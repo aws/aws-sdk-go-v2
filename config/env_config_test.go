@@ -80,6 +80,17 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 				Source: CredentialsSourceName,
 			},
 		},
+		{
+			Env: map[string]string{
+				"AWS_ACCESS_KEY_ID":     "AKID",
+				"AWS_SECRET_ACCESS_KEY": "SECRET",
+				"AWS_ACCOUNT_ID":        "012345678901",
+			},
+			Val: aws.Credentials{
+				AccessKeyID: "AKID", SecretAccessKey: "SECRET", AccountID: "012345678901",
+				Source: CredentialsSourceName,
+			},
+		},
 	}
 
 	for i, c := range cases {
@@ -494,6 +505,22 @@ func TestNewEnvConfig(t *testing.T) {
 			Config: EnvConfig{
 				DisableRequestCompression: aws.Bool(false),
 			},
+			WantErr: true,
+		},
+		46: {
+			Env: map[string]string{
+				"AWS_ACCOUNT_ID_ENDPOINT_MODE": "required",
+			},
+			Config: EnvConfig{
+				AccountIDEndpointMode: aws.AccountIDEndpointModeRequired,
+			},
+			WantErr: false,
+		},
+		47: {
+			Env: map[string]string{
+				"AWS_ACCOUNT_ID_ENDPOINT_MODE": "blabla",
+			},
+			Config:  EnvConfig{},
 			WantErr: true,
 		},
 	}

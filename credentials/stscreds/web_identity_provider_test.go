@@ -161,6 +161,50 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 				Expires:         sdk.NowTime(),
 			},
 		},
+		"success with accountID": {
+			roleARN:       "arn01234567890123456789",
+			tokenFilepath: "testdata/token.jwt",
+			options: func(o *stscreds.WebIdentityRoleOptions) {
+				o.RoleSessionName = "foo"
+			},
+			mockClient: func(
+				ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options),
+			) (
+				*sts.AssumeRoleWithWebIdentityOutput, error,
+			) {
+				if e, a := "foo", *params.RoleSessionName; e != a {
+					return nil, fmt.Errorf("expected %v, but received %v", e, a)
+				}
+				if params.DurationSeconds != nil {
+					return nil, fmt.Errorf("expect no duration seconds, got %v",
+						*params.DurationSeconds)
+				}
+				if params.Policy != nil {
+					return nil, fmt.Errorf("expect no policy, got %v",
+						*params.Policy)
+				}
+				return &sts.AssumeRoleWithWebIdentityOutput{
+					AssumedRoleUser: &types.AssumedRoleUser{
+						Arn: aws.String("arn:aws:sts::131990247566:assumed-role/assume-role-integration-test-role/Name"),
+					},
+					Credentials: &types.Credentials{
+						Expiration:      aws.Time(sdk.NowTime()),
+						AccessKeyId:     aws.String("access-key-id"),
+						SecretAccessKey: aws.String("secret-access-key"),
+						SessionToken:    aws.String("session-token"),
+					},
+				}, nil
+			},
+			expectedCredValue: aws.Credentials{
+				AccessKeyID:     "access-key-id",
+				SecretAccessKey: "secret-access-key",
+				SessionToken:    "session-token",
+				Source:          stscreds.WebIdentityProviderName,
+				CanExpire:       true,
+				Expires:         sdk.NowTime(),
+				AccountID:       "131990247566",
+			},
+		},
 	}
 
 	for name, c := range cases {
