@@ -3234,6 +3234,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns <code>payloadUrl</code> and \n      <code>secret</code> values for the webhook. The <code>payloadUrl</code> and <code>secret</code> values in the output can be \n      used to manually create a webhook within GitHub.</p>\n         <note>\n            <p>\n               <code>manualCreation</code> is only available for GitHub webhooks.</p>\n         </note>"
                     }
+                },
+                "scopeConfiguration": {
+                    "target": "com.amazonaws.codebuild#ScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration for global or organization webhooks.</p>\n         <note>\n            <p>Global or organization webhooks are only available for GitHub and Github Enterprise webhooks.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -7394,6 +7400,34 @@
                 "smithy.api#documentation": "<p>The scaling configuration output of a compute fleet.</p>"
             }
         },
+        "com.amazonaws.codebuild#ScopeConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of either the enterprise or organization that will send webhook events to CodeBuild, depending on if the webhook is a global or organization webhook respectively.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the GitHub Enterprise organization. Note that this parameter is only required if your project's source type is GITHUB_ENTERPRISE</p>"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.codebuild#WebhookScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scope for a GitHub webhook.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration information about the scope for a webhook. </p>"
+            }
+        },
         "com.amazonaws.codebuild#SecurityGroupIds": {
             "type": "list",
             "member": {
@@ -8981,6 +9015,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp that indicates the last time a repository's secret token was modified.\n    </p>"
                     }
+                },
+                "scopeConfiguration": {
+                    "target": "com.amazonaws.codebuild#ScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration for global or organization webhooks.</p>\n         <note>\n            <p>Global or organization webhooks are only available for GitHub and Github Enterprise webhooks.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -9010,7 +9050,7 @@
                 "type": {
                     "target": "com.amazonaws.codebuild#WebhookFilterType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of webhook filter. There are nine webhook filter types: <code>EVENT</code>,\n                <code>ACTOR_ACCOUNT_ID</code>, <code>HEAD_REF</code>, <code>BASE_REF</code>,\n            <code>FILE_PATH</code>, <code>COMMIT_MESSAGE</code>, <code>TAG_NAME</code>, <code>RELEASE_NAME</code>, \n            and <code>WORKFLOW_NAME</code>. </p>\n         <ul>\n            <li>\n               <p>\n                    EVENT\n                </p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when the provided <code>pattern</code>\n                            matches one of nine event types: <code>PUSH</code>,\n                            <code>PULL_REQUEST_CREATED</code>, <code>PULL_REQUEST_UPDATED</code>, \n                            <code>PULL_REQUEST_CLOSED</code>, <code>PULL_REQUEST_REOPENED</code>, \n                            <code>PULL_REQUEST_MERGED</code>, <code>RELEASED</code>, <code>PRERELEASED</code>, \n                            and <code>WORKFLOW_JOB_QUEUED</code>. The <code>EVENT</code> patterns are\n                            specified as a comma-separated string. For example, <code>PUSH,\n                                PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED</code> filters all push, pull\n                            request created, and pull request updated events. </p>\n                     <note>\n                        <p> Types <code>PULL_REQUEST_REOPENED</code> and <code>WORKFLOW_JOB_QUEUED</code> \n                                work with GitHub and GitHub Enterprise only. Types <code>RELEASED</code> and \n                                <code>PRERELEASED</code> work with GitHub only.</p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>ACTOR_ACCOUNT_ID</p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when a GitHub, GitHub Enterprise, or\n                            Bitbucket account ID matches the regular expression <code>pattern</code>.\n                        </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>HEAD_REF</p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when the head reference matches the\n                            regular expression <code>pattern</code>. For example,\n                            <code>refs/heads/branch-name</code> and <code>refs/tags/tag-name</code>. </p>\n                     <note>\n                        <p> Works with GitHub and GitHub Enterprise push, GitHub and GitHub\n                            Enterprise pull request, Bitbucket push, and Bitbucket pull request events.</p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>BASE_REF</p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when the base reference matches the\n                            regular expression <code>pattern</code>. For example,\n                            <code>refs/heads/branch-name</code>. </p>\n                     <note>\n                        <p> Works with pull request events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>FILE_PATH</p>\n               <ul>\n                  <li>\n                     <p> A webhook triggers a build when the path of a changed file matches the\n                            regular expression <code>pattern</code>. </p>\n                     <note>\n                        <p> Works with GitHub and Bitbucket events push and pull requests events.\n                                Also works with GitHub Enterprise push events, but does not work with\n                                GitHub Enterprise pull request events. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>COMMIT_MESSAGE</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the head commit message matches the\n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with GitHub and Bitbucket events push and pull requests events.\n                                Also works with GitHub Enterprise push events, but does not work with\n                                GitHub Enterprise pull request events. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>TAG_NAME</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the tag name of the release matches the \n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with <code>RELEASED</code> and <code>PRERELEASED</code> events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>RELEASE_NAME</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the release name matches the \n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with <code>RELEASED</code> and <code>PRERELEASED</code> events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>WORKFLOW_NAME</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the workflow name matches the \n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with <code>WORKFLOW_JOB_QUEUED</code> events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p> The type of webhook filter. There are nine webhook filter types: <code>EVENT</code>,\n                <code>ACTOR_ACCOUNT_ID</code>, <code>HEAD_REF</code>, <code>BASE_REF</code>,\n            <code>FILE_PATH</code>, <code>COMMIT_MESSAGE</code>, <code>TAG_NAME</code>, <code>RELEASE_NAME</code>, \n            and <code>WORKFLOW_NAME</code>. </p>\n         <ul>\n            <li>\n               <p>\n                    EVENT\n                </p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when the provided <code>pattern</code>\n                            matches one of nine event types: <code>PUSH</code>,\n                            <code>PULL_REQUEST_CREATED</code>, <code>PULL_REQUEST_UPDATED</code>, \n                            <code>PULL_REQUEST_CLOSED</code>, <code>PULL_REQUEST_REOPENED</code>, \n                            <code>PULL_REQUEST_MERGED</code>, <code>RELEASED</code>, <code>PRERELEASED</code>, \n                            and <code>WORKFLOW_JOB_QUEUED</code>. The <code>EVENT</code> patterns are\n                            specified as a comma-separated string. For example, <code>PUSH,\n                                PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED</code> filters all push, pull\n                            request created, and pull request updated events. </p>\n                     <note>\n                        <p> Types <code>PULL_REQUEST_REOPENED</code> and <code>WORKFLOW_JOB_QUEUED</code> \n                                work with GitHub and GitHub Enterprise only. Types <code>RELEASED</code> and \n                                <code>PRERELEASED</code> work with GitHub only.</p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>ACTOR_ACCOUNT_ID</p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when a GitHub, GitHub Enterprise, or\n                            Bitbucket account ID matches the regular expression <code>pattern</code>.\n                        </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>HEAD_REF</p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when the head reference matches the\n                            regular expression <code>pattern</code>. For example,\n                            <code>refs/heads/branch-name</code> and <code>refs/tags/tag-name</code>. </p>\n                     <note>\n                        <p> Works with GitHub and GitHub Enterprise push, GitHub and GitHub\n                            Enterprise pull request, Bitbucket push, and Bitbucket pull request events.</p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>BASE_REF</p>\n               <ul>\n                  <li>\n                     <p> A webhook event triggers a build when the base reference matches the\n                            regular expression <code>pattern</code>. For example,\n                            <code>refs/heads/branch-name</code>. </p>\n                     <note>\n                        <p> Works with pull request events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>FILE_PATH</p>\n               <ul>\n                  <li>\n                     <p> A webhook triggers a build when the path of a changed file matches the\n                            regular expression <code>pattern</code>. </p>\n                     <note>\n                        <p> Works with GitHub and Bitbucket events push and pull requests events.\n                                Also works with GitHub Enterprise push events, but does not work with\n                                GitHub Enterprise pull request events. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>COMMIT_MESSAGE</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the head commit message matches the\n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with GitHub and Bitbucket events push and pull requests events.\n                                Also works with GitHub Enterprise push events, but does not work with\n                                GitHub Enterprise pull request events. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>TAG_NAME</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the tag name of the release matches the \n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with <code>RELEASED</code> and <code>PRERELEASED</code> events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>RELEASE_NAME</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the release name matches the \n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with <code>RELEASED</code> and <code>PRERELEASED</code> events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>REPOSITORY_NAME</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the repository name matches the \n                                regular expression pattern.</p>\n                     <note>\n                        <p> Works with GitHub global or organization webhooks only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>WORKFLOW_NAME</p>\n               <ul>\n                  <li>\n                     <p>A webhook triggers a build when the workflow name matches the \n                            regular expression <code>pattern</code>.</p>\n                     <note>\n                        <p> Works with <code>WORKFLOW_JOB_QUEUED</code> events only. </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9087,6 +9127,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RELEASE_NAME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#WebhookScopeType": {
+            "type": "enum",
+            "members": {
+                "GITHUB_ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_ORGANIZATION"
+                    }
+                },
+                "GITHUB_GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_GLOBAL"
                     }
                 }
             }

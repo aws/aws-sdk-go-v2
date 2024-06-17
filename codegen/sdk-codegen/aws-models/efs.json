@@ -1407,7 +1407,20 @@
                     "outputToken": "NextMarker",
                     "items": "FileSystems",
                     "pageSize": "MaxItems"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeFileSystemsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.efs#DescribeFileSystemsRequest": {
@@ -2776,7 +2789,7 @@
                     "sdkId": "EFS",
                     "arnNamespace": "elasticfilesystem",
                     "cloudFormationName": "EFS",
-                    "cloudTrailEventSource": "efs.amazonaws.com",
+                    "cloudTrailEventSource": "elasticfilesystem.amazonaws.com",
                     "docId": "elasticfilesystem-2015-02-01",
                     "endpointPrefix": "elasticfilesystem"
                 },

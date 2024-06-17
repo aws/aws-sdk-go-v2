@@ -3893,6 +3893,13 @@
                         "smithy.api#jsonName": "codecSpecification"
                     }
                 },
+                "DashIFrameTrickPlayNameModifier": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max256",
+                    "traits": {
+                        "smithy.api#documentation": "Specify whether MediaConvert generates I-frame only video segments for DASH trick play, also known as trick mode. When specified, the I-frame only video segments are included within an additional AdaptationSet in your DASH output manifest. To generate I-frame only video segments: Enter a name as a text string, up to 256 character long. This name is appended to the end of this output group's base filename, that you specify as part of your destination URI, and used for the I-frame only video segment files. You may also include format identifiers. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs To not generate I-frame only video segments: Leave blank.",
+                        "smithy.api#jsonName": "dashIFrameTrickPlayNameModifier"
+                    }
+                },
                 "DashManifestStyle": {
                     "target": "com.amazonaws.mediaconvert#DashManifestStyle",
                     "traits": {
@@ -5839,6 +5846,13 @@
                     "traits": {
                         "smithy.api#documentation": "A partial URI prefix that will be put in the manifest (.mpd) file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.",
                         "smithy.api#jsonName": "baseUrl"
+                    }
+                },
+                "DashIFrameTrickPlayNameModifier": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max256",
+                    "traits": {
+                        "smithy.api#documentation": "Specify whether MediaConvert generates I-frame only video segments for DASH trick play, also known as trick mode. When specified, the I-frame only video segments are included within an additional AdaptationSet in your DASH output manifest. To generate I-frame only video segments: Enter a name as a text string, up to 256 character long. This name is appended to the end of this output group's base filename, that you specify as part of your destination URI, and used for the I-frame only video segment files. You may also include format identifiers. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs To not generate I-frame only video segments: Leave blank.",
+                        "smithy.api#jsonName": "dashIFrameTrickPlayNameModifier"
                     }
                 },
                 "DashManifestStyle": {
@@ -13043,14 +13057,14 @@
             "type": "structure",
             "members": {
                 "EndTimecode": {
-                    "target": "com.amazonaws.mediaconvert#__stringPattern010920405090509092",
+                    "target": "com.amazonaws.mediaconvert#__stringPattern010920405090509092090909",
                     "traits": {
                         "smithy.api#documentation": "Set End timecode to the end of the portion of the input you are clipping. The frame corresponding to the End timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for timecode source under input settings. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to end six minutes into the video, use 01:06:00:00.",
                         "smithy.api#jsonName": "endTimecode"
                     }
                 },
                 "StartTimecode": {
-                    "target": "com.amazonaws.mediaconvert#__stringPattern010920405090509092",
+                    "target": "com.amazonaws.mediaconvert#__stringPattern010920405090509092090909",
                     "traits": {
                         "smithy.api#documentation": "Set Start timecode to the beginning of the portion of the input you are clipping. The frame corresponding to the Start timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to begin five minutes into the video, use 01:05:00:00.",
                         "smithy.api#jsonName": "startTimecode"
@@ -13471,11 +13485,39 @@
         "com.amazonaws.mediaconvert#InputVideoGenerator": {
             "type": "structure",
             "members": {
+                "Channels": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max32",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the number of audio channels to include in your video generator input. MediaConvert creates these audio channels as silent audio within a single audio track. Enter an integer from 1 to 32.",
+                        "smithy.api#jsonName": "channels"
+                    }
+                },
                 "Duration": {
                     "target": "com.amazonaws.mediaconvert#__integerMin50Max86400000",
                     "traits": {
-                        "smithy.api#documentation": "Specify an integer value for Black video duration from 50 to 86400000 to generate a black video input for that many milliseconds. Required when you include Video generator.",
+                        "smithy.api#documentation": "Specify the duration, in milliseconds, for your video generator input.\nEnter an integer from 50 to 86400000.",
                         "smithy.api#jsonName": "duration"
+                    }
+                },
+                "FramerateDenominator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max1001",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the denominator of the fraction that represents the frame rate for your video generator input. When you do, you must also specify a value for Frame rate numerator. MediaConvert uses a default frame rate of 29.97 when you leave Frame rate numerator and Frame rate denominator blank.",
+                        "smithy.api#jsonName": "framerateDenominator"
+                    }
+                },
+                "FramerateNumerator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max60000",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the numerator of the fraction that represents the frame rate for your video generator input. When you do, you must also specify a value for Frame rate denominator. MediaConvert uses a default frame rate of 29.97 when you leave Frame rate numerator and Frame rate denominator blank.",
+                        "smithy.api#jsonName": "framerateNumerator"
+                    }
+                },
+                "SampleRate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin32000Max48000",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the audio sample rate, in Hz, for the silent audio in your video generator input.\nEnter an integer from 32000 to 48000.",
+                        "smithy.api#jsonName": "sampleRate"
                     }
                 }
             },
@@ -16984,6 +17026,9 @@
                     "name": "mediaconvert"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "AWS Elemental MediaConvert",
                 "smithy.api#title": "AWS Elemental MediaConvert",
                 "smithy.rules#endpointRuleSet": {
@@ -20258,7 +20303,7 @@
                     }
                 },
                 "NameModifier": {
-                    "target": "com.amazonaws.mediaconvert#__stringMin1",
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max256",
                     "traits": {
                         "smithy.api#documentation": "Use Name modifier to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group.",
                         "smithy.api#jsonName": "nameModifier"
@@ -27080,6 +27125,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^([01][0-9]|2[0-4]):[0-5][0-9]:[0-5][0-9][:;][0-9]{2}$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringPattern010920405090509092090909": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([01][0-9]|2[0-4]):[0-5][0-9]:[0-5][0-9][:;][0-9]{2}(@[0-9]+(\\.[0-9]+)?(:[0-9]+)?)?$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPattern01D20305D205D": {

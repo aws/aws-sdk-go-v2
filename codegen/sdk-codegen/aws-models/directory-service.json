@@ -2378,7 +2378,20 @@
                     "outputToken": "NextToken",
                     "items": "DirectoryDescriptions",
                     "pageSize": "Limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeDirectoriesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.directoryservice#DescribeDirectoriesRequest": {
@@ -3965,7 +3978,7 @@
                     "sdkId": "Directory Service",
                     "arnNamespace": "ds",
                     "cloudFormationName": "DirectoryService",
-                    "cloudTrailEventSource": "directoryservice.amazonaws.com",
+                    "cloudTrailEventSource": "ds.amazonaws.com",
                     "docId": "ds-2015-04-16",
                     "endpointPrefix": "ds"
                 },

@@ -3137,7 +3137,20 @@
                     "outputToken": "nextToken",
                     "items": "computeEnvironments",
                     "pageSize": "maxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeComputeEnvironmentsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.batch#DescribeComputeEnvironmentsRequest": {

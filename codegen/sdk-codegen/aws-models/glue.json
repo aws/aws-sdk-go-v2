@@ -160,6 +160,9 @@
                     "target": "com.amazonaws.glue#CreateTrigger"
                 },
                 {
+                    "target": "com.amazonaws.glue#CreateUsageProfile"
+                },
+                {
                     "target": "com.amazonaws.glue#CreateUserDefinedFunction"
                 },
                 {
@@ -236,6 +239,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteTrigger"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteUsageProfile"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteUserDefinedFunction"
@@ -430,6 +436,9 @@
                     "target": "com.amazonaws.glue#GetUnfilteredTableMetadata"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetUsageProfile"
+                },
+                {
                     "target": "com.amazonaws.glue#GetUserDefinedFunction"
                 },
                 {
@@ -506,6 +515,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#ListTriggers"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListUsageProfiles"
                 },
                 {
                     "target": "com.amazonaws.glue#ListWorkflows"
@@ -665,6 +677,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateTrigger"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateUsageProfile"
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateUserDefinedFunction"
@@ -1946,6 +1961,12 @@
                     "min": 1,
                     "max": 30
                 }
+            }
+        },
+        "com.amazonaws.glue#AllowedValuesStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ConfigValueString"
             }
         },
         "com.amazonaws.glue#AlreadyExistsException": {
@@ -6522,6 +6543,57 @@
                 "target": "com.amazonaws.glue#Condition"
             }
         },
+        "com.amazonaws.glue#ConfigValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.glue#ConfigurationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#ConfigurationObject"
+            }
+        },
+        "com.amazonaws.glue#ConfigurationObject": {
+            "type": "structure",
+            "members": {
+                "DefaultValue": {
+                    "target": "com.amazonaws.glue#ConfigValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A default value for the parameter.</p>"
+                    }
+                },
+                "AllowedValues": {
+                    "target": "com.amazonaws.glue#AllowedValuesStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of allowed values for the parameter.</p>"
+                    }
+                },
+                "MinValue": {
+                    "target": "com.amazonaws.glue#ConfigValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A minimum allowed value for the parameter.</p>"
+                    }
+                },
+                "MaxValue": {
+                    "target": "com.amazonaws.glue#ConfigValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A maximum allowed value for the parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the values that an admin sets for each job or session parameter configured in a Glue usage profile.</p>"
+            }
+        },
         "com.amazonaws.glue#ConflictException": {
             "type": "structure",
             "members": {
@@ -10177,6 +10249,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#CreateUsageProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateUsageProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateUsageProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Glue usage profile.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateUsageProfileRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the usage profile.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.glue#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>ProfileConfiguration</code> object specifying the job and session values for the profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags applied to the usage profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#CreateUsageProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile that was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#CreateUserDefinedFunction": {
             "type": "operation",
             "input": {
@@ -13283,6 +13435,54 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteUsageProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteUsageProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteUsageProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the Glue specified usage profile.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteUsageProfileRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteUsageProfileResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -17297,7 +17497,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the metadata for a given job run.</p>"
+                "smithy.api#documentation": "<p>Retrieves the metadata for a given job run. Job run history is accessible for 90 days for your workflow and job run.</p>"
             }
         },
         "com.amazonaws.glue#GetJobRunRequest": {
@@ -20419,6 +20619,88 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#GetUsageProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetUsageProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetUsageProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about the specified Glue usage profile.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetUsageProfileRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetUsageProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the usage profile.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.glue#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>ProfileConfiguration</code> object specifying the job and session values for the profile.</p>"
+                    }
+                },
+                "CreatedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the usage profile was created.</p>"
+                    }
+                },
+                "LastModifiedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the usage profile was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#GetUserDefinedFunction": {
             "type": "operation",
             "input": {
@@ -20667,7 +20949,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the metadata for a given workflow run. </p>"
+                "smithy.api#documentation": "<p>Retrieves the metadata for a given workflow run. Job run history is accessible for 90 days for your workflow and job run.</p>"
             }
         },
         "com.amazonaws.glue#GetWorkflowRunProperties": {
@@ -22308,6 +22590,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs.</p>\n         <p>Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.</p>"
                     }
+                },
+                "ProfileName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an Glue usage profile associated with the job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -22651,6 +22939,12 @@
                     "target": "com.amazonaws.glue#MaintenanceWindow",
                     "traits": {
                         "smithy.api#documentation": "<p>This field specifies a day of the week and hour for a maintenance window for streaming jobs. Glue periodically performs maintenance activities. During these maintenance windows, Glue will need to restart your streaming jobs.</p>\n         <p>Glue will restart the job within 3 hours of the specified maintenance window. For instance, if you set up the maintenance window for Monday at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to 1:00PM GMT.</p>"
+                    }
+                },
+                "ProfileName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an Glue usage profile associated with the job run.</p>"
                     }
                 }
             },
@@ -25044,6 +25338,78 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#ListUsageProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListUsageProfilesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListUsageProfilesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all the Glue usage profiles.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Profiles",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListUsageProfilesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.glue#OrchestrationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, included if this is a continuation call.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#OrchestrationPageSize200",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of usage profiles to return in a single response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListUsageProfilesResponse": {
+            "type": "structure",
+            "members": {
+                "Profiles": {
+                    "target": "com.amazonaws.glue#UsageProfileDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of usage profile (<code>UsageProfileDefinition</code>) objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#OrchestrationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#ListWorkflows": {
             "type": "operation",
             "input": {
@@ -26359,6 +26725,21 @@
                 "smithy.api#documentation": "<p>A structure representing an open format table.</p>"
             }
         },
+        "com.amazonaws.glue#OperationNotSupportedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation is not available in the region.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.glue#OperationTimeoutException": {
             "type": "structure",
             "members": {
@@ -27463,6 +27844,26 @@
                     "min": 0,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.glue#ProfileConfiguration": {
+            "type": "structure",
+            "members": {
+                "SessionConfiguration": {
+                    "target": "com.amazonaws.glue#ConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value map of configuration parameters for Glue sessions. </p>"
+                    }
+                },
+                "JobConfiguration": {
+                    "target": "com.amazonaws.glue#ConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value map of configuration parameters for Glue jobs. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the job and session values that an admin configures in an Glue usage profile.</p>"
             }
         },
         "com.amazonaws.glue#PropertyPredicate": {
@@ -30878,6 +31279,12 @@
                     "target": "com.amazonaws.glue#IdleTimeout",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of minutes when idle before the session times out.</p>"
+                    }
+                },
+                "ProfileName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an Glue usage profile associated with the session.</p>"
                     }
                 }
             },
@@ -36820,6 +37227,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#UpdateUsageProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateUsageProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateUsageProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an Glue usage profile.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateUsageProfileRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the usage profile.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.glue#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>ProfileConfiguration</code> object specifying the job and session values for the profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateUsageProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile that was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#UpdateUserDefinedFunction": {
             "type": "operation",
             "input": {
@@ -37025,6 +37506,44 @@
         },
         "com.amazonaws.glue#UriString": {
             "type": "string"
+        },
+        "com.amazonaws.glue#UsageProfileDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the usage profile.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the usage profile.</p>"
+                    }
+                },
+                "CreatedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the usage profile was created.</p>"
+                    }
+                },
+                "LastModifiedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the usage profile was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Glue usage profile.</p>"
+            }
+        },
+        "com.amazonaws.glue#UsageProfileDefinitionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#UsageProfileDefinition"
+            }
         },
         "com.amazonaws.glue#UserDefinedFunction": {
             "type": "structure",

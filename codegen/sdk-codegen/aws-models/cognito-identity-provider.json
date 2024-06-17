@@ -10636,7 +10636,22 @@
                     "outputToken": "NextToken",
                     "items": "UserPools",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListUserPoolsSuccess",
+                        "params": {
+                            "MaxResults": 10
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cognitoidentityprovider#ListUserPoolsRequest": {
