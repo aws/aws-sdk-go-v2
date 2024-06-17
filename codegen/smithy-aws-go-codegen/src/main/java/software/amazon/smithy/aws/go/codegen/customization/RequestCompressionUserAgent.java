@@ -26,6 +26,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.traits.RequestCompressionTrait;
@@ -41,6 +42,12 @@ public class RequestCompressionUserAgent implements GoIntegration {
             .resolvedFunction(buildPackageSymbol("addIsRequestCompressionUserAgent"))
             .useClientOptions()
             .build();
+
+    private static boolean hasRequestCompression(Model model, ServiceShape service) {
+        return TopDownIndex.of(model)
+                .getContainedOperations(service).stream()
+                .anyMatch(it -> it.hasTrait(RequestCompressionTrait.class));
+    }
 
     private static boolean isRequestCompression(Model model, ServiceShape service, OperationShape operation) {
         return operation.hasTrait(RequestCompressionTrait.class);
@@ -58,6 +65,10 @@ public class RequestCompressionUserAgent implements GoIntegration {
 
     @Override
     public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
+        if (!hasRequestCompression(model, settings.getService(model))) {
+            return;
+        }
+
         goDelegator.useFileWriter("api_client.go", settings.getModuleName(), goTemplate("""
                 func addIsRequestCompressionUserAgent(stack $stack:P, options Options) error {
                     ua, err := getOrAddRequestUserAgent(stack)
