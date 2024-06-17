@@ -137,6 +137,9 @@ func (c *Client) addOperationListRuleGroupsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRuleGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListRuleGroupsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListRuleGroupsAPIClient is a client that implements the ListRuleGroups
-// operation.
-type ListRuleGroupsAPIClient interface {
-	ListRuleGroups(context.Context, *ListRuleGroupsInput, ...func(*Options)) (*ListRuleGroupsOutput, error)
-}
-
-var _ ListRuleGroupsAPIClient = (*Client)(nil)
 
 // ListRuleGroupsPaginatorOptions is the paginator options for ListRuleGroups
 type ListRuleGroupsPaginatorOptions struct {
@@ -232,6 +227,9 @@ func (p *ListRuleGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRuleGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListRuleGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListRuleGroupsAPIClient is a client that implements the ListRuleGroups
+// operation.
+type ListRuleGroupsAPIClient interface {
+	ListRuleGroups(context.Context, *ListRuleGroupsInput, ...func(*Options)) (*ListRuleGroupsOutput, error)
+}
+
+var _ ListRuleGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRuleGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

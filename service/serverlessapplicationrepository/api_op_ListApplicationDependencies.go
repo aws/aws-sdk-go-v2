@@ -118,6 +118,9 @@ func (c *Client) addOperationListApplicationDependenciesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationDependenciesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListApplicationDependenciesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListApplicationDependenciesAPIClient is a client that implements the
-// ListApplicationDependencies operation.
-type ListApplicationDependenciesAPIClient interface {
-	ListApplicationDependencies(context.Context, *ListApplicationDependenciesInput, ...func(*Options)) (*ListApplicationDependenciesOutput, error)
-}
-
-var _ ListApplicationDependenciesAPIClient = (*Client)(nil)
 
 // ListApplicationDependenciesPaginatorOptions is the paginator options for
 // ListApplicationDependencies
@@ -216,6 +211,9 @@ func (p *ListApplicationDependenciesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationDependencies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListApplicationDependenciesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListApplicationDependenciesAPIClient is a client that implements the
+// ListApplicationDependencies operation.
+type ListApplicationDependenciesAPIClient interface {
+	ListApplicationDependencies(context.Context, *ListApplicationDependenciesInput, ...func(*Options)) (*ListApplicationDependenciesOutput, error)
+}
+
+var _ ListApplicationDependenciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationDependencies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

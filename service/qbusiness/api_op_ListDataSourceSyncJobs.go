@@ -142,6 +142,9 @@ func (c *Client) addOperationListDataSourceSyncJobsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataSourceSyncJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationListDataSourceSyncJobsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListDataSourceSyncJobsAPIClient is a client that implements the
-// ListDataSourceSyncJobs operation.
-type ListDataSourceSyncJobsAPIClient interface {
-	ListDataSourceSyncJobs(context.Context, *ListDataSourceSyncJobsInput, ...func(*Options)) (*ListDataSourceSyncJobsOutput, error)
-}
-
-var _ ListDataSourceSyncJobsAPIClient = (*Client)(nil)
 
 // ListDataSourceSyncJobsPaginatorOptions is the paginator options for
 // ListDataSourceSyncJobs
@@ -238,6 +233,9 @@ func (p *ListDataSourceSyncJobsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataSourceSyncJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListDataSourceSyncJobsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListDataSourceSyncJobsAPIClient is a client that implements the
+// ListDataSourceSyncJobs operation.
+type ListDataSourceSyncJobsAPIClient interface {
+	ListDataSourceSyncJobs(context.Context, *ListDataSourceSyncJobsInput, ...func(*Options)) (*ListDataSourceSyncJobsOutput, error)
+}
+
+var _ ListDataSourceSyncJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataSourceSyncJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -130,6 +130,9 @@ func (c *Client) addOperationListPoolOriginationIdentitiesMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPoolOriginationIdentitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListPoolOriginationIdentitiesMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListPoolOriginationIdentitiesAPIClient is a client that implements the
-// ListPoolOriginationIdentities operation.
-type ListPoolOriginationIdentitiesAPIClient interface {
-	ListPoolOriginationIdentities(context.Context, *ListPoolOriginationIdentitiesInput, ...func(*Options)) (*ListPoolOriginationIdentitiesOutput, error)
-}
-
-var _ ListPoolOriginationIdentitiesAPIClient = (*Client)(nil)
 
 // ListPoolOriginationIdentitiesPaginatorOptions is the paginator options for
 // ListPoolOriginationIdentities
@@ -228,6 +223,9 @@ func (p *ListPoolOriginationIdentitiesPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPoolOriginationIdentities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListPoolOriginationIdentitiesPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListPoolOriginationIdentitiesAPIClient is a client that implements the
+// ListPoolOriginationIdentities operation.
+type ListPoolOriginationIdentitiesAPIClient interface {
+	ListPoolOriginationIdentities(context.Context, *ListPoolOriginationIdentitiesInput, ...func(*Options)) (*ListPoolOriginationIdentitiesOutput, error)
+}
+
+var _ ListPoolOriginationIdentitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPoolOriginationIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

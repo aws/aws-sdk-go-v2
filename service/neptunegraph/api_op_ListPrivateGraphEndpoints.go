@@ -136,6 +136,9 @@ func (c *Client) addOperationListPrivateGraphEndpointsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPrivateGraphEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListPrivateGraphEndpointsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListPrivateGraphEndpointsAPIClient is a client that implements the
-// ListPrivateGraphEndpoints operation.
-type ListPrivateGraphEndpointsAPIClient interface {
-	ListPrivateGraphEndpoints(context.Context, *ListPrivateGraphEndpointsInput, ...func(*Options)) (*ListPrivateGraphEndpointsOutput, error)
-}
-
-var _ ListPrivateGraphEndpointsAPIClient = (*Client)(nil)
 
 // ListPrivateGraphEndpointsPaginatorOptions is the paginator options for
 // ListPrivateGraphEndpoints
@@ -238,6 +233,9 @@ func (p *ListPrivateGraphEndpointsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrivateGraphEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListPrivateGraphEndpointsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListPrivateGraphEndpointsAPIClient is a client that implements the
+// ListPrivateGraphEndpoints operation.
+type ListPrivateGraphEndpointsAPIClient interface {
+	ListPrivateGraphEndpoints(context.Context, *ListPrivateGraphEndpointsInput, ...func(*Options)) (*ListPrivateGraphEndpointsOutput, error)
+}
+
+var _ ListPrivateGraphEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrivateGraphEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

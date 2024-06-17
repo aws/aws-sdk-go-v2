@@ -120,6 +120,9 @@ func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListProjectsMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,40 +149,6 @@ func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-type endpointPrefix_opListProjectsMiddleware struct {
-}
-
-func (*endpointPrefix_opListProjectsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListProjectsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "monitor." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListProjectsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListProjectsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListProjectsAPIClient is a client that implements the ListProjects operation.
-type ListProjectsAPIClient interface {
-	ListProjects(context.Context, *ListProjectsInput, ...func(*Options)) (*ListProjectsOutput, error)
-}
-
-var _ ListProjectsAPIClient = (*Client)(nil)
 
 // ListProjectsPaginatorOptions is the paginator options for ListProjects
 type ListProjectsPaginatorOptions struct {
@@ -246,6 +215,9 @@ func (p *ListProjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProjects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +236,40 @@ func (p *ListProjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+type endpointPrefix_opListProjectsMiddleware struct {
+}
+
+func (*endpointPrefix_opListProjectsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListProjectsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "monitor." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListProjectsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListProjectsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListProjectsAPIClient is a client that implements the ListProjects operation.
+type ListProjectsAPIClient interface {
+	ListProjects(context.Context, *ListProjectsInput, ...func(*Options)) (*ListProjectsOutput, error)
+}
+
+var _ ListProjectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProjects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

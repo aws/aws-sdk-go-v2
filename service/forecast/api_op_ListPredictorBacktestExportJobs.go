@@ -136,6 +136,9 @@ func (c *Client) addOperationListPredictorBacktestExportJobsMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPredictorBacktestExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListPredictorBacktestExportJobsMiddlewares(stack *m
 	}
 	return nil
 }
-
-// ListPredictorBacktestExportJobsAPIClient is a client that implements the
-// ListPredictorBacktestExportJobs operation.
-type ListPredictorBacktestExportJobsAPIClient interface {
-	ListPredictorBacktestExportJobs(context.Context, *ListPredictorBacktestExportJobsInput, ...func(*Options)) (*ListPredictorBacktestExportJobsOutput, error)
-}
-
-var _ ListPredictorBacktestExportJobsAPIClient = (*Client)(nil)
 
 // ListPredictorBacktestExportJobsPaginatorOptions is the paginator options for
 // ListPredictorBacktestExportJobs
@@ -234,6 +229,9 @@ func (p *ListPredictorBacktestExportJobsPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPredictorBacktestExportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *ListPredictorBacktestExportJobsPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// ListPredictorBacktestExportJobsAPIClient is a client that implements the
+// ListPredictorBacktestExportJobs operation.
+type ListPredictorBacktestExportJobsAPIClient interface {
+	ListPredictorBacktestExportJobs(context.Context, *ListPredictorBacktestExportJobsInput, ...func(*Options)) (*ListPredictorBacktestExportJobsOutput, error)
+}
+
+var _ ListPredictorBacktestExportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPredictorBacktestExportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

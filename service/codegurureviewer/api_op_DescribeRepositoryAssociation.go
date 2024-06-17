@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRepositoryAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// DescribeRepositoryAssociationAPIClient is a client that implements the
-// DescribeRepositoryAssociation operation.
-type DescribeRepositoryAssociationAPIClient interface {
-	DescribeRepositoryAssociation(context.Context, *DescribeRepositoryAssociationInput, ...func(*Options)) (*DescribeRepositoryAssociationOutput, error)
-}
-
-var _ DescribeRepositoryAssociationAPIClient = (*Client)(nil)
 
 // RepositoryAssociationSucceededWaiterOptions are waiter options for
 // RepositoryAssociationSucceededWaiter
@@ -280,7 +275,13 @@ func (w *RepositoryAssociationSucceededWaiter) WaitForOutput(ctx context.Context
 		}
 
 		out, err := w.client.DescribeRepositoryAssociation(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -371,6 +372,14 @@ func repositoryAssociationSucceededStateRetryable(ctx context.Context, input *De
 
 	return true, nil
 }
+
+// DescribeRepositoryAssociationAPIClient is a client that implements the
+// DescribeRepositoryAssociation operation.
+type DescribeRepositoryAssociationAPIClient interface {
+	DescribeRepositoryAssociation(context.Context, *DescribeRepositoryAssociationInput, ...func(*Options)) (*DescribeRepositoryAssociationOutput, error)
+}
+
+var _ DescribeRepositoryAssociationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRepositoryAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

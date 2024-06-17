@@ -168,6 +168,9 @@ func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCases(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -188,13 +191,6 @@ func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeCasesAPIClient is a client that implements the DescribeCases operation.
-type DescribeCasesAPIClient interface {
-	DescribeCases(context.Context, *DescribeCasesInput, ...func(*Options)) (*DescribeCasesOutput, error)
-}
-
-var _ DescribeCasesAPIClient = (*Client)(nil)
 
 // DescribeCasesPaginatorOptions is the paginator options for DescribeCases
 type DescribeCasesPaginatorOptions struct {
@@ -259,6 +255,9 @@ func (p *DescribeCasesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +276,13 @@ func (p *DescribeCasesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// DescribeCasesAPIClient is a client that implements the DescribeCases operation.
+type DescribeCasesAPIClient interface {
+	DescribeCases(context.Context, *DescribeCasesInput, ...func(*Options)) (*DescribeCasesOutput, error)
+}
+
+var _ DescribeCasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

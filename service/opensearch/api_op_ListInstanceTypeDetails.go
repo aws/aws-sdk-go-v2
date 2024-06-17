@@ -132,6 +132,9 @@ func (c *Client) addOperationListInstanceTypeDetailsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInstanceTypeDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListInstanceTypeDetailsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListInstanceTypeDetailsAPIClient is a client that implements the
-// ListInstanceTypeDetails operation.
-type ListInstanceTypeDetailsAPIClient interface {
-	ListInstanceTypeDetails(context.Context, *ListInstanceTypeDetailsInput, ...func(*Options)) (*ListInstanceTypeDetailsOutput, error)
-}
-
-var _ ListInstanceTypeDetailsAPIClient = (*Client)(nil)
 
 // ListInstanceTypeDetailsPaginatorOptions is the paginator options for
 // ListInstanceTypeDetails
@@ -226,6 +221,9 @@ func (p *ListInstanceTypeDetailsPaginator) NextPage(ctx context.Context, optFns 
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInstanceTypeDetails(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListInstanceTypeDetailsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListInstanceTypeDetailsAPIClient is a client that implements the
+// ListInstanceTypeDetails operation.
+type ListInstanceTypeDetailsAPIClient interface {
+	ListInstanceTypeDetails(context.Context, *ListInstanceTypeDetailsInput, ...func(*Options)) (*ListInstanceTypeDetailsOutput, error)
+}
+
+var _ ListInstanceTypeDetailsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInstanceTypeDetails(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

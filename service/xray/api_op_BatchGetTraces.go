@@ -117,6 +117,9 @@ func (c *Client) addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetTracesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// BatchGetTracesAPIClient is a client that implements the BatchGetTraces
-// operation.
-type BatchGetTracesAPIClient interface {
-	BatchGetTraces(context.Context, *BatchGetTracesInput, ...func(*Options)) (*BatchGetTracesOutput, error)
-}
-
-var _ BatchGetTracesAPIClient = (*Client)(nil)
 
 // BatchGetTracesPaginatorOptions is the paginator options for BatchGetTraces
 type BatchGetTracesPaginatorOptions struct {
@@ -200,6 +195,9 @@ func (p *BatchGetTracesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.BatchGetTraces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -218,6 +216,14 @@ func (p *BatchGetTracesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// BatchGetTracesAPIClient is a client that implements the BatchGetTraces
+// operation.
+type BatchGetTracesAPIClient interface {
+	BatchGetTraces(context.Context, *BatchGetTracesInput, ...func(*Options)) (*BatchGetTracesOutput, error)
+}
+
+var _ BatchGetTracesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opBatchGetTraces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

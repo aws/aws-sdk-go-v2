@@ -125,6 +125,9 @@ func (c *Client) addOperationListLogPatternSetsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLogPatternSetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListLogPatternSetsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListLogPatternSetsAPIClient is a client that implements the ListLogPatternSets
-// operation.
-type ListLogPatternSetsAPIClient interface {
-	ListLogPatternSets(context.Context, *ListLogPatternSetsInput, ...func(*Options)) (*ListLogPatternSetsOutput, error)
-}
-
-var _ ListLogPatternSetsAPIClient = (*Client)(nil)
 
 // ListLogPatternSetsPaginatorOptions is the paginator options for
 // ListLogPatternSets
@@ -222,6 +217,9 @@ func (p *ListLogPatternSetsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLogPatternSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListLogPatternSetsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListLogPatternSetsAPIClient is a client that implements the ListLogPatternSets
+// operation.
+type ListLogPatternSetsAPIClient interface {
+	ListLogPatternSets(context.Context, *ListLogPatternSetsInput, ...func(*Options)) (*ListLogPatternSetsOutput, error)
+}
+
+var _ ListLogPatternSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLogPatternSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

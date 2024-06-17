@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeMetricFiltersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMetricFilters(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationDescribeMetricFiltersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeMetricFiltersAPIClient is a client that implements the
-// DescribeMetricFilters operation.
-type DescribeMetricFiltersAPIClient interface {
-	DescribeMetricFilters(context.Context, *DescribeMetricFiltersInput, ...func(*Options)) (*DescribeMetricFiltersOutput, error)
-}
-
-var _ DescribeMetricFiltersAPIClient = (*Client)(nil)
 
 // DescribeMetricFiltersPaginatorOptions is the paginator options for
 // DescribeMetricFilters
@@ -225,6 +220,9 @@ func (p *DescribeMetricFiltersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMetricFilters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeMetricFiltersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeMetricFiltersAPIClient is a client that implements the
+// DescribeMetricFilters operation.
+type DescribeMetricFiltersAPIClient interface {
+	DescribeMetricFilters(context.Context, *DescribeMetricFiltersInput, ...func(*Options)) (*DescribeMetricFiltersOutput, error)
+}
+
+var _ DescribeMetricFiltersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMetricFilters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

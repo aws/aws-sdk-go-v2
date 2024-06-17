@@ -131,6 +131,9 @@ func (c *Client) addOperationListWorldGenerationJobsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorldGenerationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListWorldGenerationJobsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListWorldGenerationJobsAPIClient is a client that implements the
-// ListWorldGenerationJobs operation.
-type ListWorldGenerationJobsAPIClient interface {
-	ListWorldGenerationJobs(context.Context, *ListWorldGenerationJobsInput, ...func(*Options)) (*ListWorldGenerationJobsOutput, error)
-}
-
-var _ ListWorldGenerationJobsAPIClient = (*Client)(nil)
 
 // ListWorldGenerationJobsPaginatorOptions is the paginator options for
 // ListWorldGenerationJobs
@@ -231,6 +226,9 @@ func (p *ListWorldGenerationJobsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorldGenerationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListWorldGenerationJobsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListWorldGenerationJobsAPIClient is a client that implements the
+// ListWorldGenerationJobs operation.
+type ListWorldGenerationJobsAPIClient interface {
+	ListWorldGenerationJobs(context.Context, *ListWorldGenerationJobsInput, ...func(*Options)) (*ListWorldGenerationJobsOutput, error)
+}
+
+var _ ListWorldGenerationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorldGenerationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

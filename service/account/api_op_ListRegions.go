@@ -155,6 +155,9 @@ func (c *Client) addOperationListRegionsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRegions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -175,13 +178,6 @@ func (c *Client) addOperationListRegionsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListRegionsAPIClient is a client that implements the ListRegions operation.
-type ListRegionsAPIClient interface {
-	ListRegions(context.Context, *ListRegionsInput, ...func(*Options)) (*ListRegionsOutput, error)
-}
-
-var _ ListRegionsAPIClient = (*Client)(nil)
 
 // ListRegionsPaginatorOptions is the paginator options for ListRegions
 type ListRegionsPaginatorOptions struct {
@@ -254,6 +250,9 @@ func (p *ListRegionsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRegions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +271,13 @@ func (p *ListRegionsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListRegionsAPIClient is a client that implements the ListRegions operation.
+type ListRegionsAPIClient interface {
+	ListRegions(context.Context, *ListRegionsInput, ...func(*Options)) (*ListRegionsOutput, error)
+}
+
+var _ ListRegionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRegions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

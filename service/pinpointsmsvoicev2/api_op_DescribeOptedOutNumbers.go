@@ -140,6 +140,9 @@ func (c *Client) addOperationDescribeOptedOutNumbersMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeOptedOutNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationDescribeOptedOutNumbersMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeOptedOutNumbersAPIClient is a client that implements the
-// DescribeOptedOutNumbers operation.
-type DescribeOptedOutNumbersAPIClient interface {
-	DescribeOptedOutNumbers(context.Context, *DescribeOptedOutNumbersInput, ...func(*Options)) (*DescribeOptedOutNumbersOutput, error)
-}
-
-var _ DescribeOptedOutNumbersAPIClient = (*Client)(nil)
 
 // DescribeOptedOutNumbersPaginatorOptions is the paginator options for
 // DescribeOptedOutNumbers
@@ -237,6 +232,9 @@ func (p *DescribeOptedOutNumbersPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOptedOutNumbers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *DescribeOptedOutNumbersPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeOptedOutNumbersAPIClient is a client that implements the
+// DescribeOptedOutNumbers operation.
+type DescribeOptedOutNumbersAPIClient interface {
+	DescribeOptedOutNumbers(context.Context, *DescribeOptedOutNumbersInput, ...func(*Options)) (*DescribeOptedOutNumbersOutput, error)
+}
+
+var _ DescribeOptedOutNumbersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOptedOutNumbers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

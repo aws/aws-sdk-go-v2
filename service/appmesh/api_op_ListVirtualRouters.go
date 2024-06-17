@@ -136,6 +136,9 @@ func (c *Client) addOperationListVirtualRoutersMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVirtualRoutersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListVirtualRoutersMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListVirtualRoutersAPIClient is a client that implements the ListVirtualRouters
-// operation.
-type ListVirtualRoutersAPIClient interface {
-	ListVirtualRouters(context.Context, *ListVirtualRoutersInput, ...func(*Options)) (*ListVirtualRoutersOutput, error)
-}
-
-var _ ListVirtualRoutersAPIClient = (*Client)(nil)
 
 // ListVirtualRoutersPaginatorOptions is the paginator options for
 // ListVirtualRouters
@@ -238,6 +233,9 @@ func (p *ListVirtualRoutersPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVirtualRouters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListVirtualRoutersPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListVirtualRoutersAPIClient is a client that implements the ListVirtualRouters
+// operation.
+type ListVirtualRoutersAPIClient interface {
+	ListVirtualRouters(context.Context, *ListVirtualRoutersInput, ...func(*Options)) (*ListVirtualRoutersOutput, error)
+}
+
+var _ ListVirtualRoutersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVirtualRouters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

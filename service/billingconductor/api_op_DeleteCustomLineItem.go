@@ -111,6 +111,9 @@ func (c *Client) addOperationDeleteCustomLineItemMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}

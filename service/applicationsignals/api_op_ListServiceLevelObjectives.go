@@ -136,6 +136,9 @@ func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceLevelObjectives(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListServiceLevelObjectivesAPIClient is a client that implements the
-// ListServiceLevelObjectives operation.
-type ListServiceLevelObjectivesAPIClient interface {
-	ListServiceLevelObjectives(context.Context, *ListServiceLevelObjectivesInput, ...func(*Options)) (*ListServiceLevelObjectivesOutput, error)
-}
-
-var _ ListServiceLevelObjectivesAPIClient = (*Client)(nil)
 
 // ListServiceLevelObjectivesPaginatorOptions is the paginator options for
 // ListServiceLevelObjectives
@@ -232,6 +227,9 @@ func (p *ListServiceLevelObjectivesPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceLevelObjectives(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListServiceLevelObjectivesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListServiceLevelObjectivesAPIClient is a client that implements the
+// ListServiceLevelObjectives operation.
+type ListServiceLevelObjectivesAPIClient interface {
+	ListServiceLevelObjectives(context.Context, *ListServiceLevelObjectivesInput, ...func(*Options)) (*ListServiceLevelObjectivesOutput, error)
+}
+
+var _ ListServiceLevelObjectivesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceLevelObjectives(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

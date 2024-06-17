@@ -121,6 +121,9 @@ func (c *Client) addOperationStartNextPendingJobExecutionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartNextPendingJobExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}

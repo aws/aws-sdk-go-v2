@@ -125,6 +125,9 @@ func (c *Client) addOperationListBatchLoadTasksMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBatchLoadTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,66 +148,6 @@ func (c *Client) addOperationListBatchLoadTasksMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-func addOpListBatchLoadTasksDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
-	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
-		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
-			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
-				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
-				opt.Logger = o.Logger
-				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
-			},
-		},
-		DiscoverOperation:            c.fetchOpListBatchLoadTasksDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
-		EndpointDiscoveryRequired:    true,
-		Region:                       o.Region,
-	}, "ResolveEndpointV2", middleware.After)
-}
-
-func (c *Client) fetchOpListBatchLoadTasksDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
-	input := getOperationInput(ctx)
-	in, ok := input.(*ListBatchLoadTasksInput)
-	if !ok {
-		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
-	}
-	_ = in
-
-	identifierMap := make(map[string]string, 0)
-	identifierMap["sdk#Region"] = region
-
-	key := fmt.Sprintf("Timestream Write.%v", identifierMap)
-
-	if v, ok := c.endpointCache.Get(key); ok {
-		return v, nil
-	}
-
-	discoveryOperationInput := &DescribeEndpointsInput{}
-
-	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
-	for _, fn := range optFns {
-		fn(&opt)
-	}
-
-	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
-	if err != nil {
-		return internalEndpointDiscovery.WeightedAddress{}, err
-	}
-
-	weighted, ok := endpoint.GetValidAddress()
-	if !ok {
-		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
-	}
-	return weighted, nil
-}
-
-// ListBatchLoadTasksAPIClient is a client that implements the ListBatchLoadTasks
-// operation.
-type ListBatchLoadTasksAPIClient interface {
-	ListBatchLoadTasks(context.Context, *ListBatchLoadTasksInput, ...func(*Options)) (*ListBatchLoadTasksOutput, error)
-}
-
-var _ ListBatchLoadTasksAPIClient = (*Client)(nil)
 
 // ListBatchLoadTasksPaginatorOptions is the paginator options for
 // ListBatchLoadTasks
@@ -273,6 +216,9 @@ func (p *ListBatchLoadTasksPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBatchLoadTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -291,6 +237,66 @@ func (p *ListBatchLoadTasksPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+func addOpListBatchLoadTasksDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
+			},
+		},
+		DiscoverOperation:            c.fetchOpListBatchLoadTasksDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    true,
+		Region:                       o.Region,
+	}, "ResolveEndpointV2", middleware.After)
+}
+
+func (c *Client) fetchOpListBatchLoadTasksDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	input := getOperationInput(ctx)
+	in, ok := input.(*ListBatchLoadTasksInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
+
+	key := fmt.Sprintf("Timestream Write.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
+	if err != nil {
+		return internalEndpointDiscovery.WeightedAddress{}, err
+	}
+
+	weighted, ok := endpoint.GetValidAddress()
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
+	}
+	return weighted, nil
+}
+
+// ListBatchLoadTasksAPIClient is a client that implements the ListBatchLoadTasks
+// operation.
+type ListBatchLoadTasksAPIClient interface {
+	ListBatchLoadTasks(context.Context, *ListBatchLoadTasksInput, ...func(*Options)) (*ListBatchLoadTasksOutput, error)
+}
+
+var _ ListBatchLoadTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBatchLoadTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

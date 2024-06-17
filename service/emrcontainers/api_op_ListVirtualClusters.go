@@ -137,6 +137,9 @@ func (c *Client) addOperationListVirtualClustersMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVirtualClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListVirtualClustersMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListVirtualClustersAPIClient is a client that implements the
-// ListVirtualClusters operation.
-type ListVirtualClustersAPIClient interface {
-	ListVirtualClusters(context.Context, *ListVirtualClustersInput, ...func(*Options)) (*ListVirtualClustersOutput, error)
-}
-
-var _ ListVirtualClustersAPIClient = (*Client)(nil)
 
 // ListVirtualClustersPaginatorOptions is the paginator options for
 // ListVirtualClusters
@@ -230,6 +225,9 @@ func (p *ListVirtualClustersPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVirtualClusters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListVirtualClustersPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListVirtualClustersAPIClient is a client that implements the
+// ListVirtualClusters operation.
+type ListVirtualClustersAPIClient interface {
+	ListVirtualClusters(context.Context, *ListVirtualClustersInput, ...func(*Options)) (*ListVirtualClustersOutput, error)
+}
+
+var _ ListVirtualClustersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVirtualClusters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

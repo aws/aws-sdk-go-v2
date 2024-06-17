@@ -117,6 +117,9 @@ func (c *Client) addOperationListWebhooksMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWebhooks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,13 +140,6 @@ func (c *Client) addOperationListWebhooksMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListWebhooksAPIClient is a client that implements the ListWebhooks operation.
-type ListWebhooksAPIClient interface {
-	ListWebhooks(context.Context, *ListWebhooksInput, ...func(*Options)) (*ListWebhooksOutput, error)
-}
-
-var _ ListWebhooksAPIClient = (*Client)(nil)
 
 // ListWebhooksPaginatorOptions is the paginator options for ListWebhooks
 type ListWebhooksPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *ListWebhooksPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWebhooks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *ListWebhooksPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListWebhooksAPIClient is a client that implements the ListWebhooks operation.
+type ListWebhooksAPIClient interface {
+	ListWebhooks(context.Context, *ListWebhooksInput, ...func(*Options)) (*ListWebhooksOutput, error)
+}
+
+var _ ListWebhooksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWebhooks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

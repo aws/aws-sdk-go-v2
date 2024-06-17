@@ -221,6 +221,9 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRequestPhoneNumberMiddleware(stack, options); err != nil {
 		return err
 	}

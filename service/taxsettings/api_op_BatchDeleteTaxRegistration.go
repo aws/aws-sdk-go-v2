@@ -115,6 +115,9 @@ func (c *Client) addOperationBatchDeleteTaxRegistrationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteTaxRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -142,6 +142,9 @@ func (c *Client) addOperationDescribeJobDefinitionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJobDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationDescribeJobDefinitionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeJobDefinitionsAPIClient is a client that implements the
-// DescribeJobDefinitions operation.
-type DescribeJobDefinitionsAPIClient interface {
-	DescribeJobDefinitions(context.Context, *DescribeJobDefinitionsInput, ...func(*Options)) (*DescribeJobDefinitionsOutput, error)
-}
-
-var _ DescribeJobDefinitionsAPIClient = (*Client)(nil)
 
 // DescribeJobDefinitionsPaginatorOptions is the paginator options for
 // DescribeJobDefinitions
@@ -242,6 +237,9 @@ func (p *DescribeJobDefinitionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeJobDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *DescribeJobDefinitionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeJobDefinitionsAPIClient is a client that implements the
+// DescribeJobDefinitions operation.
+type DescribeJobDefinitionsAPIClient interface {
+	DescribeJobDefinitions(context.Context, *DescribeJobDefinitionsInput, ...func(*Options)) (*DescribeJobDefinitionsOutput, error)
+}
+
+var _ DescribeJobDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeJobDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

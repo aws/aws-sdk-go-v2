@@ -140,6 +140,9 @@ func (c *Client) addOperationListTableOptimizerRunsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTableOptimizerRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationListTableOptimizerRunsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListTableOptimizerRunsAPIClient is a client that implements the
-// ListTableOptimizerRuns operation.
-type ListTableOptimizerRunsAPIClient interface {
-	ListTableOptimizerRuns(context.Context, *ListTableOptimizerRunsInput, ...func(*Options)) (*ListTableOptimizerRunsOutput, error)
-}
-
-var _ ListTableOptimizerRunsAPIClient = (*Client)(nil)
 
 // ListTableOptimizerRunsPaginatorOptions is the paginator options for
 // ListTableOptimizerRuns
@@ -232,6 +227,9 @@ func (p *ListTableOptimizerRunsPaginator) NextPage(ctx context.Context, optFns .
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTableOptimizerRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListTableOptimizerRunsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListTableOptimizerRunsAPIClient is a client that implements the
+// ListTableOptimizerRuns operation.
+type ListTableOptimizerRunsAPIClient interface {
+	ListTableOptimizerRuns(context.Context, *ListTableOptimizerRunsInput, ...func(*Options)) (*ListTableOptimizerRunsOutput, error)
+}
+
+var _ ListTableOptimizerRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTableOptimizerRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

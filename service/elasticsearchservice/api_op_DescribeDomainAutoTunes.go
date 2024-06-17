@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainAutoTunesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeDomainAutoTunesAPIClient is a client that implements the
-// DescribeDomainAutoTunes operation.
-type DescribeDomainAutoTunesAPIClient interface {
-	DescribeDomainAutoTunes(context.Context, *DescribeDomainAutoTunesInput, ...func(*Options)) (*DescribeDomainAutoTunesOutput, error)
-}
-
-var _ DescribeDomainAutoTunesAPIClient = (*Client)(nil)
 
 // DescribeDomainAutoTunesPaginatorOptions is the paginator options for
 // DescribeDomainAutoTunes
@@ -219,6 +214,9 @@ func (p *DescribeDomainAutoTunesPaginator) NextPage(ctx context.Context, optFns 
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDomainAutoTunes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *DescribeDomainAutoTunesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeDomainAutoTunesAPIClient is a client that implements the
+// DescribeDomainAutoTunes operation.
+type DescribeDomainAutoTunesAPIClient interface {
+	DescribeDomainAutoTunes(context.Context, *DescribeDomainAutoTunesInput, ...func(*Options)) (*DescribeDomainAutoTunesOutput, error)
+}
+
+var _ DescribeDomainAutoTunesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDomainAutoTunes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

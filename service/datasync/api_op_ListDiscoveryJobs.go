@@ -118,6 +118,9 @@ func (c *Client) addOperationListDiscoveryJobsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListDiscoveryJobsMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,41 +144,6 @@ func (c *Client) addOperationListDiscoveryJobsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-type endpointPrefix_opListDiscoveryJobsMiddleware struct {
-}
-
-func (*endpointPrefix_opListDiscoveryJobsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListDiscoveryJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "discovery-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListDiscoveryJobsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListDiscoveryJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListDiscoveryJobsAPIClient is a client that implements the ListDiscoveryJobs
-// operation.
-type ListDiscoveryJobsAPIClient interface {
-	ListDiscoveryJobs(context.Context, *ListDiscoveryJobsInput, ...func(*Options)) (*ListDiscoveryJobsOutput, error)
-}
-
-var _ ListDiscoveryJobsAPIClient = (*Client)(nil)
 
 // ListDiscoveryJobsPaginatorOptions is the paginator options for ListDiscoveryJobs
 type ListDiscoveryJobsPaginatorOptions struct {
@@ -240,6 +208,9 @@ func (p *ListDiscoveryJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDiscoveryJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +229,41 @@ func (p *ListDiscoveryJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+type endpointPrefix_opListDiscoveryJobsMiddleware struct {
+}
+
+func (*endpointPrefix_opListDiscoveryJobsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListDiscoveryJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "discovery-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListDiscoveryJobsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListDiscoveryJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListDiscoveryJobsAPIClient is a client that implements the ListDiscoveryJobs
+// operation.
+type ListDiscoveryJobsAPIClient interface {
+	ListDiscoveryJobs(context.Context, *ListDiscoveryJobsInput, ...func(*Options)) (*ListDiscoveryJobsOutput, error)
+}
+
+var _ ListDiscoveryJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDiscoveryJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

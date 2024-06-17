@@ -126,6 +126,9 @@ func (c *Client) addOperationAssociateTransitGatewayConnectPeerMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateTransitGatewayConnectPeerValidationMiddleware(stack); err != nil {
 		return err
 	}

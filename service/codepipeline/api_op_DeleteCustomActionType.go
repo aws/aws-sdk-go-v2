@@ -122,6 +122,9 @@ func (c *Client) addOperationDeleteCustomActionTypeMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomActionTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,6 +129,9 @@ func (c *Client) addOperationListDeliverabilityTestReportsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeliverabilityTestReports(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListDeliverabilityTestReportsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListDeliverabilityTestReportsAPIClient is a client that implements the
-// ListDeliverabilityTestReports operation.
-type ListDeliverabilityTestReportsAPIClient interface {
-	ListDeliverabilityTestReports(context.Context, *ListDeliverabilityTestReportsInput, ...func(*Options)) (*ListDeliverabilityTestReportsOutput, error)
-}
-
-var _ ListDeliverabilityTestReportsAPIClient = (*Client)(nil)
 
 // ListDeliverabilityTestReportsPaginatorOptions is the paginator options for
 // ListDeliverabilityTestReports
@@ -229,6 +224,9 @@ func (p *ListDeliverabilityTestReportsPaginator) NextPage(ctx context.Context, o
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDeliverabilityTestReports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListDeliverabilityTestReportsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListDeliverabilityTestReportsAPIClient is a client that implements the
+// ListDeliverabilityTestReports operation.
+type ListDeliverabilityTestReportsAPIClient interface {
+	ListDeliverabilityTestReports(context.Context, *ListDeliverabilityTestReportsInput, ...func(*Options)) (*ListDeliverabilityTestReportsOutput, error)
+}
+
+var _ ListDeliverabilityTestReportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDeliverabilityTestReports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

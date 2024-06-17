@@ -114,6 +114,9 @@ func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListScramSecretsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListScramSecretsAPIClient is a client that implements the ListScramSecrets
-// operation.
-type ListScramSecretsAPIClient interface {
-	ListScramSecrets(context.Context, *ListScramSecretsInput, ...func(*Options)) (*ListScramSecretsOutput, error)
-}
-
-var _ ListScramSecretsAPIClient = (*Client)(nil)
 
 // ListScramSecretsPaginatorOptions is the paginator options for ListScramSecrets
 type ListScramSecretsPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListScramSecretsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScramSecrets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListScramSecretsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListScramSecretsAPIClient is a client that implements the ListScramSecrets
+// operation.
+type ListScramSecretsAPIClient interface {
+	ListScramSecrets(context.Context, *ListScramSecretsInput, ...func(*Options)) (*ListScramSecretsOutput, error)
+}
+
+var _ ListScramSecretsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScramSecrets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

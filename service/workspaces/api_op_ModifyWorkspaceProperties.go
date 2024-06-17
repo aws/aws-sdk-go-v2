@@ -116,6 +116,9 @@ func (c *Client) addOperationModifyWorkspacePropertiesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyWorkspacePropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}

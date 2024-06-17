@@ -112,6 +112,9 @@ func (c *Client) addOperationDisassociateAgentKnowledgeBaseMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateAgentKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}

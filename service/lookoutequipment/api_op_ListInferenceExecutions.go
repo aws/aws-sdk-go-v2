@@ -137,6 +137,9 @@ func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInferenceExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListInferenceExecutionsAPIClient is a client that implements the
-// ListInferenceExecutions operation.
-type ListInferenceExecutionsAPIClient interface {
-	ListInferenceExecutions(context.Context, *ListInferenceExecutionsInput, ...func(*Options)) (*ListInferenceExecutionsOutput, error)
-}
-
-var _ ListInferenceExecutionsAPIClient = (*Client)(nil)
 
 // ListInferenceExecutionsPaginatorOptions is the paginator options for
 // ListInferenceExecutions
@@ -234,6 +229,9 @@ func (p *ListInferenceExecutionsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInferenceExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *ListInferenceExecutionsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListInferenceExecutionsAPIClient is a client that implements the
+// ListInferenceExecutions operation.
+type ListInferenceExecutionsAPIClient interface {
+	ListInferenceExecutions(context.Context, *ListInferenceExecutionsInput, ...func(*Options)) (*ListInferenceExecutionsOutput, error)
+}
+
+var _ ListInferenceExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInferenceExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

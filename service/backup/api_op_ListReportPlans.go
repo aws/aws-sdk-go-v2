@@ -117,6 +117,9 @@ func (c *Client) addOperationListReportPlansMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReportPlans(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListReportPlansMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListReportPlansAPIClient is a client that implements the ListReportPlans
-// operation.
-type ListReportPlansAPIClient interface {
-	ListReportPlans(context.Context, *ListReportPlansInput, ...func(*Options)) (*ListReportPlansOutput, error)
-}
-
-var _ ListReportPlansAPIClient = (*Client)(nil)
 
 // ListReportPlansPaginatorOptions is the paginator options for ListReportPlans
 type ListReportPlansPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListReportPlansPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReportPlans(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListReportPlansPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListReportPlansAPIClient is a client that implements the ListReportPlans
+// operation.
+type ListReportPlansAPIClient interface {
+	ListReportPlans(context.Context, *ListReportPlansInput, ...func(*Options)) (*ListReportPlansOutput, error)
+}
+
+var _ ListReportPlansAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReportPlans(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

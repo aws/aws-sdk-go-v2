@@ -130,6 +130,9 @@ func (c *Client) addOperationSearchJobsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,13 +153,6 @@ func (c *Client) addOperationSearchJobsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// SearchJobsAPIClient is a client that implements the SearchJobs operation.
-type SearchJobsAPIClient interface {
-	SearchJobs(context.Context, *SearchJobsInput, ...func(*Options)) (*SearchJobsOutput, error)
-}
-
-var _ SearchJobsAPIClient = (*Client)(nil)
 
 // SearchJobsPaginatorOptions is the paginator options for SearchJobs
 type SearchJobsPaginatorOptions struct {
@@ -221,6 +217,9 @@ func (p *SearchJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +238,13 @@ func (p *SearchJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// SearchJobsAPIClient is a client that implements the SearchJobs operation.
+type SearchJobsAPIClient interface {
+	SearchJobs(context.Context, *SearchJobsInput, ...func(*Options)) (*SearchJobsOutput, error)
+}
+
+var _ SearchJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

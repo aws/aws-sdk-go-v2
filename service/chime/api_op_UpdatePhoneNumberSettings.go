@@ -104,6 +104,9 @@ func (c *Client) addOperationUpdatePhoneNumberSettingsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdatePhoneNumberSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

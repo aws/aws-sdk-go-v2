@@ -142,6 +142,9 @@ func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeDBClusterEndpointsAPIClient is a client that implements the
-// DescribeDBClusterEndpoints operation.
-type DescribeDBClusterEndpointsAPIClient interface {
-	DescribeDBClusterEndpoints(context.Context, *DescribeDBClusterEndpointsInput, ...func(*Options)) (*DescribeDBClusterEndpointsOutput, error)
-}
-
-var _ DescribeDBClusterEndpointsAPIClient = (*Client)(nil)
 
 // DescribeDBClusterEndpointsPaginatorOptions is the paginator options for
 // DescribeDBClusterEndpoints
@@ -246,6 +241,9 @@ func (p *DescribeDBClusterEndpointsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBClusterEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +262,14 @@ func (p *DescribeDBClusterEndpointsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeDBClusterEndpointsAPIClient is a client that implements the
+// DescribeDBClusterEndpoints operation.
+type DescribeDBClusterEndpointsAPIClient interface {
+	DescribeDBClusterEndpoints(context.Context, *DescribeDBClusterEndpointsInput, ...func(*Options)) (*DescribeDBClusterEndpointsOutput, error)
+}
+
+var _ DescribeDBClusterEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBClusterEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

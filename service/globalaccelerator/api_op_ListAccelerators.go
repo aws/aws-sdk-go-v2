@@ -113,6 +113,9 @@ func (c *Client) addOperationListAcceleratorsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccelerators(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListAcceleratorsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListAcceleratorsAPIClient is a client that implements the ListAccelerators
-// operation.
-type ListAcceleratorsAPIClient interface {
-	ListAccelerators(context.Context, *ListAcceleratorsInput, ...func(*Options)) (*ListAcceleratorsOutput, error)
-}
-
-var _ ListAcceleratorsAPIClient = (*Client)(nil)
 
 // ListAcceleratorsPaginatorOptions is the paginator options for ListAccelerators
 type ListAcceleratorsPaginatorOptions struct {
@@ -206,6 +201,9 @@ func (p *ListAcceleratorsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccelerators(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListAcceleratorsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListAcceleratorsAPIClient is a client that implements the ListAccelerators
+// operation.
+type ListAcceleratorsAPIClient interface {
+	ListAccelerators(context.Context, *ListAcceleratorsInput, ...func(*Options)) (*ListAcceleratorsOutput, error)
+}
+
+var _ ListAcceleratorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccelerators(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

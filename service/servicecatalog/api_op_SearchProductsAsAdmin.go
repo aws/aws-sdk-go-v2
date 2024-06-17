@@ -135,6 +135,9 @@ func (c *Client) addOperationSearchProductsAsAdminMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchProductsAsAdmin(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationSearchProductsAsAdminMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// SearchProductsAsAdminAPIClient is a client that implements the
-// SearchProductsAsAdmin operation.
-type SearchProductsAsAdminAPIClient interface {
-	SearchProductsAsAdmin(context.Context, *SearchProductsAsAdminInput, ...func(*Options)) (*SearchProductsAsAdminOutput, error)
-}
-
-var _ SearchProductsAsAdminAPIClient = (*Client)(nil)
 
 // SearchProductsAsAdminPaginatorOptions is the paginator options for
 // SearchProductsAsAdmin
@@ -224,6 +219,9 @@ func (p *SearchProductsAsAdminPaginator) NextPage(ctx context.Context, optFns ..
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchProductsAsAdmin(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *SearchProductsAsAdminPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// SearchProductsAsAdminAPIClient is a client that implements the
+// SearchProductsAsAdmin operation.
+type SearchProductsAsAdminAPIClient interface {
+	SearchProductsAsAdmin(context.Context, *SearchProductsAsAdminInput, ...func(*Options)) (*SearchProductsAsAdminOutput, error)
+}
+
+var _ SearchProductsAsAdminAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchProductsAsAdmin(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

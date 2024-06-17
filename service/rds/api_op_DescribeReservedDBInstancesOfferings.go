@@ -156,6 +156,9 @@ func (c *Client) addOperationDescribeReservedDBInstancesOfferingsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReservedDBInstancesOfferingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -179,14 +182,6 @@ func (c *Client) addOperationDescribeReservedDBInstancesOfferingsMiddlewares(sta
 	}
 	return nil
 }
-
-// DescribeReservedDBInstancesOfferingsAPIClient is a client that implements the
-// DescribeReservedDBInstancesOfferings operation.
-type DescribeReservedDBInstancesOfferingsAPIClient interface {
-	DescribeReservedDBInstancesOfferings(context.Context, *DescribeReservedDBInstancesOfferingsInput, ...func(*Options)) (*DescribeReservedDBInstancesOfferingsOutput, error)
-}
-
-var _ DescribeReservedDBInstancesOfferingsAPIClient = (*Client)(nil)
 
 // DescribeReservedDBInstancesOfferingsPaginatorOptions is the paginator options
 // for DescribeReservedDBInstancesOfferings
@@ -260,6 +255,9 @@ func (p *DescribeReservedDBInstancesOfferingsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedDBInstancesOfferings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -278,6 +276,14 @@ func (p *DescribeReservedDBInstancesOfferingsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// DescribeReservedDBInstancesOfferingsAPIClient is a client that implements the
+// DescribeReservedDBInstancesOfferings operation.
+type DescribeReservedDBInstancesOfferingsAPIClient interface {
+	DescribeReservedDBInstancesOfferings(context.Context, *DescribeReservedDBInstancesOfferingsInput, ...func(*Options)) (*DescribeReservedDBInstancesOfferingsOutput, error)
+}
+
+var _ DescribeReservedDBInstancesOfferingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedDBInstancesOfferings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

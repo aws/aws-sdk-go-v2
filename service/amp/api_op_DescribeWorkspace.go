@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeWorkspaceMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeWorkspaceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationDescribeWorkspaceMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeWorkspaceAPIClient is a client that implements the DescribeWorkspace
-// operation.
-type DescribeWorkspaceAPIClient interface {
-	DescribeWorkspace(context.Context, *DescribeWorkspaceInput, ...func(*Options)) (*DescribeWorkspaceOutput, error)
-}
-
-var _ DescribeWorkspaceAPIClient = (*Client)(nil)
 
 // WorkspaceActiveWaiterOptions are waiter options for WorkspaceActiveWaiter
 type WorkspaceActiveWaiterOptions struct {
@@ -262,7 +257,13 @@ func (w *WorkspaceActiveWaiter) WaitForOutput(ctx context.Context, params *Descr
 		}
 
 		out, err := w.client.DescribeWorkspace(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -469,7 +470,13 @@ func (w *WorkspaceDeletedWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeWorkspace(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -533,6 +540,14 @@ func workspaceDeletedStateRetryable(ctx context.Context, input *DescribeWorkspac
 
 	return true, nil
 }
+
+// DescribeWorkspaceAPIClient is a client that implements the DescribeWorkspace
+// operation.
+type DescribeWorkspaceAPIClient interface {
+	DescribeWorkspace(context.Context, *DescribeWorkspaceInput, ...func(*Options)) (*DescribeWorkspaceOutput, error)
+}
+
+var _ DescribeWorkspaceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeWorkspace(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

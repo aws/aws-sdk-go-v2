@@ -116,6 +116,9 @@ func (c *Client) addOperationListLogAnomalyDetectorsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLogAnomalyDetectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListLogAnomalyDetectorsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListLogAnomalyDetectorsAPIClient is a client that implements the
-// ListLogAnomalyDetectors operation.
-type ListLogAnomalyDetectorsAPIClient interface {
-	ListLogAnomalyDetectors(context.Context, *ListLogAnomalyDetectorsInput, ...func(*Options)) (*ListLogAnomalyDetectorsOutput, error)
-}
-
-var _ ListLogAnomalyDetectorsAPIClient = (*Client)(nil)
 
 // ListLogAnomalyDetectorsPaginatorOptions is the paginator options for
 // ListLogAnomalyDetectors
@@ -211,6 +206,9 @@ func (p *ListLogAnomalyDetectorsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLogAnomalyDetectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListLogAnomalyDetectorsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListLogAnomalyDetectorsAPIClient is a client that implements the
+// ListLogAnomalyDetectors operation.
+type ListLogAnomalyDetectorsAPIClient interface {
+	ListLogAnomalyDetectors(context.Context, *ListLogAnomalyDetectorsInput, ...func(*Options)) (*ListLogAnomalyDetectorsOutput, error)
+}
+
+var _ ListLogAnomalyDetectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLogAnomalyDetectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

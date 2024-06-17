@@ -123,6 +123,9 @@ func (c *Client) addOperationListTestRecommendationsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListTestRecommendationsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListTestRecommendationsAPIClient is a client that implements the
-// ListTestRecommendations operation.
-type ListTestRecommendationsAPIClient interface {
-	ListTestRecommendations(context.Context, *ListTestRecommendationsInput, ...func(*Options)) (*ListTestRecommendationsOutput, error)
-}
-
-var _ ListTestRecommendationsAPIClient = (*Client)(nil)
 
 // ListTestRecommendationsPaginatorOptions is the paginator options for
 // ListTestRecommendations
@@ -222,6 +217,9 @@ func (p *ListTestRecommendationsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestRecommendations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListTestRecommendationsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListTestRecommendationsAPIClient is a client that implements the
+// ListTestRecommendations operation.
+type ListTestRecommendationsAPIClient interface {
+	ListTestRecommendations(context.Context, *ListTestRecommendationsInput, ...func(*Options)) (*ListTestRecommendationsOutput, error)
+}
+
+var _ ListTestRecommendationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

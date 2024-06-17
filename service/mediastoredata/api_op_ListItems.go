@@ -130,6 +130,9 @@ func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListItems(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,13 +153,6 @@ func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListItemsAPIClient is a client that implements the ListItems operation.
-type ListItemsAPIClient interface {
-	ListItems(context.Context, *ListItemsInput, ...func(*Options)) (*ListItemsOutput, error)
-}
-
-var _ ListItemsAPIClient = (*Client)(nil)
 
 // ListItemsPaginatorOptions is the paginator options for ListItems
 type ListItemsPaginatorOptions struct {
@@ -228,6 +224,9 @@ func (p *ListItemsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListItems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +245,13 @@ func (p *ListItemsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListItemsAPIClient is a client that implements the ListItems operation.
+type ListItemsAPIClient interface {
+	ListItems(context.Context, *ListItemsInput, ...func(*Options)) (*ListItemsOutput, error)
+}
+
+var _ ListItemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListItems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

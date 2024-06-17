@@ -165,6 +165,9 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeContactValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -188,14 +191,6 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeContactAPIClient is a client that implements the DescribeContact
-// operation.
-type DescribeContactAPIClient interface {
-	DescribeContact(context.Context, *DescribeContactInput, ...func(*Options)) (*DescribeContactOutput, error)
-}
-
-var _ DescribeContactAPIClient = (*Client)(nil)
 
 // ContactScheduledWaiterOptions are waiter options for ContactScheduledWaiter
 type ContactScheduledWaiterOptions struct {
@@ -312,7 +307,13 @@ func (w *ContactScheduledWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeContact(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -386,6 +387,14 @@ func contactScheduledStateRetryable(ctx context.Context, input *DescribeContactI
 
 	return true, nil
 }
+
+// DescribeContactAPIClient is a client that implements the DescribeContact
+// operation.
+type DescribeContactAPIClient interface {
+	DescribeContact(context.Context, *DescribeContactInput, ...func(*Options)) (*DescribeContactOutput, error)
+}
+
+var _ DescribeContactAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeContact(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

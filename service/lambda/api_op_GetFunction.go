@@ -142,6 +142,9 @@ func (c *Client) addOperationGetFunctionMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,13 +168,6 @@ func (c *Client) addOperationGetFunctionMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// GetFunctionAPIClient is a client that implements the GetFunction operation.
-type GetFunctionAPIClient interface {
-	GetFunction(context.Context, *GetFunctionInput, ...func(*Options)) (*GetFunctionOutput, error)
-}
-
-var _ GetFunctionAPIClient = (*Client)(nil)
 
 // FunctionActiveV2WaiterOptions are waiter options for FunctionActiveV2Waiter
 type FunctionActiveV2WaiterOptions struct {
@@ -288,7 +284,13 @@ func (w *FunctionActiveV2Waiter) WaitForOutput(ctx context.Context, params *GetF
 		}
 
 		out, err := w.client.GetFunction(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -495,7 +497,13 @@ func (w *FunctionExistsWaiter) WaitForOutput(ctx context.Context, params *GetFun
 		}
 
 		out, err := w.client.GetFunction(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -662,7 +670,13 @@ func (w *FunctionUpdatedV2Waiter) WaitForOutput(ctx context.Context, params *Get
 		}
 
 		out, err := w.client.GetFunction(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -753,6 +767,13 @@ func functionUpdatedV2StateRetryable(ctx context.Context, input *GetFunctionInpu
 
 	return true, nil
 }
+
+// GetFunctionAPIClient is a client that implements the GetFunction operation.
+type GetFunctionAPIClient interface {
+	GetFunction(context.Context, *GetFunctionInput, ...func(*Options)) (*GetFunctionOutput, error)
+}
+
+var _ GetFunctionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFunction(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -125,6 +125,9 @@ func (c *Client) addOperationListPublishingDestinationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPublishingDestinationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListPublishingDestinationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListPublishingDestinationsAPIClient is a client that implements the
-// ListPublishingDestinations operation.
-type ListPublishingDestinationsAPIClient interface {
-	ListPublishingDestinations(context.Context, *ListPublishingDestinationsInput, ...func(*Options)) (*ListPublishingDestinationsOutput, error)
-}
-
-var _ ListPublishingDestinationsAPIClient = (*Client)(nil)
 
 // ListPublishingDestinationsPaginatorOptions is the paginator options for
 // ListPublishingDestinations
@@ -223,6 +218,9 @@ func (p *ListPublishingDestinationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPublishingDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListPublishingDestinationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListPublishingDestinationsAPIClient is a client that implements the
+// ListPublishingDestinations operation.
+type ListPublishingDestinationsAPIClient interface {
+	ListPublishingDestinations(context.Context, *ListPublishingDestinationsInput, ...func(*Options)) (*ListPublishingDestinationsOutput, error)
+}
+
+var _ ListPublishingDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPublishingDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

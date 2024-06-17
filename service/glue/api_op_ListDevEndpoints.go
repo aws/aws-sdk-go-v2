@@ -120,6 +120,9 @@ func (c *Client) addOperationListDevEndpointsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListDevEndpointsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListDevEndpointsAPIClient is a client that implements the ListDevEndpoints
-// operation.
-type ListDevEndpointsAPIClient interface {
-	ListDevEndpoints(context.Context, *ListDevEndpointsInput, ...func(*Options)) (*ListDevEndpointsOutput, error)
-}
-
-var _ ListDevEndpointsAPIClient = (*Client)(nil)
 
 // ListDevEndpointsPaginatorOptions is the paginator options for ListDevEndpoints
 type ListDevEndpointsPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListDevEndpointsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDevEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListDevEndpointsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListDevEndpointsAPIClient is a client that implements the ListDevEndpoints
+// operation.
+type ListDevEndpointsAPIClient interface {
+	ListDevEndpoints(context.Context, *ListDevEndpointsInput, ...func(*Options)) (*ListDevEndpointsOutput, error)
+}
+
+var _ ListDevEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDevEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

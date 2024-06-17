@@ -112,6 +112,9 @@ func (c *Client) addOperationListEventDataStoresMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventDataStores(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListEventDataStoresMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListEventDataStoresAPIClient is a client that implements the
-// ListEventDataStores operation.
-type ListEventDataStoresAPIClient interface {
-	ListEventDataStores(context.Context, *ListEventDataStoresInput, ...func(*Options)) (*ListEventDataStoresOutput, error)
-}
-
-var _ ListEventDataStoresAPIClient = (*Client)(nil)
 
 // ListEventDataStoresPaginatorOptions is the paginator options for
 // ListEventDataStores
@@ -205,6 +200,9 @@ func (p *ListEventDataStoresPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventDataStores(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListEventDataStoresPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListEventDataStoresAPIClient is a client that implements the
+// ListEventDataStores operation.
+type ListEventDataStoresAPIClient interface {
+	ListEventDataStores(context.Context, *ListEventDataStoresInput, ...func(*Options)) (*ListEventDataStoresOutput, error)
+}
+
+var _ ListEventDataStoresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventDataStores(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

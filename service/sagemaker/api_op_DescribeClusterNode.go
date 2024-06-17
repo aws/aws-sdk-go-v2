@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeClusterNodeMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeClusterNodeValidationMiddleware(stack); err != nil {
 		return err
 	}

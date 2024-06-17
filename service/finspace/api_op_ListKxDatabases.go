@@ -118,6 +118,9 @@ func (c *Client) addOperationListKxDatabasesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListKxDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListKxDatabasesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListKxDatabasesAPIClient is a client that implements the ListKxDatabases
-// operation.
-type ListKxDatabasesAPIClient interface {
-	ListKxDatabases(context.Context, *ListKxDatabasesInput, ...func(*Options)) (*ListKxDatabasesOutput, error)
-}
-
-var _ ListKxDatabasesAPIClient = (*Client)(nil)
 
 // ListKxDatabasesPaginatorOptions is the paginator options for ListKxDatabases
 type ListKxDatabasesPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListKxDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKxDatabases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListKxDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListKxDatabasesAPIClient is a client that implements the ListKxDatabases
+// operation.
+type ListKxDatabasesAPIClient interface {
+	ListKxDatabases(context.Context, *ListKxDatabasesInput, ...func(*Options)) (*ListKxDatabasesOutput, error)
+}
+
+var _ ListKxDatabasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKxDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

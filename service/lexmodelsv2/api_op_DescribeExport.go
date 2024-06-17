@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeExportMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeExportValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationDescribeExportMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// DescribeExportAPIClient is a client that implements the DescribeExport
-// operation.
-type DescribeExportAPIClient interface {
-	DescribeExport(context.Context, *DescribeExportInput, ...func(*Options)) (*DescribeExportOutput, error)
-}
-
-var _ DescribeExportAPIClient = (*Client)(nil)
 
 // BotExportCompletedWaiterOptions are waiter options for BotExportCompletedWaiter
 type BotExportCompletedWaiterOptions struct {
@@ -281,7 +276,13 @@ func (w *BotExportCompletedWaiter) WaitForOutput(ctx context.Context, params *De
 		}
 
 		out, err := w.client.DescribeExport(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -372,6 +373,14 @@ func botExportCompletedStateRetryable(ctx context.Context, input *DescribeExport
 
 	return true, nil
 }
+
+// DescribeExportAPIClient is a client that implements the DescribeExport
+// operation.
+type DescribeExportAPIClient interface {
+	DescribeExport(context.Context, *DescribeExportInput, ...func(*Options)) (*DescribeExportOutput, error)
+}
+
+var _ DescribeExportAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeExport(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

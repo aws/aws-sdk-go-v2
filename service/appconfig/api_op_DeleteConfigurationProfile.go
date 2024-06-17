@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteConfigurationProfileMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfigurationProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

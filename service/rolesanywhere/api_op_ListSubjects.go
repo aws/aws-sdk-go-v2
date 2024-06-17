@@ -116,6 +116,9 @@ func (c *Client) addOperationListSubjectsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSubjects(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,13 +139,6 @@ func (c *Client) addOperationListSubjectsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListSubjectsAPIClient is a client that implements the ListSubjects operation.
-type ListSubjectsAPIClient interface {
-	ListSubjects(context.Context, *ListSubjectsInput, ...func(*Options)) (*ListSubjectsOutput, error)
-}
-
-var _ ListSubjectsAPIClient = (*Client)(nil)
 
 // ListSubjectsPaginatorOptions is the paginator options for ListSubjects
 type ListSubjectsPaginatorOptions struct {
@@ -195,6 +191,9 @@ func (p *ListSubjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSubjects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -213,6 +212,13 @@ func (p *ListSubjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListSubjectsAPIClient is a client that implements the ListSubjects operation.
+type ListSubjectsAPIClient interface {
+	ListSubjects(context.Context, *ListSubjectsInput, ...func(*Options)) (*ListSubjectsOutput, error)
+}
+
+var _ ListSubjectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSubjects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

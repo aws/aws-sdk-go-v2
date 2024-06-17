@@ -134,6 +134,9 @@ func (c *Client) addOperationListExplainabilitiesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListExplainabilitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListExplainabilitiesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListExplainabilitiesAPIClient is a client that implements the
-// ListExplainabilities operation.
-type ListExplainabilitiesAPIClient interface {
-	ListExplainabilities(context.Context, *ListExplainabilitiesInput, ...func(*Options)) (*ListExplainabilitiesOutput, error)
-}
-
-var _ ListExplainabilitiesAPIClient = (*Client)(nil)
 
 // ListExplainabilitiesPaginatorOptions is the paginator options for
 // ListExplainabilities
@@ -230,6 +225,9 @@ func (p *ListExplainabilitiesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExplainabilities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListExplainabilitiesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListExplainabilitiesAPIClient is a client that implements the
+// ListExplainabilities operation.
+type ListExplainabilitiesAPIClient interface {
+	ListExplainabilities(context.Context, *ListExplainabilitiesInput, ...func(*Options)) (*ListExplainabilitiesOutput, error)
+}
+
+var _ ListExplainabilitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExplainabilities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

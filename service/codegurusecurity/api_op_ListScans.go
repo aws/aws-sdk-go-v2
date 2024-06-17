@@ -118,6 +118,9 @@ func (c *Client) addOperationListScansMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScans(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationListScansMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListScansAPIClient is a client that implements the ListScans operation.
-type ListScansAPIClient interface {
-	ListScans(context.Context, *ListScansInput, ...func(*Options)) (*ListScansOutput, error)
-}
-
-var _ ListScansAPIClient = (*Client)(nil)
 
 // ListScansPaginatorOptions is the paginator options for ListScans
 type ListScansPaginatorOptions struct {
@@ -213,6 +209,9 @@ func (p *ListScansPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScans(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +230,13 @@ func (p *ListScansPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListScansAPIClient is a client that implements the ListScans operation.
+type ListScansAPIClient interface {
+	ListScans(context.Context, *ListScansInput, ...func(*Options)) (*ListScansOutput, error)
+}
+
+var _ ListScansAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScans(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

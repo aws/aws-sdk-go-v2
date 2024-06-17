@@ -120,6 +120,9 @@ func (c *Client) addOperationGetColumnStatisticsTaskRunsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetColumnStatisticsTaskRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationGetColumnStatisticsTaskRunsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// GetColumnStatisticsTaskRunsAPIClient is a client that implements the
-// GetColumnStatisticsTaskRuns operation.
-type GetColumnStatisticsTaskRunsAPIClient interface {
-	GetColumnStatisticsTaskRuns(context.Context, *GetColumnStatisticsTaskRunsInput, ...func(*Options)) (*GetColumnStatisticsTaskRunsOutput, error)
-}
-
-var _ GetColumnStatisticsTaskRunsAPIClient = (*Client)(nil)
 
 // GetColumnStatisticsTaskRunsPaginatorOptions is the paginator options for
 // GetColumnStatisticsTaskRuns
@@ -218,6 +213,9 @@ func (p *GetColumnStatisticsTaskRunsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetColumnStatisticsTaskRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetColumnStatisticsTaskRunsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// GetColumnStatisticsTaskRunsAPIClient is a client that implements the
+// GetColumnStatisticsTaskRuns operation.
+type GetColumnStatisticsTaskRunsAPIClient interface {
+	GetColumnStatisticsTaskRuns(context.Context, *GetColumnStatisticsTaskRunsInput, ...func(*Options)) (*GetColumnStatisticsTaskRunsOutput, error)
+}
+
+var _ GetColumnStatisticsTaskRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetColumnStatisticsTaskRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

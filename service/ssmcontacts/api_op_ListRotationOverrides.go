@@ -128,6 +128,9 @@ func (c *Client) addOperationListRotationOverridesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRotationOverridesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListRotationOverridesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListRotationOverridesAPIClient is a client that implements the
-// ListRotationOverrides operation.
-type ListRotationOverridesAPIClient interface {
-	ListRotationOverrides(context.Context, *ListRotationOverridesInput, ...func(*Options)) (*ListRotationOverridesOutput, error)
-}
-
-var _ ListRotationOverridesAPIClient = (*Client)(nil)
 
 // ListRotationOverridesPaginatorOptions is the paginator options for
 // ListRotationOverrides
@@ -225,6 +220,9 @@ func (p *ListRotationOverridesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRotationOverrides(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListRotationOverridesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListRotationOverridesAPIClient is a client that implements the
+// ListRotationOverrides operation.
+type ListRotationOverridesAPIClient interface {
+	ListRotationOverrides(context.Context, *ListRotationOverridesInput, ...func(*Options)) (*ListRotationOverridesOutput, error)
+}
+
+var _ ListRotationOverridesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRotationOverrides(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

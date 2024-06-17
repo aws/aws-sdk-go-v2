@@ -114,6 +114,9 @@ func (c *Client) addOperationListSubscribersMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSubscribers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListSubscribersMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListSubscribersAPIClient is a client that implements the ListSubscribers
-// operation.
-type ListSubscribersAPIClient interface {
-	ListSubscribers(context.Context, *ListSubscribersInput, ...func(*Options)) (*ListSubscribersOutput, error)
-}
-
-var _ ListSubscribersAPIClient = (*Client)(nil)
 
 // ListSubscribersPaginatorOptions is the paginator options for ListSubscribers
 type ListSubscribersPaginatorOptions struct {
@@ -206,6 +201,9 @@ func (p *ListSubscribersPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSubscribers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListSubscribersPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListSubscribersAPIClient is a client that implements the ListSubscribers
+// operation.
+type ListSubscribersAPIClient interface {
+	ListSubscribers(context.Context, *ListSubscribersInput, ...func(*Options)) (*ListSubscribersOutput, error)
+}
+
+var _ ListSubscribersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSubscribers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

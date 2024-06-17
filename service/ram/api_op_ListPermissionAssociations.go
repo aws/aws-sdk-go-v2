@@ -158,6 +158,9 @@ func (c *Client) addOperationListPermissionAssociationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPermissionAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -178,14 +181,6 @@ func (c *Client) addOperationListPermissionAssociationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListPermissionAssociationsAPIClient is a client that implements the
-// ListPermissionAssociations operation.
-type ListPermissionAssociationsAPIClient interface {
-	ListPermissionAssociations(context.Context, *ListPermissionAssociationsInput, ...func(*Options)) (*ListPermissionAssociationsOutput, error)
-}
-
-var _ ListPermissionAssociationsAPIClient = (*Client)(nil)
 
 // ListPermissionAssociationsPaginatorOptions is the paginator options for
 // ListPermissionAssociations
@@ -261,6 +256,9 @@ func (p *ListPermissionAssociationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPermissionAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -279,6 +277,14 @@ func (p *ListPermissionAssociationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListPermissionAssociationsAPIClient is a client that implements the
+// ListPermissionAssociations operation.
+type ListPermissionAssociationsAPIClient interface {
+	ListPermissionAssociations(context.Context, *ListPermissionAssociationsInput, ...func(*Options)) (*ListPermissionAssociationsOutput, error)
+}
+
+var _ ListPermissionAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPermissionAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

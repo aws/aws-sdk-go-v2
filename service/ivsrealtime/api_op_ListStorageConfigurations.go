@@ -116,6 +116,9 @@ func (c *Client) addOperationListStorageConfigurationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStorageConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListStorageConfigurationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListStorageConfigurationsAPIClient is a client that implements the
-// ListStorageConfigurations operation.
-type ListStorageConfigurationsAPIClient interface {
-	ListStorageConfigurations(context.Context, *ListStorageConfigurationsInput, ...func(*Options)) (*ListStorageConfigurationsOutput, error)
-}
-
-var _ ListStorageConfigurationsAPIClient = (*Client)(nil)
 
 // ListStorageConfigurationsPaginatorOptions is the paginator options for
 // ListStorageConfigurations
@@ -211,6 +206,9 @@ func (p *ListStorageConfigurationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStorageConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListStorageConfigurationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListStorageConfigurationsAPIClient is a client that implements the
+// ListStorageConfigurations operation.
+type ListStorageConfigurationsAPIClient interface {
+	ListStorageConfigurations(context.Context, *ListStorageConfigurationsInput, ...func(*Options)) (*ListStorageConfigurationsOutput, error)
+}
+
+var _ ListStorageConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStorageConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

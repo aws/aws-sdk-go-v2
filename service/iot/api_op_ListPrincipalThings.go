@@ -124,6 +124,9 @@ func (c *Client) addOperationListPrincipalThingsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPrincipalThingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListPrincipalThingsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListPrincipalThingsAPIClient is a client that implements the
-// ListPrincipalThings operation.
-type ListPrincipalThingsAPIClient interface {
-	ListPrincipalThings(context.Context, *ListPrincipalThingsInput, ...func(*Options)) (*ListPrincipalThingsOutput, error)
-}
-
-var _ ListPrincipalThingsAPIClient = (*Client)(nil)
 
 // ListPrincipalThingsPaginatorOptions is the paginator options for
 // ListPrincipalThings
@@ -220,6 +215,9 @@ func (p *ListPrincipalThingsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrincipalThings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListPrincipalThingsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListPrincipalThingsAPIClient is a client that implements the
+// ListPrincipalThings operation.
+type ListPrincipalThingsAPIClient interface {
+	ListPrincipalThings(context.Context, *ListPrincipalThingsInput, ...func(*Options)) (*ListPrincipalThingsOutput, error)
+}
+
+var _ ListPrincipalThingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrincipalThings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

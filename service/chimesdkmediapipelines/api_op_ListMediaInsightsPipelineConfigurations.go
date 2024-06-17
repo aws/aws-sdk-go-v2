@@ -110,6 +110,9 @@ func (c *Client) addOperationListMediaInsightsPipelineConfigurationsMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMediaInsightsPipelineConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListMediaInsightsPipelineConfigurationsMiddlewares(
 	}
 	return nil
 }
-
-// ListMediaInsightsPipelineConfigurationsAPIClient is a client that implements
-// the ListMediaInsightsPipelineConfigurations operation.
-type ListMediaInsightsPipelineConfigurationsAPIClient interface {
-	ListMediaInsightsPipelineConfigurations(context.Context, *ListMediaInsightsPipelineConfigurationsInput, ...func(*Options)) (*ListMediaInsightsPipelineConfigurationsOutput, error)
-}
-
-var _ ListMediaInsightsPipelineConfigurationsAPIClient = (*Client)(nil)
 
 // ListMediaInsightsPipelineConfigurationsPaginatorOptions is the paginator
 // options for ListMediaInsightsPipelineConfigurations
@@ -205,6 +200,9 @@ func (p *ListMediaInsightsPipelineConfigurationsPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMediaInsightsPipelineConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListMediaInsightsPipelineConfigurationsPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListMediaInsightsPipelineConfigurationsAPIClient is a client that implements
+// the ListMediaInsightsPipelineConfigurations operation.
+type ListMediaInsightsPipelineConfigurationsAPIClient interface {
+	ListMediaInsightsPipelineConfigurations(context.Context, *ListMediaInsightsPipelineConfigurationsInput, ...func(*Options)) (*ListMediaInsightsPipelineConfigurationsOutput, error)
+}
+
+var _ ListMediaInsightsPipelineConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMediaInsightsPipelineConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

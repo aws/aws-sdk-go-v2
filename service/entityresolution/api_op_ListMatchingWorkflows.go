@@ -112,6 +112,9 @@ func (c *Client) addOperationListMatchingWorkflowsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMatchingWorkflows(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListMatchingWorkflowsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListMatchingWorkflowsAPIClient is a client that implements the
-// ListMatchingWorkflows operation.
-type ListMatchingWorkflowsAPIClient interface {
-	ListMatchingWorkflows(context.Context, *ListMatchingWorkflowsInput, ...func(*Options)) (*ListMatchingWorkflowsOutput, error)
-}
-
-var _ ListMatchingWorkflowsAPIClient = (*Client)(nil)
 
 // ListMatchingWorkflowsPaginatorOptions is the paginator options for
 // ListMatchingWorkflows
@@ -205,6 +200,9 @@ func (p *ListMatchingWorkflowsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMatchingWorkflows(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListMatchingWorkflowsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListMatchingWorkflowsAPIClient is a client that implements the
+// ListMatchingWorkflows operation.
+type ListMatchingWorkflowsAPIClient interface {
+	ListMatchingWorkflows(context.Context, *ListMatchingWorkflowsInput, ...func(*Options)) (*ListMatchingWorkflowsOutput, error)
+}
+
+var _ ListMatchingWorkflowsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMatchingWorkflows(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

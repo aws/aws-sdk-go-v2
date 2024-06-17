@@ -139,6 +139,9 @@ func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAWSServiceAccessForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stac
 	}
 	return nil
 }
-
-// ListAWSServiceAccessForOrganizationAPIClient is a client that implements the
-// ListAWSServiceAccessForOrganization operation.
-type ListAWSServiceAccessForOrganizationAPIClient interface {
-	ListAWSServiceAccessForOrganization(context.Context, *ListAWSServiceAccessForOrganizationInput, ...func(*Options)) (*ListAWSServiceAccessForOrganizationOutput, error)
-}
-
-var _ ListAWSServiceAccessForOrganizationAPIClient = (*Client)(nil)
 
 // ListAWSServiceAccessForOrganizationPaginatorOptions is the paginator options
 // for ListAWSServiceAccessForOrganization
@@ -242,6 +237,9 @@ func (p *ListAWSServiceAccessForOrganizationPaginator) NextPage(ctx context.Cont
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAWSServiceAccessForOrganization(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *ListAWSServiceAccessForOrganizationPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// ListAWSServiceAccessForOrganizationAPIClient is a client that implements the
+// ListAWSServiceAccessForOrganization operation.
+type ListAWSServiceAccessForOrganizationAPIClient interface {
+	ListAWSServiceAccessForOrganization(context.Context, *ListAWSServiceAccessForOrganizationInput, ...func(*Options)) (*ListAWSServiceAccessForOrganizationOutput, error)
+}
+
+var _ ListAWSServiceAccessForOrganizationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAWSServiceAccessForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

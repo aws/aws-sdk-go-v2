@@ -143,6 +143,9 @@ func (c *Client) addOperationListNotebookInstanceLifecycleConfigsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNotebookInstanceLifecycleConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationListNotebookInstanceLifecycleConfigsMiddlewares(sta
 	}
 	return nil
 }
-
-// ListNotebookInstanceLifecycleConfigsAPIClient is a client that implements the
-// ListNotebookInstanceLifecycleConfigs operation.
-type ListNotebookInstanceLifecycleConfigsAPIClient interface {
-	ListNotebookInstanceLifecycleConfigs(context.Context, *ListNotebookInstanceLifecycleConfigsInput, ...func(*Options)) (*ListNotebookInstanceLifecycleConfigsOutput, error)
-}
-
-var _ ListNotebookInstanceLifecycleConfigsAPIClient = (*Client)(nil)
 
 // ListNotebookInstanceLifecycleConfigsPaginatorOptions is the paginator options
 // for ListNotebookInstanceLifecycleConfigs
@@ -238,6 +233,9 @@ func (p *ListNotebookInstanceLifecycleConfigsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListNotebookInstanceLifecycleConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListNotebookInstanceLifecycleConfigsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListNotebookInstanceLifecycleConfigsAPIClient is a client that implements the
+// ListNotebookInstanceLifecycleConfigs operation.
+type ListNotebookInstanceLifecycleConfigsAPIClient interface {
+	ListNotebookInstanceLifecycleConfigs(context.Context, *ListNotebookInstanceLifecycleConfigsInput, ...func(*Options)) (*ListNotebookInstanceLifecycleConfigsOutput, error)
+}
+
+var _ ListNotebookInstanceLifecycleConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListNotebookInstanceLifecycleConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -137,6 +137,9 @@ func (c *Client) addOperationDescribeFolderResolvedPermissionsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFolderResolvedPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationDescribeFolderResolvedPermissionsMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeFolderResolvedPermissionsAPIClient is a client that implements the
-// DescribeFolderResolvedPermissions operation.
-type DescribeFolderResolvedPermissionsAPIClient interface {
-	DescribeFolderResolvedPermissions(context.Context, *DescribeFolderResolvedPermissionsInput, ...func(*Options)) (*DescribeFolderResolvedPermissionsOutput, error)
-}
-
-var _ DescribeFolderResolvedPermissionsAPIClient = (*Client)(nil)
 
 // DescribeFolderResolvedPermissionsPaginatorOptions is the paginator options for
 // DescribeFolderResolvedPermissions
@@ -235,6 +230,9 @@ func (p *DescribeFolderResolvedPermissionsPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFolderResolvedPermissions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *DescribeFolderResolvedPermissionsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeFolderResolvedPermissionsAPIClient is a client that implements the
+// DescribeFolderResolvedPermissions operation.
+type DescribeFolderResolvedPermissionsAPIClient interface {
+	DescribeFolderResolvedPermissions(context.Context, *DescribeFolderResolvedPermissionsInput, ...func(*Options)) (*DescribeFolderResolvedPermissionsOutput, error)
+}
+
+var _ DescribeFolderResolvedPermissionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFolderResolvedPermissions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

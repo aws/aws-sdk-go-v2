@@ -148,6 +148,9 @@ func (c *Client) addOperationListTrialComponentsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrialComponents(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListTrialComponentsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListTrialComponentsAPIClient is a client that implements the
-// ListTrialComponents operation.
-type ListTrialComponentsAPIClient interface {
-	ListTrialComponents(context.Context, *ListTrialComponentsInput, ...func(*Options)) (*ListTrialComponentsOutput, error)
-}
-
-var _ ListTrialComponentsAPIClient = (*Client)(nil)
 
 // ListTrialComponentsPaginatorOptions is the paginator options for
 // ListTrialComponents
@@ -242,6 +237,9 @@ func (p *ListTrialComponentsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrialComponents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *ListTrialComponentsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListTrialComponentsAPIClient is a client that implements the
+// ListTrialComponents operation.
+type ListTrialComponentsAPIClient interface {
+	ListTrialComponents(context.Context, *ListTrialComponentsInput, ...func(*Options)) (*ListTrialComponentsOutput, error)
+}
+
+var _ ListTrialComponentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrialComponents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

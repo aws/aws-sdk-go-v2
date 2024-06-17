@@ -144,6 +144,9 @@ func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateAccessEntryMiddleware(stack, options); err != nil {
 		return err
 	}

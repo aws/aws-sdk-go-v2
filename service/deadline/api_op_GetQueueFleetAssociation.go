@@ -148,6 +148,9 @@ func (c *Client) addOperationGetQueueFleetAssociationMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetQueueFleetAssociationMiddleware(stack); err != nil {
 		return err
 	}
@@ -174,41 +177,6 @@ func (c *Client) addOperationGetQueueFleetAssociationMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-type endpointPrefix_opGetQueueFleetAssociationMiddleware struct {
-}
-
-func (*endpointPrefix_opGetQueueFleetAssociationMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetQueueFleetAssociationMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetQueueFleetAssociationMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetQueueFleetAssociationMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetQueueFleetAssociationAPIClient is a client that implements the
-// GetQueueFleetAssociation operation.
-type GetQueueFleetAssociationAPIClient interface {
-	GetQueueFleetAssociation(context.Context, *GetQueueFleetAssociationInput, ...func(*Options)) (*GetQueueFleetAssociationOutput, error)
-}
-
-var _ GetQueueFleetAssociationAPIClient = (*Client)(nil)
 
 // QueueFleetAssociationStoppedWaiterOptions are waiter options for
 // QueueFleetAssociationStoppedWaiter
@@ -329,7 +297,13 @@ func (w *QueueFleetAssociationStoppedWaiter) WaitForOutput(ctx context.Context, 
 		}
 
 		out, err := w.client.GetQueueFleetAssociation(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -386,6 +360,41 @@ func queueFleetAssociationStoppedStateRetryable(ctx context.Context, input *GetQ
 
 	return true, nil
 }
+
+type endpointPrefix_opGetQueueFleetAssociationMiddleware struct {
+}
+
+func (*endpointPrefix_opGetQueueFleetAssociationMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetQueueFleetAssociationMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetQueueFleetAssociationMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetQueueFleetAssociationMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetQueueFleetAssociationAPIClient is a client that implements the
+// GetQueueFleetAssociation operation.
+type GetQueueFleetAssociationAPIClient interface {
+	GetQueueFleetAssociation(context.Context, *GetQueueFleetAssociationInput, ...func(*Options)) (*GetQueueFleetAssociationOutput, error)
+}
+
+var _ GetQueueFleetAssociationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetQueueFleetAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

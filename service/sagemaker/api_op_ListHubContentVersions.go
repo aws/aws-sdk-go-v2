@@ -151,6 +151,9 @@ func (c *Client) addOperationListHubContentVersionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListHubContentVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationListFindingAggregatorsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFindingAggregators(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListFindingAggregatorsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListFindingAggregatorsAPIClient is a client that implements the
-// ListFindingAggregators operation.
-type ListFindingAggregatorsAPIClient interface {
-	ListFindingAggregators(context.Context, *ListFindingAggregatorsInput, ...func(*Options)) (*ListFindingAggregatorsOutput, error)
-}
-
-var _ ListFindingAggregatorsAPIClient = (*Client)(nil)
 
 // ListFindingAggregatorsPaginatorOptions is the paginator options for
 // ListFindingAggregators
@@ -211,6 +206,9 @@ func (p *ListFindingAggregatorsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFindingAggregators(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListFindingAggregatorsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListFindingAggregatorsAPIClient is a client that implements the
+// ListFindingAggregators operation.
+type ListFindingAggregatorsAPIClient interface {
+	ListFindingAggregators(context.Context, *ListFindingAggregatorsInput, ...func(*Options)) (*ListFindingAggregatorsOutput, error)
+}
+
+var _ ListFindingAggregatorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFindingAggregators(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

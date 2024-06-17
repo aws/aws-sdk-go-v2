@@ -132,6 +132,9 @@ func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAppInstanceAdminsMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,41 +161,6 @@ func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-type endpointPrefix_opListAppInstanceAdminsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAppInstanceAdminsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAppInstanceAdminsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "identity-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAppInstanceAdminsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAppInstanceAdminsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAppInstanceAdminsAPIClient is a client that implements the
-// ListAppInstanceAdmins operation.
-type ListAppInstanceAdminsAPIClient interface {
-	ListAppInstanceAdmins(context.Context, *ListAppInstanceAdminsInput, ...func(*Options)) (*ListAppInstanceAdminsOutput, error)
-}
-
-var _ ListAppInstanceAdminsAPIClient = (*Client)(nil)
 
 // ListAppInstanceAdminsPaginatorOptions is the paginator options for
 // ListAppInstanceAdmins
@@ -258,6 +226,9 @@ func (p *ListAppInstanceAdminsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppInstanceAdmins(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +247,41 @@ func (p *ListAppInstanceAdminsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+type endpointPrefix_opListAppInstanceAdminsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAppInstanceAdminsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAppInstanceAdminsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "identity-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAppInstanceAdminsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAppInstanceAdminsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAppInstanceAdminsAPIClient is a client that implements the
+// ListAppInstanceAdmins operation.
+type ListAppInstanceAdminsAPIClient interface {
+	ListAppInstanceAdmins(context.Context, *ListAppInstanceAdminsInput, ...func(*Options)) (*ListAppInstanceAdminsOutput, error)
+}
+
+var _ ListAppInstanceAdminsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppInstanceAdmins(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

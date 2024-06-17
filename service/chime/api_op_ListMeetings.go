@@ -121,6 +121,9 @@ func (c *Client) addOperationListMeetingsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMeetings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,13 +144,6 @@ func (c *Client) addOperationListMeetingsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListMeetingsAPIClient is a client that implements the ListMeetings operation.
-type ListMeetingsAPIClient interface {
-	ListMeetings(context.Context, *ListMeetingsInput, ...func(*Options)) (*ListMeetingsOutput, error)
-}
-
-var _ ListMeetingsAPIClient = (*Client)(nil)
 
 // ListMeetingsPaginatorOptions is the paginator options for ListMeetings
 type ListMeetingsPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *ListMeetingsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMeetings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *ListMeetingsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListMeetingsAPIClient is a client that implements the ListMeetings operation.
+type ListMeetingsAPIClient interface {
+	ListMeetings(context.Context, *ListMeetingsInput, ...func(*Options)) (*ListMeetingsOutput, error)
+}
+
+var _ ListMeetingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMeetings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

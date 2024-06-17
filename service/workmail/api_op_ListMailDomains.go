@@ -119,6 +119,9 @@ func (c *Client) addOperationListMailDomainsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMailDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListMailDomainsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListMailDomainsAPIClient is a client that implements the ListMailDomains
-// operation.
-type ListMailDomainsAPIClient interface {
-	ListMailDomains(context.Context, *ListMailDomainsInput, ...func(*Options)) (*ListMailDomainsOutput, error)
-}
-
-var _ ListMailDomainsAPIClient = (*Client)(nil)
 
 // ListMailDomainsPaginatorOptions is the paginator options for ListMailDomains
 type ListMailDomainsPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *ListMailDomainsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMailDomains(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListMailDomainsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListMailDomainsAPIClient is a client that implements the ListMailDomains
+// operation.
+type ListMailDomainsAPIClient interface {
+	ListMailDomains(context.Context, *ListMailDomainsInput, ...func(*Options)) (*ListMailDomainsOutput, error)
+}
+
+var _ ListMailDomainsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMailDomains(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

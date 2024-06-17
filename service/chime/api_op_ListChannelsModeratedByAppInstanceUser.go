@@ -133,6 +133,9 @@ func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,41 +159,6 @@ func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(s
 	}
 	return nil
 }
-
-type endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware struct {
-}
-
-func (*endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "messaging-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements the
-// ListChannelsModeratedByAppInstanceUser operation.
-type ListChannelsModeratedByAppInstanceUserAPIClient interface {
-	ListChannelsModeratedByAppInstanceUser(context.Context, *ListChannelsModeratedByAppInstanceUserInput, ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error)
-}
-
-var _ ListChannelsModeratedByAppInstanceUserAPIClient = (*Client)(nil)
 
 // ListChannelsModeratedByAppInstanceUserPaginatorOptions is the paginator options
 // for ListChannelsModeratedByAppInstanceUser
@@ -258,6 +226,9 @@ func (p *ListChannelsModeratedByAppInstanceUserPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelsModeratedByAppInstanceUser(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +247,41 @@ func (p *ListChannelsModeratedByAppInstanceUserPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+type endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware struct {
+}
+
+func (*endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "messaging-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListChannelsModeratedByAppInstanceUserMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements the
+// ListChannelsModeratedByAppInstanceUser operation.
+type ListChannelsModeratedByAppInstanceUserAPIClient interface {
+	ListChannelsModeratedByAppInstanceUser(context.Context, *ListChannelsModeratedByAppInstanceUserInput, ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error)
+}
+
+var _ ListChannelsModeratedByAppInstanceUserAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelsModeratedByAppInstanceUser(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

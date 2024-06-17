@@ -169,6 +169,9 @@ func (c *Client) addOperationCreatePortfolioShareMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePortfolioShareValidationMiddleware(stack); err != nil {
 		return err
 	}

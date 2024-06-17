@@ -144,6 +144,9 @@ func (c *Client) addOperationDescribeMountTargetsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMountTargets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationDescribeMountTargetsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeMountTargetsAPIClient is a client that implements the
-// DescribeMountTargets operation.
-type DescribeMountTargetsAPIClient interface {
-	DescribeMountTargets(context.Context, *DescribeMountTargetsInput, ...func(*Options)) (*DescribeMountTargetsOutput, error)
-}
-
-var _ DescribeMountTargetsAPIClient = (*Client)(nil)
 
 // DescribeMountTargetsPaginatorOptions is the paginator options for
 // DescribeMountTargets
@@ -240,6 +235,9 @@ func (p *DescribeMountTargetsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMountTargets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +256,14 @@ func (p *DescribeMountTargetsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeMountTargetsAPIClient is a client that implements the
+// DescribeMountTargets operation.
+type DescribeMountTargetsAPIClient interface {
+	DescribeMountTargets(context.Context, *DescribeMountTargetsInput, ...func(*Options)) (*DescribeMountTargetsOutput, error)
+}
+
+var _ DescribeMountTargetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMountTargets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -114,6 +114,9 @@ func (c *Client) addOperationGetTimelineEventMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTimelineEventValidationMiddleware(stack); err != nil {
 		return err
 	}

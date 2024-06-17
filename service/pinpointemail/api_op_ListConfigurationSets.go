@@ -127,6 +127,9 @@ func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurationSets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListConfigurationSetsAPIClient is a client that implements the
-// ListConfigurationSets operation.
-type ListConfigurationSetsAPIClient interface {
-	ListConfigurationSets(context.Context, *ListConfigurationSetsInput, ...func(*Options)) (*ListConfigurationSetsOutput, error)
-}
-
-var _ ListConfigurationSetsAPIClient = (*Client)(nil)
 
 // ListConfigurationSetsPaginatorOptions is the paginator options for
 // ListConfigurationSets
@@ -223,6 +218,9 @@ func (p *ListConfigurationSetsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConfigurationSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListConfigurationSetsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListConfigurationSetsAPIClient is a client that implements the
+// ListConfigurationSets operation.
+type ListConfigurationSetsAPIClient interface {
+	ListConfigurationSets(context.Context, *ListConfigurationSetsInput, ...func(*Options)) (*ListConfigurationSetsOutput, error)
+}
+
+var _ ListConfigurationSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConfigurationSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -110,6 +110,9 @@ func (c *Client) addOperationListPhoneNumberOrdersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPhoneNumberOrders(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListPhoneNumberOrdersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListPhoneNumberOrdersAPIClient is a client that implements the
-// ListPhoneNumberOrders operation.
-type ListPhoneNumberOrdersAPIClient interface {
-	ListPhoneNumberOrders(context.Context, *ListPhoneNumberOrdersInput, ...func(*Options)) (*ListPhoneNumberOrdersOutput, error)
-}
-
-var _ ListPhoneNumberOrdersAPIClient = (*Client)(nil)
 
 // ListPhoneNumberOrdersPaginatorOptions is the paginator options for
 // ListPhoneNumberOrders
@@ -203,6 +198,9 @@ func (p *ListPhoneNumberOrdersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPhoneNumberOrders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListPhoneNumberOrdersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListPhoneNumberOrdersAPIClient is a client that implements the
+// ListPhoneNumberOrders operation.
+type ListPhoneNumberOrdersAPIClient interface {
+	ListPhoneNumberOrders(context.Context, *ListPhoneNumberOrdersInput, ...func(*Options)) (*ListPhoneNumberOrdersOutput, error)
+}
+
+var _ ListPhoneNumberOrdersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPhoneNumberOrders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

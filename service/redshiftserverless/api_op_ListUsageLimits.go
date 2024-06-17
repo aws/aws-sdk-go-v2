@@ -122,6 +122,9 @@ func (c *Client) addOperationListUsageLimitsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUsageLimits(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListUsageLimitsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListUsageLimitsAPIClient is a client that implements the ListUsageLimits
-// operation.
-type ListUsageLimitsAPIClient interface {
-	ListUsageLimits(context.Context, *ListUsageLimitsInput, ...func(*Options)) (*ListUsageLimitsOutput, error)
-}
-
-var _ ListUsageLimitsAPIClient = (*Client)(nil)
 
 // ListUsageLimitsPaginatorOptions is the paginator options for ListUsageLimits
 type ListUsageLimitsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListUsageLimitsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUsageLimits(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListUsageLimitsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListUsageLimitsAPIClient is a client that implements the ListUsageLimits
+// operation.
+type ListUsageLimitsAPIClient interface {
+	ListUsageLimits(context.Context, *ListUsageLimitsInput, ...func(*Options)) (*ListUsageLimitsOutput, error)
+}
+
+var _ ListUsageLimitsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUsageLimits(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

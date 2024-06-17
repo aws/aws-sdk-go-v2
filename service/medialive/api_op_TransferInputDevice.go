@@ -113,6 +113,9 @@ func (c *Client) addOperationTransferInputDeviceMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTransferInputDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

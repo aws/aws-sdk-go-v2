@@ -126,6 +126,9 @@ func (c *Client) addOperationDescribeCustomPluginMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCustomPluginValidationMiddleware(stack); err != nil {
 		return err
 	}

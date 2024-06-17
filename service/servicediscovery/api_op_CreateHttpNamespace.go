@@ -130,6 +130,9 @@ func (c *Client) addOperationCreateHttpNamespaceMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateHttpNamespaceMiddleware(stack, options); err != nil {
 		return err
 	}

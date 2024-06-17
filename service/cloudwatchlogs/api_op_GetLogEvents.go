@@ -178,6 +178,9 @@ func (c *Client) addOperationGetLogEventsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLogEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -201,13 +204,6 @@ func (c *Client) addOperationGetLogEventsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetLogEventsAPIClient is a client that implements the GetLogEvents operation.
-type GetLogEventsAPIClient interface {
-	GetLogEvents(context.Context, *GetLogEventsInput, ...func(*Options)) (*GetLogEventsOutput, error)
-}
-
-var _ GetLogEventsAPIClient = (*Client)(nil)
 
 // GetLogEventsPaginatorOptions is the paginator options for GetLogEvents
 type GetLogEventsPaginatorOptions struct {
@@ -274,6 +270,9 @@ func (p *GetLogEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetLogEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -292,6 +291,13 @@ func (p *GetLogEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetLogEventsAPIClient is a client that implements the GetLogEvents operation.
+type GetLogEventsAPIClient interface {
+	GetLogEvents(context.Context, *GetLogEventsInput, ...func(*Options)) (*GetLogEventsOutput, error)
+}
+
+var _ GetLogEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLogEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

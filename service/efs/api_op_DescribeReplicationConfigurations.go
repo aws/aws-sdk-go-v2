@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeReplicationConfigurationsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeReplicationConfigurationsMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeReplicationConfigurationsAPIClient is a client that implements the
-// DescribeReplicationConfigurations operation.
-type DescribeReplicationConfigurationsAPIClient interface {
-	DescribeReplicationConfigurations(context.Context, *DescribeReplicationConfigurationsInput, ...func(*Options)) (*DescribeReplicationConfigurationsOutput, error)
-}
-
-var _ DescribeReplicationConfigurationsAPIClient = (*Client)(nil)
 
 // DescribeReplicationConfigurationsPaginatorOptions is the paginator options for
 // DescribeReplicationConfigurations
@@ -215,6 +210,9 @@ func (p *DescribeReplicationConfigurationsPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReplicationConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeReplicationConfigurationsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeReplicationConfigurationsAPIClient is a client that implements the
+// DescribeReplicationConfigurations operation.
+type DescribeReplicationConfigurationsAPIClient interface {
+	DescribeReplicationConfigurations(context.Context, *DescribeReplicationConfigurationsInput, ...func(*Options)) (*DescribeReplicationConfigurationsOutput, error)
+}
+
+var _ DescribeReplicationConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

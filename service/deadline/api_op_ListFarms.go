@@ -121,6 +121,9 @@ func (c *Client) addOperationListFarmsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListFarmsMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,40 +147,6 @@ func (c *Client) addOperationListFarmsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-type endpointPrefix_opListFarmsMiddleware struct {
-}
-
-func (*endpointPrefix_opListFarmsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListFarmsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListFarmsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListFarmsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListFarmsAPIClient is a client that implements the ListFarms operation.
-type ListFarmsAPIClient interface {
-	ListFarms(context.Context, *ListFarmsInput, ...func(*Options)) (*ListFarmsOutput, error)
-}
-
-var _ ListFarmsAPIClient = (*Client)(nil)
 
 // ListFarmsPaginatorOptions is the paginator options for ListFarms
 type ListFarmsPaginatorOptions struct {
@@ -243,6 +212,9 @@ func (p *ListFarmsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFarms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -261,6 +233,40 @@ func (p *ListFarmsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+type endpointPrefix_opListFarmsMiddleware struct {
+}
+
+func (*endpointPrefix_opListFarmsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListFarmsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListFarmsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListFarmsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListFarmsAPIClient is a client that implements the ListFarms operation.
+type ListFarmsAPIClient interface {
+	ListFarms(context.Context, *ListFarmsInput, ...func(*Options)) (*ListFarmsOutput, error)
+}
+
+var _ ListFarmsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFarms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

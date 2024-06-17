@@ -132,6 +132,9 @@ func (c *Client) addOperationListRecommendationSummariesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRecommendationSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListRecommendationSummariesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListRecommendationSummariesAPIClient is a client that implements the
-// ListRecommendationSummaries operation.
-type ListRecommendationSummariesAPIClient interface {
-	ListRecommendationSummaries(context.Context, *ListRecommendationSummariesInput, ...func(*Options)) (*ListRecommendationSummariesOutput, error)
-}
-
-var _ ListRecommendationSummariesAPIClient = (*Client)(nil)
 
 // ListRecommendationSummariesPaginatorOptions is the paginator options for
 // ListRecommendationSummaries
@@ -230,6 +225,9 @@ func (p *ListRecommendationSummariesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecommendationSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListRecommendationSummariesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListRecommendationSummariesAPIClient is a client that implements the
+// ListRecommendationSummaries operation.
+type ListRecommendationSummariesAPIClient interface {
+	ListRecommendationSummaries(context.Context, *ListRecommendationSummariesInput, ...func(*Options)) (*ListRecommendationSummariesOutput, error)
+}
+
+var _ ListRecommendationSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecommendationSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

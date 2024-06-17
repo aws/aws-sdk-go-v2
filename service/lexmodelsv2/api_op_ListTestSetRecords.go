@@ -122,6 +122,9 @@ func (c *Client) addOperationListTestSetRecordsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestSetRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListTestSetRecordsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListTestSetRecordsAPIClient is a client that implements the ListTestSetRecords
-// operation.
-type ListTestSetRecordsAPIClient interface {
-	ListTestSetRecords(context.Context, *ListTestSetRecordsInput, ...func(*Options)) (*ListTestSetRecordsOutput, error)
-}
-
-var _ ListTestSetRecordsAPIClient = (*Client)(nil)
 
 // ListTestSetRecordsPaginatorOptions is the paginator options for
 // ListTestSetRecords
@@ -220,6 +215,9 @@ func (p *ListTestSetRecordsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestSetRecords(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListTestSetRecordsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListTestSetRecordsAPIClient is a client that implements the ListTestSetRecords
+// operation.
+type ListTestSetRecordsAPIClient interface {
+	ListTestSetRecords(context.Context, *ListTestSetRecordsInput, ...func(*Options)) (*ListTestSetRecordsOutput, error)
+}
+
+var _ ListTestSetRecordsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestSetRecords(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

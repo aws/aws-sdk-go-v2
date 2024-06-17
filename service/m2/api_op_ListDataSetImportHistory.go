@@ -120,6 +120,9 @@ func (c *Client) addOperationListDataSetImportHistoryMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataSetImportHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListDataSetImportHistoryMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListDataSetImportHistoryAPIClient is a client that implements the
-// ListDataSetImportHistory operation.
-type ListDataSetImportHistoryAPIClient interface {
-	ListDataSetImportHistory(context.Context, *ListDataSetImportHistoryInput, ...func(*Options)) (*ListDataSetImportHistoryOutput, error)
-}
-
-var _ ListDataSetImportHistoryAPIClient = (*Client)(nil)
 
 // ListDataSetImportHistoryPaginatorOptions is the paginator options for
 // ListDataSetImportHistory
@@ -217,6 +212,9 @@ func (p *ListDataSetImportHistoryPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataSetImportHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListDataSetImportHistoryPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListDataSetImportHistoryAPIClient is a client that implements the
+// ListDataSetImportHistory operation.
+type ListDataSetImportHistoryAPIClient interface {
+	ListDataSetImportHistory(context.Context, *ListDataSetImportHistoryInput, ...func(*Options)) (*ListDataSetImportHistoryOutput, error)
+}
+
+var _ ListDataSetImportHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataSetImportHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

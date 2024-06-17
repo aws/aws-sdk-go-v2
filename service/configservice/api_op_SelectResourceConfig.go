@@ -127,6 +127,9 @@ func (c *Client) addOperationSelectResourceConfigMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSelectResourceConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationSelectResourceConfigMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// SelectResourceConfigAPIClient is a client that implements the
-// SelectResourceConfig operation.
-type SelectResourceConfigAPIClient interface {
-	SelectResourceConfig(context.Context, *SelectResourceConfigInput, ...func(*Options)) (*SelectResourceConfigOutput, error)
-}
-
-var _ SelectResourceConfigAPIClient = (*Client)(nil)
 
 // SelectResourceConfigPaginatorOptions is the paginator options for
 // SelectResourceConfig
@@ -219,6 +214,9 @@ func (p *SelectResourceConfigPaginator) NextPage(ctx context.Context, optFns ...
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SelectResourceConfig(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *SelectResourceConfigPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// SelectResourceConfigAPIClient is a client that implements the
+// SelectResourceConfig operation.
+type SelectResourceConfigAPIClient interface {
+	SelectResourceConfig(context.Context, *SelectResourceConfigInput, ...func(*Options)) (*SelectResourceConfigOutput, error)
+}
+
+var _ SelectResourceConfigAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSelectResourceConfig(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

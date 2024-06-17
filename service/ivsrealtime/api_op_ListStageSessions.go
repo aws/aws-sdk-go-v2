@@ -119,6 +119,9 @@ func (c *Client) addOperationListStageSessionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListStageSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListStageSessionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListStageSessionsAPIClient is a client that implements the ListStageSessions
-// operation.
-type ListStageSessionsAPIClient interface {
-	ListStageSessions(context.Context, *ListStageSessionsInput, ...func(*Options)) (*ListStageSessionsOutput, error)
-}
-
-var _ ListStageSessionsAPIClient = (*Client)(nil)
 
 // ListStageSessionsPaginatorOptions is the paginator options for ListStageSessions
 type ListStageSessionsPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *ListStageSessionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStageSessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListStageSessionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListStageSessionsAPIClient is a client that implements the ListStageSessions
+// operation.
+type ListStageSessionsAPIClient interface {
+	ListStageSessions(context.Context, *ListStageSessionsInput, ...func(*Options)) (*ListStageSessionsOutput, error)
+}
+
+var _ ListStageSessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStageSessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

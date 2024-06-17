@@ -147,6 +147,9 @@ func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRecommendationPreferencesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// GetRecommendationPreferencesAPIClient is a client that implements the
-// GetRecommendationPreferences operation.
-type GetRecommendationPreferencesAPIClient interface {
-	GetRecommendationPreferences(context.Context, *GetRecommendationPreferencesInput, ...func(*Options)) (*GetRecommendationPreferencesOutput, error)
-}
-
-var _ GetRecommendationPreferencesAPIClient = (*Client)(nil)
 
 // GetRecommendationPreferencesPaginatorOptions is the paginator options for
 // GetRecommendationPreferences
@@ -249,6 +244,9 @@ func (p *GetRecommendationPreferencesPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetRecommendationPreferences(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +265,14 @@ func (p *GetRecommendationPreferencesPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// GetRecommendationPreferencesAPIClient is a client that implements the
+// GetRecommendationPreferences operation.
+type GetRecommendationPreferencesAPIClient interface {
+	GetRecommendationPreferences(context.Context, *GetRecommendationPreferencesInput, ...func(*Options)) (*GetRecommendationPreferencesOutput, error)
+}
+
+var _ GetRecommendationPreferencesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetRecommendationPreferences(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

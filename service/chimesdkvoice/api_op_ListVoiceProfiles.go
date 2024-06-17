@@ -115,6 +115,9 @@ func (c *Client) addOperationListVoiceProfilesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVoiceProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListVoiceProfilesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListVoiceProfilesAPIClient is a client that implements the ListVoiceProfiles
-// operation.
-type ListVoiceProfilesAPIClient interface {
-	ListVoiceProfiles(context.Context, *ListVoiceProfilesInput, ...func(*Options)) (*ListVoiceProfilesOutput, error)
-}
-
-var _ ListVoiceProfilesAPIClient = (*Client)(nil)
 
 // ListVoiceProfilesPaginatorOptions is the paginator options for ListVoiceProfiles
 type ListVoiceProfilesPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListVoiceProfilesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVoiceProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListVoiceProfilesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListVoiceProfilesAPIClient is a client that implements the ListVoiceProfiles
+// operation.
+type ListVoiceProfilesAPIClient interface {
+	ListVoiceProfiles(context.Context, *ListVoiceProfilesInput, ...func(*Options)) (*ListVoiceProfilesOutput, error)
+}
+
+var _ ListVoiceProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVoiceProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

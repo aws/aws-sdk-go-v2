@@ -119,6 +119,9 @@ func (c *Client) addOperationBatchGetPreparedStatementMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetPreparedStatementValidationMiddleware(stack); err != nil {
 		return err
 	}

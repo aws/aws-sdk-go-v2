@@ -124,6 +124,9 @@ func (c *Client) addOperationListEventSubscriptionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventSubscriptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListEventSubscriptionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListEventSubscriptionsAPIClient is a client that implements the
-// ListEventSubscriptions operation.
-type ListEventSubscriptionsAPIClient interface {
-	ListEventSubscriptions(context.Context, *ListEventSubscriptionsInput, ...func(*Options)) (*ListEventSubscriptionsOutput, error)
-}
-
-var _ ListEventSubscriptionsAPIClient = (*Client)(nil)
 
 // ListEventSubscriptionsPaginatorOptions is the paginator options for
 // ListEventSubscriptions
@@ -218,6 +213,9 @@ func (p *ListEventSubscriptionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventSubscriptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListEventSubscriptionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListEventSubscriptionsAPIClient is a client that implements the
+// ListEventSubscriptions operation.
+type ListEventSubscriptionsAPIClient interface {
+	ListEventSubscriptions(context.Context, *ListEventSubscriptionsInput, ...func(*Options)) (*ListEventSubscriptionsOutput, error)
+}
+
+var _ ListEventSubscriptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventSubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationGetCellReadinessSummaryMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCellReadinessSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationGetCellReadinessSummaryMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetCellReadinessSummaryAPIClient is a client that implements the
-// GetCellReadinessSummary operation.
-type GetCellReadinessSummaryAPIClient interface {
-	GetCellReadinessSummary(context.Context, *GetCellReadinessSummaryInput, ...func(*Options)) (*GetCellReadinessSummaryOutput, error)
-}
-
-var _ GetCellReadinessSummaryAPIClient = (*Client)(nil)
 
 // GetCellReadinessSummaryPaginatorOptions is the paginator options for
 // GetCellReadinessSummary
@@ -216,6 +211,9 @@ func (p *GetCellReadinessSummaryPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCellReadinessSummary(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *GetCellReadinessSummaryPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// GetCellReadinessSummaryAPIClient is a client that implements the
+// GetCellReadinessSummary operation.
+type GetCellReadinessSummaryAPIClient interface {
+	GetCellReadinessSummary(context.Context, *GetCellReadinessSummaryInput, ...func(*Options)) (*GetCellReadinessSummaryOutput, error)
+}
+
+var _ GetCellReadinessSummaryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCellReadinessSummary(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

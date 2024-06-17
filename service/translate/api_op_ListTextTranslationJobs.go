@@ -116,6 +116,9 @@ func (c *Client) addOperationListTextTranslationJobsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTextTranslationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListTextTranslationJobsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListTextTranslationJobsAPIClient is a client that implements the
-// ListTextTranslationJobs operation.
-type ListTextTranslationJobsAPIClient interface {
-	ListTextTranslationJobs(context.Context, *ListTextTranslationJobsInput, ...func(*Options)) (*ListTextTranslationJobsOutput, error)
-}
-
-var _ ListTextTranslationJobsAPIClient = (*Client)(nil)
 
 // ListTextTranslationJobsPaginatorOptions is the paginator options for
 // ListTextTranslationJobs
@@ -210,6 +205,9 @@ func (p *ListTextTranslationJobsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTextTranslationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListTextTranslationJobsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListTextTranslationJobsAPIClient is a client that implements the
+// ListTextTranslationJobs operation.
+type ListTextTranslationJobsAPIClient interface {
+	ListTextTranslationJobs(context.Context, *ListTextTranslationJobsInput, ...func(*Options)) (*ListTextTranslationJobsOutput, error)
+}
+
+var _ ListTextTranslationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTextTranslationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

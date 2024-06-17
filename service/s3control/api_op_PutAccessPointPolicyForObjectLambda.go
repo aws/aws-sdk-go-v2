@@ -138,6 +138,9 @@ func (c *Client) addOperationPutAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutAccessPointPolicyForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}

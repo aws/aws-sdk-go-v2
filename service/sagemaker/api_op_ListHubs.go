@@ -139,6 +139,9 @@ func (c *Client) addOperationListHubsMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHubs(options.Region), middleware.Before); err != nil {
 		return err
 	}

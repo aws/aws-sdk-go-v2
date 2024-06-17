@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,13 +142,6 @@ func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// DescribeFlowAPIClient is a client that implements the DescribeFlow operation.
-type DescribeFlowAPIClient interface {
-	DescribeFlow(context.Context, *DescribeFlowInput, ...func(*Options)) (*DescribeFlowOutput, error)
-}
-
-var _ DescribeFlowAPIClient = (*Client)(nil)
 
 // FlowActiveWaiterOptions are waiter options for FlowActiveWaiter
 type FlowActiveWaiterOptions struct {
@@ -261,7 +257,13 @@ func (w *FlowActiveWaiter) WaitForOutput(ctx context.Context, params *DescribeFl
 		}
 
 		out, err := w.client.DescribeFlow(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -498,7 +500,13 @@ func (w *FlowDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeF
 		}
 
 		out, err := w.client.DescribeFlow(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -708,7 +716,13 @@ func (w *FlowStandbyWaiter) WaitForOutput(ctx context.Context, params *DescribeF
 		}
 
 		out, err := w.client.DescribeFlow(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -813,6 +827,13 @@ func flowStandbyStateRetryable(ctx context.Context, input *DescribeFlowInput, ou
 
 	return true, nil
 }
+
+// DescribeFlowAPIClient is a client that implements the DescribeFlow operation.
+type DescribeFlowAPIClient interface {
+	DescribeFlow(context.Context, *DescribeFlowInput, ...func(*Options)) (*DescribeFlowOutput, error)
+}
+
+var _ DescribeFlowAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFlow(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

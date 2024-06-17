@@ -112,6 +112,9 @@ func (c *Client) addOperationListSatellitesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSatellites(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListSatellitesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListSatellitesAPIClient is a client that implements the ListSatellites
-// operation.
-type ListSatellitesAPIClient interface {
-	ListSatellites(context.Context, *ListSatellitesInput, ...func(*Options)) (*ListSatellitesOutput, error)
-}
-
-var _ ListSatellitesAPIClient = (*Client)(nil)
 
 // ListSatellitesPaginatorOptions is the paginator options for ListSatellites
 type ListSatellitesPaginatorOptions struct {
@@ -204,6 +199,9 @@ func (p *ListSatellitesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSatellites(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListSatellitesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListSatellitesAPIClient is a client that implements the ListSatellites
+// operation.
+type ListSatellitesAPIClient interface {
+	ListSatellites(context.Context, *ListSatellitesInput, ...func(*Options)) (*ListSatellitesOutput, error)
+}
+
+var _ ListSatellitesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSatellites(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -155,6 +155,9 @@ func (c *Client) addOperationListCompilationJobsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCompilationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -175,14 +178,6 @@ func (c *Client) addOperationListCompilationJobsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListCompilationJobsAPIClient is a client that implements the
-// ListCompilationJobs operation.
-type ListCompilationJobsAPIClient interface {
-	ListCompilationJobs(context.Context, *ListCompilationJobsInput, ...func(*Options)) (*ListCompilationJobsOutput, error)
-}
-
-var _ ListCompilationJobsAPIClient = (*Client)(nil)
 
 // ListCompilationJobsPaginatorOptions is the paginator options for
 // ListCompilationJobs
@@ -248,6 +243,9 @@ func (p *ListCompilationJobsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCompilationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -266,6 +264,14 @@ func (p *ListCompilationJobsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListCompilationJobsAPIClient is a client that implements the
+// ListCompilationJobs operation.
+type ListCompilationJobsAPIClient interface {
+	ListCompilationJobs(context.Context, *ListCompilationJobsInput, ...func(*Options)) (*ListCompilationJobsOutput, error)
+}
+
+var _ ListCompilationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCompilationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -122,6 +122,9 @@ func (c *Client) addOperationListGroupResourcesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListGroupResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListGroupResourcesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListGroupResourcesAPIClient is a client that implements the ListGroupResources
-// operation.
-type ListGroupResourcesAPIClient interface {
-	ListGroupResources(context.Context, *ListGroupResourcesInput, ...func(*Options)) (*ListGroupResourcesOutput, error)
-}
-
-var _ ListGroupResourcesAPIClient = (*Client)(nil)
 
 // ListGroupResourcesPaginatorOptions is the paginator options for
 // ListGroupResources
@@ -220,6 +215,9 @@ func (p *ListGroupResourcesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGroupResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListGroupResourcesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListGroupResourcesAPIClient is a client that implements the ListGroupResources
+// operation.
+type ListGroupResourcesAPIClient interface {
+	ListGroupResources(context.Context, *ListGroupResourcesInput, ...func(*Options)) (*ListGroupResourcesOutput, error)
+}
+
+var _ ListGroupResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGroupResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

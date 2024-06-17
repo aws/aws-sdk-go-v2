@@ -128,6 +128,9 @@ func (c *Client) addOperationListRumMetricsDestinationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRumMetricsDestinationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListRumMetricsDestinationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListRumMetricsDestinationsAPIClient is a client that implements the
-// ListRumMetricsDestinations operation.
-type ListRumMetricsDestinationsAPIClient interface {
-	ListRumMetricsDestinations(context.Context, *ListRumMetricsDestinationsInput, ...func(*Options)) (*ListRumMetricsDestinationsOutput, error)
-}
-
-var _ ListRumMetricsDestinationsAPIClient = (*Client)(nil)
 
 // ListRumMetricsDestinationsPaginatorOptions is the paginator options for
 // ListRumMetricsDestinations
@@ -230,6 +225,9 @@ func (p *ListRumMetricsDestinationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRumMetricsDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListRumMetricsDestinationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListRumMetricsDestinationsAPIClient is a client that implements the
+// ListRumMetricsDestinations operation.
+type ListRumMetricsDestinationsAPIClient interface {
+	ListRumMetricsDestinations(context.Context, *ListRumMetricsDestinationsInput, ...func(*Options)) (*ListRumMetricsDestinationsOutput, error)
+}
+
+var _ ListRumMetricsDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRumMetricsDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

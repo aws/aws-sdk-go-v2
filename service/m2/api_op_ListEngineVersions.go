@@ -118,6 +118,9 @@ func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEngineVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListEngineVersionsAPIClient is a client that implements the ListEngineVersions
-// operation.
-type ListEngineVersionsAPIClient interface {
-	ListEngineVersions(context.Context, *ListEngineVersionsInput, ...func(*Options)) (*ListEngineVersionsOutput, error)
-}
-
-var _ ListEngineVersionsAPIClient = (*Client)(nil)
 
 // ListEngineVersionsPaginatorOptions is the paginator options for
 // ListEngineVersions
@@ -211,6 +206,9 @@ func (p *ListEngineVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEngineVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListEngineVersionsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListEngineVersionsAPIClient is a client that implements the ListEngineVersions
+// operation.
+type ListEngineVersionsAPIClient interface {
+	ListEngineVersions(context.Context, *ListEngineVersionsInput, ...func(*Options)) (*ListEngineVersionsOutput, error)
+}
+
+var _ ListEngineVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

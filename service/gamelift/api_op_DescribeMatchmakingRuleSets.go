@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeMatchmakingRuleSetsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMatchmakingRuleSets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationDescribeMatchmakingRuleSetsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeMatchmakingRuleSetsAPIClient is a client that implements the
-// DescribeMatchmakingRuleSets operation.
-type DescribeMatchmakingRuleSetsAPIClient interface {
-	DescribeMatchmakingRuleSets(context.Context, *DescribeMatchmakingRuleSetsInput, ...func(*Options)) (*DescribeMatchmakingRuleSetsOutput, error)
-}
-
-var _ DescribeMatchmakingRuleSetsAPIClient = (*Client)(nil)
 
 // DescribeMatchmakingRuleSetsPaginatorOptions is the paginator options for
 // DescribeMatchmakingRuleSets
@@ -228,6 +223,9 @@ func (p *DescribeMatchmakingRuleSetsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMatchmakingRuleSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *DescribeMatchmakingRuleSetsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeMatchmakingRuleSetsAPIClient is a client that implements the
+// DescribeMatchmakingRuleSets operation.
+type DescribeMatchmakingRuleSetsAPIClient interface {
+	DescribeMatchmakingRuleSets(context.Context, *DescribeMatchmakingRuleSetsInput, ...func(*Options)) (*DescribeMatchmakingRuleSetsOutput, error)
+}
+
+var _ DescribeMatchmakingRuleSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMatchmakingRuleSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

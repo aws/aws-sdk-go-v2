@@ -127,6 +127,9 @@ func (c *Client) addOperationGetAppMonitorDataMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAppMonitorDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationGetAppMonitorDataMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetAppMonitorDataAPIClient is a client that implements the GetAppMonitorData
-// operation.
-type GetAppMonitorDataAPIClient interface {
-	GetAppMonitorData(context.Context, *GetAppMonitorDataInput, ...func(*Options)) (*GetAppMonitorDataOutput, error)
-}
-
-var _ GetAppMonitorDataAPIClient = (*Client)(nil)
 
 // GetAppMonitorDataPaginatorOptions is the paginator options for GetAppMonitorData
 type GetAppMonitorDataPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *GetAppMonitorDataPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAppMonitorData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetAppMonitorDataPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetAppMonitorDataAPIClient is a client that implements the GetAppMonitorData
+// operation.
+type GetAppMonitorDataAPIClient interface {
+	GetAppMonitorData(context.Context, *GetAppMonitorDataInput, ...func(*Options)) (*GetAppMonitorDataOutput, error)
+}
+
+var _ GetAppMonitorDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAppMonitorData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

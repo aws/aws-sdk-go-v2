@@ -119,6 +119,9 @@ func (c *Client) addOperationListClassificationJobsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClassificationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListClassificationJobsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListClassificationJobsAPIClient is a client that implements the
-// ListClassificationJobs operation.
-type ListClassificationJobsAPIClient interface {
-	ListClassificationJobs(context.Context, *ListClassificationJobsInput, ...func(*Options)) (*ListClassificationJobsOutput, error)
-}
-
-var _ ListClassificationJobsAPIClient = (*Client)(nil)
 
 // ListClassificationJobsPaginatorOptions is the paginator options for
 // ListClassificationJobs
@@ -212,6 +207,9 @@ func (p *ListClassificationJobsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClassificationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListClassificationJobsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListClassificationJobsAPIClient is a client that implements the
+// ListClassificationJobs operation.
+type ListClassificationJobsAPIClient interface {
+	ListClassificationJobs(context.Context, *ListClassificationJobsInput, ...func(*Options)) (*ListClassificationJobsOutput, error)
+}
+
+var _ ListClassificationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClassificationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

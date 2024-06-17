@@ -176,6 +176,9 @@ func (c *Client) addOperationDescribeGameSessionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameSessions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -196,14 +199,6 @@ func (c *Client) addOperationDescribeGameSessionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeGameSessionsAPIClient is a client that implements the
-// DescribeGameSessions operation.
-type DescribeGameSessionsAPIClient interface {
-	DescribeGameSessions(context.Context, *DescribeGameSessionsInput, ...func(*Options)) (*DescribeGameSessionsOutput, error)
-}
-
-var _ DescribeGameSessionsAPIClient = (*Client)(nil)
 
 // DescribeGameSessionsPaginatorOptions is the paginator options for
 // DescribeGameSessions
@@ -270,6 +265,9 @@ func (p *DescribeGameSessionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeGameSessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -288,6 +286,14 @@ func (p *DescribeGameSessionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeGameSessionsAPIClient is a client that implements the
+// DescribeGameSessions operation.
+type DescribeGameSessionsAPIClient interface {
+	DescribeGameSessions(context.Context, *DescribeGameSessionsInput, ...func(*Options)) (*DescribeGameSessionsOutput, error)
+}
+
+var _ DescribeGameSessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeGameSessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

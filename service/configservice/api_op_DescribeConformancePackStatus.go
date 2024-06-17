@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeConformancePackStatusMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConformancePackStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationDescribeConformancePackStatusMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// DescribeConformancePackStatusAPIClient is a client that implements the
-// DescribeConformancePackStatus operation.
-type DescribeConformancePackStatusAPIClient interface {
-	DescribeConformancePackStatus(context.Context, *DescribeConformancePackStatusInput, ...func(*Options)) (*DescribeConformancePackStatusOutput, error)
-}
-
-var _ DescribeConformancePackStatusAPIClient = (*Client)(nil)
 
 // DescribeConformancePackStatusPaginatorOptions is the paginator options for
 // DescribeConformancePackStatus
@@ -208,6 +203,9 @@ func (p *DescribeConformancePackStatusPaginator) NextPage(ctx context.Context, o
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConformancePackStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *DescribeConformancePackStatusPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// DescribeConformancePackStatusAPIClient is a client that implements the
+// DescribeConformancePackStatus operation.
+type DescribeConformancePackStatusAPIClient interface {
+	DescribeConformancePackStatus(context.Context, *DescribeConformancePackStatusInput, ...func(*Options)) (*DescribeConformancePackStatusOutput, error)
+}
+
+var _ DescribeConformancePackStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConformancePackStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

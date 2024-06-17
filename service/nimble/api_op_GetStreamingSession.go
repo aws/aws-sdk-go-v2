@@ -118,6 +118,9 @@ func (c *Client) addOperationGetStreamingSessionMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStreamingSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationGetStreamingSessionMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetStreamingSessionAPIClient is a client that implements the
-// GetStreamingSession operation.
-type GetStreamingSessionAPIClient interface {
-	GetStreamingSession(context.Context, *GetStreamingSessionInput, ...func(*Options)) (*GetStreamingSessionOutput, error)
-}
-
-var _ GetStreamingSessionAPIClient = (*Client)(nil)
 
 // StreamingSessionReadyWaiterOptions are waiter options for
 // StreamingSessionReadyWaiter
@@ -267,7 +262,13 @@ func (w *StreamingSessionReadyWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.GetStreamingSession(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -476,7 +477,13 @@ func (w *StreamingSessionStoppedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.GetStreamingSession(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -668,7 +675,13 @@ func (w *StreamingSessionDeletedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.GetStreamingSession(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -742,6 +755,14 @@ func streamingSessionDeletedStateRetryable(ctx context.Context, input *GetStream
 
 	return true, nil
 }
+
+// GetStreamingSessionAPIClient is a client that implements the
+// GetStreamingSession operation.
+type GetStreamingSessionAPIClient interface {
+	GetStreamingSession(context.Context, *GetStreamingSessionInput, ...func(*Options)) (*GetStreamingSessionOutput, error)
+}
+
+var _ GetStreamingSessionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetStreamingSession(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

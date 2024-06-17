@@ -175,6 +175,9 @@ func (c *Client) addOperationGetTextDetectionMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTextDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,14 +201,6 @@ func (c *Client) addOperationGetTextDetectionMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetTextDetectionAPIClient is a client that implements the GetTextDetection
-// operation.
-type GetTextDetectionAPIClient interface {
-	GetTextDetection(context.Context, *GetTextDetectionInput, ...func(*Options)) (*GetTextDetectionOutput, error)
-}
-
-var _ GetTextDetectionAPIClient = (*Client)(nil)
 
 // GetTextDetectionPaginatorOptions is the paginator options for GetTextDetection
 type GetTextDetectionPaginatorOptions struct {
@@ -271,6 +266,9 @@ func (p *GetTextDetectionPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTextDetection(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -289,6 +287,14 @@ func (p *GetTextDetectionPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetTextDetectionAPIClient is a client that implements the GetTextDetection
+// operation.
+type GetTextDetectionAPIClient interface {
+	GetTextDetection(context.Context, *GetTextDetectionInput, ...func(*Options)) (*GetTextDetectionOutput, error)
+}
+
+var _ GetTextDetectionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTextDetection(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

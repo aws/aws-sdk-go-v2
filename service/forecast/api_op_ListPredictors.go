@@ -139,6 +139,9 @@ func (c *Client) addOperationListPredictorsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPredictorsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListPredictorsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListPredictorsAPIClient is a client that implements the ListPredictors
-// operation.
-type ListPredictorsAPIClient interface {
-	ListPredictors(context.Context, *ListPredictorsInput, ...func(*Options)) (*ListPredictorsOutput, error)
-}
-
-var _ ListPredictorsAPIClient = (*Client)(nil)
 
 // ListPredictorsPaginatorOptions is the paginator options for ListPredictors
 type ListPredictorsPaginatorOptions struct {
@@ -234,6 +229,9 @@ func (p *ListPredictorsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPredictors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *ListPredictorsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListPredictorsAPIClient is a client that implements the ListPredictors
+// operation.
+type ListPredictorsAPIClient interface {
+	ListPredictors(context.Context, *ListPredictorsInput, ...func(*Options)) (*ListPredictorsOutput, error)
+}
+
+var _ ListPredictorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPredictors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -137,6 +137,9 @@ func (c *Client) addOperationListModelCardVersionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListModelCardVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListModelCardVersionsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListModelCardVersionsAPIClient is a client that implements the
-// ListModelCardVersions operation.
-type ListModelCardVersionsAPIClient interface {
-	ListModelCardVersions(context.Context, *ListModelCardVersionsInput, ...func(*Options)) (*ListModelCardVersionsOutput, error)
-}
-
-var _ ListModelCardVersionsAPIClient = (*Client)(nil)
 
 // ListModelCardVersionsPaginatorOptions is the paginator options for
 // ListModelCardVersions
@@ -233,6 +228,9 @@ func (p *ListModelCardVersionsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelCardVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListModelCardVersionsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListModelCardVersionsAPIClient is a client that implements the
+// ListModelCardVersions operation.
+type ListModelCardVersionsAPIClient interface {
+	ListModelCardVersions(context.Context, *ListModelCardVersionsInput, ...func(*Options)) (*ListModelCardVersionsOutput, error)
+}
+
+var _ ListModelCardVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelCardVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

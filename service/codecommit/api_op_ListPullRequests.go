@@ -129,6 +129,9 @@ func (c *Client) addOperationListPullRequestsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPullRequestsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListPullRequestsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListPullRequestsAPIClient is a client that implements the ListPullRequests
-// operation.
-type ListPullRequestsAPIClient interface {
-	ListPullRequests(context.Context, *ListPullRequestsInput, ...func(*Options)) (*ListPullRequestsOutput, error)
-}
-
-var _ ListPullRequestsAPIClient = (*Client)(nil)
 
 // ListPullRequestsPaginatorOptions is the paginator options for ListPullRequests
 type ListPullRequestsPaginatorOptions struct {
@@ -224,6 +219,9 @@ func (p *ListPullRequestsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPullRequests(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListPullRequestsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListPullRequestsAPIClient is a client that implements the ListPullRequests
+// operation.
+type ListPullRequestsAPIClient interface {
+	ListPullRequests(context.Context, *ListPullRequestsInput, ...func(*Options)) (*ListPullRequestsOutput, error)
+}
+
+var _ ListPullRequestsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPullRequests(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

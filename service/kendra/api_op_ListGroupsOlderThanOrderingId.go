@@ -137,6 +137,9 @@ func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListGroupsOlderThanOrderingIdValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListGroupsOlderThanOrderingIdAPIClient is a client that implements the
-// ListGroupsOlderThanOrderingId operation.
-type ListGroupsOlderThanOrderingIdAPIClient interface {
-	ListGroupsOlderThanOrderingId(context.Context, *ListGroupsOlderThanOrderingIdInput, ...func(*Options)) (*ListGroupsOlderThanOrderingIdOutput, error)
-}
-
-var _ ListGroupsOlderThanOrderingIdAPIClient = (*Client)(nil)
 
 // ListGroupsOlderThanOrderingIdPaginatorOptions is the paginator options for
 // ListGroupsOlderThanOrderingId
@@ -236,6 +231,9 @@ func (p *ListGroupsOlderThanOrderingIdPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGroupsOlderThanOrderingId(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListGroupsOlderThanOrderingIdPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListGroupsOlderThanOrderingIdAPIClient is a client that implements the
+// ListGroupsOlderThanOrderingId operation.
+type ListGroupsOlderThanOrderingIdAPIClient interface {
+	ListGroupsOlderThanOrderingId(context.Context, *ListGroupsOlderThanOrderingIdInput, ...func(*Options)) (*ListGroupsOlderThanOrderingIdOutput, error)
+}
+
+var _ ListGroupsOlderThanOrderingIdAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGroupsOlderThanOrderingId(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

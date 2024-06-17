@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeFargateProfileMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFargateProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeFargateProfileMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeFargateProfileAPIClient is a client that implements the
-// DescribeFargateProfile operation.
-type DescribeFargateProfileAPIClient interface {
-	DescribeFargateProfile(context.Context, *DescribeFargateProfileInput, ...func(*Options)) (*DescribeFargateProfileOutput, error)
-}
-
-var _ DescribeFargateProfileAPIClient = (*Client)(nil)
 
 // FargateProfileActiveWaiterOptions are waiter options for
 // FargateProfileActiveWaiter
@@ -265,7 +260,13 @@ func (w *FargateProfileActiveWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.DescribeFargateProfile(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -457,7 +458,13 @@ func (w *FargateProfileDeletedWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.DescribeFargateProfile(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -521,6 +528,14 @@ func fargateProfileDeletedStateRetryable(ctx context.Context, input *DescribeFar
 
 	return true, nil
 }
+
+// DescribeFargateProfileAPIClient is a client that implements the
+// DescribeFargateProfile operation.
+type DescribeFargateProfileAPIClient interface {
+	DescribeFargateProfile(context.Context, *DescribeFargateProfileInput, ...func(*Options)) (*DescribeFargateProfileOutput, error)
+}
+
+var _ DescribeFargateProfileAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFargateProfile(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

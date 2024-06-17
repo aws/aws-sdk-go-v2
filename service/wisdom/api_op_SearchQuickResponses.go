@@ -130,6 +130,9 @@ func (c *Client) addOperationSearchQuickResponsesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchQuickResponsesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationSearchQuickResponsesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// SearchQuickResponsesAPIClient is a client that implements the
-// SearchQuickResponses operation.
-type SearchQuickResponsesAPIClient interface {
-	SearchQuickResponses(context.Context, *SearchQuickResponsesInput, ...func(*Options)) (*SearchQuickResponsesOutput, error)
-}
-
-var _ SearchQuickResponsesAPIClient = (*Client)(nil)
 
 // SearchQuickResponsesPaginatorOptions is the paginator options for
 // SearchQuickResponses
@@ -226,6 +221,9 @@ func (p *SearchQuickResponsesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchQuickResponses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *SearchQuickResponsesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// SearchQuickResponsesAPIClient is a client that implements the
+// SearchQuickResponses operation.
+type SearchQuickResponsesAPIClient interface {
+	SearchQuickResponses(context.Context, *SearchQuickResponsesInput, ...func(*Options)) (*SearchQuickResponsesOutput, error)
+}
+
+var _ SearchQuickResponsesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchQuickResponses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteKxVolumeMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteKxVolumeMiddleware(stack, options); err != nil {
 		return err
 	}

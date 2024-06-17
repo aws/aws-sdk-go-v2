@@ -111,6 +111,9 @@ func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -134,13 +137,6 @@ func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// GetServiceAPIClient is a client that implements the GetService operation.
-type GetServiceAPIClient interface {
-	GetService(context.Context, *GetServiceInput, ...func(*Options)) (*GetServiceOutput, error)
-}
-
-var _ GetServiceAPIClient = (*Client)(nil)
 
 // ServiceCreatedWaiterOptions are waiter options for ServiceCreatedWaiter
 type ServiceCreatedWaiterOptions struct {
@@ -257,7 +253,13 @@ func (w *ServiceCreatedWaiter) WaitForOutput(ctx context.Context, params *GetSer
 		}
 
 		out, err := w.client.GetService(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -481,7 +483,13 @@ func (w *ServiceUpdatedWaiter) WaitForOutput(ctx context.Context, params *GetSer
 		}
 
 		out, err := w.client.GetService(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -722,7 +730,13 @@ func (w *ServiceDeletedWaiter) WaitForOutput(ctx context.Context, params *GetSer
 		}
 
 		out, err := w.client.GetService(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -904,7 +918,13 @@ func (w *ServicePipelineDeployedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.GetService(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -978,6 +998,13 @@ func servicePipelineDeployedStateRetryable(ctx context.Context, input *GetServic
 
 	return true, nil
 }
+
+// GetServiceAPIClient is a client that implements the GetService operation.
+type GetServiceAPIClient interface {
+	GetService(context.Context, *GetServiceInput, ...func(*Options)) (*GetServiceOutput, error)
+}
+
+var _ GetServiceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetService(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

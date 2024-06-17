@@ -117,6 +117,9 @@ func (c *Client) addOperationListContactChannelsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListContactChannelsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListContactChannelsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListContactChannelsAPIClient is a client that implements the
-// ListContactChannels operation.
-type ListContactChannelsAPIClient interface {
-	ListContactChannels(context.Context, *ListContactChannelsInput, ...func(*Options)) (*ListContactChannelsOutput, error)
-}
-
-var _ ListContactChannelsAPIClient = (*Client)(nil)
 
 // ListContactChannelsPaginatorOptions is the paginator options for
 // ListContactChannels
@@ -213,6 +208,9 @@ func (p *ListContactChannelsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContactChannels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListContactChannelsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListContactChannelsAPIClient is a client that implements the
+// ListContactChannels operation.
+type ListContactChannelsAPIClient interface {
+	ListContactChannels(context.Context, *ListContactChannelsInput, ...func(*Options)) (*ListContactChannelsOutput, error)
+}
+
+var _ ListContactChannelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContactChannels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

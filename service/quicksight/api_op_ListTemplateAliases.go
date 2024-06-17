@@ -127,6 +127,9 @@ func (c *Client) addOperationListTemplateAliasesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTemplateAliasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListTemplateAliasesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListTemplateAliasesAPIClient is a client that implements the
-// ListTemplateAliases operation.
-type ListTemplateAliasesAPIClient interface {
-	ListTemplateAliases(context.Context, *ListTemplateAliasesInput, ...func(*Options)) (*ListTemplateAliasesOutput, error)
-}
-
-var _ ListTemplateAliasesAPIClient = (*Client)(nil)
 
 // ListTemplateAliasesPaginatorOptions is the paginator options for
 // ListTemplateAliases
@@ -223,6 +218,9 @@ func (p *ListTemplateAliasesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTemplateAliases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListTemplateAliasesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListTemplateAliasesAPIClient is a client that implements the
+// ListTemplateAliases operation.
+type ListTemplateAliasesAPIClient interface {
+	ListTemplateAliases(context.Context, *ListTemplateAliasesInput, ...func(*Options)) (*ListTemplateAliasesOutput, error)
+}
+
+var _ ListTemplateAliasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTemplateAliases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

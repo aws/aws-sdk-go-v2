@@ -147,6 +147,9 @@ func (c *Client) addOperationGetAggregateComplianceDetailsByConfigRuleMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateComplianceDetailsByConfigRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationGetAggregateComplianceDetailsByConfigRuleMiddleware
 	}
 	return nil
 }
-
-// GetAggregateComplianceDetailsByConfigRuleAPIClient is a client that implements
-// the GetAggregateComplianceDetailsByConfigRule operation.
-type GetAggregateComplianceDetailsByConfigRuleAPIClient interface {
-	GetAggregateComplianceDetailsByConfigRule(context.Context, *GetAggregateComplianceDetailsByConfigRuleInput, ...func(*Options)) (*GetAggregateComplianceDetailsByConfigRuleOutput, error)
-}
-
-var _ GetAggregateComplianceDetailsByConfigRuleAPIClient = (*Client)(nil)
 
 // GetAggregateComplianceDetailsByConfigRulePaginatorOptions is the paginator
 // options for GetAggregateComplianceDetailsByConfigRule
@@ -243,6 +238,9 @@ func (p *GetAggregateComplianceDetailsByConfigRulePaginator) NextPage(ctx contex
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAggregateComplianceDetailsByConfigRule(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -261,6 +259,14 @@ func (p *GetAggregateComplianceDetailsByConfigRulePaginator) NextPage(ctx contex
 
 	return result, nil
 }
+
+// GetAggregateComplianceDetailsByConfigRuleAPIClient is a client that implements
+// the GetAggregateComplianceDetailsByConfigRule operation.
+type GetAggregateComplianceDetailsByConfigRuleAPIClient interface {
+	GetAggregateComplianceDetailsByConfigRule(context.Context, *GetAggregateComplianceDetailsByConfigRuleInput, ...func(*Options)) (*GetAggregateComplianceDetailsByConfigRuleOutput, error)
+}
+
+var _ GetAggregateComplianceDetailsByConfigRuleAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAggregateComplianceDetailsByConfigRule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

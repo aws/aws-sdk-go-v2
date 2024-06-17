@@ -135,6 +135,9 @@ func (c *Client) addOperationListFirewallDomainsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFirewallDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListFirewallDomainsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListFirewallDomainsAPIClient is a client that implements the
-// ListFirewallDomains operation.
-type ListFirewallDomainsAPIClient interface {
-	ListFirewallDomains(context.Context, *ListFirewallDomainsInput, ...func(*Options)) (*ListFirewallDomainsOutput, error)
-}
-
-var _ ListFirewallDomainsAPIClient = (*Client)(nil)
 
 // ListFirewallDomainsPaginatorOptions is the paginator options for
 // ListFirewallDomains
@@ -237,6 +232,9 @@ func (p *ListFirewallDomainsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFirewallDomains(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListFirewallDomainsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListFirewallDomainsAPIClient is a client that implements the
+// ListFirewallDomains operation.
+type ListFirewallDomainsAPIClient interface {
+	ListFirewallDomains(context.Context, *ListFirewallDomainsInput, ...func(*Options)) (*ListFirewallDomainsOutput, error)
+}
+
+var _ ListFirewallDomainsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFirewallDomains(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

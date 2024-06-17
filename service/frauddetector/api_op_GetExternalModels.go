@@ -118,6 +118,9 @@ func (c *Client) addOperationGetExternalModelsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExternalModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetExternalModelsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetExternalModelsAPIClient is a client that implements the GetExternalModels
-// operation.
-type GetExternalModelsAPIClient interface {
-	GetExternalModels(context.Context, *GetExternalModelsInput, ...func(*Options)) (*GetExternalModelsOutput, error)
-}
-
-var _ GetExternalModelsAPIClient = (*Client)(nil)
 
 // GetExternalModelsPaginatorOptions is the paginator options for GetExternalModels
 type GetExternalModelsPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *GetExternalModelsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetExternalModels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *GetExternalModelsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetExternalModelsAPIClient is a client that implements the GetExternalModels
+// operation.
+type GetExternalModelsAPIClient interface {
+	GetExternalModels(context.Context, *GetExternalModelsInput, ...func(*Options)) (*GetExternalModelsOutput, error)
+}
+
+var _ GetExternalModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetExternalModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

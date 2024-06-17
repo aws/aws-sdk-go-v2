@@ -129,6 +129,9 @@ func (c *Client) addOperationListMLTransformsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMLTransformsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListMLTransformsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListMLTransformsAPIClient is a client that implements the ListMLTransforms
-// operation.
-type ListMLTransformsAPIClient interface {
-	ListMLTransforms(context.Context, *ListMLTransformsInput, ...func(*Options)) (*ListMLTransformsOutput, error)
-}
-
-var _ ListMLTransformsAPIClient = (*Client)(nil)
 
 // ListMLTransformsPaginatorOptions is the paginator options for ListMLTransforms
 type ListMLTransformsPaginatorOptions struct {
@@ -224,6 +219,9 @@ func (p *ListMLTransformsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMLTransforms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListMLTransformsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListMLTransformsAPIClient is a client that implements the ListMLTransforms
+// operation.
+type ListMLTransformsAPIClient interface {
+	ListMLTransforms(context.Context, *ListMLTransformsInput, ...func(*Options)) (*ListMLTransformsOutput, error)
+}
+
+var _ ListMLTransformsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMLTransforms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

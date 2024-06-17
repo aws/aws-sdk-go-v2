@@ -121,6 +121,9 @@ func (c *Client) addOperationSearchSystemInstancesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchSystemInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationSearchSystemInstancesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// SearchSystemInstancesAPIClient is a client that implements the
-// SearchSystemInstances operation.
-type SearchSystemInstancesAPIClient interface {
-	SearchSystemInstances(context.Context, *SearchSystemInstancesInput, ...func(*Options)) (*SearchSystemInstancesOutput, error)
-}
-
-var _ SearchSystemInstancesAPIClient = (*Client)(nil)
 
 // SearchSystemInstancesPaginatorOptions is the paginator options for
 // SearchSystemInstances
@@ -214,6 +209,9 @@ func (p *SearchSystemInstancesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchSystemInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *SearchSystemInstancesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// SearchSystemInstancesAPIClient is a client that implements the
+// SearchSystemInstances operation.
+type SearchSystemInstancesAPIClient interface {
+	SearchSystemInstances(context.Context, *SearchSystemInstancesInput, ...func(*Options)) (*SearchSystemInstancesOutput, error)
+}
+
+var _ SearchSystemInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchSystemInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -131,6 +131,9 @@ func (c *Client) addOperationListCandidatesForAutoMLJobMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCandidatesForAutoMLJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListCandidatesForAutoMLJobMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListCandidatesForAutoMLJobAPIClient is a client that implements the
-// ListCandidatesForAutoMLJob operation.
-type ListCandidatesForAutoMLJobAPIClient interface {
-	ListCandidatesForAutoMLJob(context.Context, *ListCandidatesForAutoMLJobInput, ...func(*Options)) (*ListCandidatesForAutoMLJobOutput, error)
-}
-
-var _ ListCandidatesForAutoMLJobAPIClient = (*Client)(nil)
 
 // ListCandidatesForAutoMLJobPaginatorOptions is the paginator options for
 // ListCandidatesForAutoMLJob
@@ -229,6 +224,9 @@ func (p *ListCandidatesForAutoMLJobPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCandidatesForAutoMLJob(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListCandidatesForAutoMLJobPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListCandidatesForAutoMLJobAPIClient is a client that implements the
+// ListCandidatesForAutoMLJob operation.
+type ListCandidatesForAutoMLJobAPIClient interface {
+	ListCandidatesForAutoMLJob(context.Context, *ListCandidatesForAutoMLJobInput, ...func(*Options)) (*ListCandidatesForAutoMLJobOutput, error)
+}
+
+var _ ListCandidatesForAutoMLJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCandidatesForAutoMLJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

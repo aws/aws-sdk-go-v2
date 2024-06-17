@@ -119,6 +119,9 @@ func (c *Client) addOperationListTeamMembersMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTeamMembersValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -158,6 +158,9 @@ func (c *Client) addOperationDescribeHsmConfigurationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHsmConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -178,14 +181,6 @@ func (c *Client) addOperationDescribeHsmConfigurationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeHsmConfigurationsAPIClient is a client that implements the
-// DescribeHsmConfigurations operation.
-type DescribeHsmConfigurationsAPIClient interface {
-	DescribeHsmConfigurations(context.Context, *DescribeHsmConfigurationsInput, ...func(*Options)) (*DescribeHsmConfigurationsOutput, error)
-}
-
-var _ DescribeHsmConfigurationsAPIClient = (*Client)(nil)
 
 // DescribeHsmConfigurationsPaginatorOptions is the paginator options for
 // DescribeHsmConfigurations
@@ -259,6 +254,9 @@ func (p *DescribeHsmConfigurationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeHsmConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +275,14 @@ func (p *DescribeHsmConfigurationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeHsmConfigurationsAPIClient is a client that implements the
+// DescribeHsmConfigurations operation.
+type DescribeHsmConfigurationsAPIClient interface {
+	DescribeHsmConfigurations(context.Context, *DescribeHsmConfigurationsInput, ...func(*Options)) (*DescribeHsmConfigurationsOutput, error)
+}
+
+var _ DescribeHsmConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeHsmConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -145,6 +145,9 @@ func (c *Client) addOperationSearchOrganizationInsightsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchOrganizationInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationSearchOrganizationInsightsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// SearchOrganizationInsightsAPIClient is a client that implements the
-// SearchOrganizationInsights operation.
-type SearchOrganizationInsightsAPIClient interface {
-	SearchOrganizationInsights(context.Context, *SearchOrganizationInsightsInput, ...func(*Options)) (*SearchOrganizationInsightsOutput, error)
-}
-
-var _ SearchOrganizationInsightsAPIClient = (*Client)(nil)
 
 // SearchOrganizationInsightsPaginatorOptions is the paginator options for
 // SearchOrganizationInsights
@@ -244,6 +239,9 @@ func (p *SearchOrganizationInsightsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchOrganizationInsights(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *SearchOrganizationInsightsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// SearchOrganizationInsightsAPIClient is a client that implements the
+// SearchOrganizationInsights operation.
+type SearchOrganizationInsightsAPIClient interface {
+	SearchOrganizationInsights(context.Context, *SearchOrganizationInsightsInput, ...func(*Options)) (*SearchOrganizationInsightsOutput, error)
+}
+
+var _ SearchOrganizationInsightsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchOrganizationInsights(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

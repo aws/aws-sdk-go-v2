@@ -206,6 +206,9 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceMiddleware(stack, options); err != nil {
 		return err
 	}

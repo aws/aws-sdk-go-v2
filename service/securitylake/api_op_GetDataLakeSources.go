@@ -134,6 +134,9 @@ func (c *Client) addOperationGetDataLakeSourcesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataLakeSources(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationGetDataLakeSourcesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetDataLakeSourcesAPIClient is a client that implements the GetDataLakeSources
-// operation.
-type GetDataLakeSourcesAPIClient interface {
-	GetDataLakeSources(context.Context, *GetDataLakeSourcesInput, ...func(*Options)) (*GetDataLakeSourcesOutput, error)
-}
-
-var _ GetDataLakeSourcesAPIClient = (*Client)(nil)
 
 // GetDataLakeSourcesPaginatorOptions is the paginator options for
 // GetDataLakeSources
@@ -228,6 +223,9 @@ func (p *GetDataLakeSourcesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDataLakeSources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *GetDataLakeSourcesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetDataLakeSourcesAPIClient is a client that implements the GetDataLakeSources
+// operation.
+type GetDataLakeSourcesAPIClient interface {
+	GetDataLakeSources(context.Context, *GetDataLakeSourcesInput, ...func(*Options)) (*GetDataLakeSourcesOutput, error)
+}
+
+var _ GetDataLakeSourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDataLakeSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

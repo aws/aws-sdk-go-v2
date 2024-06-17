@@ -107,6 +107,9 @@ func (c *Client) addOperationSetVoiceMessageSpendLimitOverrideMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetVoiceMessageSpendLimitOverrideValidationMiddleware(stack); err != nil {
 		return err
 	}

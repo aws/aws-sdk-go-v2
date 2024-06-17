@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLDAPSSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeLDAPSSettingsAPIClient is a client that implements the
-// DescribeLDAPSSettings operation.
-type DescribeLDAPSSettingsAPIClient interface {
-	DescribeLDAPSSettings(context.Context, *DescribeLDAPSSettingsInput, ...func(*Options)) (*DescribeLDAPSSettingsOutput, error)
-}
-
-var _ DescribeLDAPSSettingsAPIClient = (*Client)(nil)
 
 // DescribeLDAPSSettingsPaginatorOptions is the paginator options for
 // DescribeLDAPSSettings
@@ -217,6 +212,9 @@ func (p *DescribeLDAPSSettingsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeLDAPSSettings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *DescribeLDAPSSettingsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeLDAPSSettingsAPIClient is a client that implements the
+// DescribeLDAPSSettings operation.
+type DescribeLDAPSSettingsAPIClient interface {
+	DescribeLDAPSSettings(context.Context, *DescribeLDAPSSettingsInput, ...func(*Options)) (*DescribeLDAPSSettingsOutput, error)
+}
+
+var _ DescribeLDAPSSettingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeLDAPSSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -148,6 +148,9 @@ func (c *Client) addOperationDisassociateResourceMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -152,6 +152,9 @@ func (c *Client) addOperationListCoreDevicesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCoreDevices(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -172,14 +175,6 @@ func (c *Client) addOperationListCoreDevicesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListCoreDevicesAPIClient is a client that implements the ListCoreDevices
-// operation.
-type ListCoreDevicesAPIClient interface {
-	ListCoreDevices(context.Context, *ListCoreDevicesInput, ...func(*Options)) (*ListCoreDevicesOutput, error)
-}
-
-var _ ListCoreDevicesAPIClient = (*Client)(nil)
 
 // ListCoreDevicesPaginatorOptions is the paginator options for ListCoreDevices
 type ListCoreDevicesPaginatorOptions struct {
@@ -244,6 +239,9 @@ func (p *ListCoreDevicesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCoreDevices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *ListCoreDevicesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListCoreDevicesAPIClient is a client that implements the ListCoreDevices
+// operation.
+type ListCoreDevicesAPIClient interface {
+	ListCoreDevices(context.Context, *ListCoreDevicesInput, ...func(*Options)) (*ListCoreDevicesOutput, error)
+}
+
+var _ ListCoreDevicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCoreDevices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

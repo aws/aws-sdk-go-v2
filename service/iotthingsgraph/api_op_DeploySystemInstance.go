@@ -134,6 +134,9 @@ func (c *Client) addOperationDeploySystemInstanceMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeploySystemInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}

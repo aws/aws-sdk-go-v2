@@ -201,6 +201,9 @@ func (c *Client) addOperationCreateMLModelMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateMLModelValidationMiddleware(stack); err != nil {
 		return err
 	}

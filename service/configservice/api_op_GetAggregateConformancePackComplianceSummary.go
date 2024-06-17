@@ -136,6 +136,9 @@ func (c *Client) addOperationGetAggregateConformancePackComplianceSummaryMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateConformancePackComplianceSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationGetAggregateConformancePackComplianceSummaryMiddlew
 	}
 	return nil
 }
-
-// GetAggregateConformancePackComplianceSummaryAPIClient is a client that
-// implements the GetAggregateConformancePackComplianceSummary operation.
-type GetAggregateConformancePackComplianceSummaryAPIClient interface {
-	GetAggregateConformancePackComplianceSummary(context.Context, *GetAggregateConformancePackComplianceSummaryInput, ...func(*Options)) (*GetAggregateConformancePackComplianceSummaryOutput, error)
-}
-
-var _ GetAggregateConformancePackComplianceSummaryAPIClient = (*Client)(nil)
 
 // GetAggregateConformancePackComplianceSummaryPaginatorOptions is the paginator
 // options for GetAggregateConformancePackComplianceSummary
@@ -231,6 +226,9 @@ func (p *GetAggregateConformancePackComplianceSummaryPaginator) NextPage(ctx con
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAggregateConformancePackComplianceSummary(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *GetAggregateConformancePackComplianceSummaryPaginator) NextPage(ctx con
 
 	return result, nil
 }
+
+// GetAggregateConformancePackComplianceSummaryAPIClient is a client that
+// implements the GetAggregateConformancePackComplianceSummary operation.
+type GetAggregateConformancePackComplianceSummaryAPIClient interface {
+	GetAggregateConformancePackComplianceSummary(context.Context, *GetAggregateConformancePackComplianceSummaryInput, ...func(*Options)) (*GetAggregateConformancePackComplianceSummaryOutput, error)
+}
+
+var _ GetAggregateConformancePackComplianceSummaryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAggregateConformancePackComplianceSummary(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

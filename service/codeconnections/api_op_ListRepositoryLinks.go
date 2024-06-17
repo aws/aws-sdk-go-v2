@@ -114,6 +114,9 @@ func (c *Client) addOperationListRepositoryLinksMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositoryLinks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListRepositoryLinksMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListRepositoryLinksAPIClient is a client that implements the
-// ListRepositoryLinks operation.
-type ListRepositoryLinksAPIClient interface {
-	ListRepositoryLinks(context.Context, *ListRepositoryLinksInput, ...func(*Options)) (*ListRepositoryLinksOutput, error)
-}
-
-var _ ListRepositoryLinksAPIClient = (*Client)(nil)
 
 // ListRepositoryLinksPaginatorOptions is the paginator options for
 // ListRepositoryLinks
@@ -203,6 +198,9 @@ func (p *ListRepositoryLinksPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRepositoryLinks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListRepositoryLinksPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListRepositoryLinksAPIClient is a client that implements the
+// ListRepositoryLinks operation.
+type ListRepositoryLinksAPIClient interface {
+	ListRepositoryLinks(context.Context, *ListRepositoryLinksInput, ...func(*Options)) (*ListRepositoryLinksOutput, error)
+}
+
+var _ ListRepositoryLinksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRepositoryLinks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -15,6 +15,7 @@ DeleteBucketOwnershipControls
 		OperationSerializer
 		S3:UpdateEndpoint
 		S3:RemoveBucketFromPathMiddleware
+		isExpressUserAgent
 	Build stack step
 		ClientRequestID
 		ComputeContentLength

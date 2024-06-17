@@ -111,6 +111,9 @@ func (c *Client) addOperationListFlowsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFlows(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -131,13 +134,6 @@ func (c *Client) addOperationListFlowsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListFlowsAPIClient is a client that implements the ListFlows operation.
-type ListFlowsAPIClient interface {
-	ListFlows(context.Context, *ListFlowsInput, ...func(*Options)) (*ListFlowsOutput, error)
-}
-
-var _ ListFlowsAPIClient = (*Client)(nil)
 
 // ListFlowsPaginatorOptions is the paginator options for ListFlows
 type ListFlowsPaginatorOptions struct {
@@ -203,6 +199,9 @@ func (p *ListFlowsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFlows(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +220,13 @@ func (p *ListFlowsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListFlowsAPIClient is a client that implements the ListFlows operation.
+type ListFlowsAPIClient interface {
+	ListFlows(context.Context, *ListFlowsInput, ...func(*Options)) (*ListFlowsOutput, error)
+}
+
+var _ ListFlowsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFlows(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeScraperMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScraperValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationDescribeScraperMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeScraperAPIClient is a client that implements the DescribeScraper
-// operation.
-type DescribeScraperAPIClient interface {
-	DescribeScraper(context.Context, *DescribeScraperInput, ...func(*Options)) (*DescribeScraperOutput, error)
-}
-
-var _ DescribeScraperAPIClient = (*Client)(nil)
 
 // ScraperActiveWaiterOptions are waiter options for ScraperActiveWaiter
 type ScraperActiveWaiterOptions struct {
@@ -262,7 +257,13 @@ func (w *ScraperActiveWaiter) WaitForOutput(ctx context.Context, params *Describ
 		}
 
 		out, err := w.client.DescribeScraper(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -452,7 +453,13 @@ func (w *ScraperDeletedWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeScraper(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -516,6 +523,14 @@ func scraperDeletedStateRetryable(ctx context.Context, input *DescribeScraperInp
 
 	return true, nil
 }
+
+// DescribeScraperAPIClient is a client that implements the DescribeScraper
+// operation.
+type DescribeScraperAPIClient interface {
+	DescribeScraper(context.Context, *DescribeScraperInput, ...func(*Options)) (*DescribeScraperOutput, error)
+}
+
+var _ DescribeScraperAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeScraper(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

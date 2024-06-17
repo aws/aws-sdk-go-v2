@@ -117,6 +117,9 @@ func (c *Client) addOperationListTestRunTestCasesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestRunTestCasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListTestRunTestCasesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListTestRunTestCasesAPIClient is a client that implements the
-// ListTestRunTestCases operation.
-type ListTestRunTestCasesAPIClient interface {
-	ListTestRunTestCases(context.Context, *ListTestRunTestCasesInput, ...func(*Options)) (*ListTestRunTestCasesOutput, error)
-}
-
-var _ ListTestRunTestCasesAPIClient = (*Client)(nil)
 
 // ListTestRunTestCasesPaginatorOptions is the paginator options for
 // ListTestRunTestCases
@@ -213,6 +208,9 @@ func (p *ListTestRunTestCasesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestRunTestCases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListTestRunTestCasesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListTestRunTestCasesAPIClient is a client that implements the
+// ListTestRunTestCases operation.
+type ListTestRunTestCasesAPIClient interface {
+	ListTestRunTestCases(context.Context, *ListTestRunTestCasesInput, ...func(*Options)) (*ListTestRunTestCasesOutput, error)
+}
+
+var _ ListTestRunTestCasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestRunTestCases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

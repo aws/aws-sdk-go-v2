@@ -113,6 +113,9 @@ func (c *Client) addOperationGetClientCertificatesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetClientCertificates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationGetClientCertificatesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// GetClientCertificatesAPIClient is a client that implements the
-// GetClientCertificates operation.
-type GetClientCertificatesAPIClient interface {
-	GetClientCertificates(context.Context, *GetClientCertificatesInput, ...func(*Options)) (*GetClientCertificatesOutput, error)
-}
-
-var _ GetClientCertificatesAPIClient = (*Client)(nil)
 
 // GetClientCertificatesPaginatorOptions is the paginator options for
 // GetClientCertificates
@@ -210,6 +205,9 @@ func (p *GetClientCertificatesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetClientCertificates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *GetClientCertificatesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// GetClientCertificatesAPIClient is a client that implements the
+// GetClientCertificates operation.
+type GetClientCertificatesAPIClient interface {
+	GetClientCertificates(context.Context, *GetClientCertificatesInput, ...func(*Options)) (*GetClientCertificatesOutput, error)
+}
+
+var _ GetClientCertificatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetClientCertificates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -129,6 +129,9 @@ func (c *Client) addOperationGetProductsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetProductsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,13 +155,6 @@ func (c *Client) addOperationGetProductsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// GetProductsAPIClient is a client that implements the GetProducts operation.
-type GetProductsAPIClient interface {
-	GetProducts(context.Context, *GetProductsInput, ...func(*Options)) (*GetProductsOutput, error)
-}
-
-var _ GetProductsAPIClient = (*Client)(nil)
 
 // GetProductsPaginatorOptions is the paginator options for GetProducts
 type GetProductsPaginatorOptions struct {
@@ -223,6 +219,9 @@ func (p *GetProductsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetProducts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +240,13 @@ func (p *GetProductsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// GetProductsAPIClient is a client that implements the GetProducts operation.
+type GetProductsAPIClient interface {
+	GetProducts(context.Context, *GetProductsInput, ...func(*Options)) (*GetProductsOutput, error)
+}
+
+var _ GetProductsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetProducts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -132,6 +132,9 @@ func (c *Client) addOperationAddCommunicationToCaseMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddCommunicationToCaseValidationMiddleware(stack); err != nil {
 		return err
 	}

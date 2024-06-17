@@ -133,6 +133,9 @@ func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFleetValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -161,6 +161,9 @@ func (c *Client) addOperationListFragmentsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFragmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,13 +187,6 @@ func (c *Client) addOperationListFragmentsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListFragmentsAPIClient is a client that implements the ListFragments operation.
-type ListFragmentsAPIClient interface {
-	ListFragments(context.Context, *ListFragmentsInput, ...func(*Options)) (*ListFragmentsOutput, error)
-}
-
-var _ ListFragmentsAPIClient = (*Client)(nil)
 
 // ListFragmentsPaginatorOptions is the paginator options for ListFragments
 type ListFragmentsPaginatorOptions struct {
@@ -257,6 +253,9 @@ func (p *ListFragmentsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFragments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +274,13 @@ func (p *ListFragmentsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListFragmentsAPIClient is a client that implements the ListFragments operation.
+type ListFragmentsAPIClient interface {
+	ListFragments(context.Context, *ListFragmentsInput, ...func(*Options)) (*ListFragmentsOutput, error)
+}
+
+var _ ListFragmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFragments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

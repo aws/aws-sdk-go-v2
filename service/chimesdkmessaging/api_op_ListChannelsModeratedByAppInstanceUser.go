@@ -124,6 +124,9 @@ func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChannelsModeratedByAppInstanceUserValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(s
 	}
 	return nil
 }
-
-// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements the
-// ListChannelsModeratedByAppInstanceUser operation.
-type ListChannelsModeratedByAppInstanceUserAPIClient interface {
-	ListChannelsModeratedByAppInstanceUser(context.Context, *ListChannelsModeratedByAppInstanceUserInput, ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error)
-}
-
-var _ ListChannelsModeratedByAppInstanceUserAPIClient = (*Client)(nil)
 
 // ListChannelsModeratedByAppInstanceUserPaginatorOptions is the paginator options
 // for ListChannelsModeratedByAppInstanceUser
@@ -222,6 +217,9 @@ func (p *ListChannelsModeratedByAppInstanceUserPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelsModeratedByAppInstanceUser(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListChannelsModeratedByAppInstanceUserPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListChannelsModeratedByAppInstanceUserAPIClient is a client that implements the
+// ListChannelsModeratedByAppInstanceUser operation.
+type ListChannelsModeratedByAppInstanceUserAPIClient interface {
+	ListChannelsModeratedByAppInstanceUser(context.Context, *ListChannelsModeratedByAppInstanceUserInput, ...func(*Options)) (*ListChannelsModeratedByAppInstanceUserOutput, error)
+}
+
+var _ ListChannelsModeratedByAppInstanceUserAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelsModeratedByAppInstanceUser(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

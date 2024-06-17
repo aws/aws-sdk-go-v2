@@ -131,6 +131,9 @@ func (c *Client) addOperationListAddonsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAddonsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,13 +157,6 @@ func (c *Client) addOperationListAddonsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListAddonsAPIClient is a client that implements the ListAddons operation.
-type ListAddonsAPIClient interface {
-	ListAddons(context.Context, *ListAddonsInput, ...func(*Options)) (*ListAddonsOutput, error)
-}
-
-var _ ListAddonsAPIClient = (*Client)(nil)
 
 // ListAddonsPaginatorOptions is the paginator options for ListAddons
 type ListAddonsPaginatorOptions struct {
@@ -230,6 +226,9 @@ func (p *ListAddonsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAddons(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +247,13 @@ func (p *ListAddonsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListAddonsAPIClient is a client that implements the ListAddons operation.
+type ListAddonsAPIClient interface {
+	ListAddons(context.Context, *ListAddonsInput, ...func(*Options)) (*ListAddonsOutput, error)
+}
+
+var _ ListAddonsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAddons(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

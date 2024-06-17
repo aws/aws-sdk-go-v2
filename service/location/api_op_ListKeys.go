@@ -122,6 +122,9 @@ func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListKeysMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,40 +148,6 @@ func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-type endpointPrefix_opListKeysMiddleware struct {
-}
-
-func (*endpointPrefix_opListKeysMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListKeysMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "cp.metadata." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListKeysMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListKeysMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListKeysAPIClient is a client that implements the ListKeys operation.
-type ListKeysAPIClient interface {
-	ListKeys(context.Context, *ListKeysInput, ...func(*Options)) (*ListKeysOutput, error)
-}
-
-var _ ListKeysAPIClient = (*Client)(nil)
 
 // ListKeysPaginatorOptions is the paginator options for ListKeys
 type ListKeysPaginatorOptions struct {
@@ -245,6 +214,9 @@ func (p *ListKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKeys(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +235,40 @@ func (p *ListKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+type endpointPrefix_opListKeysMiddleware struct {
+}
+
+func (*endpointPrefix_opListKeysMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListKeysMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "cp.metadata." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListKeysMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListKeysMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListKeysAPIClient is a client that implements the ListKeys operation.
+type ListKeysAPIClient interface {
+	ListKeys(context.Context, *ListKeysInput, ...func(*Options)) (*ListKeysOutput, error)
+}
+
+var _ ListKeysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

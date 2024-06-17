@@ -142,6 +142,9 @@ func (c *Client) addOperationUpdatePolicyStoreMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdatePolicyStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

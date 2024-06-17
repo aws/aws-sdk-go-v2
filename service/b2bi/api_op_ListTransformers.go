@@ -120,6 +120,9 @@ func (c *Client) addOperationListTransformersMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTransformers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListTransformersMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListTransformersAPIClient is a client that implements the ListTransformers
-// operation.
-type ListTransformersAPIClient interface {
-	ListTransformers(context.Context, *ListTransformersInput, ...func(*Options)) (*ListTransformersOutput, error)
-}
-
-var _ ListTransformersAPIClient = (*Client)(nil)
 
 // ListTransformersPaginatorOptions is the paginator options for ListTransformers
 type ListTransformersPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListTransformersPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTransformers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListTransformersPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListTransformersAPIClient is a client that implements the ListTransformers
+// operation.
+type ListTransformersAPIClient interface {
+	ListTransformers(context.Context, *ListTransformersInput, ...func(*Options)) (*ListTransformersOutput, error)
+}
+
+var _ ListTransformersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTransformers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

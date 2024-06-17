@@ -237,6 +237,9 @@ func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDimensionKeysValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -260,14 +263,6 @@ func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeDimensionKeysAPIClient is a client that implements the
-// DescribeDimensionKeys operation.
-type DescribeDimensionKeysAPIClient interface {
-	DescribeDimensionKeys(context.Context, *DescribeDimensionKeysInput, ...func(*Options)) (*DescribeDimensionKeysOutput, error)
-}
-
-var _ DescribeDimensionKeysAPIClient = (*Client)(nil)
 
 // DescribeDimensionKeysPaginatorOptions is the paginator options for
 // DescribeDimensionKeys
@@ -335,6 +330,9 @@ func (p *DescribeDimensionKeysPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDimensionKeys(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -353,6 +351,14 @@ func (p *DescribeDimensionKeysPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeDimensionKeysAPIClient is a client that implements the
+// DescribeDimensionKeys operation.
+type DescribeDimensionKeysAPIClient interface {
+	DescribeDimensionKeys(context.Context, *DescribeDimensionKeysInput, ...func(*Options)) (*DescribeDimensionKeysOutput, error)
+}
+
+var _ DescribeDimensionKeysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDimensionKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

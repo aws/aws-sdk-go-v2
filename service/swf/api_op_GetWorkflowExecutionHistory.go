@@ -167,6 +167,9 @@ func (c *Client) addOperationGetWorkflowExecutionHistoryMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetWorkflowExecutionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -190,14 +193,6 @@ func (c *Client) addOperationGetWorkflowExecutionHistoryMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// GetWorkflowExecutionHistoryAPIClient is a client that implements the
-// GetWorkflowExecutionHistory operation.
-type GetWorkflowExecutionHistoryAPIClient interface {
-	GetWorkflowExecutionHistory(context.Context, *GetWorkflowExecutionHistoryInput, ...func(*Options)) (*GetWorkflowExecutionHistoryOutput, error)
-}
-
-var _ GetWorkflowExecutionHistoryAPIClient = (*Client)(nil)
 
 // GetWorkflowExecutionHistoryPaginatorOptions is the paginator options for
 // GetWorkflowExecutionHistory
@@ -262,6 +257,9 @@ func (p *GetWorkflowExecutionHistoryPaginator) NextPage(ctx context.Context, opt
 
 	params.MaximumPageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetWorkflowExecutionHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -280,6 +278,14 @@ func (p *GetWorkflowExecutionHistoryPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// GetWorkflowExecutionHistoryAPIClient is a client that implements the
+// GetWorkflowExecutionHistory operation.
+type GetWorkflowExecutionHistoryAPIClient interface {
+	GetWorkflowExecutionHistory(context.Context, *GetWorkflowExecutionHistoryInput, ...func(*Options)) (*GetWorkflowExecutionHistoryOutput, error)
+}
+
+var _ GetWorkflowExecutionHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetWorkflowExecutionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

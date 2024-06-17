@@ -132,6 +132,9 @@ func (c *Client) addOperationListFindingsMetricsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFindingsMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListFindingsMetricsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListFindingsMetricsAPIClient is a client that implements the
-// ListFindingsMetrics operation.
-type ListFindingsMetricsAPIClient interface {
-	ListFindingsMetrics(context.Context, *ListFindingsMetricsInput, ...func(*Options)) (*ListFindingsMetricsOutput, error)
-}
-
-var _ ListFindingsMetricsAPIClient = (*Client)(nil)
 
 // ListFindingsMetricsPaginatorOptions is the paginator options for
 // ListFindingsMetrics
@@ -232,6 +227,9 @@ func (p *ListFindingsMetricsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFindingsMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListFindingsMetricsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListFindingsMetricsAPIClient is a client that implements the
+// ListFindingsMetrics operation.
+type ListFindingsMetricsAPIClient interface {
+	ListFindingsMetrics(context.Context, *ListFindingsMetricsInput, ...func(*Options)) (*ListFindingsMetricsOutput, error)
+}
+
+var _ ListFindingsMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFindingsMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

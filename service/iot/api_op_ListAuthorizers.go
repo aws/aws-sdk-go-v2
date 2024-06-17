@@ -120,6 +120,9 @@ func (c *Client) addOperationListAuthorizersMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAuthorizers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListAuthorizersMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListAuthorizersAPIClient is a client that implements the ListAuthorizers
-// operation.
-type ListAuthorizersAPIClient interface {
-	ListAuthorizers(context.Context, *ListAuthorizersInput, ...func(*Options)) (*ListAuthorizersOutput, error)
-}
-
-var _ ListAuthorizersAPIClient = (*Client)(nil)
 
 // ListAuthorizersPaginatorOptions is the paginator options for ListAuthorizers
 type ListAuthorizersPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListAuthorizersPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAuthorizers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListAuthorizersPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListAuthorizersAPIClient is a client that implements the ListAuthorizers
+// operation.
+type ListAuthorizersAPIClient interface {
+	ListAuthorizers(context.Context, *ListAuthorizersInput, ...func(*Options)) (*ListAuthorizersOutput, error)
+}
+
+var _ ListAuthorizersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAuthorizers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

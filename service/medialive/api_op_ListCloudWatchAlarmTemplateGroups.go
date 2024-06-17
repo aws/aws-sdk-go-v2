@@ -119,6 +119,9 @@ func (c *Client) addOperationListCloudWatchAlarmTemplateGroupsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCloudWatchAlarmTemplateGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListCloudWatchAlarmTemplateGroupsMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListCloudWatchAlarmTemplateGroupsAPIClient is a client that implements the
-// ListCloudWatchAlarmTemplateGroups operation.
-type ListCloudWatchAlarmTemplateGroupsAPIClient interface {
-	ListCloudWatchAlarmTemplateGroups(context.Context, *ListCloudWatchAlarmTemplateGroupsInput, ...func(*Options)) (*ListCloudWatchAlarmTemplateGroupsOutput, error)
-}
-
-var _ ListCloudWatchAlarmTemplateGroupsAPIClient = (*Client)(nil)
 
 // ListCloudWatchAlarmTemplateGroupsPaginatorOptions is the paginator options for
 // ListCloudWatchAlarmTemplateGroups
@@ -214,6 +209,9 @@ func (p *ListCloudWatchAlarmTemplateGroupsPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCloudWatchAlarmTemplateGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListCloudWatchAlarmTemplateGroupsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListCloudWatchAlarmTemplateGroupsAPIClient is a client that implements the
+// ListCloudWatchAlarmTemplateGroups operation.
+type ListCloudWatchAlarmTemplateGroupsAPIClient interface {
+	ListCloudWatchAlarmTemplateGroups(context.Context, *ListCloudWatchAlarmTemplateGroupsInput, ...func(*Options)) (*ListCloudWatchAlarmTemplateGroupsOutput, error)
+}
+
+var _ ListCloudWatchAlarmTemplateGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCloudWatchAlarmTemplateGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

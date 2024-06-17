@@ -105,6 +105,9 @@ func (c *Client) addOperationStartApplicationRefreshMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartApplicationRefreshValidationMiddleware(stack); err != nil {
 		return err
 	}

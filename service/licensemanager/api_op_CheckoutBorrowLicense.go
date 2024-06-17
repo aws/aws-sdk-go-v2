@@ -153,6 +153,9 @@ func (c *Client) addOperationCheckoutBorrowLicenseMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCheckoutBorrowLicenseValidationMiddleware(stack); err != nil {
 		return err
 	}

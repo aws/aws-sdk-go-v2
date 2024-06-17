@@ -233,6 +233,9 @@ func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPollForDecisionTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -256,14 +259,6 @@ func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// PollForDecisionTaskAPIClient is a client that implements the
-// PollForDecisionTask operation.
-type PollForDecisionTaskAPIClient interface {
-	PollForDecisionTask(context.Context, *PollForDecisionTaskInput, ...func(*Options)) (*PollForDecisionTaskOutput, error)
-}
-
-var _ PollForDecisionTaskAPIClient = (*Client)(nil)
 
 // PollForDecisionTaskPaginatorOptions is the paginator options for
 // PollForDecisionTask
@@ -329,6 +324,9 @@ func (p *PollForDecisionTaskPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaximumPageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.PollForDecisionTask(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -347,6 +345,14 @@ func (p *PollForDecisionTaskPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// PollForDecisionTaskAPIClient is a client that implements the
+// PollForDecisionTask operation.
+type PollForDecisionTaskAPIClient interface {
+	PollForDecisionTask(context.Context, *PollForDecisionTaskInput, ...func(*Options)) (*PollForDecisionTaskOutput, error)
+}
+
+var _ PollForDecisionTaskAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opPollForDecisionTask(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

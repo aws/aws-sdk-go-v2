@@ -117,6 +117,9 @@ func (c *Client) addOperationListDirectoriesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDirectories(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListDirectoriesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListDirectoriesAPIClient is a client that implements the ListDirectories
-// operation.
-type ListDirectoriesAPIClient interface {
-	ListDirectories(context.Context, *ListDirectoriesInput, ...func(*Options)) (*ListDirectoriesOutput, error)
-}
-
-var _ ListDirectoriesAPIClient = (*Client)(nil)
 
 // ListDirectoriesPaginatorOptions is the paginator options for ListDirectories
 type ListDirectoriesPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListDirectoriesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDirectories(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListDirectoriesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListDirectoriesAPIClient is a client that implements the ListDirectories
+// operation.
+type ListDirectoriesAPIClient interface {
+	ListDirectories(context.Context, *ListDirectoriesInput, ...func(*Options)) (*ListDirectoriesOutput, error)
+}
+
+var _ ListDirectoriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDirectories(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -245,6 +245,9 @@ func (c *Client) addOperationCreateConfigurationProfileMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateConfigurationProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

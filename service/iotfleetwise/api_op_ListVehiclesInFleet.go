@@ -124,6 +124,9 @@ func (c *Client) addOperationListVehiclesInFleetMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVehiclesInFleetValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListVehiclesInFleetMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListVehiclesInFleetAPIClient is a client that implements the
-// ListVehiclesInFleet operation.
-type ListVehiclesInFleetAPIClient interface {
-	ListVehiclesInFleet(context.Context, *ListVehiclesInFleetInput, ...func(*Options)) (*ListVehiclesInFleetOutput, error)
-}
-
-var _ ListVehiclesInFleetAPIClient = (*Client)(nil)
 
 // ListVehiclesInFleetPaginatorOptions is the paginator options for
 // ListVehiclesInFleet
@@ -220,6 +215,9 @@ func (p *ListVehiclesInFleetPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVehiclesInFleet(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListVehiclesInFleetPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListVehiclesInFleetAPIClient is a client that implements the
+// ListVehiclesInFleet operation.
+type ListVehiclesInFleetAPIClient interface {
+	ListVehiclesInFleet(context.Context, *ListVehiclesInFleetInput, ...func(*Options)) (*ListVehiclesInFleetOutput, error)
+}
+
+var _ ListVehiclesInFleetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVehiclesInFleet(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

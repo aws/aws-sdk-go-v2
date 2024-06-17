@@ -119,6 +119,9 @@ func (c *Client) addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTransitGatewayConnectPeerAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares
 	}
 	return nil
 }
-
-// GetTransitGatewayConnectPeerAssociationsAPIClient is a client that implements
-// the GetTransitGatewayConnectPeerAssociations operation.
-type GetTransitGatewayConnectPeerAssociationsAPIClient interface {
-	GetTransitGatewayConnectPeerAssociations(context.Context, *GetTransitGatewayConnectPeerAssociationsInput, ...func(*Options)) (*GetTransitGatewayConnectPeerAssociationsOutput, error)
-}
-
-var _ GetTransitGatewayConnectPeerAssociationsAPIClient = (*Client)(nil)
 
 // GetTransitGatewayConnectPeerAssociationsPaginatorOptions is the paginator
 // options for GetTransitGatewayConnectPeerAssociations
@@ -217,6 +212,9 @@ func (p *GetTransitGatewayConnectPeerAssociationsPaginator) NextPage(ctx context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTransitGatewayConnectPeerAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *GetTransitGatewayConnectPeerAssociationsPaginator) NextPage(ctx context
 
 	return result, nil
 }
+
+// GetTransitGatewayConnectPeerAssociationsAPIClient is a client that implements
+// the GetTransitGatewayConnectPeerAssociations operation.
+type GetTransitGatewayConnectPeerAssociationsAPIClient interface {
+	GetTransitGatewayConnectPeerAssociations(context.Context, *GetTransitGatewayConnectPeerAssociationsInput, ...func(*Options)) (*GetTransitGatewayConnectPeerAssociationsOutput, error)
+}
+
+var _ GetTransitGatewayConnectPeerAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTransitGatewayConnectPeerAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -151,6 +151,9 @@ func (c *Client) addOperationCreateSyncConfigurationMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateSyncConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

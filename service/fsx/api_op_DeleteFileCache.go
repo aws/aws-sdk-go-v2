@@ -125,6 +125,9 @@ func (c *Client) addOperationDeleteFileCacheMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteFileCacheMiddleware(stack, options); err != nil {
 		return err
 	}

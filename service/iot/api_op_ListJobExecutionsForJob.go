@@ -123,6 +123,9 @@ func (c *Client) addOperationListJobExecutionsForJobMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJobExecutionsForJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListJobExecutionsForJobMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListJobExecutionsForJobAPIClient is a client that implements the
-// ListJobExecutionsForJob operation.
-type ListJobExecutionsForJobAPIClient interface {
-	ListJobExecutionsForJob(context.Context, *ListJobExecutionsForJobInput, ...func(*Options)) (*ListJobExecutionsForJobOutput, error)
-}
-
-var _ ListJobExecutionsForJobAPIClient = (*Client)(nil)
 
 // ListJobExecutionsForJobPaginatorOptions is the paginator options for
 // ListJobExecutionsForJob
@@ -220,6 +215,9 @@ func (p *ListJobExecutionsForJobPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJobExecutionsForJob(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListJobExecutionsForJobPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListJobExecutionsForJobAPIClient is a client that implements the
+// ListJobExecutionsForJob operation.
+type ListJobExecutionsForJobAPIClient interface {
+	ListJobExecutionsForJob(context.Context, *ListJobExecutionsForJobInput, ...func(*Options)) (*ListJobExecutionsForJobOutput, error)
+}
+
+var _ ListJobExecutionsForJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJobExecutionsForJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

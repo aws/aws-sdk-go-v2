@@ -152,6 +152,9 @@ func (c *Client) addOperationDescribeDBClusterAutomatedBackupsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterAutomatedBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -175,14 +178,6 @@ func (c *Client) addOperationDescribeDBClusterAutomatedBackupsMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeDBClusterAutomatedBackupsAPIClient is a client that implements the
-// DescribeDBClusterAutomatedBackups operation.
-type DescribeDBClusterAutomatedBackupsAPIClient interface {
-	DescribeDBClusterAutomatedBackups(context.Context, *DescribeDBClusterAutomatedBackupsInput, ...func(*Options)) (*DescribeDBClusterAutomatedBackupsOutput, error)
-}
-
-var _ DescribeDBClusterAutomatedBackupsAPIClient = (*Client)(nil)
 
 // DescribeDBClusterAutomatedBackupsPaginatorOptions is the paginator options for
 // DescribeDBClusterAutomatedBackups
@@ -252,6 +247,9 @@ func (p *DescribeDBClusterAutomatedBackupsPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBClusterAutomatedBackups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -270,6 +268,14 @@ func (p *DescribeDBClusterAutomatedBackupsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeDBClusterAutomatedBackupsAPIClient is a client that implements the
+// DescribeDBClusterAutomatedBackups operation.
+type DescribeDBClusterAutomatedBackupsAPIClient interface {
+	DescribeDBClusterAutomatedBackups(context.Context, *DescribeDBClusterAutomatedBackupsInput, ...func(*Options)) (*DescribeDBClusterAutomatedBackupsOutput, error)
+}
+
+var _ DescribeDBClusterAutomatedBackupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBClusterAutomatedBackups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

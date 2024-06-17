@@ -115,6 +115,9 @@ func (c *Client) addOperationListEventBridgeRuleTemplateGroupsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventBridgeRuleTemplateGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListEventBridgeRuleTemplateGroupsMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListEventBridgeRuleTemplateGroupsAPIClient is a client that implements the
-// ListEventBridgeRuleTemplateGroups operation.
-type ListEventBridgeRuleTemplateGroupsAPIClient interface {
-	ListEventBridgeRuleTemplateGroups(context.Context, *ListEventBridgeRuleTemplateGroupsInput, ...func(*Options)) (*ListEventBridgeRuleTemplateGroupsOutput, error)
-}
-
-var _ ListEventBridgeRuleTemplateGroupsAPIClient = (*Client)(nil)
 
 // ListEventBridgeRuleTemplateGroupsPaginatorOptions is the paginator options for
 // ListEventBridgeRuleTemplateGroups
@@ -210,6 +205,9 @@ func (p *ListEventBridgeRuleTemplateGroupsPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventBridgeRuleTemplateGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListEventBridgeRuleTemplateGroupsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListEventBridgeRuleTemplateGroupsAPIClient is a client that implements the
+// ListEventBridgeRuleTemplateGroups operation.
+type ListEventBridgeRuleTemplateGroupsAPIClient interface {
+	ListEventBridgeRuleTemplateGroups(context.Context, *ListEventBridgeRuleTemplateGroupsInput, ...func(*Options)) (*ListEventBridgeRuleTemplateGroupsOutput, error)
+}
+
+var _ ListEventBridgeRuleTemplateGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventBridgeRuleTemplateGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -140,6 +140,9 @@ func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditFindings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListAuditFindingsAPIClient is a client that implements the ListAuditFindings
-// operation.
-type ListAuditFindingsAPIClient interface {
-	ListAuditFindings(context.Context, *ListAuditFindingsInput, ...func(*Options)) (*ListAuditFindingsOutput, error)
-}
-
-var _ ListAuditFindingsAPIClient = (*Client)(nil)
 
 // ListAuditFindingsPaginatorOptions is the paginator options for ListAuditFindings
 type ListAuditFindingsPaginatorOptions struct {
@@ -232,6 +227,9 @@ func (p *ListAuditFindingsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAuditFindings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListAuditFindingsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListAuditFindingsAPIClient is a client that implements the ListAuditFindings
+// operation.
+type ListAuditFindingsAPIClient interface {
+	ListAuditFindings(context.Context, *ListAuditFindingsInput, ...func(*Options)) (*ListAuditFindingsOutput, error)
+}
+
+var _ ListAuditFindingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAuditFindings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

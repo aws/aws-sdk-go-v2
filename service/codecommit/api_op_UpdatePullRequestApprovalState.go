@@ -113,6 +113,9 @@ func (c *Client) addOperationUpdatePullRequestApprovalStateMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdatePullRequestApprovalStateValidationMiddleware(stack); err != nil {
 		return err
 	}

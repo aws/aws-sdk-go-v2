@@ -112,6 +112,9 @@ func (c *Client) addOperationListNetworkAnalyzerConfigurationsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNetworkAnalyzerConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListNetworkAnalyzerConfigurationsMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListNetworkAnalyzerConfigurationsAPIClient is a client that implements the
-// ListNetworkAnalyzerConfigurations operation.
-type ListNetworkAnalyzerConfigurationsAPIClient interface {
-	ListNetworkAnalyzerConfigurations(context.Context, *ListNetworkAnalyzerConfigurationsInput, ...func(*Options)) (*ListNetworkAnalyzerConfigurationsOutput, error)
-}
-
-var _ ListNetworkAnalyzerConfigurationsAPIClient = (*Client)(nil)
 
 // ListNetworkAnalyzerConfigurationsPaginatorOptions is the paginator options for
 // ListNetworkAnalyzerConfigurations
@@ -203,6 +198,9 @@ func (p *ListNetworkAnalyzerConfigurationsPaginator) NextPage(ctx context.Contex
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListNetworkAnalyzerConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListNetworkAnalyzerConfigurationsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListNetworkAnalyzerConfigurationsAPIClient is a client that implements the
+// ListNetworkAnalyzerConfigurations operation.
+type ListNetworkAnalyzerConfigurationsAPIClient interface {
+	ListNetworkAnalyzerConfigurations(context.Context, *ListNetworkAnalyzerConfigurationsInput, ...func(*Options)) (*ListNetworkAnalyzerConfigurationsOutput, error)
+}
+
+var _ ListNetworkAnalyzerConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListNetworkAnalyzerConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

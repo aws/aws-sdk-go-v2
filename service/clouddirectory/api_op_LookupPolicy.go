@@ -132,6 +132,9 @@ func (c *Client) addOperationLookupPolicyMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpLookupPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,13 +158,6 @@ func (c *Client) addOperationLookupPolicyMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// LookupPolicyAPIClient is a client that implements the LookupPolicy operation.
-type LookupPolicyAPIClient interface {
-	LookupPolicy(context.Context, *LookupPolicyInput, ...func(*Options)) (*LookupPolicyOutput, error)
-}
-
-var _ LookupPolicyAPIClient = (*Client)(nil)
 
 // LookupPolicyPaginatorOptions is the paginator options for LookupPolicy
 type LookupPolicyPaginatorOptions struct {
@@ -227,6 +223,9 @@ func (p *LookupPolicyPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.LookupPolicy(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +244,13 @@ func (p *LookupPolicyPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// LookupPolicyAPIClient is a client that implements the LookupPolicy operation.
+type LookupPolicyAPIClient interface {
+	LookupPolicy(context.Context, *LookupPolicyInput, ...func(*Options)) (*LookupPolicyOutput, error)
+}
+
+var _ LookupPolicyAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opLookupPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

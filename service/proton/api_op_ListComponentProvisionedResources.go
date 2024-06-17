@@ -122,6 +122,9 @@ func (c *Client) addOperationListComponentProvisionedResourcesMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListComponentProvisionedResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListComponentProvisionedResourcesMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListComponentProvisionedResourcesAPIClient is a client that implements the
-// ListComponentProvisionedResources operation.
-type ListComponentProvisionedResourcesAPIClient interface {
-	ListComponentProvisionedResources(context.Context, *ListComponentProvisionedResourcesInput, ...func(*Options)) (*ListComponentProvisionedResourcesOutput, error)
-}
-
-var _ ListComponentProvisionedResourcesAPIClient = (*Client)(nil)
 
 // ListComponentProvisionedResourcesPaginatorOptions is the paginator options for
 // ListComponentProvisionedResources
@@ -208,6 +203,9 @@ func (p *ListComponentProvisionedResourcesPaginator) NextPage(ctx context.Contex
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListComponentProvisionedResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListComponentProvisionedResourcesPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListComponentProvisionedResourcesAPIClient is a client that implements the
+// ListComponentProvisionedResources operation.
+type ListComponentProvisionedResourcesAPIClient interface {
+	ListComponentProvisionedResources(context.Context, *ListComponentProvisionedResourcesInput, ...func(*Options)) (*ListComponentProvisionedResourcesOutput, error)
+}
+
+var _ ListComponentProvisionedResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListComponentProvisionedResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

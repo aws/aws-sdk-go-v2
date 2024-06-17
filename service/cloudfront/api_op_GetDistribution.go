@@ -117,6 +117,9 @@ func (c *Client) addOperationGetDistributionMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationGetDistributionMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetDistributionAPIClient is a client that implements the GetDistribution
-// operation.
-type GetDistributionAPIClient interface {
-	GetDistribution(context.Context, *GetDistributionInput, ...func(*Options)) (*GetDistributionOutput, error)
-}
-
-var _ GetDistributionAPIClient = (*Client)(nil)
 
 // DistributionDeployedWaiterOptions are waiter options for
 // DistributionDeployedWaiter
@@ -266,7 +261,13 @@ func (w *DistributionDeployedWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.GetDistribution(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -323,6 +324,14 @@ func distributionDeployedStateRetryable(ctx context.Context, input *GetDistribut
 
 	return true, nil
 }
+
+// GetDistributionAPIClient is a client that implements the GetDistribution
+// operation.
+type GetDistributionAPIClient interface {
+	GetDistribution(context.Context, *GetDistributionInput, ...func(*Options)) (*GetDistributionOutput, error)
+}
+
+var _ GetDistributionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDistribution(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

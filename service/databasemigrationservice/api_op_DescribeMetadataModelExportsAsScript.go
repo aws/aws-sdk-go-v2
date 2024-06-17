@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeMetadataModelExportsAsScriptMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMetadataModelExportsAsScriptValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeMetadataModelExportsAsScriptMiddlewares(sta
 	}
 	return nil
 }
-
-// DescribeMetadataModelExportsAsScriptAPIClient is a client that implements the
-// DescribeMetadataModelExportsAsScript operation.
-type DescribeMetadataModelExportsAsScriptAPIClient interface {
-	DescribeMetadataModelExportsAsScript(context.Context, *DescribeMetadataModelExportsAsScriptInput, ...func(*Options)) (*DescribeMetadataModelExportsAsScriptOutput, error)
-}
-
-var _ DescribeMetadataModelExportsAsScriptAPIClient = (*Client)(nil)
 
 // DescribeMetadataModelExportsAsScriptPaginatorOptions is the paginator options
 // for DescribeMetadataModelExportsAsScript
@@ -235,6 +230,9 @@ func (p *DescribeMetadataModelExportsAsScriptPaginator) NextPage(ctx context.Con
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMetadataModelExportsAsScript(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *DescribeMetadataModelExportsAsScriptPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// DescribeMetadataModelExportsAsScriptAPIClient is a client that implements the
+// DescribeMetadataModelExportsAsScript operation.
+type DescribeMetadataModelExportsAsScriptAPIClient interface {
+	DescribeMetadataModelExportsAsScript(context.Context, *DescribeMetadataModelExportsAsScriptInput, ...func(*Options)) (*DescribeMetadataModelExportsAsScriptOutput, error)
+}
+
+var _ DescribeMetadataModelExportsAsScriptAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMetadataModelExportsAsScript(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

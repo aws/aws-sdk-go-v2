@@ -117,6 +117,9 @@ func (c *Client) addOperationListDbInstancesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDbInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListDbInstancesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListDbInstancesAPIClient is a client that implements the ListDbInstances
-// operation.
-type ListDbInstancesAPIClient interface {
-	ListDbInstances(context.Context, *ListDbInstancesInput, ...func(*Options)) (*ListDbInstancesOutput, error)
-}
-
-var _ ListDbInstancesAPIClient = (*Client)(nil)
 
 // ListDbInstancesPaginatorOptions is the paginator options for ListDbInstances
 type ListDbInstancesPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListDbInstancesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDbInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListDbInstancesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListDbInstancesAPIClient is a client that implements the ListDbInstances
+// operation.
+type ListDbInstancesAPIClient interface {
+	ListDbInstances(context.Context, *ListDbInstancesInput, ...func(*Options)) (*ListDbInstancesOutput, error)
+}
+
+var _ ListDbInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDbInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

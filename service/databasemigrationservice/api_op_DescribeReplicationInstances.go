@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeReplicationInstancesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,105 +157,6 @@ func (c *Client) addOperationDescribeReplicationInstancesMiddlewares(stack *midd
 		return err
 	}
 	return nil
-}
-
-// DescribeReplicationInstancesAPIClient is a client that implements the
-// DescribeReplicationInstances operation.
-type DescribeReplicationInstancesAPIClient interface {
-	DescribeReplicationInstances(context.Context, *DescribeReplicationInstancesInput, ...func(*Options)) (*DescribeReplicationInstancesOutput, error)
-}
-
-var _ DescribeReplicationInstancesAPIClient = (*Client)(nil)
-
-// DescribeReplicationInstancesPaginatorOptions is the paginator options for
-// DescribeReplicationInstances
-type DescribeReplicationInstancesPaginatorOptions struct {
-	//  The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeReplicationInstancesPaginator is a paginator for
-// DescribeReplicationInstances
-type DescribeReplicationInstancesPaginator struct {
-	options   DescribeReplicationInstancesPaginatorOptions
-	client    DescribeReplicationInstancesAPIClient
-	params    *DescribeReplicationInstancesInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeReplicationInstancesPaginator returns a new
-// DescribeReplicationInstancesPaginator
-func NewDescribeReplicationInstancesPaginator(client DescribeReplicationInstancesAPIClient, params *DescribeReplicationInstancesInput, optFns ...func(*DescribeReplicationInstancesPaginatorOptions)) *DescribeReplicationInstancesPaginator {
-	if params == nil {
-		params = &DescribeReplicationInstancesInput{}
-	}
-
-	options := DescribeReplicationInstancesPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeReplicationInstancesPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeReplicationInstancesPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeReplicationInstances page.
-func (p *DescribeReplicationInstancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationInstancesOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeReplicationInstances(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // ReplicationInstanceAvailableWaiterOptions are waiter options for
@@ -374,7 +278,13 @@ func (w *ReplicationInstanceAvailableWaiter) WaitForOutput(ctx context.Context, 
 		}
 
 		out, err := w.client.DescribeReplicationInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -662,7 +572,13 @@ func (w *ReplicationInstanceDeletedWaiter) WaitForOutput(ctx context.Context, pa
 		}
 
 		out, err := w.client.DescribeReplicationInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -733,6 +649,108 @@ func replicationInstanceDeletedStateRetryable(ctx context.Context, input *Descri
 
 	return true, nil
 }
+
+// DescribeReplicationInstancesPaginatorOptions is the paginator options for
+// DescribeReplicationInstances
+type DescribeReplicationInstancesPaginatorOptions struct {
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReplicationInstancesPaginator is a paginator for
+// DescribeReplicationInstances
+type DescribeReplicationInstancesPaginator struct {
+	options   DescribeReplicationInstancesPaginatorOptions
+	client    DescribeReplicationInstancesAPIClient
+	params    *DescribeReplicationInstancesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReplicationInstancesPaginator returns a new
+// DescribeReplicationInstancesPaginator
+func NewDescribeReplicationInstancesPaginator(client DescribeReplicationInstancesAPIClient, params *DescribeReplicationInstancesInput, optFns ...func(*DescribeReplicationInstancesPaginatorOptions)) *DescribeReplicationInstancesPaginator {
+	if params == nil {
+		params = &DescribeReplicationInstancesInput{}
+	}
+
+	options := DescribeReplicationInstancesPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeReplicationInstancesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReplicationInstancesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeReplicationInstances page.
+func (p *DescribeReplicationInstancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationInstancesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeReplicationInstances(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeReplicationInstancesAPIClient is a client that implements the
+// DescribeReplicationInstances operation.
+type DescribeReplicationInstancesAPIClient interface {
+	DescribeReplicationInstances(context.Context, *DescribeReplicationInstancesInput, ...func(*Options)) (*DescribeReplicationInstancesOutput, error)
+}
+
+var _ DescribeReplicationInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

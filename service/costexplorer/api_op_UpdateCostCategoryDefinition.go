@@ -137,6 +137,9 @@ func (c *Client) addOperationUpdateCostCategoryDefinitionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCostCategoryDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

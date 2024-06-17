@@ -115,6 +115,9 @@ func (c *Client) addOperationListImportFailuresMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListImportFailuresValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListImportFailuresMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListImportFailuresAPIClient is a client that implements the ListImportFailures
-// operation.
-type ListImportFailuresAPIClient interface {
-	ListImportFailures(context.Context, *ListImportFailuresInput, ...func(*Options)) (*ListImportFailuresOutput, error)
-}
-
-var _ ListImportFailuresAPIClient = (*Client)(nil)
 
 // ListImportFailuresPaginatorOptions is the paginator options for
 // ListImportFailures
@@ -211,6 +206,9 @@ func (p *ListImportFailuresPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImportFailures(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListImportFailuresPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListImportFailuresAPIClient is a client that implements the ListImportFailures
+// operation.
+type ListImportFailuresAPIClient interface {
+	ListImportFailures(context.Context, *ListImportFailuresInput, ...func(*Options)) (*ListImportFailuresOutput, error)
+}
+
+var _ ListImportFailuresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImportFailures(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -122,6 +122,9 @@ func (c *Client) addOperationUpdateSPICECapacityConfigurationMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSPICECapacityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

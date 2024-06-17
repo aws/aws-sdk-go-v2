@@ -109,6 +109,9 @@ func (c *Client) addOperationListDevelopmentSchemaArnsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevelopmentSchemaArns(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -129,14 +132,6 @@ func (c *Client) addOperationListDevelopmentSchemaArnsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListDevelopmentSchemaArnsAPIClient is a client that implements the
-// ListDevelopmentSchemaArns operation.
-type ListDevelopmentSchemaArnsAPIClient interface {
-	ListDevelopmentSchemaArns(context.Context, *ListDevelopmentSchemaArnsInput, ...func(*Options)) (*ListDevelopmentSchemaArnsOutput, error)
-}
-
-var _ ListDevelopmentSchemaArnsAPIClient = (*Client)(nil)
 
 // ListDevelopmentSchemaArnsPaginatorOptions is the paginator options for
 // ListDevelopmentSchemaArns
@@ -203,6 +198,9 @@ func (p *ListDevelopmentSchemaArnsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDevelopmentSchemaArns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListDevelopmentSchemaArnsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListDevelopmentSchemaArnsAPIClient is a client that implements the
+// ListDevelopmentSchemaArns operation.
+type ListDevelopmentSchemaArnsAPIClient interface {
+	ListDevelopmentSchemaArns(context.Context, *ListDevelopmentSchemaArnsInput, ...func(*Options)) (*ListDevelopmentSchemaArnsOutput, error)
+}
+
+var _ ListDevelopmentSchemaArnsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDevelopmentSchemaArns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

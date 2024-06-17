@@ -128,6 +128,9 @@ func (c *Client) addOperationListSourceRepositoryBranchesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSourceRepositoryBranchesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListSourceRepositoryBranchesMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListSourceRepositoryBranchesAPIClient is a client that implements the
-// ListSourceRepositoryBranches operation.
-type ListSourceRepositoryBranchesAPIClient interface {
-	ListSourceRepositoryBranches(context.Context, *ListSourceRepositoryBranchesInput, ...func(*Options)) (*ListSourceRepositoryBranchesOutput, error)
-}
-
-var _ ListSourceRepositoryBranchesAPIClient = (*Client)(nil)
 
 // ListSourceRepositoryBranchesPaginatorOptions is the paginator options for
 // ListSourceRepositoryBranches
@@ -228,6 +223,9 @@ func (p *ListSourceRepositoryBranchesPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSourceRepositoryBranches(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListSourceRepositoryBranchesPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListSourceRepositoryBranchesAPIClient is a client that implements the
+// ListSourceRepositoryBranches operation.
+type ListSourceRepositoryBranchesAPIClient interface {
+	ListSourceRepositoryBranches(context.Context, *ListSourceRepositoryBranchesInput, ...func(*Options)) (*ListSourceRepositoryBranchesOutput, error)
+}
+
+var _ ListSourceRepositoryBranchesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSourceRepositoryBranches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

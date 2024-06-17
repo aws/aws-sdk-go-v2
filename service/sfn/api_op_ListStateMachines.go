@@ -132,6 +132,9 @@ func (c *Client) addOperationListStateMachinesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStateMachines(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListStateMachinesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListStateMachinesAPIClient is a client that implements the ListStateMachines
-// operation.
-type ListStateMachinesAPIClient interface {
-	ListStateMachines(context.Context, *ListStateMachinesInput, ...func(*Options)) (*ListStateMachinesOutput, error)
-}
-
-var _ ListStateMachinesAPIClient = (*Client)(nil)
 
 // ListStateMachinesPaginatorOptions is the paginator options for ListStateMachines
 type ListStateMachinesPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *ListStateMachinesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStateMachines(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListStateMachinesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListStateMachinesAPIClient is a client that implements the ListStateMachines
+// operation.
+type ListStateMachinesAPIClient interface {
+	ListStateMachines(context.Context, *ListStateMachinesInput, ...func(*Options)) (*ListStateMachinesOutput, error)
+}
+
+var _ ListStateMachinesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStateMachines(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

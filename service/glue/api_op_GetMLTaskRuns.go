@@ -127,6 +127,9 @@ func (c *Client) addOperationGetMLTaskRunsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMLTaskRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,13 +153,6 @@ func (c *Client) addOperationGetMLTaskRunsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetMLTaskRunsAPIClient is a client that implements the GetMLTaskRuns operation.
-type GetMLTaskRunsAPIClient interface {
-	GetMLTaskRuns(context.Context, *GetMLTaskRunsInput, ...func(*Options)) (*GetMLTaskRunsOutput, error)
-}
-
-var _ GetMLTaskRunsAPIClient = (*Client)(nil)
 
 // GetMLTaskRunsPaginatorOptions is the paginator options for GetMLTaskRuns
 type GetMLTaskRunsPaginatorOptions struct {
@@ -221,6 +217,9 @@ func (p *GetMLTaskRunsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetMLTaskRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +238,13 @@ func (p *GetMLTaskRunsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetMLTaskRunsAPIClient is a client that implements the GetMLTaskRuns operation.
+type GetMLTaskRunsAPIClient interface {
+	GetMLTaskRuns(context.Context, *GetMLTaskRunsInput, ...func(*Options)) (*GetMLTaskRunsOutput, error)
+}
+
+var _ GetMLTaskRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetMLTaskRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

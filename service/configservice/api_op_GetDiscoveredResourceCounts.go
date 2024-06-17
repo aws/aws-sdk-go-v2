@@ -176,6 +176,9 @@ func (c *Client) addOperationGetDiscoveredResourceCountsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDiscoveredResourceCounts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -196,14 +199,6 @@ func (c *Client) addOperationGetDiscoveredResourceCountsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// GetDiscoveredResourceCountsAPIClient is a client that implements the
-// GetDiscoveredResourceCounts operation.
-type GetDiscoveredResourceCountsAPIClient interface {
-	GetDiscoveredResourceCounts(context.Context, *GetDiscoveredResourceCountsInput, ...func(*Options)) (*GetDiscoveredResourceCountsOutput, error)
-}
-
-var _ GetDiscoveredResourceCountsAPIClient = (*Client)(nil)
 
 // GetDiscoveredResourceCountsPaginatorOptions is the paginator options for
 // GetDiscoveredResourceCounts
@@ -269,6 +264,9 @@ func (p *GetDiscoveredResourceCountsPaginator) NextPage(ctx context.Context, opt
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDiscoveredResourceCounts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -287,6 +285,14 @@ func (p *GetDiscoveredResourceCountsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// GetDiscoveredResourceCountsAPIClient is a client that implements the
+// GetDiscoveredResourceCounts operation.
+type GetDiscoveredResourceCountsAPIClient interface {
+	GetDiscoveredResourceCounts(context.Context, *GetDiscoveredResourceCountsInput, ...func(*Options)) (*GetDiscoveredResourceCountsOutput, error)
+}
+
+var _ GetDiscoveredResourceCountsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDiscoveredResourceCounts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

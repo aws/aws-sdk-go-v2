@@ -112,6 +112,9 @@ func (c *Client) addOperationStartSavingsPlansPurchaseRecommendationGenerationMi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSavingsPlansPurchaseRecommendationGeneration(options.Region), middleware.Before); err != nil {
 		return err
 	}

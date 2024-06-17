@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteInlinePolicyFromPermissionSetMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInlinePolicyFromPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

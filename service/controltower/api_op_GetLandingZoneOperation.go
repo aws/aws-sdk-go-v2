@@ -109,6 +109,9 @@ func (c *Client) addOperationGetLandingZoneOperationMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLandingZoneOperationValidationMiddleware(stack); err != nil {
 		return err
 	}

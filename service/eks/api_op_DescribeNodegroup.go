@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeNodegroupMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeNodegroupValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeNodegroupMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeNodegroupAPIClient is a client that implements the DescribeNodegroup
-// operation.
-type DescribeNodegroupAPIClient interface {
-	DescribeNodegroup(context.Context, *DescribeNodegroupInput, ...func(*Options)) (*DescribeNodegroupOutput, error)
-}
-
-var _ DescribeNodegroupAPIClient = (*Client)(nil)
 
 // NodegroupActiveWaiterOptions are waiter options for NodegroupActiveWaiter
 type NodegroupActiveWaiterOptions struct {
@@ -263,7 +258,13 @@ func (w *NodegroupActiveWaiter) WaitForOutput(ctx context.Context, params *Descr
 		}
 
 		out, err := w.client.DescribeNodegroup(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -453,7 +454,13 @@ func (w *NodegroupDeletedWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeNodegroup(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -517,6 +524,14 @@ func nodegroupDeletedStateRetryable(ctx context.Context, input *DescribeNodegrou
 
 	return true, nil
 }
+
+// DescribeNodegroupAPIClient is a client that implements the DescribeNodegroup
+// operation.
+type DescribeNodegroupAPIClient interface {
+	DescribeNodegroup(context.Context, *DescribeNodegroupInput, ...func(*Options)) (*DescribeNodegroupOutput, error)
+}
+
+var _ DescribeNodegroupAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeNodegroup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -111,6 +111,9 @@ func (c *Client) addOperationDescribeControlPanelMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeControlPanelValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationDescribeControlPanelMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeControlPanelAPIClient is a client that implements the
-// DescribeControlPanel operation.
-type DescribeControlPanelAPIClient interface {
-	DescribeControlPanel(context.Context, *DescribeControlPanelInput, ...func(*Options)) (*DescribeControlPanelOutput, error)
-}
-
-var _ DescribeControlPanelAPIClient = (*Client)(nil)
 
 // ControlPanelCreatedWaiterOptions are waiter options for
 // ControlPanelCreatedWaiter
@@ -260,7 +255,13 @@ func (w *ControlPanelCreatedWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeControlPanel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -459,7 +460,13 @@ func (w *ControlPanelDeletedWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeControlPanel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -530,6 +537,14 @@ func controlPanelDeletedStateRetryable(ctx context.Context, input *DescribeContr
 
 	return true, nil
 }
+
+// DescribeControlPanelAPIClient is a client that implements the
+// DescribeControlPanel operation.
+type DescribeControlPanelAPIClient interface {
+	DescribeControlPanel(context.Context, *DescribeControlPanelInput, ...func(*Options)) (*DescribeControlPanelOutput, error)
+}
+
+var _ DescribeControlPanelAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeControlPanel(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

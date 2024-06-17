@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeTypeRegistrationMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTypeRegistrationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationDescribeTypeRegistrationMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeTypeRegistrationAPIClient is a client that implements the
-// DescribeTypeRegistration operation.
-type DescribeTypeRegistrationAPIClient interface {
-	DescribeTypeRegistration(context.Context, *DescribeTypeRegistrationInput, ...func(*Options)) (*DescribeTypeRegistrationOutput, error)
-}
-
-var _ DescribeTypeRegistrationAPIClient = (*Client)(nil)
 
 // TypeRegistrationCompleteWaiterOptions are waiter options for
 // TypeRegistrationCompleteWaiter
@@ -285,7 +280,13 @@ func (w *TypeRegistrationCompleteWaiter) WaitForOutput(ctx context.Context, para
 		}
 
 		out, err := w.client.DescribeTypeRegistration(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -359,6 +360,14 @@ func typeRegistrationCompleteStateRetryable(ctx context.Context, input *Describe
 
 	return true, nil
 }
+
+// DescribeTypeRegistrationAPIClient is a client that implements the
+// DescribeTypeRegistration operation.
+type DescribeTypeRegistrationAPIClient interface {
+	DescribeTypeRegistration(context.Context, *DescribeTypeRegistrationInput, ...func(*Options)) (*DescribeTypeRegistrationOutput, error)
+}
+
+var _ DescribeTypeRegistrationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTypeRegistration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

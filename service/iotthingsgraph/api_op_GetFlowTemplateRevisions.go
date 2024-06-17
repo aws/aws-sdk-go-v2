@@ -125,6 +125,9 @@ func (c *Client) addOperationGetFlowTemplateRevisionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFlowTemplateRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationGetFlowTemplateRevisionsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// GetFlowTemplateRevisionsAPIClient is a client that implements the
-// GetFlowTemplateRevisions operation.
-type GetFlowTemplateRevisionsAPIClient interface {
-	GetFlowTemplateRevisions(context.Context, *GetFlowTemplateRevisionsInput, ...func(*Options)) (*GetFlowTemplateRevisionsOutput, error)
-}
-
-var _ GetFlowTemplateRevisionsAPIClient = (*Client)(nil)
 
 // GetFlowTemplateRevisionsPaginatorOptions is the paginator options for
 // GetFlowTemplateRevisions
@@ -222,6 +217,9 @@ func (p *GetFlowTemplateRevisionsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetFlowTemplateRevisions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *GetFlowTemplateRevisionsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// GetFlowTemplateRevisionsAPIClient is a client that implements the
+// GetFlowTemplateRevisions operation.
+type GetFlowTemplateRevisionsAPIClient interface {
+	GetFlowTemplateRevisions(context.Context, *GetFlowTemplateRevisionsInput, ...func(*Options)) (*GetFlowTemplateRevisionsOutput, error)
+}
+
+var _ GetFlowTemplateRevisionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFlowTemplateRevisions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

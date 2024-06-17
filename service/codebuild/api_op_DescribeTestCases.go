@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeTestCasesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTestCasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationDescribeTestCasesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeTestCasesAPIClient is a client that implements the DescribeTestCases
-// operation.
-type DescribeTestCasesAPIClient interface {
-	DescribeTestCases(context.Context, *DescribeTestCasesInput, ...func(*Options)) (*DescribeTestCasesOutput, error)
-}
-
-var _ DescribeTestCasesAPIClient = (*Client)(nil)
 
 // DescribeTestCasesPaginatorOptions is the paginator options for DescribeTestCases
 type DescribeTestCasesPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *DescribeTestCasesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeTestCases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *DescribeTestCasesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// DescribeTestCasesAPIClient is a client that implements the DescribeTestCases
+// operation.
+type DescribeTestCasesAPIClient interface {
+	DescribeTestCases(context.Context, *DescribeTestCasesInput, ...func(*Options)) (*DescribeTestCasesOutput, error)
+}
+
+var _ DescribeTestCasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTestCases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

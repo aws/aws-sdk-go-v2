@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeDeliveryChannelsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDeliveryChannels(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationListMultiplexesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMultiplexes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListMultiplexesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListMultiplexesAPIClient is a client that implements the ListMultiplexes
-// operation.
-type ListMultiplexesAPIClient interface {
-	ListMultiplexes(context.Context, *ListMultiplexesInput, ...func(*Options)) (*ListMultiplexesOutput, error)
-}
-
-var _ ListMultiplexesAPIClient = (*Client)(nil)
 
 // ListMultiplexesPaginatorOptions is the paginator options for ListMultiplexes
 type ListMultiplexesPaginatorOptions struct {
@@ -204,6 +199,9 @@ func (p *ListMultiplexesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMultiplexes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListMultiplexesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListMultiplexesAPIClient is a client that implements the ListMultiplexes
+// operation.
+type ListMultiplexesAPIClient interface {
+	ListMultiplexes(context.Context, *ListMultiplexesInput, ...func(*Options)) (*ListMultiplexesOutput, error)
+}
+
+var _ ListMultiplexesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMultiplexes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -115,6 +115,9 @@ func (c *Client) addOperationListMediaAnalysisJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMediaAnalysisJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListMediaAnalysisJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListMediaAnalysisJobsAPIClient is a client that implements the
-// ListMediaAnalysisJobs operation.
-type ListMediaAnalysisJobsAPIClient interface {
-	ListMediaAnalysisJobs(context.Context, *ListMediaAnalysisJobsInput, ...func(*Options)) (*ListMediaAnalysisJobsOutput, error)
-}
-
-var _ ListMediaAnalysisJobsAPIClient = (*Client)(nil)
 
 // ListMediaAnalysisJobsPaginatorOptions is the paginator options for
 // ListMediaAnalysisJobs
@@ -210,6 +205,9 @@ func (p *ListMediaAnalysisJobsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMediaAnalysisJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListMediaAnalysisJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListMediaAnalysisJobsAPIClient is a client that implements the
+// ListMediaAnalysisJobs operation.
+type ListMediaAnalysisJobsAPIClient interface {
+	ListMediaAnalysisJobs(context.Context, *ListMediaAnalysisJobsInput, ...func(*Options)) (*ListMediaAnalysisJobsOutput, error)
+}
+
+var _ ListMediaAnalysisJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMediaAnalysisJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

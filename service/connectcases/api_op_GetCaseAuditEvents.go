@@ -125,6 +125,9 @@ func (c *Client) addOperationGetCaseAuditEventsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCaseAuditEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationGetCaseAuditEventsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetCaseAuditEventsAPIClient is a client that implements the GetCaseAuditEvents
-// operation.
-type GetCaseAuditEventsAPIClient interface {
-	GetCaseAuditEvents(context.Context, *GetCaseAuditEventsInput, ...func(*Options)) (*GetCaseAuditEventsOutput, error)
-}
-
-var _ GetCaseAuditEventsAPIClient = (*Client)(nil)
 
 // GetCaseAuditEventsPaginatorOptions is the paginator options for
 // GetCaseAuditEvents
@@ -222,6 +217,9 @@ func (p *GetCaseAuditEventsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCaseAuditEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *GetCaseAuditEventsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetCaseAuditEventsAPIClient is a client that implements the GetCaseAuditEvents
+// operation.
+type GetCaseAuditEventsAPIClient interface {
+	GetCaseAuditEvents(context.Context, *GetCaseAuditEventsInput, ...func(*Options)) (*GetCaseAuditEventsOutput, error)
+}
+
+var _ GetCaseAuditEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCaseAuditEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

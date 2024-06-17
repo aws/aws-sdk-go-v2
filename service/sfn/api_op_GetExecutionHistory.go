@@ -147,6 +147,9 @@ func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetExecutionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetExecutionHistoryAPIClient is a client that implements the
-// GetExecutionHistory operation.
-type GetExecutionHistoryAPIClient interface {
-	GetExecutionHistory(context.Context, *GetExecutionHistoryInput, ...func(*Options)) (*GetExecutionHistoryOutput, error)
-}
-
-var _ GetExecutionHistoryAPIClient = (*Client)(nil)
 
 // GetExecutionHistoryPaginatorOptions is the paginator options for
 // GetExecutionHistory
@@ -244,6 +239,9 @@ func (p *GetExecutionHistoryPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetExecutionHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *GetExecutionHistoryPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetExecutionHistoryAPIClient is a client that implements the
+// GetExecutionHistory operation.
+type GetExecutionHistoryAPIClient interface {
+	GetExecutionHistory(context.Context, *GetExecutionHistoryInput, ...func(*Options)) (*GetExecutionHistoryOutput, error)
+}
+
+var _ GetExecutionHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetExecutionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

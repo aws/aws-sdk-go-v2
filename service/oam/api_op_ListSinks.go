@@ -114,6 +114,9 @@ func (c *Client) addOperationListSinksMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSinks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,13 +137,6 @@ func (c *Client) addOperationListSinksMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListSinksAPIClient is a client that implements the ListSinks operation.
-type ListSinksAPIClient interface {
-	ListSinks(context.Context, *ListSinksInput, ...func(*Options)) (*ListSinksOutput, error)
-}
-
-var _ ListSinksAPIClient = (*Client)(nil)
 
 // ListSinksPaginatorOptions is the paginator options for ListSinks
 type ListSinksPaginatorOptions struct {
@@ -205,6 +201,9 @@ func (p *ListSinksPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSinks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +222,13 @@ func (p *ListSinksPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListSinksAPIClient is a client that implements the ListSinks operation.
+type ListSinksAPIClient interface {
+	ListSinks(context.Context, *ListSinksInput, ...func(*Options)) (*ListSinksOutput, error)
+}
+
+var _ ListSinksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSinks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

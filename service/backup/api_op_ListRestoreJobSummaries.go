@@ -175,6 +175,9 @@ func (c *Client) addOperationListRestoreJobSummariesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRestoreJobSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -195,14 +198,6 @@ func (c *Client) addOperationListRestoreJobSummariesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListRestoreJobSummariesAPIClient is a client that implements the
-// ListRestoreJobSummaries operation.
-type ListRestoreJobSummariesAPIClient interface {
-	ListRestoreJobSummaries(context.Context, *ListRestoreJobSummariesInput, ...func(*Options)) (*ListRestoreJobSummariesOutput, error)
-}
-
-var _ ListRestoreJobSummariesAPIClient = (*Client)(nil)
 
 // ListRestoreJobSummariesPaginatorOptions is the paginator options for
 // ListRestoreJobSummaries
@@ -271,6 +266,9 @@ func (p *ListRestoreJobSummariesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRestoreJobSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -289,6 +287,14 @@ func (p *ListRestoreJobSummariesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListRestoreJobSummariesAPIClient is a client that implements the
+// ListRestoreJobSummaries operation.
+type ListRestoreJobSummariesAPIClient interface {
+	ListRestoreJobSummaries(context.Context, *ListRestoreJobSummariesInput, ...func(*Options)) (*ListRestoreJobSummariesOutput, error)
+}
+
+var _ ListRestoreJobSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRestoreJobSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

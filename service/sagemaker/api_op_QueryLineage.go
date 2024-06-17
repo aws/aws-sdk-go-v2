@@ -154,6 +154,9 @@ func (c *Client) addOperationQueryLineageMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLineage(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -174,13 +177,6 @@ func (c *Client) addOperationQueryLineageMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// QueryLineageAPIClient is a client that implements the QueryLineage operation.
-type QueryLineageAPIClient interface {
-	QueryLineage(context.Context, *QueryLineageInput, ...func(*Options)) (*QueryLineageOutput, error)
-}
-
-var _ QueryLineageAPIClient = (*Client)(nil)
 
 // QueryLineagePaginatorOptions is the paginator options for QueryLineage
 type QueryLineagePaginatorOptions struct {
@@ -246,6 +242,9 @@ func (p *QueryLineagePaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.QueryLineage(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +263,13 @@ func (p *QueryLineagePaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// QueryLineageAPIClient is a client that implements the QueryLineage operation.
+type QueryLineageAPIClient interface {
+	QueryLineage(context.Context, *QueryLineageInput, ...func(*Options)) (*QueryLineageOutput, error)
+}
+
+var _ QueryLineageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opQueryLineage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

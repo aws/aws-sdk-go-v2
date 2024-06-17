@@ -161,6 +161,9 @@ func (c *Client) addOperationGetResourceShareAssociationsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResourceShareAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,14 +187,6 @@ func (c *Client) addOperationGetResourceShareAssociationsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// GetResourceShareAssociationsAPIClient is a client that implements the
-// GetResourceShareAssociations operation.
-type GetResourceShareAssociationsAPIClient interface {
-	GetResourceShareAssociations(context.Context, *GetResourceShareAssociationsInput, ...func(*Options)) (*GetResourceShareAssociationsOutput, error)
-}
-
-var _ GetResourceShareAssociationsAPIClient = (*Client)(nil)
 
 // GetResourceShareAssociationsPaginatorOptions is the paginator options for
 // GetResourceShareAssociations
@@ -267,6 +262,9 @@ func (p *GetResourceShareAssociationsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetResourceShareAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -285,6 +283,14 @@ func (p *GetResourceShareAssociationsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// GetResourceShareAssociationsAPIClient is a client that implements the
+// GetResourceShareAssociations operation.
+type GetResourceShareAssociationsAPIClient interface {
+	GetResourceShareAssociations(context.Context, *GetResourceShareAssociationsInput, ...func(*Options)) (*GetResourceShareAssociationsOutput, error)
+}
+
+var _ GetResourceShareAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetResourceShareAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -175,6 +175,9 @@ func (c *Client) addOperationListLensReviewImprovementsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLensReviewImprovementsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,14 +201,6 @@ func (c *Client) addOperationListLensReviewImprovementsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListLensReviewImprovementsAPIClient is a client that implements the
-// ListLensReviewImprovements operation.
-type ListLensReviewImprovementsAPIClient interface {
-	ListLensReviewImprovements(context.Context, *ListLensReviewImprovementsInput, ...func(*Options)) (*ListLensReviewImprovementsOutput, error)
-}
-
-var _ ListLensReviewImprovementsAPIClient = (*Client)(nil)
 
 // ListLensReviewImprovementsPaginatorOptions is the paginator options for
 // ListLensReviewImprovements
@@ -273,6 +268,9 @@ func (p *ListLensReviewImprovementsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLensReviewImprovements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -291,6 +289,14 @@ func (p *ListLensReviewImprovementsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListLensReviewImprovementsAPIClient is a client that implements the
+// ListLensReviewImprovements operation.
+type ListLensReviewImprovementsAPIClient interface {
+	ListLensReviewImprovements(context.Context, *ListLensReviewImprovementsInput, ...func(*Options)) (*ListLensReviewImprovementsOutput, error)
+}
+
+var _ ListLensReviewImprovementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLensReviewImprovements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

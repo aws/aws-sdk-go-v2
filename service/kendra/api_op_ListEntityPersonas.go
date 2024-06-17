@@ -124,6 +124,9 @@ func (c *Client) addOperationListEntityPersonasMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEntityPersonasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListEntityPersonasMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListEntityPersonasAPIClient is a client that implements the ListEntityPersonas
-// operation.
-type ListEntityPersonasAPIClient interface {
-	ListEntityPersonas(context.Context, *ListEntityPersonasInput, ...func(*Options)) (*ListEntityPersonasOutput, error)
-}
-
-var _ ListEntityPersonasAPIClient = (*Client)(nil)
 
 // ListEntityPersonasPaginatorOptions is the paginator options for
 // ListEntityPersonas
@@ -220,6 +215,9 @@ func (p *ListEntityPersonasPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEntityPersonas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListEntityPersonasPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListEntityPersonasAPIClient is a client that implements the ListEntityPersonas
+// operation.
+type ListEntityPersonasAPIClient interface {
+	ListEntityPersonas(context.Context, *ListEntityPersonasInput, ...func(*Options)) (*ListEntityPersonasOutput, error)
+}
+
+var _ ListEntityPersonasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEntityPersonas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

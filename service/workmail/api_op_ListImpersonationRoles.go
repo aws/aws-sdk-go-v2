@@ -117,6 +117,9 @@ func (c *Client) addOperationListImpersonationRolesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListImpersonationRolesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListImpersonationRolesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListImpersonationRolesAPIClient is a client that implements the
-// ListImpersonationRoles operation.
-type ListImpersonationRolesAPIClient interface {
-	ListImpersonationRoles(context.Context, *ListImpersonationRolesInput, ...func(*Options)) (*ListImpersonationRolesOutput, error)
-}
-
-var _ ListImpersonationRolesAPIClient = (*Client)(nil)
 
 // ListImpersonationRolesPaginatorOptions is the paginator options for
 // ListImpersonationRoles
@@ -213,6 +208,9 @@ func (p *ListImpersonationRolesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImpersonationRoles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListImpersonationRolesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListImpersonationRolesAPIClient is a client that implements the
+// ListImpersonationRoles operation.
+type ListImpersonationRolesAPIClient interface {
+	ListImpersonationRoles(context.Context, *ListImpersonationRolesInput, ...func(*Options)) (*ListImpersonationRolesOutput, error)
+}
+
+var _ ListImpersonationRolesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImpersonationRoles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

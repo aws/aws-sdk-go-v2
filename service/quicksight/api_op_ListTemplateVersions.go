@@ -128,6 +128,9 @@ func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTemplateVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListTemplateVersionsAPIClient is a client that implements the
-// ListTemplateVersions operation.
-type ListTemplateVersionsAPIClient interface {
-	ListTemplateVersions(context.Context, *ListTemplateVersionsInput, ...func(*Options)) (*ListTemplateVersionsOutput, error)
-}
-
-var _ ListTemplateVersionsAPIClient = (*Client)(nil)
 
 // ListTemplateVersionsPaginatorOptions is the paginator options for
 // ListTemplateVersions
@@ -224,6 +219,9 @@ func (p *ListTemplateVersionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTemplateVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListTemplateVersionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListTemplateVersionsAPIClient is a client that implements the
+// ListTemplateVersions operation.
+type ListTemplateVersionsAPIClient interface {
+	ListTemplateVersions(context.Context, *ListTemplateVersionsInput, ...func(*Options)) (*ListTemplateVersionsOutput, error)
+}
+
+var _ ListTemplateVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTemplateVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationListFHIRDatastoresMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFHIRDatastores(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListFHIRDatastoresMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListFHIRDatastoresAPIClient is a client that implements the ListFHIRDatastores
-// operation.
-type ListFHIRDatastoresAPIClient interface {
-	ListFHIRDatastores(context.Context, *ListFHIRDatastoresInput, ...func(*Options)) (*ListFHIRDatastoresOutput, error)
-}
-
-var _ ListFHIRDatastoresAPIClient = (*Client)(nil)
 
 // ListFHIRDatastoresPaginatorOptions is the paginator options for
 // ListFHIRDatastores
@@ -211,6 +206,9 @@ func (p *ListFHIRDatastoresPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFHIRDatastores(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListFHIRDatastoresPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListFHIRDatastoresAPIClient is a client that implements the ListFHIRDatastores
+// operation.
+type ListFHIRDatastoresAPIClient interface {
+	ListFHIRDatastores(context.Context, *ListFHIRDatastoresInput, ...func(*Options)) (*ListFHIRDatastoresOutput, error)
+}
+
+var _ ListFHIRDatastoresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFHIRDatastores(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

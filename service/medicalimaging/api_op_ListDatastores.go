@@ -113,6 +113,9 @@ func (c *Client) addOperationListDatastoresMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatastores(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListDatastoresMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListDatastoresAPIClient is a client that implements the ListDatastores
-// operation.
-type ListDatastoresAPIClient interface {
-	ListDatastores(context.Context, *ListDatastoresInput, ...func(*Options)) (*ListDatastoresOutput, error)
-}
-
-var _ ListDatastoresAPIClient = (*Client)(nil)
 
 // ListDatastoresPaginatorOptions is the paginator options for ListDatastores
 type ListDatastoresPaginatorOptions struct {
@@ -205,6 +200,9 @@ func (p *ListDatastoresPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDatastores(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListDatastoresPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListDatastoresAPIClient is a client that implements the ListDatastores
+// operation.
+type ListDatastoresAPIClient interface {
+	ListDatastores(context.Context, *ListDatastoresInput, ...func(*Options)) (*ListDatastoresOutput, error)
+}
+
+var _ ListDatastoresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDatastores(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

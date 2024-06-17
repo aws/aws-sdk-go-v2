@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteGcmChannelMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteGcmChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

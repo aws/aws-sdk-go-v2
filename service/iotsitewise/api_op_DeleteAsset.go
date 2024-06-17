@@ -125,6 +125,9 @@ func (c *Client) addOperationDeleteAssetMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAssetMiddleware(stack); err != nil {
 		return err
 	}

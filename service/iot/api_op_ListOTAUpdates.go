@@ -117,6 +117,9 @@ func (c *Client) addOperationListOTAUpdatesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOTAUpdates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListOTAUpdatesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListOTAUpdatesAPIClient is a client that implements the ListOTAUpdates
-// operation.
-type ListOTAUpdatesAPIClient interface {
-	ListOTAUpdates(context.Context, *ListOTAUpdatesInput, ...func(*Options)) (*ListOTAUpdatesOutput, error)
-}
-
-var _ ListOTAUpdatesAPIClient = (*Client)(nil)
 
 // ListOTAUpdatesPaginatorOptions is the paginator options for ListOTAUpdates
 type ListOTAUpdatesPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListOTAUpdatesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOTAUpdates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListOTAUpdatesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListOTAUpdatesAPIClient is a client that implements the ListOTAUpdates
+// operation.
+type ListOTAUpdatesAPIClient interface {
+	ListOTAUpdates(context.Context, *ListOTAUpdatesInput, ...func(*Options)) (*ListOTAUpdatesOutput, error)
+}
+
+var _ ListOTAUpdatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOTAUpdates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

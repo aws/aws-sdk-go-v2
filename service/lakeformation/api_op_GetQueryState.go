@@ -125,6 +125,9 @@ func (c *Client) addOperationGetQueryStateMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetQueryStateMiddleware(stack); err != nil {
 		return err
 	}

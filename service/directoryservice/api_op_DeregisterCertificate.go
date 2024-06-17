@@ -107,6 +107,9 @@ func (c *Client) addOperationDeregisterCertificateMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

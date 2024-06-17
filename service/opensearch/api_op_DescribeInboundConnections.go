@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeInboundConnectionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInboundConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeInboundConnectionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeInboundConnectionsAPIClient is a client that implements the
-// DescribeInboundConnections operation.
-type DescribeInboundConnectionsAPIClient interface {
-	DescribeInboundConnections(context.Context, *DescribeInboundConnectionsInput, ...func(*Options)) (*DescribeInboundConnectionsOutput, error)
-}
-
-var _ DescribeInboundConnectionsAPIClient = (*Client)(nil)
 
 // DescribeInboundConnectionsPaginatorOptions is the paginator options for
 // DescribeInboundConnections
@@ -216,6 +211,9 @@ func (p *DescribeInboundConnectionsPaginator) NextPage(ctx context.Context, optF
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeInboundConnections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *DescribeInboundConnectionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeInboundConnectionsAPIClient is a client that implements the
+// DescribeInboundConnections operation.
+type DescribeInboundConnectionsAPIClient interface {
+	DescribeInboundConnections(context.Context, *DescribeInboundConnectionsInput, ...func(*Options)) (*DescribeInboundConnectionsOutput, error)
+}
+
+var _ DescribeInboundConnectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInboundConnections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

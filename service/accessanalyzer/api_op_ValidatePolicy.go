@@ -151,6 +151,9 @@ func (c *Client) addOperationValidatePolicyMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpValidatePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -174,14 +177,6 @@ func (c *Client) addOperationValidatePolicyMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ValidatePolicyAPIClient is a client that implements the ValidatePolicy
-// operation.
-type ValidatePolicyAPIClient interface {
-	ValidatePolicy(context.Context, *ValidatePolicyInput, ...func(*Options)) (*ValidatePolicyOutput, error)
-}
-
-var _ ValidatePolicyAPIClient = (*Client)(nil)
 
 // ValidatePolicyPaginatorOptions is the paginator options for ValidatePolicy
 type ValidatePolicyPaginatorOptions struct {
@@ -246,6 +241,9 @@ func (p *ValidatePolicyPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ValidatePolicy(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +262,14 @@ func (p *ValidatePolicyPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ValidatePolicyAPIClient is a client that implements the ValidatePolicy
+// operation.
+type ValidatePolicyAPIClient interface {
+	ValidatePolicy(context.Context, *ValidatePolicyInput, ...func(*Options)) (*ValidatePolicyOutput, error)
+}
+
+var _ ValidatePolicyAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opValidatePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

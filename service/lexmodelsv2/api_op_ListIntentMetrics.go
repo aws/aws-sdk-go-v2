@@ -195,6 +195,9 @@ func (c *Client) addOperationListIntentMetricsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIntentMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -218,14 +221,6 @@ func (c *Client) addOperationListIntentMetricsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListIntentMetricsAPIClient is a client that implements the ListIntentMetrics
-// operation.
-type ListIntentMetricsAPIClient interface {
-	ListIntentMetrics(context.Context, *ListIntentMetricsInput, ...func(*Options)) (*ListIntentMetricsOutput, error)
-}
-
-var _ ListIntentMetricsAPIClient = (*Client)(nil)
 
 // ListIntentMetricsPaginatorOptions is the paginator options for ListIntentMetrics
 type ListIntentMetricsPaginatorOptions struct {
@@ -292,6 +287,9 @@ func (p *ListIntentMetricsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIntentMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -310,6 +308,14 @@ func (p *ListIntentMetricsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListIntentMetricsAPIClient is a client that implements the ListIntentMetrics
+// operation.
+type ListIntentMetricsAPIClient interface {
+	ListIntentMetrics(context.Context, *ListIntentMetricsInput, ...func(*Options)) (*ListIntentMetricsOutput, error)
+}
+
+var _ ListIntentMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIntentMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

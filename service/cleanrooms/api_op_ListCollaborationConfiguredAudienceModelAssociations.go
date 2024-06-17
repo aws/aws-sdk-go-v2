@@ -121,6 +121,9 @@ func (c *Client) addOperationListCollaborationConfiguredAudienceModelAssociation
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCollaborationConfiguredAudienceModelAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListCollaborationConfiguredAudienceModelAssociation
 	}
 	return nil
 }
-
-// ListCollaborationConfiguredAudienceModelAssociationsAPIClient is a client that
-// implements the ListCollaborationConfiguredAudienceModelAssociations operation.
-type ListCollaborationConfiguredAudienceModelAssociationsAPIClient interface {
-	ListCollaborationConfiguredAudienceModelAssociations(context.Context, *ListCollaborationConfiguredAudienceModelAssociationsInput, ...func(*Options)) (*ListCollaborationConfiguredAudienceModelAssociationsOutput, error)
-}
-
-var _ ListCollaborationConfiguredAudienceModelAssociationsAPIClient = (*Client)(nil)
 
 // ListCollaborationConfiguredAudienceModelAssociationsPaginatorOptions is the
 // paginator options for ListCollaborationConfiguredAudienceModelAssociations
@@ -220,6 +215,9 @@ func (p *ListCollaborationConfiguredAudienceModelAssociationsPaginator) NextPage
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCollaborationConfiguredAudienceModelAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListCollaborationConfiguredAudienceModelAssociationsPaginator) NextPage
 
 	return result, nil
 }
+
+// ListCollaborationConfiguredAudienceModelAssociationsAPIClient is a client that
+// implements the ListCollaborationConfiguredAudienceModelAssociations operation.
+type ListCollaborationConfiguredAudienceModelAssociationsAPIClient interface {
+	ListCollaborationConfiguredAudienceModelAssociations(context.Context, *ListCollaborationConfiguredAudienceModelAssociationsInput, ...func(*Options)) (*ListCollaborationConfiguredAudienceModelAssociationsOutput, error)
+}
+
+var _ ListCollaborationConfiguredAudienceModelAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCollaborationConfiguredAudienceModelAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

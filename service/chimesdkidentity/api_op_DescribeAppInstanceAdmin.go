@@ -112,6 +112,9 @@ func (c *Client) addOperationDescribeAppInstanceAdminMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAppInstanceAdminValidationMiddleware(stack); err != nil {
 		return err
 	}

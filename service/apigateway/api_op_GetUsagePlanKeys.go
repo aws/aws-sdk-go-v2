@@ -125,6 +125,9 @@ func (c *Client) addOperationGetUsagePlanKeysMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetUsagePlanKeysValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationGetUsagePlanKeysMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetUsagePlanKeysAPIClient is a client that implements the GetUsagePlanKeys
-// operation.
-type GetUsagePlanKeysAPIClient interface {
-	GetUsagePlanKeys(context.Context, *GetUsagePlanKeysInput, ...func(*Options)) (*GetUsagePlanKeysOutput, error)
-}
-
-var _ GetUsagePlanKeysAPIClient = (*Client)(nil)
 
 // GetUsagePlanKeysPaginatorOptions is the paginator options for GetUsagePlanKeys
 type GetUsagePlanKeysPaginatorOptions struct {
@@ -224,6 +219,9 @@ func (p *GetUsagePlanKeysPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetUsagePlanKeys(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *GetUsagePlanKeysPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetUsagePlanKeysAPIClient is a client that implements the GetUsagePlanKeys
+// operation.
+type GetUsagePlanKeysAPIClient interface {
+	GetUsagePlanKeys(context.Context, *GetUsagePlanKeysInput, ...func(*Options)) (*GetUsagePlanKeysOutput, error)
+}
+
+var _ GetUsagePlanKeysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetUsagePlanKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

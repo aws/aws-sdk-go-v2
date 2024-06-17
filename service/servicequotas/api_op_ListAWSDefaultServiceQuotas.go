@@ -132,6 +132,9 @@ func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAWSDefaultServiceQuotasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListAWSDefaultServiceQuotasAPIClient is a client that implements the
-// ListAWSDefaultServiceQuotas operation.
-type ListAWSDefaultServiceQuotasAPIClient interface {
-	ListAWSDefaultServiceQuotas(context.Context, *ListAWSDefaultServiceQuotasInput, ...func(*Options)) (*ListAWSDefaultServiceQuotasOutput, error)
-}
-
-var _ ListAWSDefaultServiceQuotasAPIClient = (*Client)(nil)
 
 // ListAWSDefaultServiceQuotasPaginatorOptions is the paginator options for
 // ListAWSDefaultServiceQuotas
@@ -239,6 +234,9 @@ func (p *ListAWSDefaultServiceQuotasPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAWSDefaultServiceQuotas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *ListAWSDefaultServiceQuotasPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListAWSDefaultServiceQuotasAPIClient is a client that implements the
+// ListAWSDefaultServiceQuotas operation.
+type ListAWSDefaultServiceQuotasAPIClient interface {
+	ListAWSDefaultServiceQuotas(context.Context, *ListAWSDefaultServiceQuotasInput, ...func(*Options)) (*ListAWSDefaultServiceQuotasOutput, error)
+}
+
+var _ ListAWSDefaultServiceQuotasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAWSDefaultServiceQuotas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

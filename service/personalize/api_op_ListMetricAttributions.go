@@ -115,6 +115,9 @@ func (c *Client) addOperationListMetricAttributionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMetricAttributions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListMetricAttributionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListMetricAttributionsAPIClient is a client that implements the
-// ListMetricAttributions operation.
-type ListMetricAttributionsAPIClient interface {
-	ListMetricAttributions(context.Context, *ListMetricAttributionsInput, ...func(*Options)) (*ListMetricAttributionsOutput, error)
-}
-
-var _ ListMetricAttributionsAPIClient = (*Client)(nil)
 
 // ListMetricAttributionsPaginatorOptions is the paginator options for
 // ListMetricAttributions
@@ -208,6 +203,9 @@ func (p *ListMetricAttributionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMetricAttributions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListMetricAttributionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListMetricAttributionsAPIClient is a client that implements the
+// ListMetricAttributions operation.
+type ListMetricAttributionsAPIClient interface {
+	ListMetricAttributions(context.Context, *ListMetricAttributionsInput, ...func(*Options)) (*ListMetricAttributionsOutput, error)
+}
+
+var _ ListMetricAttributionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMetricAttributions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

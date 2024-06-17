@@ -127,6 +127,9 @@ func (c *Client) addOperationListCertificatesByCAMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCertificatesByCAValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListCertificatesByCAMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListCertificatesByCAAPIClient is a client that implements the
-// ListCertificatesByCA operation.
-type ListCertificatesByCAAPIClient interface {
-	ListCertificatesByCA(context.Context, *ListCertificatesByCAInput, ...func(*Options)) (*ListCertificatesByCAOutput, error)
-}
-
-var _ ListCertificatesByCAAPIClient = (*Client)(nil)
 
 // ListCertificatesByCAPaginatorOptions is the paginator options for
 // ListCertificatesByCA
@@ -223,6 +218,9 @@ func (p *ListCertificatesByCAPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCertificatesByCA(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListCertificatesByCAPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListCertificatesByCAAPIClient is a client that implements the
+// ListCertificatesByCA operation.
+type ListCertificatesByCAAPIClient interface {
+	ListCertificatesByCA(context.Context, *ListCertificatesByCAInput, ...func(*Options)) (*ListCertificatesByCAOutput, error)
+}
+
+var _ ListCertificatesByCAAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCertificatesByCA(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

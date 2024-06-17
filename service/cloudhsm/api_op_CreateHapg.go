@@ -122,6 +122,9 @@ func (c *Client) addOperationCreateHapgMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateHapgValidationMiddleware(stack); err != nil {
 		return err
 	}

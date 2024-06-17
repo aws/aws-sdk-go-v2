@@ -127,6 +127,9 @@ func (c *Client) addOperationListControlDomainInsightsByAssessmentMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListControlDomainInsightsByAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListControlDomainInsightsByAssessmentMiddlewares(st
 	}
 	return nil
 }
-
-// ListControlDomainInsightsByAssessmentAPIClient is a client that implements the
-// ListControlDomainInsightsByAssessment operation.
-type ListControlDomainInsightsByAssessmentAPIClient interface {
-	ListControlDomainInsightsByAssessment(context.Context, *ListControlDomainInsightsByAssessmentInput, ...func(*Options)) (*ListControlDomainInsightsByAssessmentOutput, error)
-}
-
-var _ ListControlDomainInsightsByAssessmentAPIClient = (*Client)(nil)
 
 // ListControlDomainInsightsByAssessmentPaginatorOptions is the paginator options
 // for ListControlDomainInsightsByAssessment
@@ -225,6 +220,9 @@ func (p *ListControlDomainInsightsByAssessmentPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListControlDomainInsightsByAssessment(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListControlDomainInsightsByAssessmentPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListControlDomainInsightsByAssessmentAPIClient is a client that implements the
+// ListControlDomainInsightsByAssessment operation.
+type ListControlDomainInsightsByAssessmentAPIClient interface {
+	ListControlDomainInsightsByAssessment(context.Context, *ListControlDomainInsightsByAssessmentInput, ...func(*Options)) (*ListControlDomainInsightsByAssessmentOutput, error)
+}
+
+var _ ListControlDomainInsightsByAssessmentAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListControlDomainInsightsByAssessment(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

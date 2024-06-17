@@ -122,6 +122,9 @@ func (c *Client) addOperationBatchGetApplicationRevisionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetApplicationRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}

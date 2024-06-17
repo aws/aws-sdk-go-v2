@@ -131,6 +131,9 @@ func (c *Client) addOperationListParticipantEventsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListParticipantEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListParticipantEventsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListParticipantEventsAPIClient is a client that implements the
-// ListParticipantEvents operation.
-type ListParticipantEventsAPIClient interface {
-	ListParticipantEvents(context.Context, *ListParticipantEventsInput, ...func(*Options)) (*ListParticipantEventsOutput, error)
-}
-
-var _ ListParticipantEventsAPIClient = (*Client)(nil)
 
 // ListParticipantEventsPaginatorOptions is the paginator options for
 // ListParticipantEvents
@@ -227,6 +222,9 @@ func (p *ListParticipantEventsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListParticipantEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListParticipantEventsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListParticipantEventsAPIClient is a client that implements the
+// ListParticipantEvents operation.
+type ListParticipantEventsAPIClient interface {
+	ListParticipantEvents(context.Context, *ListParticipantEventsInput, ...func(*Options)) (*ListParticipantEventsOutput, error)
+}
+
+var _ ListParticipantEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListParticipantEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

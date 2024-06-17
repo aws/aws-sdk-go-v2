@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// DescribeClustersAPIClient is a client that implements the DescribeClusters
-// operation.
-type DescribeClustersAPIClient interface {
-	DescribeClusters(context.Context, *DescribeClustersInput, ...func(*Options)) (*DescribeClustersOutput, error)
-}
-
-var _ DescribeClustersAPIClient = (*Client)(nil)
 
 // DescribeClustersPaginatorOptions is the paginator options for DescribeClusters
 type DescribeClustersPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *DescribeClustersPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeClusters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeClustersPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// DescribeClustersAPIClient is a client that implements the DescribeClusters
+// operation.
+type DescribeClustersAPIClient interface {
+	DescribeClusters(context.Context, *DescribeClustersInput, ...func(*Options)) (*DescribeClustersOutput, error)
+}
+
+var _ DescribeClustersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeClusters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

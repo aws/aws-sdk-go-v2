@@ -159,6 +159,9 @@ func (c *Client) addOperationListInferenceComponentsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInferenceComponents(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -179,14 +182,6 @@ func (c *Client) addOperationListInferenceComponentsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListInferenceComponentsAPIClient is a client that implements the
-// ListInferenceComponents operation.
-type ListInferenceComponentsAPIClient interface {
-	ListInferenceComponents(context.Context, *ListInferenceComponentsInput, ...func(*Options)) (*ListInferenceComponentsOutput, error)
-}
-
-var _ ListInferenceComponentsAPIClient = (*Client)(nil)
 
 // ListInferenceComponentsPaginatorOptions is the paginator options for
 // ListInferenceComponents
@@ -254,6 +249,9 @@ func (p *ListInferenceComponentsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInferenceComponents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +270,14 @@ func (p *ListInferenceComponentsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListInferenceComponentsAPIClient is a client that implements the
+// ListInferenceComponents operation.
+type ListInferenceComponentsAPIClient interface {
+	ListInferenceComponents(context.Context, *ListInferenceComponentsInput, ...func(*Options)) (*ListInferenceComponentsOutput, error)
+}
+
+var _ ListInferenceComponentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInferenceComponents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -116,6 +116,9 @@ func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,13 +139,6 @@ func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListTemplatesAPIClient is a client that implements the ListTemplates operation.
-type ListTemplatesAPIClient interface {
-	ListTemplates(context.Context, *ListTemplatesInput, ...func(*Options)) (*ListTemplatesOutput, error)
-}
-
-var _ ListTemplatesAPIClient = (*Client)(nil)
 
 // ListTemplatesPaginatorOptions is the paginator options for ListTemplates
 type ListTemplatesPaginatorOptions struct {
@@ -203,6 +199,9 @@ func (p *ListTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +220,13 @@ func (p *ListTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListTemplatesAPIClient is a client that implements the ListTemplates operation.
+type ListTemplatesAPIClient interface {
+	ListTemplates(context.Context, *ListTemplatesInput, ...func(*Options)) (*ListTemplatesOutput, error)
+}
+
+var _ ListTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

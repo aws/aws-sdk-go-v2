@@ -129,6 +129,9 @@ func (c *Client) addOperationSearchFlowExecutionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchFlowExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationSearchFlowExecutionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// SearchFlowExecutionsAPIClient is a client that implements the
-// SearchFlowExecutions operation.
-type SearchFlowExecutionsAPIClient interface {
-	SearchFlowExecutions(context.Context, *SearchFlowExecutionsInput, ...func(*Options)) (*SearchFlowExecutionsOutput, error)
-}
-
-var _ SearchFlowExecutionsAPIClient = (*Client)(nil)
 
 // SearchFlowExecutionsPaginatorOptions is the paginator options for
 // SearchFlowExecutions
@@ -225,6 +220,9 @@ func (p *SearchFlowExecutionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchFlowExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *SearchFlowExecutionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// SearchFlowExecutionsAPIClient is a client that implements the
+// SearchFlowExecutions operation.
+type SearchFlowExecutionsAPIClient interface {
+	SearchFlowExecutions(context.Context, *SearchFlowExecutionsInput, ...func(*Options)) (*SearchFlowExecutionsOutput, error)
+}
+
+var _ SearchFlowExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchFlowExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

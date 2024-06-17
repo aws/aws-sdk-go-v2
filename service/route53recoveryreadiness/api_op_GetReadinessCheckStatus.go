@@ -124,6 +124,9 @@ func (c *Client) addOperationGetReadinessCheckStatusMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetReadinessCheckStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationGetReadinessCheckStatusMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetReadinessCheckStatusAPIClient is a client that implements the
-// GetReadinessCheckStatus operation.
-type GetReadinessCheckStatusAPIClient interface {
-	GetReadinessCheckStatus(context.Context, *GetReadinessCheckStatusInput, ...func(*Options)) (*GetReadinessCheckStatusOutput, error)
-}
-
-var _ GetReadinessCheckStatusAPIClient = (*Client)(nil)
 
 // GetReadinessCheckStatusPaginatorOptions is the paginator options for
 // GetReadinessCheckStatus
@@ -221,6 +216,9 @@ func (p *GetReadinessCheckStatusPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetReadinessCheckStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *GetReadinessCheckStatusPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// GetReadinessCheckStatusAPIClient is a client that implements the
+// GetReadinessCheckStatus operation.
+type GetReadinessCheckStatusAPIClient interface {
+	GetReadinessCheckStatus(context.Context, *GetReadinessCheckStatusInput, ...func(*Options)) (*GetReadinessCheckStatusOutput, error)
+}
+
+var _ GetReadinessCheckStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReadinessCheckStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

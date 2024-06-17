@@ -130,6 +130,9 @@ func (c *Client) addOperationSearchRelatedItemsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchRelatedItemsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationSearchRelatedItemsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// SearchRelatedItemsAPIClient is a client that implements the SearchRelatedItems
-// operation.
-type SearchRelatedItemsAPIClient interface {
-	SearchRelatedItems(context.Context, *SearchRelatedItemsInput, ...func(*Options)) (*SearchRelatedItemsOutput, error)
-}
-
-var _ SearchRelatedItemsAPIClient = (*Client)(nil)
 
 // SearchRelatedItemsPaginatorOptions is the paginator options for
 // SearchRelatedItems
@@ -226,6 +221,9 @@ func (p *SearchRelatedItemsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchRelatedItems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *SearchRelatedItemsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// SearchRelatedItemsAPIClient is a client that implements the SearchRelatedItems
+// operation.
+type SearchRelatedItemsAPIClient interface {
+	SearchRelatedItems(context.Context, *SearchRelatedItemsInput, ...func(*Options)) (*SearchRelatedItemsOutput, error)
+}
+
+var _ SearchRelatedItemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchRelatedItems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

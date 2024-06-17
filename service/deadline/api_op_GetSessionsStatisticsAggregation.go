@@ -140,6 +140,9 @@ func (c *Client) addOperationGetSessionsStatisticsAggregationMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetSessionsStatisticsAggregationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,41 +169,6 @@ func (c *Client) addOperationGetSessionsStatisticsAggregationMiddlewares(stack *
 	}
 	return nil
 }
-
-type endpointPrefix_opGetSessionsStatisticsAggregationMiddleware struct {
-}
-
-func (*endpointPrefix_opGetSessionsStatisticsAggregationMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetSessionsStatisticsAggregationMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetSessionsStatisticsAggregationMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetSessionsStatisticsAggregationMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetSessionsStatisticsAggregationAPIClient is a client that implements the
-// GetSessionsStatisticsAggregation operation.
-type GetSessionsStatisticsAggregationAPIClient interface {
-	GetSessionsStatisticsAggregation(context.Context, *GetSessionsStatisticsAggregationInput, ...func(*Options)) (*GetSessionsStatisticsAggregationOutput, error)
-}
-
-var _ GetSessionsStatisticsAggregationAPIClient = (*Client)(nil)
 
 // GetSessionsStatisticsAggregationPaginatorOptions is the paginator options for
 // GetSessionsStatisticsAggregation
@@ -269,6 +237,9 @@ func (p *GetSessionsStatisticsAggregationPaginator) NextPage(ctx context.Context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSessionsStatisticsAggregation(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -287,6 +258,41 @@ func (p *GetSessionsStatisticsAggregationPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+type endpointPrefix_opGetSessionsStatisticsAggregationMiddleware struct {
+}
+
+func (*endpointPrefix_opGetSessionsStatisticsAggregationMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetSessionsStatisticsAggregationMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetSessionsStatisticsAggregationMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetSessionsStatisticsAggregationMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetSessionsStatisticsAggregationAPIClient is a client that implements the
+// GetSessionsStatisticsAggregation operation.
+type GetSessionsStatisticsAggregationAPIClient interface {
+	GetSessionsStatisticsAggregation(context.Context, *GetSessionsStatisticsAggregationInput, ...func(*Options)) (*GetSessionsStatisticsAggregationOutput, error)
+}
+
+var _ GetSessionsStatisticsAggregationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSessionsStatisticsAggregation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -143,6 +143,9 @@ func (c *Client) addOperationDescribeTapesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTapesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,13 +169,6 @@ func (c *Client) addOperationDescribeTapesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeTapesAPIClient is a client that implements the DescribeTapes operation.
-type DescribeTapesAPIClient interface {
-	DescribeTapes(context.Context, *DescribeTapesInput, ...func(*Options)) (*DescribeTapesOutput, error)
-}
-
-var _ DescribeTapesAPIClient = (*Client)(nil)
 
 // DescribeTapesPaginatorOptions is the paginator options for DescribeTapes
 type DescribeTapesPaginatorOptions struct {
@@ -240,6 +236,9 @@ func (p *DescribeTapesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeTapes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +257,13 @@ func (p *DescribeTapesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// DescribeTapesAPIClient is a client that implements the DescribeTapes operation.
+type DescribeTapesAPIClient interface {
+	DescribeTapes(context.Context, *DescribeTapesInput, ...func(*Options)) (*DescribeTapesOutput, error)
+}
+
+var _ DescribeTapesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTapes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

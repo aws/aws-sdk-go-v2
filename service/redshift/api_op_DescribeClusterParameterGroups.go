@@ -165,6 +165,9 @@ func (c *Client) addOperationDescribeClusterParameterGroupsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterParameterGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -185,14 +188,6 @@ func (c *Client) addOperationDescribeClusterParameterGroupsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// DescribeClusterParameterGroupsAPIClient is a client that implements the
-// DescribeClusterParameterGroups operation.
-type DescribeClusterParameterGroupsAPIClient interface {
-	DescribeClusterParameterGroups(context.Context, *DescribeClusterParameterGroupsInput, ...func(*Options)) (*DescribeClusterParameterGroupsOutput, error)
-}
-
-var _ DescribeClusterParameterGroupsAPIClient = (*Client)(nil)
 
 // DescribeClusterParameterGroupsPaginatorOptions is the paginator options for
 // DescribeClusterParameterGroups
@@ -267,6 +262,9 @@ func (p *DescribeClusterParameterGroupsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeClusterParameterGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -285,6 +283,14 @@ func (p *DescribeClusterParameterGroupsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// DescribeClusterParameterGroupsAPIClient is a client that implements the
+// DescribeClusterParameterGroups operation.
+type DescribeClusterParameterGroupsAPIClient interface {
+	DescribeClusterParameterGroups(context.Context, *DescribeClusterParameterGroupsInput, ...func(*Options)) (*DescribeClusterParameterGroupsOutput, error)
+}
+
+var _ DescribeClusterParameterGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeClusterParameterGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

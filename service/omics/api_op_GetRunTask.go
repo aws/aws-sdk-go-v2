@@ -151,6 +151,9 @@ func (c *Client) addOperationGetRunTaskMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetRunTaskMiddleware(stack); err != nil {
 		return err
 	}
@@ -177,40 +180,6 @@ func (c *Client) addOperationGetRunTaskMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-type endpointPrefix_opGetRunTaskMiddleware struct {
-}
-
-func (*endpointPrefix_opGetRunTaskMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetRunTaskMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "workflows-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetRunTaskMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetRunTaskMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetRunTaskAPIClient is a client that implements the GetRunTask operation.
-type GetRunTaskAPIClient interface {
-	GetRunTask(context.Context, *GetRunTaskInput, ...func(*Options)) (*GetRunTaskOutput, error)
-}
-
-var _ GetRunTaskAPIClient = (*Client)(nil)
 
 // TaskRunningWaiterOptions are waiter options for TaskRunningWaiter
 type TaskRunningWaiterOptions struct {
@@ -326,7 +295,13 @@ func (w *TaskRunningWaiter) WaitForOutput(ctx context.Context, params *GetRunTas
 		}
 
 		out, err := w.client.GetRunTask(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -567,7 +542,13 @@ func (w *TaskCompletedWaiter) WaitForOutput(ctx context.Context, params *GetRunT
 		}
 
 		out, err := w.client.GetRunTask(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -709,6 +690,40 @@ func taskCompletedStateRetryable(ctx context.Context, input *GetRunTaskInput, ou
 
 	return true, nil
 }
+
+type endpointPrefix_opGetRunTaskMiddleware struct {
+}
+
+func (*endpointPrefix_opGetRunTaskMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetRunTaskMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "workflows-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetRunTaskMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetRunTaskMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetRunTaskAPIClient is a client that implements the GetRunTask operation.
+type GetRunTaskAPIClient interface {
+	GetRunTask(context.Context, *GetRunTaskInput, ...func(*Options)) (*GetRunTaskOutput, error)
+}
+
+var _ GetRunTaskAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetRunTask(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

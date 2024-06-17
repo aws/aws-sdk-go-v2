@@ -119,6 +119,9 @@ func (c *Client) addOperationListChannelsAssociatedWithChannelFlowMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChannelsAssociatedWithChannelFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListChannelsAssociatedWithChannelFlowMiddlewares(st
 	}
 	return nil
 }
-
-// ListChannelsAssociatedWithChannelFlowAPIClient is a client that implements the
-// ListChannelsAssociatedWithChannelFlow operation.
-type ListChannelsAssociatedWithChannelFlowAPIClient interface {
-	ListChannelsAssociatedWithChannelFlow(context.Context, *ListChannelsAssociatedWithChannelFlowInput, ...func(*Options)) (*ListChannelsAssociatedWithChannelFlowOutput, error)
-}
-
-var _ ListChannelsAssociatedWithChannelFlowAPIClient = (*Client)(nil)
 
 // ListChannelsAssociatedWithChannelFlowPaginatorOptions is the paginator options
 // for ListChannelsAssociatedWithChannelFlow
@@ -217,6 +212,9 @@ func (p *ListChannelsAssociatedWithChannelFlowPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelsAssociatedWithChannelFlow(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListChannelsAssociatedWithChannelFlowPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListChannelsAssociatedWithChannelFlowAPIClient is a client that implements the
+// ListChannelsAssociatedWithChannelFlow operation.
+type ListChannelsAssociatedWithChannelFlowAPIClient interface {
+	ListChannelsAssociatedWithChannelFlow(context.Context, *ListChannelsAssociatedWithChannelFlowInput, ...func(*Options)) (*ListChannelsAssociatedWithChannelFlowOutput, error)
+}
+
+var _ ListChannelsAssociatedWithChannelFlowAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelsAssociatedWithChannelFlow(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

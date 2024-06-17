@@ -153,6 +153,9 @@ func (c *Client) addOperationStartCapacityTaskMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartCapacityTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

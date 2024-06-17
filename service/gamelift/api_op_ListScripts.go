@@ -127,6 +127,9 @@ func (c *Client) addOperationListScriptsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScripts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,13 +150,6 @@ func (c *Client) addOperationListScriptsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListScriptsAPIClient is a client that implements the ListScripts operation.
-type ListScriptsAPIClient interface {
-	ListScripts(context.Context, *ListScriptsInput, ...func(*Options)) (*ListScriptsOutput, error)
-}
-
-var _ ListScriptsAPIClient = (*Client)(nil)
 
 // ListScriptsPaginatorOptions is the paginator options for ListScripts
 type ListScriptsPaginatorOptions struct {
@@ -219,6 +215,9 @@ func (p *ListScriptsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScripts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +236,13 @@ func (p *ListScriptsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListScriptsAPIClient is a client that implements the ListScripts operation.
+type ListScriptsAPIClient interface {
+	ListScripts(context.Context, *ListScriptsInput, ...func(*Options)) (*ListScriptsOutput, error)
+}
+
+var _ ListScriptsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScripts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

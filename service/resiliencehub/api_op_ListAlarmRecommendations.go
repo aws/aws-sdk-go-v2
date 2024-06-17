@@ -126,6 +126,9 @@ func (c *Client) addOperationListAlarmRecommendationsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAlarmRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListAlarmRecommendationsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListAlarmRecommendationsAPIClient is a client that implements the
-// ListAlarmRecommendations operation.
-type ListAlarmRecommendationsAPIClient interface {
-	ListAlarmRecommendations(context.Context, *ListAlarmRecommendationsInput, ...func(*Options)) (*ListAlarmRecommendationsOutput, error)
-}
-
-var _ ListAlarmRecommendationsAPIClient = (*Client)(nil)
 
 // ListAlarmRecommendationsPaginatorOptions is the paginator options for
 // ListAlarmRecommendations
@@ -225,6 +220,9 @@ func (p *ListAlarmRecommendationsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAlarmRecommendations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListAlarmRecommendationsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListAlarmRecommendationsAPIClient is a client that implements the
+// ListAlarmRecommendations operation.
+type ListAlarmRecommendationsAPIClient interface {
+	ListAlarmRecommendations(context.Context, *ListAlarmRecommendationsInput, ...func(*Options)) (*ListAlarmRecommendationsOutput, error)
+}
+
+var _ ListAlarmRecommendationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAlarmRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

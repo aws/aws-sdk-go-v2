@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeCertificatesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCertificatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeCertificatesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeCertificatesAPIClient is a client that implements the
-// DescribeCertificates operation.
-type DescribeCertificatesAPIClient interface {
-	DescribeCertificates(context.Context, *DescribeCertificatesInput, ...func(*Options)) (*DescribeCertificatesOutput, error)
-}
-
-var _ DescribeCertificatesAPIClient = (*Client)(nil)
 
 // DescribeCertificatesPaginatorOptions is the paginator options for
 // DescribeCertificates
@@ -221,6 +216,9 @@ func (p *DescribeCertificatesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCertificates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeCertificatesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeCertificatesAPIClient is a client that implements the
+// DescribeCertificates operation.
+type DescribeCertificatesAPIClient interface {
+	DescribeCertificates(context.Context, *DescribeCertificatesInput, ...func(*Options)) (*DescribeCertificatesOutput, error)
+}
+
+var _ DescribeCertificatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCertificates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

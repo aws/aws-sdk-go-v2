@@ -141,6 +141,9 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,13 +167,6 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListSessionsAPIClient is a client that implements the ListSessions operation.
-type ListSessionsAPIClient interface {
-	ListSessions(context.Context, *ListSessionsInput, ...func(*Options)) (*ListSessionsOutput, error)
-}
-
-var _ ListSessionsAPIClient = (*Client)(nil)
 
 // ListSessionsPaginatorOptions is the paginator options for ListSessions
 type ListSessionsPaginatorOptions struct {
@@ -235,6 +231,9 @@ func (p *ListSessionsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +252,13 @@ func (p *ListSessionsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListSessionsAPIClient is a client that implements the ListSessions operation.
+type ListSessionsAPIClient interface {
+	ListSessions(context.Context, *ListSessionsInput, ...func(*Options)) (*ListSessionsOutput, error)
+}
+
+var _ ListSessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

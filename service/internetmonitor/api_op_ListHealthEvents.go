@@ -143,6 +143,9 @@ func (c *Client) addOperationListHealthEventsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListHealthEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationListHealthEventsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListHealthEventsAPIClient is a client that implements the ListHealthEvents
-// operation.
-type ListHealthEventsAPIClient interface {
-	ListHealthEvents(context.Context, *ListHealthEventsInput, ...func(*Options)) (*ListHealthEventsOutput, error)
-}
-
-var _ ListHealthEventsAPIClient = (*Client)(nil)
 
 // ListHealthEventsPaginatorOptions is the paginator options for ListHealthEvents
 type ListHealthEventsPaginatorOptions struct {
@@ -238,6 +233,9 @@ func (p *ListHealthEventsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHealthEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListHealthEventsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListHealthEventsAPIClient is a client that implements the ListHealthEvents
+// operation.
+type ListHealthEventsAPIClient interface {
+	ListHealthEvents(context.Context, *ListHealthEventsInput, ...func(*Options)) (*ListHealthEventsOutput, error)
+}
+
+var _ ListHealthEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHealthEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

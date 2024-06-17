@@ -123,6 +123,9 @@ func (c *Client) addOperationCreateServerlessCacheSnapshotMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateServerlessCacheSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}

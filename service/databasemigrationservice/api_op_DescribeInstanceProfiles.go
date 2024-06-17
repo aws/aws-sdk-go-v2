@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeInstanceProfilesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeInstanceProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationDescribeInstanceProfilesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeInstanceProfilesAPIClient is a client that implements the
-// DescribeInstanceProfiles operation.
-type DescribeInstanceProfilesAPIClient interface {
-	DescribeInstanceProfiles(context.Context, *DescribeInstanceProfilesInput, ...func(*Options)) (*DescribeInstanceProfilesOutput, error)
-}
-
-var _ DescribeInstanceProfilesAPIClient = (*Client)(nil)
 
 // DescribeInstanceProfilesPaginatorOptions is the paginator options for
 // DescribeInstanceProfiles
@@ -230,6 +225,9 @@ func (p *DescribeInstanceProfilesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeInstanceProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *DescribeInstanceProfilesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeInstanceProfilesAPIClient is a client that implements the
+// DescribeInstanceProfiles operation.
+type DescribeInstanceProfilesAPIClient interface {
+	DescribeInstanceProfiles(context.Context, *DescribeInstanceProfilesInput, ...func(*Options)) (*DescribeInstanceProfilesOutput, error)
+}
+
+var _ DescribeInstanceProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInstanceProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

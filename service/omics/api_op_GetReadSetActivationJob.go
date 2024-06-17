@@ -141,6 +141,9 @@ func (c *Client) addOperationGetReadSetActivationJobMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetReadSetActivationJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,41 +170,6 @@ func (c *Client) addOperationGetReadSetActivationJobMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-type endpointPrefix_opGetReadSetActivationJobMiddleware struct {
-}
-
-func (*endpointPrefix_opGetReadSetActivationJobMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetReadSetActivationJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetReadSetActivationJobMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetReadSetActivationJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetReadSetActivationJobAPIClient is a client that implements the
-// GetReadSetActivationJob operation.
-type GetReadSetActivationJobAPIClient interface {
-	GetReadSetActivationJob(context.Context, *GetReadSetActivationJobInput, ...func(*Options)) (*GetReadSetActivationJobOutput, error)
-}
-
-var _ GetReadSetActivationJobAPIClient = (*Client)(nil)
 
 // ReadSetActivationJobCompletedWaiterOptions are waiter options for
 // ReadSetActivationJobCompletedWaiter
@@ -323,7 +291,13 @@ func (w *ReadSetActivationJobCompletedWaiter) WaitForOutput(ctx context.Context,
 		}
 
 		out, err := w.client.GetReadSetActivationJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -482,6 +456,41 @@ func readSetActivationJobCompletedStateRetryable(ctx context.Context, input *Get
 
 	return true, nil
 }
+
+type endpointPrefix_opGetReadSetActivationJobMiddleware struct {
+}
+
+func (*endpointPrefix_opGetReadSetActivationJobMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetReadSetActivationJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetReadSetActivationJobMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetReadSetActivationJobMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetReadSetActivationJobAPIClient is a client that implements the
+// GetReadSetActivationJob operation.
+type GetReadSetActivationJobAPIClient interface {
+	GetReadSetActivationJob(context.Context, *GetReadSetActivationJobInput, ...func(*Options)) (*GetReadSetActivationJobOutput, error)
+}
+
+var _ GetReadSetActivationJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReadSetActivationJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

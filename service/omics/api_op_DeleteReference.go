@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteReferenceMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteReferenceMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,6 +113,9 @@ func (c *Client) addOperationListSipRulesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSipRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,13 +136,6 @@ func (c *Client) addOperationListSipRulesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListSipRulesAPIClient is a client that implements the ListSipRules operation.
-type ListSipRulesAPIClient interface {
-	ListSipRules(context.Context, *ListSipRulesInput, ...func(*Options)) (*ListSipRulesOutput, error)
-}
-
-var _ ListSipRulesAPIClient = (*Client)(nil)
 
 // ListSipRulesPaginatorOptions is the paginator options for ListSipRules
 type ListSipRulesPaginatorOptions struct {
@@ -204,6 +200,9 @@ func (p *ListSipRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSipRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +221,13 @@ func (p *ListSipRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListSipRulesAPIClient is a client that implements the ListSipRules operation.
+type ListSipRulesAPIClient interface {
+	ListSipRules(context.Context, *ListSipRulesInput, ...func(*Options)) (*ListSipRulesOutput, error)
+}
+
+var _ ListSipRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSipRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

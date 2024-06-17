@@ -114,6 +114,9 @@ func (c *Client) addOperationListBaselinesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBaselines(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,13 +137,6 @@ func (c *Client) addOperationListBaselinesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListBaselinesAPIClient is a client that implements the ListBaselines operation.
-type ListBaselinesAPIClient interface {
-	ListBaselines(context.Context, *ListBaselinesInput, ...func(*Options)) (*ListBaselinesOutput, error)
-}
-
-var _ ListBaselinesAPIClient = (*Client)(nil)
 
 // ListBaselinesPaginatorOptions is the paginator options for ListBaselines
 type ListBaselinesPaginatorOptions struct {
@@ -205,6 +201,9 @@ func (p *ListBaselinesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBaselines(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +222,13 @@ func (p *ListBaselinesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListBaselinesAPIClient is a client that implements the ListBaselines operation.
+type ListBaselinesAPIClient interface {
+	ListBaselines(context.Context, *ListBaselinesInput, ...func(*Options)) (*ListBaselinesOutput, error)
+}
+
+var _ ListBaselinesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBaselines(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

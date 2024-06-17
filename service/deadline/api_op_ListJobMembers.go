@@ -133,6 +133,9 @@ func (c *Client) addOperationListJobMembersMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListJobMembersMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,41 +162,6 @@ func (c *Client) addOperationListJobMembersMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-type endpointPrefix_opListJobMembersMiddleware struct {
-}
-
-func (*endpointPrefix_opListJobMembersMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListJobMembersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListJobMembersMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListJobMembersMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListJobMembersAPIClient is a client that implements the ListJobMembers
-// operation.
-type ListJobMembersAPIClient interface {
-	ListJobMembers(context.Context, *ListJobMembersInput, ...func(*Options)) (*ListJobMembersOutput, error)
-}
-
-var _ ListJobMembersAPIClient = (*Client)(nil)
 
 // ListJobMembersPaginatorOptions is the paginator options for ListJobMembers
 type ListJobMembersPaginatorOptions struct {
@@ -259,6 +227,9 @@ func (p *ListJobMembersPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJobMembers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +248,41 @@ func (p *ListJobMembersPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+type endpointPrefix_opListJobMembersMiddleware struct {
+}
+
+func (*endpointPrefix_opListJobMembersMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListJobMembersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListJobMembersMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListJobMembersMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListJobMembersAPIClient is a client that implements the ListJobMembers
+// operation.
+type ListJobMembersAPIClient interface {
+	ListJobMembers(context.Context, *ListJobMembersInput, ...func(*Options)) (*ListJobMembersOutput, error)
+}
+
+var _ ListJobMembersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJobMembers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

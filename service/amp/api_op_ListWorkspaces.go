@@ -131,6 +131,9 @@ func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkspaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListWorkspacesAPIClient is a client that implements the ListWorkspaces
-// operation.
-type ListWorkspacesAPIClient interface {
-	ListWorkspaces(context.Context, *ListWorkspacesInput, ...func(*Options)) (*ListWorkspacesOutput, error)
-}
-
-var _ ListWorkspacesAPIClient = (*Client)(nil)
 
 // ListWorkspacesPaginatorOptions is the paginator options for ListWorkspaces
 type ListWorkspacesPaginatorOptions struct {
@@ -223,6 +218,9 @@ func (p *ListWorkspacesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkspaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListWorkspacesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListWorkspacesAPIClient is a client that implements the ListWorkspaces
+// operation.
+type ListWorkspacesAPIClient interface {
+	ListWorkspaces(context.Context, *ListWorkspacesInput, ...func(*Options)) (*ListWorkspacesOutput, error)
+}
+
+var _ ListWorkspacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

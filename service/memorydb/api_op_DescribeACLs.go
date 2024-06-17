@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeACLsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeACLs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationDescribeACLsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// DescribeACLsAPIClient is a client that implements the DescribeACLs operation.
-type DescribeACLsAPIClient interface {
-	DescribeACLs(context.Context, *DescribeACLsInput, ...func(*Options)) (*DescribeACLsOutput, error)
-}
-
-var _ DescribeACLsAPIClient = (*Client)(nil)
 
 // DescribeACLsPaginatorOptions is the paginator options for DescribeACLs
 type DescribeACLsPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *DescribeACLsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeACLs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *DescribeACLsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// DescribeACLsAPIClient is a client that implements the DescribeACLs operation.
+type DescribeACLsAPIClient interface {
+	DescribeACLs(context.Context, *DescribeACLsInput, ...func(*Options)) (*DescribeACLsOutput, error)
+}
+
+var _ DescribeACLsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeACLs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

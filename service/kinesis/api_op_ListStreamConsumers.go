@@ -170,6 +170,9 @@ func (c *Client) addOperationListStreamConsumersMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListStreamConsumersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -193,14 +196,6 @@ func (c *Client) addOperationListStreamConsumersMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListStreamConsumersAPIClient is a client that implements the
-// ListStreamConsumers operation.
-type ListStreamConsumersAPIClient interface {
-	ListStreamConsumers(context.Context, *ListStreamConsumersInput, ...func(*Options)) (*ListStreamConsumersOutput, error)
-}
-
-var _ ListStreamConsumersAPIClient = (*Client)(nil)
 
 // ListStreamConsumersPaginatorOptions is the paginator options for
 // ListStreamConsumers
@@ -268,6 +263,9 @@ func (p *ListStreamConsumersPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreamConsumers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -286,6 +284,14 @@ func (p *ListStreamConsumersPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListStreamConsumersAPIClient is a client that implements the
+// ListStreamConsumers operation.
+type ListStreamConsumersAPIClient interface {
+	ListStreamConsumers(context.Context, *ListStreamConsumersInput, ...func(*Options)) (*ListStreamConsumersOutput, error)
+}
+
+var _ ListStreamConsumersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreamConsumers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeDataProvidersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDataProvidersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationDescribeDataProvidersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeDataProvidersAPIClient is a client that implements the
-// DescribeDataProviders operation.
-type DescribeDataProvidersAPIClient interface {
-	DescribeDataProviders(context.Context, *DescribeDataProvidersInput, ...func(*Options)) (*DescribeDataProvidersOutput, error)
-}
-
-var _ DescribeDataProvidersAPIClient = (*Client)(nil)
 
 // DescribeDataProvidersPaginatorOptions is the paginator options for
 // DescribeDataProviders
@@ -230,6 +225,9 @@ func (p *DescribeDataProvidersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDataProviders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *DescribeDataProvidersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeDataProvidersAPIClient is a client that implements the
+// DescribeDataProviders operation.
+type DescribeDataProvidersAPIClient interface {
+	DescribeDataProviders(context.Context, *DescribeDataProvidersInput, ...func(*Options)) (*DescribeDataProvidersOutput, error)
+}
+
+var _ DescribeDataProvidersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDataProviders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

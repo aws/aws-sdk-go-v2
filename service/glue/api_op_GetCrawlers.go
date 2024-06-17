@@ -111,6 +111,9 @@ func (c *Client) addOperationGetCrawlersMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCrawlers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -131,13 +134,6 @@ func (c *Client) addOperationGetCrawlersMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// GetCrawlersAPIClient is a client that implements the GetCrawlers operation.
-type GetCrawlersAPIClient interface {
-	GetCrawlers(context.Context, *GetCrawlersInput, ...func(*Options)) (*GetCrawlersOutput, error)
-}
-
-var _ GetCrawlersAPIClient = (*Client)(nil)
 
 // GetCrawlersPaginatorOptions is the paginator options for GetCrawlers
 type GetCrawlersPaginatorOptions struct {
@@ -202,6 +198,9 @@ func (p *GetCrawlersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCrawlers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +219,13 @@ func (p *GetCrawlersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// GetCrawlersAPIClient is a client that implements the GetCrawlers operation.
+type GetCrawlersAPIClient interface {
+	GetCrawlers(context.Context, *GetCrawlersInput, ...func(*Options)) (*GetCrawlersOutput, error)
+}
+
+var _ GetCrawlersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCrawlers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

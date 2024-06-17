@@ -147,6 +147,9 @@ func (c *Client) addOperationListRegionalBucketsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListRegionalBucketsMiddleware(stack); err != nil {
 		return err
 	}
@@ -185,56 +188,6 @@ func (c *Client) addOperationListRegionalBucketsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-type endpointPrefix_opListRegionalBucketsMiddleware struct {
-}
-
-func (*endpointPrefix_opListRegionalBucketsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListRegionalBucketsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	opaqueInput := getOperationInput(ctx)
-	input, ok := opaqueInput.(*ListRegionalBucketsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListRegionalBucketsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListRegionalBucketsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListRegionalBucketsAPIClient is a client that implements the
-// ListRegionalBuckets operation.
-type ListRegionalBucketsAPIClient interface {
-	ListRegionalBuckets(context.Context, *ListRegionalBucketsInput, ...func(*Options)) (*ListRegionalBucketsOutput, error)
-}
-
-var _ ListRegionalBucketsAPIClient = (*Client)(nil)
 
 // ListRegionalBucketsPaginatorOptions is the paginator options for
 // ListRegionalBuckets
@@ -296,6 +249,9 @@ func (p *ListRegionalBucketsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRegionalBuckets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -314,6 +270,56 @@ func (p *ListRegionalBucketsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+type endpointPrefix_opListRegionalBucketsMiddleware struct {
+}
+
+func (*endpointPrefix_opListRegionalBucketsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListRegionalBucketsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*ListRegionalBucketsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListRegionalBucketsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListRegionalBucketsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListRegionalBucketsAPIClient is a client that implements the
+// ListRegionalBuckets operation.
+type ListRegionalBucketsAPIClient interface {
+	ListRegionalBuckets(context.Context, *ListRegionalBucketsInput, ...func(*Options)) (*ListRegionalBucketsOutput, error)
+}
+
+var _ ListRegionalBucketsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRegionalBuckets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

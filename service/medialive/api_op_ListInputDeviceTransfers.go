@@ -119,6 +119,9 @@ func (c *Client) addOperationListInputDeviceTransfersMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInputDeviceTransfersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListInputDeviceTransfersMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListInputDeviceTransfersAPIClient is a client that implements the
-// ListInputDeviceTransfers operation.
-type ListInputDeviceTransfersAPIClient interface {
-	ListInputDeviceTransfers(context.Context, *ListInputDeviceTransfersInput, ...func(*Options)) (*ListInputDeviceTransfersOutput, error)
-}
-
-var _ ListInputDeviceTransfersAPIClient = (*Client)(nil)
 
 // ListInputDeviceTransfersPaginatorOptions is the paginator options for
 // ListInputDeviceTransfers
@@ -216,6 +211,9 @@ func (p *ListInputDeviceTransfersPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInputDeviceTransfers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListInputDeviceTransfersPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListInputDeviceTransfersAPIClient is a client that implements the
+// ListInputDeviceTransfers operation.
+type ListInputDeviceTransfersAPIClient interface {
+	ListInputDeviceTransfers(context.Context, *ListInputDeviceTransfersInput, ...func(*Options)) (*ListInputDeviceTransfersOutput, error)
+}
+
+var _ ListInputDeviceTransfersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInputDeviceTransfers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

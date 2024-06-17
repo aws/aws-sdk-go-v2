@@ -154,6 +154,9 @@ func (c *Client) addOperationCreateNotificationRuleMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateNotificationRuleMiddleware(stack, options); err != nil {
 		return err
 	}

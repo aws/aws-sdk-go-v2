@@ -111,6 +111,9 @@ func (c *Client) addOperationGetFunctionMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionValidationMiddleware(stack); err != nil {
 		return err
 	}

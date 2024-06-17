@@ -123,6 +123,9 @@ func (c *Client) addOperationListEdgeAgentConfigurationsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEdgeAgentConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListEdgeAgentConfigurationsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListEdgeAgentConfigurationsAPIClient is a client that implements the
-// ListEdgeAgentConfigurations operation.
-type ListEdgeAgentConfigurationsAPIClient interface {
-	ListEdgeAgentConfigurations(context.Context, *ListEdgeAgentConfigurationsInput, ...func(*Options)) (*ListEdgeAgentConfigurationsOutput, error)
-}
-
-var _ ListEdgeAgentConfigurationsAPIClient = (*Client)(nil)
 
 // ListEdgeAgentConfigurationsPaginatorOptions is the paginator options for
 // ListEdgeAgentConfigurations
@@ -222,6 +217,9 @@ func (p *ListEdgeAgentConfigurationsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEdgeAgentConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListEdgeAgentConfigurationsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListEdgeAgentConfigurationsAPIClient is a client that implements the
+// ListEdgeAgentConfigurations operation.
+type ListEdgeAgentConfigurationsAPIClient interface {
+	ListEdgeAgentConfigurations(context.Context, *ListEdgeAgentConfigurationsInput, ...func(*Options)) (*ListEdgeAgentConfigurationsOutput, error)
+}
+
+var _ ListEdgeAgentConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEdgeAgentConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

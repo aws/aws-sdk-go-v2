@@ -141,6 +141,9 @@ func (c *Client) addOperationDescribeFileCachesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFileCaches(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationDescribeFileCachesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeFileCachesAPIClient is a client that implements the DescribeFileCaches
-// operation.
-type DescribeFileCachesAPIClient interface {
-	DescribeFileCaches(context.Context, *DescribeFileCachesInput, ...func(*Options)) (*DescribeFileCachesOutput, error)
-}
-
-var _ DescribeFileCachesAPIClient = (*Client)(nil)
 
 // DescribeFileCachesPaginatorOptions is the paginator options for
 // DescribeFileCaches
@@ -235,6 +230,9 @@ func (p *DescribeFileCachesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFileCaches(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *DescribeFileCachesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeFileCachesAPIClient is a client that implements the DescribeFileCaches
+// operation.
+type DescribeFileCachesAPIClient interface {
+	DescribeFileCaches(context.Context, *DescribeFileCachesInput, ...func(*Options)) (*DescribeFileCachesOutput, error)
+}
+
+var _ DescribeFileCachesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFileCaches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListWorkflowsMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,40 +143,6 @@ func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-type endpointPrefix_opListWorkflowsMiddleware struct {
-}
-
-func (*endpointPrefix_opListWorkflowsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListWorkflowsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "workflows-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListWorkflowsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListWorkflowsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListWorkflowsAPIClient is a client that implements the ListWorkflows operation.
-type ListWorkflowsAPIClient interface {
-	ListWorkflows(context.Context, *ListWorkflowsInput, ...func(*Options)) (*ListWorkflowsOutput, error)
-}
-
-var _ ListWorkflowsAPIClient = (*Client)(nil)
 
 // ListWorkflowsPaginatorOptions is the paginator options for ListWorkflows
 type ListWorkflowsPaginatorOptions struct {
@@ -238,6 +207,9 @@ func (p *ListWorkflowsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkflows(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +228,40 @@ func (p *ListWorkflowsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+type endpointPrefix_opListWorkflowsMiddleware struct {
+}
+
+func (*endpointPrefix_opListWorkflowsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListWorkflowsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "workflows-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListWorkflowsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListWorkflowsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListWorkflowsAPIClient is a client that implements the ListWorkflows operation.
+type ListWorkflowsAPIClient interface {
+	ListWorkflows(context.Context, *ListWorkflowsInput, ...func(*Options)) (*ListWorkflowsOutput, error)
+}
+
+var _ ListWorkflowsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkflows(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -110,6 +110,9 @@ func (c *Client) addOperationListMediaPipelineKinesisVideoStreamPoolsMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMediaPipelineKinesisVideoStreamPools(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListMediaPipelineKinesisVideoStreamPoolsMiddlewares
 	}
 	return nil
 }
-
-// ListMediaPipelineKinesisVideoStreamPoolsAPIClient is a client that implements
-// the ListMediaPipelineKinesisVideoStreamPools operation.
-type ListMediaPipelineKinesisVideoStreamPoolsAPIClient interface {
-	ListMediaPipelineKinesisVideoStreamPools(context.Context, *ListMediaPipelineKinesisVideoStreamPoolsInput, ...func(*Options)) (*ListMediaPipelineKinesisVideoStreamPoolsOutput, error)
-}
-
-var _ ListMediaPipelineKinesisVideoStreamPoolsAPIClient = (*Client)(nil)
 
 // ListMediaPipelineKinesisVideoStreamPoolsPaginatorOptions is the paginator
 // options for ListMediaPipelineKinesisVideoStreamPools
@@ -205,6 +200,9 @@ func (p *ListMediaPipelineKinesisVideoStreamPoolsPaginator) NextPage(ctx context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMediaPipelineKinesisVideoStreamPools(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListMediaPipelineKinesisVideoStreamPoolsPaginator) NextPage(ctx context
 
 	return result, nil
 }
+
+// ListMediaPipelineKinesisVideoStreamPoolsAPIClient is a client that implements
+// the ListMediaPipelineKinesisVideoStreamPools operation.
+type ListMediaPipelineKinesisVideoStreamPoolsAPIClient interface {
+	ListMediaPipelineKinesisVideoStreamPools(context.Context, *ListMediaPipelineKinesisVideoStreamPoolsInput, ...func(*Options)) (*ListMediaPipelineKinesisVideoStreamPoolsOutput, error)
+}
+
+var _ ListMediaPipelineKinesisVideoStreamPoolsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMediaPipelineKinesisVideoStreamPools(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

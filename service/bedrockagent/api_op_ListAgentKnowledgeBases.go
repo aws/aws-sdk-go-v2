@@ -132,6 +132,9 @@ func (c *Client) addOperationListAgentKnowledgeBasesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAgentKnowledgeBasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListAgentKnowledgeBasesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListAgentKnowledgeBasesAPIClient is a client that implements the
-// ListAgentKnowledgeBases operation.
-type ListAgentKnowledgeBasesAPIClient interface {
-	ListAgentKnowledgeBases(context.Context, *ListAgentKnowledgeBasesInput, ...func(*Options)) (*ListAgentKnowledgeBasesOutput, error)
-}
-
-var _ ListAgentKnowledgeBasesAPIClient = (*Client)(nil)
 
 // ListAgentKnowledgeBasesPaginatorOptions is the paginator options for
 // ListAgentKnowledgeBases
@@ -232,6 +227,9 @@ func (p *ListAgentKnowledgeBasesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAgentKnowledgeBases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListAgentKnowledgeBasesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListAgentKnowledgeBasesAPIClient is a client that implements the
+// ListAgentKnowledgeBases operation.
+type ListAgentKnowledgeBasesAPIClient interface {
+	ListAgentKnowledgeBases(context.Context, *ListAgentKnowledgeBasesInput, ...func(*Options)) (*ListAgentKnowledgeBasesOutput, error)
+}
+
+var _ ListAgentKnowledgeBasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAgentKnowledgeBases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

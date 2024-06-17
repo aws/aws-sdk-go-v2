@@ -146,6 +146,9 @@ func (c *Client) addOperationGetTableObjectsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTableObjectsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationGetTableObjectsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetTableObjectsAPIClient is a client that implements the GetTableObjects
-// operation.
-type GetTableObjectsAPIClient interface {
-	GetTableObjects(context.Context, *GetTableObjectsInput, ...func(*Options)) (*GetTableObjectsOutput, error)
-}
-
-var _ GetTableObjectsAPIClient = (*Client)(nil)
 
 // GetTableObjectsPaginatorOptions is the paginator options for GetTableObjects
 type GetTableObjectsPaginatorOptions struct {
@@ -241,6 +236,9 @@ func (p *GetTableObjectsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTableObjects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *GetTableObjectsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetTableObjectsAPIClient is a client that implements the GetTableObjects
+// operation.
+type GetTableObjectsAPIClient interface {
+	GetTableObjects(context.Context, *GetTableObjectsInput, ...func(*Options)) (*GetTableObjectsOutput, error)
+}
+
+var _ GetTableObjectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTableObjects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

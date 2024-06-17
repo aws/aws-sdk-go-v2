@@ -110,6 +110,9 @@ func (c *Client) addOperationListCellsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCells(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,13 +133,6 @@ func (c *Client) addOperationListCellsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListCellsAPIClient is a client that implements the ListCells operation.
-type ListCellsAPIClient interface {
-	ListCells(context.Context, *ListCellsInput, ...func(*Options)) (*ListCellsOutput, error)
-}
-
-var _ ListCellsAPIClient = (*Client)(nil)
 
 // ListCellsPaginatorOptions is the paginator options for ListCells
 type ListCellsPaginatorOptions struct {
@@ -201,6 +197,9 @@ func (p *ListCellsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCells(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +218,13 @@ func (p *ListCellsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListCellsAPIClient is a client that implements the ListCells operation.
+type ListCellsAPIClient interface {
+	ListCells(context.Context, *ListCellsInput, ...func(*Options)) (*ListCellsOutput, error)
+}
+
+var _ ListCellsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCells(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

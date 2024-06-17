@@ -126,6 +126,9 @@ func (c *Client) addOperationListServicePrincipalNamesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListServicePrincipalNamesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListServicePrincipalNamesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListServicePrincipalNamesAPIClient is a client that implements the
-// ListServicePrincipalNames operation.
-type ListServicePrincipalNamesAPIClient interface {
-	ListServicePrincipalNames(context.Context, *ListServicePrincipalNamesInput, ...func(*Options)) (*ListServicePrincipalNamesOutput, error)
-}
-
-var _ ListServicePrincipalNamesAPIClient = (*Client)(nil)
 
 // ListServicePrincipalNamesPaginatorOptions is the paginator options for
 // ListServicePrincipalNames
@@ -226,6 +221,9 @@ func (p *ListServicePrincipalNamesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServicePrincipalNames(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListServicePrincipalNamesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListServicePrincipalNamesAPIClient is a client that implements the
+// ListServicePrincipalNames operation.
+type ListServicePrincipalNamesAPIClient interface {
+	ListServicePrincipalNames(context.Context, *ListServicePrincipalNamesInput, ...func(*Options)) (*ListServicePrincipalNamesOutput, error)
+}
+
+var _ ListServicePrincipalNamesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServicePrincipalNames(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

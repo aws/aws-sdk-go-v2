@@ -127,6 +127,9 @@ func (c *Client) addOperationListAccessesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAccessesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,13 +153,6 @@ func (c *Client) addOperationListAccessesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListAccessesAPIClient is a client that implements the ListAccesses operation.
-type ListAccessesAPIClient interface {
-	ListAccesses(context.Context, *ListAccessesInput, ...func(*Options)) (*ListAccessesOutput, error)
-}
-
-var _ ListAccessesAPIClient = (*Client)(nil)
 
 // ListAccessesPaginatorOptions is the paginator options for ListAccesses
 type ListAccessesPaginatorOptions struct {
@@ -221,6 +217,9 @@ func (p *ListAccessesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccesses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +238,13 @@ func (p *ListAccessesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListAccessesAPIClient is a client that implements the ListAccesses operation.
+type ListAccessesAPIClient interface {
+	ListAccesses(context.Context, *ListAccessesInput, ...func(*Options)) (*ListAccessesOutput, error)
+}
+
+var _ ListAccessesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccesses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -120,6 +120,9 @@ func (c *Client) addOperationListPlaybackConfigurationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlaybackConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListPlaybackConfigurationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListPlaybackConfigurationsAPIClient is a client that implements the
-// ListPlaybackConfigurations operation.
-type ListPlaybackConfigurationsAPIClient interface {
-	ListPlaybackConfigurations(context.Context, *ListPlaybackConfigurationsInput, ...func(*Options)) (*ListPlaybackConfigurationsOutput, error)
-}
-
-var _ ListPlaybackConfigurationsAPIClient = (*Client)(nil)
 
 // ListPlaybackConfigurationsPaginatorOptions is the paginator options for
 // ListPlaybackConfigurations
@@ -218,6 +213,9 @@ func (p *ListPlaybackConfigurationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPlaybackConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListPlaybackConfigurationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListPlaybackConfigurationsAPIClient is a client that implements the
+// ListPlaybackConfigurations operation.
+type ListPlaybackConfigurationsAPIClient interface {
+	ListPlaybackConfigurations(context.Context, *ListPlaybackConfigurationsInput, ...func(*Options)) (*ListPlaybackConfigurationsOutput, error)
+}
+
+var _ ListPlaybackConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPlaybackConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

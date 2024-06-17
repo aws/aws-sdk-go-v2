@@ -115,6 +115,9 @@ func (c *Client) addOperationListTopicsDetectionJobsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTopicsDetectionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListTopicsDetectionJobsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListTopicsDetectionJobsAPIClient is a client that implements the
-// ListTopicsDetectionJobs operation.
-type ListTopicsDetectionJobsAPIClient interface {
-	ListTopicsDetectionJobs(context.Context, *ListTopicsDetectionJobsInput, ...func(*Options)) (*ListTopicsDetectionJobsOutput, error)
-}
-
-var _ ListTopicsDetectionJobsAPIClient = (*Client)(nil)
 
 // ListTopicsDetectionJobsPaginatorOptions is the paginator options for
 // ListTopicsDetectionJobs
@@ -209,6 +204,9 @@ func (p *ListTopicsDetectionJobsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTopicsDetectionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListTopicsDetectionJobsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListTopicsDetectionJobsAPIClient is a client that implements the
+// ListTopicsDetectionJobs operation.
+type ListTopicsDetectionJobsAPIClient interface {
+	ListTopicsDetectionJobs(context.Context, *ListTopicsDetectionJobsInput, ...func(*Options)) (*ListTopicsDetectionJobsOutput, error)
+}
+
+var _ ListTopicsDetectionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTopicsDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

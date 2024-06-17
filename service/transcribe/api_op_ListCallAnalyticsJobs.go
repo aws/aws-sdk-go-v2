@@ -137,6 +137,9 @@ func (c *Client) addOperationListCallAnalyticsJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCallAnalyticsJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListCallAnalyticsJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListCallAnalyticsJobsAPIClient is a client that implements the
-// ListCallAnalyticsJobs operation.
-type ListCallAnalyticsJobsAPIClient interface {
-	ListCallAnalyticsJobs(context.Context, *ListCallAnalyticsJobsInput, ...func(*Options)) (*ListCallAnalyticsJobsOutput, error)
-}
-
-var _ ListCallAnalyticsJobsAPIClient = (*Client)(nil)
 
 // ListCallAnalyticsJobsPaginatorOptions is the paginator options for
 // ListCallAnalyticsJobs
@@ -232,6 +227,9 @@ func (p *ListCallAnalyticsJobsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCallAnalyticsJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListCallAnalyticsJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListCallAnalyticsJobsAPIClient is a client that implements the
+// ListCallAnalyticsJobs operation.
+type ListCallAnalyticsJobsAPIClient interface {
+	ListCallAnalyticsJobs(context.Context, *ListCallAnalyticsJobsInput, ...func(*Options)) (*ListCallAnalyticsJobsOutput, error)
+}
+
+var _ ListCallAnalyticsJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCallAnalyticsJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -204,6 +204,9 @@ func (c *Client) addOperationGetContentModerationMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetContentModerationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -227,14 +230,6 @@ func (c *Client) addOperationGetContentModerationMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// GetContentModerationAPIClient is a client that implements the
-// GetContentModeration operation.
-type GetContentModerationAPIClient interface {
-	GetContentModeration(context.Context, *GetContentModerationInput, ...func(*Options)) (*GetContentModerationOutput, error)
-}
-
-var _ GetContentModerationAPIClient = (*Client)(nil)
 
 // GetContentModerationPaginatorOptions is the paginator options for
 // GetContentModeration
@@ -302,6 +297,9 @@ func (p *GetContentModerationPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetContentModeration(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -320,6 +318,14 @@ func (p *GetContentModerationPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// GetContentModerationAPIClient is a client that implements the
+// GetContentModeration operation.
+type GetContentModerationAPIClient interface {
+	GetContentModeration(context.Context, *GetContentModerationInput, ...func(*Options)) (*GetContentModerationOutput, error)
+}
+
+var _ GetContentModerationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetContentModeration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

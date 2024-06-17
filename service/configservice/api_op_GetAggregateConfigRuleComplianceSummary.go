@@ -132,6 +132,9 @@ func (c *Client) addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateConfigRuleComplianceSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares(
 	}
 	return nil
 }
-
-// GetAggregateConfigRuleComplianceSummaryAPIClient is a client that implements
-// the GetAggregateConfigRuleComplianceSummary operation.
-type GetAggregateConfigRuleComplianceSummaryAPIClient interface {
-	GetAggregateConfigRuleComplianceSummary(context.Context, *GetAggregateConfigRuleComplianceSummaryInput, ...func(*Options)) (*GetAggregateConfigRuleComplianceSummaryOutput, error)
-}
-
-var _ GetAggregateConfigRuleComplianceSummaryAPIClient = (*Client)(nil)
 
 // GetAggregateConfigRuleComplianceSummaryPaginatorOptions is the paginator
 // options for GetAggregateConfigRuleComplianceSummary
@@ -228,6 +223,9 @@ func (p *GetAggregateConfigRuleComplianceSummaryPaginator) NextPage(ctx context.
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAggregateConfigRuleComplianceSummary(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *GetAggregateConfigRuleComplianceSummaryPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// GetAggregateConfigRuleComplianceSummaryAPIClient is a client that implements
+// the GetAggregateConfigRuleComplianceSummary operation.
+type GetAggregateConfigRuleComplianceSummaryAPIClient interface {
+	GetAggregateConfigRuleComplianceSummary(context.Context, *GetAggregateConfigRuleComplianceSummaryInput, ...func(*Options)) (*GetAggregateConfigRuleComplianceSummaryOutput, error)
+}
+
+var _ GetAggregateConfigRuleComplianceSummaryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAggregateConfigRuleComplianceSummary(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

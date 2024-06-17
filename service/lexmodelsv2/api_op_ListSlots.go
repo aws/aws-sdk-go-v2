@@ -165,6 +165,9 @@ func (c *Client) addOperationListSlotsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSlotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -188,13 +191,6 @@ func (c *Client) addOperationListSlotsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListSlotsAPIClient is a client that implements the ListSlots operation.
-type ListSlotsAPIClient interface {
-	ListSlots(context.Context, *ListSlotsInput, ...func(*Options)) (*ListSlotsOutput, error)
-}
-
-var _ ListSlotsAPIClient = (*Client)(nil)
 
 // ListSlotsPaginatorOptions is the paginator options for ListSlots
 type ListSlotsPaginatorOptions struct {
@@ -261,6 +257,9 @@ func (p *ListSlotsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSlots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -279,6 +278,13 @@ func (p *ListSlotsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListSlotsAPIClient is a client that implements the ListSlots operation.
+type ListSlotsAPIClient interface {
+	ListSlots(context.Context, *ListSlotsInput, ...func(*Options)) (*ListSlotsOutput, error)
+}
+
+var _ ListSlotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSlots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

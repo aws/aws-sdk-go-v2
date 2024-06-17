@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateBackupPlanMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateBackupPlanValidationMiddleware(stack); err != nil {
 		return err
 	}

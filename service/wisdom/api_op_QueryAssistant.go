@@ -132,6 +132,9 @@ func (c *Client) addOperationQueryAssistantMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpQueryAssistantValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationQueryAssistantMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// QueryAssistantAPIClient is a client that implements the QueryAssistant
-// operation.
-type QueryAssistantAPIClient interface {
-	QueryAssistant(context.Context, *QueryAssistantInput, ...func(*Options)) (*QueryAssistantOutput, error)
-}
-
-var _ QueryAssistantAPIClient = (*Client)(nil)
 
 // QueryAssistantPaginatorOptions is the paginator options for QueryAssistant
 type QueryAssistantPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *QueryAssistantPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.QueryAssistant(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *QueryAssistantPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// QueryAssistantAPIClient is a client that implements the QueryAssistant
+// operation.
+type QueryAssistantAPIClient interface {
+	QueryAssistant(context.Context, *QueryAssistantInput, ...func(*Options)) (*QueryAssistantOutput, error)
+}
+
+var _ QueryAssistantAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opQueryAssistant(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeServerMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeServerValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeServerMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// DescribeServerAPIClient is a client that implements the DescribeServer
-// operation.
-type DescribeServerAPIClient interface {
-	DescribeServer(context.Context, *DescribeServerInput, ...func(*Options)) (*DescribeServerOutput, error)
-}
-
-var _ DescribeServerAPIClient = (*Client)(nil)
 
 // ServerOfflineWaiterOptions are waiter options for ServerOfflineWaiter
 type ServerOfflineWaiterOptions struct {
@@ -263,7 +258,13 @@ func (w *ServerOfflineWaiter) WaitForOutput(ctx context.Context, params *Describ
 		}
 
 		out, err := w.client.DescribeServer(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -452,7 +453,13 @@ func (w *ServerOnlineWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeServer(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -526,6 +533,14 @@ func serverOnlineStateRetryable(ctx context.Context, input *DescribeServerInput,
 
 	return true, nil
 }
+
+// DescribeServerAPIClient is a client that implements the DescribeServer
+// operation.
+type DescribeServerAPIClient interface {
+	DescribeServer(context.Context, *DescribeServerInput, ...func(*Options)) (*DescribeServerOutput, error)
+}
+
+var _ DescribeServerAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeServer(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

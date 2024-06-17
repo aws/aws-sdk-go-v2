@@ -118,6 +118,9 @@ func (c *Client) addOperationGetFreeTierUsageMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFreeTierUsageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationGetFreeTierUsageMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetFreeTierUsageAPIClient is a client that implements the GetFreeTierUsage
-// operation.
-type GetFreeTierUsageAPIClient interface {
-	GetFreeTierUsage(context.Context, *GetFreeTierUsageInput, ...func(*Options)) (*GetFreeTierUsageOutput, error)
-}
-
-var _ GetFreeTierUsageAPIClient = (*Client)(nil)
 
 // GetFreeTierUsagePaginatorOptions is the paginator options for GetFreeTierUsage
 type GetFreeTierUsagePaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *GetFreeTierUsagePaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetFreeTierUsage(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *GetFreeTierUsagePaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetFreeTierUsageAPIClient is a client that implements the GetFreeTierUsage
+// operation.
+type GetFreeTierUsageAPIClient interface {
+	GetFreeTierUsage(context.Context, *GetFreeTierUsageInput, ...func(*Options)) (*GetFreeTierUsageOutput, error)
+}
+
+var _ GetFreeTierUsageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFreeTierUsage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -111,6 +111,9 @@ func (c *Client) addOperationDisassociateWebsiteAuthorizationProviderMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateWebsiteAuthorizationProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

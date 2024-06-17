@@ -127,6 +127,9 @@ func (c *Client) addOperationListChannelBansMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChannelBansValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListChannelBansMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListChannelBansAPIClient is a client that implements the ListChannelBans
-// operation.
-type ListChannelBansAPIClient interface {
-	ListChannelBans(context.Context, *ListChannelBansInput, ...func(*Options)) (*ListChannelBansOutput, error)
-}
-
-var _ ListChannelBansAPIClient = (*Client)(nil)
 
 // ListChannelBansPaginatorOptions is the paginator options for ListChannelBans
 type ListChannelBansPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *ListChannelBansPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelBans(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListChannelBansPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListChannelBansAPIClient is a client that implements the ListChannelBans
+// operation.
+type ListChannelBansAPIClient interface {
+	ListChannelBans(context.Context, *ListChannelBansInput, ...func(*Options)) (*ListChannelBansOutput, error)
+}
+
+var _ ListChannelBansAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelBans(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

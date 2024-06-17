@@ -247,6 +247,9 @@ func (c *Client) addOperationDescribeClassificationJobMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeClassificationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

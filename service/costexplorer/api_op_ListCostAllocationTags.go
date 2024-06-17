@@ -129,6 +129,9 @@ func (c *Client) addOperationListCostAllocationTagsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCostAllocationTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListCostAllocationTagsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListCostAllocationTagsAPIClient is a client that implements the
-// ListCostAllocationTags operation.
-type ListCostAllocationTagsAPIClient interface {
-	ListCostAllocationTags(context.Context, *ListCostAllocationTagsInput, ...func(*Options)) (*ListCostAllocationTagsOutput, error)
-}
-
-var _ ListCostAllocationTagsAPIClient = (*Client)(nil)
 
 // ListCostAllocationTagsPaginatorOptions is the paginator options for
 // ListCostAllocationTags
@@ -223,6 +218,9 @@ func (p *ListCostAllocationTagsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCostAllocationTags(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListCostAllocationTagsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListCostAllocationTagsAPIClient is a client that implements the
+// ListCostAllocationTags operation.
+type ListCostAllocationTagsAPIClient interface {
+	ListCostAllocationTags(context.Context, *ListCostAllocationTagsInput, ...func(*Options)) (*ListCostAllocationTagsOutput, error)
+}
+
+var _ ListCostAllocationTagsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCostAllocationTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -121,6 +121,9 @@ func (c *Client) addOperationListWorkloadDeploymentPatternsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWorkloadDeploymentPatternsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListWorkloadDeploymentPatternsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListWorkloadDeploymentPatternsAPIClient is a client that implements the
-// ListWorkloadDeploymentPatterns operation.
-type ListWorkloadDeploymentPatternsAPIClient interface {
-	ListWorkloadDeploymentPatterns(context.Context, *ListWorkloadDeploymentPatternsInput, ...func(*Options)) (*ListWorkloadDeploymentPatternsOutput, error)
-}
-
-var _ ListWorkloadDeploymentPatternsAPIClient = (*Client)(nil)
 
 // ListWorkloadDeploymentPatternsPaginatorOptions is the paginator options for
 // ListWorkloadDeploymentPatterns
@@ -220,6 +215,9 @@ func (p *ListWorkloadDeploymentPatternsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkloadDeploymentPatterns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListWorkloadDeploymentPatternsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListWorkloadDeploymentPatternsAPIClient is a client that implements the
+// ListWorkloadDeploymentPatterns operation.
+type ListWorkloadDeploymentPatternsAPIClient interface {
+	ListWorkloadDeploymentPatterns(context.Context, *ListWorkloadDeploymentPatternsInput, ...func(*Options)) (*ListWorkloadDeploymentPatternsOutput, error)
+}
+
+var _ ListWorkloadDeploymentPatternsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkloadDeploymentPatterns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

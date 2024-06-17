@@ -120,6 +120,9 @@ func (c *Client) addOperationListTemplateStepsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTemplateStepsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListTemplateStepsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListTemplateStepsAPIClient is a client that implements the ListTemplateSteps
-// operation.
-type ListTemplateStepsAPIClient interface {
-	ListTemplateSteps(context.Context, *ListTemplateStepsInput, ...func(*Options)) (*ListTemplateStepsOutput, error)
-}
-
-var _ ListTemplateStepsAPIClient = (*Client)(nil)
 
 // ListTemplateStepsPaginatorOptions is the paginator options for ListTemplateSteps
 type ListTemplateStepsPaginatorOptions struct {
@@ -211,6 +206,9 @@ func (p *ListTemplateStepsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTemplateSteps(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListTemplateStepsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListTemplateStepsAPIClient is a client that implements the ListTemplateSteps
+// operation.
+type ListTemplateStepsAPIClient interface {
+	ListTemplateSteps(context.Context, *ListTemplateStepsInput, ...func(*Options)) (*ListTemplateStepsOutput, error)
+}
+
+var _ ListTemplateStepsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTemplateSteps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

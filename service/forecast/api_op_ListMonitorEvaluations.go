@@ -151,6 +151,9 @@ func (c *Client) addOperationListMonitorEvaluationsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMonitorEvaluationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -174,14 +177,6 @@ func (c *Client) addOperationListMonitorEvaluationsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListMonitorEvaluationsAPIClient is a client that implements the
-// ListMonitorEvaluations operation.
-type ListMonitorEvaluationsAPIClient interface {
-	ListMonitorEvaluations(context.Context, *ListMonitorEvaluationsInput, ...func(*Options)) (*ListMonitorEvaluationsOutput, error)
-}
-
-var _ ListMonitorEvaluationsAPIClient = (*Client)(nil)
 
 // ListMonitorEvaluationsPaginatorOptions is the paginator options for
 // ListMonitorEvaluations
@@ -247,6 +242,9 @@ func (p *ListMonitorEvaluationsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitorEvaluations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *ListMonitorEvaluationsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListMonitorEvaluationsAPIClient is a client that implements the
+// ListMonitorEvaluations operation.
+type ListMonitorEvaluationsAPIClient interface {
+	ListMonitorEvaluations(context.Context, *ListMonitorEvaluationsInput, ...func(*Options)) (*ListMonitorEvaluationsOutput, error)
+}
+
+var _ ListMonitorEvaluationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitorEvaluations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

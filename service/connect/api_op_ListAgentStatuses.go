@@ -124,6 +124,9 @@ func (c *Client) addOperationListAgentStatusesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAgentStatusesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListAgentStatusesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListAgentStatusesAPIClient is a client that implements the ListAgentStatuses
-// operation.
-type ListAgentStatusesAPIClient interface {
-	ListAgentStatuses(context.Context, *ListAgentStatusesInput, ...func(*Options)) (*ListAgentStatusesOutput, error)
-}
-
-var _ ListAgentStatusesAPIClient = (*Client)(nil)
 
 // ListAgentStatusesPaginatorOptions is the paginator options for ListAgentStatuses
 type ListAgentStatusesPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *ListAgentStatusesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAgentStatuses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListAgentStatusesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListAgentStatusesAPIClient is a client that implements the ListAgentStatuses
+// operation.
+type ListAgentStatusesAPIClient interface {
+	ListAgentStatuses(context.Context, *ListAgentStatusesInput, ...func(*Options)) (*ListAgentStatusesOutput, error)
+}
+
+var _ ListAgentStatusesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAgentStatuses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

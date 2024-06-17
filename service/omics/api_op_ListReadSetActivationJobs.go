@@ -119,6 +119,9 @@ func (c *Client) addOperationListReadSetActivationJobsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListReadSetActivationJobsMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,41 +148,6 @@ func (c *Client) addOperationListReadSetActivationJobsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-type endpointPrefix_opListReadSetActivationJobsMiddleware struct {
-}
-
-func (*endpointPrefix_opListReadSetActivationJobsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListReadSetActivationJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListReadSetActivationJobsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListReadSetActivationJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListReadSetActivationJobsAPIClient is a client that implements the
-// ListReadSetActivationJobs operation.
-type ListReadSetActivationJobsAPIClient interface {
-	ListReadSetActivationJobs(context.Context, *ListReadSetActivationJobsInput, ...func(*Options)) (*ListReadSetActivationJobsOutput, error)
-}
-
-var _ ListReadSetActivationJobsAPIClient = (*Client)(nil)
 
 // ListReadSetActivationJobsPaginatorOptions is the paginator options for
 // ListReadSetActivationJobs
@@ -246,6 +214,9 @@ func (p *ListReadSetActivationJobsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReadSetActivationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +235,41 @@ func (p *ListReadSetActivationJobsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+type endpointPrefix_opListReadSetActivationJobsMiddleware struct {
+}
+
+func (*endpointPrefix_opListReadSetActivationJobsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListReadSetActivationJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListReadSetActivationJobsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListReadSetActivationJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListReadSetActivationJobsAPIClient is a client that implements the
+// ListReadSetActivationJobs operation.
+type ListReadSetActivationJobsAPIClient interface {
+	ListReadSetActivationJobs(context.Context, *ListReadSetActivationJobsInput, ...func(*Options)) (*ListReadSetActivationJobsOutput, error)
+}
+
+var _ ListReadSetActivationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReadSetActivationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

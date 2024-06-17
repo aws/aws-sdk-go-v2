@@ -121,6 +121,9 @@ func (c *Client) addOperationGetInsightEventsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetInsightEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationGetInsightEventsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetInsightEventsAPIClient is a client that implements the GetInsightEvents
-// operation.
-type GetInsightEventsAPIClient interface {
-	GetInsightEvents(context.Context, *GetInsightEventsInput, ...func(*Options)) (*GetInsightEventsOutput, error)
-}
-
-var _ GetInsightEventsAPIClient = (*Client)(nil)
 
 // GetInsightEventsPaginatorOptions is the paginator options for GetInsightEvents
 type GetInsightEventsPaginatorOptions struct {
@@ -216,6 +211,9 @@ func (p *GetInsightEventsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetInsightEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *GetInsightEventsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetInsightEventsAPIClient is a client that implements the GetInsightEvents
+// operation.
+type GetInsightEventsAPIClient interface {
+	GetInsightEvents(context.Context, *GetInsightEventsInput, ...func(*Options)) (*GetInsightEventsOutput, error)
+}
+
+var _ GetInsightEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetInsightEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

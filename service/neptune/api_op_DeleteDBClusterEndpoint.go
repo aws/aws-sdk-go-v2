@@ -155,6 +155,9 @@ func (c *Client) addOperationDeleteDBClusterEndpointMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDBClusterEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

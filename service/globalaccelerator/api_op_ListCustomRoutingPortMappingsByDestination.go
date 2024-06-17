@@ -128,6 +128,9 @@ func (c *Client) addOperationListCustomRoutingPortMappingsByDestinationMiddlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomRoutingPortMappingsByDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListCustomRoutingPortMappingsByDestinationMiddlewar
 	}
 	return nil
 }
-
-// ListCustomRoutingPortMappingsByDestinationAPIClient is a client that implements
-// the ListCustomRoutingPortMappingsByDestination operation.
-type ListCustomRoutingPortMappingsByDestinationAPIClient interface {
-	ListCustomRoutingPortMappingsByDestination(context.Context, *ListCustomRoutingPortMappingsByDestinationInput, ...func(*Options)) (*ListCustomRoutingPortMappingsByDestinationOutput, error)
-}
-
-var _ ListCustomRoutingPortMappingsByDestinationAPIClient = (*Client)(nil)
 
 // ListCustomRoutingPortMappingsByDestinationPaginatorOptions is the paginator
 // options for ListCustomRoutingPortMappingsByDestination
@@ -227,6 +222,9 @@ func (p *ListCustomRoutingPortMappingsByDestinationPaginator) NextPage(ctx conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomRoutingPortMappingsByDestination(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListCustomRoutingPortMappingsByDestinationPaginator) NextPage(ctx conte
 
 	return result, nil
 }
+
+// ListCustomRoutingPortMappingsByDestinationAPIClient is a client that implements
+// the ListCustomRoutingPortMappingsByDestination operation.
+type ListCustomRoutingPortMappingsByDestinationAPIClient interface {
+	ListCustomRoutingPortMappingsByDestination(context.Context, *ListCustomRoutingPortMappingsByDestinationInput, ...func(*Options)) (*ListCustomRoutingPortMappingsByDestinationOutput, error)
+}
+
+var _ ListCustomRoutingPortMappingsByDestinationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomRoutingPortMappingsByDestination(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

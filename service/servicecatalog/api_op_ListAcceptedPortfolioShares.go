@@ -134,6 +134,9 @@ func (c *Client) addOperationListAcceptedPortfolioSharesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAcceptedPortfolioShares(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListAcceptedPortfolioSharesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListAcceptedPortfolioSharesAPIClient is a client that implements the
-// ListAcceptedPortfolioShares operation.
-type ListAcceptedPortfolioSharesAPIClient interface {
-	ListAcceptedPortfolioShares(context.Context, *ListAcceptedPortfolioSharesInput, ...func(*Options)) (*ListAcceptedPortfolioSharesOutput, error)
-}
-
-var _ ListAcceptedPortfolioSharesAPIClient = (*Client)(nil)
 
 // ListAcceptedPortfolioSharesPaginatorOptions is the paginator options for
 // ListAcceptedPortfolioShares
@@ -225,6 +220,9 @@ func (p *ListAcceptedPortfolioSharesPaginator) NextPage(ctx context.Context, opt
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAcceptedPortfolioShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListAcceptedPortfolioSharesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListAcceptedPortfolioSharesAPIClient is a client that implements the
+// ListAcceptedPortfolioShares operation.
+type ListAcceptedPortfolioSharesAPIClient interface {
+	ListAcceptedPortfolioShares(context.Context, *ListAcceptedPortfolioSharesInput, ...func(*Options)) (*ListAcceptedPortfolioSharesOutput, error)
+}
+
+var _ ListAcceptedPortfolioSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAcceptedPortfolioShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

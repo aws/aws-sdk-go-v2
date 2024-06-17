@@ -171,6 +171,9 @@ func (c *Client) addOperationGetMergeConflictsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMergeConflictsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -194,14 +197,6 @@ func (c *Client) addOperationGetMergeConflictsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetMergeConflictsAPIClient is a client that implements the GetMergeConflicts
-// operation.
-type GetMergeConflictsAPIClient interface {
-	GetMergeConflicts(context.Context, *GetMergeConflictsInput, ...func(*Options)) (*GetMergeConflictsOutput, error)
-}
-
-var _ GetMergeConflictsAPIClient = (*Client)(nil)
 
 // GetMergeConflictsPaginatorOptions is the paginator options for GetMergeConflicts
 type GetMergeConflictsPaginatorOptions struct {
@@ -266,6 +261,9 @@ func (p *GetMergeConflictsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxConflictFiles = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetMergeConflicts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -284,6 +282,14 @@ func (p *GetMergeConflictsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetMergeConflictsAPIClient is a client that implements the GetMergeConflicts
+// operation.
+type GetMergeConflictsAPIClient interface {
+	GetMergeConflicts(context.Context, *GetMergeConflictsInput, ...func(*Options)) (*GetMergeConflictsOutput, error)
+}
+
+var _ GetMergeConflictsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetMergeConflicts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

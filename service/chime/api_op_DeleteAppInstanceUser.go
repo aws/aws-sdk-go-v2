@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteAppInstanceUserMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAppInstanceUserMiddleware(stack); err != nil {
 		return err
 	}

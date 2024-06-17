@@ -136,6 +136,9 @@ func (c *Client) addOperationGetResourceShareInvitationsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceShareInvitations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationGetResourceShareInvitationsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// GetResourceShareInvitationsAPIClient is a client that implements the
-// GetResourceShareInvitations operation.
-type GetResourceShareInvitationsAPIClient interface {
-	GetResourceShareInvitations(context.Context, *GetResourceShareInvitationsInput, ...func(*Options)) (*GetResourceShareInvitationsOutput, error)
-}
-
-var _ GetResourceShareInvitationsAPIClient = (*Client)(nil)
 
 // GetResourceShareInvitationsPaginatorOptions is the paginator options for
 // GetResourceShareInvitations
@@ -239,6 +234,9 @@ func (p *GetResourceShareInvitationsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetResourceShareInvitations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *GetResourceShareInvitationsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// GetResourceShareInvitationsAPIClient is a client that implements the
+// GetResourceShareInvitations operation.
+type GetResourceShareInvitationsAPIClient interface {
+	GetResourceShareInvitations(context.Context, *GetResourceShareInvitationsInput, ...func(*Options)) (*GetResourceShareInvitationsOutput, error)
+}
+
+var _ GetResourceShareInvitationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetResourceShareInvitations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

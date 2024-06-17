@@ -129,6 +129,9 @@ func (c *Client) addOperationAssociatePhoneNumbersWithVoiceConnectorMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociatePhoneNumbersWithVoiceConnectorValidationMiddleware(stack); err != nil {
 		return err
 	}

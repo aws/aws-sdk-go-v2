@@ -117,6 +117,9 @@ func (c *Client) addOperationListDataIntegrationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataIntegrations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListDataIntegrationsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListDataIntegrationsAPIClient is a client that implements the
-// ListDataIntegrations operation.
-type ListDataIntegrationsAPIClient interface {
-	ListDataIntegrations(context.Context, *ListDataIntegrationsInput, ...func(*Options)) (*ListDataIntegrationsOutput, error)
-}
-
-var _ ListDataIntegrationsAPIClient = (*Client)(nil)
 
 // ListDataIntegrationsPaginatorOptions is the paginator options for
 // ListDataIntegrations
@@ -210,6 +205,9 @@ func (p *ListDataIntegrationsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataIntegrations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListDataIntegrationsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListDataIntegrationsAPIClient is a client that implements the
+// ListDataIntegrations operation.
+type ListDataIntegrationsAPIClient interface {
+	ListDataIntegrations(context.Context, *ListDataIntegrationsInput, ...func(*Options)) (*ListDataIntegrationsOutput, error)
+}
+
+var _ ListDataIntegrationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataIntegrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

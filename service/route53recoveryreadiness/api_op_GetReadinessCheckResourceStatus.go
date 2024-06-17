@@ -128,6 +128,9 @@ func (c *Client) addOperationGetReadinessCheckResourceStatusMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetReadinessCheckResourceStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationGetReadinessCheckResourceStatusMiddlewares(stack *m
 	}
 	return nil
 }
-
-// GetReadinessCheckResourceStatusAPIClient is a client that implements the
-// GetReadinessCheckResourceStatus operation.
-type GetReadinessCheckResourceStatusAPIClient interface {
-	GetReadinessCheckResourceStatus(context.Context, *GetReadinessCheckResourceStatusInput, ...func(*Options)) (*GetReadinessCheckResourceStatusOutput, error)
-}
-
-var _ GetReadinessCheckResourceStatusAPIClient = (*Client)(nil)
 
 // GetReadinessCheckResourceStatusPaginatorOptions is the paginator options for
 // GetReadinessCheckResourceStatus
@@ -226,6 +221,9 @@ func (p *GetReadinessCheckResourceStatusPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetReadinessCheckResourceStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *GetReadinessCheckResourceStatusPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// GetReadinessCheckResourceStatusAPIClient is a client that implements the
+// GetReadinessCheckResourceStatus operation.
+type GetReadinessCheckResourceStatusAPIClient interface {
+	GetReadinessCheckResourceStatus(context.Context, *GetReadinessCheckResourceStatusInput, ...func(*Options)) (*GetReadinessCheckResourceStatusOutput, error)
+}
+
+var _ GetReadinessCheckResourceStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReadinessCheckResourceStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

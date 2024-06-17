@@ -120,6 +120,9 @@ func (c *Client) addOperationListWorkflowBuildVersionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWorkflowBuildVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListWorkflowBuildVersionsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListWorkflowBuildVersionsAPIClient is a client that implements the
-// ListWorkflowBuildVersions operation.
-type ListWorkflowBuildVersionsAPIClient interface {
-	ListWorkflowBuildVersions(context.Context, *ListWorkflowBuildVersionsInput, ...func(*Options)) (*ListWorkflowBuildVersionsOutput, error)
-}
-
-var _ ListWorkflowBuildVersionsAPIClient = (*Client)(nil)
 
 // ListWorkflowBuildVersionsPaginatorOptions is the paginator options for
 // ListWorkflowBuildVersions
@@ -217,6 +212,9 @@ func (p *ListWorkflowBuildVersionsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkflowBuildVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListWorkflowBuildVersionsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListWorkflowBuildVersionsAPIClient is a client that implements the
+// ListWorkflowBuildVersions operation.
+type ListWorkflowBuildVersionsAPIClient interface {
+	ListWorkflowBuildVersions(context.Context, *ListWorkflowBuildVersionsInput, ...func(*Options)) (*ListWorkflowBuildVersionsOutput, error)
+}
+
+var _ ListWorkflowBuildVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkflowBuildVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

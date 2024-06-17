@@ -181,6 +181,9 @@ func (c *Client) addOperationGetKxScalingGroupMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetKxScalingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

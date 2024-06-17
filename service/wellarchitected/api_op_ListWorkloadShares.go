@@ -129,6 +129,9 @@ func (c *Client) addOperationListWorkloadSharesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWorkloadSharesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListWorkloadSharesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListWorkloadSharesAPIClient is a client that implements the ListWorkloadShares
-// operation.
-type ListWorkloadSharesAPIClient interface {
-	ListWorkloadShares(context.Context, *ListWorkloadSharesInput, ...func(*Options)) (*ListWorkloadSharesOutput, error)
-}
-
-var _ ListWorkloadSharesAPIClient = (*Client)(nil)
 
 // ListWorkloadSharesPaginatorOptions is the paginator options for
 // ListWorkloadShares
@@ -225,6 +220,9 @@ func (p *ListWorkloadSharesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkloadShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListWorkloadSharesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListWorkloadSharesAPIClient is a client that implements the ListWorkloadShares
+// operation.
+type ListWorkloadSharesAPIClient interface {
+	ListWorkloadShares(context.Context, *ListWorkloadSharesInput, ...func(*Options)) (*ListWorkloadSharesOutput, error)
+}
+
+var _ ListWorkloadSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkloadShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

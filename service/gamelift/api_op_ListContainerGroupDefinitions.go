@@ -141,6 +141,9 @@ func (c *Client) addOperationListContainerGroupDefinitionsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainerGroupDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListContainerGroupDefinitionsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListContainerGroupDefinitionsAPIClient is a client that implements the
-// ListContainerGroupDefinitions operation.
-type ListContainerGroupDefinitionsAPIClient interface {
-	ListContainerGroupDefinitions(context.Context, *ListContainerGroupDefinitionsInput, ...func(*Options)) (*ListContainerGroupDefinitionsOutput, error)
-}
-
-var _ ListContainerGroupDefinitionsAPIClient = (*Client)(nil)
 
 // ListContainerGroupDefinitionsPaginatorOptions is the paginator options for
 // ListContainerGroupDefinitions
@@ -237,6 +232,9 @@ func (p *ListContainerGroupDefinitionsPaginator) NextPage(ctx context.Context, o
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContainerGroupDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListContainerGroupDefinitionsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListContainerGroupDefinitionsAPIClient is a client that implements the
+// ListContainerGroupDefinitions operation.
+type ListContainerGroupDefinitionsAPIClient interface {
+	ListContainerGroupDefinitions(context.Context, *ListContainerGroupDefinitionsInput, ...func(*Options)) (*ListContainerGroupDefinitionsOutput, error)
+}
+
+var _ ListContainerGroupDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContainerGroupDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

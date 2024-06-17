@@ -134,6 +134,9 @@ func (c *Client) addOperationListPermissionVersionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPermissionVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListPermissionVersionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListPermissionVersionsAPIClient is a client that implements the
-// ListPermissionVersions operation.
-type ListPermissionVersionsAPIClient interface {
-	ListPermissionVersions(context.Context, *ListPermissionVersionsInput, ...func(*Options)) (*ListPermissionVersionsOutput, error)
-}
-
-var _ ListPermissionVersionsAPIClient = (*Client)(nil)
 
 // ListPermissionVersionsPaginatorOptions is the paginator options for
 // ListPermissionVersions
@@ -238,6 +233,9 @@ func (p *ListPermissionVersionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPermissionVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListPermissionVersionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListPermissionVersionsAPIClient is a client that implements the
+// ListPermissionVersions operation.
+type ListPermissionVersionsAPIClient interface {
+	ListPermissionVersions(context.Context, *ListPermissionVersionsInput, ...func(*Options)) (*ListPermissionVersionsOutput, error)
+}
+
+var _ ListPermissionVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPermissionVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

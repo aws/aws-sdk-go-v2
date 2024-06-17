@@ -153,6 +153,9 @@ func (c *Client) addOperationDescribeDBInstancesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -175,103 +178,6 @@ func (c *Client) addOperationDescribeDBInstancesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
-}
-
-// DescribeDBInstancesAPIClient is a client that implements the
-// DescribeDBInstances operation.
-type DescribeDBInstancesAPIClient interface {
-	DescribeDBInstances(context.Context, *DescribeDBInstancesInput, ...func(*Options)) (*DescribeDBInstancesOutput, error)
-}
-
-var _ DescribeDBInstancesAPIClient = (*Client)(nil)
-
-// DescribeDBInstancesPaginatorOptions is the paginator options for
-// DescribeDBInstances
-type DescribeDBInstancesPaginatorOptions struct {
-	//  The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeDBInstancesPaginator is a paginator for DescribeDBInstances
-type DescribeDBInstancesPaginator struct {
-	options   DescribeDBInstancesPaginatorOptions
-	client    DescribeDBInstancesAPIClient
-	params    *DescribeDBInstancesInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeDBInstancesPaginator returns a new DescribeDBInstancesPaginator
-func NewDescribeDBInstancesPaginator(client DescribeDBInstancesAPIClient, params *DescribeDBInstancesInput, optFns ...func(*DescribeDBInstancesPaginatorOptions)) *DescribeDBInstancesPaginator {
-	if params == nil {
-		params = &DescribeDBInstancesInput{}
-	}
-
-	options := DescribeDBInstancesPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeDBInstancesPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeDBInstancesPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeDBInstances page.
-func (p *DescribeDBInstancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBInstancesOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeDBInstances(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // DBInstanceAvailableWaiterOptions are waiter options for
@@ -391,7 +297,13 @@ func (w *DBInstanceAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeDBInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -699,7 +611,13 @@ func (w *DBInstanceDeletedWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeDBInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -879,6 +797,106 @@ func dBInstanceDeletedStateRetryable(ctx context.Context, input *DescribeDBInsta
 
 	return true, nil
 }
+
+// DescribeDBInstancesPaginatorOptions is the paginator options for
+// DescribeDBInstances
+type DescribeDBInstancesPaginatorOptions struct {
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBInstancesPaginator is a paginator for DescribeDBInstances
+type DescribeDBInstancesPaginator struct {
+	options   DescribeDBInstancesPaginatorOptions
+	client    DescribeDBInstancesAPIClient
+	params    *DescribeDBInstancesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBInstancesPaginator returns a new DescribeDBInstancesPaginator
+func NewDescribeDBInstancesPaginator(client DescribeDBInstancesAPIClient, params *DescribeDBInstancesInput, optFns ...func(*DescribeDBInstancesPaginatorOptions)) *DescribeDBInstancesPaginator {
+	if params == nil {
+		params = &DescribeDBInstancesInput{}
+	}
+
+	options := DescribeDBInstancesPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDBInstancesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBInstancesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDBInstances page.
+func (p *DescribeDBInstancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBInstancesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeDBInstances(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeDBInstancesAPIClient is a client that implements the
+// DescribeDBInstances operation.
+type DescribeDBInstancesAPIClient interface {
+	DescribeDBInstances(context.Context, *DescribeDBInstancesInput, ...func(*Options)) (*DescribeDBInstancesOutput, error)
+}
+
+var _ DescribeDBInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

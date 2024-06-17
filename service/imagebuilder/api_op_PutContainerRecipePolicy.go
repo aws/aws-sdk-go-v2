@@ -122,6 +122,9 @@ func (c *Client) addOperationPutContainerRecipePolicyMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutContainerRecipePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

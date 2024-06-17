@@ -110,6 +110,9 @@ func (c *Client) addOperationListTestGridProjectsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTestGridProjects(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListTestGridProjectsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListTestGridProjectsAPIClient is a client that implements the
-// ListTestGridProjects operation.
-type ListTestGridProjectsAPIClient interface {
-	ListTestGridProjects(context.Context, *ListTestGridProjectsInput, ...func(*Options)) (*ListTestGridProjectsOutput, error)
-}
-
-var _ ListTestGridProjectsAPIClient = (*Client)(nil)
 
 // ListTestGridProjectsPaginatorOptions is the paginator options for
 // ListTestGridProjects
@@ -203,6 +198,9 @@ func (p *ListTestGridProjectsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResult = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestGridProjects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListTestGridProjectsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListTestGridProjectsAPIClient is a client that implements the
+// ListTestGridProjects operation.
+type ListTestGridProjectsAPIClient interface {
+	ListTestGridProjects(context.Context, *ListTestGridProjectsInput, ...func(*Options)) (*ListTestGridProjectsOutput, error)
+}
+
+var _ ListTestGridProjectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestGridProjects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

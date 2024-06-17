@@ -142,6 +142,9 @@ func (c *Client) addOperationDescribeProjectVersionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeProjectVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,100 +167,6 @@ func (c *Client) addOperationDescribeProjectVersionsMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
-}
-
-// DescribeProjectVersionsAPIClient is a client that implements the
-// DescribeProjectVersions operation.
-type DescribeProjectVersionsAPIClient interface {
-	DescribeProjectVersions(context.Context, *DescribeProjectVersionsInput, ...func(*Options)) (*DescribeProjectVersionsOutput, error)
-}
-
-var _ DescribeProjectVersionsAPIClient = (*Client)(nil)
-
-// DescribeProjectVersionsPaginatorOptions is the paginator options for
-// DescribeProjectVersions
-type DescribeProjectVersionsPaginatorOptions struct {
-	// The maximum number of results to return per paginated call. The largest value
-	// you can specify is 100. If you specify a value greater than 100, a
-	// ValidationException error occurs. The default value is 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeProjectVersionsPaginator is a paginator for DescribeProjectVersions
-type DescribeProjectVersionsPaginator struct {
-	options   DescribeProjectVersionsPaginatorOptions
-	client    DescribeProjectVersionsAPIClient
-	params    *DescribeProjectVersionsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeProjectVersionsPaginator returns a new
-// DescribeProjectVersionsPaginator
-func NewDescribeProjectVersionsPaginator(client DescribeProjectVersionsAPIClient, params *DescribeProjectVersionsInput, optFns ...func(*DescribeProjectVersionsPaginatorOptions)) *DescribeProjectVersionsPaginator {
-	if params == nil {
-		params = &DescribeProjectVersionsInput{}
-	}
-
-	options := DescribeProjectVersionsPaginatorOptions{}
-	if params.MaxResults != nil {
-		options.Limit = *params.MaxResults
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeProjectVersionsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeProjectVersionsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeProjectVersions page.
-func (p *DescribeProjectVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeProjectVersionsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxResults = limit
-
-	result, err := p.client.DescribeProjectVersions(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // ProjectVersionRunningWaiterOptions are waiter options for
@@ -377,7 +286,13 @@ func (w *ProjectVersionRunningWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.DescribeProjectVersions(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -594,7 +509,13 @@ func (w *ProjectVersionTrainingCompletedWaiter) WaitForOutput(ctx context.Contex
 		}
 
 		out, err := w.client.DescribeProjectVersions(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -690,6 +611,103 @@ func projectVersionTrainingCompletedStateRetryable(ctx context.Context, input *D
 
 	return true, nil
 }
+
+// DescribeProjectVersionsPaginatorOptions is the paginator options for
+// DescribeProjectVersions
+type DescribeProjectVersionsPaginatorOptions struct {
+	// The maximum number of results to return per paginated call. The largest value
+	// you can specify is 100. If you specify a value greater than 100, a
+	// ValidationException error occurs. The default value is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeProjectVersionsPaginator is a paginator for DescribeProjectVersions
+type DescribeProjectVersionsPaginator struct {
+	options   DescribeProjectVersionsPaginatorOptions
+	client    DescribeProjectVersionsAPIClient
+	params    *DescribeProjectVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeProjectVersionsPaginator returns a new
+// DescribeProjectVersionsPaginator
+func NewDescribeProjectVersionsPaginator(client DescribeProjectVersionsAPIClient, params *DescribeProjectVersionsInput, optFns ...func(*DescribeProjectVersionsPaginatorOptions)) *DescribeProjectVersionsPaginator {
+	if params == nil {
+		params = &DescribeProjectVersionsInput{}
+	}
+
+	options := DescribeProjectVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeProjectVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeProjectVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeProjectVersions page.
+func (p *DescribeProjectVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeProjectVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeProjectVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeProjectVersionsAPIClient is a client that implements the
+// DescribeProjectVersions operation.
+type DescribeProjectVersionsAPIClient interface {
+	DescribeProjectVersions(context.Context, *DescribeProjectVersionsInput, ...func(*Options)) (*DescribeProjectVersionsOutput, error)
+}
+
+var _ DescribeProjectVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeProjectVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

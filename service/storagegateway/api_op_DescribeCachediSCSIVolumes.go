@@ -114,6 +114,9 @@ func (c *Client) addOperationDescribeCachediSCSIVolumesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCachediSCSIVolumesValidationMiddleware(stack); err != nil {
 		return err
 	}

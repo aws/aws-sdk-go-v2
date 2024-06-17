@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateDataQualityRulesetMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDataQualityRulesetValidationMiddleware(stack); err != nil {
 		return err
 	}

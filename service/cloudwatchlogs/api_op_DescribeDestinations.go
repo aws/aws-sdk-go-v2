@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeDestinationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationDescribeDestinationsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeDestinationsAPIClient is a client that implements the
-// DescribeDestinations operation.
-type DescribeDestinationsAPIClient interface {
-	DescribeDestinations(context.Context, *DescribeDestinationsInput, ...func(*Options)) (*DescribeDestinationsOutput, error)
-}
-
-var _ DescribeDestinationsAPIClient = (*Client)(nil)
 
 // DescribeDestinationsPaginatorOptions is the paginator options for
 // DescribeDestinations
@@ -209,6 +204,9 @@ func (p *DescribeDestinationsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *DescribeDestinationsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeDestinationsAPIClient is a client that implements the
+// DescribeDestinations operation.
+type DescribeDestinationsAPIClient interface {
+	DescribeDestinations(context.Context, *DescribeDestinationsInput, ...func(*Options)) (*DescribeDestinationsOutput, error)
+}
+
+var _ DescribeDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

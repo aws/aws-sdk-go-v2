@@ -118,6 +118,9 @@ func (c *Client) addOperationListTaskExecutionsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTaskExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListTaskExecutionsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListTaskExecutionsAPIClient is a client that implements the ListTaskExecutions
-// operation.
-type ListTaskExecutionsAPIClient interface {
-	ListTaskExecutions(context.Context, *ListTaskExecutionsInput, ...func(*Options)) (*ListTaskExecutionsOutput, error)
-}
-
-var _ ListTaskExecutionsAPIClient = (*Client)(nil)
 
 // ListTaskExecutionsPaginatorOptions is the paginator options for
 // ListTaskExecutions
@@ -211,6 +206,9 @@ func (p *ListTaskExecutionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTaskExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListTaskExecutionsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListTaskExecutionsAPIClient is a client that implements the ListTaskExecutions
+// operation.
+type ListTaskExecutionsAPIClient interface {
+	ListTaskExecutions(context.Context, *ListTaskExecutionsInput, ...func(*Options)) (*ListTaskExecutionsOutput, error)
+}
+
+var _ ListTaskExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTaskExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

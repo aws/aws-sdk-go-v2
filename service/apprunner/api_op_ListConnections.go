@@ -127,6 +127,9 @@ func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListConnectionsAPIClient is a client that implements the ListConnections
-// operation.
-type ListConnectionsAPIClient interface {
-	ListConnections(context.Context, *ListConnectionsInput, ...func(*Options)) (*ListConnectionsOutput, error)
-}
-
-var _ ListConnectionsAPIClient = (*Client)(nil)
 
 // ListConnectionsPaginatorOptions is the paginator options for ListConnections
 type ListConnectionsPaginatorOptions struct {
@@ -223,6 +218,9 @@ func (p *ListConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConnections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListConnectionsAPIClient is a client that implements the ListConnections
+// operation.
+type ListConnectionsAPIClient interface {
+	ListConnections(context.Context, *ListConnectionsInput, ...func(*Options)) (*ListConnectionsOutput, error)
+}
+
+var _ ListConnectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConnections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

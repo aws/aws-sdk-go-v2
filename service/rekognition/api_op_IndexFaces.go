@@ -292,6 +292,9 @@ func (c *Client) addOperationIndexFacesMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpIndexFacesValidationMiddleware(stack); err != nil {
 		return err
 	}

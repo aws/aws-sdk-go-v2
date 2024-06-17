@@ -113,6 +113,9 @@ func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInvitations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListInvitationsAPIClient is a client that implements the ListInvitations
-// operation.
-type ListInvitationsAPIClient interface {
-	ListInvitations(context.Context, *ListInvitationsInput, ...func(*Options)) (*ListInvitationsOutput, error)
-}
-
-var _ ListInvitationsAPIClient = (*Client)(nil)
 
 // ListInvitationsPaginatorOptions is the paginator options for ListInvitations
 type ListInvitationsPaginatorOptions struct {
@@ -205,6 +200,9 @@ func (p *ListInvitationsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInvitations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListInvitationsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListInvitationsAPIClient is a client that implements the ListInvitations
+// operation.
+type ListInvitationsAPIClient interface {
+	ListInvitations(context.Context, *ListInvitationsInput, ...func(*Options)) (*ListInvitationsOutput, error)
+}
+
+var _ ListInvitationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInvitations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

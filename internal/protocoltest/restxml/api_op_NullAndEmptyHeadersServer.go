@@ -107,6 +107,9 @@ func (c *Client) addOperationNullAndEmptyHeadersServerMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNullAndEmptyHeadersServer(options.Region), middleware.Before); err != nil {
 		return err
 	}

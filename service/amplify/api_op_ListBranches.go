@@ -122,6 +122,9 @@ func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBranchesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListBranchesAPIClient is a client that implements the ListBranches operation.
-type ListBranchesAPIClient interface {
-	ListBranches(context.Context, *ListBranchesInput, ...func(*Options)) (*ListBranchesOutput, error)
-}
-
-var _ ListBranchesAPIClient = (*Client)(nil)
 
 // ListBranchesPaginatorOptions is the paginator options for ListBranches
 type ListBranchesPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *ListBranchesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBranches(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *ListBranchesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListBranchesAPIClient is a client that implements the ListBranches operation.
+type ListBranchesAPIClient interface {
+	ListBranches(context.Context, *ListBranchesInput, ...func(*Options)) (*ListBranchesOutput, error)
+}
+
+var _ ListBranchesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBranches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

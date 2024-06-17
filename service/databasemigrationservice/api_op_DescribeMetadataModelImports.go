@@ -133,6 +133,9 @@ func (c *Client) addOperationDescribeMetadataModelImportsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMetadataModelImportsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationDescribeMetadataModelImportsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeMetadataModelImportsAPIClient is a client that implements the
-// DescribeMetadataModelImports operation.
-type DescribeMetadataModelImportsAPIClient interface {
-	DescribeMetadataModelImports(context.Context, *DescribeMetadataModelImportsInput, ...func(*Options)) (*DescribeMetadataModelImportsOutput, error)
-}
-
-var _ DescribeMetadataModelImportsAPIClient = (*Client)(nil)
 
 // DescribeMetadataModelImportsPaginatorOptions is the paginator options for
 // DescribeMetadataModelImports
@@ -231,6 +226,9 @@ func (p *DescribeMetadataModelImportsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMetadataModelImports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *DescribeMetadataModelImportsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeMetadataModelImportsAPIClient is a client that implements the
+// DescribeMetadataModelImports operation.
+type DescribeMetadataModelImportsAPIClient interface {
+	DescribeMetadataModelImports(context.Context, *DescribeMetadataModelImportsInput, ...func(*Options)) (*DescribeMetadataModelImportsOutput, error)
+}
+
+var _ DescribeMetadataModelImportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMetadataModelImports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

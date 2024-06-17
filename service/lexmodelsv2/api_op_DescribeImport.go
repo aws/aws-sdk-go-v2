@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeImportMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeImportValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationDescribeImportMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// DescribeImportAPIClient is a client that implements the DescribeImport
-// operation.
-type DescribeImportAPIClient interface {
-	DescribeImport(context.Context, *DescribeImportInput, ...func(*Options)) (*DescribeImportOutput, error)
-}
-
-var _ DescribeImportAPIClient = (*Client)(nil)
 
 // BotImportCompletedWaiterOptions are waiter options for BotImportCompletedWaiter
 type BotImportCompletedWaiterOptions struct {
@@ -286,7 +281,13 @@ func (w *BotImportCompletedWaiter) WaitForOutput(ctx context.Context, params *De
 		}
 
 		out, err := w.client.DescribeImport(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -377,6 +378,14 @@ func botImportCompletedStateRetryable(ctx context.Context, input *DescribeImport
 
 	return true, nil
 }
+
+// DescribeImportAPIClient is a client that implements the DescribeImport
+// operation.
+type DescribeImportAPIClient interface {
+	DescribeImport(context.Context, *DescribeImportInput, ...func(*Options)) (*DescribeImportOutput, error)
+}
+
+var _ DescribeImportAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeImport(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

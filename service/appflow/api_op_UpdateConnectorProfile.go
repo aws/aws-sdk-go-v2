@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateConnectorProfileMiddleware(stack, options); err != nil {
 		return err
 	}

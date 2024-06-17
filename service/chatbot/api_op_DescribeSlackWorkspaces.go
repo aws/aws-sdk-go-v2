@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeSlackWorkspacesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSlackWorkspaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationDescribeSlackWorkspacesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeSlackWorkspacesAPIClient is a client that implements the
-// DescribeSlackWorkspaces operation.
-type DescribeSlackWorkspacesAPIClient interface {
-	DescribeSlackWorkspaces(context.Context, *DescribeSlackWorkspacesInput, ...func(*Options)) (*DescribeSlackWorkspacesOutput, error)
-}
-
-var _ DescribeSlackWorkspacesAPIClient = (*Client)(nil)
 
 // DescribeSlackWorkspacesPaginatorOptions is the paginator options for
 // DescribeSlackWorkspaces
@@ -212,6 +207,9 @@ func (p *DescribeSlackWorkspacesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSlackWorkspaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *DescribeSlackWorkspacesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeSlackWorkspacesAPIClient is a client that implements the
+// DescribeSlackWorkspaces operation.
+type DescribeSlackWorkspacesAPIClient interface {
+	DescribeSlackWorkspaces(context.Context, *DescribeSlackWorkspacesInput, ...func(*Options)) (*DescribeSlackWorkspacesOutput, error)
+}
+
+var _ DescribeSlackWorkspacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSlackWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

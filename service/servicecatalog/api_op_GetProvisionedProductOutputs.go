@@ -133,6 +133,9 @@ func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProvisionedProductOutputs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// GetProvisionedProductOutputsAPIClient is a client that implements the
-// GetProvisionedProductOutputs operation.
-type GetProvisionedProductOutputsAPIClient interface {
-	GetProvisionedProductOutputs(context.Context, *GetProvisionedProductOutputsInput, ...func(*Options)) (*GetProvisionedProductOutputsOutput, error)
-}
-
-var _ GetProvisionedProductOutputsAPIClient = (*Client)(nil)
 
 // GetProvisionedProductOutputsPaginatorOptions is the paginator options for
 // GetProvisionedProductOutputs
@@ -224,6 +219,9 @@ func (p *GetProvisionedProductOutputsPaginator) NextPage(ctx context.Context, op
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetProvisionedProductOutputs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *GetProvisionedProductOutputsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// GetProvisionedProductOutputsAPIClient is a client that implements the
+// GetProvisionedProductOutputs operation.
+type GetProvisionedProductOutputsAPIClient interface {
+	GetProvisionedProductOutputs(context.Context, *GetProvisionedProductOutputsInput, ...func(*Options)) (*GetProvisionedProductOutputsOutput, error)
+}
+
+var _ GetProvisionedProductOutputsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetProvisionedProductOutputs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeLaunchConfigurationTemplatesMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLaunchConfigurationTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationDescribeLaunchConfigurationTemplatesMiddlewares(sta
 	}
 	return nil
 }
-
-// DescribeLaunchConfigurationTemplatesAPIClient is a client that implements the
-// DescribeLaunchConfigurationTemplates operation.
-type DescribeLaunchConfigurationTemplatesAPIClient interface {
-	DescribeLaunchConfigurationTemplates(context.Context, *DescribeLaunchConfigurationTemplatesInput, ...func(*Options)) (*DescribeLaunchConfigurationTemplatesOutput, error)
-}
-
-var _ DescribeLaunchConfigurationTemplatesAPIClient = (*Client)(nil)
 
 // DescribeLaunchConfigurationTemplatesPaginatorOptions is the paginator options
 // for DescribeLaunchConfigurationTemplates
@@ -210,6 +205,9 @@ func (p *DescribeLaunchConfigurationTemplatesPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeLaunchConfigurationTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *DescribeLaunchConfigurationTemplatesPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// DescribeLaunchConfigurationTemplatesAPIClient is a client that implements the
+// DescribeLaunchConfigurationTemplates operation.
+type DescribeLaunchConfigurationTemplatesAPIClient interface {
+	DescribeLaunchConfigurationTemplates(context.Context, *DescribeLaunchConfigurationTemplatesInput, ...func(*Options)) (*DescribeLaunchConfigurationTemplatesOutput, error)
+}
+
+var _ DescribeLaunchConfigurationTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeLaunchConfigurationTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -131,6 +131,9 @@ func (c *Client) addOperationGetConsolidatedReportMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetConsolidatedReportValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationGetConsolidatedReportMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// GetConsolidatedReportAPIClient is a client that implements the
-// GetConsolidatedReport operation.
-type GetConsolidatedReportAPIClient interface {
-	GetConsolidatedReport(context.Context, *GetConsolidatedReportInput, ...func(*Options)) (*GetConsolidatedReportOutput, error)
-}
-
-var _ GetConsolidatedReportAPIClient = (*Client)(nil)
 
 // GetConsolidatedReportPaginatorOptions is the paginator options for
 // GetConsolidatedReport
@@ -227,6 +222,9 @@ func (p *GetConsolidatedReportPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetConsolidatedReport(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *GetConsolidatedReportPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// GetConsolidatedReportAPIClient is a client that implements the
+// GetConsolidatedReport operation.
+type GetConsolidatedReportAPIClient interface {
+	GetConsolidatedReport(context.Context, *GetConsolidatedReportInput, ...func(*Options)) (*GetConsolidatedReportOutput, error)
+}
+
+var _ GetConsolidatedReportAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetConsolidatedReport(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

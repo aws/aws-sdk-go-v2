@@ -183,6 +183,9 @@ func (c *Client) addOperationGetImagesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetImagesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -206,13 +209,6 @@ func (c *Client) addOperationGetImagesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// GetImagesAPIClient is a client that implements the GetImages operation.
-type GetImagesAPIClient interface {
-	GetImages(context.Context, *GetImagesInput, ...func(*Options)) (*GetImagesOutput, error)
-}
-
-var _ GetImagesAPIClient = (*Client)(nil)
 
 // GetImagesPaginatorOptions is the paginator options for GetImages
 type GetImagesPaginatorOptions struct {
@@ -281,6 +277,9 @@ func (p *GetImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetImages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -299,6 +298,13 @@ func (p *GetImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// GetImagesAPIClient is a client that implements the GetImages operation.
+type GetImagesAPIClient interface {
+	GetImages(context.Context, *GetImagesInput, ...func(*Options)) (*GetImagesOutput, error)
+}
+
+var _ GetImagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetImages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

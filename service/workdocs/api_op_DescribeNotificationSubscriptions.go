@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeNotificationSubscriptionsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeNotificationSubscriptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationDescribeNotificationSubscriptionsMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeNotificationSubscriptionsAPIClient is a client that implements the
-// DescribeNotificationSubscriptions operation.
-type DescribeNotificationSubscriptionsAPIClient interface {
-	DescribeNotificationSubscriptions(context.Context, *DescribeNotificationSubscriptionsInput, ...func(*Options)) (*DescribeNotificationSubscriptionsOutput, error)
-}
-
-var _ DescribeNotificationSubscriptionsAPIClient = (*Client)(nil)
 
 // DescribeNotificationSubscriptionsPaginatorOptions is the paginator options for
 // DescribeNotificationSubscriptions
@@ -215,6 +210,9 @@ func (p *DescribeNotificationSubscriptionsPaginator) NextPage(ctx context.Contex
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeNotificationSubscriptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeNotificationSubscriptionsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeNotificationSubscriptionsAPIClient is a client that implements the
+// DescribeNotificationSubscriptions operation.
+type DescribeNotificationSubscriptionsAPIClient interface {
+	DescribeNotificationSubscriptions(context.Context, *DescribeNotificationSubscriptionsInput, ...func(*Options)) (*DescribeNotificationSubscriptionsOutput, error)
+}
+
+var _ DescribeNotificationSubscriptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeNotificationSubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

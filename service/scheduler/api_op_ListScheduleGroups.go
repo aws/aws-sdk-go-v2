@@ -119,6 +119,9 @@ func (c *Client) addOperationListScheduleGroupsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScheduleGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListScheduleGroupsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListScheduleGroupsAPIClient is a client that implements the ListScheduleGroups
-// operation.
-type ListScheduleGroupsAPIClient interface {
-	ListScheduleGroups(context.Context, *ListScheduleGroupsInput, ...func(*Options)) (*ListScheduleGroupsOutput, error)
-}
-
-var _ ListScheduleGroupsAPIClient = (*Client)(nil)
 
 // ListScheduleGroupsPaginatorOptions is the paginator options for
 // ListScheduleGroups
@@ -214,6 +209,9 @@ func (p *ListScheduleGroupsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScheduleGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListScheduleGroupsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListScheduleGroupsAPIClient is a client that implements the ListScheduleGroups
+// operation.
+type ListScheduleGroupsAPIClient interface {
+	ListScheduleGroups(context.Context, *ListScheduleGroupsInput, ...func(*Options)) (*ListScheduleGroupsOutput, error)
+}
+
+var _ ListScheduleGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScheduleGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

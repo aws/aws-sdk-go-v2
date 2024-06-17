@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateUserHierarchyMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserHierarchyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -140,6 +140,9 @@ func (c *Client) addOperationDescribeStorageSystemResourcesMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeStorageSystemResourcesMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,41 +169,6 @@ func (c *Client) addOperationDescribeStorageSystemResourcesMiddlewares(stack *mi
 	}
 	return nil
 }
-
-type endpointPrefix_opDescribeStorageSystemResourcesMiddleware struct {
-}
-
-func (*endpointPrefix_opDescribeStorageSystemResourcesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opDescribeStorageSystemResourcesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "discovery-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opDescribeStorageSystemResourcesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opDescribeStorageSystemResourcesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// DescribeStorageSystemResourcesAPIClient is a client that implements the
-// DescribeStorageSystemResources operation.
-type DescribeStorageSystemResourcesAPIClient interface {
-	DescribeStorageSystemResources(context.Context, *DescribeStorageSystemResourcesInput, ...func(*Options)) (*DescribeStorageSystemResourcesOutput, error)
-}
-
-var _ DescribeStorageSystemResourcesAPIClient = (*Client)(nil)
 
 // DescribeStorageSystemResourcesPaginatorOptions is the paginator options for
 // DescribeStorageSystemResources
@@ -269,6 +237,9 @@ func (p *DescribeStorageSystemResourcesPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeStorageSystemResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -287,6 +258,41 @@ func (p *DescribeStorageSystemResourcesPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+type endpointPrefix_opDescribeStorageSystemResourcesMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribeStorageSystemResourcesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribeStorageSystemResourcesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "discovery-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opDescribeStorageSystemResourcesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opDescribeStorageSystemResourcesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// DescribeStorageSystemResourcesAPIClient is a client that implements the
+// DescribeStorageSystemResources operation.
+type DescribeStorageSystemResourcesAPIClient interface {
+	DescribeStorageSystemResources(context.Context, *DescribeStorageSystemResourcesInput, ...func(*Options)) (*DescribeStorageSystemResourcesOutput, error)
+}
+
+var _ DescribeStorageSystemResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStorageSystemResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

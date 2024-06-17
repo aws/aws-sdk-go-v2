@@ -134,6 +134,9 @@ func (c *Client) addOperationBatchGetAssetPropertyValueMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchGetAssetPropertyValueMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,41 +163,6 @@ func (c *Client) addOperationBatchGetAssetPropertyValueMiddlewares(stack *middle
 	}
 	return nil
 }
-
-type endpointPrefix_opBatchGetAssetPropertyValueMiddleware struct {
-}
-
-func (*endpointPrefix_opBatchGetAssetPropertyValueMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opBatchGetAssetPropertyValueMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "data." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opBatchGetAssetPropertyValueMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opBatchGetAssetPropertyValueMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// BatchGetAssetPropertyValueAPIClient is a client that implements the
-// BatchGetAssetPropertyValue operation.
-type BatchGetAssetPropertyValueAPIClient interface {
-	BatchGetAssetPropertyValue(context.Context, *BatchGetAssetPropertyValueInput, ...func(*Options)) (*BatchGetAssetPropertyValueOutput, error)
-}
-
-var _ BatchGetAssetPropertyValueAPIClient = (*Client)(nil)
 
 // BatchGetAssetPropertyValuePaginatorOptions is the paginator options for
 // BatchGetAssetPropertyValue
@@ -250,6 +218,9 @@ func (p *BatchGetAssetPropertyValuePaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.BatchGetAssetPropertyValue(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +239,41 @@ func (p *BatchGetAssetPropertyValuePaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+type endpointPrefix_opBatchGetAssetPropertyValueMiddleware struct {
+}
+
+func (*endpointPrefix_opBatchGetAssetPropertyValueMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opBatchGetAssetPropertyValueMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "data." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opBatchGetAssetPropertyValueMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opBatchGetAssetPropertyValueMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// BatchGetAssetPropertyValueAPIClient is a client that implements the
+// BatchGetAssetPropertyValue operation.
+type BatchGetAssetPropertyValueAPIClient interface {
+	BatchGetAssetPropertyValue(context.Context, *BatchGetAssetPropertyValueInput, ...func(*Options)) (*BatchGetAssetPropertyValueOutput, error)
+}
+
+var _ BatchGetAssetPropertyValueAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opBatchGetAssetPropertyValue(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

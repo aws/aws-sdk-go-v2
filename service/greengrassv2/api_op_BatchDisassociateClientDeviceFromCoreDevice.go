@@ -113,6 +113,9 @@ func (c *Client) addOperationBatchDisassociateClientDeviceFromCoreDeviceMiddlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchDisassociateClientDeviceFromCoreDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,6 +123,9 @@ func (c *Client) addOperationListWorldTemplatesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorldTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListWorldTemplatesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListWorldTemplatesAPIClient is a client that implements the ListWorldTemplates
-// operation.
-type ListWorldTemplatesAPIClient interface {
-	ListWorldTemplates(context.Context, *ListWorldTemplatesInput, ...func(*Options)) (*ListWorldTemplatesOutput, error)
-}
-
-var _ ListWorldTemplatesAPIClient = (*Client)(nil)
 
 // ListWorldTemplatesPaginatorOptions is the paginator options for
 // ListWorldTemplates
@@ -221,6 +216,9 @@ func (p *ListWorldTemplatesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorldTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListWorldTemplatesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListWorldTemplatesAPIClient is a client that implements the ListWorldTemplates
+// operation.
+type ListWorldTemplatesAPIClient interface {
+	ListWorldTemplates(context.Context, *ListWorldTemplatesInput, ...func(*Options)) (*ListWorldTemplatesOutput, error)
+}
+
+var _ ListWorldTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorldTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

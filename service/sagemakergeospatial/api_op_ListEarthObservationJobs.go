@@ -125,6 +125,9 @@ func (c *Client) addOperationListEarthObservationJobsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEarthObservationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListEarthObservationJobsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListEarthObservationJobsAPIClient is a client that implements the
-// ListEarthObservationJobs operation.
-type ListEarthObservationJobsAPIClient interface {
-	ListEarthObservationJobs(context.Context, *ListEarthObservationJobsInput, ...func(*Options)) (*ListEarthObservationJobsOutput, error)
-}
-
-var _ ListEarthObservationJobsAPIClient = (*Client)(nil)
 
 // ListEarthObservationJobsPaginatorOptions is the paginator options for
 // ListEarthObservationJobs
@@ -207,6 +202,9 @@ func (p *ListEarthObservationJobsPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEarthObservationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListEarthObservationJobsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListEarthObservationJobsAPIClient is a client that implements the
+// ListEarthObservationJobs operation.
+type ListEarthObservationJobsAPIClient interface {
+	ListEarthObservationJobs(context.Context, *ListEarthObservationJobsInput, ...func(*Options)) (*ListEarthObservationJobsOutput, error)
+}
+
+var _ ListEarthObservationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEarthObservationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -107,6 +107,9 @@ func (c *Client) addOperationFlushStageCacheMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpFlushStageCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

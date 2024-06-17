@@ -131,6 +131,9 @@ func (c *Client) addOperationListActiveViolationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListActiveViolations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListActiveViolationsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListActiveViolationsAPIClient is a client that implements the
-// ListActiveViolations operation.
-type ListActiveViolationsAPIClient interface {
-	ListActiveViolations(context.Context, *ListActiveViolationsInput, ...func(*Options)) (*ListActiveViolationsOutput, error)
-}
-
-var _ ListActiveViolationsAPIClient = (*Client)(nil)
 
 // ListActiveViolationsPaginatorOptions is the paginator options for
 // ListActiveViolations
@@ -224,6 +219,9 @@ func (p *ListActiveViolationsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListActiveViolations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListActiveViolationsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListActiveViolationsAPIClient is a client that implements the
+// ListActiveViolations operation.
+type ListActiveViolationsAPIClient interface {
+	ListActiveViolations(context.Context, *ListActiveViolationsInput, ...func(*Options)) (*ListActiveViolationsOutput, error)
+}
+
+var _ ListActiveViolationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListActiveViolations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

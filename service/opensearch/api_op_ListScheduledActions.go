@@ -124,6 +124,9 @@ func (c *Client) addOperationListScheduledActionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListScheduledActionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListScheduledActionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListScheduledActionsAPIClient is a client that implements the
-// ListScheduledActions operation.
-type ListScheduledActionsAPIClient interface {
-	ListScheduledActions(context.Context, *ListScheduledActionsInput, ...func(*Options)) (*ListScheduledActionsOutput, error)
-}
-
-var _ ListScheduledActionsAPIClient = (*Client)(nil)
 
 // ListScheduledActionsPaginatorOptions is the paginator options for
 // ListScheduledActions
@@ -217,6 +212,9 @@ func (p *ListScheduledActionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScheduledActions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListScheduledActionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListScheduledActionsAPIClient is a client that implements the
+// ListScheduledActions operation.
+type ListScheduledActionsAPIClient interface {
+	ListScheduledActions(context.Context, *ListScheduledActionsInput, ...func(*Options)) (*ListScheduledActionsOutput, error)
+}
+
+var _ ListScheduledActionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScheduledActions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

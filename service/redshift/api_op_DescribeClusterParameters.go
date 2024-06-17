@@ -153,6 +153,9 @@ func (c *Client) addOperationDescribeClusterParametersMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeClusterParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -176,14 +179,6 @@ func (c *Client) addOperationDescribeClusterParametersMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeClusterParametersAPIClient is a client that implements the
-// DescribeClusterParameters operation.
-type DescribeClusterParametersAPIClient interface {
-	DescribeClusterParameters(context.Context, *DescribeClusterParametersInput, ...func(*Options)) (*DescribeClusterParametersOutput, error)
-}
-
-var _ DescribeClusterParametersAPIClient = (*Client)(nil)
 
 // DescribeClusterParametersPaginatorOptions is the paginator options for
 // DescribeClusterParameters
@@ -257,6 +252,9 @@ func (p *DescribeClusterParametersPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeClusterParameters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +273,14 @@ func (p *DescribeClusterParametersPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeClusterParametersAPIClient is a client that implements the
+// DescribeClusterParameters operation.
+type DescribeClusterParametersAPIClient interface {
+	DescribeClusterParameters(context.Context, *DescribeClusterParametersInput, ...func(*Options)) (*DescribeClusterParametersOutput, error)
+}
+
+var _ DescribeClusterParametersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeClusterParameters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

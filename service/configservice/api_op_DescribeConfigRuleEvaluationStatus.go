@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigRuleEvaluationStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack
 	}
 	return nil
 }
-
-// DescribeConfigRuleEvaluationStatusAPIClient is a client that implements the
-// DescribeConfigRuleEvaluationStatus operation.
-type DescribeConfigRuleEvaluationStatusAPIClient interface {
-	DescribeConfigRuleEvaluationStatus(context.Context, *DescribeConfigRuleEvaluationStatusInput, ...func(*Options)) (*DescribeConfigRuleEvaluationStatusOutput, error)
-}
-
-var _ DescribeConfigRuleEvaluationStatusAPIClient = (*Client)(nil)
 
 // DescribeConfigRuleEvaluationStatusPaginatorOptions is the paginator options for
 // DescribeConfigRuleEvaluationStatus
@@ -227,6 +222,9 @@ func (p *DescribeConfigRuleEvaluationStatusPaginator) NextPage(ctx context.Conte
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConfigRuleEvaluationStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *DescribeConfigRuleEvaluationStatusPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// DescribeConfigRuleEvaluationStatusAPIClient is a client that implements the
+// DescribeConfigRuleEvaluationStatus operation.
+type DescribeConfigRuleEvaluationStatusAPIClient interface {
+	DescribeConfigRuleEvaluationStatus(context.Context, *DescribeConfigRuleEvaluationStatusInput, ...func(*Options)) (*DescribeConfigRuleEvaluationStatusOutput, error)
+}
+
+var _ DescribeConfigRuleEvaluationStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConfigRuleEvaluationStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

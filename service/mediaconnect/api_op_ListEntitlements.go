@@ -125,6 +125,9 @@ func (c *Client) addOperationListEntitlementsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntitlements(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListEntitlementsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListEntitlementsAPIClient is a client that implements the ListEntitlements
-// operation.
-type ListEntitlementsAPIClient interface {
-	ListEntitlements(context.Context, *ListEntitlementsInput, ...func(*Options)) (*ListEntitlementsOutput, error)
-}
-
-var _ ListEntitlementsAPIClient = (*Client)(nil)
 
 // ListEntitlementsPaginatorOptions is the paginator options for ListEntitlements
 type ListEntitlementsPaginatorOptions struct {
@@ -223,6 +218,9 @@ func (p *ListEntitlementsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEntitlements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListEntitlementsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListEntitlementsAPIClient is a client that implements the ListEntitlements
+// operation.
+type ListEntitlementsAPIClient interface {
+	ListEntitlements(context.Context, *ListEntitlementsInput, ...func(*Options)) (*ListEntitlementsOutput, error)
+}
+
+var _ ListEntitlementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEntitlements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

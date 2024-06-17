@@ -128,6 +128,9 @@ func (c *Client) addOperationGetAttributeValuesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAttributeValuesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationGetAttributeValuesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetAttributeValuesAPIClient is a client that implements the GetAttributeValues
-// operation.
-type GetAttributeValuesAPIClient interface {
-	GetAttributeValues(context.Context, *GetAttributeValuesInput, ...func(*Options)) (*GetAttributeValuesOutput, error)
-}
-
-var _ GetAttributeValuesAPIClient = (*Client)(nil)
 
 // GetAttributeValuesPaginatorOptions is the paginator options for
 // GetAttributeValues
@@ -224,6 +219,9 @@ func (p *GetAttributeValuesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAttributeValues(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *GetAttributeValuesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetAttributeValuesAPIClient is a client that implements the GetAttributeValues
+// operation.
+type GetAttributeValuesAPIClient interface {
+	GetAttributeValues(context.Context, *GetAttributeValuesInput, ...func(*Options)) (*GetAttributeValuesOutput, error)
+}
+
+var _ GetAttributeValuesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAttributeValues(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

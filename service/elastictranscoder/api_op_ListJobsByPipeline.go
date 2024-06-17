@@ -127,6 +127,9 @@ func (c *Client) addOperationListJobsByPipelineMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJobsByPipelineValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListJobsByPipelineMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListJobsByPipelineAPIClient is a client that implements the ListJobsByPipeline
-// operation.
-type ListJobsByPipelineAPIClient interface {
-	ListJobsByPipeline(context.Context, *ListJobsByPipelineInput, ...func(*Options)) (*ListJobsByPipelineOutput, error)
-}
-
-var _ ListJobsByPipelineAPIClient = (*Client)(nil)
 
 // ListJobsByPipelinePaginatorOptions is the paginator options for
 // ListJobsByPipeline
@@ -211,6 +206,9 @@ func (p *ListJobsByPipelinePaginator) NextPage(ctx context.Context, optFns ...fu
 	params := *p.params
 	params.PageToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJobsByPipeline(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListJobsByPipelinePaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListJobsByPipelineAPIClient is a client that implements the ListJobsByPipeline
+// operation.
+type ListJobsByPipelineAPIClient interface {
+	ListJobsByPipeline(context.Context, *ListJobsByPipelineInput, ...func(*Options)) (*ListJobsByPipelineOutput, error)
+}
+
+var _ ListJobsByPipelineAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJobsByPipeline(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

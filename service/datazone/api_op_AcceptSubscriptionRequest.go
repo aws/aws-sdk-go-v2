@@ -172,6 +172,9 @@ func (c *Client) addOperationAcceptSubscriptionRequestMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAcceptSubscriptionRequestValidationMiddleware(stack); err != nil {
 		return err
 	}

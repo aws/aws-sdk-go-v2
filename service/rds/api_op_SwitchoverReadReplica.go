@@ -119,6 +119,9 @@ func (c *Client) addOperationSwitchoverReadReplicaMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSwitchoverReadReplicaValidationMiddleware(stack); err != nil {
 		return err
 	}

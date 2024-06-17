@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeAddonMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAddonValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationDescribeAddonMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeAddonAPIClient is a client that implements the DescribeAddon operation.
-type DescribeAddonAPIClient interface {
-	DescribeAddon(context.Context, *DescribeAddonInput, ...func(*Options)) (*DescribeAddonOutput, error)
-}
-
-var _ DescribeAddonAPIClient = (*Client)(nil)
 
 // AddonActiveWaiterOptions are waiter options for AddonActiveWaiter
 type AddonActiveWaiterOptions struct {
@@ -266,7 +262,13 @@ func (w *AddonActiveWaiter) WaitForOutput(ctx context.Context, params *DescribeA
 		}
 
 		out, err := w.client.DescribeAddon(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -472,7 +474,13 @@ func (w *AddonDeletedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeAddon(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -536,6 +544,13 @@ func addonDeletedStateRetryable(ctx context.Context, input *DescribeAddonInput, 
 
 	return true, nil
 }
+
+// DescribeAddonAPIClient is a client that implements the DescribeAddon operation.
+type DescribeAddonAPIClient interface {
+	DescribeAddon(context.Context, *DescribeAddonInput, ...func(*Options)) (*DescribeAddonOutput, error)
+}
+
+var _ DescribeAddonAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAddon(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

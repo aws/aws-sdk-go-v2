@@ -189,6 +189,9 @@ func (c *Client) addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAlarms(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -208,96 +211,6 @@ func (c *Client) addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
-}
-
-// DescribeAlarmsAPIClient is a client that implements the DescribeAlarms
-// operation.
-type DescribeAlarmsAPIClient interface {
-	DescribeAlarms(context.Context, *DescribeAlarmsInput, ...func(*Options)) (*DescribeAlarmsOutput, error)
-}
-
-var _ DescribeAlarmsAPIClient = (*Client)(nil)
-
-// DescribeAlarmsPaginatorOptions is the paginator options for DescribeAlarms
-type DescribeAlarmsPaginatorOptions struct {
-	// The maximum number of alarm descriptions to retrieve.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeAlarmsPaginator is a paginator for DescribeAlarms
-type DescribeAlarmsPaginator struct {
-	options   DescribeAlarmsPaginatorOptions
-	client    DescribeAlarmsAPIClient
-	params    *DescribeAlarmsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeAlarmsPaginator returns a new DescribeAlarmsPaginator
-func NewDescribeAlarmsPaginator(client DescribeAlarmsAPIClient, params *DescribeAlarmsInput, optFns ...func(*DescribeAlarmsPaginatorOptions)) *DescribeAlarmsPaginator {
-	if params == nil {
-		params = &DescribeAlarmsInput{}
-	}
-
-	options := DescribeAlarmsPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeAlarmsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeAlarmsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeAlarms page.
-func (p *DescribeAlarmsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAlarmsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeAlarms(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // AlarmExistsWaiterOptions are waiter options for AlarmExistsWaiter
@@ -414,7 +327,13 @@ func (w *AlarmExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeA
 		}
 
 		out, err := w.client.DescribeAlarms(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -593,7 +512,13 @@ func (w *CompositeAlarmExistsWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.DescribeAlarms(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -654,6 +579,99 @@ func compositeAlarmExistsStateRetryable(ctx context.Context, input *DescribeAlar
 
 	return true, nil
 }
+
+// DescribeAlarmsPaginatorOptions is the paginator options for DescribeAlarms
+type DescribeAlarmsPaginatorOptions struct {
+	// The maximum number of alarm descriptions to retrieve.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAlarmsPaginator is a paginator for DescribeAlarms
+type DescribeAlarmsPaginator struct {
+	options   DescribeAlarmsPaginatorOptions
+	client    DescribeAlarmsAPIClient
+	params    *DescribeAlarmsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAlarmsPaginator returns a new DescribeAlarmsPaginator
+func NewDescribeAlarmsPaginator(client DescribeAlarmsAPIClient, params *DescribeAlarmsInput, optFns ...func(*DescribeAlarmsPaginatorOptions)) *DescribeAlarmsPaginator {
+	if params == nil {
+		params = &DescribeAlarmsInput{}
+	}
+
+	options := DescribeAlarmsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeAlarmsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAlarmsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeAlarms page.
+func (p *DescribeAlarmsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAlarmsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeAlarms(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeAlarmsAPIClient is a client that implements the DescribeAlarms
+// operation.
+type DescribeAlarmsAPIClient interface {
+	DescribeAlarms(context.Context, *DescribeAlarmsInput, ...func(*Options)) (*DescribeAlarmsOutput, error)
+}
+
+var _ DescribeAlarmsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAlarms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

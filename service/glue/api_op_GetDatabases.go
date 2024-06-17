@@ -129,6 +129,9 @@ func (c *Client) addOperationGetDatabasesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDatabases(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,13 +152,6 @@ func (c *Client) addOperationGetDatabasesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetDatabasesAPIClient is a client that implements the GetDatabases operation.
-type GetDatabasesAPIClient interface {
-	GetDatabases(context.Context, *GetDatabasesInput, ...func(*Options)) (*GetDatabasesOutput, error)
-}
-
-var _ GetDatabasesAPIClient = (*Client)(nil)
 
 // GetDatabasesPaginatorOptions is the paginator options for GetDatabases
 type GetDatabasesPaginatorOptions struct {
@@ -220,6 +216,9 @@ func (p *GetDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDatabases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +237,13 @@ func (p *GetDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetDatabasesAPIClient is a client that implements the GetDatabases operation.
+type GetDatabasesAPIClient interface {
+	GetDatabases(context.Context, *GetDatabasesInput, ...func(*Options)) (*GetDatabasesOutput, error)
+}
+
+var _ GetDatabasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

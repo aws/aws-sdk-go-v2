@@ -402,6 +402,30 @@ func addRecordResponseTiming(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
 }
 
+func addIsWaiterUserAgent(o *Options) {
+	o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+		ua, err := getOrAddRequestUserAgent(stack)
+		if err != nil {
+			return err
+		}
+
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureWaiter)
+		return nil
+	})
+}
+
+func addIsPaginatorUserAgent(o *Options) {
+	o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+		ua, err := getOrAddRequestUserAgent(stack)
+		if err != nil {
+			return err
+		}
+
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeaturePaginator)
+		return nil
+	})
+}
+
 func addRetry(stack *middleware.Stack, o Options) error {
 	attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
 		m.LogAttempts = o.ClientLogMode.IsRetries()
@@ -454,6 +478,21 @@ func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
 }
 func initializeTimeOffsetResolver(c *Client) {
 	c.timeOffset = new(atomic.Int64)
+}
+
+func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	switch options.Retryer.(type) {
+	case *retry.Standard:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeStandard)
+	case *retry.AdaptiveMode:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeAdaptive)
+	}
+	return nil
 }
 
 func addRecursionDetection(stack *middleware.Stack) error {

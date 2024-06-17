@@ -146,6 +146,9 @@ func (c *Client) addOperationListStateMachineVersionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListStateMachineVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationListLogSubscriptionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLogSubscriptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListLogSubscriptionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListLogSubscriptionsAPIClient is a client that implements the
-// ListLogSubscriptions operation.
-type ListLogSubscriptionsAPIClient interface {
-	ListLogSubscriptions(context.Context, *ListLogSubscriptionsInput, ...func(*Options)) (*ListLogSubscriptionsOutput, error)
-}
-
-var _ ListLogSubscriptionsAPIClient = (*Client)(nil)
 
 // ListLogSubscriptionsPaginatorOptions is the paginator options for
 // ListLogSubscriptions
@@ -210,6 +205,9 @@ func (p *ListLogSubscriptionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLogSubscriptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListLogSubscriptionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListLogSubscriptionsAPIClient is a client that implements the
+// ListLogSubscriptions operation.
+type ListLogSubscriptionsAPIClient interface {
+	ListLogSubscriptions(context.Context, *ListLogSubscriptionsInput, ...func(*Options)) (*ListLogSubscriptionsOutput, error)
+}
+
+var _ ListLogSubscriptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLogSubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

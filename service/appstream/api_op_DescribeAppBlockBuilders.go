@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeAppBlockBuildersMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAppBlockBuilders(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationDescribeAppBlockBuildersMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeAppBlockBuildersAPIClient is a client that implements the
-// DescribeAppBlockBuilders operation.
-type DescribeAppBlockBuildersAPIClient interface {
-	DescribeAppBlockBuilders(context.Context, *DescribeAppBlockBuildersInput, ...func(*Options)) (*DescribeAppBlockBuildersOutput, error)
-}
-
-var _ DescribeAppBlockBuildersAPIClient = (*Client)(nil)
 
 // DescribeAppBlockBuildersPaginatorOptions is the paginator options for
 // DescribeAppBlockBuilders
@@ -209,6 +204,9 @@ func (p *DescribeAppBlockBuildersPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAppBlockBuilders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *DescribeAppBlockBuildersPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeAppBlockBuildersAPIClient is a client that implements the
+// DescribeAppBlockBuilders operation.
+type DescribeAppBlockBuildersAPIClient interface {
+	DescribeAppBlockBuilders(context.Context, *DescribeAppBlockBuildersInput, ...func(*Options)) (*DescribeAppBlockBuildersOutput, error)
+}
+
+var _ DescribeAppBlockBuildersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAppBlockBuilders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

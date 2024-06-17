@@ -111,6 +111,9 @@ func (c *Client) addOperationDescribeBundleAssociationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBundleAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}

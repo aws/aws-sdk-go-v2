@@ -135,6 +135,9 @@ func (c *Client) addOperationSearchSecurityProfilesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchSecurityProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationSearchSecurityProfilesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// SearchSecurityProfilesAPIClient is a client that implements the
-// SearchSecurityProfiles operation.
-type SearchSecurityProfilesAPIClient interface {
-	SearchSecurityProfiles(context.Context, *SearchSecurityProfilesInput, ...func(*Options)) (*SearchSecurityProfilesOutput, error)
-}
-
-var _ SearchSecurityProfilesAPIClient = (*Client)(nil)
 
 // SearchSecurityProfilesPaginatorOptions is the paginator options for
 // SearchSecurityProfiles
@@ -231,6 +226,9 @@ func (p *SearchSecurityProfilesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchSecurityProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *SearchSecurityProfilesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// SearchSecurityProfilesAPIClient is a client that implements the
+// SearchSecurityProfiles operation.
+type SearchSecurityProfilesAPIClient interface {
+	SearchSecurityProfiles(context.Context, *SearchSecurityProfilesInput, ...func(*Options)) (*SearchSecurityProfilesOutput, error)
+}
+
+var _ SearchSecurityProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchSecurityProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -118,6 +118,9 @@ func (c *Client) addOperationListStreamingImagesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListStreamingImagesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListStreamingImagesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListStreamingImagesAPIClient is a client that implements the
-// ListStreamingImages operation.
-type ListStreamingImagesAPIClient interface {
-	ListStreamingImages(context.Context, *ListStreamingImagesInput, ...func(*Options)) (*ListStreamingImagesOutput, error)
-}
-
-var _ ListStreamingImagesAPIClient = (*Client)(nil)
 
 // ListStreamingImagesPaginatorOptions is the paginator options for
 // ListStreamingImages
@@ -202,6 +197,9 @@ func (p *ListStreamingImagesPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreamingImages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +218,14 @@ func (p *ListStreamingImagesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListStreamingImagesAPIClient is a client that implements the
+// ListStreamingImages operation.
+type ListStreamingImagesAPIClient interface {
+	ListStreamingImages(context.Context, *ListStreamingImagesInput, ...func(*Options)) (*ListStreamingImagesOutput, error)
+}
+
+var _ ListStreamingImagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreamingImages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

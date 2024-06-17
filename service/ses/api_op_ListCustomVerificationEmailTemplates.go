@@ -132,6 +132,9 @@ func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomVerificationEmailTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(sta
 	}
 	return nil
 }
-
-// ListCustomVerificationEmailTemplatesAPIClient is a client that implements the
-// ListCustomVerificationEmailTemplates operation.
-type ListCustomVerificationEmailTemplatesAPIClient interface {
-	ListCustomVerificationEmailTemplates(context.Context, *ListCustomVerificationEmailTemplatesInput, ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error)
-}
-
-var _ ListCustomVerificationEmailTemplatesAPIClient = (*Client)(nil)
 
 // ListCustomVerificationEmailTemplatesPaginatorOptions is the paginator options
 // for ListCustomVerificationEmailTemplates
@@ -230,6 +225,9 @@ func (p *ListCustomVerificationEmailTemplatesPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomVerificationEmailTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListCustomVerificationEmailTemplatesPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListCustomVerificationEmailTemplatesAPIClient is a client that implements the
+// ListCustomVerificationEmailTemplates operation.
+type ListCustomVerificationEmailTemplatesAPIClient interface {
+	ListCustomVerificationEmailTemplates(context.Context, *ListCustomVerificationEmailTemplatesInput, ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error)
+}
+
+var _ ListCustomVerificationEmailTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomVerificationEmailTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

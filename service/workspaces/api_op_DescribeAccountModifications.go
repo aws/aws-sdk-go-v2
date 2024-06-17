@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeAccountModificationsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountModifications(options.Region), middleware.Before); err != nil {
 		return err
 	}

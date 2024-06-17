@@ -179,6 +179,9 @@ func (c *Client) addOperationListAccessGrantsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -220,56 +223,6 @@ func (c *Client) addOperationListAccessGrantsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-type endpointPrefix_opListAccessGrantsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAccessGrantsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAccessGrantsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	opaqueInput := getOperationInput(ctx)
-	input, ok := opaqueInput.(*ListAccessGrantsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAccessGrantsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAccessGrantsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAccessGrantsAPIClient is a client that implements the ListAccessGrants
-// operation.
-type ListAccessGrantsAPIClient interface {
-	ListAccessGrants(context.Context, *ListAccessGrantsInput, ...func(*Options)) (*ListAccessGrantsOutput, error)
-}
-
-var _ ListAccessGrantsAPIClient = (*Client)(nil)
 
 // ListAccessGrantsPaginatorOptions is the paginator options for ListAccessGrants
 type ListAccessGrantsPaginatorOptions struct {
@@ -332,6 +285,9 @@ func (p *ListAccessGrantsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccessGrants(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -350,6 +306,56 @@ func (p *ListAccessGrantsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+type endpointPrefix_opListAccessGrantsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAccessGrantsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAccessGrantsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*ListAccessGrantsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAccessGrantsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAccessGrantsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAccessGrantsAPIClient is a client that implements the ListAccessGrants
+// operation.
+type ListAccessGrantsAPIClient interface {
+	ListAccessGrants(context.Context, *ListAccessGrantsInput, ...func(*Options)) (*ListAccessGrantsOutput, error)
+}
+
+var _ ListAccessGrantsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccessGrants(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

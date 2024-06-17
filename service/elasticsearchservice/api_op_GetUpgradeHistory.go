@@ -125,6 +125,9 @@ func (c *Client) addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetUpgradeHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetUpgradeHistoryAPIClient is a client that implements the GetUpgradeHistory
-// operation.
-type GetUpgradeHistoryAPIClient interface {
-	GetUpgradeHistory(context.Context, *GetUpgradeHistoryInput, ...func(*Options)) (*GetUpgradeHistoryOutput, error)
-}
-
-var _ GetUpgradeHistoryAPIClient = (*Client)(nil)
 
 // GetUpgradeHistoryPaginatorOptions is the paginator options for GetUpgradeHistory
 type GetUpgradeHistoryPaginatorOptions struct {
@@ -216,6 +211,9 @@ func (p *GetUpgradeHistoryPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetUpgradeHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *GetUpgradeHistoryPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetUpgradeHistoryAPIClient is a client that implements the GetUpgradeHistory
+// operation.
+type GetUpgradeHistoryAPIClient interface {
+	GetUpgradeHistory(context.Context, *GetUpgradeHistoryInput, ...func(*Options)) (*GetUpgradeHistoryOutput, error)
+}
+
+var _ GetUpgradeHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetUpgradeHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

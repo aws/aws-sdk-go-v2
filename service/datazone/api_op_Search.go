@@ -152,6 +152,9 @@ func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -175,13 +178,6 @@ func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options 
 	}
 	return nil
 }
-
-// SearchAPIClient is a client that implements the Search operation.
-type SearchAPIClient interface {
-	Search(context.Context, *SearchInput, ...func(*Options)) (*SearchOutput, error)
-}
-
-var _ SearchAPIClient = (*Client)(nil)
 
 // SearchPaginatorOptions is the paginator options for Search
 type SearchPaginatorOptions struct {
@@ -249,6 +245,9 @@ func (p *SearchPaginator) NextPage(ctx context.Context, optFns ...func(*Options)
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.Search(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +266,13 @@ func (p *SearchPaginator) NextPage(ctx context.Context, optFns ...func(*Options)
 
 	return result, nil
 }
+
+// SearchAPIClient is a client that implements the Search operation.
+type SearchAPIClient interface {
+	Search(context.Context, *SearchInput, ...func(*Options)) (*SearchOutput, error)
+}
+
+var _ SearchAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearch(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

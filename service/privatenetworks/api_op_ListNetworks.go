@@ -121,6 +121,9 @@ func (c *Client) addOperationListNetworksMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNetworks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,13 +144,6 @@ func (c *Client) addOperationListNetworksMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListNetworksAPIClient is a client that implements the ListNetworks operation.
-type ListNetworksAPIClient interface {
-	ListNetworks(context.Context, *ListNetworksInput, ...func(*Options)) (*ListNetworksOutput, error)
-}
-
-var _ ListNetworksAPIClient = (*Client)(nil)
 
 // ListNetworksPaginatorOptions is the paginator options for ListNetworks
 type ListNetworksPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *ListNetworksPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListNetworks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *ListNetworksPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListNetworksAPIClient is a client that implements the ListNetworks operation.
+type ListNetworksAPIClient interface {
+	ListNetworks(context.Context, *ListNetworksInput, ...func(*Options)) (*ListNetworksOutput, error)
+}
+
+var _ ListNetworksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListNetworks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

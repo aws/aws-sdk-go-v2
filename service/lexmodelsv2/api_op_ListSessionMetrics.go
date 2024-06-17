@@ -195,6 +195,9 @@ func (c *Client) addOperationListSessionMetricsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSessionMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -218,14 +221,6 @@ func (c *Client) addOperationListSessionMetricsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListSessionMetricsAPIClient is a client that implements the ListSessionMetrics
-// operation.
-type ListSessionMetricsAPIClient interface {
-	ListSessionMetrics(context.Context, *ListSessionMetricsInput, ...func(*Options)) (*ListSessionMetricsOutput, error)
-}
-
-var _ ListSessionMetricsAPIClient = (*Client)(nil)
 
 // ListSessionMetricsPaginatorOptions is the paginator options for
 // ListSessionMetrics
@@ -293,6 +288,9 @@ func (p *ListSessionMetricsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSessionMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -311,6 +309,14 @@ func (p *ListSessionMetricsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListSessionMetricsAPIClient is a client that implements the ListSessionMetrics
+// operation.
+type ListSessionMetricsAPIClient interface {
+	ListSessionMetrics(context.Context, *ListSessionMetricsInput, ...func(*Options)) (*ListSessionMetricsOutput, error)
+}
+
+var _ ListSessionMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSessionMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

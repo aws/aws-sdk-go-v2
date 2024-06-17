@@ -129,6 +129,9 @@ func (c *Client) addOperationListUserProficienciesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUserProficienciesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListUserProficienciesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListUserProficienciesAPIClient is a client that implements the
-// ListUserProficiencies operation.
-type ListUserProficienciesAPIClient interface {
-	ListUserProficiencies(context.Context, *ListUserProficienciesInput, ...func(*Options)) (*ListUserProficienciesOutput, error)
-}
-
-var _ ListUserProficienciesAPIClient = (*Client)(nil)
 
 // ListUserProficienciesPaginatorOptions is the paginator options for
 // ListUserProficiencies
@@ -225,6 +220,9 @@ func (p *ListUserProficienciesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUserProficiencies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListUserProficienciesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListUserProficienciesAPIClient is a client that implements the
+// ListUserProficiencies operation.
+type ListUserProficienciesAPIClient interface {
+	ListUserProficiencies(context.Context, *ListUserProficienciesInput, ...func(*Options)) (*ListUserProficienciesOutput, error)
+}
+
+var _ ListUserProficienciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUserProficiencies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -121,6 +121,9 @@ func (c *Client) addOperationListDataViewsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataViewsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationListDataViewsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListDataViewsAPIClient is a client that implements the ListDataViews operation.
-type ListDataViewsAPIClient interface {
-	ListDataViews(context.Context, *ListDataViewsInput, ...func(*Options)) (*ListDataViewsOutput, error)
-}
-
-var _ ListDataViewsAPIClient = (*Client)(nil)
 
 // ListDataViewsPaginatorOptions is the paginator options for ListDataViews
 type ListDataViewsPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListDataViewsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataViews(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListDataViewsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListDataViewsAPIClient is a client that implements the ListDataViews operation.
+type ListDataViewsAPIClient interface {
+	ListDataViews(context.Context, *ListDataViewsInput, ...func(*Options)) (*ListDataViewsOutput, error)
+}
+
+var _ ListDataViewsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataViews(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

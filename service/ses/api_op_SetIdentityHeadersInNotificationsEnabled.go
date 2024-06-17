@@ -133,6 +133,9 @@ func (c *Client) addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityHeadersInNotificationsEnabledValidationMiddleware(stack); err != nil {
 		return err
 	}

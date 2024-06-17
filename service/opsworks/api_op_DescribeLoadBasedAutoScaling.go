@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeLoadBasedAutoScalingMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLoadBasedAutoScalingValidationMiddleware(stack); err != nil {
 		return err
 	}

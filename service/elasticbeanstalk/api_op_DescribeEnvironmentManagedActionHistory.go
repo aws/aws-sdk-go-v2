@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironmentManagedActionHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(
 	}
 	return nil
 }
-
-// DescribeEnvironmentManagedActionHistoryAPIClient is a client that implements
-// the DescribeEnvironmentManagedActionHistory operation.
-type DescribeEnvironmentManagedActionHistoryAPIClient interface {
-	DescribeEnvironmentManagedActionHistory(context.Context, *DescribeEnvironmentManagedActionHistoryInput, ...func(*Options)) (*DescribeEnvironmentManagedActionHistoryOutput, error)
-}
-
-var _ DescribeEnvironmentManagedActionHistoryAPIClient = (*Client)(nil)
 
 // DescribeEnvironmentManagedActionHistoryPaginatorOptions is the paginator
 // options for DescribeEnvironmentManagedActionHistory
@@ -213,6 +208,9 @@ func (p *DescribeEnvironmentManagedActionHistoryPaginator) NextPage(ctx context.
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeEnvironmentManagedActionHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *DescribeEnvironmentManagedActionHistoryPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// DescribeEnvironmentManagedActionHistoryAPIClient is a client that implements
+// the DescribeEnvironmentManagedActionHistory operation.
+type DescribeEnvironmentManagedActionHistoryAPIClient interface {
+	DescribeEnvironmentManagedActionHistory(context.Context, *DescribeEnvironmentManagedActionHistoryInput, ...func(*Options)) (*DescribeEnvironmentManagedActionHistoryOutput, error)
+}
+
+var _ DescribeEnvironmentManagedActionHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEnvironmentManagedActionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

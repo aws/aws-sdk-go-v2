@@ -143,6 +143,9 @@ func (c *Client) addOperationGetServiceGraphMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceGraphValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationGetServiceGraphMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetServiceGraphAPIClient is a client that implements the GetServiceGraph
-// operation.
-type GetServiceGraphAPIClient interface {
-	GetServiceGraph(context.Context, *GetServiceGraphInput, ...func(*Options)) (*GetServiceGraphOutput, error)
-}
-
-var _ GetServiceGraphAPIClient = (*Client)(nil)
 
 // GetServiceGraphPaginatorOptions is the paginator options for GetServiceGraph
 type GetServiceGraphPaginatorOptions struct {
@@ -226,6 +221,9 @@ func (p *GetServiceGraphPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetServiceGraph(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *GetServiceGraphPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetServiceGraphAPIClient is a client that implements the GetServiceGraph
+// operation.
+type GetServiceGraphAPIClient interface {
+	GetServiceGraph(context.Context, *GetServiceGraphInput, ...func(*Options)) (*GetServiceGraphOutput, error)
+}
+
+var _ GetServiceGraphAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetServiceGraph(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

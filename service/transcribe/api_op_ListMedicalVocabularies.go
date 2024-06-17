@@ -141,6 +141,9 @@ func (c *Client) addOperationListMedicalVocabulariesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMedicalVocabularies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListMedicalVocabulariesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListMedicalVocabulariesAPIClient is a client that implements the
-// ListMedicalVocabularies operation.
-type ListMedicalVocabulariesAPIClient interface {
-	ListMedicalVocabularies(context.Context, *ListMedicalVocabulariesInput, ...func(*Options)) (*ListMedicalVocabulariesOutput, error)
-}
-
-var _ ListMedicalVocabulariesAPIClient = (*Client)(nil)
 
 // ListMedicalVocabulariesPaginatorOptions is the paginator options for
 // ListMedicalVocabularies
@@ -238,6 +233,9 @@ func (p *ListMedicalVocabulariesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMedicalVocabularies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListMedicalVocabulariesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListMedicalVocabulariesAPIClient is a client that implements the
+// ListMedicalVocabularies operation.
+type ListMedicalVocabulariesAPIClient interface {
+	ListMedicalVocabularies(context.Context, *ListMedicalVocabulariesInput, ...func(*Options)) (*ListMedicalVocabulariesOutput, error)
+}
+
+var _ ListMedicalVocabulariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMedicalVocabularies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

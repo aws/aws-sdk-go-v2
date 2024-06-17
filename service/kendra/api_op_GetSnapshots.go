@@ -161,6 +161,9 @@ func (c *Client) addOperationGetSnapshotsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,13 +187,6 @@ func (c *Client) addOperationGetSnapshotsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetSnapshotsAPIClient is a client that implements the GetSnapshots operation.
-type GetSnapshotsAPIClient interface {
-	GetSnapshots(context.Context, *GetSnapshotsInput, ...func(*Options)) (*GetSnapshotsOutput, error)
-}
-
-var _ GetSnapshotsAPIClient = (*Client)(nil)
 
 // GetSnapshotsPaginatorOptions is the paginator options for GetSnapshots
 type GetSnapshotsPaginatorOptions struct {
@@ -255,6 +251,9 @@ func (p *GetSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSnapshots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -273,6 +272,13 @@ func (p *GetSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetSnapshotsAPIClient is a client that implements the GetSnapshots operation.
+type GetSnapshotsAPIClient interface {
+	GetSnapshots(context.Context, *GetSnapshotsInput, ...func(*Options)) (*GetSnapshotsOutput, error)
+}
+
+var _ GetSnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

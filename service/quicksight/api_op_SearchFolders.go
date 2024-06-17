@@ -130,6 +130,9 @@ func (c *Client) addOperationSearchFoldersMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchFoldersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,13 +156,6 @@ func (c *Client) addOperationSearchFoldersMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// SearchFoldersAPIClient is a client that implements the SearchFolders operation.
-type SearchFoldersAPIClient interface {
-	SearchFolders(context.Context, *SearchFoldersInput, ...func(*Options)) (*SearchFoldersOutput, error)
-}
-
-var _ SearchFoldersAPIClient = (*Client)(nil)
 
 // SearchFoldersPaginatorOptions is the paginator options for SearchFolders
 type SearchFoldersPaginatorOptions struct {
@@ -224,6 +220,9 @@ func (p *SearchFoldersPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchFolders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +241,13 @@ func (p *SearchFoldersPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// SearchFoldersAPIClient is a client that implements the SearchFolders operation.
+type SearchFoldersAPIClient interface {
+	SearchFolders(context.Context, *SearchFoldersInput, ...func(*Options)) (*SearchFoldersOutput, error)
+}
+
+var _ SearchFoldersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchFolders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

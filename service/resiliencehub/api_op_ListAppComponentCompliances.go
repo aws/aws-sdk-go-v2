@@ -125,6 +125,9 @@ func (c *Client) addOperationListAppComponentCompliancesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAppComponentCompliancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListAppComponentCompliancesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListAppComponentCompliancesAPIClient is a client that implements the
-// ListAppComponentCompliances operation.
-type ListAppComponentCompliancesAPIClient interface {
-	ListAppComponentCompliances(context.Context, *ListAppComponentCompliancesInput, ...func(*Options)) (*ListAppComponentCompliancesOutput, error)
-}
-
-var _ ListAppComponentCompliancesAPIClient = (*Client)(nil)
 
 // ListAppComponentCompliancesPaginatorOptions is the paginator options for
 // ListAppComponentCompliances
@@ -225,6 +220,9 @@ func (p *ListAppComponentCompliancesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppComponentCompliances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListAppComponentCompliancesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListAppComponentCompliancesAPIClient is a client that implements the
+// ListAppComponentCompliances operation.
+type ListAppComponentCompliancesAPIClient interface {
+	ListAppComponentCompliances(context.Context, *ListAppComponentCompliancesInput, ...func(*Options)) (*ListAppComponentCompliancesOutput, error)
+}
+
+var _ ListAppComponentCompliancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppComponentCompliances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

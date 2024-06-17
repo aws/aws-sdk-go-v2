@@ -115,6 +115,9 @@ func (c *Client) addOperationListEnabledProductsForImportMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledProductsForImport(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListEnabledProductsForImportMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListEnabledProductsForImportAPIClient is a client that implements the
-// ListEnabledProductsForImport operation.
-type ListEnabledProductsForImportAPIClient interface {
-	ListEnabledProductsForImport(context.Context, *ListEnabledProductsForImportInput, ...func(*Options)) (*ListEnabledProductsForImportOutput, error)
-}
-
-var _ ListEnabledProductsForImportAPIClient = (*Client)(nil)
 
 // ListEnabledProductsForImportPaginatorOptions is the paginator options for
 // ListEnabledProductsForImport
@@ -210,6 +205,9 @@ func (p *ListEnabledProductsForImportPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnabledProductsForImport(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListEnabledProductsForImportPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListEnabledProductsForImportAPIClient is a client that implements the
+// ListEnabledProductsForImport operation.
+type ListEnabledProductsForImportAPIClient interface {
+	ListEnabledProductsForImport(context.Context, *ListEnabledProductsForImportInput, ...func(*Options)) (*ListEnabledProductsForImportOutput, error)
+}
+
+var _ ListEnabledProductsForImportAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnabledProductsForImport(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

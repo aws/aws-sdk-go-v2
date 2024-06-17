@@ -122,6 +122,9 @@ func (c *Client) addOperationListVpcConnectorsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVpcConnectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListVpcConnectorsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListVpcConnectorsAPIClient is a client that implements the ListVpcConnectors
-// operation.
-type ListVpcConnectorsAPIClient interface {
-	ListVpcConnectors(context.Context, *ListVpcConnectorsInput, ...func(*Options)) (*ListVpcConnectorsOutput, error)
-}
-
-var _ ListVpcConnectorsAPIClient = (*Client)(nil)
 
 // ListVpcConnectorsPaginatorOptions is the paginator options for ListVpcConnectors
 type ListVpcConnectorsPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *ListVpcConnectorsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVpcConnectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListVpcConnectorsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListVpcConnectorsAPIClient is a client that implements the ListVpcConnectors
+// operation.
+type ListVpcConnectorsAPIClient interface {
+	ListVpcConnectors(context.Context, *ListVpcConnectorsInput, ...func(*Options)) (*ListVpcConnectorsOutput, error)
+}
+
+var _ ListVpcConnectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVpcConnectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

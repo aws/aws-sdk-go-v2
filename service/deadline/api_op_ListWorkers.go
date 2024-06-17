@@ -128,6 +128,9 @@ func (c *Client) addOperationListWorkersMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListWorkersMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,40 +157,6 @@ func (c *Client) addOperationListWorkersMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-type endpointPrefix_opListWorkersMiddleware struct {
-}
-
-func (*endpointPrefix_opListWorkersMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListWorkersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListWorkersMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListWorkersMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListWorkersAPIClient is a client that implements the ListWorkers operation.
-type ListWorkersAPIClient interface {
-	ListWorkers(context.Context, *ListWorkersInput, ...func(*Options)) (*ListWorkersOutput, error)
-}
-
-var _ ListWorkersAPIClient = (*Client)(nil)
 
 // ListWorkersPaginatorOptions is the paginator options for ListWorkers
 type ListWorkersPaginatorOptions struct {
@@ -253,6 +222,9 @@ func (p *ListWorkersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -271,6 +243,40 @@ func (p *ListWorkersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+type endpointPrefix_opListWorkersMiddleware struct {
+}
+
+func (*endpointPrefix_opListWorkersMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListWorkersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListWorkersMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListWorkersMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListWorkersAPIClient is a client that implements the ListWorkers operation.
+type ListWorkersAPIClient interface {
+	ListWorkers(context.Context, *ListWorkersInput, ...func(*Options)) (*ListWorkersOutput, error)
+}
+
+var _ ListWorkersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

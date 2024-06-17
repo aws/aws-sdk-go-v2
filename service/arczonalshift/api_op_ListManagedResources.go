@@ -123,6 +123,9 @@ func (c *Client) addOperationListManagedResourcesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListManagedResourcesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListManagedResourcesAPIClient is a client that implements the
-// ListManagedResources operation.
-type ListManagedResourcesAPIClient interface {
-	ListManagedResources(context.Context, *ListManagedResourcesInput, ...func(*Options)) (*ListManagedResourcesOutput, error)
-}
-
-var _ ListManagedResourcesAPIClient = (*Client)(nil)
 
 // ListManagedResourcesPaginatorOptions is the paginator options for
 // ListManagedResources
@@ -216,6 +211,9 @@ func (p *ListManagedResourcesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListManagedResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListManagedResourcesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListManagedResourcesAPIClient is a client that implements the
+// ListManagedResources operation.
+type ListManagedResourcesAPIClient interface {
+	ListManagedResources(context.Context, *ListManagedResourcesInput, ...func(*Options)) (*ListManagedResourcesOutput, error)
+}
+
+var _ ListManagedResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListManagedResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

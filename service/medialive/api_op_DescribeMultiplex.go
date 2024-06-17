@@ -140,6 +140,9 @@ func (c *Client) addOperationDescribeMultiplexMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMultiplexValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationDescribeMultiplexMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeMultiplexAPIClient is a client that implements the DescribeMultiplex
-// operation.
-type DescribeMultiplexAPIClient interface {
-	DescribeMultiplex(context.Context, *DescribeMultiplexInput, ...func(*Options)) (*DescribeMultiplexOutput, error)
-}
-
-var _ DescribeMultiplexAPIClient = (*Client)(nil)
 
 // MultiplexCreatedWaiterOptions are waiter options for MultiplexCreatedWaiter
 type MultiplexCreatedWaiterOptions struct {
@@ -287,7 +282,13 @@ func (w *MultiplexCreatedWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeMultiplex(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -501,7 +502,13 @@ func (w *MultiplexDeletedWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeMultiplex(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -698,7 +705,13 @@ func (w *MultiplexRunningWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeMultiplex(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -895,7 +908,13 @@ func (w *MultiplexStoppedWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeMultiplex(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -976,6 +995,14 @@ func multiplexStoppedStateRetryable(ctx context.Context, input *DescribeMultiple
 
 	return true, nil
 }
+
+// DescribeMultiplexAPIClient is a client that implements the DescribeMultiplex
+// operation.
+type DescribeMultiplexAPIClient interface {
+	DescribeMultiplex(context.Context, *DescribeMultiplexInput, ...func(*Options)) (*DescribeMultiplexOutput, error)
+}
+
+var _ DescribeMultiplexAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMultiplex(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

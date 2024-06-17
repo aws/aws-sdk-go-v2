@@ -148,6 +148,9 @@ func (c *Client) addOperationListStudioLifecycleConfigsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStudioLifecycleConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListStudioLifecycleConfigsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListStudioLifecycleConfigsAPIClient is a client that implements the
-// ListStudioLifecycleConfigs operation.
-type ListStudioLifecycleConfigsAPIClient interface {
-	ListStudioLifecycleConfigs(context.Context, *ListStudioLifecycleConfigsInput, ...func(*Options)) (*ListStudioLifecycleConfigsOutput, error)
-}
-
-var _ ListStudioLifecycleConfigsAPIClient = (*Client)(nil)
 
 // ListStudioLifecycleConfigsPaginatorOptions is the paginator options for
 // ListStudioLifecycleConfigs
@@ -246,6 +241,9 @@ func (p *ListStudioLifecycleConfigsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStudioLifecycleConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +262,14 @@ func (p *ListStudioLifecycleConfigsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListStudioLifecycleConfigsAPIClient is a client that implements the
+// ListStudioLifecycleConfigs operation.
+type ListStudioLifecycleConfigsAPIClient interface {
+	ListStudioLifecycleConfigs(context.Context, *ListStudioLifecycleConfigsInput, ...func(*Options)) (*ListStudioLifecycleConfigsOutput, error)
+}
+
+var _ ListStudioLifecycleConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStudioLifecycleConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

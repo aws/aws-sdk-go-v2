@@ -119,6 +119,9 @@ func (c *Client) addOperationListRecoveryPointsByLegalHoldMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRecoveryPointsByLegalHoldValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListRecoveryPointsByLegalHoldMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListRecoveryPointsByLegalHoldAPIClient is a client that implements the
-// ListRecoveryPointsByLegalHold operation.
-type ListRecoveryPointsByLegalHoldAPIClient interface {
-	ListRecoveryPointsByLegalHold(context.Context, *ListRecoveryPointsByLegalHoldInput, ...func(*Options)) (*ListRecoveryPointsByLegalHoldOutput, error)
-}
-
-var _ ListRecoveryPointsByLegalHoldAPIClient = (*Client)(nil)
 
 // ListRecoveryPointsByLegalHoldPaginatorOptions is the paginator options for
 // ListRecoveryPointsByLegalHold
@@ -217,6 +212,9 @@ func (p *ListRecoveryPointsByLegalHoldPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecoveryPointsByLegalHold(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListRecoveryPointsByLegalHoldPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListRecoveryPointsByLegalHoldAPIClient is a client that implements the
+// ListRecoveryPointsByLegalHold operation.
+type ListRecoveryPointsByLegalHoldAPIClient interface {
+	ListRecoveryPointsByLegalHold(context.Context, *ListRecoveryPointsByLegalHoldInput, ...func(*Options)) (*ListRecoveryPointsByLegalHoldOutput, error)
+}
+
+var _ ListRecoveryPointsByLegalHoldAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecoveryPointsByLegalHold(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

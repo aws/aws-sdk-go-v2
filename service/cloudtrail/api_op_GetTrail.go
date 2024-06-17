@@ -107,6 +107,9 @@ func (c *Client) addOperationGetTrailMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTrailValidationMiddleware(stack); err != nil {
 		return err
 	}

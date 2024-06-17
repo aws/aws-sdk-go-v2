@@ -135,6 +135,9 @@ func (c *Client) addOperationListAggregateDiscoveredResourcesMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAggregateDiscoveredResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListAggregateDiscoveredResourcesMiddlewares(stack *
 	}
 	return nil
 }
-
-// ListAggregateDiscoveredResourcesAPIClient is a client that implements the
-// ListAggregateDiscoveredResources operation.
-type ListAggregateDiscoveredResourcesAPIClient interface {
-	ListAggregateDiscoveredResources(context.Context, *ListAggregateDiscoveredResourcesInput, ...func(*Options)) (*ListAggregateDiscoveredResourcesOutput, error)
-}
-
-var _ ListAggregateDiscoveredResourcesAPIClient = (*Client)(nil)
 
 // ListAggregateDiscoveredResourcesPaginatorOptions is the paginator options for
 // ListAggregateDiscoveredResources
@@ -230,6 +225,9 @@ func (p *ListAggregateDiscoveredResourcesPaginator) NextPage(ctx context.Context
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAggregateDiscoveredResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListAggregateDiscoveredResourcesPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// ListAggregateDiscoveredResourcesAPIClient is a client that implements the
+// ListAggregateDiscoveredResources operation.
+type ListAggregateDiscoveredResourcesAPIClient interface {
+	ListAggregateDiscoveredResources(context.Context, *ListAggregateDiscoveredResourcesInput, ...func(*Options)) (*ListAggregateDiscoveredResourcesOutput, error)
+}
+
+var _ ListAggregateDiscoveredResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAggregateDiscoveredResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

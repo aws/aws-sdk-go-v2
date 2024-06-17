@@ -116,6 +116,9 @@ func (c *Client) addOperationListConnectPeersMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConnectPeers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListConnectPeersMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListConnectPeersAPIClient is a client that implements the ListConnectPeers
-// operation.
-type ListConnectPeersAPIClient interface {
-	ListConnectPeers(context.Context, *ListConnectPeersInput, ...func(*Options)) (*ListConnectPeersOutput, error)
-}
-
-var _ ListConnectPeersAPIClient = (*Client)(nil)
 
 // ListConnectPeersPaginatorOptions is the paginator options for ListConnectPeers
 type ListConnectPeersPaginatorOptions struct {
@@ -208,6 +203,9 @@ func (p *ListConnectPeersPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConnectPeers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListConnectPeersPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListConnectPeersAPIClient is a client that implements the ListConnectPeers
+// operation.
+type ListConnectPeersAPIClient interface {
+	ListConnectPeers(context.Context, *ListConnectPeersInput, ...func(*Options)) (*ListConnectPeersOutput, error)
+}
+
+var _ ListConnectPeersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConnectPeers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

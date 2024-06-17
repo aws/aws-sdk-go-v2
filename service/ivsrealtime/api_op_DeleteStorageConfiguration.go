@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteStorageConfigurationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteStorageConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

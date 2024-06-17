@@ -204,6 +204,9 @@ func (c *Client) addOperationCreateEventSubscriptionMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateEventSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

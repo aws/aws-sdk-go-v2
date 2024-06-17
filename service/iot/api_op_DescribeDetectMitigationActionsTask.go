@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeDetectMitigationActionsTaskMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDetectMitigationActionsTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

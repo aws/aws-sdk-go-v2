@@ -133,6 +133,9 @@ func (c *Client) addOperationListRealtimeContactAnalysisSegmentsMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRealtimeContactAnalysisSegmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListRealtimeContactAnalysisSegmentsMiddlewares(stac
 	}
 	return nil
 }
-
-// ListRealtimeContactAnalysisSegmentsAPIClient is a client that implements the
-// ListRealtimeContactAnalysisSegments operation.
-type ListRealtimeContactAnalysisSegmentsAPIClient interface {
-	ListRealtimeContactAnalysisSegments(context.Context, *ListRealtimeContactAnalysisSegmentsInput, ...func(*Options)) (*ListRealtimeContactAnalysisSegmentsOutput, error)
-}
-
-var _ ListRealtimeContactAnalysisSegmentsAPIClient = (*Client)(nil)
 
 // ListRealtimeContactAnalysisSegmentsPaginatorOptions is the paginator options
 // for ListRealtimeContactAnalysisSegments
@@ -231,6 +226,9 @@ func (p *ListRealtimeContactAnalysisSegmentsPaginator) NextPage(ctx context.Cont
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRealtimeContactAnalysisSegments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListRealtimeContactAnalysisSegmentsPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// ListRealtimeContactAnalysisSegmentsAPIClient is a client that implements the
+// ListRealtimeContactAnalysisSegments operation.
+type ListRealtimeContactAnalysisSegmentsAPIClient interface {
+	ListRealtimeContactAnalysisSegments(context.Context, *ListRealtimeContactAnalysisSegmentsInput, ...func(*Options)) (*ListRealtimeContactAnalysisSegmentsOutput, error)
+}
+
+var _ ListRealtimeContactAnalysisSegmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRealtimeContactAnalysisSegments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

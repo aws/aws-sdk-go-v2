@@ -135,6 +135,9 @@ func (c *Client) addOperationListAnomalyGroupTimeSeriesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnomalyGroupTimeSeriesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListAnomalyGroupTimeSeriesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListAnomalyGroupTimeSeriesAPIClient is a client that implements the
-// ListAnomalyGroupTimeSeries operation.
-type ListAnomalyGroupTimeSeriesAPIClient interface {
-	ListAnomalyGroupTimeSeries(context.Context, *ListAnomalyGroupTimeSeriesInput, ...func(*Options)) (*ListAnomalyGroupTimeSeriesOutput, error)
-}
-
-var _ ListAnomalyGroupTimeSeriesAPIClient = (*Client)(nil)
 
 // ListAnomalyGroupTimeSeriesPaginatorOptions is the paginator options for
 // ListAnomalyGroupTimeSeries
@@ -233,6 +228,9 @@ func (p *ListAnomalyGroupTimeSeriesPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnomalyGroupTimeSeries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListAnomalyGroupTimeSeriesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListAnomalyGroupTimeSeriesAPIClient is a client that implements the
+// ListAnomalyGroupTimeSeries operation.
+type ListAnomalyGroupTimeSeriesAPIClient interface {
+	ListAnomalyGroupTimeSeries(context.Context, *ListAnomalyGroupTimeSeriesInput, ...func(*Options)) (*ListAnomalyGroupTimeSeriesOutput, error)
+}
+
+var _ ListAnomalyGroupTimeSeriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnomalyGroupTimeSeries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

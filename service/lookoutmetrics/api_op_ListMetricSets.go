@@ -120,6 +120,9 @@ func (c *Client) addOperationListMetricSetsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMetricSets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListMetricSetsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListMetricSetsAPIClient is a client that implements the ListMetricSets
-// operation.
-type ListMetricSetsAPIClient interface {
-	ListMetricSets(context.Context, *ListMetricSetsInput, ...func(*Options)) (*ListMetricSetsOutput, error)
-}
-
-var _ ListMetricSetsAPIClient = (*Client)(nil)
 
 // ListMetricSetsPaginatorOptions is the paginator options for ListMetricSets
 type ListMetricSetsPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListMetricSetsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMetricSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListMetricSetsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListMetricSetsAPIClient is a client that implements the ListMetricSets
+// operation.
+type ListMetricSetsAPIClient interface {
+	ListMetricSets(context.Context, *ListMetricSetsInput, ...func(*Options)) (*ListMetricSetsOutput, error)
+}
+
+var _ ListMetricSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMetricSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

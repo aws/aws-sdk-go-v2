@@ -118,6 +118,9 @@ func (c *Client) addOperationListCapabilitiesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCapabilities(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListCapabilitiesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListCapabilitiesAPIClient is a client that implements the ListCapabilities
-// operation.
-type ListCapabilitiesAPIClient interface {
-	ListCapabilities(context.Context, *ListCapabilitiesInput, ...func(*Options)) (*ListCapabilitiesOutput, error)
-}
-
-var _ ListCapabilitiesAPIClient = (*Client)(nil)
 
 // ListCapabilitiesPaginatorOptions is the paginator options for ListCapabilities
 type ListCapabilitiesPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListCapabilitiesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCapabilities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListCapabilitiesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListCapabilitiesAPIClient is a client that implements the ListCapabilities
+// operation.
+type ListCapabilitiesAPIClient interface {
+	ListCapabilities(context.Context, *ListCapabilitiesInput, ...func(*Options)) (*ListCapabilitiesOutput, error)
+}
+
+var _ ListCapabilitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCapabilities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

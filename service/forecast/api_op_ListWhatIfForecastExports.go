@@ -141,6 +141,9 @@ func (c *Client) addOperationListWhatIfForecastExportsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWhatIfForecastExportsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationListWhatIfForecastExportsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListWhatIfForecastExportsAPIClient is a client that implements the
-// ListWhatIfForecastExports operation.
-type ListWhatIfForecastExportsAPIClient interface {
-	ListWhatIfForecastExports(context.Context, *ListWhatIfForecastExportsInput, ...func(*Options)) (*ListWhatIfForecastExportsOutput, error)
-}
-
-var _ ListWhatIfForecastExportsAPIClient = (*Client)(nil)
 
 // ListWhatIfForecastExportsPaginatorOptions is the paginator options for
 // ListWhatIfForecastExports
@@ -238,6 +233,9 @@ func (p *ListWhatIfForecastExportsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWhatIfForecastExports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListWhatIfForecastExportsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListWhatIfForecastExportsAPIClient is a client that implements the
+// ListWhatIfForecastExports operation.
+type ListWhatIfForecastExportsAPIClient interface {
+	ListWhatIfForecastExports(context.Context, *ListWhatIfForecastExportsInput, ...func(*Options)) (*ListWhatIfForecastExportsOutput, error)
+}
+
+var _ ListWhatIfForecastExportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWhatIfForecastExports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationPurchaseReservedElasticsearchInstanceOfferingMiddle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPurchaseReservedElasticsearchInstanceOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}

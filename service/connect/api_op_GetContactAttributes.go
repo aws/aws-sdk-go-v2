@@ -110,6 +110,9 @@ func (c *Client) addOperationGetContactAttributesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetContactAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

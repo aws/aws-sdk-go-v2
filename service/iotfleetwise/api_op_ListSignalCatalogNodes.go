@@ -128,6 +128,9 @@ func (c *Client) addOperationListSignalCatalogNodesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSignalCatalogNodesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListSignalCatalogNodesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListSignalCatalogNodesAPIClient is a client that implements the
-// ListSignalCatalogNodes operation.
-type ListSignalCatalogNodesAPIClient interface {
-	ListSignalCatalogNodes(context.Context, *ListSignalCatalogNodesInput, ...func(*Options)) (*ListSignalCatalogNodesOutput, error)
-}
-
-var _ ListSignalCatalogNodesAPIClient = (*Client)(nil)
 
 // ListSignalCatalogNodesPaginatorOptions is the paginator options for
 // ListSignalCatalogNodes
@@ -224,6 +219,9 @@ func (p *ListSignalCatalogNodesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSignalCatalogNodes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListSignalCatalogNodesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListSignalCatalogNodesAPIClient is a client that implements the
+// ListSignalCatalogNodes operation.
+type ListSignalCatalogNodesAPIClient interface {
+	ListSignalCatalogNodes(context.Context, *ListSignalCatalogNodesInput, ...func(*Options)) (*ListSignalCatalogNodesOutput, error)
+}
+
+var _ ListSignalCatalogNodesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSignalCatalogNodes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

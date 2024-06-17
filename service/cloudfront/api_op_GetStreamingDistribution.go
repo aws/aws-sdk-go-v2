@@ -117,6 +117,9 @@ func (c *Client) addOperationGetStreamingDistributionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStreamingDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationGetStreamingDistributionMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// GetStreamingDistributionAPIClient is a client that implements the
-// GetStreamingDistribution operation.
-type GetStreamingDistributionAPIClient interface {
-	GetStreamingDistribution(context.Context, *GetStreamingDistributionInput, ...func(*Options)) (*GetStreamingDistributionOutput, error)
-}
-
-var _ GetStreamingDistributionAPIClient = (*Client)(nil)
 
 // StreamingDistributionDeployedWaiterOptions are waiter options for
 // StreamingDistributionDeployedWaiter
@@ -269,7 +264,13 @@ func (w *StreamingDistributionDeployedWaiter) WaitForOutput(ctx context.Context,
 		}
 
 		out, err := w.client.GetStreamingDistribution(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -326,6 +327,14 @@ func streamingDistributionDeployedStateRetryable(ctx context.Context, input *Get
 
 	return true, nil
 }
+
+// GetStreamingDistributionAPIClient is a client that implements the
+// GetStreamingDistribution operation.
+type GetStreamingDistributionAPIClient interface {
+	GetStreamingDistribution(context.Context, *GetStreamingDistributionInput, ...func(*Options)) (*GetStreamingDistributionOutput, error)
+}
+
+var _ GetStreamingDistributionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetStreamingDistribution(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

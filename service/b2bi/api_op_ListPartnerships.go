@@ -123,6 +123,9 @@ func (c *Client) addOperationListPartnershipsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPartnerships(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListPartnershipsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListPartnershipsAPIClient is a client that implements the ListPartnerships
-// operation.
-type ListPartnershipsAPIClient interface {
-	ListPartnerships(context.Context, *ListPartnershipsInput, ...func(*Options)) (*ListPartnershipsOutput, error)
-}
-
-var _ ListPartnershipsAPIClient = (*Client)(nil)
 
 // ListPartnershipsPaginatorOptions is the paginator options for ListPartnerships
 type ListPartnershipsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListPartnershipsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPartnerships(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListPartnershipsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListPartnershipsAPIClient is a client that implements the ListPartnerships
+// operation.
+type ListPartnershipsAPIClient interface {
+	ListPartnerships(context.Context, *ListPartnershipsInput, ...func(*Options)) (*ListPartnershipsOutput, error)
+}
+
+var _ ListPartnershipsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPartnerships(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationListBudgetsForResourceMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBudgetsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListBudgetsForResourceMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListBudgetsForResourceAPIClient is a client that implements the
-// ListBudgetsForResource operation.
-type ListBudgetsForResourceAPIClient interface {
-	ListBudgetsForResource(context.Context, *ListBudgetsForResourceInput, ...func(*Options)) (*ListBudgetsForResourceOutput, error)
-}
-
-var _ ListBudgetsForResourceAPIClient = (*Client)(nil)
 
 // ListBudgetsForResourcePaginatorOptions is the paginator options for
 // ListBudgetsForResource
@@ -216,6 +211,9 @@ func (p *ListBudgetsForResourcePaginator) NextPage(ctx context.Context, optFns .
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBudgetsForResource(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListBudgetsForResourcePaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListBudgetsForResourceAPIClient is a client that implements the
+// ListBudgetsForResource operation.
+type ListBudgetsForResourceAPIClient interface {
+	ListBudgetsForResource(context.Context, *ListBudgetsForResourceInput, ...func(*Options)) (*ListBudgetsForResourceOutput, error)
+}
+
+var _ ListBudgetsForResourceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBudgetsForResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

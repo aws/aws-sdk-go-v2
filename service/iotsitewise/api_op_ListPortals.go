@@ -113,6 +113,9 @@ func (c *Client) addOperationListPortalsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListPortalsMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,40 +139,6 @@ func (c *Client) addOperationListPortalsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-type endpointPrefix_opListPortalsMiddleware struct {
-}
-
-func (*endpointPrefix_opListPortalsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListPortalsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "monitor." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListPortalsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListPortalsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListPortalsAPIClient is a client that implements the ListPortals operation.
-type ListPortalsAPIClient interface {
-	ListPortals(context.Context, *ListPortalsInput, ...func(*Options)) (*ListPortalsOutput, error)
-}
-
-var _ ListPortalsAPIClient = (*Client)(nil)
 
 // ListPortalsPaginatorOptions is the paginator options for ListPortals
 type ListPortalsPaginatorOptions struct {
@@ -236,6 +205,9 @@ func (p *ListPortalsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPortals(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +226,40 @@ func (p *ListPortalsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+type endpointPrefix_opListPortalsMiddleware struct {
+}
+
+func (*endpointPrefix_opListPortalsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListPortalsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "monitor." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListPortalsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListPortalsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListPortalsAPIClient is a client that implements the ListPortals operation.
+type ListPortalsAPIClient interface {
+	ListPortals(context.Context, *ListPortalsInput, ...func(*Options)) (*ListPortalsOutput, error)
+}
+
+var _ ListPortalsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPortals(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

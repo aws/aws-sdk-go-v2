@@ -169,6 +169,9 @@ func (c *Client) addOperationRestartChannelPipelinesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRestartChannelPipelinesValidationMiddleware(stack); err != nil {
 		return err
 	}

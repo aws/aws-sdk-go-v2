@@ -190,6 +190,9 @@ func (c *Client) addOperationDescribeBatchPredictionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBatchPredictions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -209,99 +212,6 @@ func (c *Client) addOperationDescribeBatchPredictionsMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
-}
-
-// DescribeBatchPredictionsAPIClient is a client that implements the
-// DescribeBatchPredictions operation.
-type DescribeBatchPredictionsAPIClient interface {
-	DescribeBatchPredictions(context.Context, *DescribeBatchPredictionsInput, ...func(*Options)) (*DescribeBatchPredictionsOutput, error)
-}
-
-var _ DescribeBatchPredictionsAPIClient = (*Client)(nil)
-
-// DescribeBatchPredictionsPaginatorOptions is the paginator options for
-// DescribeBatchPredictions
-type DescribeBatchPredictionsPaginatorOptions struct {
-	// The number of pages of information to include in the result. The range of
-	// acceptable values is 1 through 100 . The default value is 100 .
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeBatchPredictionsPaginator is a paginator for DescribeBatchPredictions
-type DescribeBatchPredictionsPaginator struct {
-	options   DescribeBatchPredictionsPaginatorOptions
-	client    DescribeBatchPredictionsAPIClient
-	params    *DescribeBatchPredictionsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeBatchPredictionsPaginator returns a new
-// DescribeBatchPredictionsPaginator
-func NewDescribeBatchPredictionsPaginator(client DescribeBatchPredictionsAPIClient, params *DescribeBatchPredictionsInput, optFns ...func(*DescribeBatchPredictionsPaginatorOptions)) *DescribeBatchPredictionsPaginator {
-	if params == nil {
-		params = &DescribeBatchPredictionsInput{}
-	}
-
-	options := DescribeBatchPredictionsPaginatorOptions{}
-	if params.Limit != nil {
-		options.Limit = *params.Limit
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeBatchPredictionsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeBatchPredictionsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeBatchPredictions page.
-func (p *DescribeBatchPredictionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeBatchPredictionsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.Limit = limit
-
-	result, err := p.client.DescribeBatchPredictions(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // BatchPredictionAvailableWaiterOptions are waiter options for
@@ -421,7 +331,13 @@ func (w *BatchPredictionAvailableWaiter) WaitForOutput(ctx context.Context, para
 		}
 
 		out, err := w.client.DescribeBatchPredictions(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -517,6 +433,102 @@ func batchPredictionAvailableStateRetryable(ctx context.Context, input *Describe
 
 	return true, nil
 }
+
+// DescribeBatchPredictionsPaginatorOptions is the paginator options for
+// DescribeBatchPredictions
+type DescribeBatchPredictionsPaginatorOptions struct {
+	// The number of pages of information to include in the result. The range of
+	// acceptable values is 1 through 100 . The default value is 100 .
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeBatchPredictionsPaginator is a paginator for DescribeBatchPredictions
+type DescribeBatchPredictionsPaginator struct {
+	options   DescribeBatchPredictionsPaginatorOptions
+	client    DescribeBatchPredictionsAPIClient
+	params    *DescribeBatchPredictionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeBatchPredictionsPaginator returns a new
+// DescribeBatchPredictionsPaginator
+func NewDescribeBatchPredictionsPaginator(client DescribeBatchPredictionsAPIClient, params *DescribeBatchPredictionsInput, optFns ...func(*DescribeBatchPredictionsPaginatorOptions)) *DescribeBatchPredictionsPaginator {
+	if params == nil {
+		params = &DescribeBatchPredictionsInput{}
+	}
+
+	options := DescribeBatchPredictionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeBatchPredictionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeBatchPredictionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeBatchPredictions page.
+func (p *DescribeBatchPredictionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeBatchPredictionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeBatchPredictions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeBatchPredictionsAPIClient is a client that implements the
+// DescribeBatchPredictions operation.
+type DescribeBatchPredictionsAPIClient interface {
+	DescribeBatchPredictions(context.Context, *DescribeBatchPredictionsInput, ...func(*Options)) (*DescribeBatchPredictionsOutput, error)
+}
+
+var _ DescribeBatchPredictionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBatchPredictions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

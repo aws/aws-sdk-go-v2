@@ -116,6 +116,9 @@ func (c *Client) addOperationListApplicationInstanceNodeInstancesMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationInstanceNodeInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListApplicationInstanceNodeInstancesMiddlewares(sta
 	}
 	return nil
 }
-
-// ListApplicationInstanceNodeInstancesAPIClient is a client that implements the
-// ListApplicationInstanceNodeInstances operation.
-type ListApplicationInstanceNodeInstancesAPIClient interface {
-	ListApplicationInstanceNodeInstances(context.Context, *ListApplicationInstanceNodeInstancesInput, ...func(*Options)) (*ListApplicationInstanceNodeInstancesOutput, error)
-}
-
-var _ ListApplicationInstanceNodeInstancesAPIClient = (*Client)(nil)
 
 // ListApplicationInstanceNodeInstancesPaginatorOptions is the paginator options
 // for ListApplicationInstanceNodeInstances
@@ -210,6 +205,9 @@ func (p *ListApplicationInstanceNodeInstancesPaginator) NextPage(ctx context.Con
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationInstanceNodeInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListApplicationInstanceNodeInstancesPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListApplicationInstanceNodeInstancesAPIClient is a client that implements the
+// ListApplicationInstanceNodeInstances operation.
+type ListApplicationInstanceNodeInstancesAPIClient interface {
+	ListApplicationInstanceNodeInstances(context.Context, *ListApplicationInstanceNodeInstancesInput, ...func(*Options)) (*ListApplicationInstanceNodeInstancesOutput, error)
+}
+
+var _ ListApplicationInstanceNodeInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationInstanceNodeInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

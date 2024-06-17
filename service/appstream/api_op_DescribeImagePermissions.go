@@ -126,6 +126,9 @@ func (c *Client) addOperationDescribeImagePermissionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeImagePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationDescribeImagePermissionsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeImagePermissionsAPIClient is a client that implements the
-// DescribeImagePermissions operation.
-type DescribeImagePermissionsAPIClient interface {
-	DescribeImagePermissions(context.Context, *DescribeImagePermissionsInput, ...func(*Options)) (*DescribeImagePermissionsOutput, error)
-}
-
-var _ DescribeImagePermissionsAPIClient = (*Client)(nil)
 
 // DescribeImagePermissionsPaginatorOptions is the paginator options for
 // DescribeImagePermissions
@@ -223,6 +218,9 @@ func (p *DescribeImagePermissionsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeImagePermissions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *DescribeImagePermissionsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeImagePermissionsAPIClient is a client that implements the
+// DescribeImagePermissions operation.
+type DescribeImagePermissionsAPIClient interface {
+	DescribeImagePermissions(context.Context, *DescribeImagePermissionsInput, ...func(*Options)) (*DescribeImagePermissionsOutput, error)
+}
+
+var _ DescribeImagePermissionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeImagePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -118,6 +118,9 @@ func (c *Client) addOperationListPlaceIndexesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListPlaceIndexesMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,41 +144,6 @@ func (c *Client) addOperationListPlaceIndexesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-type endpointPrefix_opListPlaceIndexesMiddleware struct {
-}
-
-func (*endpointPrefix_opListPlaceIndexesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListPlaceIndexesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "cp.places." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListPlaceIndexesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListPlaceIndexesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListPlaceIndexesAPIClient is a client that implements the ListPlaceIndexes
-// operation.
-type ListPlaceIndexesAPIClient interface {
-	ListPlaceIndexes(context.Context, *ListPlaceIndexesInput, ...func(*Options)) (*ListPlaceIndexesOutput, error)
-}
-
-var _ ListPlaceIndexesAPIClient = (*Client)(nil)
 
 // ListPlaceIndexesPaginatorOptions is the paginator options for ListPlaceIndexes
 type ListPlaceIndexesPaginatorOptions struct {
@@ -242,6 +210,9 @@ func (p *ListPlaceIndexesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPlaceIndexes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +231,41 @@ func (p *ListPlaceIndexesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+type endpointPrefix_opListPlaceIndexesMiddleware struct {
+}
+
+func (*endpointPrefix_opListPlaceIndexesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListPlaceIndexesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "cp.places." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListPlaceIndexesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListPlaceIndexesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListPlaceIndexesAPIClient is a client that implements the ListPlaceIndexes
+// operation.
+type ListPlaceIndexesAPIClient interface {
+	ListPlaceIndexes(context.Context, *ListPlaceIndexesInput, ...func(*Options)) (*ListPlaceIndexesOutput, error)
+}
+
+var _ ListPlaceIndexesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPlaceIndexes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

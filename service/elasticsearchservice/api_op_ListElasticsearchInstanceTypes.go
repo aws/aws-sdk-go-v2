@@ -128,6 +128,9 @@ func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListElasticsearchInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListElasticsearchInstanceTypesAPIClient is a client that implements the
-// ListElasticsearchInstanceTypes operation.
-type ListElasticsearchInstanceTypesAPIClient interface {
-	ListElasticsearchInstanceTypes(context.Context, *ListElasticsearchInstanceTypesInput, ...func(*Options)) (*ListElasticsearchInstanceTypesOutput, error)
-}
-
-var _ ListElasticsearchInstanceTypesAPIClient = (*Client)(nil)
 
 // ListElasticsearchInstanceTypesPaginatorOptions is the paginator options for
 // ListElasticsearchInstanceTypes
@@ -223,6 +218,9 @@ func (p *ListElasticsearchInstanceTypesPaginator) NextPage(ctx context.Context, 
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListElasticsearchInstanceTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListElasticsearchInstanceTypesPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListElasticsearchInstanceTypesAPIClient is a client that implements the
+// ListElasticsearchInstanceTypes operation.
+type ListElasticsearchInstanceTypesAPIClient interface {
+	ListElasticsearchInstanceTypes(context.Context, *ListElasticsearchInstanceTypesInput, ...func(*Options)) (*ListElasticsearchInstanceTypesOutput, error)
+}
+
+var _ ListElasticsearchInstanceTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListElasticsearchInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

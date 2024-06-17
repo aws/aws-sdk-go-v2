@@ -120,6 +120,9 @@ func (c *Client) addOperationListOutgoingCertificatesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOutgoingCertificates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListOutgoingCertificatesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListOutgoingCertificatesAPIClient is a client that implements the
-// ListOutgoingCertificates operation.
-type ListOutgoingCertificatesAPIClient interface {
-	ListOutgoingCertificates(context.Context, *ListOutgoingCertificatesInput, ...func(*Options)) (*ListOutgoingCertificatesOutput, error)
-}
-
-var _ ListOutgoingCertificatesAPIClient = (*Client)(nil)
 
 // ListOutgoingCertificatesPaginatorOptions is the paginator options for
 // ListOutgoingCertificates
@@ -214,6 +209,9 @@ func (p *ListOutgoingCertificatesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOutgoingCertificates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListOutgoingCertificatesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListOutgoingCertificatesAPIClient is a client that implements the
+// ListOutgoingCertificates operation.
+type ListOutgoingCertificatesAPIClient interface {
+	ListOutgoingCertificates(context.Context, *ListOutgoingCertificatesInput, ...func(*Options)) (*ListOutgoingCertificatesOutput, error)
+}
+
+var _ ListOutgoingCertificatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOutgoingCertificates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

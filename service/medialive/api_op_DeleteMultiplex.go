@@ -135,6 +135,9 @@ func (c *Client) addOperationDeleteMultiplexMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteMultiplexValidationMiddleware(stack); err != nil {
 		return err
 	}

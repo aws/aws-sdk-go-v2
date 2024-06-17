@@ -213,6 +213,9 @@ func (c *Client) addOperationDescribeDBRecommendationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -236,14 +239,6 @@ func (c *Client) addOperationDescribeDBRecommendationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeDBRecommendationsAPIClient is a client that implements the
-// DescribeDBRecommendations operation.
-type DescribeDBRecommendationsAPIClient interface {
-	DescribeDBRecommendations(context.Context, *DescribeDBRecommendationsInput, ...func(*Options)) (*DescribeDBRecommendationsOutput, error)
-}
-
-var _ DescribeDBRecommendationsAPIClient = (*Client)(nil)
 
 // DescribeDBRecommendationsPaginatorOptions is the paginator options for
 // DescribeDBRecommendations
@@ -313,6 +308,9 @@ func (p *DescribeDBRecommendationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBRecommendations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -331,6 +329,14 @@ func (p *DescribeDBRecommendationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeDBRecommendationsAPIClient is a client that implements the
+// DescribeDBRecommendations operation.
+type DescribeDBRecommendationsAPIClient interface {
+	DescribeDBRecommendations(context.Context, *DescribeDBRecommendationsInput, ...func(*Options)) (*DescribeDBRecommendationsOutput, error)
+}
+
+var _ DescribeDBRecommendationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

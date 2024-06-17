@@ -112,6 +112,9 @@ func (c *Client) addOperationDescribeCodeReviewMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCodeReviewValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationDescribeCodeReviewMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeCodeReviewAPIClient is a client that implements the DescribeCodeReview
-// operation.
-type DescribeCodeReviewAPIClient interface {
-	DescribeCodeReview(context.Context, *DescribeCodeReviewInput, ...func(*Options)) (*DescribeCodeReviewOutput, error)
-}
-
-var _ DescribeCodeReviewAPIClient = (*Client)(nil)
 
 // CodeReviewCompletedWaiterOptions are waiter options for
 // CodeReviewCompletedWaiter
@@ -261,7 +256,13 @@ func (w *CodeReviewCompletedWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeCodeReview(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -352,6 +353,14 @@ func codeReviewCompletedStateRetryable(ctx context.Context, input *DescribeCodeR
 
 	return true, nil
 }
+
+// DescribeCodeReviewAPIClient is a client that implements the DescribeCodeReview
+// operation.
+type DescribeCodeReviewAPIClient interface {
+	DescribeCodeReview(context.Context, *DescribeCodeReviewInput, ...func(*Options)) (*DescribeCodeReviewOutput, error)
+}
+
+var _ DescribeCodeReviewAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCodeReview(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

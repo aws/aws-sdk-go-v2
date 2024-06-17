@@ -121,6 +121,9 @@ func (c *Client) addOperationListSubscribedWorkteamsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSubscribedWorkteams(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListSubscribedWorkteamsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListSubscribedWorkteamsAPIClient is a client that implements the
-// ListSubscribedWorkteams operation.
-type ListSubscribedWorkteamsAPIClient interface {
-	ListSubscribedWorkteams(context.Context, *ListSubscribedWorkteamsInput, ...func(*Options)) (*ListSubscribedWorkteamsOutput, error)
-}
-
-var _ ListSubscribedWorkteamsAPIClient = (*Client)(nil)
 
 // ListSubscribedWorkteamsPaginatorOptions is the paginator options for
 // ListSubscribedWorkteams
@@ -215,6 +210,9 @@ func (p *ListSubscribedWorkteamsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSubscribedWorkteams(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListSubscribedWorkteamsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListSubscribedWorkteamsAPIClient is a client that implements the
+// ListSubscribedWorkteams operation.
+type ListSubscribedWorkteamsAPIClient interface {
+	ListSubscribedWorkteams(context.Context, *ListSubscribedWorkteamsInput, ...func(*Options)) (*ListSubscribedWorkteamsOutput, error)
+}
+
+var _ ListSubscribedWorkteamsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSubscribedWorkteams(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

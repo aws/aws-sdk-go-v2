@@ -123,6 +123,9 @@ func (c *Client) addOperationListBackupSelectionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBackupSelectionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListBackupSelectionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListBackupSelectionsAPIClient is a client that implements the
-// ListBackupSelections operation.
-type ListBackupSelectionsAPIClient interface {
-	ListBackupSelections(context.Context, *ListBackupSelectionsInput, ...func(*Options)) (*ListBackupSelectionsOutput, error)
-}
-
-var _ ListBackupSelectionsAPIClient = (*Client)(nil)
 
 // ListBackupSelectionsPaginatorOptions is the paginator options for
 // ListBackupSelections
@@ -219,6 +214,9 @@ func (p *ListBackupSelectionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBackupSelections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListBackupSelectionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListBackupSelectionsAPIClient is a client that implements the
+// ListBackupSelections operation.
+type ListBackupSelectionsAPIClient interface {
+	ListBackupSelections(context.Context, *ListBackupSelectionsInput, ...func(*Options)) (*ListBackupSelectionsOutput, error)
+}
+
+var _ ListBackupSelectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBackupSelections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

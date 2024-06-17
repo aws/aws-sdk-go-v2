@@ -123,6 +123,9 @@ func (c *Client) addOperationCreateRegistryMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRegistryValidationMiddleware(stack); err != nil {
 		return err
 	}

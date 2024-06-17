@@ -441,6 +441,9 @@ func (c *Client) addOperationScanMiddlewares(stack *middleware.Stack, options Op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpScanValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -470,56 +473,6 @@ func (c *Client) addOperationScanMiddlewares(stack *middleware.Stack, options Op
 	}
 	return nil
 }
-
-func addOpScanDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
-	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
-		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
-			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
-				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
-				opt.Logger = o.Logger
-			},
-		},
-		DiscoverOperation:            c.fetchOpScanDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
-		EndpointDiscoveryRequired:    false,
-		Region:                       o.Region,
-	}, "ResolveEndpointV2", middleware.After)
-}
-
-func (c *Client) fetchOpScanDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
-	input := getOperationInput(ctx)
-	in, ok := input.(*ScanInput)
-	if !ok {
-		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
-	}
-	_ = in
-
-	identifierMap := make(map[string]string, 0)
-	identifierMap["sdk#Region"] = region
-
-	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
-
-	if v, ok := c.endpointCache.Get(key); ok {
-		return v, nil
-	}
-
-	discoveryOperationInput := &DescribeEndpointsInput{}
-
-	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
-	for _, fn := range optFns {
-		fn(&opt)
-	}
-
-	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
-	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-// ScanAPIClient is a client that implements the Scan operation.
-type ScanAPIClient interface {
-	Scan(context.Context, *ScanInput, ...func(*Options)) (*ScanOutput, error)
-}
-
-var _ ScanAPIClient = (*Client)(nil)
 
 // ScanPaginatorOptions is the paginator options for Scan
 type ScanPaginatorOptions struct {
@@ -590,6 +543,9 @@ func (p *ScanPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) 
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.Scan(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -603,6 +559,56 @@ func (p *ScanPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) 
 
 	return result, nil
 }
+
+func addOpScanDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpScanDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+		Region:                       o.Region,
+	}, "ResolveEndpointV2", middleware.After)
+}
+
+func (c *Client) fetchOpScanDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	input := getOperationInput(ctx)
+	in, ok := input.(*ScanInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
+}
+
+// ScanAPIClient is a client that implements the Scan operation.
+type ScanAPIClient interface {
+	Scan(context.Context, *ScanInput, ...func(*Options)) (*ScanOutput, error)
+}
+
+var _ ScanAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opScan(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -127,6 +127,9 @@ func (c *Client) addOperationListFileSharesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFileShares(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListFileSharesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListFileSharesAPIClient is a client that implements the ListFileShares
-// operation.
-type ListFileSharesAPIClient interface {
-	ListFileShares(context.Context, *ListFileSharesInput, ...func(*Options)) (*ListFileSharesOutput, error)
-}
-
-var _ ListFileSharesAPIClient = (*Client)(nil)
 
 // ListFileSharesPaginatorOptions is the paginator options for ListFileShares
 type ListFileSharesPaginatorOptions struct {
@@ -220,6 +215,9 @@ func (p *ListFileSharesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFileShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListFileSharesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListFileSharesAPIClient is a client that implements the ListFileShares
+// operation.
+type ListFileSharesAPIClient interface {
+	ListFileShares(context.Context, *ListFileSharesInput, ...func(*Options)) (*ListFileSharesOutput, error)
+}
+
+var _ ListFileSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFileShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

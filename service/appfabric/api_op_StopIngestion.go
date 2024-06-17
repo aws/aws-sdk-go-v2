@@ -108,6 +108,9 @@ func (c *Client) addOperationStopIngestionMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopIngestionValidationMiddleware(stack); err != nil {
 		return err
 	}

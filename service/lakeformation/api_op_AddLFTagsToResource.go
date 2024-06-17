@@ -117,6 +117,9 @@ func (c *Client) addOperationAddLFTagsToResourceMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddLFTagsToResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

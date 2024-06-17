@@ -130,6 +130,9 @@ func (c *Client) addOperationListProxySessionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProxySessionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListProxySessionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListProxySessionsAPIClient is a client that implements the ListProxySessions
-// operation.
-type ListProxySessionsAPIClient interface {
-	ListProxySessions(context.Context, *ListProxySessionsInput, ...func(*Options)) (*ListProxySessionsOutput, error)
-}
-
-var _ ListProxySessionsAPIClient = (*Client)(nil)
 
 // ListProxySessionsPaginatorOptions is the paginator options for ListProxySessions
 type ListProxySessionsPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *ListProxySessionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProxySessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListProxySessionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListProxySessionsAPIClient is a client that implements the ListProxySessions
+// operation.
+type ListProxySessionsAPIClient interface {
+	ListProxySessions(context.Context, *ListProxySessionsInput, ...func(*Options)) (*ListProxySessionsOutput, error)
+}
+
+var _ ListProxySessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProxySessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

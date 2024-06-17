@@ -123,6 +123,9 @@ func (c *Client) addOperationListContactFlowModulesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListContactFlowModulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListContactFlowModulesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListContactFlowModulesAPIClient is a client that implements the
-// ListContactFlowModules operation.
-type ListContactFlowModulesAPIClient interface {
-	ListContactFlowModules(context.Context, *ListContactFlowModulesInput, ...func(*Options)) (*ListContactFlowModulesOutput, error)
-}
-
-var _ ListContactFlowModulesAPIClient = (*Client)(nil)
 
 // ListContactFlowModulesPaginatorOptions is the paginator options for
 // ListContactFlowModules
@@ -219,6 +214,9 @@ func (p *ListContactFlowModulesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContactFlowModules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListContactFlowModulesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListContactFlowModulesAPIClient is a client that implements the
+// ListContactFlowModules operation.
+type ListContactFlowModulesAPIClient interface {
+	ListContactFlowModules(context.Context, *ListContactFlowModulesInput, ...func(*Options)) (*ListContactFlowModulesOutput, error)
+}
+
+var _ ListContactFlowModulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContactFlowModules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteThingGroupMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteThingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

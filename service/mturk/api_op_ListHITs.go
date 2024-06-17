@@ -117,6 +117,9 @@ func (c *Client) addOperationListHITsMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHITs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,13 +140,6 @@ func (c *Client) addOperationListHITsMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// ListHITsAPIClient is a client that implements the ListHITs operation.
-type ListHITsAPIClient interface {
-	ListHITs(context.Context, *ListHITsInput, ...func(*Options)) (*ListHITsOutput, error)
-}
-
-var _ ListHITsAPIClient = (*Client)(nil)
 
 // ListHITsPaginatorOptions is the paginator options for ListHITs
 type ListHITsPaginatorOptions struct {
@@ -207,6 +203,9 @@ func (p *ListHITsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHITs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +224,13 @@ func (p *ListHITsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// ListHITsAPIClient is a client that implements the ListHITs operation.
+type ListHITsAPIClient interface {
+	ListHITs(context.Context, *ListHITsInput, ...func(*Options)) (*ListHITsOutput, error)
+}
+
+var _ ListHITsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHITs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

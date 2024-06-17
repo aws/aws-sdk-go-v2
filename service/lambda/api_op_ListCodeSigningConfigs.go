@@ -114,6 +114,9 @@ func (c *Client) addOperationListCodeSigningConfigsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCodeSigningConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListCodeSigningConfigsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListCodeSigningConfigsAPIClient is a client that implements the
-// ListCodeSigningConfigs operation.
-type ListCodeSigningConfigsAPIClient interface {
-	ListCodeSigningConfigs(context.Context, *ListCodeSigningConfigsInput, ...func(*Options)) (*ListCodeSigningConfigsOutput, error)
-}
-
-var _ ListCodeSigningConfigsAPIClient = (*Client)(nil)
 
 // ListCodeSigningConfigsPaginatorOptions is the paginator options for
 // ListCodeSigningConfigs
@@ -207,6 +202,9 @@ func (p *ListCodeSigningConfigsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCodeSigningConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListCodeSigningConfigsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListCodeSigningConfigsAPIClient is a client that implements the
+// ListCodeSigningConfigs operation.
+type ListCodeSigningConfigsAPIClient interface {
+	ListCodeSigningConfigs(context.Context, *ListCodeSigningConfigsInput, ...func(*Options)) (*ListCodeSigningConfigsOutput, error)
+}
+
+var _ ListCodeSigningConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCodeSigningConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -130,6 +130,9 @@ func (c *Client) addOperationGetLinksMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLinksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,13 +156,6 @@ func (c *Client) addOperationGetLinksMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// GetLinksAPIClient is a client that implements the GetLinks operation.
-type GetLinksAPIClient interface {
-	GetLinks(context.Context, *GetLinksInput, ...func(*Options)) (*GetLinksOutput, error)
-}
-
-var _ GetLinksAPIClient = (*Client)(nil)
 
 // GetLinksPaginatorOptions is the paginator options for GetLinks
 type GetLinksPaginatorOptions struct {
@@ -224,6 +220,9 @@ func (p *GetLinksPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetLinks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +241,13 @@ func (p *GetLinksPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// GetLinksAPIClient is a client that implements the GetLinks operation.
+type GetLinksAPIClient interface {
+	GetLinks(context.Context, *GetLinksInput, ...func(*Options)) (*GetLinksOutput, error)
+}
+
+var _ GetLinksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLinks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -122,6 +122,9 @@ func (c *Client) addOperationListAutomatedDiscoveryAccountsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutomatedDiscoveryAccounts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListAutomatedDiscoveryAccountsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListAutomatedDiscoveryAccountsAPIClient is a client that implements the
-// ListAutomatedDiscoveryAccounts operation.
-type ListAutomatedDiscoveryAccountsAPIClient interface {
-	ListAutomatedDiscoveryAccounts(context.Context, *ListAutomatedDiscoveryAccountsInput, ...func(*Options)) (*ListAutomatedDiscoveryAccountsOutput, error)
-}
-
-var _ ListAutomatedDiscoveryAccountsAPIClient = (*Client)(nil)
 
 // ListAutomatedDiscoveryAccountsPaginatorOptions is the paginator options for
 // ListAutomatedDiscoveryAccounts
@@ -217,6 +212,9 @@ func (p *ListAutomatedDiscoveryAccountsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAutomatedDiscoveryAccounts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListAutomatedDiscoveryAccountsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListAutomatedDiscoveryAccountsAPIClient is a client that implements the
+// ListAutomatedDiscoveryAccounts operation.
+type ListAutomatedDiscoveryAccountsAPIClient interface {
+	ListAutomatedDiscoveryAccounts(context.Context, *ListAutomatedDiscoveryAccountsInput, ...func(*Options)) (*ListAutomatedDiscoveryAccountsOutput, error)
+}
+
+var _ ListAutomatedDiscoveryAccountsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAutomatedDiscoveryAccounts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

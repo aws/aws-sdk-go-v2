@@ -134,6 +134,9 @@ func (c *Client) addOperationListShareInvitationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListShareInvitations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListShareInvitationsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListShareInvitationsAPIClient is a client that implements the
-// ListShareInvitations operation.
-type ListShareInvitationsAPIClient interface {
-	ListShareInvitations(context.Context, *ListShareInvitationsInput, ...func(*Options)) (*ListShareInvitationsOutput, error)
-}
-
-var _ ListShareInvitationsAPIClient = (*Client)(nil)
 
 // ListShareInvitationsPaginatorOptions is the paginator options for
 // ListShareInvitations
@@ -227,6 +222,9 @@ func (p *ListShareInvitationsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListShareInvitations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListShareInvitationsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListShareInvitationsAPIClient is a client that implements the
+// ListShareInvitations operation.
+type ListShareInvitationsAPIClient interface {
+	ListShareInvitations(context.Context, *ListShareInvitationsInput, ...func(*Options)) (*ListShareInvitationsOutput, error)
+}
+
+var _ ListShareInvitationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListShareInvitations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

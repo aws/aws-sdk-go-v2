@@ -132,6 +132,9 @@ func (c *Client) addOperationGetCommentsForComparedCommitMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCommentsForComparedCommitValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationGetCommentsForComparedCommitMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// GetCommentsForComparedCommitAPIClient is a client that implements the
-// GetCommentsForComparedCommit operation.
-type GetCommentsForComparedCommitAPIClient interface {
-	GetCommentsForComparedCommit(context.Context, *GetCommentsForComparedCommitInput, ...func(*Options)) (*GetCommentsForComparedCommitOutput, error)
-}
-
-var _ GetCommentsForComparedCommitAPIClient = (*Client)(nil)
 
 // GetCommentsForComparedCommitPaginatorOptions is the paginator options for
 // GetCommentsForComparedCommit
@@ -231,6 +226,9 @@ func (p *GetCommentsForComparedCommitPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCommentsForComparedCommit(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *GetCommentsForComparedCommitPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// GetCommentsForComparedCommitAPIClient is a client that implements the
+// GetCommentsForComparedCommit operation.
+type GetCommentsForComparedCommitAPIClient interface {
+	GetCommentsForComparedCommit(context.Context, *GetCommentsForComparedCommitInput, ...func(*Options)) (*GetCommentsForComparedCommitOutput, error)
+}
+
+var _ GetCommentsForComparedCommitAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCommentsForComparedCommit(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

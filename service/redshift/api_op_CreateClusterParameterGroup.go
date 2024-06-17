@@ -150,6 +150,9 @@ func (c *Client) addOperationCreateClusterParameterGroupMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationListManagedJobTemplatesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedJobTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListManagedJobTemplatesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListManagedJobTemplatesAPIClient is a client that implements the
-// ListManagedJobTemplates operation.
-type ListManagedJobTemplatesAPIClient interface {
-	ListManagedJobTemplates(context.Context, *ListManagedJobTemplatesInput, ...func(*Options)) (*ListManagedJobTemplatesOutput, error)
-}
-
-var _ ListManagedJobTemplatesAPIClient = (*Client)(nil)
 
 // ListManagedJobTemplatesPaginatorOptions is the paginator options for
 // ListManagedJobTemplates
@@ -208,6 +203,9 @@ func (p *ListManagedJobTemplatesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListManagedJobTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListManagedJobTemplatesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListManagedJobTemplatesAPIClient is a client that implements the
+// ListManagedJobTemplates operation.
+type ListManagedJobTemplatesAPIClient interface {
+	ListManagedJobTemplates(context.Context, *ListManagedJobTemplatesInput, ...func(*Options)) (*ListManagedJobTemplatesOutput, error)
+}
+
+var _ ListManagedJobTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListManagedJobTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -114,6 +114,9 @@ func (c *Client) addOperationListAudienceModelsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAudienceModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListAudienceModelsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListAudienceModelsAPIClient is a client that implements the ListAudienceModels
-// operation.
-type ListAudienceModelsAPIClient interface {
-	ListAudienceModels(context.Context, *ListAudienceModelsInput, ...func(*Options)) (*ListAudienceModelsOutput, error)
-}
-
-var _ ListAudienceModelsAPIClient = (*Client)(nil)
 
 // ListAudienceModelsPaginatorOptions is the paginator options for
 // ListAudienceModels
@@ -207,6 +202,9 @@ func (p *ListAudienceModelsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAudienceModels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListAudienceModelsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListAudienceModelsAPIClient is a client that implements the ListAudienceModels
+// operation.
+type ListAudienceModelsAPIClient interface {
+	ListAudienceModels(context.Context, *ListAudienceModelsInput, ...func(*Options)) (*ListAudienceModelsOutput, error)
+}
+
+var _ ListAudienceModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAudienceModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

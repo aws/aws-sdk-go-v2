@@ -122,6 +122,9 @@ func (c *Client) addOperationListDomainAssociationsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDomainAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListDomainAssociationsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListDomainAssociationsAPIClient is a client that implements the
-// ListDomainAssociations operation.
-type ListDomainAssociationsAPIClient interface {
-	ListDomainAssociations(context.Context, *ListDomainAssociationsInput, ...func(*Options)) (*ListDomainAssociationsOutput, error)
-}
-
-var _ ListDomainAssociationsAPIClient = (*Client)(nil)
 
 // ListDomainAssociationsPaginatorOptions is the paginator options for
 // ListDomainAssociations
@@ -214,6 +209,9 @@ func (p *ListDomainAssociationsPaginator) NextPage(ctx context.Context, optFns .
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDomainAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListDomainAssociationsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListDomainAssociationsAPIClient is a client that implements the
+// ListDomainAssociations operation.
+type ListDomainAssociationsAPIClient interface {
+	ListDomainAssociations(context.Context, *ListDomainAssociationsInput, ...func(*Options)) (*ListDomainAssociationsOutput, error)
+}
+
+var _ ListDomainAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDomainAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

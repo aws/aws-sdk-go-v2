@@ -150,6 +150,9 @@ func (c *Client) addOperationListEventLogsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEventLogsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -173,13 +176,6 @@ func (c *Client) addOperationListEventLogsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListEventLogsAPIClient is a client that implements the ListEventLogs operation.
-type ListEventLogsAPIClient interface {
-	ListEventLogs(context.Context, *ListEventLogsInput, ...func(*Options)) (*ListEventLogsOutput, error)
-}
-
-var _ ListEventLogsAPIClient = (*Client)(nil)
 
 // ListEventLogsPaginatorOptions is the paginator options for ListEventLogs
 type ListEventLogsPaginatorOptions struct {
@@ -246,6 +242,9 @@ func (p *ListEventLogsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventLogs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +263,13 @@ func (p *ListEventLogsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListEventLogsAPIClient is a client that implements the ListEventLogs operation.
+type ListEventLogsAPIClient interface {
+	ListEventLogs(context.Context, *ListEventLogsInput, ...func(*Options)) (*ListEventLogsOutput, error)
+}
+
+var _ ListEventLogsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventLogs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

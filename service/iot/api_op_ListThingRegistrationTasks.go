@@ -119,6 +119,9 @@ func (c *Client) addOperationListThingRegistrationTasksMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThingRegistrationTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListThingRegistrationTasksMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListThingRegistrationTasksAPIClient is a client that implements the
-// ListThingRegistrationTasks operation.
-type ListThingRegistrationTasksAPIClient interface {
-	ListThingRegistrationTasks(context.Context, *ListThingRegistrationTasksInput, ...func(*Options)) (*ListThingRegistrationTasksOutput, error)
-}
-
-var _ ListThingRegistrationTasksAPIClient = (*Client)(nil)
 
 // ListThingRegistrationTasksPaginatorOptions is the paginator options for
 // ListThingRegistrationTasks
@@ -214,6 +209,9 @@ func (p *ListThingRegistrationTasksPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListThingRegistrationTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListThingRegistrationTasksPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListThingRegistrationTasksAPIClient is a client that implements the
+// ListThingRegistrationTasks operation.
+type ListThingRegistrationTasksAPIClient interface {
+	ListThingRegistrationTasks(context.Context, *ListThingRegistrationTasksInput, ...func(*Options)) (*ListThingRegistrationTasksOutput, error)
+}
+
+var _ ListThingRegistrationTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListThingRegistrationTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

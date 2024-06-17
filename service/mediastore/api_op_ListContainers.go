@@ -127,6 +127,9 @@ func (c *Client) addOperationListContainersMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListContainersMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListContainersAPIClient is a client that implements the ListContainers
-// operation.
-type ListContainersAPIClient interface {
-	ListContainers(context.Context, *ListContainersInput, ...func(*Options)) (*ListContainersOutput, error)
-}
-
-var _ ListContainersAPIClient = (*Client)(nil)
 
 // ListContainersPaginatorOptions is the paginator options for ListContainers
 type ListContainersPaginatorOptions struct {
@@ -220,6 +215,9 @@ func (p *ListContainersPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContainers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListContainersPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListContainersAPIClient is a client that implements the ListContainers
+// operation.
+type ListContainersAPIClient interface {
+	ListContainers(context.Context, *ListContainersInput, ...func(*Options)) (*ListContainersOutput, error)
+}
+
+var _ ListContainersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContainers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

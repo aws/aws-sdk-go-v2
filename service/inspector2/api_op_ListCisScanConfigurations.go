@@ -122,6 +122,9 @@ func (c *Client) addOperationListCisScanConfigurationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCisScanConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListCisScanConfigurationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListCisScanConfigurationsAPIClient is a client that implements the
-// ListCisScanConfigurations operation.
-type ListCisScanConfigurationsAPIClient interface {
-	ListCisScanConfigurations(context.Context, *ListCisScanConfigurationsInput, ...func(*Options)) (*ListCisScanConfigurationsOutput, error)
-}
-
-var _ ListCisScanConfigurationsAPIClient = (*Client)(nil)
 
 // ListCisScanConfigurationsPaginatorOptions is the paginator options for
 // ListCisScanConfigurations
@@ -220,6 +215,9 @@ func (p *ListCisScanConfigurationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCisScanConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListCisScanConfigurationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListCisScanConfigurationsAPIClient is a client that implements the
+// ListCisScanConfigurations operation.
+type ListCisScanConfigurationsAPIClient interface {
+	ListCisScanConfigurations(context.Context, *ListCisScanConfigurationsInput, ...func(*Options)) (*ListCisScanConfigurationsOutput, error)
+}
+
+var _ ListCisScanConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCisScanConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

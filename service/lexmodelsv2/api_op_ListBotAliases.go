@@ -128,6 +128,9 @@ func (c *Client) addOperationListBotAliasesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBotAliasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListBotAliasesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListBotAliasesAPIClient is a client that implements the ListBotAliases
-// operation.
-type ListBotAliasesAPIClient interface {
-	ListBotAliases(context.Context, *ListBotAliasesInput, ...func(*Options)) (*ListBotAliasesOutput, error)
-}
-
-var _ ListBotAliasesAPIClient = (*Client)(nil)
 
 // ListBotAliasesPaginatorOptions is the paginator options for ListBotAliases
 type ListBotAliasesPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *ListBotAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBotAliases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListBotAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListBotAliasesAPIClient is a client that implements the ListBotAliases
+// operation.
+type ListBotAliasesAPIClient interface {
+	ListBotAliases(context.Context, *ListBotAliasesInput, ...func(*Options)) (*ListBotAliasesOutput, error)
+}
+
+var _ ListBotAliasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBotAliases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationListDirectoryRegistrationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDirectoryRegistrations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListDirectoryRegistrationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListDirectoryRegistrationsAPIClient is a client that implements the
-// ListDirectoryRegistrations operation.
-type ListDirectoryRegistrationsAPIClient interface {
-	ListDirectoryRegistrations(context.Context, *ListDirectoryRegistrationsInput, ...func(*Options)) (*ListDirectoryRegistrationsOutput, error)
-}
-
-var _ ListDirectoryRegistrationsAPIClient = (*Client)(nil)
 
 // ListDirectoryRegistrationsPaginatorOptions is the paginator options for
 // ListDirectoryRegistrations
@@ -217,6 +212,9 @@ func (p *ListDirectoryRegistrationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDirectoryRegistrations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListDirectoryRegistrationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListDirectoryRegistrationsAPIClient is a client that implements the
+// ListDirectoryRegistrations operation.
+type ListDirectoryRegistrationsAPIClient interface {
+	ListDirectoryRegistrations(context.Context, *ListDirectoryRegistrationsInput, ...func(*Options)) (*ListDirectoryRegistrationsOutput, error)
+}
+
+var _ ListDirectoryRegistrationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDirectoryRegistrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

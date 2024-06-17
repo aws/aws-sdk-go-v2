@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteConformancePackMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConformancePackValidationMiddleware(stack); err != nil {
 		return err
 	}

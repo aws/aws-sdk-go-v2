@@ -101,6 +101,9 @@ func (c *Client) addOperationRestartSimulationJobMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRestartSimulationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

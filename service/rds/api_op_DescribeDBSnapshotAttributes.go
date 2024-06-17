@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeDBSnapshotAttributesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSnapshotAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

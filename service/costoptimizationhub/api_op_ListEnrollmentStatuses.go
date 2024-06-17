@@ -122,6 +122,9 @@ func (c *Client) addOperationListEnrollmentStatusesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnrollmentStatuses(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListEnrollmentStatusesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListEnrollmentStatusesAPIClient is a client that implements the
-// ListEnrollmentStatuses operation.
-type ListEnrollmentStatusesAPIClient interface {
-	ListEnrollmentStatuses(context.Context, *ListEnrollmentStatusesInput, ...func(*Options)) (*ListEnrollmentStatusesOutput, error)
-}
-
-var _ ListEnrollmentStatusesAPIClient = (*Client)(nil)
 
 // ListEnrollmentStatusesPaginatorOptions is the paginator options for
 // ListEnrollmentStatuses
@@ -215,6 +210,9 @@ func (p *ListEnrollmentStatusesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnrollmentStatuses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListEnrollmentStatusesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListEnrollmentStatusesAPIClient is a client that implements the
+// ListEnrollmentStatuses operation.
+type ListEnrollmentStatusesAPIClient interface {
+	ListEnrollmentStatuses(context.Context, *ListEnrollmentStatusesInput, ...func(*Options)) (*ListEnrollmentStatusesOutput, error)
+}
+
+var _ ListEnrollmentStatusesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnrollmentStatuses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

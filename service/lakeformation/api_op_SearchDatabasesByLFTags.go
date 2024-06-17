@@ -125,6 +125,9 @@ func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchDatabasesByLFTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// SearchDatabasesByLFTagsAPIClient is a client that implements the
-// SearchDatabasesByLFTags operation.
-type SearchDatabasesByLFTagsAPIClient interface {
-	SearchDatabasesByLFTags(context.Context, *SearchDatabasesByLFTagsInput, ...func(*Options)) (*SearchDatabasesByLFTagsOutput, error)
-}
-
-var _ SearchDatabasesByLFTagsAPIClient = (*Client)(nil)
 
 // SearchDatabasesByLFTagsPaginatorOptions is the paginator options for
 // SearchDatabasesByLFTags
@@ -222,6 +217,9 @@ func (p *SearchDatabasesByLFTagsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchDatabasesByLFTags(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *SearchDatabasesByLFTagsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// SearchDatabasesByLFTagsAPIClient is a client that implements the
+// SearchDatabasesByLFTags operation.
+type SearchDatabasesByLFTagsAPIClient interface {
+	SearchDatabasesByLFTags(context.Context, *SearchDatabasesByLFTagsInput, ...func(*Options)) (*SearchDatabasesByLFTagsOutput, error)
+}
+
+var _ SearchDatabasesByLFTagsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchDatabasesByLFTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeReservedInstancesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeReservedInstancesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeReservedInstancesAPIClient is a client that implements the
-// DescribeReservedInstances operation.
-type DescribeReservedInstancesAPIClient interface {
-	DescribeReservedInstances(context.Context, *DescribeReservedInstancesInput, ...func(*Options)) (*DescribeReservedInstancesOutput, error)
-}
-
-var _ DescribeReservedInstancesAPIClient = (*Client)(nil)
 
 // DescribeReservedInstancesPaginatorOptions is the paginator options for
 // DescribeReservedInstances
@@ -215,6 +210,9 @@ func (p *DescribeReservedInstancesPaginator) NextPage(ctx context.Context, optFn
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeReservedInstancesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeReservedInstancesAPIClient is a client that implements the
+// DescribeReservedInstances operation.
+type DescribeReservedInstancesAPIClient interface {
+	DescribeReservedInstances(context.Context, *DescribeReservedInstancesInput, ...func(*Options)) (*DescribeReservedInstancesOutput, error)
+}
+
+var _ DescribeReservedInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

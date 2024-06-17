@@ -123,6 +123,9 @@ func (c *Client) addOperationDetachInstancesFromLoadBalancerMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetachInstancesFromLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}

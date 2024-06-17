@@ -192,6 +192,9 @@ func (c *Client) addOperationDescribeProcessingJobMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeProcessingJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -215,14 +218,6 @@ func (c *Client) addOperationDescribeProcessingJobMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeProcessingJobAPIClient is a client that implements the
-// DescribeProcessingJob operation.
-type DescribeProcessingJobAPIClient interface {
-	DescribeProcessingJob(context.Context, *DescribeProcessingJobInput, ...func(*Options)) (*DescribeProcessingJobOutput, error)
-}
-
-var _ DescribeProcessingJobAPIClient = (*Client)(nil)
 
 // ProcessingJobCompletedOrStoppedWaiterOptions are waiter options for
 // ProcessingJobCompletedOrStoppedWaiter
@@ -344,7 +339,13 @@ func (w *ProcessingJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Contex
 		}
 
 		out, err := w.client.DescribeProcessingJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -447,6 +448,14 @@ func processingJobCompletedOrStoppedStateRetryable(ctx context.Context, input *D
 
 	return true, nil
 }
+
+// DescribeProcessingJobAPIClient is a client that implements the
+// DescribeProcessingJob operation.
+type DescribeProcessingJobAPIClient interface {
+	DescribeProcessingJob(context.Context, *DescribeProcessingJobInput, ...func(*Options)) (*DescribeProcessingJobOutput, error)
+}
+
+var _ DescribeProcessingJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeProcessingJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

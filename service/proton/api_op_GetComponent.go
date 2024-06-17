@@ -115,6 +115,9 @@ func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetComponentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetComponentAPIClient is a client that implements the GetComponent operation.
-type GetComponentAPIClient interface {
-	GetComponent(context.Context, *GetComponentInput, ...func(*Options)) (*GetComponentOutput, error)
-}
-
-var _ GetComponentAPIClient = (*Client)(nil)
 
 // ComponentDeployedWaiterOptions are waiter options for ComponentDeployedWaiter
 type ComponentDeployedWaiterOptions struct {
@@ -261,7 +257,13 @@ func (w *ComponentDeployedWaiter) WaitForOutput(ctx context.Context, params *Get
 		}
 
 		out, err := w.client.GetComponent(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -451,7 +453,13 @@ func (w *ComponentDeletedWaiter) WaitForOutput(ctx context.Context, params *GetC
 		}
 
 		out, err := w.client.GetComponent(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -515,6 +523,13 @@ func componentDeletedStateRetryable(ctx context.Context, input *GetComponentInpu
 
 	return true, nil
 }
+
+// GetComponentAPIClient is a client that implements the GetComponent operation.
+type GetComponentAPIClient interface {
+	GetComponent(context.Context, *GetComponentInput, ...func(*Options)) (*GetComponentOutput, error)
+}
+
+var _ GetComponentAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetComponent(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

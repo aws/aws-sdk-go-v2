@@ -130,6 +130,9 @@ func (c *Client) addOperationListAuditMitigationActionsExecutionsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAuditMitigationActionsExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListAuditMitigationActionsExecutionsMiddlewares(sta
 	}
 	return nil
 }
-
-// ListAuditMitigationActionsExecutionsAPIClient is a client that implements the
-// ListAuditMitigationActionsExecutions operation.
-type ListAuditMitigationActionsExecutionsAPIClient interface {
-	ListAuditMitigationActionsExecutions(context.Context, *ListAuditMitigationActionsExecutionsInput, ...func(*Options)) (*ListAuditMitigationActionsExecutionsOutput, error)
-}
-
-var _ ListAuditMitigationActionsExecutionsAPIClient = (*Client)(nil)
 
 // ListAuditMitigationActionsExecutionsPaginatorOptions is the paginator options
 // for ListAuditMitigationActionsExecutions
@@ -228,6 +223,9 @@ func (p *ListAuditMitigationActionsExecutionsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAuditMitigationActionsExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListAuditMitigationActionsExecutionsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListAuditMitigationActionsExecutionsAPIClient is a client that implements the
+// ListAuditMitigationActionsExecutions operation.
+type ListAuditMitigationActionsExecutionsAPIClient interface {
+	ListAuditMitigationActionsExecutions(context.Context, *ListAuditMitigationActionsExecutionsInput, ...func(*Options)) (*ListAuditMitigationActionsExecutionsOutput, error)
+}
+
+var _ ListAuditMitigationActionsExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAuditMitigationActionsExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -115,6 +115,9 @@ func (c *Client) addOperationGetListsMetadataMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetListsMetadata(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationGetListsMetadataMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetListsMetadataAPIClient is a client that implements the GetListsMetadata
-// operation.
-type GetListsMetadataAPIClient interface {
-	GetListsMetadata(context.Context, *GetListsMetadataInput, ...func(*Options)) (*GetListsMetadataOutput, error)
-}
-
-var _ GetListsMetadataAPIClient = (*Client)(nil)
 
 // GetListsMetadataPaginatorOptions is the paginator options for GetListsMetadata
 type GetListsMetadataPaginatorOptions struct {
@@ -207,6 +202,9 @@ func (p *GetListsMetadataPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetListsMetadata(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *GetListsMetadataPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetListsMetadataAPIClient is a client that implements the GetListsMetadata
+// operation.
+type GetListsMetadataAPIClient interface {
+	GetListsMetadata(context.Context, *GetListsMetadataInput, ...func(*Options)) (*GetListsMetadataOutput, error)
+}
+
+var _ GetListsMetadataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetListsMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

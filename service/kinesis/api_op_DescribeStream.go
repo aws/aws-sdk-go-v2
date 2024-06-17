@@ -165,6 +165,9 @@ func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -185,14 +188,6 @@ func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// DescribeStreamAPIClient is a client that implements the DescribeStream
-// operation.
-type DescribeStreamAPIClient interface {
-	DescribeStream(context.Context, *DescribeStreamInput, ...func(*Options)) (*DescribeStreamOutput, error)
-}
-
-var _ DescribeStreamAPIClient = (*Client)(nil)
 
 // StreamExistsWaiterOptions are waiter options for StreamExistsWaiter
 type StreamExistsWaiterOptions struct {
@@ -308,7 +303,13 @@ func (w *StreamExistsWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeStream(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -481,7 +482,13 @@ func (w *StreamNotExistsWaiter) WaitForOutput(ctx context.Context, params *Descr
 		}
 
 		out, err := w.client.DescribeStream(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -528,6 +535,14 @@ func streamNotExistsStateRetryable(ctx context.Context, input *DescribeStreamInp
 
 	return true, nil
 }
+
+// DescribeStreamAPIClient is a client that implements the DescribeStream
+// operation.
+type DescribeStreamAPIClient interface {
+	DescribeStream(context.Context, *DescribeStreamInput, ...func(*Options)) (*DescribeStreamOutput, error)
+}
+
+var _ DescribeStreamAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStream(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

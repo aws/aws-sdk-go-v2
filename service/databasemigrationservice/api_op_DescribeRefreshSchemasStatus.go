@@ -106,6 +106,9 @@ func (c *Client) addOperationDescribeRefreshSchemasStatusMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRefreshSchemasStatusValidationMiddleware(stack); err != nil {
 		return err
 	}

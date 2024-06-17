@@ -121,6 +121,9 @@ func (c *Client) addOperationListApplicationGrantsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationGrantsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListApplicationGrantsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListApplicationGrantsAPIClient is a client that implements the
-// ListApplicationGrants operation.
-type ListApplicationGrantsAPIClient interface {
-	ListApplicationGrants(context.Context, *ListApplicationGrantsInput, ...func(*Options)) (*ListApplicationGrantsOutput, error)
-}
-
-var _ ListApplicationGrantsAPIClient = (*Client)(nil)
 
 // ListApplicationGrantsPaginatorOptions is the paginator options for
 // ListApplicationGrants
@@ -205,6 +200,9 @@ func (p *ListApplicationGrantsPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationGrants(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListApplicationGrantsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListApplicationGrantsAPIClient is a client that implements the
+// ListApplicationGrants operation.
+type ListApplicationGrantsAPIClient interface {
+	ListApplicationGrants(context.Context, *ListApplicationGrantsInput, ...func(*Options)) (*ListApplicationGrantsOutput, error)
+}
+
+var _ ListApplicationGrantsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationGrants(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

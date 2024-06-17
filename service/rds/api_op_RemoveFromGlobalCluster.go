@@ -112,6 +112,9 @@ func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFromGlobalCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}

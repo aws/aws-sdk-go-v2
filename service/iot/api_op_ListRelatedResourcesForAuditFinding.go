@@ -145,6 +145,9 @@ func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRelatedResourcesForAuditFindingValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stac
 	}
 	return nil
 }
-
-// ListRelatedResourcesForAuditFindingAPIClient is a client that implements the
-// ListRelatedResourcesForAuditFinding operation.
-type ListRelatedResourcesForAuditFindingAPIClient interface {
-	ListRelatedResourcesForAuditFinding(context.Context, *ListRelatedResourcesForAuditFindingInput, ...func(*Options)) (*ListRelatedResourcesForAuditFindingOutput, error)
-}
-
-var _ ListRelatedResourcesForAuditFindingAPIClient = (*Client)(nil)
 
 // ListRelatedResourcesForAuditFindingPaginatorOptions is the paginator options
 // for ListRelatedResourcesForAuditFinding
@@ -243,6 +238,9 @@ func (p *ListRelatedResourcesForAuditFindingPaginator) NextPage(ctx context.Cont
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRelatedResourcesForAuditFinding(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -261,6 +259,14 @@ func (p *ListRelatedResourcesForAuditFindingPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// ListRelatedResourcesForAuditFindingAPIClient is a client that implements the
+// ListRelatedResourcesForAuditFinding operation.
+type ListRelatedResourcesForAuditFindingAPIClient interface {
+	ListRelatedResourcesForAuditFinding(context.Context, *ListRelatedResourcesForAuditFindingInput, ...func(*Options)) (*ListRelatedResourcesForAuditFindingOutput, error)
+}
+
+var _ ListRelatedResourcesForAuditFindingAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRelatedResourcesForAuditFinding(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

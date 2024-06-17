@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeImportTasksMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeImportTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationDescribeImportTasksMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeImportTasksAPIClient is a client that implements the
-// DescribeImportTasks operation.
-type DescribeImportTasksAPIClient interface {
-	DescribeImportTasks(context.Context, *DescribeImportTasksInput, ...func(*Options)) (*DescribeImportTasksOutput, error)
-}
-
-var _ DescribeImportTasksAPIClient = (*Client)(nil)
 
 // DescribeImportTasksPaginatorOptions is the paginator options for
 // DescribeImportTasks
@@ -210,6 +205,9 @@ func (p *DescribeImportTasksPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeImportTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *DescribeImportTasksPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeImportTasksAPIClient is a client that implements the
+// DescribeImportTasks operation.
+type DescribeImportTasksAPIClient interface {
+	DescribeImportTasks(context.Context, *DescribeImportTasksInput, ...func(*Options)) (*DescribeImportTasksOutput, error)
+}
+
+var _ DescribeImportTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeImportTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

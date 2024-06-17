@@ -139,6 +139,9 @@ func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListQuerySuggestionsBlockListsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListQuerySuggestionsBlockListsAPIClient is a client that implements the
-// ListQuerySuggestionsBlockLists operation.
-type ListQuerySuggestionsBlockListsAPIClient interface {
-	ListQuerySuggestionsBlockLists(context.Context, *ListQuerySuggestionsBlockListsInput, ...func(*Options)) (*ListQuerySuggestionsBlockListsOutput, error)
-}
-
-var _ ListQuerySuggestionsBlockListsAPIClient = (*Client)(nil)
 
 // ListQuerySuggestionsBlockListsPaginatorOptions is the paginator options for
 // ListQuerySuggestionsBlockLists
@@ -237,6 +232,9 @@ func (p *ListQuerySuggestionsBlockListsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQuerySuggestionsBlockLists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListQuerySuggestionsBlockListsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListQuerySuggestionsBlockListsAPIClient is a client that implements the
+// ListQuerySuggestionsBlockLists operation.
+type ListQuerySuggestionsBlockListsAPIClient interface {
+	ListQuerySuggestionsBlockLists(context.Context, *ListQuerySuggestionsBlockListsInput, ...func(*Options)) (*ListQuerySuggestionsBlockListsOutput, error)
+}
+
+var _ ListQuerySuggestionsBlockListsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQuerySuggestionsBlockLists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -114,6 +114,9 @@ func (c *Client) addOperationListFacetNamesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFacetNamesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListFacetNamesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListFacetNamesAPIClient is a client that implements the ListFacetNames
-// operation.
-type ListFacetNamesAPIClient interface {
-	ListFacetNames(context.Context, *ListFacetNamesInput, ...func(*Options)) (*ListFacetNamesOutput, error)
-}
-
-var _ ListFacetNamesAPIClient = (*Client)(nil)
 
 // ListFacetNamesPaginatorOptions is the paginator options for ListFacetNames
 type ListFacetNamesPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListFacetNamesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFacetNames(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListFacetNamesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListFacetNamesAPIClient is a client that implements the ListFacetNames
+// operation.
+type ListFacetNamesAPIClient interface {
+	ListFacetNames(context.Context, *ListFacetNamesInput, ...func(*Options)) (*ListFacetNamesOutput, error)
+}
+
+var _ ListFacetNamesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFacetNames(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -194,6 +194,9 @@ func (c *Client) addOperationGetSavingsPlansCoverageMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSavingsPlansCoverageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -217,14 +220,6 @@ func (c *Client) addOperationGetSavingsPlansCoverageMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetSavingsPlansCoverageAPIClient is a client that implements the
-// GetSavingsPlansCoverage operation.
-type GetSavingsPlansCoverageAPIClient interface {
-	GetSavingsPlansCoverage(context.Context, *GetSavingsPlansCoverageInput, ...func(*Options)) (*GetSavingsPlansCoverageOutput, error)
-}
-
-var _ GetSavingsPlansCoverageAPIClient = (*Client)(nil)
 
 // GetSavingsPlansCoveragePaginatorOptions is the paginator options for
 // GetSavingsPlansCoverage
@@ -292,6 +287,9 @@ func (p *GetSavingsPlansCoveragePaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSavingsPlansCoverage(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -310,6 +308,14 @@ func (p *GetSavingsPlansCoveragePaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// GetSavingsPlansCoverageAPIClient is a client that implements the
+// GetSavingsPlansCoverage operation.
+type GetSavingsPlansCoverageAPIClient interface {
+	GetSavingsPlansCoverage(context.Context, *GetSavingsPlansCoverageInput, ...func(*Options)) (*GetSavingsPlansCoverageOutput, error)
+}
+
+var _ GetSavingsPlansCoverageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSavingsPlansCoverage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

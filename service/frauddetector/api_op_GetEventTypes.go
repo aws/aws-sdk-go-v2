@@ -118,6 +118,9 @@ func (c *Client) addOperationGetEventTypesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventTypes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationGetEventTypesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetEventTypesAPIClient is a client that implements the GetEventTypes operation.
-type GetEventTypesAPIClient interface {
-	GetEventTypes(context.Context, *GetEventTypesInput, ...func(*Options)) (*GetEventTypesOutput, error)
-}
-
-var _ GetEventTypesAPIClient = (*Client)(nil)
 
 // GetEventTypesPaginatorOptions is the paginator options for GetEventTypes
 type GetEventTypesPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *GetEventTypesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetEventTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *GetEventTypesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetEventTypesAPIClient is a client that implements the GetEventTypes operation.
+type GetEventTypesAPIClient interface {
+	GetEventTypes(context.Context, *GetEventTypesInput, ...func(*Options)) (*GetEventTypesOutput, error)
+}
+
+var _ GetEventTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEventTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

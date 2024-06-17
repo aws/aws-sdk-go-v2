@@ -129,6 +129,9 @@ func (c *Client) addOperationListProfileAssociationsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProfileAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListProfileAssociationsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListProfileAssociationsAPIClient is a client that implements the
-// ListProfileAssociations operation.
-type ListProfileAssociationsAPIClient interface {
-	ListProfileAssociations(context.Context, *ListProfileAssociationsInput, ...func(*Options)) (*ListProfileAssociationsOutput, error)
-}
-
-var _ ListProfileAssociationsAPIClient = (*Client)(nil)
 
 // ListProfileAssociationsPaginatorOptions is the paginator options for
 // ListProfileAssociations
@@ -227,6 +222,9 @@ func (p *ListProfileAssociationsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProfileAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListProfileAssociationsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListProfileAssociationsAPIClient is a client that implements the
+// ListProfileAssociations operation.
+type ListProfileAssociationsAPIClient interface {
+	ListProfileAssociations(context.Context, *ListProfileAssociationsInput, ...func(*Options)) (*ListProfileAssociationsOutput, error)
+}
+
+var _ ListProfileAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProfileAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

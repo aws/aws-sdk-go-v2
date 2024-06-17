@@ -117,6 +117,9 @@ func (c *Client) addOperationListWorkflowStepGroupsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWorkflowStepGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListWorkflowStepGroupsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListWorkflowStepGroupsAPIClient is a client that implements the
-// ListWorkflowStepGroups operation.
-type ListWorkflowStepGroupsAPIClient interface {
-	ListWorkflowStepGroups(context.Context, *ListWorkflowStepGroupsInput, ...func(*Options)) (*ListWorkflowStepGroupsOutput, error)
-}
-
-var _ ListWorkflowStepGroupsAPIClient = (*Client)(nil)
 
 // ListWorkflowStepGroupsPaginatorOptions is the paginator options for
 // ListWorkflowStepGroups
@@ -209,6 +204,9 @@ func (p *ListWorkflowStepGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkflowStepGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListWorkflowStepGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListWorkflowStepGroupsAPIClient is a client that implements the
+// ListWorkflowStepGroups operation.
+type ListWorkflowStepGroupsAPIClient interface {
+	ListWorkflowStepGroups(context.Context, *ListWorkflowStepGroupsInput, ...func(*Options)) (*ListWorkflowStepGroupsOutput, error)
+}
+
+var _ ListWorkflowStepGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkflowStepGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -127,6 +127,9 @@ func (c *Client) addOperationListThemeVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListThemeVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListThemeVersionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListThemeVersionsAPIClient is a client that implements the ListThemeVersions
-// operation.
-type ListThemeVersionsAPIClient interface {
-	ListThemeVersions(context.Context, *ListThemeVersionsInput, ...func(*Options)) (*ListThemeVersionsOutput, error)
-}
-
-var _ ListThemeVersionsAPIClient = (*Client)(nil)
 
 // ListThemeVersionsPaginatorOptions is the paginator options for ListThemeVersions
 type ListThemeVersionsPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *ListThemeVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListThemeVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListThemeVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListThemeVersionsAPIClient is a client that implements the ListThemeVersions
+// operation.
+type ListThemeVersionsAPIClient interface {
+	ListThemeVersions(context.Context, *ListThemeVersionsInput, ...func(*Options)) (*ListThemeVersionsOutput, error)
+}
+
+var _ ListThemeVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListThemeVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

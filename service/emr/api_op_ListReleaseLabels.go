@@ -123,6 +123,9 @@ func (c *Client) addOperationListReleaseLabelsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReleaseLabels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListReleaseLabelsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListReleaseLabelsAPIClient is a client that implements the ListReleaseLabels
-// operation.
-type ListReleaseLabelsAPIClient interface {
-	ListReleaseLabels(context.Context, *ListReleaseLabelsInput, ...func(*Options)) (*ListReleaseLabelsOutput, error)
-}
-
-var _ ListReleaseLabelsAPIClient = (*Client)(nil)
 
 // ListReleaseLabelsPaginatorOptions is the paginator options for ListReleaseLabels
 type ListReleaseLabelsPaginatorOptions struct {
@@ -216,6 +211,9 @@ func (p *ListReleaseLabelsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReleaseLabels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListReleaseLabelsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListReleaseLabelsAPIClient is a client that implements the ListReleaseLabels
+// operation.
+type ListReleaseLabelsAPIClient interface {
+	ListReleaseLabels(context.Context, *ListReleaseLabelsInput, ...func(*Options)) (*ListReleaseLabelsOutput, error)
+}
+
+var _ ListReleaseLabelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReleaseLabels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

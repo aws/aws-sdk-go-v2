@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteStorageVirtualMachineMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteStorageVirtualMachineMiddleware(stack, options); err != nil {
 		return err
 	}

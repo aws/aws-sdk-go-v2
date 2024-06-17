@@ -191,6 +191,9 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateMonitorMiddleware(stack, options); err != nil {
 		return err
 	}

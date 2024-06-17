@@ -119,6 +119,9 @@ func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDedicatedIpPools(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListDedicatedIpPoolsAPIClient is a client that implements the
-// ListDedicatedIpPools operation.
-type ListDedicatedIpPoolsAPIClient interface {
-	ListDedicatedIpPools(context.Context, *ListDedicatedIpPoolsInput, ...func(*Options)) (*ListDedicatedIpPoolsOutput, error)
-}
-
-var _ ListDedicatedIpPoolsAPIClient = (*Client)(nil)
 
 // ListDedicatedIpPoolsPaginatorOptions is the paginator options for
 // ListDedicatedIpPools
@@ -215,6 +210,9 @@ func (p *ListDedicatedIpPoolsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDedicatedIpPools(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListDedicatedIpPoolsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListDedicatedIpPoolsAPIClient is a client that implements the
+// ListDedicatedIpPools operation.
+type ListDedicatedIpPoolsAPIClient interface {
+	ListDedicatedIpPools(context.Context, *ListDedicatedIpPoolsInput, ...func(*Options)) (*ListDedicatedIpPoolsOutput, error)
+}
+
+var _ ListDedicatedIpPoolsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDedicatedIpPools(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -221,6 +221,9 @@ func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeClusterSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -243,105 +246,6 @@ func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
-}
-
-// DescribeClusterSnapshotsAPIClient is a client that implements the
-// DescribeClusterSnapshots operation.
-type DescribeClusterSnapshotsAPIClient interface {
-	DescribeClusterSnapshots(context.Context, *DescribeClusterSnapshotsInput, ...func(*Options)) (*DescribeClusterSnapshotsOutput, error)
-}
-
-var _ DescribeClusterSnapshotsAPIClient = (*Client)(nil)
-
-// DescribeClusterSnapshotsPaginatorOptions is the paginator options for
-// DescribeClusterSnapshots
-type DescribeClusterSnapshotsPaginatorOptions struct {
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeClusterSnapshotsPaginator is a paginator for DescribeClusterSnapshots
-type DescribeClusterSnapshotsPaginator struct {
-	options   DescribeClusterSnapshotsPaginatorOptions
-	client    DescribeClusterSnapshotsAPIClient
-	params    *DescribeClusterSnapshotsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeClusterSnapshotsPaginator returns a new
-// DescribeClusterSnapshotsPaginator
-func NewDescribeClusterSnapshotsPaginator(client DescribeClusterSnapshotsAPIClient, params *DescribeClusterSnapshotsInput, optFns ...func(*DescribeClusterSnapshotsPaginatorOptions)) *DescribeClusterSnapshotsPaginator {
-	if params == nil {
-		params = &DescribeClusterSnapshotsInput{}
-	}
-
-	options := DescribeClusterSnapshotsPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeClusterSnapshotsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeClusterSnapshotsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeClusterSnapshots page.
-func (p *DescribeClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClusterSnapshotsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeClusterSnapshots(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // SnapshotAvailableWaiterOptions are waiter options for SnapshotAvailableWaiter
@@ -459,7 +363,13 @@ func (w *SnapshotAvailableWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeClusterSnapshots(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -579,6 +489,108 @@ func snapshotAvailableStateRetryable(ctx context.Context, input *DescribeCluster
 
 	return true, nil
 }
+
+// DescribeClusterSnapshotsPaginatorOptions is the paginator options for
+// DescribeClusterSnapshots
+type DescribeClusterSnapshotsPaginatorOptions struct {
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClusterSnapshotsPaginator is a paginator for DescribeClusterSnapshots
+type DescribeClusterSnapshotsPaginator struct {
+	options   DescribeClusterSnapshotsPaginatorOptions
+	client    DescribeClusterSnapshotsAPIClient
+	params    *DescribeClusterSnapshotsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClusterSnapshotsPaginator returns a new
+// DescribeClusterSnapshotsPaginator
+func NewDescribeClusterSnapshotsPaginator(client DescribeClusterSnapshotsAPIClient, params *DescribeClusterSnapshotsInput, optFns ...func(*DescribeClusterSnapshotsPaginatorOptions)) *DescribeClusterSnapshotsPaginator {
+	if params == nil {
+		params = &DescribeClusterSnapshotsInput{}
+	}
+
+	options := DescribeClusterSnapshotsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeClusterSnapshotsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClusterSnapshotsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeClusterSnapshots page.
+func (p *DescribeClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClusterSnapshotsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeClusterSnapshots(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeClusterSnapshotsAPIClient is a client that implements the
+// DescribeClusterSnapshots operation.
+type DescribeClusterSnapshotsAPIClient interface {
+	DescribeClusterSnapshots(context.Context, *DescribeClusterSnapshotsInput, ...func(*Options)) (*DescribeClusterSnapshotsOutput, error)
+}
+
+var _ DescribeClusterSnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeClusterSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateVirtualRouterMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateVirtualRouterMiddleware(stack, options); err != nil {
 		return err
 	}

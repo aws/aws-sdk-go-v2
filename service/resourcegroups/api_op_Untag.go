@@ -120,6 +120,9 @@ func (c *Client) addOperationUntagMiddlewares(stack *middleware.Stack, options O
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUntagValidationMiddleware(stack); err != nil {
 		return err
 	}

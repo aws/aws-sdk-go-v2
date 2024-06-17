@@ -119,6 +119,9 @@ func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,13 +142,6 @@ func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListDatasetsAPIClient is a client that implements the ListDatasets operation.
-type ListDatasetsAPIClient interface {
-	ListDatasets(context.Context, *ListDatasetsInput, ...func(*Options)) (*ListDatasetsOutput, error)
-}
-
-var _ ListDatasetsAPIClient = (*Client)(nil)
 
 // ListDatasetsPaginatorOptions is the paginator options for ListDatasets
 type ListDatasetsPaginatorOptions struct {
@@ -210,6 +206,9 @@ func (p *ListDatasetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDatasets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +227,13 @@ func (p *ListDatasetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListDatasetsAPIClient is a client that implements the ListDatasets operation.
+type ListDatasetsAPIClient interface {
+	ListDatasets(context.Context, *ListDatasetsInput, ...func(*Options)) (*ListDatasetsOutput, error)
+}
+
+var _ ListDatasetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDatasets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

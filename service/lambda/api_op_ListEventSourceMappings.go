@@ -149,6 +149,9 @@ func (c *Client) addOperationListEventSourceMappingsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventSourceMappings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationListEventSourceMappingsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListEventSourceMappingsAPIClient is a client that implements the
-// ListEventSourceMappings operation.
-type ListEventSourceMappingsAPIClient interface {
-	ListEventSourceMappings(context.Context, *ListEventSourceMappingsInput, ...func(*Options)) (*ListEventSourceMappingsOutput, error)
-}
-
-var _ ListEventSourceMappingsAPIClient = (*Client)(nil)
 
 // ListEventSourceMappingsPaginatorOptions is the paginator options for
 // ListEventSourceMappings
@@ -245,6 +240,9 @@ func (p *ListEventSourceMappingsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventSourceMappings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +261,14 @@ func (p *ListEventSourceMappingsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListEventSourceMappingsAPIClient is a client that implements the
+// ListEventSourceMappings operation.
+type ListEventSourceMappingsAPIClient interface {
+	ListEventSourceMappings(context.Context, *ListEventSourceMappingsInput, ...func(*Options)) (*ListEventSourceMappingsOutput, error)
+}
+
+var _ ListEventSourceMappingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventSourceMappings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

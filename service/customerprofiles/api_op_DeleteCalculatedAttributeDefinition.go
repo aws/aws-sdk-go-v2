@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

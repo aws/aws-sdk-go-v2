@@ -134,6 +134,9 @@ func (c *Client) addOperationListQueueQuickConnectsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListQueueQuickConnectsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListQueueQuickConnectsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListQueueQuickConnectsAPIClient is a client that implements the
-// ListQueueQuickConnects operation.
-type ListQueueQuickConnectsAPIClient interface {
-	ListQueueQuickConnects(context.Context, *ListQueueQuickConnectsInput, ...func(*Options)) (*ListQueueQuickConnectsOutput, error)
-}
-
-var _ ListQueueQuickConnectsAPIClient = (*Client)(nil)
 
 // ListQueueQuickConnectsPaginatorOptions is the paginator options for
 // ListQueueQuickConnects
@@ -231,6 +226,9 @@ func (p *ListQueueQuickConnectsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQueueQuickConnects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListQueueQuickConnectsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListQueueQuickConnectsAPIClient is a client that implements the
+// ListQueueQuickConnects operation.
+type ListQueueQuickConnectsAPIClient interface {
+	ListQueueQuickConnects(context.Context, *ListQueueQuickConnectsInput, ...func(*Options)) (*ListQueueQuickConnectsOutput, error)
+}
+
+var _ ListQueueQuickConnectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQueueQuickConnects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

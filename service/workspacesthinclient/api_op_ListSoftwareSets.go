@@ -122,6 +122,9 @@ func (c *Client) addOperationListSoftwareSetsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListSoftwareSetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,41 +148,6 @@ func (c *Client) addOperationListSoftwareSetsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-type endpointPrefix_opListSoftwareSetsMiddleware struct {
-}
-
-func (*endpointPrefix_opListSoftwareSetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListSoftwareSetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListSoftwareSetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListSoftwareSetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListSoftwareSetsAPIClient is a client that implements the ListSoftwareSets
-// operation.
-type ListSoftwareSetsAPIClient interface {
-	ListSoftwareSets(context.Context, *ListSoftwareSetsInput, ...func(*Options)) (*ListSoftwareSetsOutput, error)
-}
-
-var _ ListSoftwareSetsAPIClient = (*Client)(nil)
 
 // ListSoftwareSetsPaginatorOptions is the paginator options for ListSoftwareSets
 type ListSoftwareSetsPaginatorOptions struct {
@@ -248,6 +216,9 @@ func (p *ListSoftwareSetsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSoftwareSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -266,6 +237,41 @@ func (p *ListSoftwareSetsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+type endpointPrefix_opListSoftwareSetsMiddleware struct {
+}
+
+func (*endpointPrefix_opListSoftwareSetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListSoftwareSetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListSoftwareSetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListSoftwareSetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListSoftwareSetsAPIClient is a client that implements the ListSoftwareSets
+// operation.
+type ListSoftwareSetsAPIClient interface {
+	ListSoftwareSets(context.Context, *ListSoftwareSetsInput, ...func(*Options)) (*ListSoftwareSetsOutput, error)
+}
+
+var _ ListSoftwareSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSoftwareSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

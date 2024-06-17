@@ -129,6 +129,9 @@ func (c *Client) addOperationCreatePackageGroupMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreatePackageGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

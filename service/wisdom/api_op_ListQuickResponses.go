@@ -121,6 +121,9 @@ func (c *Client) addOperationListQuickResponsesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListQuickResponsesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListQuickResponsesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListQuickResponsesAPIClient is a client that implements the ListQuickResponses
-// operation.
-type ListQuickResponsesAPIClient interface {
-	ListQuickResponses(context.Context, *ListQuickResponsesInput, ...func(*Options)) (*ListQuickResponsesOutput, error)
-}
-
-var _ ListQuickResponsesAPIClient = (*Client)(nil)
 
 // ListQuickResponsesPaginatorOptions is the paginator options for
 // ListQuickResponses
@@ -217,6 +212,9 @@ func (p *ListQuickResponsesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQuickResponses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListQuickResponsesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListQuickResponsesAPIClient is a client that implements the ListQuickResponses
+// operation.
+type ListQuickResponsesAPIClient interface {
+	ListQuickResponses(context.Context, *ListQuickResponsesInput, ...func(*Options)) (*ListQuickResponsesOutput, error)
+}
+
+var _ ListQuickResponsesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQuickResponses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

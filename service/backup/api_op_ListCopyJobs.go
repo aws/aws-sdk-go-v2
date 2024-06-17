@@ -202,6 +202,9 @@ func (c *Client) addOperationListCopyJobsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCopyJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -222,13 +225,6 @@ func (c *Client) addOperationListCopyJobsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListCopyJobsAPIClient is a client that implements the ListCopyJobs operation.
-type ListCopyJobsAPIClient interface {
-	ListCopyJobs(context.Context, *ListCopyJobsInput, ...func(*Options)) (*ListCopyJobsOutput, error)
-}
-
-var _ ListCopyJobsAPIClient = (*Client)(nil)
 
 // ListCopyJobsPaginatorOptions is the paginator options for ListCopyJobs
 type ListCopyJobsPaginatorOptions struct {
@@ -293,6 +289,9 @@ func (p *ListCopyJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCopyJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -311,6 +310,13 @@ func (p *ListCopyJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListCopyJobsAPIClient is a client that implements the ListCopyJobs operation.
+type ListCopyJobsAPIClient interface {
+	ListCopyJobs(context.Context, *ListCopyJobsInput, ...func(*Options)) (*ListCopyJobsOutput, error)
+}
+
+var _ ListCopyJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCopyJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

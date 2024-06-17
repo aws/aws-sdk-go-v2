@@ -121,6 +121,9 @@ func (c *Client) addOperationGetArchitectureRecommendationsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetArchitectureRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}

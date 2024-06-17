@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeContinuousExportsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeContinuousExports(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationDescribeContinuousExportsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeContinuousExportsAPIClient is a client that implements the
-// DescribeContinuousExports operation.
-type DescribeContinuousExportsAPIClient interface {
-	DescribeContinuousExports(context.Context, *DescribeContinuousExportsInput, ...func(*Options)) (*DescribeContinuousExportsOutput, error)
-}
-
-var _ DescribeContinuousExportsAPIClient = (*Client)(nil)
 
 // DescribeContinuousExportsPaginatorOptions is the paginator options for
 // DescribeContinuousExports
@@ -211,6 +206,9 @@ func (p *DescribeContinuousExportsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeContinuousExports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *DescribeContinuousExportsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeContinuousExportsAPIClient is a client that implements the
+// DescribeContinuousExports operation.
+type DescribeContinuousExportsAPIClient interface {
+	DescribeContinuousExports(context.Context, *DescribeContinuousExportsInput, ...func(*Options)) (*DescribeContinuousExportsOutput, error)
+}
+
+var _ DescribeContinuousExportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeContinuousExports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

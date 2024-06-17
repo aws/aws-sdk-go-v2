@@ -113,6 +113,9 @@ func (c *Client) addOperationListClassificationScopesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClassificationScopes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListClassificationScopesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListClassificationScopesAPIClient is a client that implements the
-// ListClassificationScopes operation.
-type ListClassificationScopesAPIClient interface {
-	ListClassificationScopes(context.Context, *ListClassificationScopesInput, ...func(*Options)) (*ListClassificationScopesOutput, error)
-}
-
-var _ ListClassificationScopesAPIClient = (*Client)(nil)
 
 // ListClassificationScopesPaginatorOptions is the paginator options for
 // ListClassificationScopes
@@ -195,6 +190,9 @@ func (p *ListClassificationScopesPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClassificationScopes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -213,6 +211,14 @@ func (p *ListClassificationScopesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListClassificationScopesAPIClient is a client that implements the
+// ListClassificationScopes operation.
+type ListClassificationScopesAPIClient interface {
+	ListClassificationScopes(context.Context, *ListClassificationScopesInput, ...func(*Options)) (*ListClassificationScopesOutput, error)
+}
+
+var _ ListClassificationScopesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClassificationScopes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

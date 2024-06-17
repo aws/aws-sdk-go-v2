@@ -127,6 +127,9 @@ func (c *Client) addOperationListHumanTaskUisMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHumanTaskUis(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListHumanTaskUisMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListHumanTaskUisAPIClient is a client that implements the ListHumanTaskUis
-// operation.
-type ListHumanTaskUisAPIClient interface {
-	ListHumanTaskUis(context.Context, *ListHumanTaskUisInput, ...func(*Options)) (*ListHumanTaskUisOutput, error)
-}
-
-var _ ListHumanTaskUisAPIClient = (*Client)(nil)
 
 // ListHumanTaskUisPaginatorOptions is the paginator options for ListHumanTaskUis
 type ListHumanTaskUisPaginatorOptions struct {
@@ -221,6 +216,9 @@ func (p *ListHumanTaskUisPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHumanTaskUis(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListHumanTaskUisPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListHumanTaskUisAPIClient is a client that implements the ListHumanTaskUis
+// operation.
+type ListHumanTaskUisAPIClient interface {
+	ListHumanTaskUis(context.Context, *ListHumanTaskUisInput, ...func(*Options)) (*ListHumanTaskUisOutput, error)
+}
+
+var _ ListHumanTaskUisAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHumanTaskUis(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

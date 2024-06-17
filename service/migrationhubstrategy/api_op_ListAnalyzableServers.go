@@ -121,6 +121,9 @@ func (c *Client) addOperationListAnalyzableServersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnalyzableServers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListAnalyzableServersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAnalyzableServersAPIClient is a client that implements the
-// ListAnalyzableServers operation.
-type ListAnalyzableServersAPIClient interface {
-	ListAnalyzableServers(context.Context, *ListAnalyzableServersInput, ...func(*Options)) (*ListAnalyzableServersOutput, error)
-}
-
-var _ ListAnalyzableServersAPIClient = (*Client)(nil)
 
 // ListAnalyzableServersPaginatorOptions is the paginator options for
 // ListAnalyzableServers
@@ -215,6 +210,9 @@ func (p *ListAnalyzableServersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnalyzableServers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListAnalyzableServersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAnalyzableServersAPIClient is a client that implements the
+// ListAnalyzableServers operation.
+type ListAnalyzableServersAPIClient interface {
+	ListAnalyzableServers(context.Context, *ListAnalyzableServersInput, ...func(*Options)) (*ListAnalyzableServersOutput, error)
+}
+
+var _ ListAnalyzableServersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnalyzableServers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

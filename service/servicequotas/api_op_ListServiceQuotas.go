@@ -141,6 +141,9 @@ func (c *Client) addOperationListServiceQuotasMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListServiceQuotasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationListServiceQuotasMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListServiceQuotasAPIClient is a client that implements the ListServiceQuotas
-// operation.
-type ListServiceQuotasAPIClient interface {
-	ListServiceQuotas(context.Context, *ListServiceQuotasInput, ...func(*Options)) (*ListServiceQuotasOutput, error)
-}
-
-var _ ListServiceQuotasAPIClient = (*Client)(nil)
 
 // ListServiceQuotasPaginatorOptions is the paginator options for ListServiceQuotas
 type ListServiceQuotasPaginatorOptions struct {
@@ -245,6 +240,9 @@ func (p *ListServiceQuotasPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceQuotas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +261,14 @@ func (p *ListServiceQuotasPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListServiceQuotasAPIClient is a client that implements the ListServiceQuotas
+// operation.
+type ListServiceQuotasAPIClient interface {
+	ListServiceQuotas(context.Context, *ListServiceQuotasInput, ...func(*Options)) (*ListServiceQuotasOutput, error)
+}
+
+var _ ListServiceQuotasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceQuotas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -112,6 +112,9 @@ func (c *Client) addOperationGetEventsConfigurationMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEventsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

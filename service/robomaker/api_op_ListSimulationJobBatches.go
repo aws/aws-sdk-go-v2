@@ -125,6 +125,9 @@ func (c *Client) addOperationListSimulationJobBatchesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSimulationJobBatches(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListSimulationJobBatchesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListSimulationJobBatchesAPIClient is a client that implements the
-// ListSimulationJobBatches operation.
-type ListSimulationJobBatchesAPIClient interface {
-	ListSimulationJobBatches(context.Context, *ListSimulationJobBatchesInput, ...func(*Options)) (*ListSimulationJobBatchesOutput, error)
-}
-
-var _ ListSimulationJobBatchesAPIClient = (*Client)(nil)
 
 // ListSimulationJobBatchesPaginatorOptions is the paginator options for
 // ListSimulationJobBatches
@@ -222,6 +217,9 @@ func (p *ListSimulationJobBatchesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSimulationJobBatches(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListSimulationJobBatchesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListSimulationJobBatchesAPIClient is a client that implements the
+// ListSimulationJobBatches operation.
+type ListSimulationJobBatchesAPIClient interface {
+	ListSimulationJobBatches(context.Context, *ListSimulationJobBatchesInput, ...func(*Options)) (*ListSimulationJobBatchesOutput, error)
+}
+
+var _ ListSimulationJobBatchesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSimulationJobBatches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

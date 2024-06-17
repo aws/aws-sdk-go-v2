@@ -214,6 +214,9 @@ func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResourceMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -237,14 +240,6 @@ func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetResourceMetricsAPIClient is a client that implements the GetResourceMetrics
-// operation.
-type GetResourceMetricsAPIClient interface {
-	GetResourceMetrics(context.Context, *GetResourceMetricsInput, ...func(*Options)) (*GetResourceMetricsOutput, error)
-}
-
-var _ GetResourceMetricsAPIClient = (*Client)(nil)
 
 // GetResourceMetricsPaginatorOptions is the paginator options for
 // GetResourceMetrics
@@ -312,6 +307,9 @@ func (p *GetResourceMetricsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetResourceMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -330,6 +328,14 @@ func (p *GetResourceMetricsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetResourceMetricsAPIClient is a client that implements the GetResourceMetrics
+// operation.
+type GetResourceMetricsAPIClient interface {
+	GetResourceMetrics(context.Context, *GetResourceMetricsInput, ...func(*Options)) (*GetResourceMetricsOutput, error)
+}
+
+var _ GetResourceMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetResourceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

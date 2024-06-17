@@ -117,6 +117,9 @@ func (c *Client) addOperationListExportErrorsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListExportErrorsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListExportErrorsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListExportErrorsAPIClient is a client that implements the ListExportErrors
-// operation.
-type ListExportErrorsAPIClient interface {
-	ListExportErrors(context.Context, *ListExportErrorsInput, ...func(*Options)) (*ListExportErrorsOutput, error)
-}
-
-var _ ListExportErrorsAPIClient = (*Client)(nil)
 
 // ListExportErrorsPaginatorOptions is the paginator options for ListExportErrors
 type ListExportErrorsPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListExportErrorsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExportErrors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListExportErrorsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListExportErrorsAPIClient is a client that implements the ListExportErrors
+// operation.
+type ListExportErrorsAPIClient interface {
+	ListExportErrors(context.Context, *ListExportErrorsInput, ...func(*Options)) (*ListExportErrorsOutput, error)
+}
+
+var _ ListExportErrorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExportErrors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

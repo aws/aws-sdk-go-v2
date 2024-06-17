@@ -131,6 +131,9 @@ func (c *Client) addOperationListPortfolioAccessMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPortfolioAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListPortfolioAccessMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListPortfolioAccessAPIClient is a client that implements the
-// ListPortfolioAccess operation.
-type ListPortfolioAccessAPIClient interface {
-	ListPortfolioAccess(context.Context, *ListPortfolioAccessInput, ...func(*Options)) (*ListPortfolioAccessOutput, error)
-}
-
-var _ ListPortfolioAccessAPIClient = (*Client)(nil)
 
 // ListPortfolioAccessPaginatorOptions is the paginator options for
 // ListPortfolioAccess
@@ -223,6 +218,9 @@ func (p *ListPortfolioAccessPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPortfolioAccess(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListPortfolioAccessPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListPortfolioAccessAPIClient is a client that implements the
+// ListPortfolioAccess operation.
+type ListPortfolioAccessAPIClient interface {
+	ListPortfolioAccess(context.Context, *ListPortfolioAccessInput, ...func(*Options)) (*ListPortfolioAccessOutput, error)
+}
+
+var _ ListPortfolioAccessAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPortfolioAccess(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeEventAggregatesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEventAggregatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationDescribeEventAggregatesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeEventAggregatesAPIClient is a client that implements the
-// DescribeEventAggregates operation.
-type DescribeEventAggregatesAPIClient interface {
-	DescribeEventAggregates(context.Context, *DescribeEventAggregatesInput, ...func(*Options)) (*DescribeEventAggregatesOutput, error)
-}
-
-var _ DescribeEventAggregatesAPIClient = (*Client)(nil)
 
 // DescribeEventAggregatesPaginatorOptions is the paginator options for
 // DescribeEventAggregates
@@ -230,6 +225,9 @@ func (p *DescribeEventAggregatesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeEventAggregates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *DescribeEventAggregatesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeEventAggregatesAPIClient is a client that implements the
+// DescribeEventAggregates operation.
+type DescribeEventAggregatesAPIClient interface {
+	DescribeEventAggregates(context.Context, *DescribeEventAggregatesInput, ...func(*Options)) (*DescribeEventAggregatesOutput, error)
+}
+
+var _ DescribeEventAggregatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEventAggregates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

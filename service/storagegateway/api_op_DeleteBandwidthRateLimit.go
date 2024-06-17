@@ -125,6 +125,9 @@ func (c *Client) addOperationDeleteBandwidthRateLimitMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteBandwidthRateLimitValidationMiddleware(stack); err != nil {
 		return err
 	}

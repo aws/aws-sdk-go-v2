@@ -143,6 +143,9 @@ func (c *Client) addOperationListModelCardExportJobsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListModelCardExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationListModelCardExportJobsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListModelCardExportJobsAPIClient is a client that implements the
-// ListModelCardExportJobs operation.
-type ListModelCardExportJobsAPIClient interface {
-	ListModelCardExportJobs(context.Context, *ListModelCardExportJobsInput, ...func(*Options)) (*ListModelCardExportJobsOutput, error)
-}
-
-var _ ListModelCardExportJobsAPIClient = (*Client)(nil)
 
 // ListModelCardExportJobsPaginatorOptions is the paginator options for
 // ListModelCardExportJobs
@@ -240,6 +235,9 @@ func (p *ListModelCardExportJobsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelCardExportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +256,14 @@ func (p *ListModelCardExportJobsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListModelCardExportJobsAPIClient is a client that implements the
+// ListModelCardExportJobs operation.
+type ListModelCardExportJobsAPIClient interface {
+	ListModelCardExportJobs(context.Context, *ListModelCardExportJobsInput, ...func(*Options)) (*ListModelCardExportJobsOutput, error)
+}
+
+var _ ListModelCardExportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelCardExportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

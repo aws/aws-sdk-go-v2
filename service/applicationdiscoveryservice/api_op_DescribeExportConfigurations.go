@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeExportConfigurationsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExportConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationDescribeExportConfigurationsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeExportConfigurationsAPIClient is a client that implements the
-// DescribeExportConfigurations operation.
-type DescribeExportConfigurationsAPIClient interface {
-	DescribeExportConfigurations(context.Context, *DescribeExportConfigurationsInput, ...func(*Options)) (*DescribeExportConfigurationsOutput, error)
-}
-
-var _ DescribeExportConfigurationsAPIClient = (*Client)(nil)
 
 // DescribeExportConfigurationsPaginatorOptions is the paginator options for
 // DescribeExportConfigurations
@@ -210,6 +205,9 @@ func (p *DescribeExportConfigurationsPaginator) NextPage(ctx context.Context, op
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeExportConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *DescribeExportConfigurationsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeExportConfigurationsAPIClient is a client that implements the
+// DescribeExportConfigurations operation.
+type DescribeExportConfigurationsAPIClient interface {
+	DescribeExportConfigurations(context.Context, *DescribeExportConfigurationsInput, ...func(*Options)) (*DescribeExportConfigurationsOutput, error)
+}
+
+var _ DescribeExportConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeExportConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

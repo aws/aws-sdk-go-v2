@@ -115,6 +115,9 @@ func (c *Client) addOperationListWorkGroupsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListWorkGroupsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListWorkGroupsAPIClient is a client that implements the ListWorkGroups
-// operation.
-type ListWorkGroupsAPIClient interface {
-	ListWorkGroups(context.Context, *ListWorkGroupsInput, ...func(*Options)) (*ListWorkGroupsOutput, error)
-}
-
-var _ ListWorkGroupsAPIClient = (*Client)(nil)
 
 // ListWorkGroupsPaginatorOptions is the paginator options for ListWorkGroups
 type ListWorkGroupsPaginatorOptions struct {
@@ -207,6 +202,9 @@ func (p *ListWorkGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListWorkGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListWorkGroupsAPIClient is a client that implements the ListWorkGroups
+// operation.
+type ListWorkGroupsAPIClient interface {
+	ListWorkGroups(context.Context, *ListWorkGroupsInput, ...func(*Options)) (*ListWorkGroupsOutput, error)
+}
+
+var _ ListWorkGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

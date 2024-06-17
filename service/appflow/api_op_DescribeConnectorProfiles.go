@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeConnectorProfilesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectorProfiles(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationDescribeConnectorProfilesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeConnectorProfilesAPIClient is a client that implements the
-// DescribeConnectorProfiles operation.
-type DescribeConnectorProfilesAPIClient interface {
-	DescribeConnectorProfiles(context.Context, *DescribeConnectorProfilesInput, ...func(*Options)) (*DescribeConnectorProfilesOutput, error)
-}
-
-var _ DescribeConnectorProfilesAPIClient = (*Client)(nil)
 
 // DescribeConnectorProfilesPaginatorOptions is the paginator options for
 // DescribeConnectorProfiles
@@ -225,6 +220,9 @@ func (p *DescribeConnectorProfilesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConnectorProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeConnectorProfilesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeConnectorProfilesAPIClient is a client that implements the
+// DescribeConnectorProfiles operation.
+type DescribeConnectorProfilesAPIClient interface {
+	DescribeConnectorProfiles(context.Context, *DescribeConnectorProfilesInput, ...func(*Options)) (*DescribeConnectorProfilesOutput, error)
+}
+
+var _ DescribeConnectorProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConnectorProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

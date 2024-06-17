@@ -133,6 +133,9 @@ func (c *Client) addOperationSearchRoutingProfilesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchRoutingProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationSearchRoutingProfilesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// SearchRoutingProfilesAPIClient is a client that implements the
-// SearchRoutingProfiles operation.
-type SearchRoutingProfilesAPIClient interface {
-	SearchRoutingProfiles(context.Context, *SearchRoutingProfilesInput, ...func(*Options)) (*SearchRoutingProfilesOutput, error)
-}
-
-var _ SearchRoutingProfilesAPIClient = (*Client)(nil)
 
 // SearchRoutingProfilesPaginatorOptions is the paginator options for
 // SearchRoutingProfiles
@@ -229,6 +224,9 @@ func (p *SearchRoutingProfilesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchRoutingProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *SearchRoutingProfilesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// SearchRoutingProfilesAPIClient is a client that implements the
+// SearchRoutingProfiles operation.
+type SearchRoutingProfilesAPIClient interface {
+	SearchRoutingProfiles(context.Context, *SearchRoutingProfilesInput, ...func(*Options)) (*SearchRoutingProfilesOutput, error)
+}
+
+var _ SearchRoutingProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchRoutingProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

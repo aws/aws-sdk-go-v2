@@ -118,6 +118,9 @@ func (c *Client) addOperationListMitigationActionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMitigationActions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListMitigationActionsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListMitigationActionsAPIClient is a client that implements the
-// ListMitigationActions operation.
-type ListMitigationActionsAPIClient interface {
-	ListMitigationActions(context.Context, *ListMitigationActionsInput, ...func(*Options)) (*ListMitigationActionsOutput, error)
-}
-
-var _ ListMitigationActionsAPIClient = (*Client)(nil)
 
 // ListMitigationActionsPaginatorOptions is the paginator options for
 // ListMitigationActions
@@ -211,6 +206,9 @@ func (p *ListMitigationActionsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMitigationActions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListMitigationActionsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListMitigationActionsAPIClient is a client that implements the
+// ListMitigationActions operation.
+type ListMitigationActionsAPIClient interface {
+	ListMitigationActions(context.Context, *ListMitigationActionsInput, ...func(*Options)) (*ListMitigationActionsOutput, error)
+}
+
+var _ ListMitigationActionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMitigationActions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

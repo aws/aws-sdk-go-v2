@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeStackEventsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStackEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeStackEventsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeStackEventsAPIClient is a client that implements the
-// DescribeStackEvents operation.
-type DescribeStackEventsAPIClient interface {
-	DescribeStackEvents(context.Context, *DescribeStackEventsInput, ...func(*Options)) (*DescribeStackEventsOutput, error)
-}
-
-var _ DescribeStackEventsAPIClient = (*Client)(nil)
 
 // DescribeStackEventsPaginatorOptions is the paginator options for
 // DescribeStackEvents
@@ -209,6 +204,9 @@ func (p *DescribeStackEventsPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeStackEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *DescribeStackEventsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeStackEventsAPIClient is a client that implements the
+// DescribeStackEvents operation.
+type DescribeStackEventsAPIClient interface {
+	DescribeStackEvents(context.Context, *DescribeStackEventsInput, ...func(*Options)) (*DescribeStackEventsOutput, error)
+}
+
+var _ DescribeStackEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStackEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

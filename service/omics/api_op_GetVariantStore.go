@@ -168,6 +168,9 @@ func (c *Client) addOperationGetVariantStoreMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetVariantStoreMiddleware(stack); err != nil {
 		return err
 	}
@@ -194,41 +197,6 @@ func (c *Client) addOperationGetVariantStoreMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-type endpointPrefix_opGetVariantStoreMiddleware struct {
-}
-
-func (*endpointPrefix_opGetVariantStoreMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetVariantStoreMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetVariantStoreMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetVariantStoreMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetVariantStoreAPIClient is a client that implements the GetVariantStore
-// operation.
-type GetVariantStoreAPIClient interface {
-	GetVariantStore(context.Context, *GetVariantStoreInput, ...func(*Options)) (*GetVariantStoreOutput, error)
-}
-
-var _ GetVariantStoreAPIClient = (*Client)(nil)
 
 // VariantStoreCreatedWaiterOptions are waiter options for
 // VariantStoreCreatedWaiter
@@ -347,7 +315,13 @@ func (w *VariantStoreCreatedWaiter) WaitForOutput(ctx context.Context, params *G
 		}
 
 		out, err := w.client.GetVariantStore(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -573,7 +547,13 @@ func (w *VariantStoreDeletedWaiter) WaitForOutput(ctx context.Context, params *G
 		}
 
 		out, err := w.client.GetVariantStore(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -654,6 +634,41 @@ func variantStoreDeletedStateRetryable(ctx context.Context, input *GetVariantSto
 
 	return true, nil
 }
+
+type endpointPrefix_opGetVariantStoreMiddleware struct {
+}
+
+func (*endpointPrefix_opGetVariantStoreMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetVariantStoreMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetVariantStoreMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetVariantStoreMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetVariantStoreAPIClient is a client that implements the GetVariantStore
+// operation.
+type GetVariantStoreAPIClient interface {
+	GetVariantStore(context.Context, *GetVariantStoreInput, ...func(*Options)) (*GetVariantStoreOutput, error)
+}
+
+var _ GetVariantStoreAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetVariantStore(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

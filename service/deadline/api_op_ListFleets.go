@@ -132,6 +132,9 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListFleetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,40 +161,6 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-type endpointPrefix_opListFleetsMiddleware struct {
-}
-
-func (*endpointPrefix_opListFleetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListFleetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListFleetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListFleetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListFleetsAPIClient is a client that implements the ListFleets operation.
-type ListFleetsAPIClient interface {
-	ListFleets(context.Context, *ListFleetsInput, ...func(*Options)) (*ListFleetsOutput, error)
-}
-
-var _ ListFleetsAPIClient = (*Client)(nil)
 
 // ListFleetsPaginatorOptions is the paginator options for ListFleets
 type ListFleetsPaginatorOptions struct {
@@ -257,6 +226,9 @@ func (p *ListFleetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFleets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +247,40 @@ func (p *ListFleetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+type endpointPrefix_opListFleetsMiddleware struct {
+}
+
+func (*endpointPrefix_opListFleetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListFleetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListFleetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListFleetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListFleetsAPIClient is a client that implements the ListFleets operation.
+type ListFleetsAPIClient interface {
+	ListFleets(context.Context, *ListFleetsInput, ...func(*Options)) (*ListFleetsOutput, error)
+}
+
+var _ ListFleetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFleets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

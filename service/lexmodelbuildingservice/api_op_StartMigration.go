@@ -169,6 +169,9 @@ func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartMigrationValidationMiddleware(stack); err != nil {
 		return err
 	}

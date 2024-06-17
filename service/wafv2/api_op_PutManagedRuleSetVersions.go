@@ -177,6 +177,9 @@ func (c *Client) addOperationPutManagedRuleSetVersionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutManagedRuleSetVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}

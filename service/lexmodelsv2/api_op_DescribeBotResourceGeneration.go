@@ -157,6 +157,9 @@ func (c *Client) addOperationDescribeBotResourceGenerationMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotResourceGenerationValidationMiddleware(stack); err != nil {
 		return err
 	}

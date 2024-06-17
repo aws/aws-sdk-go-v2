@@ -137,6 +137,9 @@ func (c *Client) addOperationListMedicalScribeJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMedicalScribeJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListMedicalScribeJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListMedicalScribeJobsAPIClient is a client that implements the
-// ListMedicalScribeJobs operation.
-type ListMedicalScribeJobsAPIClient interface {
-	ListMedicalScribeJobs(context.Context, *ListMedicalScribeJobsInput, ...func(*Options)) (*ListMedicalScribeJobsOutput, error)
-}
-
-var _ ListMedicalScribeJobsAPIClient = (*Client)(nil)
 
 // ListMedicalScribeJobsPaginatorOptions is the paginator options for
 // ListMedicalScribeJobs
@@ -232,6 +227,9 @@ func (p *ListMedicalScribeJobsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMedicalScribeJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListMedicalScribeJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListMedicalScribeJobsAPIClient is a client that implements the
+// ListMedicalScribeJobs operation.
+type ListMedicalScribeJobsAPIClient interface {
+	ListMedicalScribeJobs(context.Context, *ListMedicalScribeJobsInput, ...func(*Options)) (*ListMedicalScribeJobsOutput, error)
+}
+
+var _ ListMedicalScribeJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMedicalScribeJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

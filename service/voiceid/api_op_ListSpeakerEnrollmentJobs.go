@@ -128,6 +128,9 @@ func (c *Client) addOperationListSpeakerEnrollmentJobsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSpeakerEnrollmentJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListSpeakerEnrollmentJobsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListSpeakerEnrollmentJobsAPIClient is a client that implements the
-// ListSpeakerEnrollmentJobs operation.
-type ListSpeakerEnrollmentJobsAPIClient interface {
-	ListSpeakerEnrollmentJobs(context.Context, *ListSpeakerEnrollmentJobsInput, ...func(*Options)) (*ListSpeakerEnrollmentJobsOutput, error)
-}
-
-var _ ListSpeakerEnrollmentJobsAPIClient = (*Client)(nil)
 
 // ListSpeakerEnrollmentJobsPaginatorOptions is the paginator options for
 // ListSpeakerEnrollmentJobs
@@ -227,6 +222,9 @@ func (p *ListSpeakerEnrollmentJobsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSpeakerEnrollmentJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListSpeakerEnrollmentJobsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListSpeakerEnrollmentJobsAPIClient is a client that implements the
+// ListSpeakerEnrollmentJobs operation.
+type ListSpeakerEnrollmentJobsAPIClient interface {
+	ListSpeakerEnrollmentJobs(context.Context, *ListSpeakerEnrollmentJobsInput, ...func(*Options)) (*ListSpeakerEnrollmentJobsOutput, error)
+}
+
+var _ ListSpeakerEnrollmentJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSpeakerEnrollmentJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

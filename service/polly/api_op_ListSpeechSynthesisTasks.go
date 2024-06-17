@@ -119,6 +119,9 @@ func (c *Client) addOperationListSpeechSynthesisTasksMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSpeechSynthesisTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListSpeechSynthesisTasksMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListSpeechSynthesisTasksAPIClient is a client that implements the
-// ListSpeechSynthesisTasks operation.
-type ListSpeechSynthesisTasksAPIClient interface {
-	ListSpeechSynthesisTasks(context.Context, *ListSpeechSynthesisTasksInput, ...func(*Options)) (*ListSpeechSynthesisTasksOutput, error)
-}
-
-var _ ListSpeechSynthesisTasksAPIClient = (*Client)(nil)
 
 // ListSpeechSynthesisTasksPaginatorOptions is the paginator options for
 // ListSpeechSynthesisTasks
@@ -213,6 +208,9 @@ func (p *ListSpeechSynthesisTasksPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSpeechSynthesisTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListSpeechSynthesisTasksPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListSpeechSynthesisTasksAPIClient is a client that implements the
+// ListSpeechSynthesisTasks operation.
+type ListSpeechSynthesisTasksAPIClient interface {
+	ListSpeechSynthesisTasks(context.Context, *ListSpeechSynthesisTasksInput, ...func(*Options)) (*ListSpeechSynthesisTasksOutput, error)
+}
+
+var _ ListSpeechSynthesisTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSpeechSynthesisTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

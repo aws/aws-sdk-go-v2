@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeResourcePermissionsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeResourcePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeResourcePermissionsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeResourcePermissionsAPIClient is a client that implements the
-// DescribeResourcePermissions operation.
-type DescribeResourcePermissionsAPIClient interface {
-	DescribeResourcePermissions(context.Context, *DescribeResourcePermissionsInput, ...func(*Options)) (*DescribeResourcePermissionsOutput, error)
-}
-
-var _ DescribeResourcePermissionsAPIClient = (*Client)(nil)
 
 // DescribeResourcePermissionsPaginatorOptions is the paginator options for
 // DescribeResourcePermissions
@@ -222,6 +217,9 @@ func (p *DescribeResourcePermissionsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeResourcePermissions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *DescribeResourcePermissionsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeResourcePermissionsAPIClient is a client that implements the
+// DescribeResourcePermissions operation.
+type DescribeResourcePermissionsAPIClient interface {
+	DescribeResourcePermissions(context.Context, *DescribeResourcePermissionsInput, ...func(*Options)) (*DescribeResourcePermissionsOutput, error)
+}
+
+var _ DescribeResourcePermissionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeResourcePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

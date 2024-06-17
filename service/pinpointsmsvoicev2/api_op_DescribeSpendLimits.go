@@ -120,6 +120,9 @@ func (c *Client) addOperationDescribeSpendLimitsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSpendLimits(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationDescribeSpendLimitsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeSpendLimitsAPIClient is a client that implements the
-// DescribeSpendLimits operation.
-type DescribeSpendLimitsAPIClient interface {
-	DescribeSpendLimits(context.Context, *DescribeSpendLimitsInput, ...func(*Options)) (*DescribeSpendLimitsOutput, error)
-}
-
-var _ DescribeSpendLimitsAPIClient = (*Client)(nil)
 
 // DescribeSpendLimitsPaginatorOptions is the paginator options for
 // DescribeSpendLimits
@@ -213,6 +208,9 @@ func (p *DescribeSpendLimitsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSpendLimits(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *DescribeSpendLimitsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeSpendLimitsAPIClient is a client that implements the
+// DescribeSpendLimits operation.
+type DescribeSpendLimitsAPIClient interface {
+	DescribeSpendLimits(context.Context, *DescribeSpendLimitsInput, ...func(*Options)) (*DescribeSpendLimitsOutput, error)
+}
+
+var _ DescribeSpendLimitsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSpendLimits(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

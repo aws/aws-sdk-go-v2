@@ -119,6 +119,9 @@ func (c *Client) addOperationGetTranscriptionJobMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

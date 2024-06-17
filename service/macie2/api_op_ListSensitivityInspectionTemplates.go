@@ -114,6 +114,9 @@ func (c *Client) addOperationListSensitivityInspectionTemplatesMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSensitivityInspectionTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListSensitivityInspectionTemplatesMiddlewares(stack
 	}
 	return nil
 }
-
-// ListSensitivityInspectionTemplatesAPIClient is a client that implements the
-// ListSensitivityInspectionTemplates operation.
-type ListSensitivityInspectionTemplatesAPIClient interface {
-	ListSensitivityInspectionTemplates(context.Context, *ListSensitivityInspectionTemplatesInput, ...func(*Options)) (*ListSensitivityInspectionTemplatesOutput, error)
-}
-
-var _ ListSensitivityInspectionTemplatesAPIClient = (*Client)(nil)
 
 // ListSensitivityInspectionTemplatesPaginatorOptions is the paginator options for
 // ListSensitivityInspectionTemplates
@@ -209,6 +204,9 @@ func (p *ListSensitivityInspectionTemplatesPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSensitivityInspectionTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListSensitivityInspectionTemplatesPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListSensitivityInspectionTemplatesAPIClient is a client that implements the
+// ListSensitivityInspectionTemplates operation.
+type ListSensitivityInspectionTemplatesAPIClient interface {
+	ListSensitivityInspectionTemplates(context.Context, *ListSensitivityInspectionTemplatesInput, ...func(*Options)) (*ListSensitivityInspectionTemplatesOutput, error)
+}
+
+var _ ListSensitivityInspectionTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSensitivityInspectionTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

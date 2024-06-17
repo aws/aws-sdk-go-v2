@@ -200,6 +200,9 @@ func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeOrderableDBInstanceOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -223,14 +226,6 @@ func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack
 	}
 	return nil
 }
-
-// DescribeOrderableDBInstanceOptionsAPIClient is a client that implements the
-// DescribeOrderableDBInstanceOptions operation.
-type DescribeOrderableDBInstanceOptionsAPIClient interface {
-	DescribeOrderableDBInstanceOptions(context.Context, *DescribeOrderableDBInstanceOptionsInput, ...func(*Options)) (*DescribeOrderableDBInstanceOptionsOutput, error)
-}
-
-var _ DescribeOrderableDBInstanceOptionsAPIClient = (*Client)(nil)
 
 // DescribeOrderableDBInstanceOptionsPaginatorOptions is the paginator options for
 // DescribeOrderableDBInstanceOptions
@@ -304,6 +299,9 @@ func (p *DescribeOrderableDBInstanceOptionsPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOrderableDBInstanceOptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -322,6 +320,14 @@ func (p *DescribeOrderableDBInstanceOptionsPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// DescribeOrderableDBInstanceOptionsAPIClient is a client that implements the
+// DescribeOrderableDBInstanceOptions operation.
+type DescribeOrderableDBInstanceOptionsAPIClient interface {
+	DescribeOrderableDBInstanceOptions(context.Context, *DescribeOrderableDBInstanceOptionsInput, ...func(*Options)) (*DescribeOrderableDBInstanceOptionsOutput, error)
+}
+
+var _ DescribeOrderableDBInstanceOptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOrderableDBInstanceOptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

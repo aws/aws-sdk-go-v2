@@ -130,6 +130,9 @@ func (c *Client) addOperationListWirelessDevicesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWirelessDevices(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListWirelessDevicesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListWirelessDevicesAPIClient is a client that implements the
-// ListWirelessDevices operation.
-type ListWirelessDevicesAPIClient interface {
-	ListWirelessDevices(context.Context, *ListWirelessDevicesInput, ...func(*Options)) (*ListWirelessDevicesOutput, error)
-}
-
-var _ ListWirelessDevicesAPIClient = (*Client)(nil)
 
 // ListWirelessDevicesPaginatorOptions is the paginator options for
 // ListWirelessDevices
@@ -219,6 +214,9 @@ func (p *ListWirelessDevicesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWirelessDevices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListWirelessDevicesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListWirelessDevicesAPIClient is a client that implements the
+// ListWirelessDevices operation.
+type ListWirelessDevicesAPIClient interface {
+	ListWirelessDevices(context.Context, *ListWirelessDevicesInput, ...func(*Options)) (*ListWirelessDevicesOutput, error)
+}
+
+var _ ListWirelessDevicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWirelessDevices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

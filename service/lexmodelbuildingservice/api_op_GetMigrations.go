@@ -130,6 +130,9 @@ func (c *Client) addOperationGetMigrationsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMigrations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,13 +153,6 @@ func (c *Client) addOperationGetMigrationsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetMigrationsAPIClient is a client that implements the GetMigrations operation.
-type GetMigrationsAPIClient interface {
-	GetMigrations(context.Context, *GetMigrationsInput, ...func(*Options)) (*GetMigrationsOutput, error)
-}
-
-var _ GetMigrationsAPIClient = (*Client)(nil)
 
 // GetMigrationsPaginatorOptions is the paginator options for GetMigrations
 type GetMigrationsPaginatorOptions struct {
@@ -221,6 +217,9 @@ func (p *GetMigrationsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetMigrations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +238,13 @@ func (p *GetMigrationsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetMigrationsAPIClient is a client that implements the GetMigrations operation.
+type GetMigrationsAPIClient interface {
+	GetMigrations(context.Context, *GetMigrationsInput, ...func(*Options)) (*GetMigrationsOutput, error)
+}
+
+var _ GetMigrationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetMigrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

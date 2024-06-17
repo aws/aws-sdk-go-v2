@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeBucketsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBuckets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationDescribeBucketsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeBucketsAPIClient is a client that implements the DescribeBuckets
-// operation.
-type DescribeBucketsAPIClient interface {
-	DescribeBuckets(context.Context, *DescribeBucketsInput, ...func(*Options)) (*DescribeBucketsOutput, error)
-}
-
-var _ DescribeBucketsAPIClient = (*Client)(nil)
 
 // DescribeBucketsPaginatorOptions is the paginator options for DescribeBuckets
 type DescribeBucketsPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *DescribeBucketsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeBuckets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *DescribeBucketsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// DescribeBucketsAPIClient is a client that implements the DescribeBuckets
+// operation.
+type DescribeBucketsAPIClient interface {
+	DescribeBuckets(context.Context, *DescribeBucketsInput, ...func(*Options)) (*DescribeBucketsOutput, error)
+}
+
+var _ DescribeBucketsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBuckets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

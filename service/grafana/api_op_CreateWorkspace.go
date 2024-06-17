@@ -226,6 +226,9 @@ func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateWorkspaceMiddleware(stack, options); err != nil {
 		return err
 	}

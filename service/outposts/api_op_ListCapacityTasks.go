@@ -121,6 +121,9 @@ func (c *Client) addOperationListCapacityTasksMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCapacityTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListCapacityTasksMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListCapacityTasksAPIClient is a client that implements the ListCapacityTasks
-// operation.
-type ListCapacityTasksAPIClient interface {
-	ListCapacityTasks(context.Context, *ListCapacityTasksInput, ...func(*Options)) (*ListCapacityTasksOutput, error)
-}
-
-var _ ListCapacityTasksAPIClient = (*Client)(nil)
 
 // ListCapacityTasksPaginatorOptions is the paginator options for ListCapacityTasks
 type ListCapacityTasksPaginatorOptions struct {
@@ -213,6 +208,9 @@ func (p *ListCapacityTasksPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCapacityTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListCapacityTasksPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListCapacityTasksAPIClient is a client that implements the ListCapacityTasks
+// operation.
+type ListCapacityTasksAPIClient interface {
+	ListCapacityTasks(context.Context, *ListCapacityTasksInput, ...func(*Options)) (*ListCapacityTasksOutput, error)
+}
+
+var _ ListCapacityTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCapacityTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -120,6 +120,9 @@ func (c *Client) addOperationPutEventsConfigurationMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutEventsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationListStudioSessionMappingsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStudioSessionMappings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListStudioSessionMappingsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListStudioSessionMappingsAPIClient is a client that implements the
-// ListStudioSessionMappings operation.
-type ListStudioSessionMappingsAPIClient interface {
-	ListStudioSessionMappings(context.Context, *ListStudioSessionMappingsInput, ...func(*Options)) (*ListStudioSessionMappingsOutput, error)
-}
-
-var _ ListStudioSessionMappingsAPIClient = (*Client)(nil)
 
 // ListStudioSessionMappingsPaginatorOptions is the paginator options for
 // ListStudioSessionMappings
@@ -200,6 +195,9 @@ func (p *ListStudioSessionMappingsPaginator) NextPage(ctx context.Context, optFn
 	params := *p.params
 	params.Marker = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStudioSessionMappings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -218,6 +216,14 @@ func (p *ListStudioSessionMappingsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListStudioSessionMappingsAPIClient is a client that implements the
+// ListStudioSessionMappings operation.
+type ListStudioSessionMappingsAPIClient interface {
+	ListStudioSessionMappings(context.Context, *ListStudioSessionMappingsInput, ...func(*Options)) (*ListStudioSessionMappingsOutput, error)
+}
+
+var _ ListStudioSessionMappingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStudioSessionMappings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

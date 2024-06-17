@@ -129,6 +129,9 @@ func (c *Client) addOperationListEnvironmentBlueprintConfigurationsMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEnvironmentBlueprintConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListEnvironmentBlueprintConfigurationsMiddlewares(s
 	}
 	return nil
 }
-
-// ListEnvironmentBlueprintConfigurationsAPIClient is a client that implements the
-// ListEnvironmentBlueprintConfigurations operation.
-type ListEnvironmentBlueprintConfigurationsAPIClient interface {
-	ListEnvironmentBlueprintConfigurations(context.Context, *ListEnvironmentBlueprintConfigurationsInput, ...func(*Options)) (*ListEnvironmentBlueprintConfigurationsOutput, error)
-}
-
-var _ ListEnvironmentBlueprintConfigurationsAPIClient = (*Client)(nil)
 
 // ListEnvironmentBlueprintConfigurationsPaginatorOptions is the paginator options
 // for ListEnvironmentBlueprintConfigurations
@@ -231,6 +226,9 @@ func (p *ListEnvironmentBlueprintConfigurationsPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnvironmentBlueprintConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListEnvironmentBlueprintConfigurationsPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListEnvironmentBlueprintConfigurationsAPIClient is a client that implements the
+// ListEnvironmentBlueprintConfigurations operation.
+type ListEnvironmentBlueprintConfigurationsAPIClient interface {
+	ListEnvironmentBlueprintConfigurations(context.Context, *ListEnvironmentBlueprintConfigurationsInput, ...func(*Options)) (*ListEnvironmentBlueprintConfigurationsOutput, error)
+}
+
+var _ ListEnvironmentBlueprintConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnvironmentBlueprintConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

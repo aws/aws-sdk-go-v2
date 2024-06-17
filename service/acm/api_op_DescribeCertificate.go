@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeCertificateMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationDescribeCertificateMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeCertificateAPIClient is a client that implements the
-// DescribeCertificate operation.
-type DescribeCertificateAPIClient interface {
-	DescribeCertificate(context.Context, *DescribeCertificateInput, ...func(*Options)) (*DescribeCertificateOutput, error)
-}
-
-var _ DescribeCertificateAPIClient = (*Client)(nil)
 
 // CertificateValidatedWaiterOptions are waiter options for
 // CertificateValidatedWaiter
@@ -271,7 +266,13 @@ func (w *CertificateValidatedWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.DescribeCertificate(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -391,6 +392,14 @@ func certificateValidatedStateRetryable(ctx context.Context, input *DescribeCert
 
 	return true, nil
 }
+
+// DescribeCertificateAPIClient is a client that implements the
+// DescribeCertificate operation.
+type DescribeCertificateAPIClient interface {
+	DescribeCertificate(context.Context, *DescribeCertificateInput, ...func(*Options)) (*DescribeCertificateOutput, error)
+}
+
+var _ DescribeCertificateAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

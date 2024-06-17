@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeNodeAssociationStatusMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeNodeAssociationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeNodeAssociationStatusMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// DescribeNodeAssociationStatusAPIClient is a client that implements the
-// DescribeNodeAssociationStatus operation.
-type DescribeNodeAssociationStatusAPIClient interface {
-	DescribeNodeAssociationStatus(context.Context, *DescribeNodeAssociationStatusInput, ...func(*Options)) (*DescribeNodeAssociationStatusOutput, error)
-}
-
-var _ DescribeNodeAssociationStatusAPIClient = (*Client)(nil)
 
 // NodeAssociatedWaiterOptions are waiter options for NodeAssociatedWaiter
 type NodeAssociatedWaiterOptions struct {
@@ -282,7 +277,13 @@ func (w *NodeAssociatedWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeNodeAssociationStatus(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -356,6 +357,14 @@ func nodeAssociatedStateRetryable(ctx context.Context, input *DescribeNodeAssoci
 
 	return true, nil
 }
+
+// DescribeNodeAssociationStatusAPIClient is a client that implements the
+// DescribeNodeAssociationStatus operation.
+type DescribeNodeAssociationStatusAPIClient interface {
+	DescribeNodeAssociationStatus(context.Context, *DescribeNodeAssociationStatusInput, ...func(*Options)) (*DescribeNodeAssociationStatusOutput, error)
+}
+
+var _ DescribeNodeAssociationStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeNodeAssociationStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

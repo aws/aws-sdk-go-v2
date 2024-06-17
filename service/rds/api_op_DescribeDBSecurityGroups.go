@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeDBSecurityGroupsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSecurityGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationDescribeDBSecurityGroupsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeDBSecurityGroupsAPIClient is a client that implements the
-// DescribeDBSecurityGroups operation.
-type DescribeDBSecurityGroupsAPIClient interface {
-	DescribeDBSecurityGroups(context.Context, *DescribeDBSecurityGroupsInput, ...func(*Options)) (*DescribeDBSecurityGroupsOutput, error)
-}
-
-var _ DescribeDBSecurityGroupsAPIClient = (*Client)(nil)
 
 // DescribeDBSecurityGroupsPaginatorOptions is the paginator options for
 // DescribeDBSecurityGroups
@@ -242,6 +237,9 @@ func (p *DescribeDBSecurityGroupsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBSecurityGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *DescribeDBSecurityGroupsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeDBSecurityGroupsAPIClient is a client that implements the
+// DescribeDBSecurityGroups operation.
+type DescribeDBSecurityGroupsAPIClient interface {
+	DescribeDBSecurityGroups(context.Context, *DescribeDBSecurityGroupsInput, ...func(*Options)) (*DescribeDBSecurityGroupsOutput, error)
+}
+
+var _ DescribeDBSecurityGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBSecurityGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

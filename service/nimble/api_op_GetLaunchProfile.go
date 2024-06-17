@@ -115,6 +115,9 @@ func (c *Client) addOperationGetLaunchProfileMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLaunchProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetLaunchProfileMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetLaunchProfileAPIClient is a client that implements the GetLaunchProfile
-// operation.
-type GetLaunchProfileAPIClient interface {
-	GetLaunchProfile(context.Context, *GetLaunchProfileInput, ...func(*Options)) (*GetLaunchProfileOutput, error)
-}
-
-var _ GetLaunchProfileAPIClient = (*Client)(nil)
 
 // LaunchProfileReadyWaiterOptions are waiter options for LaunchProfileReadyWaiter
 type LaunchProfileReadyWaiterOptions struct {
@@ -262,7 +257,13 @@ func (w *LaunchProfileReadyWaiter) WaitForOutput(ctx context.Context, params *Ge
 		}
 
 		out, err := w.client.GetLaunchProfile(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -471,7 +472,13 @@ func (w *LaunchProfileDeletedWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.GetLaunchProfile(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -545,6 +552,14 @@ func launchProfileDeletedStateRetryable(ctx context.Context, input *GetLaunchPro
 
 	return true, nil
 }
+
+// GetLaunchProfileAPIClient is a client that implements the GetLaunchProfile
+// operation.
+type GetLaunchProfileAPIClient interface {
+	GetLaunchProfile(context.Context, *GetLaunchProfileInput, ...func(*Options)) (*GetLaunchProfileOutput, error)
+}
+
+var _ GetLaunchProfileAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLaunchProfile(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

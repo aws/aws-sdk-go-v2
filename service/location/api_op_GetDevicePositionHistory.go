@@ -155,6 +155,9 @@ func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetDevicePositionHistoryMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,41 +184,6 @@ func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-type endpointPrefix_opGetDevicePositionHistoryMiddleware struct {
-}
-
-func (*endpointPrefix_opGetDevicePositionHistoryMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetDevicePositionHistoryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "tracking." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetDevicePositionHistoryMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetDevicePositionHistoryMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetDevicePositionHistoryAPIClient is a client that implements the
-// GetDevicePositionHistory operation.
-type GetDevicePositionHistoryAPIClient interface {
-	GetDevicePositionHistory(context.Context, *GetDevicePositionHistoryInput, ...func(*Options)) (*GetDevicePositionHistoryOutput, error)
-}
-
-var _ GetDevicePositionHistoryAPIClient = (*Client)(nil)
 
 // GetDevicePositionHistoryPaginatorOptions is the paginator options for
 // GetDevicePositionHistory
@@ -284,6 +252,9 @@ func (p *GetDevicePositionHistoryPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDevicePositionHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -302,6 +273,41 @@ func (p *GetDevicePositionHistoryPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+type endpointPrefix_opGetDevicePositionHistoryMiddleware struct {
+}
+
+func (*endpointPrefix_opGetDevicePositionHistoryMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetDevicePositionHistoryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "tracking." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetDevicePositionHistoryMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetDevicePositionHistoryMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetDevicePositionHistoryAPIClient is a client that implements the
+// GetDevicePositionHistory operation.
+type GetDevicePositionHistoryAPIClient interface {
+	GetDevicePositionHistory(context.Context, *GetDevicePositionHistoryInput, ...func(*Options)) (*GetDevicePositionHistoryOutput, error)
+}
+
+var _ GetDevicePositionHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDevicePositionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

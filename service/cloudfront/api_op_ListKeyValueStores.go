@@ -110,6 +110,9 @@ func (c *Client) addOperationListKeyValueStoresMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKeyValueStores(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListKeyValueStoresMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListKeyValueStoresAPIClient is a client that implements the ListKeyValueStores
-// operation.
-type ListKeyValueStoresAPIClient interface {
-	ListKeyValueStores(context.Context, *ListKeyValueStoresInput, ...func(*Options)) (*ListKeyValueStoresOutput, error)
-}
-
-var _ ListKeyValueStoresAPIClient = (*Client)(nil)
 
 // ListKeyValueStoresPaginatorOptions is the paginator options for
 // ListKeyValueStores
@@ -203,6 +198,9 @@ func (p *ListKeyValueStoresPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKeyValueStores(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListKeyValueStoresPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListKeyValueStoresAPIClient is a client that implements the ListKeyValueStores
+// operation.
+type ListKeyValueStoresAPIClient interface {
+	ListKeyValueStores(context.Context, *ListKeyValueStoresInput, ...func(*Options)) (*ListKeyValueStoresOutput, error)
+}
+
+var _ ListKeyValueStoresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKeyValueStores(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

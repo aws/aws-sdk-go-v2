@@ -119,6 +119,9 @@ func (c *Client) addOperationListTestSetsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestSetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListTestSetsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListTestSetsAPIClient is a client that implements the ListTestSets operation.
-type ListTestSetsAPIClient interface {
-	ListTestSets(context.Context, *ListTestSetsInput, ...func(*Options)) (*ListTestSetsOutput, error)
-}
-
-var _ ListTestSetsAPIClient = (*Client)(nil)
 
 // ListTestSetsPaginatorOptions is the paginator options for ListTestSets
 type ListTestSetsPaginatorOptions struct {
@@ -214,6 +210,9 @@ func (p *ListTestSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +231,13 @@ func (p *ListTestSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListTestSetsAPIClient is a client that implements the ListTestSets operation.
+type ListTestSetsAPIClient interface {
+	ListTestSets(context.Context, *ListTestSetsInput, ...func(*Options)) (*ListTestSetsOutput, error)
+}
+
+var _ ListTestSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

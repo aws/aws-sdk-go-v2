@@ -141,6 +141,9 @@ func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTimeSeriesServiceStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// GetTimeSeriesServiceStatisticsAPIClient is a client that implements the
-// GetTimeSeriesServiceStatistics operation.
-type GetTimeSeriesServiceStatisticsAPIClient interface {
-	GetTimeSeriesServiceStatistics(context.Context, *GetTimeSeriesServiceStatisticsInput, ...func(*Options)) (*GetTimeSeriesServiceStatisticsOutput, error)
-}
-
-var _ GetTimeSeriesServiceStatisticsAPIClient = (*Client)(nil)
 
 // GetTimeSeriesServiceStatisticsPaginatorOptions is the paginator options for
 // GetTimeSeriesServiceStatistics
@@ -227,6 +222,9 @@ func (p *GetTimeSeriesServiceStatisticsPaginator) NextPage(ctx context.Context, 
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTimeSeriesServiceStatistics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *GetTimeSeriesServiceStatisticsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// GetTimeSeriesServiceStatisticsAPIClient is a client that implements the
+// GetTimeSeriesServiceStatistics operation.
+type GetTimeSeriesServiceStatisticsAPIClient interface {
+	GetTimeSeriesServiceStatistics(context.Context, *GetTimeSeriesServiceStatisticsInput, ...func(*Options)) (*GetTimeSeriesServiceStatisticsOutput, error)
+}
+
+var _ GetTimeSeriesServiceStatisticsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTimeSeriesServiceStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

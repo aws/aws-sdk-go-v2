@@ -117,6 +117,9 @@ func (c *Client) addOperationListApplicationInstanceDependenciesMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationInstanceDependenciesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListApplicationInstanceDependenciesMiddlewares(stac
 	}
 	return nil
 }
-
-// ListApplicationInstanceDependenciesAPIClient is a client that implements the
-// ListApplicationInstanceDependencies operation.
-type ListApplicationInstanceDependenciesAPIClient interface {
-	ListApplicationInstanceDependencies(context.Context, *ListApplicationInstanceDependenciesInput, ...func(*Options)) (*ListApplicationInstanceDependenciesOutput, error)
-}
-
-var _ ListApplicationInstanceDependenciesAPIClient = (*Client)(nil)
 
 // ListApplicationInstanceDependenciesPaginatorOptions is the paginator options
 // for ListApplicationInstanceDependencies
@@ -212,6 +207,9 @@ func (p *ListApplicationInstanceDependenciesPaginator) NextPage(ctx context.Cont
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationInstanceDependencies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListApplicationInstanceDependenciesPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// ListApplicationInstanceDependenciesAPIClient is a client that implements the
+// ListApplicationInstanceDependencies operation.
+type ListApplicationInstanceDependenciesAPIClient interface {
+	ListApplicationInstanceDependencies(context.Context, *ListApplicationInstanceDependenciesInput, ...func(*Options)) (*ListApplicationInstanceDependenciesOutput, error)
+}
+
+var _ ListApplicationInstanceDependenciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationInstanceDependencies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

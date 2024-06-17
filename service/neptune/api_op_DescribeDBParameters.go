@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeDBParametersMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationDescribeDBParametersMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeDBParametersAPIClient is a client that implements the
-// DescribeDBParameters operation.
-type DescribeDBParametersAPIClient interface {
-	DescribeDBParameters(context.Context, *DescribeDBParametersInput, ...func(*Options)) (*DescribeDBParametersOutput, error)
-}
-
-var _ DescribeDBParametersAPIClient = (*Client)(nil)
 
 // DescribeDBParametersPaginatorOptions is the paginator options for
 // DescribeDBParameters
@@ -241,6 +236,9 @@ func (p *DescribeDBParametersPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBParameters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *DescribeDBParametersPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeDBParametersAPIClient is a client that implements the
+// DescribeDBParameters operation.
+type DescribeDBParametersAPIClient interface {
+	DescribeDBParameters(context.Context, *DescribeDBParametersInput, ...func(*Options)) (*DescribeDBParametersOutput, error)
+}
+
+var _ DescribeDBParametersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBParameters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -114,6 +114,9 @@ func (c *Client) addOperationListRunGroupsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListRunGroupsMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,40 +140,6 @@ func (c *Client) addOperationListRunGroupsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-type endpointPrefix_opListRunGroupsMiddleware struct {
-}
-
-func (*endpointPrefix_opListRunGroupsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListRunGroupsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "workflows-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListRunGroupsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListRunGroupsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListRunGroupsAPIClient is a client that implements the ListRunGroups operation.
-type ListRunGroupsAPIClient interface {
-	ListRunGroups(context.Context, *ListRunGroupsInput, ...func(*Options)) (*ListRunGroupsOutput, error)
-}
-
-var _ ListRunGroupsAPIClient = (*Client)(nil)
 
 // ListRunGroupsPaginatorOptions is the paginator options for ListRunGroups
 type ListRunGroupsPaginatorOptions struct {
@@ -235,6 +204,9 @@ func (p *ListRunGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRunGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +225,40 @@ func (p *ListRunGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+type endpointPrefix_opListRunGroupsMiddleware struct {
+}
+
+func (*endpointPrefix_opListRunGroupsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListRunGroupsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "workflows-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListRunGroupsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListRunGroupsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListRunGroupsAPIClient is a client that implements the ListRunGroups operation.
+type ListRunGroupsAPIClient interface {
+	ListRunGroups(context.Context, *ListRunGroupsInput, ...func(*Options)) (*ListRunGroupsOutput, error)
+}
+
+var _ ListRunGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRunGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

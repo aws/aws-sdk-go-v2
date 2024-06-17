@@ -121,6 +121,9 @@ func (c *Client) addOperationListLiveSourcesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLiveSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListLiveSourcesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListLiveSourcesAPIClient is a client that implements the ListLiveSources
-// operation.
-type ListLiveSourcesAPIClient interface {
-	ListLiveSources(context.Context, *ListLiveSourcesInput, ...func(*Options)) (*ListLiveSourcesOutput, error)
-}
-
-var _ ListLiveSourcesAPIClient = (*Client)(nil)
 
 // ListLiveSourcesPaginatorOptions is the paginator options for ListLiveSources
 type ListLiveSourcesPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *ListLiveSourcesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLiveSources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListLiveSourcesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListLiveSourcesAPIClient is a client that implements the ListLiveSources
+// operation.
+type ListLiveSourcesAPIClient interface {
+	ListLiveSources(context.Context, *ListLiveSourcesInput, ...func(*Options)) (*ListLiveSourcesOutput, error)
+}
+
+var _ ListLiveSourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLiveSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

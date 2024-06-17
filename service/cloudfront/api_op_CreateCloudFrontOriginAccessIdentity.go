@@ -125,6 +125,9 @@ func (c *Client) addOperationCreateCloudFrontOriginAccessIdentityMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateCloudFrontOriginAccessIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}

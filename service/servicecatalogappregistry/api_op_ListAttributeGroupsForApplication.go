@@ -117,6 +117,9 @@ func (c *Client) addOperationListAttributeGroupsForApplicationMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAttributeGroupsForApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListAttributeGroupsForApplicationMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListAttributeGroupsForApplicationAPIClient is a client that implements the
-// ListAttributeGroupsForApplication operation.
-type ListAttributeGroupsForApplicationAPIClient interface {
-	ListAttributeGroupsForApplication(context.Context, *ListAttributeGroupsForApplicationInput, ...func(*Options)) (*ListAttributeGroupsForApplicationOutput, error)
-}
-
-var _ ListAttributeGroupsForApplicationAPIClient = (*Client)(nil)
 
 // ListAttributeGroupsForApplicationPaginatorOptions is the paginator options for
 // ListAttributeGroupsForApplication
@@ -216,6 +211,9 @@ func (p *ListAttributeGroupsForApplicationPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAttributeGroupsForApplication(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListAttributeGroupsForApplicationPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListAttributeGroupsForApplicationAPIClient is a client that implements the
+// ListAttributeGroupsForApplication operation.
+type ListAttributeGroupsForApplicationAPIClient interface {
+	ListAttributeGroupsForApplication(context.Context, *ListAttributeGroupsForApplicationInput, ...func(*Options)) (*ListAttributeGroupsForApplicationOutput, error)
+}
+
+var _ ListAttributeGroupsForApplicationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAttributeGroupsForApplication(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

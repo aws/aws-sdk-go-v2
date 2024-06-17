@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeInsightRulesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInsightRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationDescribeInsightRulesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeInsightRulesAPIClient is a client that implements the
-// DescribeInsightRules operation.
-type DescribeInsightRulesAPIClient interface {
-	DescribeInsightRules(context.Context, *DescribeInsightRulesInput, ...func(*Options)) (*DescribeInsightRulesOutput, error)
-}
-
-var _ DescribeInsightRulesAPIClient = (*Client)(nil)
 
 // DescribeInsightRulesPaginatorOptions is the paginator options for
 // DescribeInsightRules
@@ -211,6 +206,9 @@ func (p *DescribeInsightRulesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeInsightRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *DescribeInsightRulesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeInsightRulesAPIClient is a client that implements the
+// DescribeInsightRules operation.
+type DescribeInsightRulesAPIClient interface {
+	DescribeInsightRules(context.Context, *DescribeInsightRulesInput, ...func(*Options)) (*DescribeInsightRulesOutput, error)
+}
+
+var _ DescribeInsightRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInsightRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -127,6 +127,9 @@ func (c *Client) addOperationListFolderMembersMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFolderMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListFolderMembersMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListFolderMembersAPIClient is a client that implements the ListFolderMembers
-// operation.
-type ListFolderMembersAPIClient interface {
-	ListFolderMembers(context.Context, *ListFolderMembersInput, ...func(*Options)) (*ListFolderMembersOutput, error)
-}
-
-var _ ListFolderMembersAPIClient = (*Client)(nil)
 
 // ListFolderMembersPaginatorOptions is the paginator options for ListFolderMembers
 type ListFolderMembersPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *ListFolderMembersPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFolderMembers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListFolderMembersPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListFolderMembersAPIClient is a client that implements the ListFolderMembers
+// operation.
+type ListFolderMembersAPIClient interface {
+	ListFolderMembers(context.Context, *ListFolderMembersInput, ...func(*Options)) (*ListFolderMembersOutput, error)
+}
+
+var _ ListFolderMembersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFolderMembers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

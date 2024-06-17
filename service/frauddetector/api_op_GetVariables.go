@@ -118,6 +118,9 @@ func (c *Client) addOperationGetVariablesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVariables(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationGetVariablesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetVariablesAPIClient is a client that implements the GetVariables operation.
-type GetVariablesAPIClient interface {
-	GetVariables(context.Context, *GetVariablesInput, ...func(*Options)) (*GetVariablesOutput, error)
-}
-
-var _ GetVariablesAPIClient = (*Client)(nil)
 
 // GetVariablesPaginatorOptions is the paginator options for GetVariables
 type GetVariablesPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *GetVariablesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetVariables(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *GetVariablesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetVariablesAPIClient is a client that implements the GetVariables operation.
+type GetVariablesAPIClient interface {
+	GetVariables(context.Context, *GetVariablesInput, ...func(*Options)) (*GetVariablesOutput, error)
+}
+
+var _ GetVariablesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetVariables(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

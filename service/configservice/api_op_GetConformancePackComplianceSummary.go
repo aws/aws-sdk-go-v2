@@ -118,6 +118,9 @@ func (c *Client) addOperationGetConformancePackComplianceSummaryMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetConformancePackComplianceSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationGetConformancePackComplianceSummaryMiddlewares(stac
 	}
 	return nil
 }
-
-// GetConformancePackComplianceSummaryAPIClient is a client that implements the
-// GetConformancePackComplianceSummary operation.
-type GetConformancePackComplianceSummaryAPIClient interface {
-	GetConformancePackComplianceSummary(context.Context, *GetConformancePackComplianceSummaryInput, ...func(*Options)) (*GetConformancePackComplianceSummaryOutput, error)
-}
-
-var _ GetConformancePackComplianceSummaryAPIClient = (*Client)(nil)
 
 // GetConformancePackComplianceSummaryPaginatorOptions is the paginator options
 // for GetConformancePackComplianceSummary
@@ -212,6 +207,9 @@ func (p *GetConformancePackComplianceSummaryPaginator) NextPage(ctx context.Cont
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetConformancePackComplianceSummary(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *GetConformancePackComplianceSummaryPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// GetConformancePackComplianceSummaryAPIClient is a client that implements the
+// GetConformancePackComplianceSummary operation.
+type GetConformancePackComplianceSummaryAPIClient interface {
+	GetConformancePackComplianceSummary(context.Context, *GetConformancePackComplianceSummaryInput, ...func(*Options)) (*GetConformancePackComplianceSummaryOutput, error)
+}
+
+var _ GetConformancePackComplianceSummaryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetConformancePackComplianceSummary(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

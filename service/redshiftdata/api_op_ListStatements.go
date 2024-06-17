@@ -160,6 +160,9 @@ func (c *Client) addOperationListStatementsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStatements(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -180,14 +183,6 @@ func (c *Client) addOperationListStatementsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListStatementsAPIClient is a client that implements the ListStatements
-// operation.
-type ListStatementsAPIClient interface {
-	ListStatements(context.Context, *ListStatementsInput, ...func(*Options)) (*ListStatementsOutput, error)
-}
-
-var _ ListStatementsAPIClient = (*Client)(nil)
 
 // ListStatementsPaginatorOptions is the paginator options for ListStatements
 type ListStatementsPaginatorOptions struct {
@@ -250,6 +245,9 @@ func (p *ListStatementsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStatements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +266,14 @@ func (p *ListStatementsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListStatementsAPIClient is a client that implements the ListStatements
+// operation.
+type ListStatementsAPIClient interface {
+	ListStatements(context.Context, *ListStatementsInput, ...func(*Options)) (*ListStatementsOutput, error)
+}
+
+var _ ListStatementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStatements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

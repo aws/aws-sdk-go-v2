@@ -174,6 +174,9 @@ func (c *Client) addOperationSearchUsersByImageMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchUsersByImageValidationMiddleware(stack); err != nil {
 		return err
 	}

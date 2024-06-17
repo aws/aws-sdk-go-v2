@@ -167,6 +167,9 @@ func (c *Client) addOperationListActivityTypesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListActivityTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -190,14 +193,6 @@ func (c *Client) addOperationListActivityTypesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListActivityTypesAPIClient is a client that implements the ListActivityTypes
-// operation.
-type ListActivityTypesAPIClient interface {
-	ListActivityTypes(context.Context, *ListActivityTypesInput, ...func(*Options)) (*ListActivityTypesOutput, error)
-}
-
-var _ ListActivityTypesAPIClient = (*Client)(nil)
 
 // ListActivityTypesPaginatorOptions is the paginator options for ListActivityTypes
 type ListActivityTypesPaginatorOptions struct {
@@ -259,6 +254,9 @@ func (p *ListActivityTypesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	params.MaximumPageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListActivityTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +275,14 @@ func (p *ListActivityTypesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListActivityTypesAPIClient is a client that implements the ListActivityTypes
+// operation.
+type ListActivityTypesAPIClient interface {
+	ListActivityTypes(context.Context, *ListActivityTypesInput, ...func(*Options)) (*ListActivityTypesOutput, error)
+}
+
+var _ ListActivityTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListActivityTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

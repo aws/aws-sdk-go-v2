@@ -127,6 +127,9 @@ func (c *Client) addOperationListVpcIngressConnectionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVpcIngressConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListVpcIngressConnectionsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListVpcIngressConnectionsAPIClient is a client that implements the
-// ListVpcIngressConnections operation.
-type ListVpcIngressConnectionsAPIClient interface {
-	ListVpcIngressConnections(context.Context, *ListVpcIngressConnectionsInput, ...func(*Options)) (*ListVpcIngressConnectionsOutput, error)
-}
-
-var _ ListVpcIngressConnectionsAPIClient = (*Client)(nil)
 
 // ListVpcIngressConnectionsPaginatorOptions is the paginator options for
 // ListVpcIngressConnections
@@ -225,6 +220,9 @@ func (p *ListVpcIngressConnectionsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVpcIngressConnections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListVpcIngressConnectionsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListVpcIngressConnectionsAPIClient is a client that implements the
+// ListVpcIngressConnections operation.
+type ListVpcIngressConnectionsAPIClient interface {
+	ListVpcIngressConnections(context.Context, *ListVpcIngressConnectionsInput, ...func(*Options)) (*ListVpcIngressConnectionsOutput, error)
+}
+
+var _ ListVpcIngressConnectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVpcIngressConnections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

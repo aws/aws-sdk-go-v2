@@ -117,6 +117,9 @@ func (c *Client) addOperationListMulticastGroupsByFuotaTaskMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMulticastGroupsByFuotaTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListMulticastGroupsByFuotaTaskMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListMulticastGroupsByFuotaTaskAPIClient is a client that implements the
-// ListMulticastGroupsByFuotaTask operation.
-type ListMulticastGroupsByFuotaTaskAPIClient interface {
-	ListMulticastGroupsByFuotaTask(context.Context, *ListMulticastGroupsByFuotaTaskInput, ...func(*Options)) (*ListMulticastGroupsByFuotaTaskOutput, error)
-}
-
-var _ ListMulticastGroupsByFuotaTaskAPIClient = (*Client)(nil)
 
 // ListMulticastGroupsByFuotaTaskPaginatorOptions is the paginator options for
 // ListMulticastGroupsByFuotaTask
@@ -211,6 +206,9 @@ func (p *ListMulticastGroupsByFuotaTaskPaginator) NextPage(ctx context.Context, 
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMulticastGroupsByFuotaTask(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListMulticastGroupsByFuotaTaskPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListMulticastGroupsByFuotaTaskAPIClient is a client that implements the
+// ListMulticastGroupsByFuotaTask operation.
+type ListMulticastGroupsByFuotaTaskAPIClient interface {
+	ListMulticastGroupsByFuotaTask(context.Context, *ListMulticastGroupsByFuotaTaskInput, ...func(*Options)) (*ListMulticastGroupsByFuotaTaskOutput, error)
+}
+
+var _ ListMulticastGroupsByFuotaTaskAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMulticastGroupsByFuotaTask(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

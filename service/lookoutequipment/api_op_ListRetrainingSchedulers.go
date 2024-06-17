@@ -123,6 +123,9 @@ func (c *Client) addOperationListRetrainingSchedulersMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRetrainingSchedulers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListRetrainingSchedulersMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListRetrainingSchedulersAPIClient is a client that implements the
-// ListRetrainingSchedulers operation.
-type ListRetrainingSchedulersAPIClient interface {
-	ListRetrainingSchedulers(context.Context, *ListRetrainingSchedulersInput, ...func(*Options)) (*ListRetrainingSchedulersOutput, error)
-}
-
-var _ ListRetrainingSchedulersAPIClient = (*Client)(nil)
 
 // ListRetrainingSchedulersPaginatorOptions is the paginator options for
 // ListRetrainingSchedulers
@@ -217,6 +212,9 @@ func (p *ListRetrainingSchedulersPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRetrainingSchedulers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListRetrainingSchedulersPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListRetrainingSchedulersAPIClient is a client that implements the
+// ListRetrainingSchedulers operation.
+type ListRetrainingSchedulersAPIClient interface {
+	ListRetrainingSchedulers(context.Context, *ListRetrainingSchedulersInput, ...func(*Options)) (*ListRetrainingSchedulersOutput, error)
+}
+
+var _ ListRetrainingSchedulersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRetrainingSchedulers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

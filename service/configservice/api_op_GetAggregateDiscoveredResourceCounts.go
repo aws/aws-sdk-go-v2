@@ -143,6 +143,9 @@ func (c *Client) addOperationGetAggregateDiscoveredResourceCountsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAggregateDiscoveredResourceCountsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationGetAggregateDiscoveredResourceCountsMiddlewares(sta
 	}
 	return nil
 }
-
-// GetAggregateDiscoveredResourceCountsAPIClient is a client that implements the
-// GetAggregateDiscoveredResourceCounts operation.
-type GetAggregateDiscoveredResourceCountsAPIClient interface {
-	GetAggregateDiscoveredResourceCounts(context.Context, *GetAggregateDiscoveredResourceCountsInput, ...func(*Options)) (*GetAggregateDiscoveredResourceCountsOutput, error)
-}
-
-var _ GetAggregateDiscoveredResourceCountsAPIClient = (*Client)(nil)
 
 // GetAggregateDiscoveredResourceCountsPaginatorOptions is the paginator options
 // for GetAggregateDiscoveredResourceCounts
@@ -239,6 +234,9 @@ func (p *GetAggregateDiscoveredResourceCountsPaginator) NextPage(ctx context.Con
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAggregateDiscoveredResourceCounts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *GetAggregateDiscoveredResourceCountsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// GetAggregateDiscoveredResourceCountsAPIClient is a client that implements the
+// GetAggregateDiscoveredResourceCounts operation.
+type GetAggregateDiscoveredResourceCountsAPIClient interface {
+	GetAggregateDiscoveredResourceCounts(context.Context, *GetAggregateDiscoveredResourceCountsInput, ...func(*Options)) (*GetAggregateDiscoveredResourceCountsOutput, error)
+}
+
+var _ GetAggregateDiscoveredResourceCountsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAggregateDiscoveredResourceCounts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

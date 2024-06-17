@@ -143,6 +143,9 @@ func (c *Client) addOperationBatchGetAssetPropertyValueHistoryMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,41 +172,6 @@ func (c *Client) addOperationBatchGetAssetPropertyValueHistoryMiddlewares(stack 
 	}
 	return nil
 }
-
-type endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware struct {
-}
-
-func (*endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "data." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// BatchGetAssetPropertyValueHistoryAPIClient is a client that implements the
-// BatchGetAssetPropertyValueHistory operation.
-type BatchGetAssetPropertyValueHistoryAPIClient interface {
-	BatchGetAssetPropertyValueHistory(context.Context, *BatchGetAssetPropertyValueHistoryInput, ...func(*Options)) (*BatchGetAssetPropertyValueHistoryOutput, error)
-}
-
-var _ BatchGetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 
 // BatchGetAssetPropertyValueHistoryPaginatorOptions is the paginator options for
 // BatchGetAssetPropertyValueHistory
@@ -277,6 +245,9 @@ func (p *BatchGetAssetPropertyValueHistoryPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.BatchGetAssetPropertyValueHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -295,6 +266,41 @@ func (p *BatchGetAssetPropertyValueHistoryPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+type endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware struct {
+}
+
+func (*endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "data." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// BatchGetAssetPropertyValueHistoryAPIClient is a client that implements the
+// BatchGetAssetPropertyValueHistory operation.
+type BatchGetAssetPropertyValueHistoryAPIClient interface {
+	BatchGetAssetPropertyValueHistory(context.Context, *BatchGetAssetPropertyValueHistoryInput, ...func(*Options)) (*BatchGetAssetPropertyValueHistoryOutput, error)
+}
+
+var _ BatchGetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opBatchGetAssetPropertyValueHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

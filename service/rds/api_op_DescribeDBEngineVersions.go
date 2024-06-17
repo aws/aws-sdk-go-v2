@@ -242,6 +242,9 @@ func (c *Client) addOperationDescribeDBEngineVersionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBEngineVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -265,14 +268,6 @@ func (c *Client) addOperationDescribeDBEngineVersionsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeDBEngineVersionsAPIClient is a client that implements the
-// DescribeDBEngineVersions operation.
-type DescribeDBEngineVersionsAPIClient interface {
-	DescribeDBEngineVersions(context.Context, *DescribeDBEngineVersionsInput, ...func(*Options)) (*DescribeDBEngineVersionsOutput, error)
-}
-
-var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
 
 // DescribeDBEngineVersionsPaginatorOptions is the paginator options for
 // DescribeDBEngineVersions
@@ -345,6 +340,9 @@ func (p *DescribeDBEngineVersionsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBEngineVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -363,6 +361,14 @@ func (p *DescribeDBEngineVersionsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeDBEngineVersionsAPIClient is a client that implements the
+// DescribeDBEngineVersions operation.
+type DescribeDBEngineVersionsAPIClient interface {
+	DescribeDBEngineVersions(context.Context, *DescribeDBEngineVersionsInput, ...func(*Options)) (*DescribeDBEngineVersionsOutput, error)
+}
+
+var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

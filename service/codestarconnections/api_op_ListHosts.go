@@ -115,6 +115,9 @@ func (c *Client) addOperationListHostsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHosts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,13 +138,6 @@ func (c *Client) addOperationListHostsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListHostsAPIClient is a client that implements the ListHosts operation.
-type ListHostsAPIClient interface {
-	ListHosts(context.Context, *ListHostsInput, ...func(*Options)) (*ListHostsOutput, error)
-}
-
-var _ ListHostsAPIClient = (*Client)(nil)
 
 // ListHostsPaginatorOptions is the paginator options for ListHosts
 type ListHostsPaginatorOptions struct {
@@ -203,6 +199,9 @@ func (p *ListHostsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHosts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +220,13 @@ func (p *ListHostsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListHostsAPIClient is a client that implements the ListHosts operation.
+type ListHostsAPIClient interface {
+	ListHosts(context.Context, *ListHostsInput, ...func(*Options)) (*ListHostsOutput, error)
+}
+
+var _ ListHostsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHosts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

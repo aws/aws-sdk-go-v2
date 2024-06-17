@@ -114,6 +114,9 @@ func (c *Client) addOperationListRescoreExecutionPlansMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRescoreExecutionPlans(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListRescoreExecutionPlansMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListRescoreExecutionPlansAPIClient is a client that implements the
-// ListRescoreExecutionPlans operation.
-type ListRescoreExecutionPlansAPIClient interface {
-	ListRescoreExecutionPlans(context.Context, *ListRescoreExecutionPlansInput, ...func(*Options)) (*ListRescoreExecutionPlansOutput, error)
-}
-
-var _ ListRescoreExecutionPlansAPIClient = (*Client)(nil)
 
 // ListRescoreExecutionPlansPaginatorOptions is the paginator options for
 // ListRescoreExecutionPlans
@@ -208,6 +203,9 @@ func (p *ListRescoreExecutionPlansPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRescoreExecutionPlans(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListRescoreExecutionPlansPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListRescoreExecutionPlansAPIClient is a client that implements the
+// ListRescoreExecutionPlans operation.
+type ListRescoreExecutionPlansAPIClient interface {
+	ListRescoreExecutionPlans(context.Context, *ListRescoreExecutionPlansInput, ...func(*Options)) (*ListRescoreExecutionPlansOutput, error)
+}
+
+var _ ListRescoreExecutionPlansAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRescoreExecutionPlans(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

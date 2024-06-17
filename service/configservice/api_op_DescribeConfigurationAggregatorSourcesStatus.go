@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeConfigurationAggregatorSourcesStatusMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeConfigurationAggregatorSourcesStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationDescribeConfigurationAggregatorSourcesStatusMiddlew
 	}
 	return nil
 }
-
-// DescribeConfigurationAggregatorSourcesStatusAPIClient is a client that
-// implements the DescribeConfigurationAggregatorSourcesStatus operation.
-type DescribeConfigurationAggregatorSourcesStatusAPIClient interface {
-	DescribeConfigurationAggregatorSourcesStatus(context.Context, *DescribeConfigurationAggregatorSourcesStatusInput, ...func(*Options)) (*DescribeConfigurationAggregatorSourcesStatusOutput, error)
-}
-
-var _ DescribeConfigurationAggregatorSourcesStatusAPIClient = (*Client)(nil)
 
 // DescribeConfigurationAggregatorSourcesStatusPaginatorOptions is the paginator
 // options for DescribeConfigurationAggregatorSourcesStatus
@@ -225,6 +220,9 @@ func (p *DescribeConfigurationAggregatorSourcesStatusPaginator) NextPage(ctx con
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConfigurationAggregatorSourcesStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeConfigurationAggregatorSourcesStatusPaginator) NextPage(ctx con
 
 	return result, nil
 }
+
+// DescribeConfigurationAggregatorSourcesStatusAPIClient is a client that
+// implements the DescribeConfigurationAggregatorSourcesStatus operation.
+type DescribeConfigurationAggregatorSourcesStatusAPIClient interface {
+	DescribeConfigurationAggregatorSourcesStatus(context.Context, *DescribeConfigurationAggregatorSourcesStatusInput, ...func(*Options)) (*DescribeConfigurationAggregatorSourcesStatusOutput, error)
+}
+
+var _ DescribeConfigurationAggregatorSourcesStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConfigurationAggregatorSourcesStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -130,6 +130,9 @@ func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpVerifySoftwareTokenValidationMiddleware(stack); err != nil {
 		return err
 	}

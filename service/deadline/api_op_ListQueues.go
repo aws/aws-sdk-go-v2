@@ -136,6 +136,9 @@ func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListQueuesMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,40 +165,6 @@ func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-type endpointPrefix_opListQueuesMiddleware struct {
-}
-
-func (*endpointPrefix_opListQueuesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListQueuesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListQueuesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListQueuesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListQueuesAPIClient is a client that implements the ListQueues operation.
-type ListQueuesAPIClient interface {
-	ListQueues(context.Context, *ListQueuesInput, ...func(*Options)) (*ListQueuesOutput, error)
-}
-
-var _ ListQueuesAPIClient = (*Client)(nil)
 
 // ListQueuesPaginatorOptions is the paginator options for ListQueues
 type ListQueuesPaginatorOptions struct {
@@ -261,6 +230,9 @@ func (p *ListQueuesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQueues(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -279,6 +251,40 @@ func (p *ListQueuesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+type endpointPrefix_opListQueuesMiddleware struct {
+}
+
+func (*endpointPrefix_opListQueuesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListQueuesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListQueuesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListQueuesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListQueuesAPIClient is a client that implements the ListQueues operation.
+type ListQueuesAPIClient interface {
+	ListQueues(context.Context, *ListQueuesInput, ...func(*Options)) (*ListQueuesOutput, error)
+}
+
+var _ ListQueuesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQueues(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

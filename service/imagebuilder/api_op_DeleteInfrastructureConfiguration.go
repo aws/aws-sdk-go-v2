@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteInfrastructureConfigurationMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInfrastructureConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

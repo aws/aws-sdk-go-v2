@@ -153,6 +153,9 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponents(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -173,14 +176,6 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListComponentsAPIClient is a client that implements the ListComponents
-// operation.
-type ListComponentsAPIClient interface {
-	ListComponents(context.Context, *ListComponentsInput, ...func(*Options)) (*ListComponentsOutput, error)
-}
-
-var _ ListComponentsAPIClient = (*Client)(nil)
 
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
@@ -245,6 +240,9 @@ func (p *ListComponentsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListComponents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +261,14 @@ func (p *ListComponentsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListComponentsAPIClient is a client that implements the ListComponents
+// operation.
+type ListComponentsAPIClient interface {
+	ListComponents(context.Context, *ListComponentsInput, ...func(*Options)) (*ListComponentsOutput, error)
+}
+
+var _ ListComponentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListComponents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

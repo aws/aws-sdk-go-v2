@@ -124,6 +124,9 @@ func (c *Client) addOperationDeleteTemplateMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -152,6 +152,9 @@ func (c *Client) addOperationDescribeAddonVersionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAddonVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -172,14 +175,6 @@ func (c *Client) addOperationDescribeAddonVersionsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeAddonVersionsAPIClient is a client that implements the
-// DescribeAddonVersions operation.
-type DescribeAddonVersionsAPIClient interface {
-	DescribeAddonVersions(context.Context, *DescribeAddonVersionsInput, ...func(*Options)) (*DescribeAddonVersionsOutput, error)
-}
-
-var _ DescribeAddonVersionsAPIClient = (*Client)(nil)
 
 // DescribeAddonVersionsPaginatorOptions is the paginator options for
 // DescribeAddonVersions
@@ -250,6 +245,9 @@ func (p *DescribeAddonVersionsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAddonVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +266,14 @@ func (p *DescribeAddonVersionsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeAddonVersionsAPIClient is a client that implements the
+// DescribeAddonVersions operation.
+type DescribeAddonVersionsAPIClient interface {
+	DescribeAddonVersions(context.Context, *DescribeAddonVersionsInput, ...func(*Options)) (*DescribeAddonVersionsOutput, error)
+}
+
+var _ DescribeAddonVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAddonVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

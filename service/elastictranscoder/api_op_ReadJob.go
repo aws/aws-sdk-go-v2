@@ -112,6 +112,9 @@ func (c *Client) addOperationReadJobMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpReadJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,13 +138,6 @@ func (c *Client) addOperationReadJobMiddlewares(stack *middleware.Stack, options
 	}
 	return nil
 }
-
-// ReadJobAPIClient is a client that implements the ReadJob operation.
-type ReadJobAPIClient interface {
-	ReadJob(context.Context, *ReadJobInput, ...func(*Options)) (*ReadJobOutput, error)
-}
-
-var _ ReadJobAPIClient = (*Client)(nil)
 
 // JobCompleteWaiterOptions are waiter options for JobCompleteWaiter
 type JobCompleteWaiterOptions struct {
@@ -257,7 +253,13 @@ func (w *JobCompleteWaiter) WaitForOutput(ctx context.Context, params *ReadJobIn
 		}
 
 		out, err := w.client.ReadJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -348,6 +350,13 @@ func jobCompleteStateRetryable(ctx context.Context, input *ReadJobInput, output 
 
 	return true, nil
 }
+
+// ReadJobAPIClient is a client that implements the ReadJob operation.
+type ReadJobAPIClient interface {
+	ReadJob(context.Context, *ReadJobInput, ...func(*Options)) (*ReadJobOutput, error)
+}
+
+var _ ReadJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opReadJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

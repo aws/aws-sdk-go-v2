@@ -122,6 +122,9 @@ func (c *Client) addOperationListManagedInsightRulesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListManagedInsightRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListManagedInsightRulesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListManagedInsightRulesAPIClient is a client that implements the
-// ListManagedInsightRules operation.
-type ListManagedInsightRulesAPIClient interface {
-	ListManagedInsightRules(context.Context, *ListManagedInsightRulesInput, ...func(*Options)) (*ListManagedInsightRulesOutput, error)
-}
-
-var _ ListManagedInsightRulesAPIClient = (*Client)(nil)
 
 // ListManagedInsightRulesPaginatorOptions is the paginator options for
 // ListManagedInsightRules
@@ -220,6 +215,9 @@ func (p *ListManagedInsightRulesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListManagedInsightRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListManagedInsightRulesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListManagedInsightRulesAPIClient is a client that implements the
+// ListManagedInsightRules operation.
+type ListManagedInsightRulesAPIClient interface {
+	ListManagedInsightRules(context.Context, *ListManagedInsightRulesInput, ...func(*Options)) (*ListManagedInsightRulesOutput, error)
+}
+
+var _ ListManagedInsightRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListManagedInsightRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

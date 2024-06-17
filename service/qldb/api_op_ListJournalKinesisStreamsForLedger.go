@@ -133,6 +133,9 @@ func (c *Client) addOperationListJournalKinesisStreamsForLedgerMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJournalKinesisStreamsForLedgerValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListJournalKinesisStreamsForLedgerMiddlewares(stack
 	}
 	return nil
 }
-
-// ListJournalKinesisStreamsForLedgerAPIClient is a client that implements the
-// ListJournalKinesisStreamsForLedger operation.
-type ListJournalKinesisStreamsForLedgerAPIClient interface {
-	ListJournalKinesisStreamsForLedger(context.Context, *ListJournalKinesisStreamsForLedgerInput, ...func(*Options)) (*ListJournalKinesisStreamsForLedgerOutput, error)
-}
-
-var _ ListJournalKinesisStreamsForLedgerAPIClient = (*Client)(nil)
 
 // ListJournalKinesisStreamsForLedgerPaginatorOptions is the paginator options for
 // ListJournalKinesisStreamsForLedger
@@ -233,6 +228,9 @@ func (p *ListJournalKinesisStreamsForLedgerPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJournalKinesisStreamsForLedger(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListJournalKinesisStreamsForLedgerPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListJournalKinesisStreamsForLedgerAPIClient is a client that implements the
+// ListJournalKinesisStreamsForLedger operation.
+type ListJournalKinesisStreamsForLedgerAPIClient interface {
+	ListJournalKinesisStreamsForLedger(context.Context, *ListJournalKinesisStreamsForLedgerInput, ...func(*Options)) (*ListJournalKinesisStreamsForLedgerOutput, error)
+}
+
+var _ ListJournalKinesisStreamsForLedgerAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJournalKinesisStreamsForLedger(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

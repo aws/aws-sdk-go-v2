@@ -119,6 +119,9 @@ func (c *Client) addOperationGetOfferingStatusMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOfferingStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationGetOfferingStatusMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetOfferingStatusAPIClient is a client that implements the GetOfferingStatus
-// operation.
-type GetOfferingStatusAPIClient interface {
-	GetOfferingStatus(context.Context, *GetOfferingStatusInput, ...func(*Options)) (*GetOfferingStatusOutput, error)
-}
-
-var _ GetOfferingStatusAPIClient = (*Client)(nil)
 
 // GetOfferingStatusPaginatorOptions is the paginator options for GetOfferingStatus
 type GetOfferingStatusPaginatorOptions struct {
@@ -199,6 +194,9 @@ func (p *GetOfferingStatusPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetOfferingStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -217,6 +215,14 @@ func (p *GetOfferingStatusPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetOfferingStatusAPIClient is a client that implements the GetOfferingStatus
+// operation.
+type GetOfferingStatusAPIClient interface {
+	GetOfferingStatus(context.Context, *GetOfferingStatusInput, ...func(*Options)) (*GetOfferingStatusOutput, error)
+}
+
+var _ GetOfferingStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetOfferingStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

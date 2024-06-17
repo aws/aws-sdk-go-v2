@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeLocationSmbMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLocationSmbValidationMiddleware(stack); err != nil {
 		return err
 	}

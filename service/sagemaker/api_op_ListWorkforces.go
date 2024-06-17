@@ -123,6 +123,9 @@ func (c *Client) addOperationListWorkforcesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkforces(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListWorkforcesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListWorkforcesAPIClient is a client that implements the ListWorkforces
-// operation.
-type ListWorkforcesAPIClient interface {
-	ListWorkforces(context.Context, *ListWorkforcesInput, ...func(*Options)) (*ListWorkforcesOutput, error)
-}
-
-var _ ListWorkforcesAPIClient = (*Client)(nil)
 
 // ListWorkforcesPaginatorOptions is the paginator options for ListWorkforces
 type ListWorkforcesPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListWorkforcesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkforces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListWorkforcesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListWorkforcesAPIClient is a client that implements the ListWorkforces
+// operation.
+type ListWorkforcesAPIClient interface {
+	ListWorkforces(context.Context, *ListWorkforcesInput, ...func(*Options)) (*ListWorkforcesOutput, error)
+}
+
+var _ ListWorkforcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkforces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

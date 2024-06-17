@@ -131,6 +131,9 @@ func (c *Client) addOperationListTestGridSessionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestGridSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListTestGridSessionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListTestGridSessionsAPIClient is a client that implements the
-// ListTestGridSessions operation.
-type ListTestGridSessionsAPIClient interface {
-	ListTestGridSessions(context.Context, *ListTestGridSessionsInput, ...func(*Options)) (*ListTestGridSessionsOutput, error)
-}
-
-var _ ListTestGridSessionsAPIClient = (*Client)(nil)
 
 // ListTestGridSessionsPaginatorOptions is the paginator options for
 // ListTestGridSessions
@@ -227,6 +222,9 @@ func (p *ListTestGridSessionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResult = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestGridSessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListTestGridSessionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListTestGridSessionsAPIClient is a client that implements the
+// ListTestGridSessions operation.
+type ListTestGridSessionsAPIClient interface {
+	ListTestGridSessions(context.Context, *ListTestGridSessionsInput, ...func(*Options)) (*ListTestGridSessionsOutput, error)
+}
+
+var _ ListTestGridSessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestGridSessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

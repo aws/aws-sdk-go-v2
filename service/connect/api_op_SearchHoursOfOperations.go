@@ -129,6 +129,9 @@ func (c *Client) addOperationSearchHoursOfOperationsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchHoursOfOperationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationSearchHoursOfOperationsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// SearchHoursOfOperationsAPIClient is a client that implements the
-// SearchHoursOfOperations operation.
-type SearchHoursOfOperationsAPIClient interface {
-	SearchHoursOfOperations(context.Context, *SearchHoursOfOperationsInput, ...func(*Options)) (*SearchHoursOfOperationsOutput, error)
-}
-
-var _ SearchHoursOfOperationsAPIClient = (*Client)(nil)
 
 // SearchHoursOfOperationsPaginatorOptions is the paginator options for
 // SearchHoursOfOperations
@@ -226,6 +221,9 @@ func (p *SearchHoursOfOperationsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchHoursOfOperations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *SearchHoursOfOperationsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// SearchHoursOfOperationsAPIClient is a client that implements the
+// SearchHoursOfOperations operation.
+type SearchHoursOfOperationsAPIClient interface {
+	SearchHoursOfOperations(context.Context, *SearchHoursOfOperationsInput, ...func(*Options)) (*SearchHoursOfOperationsOutput, error)
+}
+
+var _ SearchHoursOfOperationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchHoursOfOperations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

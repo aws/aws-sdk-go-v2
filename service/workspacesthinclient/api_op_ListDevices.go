@@ -122,6 +122,9 @@ func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListDevicesMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,40 +148,6 @@ func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-type endpointPrefix_opListDevicesMiddleware struct {
-}
-
-func (*endpointPrefix_opListDevicesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListDevicesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListDevicesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListDevicesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListDevicesAPIClient is a client that implements the ListDevices operation.
-type ListDevicesAPIClient interface {
-	ListDevices(context.Context, *ListDevicesInput, ...func(*Options)) (*ListDevicesOutput, error)
-}
-
-var _ ListDevicesAPIClient = (*Client)(nil)
 
 // ListDevicesPaginatorOptions is the paginator options for ListDevices
 type ListDevicesPaginatorOptions struct {
@@ -247,6 +216,9 @@ func (p *ListDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDevices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +237,40 @@ func (p *ListDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+type endpointPrefix_opListDevicesMiddleware struct {
+}
+
+func (*endpointPrefix_opListDevicesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListDevicesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListDevicesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListDevicesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListDevicesAPIClient is a client that implements the ListDevices operation.
+type ListDevicesAPIClient interface {
+	ListDevices(context.Context, *ListDevicesInput, ...func(*Options)) (*ListDevicesOutput, error)
+}
+
+var _ ListDevicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDevices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

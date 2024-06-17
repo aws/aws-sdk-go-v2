@@ -148,6 +148,9 @@ func (c *Client) addOperationGetReferenceImportJobMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetReferenceImportJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -174,41 +177,6 @@ func (c *Client) addOperationGetReferenceImportJobMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-type endpointPrefix_opGetReferenceImportJobMiddleware struct {
-}
-
-func (*endpointPrefix_opGetReferenceImportJobMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetReferenceImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetReferenceImportJobMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetReferenceImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetReferenceImportJobAPIClient is a client that implements the
-// GetReferenceImportJob operation.
-type GetReferenceImportJobAPIClient interface {
-	GetReferenceImportJob(context.Context, *GetReferenceImportJobInput, ...func(*Options)) (*GetReferenceImportJobOutput, error)
-}
-
-var _ GetReferenceImportJobAPIClient = (*Client)(nil)
 
 // ReferenceImportJobCompletedWaiterOptions are waiter options for
 // ReferenceImportJobCompletedWaiter
@@ -329,7 +297,13 @@ func (w *ReferenceImportJobCompletedWaiter) WaitForOutput(ctx context.Context, p
 		}
 
 		out, err := w.client.GetReferenceImportJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -488,6 +462,41 @@ func referenceImportJobCompletedStateRetryable(ctx context.Context, input *GetRe
 
 	return true, nil
 }
+
+type endpointPrefix_opGetReferenceImportJobMiddleware struct {
+}
+
+func (*endpointPrefix_opGetReferenceImportJobMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetReferenceImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetReferenceImportJobMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetReferenceImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetReferenceImportJobAPIClient is a client that implements the
+// GetReferenceImportJob operation.
+type GetReferenceImportJobAPIClient interface {
+	GetReferenceImportJob(context.Context, *GetReferenceImportJobInput, ...func(*Options)) (*GetReferenceImportJobOutput, error)
+}
+
+var _ GetReferenceImportJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReferenceImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

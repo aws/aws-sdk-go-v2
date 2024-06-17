@@ -135,6 +135,9 @@ func (c *Client) addOperationListModelCardsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelCards(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListModelCardsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListModelCardsAPIClient is a client that implements the ListModelCards
-// operation.
-type ListModelCardsAPIClient interface {
-	ListModelCards(context.Context, *ListModelCardsInput, ...func(*Options)) (*ListModelCardsOutput, error)
-}
-
-var _ ListModelCardsAPIClient = (*Client)(nil)
 
 // ListModelCardsPaginatorOptions is the paginator options for ListModelCards
 type ListModelCardsPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *ListModelCardsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelCards(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListModelCardsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListModelCardsAPIClient is a client that implements the ListModelCards
+// operation.
+type ListModelCardsAPIClient interface {
+	ListModelCards(context.Context, *ListModelCardsInput, ...func(*Options)) (*ListModelCardsOutput, error)
+}
+
+var _ ListModelCardsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelCards(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

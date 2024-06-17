@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeConnectionsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeConnectionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,103 +156,6 @@ func (c *Client) addOperationDescribeConnectionsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
-}
-
-// DescribeConnectionsAPIClient is a client that implements the
-// DescribeConnections operation.
-type DescribeConnectionsAPIClient interface {
-	DescribeConnections(context.Context, *DescribeConnectionsInput, ...func(*Options)) (*DescribeConnectionsOutput, error)
-}
-
-var _ DescribeConnectionsAPIClient = (*Client)(nil)
-
-// DescribeConnectionsPaginatorOptions is the paginator options for
-// DescribeConnections
-type DescribeConnectionsPaginatorOptions struct {
-	//  The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeConnectionsPaginator is a paginator for DescribeConnections
-type DescribeConnectionsPaginator struct {
-	options   DescribeConnectionsPaginatorOptions
-	client    DescribeConnectionsAPIClient
-	params    *DescribeConnectionsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeConnectionsPaginator returns a new DescribeConnectionsPaginator
-func NewDescribeConnectionsPaginator(client DescribeConnectionsAPIClient, params *DescribeConnectionsInput, optFns ...func(*DescribeConnectionsPaginatorOptions)) *DescribeConnectionsPaginator {
-	if params == nil {
-		params = &DescribeConnectionsInput{}
-	}
-
-	options := DescribeConnectionsPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeConnectionsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeConnectionsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeConnections page.
-func (p *DescribeConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeConnectionsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeConnections(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // TestConnectionSucceedsWaiterOptions are waiter options for
@@ -369,7 +275,13 @@ func (w *TestConnectionSucceedsWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.DescribeConnections(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -465,6 +377,106 @@ func testConnectionSucceedsStateRetryable(ctx context.Context, input *DescribeCo
 
 	return true, nil
 }
+
+// DescribeConnectionsPaginatorOptions is the paginator options for
+// DescribeConnections
+type DescribeConnectionsPaginatorOptions struct {
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeConnectionsPaginator is a paginator for DescribeConnections
+type DescribeConnectionsPaginator struct {
+	options   DescribeConnectionsPaginatorOptions
+	client    DescribeConnectionsAPIClient
+	params    *DescribeConnectionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeConnectionsPaginator returns a new DescribeConnectionsPaginator
+func NewDescribeConnectionsPaginator(client DescribeConnectionsAPIClient, params *DescribeConnectionsInput, optFns ...func(*DescribeConnectionsPaginatorOptions)) *DescribeConnectionsPaginator {
+	if params == nil {
+		params = &DescribeConnectionsInput{}
+	}
+
+	options := DescribeConnectionsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeConnectionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeConnectionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeConnections page.
+func (p *DescribeConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeConnectionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeConnections(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeConnectionsAPIClient is a client that implements the
+// DescribeConnections operation.
+type DescribeConnectionsAPIClient interface {
+	DescribeConnections(context.Context, *DescribeConnectionsInput, ...func(*Options)) (*DescribeConnectionsOutput, error)
+}
+
+var _ DescribeConnectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConnections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -153,6 +153,9 @@ func (c *Client) addOperationListFilteredTransactionEventsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFilteredTransactionEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -176,14 +179,6 @@ func (c *Client) addOperationListFilteredTransactionEventsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListFilteredTransactionEventsAPIClient is a client that implements the
-// ListFilteredTransactionEvents operation.
-type ListFilteredTransactionEventsAPIClient interface {
-	ListFilteredTransactionEvents(context.Context, *ListFilteredTransactionEventsInput, ...func(*Options)) (*ListFilteredTransactionEventsOutput, error)
-}
-
-var _ ListFilteredTransactionEventsAPIClient = (*Client)(nil)
 
 // ListFilteredTransactionEventsPaginatorOptions is the paginator options for
 // ListFilteredTransactionEvents
@@ -260,6 +255,9 @@ func (p *ListFilteredTransactionEventsPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFilteredTransactionEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -278,6 +276,14 @@ func (p *ListFilteredTransactionEventsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListFilteredTransactionEventsAPIClient is a client that implements the
+// ListFilteredTransactionEvents operation.
+type ListFilteredTransactionEventsAPIClient interface {
+	ListFilteredTransactionEvents(context.Context, *ListFilteredTransactionEventsInput, ...func(*Options)) (*ListFilteredTransactionEventsOutput, error)
+}
+
+var _ ListFilteredTransactionEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFilteredTransactionEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

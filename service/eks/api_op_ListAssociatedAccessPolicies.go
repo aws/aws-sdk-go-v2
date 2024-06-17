@@ -143,6 +143,9 @@ func (c *Client) addOperationListAssociatedAccessPoliciesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssociatedAccessPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationListAssociatedAccessPoliciesMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListAssociatedAccessPoliciesAPIClient is a client that implements the
-// ListAssociatedAccessPolicies operation.
-type ListAssociatedAccessPoliciesAPIClient interface {
-	ListAssociatedAccessPolicies(context.Context, *ListAssociatedAccessPoliciesInput, ...func(*Options)) (*ListAssociatedAccessPoliciesOutput, error)
-}
-
-var _ ListAssociatedAccessPoliciesAPIClient = (*Client)(nil)
 
 // ListAssociatedAccessPoliciesPaginatorOptions is the paginator options for
 // ListAssociatedAccessPolicies
@@ -246,6 +241,9 @@ func (p *ListAssociatedAccessPoliciesPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedAccessPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +262,14 @@ func (p *ListAssociatedAccessPoliciesPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListAssociatedAccessPoliciesAPIClient is a client that implements the
+// ListAssociatedAccessPolicies operation.
+type ListAssociatedAccessPoliciesAPIClient interface {
+	ListAssociatedAccessPolicies(context.Context, *ListAssociatedAccessPoliciesInput, ...func(*Options)) (*ListAssociatedAccessPoliciesOutput, error)
+}
+
+var _ ListAssociatedAccessPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedAccessPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

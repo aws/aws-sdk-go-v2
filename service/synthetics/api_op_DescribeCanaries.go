@@ -144,6 +144,9 @@ func (c *Client) addOperationDescribeCanariesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCanaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationDescribeCanariesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// DescribeCanariesAPIClient is a client that implements the DescribeCanaries
-// operation.
-type DescribeCanariesAPIClient interface {
-	DescribeCanaries(context.Context, *DescribeCanariesInput, ...func(*Options)) (*DescribeCanariesOutput, error)
-}
-
-var _ DescribeCanariesAPIClient = (*Client)(nil)
 
 // DescribeCanariesPaginatorOptions is the paginator options for DescribeCanaries
 type DescribeCanariesPaginatorOptions struct {
@@ -238,6 +233,9 @@ func (p *DescribeCanariesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCanaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *DescribeCanariesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// DescribeCanariesAPIClient is a client that implements the DescribeCanaries
+// operation.
+type DescribeCanariesAPIClient interface {
+	DescribeCanaries(context.Context, *DescribeCanariesInput, ...func(*Options)) (*DescribeCanariesOutput, error)
+}
+
+var _ DescribeCanariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCanaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

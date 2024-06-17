@@ -126,6 +126,9 @@ func (c *Client) addOperationListOriginEndpointsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOriginEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListOriginEndpointsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListOriginEndpointsAPIClient is a client that implements the
-// ListOriginEndpoints operation.
-type ListOriginEndpointsAPIClient interface {
-	ListOriginEndpoints(context.Context, *ListOriginEndpointsInput, ...func(*Options)) (*ListOriginEndpointsOutput, error)
-}
-
-var _ ListOriginEndpointsAPIClient = (*Client)(nil)
 
 // ListOriginEndpointsPaginatorOptions is the paginator options for
 // ListOriginEndpoints
@@ -222,6 +217,9 @@ func (p *ListOriginEndpointsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOriginEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListOriginEndpointsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListOriginEndpointsAPIClient is a client that implements the
+// ListOriginEndpoints operation.
+type ListOriginEndpointsAPIClient interface {
+	ListOriginEndpoints(context.Context, *ListOriginEndpointsInput, ...func(*Options)) (*ListOriginEndpointsOutput, error)
+}
+
+var _ ListOriginEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOriginEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

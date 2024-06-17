@@ -130,6 +130,9 @@ func (c *Client) addOperationUpdateCustomRoutingAcceleratorAttributesMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCustomRoutingAcceleratorAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}

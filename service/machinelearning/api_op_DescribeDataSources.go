@@ -182,6 +182,9 @@ func (c *Client) addOperationDescribeDataSourcesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataSources(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -201,97 +204,6 @@ func (c *Client) addOperationDescribeDataSourcesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
-}
-
-// DescribeDataSourcesAPIClient is a client that implements the
-// DescribeDataSources operation.
-type DescribeDataSourcesAPIClient interface {
-	DescribeDataSources(context.Context, *DescribeDataSourcesInput, ...func(*Options)) (*DescribeDataSourcesOutput, error)
-}
-
-var _ DescribeDataSourcesAPIClient = (*Client)(nil)
-
-// DescribeDataSourcesPaginatorOptions is the paginator options for
-// DescribeDataSources
-type DescribeDataSourcesPaginatorOptions struct {
-	//  The maximum number of DataSource to include in the result.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeDataSourcesPaginator is a paginator for DescribeDataSources
-type DescribeDataSourcesPaginator struct {
-	options   DescribeDataSourcesPaginatorOptions
-	client    DescribeDataSourcesAPIClient
-	params    *DescribeDataSourcesInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeDataSourcesPaginator returns a new DescribeDataSourcesPaginator
-func NewDescribeDataSourcesPaginator(client DescribeDataSourcesAPIClient, params *DescribeDataSourcesInput, optFns ...func(*DescribeDataSourcesPaginatorOptions)) *DescribeDataSourcesPaginator {
-	if params == nil {
-		params = &DescribeDataSourcesInput{}
-	}
-
-	options := DescribeDataSourcesPaginatorOptions{}
-	if params.Limit != nil {
-		options.Limit = *params.Limit
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeDataSourcesPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeDataSourcesPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeDataSources page.
-func (p *DescribeDataSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDataSourcesOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.Limit = limit
-
-	result, err := p.client.DescribeDataSources(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // DataSourceAvailableWaiterOptions are waiter options for
@@ -411,7 +323,13 @@ func (w *DataSourceAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeDataSources(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -507,6 +425,100 @@ func dataSourceAvailableStateRetryable(ctx context.Context, input *DescribeDataS
 
 	return true, nil
 }
+
+// DescribeDataSourcesPaginatorOptions is the paginator options for
+// DescribeDataSources
+type DescribeDataSourcesPaginatorOptions struct {
+	//  The maximum number of DataSource to include in the result.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDataSourcesPaginator is a paginator for DescribeDataSources
+type DescribeDataSourcesPaginator struct {
+	options   DescribeDataSourcesPaginatorOptions
+	client    DescribeDataSourcesAPIClient
+	params    *DescribeDataSourcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDataSourcesPaginator returns a new DescribeDataSourcesPaginator
+func NewDescribeDataSourcesPaginator(client DescribeDataSourcesAPIClient, params *DescribeDataSourcesInput, optFns ...func(*DescribeDataSourcesPaginatorOptions)) *DescribeDataSourcesPaginator {
+	if params == nil {
+		params = &DescribeDataSourcesInput{}
+	}
+
+	options := DescribeDataSourcesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDataSourcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDataSourcesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDataSources page.
+func (p *DescribeDataSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDataSourcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeDataSources(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeDataSourcesAPIClient is a client that implements the
+// DescribeDataSources operation.
+type DescribeDataSourcesAPIClient interface {
+	DescribeDataSources(context.Context, *DescribeDataSourcesInput, ...func(*Options)) (*DescribeDataSourcesOutput, error)
+}
+
+var _ DescribeDataSourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDataSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

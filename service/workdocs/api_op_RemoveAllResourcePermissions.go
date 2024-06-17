@@ -105,6 +105,9 @@ func (c *Client) addOperationRemoveAllResourcePermissionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveAllResourcePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

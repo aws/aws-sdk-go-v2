@@ -128,6 +128,9 @@ func (c *Client) addOperationListFleetMembersMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListFleetMembersMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,41 +157,6 @@ func (c *Client) addOperationListFleetMembersMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-type endpointPrefix_opListFleetMembersMiddleware struct {
-}
-
-func (*endpointPrefix_opListFleetMembersMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListFleetMembersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListFleetMembersMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListFleetMembersMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListFleetMembersAPIClient is a client that implements the ListFleetMembers
-// operation.
-type ListFleetMembersAPIClient interface {
-	ListFleetMembers(context.Context, *ListFleetMembersInput, ...func(*Options)) (*ListFleetMembersOutput, error)
-}
-
-var _ ListFleetMembersAPIClient = (*Client)(nil)
 
 // ListFleetMembersPaginatorOptions is the paginator options for ListFleetMembers
 type ListFleetMembersPaginatorOptions struct {
@@ -254,6 +222,9 @@ func (p *ListFleetMembersPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFleetMembers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +243,41 @@ func (p *ListFleetMembersPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+type endpointPrefix_opListFleetMembersMiddleware struct {
+}
+
+func (*endpointPrefix_opListFleetMembersMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListFleetMembersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListFleetMembersMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListFleetMembersMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListFleetMembersAPIClient is a client that implements the ListFleetMembers
+// operation.
+type ListFleetMembersAPIClient interface {
+	ListFleetMembers(context.Context, *ListFleetMembersInput, ...func(*Options)) (*ListFleetMembersOutput, error)
+}
+
+var _ ListFleetMembersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFleetMembers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeReservedNodesOfferingsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedNodesOfferings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationDescribeReservedNodesOfferingsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// DescribeReservedNodesOfferingsAPIClient is a client that implements the
-// DescribeReservedNodesOfferings operation.
-type DescribeReservedNodesOfferingsAPIClient interface {
-	DescribeReservedNodesOfferings(context.Context, *DescribeReservedNodesOfferingsInput, ...func(*Options)) (*DescribeReservedNodesOfferingsOutput, error)
-}
-
-var _ DescribeReservedNodesOfferingsAPIClient = (*Client)(nil)
 
 // DescribeReservedNodesOfferingsPaginatorOptions is the paginator options for
 // DescribeReservedNodesOfferings
@@ -233,6 +228,9 @@ func (p *DescribeReservedNodesOfferingsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedNodesOfferings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *DescribeReservedNodesOfferingsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// DescribeReservedNodesOfferingsAPIClient is a client that implements the
+// DescribeReservedNodesOfferings operation.
+type DescribeReservedNodesOfferingsAPIClient interface {
+	DescribeReservedNodesOfferings(context.Context, *DescribeReservedNodesOfferingsInput, ...func(*Options)) (*DescribeReservedNodesOfferingsOutput, error)
+}
+
+var _ DescribeReservedNodesOfferingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedNodesOfferings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -118,6 +118,9 @@ func (c *Client) addOperationListLicenseEndpointsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListLicenseEndpointsMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,41 +144,6 @@ func (c *Client) addOperationListLicenseEndpointsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-type endpointPrefix_opListLicenseEndpointsMiddleware struct {
-}
-
-func (*endpointPrefix_opListLicenseEndpointsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListLicenseEndpointsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListLicenseEndpointsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListLicenseEndpointsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListLicenseEndpointsAPIClient is a client that implements the
-// ListLicenseEndpoints operation.
-type ListLicenseEndpointsAPIClient interface {
-	ListLicenseEndpoints(context.Context, *ListLicenseEndpointsInput, ...func(*Options)) (*ListLicenseEndpointsOutput, error)
-}
-
-var _ ListLicenseEndpointsAPIClient = (*Client)(nil)
 
 // ListLicenseEndpointsPaginatorOptions is the paginator options for
 // ListLicenseEndpoints
@@ -242,6 +210,9 @@ func (p *ListLicenseEndpointsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLicenseEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +231,41 @@ func (p *ListLicenseEndpointsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+type endpointPrefix_opListLicenseEndpointsMiddleware struct {
+}
+
+func (*endpointPrefix_opListLicenseEndpointsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListLicenseEndpointsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListLicenseEndpointsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListLicenseEndpointsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListLicenseEndpointsAPIClient is a client that implements the
+// ListLicenseEndpoints operation.
+type ListLicenseEndpointsAPIClient interface {
+	ListLicenseEndpoints(context.Context, *ListLicenseEndpointsInput, ...func(*Options)) (*ListLicenseEndpointsOutput, error)
+}
+
+var _ ListLicenseEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLicenseEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

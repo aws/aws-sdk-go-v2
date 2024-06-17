@@ -123,6 +123,9 @@ func (c *Client) addOperationGetBasePathMappingMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBasePathMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

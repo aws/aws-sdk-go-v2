@@ -128,6 +128,9 @@ func (c *Client) addOperationListAuditSuppressionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditSuppressions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListAuditSuppressionsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAuditSuppressionsAPIClient is a client that implements the
-// ListAuditSuppressions operation.
-type ListAuditSuppressionsAPIClient interface {
-	ListAuditSuppressions(context.Context, *ListAuditSuppressionsInput, ...func(*Options)) (*ListAuditSuppressionsOutput, error)
-}
-
-var _ ListAuditSuppressionsAPIClient = (*Client)(nil)
 
 // ListAuditSuppressionsPaginatorOptions is the paginator options for
 // ListAuditSuppressions
@@ -221,6 +216,9 @@ func (p *ListAuditSuppressionsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAuditSuppressions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListAuditSuppressionsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAuditSuppressionsAPIClient is a client that implements the
+// ListAuditSuppressions operation.
+type ListAuditSuppressionsAPIClient interface {
+	ListAuditSuppressions(context.Context, *ListAuditSuppressionsInput, ...func(*Options)) (*ListAuditSuppressionsOutput, error)
+}
+
+var _ ListAuditSuppressionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAuditSuppressions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -118,6 +118,9 @@ func (c *Client) addOperationListGeofenceCollectionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListGeofenceCollectionsMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,41 +144,6 @@ func (c *Client) addOperationListGeofenceCollectionsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-type endpointPrefix_opListGeofenceCollectionsMiddleware struct {
-}
-
-func (*endpointPrefix_opListGeofenceCollectionsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListGeofenceCollectionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "cp.geofencing." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListGeofenceCollectionsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListGeofenceCollectionsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListGeofenceCollectionsAPIClient is a client that implements the
-// ListGeofenceCollections operation.
-type ListGeofenceCollectionsAPIClient interface {
-	ListGeofenceCollections(context.Context, *ListGeofenceCollectionsInput, ...func(*Options)) (*ListGeofenceCollectionsOutput, error)
-}
-
-var _ ListGeofenceCollectionsAPIClient = (*Client)(nil)
 
 // ListGeofenceCollectionsPaginatorOptions is the paginator options for
 // ListGeofenceCollections
@@ -244,6 +212,9 @@ func (p *ListGeofenceCollectionsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGeofenceCollections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +233,41 @@ func (p *ListGeofenceCollectionsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+type endpointPrefix_opListGeofenceCollectionsMiddleware struct {
+}
+
+func (*endpointPrefix_opListGeofenceCollectionsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListGeofenceCollectionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "cp.geofencing." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListGeofenceCollectionsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListGeofenceCollectionsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListGeofenceCollectionsAPIClient is a client that implements the
+// ListGeofenceCollections operation.
+type ListGeofenceCollectionsAPIClient interface {
+	ListGeofenceCollections(context.Context, *ListGeofenceCollectionsInput, ...func(*Options)) (*ListGeofenceCollectionsOutput, error)
+}
+
+var _ ListGeofenceCollectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGeofenceCollections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

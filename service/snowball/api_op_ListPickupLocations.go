@@ -114,6 +114,9 @@ func (c *Client) addOperationListPickupLocationsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPickupLocations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListPickupLocationsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListPickupLocationsAPIClient is a client that implements the
-// ListPickupLocations operation.
-type ListPickupLocationsAPIClient interface {
-	ListPickupLocations(context.Context, *ListPickupLocationsInput, ...func(*Options)) (*ListPickupLocationsOutput, error)
-}
-
-var _ ListPickupLocationsAPIClient = (*Client)(nil)
 
 // ListPickupLocationsPaginatorOptions is the paginator options for
 // ListPickupLocations
@@ -207,6 +202,9 @@ func (p *ListPickupLocationsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPickupLocations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListPickupLocationsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListPickupLocationsAPIClient is a client that implements the
+// ListPickupLocations operation.
+type ListPickupLocationsAPIClient interface {
+	ListPickupLocations(context.Context, *ListPickupLocationsInput, ...func(*Options)) (*ListPickupLocationsOutput, error)
+}
+
+var _ ListPickupLocationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPickupLocations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

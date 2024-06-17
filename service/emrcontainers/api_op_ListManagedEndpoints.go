@@ -130,6 +130,9 @@ func (c *Client) addOperationListManagedEndpointsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListManagedEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListManagedEndpointsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListManagedEndpointsAPIClient is a client that implements the
-// ListManagedEndpoints operation.
-type ListManagedEndpointsAPIClient interface {
-	ListManagedEndpoints(context.Context, *ListManagedEndpointsInput, ...func(*Options)) (*ListManagedEndpointsOutput, error)
-}
-
-var _ ListManagedEndpointsAPIClient = (*Client)(nil)
 
 // ListManagedEndpointsPaginatorOptions is the paginator options for
 // ListManagedEndpoints
@@ -226,6 +221,9 @@ func (p *ListManagedEndpointsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListManagedEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListManagedEndpointsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListManagedEndpointsAPIClient is a client that implements the
+// ListManagedEndpoints operation.
+type ListManagedEndpointsAPIClient interface {
+	ListManagedEndpoints(context.Context, *ListManagedEndpointsInput, ...func(*Options)) (*ListManagedEndpointsOutput, error)
+}
+
+var _ ListManagedEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListManagedEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

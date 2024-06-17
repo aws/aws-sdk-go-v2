@@ -115,6 +115,9 @@ func (c *Client) addOperationListDataQualityRulesetEvaluationRunsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataQualityRulesetEvaluationRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListDataQualityRulesetEvaluationRunsMiddlewares(sta
 	}
 	return nil
 }
-
-// ListDataQualityRulesetEvaluationRunsAPIClient is a client that implements the
-// ListDataQualityRulesetEvaluationRuns operation.
-type ListDataQualityRulesetEvaluationRunsAPIClient interface {
-	ListDataQualityRulesetEvaluationRuns(context.Context, *ListDataQualityRulesetEvaluationRunsInput, ...func(*Options)) (*ListDataQualityRulesetEvaluationRunsOutput, error)
-}
-
-var _ ListDataQualityRulesetEvaluationRunsAPIClient = (*Client)(nil)
 
 // ListDataQualityRulesetEvaluationRunsPaginatorOptions is the paginator options
 // for ListDataQualityRulesetEvaluationRuns
@@ -213,6 +208,9 @@ func (p *ListDataQualityRulesetEvaluationRunsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataQualityRulesetEvaluationRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListDataQualityRulesetEvaluationRunsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListDataQualityRulesetEvaluationRunsAPIClient is a client that implements the
+// ListDataQualityRulesetEvaluationRuns operation.
+type ListDataQualityRulesetEvaluationRunsAPIClient interface {
+	ListDataQualityRulesetEvaluationRuns(context.Context, *ListDataQualityRulesetEvaluationRunsInput, ...func(*Options)) (*ListDataQualityRulesetEvaluationRunsOutput, error)
+}
+
+var _ ListDataQualityRulesetEvaluationRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataQualityRulesetEvaluationRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

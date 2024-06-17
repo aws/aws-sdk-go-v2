@@ -115,6 +115,9 @@ func (c *Client) addOperationListSentimentDetectionJobsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSentimentDetectionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListSentimentDetectionJobsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListSentimentDetectionJobsAPIClient is a client that implements the
-// ListSentimentDetectionJobs operation.
-type ListSentimentDetectionJobsAPIClient interface {
-	ListSentimentDetectionJobs(context.Context, *ListSentimentDetectionJobsInput, ...func(*Options)) (*ListSentimentDetectionJobsOutput, error)
-}
-
-var _ ListSentimentDetectionJobsAPIClient = (*Client)(nil)
 
 // ListSentimentDetectionJobsPaginatorOptions is the paginator options for
 // ListSentimentDetectionJobs
@@ -210,6 +205,9 @@ func (p *ListSentimentDetectionJobsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSentimentDetectionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListSentimentDetectionJobsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListSentimentDetectionJobsAPIClient is a client that implements the
+// ListSentimentDetectionJobs operation.
+type ListSentimentDetectionJobsAPIClient interface {
+	ListSentimentDetectionJobs(context.Context, *ListSentimentDetectionJobsInput, ...func(*Options)) (*ListSentimentDetectionJobsOutput, error)
+}
+
+var _ ListSentimentDetectionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSentimentDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

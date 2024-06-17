@@ -443,6 +443,9 @@ func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchValidationMiddleware(stack); err != nil {
 		return err
 	}

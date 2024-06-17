@@ -176,6 +176,9 @@ func (c *Client) addOperationGetAnnotationStoreVersionMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAnnotationStoreVersionMiddleware(stack); err != nil {
 		return err
 	}
@@ -202,41 +205,6 @@ func (c *Client) addOperationGetAnnotationStoreVersionMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-type endpointPrefix_opGetAnnotationStoreVersionMiddleware struct {
-}
-
-func (*endpointPrefix_opGetAnnotationStoreVersionMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetAnnotationStoreVersionMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetAnnotationStoreVersionMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetAnnotationStoreVersionMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetAnnotationStoreVersionAPIClient is a client that implements the
-// GetAnnotationStoreVersion operation.
-type GetAnnotationStoreVersionAPIClient interface {
-	GetAnnotationStoreVersion(context.Context, *GetAnnotationStoreVersionInput, ...func(*Options)) (*GetAnnotationStoreVersionOutput, error)
-}
-
-var _ GetAnnotationStoreVersionAPIClient = (*Client)(nil)
 
 // AnnotationStoreVersionCreatedWaiterOptions are waiter options for
 // AnnotationStoreVersionCreatedWaiter
@@ -358,7 +326,13 @@ func (w *AnnotationStoreVersionCreatedWaiter) WaitForOutput(ctx context.Context,
 		}
 
 		out, err := w.client.GetAnnotationStoreVersion(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -587,7 +561,13 @@ func (w *AnnotationStoreVersionDeletedWaiter) WaitForOutput(ctx context.Context,
 		}
 
 		out, err := w.client.GetAnnotationStoreVersion(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -668,6 +648,41 @@ func annotationStoreVersionDeletedStateRetryable(ctx context.Context, input *Get
 
 	return true, nil
 }
+
+type endpointPrefix_opGetAnnotationStoreVersionMiddleware struct {
+}
+
+func (*endpointPrefix_opGetAnnotationStoreVersionMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetAnnotationStoreVersionMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetAnnotationStoreVersionMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetAnnotationStoreVersionMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetAnnotationStoreVersionAPIClient is a client that implements the
+// GetAnnotationStoreVersion operation.
+type GetAnnotationStoreVersionAPIClient interface {
+	GetAnnotationStoreVersion(context.Context, *GetAnnotationStoreVersionInput, ...func(*Options)) (*GetAnnotationStoreVersionOutput, error)
+}
+
+var _ GetAnnotationStoreVersionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAnnotationStoreVersion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -127,6 +127,9 @@ func (c *Client) addOperationListInstanceStorageConfigsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInstanceStorageConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListInstanceStorageConfigsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListInstanceStorageConfigsAPIClient is a client that implements the
-// ListInstanceStorageConfigs operation.
-type ListInstanceStorageConfigsAPIClient interface {
-	ListInstanceStorageConfigs(context.Context, *ListInstanceStorageConfigsInput, ...func(*Options)) (*ListInstanceStorageConfigsOutput, error)
-}
-
-var _ ListInstanceStorageConfigsAPIClient = (*Client)(nil)
 
 // ListInstanceStorageConfigsPaginatorOptions is the paginator options for
 // ListInstanceStorageConfigs
@@ -225,6 +220,9 @@ func (p *ListInstanceStorageConfigsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInstanceStorageConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListInstanceStorageConfigsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListInstanceStorageConfigsAPIClient is a client that implements the
+// ListInstanceStorageConfigs operation.
+type ListInstanceStorageConfigsAPIClient interface {
+	ListInstanceStorageConfigs(context.Context, *ListInstanceStorageConfigsInput, ...func(*Options)) (*ListInstanceStorageConfigsOutput, error)
+}
+
+var _ ListInstanceStorageConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInstanceStorageConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

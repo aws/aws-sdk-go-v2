@@ -138,6 +138,9 @@ func (c *Client) addOperationDescribeReplicationGroupsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,104 +160,6 @@ func (c *Client) addOperationDescribeReplicationGroupsMiddlewares(stack *middlew
 		return err
 	}
 	return nil
-}
-
-// DescribeReplicationGroupsAPIClient is a client that implements the
-// DescribeReplicationGroups operation.
-type DescribeReplicationGroupsAPIClient interface {
-	DescribeReplicationGroups(context.Context, *DescribeReplicationGroupsInput, ...func(*Options)) (*DescribeReplicationGroupsOutput, error)
-}
-
-var _ DescribeReplicationGroupsAPIClient = (*Client)(nil)
-
-// DescribeReplicationGroupsPaginatorOptions is the paginator options for
-// DescribeReplicationGroups
-type DescribeReplicationGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeReplicationGroupsPaginator is a paginator for DescribeReplicationGroups
-type DescribeReplicationGroupsPaginator struct {
-	options   DescribeReplicationGroupsPaginatorOptions
-	client    DescribeReplicationGroupsAPIClient
-	params    *DescribeReplicationGroupsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeReplicationGroupsPaginator returns a new
-// DescribeReplicationGroupsPaginator
-func NewDescribeReplicationGroupsPaginator(client DescribeReplicationGroupsAPIClient, params *DescribeReplicationGroupsInput, optFns ...func(*DescribeReplicationGroupsPaginatorOptions)) *DescribeReplicationGroupsPaginator {
-	if params == nil {
-		params = &DescribeReplicationGroupsInput{}
-	}
-
-	options := DescribeReplicationGroupsPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeReplicationGroupsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeReplicationGroupsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeReplicationGroups page.
-func (p *DescribeReplicationGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationGroupsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeReplicationGroups(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // ReplicationGroupAvailableWaiterOptions are waiter options for
@@ -375,7 +280,13 @@ func (w *ReplicationGroupAvailableWaiter) WaitForOutput(ctx context.Context, par
 		}
 
 		out, err := w.client.DescribeReplicationGroups(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -589,7 +500,13 @@ func (w *ReplicationGroupDeletedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.DescribeReplicationGroups(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -692,6 +609,107 @@ func replicationGroupDeletedStateRetryable(ctx context.Context, input *DescribeR
 
 	return true, nil
 }
+
+// DescribeReplicationGroupsPaginatorOptions is the paginator options for
+// DescribeReplicationGroups
+type DescribeReplicationGroupsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReplicationGroupsPaginator is a paginator for DescribeReplicationGroups
+type DescribeReplicationGroupsPaginator struct {
+	options   DescribeReplicationGroupsPaginatorOptions
+	client    DescribeReplicationGroupsAPIClient
+	params    *DescribeReplicationGroupsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReplicationGroupsPaginator returns a new
+// DescribeReplicationGroupsPaginator
+func NewDescribeReplicationGroupsPaginator(client DescribeReplicationGroupsAPIClient, params *DescribeReplicationGroupsInput, optFns ...func(*DescribeReplicationGroupsPaginatorOptions)) *DescribeReplicationGroupsPaginator {
+	if params == nil {
+		params = &DescribeReplicationGroupsInput{}
+	}
+
+	options := DescribeReplicationGroupsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeReplicationGroupsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReplicationGroupsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeReplicationGroups page.
+func (p *DescribeReplicationGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationGroupsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeReplicationGroups(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeReplicationGroupsAPIClient is a client that implements the
+// DescribeReplicationGroups operation.
+type DescribeReplicationGroupsAPIClient interface {
+	DescribeReplicationGroups(context.Context, *DescribeReplicationGroupsInput, ...func(*Options)) (*DescribeReplicationGroupsOutput, error)
+}
+
+var _ DescribeReplicationGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

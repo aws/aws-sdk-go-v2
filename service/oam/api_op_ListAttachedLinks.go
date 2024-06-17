@@ -127,6 +127,9 @@ func (c *Client) addOperationListAttachedLinksMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAttachedLinksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListAttachedLinksMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListAttachedLinksAPIClient is a client that implements the ListAttachedLinks
-// operation.
-type ListAttachedLinksAPIClient interface {
-	ListAttachedLinks(context.Context, *ListAttachedLinksInput, ...func(*Options)) (*ListAttachedLinksOutput, error)
-}
-
-var _ ListAttachedLinksAPIClient = (*Client)(nil)
 
 // ListAttachedLinksPaginatorOptions is the paginator options for ListAttachedLinks
 type ListAttachedLinksPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *ListAttachedLinksPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAttachedLinks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListAttachedLinksPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListAttachedLinksAPIClient is a client that implements the ListAttachedLinks
+// operation.
+type ListAttachedLinksAPIClient interface {
+	ListAttachedLinks(context.Context, *ListAttachedLinksInput, ...func(*Options)) (*ListAttachedLinksOutput, error)
+}
+
+var _ ListAttachedLinksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAttachedLinks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

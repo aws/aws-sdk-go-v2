@@ -124,6 +124,9 @@ func (c *Client) addOperationListCostCategoryDefinitionsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCostCategoryDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListCostCategoryDefinitionsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListCostCategoryDefinitionsAPIClient is a client that implements the
-// ListCostCategoryDefinitions operation.
-type ListCostCategoryDefinitionsAPIClient interface {
-	ListCostCategoryDefinitions(context.Context, *ListCostCategoryDefinitionsInput, ...func(*Options)) (*ListCostCategoryDefinitionsOutput, error)
-}
-
-var _ ListCostCategoryDefinitionsAPIClient = (*Client)(nil)
 
 // ListCostCategoryDefinitionsPaginatorOptions is the paginator options for
 // ListCostCategoryDefinitions
@@ -219,6 +214,9 @@ func (p *ListCostCategoryDefinitionsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCostCategoryDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListCostCategoryDefinitionsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListCostCategoryDefinitionsAPIClient is a client that implements the
+// ListCostCategoryDefinitions operation.
+type ListCostCategoryDefinitionsAPIClient interface {
+	ListCostCategoryDefinitions(context.Context, *ListCostCategoryDefinitionsInput, ...func(*Options)) (*ListCostCategoryDefinitionsOutput, error)
+}
+
+var _ ListCostCategoryDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCostCategoryDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

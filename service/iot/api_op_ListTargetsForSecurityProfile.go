@@ -121,6 +121,9 @@ func (c *Client) addOperationListTargetsForSecurityProfileMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTargetsForSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListTargetsForSecurityProfileMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListTargetsForSecurityProfileAPIClient is a client that implements the
-// ListTargetsForSecurityProfile operation.
-type ListTargetsForSecurityProfileAPIClient interface {
-	ListTargetsForSecurityProfile(context.Context, *ListTargetsForSecurityProfileInput, ...func(*Options)) (*ListTargetsForSecurityProfileOutput, error)
-}
-
-var _ ListTargetsForSecurityProfileAPIClient = (*Client)(nil)
 
 // ListTargetsForSecurityProfilePaginatorOptions is the paginator options for
 // ListTargetsForSecurityProfile
@@ -219,6 +214,9 @@ func (p *ListTargetsForSecurityProfilePaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTargetsForSecurityProfile(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListTargetsForSecurityProfilePaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListTargetsForSecurityProfileAPIClient is a client that implements the
+// ListTargetsForSecurityProfile operation.
+type ListTargetsForSecurityProfileAPIClient interface {
+	ListTargetsForSecurityProfile(context.Context, *ListTargetsForSecurityProfileInput, ...func(*Options)) (*ListTargetsForSecurityProfileOutput, error)
+}
+
+var _ ListTargetsForSecurityProfileAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTargetsForSecurityProfile(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

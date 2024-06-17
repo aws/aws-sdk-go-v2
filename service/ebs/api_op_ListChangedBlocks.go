@@ -159,6 +159,9 @@ func (c *Client) addOperationListChangedBlocksMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChangedBlocksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -182,14 +185,6 @@ func (c *Client) addOperationListChangedBlocksMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListChangedBlocksAPIClient is a client that implements the ListChangedBlocks
-// operation.
-type ListChangedBlocksAPIClient interface {
-	ListChangedBlocks(context.Context, *ListChangedBlocksInput, ...func(*Options)) (*ListChangedBlocksOutput, error)
-}
-
-var _ ListChangedBlocksAPIClient = (*Client)(nil)
 
 // ListChangedBlocksPaginatorOptions is the paginator options for ListChangedBlocks
 type ListChangedBlocksPaginatorOptions struct {
@@ -261,6 +256,9 @@ func (p *ListChangedBlocksPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChangedBlocks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -279,6 +277,14 @@ func (p *ListChangedBlocksPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListChangedBlocksAPIClient is a client that implements the ListChangedBlocks
+// operation.
+type ListChangedBlocksAPIClient interface {
+	ListChangedBlocks(context.Context, *ListChangedBlocksInput, ...func(*Options)) (*ListChangedBlocksOutput, error)
+}
+
+var _ ListChangedBlocksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChangedBlocks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

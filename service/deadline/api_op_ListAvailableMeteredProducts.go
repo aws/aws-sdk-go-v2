@@ -118,6 +118,9 @@ func (c *Client) addOperationListAvailableMeteredProductsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAvailableMeteredProductsMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,41 +144,6 @@ func (c *Client) addOperationListAvailableMeteredProductsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-type endpointPrefix_opListAvailableMeteredProductsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAvailableMeteredProductsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAvailableMeteredProductsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAvailableMeteredProductsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAvailableMeteredProductsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAvailableMeteredProductsAPIClient is a client that implements the
-// ListAvailableMeteredProducts operation.
-type ListAvailableMeteredProductsAPIClient interface {
-	ListAvailableMeteredProducts(context.Context, *ListAvailableMeteredProductsInput, ...func(*Options)) (*ListAvailableMeteredProductsOutput, error)
-}
-
-var _ ListAvailableMeteredProductsAPIClient = (*Client)(nil)
 
 // ListAvailableMeteredProductsPaginatorOptions is the paginator options for
 // ListAvailableMeteredProducts
@@ -244,6 +212,9 @@ func (p *ListAvailableMeteredProductsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAvailableMeteredProducts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +233,41 @@ func (p *ListAvailableMeteredProductsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+type endpointPrefix_opListAvailableMeteredProductsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAvailableMeteredProductsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAvailableMeteredProductsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAvailableMeteredProductsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAvailableMeteredProductsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAvailableMeteredProductsAPIClient is a client that implements the
+// ListAvailableMeteredProducts operation.
+type ListAvailableMeteredProductsAPIClient interface {
+	ListAvailableMeteredProducts(context.Context, *ListAvailableMeteredProductsInput, ...func(*Options)) (*ListAvailableMeteredProductsOutput, error)
+}
+
+var _ ListAvailableMeteredProductsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAvailableMeteredProducts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

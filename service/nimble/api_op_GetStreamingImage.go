@@ -115,6 +115,9 @@ func (c *Client) addOperationGetStreamingImageMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStreamingImageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetStreamingImageMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetStreamingImageAPIClient is a client that implements the GetStreamingImage
-// operation.
-type GetStreamingImageAPIClient interface {
-	GetStreamingImage(context.Context, *GetStreamingImageInput, ...func(*Options)) (*GetStreamingImageOutput, error)
-}
-
-var _ GetStreamingImageAPIClient = (*Client)(nil)
 
 // StreamingImageReadyWaiterOptions are waiter options for
 // StreamingImageReadyWaiter
@@ -264,7 +259,13 @@ func (w *StreamingImageReadyWaiter) WaitForOutput(ctx context.Context, params *G
 		}
 
 		out, err := w.client.GetStreamingImage(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -473,7 +474,13 @@ func (w *StreamingImageDeletedWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.GetStreamingImage(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -547,6 +554,14 @@ func streamingImageDeletedStateRetryable(ctx context.Context, input *GetStreamin
 
 	return true, nil
 }
+
+// GetStreamingImageAPIClient is a client that implements the GetStreamingImage
+// operation.
+type GetStreamingImageAPIClient interface {
+	GetStreamingImage(context.Context, *GetStreamingImageInput, ...func(*Options)) (*GetStreamingImageOutput, error)
+}
+
+var _ GetStreamingImageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetStreamingImage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

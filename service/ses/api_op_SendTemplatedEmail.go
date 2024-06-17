@@ -245,6 +245,9 @@ func (c *Client) addOperationSendTemplatedEmailMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSendTemplatedEmailValidationMiddleware(stack); err != nil {
 		return err
 	}

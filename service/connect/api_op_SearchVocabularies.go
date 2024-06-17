@@ -132,6 +132,9 @@ func (c *Client) addOperationSearchVocabulariesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchVocabulariesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationSearchVocabulariesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// SearchVocabulariesAPIClient is a client that implements the SearchVocabularies
-// operation.
-type SearchVocabulariesAPIClient interface {
-	SearchVocabularies(context.Context, *SearchVocabulariesInput, ...func(*Options)) (*SearchVocabulariesOutput, error)
-}
-
-var _ SearchVocabulariesAPIClient = (*Client)(nil)
 
 // SearchVocabulariesPaginatorOptions is the paginator options for
 // SearchVocabularies
@@ -228,6 +223,9 @@ func (p *SearchVocabulariesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchVocabularies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *SearchVocabulariesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// SearchVocabulariesAPIClient is a client that implements the SearchVocabularies
+// operation.
+type SearchVocabulariesAPIClient interface {
+	SearchVocabularies(context.Context, *SearchVocabulariesInput, ...func(*Options)) (*SearchVocabulariesOutput, error)
+}
+
+var _ SearchVocabulariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchVocabularies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -155,6 +155,9 @@ func (c *Client) addOperationDescribeBotAliasMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -178,14 +181,6 @@ func (c *Client) addOperationDescribeBotAliasMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// DescribeBotAliasAPIClient is a client that implements the DescribeBotAlias
-// operation.
-type DescribeBotAliasAPIClient interface {
-	DescribeBotAlias(context.Context, *DescribeBotAliasInput, ...func(*Options)) (*DescribeBotAliasOutput, error)
-}
-
-var _ DescribeBotAliasAPIClient = (*Client)(nil)
 
 // BotAliasAvailableWaiterOptions are waiter options for BotAliasAvailableWaiter
 type BotAliasAvailableWaiterOptions struct {
@@ -302,7 +297,13 @@ func (w *BotAliasAvailableWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeBotAlias(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -393,6 +394,14 @@ func botAliasAvailableStateRetryable(ctx context.Context, input *DescribeBotAlia
 
 	return true, nil
 }
+
+// DescribeBotAliasAPIClient is a client that implements the DescribeBotAlias
+// operation.
+type DescribeBotAliasAPIClient interface {
+	DescribeBotAlias(context.Context, *DescribeBotAliasInput, ...func(*Options)) (*DescribeBotAliasOutput, error)
+}
+
+var _ DescribeBotAliasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBotAlias(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

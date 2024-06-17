@@ -115,6 +115,9 @@ func (c *Client) addOperationListScheduledAuditsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScheduledAudits(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListScheduledAuditsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListScheduledAuditsAPIClient is a client that implements the
-// ListScheduledAudits operation.
-type ListScheduledAuditsAPIClient interface {
-	ListScheduledAudits(context.Context, *ListScheduledAuditsInput, ...func(*Options)) (*ListScheduledAuditsOutput, error)
-}
-
-var _ ListScheduledAuditsAPIClient = (*Client)(nil)
 
 // ListScheduledAuditsPaginatorOptions is the paginator options for
 // ListScheduledAudits
@@ -208,6 +203,9 @@ func (p *ListScheduledAuditsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScheduledAudits(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListScheduledAuditsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListScheduledAuditsAPIClient is a client that implements the
+// ListScheduledAudits operation.
+type ListScheduledAuditsAPIClient interface {
+	ListScheduledAudits(context.Context, *ListScheduledAuditsInput, ...func(*Options)) (*ListScheduledAuditsOutput, error)
+}
+
+var _ ListScheduledAuditsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScheduledAudits(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

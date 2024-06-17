@@ -126,6 +126,9 @@ func (c *Client) addOperationGetBotsMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBots(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,13 +149,6 @@ func (c *Client) addOperationGetBotsMiddlewares(stack *middleware.Stack, options
 	}
 	return nil
 }
-
-// GetBotsAPIClient is a client that implements the GetBots operation.
-type GetBotsAPIClient interface {
-	GetBots(context.Context, *GetBotsInput, ...func(*Options)) (*GetBotsOutput, error)
-}
-
-var _ GetBotsAPIClient = (*Client)(nil)
 
 // GetBotsPaginatorOptions is the paginator options for GetBots
 type GetBotsPaginatorOptions struct {
@@ -218,6 +214,9 @@ func (p *GetBotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +235,13 @@ func (p *GetBotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options
 
 	return result, nil
 }
+
+// GetBotsAPIClient is a client that implements the GetBots operation.
+type GetBotsAPIClient interface {
+	GetBots(context.Context, *GetBotsInput, ...func(*Options)) (*GetBotsOutput, error)
+}
+
+var _ GetBotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -134,6 +134,9 @@ func (c *Client) addOperationListInferenceEventsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInferenceEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListInferenceEventsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListInferenceEventsAPIClient is a client that implements the
-// ListInferenceEvents operation.
-type ListInferenceEventsAPIClient interface {
-	ListInferenceEvents(context.Context, *ListInferenceEventsInput, ...func(*Options)) (*ListInferenceEventsOutput, error)
-}
-
-var _ ListInferenceEventsAPIClient = (*Client)(nil)
 
 // ListInferenceEventsPaginatorOptions is the paginator options for
 // ListInferenceEvents
@@ -230,6 +225,9 @@ func (p *ListInferenceEventsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInferenceEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListInferenceEventsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListInferenceEventsAPIClient is a client that implements the
+// ListInferenceEvents operation.
+type ListInferenceEventsAPIClient interface {
+	ListInferenceEvents(context.Context, *ListInferenceEventsInput, ...func(*Options)) (*ListInferenceEventsOutput, error)
+}
+
+var _ ListInferenceEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInferenceEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

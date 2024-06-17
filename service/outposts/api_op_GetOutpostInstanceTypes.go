@@ -121,6 +121,9 @@ func (c *Client) addOperationGetOutpostInstanceTypesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetOutpostInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationGetOutpostInstanceTypesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetOutpostInstanceTypesAPIClient is a client that implements the
-// GetOutpostInstanceTypes operation.
-type GetOutpostInstanceTypesAPIClient interface {
-	GetOutpostInstanceTypes(context.Context, *GetOutpostInstanceTypesInput, ...func(*Options)) (*GetOutpostInstanceTypesOutput, error)
-}
-
-var _ GetOutpostInstanceTypesAPIClient = (*Client)(nil)
 
 // GetOutpostInstanceTypesPaginatorOptions is the paginator options for
 // GetOutpostInstanceTypes
@@ -218,6 +213,9 @@ func (p *GetOutpostInstanceTypesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetOutpostInstanceTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetOutpostInstanceTypesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// GetOutpostInstanceTypesAPIClient is a client that implements the
+// GetOutpostInstanceTypes operation.
+type GetOutpostInstanceTypesAPIClient interface {
+	GetOutpostInstanceTypes(context.Context, *GetOutpostInstanceTypesInput, ...func(*Options)) (*GetOutpostInstanceTypesOutput, error)
+}
+
+var _ GetOutpostInstanceTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetOutpostInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

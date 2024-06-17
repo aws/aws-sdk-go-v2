@@ -148,6 +148,9 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeGameServerInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -171,14 +174,6 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeGameServerInstancesAPIClient is a client that implements the
-// DescribeGameServerInstances operation.
-type DescribeGameServerInstancesAPIClient interface {
-	DescribeGameServerInstances(context.Context, *DescribeGameServerInstancesInput, ...func(*Options)) (*DescribeGameServerInstancesOutput, error)
-}
-
-var _ DescribeGameServerInstancesAPIClient = (*Client)(nil)
 
 // DescribeGameServerInstancesPaginatorOptions is the paginator options for
 // DescribeGameServerInstances
@@ -247,6 +242,9 @@ func (p *DescribeGameServerInstancesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeGameServerInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *DescribeGameServerInstancesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeGameServerInstancesAPIClient is a client that implements the
+// DescribeGameServerInstances operation.
+type DescribeGameServerInstancesAPIClient interface {
+	DescribeGameServerInstances(context.Context, *DescribeGameServerInstancesInput, ...func(*Options)) (*DescribeGameServerInstancesOutput, error)
+}
+
+var _ DescribeGameServerInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeGameServerInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

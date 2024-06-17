@@ -279,6 +279,9 @@ func (c *Client) addOperationGetCurrentMetricDataMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCurrentMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -302,14 +305,6 @@ func (c *Client) addOperationGetCurrentMetricDataMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// GetCurrentMetricDataAPIClient is a client that implements the
-// GetCurrentMetricData operation.
-type GetCurrentMetricDataAPIClient interface {
-	GetCurrentMetricData(context.Context, *GetCurrentMetricDataInput, ...func(*Options)) (*GetCurrentMetricDataOutput, error)
-}
-
-var _ GetCurrentMetricDataAPIClient = (*Client)(nil)
 
 // GetCurrentMetricDataPaginatorOptions is the paginator options for
 // GetCurrentMetricData
@@ -375,6 +370,9 @@ func (p *GetCurrentMetricDataPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCurrentMetricData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -393,6 +391,14 @@ func (p *GetCurrentMetricDataPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// GetCurrentMetricDataAPIClient is a client that implements the
+// GetCurrentMetricData operation.
+type GetCurrentMetricDataAPIClient interface {
+	GetCurrentMetricData(context.Context, *GetCurrentMetricDataInput, ...func(*Options)) (*GetCurrentMetricDataOutput, error)
+}
+
+var _ GetCurrentMetricDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCurrentMetricData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

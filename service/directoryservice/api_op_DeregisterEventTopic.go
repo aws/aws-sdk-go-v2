@@ -112,6 +112,9 @@ func (c *Client) addOperationDeregisterEventTopicMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterEventTopicValidationMiddleware(stack); err != nil {
 		return err
 	}

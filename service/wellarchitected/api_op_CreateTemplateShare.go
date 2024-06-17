@@ -146,6 +146,9 @@ func (c *Client) addOperationCreateTemplateShareMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTemplateShareMiddleware(stack, options); err != nil {
 		return err
 	}

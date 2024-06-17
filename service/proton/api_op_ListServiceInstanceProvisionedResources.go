@@ -123,6 +123,9 @@ func (c *Client) addOperationListServiceInstanceProvisionedResourcesMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListServiceInstanceProvisionedResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListServiceInstanceProvisionedResourcesMiddlewares(
 	}
 	return nil
 }
-
-// ListServiceInstanceProvisionedResourcesAPIClient is a client that implements
-// the ListServiceInstanceProvisionedResources operation.
-type ListServiceInstanceProvisionedResourcesAPIClient interface {
-	ListServiceInstanceProvisionedResources(context.Context, *ListServiceInstanceProvisionedResourcesInput, ...func(*Options)) (*ListServiceInstanceProvisionedResourcesOutput, error)
-}
-
-var _ ListServiceInstanceProvisionedResourcesAPIClient = (*Client)(nil)
 
 // ListServiceInstanceProvisionedResourcesPaginatorOptions is the paginator
 // options for ListServiceInstanceProvisionedResources
@@ -209,6 +204,9 @@ func (p *ListServiceInstanceProvisionedResourcesPaginator) NextPage(ctx context.
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceInstanceProvisionedResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListServiceInstanceProvisionedResourcesPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListServiceInstanceProvisionedResourcesAPIClient is a client that implements
+// the ListServiceInstanceProvisionedResources operation.
+type ListServiceInstanceProvisionedResourcesAPIClient interface {
+	ListServiceInstanceProvisionedResources(context.Context, *ListServiceInstanceProvisionedResourcesInput, ...func(*Options)) (*ListServiceInstanceProvisionedResourcesOutput, error)
+}
+
+var _ ListServiceInstanceProvisionedResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceInstanceProvisionedResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

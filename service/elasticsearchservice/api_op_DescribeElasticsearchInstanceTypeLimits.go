@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeElasticsearchInstanceTypeLimitsValidationMiddleware(stack); err != nil {
 		return err
 	}

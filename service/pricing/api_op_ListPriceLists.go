@@ -161,6 +161,9 @@ func (c *Client) addOperationListPriceListsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPriceListsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,14 +187,6 @@ func (c *Client) addOperationListPriceListsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListPriceListsAPIClient is a client that implements the ListPriceLists
-// operation.
-type ListPriceListsAPIClient interface {
-	ListPriceLists(context.Context, *ListPriceListsInput, ...func(*Options)) (*ListPriceListsOutput, error)
-}
-
-var _ ListPriceListsAPIClient = (*Client)(nil)
 
 // ListPriceListsPaginatorOptions is the paginator options for ListPriceLists
 type ListPriceListsPaginatorOptions struct {
@@ -256,6 +251,9 @@ func (p *ListPriceListsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPriceLists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -274,6 +272,14 @@ func (p *ListPriceListsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListPriceListsAPIClient is a client that implements the ListPriceLists
+// operation.
+type ListPriceListsAPIClient interface {
+	ListPriceLists(context.Context, *ListPriceListsInput, ...func(*Options)) (*ListPriceListsOutput, error)
+}
+
+var _ ListPriceListsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPriceLists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

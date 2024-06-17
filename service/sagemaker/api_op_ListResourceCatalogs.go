@@ -131,6 +131,9 @@ func (c *Client) addOperationListResourceCatalogsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceCatalogs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListResourceCatalogsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListResourceCatalogsAPIClient is a client that implements the
-// ListResourceCatalogs operation.
-type ListResourceCatalogsAPIClient interface {
-	ListResourceCatalogs(context.Context, *ListResourceCatalogsInput, ...func(*Options)) (*ListResourceCatalogsOutput, error)
-}
-
-var _ ListResourceCatalogsAPIClient = (*Client)(nil)
 
 // ListResourceCatalogsPaginatorOptions is the paginator options for
 // ListResourceCatalogs
@@ -224,6 +219,9 @@ func (p *ListResourceCatalogsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResourceCatalogs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListResourceCatalogsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListResourceCatalogsAPIClient is a client that implements the
+// ListResourceCatalogs operation.
+type ListResourceCatalogsAPIClient interface {
+	ListResourceCatalogs(context.Context, *ListResourceCatalogsInput, ...func(*Options)) (*ListResourceCatalogsOutput, error)
+}
+
+var _ ListResourceCatalogsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResourceCatalogs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

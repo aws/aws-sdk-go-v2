@@ -121,6 +121,9 @@ func (c *Client) addOperationListLogSourcesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLogSources(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListLogSourcesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListLogSourcesAPIClient is a client that implements the ListLogSources
-// operation.
-type ListLogSourcesAPIClient interface {
-	ListLogSources(context.Context, *ListLogSourcesInput, ...func(*Options)) (*ListLogSourcesOutput, error)
-}
-
-var _ ListLogSourcesAPIClient = (*Client)(nil)
 
 // ListLogSourcesPaginatorOptions is the paginator options for ListLogSources
 type ListLogSourcesPaginatorOptions struct {
@@ -213,6 +208,9 @@ func (p *ListLogSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLogSources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListLogSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListLogSourcesAPIClient is a client that implements the ListLogSources
+// operation.
+type ListLogSourcesAPIClient interface {
+	ListLogSources(context.Context, *ListLogSourcesInput, ...func(*Options)) (*ListLogSourcesOutput, error)
+}
+
+var _ ListLogSourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLogSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

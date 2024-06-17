@@ -128,6 +128,9 @@ func (c *Client) addOperationSetVisibleToAllUsersMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetVisibleToAllUsersValidationMiddleware(stack); err != nil {
 		return err
 	}

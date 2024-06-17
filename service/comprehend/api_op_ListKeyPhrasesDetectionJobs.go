@@ -115,6 +115,9 @@ func (c *Client) addOperationListKeyPhrasesDetectionJobsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKeyPhrasesDetectionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListKeyPhrasesDetectionJobsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListKeyPhrasesDetectionJobsAPIClient is a client that implements the
-// ListKeyPhrasesDetectionJobs operation.
-type ListKeyPhrasesDetectionJobsAPIClient interface {
-	ListKeyPhrasesDetectionJobs(context.Context, *ListKeyPhrasesDetectionJobsInput, ...func(*Options)) (*ListKeyPhrasesDetectionJobsOutput, error)
-}
-
-var _ ListKeyPhrasesDetectionJobsAPIClient = (*Client)(nil)
 
 // ListKeyPhrasesDetectionJobsPaginatorOptions is the paginator options for
 // ListKeyPhrasesDetectionJobs
@@ -210,6 +205,9 @@ func (p *ListKeyPhrasesDetectionJobsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKeyPhrasesDetectionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListKeyPhrasesDetectionJobsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListKeyPhrasesDetectionJobsAPIClient is a client that implements the
+// ListKeyPhrasesDetectionJobs operation.
+type ListKeyPhrasesDetectionJobsAPIClient interface {
+	ListKeyPhrasesDetectionJobs(context.Context, *ListKeyPhrasesDetectionJobsInput, ...func(*Options)) (*ListKeyPhrasesDetectionJobsOutput, error)
+}
+
+var _ ListKeyPhrasesDetectionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKeyPhrasesDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

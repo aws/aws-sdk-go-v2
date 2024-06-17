@@ -157,6 +157,9 @@ func (c *Client) addOperationUpdateEventBridgeRuleTemplateMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateEventBridgeRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

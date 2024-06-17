@@ -166,6 +166,9 @@ func (c *Client) addOperationGetSensitiveDataOccurrencesAvailabilityMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSensitiveDataOccurrencesAvailabilityValidationMiddleware(stack); err != nil {
 		return err
 	}

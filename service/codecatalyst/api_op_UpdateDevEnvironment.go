@@ -174,6 +174,9 @@ func (c *Client) addOperationUpdateDevEnvironmentMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDevEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}

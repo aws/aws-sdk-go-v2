@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeAccountSubscriptionMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAccountSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}

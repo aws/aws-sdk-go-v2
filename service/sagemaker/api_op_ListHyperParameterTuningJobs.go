@@ -152,6 +152,9 @@ func (c *Client) addOperationListHyperParameterTuningJobsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHyperParameterTuningJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -172,14 +175,6 @@ func (c *Client) addOperationListHyperParameterTuningJobsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListHyperParameterTuningJobsAPIClient is a client that implements the
-// ListHyperParameterTuningJobs operation.
-type ListHyperParameterTuningJobsAPIClient interface {
-	ListHyperParameterTuningJobs(context.Context, *ListHyperParameterTuningJobsInput, ...func(*Options)) (*ListHyperParameterTuningJobsOutput, error)
-}
-
-var _ ListHyperParameterTuningJobsAPIClient = (*Client)(nil)
 
 // ListHyperParameterTuningJobsPaginatorOptions is the paginator options for
 // ListHyperParameterTuningJobs
@@ -247,6 +242,9 @@ func (p *ListHyperParameterTuningJobsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHyperParameterTuningJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *ListHyperParameterTuningJobsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListHyperParameterTuningJobsAPIClient is a client that implements the
+// ListHyperParameterTuningJobs operation.
+type ListHyperParameterTuningJobsAPIClient interface {
+	ListHyperParameterTuningJobs(context.Context, *ListHyperParameterTuningJobsInput, ...func(*Options)) (*ListHyperParameterTuningJobsOutput, error)
+}
+
+var _ ListHyperParameterTuningJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHyperParameterTuningJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

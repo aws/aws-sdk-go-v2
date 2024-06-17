@@ -127,6 +127,9 @@ func (c *Client) addOperationListWorkflowRunsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWorkflowRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListWorkflowRunsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListWorkflowRunsAPIClient is a client that implements the ListWorkflowRuns
-// operation.
-type ListWorkflowRunsAPIClient interface {
-	ListWorkflowRuns(context.Context, *ListWorkflowRunsInput, ...func(*Options)) (*ListWorkflowRunsOutput, error)
-}
-
-var _ ListWorkflowRunsAPIClient = (*Client)(nil)
 
 // ListWorkflowRunsPaginatorOptions is the paginator options for ListWorkflowRuns
 type ListWorkflowRunsPaginatorOptions struct {
@@ -224,6 +219,9 @@ func (p *ListWorkflowRunsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkflowRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListWorkflowRunsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListWorkflowRunsAPIClient is a client that implements the ListWorkflowRuns
+// operation.
+type ListWorkflowRunsAPIClient interface {
+	ListWorkflowRuns(context.Context, *ListWorkflowRunsInput, ...func(*Options)) (*ListWorkflowRunsOutput, error)
+}
+
+var _ ListWorkflowRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkflowRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -132,6 +132,9 @@ func (c *Client) addOperationListRecommendationTemplatesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecommendationTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListRecommendationTemplatesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListRecommendationTemplatesAPIClient is a client that implements the
-// ListRecommendationTemplates operation.
-type ListRecommendationTemplatesAPIClient interface {
-	ListRecommendationTemplates(context.Context, *ListRecommendationTemplatesInput, ...func(*Options)) (*ListRecommendationTemplatesOutput, error)
-}
-
-var _ ListRecommendationTemplatesAPIClient = (*Client)(nil)
 
 // ListRecommendationTemplatesPaginatorOptions is the paginator options for
 // ListRecommendationTemplates
@@ -229,6 +224,9 @@ func (p *ListRecommendationTemplatesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecommendationTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListRecommendationTemplatesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListRecommendationTemplatesAPIClient is a client that implements the
+// ListRecommendationTemplates operation.
+type ListRecommendationTemplatesAPIClient interface {
+	ListRecommendationTemplates(context.Context, *ListRecommendationTemplatesInput, ...func(*Options)) (*ListRecommendationTemplatesOutput, error)
+}
+
+var _ ListRecommendationTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecommendationTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

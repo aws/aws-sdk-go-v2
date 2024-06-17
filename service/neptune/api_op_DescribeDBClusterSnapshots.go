@@ -186,6 +186,9 @@ func (c *Client) addOperationDescribeDBClusterSnapshotsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -209,14 +212,6 @@ func (c *Client) addOperationDescribeDBClusterSnapshotsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeDBClusterSnapshotsAPIClient is a client that implements the
-// DescribeDBClusterSnapshots operation.
-type DescribeDBClusterSnapshotsAPIClient interface {
-	DescribeDBClusterSnapshots(context.Context, *DescribeDBClusterSnapshotsInput, ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error)
-}
-
-var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
 
 // DescribeDBClusterSnapshotsPaginatorOptions is the paginator options for
 // DescribeDBClusterSnapshots
@@ -290,6 +285,9 @@ func (p *DescribeDBClusterSnapshotsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBClusterSnapshots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -308,6 +306,14 @@ func (p *DescribeDBClusterSnapshotsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeDBClusterSnapshotsAPIClient is a client that implements the
+// DescribeDBClusterSnapshots operation.
+type DescribeDBClusterSnapshotsAPIClient interface {
+	DescribeDBClusterSnapshots(context.Context, *DescribeDBClusterSnapshotsInput, ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error)
+}
+
+var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBClusterSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -147,6 +147,9 @@ func (c *Client) addOperationDescribeBotMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,13 +173,6 @@ func (c *Client) addOperationDescribeBotMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// DescribeBotAPIClient is a client that implements the DescribeBot operation.
-type DescribeBotAPIClient interface {
-	DescribeBot(context.Context, *DescribeBotInput, ...func(*Options)) (*DescribeBotOutput, error)
-}
-
-var _ DescribeBotAPIClient = (*Client)(nil)
 
 // BotAvailableWaiterOptions are waiter options for BotAvailableWaiter
 type BotAvailableWaiterOptions struct {
@@ -292,7 +288,13 @@ func (w *BotAvailableWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeBot(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -400,6 +402,13 @@ func botAvailableStateRetryable(ctx context.Context, input *DescribeBotInput, ou
 
 	return true, nil
 }
+
+// DescribeBotAPIClient is a client that implements the DescribeBot operation.
+type DescribeBotAPIClient interface {
+	DescribeBot(context.Context, *DescribeBotInput, ...func(*Options)) (*DescribeBotOutput, error)
+}
+
+var _ DescribeBotAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBot(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

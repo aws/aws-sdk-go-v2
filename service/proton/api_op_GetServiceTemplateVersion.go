@@ -123,6 +123,9 @@ func (c *Client) addOperationGetServiceTemplateVersionMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationGetServiceTemplateVersionMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// GetServiceTemplateVersionAPIClient is a client that implements the
-// GetServiceTemplateVersion operation.
-type GetServiceTemplateVersionAPIClient interface {
-	GetServiceTemplateVersion(context.Context, *GetServiceTemplateVersionInput, ...func(*Options)) (*GetServiceTemplateVersionOutput, error)
-}
-
-var _ GetServiceTemplateVersionAPIClient = (*Client)(nil)
 
 // ServiceTemplateVersionRegisteredWaiterOptions are waiter options for
 // ServiceTemplateVersionRegisteredWaiter
@@ -275,7 +270,13 @@ func (w *ServiceTemplateVersionRegisteredWaiter) WaitForOutput(ctx context.Conte
 		}
 
 		out, err := w.client.GetServiceTemplateVersion(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -366,6 +367,14 @@ func serviceTemplateVersionRegisteredStateRetryable(ctx context.Context, input *
 
 	return true, nil
 }
+
+// GetServiceTemplateVersionAPIClient is a client that implements the
+// GetServiceTemplateVersion operation.
+type GetServiceTemplateVersionAPIClient interface {
+	GetServiceTemplateVersion(context.Context, *GetServiceTemplateVersionInput, ...func(*Options)) (*GetServiceTemplateVersionOutput, error)
+}
+
+var _ GetServiceTemplateVersionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetServiceTemplateVersion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

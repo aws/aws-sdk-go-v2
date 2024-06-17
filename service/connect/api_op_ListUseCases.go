@@ -126,6 +126,9 @@ func (c *Client) addOperationListUseCasesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUseCasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,13 +152,6 @@ func (c *Client) addOperationListUseCasesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListUseCasesAPIClient is a client that implements the ListUseCases operation.
-type ListUseCasesAPIClient interface {
-	ListUseCases(context.Context, *ListUseCasesInput, ...func(*Options)) (*ListUseCasesOutput, error)
-}
-
-var _ ListUseCasesAPIClient = (*Client)(nil)
 
 // ListUseCasesPaginatorOptions is the paginator options for ListUseCases
 type ListUseCasesPaginatorOptions struct {
@@ -220,6 +216,9 @@ func (p *ListUseCasesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUseCases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +237,13 @@ func (p *ListUseCasesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListUseCasesAPIClient is a client that implements the ListUseCases operation.
+type ListUseCasesAPIClient interface {
+	ListUseCases(context.Context, *ListUseCasesInput, ...func(*Options)) (*ListUseCasesOutput, error)
+}
+
+var _ ListUseCasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUseCases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

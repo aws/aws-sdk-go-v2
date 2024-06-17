@@ -133,6 +133,9 @@ func (c *Client) addOperationGetTablesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTablesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,13 +159,6 @@ func (c *Client) addOperationGetTablesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// GetTablesAPIClient is a client that implements the GetTables operation.
-type GetTablesAPIClient interface {
-	GetTables(context.Context, *GetTablesInput, ...func(*Options)) (*GetTablesOutput, error)
-}
-
-var _ GetTablesAPIClient = (*Client)(nil)
 
 // GetTablesPaginatorOptions is the paginator options for GetTables
 type GetTablesPaginatorOptions struct {
@@ -227,6 +223,9 @@ func (p *GetTablesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTables(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +244,13 @@ func (p *GetTablesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// GetTablesAPIClient is a client that implements the GetTables operation.
+type GetTablesAPIClient interface {
+	GetTables(context.Context, *GetTablesInput, ...func(*Options)) (*GetTablesOutput, error)
+}
+
+var _ GetTablesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTables(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

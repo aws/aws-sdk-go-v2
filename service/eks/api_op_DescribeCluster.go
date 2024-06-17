@@ -120,6 +120,9 @@ func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeClusterAPIClient is a client that implements the DescribeCluster
-// operation.
-type DescribeClusterAPIClient interface {
-	DescribeCluster(context.Context, *DescribeClusterInput, ...func(*Options)) (*DescribeClusterOutput, error)
-}
-
-var _ DescribeClusterAPIClient = (*Client)(nil)
 
 // ClusterActiveWaiterOptions are waiter options for ClusterActiveWaiter
 type ClusterActiveWaiterOptions struct {
@@ -267,7 +262,13 @@ func (w *ClusterActiveWaiter) WaitForOutput(ctx context.Context, params *Describ
 		}
 
 		out, err := w.client.DescribeCluster(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -474,7 +475,13 @@ func (w *ClusterDeletedWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeCluster(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -572,6 +579,14 @@ func clusterDeletedStateRetryable(ctx context.Context, input *DescribeClusterInp
 
 	return true, nil
 }
+
+// DescribeClusterAPIClient is a client that implements the DescribeCluster
+// operation.
+type DescribeClusterAPIClient interface {
+	DescribeCluster(context.Context, *DescribeClusterInput, ...func(*Options)) (*DescribeClusterOutput, error)
+}
+
+var _ DescribeClusterAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCluster(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

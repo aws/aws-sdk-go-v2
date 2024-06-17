@@ -129,6 +129,9 @@ func (c *Client) addOperationListPolicyStoresMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicyStores(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListPolicyStoresMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListPolicyStoresAPIClient is a client that implements the ListPolicyStores
-// operation.
-type ListPolicyStoresAPIClient interface {
-	ListPolicyStores(context.Context, *ListPolicyStoresInput, ...func(*Options)) (*ListPolicyStoresOutput, error)
-}
-
-var _ ListPolicyStoresAPIClient = (*Client)(nil)
 
 // ListPolicyStoresPaginatorOptions is the paginator options for ListPolicyStores
 type ListPolicyStoresPaginatorOptions struct {
@@ -230,6 +225,9 @@ func (p *ListPolicyStoresPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPolicyStores(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListPolicyStoresPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListPolicyStoresAPIClient is a client that implements the ListPolicyStores
+// operation.
+type ListPolicyStoresAPIClient interface {
+	ListPolicyStores(context.Context, *ListPolicyStoresInput, ...func(*Options)) (*ListPolicyStoresOutput, error)
+}
+
+var _ ListPolicyStoresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPolicyStores(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

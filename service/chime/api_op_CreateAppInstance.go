@@ -131,6 +131,9 @@ func (c *Client) addOperationCreateAppInstanceMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateAppInstanceMiddleware(stack); err != nil {
 		return err
 	}

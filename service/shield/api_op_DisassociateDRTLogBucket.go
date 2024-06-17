@@ -102,6 +102,9 @@ func (c *Client) addOperationDisassociateDRTLogBucketMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateDRTLogBucketValidationMiddleware(stack); err != nil {
 		return err
 	}

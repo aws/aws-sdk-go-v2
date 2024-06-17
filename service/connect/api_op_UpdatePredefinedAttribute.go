@@ -111,6 +111,9 @@ func (c *Client) addOperationUpdatePredefinedAttributeMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdatePredefinedAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}

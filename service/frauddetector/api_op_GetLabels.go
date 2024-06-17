@@ -118,6 +118,9 @@ func (c *Client) addOperationGetLabelsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLabels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationGetLabelsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// GetLabelsAPIClient is a client that implements the GetLabels operation.
-type GetLabelsAPIClient interface {
-	GetLabels(context.Context, *GetLabelsInput, ...func(*Options)) (*GetLabelsOutput, error)
-}
-
-var _ GetLabelsAPIClient = (*Client)(nil)
 
 // GetLabelsPaginatorOptions is the paginator options for GetLabels
 type GetLabelsPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *GetLabelsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetLabels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *GetLabelsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// GetLabelsAPIClient is a client that implements the GetLabels operation.
+type GetLabelsAPIClient interface {
+	GetLabels(context.Context, *GetLabelsInput, ...func(*Options)) (*GetLabelsOutput, error)
+}
+
+var _ GetLabelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLabels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

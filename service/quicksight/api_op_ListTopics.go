@@ -122,6 +122,9 @@ func (c *Client) addOperationListTopicsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTopicsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationListTopicsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListTopicsAPIClient is a client that implements the ListTopics operation.
-type ListTopicsAPIClient interface {
-	ListTopics(context.Context, *ListTopicsInput, ...func(*Options)) (*ListTopicsOutput, error)
-}
-
-var _ ListTopicsAPIClient = (*Client)(nil)
 
 // ListTopicsPaginatorOptions is the paginator options for ListTopics
 type ListTopicsPaginatorOptions struct {
@@ -216,6 +212,9 @@ func (p *ListTopicsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTopics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +233,13 @@ func (p *ListTopicsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListTopicsAPIClient is a client that implements the ListTopics operation.
+type ListTopicsAPIClient interface {
+	ListTopics(context.Context, *ListTopicsInput, ...func(*Options)) (*ListTopicsOutput, error)
+}
+
+var _ ListTopicsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTopics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

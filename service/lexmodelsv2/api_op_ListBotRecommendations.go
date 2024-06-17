@@ -144,6 +144,9 @@ func (c *Client) addOperationListBotRecommendationsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBotRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,14 +170,6 @@ func (c *Client) addOperationListBotRecommendationsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListBotRecommendationsAPIClient is a client that implements the
-// ListBotRecommendations operation.
-type ListBotRecommendationsAPIClient interface {
-	ListBotRecommendations(context.Context, *ListBotRecommendationsInput, ...func(*Options)) (*ListBotRecommendationsOutput, error)
-}
-
-var _ ListBotRecommendationsAPIClient = (*Client)(nil)
 
 // ListBotRecommendationsPaginatorOptions is the paginator options for
 // ListBotRecommendations
@@ -242,6 +237,9 @@ func (p *ListBotRecommendationsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBotRecommendations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *ListBotRecommendationsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListBotRecommendationsAPIClient is a client that implements the
+// ListBotRecommendations operation.
+type ListBotRecommendationsAPIClient interface {
+	ListBotRecommendations(context.Context, *ListBotRecommendationsInput, ...func(*Options)) (*ListBotRecommendationsOutput, error)
+}
+
+var _ ListBotRecommendationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBotRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

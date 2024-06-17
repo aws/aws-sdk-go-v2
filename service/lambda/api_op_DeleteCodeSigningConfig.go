@@ -102,6 +102,9 @@ func (c *Client) addOperationDeleteCodeSigningConfigMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCodeSigningConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

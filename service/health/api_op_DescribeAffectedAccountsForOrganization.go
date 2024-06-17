@@ -158,6 +158,9 @@ func (c *Client) addOperationDescribeAffectedAccountsForOrganizationMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAffectedAccountsForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,14 +184,6 @@ func (c *Client) addOperationDescribeAffectedAccountsForOrganizationMiddlewares(
 	}
 	return nil
 }
-
-// DescribeAffectedAccountsForOrganizationAPIClient is a client that implements
-// the DescribeAffectedAccountsForOrganization operation.
-type DescribeAffectedAccountsForOrganizationAPIClient interface {
-	DescribeAffectedAccountsForOrganization(context.Context, *DescribeAffectedAccountsForOrganizationInput, ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error)
-}
-
-var _ DescribeAffectedAccountsForOrganizationAPIClient = (*Client)(nil)
 
 // DescribeAffectedAccountsForOrganizationPaginatorOptions is the paginator
 // options for DescribeAffectedAccountsForOrganization
@@ -257,6 +252,9 @@ func (p *DescribeAffectedAccountsForOrganizationPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAffectedAccountsForOrganization(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +273,14 @@ func (p *DescribeAffectedAccountsForOrganizationPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// DescribeAffectedAccountsForOrganizationAPIClient is a client that implements
+// the DescribeAffectedAccountsForOrganization operation.
+type DescribeAffectedAccountsForOrganizationAPIClient interface {
+	DescribeAffectedAccountsForOrganization(context.Context, *DescribeAffectedAccountsForOrganizationInput, ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error)
+}
+
+var _ DescribeAffectedAccountsForOrganizationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAffectedAccountsForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

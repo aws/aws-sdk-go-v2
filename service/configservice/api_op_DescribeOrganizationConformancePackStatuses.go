@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeOrganizationConformancePackStatusesMiddlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConformancePackStatuses(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeOrganizationConformancePackStatusesMiddlewa
 	}
 	return nil
 }
-
-// DescribeOrganizationConformancePackStatusesAPIClient is a client that
-// implements the DescribeOrganizationConformancePackStatuses operation.
-type DescribeOrganizationConformancePackStatusesAPIClient interface {
-	DescribeOrganizationConformancePackStatuses(context.Context, *DescribeOrganizationConformancePackStatusesInput, ...func(*Options)) (*DescribeOrganizationConformancePackStatusesOutput, error)
-}
-
-var _ DescribeOrganizationConformancePackStatusesAPIClient = (*Client)(nil)
 
 // DescribeOrganizationConformancePackStatusesPaginatorOptions is the paginator
 // options for DescribeOrganizationConformancePackStatuses
@@ -221,6 +216,9 @@ func (p *DescribeOrganizationConformancePackStatusesPaginator) NextPage(ctx cont
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOrganizationConformancePackStatuses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeOrganizationConformancePackStatusesPaginator) NextPage(ctx cont
 
 	return result, nil
 }
+
+// DescribeOrganizationConformancePackStatusesAPIClient is a client that
+// implements the DescribeOrganizationConformancePackStatuses operation.
+type DescribeOrganizationConformancePackStatusesAPIClient interface {
+	DescribeOrganizationConformancePackStatuses(context.Context, *DescribeOrganizationConformancePackStatusesInput, ...func(*Options)) (*DescribeOrganizationConformancePackStatusesOutput, error)
+}
+
+var _ DescribeOrganizationConformancePackStatusesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOrganizationConformancePackStatuses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

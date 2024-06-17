@@ -240,6 +240,9 @@ func (c *Client) addOperationGetResourcesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -260,13 +263,6 @@ func (c *Client) addOperationGetResourcesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetResourcesAPIClient is a client that implements the GetResources operation.
-type GetResourcesAPIClient interface {
-	GetResources(context.Context, *GetResourcesInput, ...func(*Options)) (*GetResourcesOutput, error)
-}
-
-var _ GetResourcesAPIClient = (*Client)(nil)
 
 // GetResourcesPaginatorOptions is the paginator options for GetResources
 type GetResourcesPaginatorOptions struct {
@@ -335,6 +331,9 @@ func (p *GetResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.ResourcesPerPage = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -353,6 +352,13 @@ func (p *GetResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetResourcesAPIClient is a client that implements the GetResources operation.
+type GetResourcesAPIClient interface {
+	GetResources(context.Context, *GetResourcesInput, ...func(*Options)) (*GetResourcesOutput, error)
+}
+
+var _ GetResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

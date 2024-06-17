@@ -106,6 +106,9 @@ func (c *Client) addOperationGetIpAccessSettingsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetIpAccessSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

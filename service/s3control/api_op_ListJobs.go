@@ -160,6 +160,9 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListJobsMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,55 +201,6 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-type endpointPrefix_opListJobsMiddleware struct {
-}
-
-func (*endpointPrefix_opListJobsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	opaqueInput := getOperationInput(ctx)
-	input, ok := opaqueInput.(*ListJobsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListJobsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListJobsAPIClient is a client that implements the ListJobs operation.
-type ListJobsAPIClient interface {
-	ListJobs(context.Context, *ListJobsInput, ...func(*Options)) (*ListJobsOutput, error)
-}
-
-var _ ListJobsAPIClient = (*Client)(nil)
 
 // ListJobsPaginatorOptions is the paginator options for ListJobs
 type ListJobsPaginatorOptions struct {
@@ -314,6 +268,9 @@ func (p *ListJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -332,6 +289,55 @@ func (p *ListJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+type endpointPrefix_opListJobsMiddleware struct {
+}
+
+func (*endpointPrefix_opListJobsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*ListJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListJobsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListJobsAPIClient is a client that implements the ListJobs operation.
+type ListJobsAPIClient interface {
+	ListJobs(context.Context, *ListJobsInput, ...func(*Options)) (*ListJobsOutput, error)
+}
+
+var _ ListJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

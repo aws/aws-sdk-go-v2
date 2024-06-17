@@ -114,6 +114,9 @@ func (c *Client) addOperationListCustomMetricsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListCustomMetricsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListCustomMetricsAPIClient is a client that implements the ListCustomMetrics
-// operation.
-type ListCustomMetricsAPIClient interface {
-	ListCustomMetrics(context.Context, *ListCustomMetricsInput, ...func(*Options)) (*ListCustomMetricsOutput, error)
-}
-
-var _ ListCustomMetricsAPIClient = (*Client)(nil)
 
 // ListCustomMetricsPaginatorOptions is the paginator options for ListCustomMetrics
 type ListCustomMetricsPaginatorOptions struct {
@@ -206,6 +201,9 @@ func (p *ListCustomMetricsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListCustomMetricsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListCustomMetricsAPIClient is a client that implements the ListCustomMetrics
+// operation.
+type ListCustomMetricsAPIClient interface {
+	ListCustomMetrics(context.Context, *ListCustomMetricsInput, ...func(*Options)) (*ListCustomMetricsOutput, error)
+}
+
+var _ ListCustomMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

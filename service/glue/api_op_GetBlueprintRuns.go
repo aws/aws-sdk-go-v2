@@ -115,6 +115,9 @@ func (c *Client) addOperationGetBlueprintRunsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBlueprintRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetBlueprintRunsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetBlueprintRunsAPIClient is a client that implements the GetBlueprintRuns
-// operation.
-type GetBlueprintRunsAPIClient interface {
-	GetBlueprintRuns(context.Context, *GetBlueprintRunsInput, ...func(*Options)) (*GetBlueprintRunsOutput, error)
-}
-
-var _ GetBlueprintRunsAPIClient = (*Client)(nil)
 
 // GetBlueprintRunsPaginatorOptions is the paginator options for GetBlueprintRuns
 type GetBlueprintRunsPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *GetBlueprintRunsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBlueprintRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *GetBlueprintRunsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetBlueprintRunsAPIClient is a client that implements the GetBlueprintRuns
+// operation.
+type GetBlueprintRunsAPIClient interface {
+	GetBlueprintRuns(context.Context, *GetBlueprintRunsInput, ...func(*Options)) (*GetBlueprintRunsOutput, error)
+}
+
+var _ GetBlueprintRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBlueprintRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

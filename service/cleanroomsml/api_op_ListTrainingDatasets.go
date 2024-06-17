@@ -114,6 +114,9 @@ func (c *Client) addOperationListTrainingDatasetsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainingDatasets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListTrainingDatasetsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListTrainingDatasetsAPIClient is a client that implements the
-// ListTrainingDatasets operation.
-type ListTrainingDatasetsAPIClient interface {
-	ListTrainingDatasets(context.Context, *ListTrainingDatasetsInput, ...func(*Options)) (*ListTrainingDatasetsOutput, error)
-}
-
-var _ ListTrainingDatasetsAPIClient = (*Client)(nil)
 
 // ListTrainingDatasetsPaginatorOptions is the paginator options for
 // ListTrainingDatasets
@@ -207,6 +202,9 @@ func (p *ListTrainingDatasetsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrainingDatasets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListTrainingDatasetsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListTrainingDatasetsAPIClient is a client that implements the
+// ListTrainingDatasets operation.
+type ListTrainingDatasetsAPIClient interface {
+	ListTrainingDatasets(context.Context, *ListTrainingDatasetsInput, ...func(*Options)) (*ListTrainingDatasetsOutput, error)
+}
+
+var _ ListTrainingDatasetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrainingDatasets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

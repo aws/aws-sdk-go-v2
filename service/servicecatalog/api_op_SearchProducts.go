@@ -132,6 +132,9 @@ func (c *Client) addOperationSearchProductsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchProducts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationSearchProductsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// SearchProductsAPIClient is a client that implements the SearchProducts
-// operation.
-type SearchProductsAPIClient interface {
-	SearchProducts(context.Context, *SearchProductsInput, ...func(*Options)) (*SearchProductsOutput, error)
-}
-
-var _ SearchProductsAPIClient = (*Client)(nil)
 
 // SearchProductsPaginatorOptions is the paginator options for SearchProducts
 type SearchProductsPaginatorOptions struct {
@@ -220,6 +215,9 @@ func (p *SearchProductsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchProducts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *SearchProductsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// SearchProductsAPIClient is a client that implements the SearchProducts
+// operation.
+type SearchProductsAPIClient interface {
+	SearchProducts(context.Context, *SearchProductsInput, ...func(*Options)) (*SearchProductsOutput, error)
+}
+
+var _ SearchProductsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchProducts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

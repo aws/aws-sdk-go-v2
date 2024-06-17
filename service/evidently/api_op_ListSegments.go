@@ -115,6 +115,9 @@ func (c *Client) addOperationListSegmentsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSegments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,13 +138,6 @@ func (c *Client) addOperationListSegmentsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListSegmentsAPIClient is a client that implements the ListSegments operation.
-type ListSegmentsAPIClient interface {
-	ListSegments(context.Context, *ListSegmentsInput, ...func(*Options)) (*ListSegmentsOutput, error)
-}
-
-var _ ListSegmentsAPIClient = (*Client)(nil)
 
 // ListSegmentsPaginatorOptions is the paginator options for ListSegments
 type ListSegmentsPaginatorOptions struct {
@@ -207,6 +203,9 @@ func (p *ListSegmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSegments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +224,13 @@ func (p *ListSegmentsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListSegmentsAPIClient is a client that implements the ListSegments operation.
+type ListSegmentsAPIClient interface {
+	ListSegments(context.Context, *ListSegmentsInput, ...func(*Options)) (*ListSegmentsOutput, error)
+}
+
+var _ ListSegmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSegments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

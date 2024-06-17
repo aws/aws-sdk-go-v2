@@ -123,6 +123,9 @@ func (c *Client) addOperationListResourceProfileArtifactsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListResourceProfileArtifactsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListResourceProfileArtifactsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListResourceProfileArtifactsAPIClient is a client that implements the
-// ListResourceProfileArtifacts operation.
-type ListResourceProfileArtifactsAPIClient interface {
-	ListResourceProfileArtifacts(context.Context, *ListResourceProfileArtifactsInput, ...func(*Options)) (*ListResourceProfileArtifactsOutput, error)
-}
-
-var _ ListResourceProfileArtifactsAPIClient = (*Client)(nil)
 
 // ListResourceProfileArtifactsPaginatorOptions is the paginator options for
 // ListResourceProfileArtifacts
@@ -209,6 +204,9 @@ func (p *ListResourceProfileArtifactsPaginator) NextPage(ctx context.Context, op
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResourceProfileArtifacts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListResourceProfileArtifactsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListResourceProfileArtifactsAPIClient is a client that implements the
+// ListResourceProfileArtifacts operation.
+type ListResourceProfileArtifactsAPIClient interface {
+	ListResourceProfileArtifacts(context.Context, *ListResourceProfileArtifactsInput, ...func(*Options)) (*ListResourceProfileArtifactsOutput, error)
+}
+
+var _ ListResourceProfileArtifactsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResourceProfileArtifacts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

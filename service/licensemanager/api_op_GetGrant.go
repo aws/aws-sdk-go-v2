@@ -109,6 +109,9 @@ func (c *Client) addOperationGetGrantMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetGrantValidationMiddleware(stack); err != nil {
 		return err
 	}

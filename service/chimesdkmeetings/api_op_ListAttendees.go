@@ -120,6 +120,9 @@ func (c *Client) addOperationListAttendeesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAttendeesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,13 +146,6 @@ func (c *Client) addOperationListAttendeesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListAttendeesAPIClient is a client that implements the ListAttendees operation.
-type ListAttendeesAPIClient interface {
-	ListAttendees(context.Context, *ListAttendeesInput, ...func(*Options)) (*ListAttendeesOutput, error)
-}
-
-var _ ListAttendeesAPIClient = (*Client)(nil)
 
 // ListAttendeesPaginatorOptions is the paginator options for ListAttendees
 type ListAttendeesPaginatorOptions struct {
@@ -214,6 +210,9 @@ func (p *ListAttendeesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAttendees(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +231,13 @@ func (p *ListAttendeesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListAttendeesAPIClient is a client that implements the ListAttendees operation.
+type ListAttendeesAPIClient interface {
+	ListAttendees(context.Context, *ListAttendeesInput, ...func(*Options)) (*ListAttendeesOutput, error)
+}
+
+var _ ListAttendeesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAttendees(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

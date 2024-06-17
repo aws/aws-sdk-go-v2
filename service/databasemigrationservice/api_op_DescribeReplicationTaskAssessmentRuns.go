@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationTaskAssessmentRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(st
 	}
 	return nil
 }
-
-// DescribeReplicationTaskAssessmentRunsAPIClient is a client that implements the
-// DescribeReplicationTaskAssessmentRuns operation.
-type DescribeReplicationTaskAssessmentRunsAPIClient interface {
-	DescribeReplicationTaskAssessmentRuns(context.Context, *DescribeReplicationTaskAssessmentRunsInput, ...func(*Options)) (*DescribeReplicationTaskAssessmentRunsOutput, error)
-}
-
-var _ DescribeReplicationTaskAssessmentRunsAPIClient = (*Client)(nil)
 
 // DescribeReplicationTaskAssessmentRunsPaginatorOptions is the paginator options
 // for DescribeReplicationTaskAssessmentRuns
@@ -232,6 +227,9 @@ func (p *DescribeReplicationTaskAssessmentRunsPaginator) NextPage(ctx context.Co
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReplicationTaskAssessmentRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *DescribeReplicationTaskAssessmentRunsPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// DescribeReplicationTaskAssessmentRunsAPIClient is a client that implements the
+// DescribeReplicationTaskAssessmentRuns operation.
+type DescribeReplicationTaskAssessmentRunsAPIClient interface {
+	DescribeReplicationTaskAssessmentRuns(context.Context, *DescribeReplicationTaskAssessmentRunsInput, ...func(*Options)) (*DescribeReplicationTaskAssessmentRunsOutput, error)
+}
+
+var _ DescribeReplicationTaskAssessmentRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationTaskAssessmentRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

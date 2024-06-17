@@ -116,6 +116,9 @@ func (c *Client) addOperationListWavesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWaves(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,13 +139,6 @@ func (c *Client) addOperationListWavesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListWavesAPIClient is a client that implements the ListWaves operation.
-type ListWavesAPIClient interface {
-	ListWaves(context.Context, *ListWavesInput, ...func(*Options)) (*ListWavesOutput, error)
-}
-
-var _ ListWavesAPIClient = (*Client)(nil)
 
 // ListWavesPaginatorOptions is the paginator options for ListWaves
 type ListWavesPaginatorOptions struct {
@@ -207,6 +203,9 @@ func (p *ListWavesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWaves(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +224,13 @@ func (p *ListWavesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListWavesAPIClient is a client that implements the ListWaves operation.
+type ListWavesAPIClient interface {
+	ListWaves(context.Context, *ListWavesInput, ...func(*Options)) (*ListWavesOutput, error)
+}
+
+var _ ListWavesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWaves(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

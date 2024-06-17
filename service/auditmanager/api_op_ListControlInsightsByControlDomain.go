@@ -129,6 +129,9 @@ func (c *Client) addOperationListControlInsightsByControlDomainMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListControlInsightsByControlDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListControlInsightsByControlDomainMiddlewares(stack
 	}
 	return nil
 }
-
-// ListControlInsightsByControlDomainAPIClient is a client that implements the
-// ListControlInsightsByControlDomain operation.
-type ListControlInsightsByControlDomainAPIClient interface {
-	ListControlInsightsByControlDomain(context.Context, *ListControlInsightsByControlDomainInput, ...func(*Options)) (*ListControlInsightsByControlDomainOutput, error)
-}
-
-var _ ListControlInsightsByControlDomainAPIClient = (*Client)(nil)
 
 // ListControlInsightsByControlDomainPaginatorOptions is the paginator options for
 // ListControlInsightsByControlDomain
@@ -227,6 +222,9 @@ func (p *ListControlInsightsByControlDomainPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListControlInsightsByControlDomain(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListControlInsightsByControlDomainPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListControlInsightsByControlDomainAPIClient is a client that implements the
+// ListControlInsightsByControlDomain operation.
+type ListControlInsightsByControlDomainAPIClient interface {
+	ListControlInsightsByControlDomain(context.Context, *ListControlInsightsByControlDomainInput, ...func(*Options)) (*ListControlInsightsByControlDomainOutput, error)
+}
+
+var _ ListControlInsightsByControlDomainAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListControlInsightsByControlDomain(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

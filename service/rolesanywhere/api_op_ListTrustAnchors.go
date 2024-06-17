@@ -117,6 +117,9 @@ func (c *Client) addOperationListTrustAnchorsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrustAnchors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListTrustAnchorsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListTrustAnchorsAPIClient is a client that implements the ListTrustAnchors
-// operation.
-type ListTrustAnchorsAPIClient interface {
-	ListTrustAnchors(context.Context, *ListTrustAnchorsInput, ...func(*Options)) (*ListTrustAnchorsOutput, error)
-}
-
-var _ ListTrustAnchorsAPIClient = (*Client)(nil)
 
 // ListTrustAnchorsPaginatorOptions is the paginator options for ListTrustAnchors
 type ListTrustAnchorsPaginatorOptions struct {
@@ -197,6 +192,9 @@ func (p *ListTrustAnchorsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrustAnchors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -215,6 +213,14 @@ func (p *ListTrustAnchorsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListTrustAnchorsAPIClient is a client that implements the ListTrustAnchors
+// operation.
+type ListTrustAnchorsAPIClient interface {
+	ListTrustAnchors(context.Context, *ListTrustAnchorsInput, ...func(*Options)) (*ListTrustAnchorsOutput, error)
+}
+
+var _ ListTrustAnchorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrustAnchors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

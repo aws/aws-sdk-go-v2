@@ -110,6 +110,9 @@ func (c *Client) addOperationListStudiosMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStudios(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,13 +133,6 @@ func (c *Client) addOperationListStudiosMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListStudiosAPIClient is a client that implements the ListStudios operation.
-type ListStudiosAPIClient interface {
-	ListStudios(context.Context, *ListStudiosInput, ...func(*Options)) (*ListStudiosOutput, error)
-}
-
-var _ ListStudiosAPIClient = (*Client)(nil)
 
 // ListStudiosPaginatorOptions is the paginator options for ListStudios
 type ListStudiosPaginatorOptions struct {
@@ -189,6 +185,9 @@ func (p *ListStudiosPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStudios(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -207,6 +206,13 @@ func (p *ListStudiosPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListStudiosAPIClient is a client that implements the ListStudios operation.
+type ListStudiosAPIClient interface {
+	ListStudios(context.Context, *ListStudiosInput, ...func(*Options)) (*ListStudiosOutput, error)
+}
+
+var _ ListStudiosAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStudios(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

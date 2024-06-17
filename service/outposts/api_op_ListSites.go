@@ -125,6 +125,9 @@ func (c *Client) addOperationListSitesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSites(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationListSitesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListSitesAPIClient is a client that implements the ListSites operation.
-type ListSitesAPIClient interface {
-	ListSites(context.Context, *ListSitesInput, ...func(*Options)) (*ListSitesOutput, error)
-}
-
-var _ ListSitesAPIClient = (*Client)(nil)
 
 // ListSitesPaginatorOptions is the paginator options for ListSites
 type ListSitesPaginatorOptions struct {
@@ -216,6 +212,9 @@ func (p *ListSitesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSites(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +233,13 @@ func (p *ListSitesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListSitesAPIClient is a client that implements the ListSites operation.
+type ListSitesAPIClient interface {
+	ListSites(context.Context, *ListSitesInput, ...func(*Options)) (*ListSitesOutput, error)
+}
+
+var _ ListSitesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSites(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeCustomDomainAssociationsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCustomDomainAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationDescribeCustomDomainAssociationsMiddlewares(stack *
 	}
 	return nil
 }
-
-// DescribeCustomDomainAssociationsAPIClient is a client that implements the
-// DescribeCustomDomainAssociations operation.
-type DescribeCustomDomainAssociationsAPIClient interface {
-	DescribeCustomDomainAssociations(context.Context, *DescribeCustomDomainAssociationsInput, ...func(*Options)) (*DescribeCustomDomainAssociationsOutput, error)
-}
-
-var _ DescribeCustomDomainAssociationsAPIClient = (*Client)(nil)
 
 // DescribeCustomDomainAssociationsPaginatorOptions is the paginator options for
 // DescribeCustomDomainAssociations
@@ -211,6 +206,9 @@ func (p *DescribeCustomDomainAssociationsPaginator) NextPage(ctx context.Context
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCustomDomainAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *DescribeCustomDomainAssociationsPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// DescribeCustomDomainAssociationsAPIClient is a client that implements the
+// DescribeCustomDomainAssociations operation.
+type DescribeCustomDomainAssociationsAPIClient interface {
+	DescribeCustomDomainAssociations(context.Context, *DescribeCustomDomainAssociationsInput, ...func(*Options)) (*DescribeCustomDomainAssociationsOutput, error)
+}
+
+var _ DescribeCustomDomainAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCustomDomainAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

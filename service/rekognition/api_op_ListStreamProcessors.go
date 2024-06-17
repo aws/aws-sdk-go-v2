@@ -116,6 +116,9 @@ func (c *Client) addOperationListStreamProcessorsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStreamProcessors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListStreamProcessorsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListStreamProcessorsAPIClient is a client that implements the
-// ListStreamProcessors operation.
-type ListStreamProcessorsAPIClient interface {
-	ListStreamProcessors(context.Context, *ListStreamProcessorsInput, ...func(*Options)) (*ListStreamProcessorsOutput, error)
-}
-
-var _ ListStreamProcessorsAPIClient = (*Client)(nil)
 
 // ListStreamProcessorsPaginatorOptions is the paginator options for
 // ListStreamProcessors
@@ -210,6 +205,9 @@ func (p *ListStreamProcessorsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreamProcessors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListStreamProcessorsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListStreamProcessorsAPIClient is a client that implements the
+// ListStreamProcessors operation.
+type ListStreamProcessorsAPIClient interface {
+	ListStreamProcessors(context.Context, *ListStreamProcessorsInput, ...func(*Options)) (*ListStreamProcessorsOutput, error)
+}
+
+var _ ListStreamProcessorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreamProcessors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

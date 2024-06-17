@@ -120,6 +120,9 @@ func (c *Client) addOperationListSnapshotCopyConfigurationsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSnapshotCopyConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListSnapshotCopyConfigurationsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListSnapshotCopyConfigurationsAPIClient is a client that implements the
-// ListSnapshotCopyConfigurations operation.
-type ListSnapshotCopyConfigurationsAPIClient interface {
-	ListSnapshotCopyConfigurations(context.Context, *ListSnapshotCopyConfigurationsInput, ...func(*Options)) (*ListSnapshotCopyConfigurationsOutput, error)
-}
-
-var _ ListSnapshotCopyConfigurationsAPIClient = (*Client)(nil)
 
 // ListSnapshotCopyConfigurationsPaginatorOptions is the paginator options for
 // ListSnapshotCopyConfigurations
@@ -216,6 +211,9 @@ func (p *ListSnapshotCopyConfigurationsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSnapshotCopyConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListSnapshotCopyConfigurationsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListSnapshotCopyConfigurationsAPIClient is a client that implements the
+// ListSnapshotCopyConfigurations operation.
+type ListSnapshotCopyConfigurationsAPIClient interface {
+	ListSnapshotCopyConfigurations(context.Context, *ListSnapshotCopyConfigurationsInput, ...func(*Options)) (*ListSnapshotCopyConfigurationsOutput, error)
+}
+
+var _ ListSnapshotCopyConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSnapshotCopyConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

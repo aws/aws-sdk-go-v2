@@ -118,6 +118,9 @@ func (c *Client) addOperationGetBatchPredictionJobsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBatchPredictionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetBatchPredictionJobsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// GetBatchPredictionJobsAPIClient is a client that implements the
-// GetBatchPredictionJobs operation.
-type GetBatchPredictionJobsAPIClient interface {
-	GetBatchPredictionJobs(context.Context, *GetBatchPredictionJobsInput, ...func(*Options)) (*GetBatchPredictionJobsOutput, error)
-}
-
-var _ GetBatchPredictionJobsAPIClient = (*Client)(nil)
 
 // GetBatchPredictionJobsPaginatorOptions is the paginator options for
 // GetBatchPredictionJobs
@@ -211,6 +206,9 @@ func (p *GetBatchPredictionJobsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBatchPredictionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *GetBatchPredictionJobsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// GetBatchPredictionJobsAPIClient is a client that implements the
+// GetBatchPredictionJobs operation.
+type GetBatchPredictionJobsAPIClient interface {
+	GetBatchPredictionJobs(context.Context, *GetBatchPredictionJobsInput, ...func(*Options)) (*GetBatchPredictionJobsOutput, error)
+}
+
+var _ GetBatchPredictionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBatchPredictionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

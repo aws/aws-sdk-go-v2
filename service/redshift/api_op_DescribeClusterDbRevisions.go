@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeClusterDbRevisionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterDbRevisions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationDescribeClusterDbRevisionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeClusterDbRevisionsAPIClient is a client that implements the
-// DescribeClusterDbRevisions operation.
-type DescribeClusterDbRevisionsAPIClient interface {
-	DescribeClusterDbRevisions(context.Context, *DescribeClusterDbRevisionsInput, ...func(*Options)) (*DescribeClusterDbRevisionsOutput, error)
-}
-
-var _ DescribeClusterDbRevisionsAPIClient = (*Client)(nil)
 
 // DescribeClusterDbRevisionsPaginatorOptions is the paginator options for
 // DescribeClusterDbRevisions
@@ -237,6 +232,9 @@ func (p *DescribeClusterDbRevisionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeClusterDbRevisions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *DescribeClusterDbRevisionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeClusterDbRevisionsAPIClient is a client that implements the
+// DescribeClusterDbRevisions operation.
+type DescribeClusterDbRevisionsAPIClient interface {
+	DescribeClusterDbRevisions(context.Context, *DescribeClusterDbRevisionsInput, ...func(*Options)) (*DescribeClusterDbRevisionsOutput, error)
+}
+
+var _ DescribeClusterDbRevisionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeClusterDbRevisions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

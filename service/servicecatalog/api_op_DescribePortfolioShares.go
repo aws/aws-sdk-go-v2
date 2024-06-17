@@ -140,6 +140,9 @@ func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribePortfolioSharesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribePortfolioSharesAPIClient is a client that implements the
-// DescribePortfolioShares operation.
-type DescribePortfolioSharesAPIClient interface {
-	DescribePortfolioShares(context.Context, *DescribePortfolioSharesInput, ...func(*Options)) (*DescribePortfolioSharesOutput, error)
-}
-
-var _ DescribePortfolioSharesAPIClient = (*Client)(nil)
 
 // DescribePortfolioSharesPaginatorOptions is the paginator options for
 // DescribePortfolioShares
@@ -233,6 +228,9 @@ func (p *DescribePortfolioSharesPaginator) NextPage(ctx context.Context, optFns 
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribePortfolioShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *DescribePortfolioSharesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribePortfolioSharesAPIClient is a client that implements the
+// DescribePortfolioShares operation.
+type DescribePortfolioSharesAPIClient interface {
+	DescribePortfolioShares(context.Context, *DescribePortfolioSharesInput, ...func(*Options)) (*DescribePortfolioSharesOutput, error)
+}
+
+var _ DescribePortfolioSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribePortfolioShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

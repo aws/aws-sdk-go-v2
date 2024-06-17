@@ -150,6 +150,9 @@ func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFileSystems(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeFileSystemsAPIClient is a client that implements the
-// DescribeFileSystems operation.
-type DescribeFileSystemsAPIClient interface {
-	DescribeFileSystems(context.Context, *DescribeFileSystemsInput, ...func(*Options)) (*DescribeFileSystemsOutput, error)
-}
-
-var _ DescribeFileSystemsAPIClient = (*Client)(nil)
 
 // DescribeFileSystemsPaginatorOptions is the paginator options for
 // DescribeFileSystems
@@ -245,6 +240,9 @@ func (p *DescribeFileSystemsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFileSystems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +261,14 @@ func (p *DescribeFileSystemsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeFileSystemsAPIClient is a client that implements the
+// DescribeFileSystems operation.
+type DescribeFileSystemsAPIClient interface {
+	DescribeFileSystems(context.Context, *DescribeFileSystemsInput, ...func(*Options)) (*DescribeFileSystemsOutput, error)
+}
+
+var _ DescribeFileSystemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFileSystems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

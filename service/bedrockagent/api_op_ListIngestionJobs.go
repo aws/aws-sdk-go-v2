@@ -135,6 +135,9 @@ func (c *Client) addOperationListIngestionJobsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIngestionJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListIngestionJobsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListIngestionJobsAPIClient is a client that implements the ListIngestionJobs
-// operation.
-type ListIngestionJobsAPIClient interface {
-	ListIngestionJobs(context.Context, *ListIngestionJobsInput, ...func(*Options)) (*ListIngestionJobsOutput, error)
-}
-
-var _ ListIngestionJobsAPIClient = (*Client)(nil)
 
 // ListIngestionJobsPaginatorOptions is the paginator options for ListIngestionJobs
 type ListIngestionJobsPaginatorOptions struct {
@@ -233,6 +228,9 @@ func (p *ListIngestionJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIngestionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListIngestionJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListIngestionJobsAPIClient is a client that implements the ListIngestionJobs
+// operation.
+type ListIngestionJobsAPIClient interface {
+	ListIngestionJobs(context.Context, *ListIngestionJobsInput, ...func(*Options)) (*ListIngestionJobsOutput, error)
+}
+
+var _ ListIngestionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIngestionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

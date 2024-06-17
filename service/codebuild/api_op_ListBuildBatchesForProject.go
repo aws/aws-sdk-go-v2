@@ -128,6 +128,9 @@ func (c *Client) addOperationListBuildBatchesForProjectMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBuildBatchesForProject(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListBuildBatchesForProjectMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListBuildBatchesForProjectAPIClient is a client that implements the
-// ListBuildBatchesForProject operation.
-type ListBuildBatchesForProjectAPIClient interface {
-	ListBuildBatchesForProject(context.Context, *ListBuildBatchesForProjectInput, ...func(*Options)) (*ListBuildBatchesForProjectOutput, error)
-}
-
-var _ ListBuildBatchesForProjectAPIClient = (*Client)(nil)
 
 // ListBuildBatchesForProjectPaginatorOptions is the paginator options for
 // ListBuildBatchesForProject
@@ -223,6 +218,9 @@ func (p *ListBuildBatchesForProjectPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBuildBatchesForProject(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListBuildBatchesForProjectPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListBuildBatchesForProjectAPIClient is a client that implements the
+// ListBuildBatchesForProject operation.
+type ListBuildBatchesForProjectAPIClient interface {
+	ListBuildBatchesForProject(context.Context, *ListBuildBatchesForProjectInput, ...func(*Options)) (*ListBuildBatchesForProjectOutput, error)
+}
+
+var _ ListBuildBatchesForProjectAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBuildBatchesForProject(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

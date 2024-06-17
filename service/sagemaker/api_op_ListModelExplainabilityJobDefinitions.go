@@ -137,6 +137,9 @@ func (c *Client) addOperationListModelExplainabilityJobDefinitionsMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelExplainabilityJobDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListModelExplainabilityJobDefinitionsMiddlewares(st
 	}
 	return nil
 }
-
-// ListModelExplainabilityJobDefinitionsAPIClient is a client that implements the
-// ListModelExplainabilityJobDefinitions operation.
-type ListModelExplainabilityJobDefinitionsAPIClient interface {
-	ListModelExplainabilityJobDefinitions(context.Context, *ListModelExplainabilityJobDefinitionsInput, ...func(*Options)) (*ListModelExplainabilityJobDefinitionsOutput, error)
-}
-
-var _ ListModelExplainabilityJobDefinitionsAPIClient = (*Client)(nil)
 
 // ListModelExplainabilityJobDefinitionsPaginatorOptions is the paginator options
 // for ListModelExplainabilityJobDefinitions
@@ -232,6 +227,9 @@ func (p *ListModelExplainabilityJobDefinitionsPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelExplainabilityJobDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListModelExplainabilityJobDefinitionsPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListModelExplainabilityJobDefinitionsAPIClient is a client that implements the
+// ListModelExplainabilityJobDefinitions operation.
+type ListModelExplainabilityJobDefinitionsAPIClient interface {
+	ListModelExplainabilityJobDefinitions(context.Context, *ListModelExplainabilityJobDefinitionsInput, ...func(*Options)) (*ListModelExplainabilityJobDefinitionsOutput, error)
+}
+
+var _ ListModelExplainabilityJobDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelExplainabilityJobDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

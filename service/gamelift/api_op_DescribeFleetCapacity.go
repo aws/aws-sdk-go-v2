@@ -161,6 +161,9 @@ func (c *Client) addOperationDescribeFleetCapacityMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetCapacity(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -181,14 +184,6 @@ func (c *Client) addOperationDescribeFleetCapacityMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeFleetCapacityAPIClient is a client that implements the
-// DescribeFleetCapacity operation.
-type DescribeFleetCapacityAPIClient interface {
-	DescribeFleetCapacity(context.Context, *DescribeFleetCapacityInput, ...func(*Options)) (*DescribeFleetCapacityOutput, error)
-}
-
-var _ DescribeFleetCapacityAPIClient = (*Client)(nil)
 
 // DescribeFleetCapacityPaginatorOptions is the paginator options for
 // DescribeFleetCapacity
@@ -256,6 +251,9 @@ func (p *DescribeFleetCapacityPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFleetCapacity(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -274,6 +272,14 @@ func (p *DescribeFleetCapacityPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeFleetCapacityAPIClient is a client that implements the
+// DescribeFleetCapacity operation.
+type DescribeFleetCapacityAPIClient interface {
+	DescribeFleetCapacity(context.Context, *DescribeFleetCapacityInput, ...func(*Options)) (*DescribeFleetCapacityOutput, error)
+}
+
+var _ DescribeFleetCapacityAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFleetCapacity(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

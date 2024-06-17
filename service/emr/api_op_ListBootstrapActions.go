@@ -114,6 +114,9 @@ func (c *Client) addOperationListBootstrapActionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBootstrapActionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListBootstrapActionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListBootstrapActionsAPIClient is a client that implements the
-// ListBootstrapActions operation.
-type ListBootstrapActionsAPIClient interface {
-	ListBootstrapActions(context.Context, *ListBootstrapActionsInput, ...func(*Options)) (*ListBootstrapActionsOutput, error)
-}
-
-var _ ListBootstrapActionsAPIClient = (*Client)(nil)
 
 // ListBootstrapActionsPaginatorOptions is the paginator options for
 // ListBootstrapActions
@@ -198,6 +193,9 @@ func (p *ListBootstrapActionsPaginator) NextPage(ctx context.Context, optFns ...
 	params := *p.params
 	params.Marker = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBootstrapActions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -216,6 +214,14 @@ func (p *ListBootstrapActionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListBootstrapActionsAPIClient is a client that implements the
+// ListBootstrapActions operation.
+type ListBootstrapActionsAPIClient interface {
+	ListBootstrapActions(context.Context, *ListBootstrapActionsInput, ...func(*Options)) (*ListBootstrapActionsOutput, error)
+}
+
+var _ ListBootstrapActionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBootstrapActions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -122,6 +122,9 @@ func (c *Client) addOperationCreateOriginAccessControlMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateOriginAccessControlValidationMiddleware(stack); err != nil {
 		return err
 	}

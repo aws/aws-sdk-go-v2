@@ -117,6 +117,9 @@ func (c *Client) addOperationListSuitesMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSuitesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,13 +143,6 @@ func (c *Client) addOperationListSuitesMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListSuitesAPIClient is a client that implements the ListSuites operation.
-type ListSuitesAPIClient interface {
-	ListSuites(context.Context, *ListSuitesInput, ...func(*Options)) (*ListSuitesOutput, error)
-}
-
-var _ ListSuitesAPIClient = (*Client)(nil)
 
 // ListSuitesPaginatorOptions is the paginator options for ListSuites
 type ListSuitesPaginatorOptions struct {
@@ -199,6 +195,9 @@ func (p *ListSuitesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSuites(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -217,6 +216,13 @@ func (p *ListSuitesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListSuitesAPIClient is a client that implements the ListSuites operation.
+type ListSuitesAPIClient interface {
+	ListSuites(context.Context, *ListSuitesInput, ...func(*Options)) (*ListSuitesOutput, error)
+}
+
+var _ ListSuitesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSuites(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

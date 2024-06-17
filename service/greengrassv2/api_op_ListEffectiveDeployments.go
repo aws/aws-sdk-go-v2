@@ -117,6 +117,9 @@ func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEffectiveDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListEffectiveDeploymentsAPIClient is a client that implements the
-// ListEffectiveDeployments operation.
-type ListEffectiveDeploymentsAPIClient interface {
-	ListEffectiveDeployments(context.Context, *ListEffectiveDeploymentsInput, ...func(*Options)) (*ListEffectiveDeploymentsOutput, error)
-}
-
-var _ ListEffectiveDeploymentsAPIClient = (*Client)(nil)
 
 // ListEffectiveDeploymentsPaginatorOptions is the paginator options for
 // ListEffectiveDeployments
@@ -214,6 +209,9 @@ func (p *ListEffectiveDeploymentsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEffectiveDeployments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListEffectiveDeploymentsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListEffectiveDeploymentsAPIClient is a client that implements the
+// ListEffectiveDeployments operation.
+type ListEffectiveDeploymentsAPIClient interface {
+	ListEffectiveDeployments(context.Context, *ListEffectiveDeploymentsInput, ...func(*Options)) (*ListEffectiveDeploymentsOutput, error)
+}
+
+var _ ListEffectiveDeploymentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEffectiveDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

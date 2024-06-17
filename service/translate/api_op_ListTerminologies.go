@@ -112,6 +112,9 @@ func (c *Client) addOperationListTerminologiesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTerminologies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListTerminologiesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListTerminologiesAPIClient is a client that implements the ListTerminologies
-// operation.
-type ListTerminologiesAPIClient interface {
-	ListTerminologies(context.Context, *ListTerminologiesInput, ...func(*Options)) (*ListTerminologiesOutput, error)
-}
-
-var _ ListTerminologiesAPIClient = (*Client)(nil)
 
 // ListTerminologiesPaginatorOptions is the paginator options for ListTerminologies
 type ListTerminologiesPaginatorOptions struct {
@@ -204,6 +199,9 @@ func (p *ListTerminologiesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTerminologies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListTerminologiesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListTerminologiesAPIClient is a client that implements the ListTerminologies
+// operation.
+type ListTerminologiesAPIClient interface {
+	ListTerminologies(context.Context, *ListTerminologiesInput, ...func(*Options)) (*ListTerminologiesOutput, error)
+}
+
+var _ ListTerminologiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTerminologies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

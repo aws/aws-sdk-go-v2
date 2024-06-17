@@ -112,6 +112,9 @@ func (c *Client) addOperationListSlackWorkspaceConfigurationsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSlackWorkspaceConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListSlackWorkspaceConfigurationsMiddlewares(stack *
 	}
 	return nil
 }
-
-// ListSlackWorkspaceConfigurationsAPIClient is a client that implements the
-// ListSlackWorkspaceConfigurations operation.
-type ListSlackWorkspaceConfigurationsAPIClient interface {
-	ListSlackWorkspaceConfigurations(context.Context, *ListSlackWorkspaceConfigurationsInput, ...func(*Options)) (*ListSlackWorkspaceConfigurationsOutput, error)
-}
-
-var _ ListSlackWorkspaceConfigurationsAPIClient = (*Client)(nil)
 
 // ListSlackWorkspaceConfigurationsPaginatorOptions is the paginator options for
 // ListSlackWorkspaceConfigurations
@@ -195,6 +190,9 @@ func (p *ListSlackWorkspaceConfigurationsPaginator) NextPage(ctx context.Context
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSlackWorkspaceConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -213,6 +211,14 @@ func (p *ListSlackWorkspaceConfigurationsPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// ListSlackWorkspaceConfigurationsAPIClient is a client that implements the
+// ListSlackWorkspaceConfigurations operation.
+type ListSlackWorkspaceConfigurationsAPIClient interface {
+	ListSlackWorkspaceConfigurations(context.Context, *ListSlackWorkspaceConfigurationsInput, ...func(*Options)) (*ListSlackWorkspaceConfigurationsOutput, error)
+}
+
+var _ ListSlackWorkspaceConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSlackWorkspaceConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

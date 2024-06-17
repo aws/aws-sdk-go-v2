@@ -119,6 +119,9 @@ func (c *Client) addOperationListProvisioningTemplateVersionsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProvisioningTemplateVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListProvisioningTemplateVersionsMiddlewares(stack *
 	}
 	return nil
 }
-
-// ListProvisioningTemplateVersionsAPIClient is a client that implements the
-// ListProvisioningTemplateVersions operation.
-type ListProvisioningTemplateVersionsAPIClient interface {
-	ListProvisioningTemplateVersions(context.Context, *ListProvisioningTemplateVersionsInput, ...func(*Options)) (*ListProvisioningTemplateVersionsOutput, error)
-}
-
-var _ ListProvisioningTemplateVersionsAPIClient = (*Client)(nil)
 
 // ListProvisioningTemplateVersionsPaginatorOptions is the paginator options for
 // ListProvisioningTemplateVersions
@@ -217,6 +212,9 @@ func (p *ListProvisioningTemplateVersionsPaginator) NextPage(ctx context.Context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProvisioningTemplateVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListProvisioningTemplateVersionsPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// ListProvisioningTemplateVersionsAPIClient is a client that implements the
+// ListProvisioningTemplateVersions operation.
+type ListProvisioningTemplateVersionsAPIClient interface {
+	ListProvisioningTemplateVersions(context.Context, *ListProvisioningTemplateVersionsInput, ...func(*Options)) (*ListProvisioningTemplateVersionsOutput, error)
+}
+
+var _ ListProvisioningTemplateVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProvisioningTemplateVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -128,6 +128,9 @@ func (c *Client) addOperationListAccessPreviewFindingsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAccessPreviewFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListAccessPreviewFindingsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListAccessPreviewFindingsAPIClient is a client that implements the
-// ListAccessPreviewFindings operation.
-type ListAccessPreviewFindingsAPIClient interface {
-	ListAccessPreviewFindings(context.Context, *ListAccessPreviewFindingsInput, ...func(*Options)) (*ListAccessPreviewFindingsOutput, error)
-}
-
-var _ ListAccessPreviewFindingsAPIClient = (*Client)(nil)
 
 // ListAccessPreviewFindingsPaginatorOptions is the paginator options for
 // ListAccessPreviewFindings
@@ -225,6 +220,9 @@ func (p *ListAccessPreviewFindingsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccessPreviewFindings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListAccessPreviewFindingsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListAccessPreviewFindingsAPIClient is a client that implements the
+// ListAccessPreviewFindings operation.
+type ListAccessPreviewFindingsAPIClient interface {
+	ListAccessPreviewFindings(context.Context, *ListAccessPreviewFindingsInput, ...func(*Options)) (*ListAccessPreviewFindingsOutput, error)
+}
+
+var _ ListAccessPreviewFindingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccessPreviewFindings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

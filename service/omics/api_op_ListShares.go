@@ -123,6 +123,9 @@ func (c *Client) addOperationListSharesMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListSharesMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,40 +152,6 @@ func (c *Client) addOperationListSharesMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-type endpointPrefix_opListSharesMiddleware struct {
-}
-
-func (*endpointPrefix_opListSharesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListSharesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListSharesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListSharesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListSharesAPIClient is a client that implements the ListShares operation.
-type ListSharesAPIClient interface {
-	ListShares(context.Context, *ListSharesInput, ...func(*Options)) (*ListSharesOutput, error)
-}
-
-var _ ListSharesAPIClient = (*Client)(nil)
 
 // ListSharesPaginatorOptions is the paginator options for ListShares
 type ListSharesPaginatorOptions struct {
@@ -247,6 +216,9 @@ func (p *ListSharesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +237,40 @@ func (p *ListSharesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+type endpointPrefix_opListSharesMiddleware struct {
+}
+
+func (*endpointPrefix_opListSharesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListSharesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListSharesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListSharesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListSharesAPIClient is a client that implements the ListShares operation.
+type ListSharesAPIClient interface {
+	ListShares(context.Context, *ListSharesInput, ...func(*Options)) (*ListSharesOutput, error)
+}
+
+var _ ListSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

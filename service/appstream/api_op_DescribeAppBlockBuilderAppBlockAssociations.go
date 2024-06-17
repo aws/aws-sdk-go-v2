@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeAppBlockBuilderAppBlockAssociationsMiddlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAppBlockBuilderAppBlockAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationDescribeAppBlockBuilderAppBlockAssociationsMiddlewa
 	}
 	return nil
 }
-
-// DescribeAppBlockBuilderAppBlockAssociationsAPIClient is a client that
-// implements the DescribeAppBlockBuilderAppBlockAssociations operation.
-type DescribeAppBlockBuilderAppBlockAssociationsAPIClient interface {
-	DescribeAppBlockBuilderAppBlockAssociations(context.Context, *DescribeAppBlockBuilderAppBlockAssociationsInput, ...func(*Options)) (*DescribeAppBlockBuilderAppBlockAssociationsOutput, error)
-}
-
-var _ DescribeAppBlockBuilderAppBlockAssociationsAPIClient = (*Client)(nil)
 
 // DescribeAppBlockBuilderAppBlockAssociationsPaginatorOptions is the paginator
 // options for DescribeAppBlockBuilderAppBlockAssociations
@@ -213,6 +208,9 @@ func (p *DescribeAppBlockBuilderAppBlockAssociationsPaginator) NextPage(ctx cont
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAppBlockBuilderAppBlockAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *DescribeAppBlockBuilderAppBlockAssociationsPaginator) NextPage(ctx cont
 
 	return result, nil
 }
+
+// DescribeAppBlockBuilderAppBlockAssociationsAPIClient is a client that
+// implements the DescribeAppBlockBuilderAppBlockAssociations operation.
+type DescribeAppBlockBuilderAppBlockAssociationsAPIClient interface {
+	DescribeAppBlockBuilderAppBlockAssociations(context.Context, *DescribeAppBlockBuilderAppBlockAssociationsInput, ...func(*Options)) (*DescribeAppBlockBuilderAppBlockAssociationsOutput, error)
+}
+
+var _ DescribeAppBlockBuilderAppBlockAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAppBlockBuilderAppBlockAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

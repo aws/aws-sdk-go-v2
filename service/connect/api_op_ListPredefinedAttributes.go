@@ -117,6 +117,9 @@ func (c *Client) addOperationListPredefinedAttributesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPredefinedAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListPredefinedAttributesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListPredefinedAttributesAPIClient is a client that implements the
-// ListPredefinedAttributes operation.
-type ListPredefinedAttributesAPIClient interface {
-	ListPredefinedAttributes(context.Context, *ListPredefinedAttributesInput, ...func(*Options)) (*ListPredefinedAttributesOutput, error)
-}
-
-var _ ListPredefinedAttributesAPIClient = (*Client)(nil)
 
 // ListPredefinedAttributesPaginatorOptions is the paginator options for
 // ListPredefinedAttributes
@@ -214,6 +209,9 @@ func (p *ListPredefinedAttributesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPredefinedAttributes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListPredefinedAttributesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListPredefinedAttributesAPIClient is a client that implements the
+// ListPredefinedAttributes operation.
+type ListPredefinedAttributesAPIClient interface {
+	ListPredefinedAttributes(context.Context, *ListPredefinedAttributesInput, ...func(*Options)) (*ListPredefinedAttributesOutput, error)
+}
+
+var _ ListPredefinedAttributesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPredefinedAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

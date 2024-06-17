@@ -111,6 +111,9 @@ func (c *Client) addOperationReleaseFileSystemNfsV3LocksMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opReleaseFileSystemNfsV3LocksMiddleware(stack, options); err != nil {
 		return err
 	}

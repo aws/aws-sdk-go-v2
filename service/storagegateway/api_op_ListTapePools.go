@@ -128,6 +128,9 @@ func (c *Client) addOperationListTapePoolsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTapePools(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,13 +151,6 @@ func (c *Client) addOperationListTapePoolsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListTapePoolsAPIClient is a client that implements the ListTapePools operation.
-type ListTapePoolsAPIClient interface {
-	ListTapePools(context.Context, *ListTapePoolsInput, ...func(*Options)) (*ListTapePoolsOutput, error)
-}
-
-var _ ListTapePoolsAPIClient = (*Client)(nil)
 
 // ListTapePoolsPaginatorOptions is the paginator options for ListTapePools
 type ListTapePoolsPaginatorOptions struct {
@@ -219,6 +215,9 @@ func (p *ListTapePoolsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTapePools(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +236,13 @@ func (p *ListTapePoolsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListTapePoolsAPIClient is a client that implements the ListTapePools operation.
+type ListTapePoolsAPIClient interface {
+	ListTapePools(context.Context, *ListTapePoolsInput, ...func(*Options)) (*ListTapePoolsOutput, error)
+}
+
+var _ ListTapePoolsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTapePools(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -125,6 +125,9 @@ func (c *Client) addOperationListExperienceEntitiesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListExperienceEntitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListExperienceEntitiesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListExperienceEntitiesAPIClient is a client that implements the
-// ListExperienceEntities operation.
-type ListExperienceEntitiesAPIClient interface {
-	ListExperienceEntities(context.Context, *ListExperienceEntitiesInput, ...func(*Options)) (*ListExperienceEntitiesOutput, error)
-}
-
-var _ ListExperienceEntitiesAPIClient = (*Client)(nil)
 
 // ListExperienceEntitiesPaginatorOptions is the paginator options for
 // ListExperienceEntities
@@ -209,6 +204,9 @@ func (p *ListExperienceEntitiesPaginator) NextPage(ctx context.Context, optFns .
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExperienceEntities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListExperienceEntitiesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListExperienceEntitiesAPIClient is a client that implements the
+// ListExperienceEntities operation.
+type ListExperienceEntitiesAPIClient interface {
+	ListExperienceEntities(context.Context, *ListExperienceEntitiesInput, ...func(*Options)) (*ListExperienceEntitiesOutput, error)
+}
+
+var _ ListExperienceEntitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExperienceEntities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationListVariantStoresMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListVariantStoresMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,41 +143,6 @@ func (c *Client) addOperationListVariantStoresMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-type endpointPrefix_opListVariantStoresMiddleware struct {
-}
-
-func (*endpointPrefix_opListVariantStoresMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListVariantStoresMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListVariantStoresMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListVariantStoresMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListVariantStoresAPIClient is a client that implements the ListVariantStores
-// operation.
-type ListVariantStoresAPIClient interface {
-	ListVariantStores(context.Context, *ListVariantStoresInput, ...func(*Options)) (*ListVariantStoresOutput, error)
-}
-
-var _ ListVariantStoresAPIClient = (*Client)(nil)
 
 // ListVariantStoresPaginatorOptions is the paginator options for ListVariantStores
 type ListVariantStoresPaginatorOptions struct {
@@ -239,6 +207,9 @@ func (p *ListVariantStoresPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVariantStores(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +228,41 @@ func (p *ListVariantStoresPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+type endpointPrefix_opListVariantStoresMiddleware struct {
+}
+
+func (*endpointPrefix_opListVariantStoresMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListVariantStoresMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListVariantStoresMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListVariantStoresMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListVariantStoresAPIClient is a client that implements the ListVariantStores
+// operation.
+type ListVariantStoresAPIClient interface {
+	ListVariantStores(context.Context, *ListVariantStoresInput, ...func(*Options)) (*ListVariantStoresOutput, error)
+}
+
+var _ ListVariantStoresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVariantStores(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

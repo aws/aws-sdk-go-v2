@@ -124,6 +124,9 @@ func (c *Client) addOperationGetVehicleStatusMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetVehicleStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationGetVehicleStatusMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetVehicleStatusAPIClient is a client that implements the GetVehicleStatus
-// operation.
-type GetVehicleStatusAPIClient interface {
-	GetVehicleStatus(context.Context, *GetVehicleStatusInput, ...func(*Options)) (*GetVehicleStatusOutput, error)
-}
-
-var _ GetVehicleStatusAPIClient = (*Client)(nil)
 
 // GetVehicleStatusPaginatorOptions is the paginator options for GetVehicleStatus
 type GetVehicleStatusPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *GetVehicleStatusPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetVehicleStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *GetVehicleStatusPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetVehicleStatusAPIClient is a client that implements the GetVehicleStatus
+// operation.
+type GetVehicleStatusAPIClient interface {
+	GetVehicleStatus(context.Context, *GetVehicleStatusInput, ...func(*Options)) (*GetVehicleStatusOutput, error)
+}
+
+var _ GetVehicleStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetVehicleStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -126,6 +126,9 @@ func (c *Client) addOperationListLexBotsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLexBotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,13 +152,6 @@ func (c *Client) addOperationListLexBotsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListLexBotsAPIClient is a client that implements the ListLexBots operation.
-type ListLexBotsAPIClient interface {
-	ListLexBots(context.Context, *ListLexBotsInput, ...func(*Options)) (*ListLexBotsOutput, error)
-}
-
-var _ ListLexBotsAPIClient = (*Client)(nil)
 
 // ListLexBotsPaginatorOptions is the paginator options for ListLexBots
 type ListLexBotsPaginatorOptions struct {
@@ -221,6 +217,9 @@ func (p *ListLexBotsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLexBots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +238,13 @@ func (p *ListLexBotsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListLexBotsAPIClient is a client that implements the ListLexBots operation.
+type ListLexBotsAPIClient interface {
+	ListLexBots(context.Context, *ListLexBotsInput, ...func(*Options)) (*ListLexBotsOutput, error)
+}
+
+var _ ListLexBotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLexBots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

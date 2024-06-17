@@ -155,6 +155,9 @@ func (c *Client) addOperationCreateDetectorMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDetectorMiddleware(stack, options); err != nil {
 		return err
 	}

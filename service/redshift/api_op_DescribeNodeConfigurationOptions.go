@@ -153,6 +153,9 @@ func (c *Client) addOperationDescribeNodeConfigurationOptionsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeNodeConfigurationOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -176,14 +179,6 @@ func (c *Client) addOperationDescribeNodeConfigurationOptionsMiddlewares(stack *
 	}
 	return nil
 }
-
-// DescribeNodeConfigurationOptionsAPIClient is a client that implements the
-// DescribeNodeConfigurationOptions operation.
-type DescribeNodeConfigurationOptionsAPIClient interface {
-	DescribeNodeConfigurationOptions(context.Context, *DescribeNodeConfigurationOptionsInput, ...func(*Options)) (*DescribeNodeConfigurationOptionsOutput, error)
-}
-
-var _ DescribeNodeConfigurationOptionsAPIClient = (*Client)(nil)
 
 // DescribeNodeConfigurationOptionsPaginatorOptions is the paginator options for
 // DescribeNodeConfigurationOptions
@@ -258,6 +253,9 @@ func (p *DescribeNodeConfigurationOptionsPaginator) NextPage(ctx context.Context
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeNodeConfigurationOptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +274,14 @@ func (p *DescribeNodeConfigurationOptionsPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// DescribeNodeConfigurationOptionsAPIClient is a client that implements the
+// DescribeNodeConfigurationOptions operation.
+type DescribeNodeConfigurationOptionsAPIClient interface {
+	DescribeNodeConfigurationOptions(context.Context, *DescribeNodeConfigurationOptionsInput, ...func(*Options)) (*DescribeNodeConfigurationOptionsOutput, error)
+}
+
+var _ DescribeNodeConfigurationOptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeNodeConfigurationOptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

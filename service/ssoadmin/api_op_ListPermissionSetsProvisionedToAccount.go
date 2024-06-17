@@ -129,6 +129,9 @@ func (c *Client) addOperationListPermissionSetsProvisionedToAccountMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPermissionSetsProvisionedToAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListPermissionSetsProvisionedToAccountMiddlewares(s
 	}
 	return nil
 }
-
-// ListPermissionSetsProvisionedToAccountAPIClient is a client that implements the
-// ListPermissionSetsProvisionedToAccount operation.
-type ListPermissionSetsProvisionedToAccountAPIClient interface {
-	ListPermissionSetsProvisionedToAccount(context.Context, *ListPermissionSetsProvisionedToAccountInput, ...func(*Options)) (*ListPermissionSetsProvisionedToAccountOutput, error)
-}
-
-var _ ListPermissionSetsProvisionedToAccountAPIClient = (*Client)(nil)
 
 // ListPermissionSetsProvisionedToAccountPaginatorOptions is the paginator options
 // for ListPermissionSetsProvisionedToAccount
@@ -227,6 +222,9 @@ func (p *ListPermissionSetsProvisionedToAccountPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPermissionSetsProvisionedToAccount(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListPermissionSetsProvisionedToAccountPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListPermissionSetsProvisionedToAccountAPIClient is a client that implements the
+// ListPermissionSetsProvisionedToAccount operation.
+type ListPermissionSetsProvisionedToAccountAPIClient interface {
+	ListPermissionSetsProvisionedToAccount(context.Context, *ListPermissionSetsProvisionedToAccountInput, ...func(*Options)) (*ListPermissionSetsProvisionedToAccountOutput, error)
+}
+
+var _ ListPermissionSetsProvisionedToAccountAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPermissionSetsProvisionedToAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

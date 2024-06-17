@@ -115,6 +115,9 @@ func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroundStations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListGroundStationsAPIClient is a client that implements the ListGroundStations
-// operation.
-type ListGroundStationsAPIClient interface {
-	ListGroundStations(context.Context, *ListGroundStationsInput, ...func(*Options)) (*ListGroundStationsOutput, error)
-}
-
-var _ ListGroundStationsAPIClient = (*Client)(nil)
 
 // ListGroundStationsPaginatorOptions is the paginator options for
 // ListGroundStations
@@ -208,6 +203,9 @@ func (p *ListGroundStationsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGroundStations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListGroundStationsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListGroundStationsAPIClient is a client that implements the ListGroundStations
+// operation.
+type ListGroundStationsAPIClient interface {
+	ListGroundStations(context.Context, *ListGroundStationsInput, ...func(*Options)) (*ListGroundStationsOutput, error)
+}
+
+var _ ListGroundStationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGroundStations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

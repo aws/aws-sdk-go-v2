@@ -144,6 +144,9 @@ func (c *Client) addOperationListVolumesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVolumes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -164,13 +167,6 @@ func (c *Client) addOperationListVolumesMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListVolumesAPIClient is a client that implements the ListVolumes operation.
-type ListVolumesAPIClient interface {
-	ListVolumes(context.Context, *ListVolumesInput, ...func(*Options)) (*ListVolumesOutput, error)
-}
-
-var _ ListVolumesAPIClient = (*Client)(nil)
 
 // ListVolumesPaginatorOptions is the paginator options for ListVolumes
 type ListVolumesPaginatorOptions struct {
@@ -236,6 +232,9 @@ func (p *ListVolumesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVolumes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +253,13 @@ func (p *ListVolumesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListVolumesAPIClient is a client that implements the ListVolumes operation.
+type ListVolumesAPIClient interface {
+	ListVolumes(context.Context, *ListVolumesInput, ...func(*Options)) (*ListVolumesOutput, error)
+}
+
+var _ ListVolumesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVolumes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

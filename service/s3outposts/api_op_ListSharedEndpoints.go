@@ -129,6 +129,9 @@ func (c *Client) addOperationListSharedEndpointsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSharedEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListSharedEndpointsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListSharedEndpointsAPIClient is a client that implements the
-// ListSharedEndpoints operation.
-type ListSharedEndpointsAPIClient interface {
-	ListSharedEndpoints(context.Context, *ListSharedEndpointsInput, ...func(*Options)) (*ListSharedEndpointsOutput, error)
-}
-
-var _ ListSharedEndpointsAPIClient = (*Client)(nil)
 
 // ListSharedEndpointsPaginatorOptions is the paginator options for
 // ListSharedEndpoints
@@ -221,6 +216,9 @@ func (p *ListSharedEndpointsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSharedEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListSharedEndpointsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListSharedEndpointsAPIClient is a client that implements the
+// ListSharedEndpoints operation.
+type ListSharedEndpointsAPIClient interface {
+	ListSharedEndpoints(context.Context, *ListSharedEndpointsInput, ...func(*Options)) (*ListSharedEndpointsOutput, error)
+}
+
+var _ ListSharedEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSharedEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

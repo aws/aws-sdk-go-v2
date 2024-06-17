@@ -129,6 +129,9 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledControls(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListEnabledControlsAPIClient is a client that implements the
-// ListEnabledControls operation.
-type ListEnabledControlsAPIClient interface {
-	ListEnabledControls(context.Context, *ListEnabledControlsInput, ...func(*Options)) (*ListEnabledControlsOutput, error)
-}
-
-var _ ListEnabledControlsAPIClient = (*Client)(nil)
 
 // ListEnabledControlsPaginatorOptions is the paginator options for
 // ListEnabledControls
@@ -222,6 +217,9 @@ func (p *ListEnabledControlsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnabledControls(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListEnabledControlsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListEnabledControlsAPIClient is a client that implements the
+// ListEnabledControls operation.
+type ListEnabledControlsAPIClient interface {
+	ListEnabledControls(context.Context, *ListEnabledControlsInput, ...func(*Options)) (*ListEnabledControlsOutput, error)
+}
+
+var _ ListEnabledControlsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnabledControls(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

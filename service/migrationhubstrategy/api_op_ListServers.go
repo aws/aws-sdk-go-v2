@@ -130,6 +130,9 @@ func (c *Client) addOperationListServersMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,13 +153,6 @@ func (c *Client) addOperationListServersMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListServersAPIClient is a client that implements the ListServers operation.
-type ListServersAPIClient interface {
-	ListServers(context.Context, *ListServersInput, ...func(*Options)) (*ListServersOutput, error)
-}
-
-var _ ListServersAPIClient = (*Client)(nil)
 
 // ListServersPaginatorOptions is the paginator options for ListServers
 type ListServersPaginatorOptions struct {
@@ -222,6 +218,9 @@ func (p *ListServersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +239,13 @@ func (p *ListServersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListServersAPIClient is a client that implements the ListServers operation.
+type ListServersAPIClient interface {
+	ListServers(context.Context, *ListServersInput, ...func(*Options)) (*ListServersOutput, error)
+}
+
+var _ ListServersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -123,6 +123,9 @@ func (c *Client) addOperationListTableRestoreStatusMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTableRestoreStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListTableRestoreStatusMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListTableRestoreStatusAPIClient is a client that implements the
-// ListTableRestoreStatus operation.
-type ListTableRestoreStatusAPIClient interface {
-	ListTableRestoreStatus(context.Context, *ListTableRestoreStatusInput, ...func(*Options)) (*ListTableRestoreStatusOutput, error)
-}
-
-var _ ListTableRestoreStatusAPIClient = (*Client)(nil)
 
 // ListTableRestoreStatusPaginatorOptions is the paginator options for
 // ListTableRestoreStatus
@@ -217,6 +212,9 @@ func (p *ListTableRestoreStatusPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTableRestoreStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListTableRestoreStatusPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListTableRestoreStatusAPIClient is a client that implements the
+// ListTableRestoreStatus operation.
+type ListTableRestoreStatusAPIClient interface {
+	ListTableRestoreStatus(context.Context, *ListTableRestoreStatusInput, ...func(*Options)) (*ListTableRestoreStatusOutput, error)
+}
+
+var _ ListTableRestoreStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTableRestoreStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

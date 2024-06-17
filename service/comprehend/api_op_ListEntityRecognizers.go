@@ -121,6 +121,9 @@ func (c *Client) addOperationListEntityRecognizersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntityRecognizers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListEntityRecognizersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListEntityRecognizersAPIClient is a client that implements the
-// ListEntityRecognizers operation.
-type ListEntityRecognizersAPIClient interface {
-	ListEntityRecognizers(context.Context, *ListEntityRecognizersInput, ...func(*Options)) (*ListEntityRecognizersOutput, error)
-}
-
-var _ ListEntityRecognizersAPIClient = (*Client)(nil)
 
 // ListEntityRecognizersPaginatorOptions is the paginator options for
 // ListEntityRecognizers
@@ -214,6 +209,9 @@ func (p *ListEntityRecognizersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEntityRecognizers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListEntityRecognizersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListEntityRecognizersAPIClient is a client that implements the
+// ListEntityRecognizers operation.
+type ListEntityRecognizersAPIClient interface {
+	ListEntityRecognizers(context.Context, *ListEntityRecognizersInput, ...func(*Options)) (*ListEntityRecognizersOutput, error)
+}
+
+var _ ListEntityRecognizersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEntityRecognizers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

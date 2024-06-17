@@ -140,6 +140,9 @@ func (c *Client) addOperationCreateLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLicenseManagerReportGeneratorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationListBillingGroupsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBillingGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListBillingGroupsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListBillingGroupsAPIClient is a client that implements the ListBillingGroups
-// operation.
-type ListBillingGroupsAPIClient interface {
-	ListBillingGroups(context.Context, *ListBillingGroupsInput, ...func(*Options)) (*ListBillingGroupsOutput, error)
-}
-
-var _ ListBillingGroupsAPIClient = (*Client)(nil)
 
 // ListBillingGroupsPaginatorOptions is the paginator options for ListBillingGroups
 type ListBillingGroupsPaginatorOptions struct {
@@ -211,6 +206,9 @@ func (p *ListBillingGroupsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBillingGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListBillingGroupsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListBillingGroupsAPIClient is a client that implements the ListBillingGroups
+// operation.
+type ListBillingGroupsAPIClient interface {
+	ListBillingGroups(context.Context, *ListBillingGroupsInput, ...func(*Options)) (*ListBillingGroupsOutput, error)
+}
+
+var _ ListBillingGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBillingGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

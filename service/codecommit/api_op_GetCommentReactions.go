@@ -125,6 +125,9 @@ func (c *Client) addOperationGetCommentReactionsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCommentReactionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationGetCommentReactionsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetCommentReactionsAPIClient is a client that implements the
-// GetCommentReactions operation.
-type GetCommentReactionsAPIClient interface {
-	GetCommentReactions(context.Context, *GetCommentReactionsInput, ...func(*Options)) (*GetCommentReactionsOutput, error)
-}
-
-var _ GetCommentReactionsAPIClient = (*Client)(nil)
 
 // GetCommentReactionsPaginatorOptions is the paginator options for
 // GetCommentReactions
@@ -222,6 +217,9 @@ func (p *GetCommentReactionsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCommentReactions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *GetCommentReactionsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetCommentReactionsAPIClient is a client that implements the
+// GetCommentReactions operation.
+type GetCommentReactionsAPIClient interface {
+	GetCommentReactions(context.Context, *GetCommentReactionsInput, ...func(*Options)) (*GetCommentReactionsOutput, error)
+}
+
+var _ GetCommentReactionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCommentReactions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

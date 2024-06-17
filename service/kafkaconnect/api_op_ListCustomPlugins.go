@@ -117,6 +117,9 @@ func (c *Client) addOperationListCustomPluginsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomPlugins(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListCustomPluginsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListCustomPluginsAPIClient is a client that implements the ListCustomPlugins
-// operation.
-type ListCustomPluginsAPIClient interface {
-	ListCustomPlugins(context.Context, *ListCustomPluginsInput, ...func(*Options)) (*ListCustomPluginsOutput, error)
-}
-
-var _ ListCustomPluginsAPIClient = (*Client)(nil)
 
 // ListCustomPluginsPaginatorOptions is the paginator options for ListCustomPlugins
 type ListCustomPluginsPaginatorOptions struct {
@@ -205,6 +200,9 @@ func (p *ListCustomPluginsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomPlugins(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListCustomPluginsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListCustomPluginsAPIClient is a client that implements the ListCustomPlugins
+// operation.
+type ListCustomPluginsAPIClient interface {
+	ListCustomPlugins(context.Context, *ListCustomPluginsInput, ...func(*Options)) (*ListCustomPluginsOutput, error)
+}
+
+var _ ListCustomPluginsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomPlugins(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

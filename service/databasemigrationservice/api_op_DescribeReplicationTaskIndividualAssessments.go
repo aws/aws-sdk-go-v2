@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeReplicationTaskIndividualAssessmentsMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationTaskIndividualAssessmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationDescribeReplicationTaskIndividualAssessmentsMiddlew
 	}
 	return nil
 }
-
-// DescribeReplicationTaskIndividualAssessmentsAPIClient is a client that
-// implements the DescribeReplicationTaskIndividualAssessments operation.
-type DescribeReplicationTaskIndividualAssessmentsAPIClient interface {
-	DescribeReplicationTaskIndividualAssessments(context.Context, *DescribeReplicationTaskIndividualAssessmentsInput, ...func(*Options)) (*DescribeReplicationTaskIndividualAssessmentsOutput, error)
-}
-
-var _ DescribeReplicationTaskIndividualAssessmentsAPIClient = (*Client)(nil)
 
 // DescribeReplicationTaskIndividualAssessmentsPaginatorOptions is the paginator
 // options for DescribeReplicationTaskIndividualAssessments
@@ -227,6 +222,9 @@ func (p *DescribeReplicationTaskIndividualAssessmentsPaginator) NextPage(ctx con
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReplicationTaskIndividualAssessments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *DescribeReplicationTaskIndividualAssessmentsPaginator) NextPage(ctx con
 
 	return result, nil
 }
+
+// DescribeReplicationTaskIndividualAssessmentsAPIClient is a client that
+// implements the DescribeReplicationTaskIndividualAssessments operation.
+type DescribeReplicationTaskIndividualAssessmentsAPIClient interface {
+	DescribeReplicationTaskIndividualAssessments(context.Context, *DescribeReplicationTaskIndividualAssessmentsInput, ...func(*Options)) (*DescribeReplicationTaskIndividualAssessmentsOutput, error)
+}
+
+var _ DescribeReplicationTaskIndividualAssessmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationTaskIndividualAssessments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

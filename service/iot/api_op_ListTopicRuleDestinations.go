@@ -116,6 +116,9 @@ func (c *Client) addOperationListTopicRuleDestinationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTopicRuleDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListTopicRuleDestinationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListTopicRuleDestinationsAPIClient is a client that implements the
-// ListTopicRuleDestinations operation.
-type ListTopicRuleDestinationsAPIClient interface {
-	ListTopicRuleDestinations(context.Context, *ListTopicRuleDestinationsInput, ...func(*Options)) (*ListTopicRuleDestinationsOutput, error)
-}
-
-var _ ListTopicRuleDestinationsAPIClient = (*Client)(nil)
 
 // ListTopicRuleDestinationsPaginatorOptions is the paginator options for
 // ListTopicRuleDestinations
@@ -210,6 +205,9 @@ func (p *ListTopicRuleDestinationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTopicRuleDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListTopicRuleDestinationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListTopicRuleDestinationsAPIClient is a client that implements the
+// ListTopicRuleDestinations operation.
+type ListTopicRuleDestinationsAPIClient interface {
+	ListTopicRuleDestinations(context.Context, *ListTopicRuleDestinationsInput, ...func(*Options)) (*ListTopicRuleDestinationsOutput, error)
+}
+
+var _ ListTopicRuleDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTopicRuleDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

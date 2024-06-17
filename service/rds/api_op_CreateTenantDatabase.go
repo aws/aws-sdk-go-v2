@@ -156,6 +156,9 @@ func (c *Client) addOperationCreateTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateTenantDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

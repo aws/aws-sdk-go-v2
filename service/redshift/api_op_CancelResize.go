@@ -178,6 +178,9 @@ func (c *Client) addOperationCancelResizeMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelResizeValidationMiddleware(stack); err != nil {
 		return err
 	}

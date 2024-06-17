@@ -126,6 +126,9 @@ func (c *Client) addOperationListJobsByStatusMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJobsByStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListJobsByStatusMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListJobsByStatusAPIClient is a client that implements the ListJobsByStatus
-// operation.
-type ListJobsByStatusAPIClient interface {
-	ListJobsByStatus(context.Context, *ListJobsByStatusInput, ...func(*Options)) (*ListJobsByStatusOutput, error)
-}
-
-var _ ListJobsByStatusAPIClient = (*Client)(nil)
 
 // ListJobsByStatusPaginatorOptions is the paginator options for ListJobsByStatus
 type ListJobsByStatusPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListJobsByStatusPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.PageToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJobsByStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListJobsByStatusPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListJobsByStatusAPIClient is a client that implements the ListJobsByStatus
+// operation.
+type ListJobsByStatusAPIClient interface {
+	ListJobsByStatus(context.Context, *ListJobsByStatusInput, ...func(*Options)) (*ListJobsByStatusOutput, error)
+}
+
+var _ ListJobsByStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJobsByStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

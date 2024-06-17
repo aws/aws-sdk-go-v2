@@ -116,6 +116,9 @@ func (c *Client) addOperationUpdateTrustedTokenIssuerMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateTrustedTokenIssuerValidationMiddleware(stack); err != nil {
 		return err
 	}

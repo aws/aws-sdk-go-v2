@@ -125,6 +125,9 @@ func (c *Client) addOperationListCompositionRelationshipsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListCompositionRelationshipsMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,41 +154,6 @@ func (c *Client) addOperationListCompositionRelationshipsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-type endpointPrefix_opListCompositionRelationshipsMiddleware struct {
-}
-
-func (*endpointPrefix_opListCompositionRelationshipsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListCompositionRelationshipsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListCompositionRelationshipsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListCompositionRelationshipsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListCompositionRelationshipsAPIClient is a client that implements the
-// ListCompositionRelationships operation.
-type ListCompositionRelationshipsAPIClient interface {
-	ListCompositionRelationships(context.Context, *ListCompositionRelationshipsInput, ...func(*Options)) (*ListCompositionRelationshipsOutput, error)
-}
-
-var _ ListCompositionRelationshipsAPIClient = (*Client)(nil)
 
 // ListCompositionRelationshipsPaginatorOptions is the paginator options for
 // ListCompositionRelationships
@@ -255,6 +223,9 @@ func (p *ListCompositionRelationshipsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCompositionRelationships(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -273,6 +244,41 @@ func (p *ListCompositionRelationshipsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+type endpointPrefix_opListCompositionRelationshipsMiddleware struct {
+}
+
+func (*endpointPrefix_opListCompositionRelationshipsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListCompositionRelationshipsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListCompositionRelationshipsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListCompositionRelationshipsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListCompositionRelationshipsAPIClient is a client that implements the
+// ListCompositionRelationships operation.
+type ListCompositionRelationshipsAPIClient interface {
+	ListCompositionRelationships(context.Context, *ListCompositionRelationshipsInput, ...func(*Options)) (*ListCompositionRelationshipsOutput, error)
+}
+
+var _ ListCompositionRelationshipsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCompositionRelationships(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

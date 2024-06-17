@@ -228,6 +228,9 @@ func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeChangeSetValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -251,14 +254,6 @@ func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeChangeSetAPIClient is a client that implements the DescribeChangeSet
-// operation.
-type DescribeChangeSetAPIClient interface {
-	DescribeChangeSet(context.Context, *DescribeChangeSetInput, ...func(*Options)) (*DescribeChangeSetOutput, error)
-}
-
-var _ DescribeChangeSetAPIClient = (*Client)(nil)
 
 // ChangeSetCreateCompleteWaiterOptions are waiter options for
 // ChangeSetCreateCompleteWaiter
@@ -377,7 +372,13 @@ func (w *ChangeSetCreateCompleteWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.DescribeChangeSet(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -463,6 +464,14 @@ func changeSetCreateCompleteStateRetryable(ctx context.Context, input *DescribeC
 
 	return true, nil
 }
+
+// DescribeChangeSetAPIClient is a client that implements the DescribeChangeSet
+// operation.
+type DescribeChangeSetAPIClient interface {
+	DescribeChangeSet(context.Context, *DescribeChangeSetInput, ...func(*Options)) (*DescribeChangeSetOutput, error)
+}
+
+var _ DescribeChangeSetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeChangeSet(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

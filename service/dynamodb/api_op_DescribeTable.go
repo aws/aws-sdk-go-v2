@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTableValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,56 +160,6 @@ func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-func addOpDescribeTableDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
-	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
-		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
-			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
-				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
-				opt.Logger = o.Logger
-			},
-		},
-		DiscoverOperation:            c.fetchOpDescribeTableDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
-		EndpointDiscoveryRequired:    false,
-		Region:                       o.Region,
-	}, "ResolveEndpointV2", middleware.After)
-}
-
-func (c *Client) fetchOpDescribeTableDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
-	input := getOperationInput(ctx)
-	in, ok := input.(*DescribeTableInput)
-	if !ok {
-		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
-	}
-	_ = in
-
-	identifierMap := make(map[string]string, 0)
-	identifierMap["sdk#Region"] = region
-
-	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
-
-	if v, ok := c.endpointCache.Get(key); ok {
-		return v, nil
-	}
-
-	discoveryOperationInput := &DescribeEndpointsInput{}
-
-	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
-	for _, fn := range optFns {
-		fn(&opt)
-	}
-
-	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
-	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-// DescribeTableAPIClient is a client that implements the DescribeTable operation.
-type DescribeTableAPIClient interface {
-	DescribeTable(context.Context, *DescribeTableInput, ...func(*Options)) (*DescribeTableOutput, error)
-}
-
-var _ DescribeTableAPIClient = (*Client)(nil)
 
 // TableExistsWaiterOptions are waiter options for TableExistsWaiter
 type TableExistsWaiterOptions struct {
@@ -322,7 +275,13 @@ func (w *TableExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeT
 		}
 
 		out, err := w.client.DescribeTable(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -502,7 +461,13 @@ func (w *TableNotExistsWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeTable(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -549,6 +514,56 @@ func tableNotExistsStateRetryable(ctx context.Context, input *DescribeTableInput
 
 	return true, nil
 }
+
+func addOpDescribeTableDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpDescribeTableDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+		Region:                       o.Region,
+	}, "ResolveEndpointV2", middleware.After)
+}
+
+func (c *Client) fetchOpDescribeTableDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	input := getOperationInput(ctx)
+	in, ok := input.(*DescribeTableInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
+}
+
+// DescribeTableAPIClient is a client that implements the DescribeTable operation.
+type DescribeTableAPIClient interface {
+	DescribeTable(context.Context, *DescribeTableInput, ...func(*Options)) (*DescribeTableOutput, error)
+}
+
+var _ DescribeTableAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTable(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

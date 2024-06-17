@@ -138,6 +138,9 @@ func (c *Client) addOperationGetPrivateGraphEndpointMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPrivateGraphEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationGetPrivateGraphEndpointMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetPrivateGraphEndpointAPIClient is a client that implements the
-// GetPrivateGraphEndpoint operation.
-type GetPrivateGraphEndpointAPIClient interface {
-	GetPrivateGraphEndpoint(context.Context, *GetPrivateGraphEndpointInput, ...func(*Options)) (*GetPrivateGraphEndpointOutput, error)
-}
-
-var _ GetPrivateGraphEndpointAPIClient = (*Client)(nil)
 
 // PrivateGraphEndpointAvailableWaiterOptions are waiter options for
 // PrivateGraphEndpointAvailableWaiter
@@ -290,7 +285,13 @@ func (w *PrivateGraphEndpointAvailableWaiter) WaitForOutput(ctx context.Context,
 		}
 
 		out, err := w.client.GetPrivateGraphEndpoint(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -501,7 +502,13 @@ func (w *PrivateGraphEndpointDeletedWaiter) WaitForOutput(ctx context.Context, p
 		}
 
 		out, err := w.client.GetPrivateGraphEndpoint(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -569,6 +576,14 @@ func privateGraphEndpointDeletedStateRetryable(ctx context.Context, input *GetPr
 
 	return true, nil
 }
+
+// GetPrivateGraphEndpointAPIClient is a client that implements the
+// GetPrivateGraphEndpoint operation.
+type GetPrivateGraphEndpointAPIClient interface {
+	GetPrivateGraphEndpoint(context.Context, *GetPrivateGraphEndpointInput, ...func(*Options)) (*GetPrivateGraphEndpointOutput, error)
+}
+
+var _ GetPrivateGraphEndpointAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetPrivateGraphEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

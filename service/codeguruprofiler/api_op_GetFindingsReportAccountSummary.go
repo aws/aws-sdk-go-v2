@@ -141,6 +141,9 @@ func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindingsReportAccountSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *m
 	}
 	return nil
 }
-
-// GetFindingsReportAccountSummaryAPIClient is a client that implements the
-// GetFindingsReportAccountSummary operation.
-type GetFindingsReportAccountSummaryAPIClient interface {
-	GetFindingsReportAccountSummary(context.Context, *GetFindingsReportAccountSummaryInput, ...func(*Options)) (*GetFindingsReportAccountSummaryOutput, error)
-}
-
-var _ GetFindingsReportAccountSummaryAPIClient = (*Client)(nil)
 
 // GetFindingsReportAccountSummaryPaginatorOptions is the paginator options for
 // GetFindingsReportAccountSummary
@@ -241,6 +236,9 @@ func (p *GetFindingsReportAccountSummaryPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetFindingsReportAccountSummary(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *GetFindingsReportAccountSummaryPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// GetFindingsReportAccountSummaryAPIClient is a client that implements the
+// GetFindingsReportAccountSummary operation.
+type GetFindingsReportAccountSummaryAPIClient interface {
+	GetFindingsReportAccountSummary(context.Context, *GetFindingsReportAccountSummaryInput, ...func(*Options)) (*GetFindingsReportAccountSummaryOutput, error)
+}
+
+var _ GetFindingsReportAccountSummaryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFindingsReportAccountSummary(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

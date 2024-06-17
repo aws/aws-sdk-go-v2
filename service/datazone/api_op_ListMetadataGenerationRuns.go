@@ -136,6 +136,9 @@ func (c *Client) addOperationListMetadataGenerationRunsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMetadataGenerationRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListMetadataGenerationRunsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListMetadataGenerationRunsAPIClient is a client that implements the
-// ListMetadataGenerationRuns operation.
-type ListMetadataGenerationRunsAPIClient interface {
-	ListMetadataGenerationRuns(context.Context, *ListMetadataGenerationRunsInput, ...func(*Options)) (*ListMetadataGenerationRunsOutput, error)
-}
-
-var _ ListMetadataGenerationRunsAPIClient = (*Client)(nil)
 
 // ListMetadataGenerationRunsPaginatorOptions is the paginator options for
 // ListMetadataGenerationRuns
@@ -238,6 +233,9 @@ func (p *ListMetadataGenerationRunsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMetadataGenerationRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListMetadataGenerationRunsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListMetadataGenerationRunsAPIClient is a client that implements the
+// ListMetadataGenerationRuns operation.
+type ListMetadataGenerationRunsAPIClient interface {
+	ListMetadataGenerationRuns(context.Context, *ListMetadataGenerationRunsInput, ...func(*Options)) (*ListMetadataGenerationRunsOutput, error)
+}
+
+var _ ListMetadataGenerationRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMetadataGenerationRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

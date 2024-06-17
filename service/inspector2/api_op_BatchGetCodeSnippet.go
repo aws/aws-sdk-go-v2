@@ -112,6 +112,9 @@ func (c *Client) addOperationBatchGetCodeSnippetMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetCodeSnippetValidationMiddleware(stack); err != nil {
 		return err
 	}

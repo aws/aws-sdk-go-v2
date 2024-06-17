@@ -131,6 +131,9 @@ func (c *Client) addOperationListImportTasksMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImportTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListImportTasksMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListImportTasksAPIClient is a client that implements the ListImportTasks
-// operation.
-type ListImportTasksAPIClient interface {
-	ListImportTasks(context.Context, *ListImportTasksInput, ...func(*Options)) (*ListImportTasksOutput, error)
-}
-
-var _ ListImportTasksAPIClient = (*Client)(nil)
 
 // ListImportTasksPaginatorOptions is the paginator options for ListImportTasks
 type ListImportTasksPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *ListImportTasksPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImportTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListImportTasksPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListImportTasksAPIClient is a client that implements the ListImportTasks
+// operation.
+type ListImportTasksAPIClient interface {
+	ListImportTasks(context.Context, *ListImportTasksInput, ...func(*Options)) (*ListImportTasksOutput, error)
+}
+
+var _ ListImportTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImportTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

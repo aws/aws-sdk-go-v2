@@ -101,6 +101,9 @@ func (c *Client) addOperationDeletePredictorBacktestExportJobMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeletePredictorBacktestExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

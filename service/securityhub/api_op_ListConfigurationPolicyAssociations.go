@@ -132,6 +132,9 @@ func (c *Client) addOperationListConfigurationPolicyAssociationsMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurationPolicyAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListConfigurationPolicyAssociationsMiddlewares(stac
 	}
 	return nil
 }
-
-// ListConfigurationPolicyAssociationsAPIClient is a client that implements the
-// ListConfigurationPolicyAssociations operation.
-type ListConfigurationPolicyAssociationsAPIClient interface {
-	ListConfigurationPolicyAssociations(context.Context, *ListConfigurationPolicyAssociationsInput, ...func(*Options)) (*ListConfigurationPolicyAssociationsOutput, error)
-}
-
-var _ ListConfigurationPolicyAssociationsAPIClient = (*Client)(nil)
 
 // ListConfigurationPolicyAssociationsPaginatorOptions is the paginator options
 // for ListConfigurationPolicyAssociations
@@ -233,6 +228,9 @@ func (p *ListConfigurationPolicyAssociationsPaginator) NextPage(ctx context.Cont
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConfigurationPolicyAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListConfigurationPolicyAssociationsPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// ListConfigurationPolicyAssociationsAPIClient is a client that implements the
+// ListConfigurationPolicyAssociations operation.
+type ListConfigurationPolicyAssociationsAPIClient interface {
+	ListConfigurationPolicyAssociations(context.Context, *ListConfigurationPolicyAssociationsInput, ...func(*Options)) (*ListConfigurationPolicyAssociationsOutput, error)
+}
+
+var _ ListConfigurationPolicyAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConfigurationPolicyAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

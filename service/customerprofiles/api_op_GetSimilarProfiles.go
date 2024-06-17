@@ -153,6 +153,9 @@ func (c *Client) addOperationGetSimilarProfilesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSimilarProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}

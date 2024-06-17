@@ -149,6 +149,9 @@ func (c *Client) addOperationDescribeFleetEventsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -172,14 +175,6 @@ func (c *Client) addOperationDescribeFleetEventsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeFleetEventsAPIClient is a client that implements the
-// DescribeFleetEvents operation.
-type DescribeFleetEventsAPIClient interface {
-	DescribeFleetEvents(context.Context, *DescribeFleetEventsInput, ...func(*Options)) (*DescribeFleetEventsOutput, error)
-}
-
-var _ DescribeFleetEventsAPIClient = (*Client)(nil)
 
 // DescribeFleetEventsPaginatorOptions is the paginator options for
 // DescribeFleetEvents
@@ -246,6 +241,9 @@ func (p *DescribeFleetEventsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFleetEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +262,14 @@ func (p *DescribeFleetEventsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeFleetEventsAPIClient is a client that implements the
+// DescribeFleetEvents operation.
+type DescribeFleetEventsAPIClient interface {
+	DescribeFleetEvents(context.Context, *DescribeFleetEventsInput, ...func(*Options)) (*DescribeFleetEventsOutput, error)
+}
+
+var _ DescribeFleetEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFleetEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

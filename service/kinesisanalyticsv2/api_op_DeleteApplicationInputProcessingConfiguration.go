@@ -122,6 +122,9 @@ func (c *Client) addOperationDeleteApplicationInputProcessingConfigurationMiddle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationInputProcessingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

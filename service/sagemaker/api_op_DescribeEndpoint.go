@@ -209,6 +209,9 @@ func (c *Client) addOperationDescribeEndpointMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -232,14 +235,6 @@ func (c *Client) addOperationDescribeEndpointMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// DescribeEndpointAPIClient is a client that implements the DescribeEndpoint
-// operation.
-type DescribeEndpointAPIClient interface {
-	DescribeEndpoint(context.Context, *DescribeEndpointInput, ...func(*Options)) (*DescribeEndpointOutput, error)
-}
-
-var _ DescribeEndpointAPIClient = (*Client)(nil)
 
 // EndpointDeletedWaiterOptions are waiter options for EndpointDeletedWaiter
 type EndpointDeletedWaiterOptions struct {
@@ -356,7 +351,13 @@ func (w *EndpointDeletedWaiter) WaitForOutput(ctx context.Context, params *Descr
 		}
 
 		out, err := w.client.DescribeEndpoint(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -541,7 +542,13 @@ func (w *EndpointInServiceWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeEndpoint(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -627,6 +634,14 @@ func endpointInServiceStateRetryable(ctx context.Context, input *DescribeEndpoin
 
 	return true, nil
 }
+
+// DescribeEndpointAPIClient is a client that implements the DescribeEndpoint
+// operation.
+type DescribeEndpointAPIClient interface {
+	DescribeEndpoint(context.Context, *DescribeEndpointInput, ...func(*Options)) (*DescribeEndpointOutput, error)
+}
+
+var _ DescribeEndpointAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

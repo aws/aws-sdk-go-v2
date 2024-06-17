@@ -145,6 +145,9 @@ func (c *Client) addOperationDescribeActivitiesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeActivities(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationDescribeActivitiesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeActivitiesAPIClient is a client that implements the DescribeActivities
-// operation.
-type DescribeActivitiesAPIClient interface {
-	DescribeActivities(context.Context, *DescribeActivitiesInput, ...func(*Options)) (*DescribeActivitiesOutput, error)
-}
-
-var _ DescribeActivitiesAPIClient = (*Client)(nil)
 
 // DescribeActivitiesPaginatorOptions is the paginator options for
 // DescribeActivities
@@ -238,6 +233,9 @@ func (p *DescribeActivitiesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeActivities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *DescribeActivitiesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeActivitiesAPIClient is a client that implements the DescribeActivities
+// operation.
+type DescribeActivitiesAPIClient interface {
+	DescribeActivities(context.Context, *DescribeActivitiesInput, ...func(*Options)) (*DescribeActivitiesOutput, error)
+}
+
+var _ DescribeActivitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeActivities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

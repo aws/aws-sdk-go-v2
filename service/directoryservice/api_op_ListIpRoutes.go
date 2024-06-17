@@ -119,6 +119,9 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIpRoutesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListIpRoutesAPIClient is a client that implements the ListIpRoutes operation.
-type ListIpRoutesAPIClient interface {
-	ListIpRoutes(context.Context, *ListIpRoutesInput, ...func(*Options)) (*ListIpRoutesOutput, error)
-}
-
-var _ ListIpRoutesAPIClient = (*Client)(nil)
 
 // ListIpRoutesPaginatorOptions is the paginator options for ListIpRoutes
 type ListIpRoutesPaginatorOptions struct {
@@ -214,6 +210,9 @@ func (p *ListIpRoutesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIpRoutes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +231,13 @@ func (p *ListIpRoutesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListIpRoutesAPIClient is a client that implements the ListIpRoutes operation.
+type ListIpRoutesAPIClient interface {
+	ListIpRoutes(context.Context, *ListIpRoutesInput, ...func(*Options)) (*ListIpRoutesOutput, error)
+}
+
+var _ ListIpRoutesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIpRoutes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

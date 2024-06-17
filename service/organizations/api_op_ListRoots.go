@@ -139,6 +139,9 @@ func (c *Client) addOperationListRootsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoots(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -159,13 +162,6 @@ func (c *Client) addOperationListRootsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListRootsAPIClient is a client that implements the ListRoots operation.
-type ListRootsAPIClient interface {
-	ListRoots(context.Context, *ListRootsInput, ...func(*Options)) (*ListRootsOutput, error)
-}
-
-var _ ListRootsAPIClient = (*Client)(nil)
 
 // ListRootsPaginatorOptions is the paginator options for ListRoots
 type ListRootsPaginatorOptions struct {
@@ -238,6 +234,9 @@ func (p *ListRootsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRoots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +255,13 @@ func (p *ListRootsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListRootsAPIClient is a client that implements the ListRoots operation.
+type ListRootsAPIClient interface {
+	ListRoots(context.Context, *ListRootsInput, ...func(*Options)) (*ListRootsOutput, error)
+}
+
+var _ ListRootsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRoots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

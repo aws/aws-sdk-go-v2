@@ -137,6 +137,9 @@ func (c *Client) addOperationDescribeImageMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeImageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,13 +163,6 @@ func (c *Client) addOperationDescribeImageMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeImageAPIClient is a client that implements the DescribeImage operation.
-type DescribeImageAPIClient interface {
-	DescribeImage(context.Context, *DescribeImageInput, ...func(*Options)) (*DescribeImageOutput, error)
-}
-
-var _ DescribeImageAPIClient = (*Client)(nil)
 
 // ImageCreatedWaiterOptions are waiter options for ImageCreatedWaiter
 type ImageCreatedWaiterOptions struct {
@@ -282,7 +278,13 @@ func (w *ImageCreatedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeImage(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -483,7 +485,13 @@ func (w *ImageDeletedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeImage(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -679,7 +687,13 @@ func (w *ImageUpdatedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeImage(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -765,6 +779,13 @@ func imageUpdatedStateRetryable(ctx context.Context, input *DescribeImageInput, 
 
 	return true, nil
 }
+
+// DescribeImageAPIClient is a client that implements the DescribeImage operation.
+type DescribeImageAPIClient interface {
+	DescribeImage(context.Context, *DescribeImageInput, ...func(*Options)) (*DescribeImageOutput, error)
+}
+
+var _ DescribeImageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeImage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

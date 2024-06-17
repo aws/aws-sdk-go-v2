@@ -214,6 +214,9 @@ func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListClosedWorkflowExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -237,14 +240,6 @@ func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListClosedWorkflowExecutionsAPIClient is a client that implements the
-// ListClosedWorkflowExecutions operation.
-type ListClosedWorkflowExecutionsAPIClient interface {
-	ListClosedWorkflowExecutions(context.Context, *ListClosedWorkflowExecutionsInput, ...func(*Options)) (*ListClosedWorkflowExecutionsOutput, error)
-}
-
-var _ ListClosedWorkflowExecutionsAPIClient = (*Client)(nil)
 
 // ListClosedWorkflowExecutionsPaginatorOptions is the paginator options for
 // ListClosedWorkflowExecutions
@@ -309,6 +304,9 @@ func (p *ListClosedWorkflowExecutionsPaginator) NextPage(ctx context.Context, op
 
 	params.MaximumPageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClosedWorkflowExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -327,6 +325,14 @@ func (p *ListClosedWorkflowExecutionsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListClosedWorkflowExecutionsAPIClient is a client that implements the
+// ListClosedWorkflowExecutions operation.
+type ListClosedWorkflowExecutionsAPIClient interface {
+	ListClosedWorkflowExecutions(context.Context, *ListClosedWorkflowExecutionsInput, ...func(*Options)) (*ListClosedWorkflowExecutionsOutput, error)
+}
+
+var _ ListClosedWorkflowExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClosedWorkflowExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

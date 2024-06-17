@@ -121,6 +121,9 @@ func (c *Client) addOperationGetChangeLogsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetChangeLogsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationGetChangeLogsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetChangeLogsAPIClient is a client that implements the GetChangeLogs operation.
-type GetChangeLogsAPIClient interface {
-	GetChangeLogs(context.Context, *GetChangeLogsInput, ...func(*Options)) (*GetChangeLogsOutput, error)
-}
-
-var _ GetChangeLogsAPIClient = (*Client)(nil)
 
 // GetChangeLogsPaginatorOptions is the paginator options for GetChangeLogs
 type GetChangeLogsPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *GetChangeLogsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetChangeLogs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *GetChangeLogsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetChangeLogsAPIClient is a client that implements the GetChangeLogs operation.
+type GetChangeLogsAPIClient interface {
+	GetChangeLogs(context.Context, *GetChangeLogsInput, ...func(*Options)) (*GetChangeLogsOutput, error)
+}
+
+var _ GetChangeLogsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetChangeLogs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

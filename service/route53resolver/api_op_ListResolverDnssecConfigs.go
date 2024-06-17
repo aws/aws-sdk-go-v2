@@ -136,6 +136,9 @@ func (c *Client) addOperationListResolverDnssecConfigsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverDnssecConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListResolverDnssecConfigsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListResolverDnssecConfigsAPIClient is a client that implements the
-// ListResolverDnssecConfigs operation.
-type ListResolverDnssecConfigsAPIClient interface {
-	ListResolverDnssecConfigs(context.Context, *ListResolverDnssecConfigsInput, ...func(*Options)) (*ListResolverDnssecConfigsOutput, error)
-}
-
-var _ ListResolverDnssecConfigsAPIClient = (*Client)(nil)
 
 // ListResolverDnssecConfigsPaginatorOptions is the paginator options for
 // ListResolverDnssecConfigs
@@ -232,6 +227,9 @@ func (p *ListResolverDnssecConfigsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResolverDnssecConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListResolverDnssecConfigsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListResolverDnssecConfigsAPIClient is a client that implements the
+// ListResolverDnssecConfigs operation.
+type ListResolverDnssecConfigsAPIClient interface {
+	ListResolverDnssecConfigs(context.Context, *ListResolverDnssecConfigsInput, ...func(*Options)) (*ListResolverDnssecConfigsOutput, error)
+}
+
+var _ ListResolverDnssecConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResolverDnssecConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

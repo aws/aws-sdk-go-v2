@@ -132,6 +132,9 @@ func (c *Client) addOperationGetQueryResultsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetQueryResultsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationGetQueryResultsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetQueryResultsAPIClient is a client that implements the GetQueryResults
-// operation.
-type GetQueryResultsAPIClient interface {
-	GetQueryResults(context.Context, *GetQueryResultsInput, ...func(*Options)) (*GetQueryResultsOutput, error)
-}
-
-var _ GetQueryResultsAPIClient = (*Client)(nil)
 
 // GetQueryResultsPaginatorOptions is the paginator options for GetQueryResults
 type GetQueryResultsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *GetQueryResultsPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetQueryResults(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *GetQueryResultsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetQueryResultsAPIClient is a client that implements the GetQueryResults
+// operation.
+type GetQueryResultsAPIClient interface {
+	GetQueryResults(context.Context, *GetQueryResultsInput, ...func(*Options)) (*GetQueryResultsOutput, error)
+}
+
+var _ GetQueryResultsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetQueryResults(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

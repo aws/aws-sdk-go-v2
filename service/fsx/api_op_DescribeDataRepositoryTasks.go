@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataRepositoryTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeDataRepositoryTasksAPIClient is a client that implements the
-// DescribeDataRepositoryTasks operation.
-type DescribeDataRepositoryTasksAPIClient interface {
-	DescribeDataRepositoryTasks(context.Context, *DescribeDataRepositoryTasksInput, ...func(*Options)) (*DescribeDataRepositoryTasksOutput, error)
-}
-
-var _ DescribeDataRepositoryTasksAPIClient = (*Client)(nil)
 
 // DescribeDataRepositoryTasksPaginatorOptions is the paginator options for
 // DescribeDataRepositoryTasks
@@ -231,6 +226,9 @@ func (p *DescribeDataRepositoryTasksPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDataRepositoryTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *DescribeDataRepositoryTasksPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeDataRepositoryTasksAPIClient is a client that implements the
+// DescribeDataRepositoryTasks operation.
+type DescribeDataRepositoryTasksAPIClient interface {
+	DescribeDataRepositoryTasks(context.Context, *DescribeDataRepositoryTasksInput, ...func(*Options)) (*DescribeDataRepositoryTasksOutput, error)
+}
+
+var _ DescribeDataRepositoryTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDataRepositoryTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

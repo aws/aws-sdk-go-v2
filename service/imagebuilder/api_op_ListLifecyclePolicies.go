@@ -117,6 +117,9 @@ func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLifecyclePolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListLifecyclePoliciesAPIClient is a client that implements the
-// ListLifecyclePolicies operation.
-type ListLifecyclePoliciesAPIClient interface {
-	ListLifecyclePolicies(context.Context, *ListLifecyclePoliciesInput, ...func(*Options)) (*ListLifecyclePoliciesOutput, error)
-}
-
-var _ ListLifecyclePoliciesAPIClient = (*Client)(nil)
 
 // ListLifecyclePoliciesPaginatorOptions is the paginator options for
 // ListLifecyclePolicies
@@ -210,6 +205,9 @@ func (p *ListLifecyclePoliciesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLifecyclePolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListLifecyclePoliciesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListLifecyclePoliciesAPIClient is a client that implements the
+// ListLifecyclePolicies operation.
+type ListLifecyclePoliciesAPIClient interface {
+	ListLifecyclePolicies(context.Context, *ListLifecyclePoliciesInput, ...func(*Options)) (*ListLifecyclePoliciesOutput, error)
+}
+
+var _ ListLifecyclePoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLifecyclePolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

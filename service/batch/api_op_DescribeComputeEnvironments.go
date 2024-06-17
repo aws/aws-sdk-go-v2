@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeComputeEnvironmentsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComputeEnvironments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationDescribeComputeEnvironmentsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeComputeEnvironmentsAPIClient is a client that implements the
-// DescribeComputeEnvironments operation.
-type DescribeComputeEnvironmentsAPIClient interface {
-	DescribeComputeEnvironments(context.Context, *DescribeComputeEnvironmentsInput, ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error)
-}
-
-var _ DescribeComputeEnvironmentsAPIClient = (*Client)(nil)
 
 // DescribeComputeEnvironmentsPaginatorOptions is the paginator options for
 // DescribeComputeEnvironments
@@ -238,6 +233,9 @@ func (p *DescribeComputeEnvironmentsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeComputeEnvironments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *DescribeComputeEnvironmentsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeComputeEnvironmentsAPIClient is a client that implements the
+// DescribeComputeEnvironments operation.
+type DescribeComputeEnvironmentsAPIClient interface {
+	DescribeComputeEnvironments(context.Context, *DescribeComputeEnvironmentsInput, ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error)
+}
+
+var _ DescribeComputeEnvironmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeComputeEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

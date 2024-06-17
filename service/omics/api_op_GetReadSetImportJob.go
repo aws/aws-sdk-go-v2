@@ -148,6 +148,9 @@ func (c *Client) addOperationGetReadSetImportJobMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetReadSetImportJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -174,41 +177,6 @@ func (c *Client) addOperationGetReadSetImportJobMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-type endpointPrefix_opGetReadSetImportJobMiddleware struct {
-}
-
-func (*endpointPrefix_opGetReadSetImportJobMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetReadSetImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetReadSetImportJobMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetReadSetImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetReadSetImportJobAPIClient is a client that implements the
-// GetReadSetImportJob operation.
-type GetReadSetImportJobAPIClient interface {
-	GetReadSetImportJob(context.Context, *GetReadSetImportJobInput, ...func(*Options)) (*GetReadSetImportJobOutput, error)
-}
-
-var _ GetReadSetImportJobAPIClient = (*Client)(nil)
 
 // ReadSetImportJobCompletedWaiterOptions are waiter options for
 // ReadSetImportJobCompletedWaiter
@@ -328,7 +296,13 @@ func (w *ReadSetImportJobCompletedWaiter) WaitForOutput(ctx context.Context, par
 		}
 
 		out, err := w.client.GetReadSetImportJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -487,6 +461,41 @@ func readSetImportJobCompletedStateRetryable(ctx context.Context, input *GetRead
 
 	return true, nil
 }
+
+type endpointPrefix_opGetReadSetImportJobMiddleware struct {
+}
+
+func (*endpointPrefix_opGetReadSetImportJobMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetReadSetImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetReadSetImportJobMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetReadSetImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetReadSetImportJobAPIClient is a client that implements the
+// GetReadSetImportJob operation.
+type GetReadSetImportJobAPIClient interface {
+	GetReadSetImportJob(context.Context, *GetReadSetImportJobInput, ...func(*Options)) (*GetReadSetImportJobOutput, error)
+}
+
+var _ GetReadSetImportJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReadSetImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

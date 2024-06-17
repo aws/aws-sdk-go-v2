@@ -127,6 +127,9 @@ func (c *Client) addOperationListDevicePoolsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDevicePoolsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListDevicePoolsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListDevicePoolsAPIClient is a client that implements the ListDevicePools
-// operation.
-type ListDevicePoolsAPIClient interface {
-	ListDevicePools(context.Context, *ListDevicePoolsInput, ...func(*Options)) (*ListDevicePoolsOutput, error)
-}
-
-var _ ListDevicePoolsAPIClient = (*Client)(nil)
 
 // ListDevicePoolsPaginatorOptions is the paginator options for ListDevicePools
 type ListDevicePoolsPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListDevicePoolsPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDevicePools(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListDevicePoolsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListDevicePoolsAPIClient is a client that implements the ListDevicePools
+// operation.
+type ListDevicePoolsAPIClient interface {
+	ListDevicePools(context.Context, *ListDevicePoolsInput, ...func(*Options)) (*ListDevicePoolsOutput, error)
+}
+
+var _ ListDevicePoolsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDevicePools(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

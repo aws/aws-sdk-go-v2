@@ -186,6 +186,9 @@ func (c *Client) addOperationGetPersonTrackingMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPersonTrackingValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -209,14 +212,6 @@ func (c *Client) addOperationGetPersonTrackingMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetPersonTrackingAPIClient is a client that implements the GetPersonTracking
-// operation.
-type GetPersonTrackingAPIClient interface {
-	GetPersonTracking(context.Context, *GetPersonTrackingInput, ...func(*Options)) (*GetPersonTrackingOutput, error)
-}
-
-var _ GetPersonTrackingAPIClient = (*Client)(nil)
 
 // GetPersonTrackingPaginatorOptions is the paginator options for GetPersonTracking
 type GetPersonTrackingPaginatorOptions struct {
@@ -283,6 +278,9 @@ func (p *GetPersonTrackingPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetPersonTracking(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -301,6 +299,14 @@ func (p *GetPersonTrackingPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetPersonTrackingAPIClient is a client that implements the GetPersonTracking
+// operation.
+type GetPersonTrackingAPIClient interface {
+	GetPersonTracking(context.Context, *GetPersonTrackingInput, ...func(*Options)) (*GetPersonTrackingOutput, error)
+}
+
+var _ GetPersonTrackingAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetPersonTracking(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

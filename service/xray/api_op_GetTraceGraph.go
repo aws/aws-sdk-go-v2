@@ -112,6 +112,9 @@ func (c *Client) addOperationGetTraceGraphMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTraceGraphValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,13 +138,6 @@ func (c *Client) addOperationGetTraceGraphMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetTraceGraphAPIClient is a client that implements the GetTraceGraph operation.
-type GetTraceGraphAPIClient interface {
-	GetTraceGraph(context.Context, *GetTraceGraphInput, ...func(*Options)) (*GetTraceGraphOutput, error)
-}
-
-var _ GetTraceGraphAPIClient = (*Client)(nil)
 
 // GetTraceGraphPaginatorOptions is the paginator options for GetTraceGraph
 type GetTraceGraphPaginatorOptions struct {
@@ -194,6 +190,9 @@ func (p *GetTraceGraphPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTraceGraph(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -212,6 +211,13 @@ func (p *GetTraceGraphPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetTraceGraphAPIClient is a client that implements the GetTraceGraph operation.
+type GetTraceGraphAPIClient interface {
+	GetTraceGraph(context.Context, *GetTraceGraphInput, ...func(*Options)) (*GetTraceGraphOutput, error)
+}
+
+var _ GetTraceGraphAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTraceGraph(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

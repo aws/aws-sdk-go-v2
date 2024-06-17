@@ -176,6 +176,9 @@ func (c *Client) addOperationGetFindingV2Middlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFindingV2ValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -199,13 +202,6 @@ func (c *Client) addOperationGetFindingV2Middlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetFindingV2APIClient is a client that implements the GetFindingV2 operation.
-type GetFindingV2APIClient interface {
-	GetFindingV2(context.Context, *GetFindingV2Input, ...func(*Options)) (*GetFindingV2Output, error)
-}
-
-var _ GetFindingV2APIClient = (*Client)(nil)
 
 // GetFindingV2PaginatorOptions is the paginator options for GetFindingV2
 type GetFindingV2PaginatorOptions struct {
@@ -270,6 +266,9 @@ func (p *GetFindingV2Paginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetFindingV2(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -288,6 +287,13 @@ func (p *GetFindingV2Paginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetFindingV2APIClient is a client that implements the GetFindingV2 operation.
+type GetFindingV2APIClient interface {
+	GetFindingV2(context.Context, *GetFindingV2Input, ...func(*Options)) (*GetFindingV2Output, error)
+}
+
+var _ GetFindingV2APIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFindingV2(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeStackProvisioningParametersMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeStackProvisioningParametersValidationMiddleware(stack); err != nil {
 		return err
 	}

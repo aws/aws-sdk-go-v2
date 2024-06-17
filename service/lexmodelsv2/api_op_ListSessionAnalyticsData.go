@@ -166,6 +166,9 @@ func (c *Client) addOperationListSessionAnalyticsDataMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSessionAnalyticsDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -189,14 +192,6 @@ func (c *Client) addOperationListSessionAnalyticsDataMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListSessionAnalyticsDataAPIClient is a client that implements the
-// ListSessionAnalyticsData operation.
-type ListSessionAnalyticsDataAPIClient interface {
-	ListSessionAnalyticsData(context.Context, *ListSessionAnalyticsDataInput, ...func(*Options)) (*ListSessionAnalyticsDataOutput, error)
-}
-
-var _ ListSessionAnalyticsDataAPIClient = (*Client)(nil)
 
 // ListSessionAnalyticsDataPaginatorOptions is the paginator options for
 // ListSessionAnalyticsData
@@ -265,6 +260,9 @@ func (p *ListSessionAnalyticsDataPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSessionAnalyticsData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -283,6 +281,14 @@ func (p *ListSessionAnalyticsDataPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListSessionAnalyticsDataAPIClient is a client that implements the
+// ListSessionAnalyticsData operation.
+type ListSessionAnalyticsDataAPIClient interface {
+	ListSessionAnalyticsData(context.Context, *ListSessionAnalyticsDataInput, ...func(*Options)) (*ListSessionAnalyticsDataOutput, error)
+}
+
+var _ ListSessionAnalyticsDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSessionAnalyticsData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

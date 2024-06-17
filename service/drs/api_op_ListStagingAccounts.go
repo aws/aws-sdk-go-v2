@@ -110,6 +110,9 @@ func (c *Client) addOperationListStagingAccountsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStagingAccounts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListStagingAccountsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListStagingAccountsAPIClient is a client that implements the
-// ListStagingAccounts operation.
-type ListStagingAccountsAPIClient interface {
-	ListStagingAccounts(context.Context, *ListStagingAccountsInput, ...func(*Options)) (*ListStagingAccountsOutput, error)
-}
-
-var _ ListStagingAccountsAPIClient = (*Client)(nil)
 
 // ListStagingAccountsPaginatorOptions is the paginator options for
 // ListStagingAccounts
@@ -203,6 +198,9 @@ func (p *ListStagingAccountsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStagingAccounts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListStagingAccountsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListStagingAccountsAPIClient is a client that implements the
+// ListStagingAccounts operation.
+type ListStagingAccountsAPIClient interface {
+	ListStagingAccounts(context.Context, *ListStagingAccountsInput, ...func(*Options)) (*ListStagingAccountsOutput, error)
+}
+
+var _ ListStagingAccountsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStagingAccounts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

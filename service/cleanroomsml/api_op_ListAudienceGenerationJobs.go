@@ -122,6 +122,9 @@ func (c *Client) addOperationListAudienceGenerationJobsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAudienceGenerationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListAudienceGenerationJobsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListAudienceGenerationJobsAPIClient is a client that implements the
-// ListAudienceGenerationJobs operation.
-type ListAudienceGenerationJobsAPIClient interface {
-	ListAudienceGenerationJobs(context.Context, *ListAudienceGenerationJobsInput, ...func(*Options)) (*ListAudienceGenerationJobsOutput, error)
-}
-
-var _ ListAudienceGenerationJobsAPIClient = (*Client)(nil)
 
 // ListAudienceGenerationJobsPaginatorOptions is the paginator options for
 // ListAudienceGenerationJobs
@@ -217,6 +212,9 @@ func (p *ListAudienceGenerationJobsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAudienceGenerationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListAudienceGenerationJobsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListAudienceGenerationJobsAPIClient is a client that implements the
+// ListAudienceGenerationJobs operation.
+type ListAudienceGenerationJobsAPIClient interface {
+	ListAudienceGenerationJobs(context.Context, *ListAudienceGenerationJobsInput, ...func(*Options)) (*ListAudienceGenerationJobsOutput, error)
+}
+
+var _ ListAudienceGenerationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAudienceGenerationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

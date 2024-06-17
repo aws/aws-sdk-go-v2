@@ -123,6 +123,9 @@ func (c *Client) addOperationListThreatIntelSetsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListThreatIntelSetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListThreatIntelSetsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListThreatIntelSetsAPIClient is a client that implements the
-// ListThreatIntelSets operation.
-type ListThreatIntelSetsAPIClient interface {
-	ListThreatIntelSets(context.Context, *ListThreatIntelSetsInput, ...func(*Options)) (*ListThreatIntelSetsOutput, error)
-}
-
-var _ ListThreatIntelSetsAPIClient = (*Client)(nil)
 
 // ListThreatIntelSetsPaginatorOptions is the paginator options for
 // ListThreatIntelSets
@@ -220,6 +215,9 @@ func (p *ListThreatIntelSetsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListThreatIntelSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListThreatIntelSetsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListThreatIntelSetsAPIClient is a client that implements the
+// ListThreatIntelSets operation.
+type ListThreatIntelSetsAPIClient interface {
+	ListThreatIntelSets(context.Context, *ListThreatIntelSetsInput, ...func(*Options)) (*ListThreatIntelSetsOutput, error)
+}
+
+var _ ListThreatIntelSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListThreatIntelSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

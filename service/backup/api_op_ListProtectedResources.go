@@ -120,6 +120,9 @@ func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProtectedResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListProtectedResourcesAPIClient is a client that implements the
-// ListProtectedResources operation.
-type ListProtectedResourcesAPIClient interface {
-	ListProtectedResources(context.Context, *ListProtectedResourcesInput, ...func(*Options)) (*ListProtectedResourcesOutput, error)
-}
-
-var _ ListProtectedResourcesAPIClient = (*Client)(nil)
 
 // ListProtectedResourcesPaginatorOptions is the paginator options for
 // ListProtectedResources
@@ -213,6 +208,9 @@ func (p *ListProtectedResourcesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProtectedResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListProtectedResourcesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListProtectedResourcesAPIClient is a client that implements the
+// ListProtectedResources operation.
+type ListProtectedResourcesAPIClient interface {
+	ListProtectedResources(context.Context, *ListProtectedResourcesInput, ...func(*Options)) (*ListProtectedResourcesOutput, error)
+}
+
+var _ ListProtectedResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProtectedResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

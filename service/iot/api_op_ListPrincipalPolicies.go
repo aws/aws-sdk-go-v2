@@ -135,6 +135,9 @@ func (c *Client) addOperationListPrincipalPoliciesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPrincipalPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListPrincipalPoliciesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListPrincipalPoliciesAPIClient is a client that implements the
-// ListPrincipalPolicies operation.
-type ListPrincipalPoliciesAPIClient interface {
-	ListPrincipalPolicies(context.Context, *ListPrincipalPoliciesInput, ...func(*Options)) (*ListPrincipalPoliciesOutput, error)
-}
-
-var _ ListPrincipalPoliciesAPIClient = (*Client)(nil)
 
 // ListPrincipalPoliciesPaginatorOptions is the paginator options for
 // ListPrincipalPolicies
@@ -231,6 +226,9 @@ func (p *ListPrincipalPoliciesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrincipalPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListPrincipalPoliciesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListPrincipalPoliciesAPIClient is a client that implements the
+// ListPrincipalPolicies operation.
+type ListPrincipalPoliciesAPIClient interface {
+	ListPrincipalPolicies(context.Context, *ListPrincipalPoliciesInput, ...func(*Options)) (*ListPrincipalPoliciesOutput, error)
+}
+
+var _ ListPrincipalPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrincipalPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -131,6 +131,9 @@ func (c *Client) addOperationListOrdersMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOrdersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,13 +157,6 @@ func (c *Client) addOperationListOrdersMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListOrdersAPIClient is a client that implements the ListOrders operation.
-type ListOrdersAPIClient interface {
-	ListOrders(context.Context, *ListOrdersInput, ...func(*Options)) (*ListOrdersOutput, error)
-}
-
-var _ ListOrdersAPIClient = (*Client)(nil)
 
 // ListOrdersPaginatorOptions is the paginator options for ListOrders
 type ListOrdersPaginatorOptions struct {
@@ -225,6 +221,9 @@ func (p *ListOrdersPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOrders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +242,13 @@ func (p *ListOrdersPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListOrdersAPIClient is a client that implements the ListOrders operation.
+type ListOrdersAPIClient interface {
+	ListOrders(context.Context, *ListOrdersInput, ...func(*Options)) (*ListOrdersOutput, error)
+}
+
+var _ ListOrdersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOrders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

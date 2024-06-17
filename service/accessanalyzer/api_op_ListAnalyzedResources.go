@@ -126,6 +126,9 @@ func (c *Client) addOperationListAnalyzedResourcesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnalyzedResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListAnalyzedResourcesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAnalyzedResourcesAPIClient is a client that implements the
-// ListAnalyzedResources operation.
-type ListAnalyzedResourcesAPIClient interface {
-	ListAnalyzedResources(context.Context, *ListAnalyzedResourcesInput, ...func(*Options)) (*ListAnalyzedResourcesOutput, error)
-}
-
-var _ ListAnalyzedResourcesAPIClient = (*Client)(nil)
 
 // ListAnalyzedResourcesPaginatorOptions is the paginator options for
 // ListAnalyzedResources
@@ -222,6 +217,9 @@ func (p *ListAnalyzedResourcesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnalyzedResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListAnalyzedResourcesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAnalyzedResourcesAPIClient is a client that implements the
+// ListAnalyzedResources operation.
+type ListAnalyzedResourcesAPIClient interface {
+	ListAnalyzedResources(context.Context, *ListAnalyzedResourcesInput, ...func(*Options)) (*ListAnalyzedResourcesOutput, error)
+}
+
+var _ ListAnalyzedResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnalyzedResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

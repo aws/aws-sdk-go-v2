@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeStandardsControlsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeStandardsControlsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeStandardsControlsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeStandardsControlsAPIClient is a client that implements the
-// DescribeStandardsControls operation.
-type DescribeStandardsControlsAPIClient interface {
-	DescribeStandardsControls(context.Context, *DescribeStandardsControlsInput, ...func(*Options)) (*DescribeStandardsControlsOutput, error)
-}
-
-var _ DescribeStandardsControlsAPIClient = (*Client)(nil)
 
 // DescribeStandardsControlsPaginatorOptions is the paginator options for
 // DescribeStandardsControls
@@ -221,6 +216,9 @@ func (p *DescribeStandardsControlsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeStandardsControls(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeStandardsControlsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeStandardsControlsAPIClient is a client that implements the
+// DescribeStandardsControls operation.
+type DescribeStandardsControlsAPIClient interface {
+	DescribeStandardsControls(context.Context, *DescribeStandardsControlsInput, ...func(*Options)) (*DescribeStandardsControlsOutput, error)
+}
+
+var _ DescribeStandardsControlsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStandardsControls(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataLakeExceptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListDataLakeExceptionsAPIClient is a client that implements the
-// ListDataLakeExceptions operation.
-type ListDataLakeExceptionsAPIClient interface {
-	ListDataLakeExceptions(context.Context, *ListDataLakeExceptionsInput, ...func(*Options)) (*ListDataLakeExceptionsOutput, error)
-}
-
-var _ ListDataLakeExceptionsAPIClient = (*Client)(nil)
 
 // ListDataLakeExceptionsPaginatorOptions is the paginator options for
 // ListDataLakeExceptions
@@ -217,6 +212,9 @@ func (p *ListDataLakeExceptionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataLakeExceptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListDataLakeExceptionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListDataLakeExceptionsAPIClient is a client that implements the
+// ListDataLakeExceptions operation.
+type ListDataLakeExceptionsAPIClient interface {
+	ListDataLakeExceptions(context.Context, *ListDataLakeExceptionsInput, ...func(*Options)) (*ListDataLakeExceptionsOutput, error)
+}
+
+var _ ListDataLakeExceptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataLakeExceptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

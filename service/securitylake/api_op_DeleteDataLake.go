@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDataLakeValidationMiddleware(stack); err != nil {
 		return err
 	}

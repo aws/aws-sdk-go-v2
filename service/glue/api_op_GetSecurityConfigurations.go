@@ -110,6 +110,9 @@ func (c *Client) addOperationGetSecurityConfigurationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSecurityConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationGetSecurityConfigurationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// GetSecurityConfigurationsAPIClient is a client that implements the
-// GetSecurityConfigurations operation.
-type GetSecurityConfigurationsAPIClient interface {
-	GetSecurityConfigurations(context.Context, *GetSecurityConfigurationsInput, ...func(*Options)) (*GetSecurityConfigurationsOutput, error)
-}
-
-var _ GetSecurityConfigurationsAPIClient = (*Client)(nil)
 
 // GetSecurityConfigurationsPaginatorOptions is the paginator options for
 // GetSecurityConfigurations
@@ -204,6 +199,9 @@ func (p *GetSecurityConfigurationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSecurityConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *GetSecurityConfigurationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// GetSecurityConfigurationsAPIClient is a client that implements the
+// GetSecurityConfigurations operation.
+type GetSecurityConfigurationsAPIClient interface {
+	GetSecurityConfigurations(context.Context, *GetSecurityConfigurationsInput, ...func(*Options)) (*GetSecurityConfigurationsOutput, error)
+}
+
+var _ GetSecurityConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSecurityConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

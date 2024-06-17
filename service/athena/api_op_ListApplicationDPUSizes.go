@@ -114,6 +114,9 @@ func (c *Client) addOperationListApplicationDPUSizesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationDPUSizes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListApplicationDPUSizesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListApplicationDPUSizesAPIClient is a client that implements the
-// ListApplicationDPUSizes operation.
-type ListApplicationDPUSizesAPIClient interface {
-	ListApplicationDPUSizes(context.Context, *ListApplicationDPUSizesInput, ...func(*Options)) (*ListApplicationDPUSizesOutput, error)
-}
-
-var _ ListApplicationDPUSizesAPIClient = (*Client)(nil)
 
 // ListApplicationDPUSizesPaginatorOptions is the paginator options for
 // ListApplicationDPUSizes
@@ -208,6 +203,9 @@ func (p *ListApplicationDPUSizesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationDPUSizes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListApplicationDPUSizesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListApplicationDPUSizesAPIClient is a client that implements the
+// ListApplicationDPUSizes operation.
+type ListApplicationDPUSizesAPIClient interface {
+	ListApplicationDPUSizes(context.Context, *ListApplicationDPUSizesInput, ...func(*Options)) (*ListApplicationDPUSizesOutput, error)
+}
+
+var _ ListApplicationDPUSizesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationDPUSizes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

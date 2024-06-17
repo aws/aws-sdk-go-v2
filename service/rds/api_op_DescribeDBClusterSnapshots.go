@@ -217,6 +217,9 @@ func (c *Client) addOperationDescribeDBClusterSnapshotsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -239,105 +242,6 @@ func (c *Client) addOperationDescribeDBClusterSnapshotsMiddlewares(stack *middle
 		return err
 	}
 	return nil
-}
-
-// DescribeDBClusterSnapshotsAPIClient is a client that implements the
-// DescribeDBClusterSnapshots operation.
-type DescribeDBClusterSnapshotsAPIClient interface {
-	DescribeDBClusterSnapshots(context.Context, *DescribeDBClusterSnapshotsInput, ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error)
-}
-
-var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
-
-// DescribeDBClusterSnapshotsPaginatorOptions is the paginator options for
-// DescribeDBClusterSnapshots
-type DescribeDBClusterSnapshotsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeDBClusterSnapshotsPaginator is a paginator for
-// DescribeDBClusterSnapshots
-type DescribeDBClusterSnapshotsPaginator struct {
-	options   DescribeDBClusterSnapshotsPaginatorOptions
-	client    DescribeDBClusterSnapshotsAPIClient
-	params    *DescribeDBClusterSnapshotsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeDBClusterSnapshotsPaginator returns a new
-// DescribeDBClusterSnapshotsPaginator
-func NewDescribeDBClusterSnapshotsPaginator(client DescribeDBClusterSnapshotsAPIClient, params *DescribeDBClusterSnapshotsInput, optFns ...func(*DescribeDBClusterSnapshotsPaginatorOptions)) *DescribeDBClusterSnapshotsPaginator {
-	if params == nil {
-		params = &DescribeDBClusterSnapshotsInput{}
-	}
-
-	options := DescribeDBClusterSnapshotsPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeDBClusterSnapshotsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeDBClusterSnapshotsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeDBClusterSnapshots page.
-func (p *DescribeDBClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeDBClusterSnapshots(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // DBClusterSnapshotAvailableWaiterOptions are waiter options for
@@ -459,7 +363,13 @@ func (w *DBClusterSnapshotAvailableWaiter) WaitForOutput(ctx context.Context, pa
 		}
 
 		out, err := w.client.DescribeDBClusterSnapshots(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -769,7 +679,13 @@ func (w *DBClusterSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, para
 		}
 
 		out, err := w.client.DescribeDBClusterSnapshots(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -933,6 +849,108 @@ func dBClusterSnapshotDeletedStateRetryable(ctx context.Context, input *Describe
 
 	return true, nil
 }
+
+// DescribeDBClusterSnapshotsPaginatorOptions is the paginator options for
+// DescribeDBClusterSnapshots
+type DescribeDBClusterSnapshotsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBClusterSnapshotsPaginator is a paginator for
+// DescribeDBClusterSnapshots
+type DescribeDBClusterSnapshotsPaginator struct {
+	options   DescribeDBClusterSnapshotsPaginatorOptions
+	client    DescribeDBClusterSnapshotsAPIClient
+	params    *DescribeDBClusterSnapshotsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBClusterSnapshotsPaginator returns a new
+// DescribeDBClusterSnapshotsPaginator
+func NewDescribeDBClusterSnapshotsPaginator(client DescribeDBClusterSnapshotsAPIClient, params *DescribeDBClusterSnapshotsInput, optFns ...func(*DescribeDBClusterSnapshotsPaginatorOptions)) *DescribeDBClusterSnapshotsPaginator {
+	if params == nil {
+		params = &DescribeDBClusterSnapshotsInput{}
+	}
+
+	options := DescribeDBClusterSnapshotsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDBClusterSnapshotsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBClusterSnapshotsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDBClusterSnapshots page.
+func (p *DescribeDBClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeDBClusterSnapshots(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeDBClusterSnapshotsAPIClient is a client that implements the
+// DescribeDBClusterSnapshots operation.
+type DescribeDBClusterSnapshotsAPIClient interface {
+	DescribeDBClusterSnapshots(context.Context, *DescribeDBClusterSnapshotsInput, ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error)
+}
+
+var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBClusterSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

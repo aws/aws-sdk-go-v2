@@ -133,6 +133,9 @@ func (c *Client) addOperationStartWirelessDeviceImportTaskMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartWirelessDeviceImportTaskMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -167,6 +167,9 @@ func (c *Client) addOperationGetSolNetworkPackageMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSolNetworkPackageValidationMiddleware(stack); err != nil {
 		return err
 	}

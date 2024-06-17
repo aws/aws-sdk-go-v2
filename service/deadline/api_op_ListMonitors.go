@@ -119,6 +119,9 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListMonitorsMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,40 +145,6 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-type endpointPrefix_opListMonitorsMiddleware struct {
-}
-
-func (*endpointPrefix_opListMonitorsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListMonitorsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListMonitorsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListMonitorsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListMonitorsAPIClient is a client that implements the ListMonitors operation.
-type ListMonitorsAPIClient interface {
-	ListMonitors(context.Context, *ListMonitorsInput, ...func(*Options)) (*ListMonitorsOutput, error)
-}
-
-var _ ListMonitorsAPIClient = (*Client)(nil)
 
 // ListMonitorsPaginatorOptions is the paginator options for ListMonitors
 type ListMonitorsPaginatorOptions struct {
@@ -241,6 +210,9 @@ func (p *ListMonitorsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +231,40 @@ func (p *ListMonitorsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+type endpointPrefix_opListMonitorsMiddleware struct {
+}
+
+func (*endpointPrefix_opListMonitorsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListMonitorsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListMonitorsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListMonitorsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListMonitorsAPIClient is a client that implements the ListMonitors operation.
+type ListMonitorsAPIClient interface {
+	ListMonitors(context.Context, *ListMonitorsInput, ...func(*Options)) (*ListMonitorsOutput, error)
+}
+
+var _ ListMonitorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

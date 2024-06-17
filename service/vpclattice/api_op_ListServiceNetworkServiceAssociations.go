@@ -127,6 +127,9 @@ func (c *Client) addOperationListServiceNetworkServiceAssociationsMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceNetworkServiceAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListServiceNetworkServiceAssociationsMiddlewares(st
 	}
 	return nil
 }
-
-// ListServiceNetworkServiceAssociationsAPIClient is a client that implements the
-// ListServiceNetworkServiceAssociations operation.
-type ListServiceNetworkServiceAssociationsAPIClient interface {
-	ListServiceNetworkServiceAssociations(context.Context, *ListServiceNetworkServiceAssociationsInput, ...func(*Options)) (*ListServiceNetworkServiceAssociationsOutput, error)
-}
-
-var _ ListServiceNetworkServiceAssociationsAPIClient = (*Client)(nil)
 
 // ListServiceNetworkServiceAssociationsPaginatorOptions is the paginator options
 // for ListServiceNetworkServiceAssociations
@@ -222,6 +217,9 @@ func (p *ListServiceNetworkServiceAssociationsPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceNetworkServiceAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListServiceNetworkServiceAssociationsPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListServiceNetworkServiceAssociationsAPIClient is a client that implements the
+// ListServiceNetworkServiceAssociations operation.
+type ListServiceNetworkServiceAssociationsAPIClient interface {
+	ListServiceNetworkServiceAssociations(context.Context, *ListServiceNetworkServiceAssociationsInput, ...func(*Options)) (*ListServiceNetworkServiceAssociationsOutput, error)
+}
+
+var _ ListServiceNetworkServiceAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceNetworkServiceAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationListAgreementsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAgreementsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListAgreementsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListAgreementsAPIClient is a client that implements the ListAgreements
-// operation.
-type ListAgreementsAPIClient interface {
-	ListAgreements(context.Context, *ListAgreementsInput, ...func(*Options)) (*ListAgreementsOutput, error)
-}
-
-var _ ListAgreementsAPIClient = (*Client)(nil)
 
 // ListAgreementsPaginatorOptions is the paginator options for ListAgreements
 type ListAgreementsPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *ListAgreementsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAgreements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListAgreementsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListAgreementsAPIClient is a client that implements the ListAgreements
+// operation.
+type ListAgreementsAPIClient interface {
+	ListAgreements(context.Context, *ListAgreementsInput, ...func(*Options)) (*ListAgreementsOutput, error)
+}
+
+var _ ListAgreementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAgreements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

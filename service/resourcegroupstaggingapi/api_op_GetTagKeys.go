@@ -118,6 +118,9 @@ func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTagKeys(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// GetTagKeysAPIClient is a client that implements the GetTagKeys operation.
-type GetTagKeysAPIClient interface {
-	GetTagKeys(context.Context, *GetTagKeysInput, ...func(*Options)) (*GetTagKeysOutput, error)
-}
-
-var _ GetTagKeysAPIClient = (*Client)(nil)
 
 // GetTagKeysPaginatorOptions is the paginator options for GetTagKeys
 type GetTagKeysPaginatorOptions struct {
@@ -197,6 +193,9 @@ func (p *GetTagKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.PaginationToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTagKeys(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -215,6 +214,13 @@ func (p *GetTagKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// GetTagKeysAPIClient is a client that implements the GetTagKeys operation.
+type GetTagKeysAPIClient interface {
+	GetTagKeys(context.Context, *GetTagKeysInput, ...func(*Options)) (*GetTagKeysOutput, error)
+}
+
+var _ GetTagKeysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTagKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

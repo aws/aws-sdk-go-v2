@@ -135,6 +135,9 @@ func (c *Client) addOperationListDetectMitigationActionsExecutionsMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDetectMitigationActionsExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListDetectMitigationActionsExecutionsMiddlewares(st
 	}
 	return nil
 }
-
-// ListDetectMitigationActionsExecutionsAPIClient is a client that implements the
-// ListDetectMitigationActionsExecutions operation.
-type ListDetectMitigationActionsExecutionsAPIClient interface {
-	ListDetectMitigationActionsExecutions(context.Context, *ListDetectMitigationActionsExecutionsInput, ...func(*Options)) (*ListDetectMitigationActionsExecutionsOutput, error)
-}
-
-var _ ListDetectMitigationActionsExecutionsAPIClient = (*Client)(nil)
 
 // ListDetectMitigationActionsExecutionsPaginatorOptions is the paginator options
 // for ListDetectMitigationActionsExecutions
@@ -230,6 +225,9 @@ func (p *ListDetectMitigationActionsExecutionsPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDetectMitigationActionsExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListDetectMitigationActionsExecutionsPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListDetectMitigationActionsExecutionsAPIClient is a client that implements the
+// ListDetectMitigationActionsExecutions operation.
+type ListDetectMitigationActionsExecutionsAPIClient interface {
+	ListDetectMitigationActionsExecutions(context.Context, *ListDetectMitigationActionsExecutionsInput, ...func(*Options)) (*ListDetectMitigationActionsExecutionsOutput, error)
+}
+
+var _ ListDetectMitigationActionsExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDetectMitigationActionsExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

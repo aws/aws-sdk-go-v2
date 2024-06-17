@@ -137,6 +137,9 @@ func (c *Client) addOperationGetCisScanResultDetailsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCisScanResultDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationGetCisScanResultDetailsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetCisScanResultDetailsAPIClient is a client that implements the
-// GetCisScanResultDetails operation.
-type GetCisScanResultDetailsAPIClient interface {
-	GetCisScanResultDetails(context.Context, *GetCisScanResultDetailsInput, ...func(*Options)) (*GetCisScanResultDetailsOutput, error)
-}
-
-var _ GetCisScanResultDetailsAPIClient = (*Client)(nil)
 
 // GetCisScanResultDetailsPaginatorOptions is the paginator options for
 // GetCisScanResultDetails
@@ -235,6 +230,9 @@ func (p *GetCisScanResultDetailsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCisScanResultDetails(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *GetCisScanResultDetailsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// GetCisScanResultDetailsAPIClient is a client that implements the
+// GetCisScanResultDetails operation.
+type GetCisScanResultDetailsAPIClient interface {
+	GetCisScanResultDetails(context.Context, *GetCisScanResultDetailsInput, ...func(*Options)) (*GetCisScanResultDetailsOutput, error)
+}
+
+var _ GetCisScanResultDetailsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCisScanResultDetails(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

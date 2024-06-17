@@ -113,6 +113,9 @@ func (c *Client) addOperationListOrganizationsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOrganizations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListOrganizationsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListOrganizationsAPIClient is a client that implements the ListOrganizations
-// operation.
-type ListOrganizationsAPIClient interface {
-	ListOrganizations(context.Context, *ListOrganizationsInput, ...func(*Options)) (*ListOrganizationsOutput, error)
-}
-
-var _ ListOrganizationsAPIClient = (*Client)(nil)
 
 // ListOrganizationsPaginatorOptions is the paginator options for ListOrganizations
 type ListOrganizationsPaginatorOptions struct {
@@ -205,6 +200,9 @@ func (p *ListOrganizationsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOrganizations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListOrganizationsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListOrganizationsAPIClient is a client that implements the ListOrganizations
+// operation.
+type ListOrganizationsAPIClient interface {
+	ListOrganizations(context.Context, *ListOrganizationsInput, ...func(*Options)) (*ListOrganizationsOutput, error)
+}
+
+var _ ListOrganizationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOrganizations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

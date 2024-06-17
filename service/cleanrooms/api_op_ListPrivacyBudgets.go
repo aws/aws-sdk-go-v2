@@ -131,6 +131,9 @@ func (c *Client) addOperationListPrivacyBudgetsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPrivacyBudgetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListPrivacyBudgetsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListPrivacyBudgetsAPIClient is a client that implements the ListPrivacyBudgets
-// operation.
-type ListPrivacyBudgetsAPIClient interface {
-	ListPrivacyBudgets(context.Context, *ListPrivacyBudgetsInput, ...func(*Options)) (*ListPrivacyBudgetsOutput, error)
-}
-
-var _ ListPrivacyBudgetsAPIClient = (*Client)(nil)
 
 // ListPrivacyBudgetsPaginatorOptions is the paginator options for
 // ListPrivacyBudgets
@@ -229,6 +224,9 @@ func (p *ListPrivacyBudgetsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrivacyBudgets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListPrivacyBudgetsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListPrivacyBudgetsAPIClient is a client that implements the ListPrivacyBudgets
+// operation.
+type ListPrivacyBudgetsAPIClient interface {
+	ListPrivacyBudgets(context.Context, *ListPrivacyBudgetsInput, ...func(*Options)) (*ListPrivacyBudgetsOutput, error)
+}
+
+var _ ListPrivacyBudgetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrivacyBudgets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

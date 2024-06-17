@@ -126,6 +126,9 @@ func (c *Client) addOperationGetStreamingSessionStreamMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStreamingSessionStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationGetStreamingSessionStreamMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// GetStreamingSessionStreamAPIClient is a client that implements the
-// GetStreamingSessionStream operation.
-type GetStreamingSessionStreamAPIClient interface {
-	GetStreamingSessionStream(context.Context, *GetStreamingSessionStreamInput, ...func(*Options)) (*GetStreamingSessionStreamOutput, error)
-}
-
-var _ GetStreamingSessionStreamAPIClient = (*Client)(nil)
 
 // StreamingSessionStreamReadyWaiterOptions are waiter options for
 // StreamingSessionStreamReadyWaiter
@@ -277,7 +272,13 @@ func (w *StreamingSessionStreamReadyWaiter) WaitForOutput(ctx context.Context, p
 		}
 
 		out, err := w.client.GetStreamingSessionStream(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -351,6 +352,14 @@ func streamingSessionStreamReadyStateRetryable(ctx context.Context, input *GetSt
 
 	return true, nil
 }
+
+// GetStreamingSessionStreamAPIClient is a client that implements the
+// GetStreamingSessionStream operation.
+type GetStreamingSessionStreamAPIClient interface {
+	GetStreamingSessionStream(context.Context, *GetStreamingSessionStreamInput, ...func(*Options)) (*GetStreamingSessionStreamOutput, error)
+}
+
+var _ GetStreamingSessionStreamAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetStreamingSessionStream(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

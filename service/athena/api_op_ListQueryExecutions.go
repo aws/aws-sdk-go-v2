@@ -119,6 +119,9 @@ func (c *Client) addOperationListQueryExecutionsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQueryExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListQueryExecutionsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListQueryExecutionsAPIClient is a client that implements the
-// ListQueryExecutions operation.
-type ListQueryExecutionsAPIClient interface {
-	ListQueryExecutions(context.Context, *ListQueryExecutionsInput, ...func(*Options)) (*ListQueryExecutionsOutput, error)
-}
-
-var _ ListQueryExecutionsAPIClient = (*Client)(nil)
 
 // ListQueryExecutionsPaginatorOptions is the paginator options for
 // ListQueryExecutions
@@ -212,6 +207,9 @@ func (p *ListQueryExecutionsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQueryExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListQueryExecutionsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListQueryExecutionsAPIClient is a client that implements the
+// ListQueryExecutions operation.
+type ListQueryExecutionsAPIClient interface {
+	ListQueryExecutions(context.Context, *ListQueryExecutionsInput, ...func(*Options)) (*ListQueryExecutionsOutput, error)
+}
+
+var _ ListQueryExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQueryExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

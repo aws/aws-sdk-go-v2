@@ -150,6 +150,9 @@ func (c *Client) addOperationListProfilingGroupsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProfilingGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationListProfilingGroupsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListProfilingGroupsAPIClient is a client that implements the
-// ListProfilingGroups operation.
-type ListProfilingGroupsAPIClient interface {
-	ListProfilingGroups(context.Context, *ListProfilingGroupsInput, ...func(*Options)) (*ListProfilingGroupsOutput, error)
-}
-
-var _ ListProfilingGroupsAPIClient = (*Client)(nil)
 
 // ListProfilingGroupsPaginatorOptions is the paginator options for
 // ListProfilingGroups
@@ -247,6 +242,9 @@ func (p *ListProfilingGroupsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProfilingGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *ListProfilingGroupsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListProfilingGroupsAPIClient is a client that implements the
+// ListProfilingGroups operation.
+type ListProfilingGroupsAPIClient interface {
+	ListProfilingGroups(context.Context, *ListProfilingGroupsInput, ...func(*Options)) (*ListProfilingGroupsOutput, error)
+}
+
+var _ ListProfilingGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProfilingGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

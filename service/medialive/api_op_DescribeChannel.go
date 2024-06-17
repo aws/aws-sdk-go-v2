@@ -167,6 +167,9 @@ func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -190,14 +193,6 @@ func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeChannelAPIClient is a client that implements the DescribeChannel
-// operation.
-type DescribeChannelAPIClient interface {
-	DescribeChannel(context.Context, *DescribeChannelInput, ...func(*Options)) (*DescribeChannelOutput, error)
-}
-
-var _ DescribeChannelAPIClient = (*Client)(nil)
 
 // ChannelCreatedWaiterOptions are waiter options for ChannelCreatedWaiter
 type ChannelCreatedWaiterOptions struct {
@@ -314,7 +309,13 @@ func (w *ChannelCreatedWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeChannel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -528,7 +529,13 @@ func (w *ChannelDeletedWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeChannel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -725,7 +732,13 @@ func (w *ChannelRunningWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeChannel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -922,7 +935,13 @@ func (w *ChannelStoppedWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeChannel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1003,6 +1022,14 @@ func channelStoppedStateRetryable(ctx context.Context, input *DescribeChannelInp
 
 	return true, nil
 }
+
+// DescribeChannelAPIClient is a client that implements the DescribeChannel
+// operation.
+type DescribeChannelAPIClient interface {
+	DescribeChannel(context.Context, *DescribeChannelInput, ...func(*Options)) (*DescribeChannelOutput, error)
+}
+
+var _ DescribeChannelAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeChannel(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

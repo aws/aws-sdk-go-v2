@@ -162,6 +162,9 @@ func (c *Client) addOperationDescribeLogStreamsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLogStreams(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -182,14 +185,6 @@ func (c *Client) addOperationDescribeLogStreamsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeLogStreamsAPIClient is a client that implements the DescribeLogStreams
-// operation.
-type DescribeLogStreamsAPIClient interface {
-	DescribeLogStreams(context.Context, *DescribeLogStreamsInput, ...func(*Options)) (*DescribeLogStreamsOutput, error)
-}
-
-var _ DescribeLogStreamsAPIClient = (*Client)(nil)
 
 // DescribeLogStreamsPaginatorOptions is the paginator options for
 // DescribeLogStreams
@@ -256,6 +251,9 @@ func (p *DescribeLogStreamsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeLogStreams(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -274,6 +272,14 @@ func (p *DescribeLogStreamsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeLogStreamsAPIClient is a client that implements the DescribeLogStreams
+// operation.
+type DescribeLogStreamsAPIClient interface {
+	DescribeLogStreams(context.Context, *DescribeLogStreamsInput, ...func(*Options)) (*DescribeLogStreamsOutput, error)
+}
+
+var _ DescribeLogStreamsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeLogStreams(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

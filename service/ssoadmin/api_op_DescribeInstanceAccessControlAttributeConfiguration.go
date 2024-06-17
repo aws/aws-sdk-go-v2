@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeInstanceAccessControlAttributeConfiguration
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeInstanceAccessControlAttributeConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

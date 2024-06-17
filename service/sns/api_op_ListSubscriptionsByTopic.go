@@ -120,6 +120,9 @@ func (c *Client) addOperationListSubscriptionsByTopicMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSubscriptionsByTopicValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListSubscriptionsByTopicMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListSubscriptionsByTopicAPIClient is a client that implements the
-// ListSubscriptionsByTopic operation.
-type ListSubscriptionsByTopicAPIClient interface {
-	ListSubscriptionsByTopic(context.Context, *ListSubscriptionsByTopicInput, ...func(*Options)) (*ListSubscriptionsByTopicOutput, error)
-}
-
-var _ ListSubscriptionsByTopicAPIClient = (*Client)(nil)
 
 // ListSubscriptionsByTopicPaginatorOptions is the paginator options for
 // ListSubscriptionsByTopic
@@ -205,6 +200,9 @@ func (p *ListSubscriptionsByTopicPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSubscriptionsByTopic(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListSubscriptionsByTopicPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListSubscriptionsByTopicAPIClient is a client that implements the
+// ListSubscriptionsByTopic operation.
+type ListSubscriptionsByTopicAPIClient interface {
+	ListSubscriptionsByTopic(context.Context, *ListSubscriptionsByTopicInput, ...func(*Options)) (*ListSubscriptionsByTopicOutput, error)
+}
+
+var _ ListSubscriptionsByTopicAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSubscriptionsByTopic(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

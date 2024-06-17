@@ -121,6 +121,9 @@ func (c *Client) addOperationListSimulationsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSimulations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListSimulationsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListSimulationsAPIClient is a client that implements the ListSimulations
-// operation.
-type ListSimulationsAPIClient interface {
-	ListSimulations(context.Context, *ListSimulationsInput, ...func(*Options)) (*ListSimulationsOutput, error)
-}
-
-var _ ListSimulationsAPIClient = (*Client)(nil)
 
 // ListSimulationsPaginatorOptions is the paginator options for ListSimulations
 type ListSimulationsPaginatorOptions struct {
@@ -213,6 +208,9 @@ func (p *ListSimulationsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSimulations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListSimulationsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListSimulationsAPIClient is a client that implements the ListSimulations
+// operation.
+type ListSimulationsAPIClient interface {
+	ListSimulations(context.Context, *ListSimulationsInput, ...func(*Options)) (*ListSimulationsOutput, error)
+}
+
+var _ ListSimulationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSimulations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

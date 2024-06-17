@@ -145,6 +145,9 @@ func (c *Client) addOperationListTimelineEventsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTimelineEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListTimelineEventsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListTimelineEventsAPIClient is a client that implements the ListTimelineEvents
-// operation.
-type ListTimelineEventsAPIClient interface {
-	ListTimelineEvents(context.Context, *ListTimelineEventsInput, ...func(*Options)) (*ListTimelineEventsOutput, error)
-}
-
-var _ ListTimelineEventsAPIClient = (*Client)(nil)
 
 // ListTimelineEventsPaginatorOptions is the paginator options for
 // ListTimelineEvents
@@ -241,6 +236,9 @@ func (p *ListTimelineEventsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTimelineEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *ListTimelineEventsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListTimelineEventsAPIClient is a client that implements the ListTimelineEvents
+// operation.
+type ListTimelineEventsAPIClient interface {
+	ListTimelineEvents(context.Context, *ListTimelineEventsInput, ...func(*Options)) (*ListTimelineEventsOutput, error)
+}
+
+var _ ListTimelineEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTimelineEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

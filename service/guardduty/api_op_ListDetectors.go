@@ -116,6 +116,9 @@ func (c *Client) addOperationListDetectorsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDetectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,13 +139,6 @@ func (c *Client) addOperationListDetectorsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListDetectorsAPIClient is a client that implements the ListDetectors operation.
-type ListDetectorsAPIClient interface {
-	ListDetectors(context.Context, *ListDetectorsInput, ...func(*Options)) (*ListDetectorsOutput, error)
-}
-
-var _ ListDetectorsAPIClient = (*Client)(nil)
 
 // ListDetectorsPaginatorOptions is the paginator options for ListDetectors
 type ListDetectorsPaginatorOptions struct {
@@ -208,6 +204,9 @@ func (p *ListDetectorsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDetectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +225,13 @@ func (p *ListDetectorsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListDetectorsAPIClient is a client that implements the ListDetectors operation.
+type ListDetectorsAPIClient interface {
+	ListDetectors(context.Context, *ListDetectorsInput, ...func(*Options)) (*ListDetectorsOutput, error)
+}
+
+var _ ListDetectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDetectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

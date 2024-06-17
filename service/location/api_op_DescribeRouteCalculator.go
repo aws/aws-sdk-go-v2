@@ -167,6 +167,9 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeRouteCalculatorMiddleware(stack); err != nil {
 		return err
 	}

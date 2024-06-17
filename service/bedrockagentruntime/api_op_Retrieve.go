@@ -129,6 +129,9 @@ func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRetrieveValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,13 +155,6 @@ func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// RetrieveAPIClient is a client that implements the Retrieve operation.
-type RetrieveAPIClient interface {
-	Retrieve(context.Context, *RetrieveInput, ...func(*Options)) (*RetrieveOutput, error)
-}
-
-var _ RetrieveAPIClient = (*Client)(nil)
 
 // RetrievePaginatorOptions is the paginator options for Retrieve
 type RetrievePaginatorOptions struct {
@@ -211,6 +207,9 @@ func (p *RetrievePaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.Retrieve(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +228,13 @@ func (p *RetrievePaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// RetrieveAPIClient is a client that implements the Retrieve operation.
+type RetrieveAPIClient interface {
+	Retrieve(context.Context, *RetrieveInput, ...func(*Options)) (*RetrieveOutput, error)
+}
+
+var _ RetrieveAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opRetrieve(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

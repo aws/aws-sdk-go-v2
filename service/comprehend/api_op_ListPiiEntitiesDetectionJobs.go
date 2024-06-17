@@ -115,6 +115,9 @@ func (c *Client) addOperationListPiiEntitiesDetectionJobsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPiiEntitiesDetectionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListPiiEntitiesDetectionJobsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListPiiEntitiesDetectionJobsAPIClient is a client that implements the
-// ListPiiEntitiesDetectionJobs operation.
-type ListPiiEntitiesDetectionJobsAPIClient interface {
-	ListPiiEntitiesDetectionJobs(context.Context, *ListPiiEntitiesDetectionJobsInput, ...func(*Options)) (*ListPiiEntitiesDetectionJobsOutput, error)
-}
-
-var _ ListPiiEntitiesDetectionJobsAPIClient = (*Client)(nil)
 
 // ListPiiEntitiesDetectionJobsPaginatorOptions is the paginator options for
 // ListPiiEntitiesDetectionJobs
@@ -210,6 +205,9 @@ func (p *ListPiiEntitiesDetectionJobsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPiiEntitiesDetectionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListPiiEntitiesDetectionJobsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListPiiEntitiesDetectionJobsAPIClient is a client that implements the
+// ListPiiEntitiesDetectionJobs operation.
+type ListPiiEntitiesDetectionJobsAPIClient interface {
+	ListPiiEntitiesDetectionJobs(context.Context, *ListPiiEntitiesDetectionJobsInput, ...func(*Options)) (*ListPiiEntitiesDetectionJobsOutput, error)
+}
+
+var _ ListPiiEntitiesDetectionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPiiEntitiesDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

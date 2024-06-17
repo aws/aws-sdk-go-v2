@@ -114,6 +114,9 @@ func (c *Client) addOperationListConfiguredTablesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfiguredTables(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListConfiguredTablesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListConfiguredTablesAPIClient is a client that implements the
-// ListConfiguredTables operation.
-type ListConfiguredTablesAPIClient interface {
-	ListConfiguredTables(context.Context, *ListConfiguredTablesInput, ...func(*Options)) (*ListConfiguredTablesOutput, error)
-}
-
-var _ ListConfiguredTablesAPIClient = (*Client)(nil)
 
 // ListConfiguredTablesPaginatorOptions is the paginator options for
 // ListConfiguredTables
@@ -207,6 +202,9 @@ func (p *ListConfiguredTablesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConfiguredTables(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListConfiguredTablesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListConfiguredTablesAPIClient is a client that implements the
+// ListConfiguredTables operation.
+type ListConfiguredTablesAPIClient interface {
+	ListConfiguredTables(context.Context, *ListConfiguredTablesInput, ...func(*Options)) (*ListConfiguredTablesOutput, error)
+}
+
+var _ ListConfiguredTablesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConfiguredTables(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationSearchPredefinedAttributesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchPredefinedAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationSearchPredefinedAttributesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// SearchPredefinedAttributesAPIClient is a client that implements the
-// SearchPredefinedAttributes operation.
-type SearchPredefinedAttributesAPIClient interface {
-	SearchPredefinedAttributes(context.Context, *SearchPredefinedAttributesInput, ...func(*Options)) (*SearchPredefinedAttributesOutput, error)
-}
-
-var _ SearchPredefinedAttributesAPIClient = (*Client)(nil)
 
 // SearchPredefinedAttributesPaginatorOptions is the paginator options for
 // SearchPredefinedAttributes
@@ -222,6 +217,9 @@ func (p *SearchPredefinedAttributesPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchPredefinedAttributes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *SearchPredefinedAttributesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// SearchPredefinedAttributesAPIClient is a client that implements the
+// SearchPredefinedAttributes operation.
+type SearchPredefinedAttributesAPIClient interface {
+	SearchPredefinedAttributes(context.Context, *SearchPredefinedAttributesInput, ...func(*Options)) (*SearchPredefinedAttributesOutput, error)
+}
+
+var _ SearchPredefinedAttributesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchPredefinedAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

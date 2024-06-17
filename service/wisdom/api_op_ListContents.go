@@ -120,6 +120,9 @@ func (c *Client) addOperationListContentsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListContentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,13 +146,6 @@ func (c *Client) addOperationListContentsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListContentsAPIClient is a client that implements the ListContents operation.
-type ListContentsAPIClient interface {
-	ListContents(context.Context, *ListContentsInput, ...func(*Options)) (*ListContentsOutput, error)
-}
-
-var _ ListContentsAPIClient = (*Client)(nil)
 
 // ListContentsPaginatorOptions is the paginator options for ListContents
 type ListContentsPaginatorOptions struct {
@@ -214,6 +210,9 @@ func (p *ListContentsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +231,13 @@ func (p *ListContentsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListContentsAPIClient is a client that implements the ListContents operation.
+type ListContentsAPIClient interface {
+	ListContents(context.Context, *ListContentsInput, ...func(*Options)) (*ListContentsOutput, error)
+}
+
+var _ ListContentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

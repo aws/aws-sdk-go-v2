@@ -145,6 +145,9 @@ func (c *Client) addOperationListHandshakesForAccountMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHandshakesForAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationListHandshakesForAccountMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListHandshakesForAccountAPIClient is a client that implements the
-// ListHandshakesForAccount operation.
-type ListHandshakesForAccountAPIClient interface {
-	ListHandshakesForAccount(context.Context, *ListHandshakesForAccountInput, ...func(*Options)) (*ListHandshakesForAccountOutput, error)
-}
-
-var _ ListHandshakesForAccountAPIClient = (*Client)(nil)
 
 // ListHandshakesForAccountPaginatorOptions is the paginator options for
 // ListHandshakesForAccount
@@ -247,6 +242,9 @@ func (p *ListHandshakesForAccountPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHandshakesForAccount(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *ListHandshakesForAccountPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListHandshakesForAccountAPIClient is a client that implements the
+// ListHandshakesForAccount operation.
+type ListHandshakesForAccountAPIClient interface {
+	ListHandshakesForAccount(context.Context, *ListHandshakesForAccountInput, ...func(*Options)) (*ListHandshakesForAccountOutput, error)
+}
+
+var _ ListHandshakesForAccountAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHandshakesForAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

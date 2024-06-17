@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteAccountAuditConfigurationMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccountAuditConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

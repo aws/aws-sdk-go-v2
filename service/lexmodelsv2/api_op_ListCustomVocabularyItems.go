@@ -141,6 +141,9 @@ func (c *Client) addOperationListCustomVocabularyItemsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomVocabularyItemsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationListCustomVocabularyItemsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListCustomVocabularyItemsAPIClient is a client that implements the
-// ListCustomVocabularyItems operation.
-type ListCustomVocabularyItemsAPIClient interface {
-	ListCustomVocabularyItems(context.Context, *ListCustomVocabularyItemsInput, ...func(*Options)) (*ListCustomVocabularyItemsOutput, error)
-}
-
-var _ ListCustomVocabularyItemsAPIClient = (*Client)(nil)
 
 // ListCustomVocabularyItemsPaginatorOptions is the paginator options for
 // ListCustomVocabularyItems
@@ -238,6 +233,9 @@ func (p *ListCustomVocabularyItemsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomVocabularyItems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListCustomVocabularyItemsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListCustomVocabularyItemsAPIClient is a client that implements the
+// ListCustomVocabularyItems operation.
+type ListCustomVocabularyItemsAPIClient interface {
+	ListCustomVocabularyItems(context.Context, *ListCustomVocabularyItemsInput, ...func(*Options)) (*ListCustomVocabularyItemsOutput, error)
+}
+
+var _ ListCustomVocabularyItemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomVocabularyItems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

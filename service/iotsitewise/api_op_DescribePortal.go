@@ -186,6 +186,9 @@ func (c *Client) addOperationDescribePortalMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribePortalMiddleware(stack); err != nil {
 		return err
 	}
@@ -212,41 +215,6 @@ func (c *Client) addOperationDescribePortalMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-type endpointPrefix_opDescribePortalMiddleware struct {
-}
-
-func (*endpointPrefix_opDescribePortalMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opDescribePortalMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "monitor." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opDescribePortalMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opDescribePortalMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// DescribePortalAPIClient is a client that implements the DescribePortal
-// operation.
-type DescribePortalAPIClient interface {
-	DescribePortal(context.Context, *DescribePortalInput, ...func(*Options)) (*DescribePortalOutput, error)
-}
-
-var _ DescribePortalAPIClient = (*Client)(nil)
 
 // PortalActiveWaiterOptions are waiter options for PortalActiveWaiter
 type PortalActiveWaiterOptions struct {
@@ -362,7 +330,13 @@ func (w *PortalActiveWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribePortal(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -535,7 +509,13 @@ func (w *PortalNotExistsWaiter) WaitForOutput(ctx context.Context, params *Descr
 		}
 
 		out, err := w.client.DescribePortal(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -582,6 +562,41 @@ func portalNotExistsStateRetryable(ctx context.Context, input *DescribePortalInp
 
 	return true, nil
 }
+
+type endpointPrefix_opDescribePortalMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribePortalMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribePortalMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "monitor." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opDescribePortalMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opDescribePortalMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// DescribePortalAPIClient is a client that implements the DescribePortal
+// operation.
+type DescribePortalAPIClient interface {
+	DescribePortal(context.Context, *DescribePortalInput, ...func(*Options)) (*DescribePortalOutput, error)
+}
+
+var _ DescribePortalAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribePortal(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

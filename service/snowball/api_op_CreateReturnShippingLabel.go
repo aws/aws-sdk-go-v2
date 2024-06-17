@@ -115,6 +115,9 @@ func (c *Client) addOperationCreateReturnShippingLabelMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateReturnShippingLabelValidationMiddleware(stack); err != nil {
 		return err
 	}

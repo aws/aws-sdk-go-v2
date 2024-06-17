@@ -145,6 +145,9 @@ func (c *Client) addOperationListAvailableResourceDimensionsMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAvailableResourceDimensionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListAvailableResourceDimensionsMiddlewares(stack *m
 	}
 	return nil
 }
-
-// ListAvailableResourceDimensionsAPIClient is a client that implements the
-// ListAvailableResourceDimensions operation.
-type ListAvailableResourceDimensionsAPIClient interface {
-	ListAvailableResourceDimensions(context.Context, *ListAvailableResourceDimensionsInput, ...func(*Options)) (*ListAvailableResourceDimensionsOutput, error)
-}
-
-var _ ListAvailableResourceDimensionsAPIClient = (*Client)(nil)
 
 // ListAvailableResourceDimensionsPaginatorOptions is the paginator options for
 // ListAvailableResourceDimensions
@@ -245,6 +240,9 @@ func (p *ListAvailableResourceDimensionsPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAvailableResourceDimensions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +261,14 @@ func (p *ListAvailableResourceDimensionsPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// ListAvailableResourceDimensionsAPIClient is a client that implements the
+// ListAvailableResourceDimensions operation.
+type ListAvailableResourceDimensionsAPIClient interface {
+	ListAvailableResourceDimensions(context.Context, *ListAvailableResourceDimensionsInput, ...func(*Options)) (*ListAvailableResourceDimensionsOutput, error)
+}
+
+var _ ListAvailableResourceDimensionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAvailableResourceDimensions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

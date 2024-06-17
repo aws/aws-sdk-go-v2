@@ -131,6 +131,9 @@ func (c *Client) addOperationPurchaseReservedCacheNodesOfferingMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPurchaseReservedCacheNodesOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}

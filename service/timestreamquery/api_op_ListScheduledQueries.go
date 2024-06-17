@@ -121,6 +121,9 @@ func (c *Client) addOperationListScheduledQueriesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScheduledQueries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,66 +144,6 @@ func (c *Client) addOperationListScheduledQueriesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-func addOpListScheduledQueriesDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
-	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
-		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
-			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
-				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
-				opt.Logger = o.Logger
-				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
-			},
-		},
-		DiscoverOperation:            c.fetchOpListScheduledQueriesDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
-		EndpointDiscoveryRequired:    true,
-		Region:                       o.Region,
-	}, "ResolveEndpointV2", middleware.After)
-}
-
-func (c *Client) fetchOpListScheduledQueriesDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
-	input := getOperationInput(ctx)
-	in, ok := input.(*ListScheduledQueriesInput)
-	if !ok {
-		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
-	}
-	_ = in
-
-	identifierMap := make(map[string]string, 0)
-	identifierMap["sdk#Region"] = region
-
-	key := fmt.Sprintf("Timestream Query.%v", identifierMap)
-
-	if v, ok := c.endpointCache.Get(key); ok {
-		return v, nil
-	}
-
-	discoveryOperationInput := &DescribeEndpointsInput{}
-
-	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
-	for _, fn := range optFns {
-		fn(&opt)
-	}
-
-	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
-	if err != nil {
-		return internalEndpointDiscovery.WeightedAddress{}, err
-	}
-
-	weighted, ok := endpoint.GetValidAddress()
-	if !ok {
-		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
-	}
-	return weighted, nil
-}
-
-// ListScheduledQueriesAPIClient is a client that implements the
-// ListScheduledQueries operation.
-type ListScheduledQueriesAPIClient interface {
-	ListScheduledQueries(context.Context, *ListScheduledQueriesInput, ...func(*Options)) (*ListScheduledQueriesOutput, error)
-}
-
-var _ ListScheduledQueriesAPIClient = (*Client)(nil)
 
 // ListScheduledQueriesPaginatorOptions is the paginator options for
 // ListScheduledQueries
@@ -269,6 +212,9 @@ func (p *ListScheduledQueriesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScheduledQueries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -287,6 +233,66 @@ func (p *ListScheduledQueriesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+func addOpListScheduledQueriesDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
+			},
+		},
+		DiscoverOperation:            c.fetchOpListScheduledQueriesDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    true,
+		Region:                       o.Region,
+	}, "ResolveEndpointV2", middleware.After)
+}
+
+func (c *Client) fetchOpListScheduledQueriesDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	input := getOperationInput(ctx)
+	in, ok := input.(*ListScheduledQueriesInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+	identifierMap["sdk#Region"] = region
+
+	key := fmt.Sprintf("Timestream Query.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
+	if err != nil {
+		return internalEndpointDiscovery.WeightedAddress{}, err
+	}
+
+	weighted, ok := endpoint.GetValidAddress()
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
+	}
+	return weighted, nil
+}
+
+// ListScheduledQueriesAPIClient is a client that implements the
+// ListScheduledQueries operation.
+type ListScheduledQueriesAPIClient interface {
+	ListScheduledQueries(context.Context, *ListScheduledQueriesInput, ...func(*Options)) (*ListScheduledQueriesOutput, error)
+}
+
+var _ ListScheduledQueriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScheduledQueries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

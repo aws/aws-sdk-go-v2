@@ -118,6 +118,9 @@ func (c *Client) addOperationListPagesByEngagementMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPagesByEngagementValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListPagesByEngagementMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListPagesByEngagementAPIClient is a client that implements the
-// ListPagesByEngagement operation.
-type ListPagesByEngagementAPIClient interface {
-	ListPagesByEngagement(context.Context, *ListPagesByEngagementInput, ...func(*Options)) (*ListPagesByEngagementOutput, error)
-}
-
-var _ ListPagesByEngagementAPIClient = (*Client)(nil)
 
 // ListPagesByEngagementPaginatorOptions is the paginator options for
 // ListPagesByEngagement
@@ -215,6 +210,9 @@ func (p *ListPagesByEngagementPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPagesByEngagement(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListPagesByEngagementPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListPagesByEngagementAPIClient is a client that implements the
+// ListPagesByEngagement operation.
+type ListPagesByEngagementAPIClient interface {
+	ListPagesByEngagement(context.Context, *ListPagesByEngagementInput, ...func(*Options)) (*ListPagesByEngagementOutput, error)
+}
+
+var _ ListPagesByEngagementAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPagesByEngagement(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

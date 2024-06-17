@@ -126,6 +126,9 @@ func (c *Client) addOperationListEvaluationFormVersionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEvaluationFormVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListEvaluationFormVersionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListEvaluationFormVersionsAPIClient is a client that implements the
-// ListEvaluationFormVersions operation.
-type ListEvaluationFormVersionsAPIClient interface {
-	ListEvaluationFormVersions(context.Context, *ListEvaluationFormVersionsInput, ...func(*Options)) (*ListEvaluationFormVersionsOutput, error)
-}
-
-var _ ListEvaluationFormVersionsAPIClient = (*Client)(nil)
 
 // ListEvaluationFormVersionsPaginatorOptions is the paginator options for
 // ListEvaluationFormVersions
@@ -224,6 +219,9 @@ func (p *ListEvaluationFormVersionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEvaluationFormVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListEvaluationFormVersionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListEvaluationFormVersionsAPIClient is a client that implements the
+// ListEvaluationFormVersions operation.
+type ListEvaluationFormVersionsAPIClient interface {
+	ListEvaluationFormVersions(context.Context, *ListEvaluationFormVersionsInput, ...func(*Options)) (*ListEvaluationFormVersionsOutput, error)
+}
+
+var _ ListEvaluationFormVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEvaluationFormVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -270,6 +270,9 @@ func (c *Client) addOperationGetFunctionConfigurationMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -293,14 +296,6 @@ func (c *Client) addOperationGetFunctionConfigurationMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// GetFunctionConfigurationAPIClient is a client that implements the
-// GetFunctionConfiguration operation.
-type GetFunctionConfigurationAPIClient interface {
-	GetFunctionConfiguration(context.Context, *GetFunctionConfigurationInput, ...func(*Options)) (*GetFunctionConfigurationOutput, error)
-}
-
-var _ GetFunctionConfigurationAPIClient = (*Client)(nil)
 
 // FunctionActiveWaiterOptions are waiter options for FunctionActiveWaiter
 type FunctionActiveWaiterOptions struct {
@@ -417,7 +412,13 @@ func (w *FunctionActiveWaiter) WaitForOutput(ctx context.Context, params *GetFun
 		}
 
 		out, err := w.client.GetFunctionConfiguration(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -624,7 +625,13 @@ func (w *FunctionUpdatedWaiter) WaitForOutput(ctx context.Context, params *GetFu
 		}
 
 		out, err := w.client.GetFunctionConfiguration(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -833,7 +840,13 @@ func (w *PublishedVersionActiveWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.GetFunctionConfiguration(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -924,6 +937,14 @@ func publishedVersionActiveStateRetryable(ctx context.Context, input *GetFunctio
 
 	return true, nil
 }
+
+// GetFunctionConfigurationAPIClient is a client that implements the
+// GetFunctionConfiguration operation.
+type GetFunctionConfigurationAPIClient interface {
+	GetFunctionConfiguration(context.Context, *GetFunctionConfigurationInput, ...func(*Options)) (*GetFunctionConfigurationOutput, error)
+}
+
+var _ GetFunctionConfigurationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFunctionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

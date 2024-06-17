@@ -113,6 +113,9 @@ func (c *Client) addOperationListDataCellsFilterMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataCellsFilterValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListDataCellsFilterMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListDataCellsFilterAPIClient is a client that implements the
-// ListDataCellsFilter operation.
-type ListDataCellsFilterAPIClient interface {
-	ListDataCellsFilter(context.Context, *ListDataCellsFilterInput, ...func(*Options)) (*ListDataCellsFilterOutput, error)
-}
-
-var _ ListDataCellsFilterAPIClient = (*Client)(nil)
 
 // ListDataCellsFilterPaginatorOptions is the paginator options for
 // ListDataCellsFilter
@@ -209,6 +204,9 @@ func (p *ListDataCellsFilterPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataCellsFilter(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListDataCellsFilterPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListDataCellsFilterAPIClient is a client that implements the
+// ListDataCellsFilter operation.
+type ListDataCellsFilterAPIClient interface {
+	ListDataCellsFilter(context.Context, *ListDataCellsFilterInput, ...func(*Options)) (*ListDataCellsFilterOutput, error)
+}
+
+var _ ListDataCellsFilterAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataCellsFilter(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

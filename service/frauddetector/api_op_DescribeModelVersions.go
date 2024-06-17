@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeModelVersionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModelVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationDescribeModelVersionsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeModelVersionsAPIClient is a client that implements the
-// DescribeModelVersions operation.
-type DescribeModelVersionsAPIClient interface {
-	DescribeModelVersions(context.Context, *DescribeModelVersionsInput, ...func(*Options)) (*DescribeModelVersionsOutput, error)
-}
-
-var _ DescribeModelVersionsAPIClient = (*Client)(nil)
 
 // DescribeModelVersionsPaginatorOptions is the paginator options for
 // DescribeModelVersions
@@ -214,6 +209,9 @@ func (p *DescribeModelVersionsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeModelVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *DescribeModelVersionsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeModelVersionsAPIClient is a client that implements the
+// DescribeModelVersions operation.
+type DescribeModelVersionsAPIClient interface {
+	DescribeModelVersions(context.Context, *DescribeModelVersionsInput, ...func(*Options)) (*DescribeModelVersionsOutput, error)
+}
+
+var _ DescribeModelVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeModelVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

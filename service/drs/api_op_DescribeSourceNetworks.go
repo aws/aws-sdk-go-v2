@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribeSourceNetworksMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSourceNetworks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationDescribeSourceNetworksMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeSourceNetworksAPIClient is a client that implements the
-// DescribeSourceNetworks operation.
-type DescribeSourceNetworksAPIClient interface {
-	DescribeSourceNetworks(context.Context, *DescribeSourceNetworksInput, ...func(*Options)) (*DescribeSourceNetworksOutput, error)
-}
-
-var _ DescribeSourceNetworksAPIClient = (*Client)(nil)
 
 // DescribeSourceNetworksPaginatorOptions is the paginator options for
 // DescribeSourceNetworks
@@ -206,6 +201,9 @@ func (p *DescribeSourceNetworksPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSourceNetworks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *DescribeSourceNetworksPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeSourceNetworksAPIClient is a client that implements the
+// DescribeSourceNetworks operation.
+type DescribeSourceNetworksAPIClient interface {
+	DescribeSourceNetworks(context.Context, *DescribeSourceNetworksInput, ...func(*Options)) (*DescribeSourceNetworksOutput, error)
+}
+
+var _ DescribeSourceNetworksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSourceNetworks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

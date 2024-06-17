@@ -111,6 +111,9 @@ func (c *Client) addOperationDeregisterDBProxyTargetsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeregisterDBProxyTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

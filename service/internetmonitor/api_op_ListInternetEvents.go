@@ -140,6 +140,9 @@ func (c *Client) addOperationListInternetEventsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInternetEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListInternetEventsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListInternetEventsAPIClient is a client that implements the ListInternetEvents
-// operation.
-type ListInternetEventsAPIClient interface {
-	ListInternetEvents(context.Context, *ListInternetEventsInput, ...func(*Options)) (*ListInternetEventsOutput, error)
-}
-
-var _ ListInternetEventsAPIClient = (*Client)(nil)
 
 // ListInternetEventsPaginatorOptions is the paginator options for
 // ListInternetEvents
@@ -233,6 +228,9 @@ func (p *ListInternetEventsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInternetEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListInternetEventsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListInternetEventsAPIClient is a client that implements the ListInternetEvents
+// operation.
+type ListInternetEventsAPIClient interface {
+	ListInternetEvents(context.Context, *ListInternetEventsInput, ...func(*Options)) (*ListInternetEventsOutput, error)
+}
+
+var _ ListInternetEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInternetEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

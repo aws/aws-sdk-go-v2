@@ -456,6 +456,30 @@ func addContentSHA256Header(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&v4.ContentSHA256Header{}, (*v4.ComputePayloadSHA256)(nil).ID(), middleware.After)
 }
 
+func addIsWaiterUserAgent(o *Options) {
+	o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+		ua, err := getOrAddRequestUserAgent(stack)
+		if err != nil {
+			return err
+		}
+
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureWaiter)
+		return nil
+	})
+}
+
+func addIsPaginatorUserAgent(o *Options) {
+	o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+		ua, err := getOrAddRequestUserAgent(stack)
+		if err != nil {
+			return err
+		}
+
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeaturePaginator)
+		return nil
+	})
+}
+
 func resolveIdempotencyTokenProvider(o *Options) {
 	if o.IdempotencyTokenProvider != nil {
 		return
@@ -515,6 +539,33 @@ func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
 }
 func initializeTimeOffsetResolver(c *Client) {
 	c.timeOffset = new(atomic.Int64)
+}
+
+func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	switch options.Retryer.(type) {
+	case *retry.Standard:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeStandard)
+	case *retry.AdaptiveMode:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeAdaptive)
+	}
+	return nil
+}
+
+func addIsRequestCompressionUserAgent(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	if !options.DisableRequestCompression {
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureGZIPRequestCompression)
+	}
+	return nil
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

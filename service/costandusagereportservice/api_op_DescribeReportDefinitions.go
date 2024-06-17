@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribeReportDefinitionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReportDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationDescribeReportDefinitionsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeReportDefinitionsAPIClient is a client that implements the
-// DescribeReportDefinitions operation.
-type DescribeReportDefinitionsAPIClient interface {
-	DescribeReportDefinitions(context.Context, *DescribeReportDefinitionsInput, ...func(*Options)) (*DescribeReportDefinitionsOutput, error)
-}
-
-var _ DescribeReportDefinitionsAPIClient = (*Client)(nil)
 
 // DescribeReportDefinitionsPaginatorOptions is the paginator options for
 // DescribeReportDefinitions
@@ -208,6 +203,9 @@ func (p *DescribeReportDefinitionsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReportDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *DescribeReportDefinitionsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeReportDefinitionsAPIClient is a client that implements the
+// DescribeReportDefinitions operation.
+type DescribeReportDefinitionsAPIClient interface {
+	DescribeReportDefinitions(context.Context, *DescribeReportDefinitionsInput, ...func(*Options)) (*DescribeReportDefinitionsOutput, error)
+}
+
+var _ DescribeReportDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReportDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

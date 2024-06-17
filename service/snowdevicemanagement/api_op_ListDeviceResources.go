@@ -119,6 +119,9 @@ func (c *Client) addOperationListDeviceResourcesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDeviceResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListDeviceResourcesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListDeviceResourcesAPIClient is a client that implements the
-// ListDeviceResources operation.
-type ListDeviceResourcesAPIClient interface {
-	ListDeviceResources(context.Context, *ListDeviceResourcesInput, ...func(*Options)) (*ListDeviceResourcesOutput, error)
-}
-
-var _ ListDeviceResourcesAPIClient = (*Client)(nil)
 
 // ListDeviceResourcesPaginatorOptions is the paginator options for
 // ListDeviceResources
@@ -215,6 +210,9 @@ func (p *ListDeviceResourcesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDeviceResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListDeviceResourcesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListDeviceResourcesAPIClient is a client that implements the
+// ListDeviceResources operation.
+type ListDeviceResourcesAPIClient interface {
+	ListDeviceResources(context.Context, *ListDeviceResourcesInput, ...func(*Options)) (*ListDeviceResourcesOutput, error)
+}
+
+var _ ListDeviceResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDeviceResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

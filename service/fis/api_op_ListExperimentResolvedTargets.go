@@ -120,6 +120,9 @@ func (c *Client) addOperationListExperimentResolvedTargetsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListExperimentResolvedTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListExperimentResolvedTargetsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListExperimentResolvedTargetsAPIClient is a client that implements the
-// ListExperimentResolvedTargets operation.
-type ListExperimentResolvedTargetsAPIClient interface {
-	ListExperimentResolvedTargets(context.Context, *ListExperimentResolvedTargetsInput, ...func(*Options)) (*ListExperimentResolvedTargetsOutput, error)
-}
-
-var _ ListExperimentResolvedTargetsAPIClient = (*Client)(nil)
 
 // ListExperimentResolvedTargetsPaginatorOptions is the paginator options for
 // ListExperimentResolvedTargets
@@ -219,6 +214,9 @@ func (p *ListExperimentResolvedTargetsPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExperimentResolvedTargets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListExperimentResolvedTargetsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListExperimentResolvedTargetsAPIClient is a client that implements the
+// ListExperimentResolvedTargets operation.
+type ListExperimentResolvedTargetsAPIClient interface {
+	ListExperimentResolvedTargets(context.Context, *ListExperimentResolvedTargetsInput, ...func(*Options)) (*ListExperimentResolvedTargetsOutput, error)
+}
+
+var _ ListExperimentResolvedTargetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExperimentResolvedTargets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

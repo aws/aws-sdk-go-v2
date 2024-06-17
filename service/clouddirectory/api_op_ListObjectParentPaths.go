@@ -133,6 +133,9 @@ func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListObjectParentPathsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListObjectParentPathsAPIClient is a client that implements the
-// ListObjectParentPaths operation.
-type ListObjectParentPathsAPIClient interface {
-	ListObjectParentPaths(context.Context, *ListObjectParentPathsInput, ...func(*Options)) (*ListObjectParentPathsOutput, error)
-}
-
-var _ ListObjectParentPathsAPIClient = (*Client)(nil)
 
 // ListObjectParentPathsPaginatorOptions is the paginator options for
 // ListObjectParentPaths
@@ -230,6 +225,9 @@ func (p *ListObjectParentPathsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListObjectParentPaths(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListObjectParentPathsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListObjectParentPathsAPIClient is a client that implements the
+// ListObjectParentPaths operation.
+type ListObjectParentPathsAPIClient interface {
+	ListObjectParentPaths(context.Context, *ListObjectParentPathsInput, ...func(*Options)) (*ListObjectParentPathsOutput, error)
+}
+
+var _ ListObjectParentPathsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListObjectParentPaths(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

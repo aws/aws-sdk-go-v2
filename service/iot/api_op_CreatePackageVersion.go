@@ -156,6 +156,9 @@ func (c *Client) addOperationCreatePackageVersionMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePackageVersionMiddleware(stack, options); err != nil {
 		return err
 	}

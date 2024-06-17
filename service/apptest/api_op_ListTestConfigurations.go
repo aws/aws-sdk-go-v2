@@ -115,6 +115,9 @@ func (c *Client) addOperationListTestConfigurationsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTestConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListTestConfigurationsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListTestConfigurationsAPIClient is a client that implements the
-// ListTestConfigurations operation.
-type ListTestConfigurationsAPIClient interface {
-	ListTestConfigurations(context.Context, *ListTestConfigurationsInput, ...func(*Options)) (*ListTestConfigurationsOutput, error)
-}
-
-var _ ListTestConfigurationsAPIClient = (*Client)(nil)
 
 // ListTestConfigurationsPaginatorOptions is the paginator options for
 // ListTestConfigurations
@@ -208,6 +203,9 @@ func (p *ListTestConfigurationsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListTestConfigurationsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListTestConfigurationsAPIClient is a client that implements the
+// ListTestConfigurations operation.
+type ListTestConfigurationsAPIClient interface {
+	ListTestConfigurations(context.Context, *ListTestConfigurationsInput, ...func(*Options)) (*ListTestConfigurationsOutput, error)
+}
+
+var _ ListTestConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeFolderPermissionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFolderPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationDescribeFolderPermissionsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeFolderPermissionsAPIClient is a client that implements the
-// DescribeFolderPermissions operation.
-type DescribeFolderPermissionsAPIClient interface {
-	DescribeFolderPermissions(context.Context, *DescribeFolderPermissionsInput, ...func(*Options)) (*DescribeFolderPermissionsOutput, error)
-}
-
-var _ DescribeFolderPermissionsAPIClient = (*Client)(nil)
 
 // DescribeFolderPermissionsPaginatorOptions is the paginator options for
 // DescribeFolderPermissions
@@ -233,6 +228,9 @@ func (p *DescribeFolderPermissionsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFolderPermissions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *DescribeFolderPermissionsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeFolderPermissionsAPIClient is a client that implements the
+// DescribeFolderPermissions operation.
+type DescribeFolderPermissionsAPIClient interface {
+	DescribeFolderPermissions(context.Context, *DescribeFolderPermissionsInput, ...func(*Options)) (*DescribeFolderPermissionsOutput, error)
+}
+
+var _ DescribeFolderPermissionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFolderPermissions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationListV2LoggingLevelsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListV2LoggingLevels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListV2LoggingLevelsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListV2LoggingLevelsAPIClient is a client that implements the
-// ListV2LoggingLevels operation.
-type ListV2LoggingLevelsAPIClient interface {
-	ListV2LoggingLevels(context.Context, *ListV2LoggingLevelsInput, ...func(*Options)) (*ListV2LoggingLevelsOutput, error)
-}
-
-var _ ListV2LoggingLevelsAPIClient = (*Client)(nil)
 
 // ListV2LoggingLevelsPaginatorOptions is the paginator options for
 // ListV2LoggingLevels
@@ -212,6 +207,9 @@ func (p *ListV2LoggingLevelsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListV2LoggingLevels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListV2LoggingLevelsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListV2LoggingLevelsAPIClient is a client that implements the
+// ListV2LoggingLevels operation.
+type ListV2LoggingLevelsAPIClient interface {
+	ListV2LoggingLevels(context.Context, *ListV2LoggingLevelsInput, ...func(*Options)) (*ListV2LoggingLevelsOutput, error)
+}
+
+var _ ListV2LoggingLevelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListV2LoggingLevels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

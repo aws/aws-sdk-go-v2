@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeOrderableReplicationInstancesMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrderableReplicationInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationDescribeOrderableReplicationInstancesMiddlewares(st
 	}
 	return nil
 }
-
-// DescribeOrderableReplicationInstancesAPIClient is a client that implements the
-// DescribeOrderableReplicationInstances operation.
-type DescribeOrderableReplicationInstancesAPIClient interface {
-	DescribeOrderableReplicationInstances(context.Context, *DescribeOrderableReplicationInstancesInput, ...func(*Options)) (*DescribeOrderableReplicationInstancesOutput, error)
-}
-
-var _ DescribeOrderableReplicationInstancesAPIClient = (*Client)(nil)
 
 // DescribeOrderableReplicationInstancesPaginatorOptions is the paginator options
 // for DescribeOrderableReplicationInstances
@@ -222,6 +217,9 @@ func (p *DescribeOrderableReplicationInstancesPaginator) NextPage(ctx context.Co
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOrderableReplicationInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *DescribeOrderableReplicationInstancesPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// DescribeOrderableReplicationInstancesAPIClient is a client that implements the
+// DescribeOrderableReplicationInstances operation.
+type DescribeOrderableReplicationInstancesAPIClient interface {
+	DescribeOrderableReplicationInstances(context.Context, *DescribeOrderableReplicationInstancesInput, ...func(*Options)) (*DescribeOrderableReplicationInstancesOutput, error)
+}
+
+var _ DescribeOrderableReplicationInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOrderableReplicationInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

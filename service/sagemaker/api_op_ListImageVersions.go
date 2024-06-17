@@ -137,6 +137,9 @@ func (c *Client) addOperationListImageVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListImageVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListImageVersionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListImageVersionsAPIClient is a client that implements the ListImageVersions
-// operation.
-type ListImageVersionsAPIClient interface {
-	ListImageVersions(context.Context, *ListImageVersionsInput, ...func(*Options)) (*ListImageVersionsOutput, error)
-}
-
-var _ ListImageVersionsAPIClient = (*Client)(nil)
 
 // ListImageVersionsPaginatorOptions is the paginator options for ListImageVersions
 type ListImageVersionsPaginatorOptions struct {
@@ -233,6 +228,9 @@ func (p *ListImageVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImageVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListImageVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListImageVersionsAPIClient is a client that implements the ListImageVersions
+// operation.
+type ListImageVersionsAPIClient interface {
+	ListImageVersions(context.Context, *ListImageVersionsInput, ...func(*Options)) (*ListImageVersionsOutput, error)
+}
+
+var _ ListImageVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImageVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationListMultiplexProgramsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMultiplexProgramsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListMultiplexProgramsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListMultiplexProgramsAPIClient is a client that implements the
-// ListMultiplexPrograms operation.
-type ListMultiplexProgramsAPIClient interface {
-	ListMultiplexPrograms(context.Context, *ListMultiplexProgramsInput, ...func(*Options)) (*ListMultiplexProgramsOutput, error)
-}
-
-var _ ListMultiplexProgramsAPIClient = (*Client)(nil)
 
 // ListMultiplexProgramsPaginatorOptions is the paginator options for
 // ListMultiplexPrograms
@@ -213,6 +208,9 @@ func (p *ListMultiplexProgramsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMultiplexPrograms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListMultiplexProgramsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListMultiplexProgramsAPIClient is a client that implements the
+// ListMultiplexPrograms operation.
+type ListMultiplexProgramsAPIClient interface {
+	ListMultiplexPrograms(context.Context, *ListMultiplexProgramsInput, ...func(*Options)) (*ListMultiplexProgramsOutput, error)
+}
+
+var _ ListMultiplexProgramsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMultiplexPrograms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

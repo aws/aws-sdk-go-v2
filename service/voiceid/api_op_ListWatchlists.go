@@ -124,6 +124,9 @@ func (c *Client) addOperationListWatchlistsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWatchlistsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListWatchlistsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListWatchlistsAPIClient is a client that implements the ListWatchlists
-// operation.
-type ListWatchlistsAPIClient interface {
-	ListWatchlists(context.Context, *ListWatchlistsInput, ...func(*Options)) (*ListWatchlistsOutput, error)
-}
-
-var _ ListWatchlistsAPIClient = (*Client)(nil)
 
 // ListWatchlistsPaginatorOptions is the paginator options for ListWatchlists
 type ListWatchlistsPaginatorOptions struct {
@@ -221,6 +216,9 @@ func (p *ListWatchlistsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWatchlists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListWatchlistsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListWatchlistsAPIClient is a client that implements the ListWatchlists
+// operation.
+type ListWatchlistsAPIClient interface {
+	ListWatchlists(context.Context, *ListWatchlistsInput, ...func(*Options)) (*ListWatchlistsOutput, error)
+}
+
+var _ ListWatchlistsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWatchlists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

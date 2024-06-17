@@ -133,6 +133,9 @@ func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateMembershipValidationMiddleware(stack); err != nil {
 		return err
 	}

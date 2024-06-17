@@ -118,6 +118,9 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListMonitorsAPIClient is a client that implements the ListMonitors operation.
-type ListMonitorsAPIClient interface {
-	ListMonitors(context.Context, *ListMonitorsInput, ...func(*Options)) (*ListMonitorsOutput, error)
-}
-
-var _ ListMonitorsAPIClient = (*Client)(nil)
 
 // ListMonitorsPaginatorOptions is the paginator options for ListMonitors
 type ListMonitorsPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *ListMonitorsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *ListMonitorsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListMonitorsAPIClient is a client that implements the ListMonitors operation.
+type ListMonitorsAPIClient interface {
+	ListMonitors(context.Context, *ListMonitorsInput, ...func(*Options)) (*ListMonitorsOutput, error)
+}
+
+var _ ListMonitorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

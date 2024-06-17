@@ -117,6 +117,9 @@ func (c *Client) addOperationListDbParameterGroupsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDbParameterGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListDbParameterGroupsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListDbParameterGroupsAPIClient is a client that implements the
-// ListDbParameterGroups operation.
-type ListDbParameterGroupsAPIClient interface {
-	ListDbParameterGroups(context.Context, *ListDbParameterGroupsInput, ...func(*Options)) (*ListDbParameterGroupsOutput, error)
-}
-
-var _ ListDbParameterGroupsAPIClient = (*Client)(nil)
 
 // ListDbParameterGroupsPaginatorOptions is the paginator options for
 // ListDbParameterGroups
@@ -213,6 +208,9 @@ func (p *ListDbParameterGroupsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDbParameterGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListDbParameterGroupsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListDbParameterGroupsAPIClient is a client that implements the
+// ListDbParameterGroups operation.
+type ListDbParameterGroupsAPIClient interface {
+	ListDbParameterGroups(context.Context, *ListDbParameterGroupsInput, ...func(*Options)) (*ListDbParameterGroupsOutput, error)
+}
+
+var _ ListDbParameterGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDbParameterGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

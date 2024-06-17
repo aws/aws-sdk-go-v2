@@ -128,6 +128,9 @@ func (c *Client) addOperationListResolverConfigsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListResolverConfigsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListResolverConfigsAPIClient is a client that implements the
-// ListResolverConfigs operation.
-type ListResolverConfigsAPIClient interface {
-	ListResolverConfigs(context.Context, *ListResolverConfigsInput, ...func(*Options)) (*ListResolverConfigsOutput, error)
-}
-
-var _ ListResolverConfigsAPIClient = (*Client)(nil)
 
 // ListResolverConfigsPaginatorOptions is the paginator options for
 // ListResolverConfigs
@@ -223,6 +218,9 @@ func (p *ListResolverConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResolverConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListResolverConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListResolverConfigsAPIClient is a client that implements the
+// ListResolverConfigs operation.
+type ListResolverConfigsAPIClient interface {
+	ListResolverConfigs(context.Context, *ListResolverConfigsInput, ...func(*Options)) (*ListResolverConfigsOutput, error)
+}
+
+var _ ListResolverConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResolverConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

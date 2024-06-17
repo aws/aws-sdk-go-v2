@@ -132,6 +132,9 @@ func (c *Client) addOperationCreateVirtualClusterMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVirtualClusterMiddleware(stack, options); err != nil {
 		return err
 	}

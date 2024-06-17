@@ -121,6 +121,9 @@ func (c *Client) addOperationOpenInstancePublicPortsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpOpenInstancePublicPortsValidationMiddleware(stack); err != nil {
 		return err
 	}

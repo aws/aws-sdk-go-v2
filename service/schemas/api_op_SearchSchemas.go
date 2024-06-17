@@ -124,6 +124,9 @@ func (c *Client) addOperationSearchSchemasMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchSchemasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,13 +150,6 @@ func (c *Client) addOperationSearchSchemasMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// SearchSchemasAPIClient is a client that implements the SearchSchemas operation.
-type SearchSchemasAPIClient interface {
-	SearchSchemas(context.Context, *SearchSchemasInput, ...func(*Options)) (*SearchSchemasOutput, error)
-}
-
-var _ SearchSchemasAPIClient = (*Client)(nil)
 
 // SearchSchemasPaginatorOptions is the paginator options for SearchSchemas
 type SearchSchemasPaginatorOptions struct {
@@ -217,6 +213,9 @@ func (p *SearchSchemasPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchSchemas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +234,13 @@ func (p *SearchSchemasPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// SearchSchemasAPIClient is a client that implements the SearchSchemas operation.
+type SearchSchemasAPIClient interface {
+	SearchSchemas(context.Context, *SearchSchemasInput, ...func(*Options)) (*SearchSchemasOutput, error)
+}
+
+var _ SearchSchemasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchSchemas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

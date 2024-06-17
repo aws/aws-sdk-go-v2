@@ -124,6 +124,9 @@ func (c *Client) addOperationListAssetModelCompositeModelsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAssetModelCompositeModelsMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,41 +153,6 @@ func (c *Client) addOperationListAssetModelCompositeModelsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-type endpointPrefix_opListAssetModelCompositeModelsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAssetModelCompositeModelsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAssetModelCompositeModelsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAssetModelCompositeModelsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAssetModelCompositeModelsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAssetModelCompositeModelsAPIClient is a client that implements the
-// ListAssetModelCompositeModels operation.
-type ListAssetModelCompositeModelsAPIClient interface {
-	ListAssetModelCompositeModels(context.Context, *ListAssetModelCompositeModelsInput, ...func(*Options)) (*ListAssetModelCompositeModelsOutput, error)
-}
-
-var _ ListAssetModelCompositeModelsAPIClient = (*Client)(nil)
 
 // ListAssetModelCompositeModelsPaginatorOptions is the paginator options for
 // ListAssetModelCompositeModels
@@ -254,6 +222,9 @@ func (p *ListAssetModelCompositeModelsPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssetModelCompositeModels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +243,41 @@ func (p *ListAssetModelCompositeModelsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+type endpointPrefix_opListAssetModelCompositeModelsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAssetModelCompositeModelsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAssetModelCompositeModelsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAssetModelCompositeModelsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAssetModelCompositeModelsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAssetModelCompositeModelsAPIClient is a client that implements the
+// ListAssetModelCompositeModels operation.
+type ListAssetModelCompositeModelsAPIClient interface {
+	ListAssetModelCompositeModels(context.Context, *ListAssetModelCompositeModelsInput, ...func(*Options)) (*ListAssetModelCompositeModelsOutput, error)
+}
+
+var _ ListAssetModelCompositeModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssetModelCompositeModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

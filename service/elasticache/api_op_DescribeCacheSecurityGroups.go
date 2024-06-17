@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeCacheSecurityGroupsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCacheSecurityGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeCacheSecurityGroupsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeCacheSecurityGroupsAPIClient is a client that implements the
-// DescribeCacheSecurityGroups operation.
-type DescribeCacheSecurityGroupsAPIClient interface {
-	DescribeCacheSecurityGroups(context.Context, *DescribeCacheSecurityGroupsInput, ...func(*Options)) (*DescribeCacheSecurityGroupsOutput, error)
-}
-
-var _ DescribeCacheSecurityGroupsAPIClient = (*Client)(nil)
 
 // DescribeCacheSecurityGroupsPaginatorOptions is the paginator options for
 // DescribeCacheSecurityGroups
@@ -228,6 +223,9 @@ func (p *DescribeCacheSecurityGroupsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCacheSecurityGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *DescribeCacheSecurityGroupsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeCacheSecurityGroupsAPIClient is a client that implements the
+// DescribeCacheSecurityGroups operation.
+type DescribeCacheSecurityGroupsAPIClient interface {
+	DescribeCacheSecurityGroups(context.Context, *DescribeCacheSecurityGroupsInput, ...func(*Options)) (*DescribeCacheSecurityGroupsOutput, error)
+}
+
+var _ DescribeCacheSecurityGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCacheSecurityGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

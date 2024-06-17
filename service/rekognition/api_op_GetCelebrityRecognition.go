@@ -198,6 +198,9 @@ func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCelebrityRecognitionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -221,14 +224,6 @@ func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetCelebrityRecognitionAPIClient is a client that implements the
-// GetCelebrityRecognition operation.
-type GetCelebrityRecognitionAPIClient interface {
-	GetCelebrityRecognition(context.Context, *GetCelebrityRecognitionInput, ...func(*Options)) (*GetCelebrityRecognitionOutput, error)
-}
-
-var _ GetCelebrityRecognitionAPIClient = (*Client)(nil)
 
 // GetCelebrityRecognitionPaginatorOptions is the paginator options for
 // GetCelebrityRecognition
@@ -297,6 +292,9 @@ func (p *GetCelebrityRecognitionPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCelebrityRecognition(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -315,6 +313,14 @@ func (p *GetCelebrityRecognitionPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// GetCelebrityRecognitionAPIClient is a client that implements the
+// GetCelebrityRecognition operation.
+type GetCelebrityRecognitionAPIClient interface {
+	GetCelebrityRecognition(context.Context, *GetCelebrityRecognitionInput, ...func(*Options)) (*GetCelebrityRecognitionOutput, error)
+}
+
+var _ GetCelebrityRecognitionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCelebrityRecognition(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

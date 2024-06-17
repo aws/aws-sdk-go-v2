@@ -117,6 +117,9 @@ func (c *Client) addOperationListLoggingConfigurationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLoggingConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListLoggingConfigurationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListLoggingConfigurationsAPIClient is a client that implements the
-// ListLoggingConfigurations operation.
-type ListLoggingConfigurationsAPIClient interface {
-	ListLoggingConfigurations(context.Context, *ListLoggingConfigurationsInput, ...func(*Options)) (*ListLoggingConfigurationsOutput, error)
-}
-
-var _ ListLoggingConfigurationsAPIClient = (*Client)(nil)
 
 // ListLoggingConfigurationsPaginatorOptions is the paginator options for
 // ListLoggingConfigurations
@@ -211,6 +206,9 @@ func (p *ListLoggingConfigurationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLoggingConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListLoggingConfigurationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListLoggingConfigurationsAPIClient is a client that implements the
+// ListLoggingConfigurations operation.
+type ListLoggingConfigurationsAPIClient interface {
+	ListLoggingConfigurations(context.Context, *ListLoggingConfigurationsInput, ...func(*Options)) (*ListLoggingConfigurationsOutput, error)
+}
+
+var _ ListLoggingConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLoggingConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -154,6 +154,9 @@ func (c *Client) addOperationListPodIdentityAssociationsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPodIdentityAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -177,14 +180,6 @@ func (c *Client) addOperationListPodIdentityAssociationsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListPodIdentityAssociationsAPIClient is a client that implements the
-// ListPodIdentityAssociations operation.
-type ListPodIdentityAssociationsAPIClient interface {
-	ListPodIdentityAssociations(context.Context, *ListPodIdentityAssociationsInput, ...func(*Options)) (*ListPodIdentityAssociationsOutput, error)
-}
-
-var _ ListPodIdentityAssociationsAPIClient = (*Client)(nil)
 
 // ListPodIdentityAssociationsPaginatorOptions is the paginator options for
 // ListPodIdentityAssociations
@@ -259,6 +254,9 @@ func (p *ListPodIdentityAssociationsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPodIdentityAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +275,14 @@ func (p *ListPodIdentityAssociationsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListPodIdentityAssociationsAPIClient is a client that implements the
+// ListPodIdentityAssociations operation.
+type ListPodIdentityAssociationsAPIClient interface {
+	ListPodIdentityAssociations(context.Context, *ListPodIdentityAssociationsInput, ...func(*Options)) (*ListPodIdentityAssociationsOutput, error)
+}
+
+var _ ListPodIdentityAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPodIdentityAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -163,6 +163,9 @@ func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApplicableIndividualAssessments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -183,14 +186,6 @@ func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(
 	}
 	return nil
 }
-
-// DescribeApplicableIndividualAssessmentsAPIClient is a client that implements
-// the DescribeApplicableIndividualAssessments operation.
-type DescribeApplicableIndividualAssessmentsAPIClient interface {
-	DescribeApplicableIndividualAssessments(context.Context, *DescribeApplicableIndividualAssessmentsInput, ...func(*Options)) (*DescribeApplicableIndividualAssessmentsOutput, error)
-}
-
-var _ DescribeApplicableIndividualAssessmentsAPIClient = (*Client)(nil)
 
 // DescribeApplicableIndividualAssessmentsPaginatorOptions is the paginator
 // options for DescribeApplicableIndividualAssessments
@@ -260,6 +255,9 @@ func (p *DescribeApplicableIndividualAssessmentsPaginator) NextPage(ctx context.
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeApplicableIndividualAssessments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -278,6 +276,14 @@ func (p *DescribeApplicableIndividualAssessmentsPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// DescribeApplicableIndividualAssessmentsAPIClient is a client that implements
+// the DescribeApplicableIndividualAssessments operation.
+type DescribeApplicableIndividualAssessmentsAPIClient interface {
+	DescribeApplicableIndividualAssessments(context.Context, *DescribeApplicableIndividualAssessmentsInput, ...func(*Options)) (*DescribeApplicableIndividualAssessmentsOutput, error)
+}
+
+var _ DescribeApplicableIndividualAssessmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeApplicableIndividualAssessments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

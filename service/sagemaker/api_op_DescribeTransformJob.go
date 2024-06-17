@@ -225,6 +225,9 @@ func (c *Client) addOperationDescribeTransformJobMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTransformJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -248,14 +251,6 @@ func (c *Client) addOperationDescribeTransformJobMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeTransformJobAPIClient is a client that implements the
-// DescribeTransformJob operation.
-type DescribeTransformJobAPIClient interface {
-	DescribeTransformJob(context.Context, *DescribeTransformJobInput, ...func(*Options)) (*DescribeTransformJobOutput, error)
-}
-
-var _ DescribeTransformJobAPIClient = (*Client)(nil)
 
 // TransformJobCompletedOrStoppedWaiterOptions are waiter options for
 // TransformJobCompletedOrStoppedWaiter
@@ -377,7 +372,13 @@ func (w *TransformJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Context
 		}
 
 		out, err := w.client.DescribeTransformJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -480,6 +481,14 @@ func transformJobCompletedOrStoppedStateRetryable(ctx context.Context, input *De
 
 	return true, nil
 }
+
+// DescribeTransformJobAPIClient is a client that implements the
+// DescribeTransformJob operation.
+type DescribeTransformJobAPIClient interface {
+	DescribeTransformJob(context.Context, *DescribeTransformJobInput, ...func(*Options)) (*DescribeTransformJobOutput, error)
+}
+
+var _ DescribeTransformJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTransformJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

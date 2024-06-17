@@ -151,6 +151,9 @@ func (c *Client) addOperationGetFileMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFileValidationMiddleware(stack); err != nil {
 		return err
 	}

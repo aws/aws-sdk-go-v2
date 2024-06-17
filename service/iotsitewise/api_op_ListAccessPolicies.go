@@ -138,6 +138,9 @@ func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAccessPoliciesMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,41 +164,6 @@ func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-type endpointPrefix_opListAccessPoliciesMiddleware struct {
-}
-
-func (*endpointPrefix_opListAccessPoliciesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAccessPoliciesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "monitor." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAccessPoliciesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAccessPoliciesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAccessPoliciesAPIClient is a client that implements the ListAccessPolicies
-// operation.
-type ListAccessPoliciesAPIClient interface {
-	ListAccessPolicies(context.Context, *ListAccessPoliciesInput, ...func(*Options)) (*ListAccessPoliciesOutput, error)
-}
-
-var _ ListAccessPoliciesAPIClient = (*Client)(nil)
 
 // ListAccessPoliciesPaginatorOptions is the paginator options for
 // ListAccessPolicies
@@ -263,6 +231,9 @@ func (p *ListAccessPoliciesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccessPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -281,6 +252,41 @@ func (p *ListAccessPoliciesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+type endpointPrefix_opListAccessPoliciesMiddleware struct {
+}
+
+func (*endpointPrefix_opListAccessPoliciesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAccessPoliciesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "monitor." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAccessPoliciesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAccessPoliciesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAccessPoliciesAPIClient is a client that implements the ListAccessPolicies
+// operation.
+type ListAccessPoliciesAPIClient interface {
+	ListAccessPolicies(context.Context, *ListAccessPoliciesInput, ...func(*Options)) (*ListAccessPoliciesOutput, error)
+}
+
+var _ ListAccessPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccessPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

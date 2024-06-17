@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateTemplateAliasMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateTemplateAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

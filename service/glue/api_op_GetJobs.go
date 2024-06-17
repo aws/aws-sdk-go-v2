@@ -110,6 +110,9 @@ func (c *Client) addOperationGetJobsMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,13 +133,6 @@ func (c *Client) addOperationGetJobsMiddlewares(stack *middleware.Stack, options
 	}
 	return nil
 }
-
-// GetJobsAPIClient is a client that implements the GetJobs operation.
-type GetJobsAPIClient interface {
-	GetJobs(context.Context, *GetJobsInput, ...func(*Options)) (*GetJobsOutput, error)
-}
-
-var _ GetJobsAPIClient = (*Client)(nil)
 
 // GetJobsPaginatorOptions is the paginator options for GetJobs
 type GetJobsPaginatorOptions struct {
@@ -201,6 +197,9 @@ func (p *GetJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +218,13 @@ func (p *GetJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options
 
 	return result, nil
 }
+
+// GetJobsAPIClient is a client that implements the GetJobs operation.
+type GetJobsAPIClient interface {
+	GetJobs(context.Context, *GetJobsInput, ...func(*Options)) (*GetJobsOutput, error)
+}
+
+var _ GetJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

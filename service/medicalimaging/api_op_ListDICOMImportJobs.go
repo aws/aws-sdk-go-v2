@@ -120,6 +120,9 @@ func (c *Client) addOperationListDICOMImportJobsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDICOMImportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListDICOMImportJobsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListDICOMImportJobsAPIClient is a client that implements the
-// ListDICOMImportJobs operation.
-type ListDICOMImportJobsAPIClient interface {
-	ListDICOMImportJobs(context.Context, *ListDICOMImportJobsInput, ...func(*Options)) (*ListDICOMImportJobsOutput, error)
-}
-
-var _ ListDICOMImportJobsAPIClient = (*Client)(nil)
 
 // ListDICOMImportJobsPaginatorOptions is the paginator options for
 // ListDICOMImportJobs
@@ -216,6 +211,9 @@ func (p *ListDICOMImportJobsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDICOMImportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListDICOMImportJobsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListDICOMImportJobsAPIClient is a client that implements the
+// ListDICOMImportJobs operation.
+type ListDICOMImportJobsAPIClient interface {
+	ListDICOMImportJobs(context.Context, *ListDICOMImportJobsInput, ...func(*Options)) (*ListDICOMImportJobsOutput, error)
+}
+
+var _ ListDICOMImportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDICOMImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

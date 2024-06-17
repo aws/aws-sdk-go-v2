@@ -142,6 +142,9 @@ func (c *Client) addOperationGetMetadataGenerationRunMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMetadataGenerationRunValidationMiddleware(stack); err != nil {
 		return err
 	}

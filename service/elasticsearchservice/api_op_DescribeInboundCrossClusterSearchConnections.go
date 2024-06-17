@@ -126,6 +126,9 @@ func (c *Client) addOperationDescribeInboundCrossClusterSearchConnectionsMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInboundCrossClusterSearchConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationDescribeInboundCrossClusterSearchConnectionsMiddlew
 	}
 	return nil
 }
-
-// DescribeInboundCrossClusterSearchConnectionsAPIClient is a client that
-// implements the DescribeInboundCrossClusterSearchConnections operation.
-type DescribeInboundCrossClusterSearchConnectionsAPIClient interface {
-	DescribeInboundCrossClusterSearchConnections(context.Context, *DescribeInboundCrossClusterSearchConnectionsInput, ...func(*Options)) (*DescribeInboundCrossClusterSearchConnectionsOutput, error)
-}
-
-var _ DescribeInboundCrossClusterSearchConnectionsAPIClient = (*Client)(nil)
 
 // DescribeInboundCrossClusterSearchConnectionsPaginatorOptions is the paginator
 // options for DescribeInboundCrossClusterSearchConnections
@@ -218,6 +213,9 @@ func (p *DescribeInboundCrossClusterSearchConnectionsPaginator) NextPage(ctx con
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeInboundCrossClusterSearchConnections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *DescribeInboundCrossClusterSearchConnectionsPaginator) NextPage(ctx con
 
 	return result, nil
 }
+
+// DescribeInboundCrossClusterSearchConnectionsAPIClient is a client that
+// implements the DescribeInboundCrossClusterSearchConnections operation.
+type DescribeInboundCrossClusterSearchConnectionsAPIClient interface {
+	DescribeInboundCrossClusterSearchConnections(context.Context, *DescribeInboundCrossClusterSearchConnectionsInput, ...func(*Options)) (*DescribeInboundCrossClusterSearchConnectionsOutput, error)
+}
+
+var _ DescribeInboundCrossClusterSearchConnectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInboundCrossClusterSearchConnections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

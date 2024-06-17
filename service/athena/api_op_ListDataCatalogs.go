@@ -120,6 +120,9 @@ func (c *Client) addOperationListDataCatalogsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataCatalogs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListDataCatalogsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListDataCatalogsAPIClient is a client that implements the ListDataCatalogs
-// operation.
-type ListDataCatalogsAPIClient interface {
-	ListDataCatalogs(context.Context, *ListDataCatalogsInput, ...func(*Options)) (*ListDataCatalogsOutput, error)
-}
-
-var _ ListDataCatalogsAPIClient = (*Client)(nil)
 
 // ListDataCatalogsPaginatorOptions is the paginator options for ListDataCatalogs
 type ListDataCatalogsPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListDataCatalogsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataCatalogs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListDataCatalogsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListDataCatalogsAPIClient is a client that implements the ListDataCatalogs
+// operation.
+type ListDataCatalogsAPIClient interface {
+	ListDataCatalogs(context.Context, *ListDataCatalogsInput, ...func(*Options)) (*ListDataCatalogsOutput, error)
+}
+
+var _ ListDataCatalogsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataCatalogs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

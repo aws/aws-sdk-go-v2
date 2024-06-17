@@ -137,6 +137,9 @@ func (c *Client) addOperationListEnvironmentBlueprintsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEnvironmentBlueprintsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListEnvironmentBlueprintsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListEnvironmentBlueprintsAPIClient is a client that implements the
-// ListEnvironmentBlueprints operation.
-type ListEnvironmentBlueprintsAPIClient interface {
-	ListEnvironmentBlueprints(context.Context, *ListEnvironmentBlueprintsInput, ...func(*Options)) (*ListEnvironmentBlueprintsOutput, error)
-}
-
-var _ ListEnvironmentBlueprintsAPIClient = (*Client)(nil)
 
 // ListEnvironmentBlueprintsPaginatorOptions is the paginator options for
 // ListEnvironmentBlueprints
@@ -238,6 +233,9 @@ func (p *ListEnvironmentBlueprintsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnvironmentBlueprints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListEnvironmentBlueprintsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListEnvironmentBlueprintsAPIClient is a client that implements the
+// ListEnvironmentBlueprints operation.
+type ListEnvironmentBlueprintsAPIClient interface {
+	ListEnvironmentBlueprints(context.Context, *ListEnvironmentBlueprintsInput, ...func(*Options)) (*ListEnvironmentBlueprintsOutput, error)
+}
+
+var _ ListEnvironmentBlueprintsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnvironmentBlueprints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

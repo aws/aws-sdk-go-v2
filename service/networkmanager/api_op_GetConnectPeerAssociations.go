@@ -118,6 +118,9 @@ func (c *Client) addOperationGetConnectPeerAssociationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetConnectPeerAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationGetConnectPeerAssociationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// GetConnectPeerAssociationsAPIClient is a client that implements the
-// GetConnectPeerAssociations operation.
-type GetConnectPeerAssociationsAPIClient interface {
-	GetConnectPeerAssociations(context.Context, *GetConnectPeerAssociationsInput, ...func(*Options)) (*GetConnectPeerAssociationsOutput, error)
-}
-
-var _ GetConnectPeerAssociationsAPIClient = (*Client)(nil)
 
 // GetConnectPeerAssociationsPaginatorOptions is the paginator options for
 // GetConnectPeerAssociations
@@ -216,6 +211,9 @@ func (p *GetConnectPeerAssociationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetConnectPeerAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *GetConnectPeerAssociationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// GetConnectPeerAssociationsAPIClient is a client that implements the
+// GetConnectPeerAssociations operation.
+type GetConnectPeerAssociationsAPIClient interface {
+	GetConnectPeerAssociations(context.Context, *GetConnectPeerAssociationsInput, ...func(*Options)) (*GetConnectPeerAssociationsOutput, error)
+}
+
+var _ GetConnectPeerAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetConnectPeerAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

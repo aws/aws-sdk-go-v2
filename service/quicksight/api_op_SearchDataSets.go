@@ -127,6 +127,9 @@ func (c *Client) addOperationSearchDataSetsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchDataSetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationSearchDataSetsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// SearchDataSetsAPIClient is a client that implements the SearchDataSets
-// operation.
-type SearchDataSetsAPIClient interface {
-	SearchDataSets(context.Context, *SearchDataSetsInput, ...func(*Options)) (*SearchDataSetsOutput, error)
-}
-
-var _ SearchDataSetsAPIClient = (*Client)(nil)
 
 // SearchDataSetsPaginatorOptions is the paginator options for SearchDataSets
 type SearchDataSetsPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *SearchDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchDataSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *SearchDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// SearchDataSetsAPIClient is a client that implements the SearchDataSets
+// operation.
+type SearchDataSetsAPIClient interface {
+	SearchDataSets(context.Context, *SearchDataSetsInput, ...func(*Options)) (*SearchDataSetsOutput, error)
+}
+
+var _ SearchDataSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchDataSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

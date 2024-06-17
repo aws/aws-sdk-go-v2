@@ -120,6 +120,9 @@ func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListDashboardsMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,41 +149,6 @@ func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-type endpointPrefix_opListDashboardsMiddleware struct {
-}
-
-func (*endpointPrefix_opListDashboardsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListDashboardsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "monitor." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListDashboardsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListDashboardsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListDashboardsAPIClient is a client that implements the ListDashboards
-// operation.
-type ListDashboardsAPIClient interface {
-	ListDashboards(context.Context, *ListDashboardsInput, ...func(*Options)) (*ListDashboardsOutput, error)
-}
-
-var _ ListDashboardsAPIClient = (*Client)(nil)
 
 // ListDashboardsPaginatorOptions is the paginator options for ListDashboards
 type ListDashboardsPaginatorOptions struct {
@@ -247,6 +215,9 @@ func (p *ListDashboardsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDashboards(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +236,41 @@ func (p *ListDashboardsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+type endpointPrefix_opListDashboardsMiddleware struct {
+}
+
+func (*endpointPrefix_opListDashboardsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListDashboardsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "monitor." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListDashboardsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListDashboardsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListDashboardsAPIClient is a client that implements the ListDashboards
+// operation.
+type ListDashboardsAPIClient interface {
+	ListDashboards(context.Context, *ListDashboardsInput, ...func(*Options)) (*ListDashboardsOutput, error)
+}
+
+var _ ListDashboardsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDashboards(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

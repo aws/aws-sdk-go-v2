@@ -148,6 +148,9 @@ func (c *Client) addOperationListRealtimeContactAnalysisSegmentsV2Middlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRealtimeContactAnalysisSegmentsV2ValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -171,14 +174,6 @@ func (c *Client) addOperationListRealtimeContactAnalysisSegmentsV2Middlewares(st
 	}
 	return nil
 }
-
-// ListRealtimeContactAnalysisSegmentsV2APIClient is a client that implements the
-// ListRealtimeContactAnalysisSegmentsV2 operation.
-type ListRealtimeContactAnalysisSegmentsV2APIClient interface {
-	ListRealtimeContactAnalysisSegmentsV2(context.Context, *ListRealtimeContactAnalysisSegmentsV2Input, ...func(*Options)) (*ListRealtimeContactAnalysisSegmentsV2Output, error)
-}
-
-var _ ListRealtimeContactAnalysisSegmentsV2APIClient = (*Client)(nil)
 
 // ListRealtimeContactAnalysisSegmentsV2PaginatorOptions is the paginator options
 // for ListRealtimeContactAnalysisSegmentsV2
@@ -246,6 +241,9 @@ func (p *ListRealtimeContactAnalysisSegmentsV2Paginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRealtimeContactAnalysisSegmentsV2(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +262,14 @@ func (p *ListRealtimeContactAnalysisSegmentsV2Paginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListRealtimeContactAnalysisSegmentsV2APIClient is a client that implements the
+// ListRealtimeContactAnalysisSegmentsV2 operation.
+type ListRealtimeContactAnalysisSegmentsV2APIClient interface {
+	ListRealtimeContactAnalysisSegmentsV2(context.Context, *ListRealtimeContactAnalysisSegmentsV2Input, ...func(*Options)) (*ListRealtimeContactAnalysisSegmentsV2Output, error)
+}
+
+var _ ListRealtimeContactAnalysisSegmentsV2APIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRealtimeContactAnalysisSegmentsV2(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

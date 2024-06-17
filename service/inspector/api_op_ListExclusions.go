@@ -124,6 +124,9 @@ func (c *Client) addOperationListExclusionsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListExclusionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListExclusionsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListExclusionsAPIClient is a client that implements the ListExclusions
-// operation.
-type ListExclusionsAPIClient interface {
-	ListExclusions(context.Context, *ListExclusionsInput, ...func(*Options)) (*ListExclusionsOutput, error)
-}
-
-var _ ListExclusionsAPIClient = (*Client)(nil)
 
 // ListExclusionsPaginatorOptions is the paginator options for ListExclusions
 type ListExclusionsPaginatorOptions struct {
@@ -220,6 +215,9 @@ func (p *ListExclusionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExclusions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListExclusionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListExclusionsAPIClient is a client that implements the ListExclusions
+// operation.
+type ListExclusionsAPIClient interface {
+	ListExclusions(context.Context, *ListExclusionsInput, ...func(*Options)) (*ListExclusionsOutput, error)
+}
+
+var _ ListExclusionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExclusions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

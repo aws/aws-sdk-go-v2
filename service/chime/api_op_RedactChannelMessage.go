@@ -132,6 +132,9 @@ func (c *Client) addOperationRedactChannelMessageMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opRedactChannelMessageMiddleware(stack); err != nil {
 		return err
 	}

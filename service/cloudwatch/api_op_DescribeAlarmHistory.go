@@ -143,6 +143,9 @@ func (c *Client) addOperationDescribeAlarmHistoryMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAlarmHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationDescribeAlarmHistoryMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeAlarmHistoryAPIClient is a client that implements the
-// DescribeAlarmHistory operation.
-type DescribeAlarmHistoryAPIClient interface {
-	DescribeAlarmHistory(context.Context, *DescribeAlarmHistoryInput, ...func(*Options)) (*DescribeAlarmHistoryOutput, error)
-}
-
-var _ DescribeAlarmHistoryAPIClient = (*Client)(nil)
 
 // DescribeAlarmHistoryPaginatorOptions is the paginator options for
 // DescribeAlarmHistory
@@ -236,6 +231,9 @@ func (p *DescribeAlarmHistoryPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAlarmHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *DescribeAlarmHistoryPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeAlarmHistoryAPIClient is a client that implements the
+// DescribeAlarmHistory operation.
+type DescribeAlarmHistoryAPIClient interface {
+	DescribeAlarmHistory(context.Context, *DescribeAlarmHistoryInput, ...func(*Options)) (*DescribeAlarmHistoryOutput, error)
+}
+
+var _ DescribeAlarmHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAlarmHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -113,6 +113,9 @@ func (c *Client) addOperationListCustomDataIdentifiersMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomDataIdentifiers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListCustomDataIdentifiersMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListCustomDataIdentifiersAPIClient is a client that implements the
-// ListCustomDataIdentifiers operation.
-type ListCustomDataIdentifiersAPIClient interface {
-	ListCustomDataIdentifiers(context.Context, *ListCustomDataIdentifiersInput, ...func(*Options)) (*ListCustomDataIdentifiersOutput, error)
-}
-
-var _ ListCustomDataIdentifiersAPIClient = (*Client)(nil)
 
 // ListCustomDataIdentifiersPaginatorOptions is the paginator options for
 // ListCustomDataIdentifiers
@@ -207,6 +202,9 @@ func (p *ListCustomDataIdentifiersPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomDataIdentifiers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListCustomDataIdentifiersPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListCustomDataIdentifiersAPIClient is a client that implements the
+// ListCustomDataIdentifiers operation.
+type ListCustomDataIdentifiersAPIClient interface {
+	ListCustomDataIdentifiers(context.Context, *ListCustomDataIdentifiersInput, ...func(*Options)) (*ListCustomDataIdentifiersOutput, error)
+}
+
+var _ ListCustomDataIdentifiersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomDataIdentifiers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

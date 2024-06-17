@@ -107,6 +107,9 @@ func (c *Client) addOperationUpdateIndexingConfigurationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateIndexingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

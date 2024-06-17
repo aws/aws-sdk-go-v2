@@ -121,6 +121,9 @@ func (c *Client) addOperationListCustomLineItemVersionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomLineItemVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListCustomLineItemVersionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListCustomLineItemVersionsAPIClient is a client that implements the
-// ListCustomLineItemVersions operation.
-type ListCustomLineItemVersionsAPIClient interface {
-	ListCustomLineItemVersions(context.Context, *ListCustomLineItemVersionsInput, ...func(*Options)) (*ListCustomLineItemVersionsOutput, error)
-}
-
-var _ ListCustomLineItemVersionsAPIClient = (*Client)(nil)
 
 // ListCustomLineItemVersionsPaginatorOptions is the paginator options for
 // ListCustomLineItemVersions
@@ -219,6 +214,9 @@ func (p *ListCustomLineItemVersionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomLineItemVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListCustomLineItemVersionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListCustomLineItemVersionsAPIClient is a client that implements the
+// ListCustomLineItemVersions operation.
+type ListCustomLineItemVersionsAPIClient interface {
+	ListCustomLineItemVersions(context.Context, *ListCustomLineItemVersionsInput, ...func(*Options)) (*ListCustomLineItemVersionsOutput, error)
+}
+
+var _ ListCustomLineItemVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomLineItemVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

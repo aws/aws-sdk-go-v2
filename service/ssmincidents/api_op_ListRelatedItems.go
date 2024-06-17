@@ -120,6 +120,9 @@ func (c *Client) addOperationListRelatedItemsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRelatedItemsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListRelatedItemsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListRelatedItemsAPIClient is a client that implements the ListRelatedItems
-// operation.
-type ListRelatedItemsAPIClient interface {
-	ListRelatedItems(context.Context, *ListRelatedItemsInput, ...func(*Options)) (*ListRelatedItemsOutput, error)
-}
-
-var _ ListRelatedItemsAPIClient = (*Client)(nil)
 
 // ListRelatedItemsPaginatorOptions is the paginator options for ListRelatedItems
 type ListRelatedItemsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListRelatedItemsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRelatedItems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListRelatedItemsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListRelatedItemsAPIClient is a client that implements the ListRelatedItems
+// operation.
+type ListRelatedItemsAPIClient interface {
+	ListRelatedItems(context.Context, *ListRelatedItemsInput, ...func(*Options)) (*ListRelatedItemsOutput, error)
+}
+
+var _ ListRelatedItemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRelatedItems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

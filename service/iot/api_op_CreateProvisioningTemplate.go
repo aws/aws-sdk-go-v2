@@ -158,6 +158,9 @@ func (c *Client) addOperationCreateProvisioningTemplateMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateProvisioningTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

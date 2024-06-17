@@ -162,6 +162,9 @@ func (c *Client) addOperationUpdateMaintenanceStartTimeMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateMaintenanceStartTimeValidationMiddleware(stack); err != nil {
 		return err
 	}

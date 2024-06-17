@@ -132,6 +132,9 @@ func (c *Client) addOperationPutExternalModelMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutExternalModelValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -129,6 +129,9 @@ func (c *Client) addOperationExecuteTransactionMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opExecuteTransactionMiddleware(stack, options); err != nil {
 		return err
 	}

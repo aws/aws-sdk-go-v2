@@ -123,6 +123,9 @@ func (c *Client) addOperationGetTypedLinkFacetInformationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTypedLinkFacetInformationValidationMiddleware(stack); err != nil {
 		return err
 	}

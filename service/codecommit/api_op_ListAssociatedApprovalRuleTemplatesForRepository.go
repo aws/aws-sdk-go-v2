@@ -118,6 +118,9 @@ func (c *Client) addOperationListAssociatedApprovalRuleTemplatesForRepositoryMid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssociatedApprovalRuleTemplatesForRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListAssociatedApprovalRuleTemplatesForRepositoryMid
 	}
 	return nil
 }
-
-// ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient is a client that
-// implements the ListAssociatedApprovalRuleTemplatesForRepository operation.
-type ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient interface {
-	ListAssociatedApprovalRuleTemplatesForRepository(context.Context, *ListAssociatedApprovalRuleTemplatesForRepositoryInput, ...func(*Options)) (*ListAssociatedApprovalRuleTemplatesForRepositoryOutput, error)
-}
-
-var _ ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient = (*Client)(nil)
 
 // ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions is the
 // paginator options for ListAssociatedApprovalRuleTemplatesForRepository
@@ -217,6 +212,9 @@ func (p *ListAssociatedApprovalRuleTemplatesForRepositoryPaginator) NextPage(ctx
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedApprovalRuleTemplatesForRepository(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListAssociatedApprovalRuleTemplatesForRepositoryPaginator) NextPage(ctx
 
 	return result, nil
 }
+
+// ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient is a client that
+// implements the ListAssociatedApprovalRuleTemplatesForRepository operation.
+type ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient interface {
+	ListAssociatedApprovalRuleTemplatesForRepository(context.Context, *ListAssociatedApprovalRuleTemplatesForRepositoryInput, ...func(*Options)) (*ListAssociatedApprovalRuleTemplatesForRepositoryOutput, error)
+}
+
+var _ ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedApprovalRuleTemplatesForRepository(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

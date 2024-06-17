@@ -121,6 +121,9 @@ func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListElasticsearchVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListElasticsearchVersionsAPIClient is a client that implements the
-// ListElasticsearchVersions operation.
-type ListElasticsearchVersionsAPIClient interface {
-	ListElasticsearchVersions(context.Context, *ListElasticsearchVersionsInput, ...func(*Options)) (*ListElasticsearchVersionsOutput, error)
-}
-
-var _ ListElasticsearchVersionsAPIClient = (*Client)(nil)
 
 // ListElasticsearchVersionsPaginatorOptions is the paginator options for
 // ListElasticsearchVersions
@@ -212,6 +207,9 @@ func (p *ListElasticsearchVersionsPaginator) NextPage(ctx context.Context, optFn
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListElasticsearchVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListElasticsearchVersionsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListElasticsearchVersionsAPIClient is a client that implements the
+// ListElasticsearchVersions operation.
+type ListElasticsearchVersionsAPIClient interface {
+	ListElasticsearchVersions(context.Context, *ListElasticsearchVersionsInput, ...func(*Options)) (*ListElasticsearchVersionsOutput, error)
+}
+
+var _ ListElasticsearchVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListElasticsearchVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

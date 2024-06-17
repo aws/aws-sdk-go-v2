@@ -107,6 +107,9 @@ func (c *Client) addOperationListResourcePoliciesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourcePolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -127,14 +130,6 @@ func (c *Client) addOperationListResourcePoliciesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListResourcePoliciesAPIClient is a client that implements the
-// ListResourcePolicies operation.
-type ListResourcePoliciesAPIClient interface {
-	ListResourcePolicies(context.Context, *ListResourcePoliciesInput, ...func(*Options)) (*ListResourcePoliciesOutput, error)
-}
-
-var _ ListResourcePoliciesAPIClient = (*Client)(nil)
 
 // ListResourcePoliciesPaginatorOptions is the paginator options for
 // ListResourcePolicies
@@ -188,6 +183,9 @@ func (p *ListResourcePoliciesPaginator) NextPage(ctx context.Context, optFns ...
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResourcePolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -206,6 +204,14 @@ func (p *ListResourcePoliciesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListResourcePoliciesAPIClient is a client that implements the
+// ListResourcePolicies operation.
+type ListResourcePoliciesAPIClient interface {
+	ListResourcePolicies(context.Context, *ListResourcePoliciesInput, ...func(*Options)) (*ListResourcePoliciesOutput, error)
+}
+
+var _ ListResourcePoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResourcePolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

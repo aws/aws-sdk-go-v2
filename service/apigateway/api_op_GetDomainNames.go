@@ -113,6 +113,9 @@ func (c *Client) addOperationGetDomainNamesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainNames(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationGetDomainNamesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetDomainNamesAPIClient is a client that implements the GetDomainNames
-// operation.
-type GetDomainNamesAPIClient interface {
-	GetDomainNames(context.Context, *GetDomainNamesInput, ...func(*Options)) (*GetDomainNamesOutput, error)
-}
-
-var _ GetDomainNamesAPIClient = (*Client)(nil)
 
 // GetDomainNamesPaginatorOptions is the paginator options for GetDomainNames
 type GetDomainNamesPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *GetDomainNamesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDomainNames(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *GetDomainNamesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// GetDomainNamesAPIClient is a client that implements the GetDomainNames
+// operation.
+type GetDomainNamesAPIClient interface {
+	GetDomainNames(context.Context, *GetDomainNamesInput, ...func(*Options)) (*GetDomainNamesOutput, error)
+}
+
+var _ GetDomainNamesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDomainNames(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

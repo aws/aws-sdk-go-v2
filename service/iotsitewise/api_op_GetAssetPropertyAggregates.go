@@ -175,6 +175,9 @@ func (c *Client) addOperationGetAssetPropertyAggregatesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAssetPropertyAggregatesMiddleware(stack); err != nil {
 		return err
 	}
@@ -201,41 +204,6 @@ func (c *Client) addOperationGetAssetPropertyAggregatesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-type endpointPrefix_opGetAssetPropertyAggregatesMiddleware struct {
-}
-
-func (*endpointPrefix_opGetAssetPropertyAggregatesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetAssetPropertyAggregatesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "data." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetAssetPropertyAggregatesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetAssetPropertyAggregatesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetAssetPropertyAggregatesAPIClient is a client that implements the
-// GetAssetPropertyAggregates operation.
-type GetAssetPropertyAggregatesAPIClient interface {
-	GetAssetPropertyAggregates(context.Context, *GetAssetPropertyAggregatesInput, ...func(*Options)) (*GetAssetPropertyAggregatesOutput, error)
-}
-
-var _ GetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 
 // GetAssetPropertyAggregatesPaginatorOptions is the paginator options for
 // GetAssetPropertyAggregates
@@ -309,6 +277,9 @@ func (p *GetAssetPropertyAggregatesPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAssetPropertyAggregates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -327,6 +298,41 @@ func (p *GetAssetPropertyAggregatesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+type endpointPrefix_opGetAssetPropertyAggregatesMiddleware struct {
+}
+
+func (*endpointPrefix_opGetAssetPropertyAggregatesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetAssetPropertyAggregatesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "data." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetAssetPropertyAggregatesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetAssetPropertyAggregatesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetAssetPropertyAggregatesAPIClient is a client that implements the
+// GetAssetPropertyAggregates operation.
+type GetAssetPropertyAggregatesAPIClient interface {
+	GetAssetPropertyAggregates(context.Context, *GetAssetPropertyAggregatesInput, ...func(*Options)) (*GetAssetPropertyAggregatesOutput, error)
+}
+
+var _ GetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAssetPropertyAggregates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

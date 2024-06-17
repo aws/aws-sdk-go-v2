@@ -125,6 +125,9 @@ func (c *Client) addOperationListSopRecommendationsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSopRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListSopRecommendationsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListSopRecommendationsAPIClient is a client that implements the
-// ListSopRecommendations operation.
-type ListSopRecommendationsAPIClient interface {
-	ListSopRecommendations(context.Context, *ListSopRecommendationsInput, ...func(*Options)) (*ListSopRecommendationsOutput, error)
-}
-
-var _ ListSopRecommendationsAPIClient = (*Client)(nil)
 
 // ListSopRecommendationsPaginatorOptions is the paginator options for
 // ListSopRecommendations
@@ -223,6 +218,9 @@ func (p *ListSopRecommendationsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSopRecommendations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListSopRecommendationsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListSopRecommendationsAPIClient is a client that implements the
+// ListSopRecommendations operation.
+type ListSopRecommendationsAPIClient interface {
+	ListSopRecommendations(context.Context, *ListSopRecommendationsInput, ...func(*Options)) (*ListSopRecommendationsOutput, error)
+}
+
+var _ ListSopRecommendationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSopRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -120,6 +120,9 @@ func (c *Client) addOperationListVodSourcesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVodSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListVodSourcesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListVodSourcesAPIClient is a client that implements the ListVodSources
-// operation.
-type ListVodSourcesAPIClient interface {
-	ListVodSources(context.Context, *ListVodSourcesInput, ...func(*Options)) (*ListVodSourcesOutput, error)
-}
-
-var _ ListVodSourcesAPIClient = (*Client)(nil)
 
 // ListVodSourcesPaginatorOptions is the paginator options for ListVodSources
 type ListVodSourcesPaginatorOptions struct {
@@ -217,6 +212,9 @@ func (p *ListVodSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVodSources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListVodSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListVodSourcesAPIClient is a client that implements the ListVodSources
+// operation.
+type ListVodSourcesAPIClient interface {
+	ListVodSources(context.Context, *ListVodSourcesInput, ...func(*Options)) (*ListVodSourcesOutput, error)
+}
+
+var _ ListVodSourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVodSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

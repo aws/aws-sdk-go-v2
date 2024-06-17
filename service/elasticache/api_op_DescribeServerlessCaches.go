@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeServerlessCachesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeServerlessCaches(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeServerlessCachesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeServerlessCachesAPIClient is a client that implements the
-// DescribeServerlessCaches operation.
-type DescribeServerlessCachesAPIClient interface {
-	DescribeServerlessCaches(context.Context, *DescribeServerlessCachesInput, ...func(*Options)) (*DescribeServerlessCachesOutput, error)
-}
-
-var _ DescribeServerlessCachesAPIClient = (*Client)(nil)
 
 // DescribeServerlessCachesPaginatorOptions is the paginator options for
 // DescribeServerlessCaches
@@ -220,6 +215,9 @@ func (p *DescribeServerlessCachesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeServerlessCaches(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *DescribeServerlessCachesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeServerlessCachesAPIClient is a client that implements the
+// DescribeServerlessCaches operation.
+type DescribeServerlessCachesAPIClient interface {
+	DescribeServerlessCaches(context.Context, *DescribeServerlessCachesInput, ...func(*Options)) (*DescribeServerlessCachesOutput, error)
+}
+
+var _ DescribeServerlessCachesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeServerlessCaches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

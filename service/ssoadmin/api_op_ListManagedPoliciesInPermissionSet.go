@@ -125,6 +125,9 @@ func (c *Client) addOperationListManagedPoliciesInPermissionSetMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListManagedPoliciesInPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListManagedPoliciesInPermissionSetMiddlewares(stack
 	}
 	return nil
 }
-
-// ListManagedPoliciesInPermissionSetAPIClient is a client that implements the
-// ListManagedPoliciesInPermissionSet operation.
-type ListManagedPoliciesInPermissionSetAPIClient interface {
-	ListManagedPoliciesInPermissionSet(context.Context, *ListManagedPoliciesInPermissionSetInput, ...func(*Options)) (*ListManagedPoliciesInPermissionSetOutput, error)
-}
-
-var _ ListManagedPoliciesInPermissionSetAPIClient = (*Client)(nil)
 
 // ListManagedPoliciesInPermissionSetPaginatorOptions is the paginator options for
 // ListManagedPoliciesInPermissionSet
@@ -223,6 +218,9 @@ func (p *ListManagedPoliciesInPermissionSetPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListManagedPoliciesInPermissionSet(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListManagedPoliciesInPermissionSetPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListManagedPoliciesInPermissionSetAPIClient is a client that implements the
+// ListManagedPoliciesInPermissionSet operation.
+type ListManagedPoliciesInPermissionSetAPIClient interface {
+	ListManagedPoliciesInPermissionSet(context.Context, *ListManagedPoliciesInPermissionSetInput, ...func(*Options)) (*ListManagedPoliciesInPermissionSetOutput, error)
+}
+
+var _ ListManagedPoliciesInPermissionSetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListManagedPoliciesInPermissionSet(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

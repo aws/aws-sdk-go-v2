@@ -121,6 +121,9 @@ func (c *Client) addOperationCancelMLDataProcessingJobMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelMLDataProcessingJobValidationMiddleware(stack); err != nil {
 		return err
 	}

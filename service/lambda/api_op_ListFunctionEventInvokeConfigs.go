@@ -129,6 +129,9 @@ func (c *Client) addOperationListFunctionEventInvokeConfigsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFunctionEventInvokeConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListFunctionEventInvokeConfigsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListFunctionEventInvokeConfigsAPIClient is a client that implements the
-// ListFunctionEventInvokeConfigs operation.
-type ListFunctionEventInvokeConfigsAPIClient interface {
-	ListFunctionEventInvokeConfigs(context.Context, *ListFunctionEventInvokeConfigsInput, ...func(*Options)) (*ListFunctionEventInvokeConfigsOutput, error)
-}
-
-var _ ListFunctionEventInvokeConfigsAPIClient = (*Client)(nil)
 
 // ListFunctionEventInvokeConfigsPaginatorOptions is the paginator options for
 // ListFunctionEventInvokeConfigs
@@ -227,6 +222,9 @@ func (p *ListFunctionEventInvokeConfigsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFunctionEventInvokeConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListFunctionEventInvokeConfigsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListFunctionEventInvokeConfigsAPIClient is a client that implements the
+// ListFunctionEventInvokeConfigs operation.
+type ListFunctionEventInvokeConfigsAPIClient interface {
+	ListFunctionEventInvokeConfigs(context.Context, *ListFunctionEventInvokeConfigsInput, ...func(*Options)) (*ListFunctionEventInvokeConfigsOutput, error)
+}
+
+var _ ListFunctionEventInvokeConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFunctionEventInvokeConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

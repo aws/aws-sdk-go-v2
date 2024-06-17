@@ -111,6 +111,9 @@ func (c *Client) addOperationGetDatabaseMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}

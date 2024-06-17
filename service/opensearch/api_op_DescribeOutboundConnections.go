@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeOutboundConnectionsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOutboundConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationDescribeOutboundConnectionsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeOutboundConnectionsAPIClient is a client that implements the
-// DescribeOutboundConnections operation.
-type DescribeOutboundConnectionsAPIClient interface {
-	DescribeOutboundConnections(context.Context, *DescribeOutboundConnectionsInput, ...func(*Options)) (*DescribeOutboundConnectionsOutput, error)
-}
-
-var _ DescribeOutboundConnectionsAPIClient = (*Client)(nil)
 
 // DescribeOutboundConnectionsPaginatorOptions is the paginator options for
 // DescribeOutboundConnections
@@ -215,6 +210,9 @@ func (p *DescribeOutboundConnectionsPaginator) NextPage(ctx context.Context, opt
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOutboundConnections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeOutboundConnectionsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeOutboundConnectionsAPIClient is a client that implements the
+// DescribeOutboundConnections operation.
+type DescribeOutboundConnectionsAPIClient interface {
+	DescribeOutboundConnections(context.Context, *DescribeOutboundConnectionsInput, ...func(*Options)) (*DescribeOutboundConnectionsOutput, error)
+}
+
+var _ DescribeOutboundConnectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOutboundConnections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

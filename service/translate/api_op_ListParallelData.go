@@ -112,6 +112,9 @@ func (c *Client) addOperationListParallelDataMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListParallelData(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListParallelDataMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListParallelDataAPIClient is a client that implements the ListParallelData
-// operation.
-type ListParallelDataAPIClient interface {
-	ListParallelData(context.Context, *ListParallelDataInput, ...func(*Options)) (*ListParallelDataOutput, error)
-}
-
-var _ ListParallelDataAPIClient = (*Client)(nil)
 
 // ListParallelDataPaginatorOptions is the paginator options for ListParallelData
 type ListParallelDataPaginatorOptions struct {
@@ -204,6 +199,9 @@ func (p *ListParallelDataPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListParallelData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListParallelDataPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListParallelDataAPIClient is a client that implements the ListParallelData
+// operation.
+type ListParallelDataAPIClient interface {
+	ListParallelData(context.Context, *ListParallelDataInput, ...func(*Options)) (*ListParallelDataOutput, error)
+}
+
+var _ ListParallelDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListParallelData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

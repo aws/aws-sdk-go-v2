@@ -137,6 +137,9 @@ func (c *Client) addOperationListStorageLensGroupsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListStorageLensGroupsMiddleware(stack); err != nil {
 		return err
 	}
@@ -175,56 +178,6 @@ func (c *Client) addOperationListStorageLensGroupsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-type endpointPrefix_opListStorageLensGroupsMiddleware struct {
-}
-
-func (*endpointPrefix_opListStorageLensGroupsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListStorageLensGroupsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	opaqueInput := getOperationInput(ctx)
-	input, ok := opaqueInput.(*ListStorageLensGroupsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListStorageLensGroupsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListStorageLensGroupsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListStorageLensGroupsAPIClient is a client that implements the
-// ListStorageLensGroups operation.
-type ListStorageLensGroupsAPIClient interface {
-	ListStorageLensGroups(context.Context, *ListStorageLensGroupsInput, ...func(*Options)) (*ListStorageLensGroupsOutput, error)
-}
-
-var _ ListStorageLensGroupsAPIClient = (*Client)(nil)
 
 // ListStorageLensGroupsPaginatorOptions is the paginator options for
 // ListStorageLensGroups
@@ -278,6 +231,9 @@ func (p *ListStorageLensGroupsPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStorageLensGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -296,6 +252,56 @@ func (p *ListStorageLensGroupsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+type endpointPrefix_opListStorageLensGroupsMiddleware struct {
+}
+
+func (*endpointPrefix_opListStorageLensGroupsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListStorageLensGroupsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*ListStorageLensGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListStorageLensGroupsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListStorageLensGroupsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListStorageLensGroupsAPIClient is a client that implements the
+// ListStorageLensGroups operation.
+type ListStorageLensGroupsAPIClient interface {
+	ListStorageLensGroups(context.Context, *ListStorageLensGroupsInput, ...func(*Options)) (*ListStorageLensGroupsOutput, error)
+}
+
+var _ ListStorageLensGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStorageLensGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

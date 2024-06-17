@@ -129,6 +129,9 @@ func (c *Client) addOperationListAssetContractsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssetContractsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListAssetContractsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListAssetContractsAPIClient is a client that implements the ListAssetContracts
-// operation.
-type ListAssetContractsAPIClient interface {
-	ListAssetContracts(context.Context, *ListAssetContractsInput, ...func(*Options)) (*ListAssetContractsOutput, error)
-}
-
-var _ ListAssetContractsAPIClient = (*Client)(nil)
 
 // ListAssetContractsPaginatorOptions is the paginator options for
 // ListAssetContracts
@@ -234,6 +229,9 @@ func (p *ListAssetContractsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssetContracts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *ListAssetContractsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListAssetContractsAPIClient is a client that implements the ListAssetContracts
+// operation.
+type ListAssetContractsAPIClient interface {
+	ListAssetContracts(context.Context, *ListAssetContractsInput, ...func(*Options)) (*ListAssetContractsOutput, error)
+}
+
+var _ ListAssetContractsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssetContracts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

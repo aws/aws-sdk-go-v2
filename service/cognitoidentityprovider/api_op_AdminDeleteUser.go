@@ -125,6 +125,9 @@ func (c *Client) addOperationAdminDeleteUserMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminDeleteUserValidationMiddleware(stack); err != nil {
 		return err
 	}

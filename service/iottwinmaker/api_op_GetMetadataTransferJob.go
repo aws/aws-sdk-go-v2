@@ -153,6 +153,9 @@ func (c *Client) addOperationGetMetadataTransferJobMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetMetadataTransferJobMiddleware(stack); err != nil {
 		return err
 	}

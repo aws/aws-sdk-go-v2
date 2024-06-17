@@ -118,6 +118,9 @@ func (c *Client) addOperationListIndicesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIndicesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,13 +144,6 @@ func (c *Client) addOperationListIndicesMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListIndicesAPIClient is a client that implements the ListIndices operation.
-type ListIndicesAPIClient interface {
-	ListIndices(context.Context, *ListIndicesInput, ...func(*Options)) (*ListIndicesOutput, error)
-}
-
-var _ ListIndicesAPIClient = (*Client)(nil)
 
 // ListIndicesPaginatorOptions is the paginator options for ListIndices
 type ListIndicesPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *ListIndicesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIndices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *ListIndicesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListIndicesAPIClient is a client that implements the ListIndices operation.
+type ListIndicesAPIClient interface {
+	ListIndices(context.Context, *ListIndicesInput, ...func(*Options)) (*ListIndicesOutput, error)
+}
+
+var _ ListIndicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIndices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

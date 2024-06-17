@@ -154,6 +154,9 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAccessPointsForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}
@@ -192,56 +195,6 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 	}
 	return nil
 }
-
-type endpointPrefix_opListAccessPointsForObjectLambdaMiddleware struct {
-}
-
-func (*endpointPrefix_opListAccessPointsForObjectLambdaMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAccessPointsForObjectLambdaMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	opaqueInput := getOperationInput(ctx)
-	input, ok := opaqueInput.(*ListAccessPointsForObjectLambdaInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAccessPointsForObjectLambdaMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAccessPointsForObjectLambdaMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAccessPointsForObjectLambdaAPIClient is a client that implements the
-// ListAccessPointsForObjectLambda operation.
-type ListAccessPointsForObjectLambdaAPIClient interface {
-	ListAccessPointsForObjectLambda(context.Context, *ListAccessPointsForObjectLambdaInput, ...func(*Options)) (*ListAccessPointsForObjectLambdaOutput, error)
-}
-
-var _ ListAccessPointsForObjectLambdaAPIClient = (*Client)(nil)
 
 // ListAccessPointsForObjectLambdaPaginatorOptions is the paginator options for
 // ListAccessPointsForObjectLambda
@@ -309,6 +262,9 @@ func (p *ListAccessPointsForObjectLambdaPaginator) NextPage(ctx context.Context,
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccessPointsForObjectLambda(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -327,6 +283,56 @@ func (p *ListAccessPointsForObjectLambdaPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+type endpointPrefix_opListAccessPointsForObjectLambdaMiddleware struct {
+}
+
+func (*endpointPrefix_opListAccessPointsForObjectLambdaMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAccessPointsForObjectLambdaMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*ListAccessPointsForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAccessPointsForObjectLambdaMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAccessPointsForObjectLambdaMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAccessPointsForObjectLambdaAPIClient is a client that implements the
+// ListAccessPointsForObjectLambda operation.
+type ListAccessPointsForObjectLambdaAPIClient interface {
+	ListAccessPointsForObjectLambda(context.Context, *ListAccessPointsForObjectLambdaInput, ...func(*Options)) (*ListAccessPointsForObjectLambdaOutput, error)
+}
+
+var _ ListAccessPointsForObjectLambdaAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccessPointsForObjectLambda(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

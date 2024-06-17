@@ -122,6 +122,9 @@ func (c *Client) addOperationListAttachmentsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAttachments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListAttachmentsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListAttachmentsAPIClient is a client that implements the ListAttachments
-// operation.
-type ListAttachmentsAPIClient interface {
-	ListAttachments(context.Context, *ListAttachmentsInput, ...func(*Options)) (*ListAttachmentsOutput, error)
-}
-
-var _ ListAttachmentsAPIClient = (*Client)(nil)
 
 // ListAttachmentsPaginatorOptions is the paginator options for ListAttachments
 type ListAttachmentsPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *ListAttachmentsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAttachments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListAttachmentsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListAttachmentsAPIClient is a client that implements the ListAttachments
+// operation.
+type ListAttachmentsAPIClient interface {
+	ListAttachments(context.Context, *ListAttachmentsInput, ...func(*Options)) (*ListAttachmentsOutput, error)
+}
+
+var _ ListAttachmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAttachments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

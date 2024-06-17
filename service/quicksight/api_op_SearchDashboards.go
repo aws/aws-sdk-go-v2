@@ -133,6 +133,9 @@ func (c *Client) addOperationSearchDashboardsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchDashboardsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationSearchDashboardsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// SearchDashboardsAPIClient is a client that implements the SearchDashboards
-// operation.
-type SearchDashboardsAPIClient interface {
-	SearchDashboards(context.Context, *SearchDashboardsInput, ...func(*Options)) (*SearchDashboardsOutput, error)
-}
-
-var _ SearchDashboardsAPIClient = (*Client)(nil)
 
 // SearchDashboardsPaginatorOptions is the paginator options for SearchDashboards
 type SearchDashboardsPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *SearchDashboardsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchDashboards(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *SearchDashboardsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// SearchDashboardsAPIClient is a client that implements the SearchDashboards
+// operation.
+type SearchDashboardsAPIClient interface {
+	SearchDashboards(context.Context, *SearchDashboardsInput, ...func(*Options)) (*SearchDashboardsOutput, error)
+}
+
+var _ SearchDashboardsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchDashboards(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

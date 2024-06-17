@@ -118,6 +118,9 @@ func (c *Client) addOperationListTypedLinkFacetNamesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTypedLinkFacetNamesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListTypedLinkFacetNamesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListTypedLinkFacetNamesAPIClient is a client that implements the
-// ListTypedLinkFacetNames operation.
-type ListTypedLinkFacetNamesAPIClient interface {
-	ListTypedLinkFacetNames(context.Context, *ListTypedLinkFacetNamesInput, ...func(*Options)) (*ListTypedLinkFacetNamesOutput, error)
-}
-
-var _ ListTypedLinkFacetNamesAPIClient = (*Client)(nil)
 
 // ListTypedLinkFacetNamesPaginatorOptions is the paginator options for
 // ListTypedLinkFacetNames
@@ -215,6 +210,9 @@ func (p *ListTypedLinkFacetNamesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTypedLinkFacetNames(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListTypedLinkFacetNamesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListTypedLinkFacetNamesAPIClient is a client that implements the
+// ListTypedLinkFacetNames operation.
+type ListTypedLinkFacetNamesAPIClient interface {
+	ListTypedLinkFacetNames(context.Context, *ListTypedLinkFacetNamesInput, ...func(*Options)) (*ListTypedLinkFacetNamesOutput, error)
+}
+
+var _ ListTypedLinkFacetNamesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTypedLinkFacetNames(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

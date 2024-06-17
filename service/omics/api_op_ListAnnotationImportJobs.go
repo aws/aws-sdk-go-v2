@@ -118,6 +118,9 @@ func (c *Client) addOperationListAnnotationImportJobsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAnnotationImportJobsMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,41 +144,6 @@ func (c *Client) addOperationListAnnotationImportJobsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-type endpointPrefix_opListAnnotationImportJobsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAnnotationImportJobsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAnnotationImportJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAnnotationImportJobsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAnnotationImportJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAnnotationImportJobsAPIClient is a client that implements the
-// ListAnnotationImportJobs operation.
-type ListAnnotationImportJobsAPIClient interface {
-	ListAnnotationImportJobs(context.Context, *ListAnnotationImportJobsInput, ...func(*Options)) (*ListAnnotationImportJobsOutput, error)
-}
-
-var _ ListAnnotationImportJobsAPIClient = (*Client)(nil)
 
 // ListAnnotationImportJobsPaginatorOptions is the paginator options for
 // ListAnnotationImportJobs
@@ -242,6 +210,9 @@ func (p *ListAnnotationImportJobsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnnotationImportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +231,41 @@ func (p *ListAnnotationImportJobsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+type endpointPrefix_opListAnnotationImportJobsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAnnotationImportJobsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAnnotationImportJobsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAnnotationImportJobsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAnnotationImportJobsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAnnotationImportJobsAPIClient is a client that implements the
+// ListAnnotationImportJobs operation.
+type ListAnnotationImportJobsAPIClient interface {
+	ListAnnotationImportJobs(context.Context, *ListAnnotationImportJobsInput, ...func(*Options)) (*ListAnnotationImportJobsOutput, error)
+}
+
+var _ ListAnnotationImportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnnotationImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

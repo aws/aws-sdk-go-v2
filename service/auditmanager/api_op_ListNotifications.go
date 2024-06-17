@@ -110,6 +110,9 @@ func (c *Client) addOperationListNotificationsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNotifications(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListNotificationsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListNotificationsAPIClient is a client that implements the ListNotifications
-// operation.
-type ListNotificationsAPIClient interface {
-	ListNotifications(context.Context, *ListNotificationsInput, ...func(*Options)) (*ListNotificationsOutput, error)
-}
-
-var _ ListNotificationsAPIClient = (*Client)(nil)
 
 // ListNotificationsPaginatorOptions is the paginator options for ListNotifications
 type ListNotificationsPaginatorOptions struct {
@@ -202,6 +197,9 @@ func (p *ListNotificationsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListNotifications(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +218,14 @@ func (p *ListNotificationsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListNotificationsAPIClient is a client that implements the ListNotifications
+// operation.
+type ListNotificationsAPIClient interface {
+	ListNotifications(context.Context, *ListNotificationsInput, ...func(*Options)) (*ListNotificationsOutput, error)
+}
+
+var _ ListNotificationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListNotifications(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

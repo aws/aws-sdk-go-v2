@@ -115,6 +115,9 @@ func (c *Client) addOperationListDocumentClassifiersMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDocumentClassifiers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListDocumentClassifiersMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListDocumentClassifiersAPIClient is a client that implements the
-// ListDocumentClassifiers operation.
-type ListDocumentClassifiersAPIClient interface {
-	ListDocumentClassifiers(context.Context, *ListDocumentClassifiersInput, ...func(*Options)) (*ListDocumentClassifiersOutput, error)
-}
-
-var _ ListDocumentClassifiersAPIClient = (*Client)(nil)
 
 // ListDocumentClassifiersPaginatorOptions is the paginator options for
 // ListDocumentClassifiers
@@ -209,6 +204,9 @@ func (p *ListDocumentClassifiersPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDocumentClassifiers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListDocumentClassifiersPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListDocumentClassifiersAPIClient is a client that implements the
+// ListDocumentClassifiers operation.
+type ListDocumentClassifiersAPIClient interface {
+	ListDocumentClassifiers(context.Context, *ListDocumentClassifiersInput, ...func(*Options)) (*ListDocumentClassifiersOutput, error)
+}
+
+var _ ListDocumentClassifiersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDocumentClassifiers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

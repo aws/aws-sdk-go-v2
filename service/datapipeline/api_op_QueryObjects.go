@@ -154,6 +154,9 @@ func (c *Client) addOperationQueryObjectsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpQueryObjectsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -177,13 +180,6 @@ func (c *Client) addOperationQueryObjectsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// QueryObjectsAPIClient is a client that implements the QueryObjects operation.
-type QueryObjectsAPIClient interface {
-	QueryObjects(context.Context, *QueryObjectsInput, ...func(*Options)) (*QueryObjectsOutput, error)
-}
-
-var _ QueryObjectsAPIClient = (*Client)(nil)
 
 // QueryObjectsPaginatorOptions is the paginator options for QueryObjects
 type QueryObjectsPaginatorOptions struct {
@@ -249,6 +245,9 @@ func (p *QueryObjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.QueryObjects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +266,13 @@ func (p *QueryObjectsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// QueryObjectsAPIClient is a client that implements the QueryObjects operation.
+type QueryObjectsAPIClient interface {
+	QueryObjects(context.Context, *QueryObjectsInput, ...func(*Options)) (*QueryObjectsOutput, error)
+}
+
+var _ QueryObjectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opQueryObjects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

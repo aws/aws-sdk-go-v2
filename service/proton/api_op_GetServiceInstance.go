@@ -118,6 +118,9 @@ func (c *Client) addOperationGetServiceInstanceMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationGetServiceInstanceMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetServiceInstanceAPIClient is a client that implements the GetServiceInstance
-// operation.
-type GetServiceInstanceAPIClient interface {
-	GetServiceInstance(context.Context, *GetServiceInstanceInput, ...func(*Options)) (*GetServiceInstanceOutput, error)
-}
-
-var _ GetServiceInstanceAPIClient = (*Client)(nil)
 
 // ServiceInstanceDeployedWaiterOptions are waiter options for
 // ServiceInstanceDeployedWaiter
@@ -267,7 +262,13 @@ func (w *ServiceInstanceDeployedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.GetServiceInstance(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -341,6 +342,14 @@ func serviceInstanceDeployedStateRetryable(ctx context.Context, input *GetServic
 
 	return true, nil
 }
+
+// GetServiceInstanceAPIClient is a client that implements the GetServiceInstance
+// operation.
+type GetServiceInstanceAPIClient interface {
+	GetServiceInstance(context.Context, *GetServiceInstanceInput, ...func(*Options)) (*GetServiceInstanceOutput, error)
+}
+
+var _ GetServiceInstanceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetServiceInstance(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

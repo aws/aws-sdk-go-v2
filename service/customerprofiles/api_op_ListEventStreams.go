@@ -115,6 +115,9 @@ func (c *Client) addOperationListEventStreamsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEventStreamsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListEventStreamsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListEventStreamsAPIClient is a client that implements the ListEventStreams
-// operation.
-type ListEventStreamsAPIClient interface {
-	ListEventStreams(context.Context, *ListEventStreamsInput, ...func(*Options)) (*ListEventStreamsOutput, error)
-}
-
-var _ ListEventStreamsAPIClient = (*Client)(nil)
 
 // ListEventStreamsPaginatorOptions is the paginator options for ListEventStreams
 type ListEventStreamsPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListEventStreamsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventStreams(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListEventStreamsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListEventStreamsAPIClient is a client that implements the ListEventStreams
+// operation.
+type ListEventStreamsAPIClient interface {
+	ListEventStreams(context.Context, *ListEventStreamsInput, ...func(*Options)) (*ListEventStreamsOutput, error)
+}
+
+var _ ListEventStreamsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventStreams(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -152,6 +152,9 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRoutingProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

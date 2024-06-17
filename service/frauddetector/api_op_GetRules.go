@@ -130,6 +130,9 @@ func (c *Client) addOperationGetRulesMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,13 +156,6 @@ func (c *Client) addOperationGetRulesMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// GetRulesAPIClient is a client that implements the GetRules operation.
-type GetRulesAPIClient interface {
-	GetRules(context.Context, *GetRulesInput, ...func(*Options)) (*GetRulesOutput, error)
-}
-
-var _ GetRulesAPIClient = (*Client)(nil)
 
 // GetRulesPaginatorOptions is the paginator options for GetRules
 type GetRulesPaginatorOptions struct {
@@ -224,6 +220,9 @@ func (p *GetRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +241,13 @@ func (p *GetRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// GetRulesAPIClient is a client that implements the GetRules operation.
+type GetRulesAPIClient interface {
+	GetRules(context.Context, *GetRulesInput, ...func(*Options)) (*GetRulesOutput, error)
+}
+
+var _ GetRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

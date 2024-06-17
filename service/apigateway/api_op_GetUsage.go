@@ -144,6 +144,9 @@ func (c *Client) addOperationGetUsageMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetUsageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,13 +173,6 @@ func (c *Client) addOperationGetUsageMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// GetUsageAPIClient is a client that implements the GetUsage operation.
-type GetUsageAPIClient interface {
-	GetUsage(context.Context, *GetUsageInput, ...func(*Options)) (*GetUsageOutput, error)
-}
-
-var _ GetUsageAPIClient = (*Client)(nil)
 
 // GetUsagePaginatorOptions is the paginator options for GetUsage
 type GetUsagePaginatorOptions struct {
@@ -242,6 +238,9 @@ func (p *GetUsagePaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetUsage(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +259,13 @@ func (p *GetUsagePaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// GetUsageAPIClient is a client that implements the GetUsage operation.
+type GetUsageAPIClient interface {
+	GetUsage(context.Context, *GetUsageInput, ...func(*Options)) (*GetUsageOutput, error)
+}
+
+var _ GetUsageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetUsage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

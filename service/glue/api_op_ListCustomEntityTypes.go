@@ -113,6 +113,9 @@ func (c *Client) addOperationListCustomEntityTypesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomEntityTypes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListCustomEntityTypesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListCustomEntityTypesAPIClient is a client that implements the
-// ListCustomEntityTypes operation.
-type ListCustomEntityTypesAPIClient interface {
-	ListCustomEntityTypes(context.Context, *ListCustomEntityTypesInput, ...func(*Options)) (*ListCustomEntityTypesOutput, error)
-}
-
-var _ ListCustomEntityTypesAPIClient = (*Client)(nil)
 
 // ListCustomEntityTypesPaginatorOptions is the paginator options for
 // ListCustomEntityTypes
@@ -206,6 +201,9 @@ func (p *ListCustomEntityTypesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomEntityTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListCustomEntityTypesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListCustomEntityTypesAPIClient is a client that implements the
+// ListCustomEntityTypes operation.
+type ListCustomEntityTypesAPIClient interface {
+	ListCustomEntityTypes(context.Context, *ListCustomEntityTypesInput, ...func(*Options)) (*ListCustomEntityTypesOutput, error)
+}
+
+var _ ListCustomEntityTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomEntityTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

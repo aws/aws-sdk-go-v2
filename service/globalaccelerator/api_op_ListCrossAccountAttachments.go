@@ -113,6 +113,9 @@ func (c *Client) addOperationListCrossAccountAttachmentsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCrossAccountAttachments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListCrossAccountAttachmentsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListCrossAccountAttachmentsAPIClient is a client that implements the
-// ListCrossAccountAttachments operation.
-type ListCrossAccountAttachmentsAPIClient interface {
-	ListCrossAccountAttachments(context.Context, *ListCrossAccountAttachmentsInput, ...func(*Options)) (*ListCrossAccountAttachmentsOutput, error)
-}
-
-var _ ListCrossAccountAttachmentsAPIClient = (*Client)(nil)
 
 // ListCrossAccountAttachmentsPaginatorOptions is the paginator options for
 // ListCrossAccountAttachments
@@ -209,6 +204,9 @@ func (p *ListCrossAccountAttachmentsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCrossAccountAttachments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListCrossAccountAttachmentsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListCrossAccountAttachmentsAPIClient is a client that implements the
+// ListCrossAccountAttachments operation.
+type ListCrossAccountAttachmentsAPIClient interface {
+	ListCrossAccountAttachments(context.Context, *ListCrossAccountAttachmentsInput, ...func(*Options)) (*ListCrossAccountAttachmentsOutput, error)
+}
+
+var _ ListCrossAccountAttachmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCrossAccountAttachments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

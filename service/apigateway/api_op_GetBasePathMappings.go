@@ -118,6 +118,9 @@ func (c *Client) addOperationGetBasePathMappingsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBasePathMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationGetBasePathMappingsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetBasePathMappingsAPIClient is a client that implements the
-// GetBasePathMappings operation.
-type GetBasePathMappingsAPIClient interface {
-	GetBasePathMappings(context.Context, *GetBasePathMappingsInput, ...func(*Options)) (*GetBasePathMappingsOutput, error)
-}
-
-var _ GetBasePathMappingsAPIClient = (*Client)(nil)
 
 // GetBasePathMappingsPaginatorOptions is the paginator options for
 // GetBasePathMappings
@@ -218,6 +213,9 @@ func (p *GetBasePathMappingsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBasePathMappings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetBasePathMappingsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetBasePathMappingsAPIClient is a client that implements the
+// GetBasePathMappings operation.
+type GetBasePathMappingsAPIClient interface {
+	GetBasePathMappings(context.Context, *GetBasePathMappingsInput, ...func(*Options)) (*GetBasePathMappingsOutput, error)
+}
+
+var _ GetBasePathMappingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBasePathMappings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

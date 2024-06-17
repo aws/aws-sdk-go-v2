@@ -124,6 +124,9 @@ func (c *Client) addOperationListImageSetVersionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListImageSetVersionsMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,41 +153,6 @@ func (c *Client) addOperationListImageSetVersionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-type endpointPrefix_opListImageSetVersionsMiddleware struct {
-}
-
-func (*endpointPrefix_opListImageSetVersionsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListImageSetVersionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "runtime-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListImageSetVersionsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListImageSetVersionsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListImageSetVersionsAPIClient is a client that implements the
-// ListImageSetVersions operation.
-type ListImageSetVersionsAPIClient interface {
-	ListImageSetVersions(context.Context, *ListImageSetVersionsInput, ...func(*Options)) (*ListImageSetVersionsOutput, error)
-}
-
-var _ ListImageSetVersionsAPIClient = (*Client)(nil)
 
 // ListImageSetVersionsPaginatorOptions is the paginator options for
 // ListImageSetVersions
@@ -250,6 +218,9 @@ func (p *ListImageSetVersionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImageSetVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +239,41 @@ func (p *ListImageSetVersionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+type endpointPrefix_opListImageSetVersionsMiddleware struct {
+}
+
+func (*endpointPrefix_opListImageSetVersionsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListImageSetVersionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "runtime-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListImageSetVersionsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListImageSetVersionsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListImageSetVersionsAPIClient is a client that implements the
+// ListImageSetVersions operation.
+type ListImageSetVersionsAPIClient interface {
+	ListImageSetVersions(context.Context, *ListImageSetVersionsInput, ...func(*Options)) (*ListImageSetVersionsOutput, error)
+}
+
+var _ ListImageSetVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImageSetVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

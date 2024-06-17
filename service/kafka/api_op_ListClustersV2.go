@@ -122,6 +122,9 @@ func (c *Client) addOperationListClustersV2Middlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClustersV2(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListClustersV2Middlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListClustersV2APIClient is a client that implements the ListClustersV2
-// operation.
-type ListClustersV2APIClient interface {
-	ListClustersV2(context.Context, *ListClustersV2Input, ...func(*Options)) (*ListClustersV2Output, error)
-}
-
-var _ ListClustersV2APIClient = (*Client)(nil)
 
 // ListClustersV2PaginatorOptions is the paginator options for ListClustersV2
 type ListClustersV2PaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListClustersV2Paginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClustersV2(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListClustersV2Paginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListClustersV2APIClient is a client that implements the ListClustersV2
+// operation.
+type ListClustersV2APIClient interface {
+	ListClustersV2(context.Context, *ListClustersV2Input, ...func(*Options)) (*ListClustersV2Output, error)
+}
+
+var _ ListClustersV2APIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClustersV2(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

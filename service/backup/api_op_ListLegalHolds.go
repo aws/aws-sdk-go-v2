@@ -116,6 +116,9 @@ func (c *Client) addOperationListLegalHoldsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLegalHolds(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListLegalHoldsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListLegalHoldsAPIClient is a client that implements the ListLegalHolds
-// operation.
-type ListLegalHoldsAPIClient interface {
-	ListLegalHolds(context.Context, *ListLegalHoldsInput, ...func(*Options)) (*ListLegalHoldsOutput, error)
-}
-
-var _ ListLegalHoldsAPIClient = (*Client)(nil)
 
 // ListLegalHoldsPaginatorOptions is the paginator options for ListLegalHolds
 type ListLegalHoldsPaginatorOptions struct {
@@ -208,6 +203,9 @@ func (p *ListLegalHoldsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLegalHolds(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListLegalHoldsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListLegalHoldsAPIClient is a client that implements the ListLegalHolds
+// operation.
+type ListLegalHoldsAPIClient interface {
+	ListLegalHolds(context.Context, *ListLegalHoldsInput, ...func(*Options)) (*ListLegalHoldsOutput, error)
+}
+
+var _ ListLegalHoldsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLegalHolds(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

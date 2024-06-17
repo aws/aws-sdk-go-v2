@@ -154,6 +154,9 @@ func (c *Client) addOperationSearchTablesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchTables(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -174,13 +177,6 @@ func (c *Client) addOperationSearchTablesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// SearchTablesAPIClient is a client that implements the SearchTables operation.
-type SearchTablesAPIClient interface {
-	SearchTables(context.Context, *SearchTablesInput, ...func(*Options)) (*SearchTablesOutput, error)
-}
-
-var _ SearchTablesAPIClient = (*Client)(nil)
 
 // SearchTablesPaginatorOptions is the paginator options for SearchTables
 type SearchTablesPaginatorOptions struct {
@@ -245,6 +241,9 @@ func (p *SearchTablesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchTables(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +262,13 @@ func (p *SearchTablesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// SearchTablesAPIClient is a client that implements the SearchTables operation.
+type SearchTablesAPIClient interface {
+	SearchTables(context.Context, *SearchTablesInput, ...func(*Options)) (*SearchTablesOutput, error)
+}
+
+var _ SearchTablesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchTables(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

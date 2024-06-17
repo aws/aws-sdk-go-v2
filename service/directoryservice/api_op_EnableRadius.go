@@ -110,6 +110,9 @@ func (c *Client) addOperationEnableRadiusMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpEnableRadiusValidationMiddleware(stack); err != nil {
 		return err
 	}

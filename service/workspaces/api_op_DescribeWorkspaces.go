@@ -142,6 +142,9 @@ func (c *Client) addOperationDescribeWorkspacesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkspaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationDescribeWorkspacesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeWorkspacesAPIClient is a client that implements the DescribeWorkspaces
-// operation.
-type DescribeWorkspacesAPIClient interface {
-	DescribeWorkspaces(context.Context, *DescribeWorkspacesInput, ...func(*Options)) (*DescribeWorkspacesOutput, error)
-}
-
-var _ DescribeWorkspacesAPIClient = (*Client)(nil)
 
 // DescribeWorkspacesPaginatorOptions is the paginator options for
 // DescribeWorkspaces
@@ -235,6 +230,9 @@ func (p *DescribeWorkspacesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeWorkspaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *DescribeWorkspacesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeWorkspacesAPIClient is a client that implements the DescribeWorkspaces
+// operation.
+type DescribeWorkspacesAPIClient interface {
+	DescribeWorkspaces(context.Context, *DescribeWorkspacesInput, ...func(*Options)) (*DescribeWorkspacesOutput, error)
+}
+
+var _ DescribeWorkspacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -150,6 +150,9 @@ func (c *Client) addOperationGetFindingRecommendationMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFindingRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -173,14 +176,6 @@ func (c *Client) addOperationGetFindingRecommendationMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// GetFindingRecommendationAPIClient is a client that implements the
-// GetFindingRecommendation operation.
-type GetFindingRecommendationAPIClient interface {
-	GetFindingRecommendation(context.Context, *GetFindingRecommendationInput, ...func(*Options)) (*GetFindingRecommendationOutput, error)
-}
-
-var _ GetFindingRecommendationAPIClient = (*Client)(nil)
 
 // GetFindingRecommendationPaginatorOptions is the paginator options for
 // GetFindingRecommendation
@@ -247,6 +242,9 @@ func (p *GetFindingRecommendationPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetFindingRecommendation(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *GetFindingRecommendationPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// GetFindingRecommendationAPIClient is a client that implements the
+// GetFindingRecommendation operation.
+type GetFindingRecommendationAPIClient interface {
+	GetFindingRecommendation(context.Context, *GetFindingRecommendationInput, ...func(*Options)) (*GetFindingRecommendationOutput, error)
+}
+
+var _ GetFindingRecommendationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFindingRecommendation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

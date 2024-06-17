@@ -136,6 +136,9 @@ func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPipelines(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,13 +159,6 @@ func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListPipelinesAPIClient is a client that implements the ListPipelines operation.
-type ListPipelinesAPIClient interface {
-	ListPipelines(context.Context, *ListPipelinesInput, ...func(*Options)) (*ListPipelinesOutput, error)
-}
-
-var _ ListPipelinesAPIClient = (*Client)(nil)
 
 // ListPipelinesPaginatorOptions is the paginator options for ListPipelines
 type ListPipelinesPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListPipelinesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	params := *p.params
 	params.Marker = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPipelines(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListPipelinesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListPipelinesAPIClient is a client that implements the ListPipelines operation.
+type ListPipelinesAPIClient interface {
+	ListPipelines(context.Context, *ListPipelinesInput, ...func(*Options)) (*ListPipelinesOutput, error)
+}
+
+var _ ListPipelinesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPipelines(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -118,6 +118,9 @@ func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnabledStandards(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetEnabledStandardsAPIClient is a client that implements the
-// GetEnabledStandards operation.
-type GetEnabledStandardsAPIClient interface {
-	GetEnabledStandards(context.Context, *GetEnabledStandardsInput, ...func(*Options)) (*GetEnabledStandardsOutput, error)
-}
-
-var _ GetEnabledStandardsAPIClient = (*Client)(nil)
 
 // GetEnabledStandardsPaginatorOptions is the paginator options for
 // GetEnabledStandards
@@ -211,6 +206,9 @@ func (p *GetEnabledStandardsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetEnabledStandards(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *GetEnabledStandardsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetEnabledStandardsAPIClient is a client that implements the
+// GetEnabledStandards operation.
+type GetEnabledStandardsAPIClient interface {
+	GetEnabledStandards(context.Context, *GetEnabledStandardsInput, ...func(*Options)) (*GetEnabledStandardsOutput, error)
+}
+
+var _ GetEnabledStandardsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEnabledStandards(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

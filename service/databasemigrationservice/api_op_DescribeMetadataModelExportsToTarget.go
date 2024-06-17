@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeMetadataModelExportsToTargetMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMetadataModelExportsToTargetValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeMetadataModelExportsToTargetMiddlewares(sta
 	}
 	return nil
 }
-
-// DescribeMetadataModelExportsToTargetAPIClient is a client that implements the
-// DescribeMetadataModelExportsToTarget operation.
-type DescribeMetadataModelExportsToTargetAPIClient interface {
-	DescribeMetadataModelExportsToTarget(context.Context, *DescribeMetadataModelExportsToTargetInput, ...func(*Options)) (*DescribeMetadataModelExportsToTargetOutput, error)
-}
-
-var _ DescribeMetadataModelExportsToTargetAPIClient = (*Client)(nil)
 
 // DescribeMetadataModelExportsToTargetPaginatorOptions is the paginator options
 // for DescribeMetadataModelExportsToTarget
@@ -235,6 +230,9 @@ func (p *DescribeMetadataModelExportsToTargetPaginator) NextPage(ctx context.Con
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMetadataModelExportsToTarget(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *DescribeMetadataModelExportsToTargetPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// DescribeMetadataModelExportsToTargetAPIClient is a client that implements the
+// DescribeMetadataModelExportsToTarget operation.
+type DescribeMetadataModelExportsToTargetAPIClient interface {
+	DescribeMetadataModelExportsToTarget(context.Context, *DescribeMetadataModelExportsToTargetInput, ...func(*Options)) (*DescribeMetadataModelExportsToTargetOutput, error)
+}
+
+var _ DescribeMetadataModelExportsToTargetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMetadataModelExportsToTarget(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

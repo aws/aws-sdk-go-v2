@@ -124,6 +124,9 @@ func (c *Client) addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetOrganizationConfigRuleDetailedStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares(
 	}
 	return nil
 }
-
-// GetOrganizationConfigRuleDetailedStatusAPIClient is a client that implements
-// the GetOrganizationConfigRuleDetailedStatus operation.
-type GetOrganizationConfigRuleDetailedStatusAPIClient interface {
-	GetOrganizationConfigRuleDetailedStatus(context.Context, *GetOrganizationConfigRuleDetailedStatusInput, ...func(*Options)) (*GetOrganizationConfigRuleDetailedStatusOutput, error)
-}
-
-var _ GetOrganizationConfigRuleDetailedStatusAPIClient = (*Client)(nil)
 
 // GetOrganizationConfigRuleDetailedStatusPaginatorOptions is the paginator
 // options for GetOrganizationConfigRuleDetailedStatus
@@ -220,6 +215,9 @@ func (p *GetOrganizationConfigRuleDetailedStatusPaginator) NextPage(ctx context.
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetOrganizationConfigRuleDetailedStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *GetOrganizationConfigRuleDetailedStatusPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// GetOrganizationConfigRuleDetailedStatusAPIClient is a client that implements
+// the GetOrganizationConfigRuleDetailedStatus operation.
+type GetOrganizationConfigRuleDetailedStatusAPIClient interface {
+	GetOrganizationConfigRuleDetailedStatus(context.Context, *GetOrganizationConfigRuleDetailedStatusInput, ...func(*Options)) (*GetOrganizationConfigRuleDetailedStatusOutput, error)
+}
+
+var _ GetOrganizationConfigRuleDetailedStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetOrganizationConfigRuleDetailedStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

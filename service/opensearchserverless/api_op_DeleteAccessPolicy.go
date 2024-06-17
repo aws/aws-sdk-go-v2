@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteAccessPolicyMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteAccessPolicyMiddleware(stack, options); err != nil {
 		return err
 	}

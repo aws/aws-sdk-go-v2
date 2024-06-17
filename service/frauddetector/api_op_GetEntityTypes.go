@@ -118,6 +118,9 @@ func (c *Client) addOperationGetEntityTypesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEntityTypes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetEntityTypesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetEntityTypesAPIClient is a client that implements the GetEntityTypes
-// operation.
-type GetEntityTypesAPIClient interface {
-	GetEntityTypes(context.Context, *GetEntityTypesInput, ...func(*Options)) (*GetEntityTypesOutput, error)
-}
-
-var _ GetEntityTypesAPIClient = (*Client)(nil)
 
 // GetEntityTypesPaginatorOptions is the paginator options for GetEntityTypes
 type GetEntityTypesPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *GetEntityTypesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetEntityTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *GetEntityTypesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// GetEntityTypesAPIClient is a client that implements the GetEntityTypes
+// operation.
+type GetEntityTypesAPIClient interface {
+	GetEntityTypes(context.Context, *GetEntityTypesInput, ...func(*Options)) (*GetEntityTypesOutput, error)
+}
+
+var _ GetEntityTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEntityTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

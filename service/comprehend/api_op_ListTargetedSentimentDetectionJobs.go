@@ -115,6 +115,9 @@ func (c *Client) addOperationListTargetedSentimentDetectionJobsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTargetedSentimentDetectionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListTargetedSentimentDetectionJobsMiddlewares(stack
 	}
 	return nil
 }
-
-// ListTargetedSentimentDetectionJobsAPIClient is a client that implements the
-// ListTargetedSentimentDetectionJobs operation.
-type ListTargetedSentimentDetectionJobsAPIClient interface {
-	ListTargetedSentimentDetectionJobs(context.Context, *ListTargetedSentimentDetectionJobsInput, ...func(*Options)) (*ListTargetedSentimentDetectionJobsOutput, error)
-}
-
-var _ ListTargetedSentimentDetectionJobsAPIClient = (*Client)(nil)
 
 // ListTargetedSentimentDetectionJobsPaginatorOptions is the paginator options for
 // ListTargetedSentimentDetectionJobs
@@ -210,6 +205,9 @@ func (p *ListTargetedSentimentDetectionJobsPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTargetedSentimentDetectionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListTargetedSentimentDetectionJobsPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListTargetedSentimentDetectionJobsAPIClient is a client that implements the
+// ListTargetedSentimentDetectionJobs operation.
+type ListTargetedSentimentDetectionJobsAPIClient interface {
+	ListTargetedSentimentDetectionJobs(context.Context, *ListTargetedSentimentDetectionJobsInput, ...func(*Options)) (*ListTargetedSentimentDetectionJobsOutput, error)
+}
+
+var _ ListTargetedSentimentDetectionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTargetedSentimentDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

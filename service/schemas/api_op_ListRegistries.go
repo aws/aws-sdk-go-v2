@@ -120,6 +120,9 @@ func (c *Client) addOperationListRegistriesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRegistries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListRegistriesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListRegistriesAPIClient is a client that implements the ListRegistries
-// operation.
-type ListRegistriesAPIClient interface {
-	ListRegistries(context.Context, *ListRegistriesInput, ...func(*Options)) (*ListRegistriesOutput, error)
-}
-
-var _ ListRegistriesAPIClient = (*Client)(nil)
 
 // ListRegistriesPaginatorOptions is the paginator options for ListRegistries
 type ListRegistriesPaginatorOptions struct {
@@ -211,6 +206,9 @@ func (p *ListRegistriesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRegistries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListRegistriesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListRegistriesAPIClient is a client that implements the ListRegistries
+// operation.
+type ListRegistriesAPIClient interface {
+	ListRegistries(context.Context, *ListRegistriesInput, ...func(*Options)) (*ListRegistriesOutput, error)
+}
+
+var _ ListRegistriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRegistries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

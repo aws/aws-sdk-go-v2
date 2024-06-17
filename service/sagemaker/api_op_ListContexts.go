@@ -131,6 +131,9 @@ func (c *Client) addOperationListContextsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContexts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,13 +154,6 @@ func (c *Client) addOperationListContextsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListContextsAPIClient is a client that implements the ListContexts operation.
-type ListContextsAPIClient interface {
-	ListContexts(context.Context, *ListContextsInput, ...func(*Options)) (*ListContextsOutput, error)
-}
-
-var _ ListContextsAPIClient = (*Client)(nil)
 
 // ListContextsPaginatorOptions is the paginator options for ListContexts
 type ListContextsPaginatorOptions struct {
@@ -223,6 +219,9 @@ func (p *ListContextsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContexts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +240,13 @@ func (p *ListContextsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListContextsAPIClient is a client that implements the ListContexts operation.
+type ListContextsAPIClient interface {
+	ListContexts(context.Context, *ListContextsInput, ...func(*Options)) (*ListContextsOutput, error)
+}
+
+var _ ListContextsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContexts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

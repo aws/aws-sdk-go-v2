@@ -120,6 +120,9 @@ func (c *Client) addOperationListMicrosoftTeamsUserIdentitiesMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMicrosoftTeamsUserIdentities(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListMicrosoftTeamsUserIdentitiesMiddlewares(stack *
 	}
 	return nil
 }
-
-// ListMicrosoftTeamsUserIdentitiesAPIClient is a client that implements the
-// ListMicrosoftTeamsUserIdentities operation.
-type ListMicrosoftTeamsUserIdentitiesAPIClient interface {
-	ListMicrosoftTeamsUserIdentities(context.Context, *ListMicrosoftTeamsUserIdentitiesInput, ...func(*Options)) (*ListMicrosoftTeamsUserIdentitiesOutput, error)
-}
-
-var _ ListMicrosoftTeamsUserIdentitiesAPIClient = (*Client)(nil)
 
 // ListMicrosoftTeamsUserIdentitiesPaginatorOptions is the paginator options for
 // ListMicrosoftTeamsUserIdentities
@@ -217,6 +212,9 @@ func (p *ListMicrosoftTeamsUserIdentitiesPaginator) NextPage(ctx context.Context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMicrosoftTeamsUserIdentities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListMicrosoftTeamsUserIdentitiesPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// ListMicrosoftTeamsUserIdentitiesAPIClient is a client that implements the
+// ListMicrosoftTeamsUserIdentities operation.
+type ListMicrosoftTeamsUserIdentitiesAPIClient interface {
+	ListMicrosoftTeamsUserIdentities(context.Context, *ListMicrosoftTeamsUserIdentitiesInput, ...func(*Options)) (*ListMicrosoftTeamsUserIdentitiesOutput, error)
+}
+
+var _ ListMicrosoftTeamsUserIdentitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMicrosoftTeamsUserIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

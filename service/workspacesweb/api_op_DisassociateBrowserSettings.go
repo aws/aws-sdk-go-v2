@@ -101,6 +101,9 @@ func (c *Client) addOperationDisassociateBrowserSettingsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateBrowserSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

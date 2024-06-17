@@ -136,6 +136,9 @@ func (c *Client) addOperationListIngestionDestinationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIngestionDestinationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListIngestionDestinationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListIngestionDestinationsAPIClient is a client that implements the
-// ListIngestionDestinations operation.
-type ListIngestionDestinationsAPIClient interface {
-	ListIngestionDestinations(context.Context, *ListIngestionDestinationsInput, ...func(*Options)) (*ListIngestionDestinationsOutput, error)
-}
-
-var _ ListIngestionDestinationsAPIClient = (*Client)(nil)
 
 // ListIngestionDestinationsPaginatorOptions is the paginator options for
 // ListIngestionDestinations
@@ -237,6 +232,9 @@ func (p *ListIngestionDestinationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIngestionDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListIngestionDestinationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListIngestionDestinationsAPIClient is a client that implements the
+// ListIngestionDestinations operation.
+type ListIngestionDestinationsAPIClient interface {
+	ListIngestionDestinations(context.Context, *ListIngestionDestinationsInput, ...func(*Options)) (*ListIngestionDestinationsOutput, error)
+}
+
+var _ ListIngestionDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIngestionDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

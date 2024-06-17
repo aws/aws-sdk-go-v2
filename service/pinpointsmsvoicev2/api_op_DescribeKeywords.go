@@ -140,6 +140,9 @@ func (c *Client) addOperationDescribeKeywordsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeKeywordsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationDescribeKeywordsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// DescribeKeywordsAPIClient is a client that implements the DescribeKeywords
-// operation.
-type DescribeKeywordsAPIClient interface {
-	DescribeKeywords(context.Context, *DescribeKeywordsInput, ...func(*Options)) (*DescribeKeywordsOutput, error)
-}
-
-var _ DescribeKeywordsAPIClient = (*Client)(nil)
 
 // DescribeKeywordsPaginatorOptions is the paginator options for DescribeKeywords
 type DescribeKeywordsPaginatorOptions struct {
@@ -235,6 +230,9 @@ func (p *DescribeKeywordsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeKeywords(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *DescribeKeywordsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// DescribeKeywordsAPIClient is a client that implements the DescribeKeywords
+// operation.
+type DescribeKeywordsAPIClient interface {
+	DescribeKeywords(context.Context, *DescribeKeywordsInput, ...func(*Options)) (*DescribeKeywordsOutput, error)
+}
+
+var _ DescribeKeywordsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeKeywords(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

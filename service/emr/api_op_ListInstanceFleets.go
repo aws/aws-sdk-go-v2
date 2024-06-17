@@ -115,6 +115,9 @@ func (c *Client) addOperationListInstanceFleetsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInstanceFleetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListInstanceFleetsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListInstanceFleetsAPIClient is a client that implements the ListInstanceFleets
-// operation.
-type ListInstanceFleetsAPIClient interface {
-	ListInstanceFleets(context.Context, *ListInstanceFleetsInput, ...func(*Options)) (*ListInstanceFleetsOutput, error)
-}
-
-var _ ListInstanceFleetsAPIClient = (*Client)(nil)
 
 // ListInstanceFleetsPaginatorOptions is the paginator options for
 // ListInstanceFleets
@@ -199,6 +194,9 @@ func (p *ListInstanceFleetsPaginator) NextPage(ctx context.Context, optFns ...fu
 	params := *p.params
 	params.Marker = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInstanceFleets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -217,6 +215,14 @@ func (p *ListInstanceFleetsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListInstanceFleetsAPIClient is a client that implements the ListInstanceFleets
+// operation.
+type ListInstanceFleetsAPIClient interface {
+	ListInstanceFleets(context.Context, *ListInstanceFleetsInput, ...func(*Options)) (*ListInstanceFleetsOutput, error)
+}
+
+var _ ListInstanceFleetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInstanceFleets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDevEnvironmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListDevEnvironmentsAPIClient is a client that implements the
-// ListDevEnvironments operation.
-type ListDevEnvironmentsAPIClient interface {
-	ListDevEnvironments(context.Context, *ListDevEnvironmentsInput, ...func(*Options)) (*ListDevEnvironmentsOutput, error)
-}
-
-var _ ListDevEnvironmentsAPIClient = (*Client)(nil)
 
 // ListDevEnvironmentsPaginatorOptions is the paginator options for
 // ListDevEnvironments
@@ -222,6 +217,9 @@ func (p *ListDevEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDevEnvironments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListDevEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListDevEnvironmentsAPIClient is a client that implements the
+// ListDevEnvironments operation.
+type ListDevEnvironmentsAPIClient interface {
+	ListDevEnvironments(context.Context, *ListDevEnvironmentsInput, ...func(*Options)) (*ListDevEnvironmentsOutput, error)
+}
+
+var _ ListDevEnvironmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDevEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

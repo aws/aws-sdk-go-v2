@@ -147,6 +147,9 @@ func (c *Client) addOperationDescribeStacksMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStacks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -166,84 +169,6 @@ func (c *Client) addOperationDescribeStacksMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
-}
-
-// DescribeStacksAPIClient is a client that implements the DescribeStacks
-// operation.
-type DescribeStacksAPIClient interface {
-	DescribeStacks(context.Context, *DescribeStacksInput, ...func(*Options)) (*DescribeStacksOutput, error)
-}
-
-var _ DescribeStacksAPIClient = (*Client)(nil)
-
-// DescribeStacksPaginatorOptions is the paginator options for DescribeStacks
-type DescribeStacksPaginatorOptions struct {
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeStacksPaginator is a paginator for DescribeStacks
-type DescribeStacksPaginator struct {
-	options   DescribeStacksPaginatorOptions
-	client    DescribeStacksAPIClient
-	params    *DescribeStacksInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeStacksPaginator returns a new DescribeStacksPaginator
-func NewDescribeStacksPaginator(client DescribeStacksAPIClient, params *DescribeStacksInput, optFns ...func(*DescribeStacksPaginatorOptions)) *DescribeStacksPaginator {
-	if params == nil {
-		params = &DescribeStacksInput{}
-	}
-
-	options := DescribeStacksPaginatorOptions{}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeStacksPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeStacksPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeStacks page.
-func (p *DescribeStacksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	result, err := p.client.DescribeStacks(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // StackCreateCompleteWaiterOptions are waiter options for
@@ -363,7 +288,13 @@ func (w *StackCreateCompleteWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -941,7 +872,13 @@ func (w *StackDeleteCompleteWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1308,7 +1245,13 @@ func (w *StackExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeS
 		}
 
 		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1482,7 +1425,13 @@ func (w *StackImportCompleteWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1804,7 +1753,13 @@ func (w *StackRollbackCompleteWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -2078,7 +2033,13 @@ func (w *StackUpdateCompleteWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -2234,6 +2195,87 @@ func stackUpdateCompleteStateRetryable(ctx context.Context, input *DescribeStack
 
 	return true, nil
 }
+
+// DescribeStacksPaginatorOptions is the paginator options for DescribeStacks
+type DescribeStacksPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeStacksPaginator is a paginator for DescribeStacks
+type DescribeStacksPaginator struct {
+	options   DescribeStacksPaginatorOptions
+	client    DescribeStacksAPIClient
+	params    *DescribeStacksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeStacksPaginator returns a new DescribeStacksPaginator
+func NewDescribeStacksPaginator(client DescribeStacksAPIClient, params *DescribeStacksInput, optFns ...func(*DescribeStacksPaginatorOptions)) *DescribeStacksPaginator {
+	if params == nil {
+		params = &DescribeStacksInput{}
+	}
+
+	options := DescribeStacksPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeStacksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeStacksPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeStacks page.
+func (p *DescribeStacksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeStacks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeStacksAPIClient is a client that implements the DescribeStacks
+// operation.
+type DescribeStacksAPIClient interface {
+	DescribeStacks(context.Context, *DescribeStacksInput, ...func(*Options)) (*DescribeStacksOutput, error)
+}
+
+var _ DescribeStacksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStacks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

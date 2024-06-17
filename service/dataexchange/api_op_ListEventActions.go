@@ -115,6 +115,9 @@ func (c *Client) addOperationListEventActionsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventActions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListEventActionsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListEventActionsAPIClient is a client that implements the ListEventActions
-// operation.
-type ListEventActionsAPIClient interface {
-	ListEventActions(context.Context, *ListEventActionsInput, ...func(*Options)) (*ListEventActionsOutput, error)
-}
-
-var _ ListEventActionsAPIClient = (*Client)(nil)
 
 // ListEventActionsPaginatorOptions is the paginator options for ListEventActions
 type ListEventActionsPaginatorOptions struct {
@@ -203,6 +198,9 @@ func (p *ListEventActionsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventActions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListEventActionsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListEventActionsAPIClient is a client that implements the ListEventActions
+// operation.
+type ListEventActionsAPIClient interface {
+	ListEventActions(context.Context, *ListEventActionsInput, ...func(*Options)) (*ListEventActionsOutput, error)
+}
+
+var _ ListEventActionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventActions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

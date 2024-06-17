@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeDeliveriesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDeliveries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationDescribeDeliveriesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeDeliveriesAPIClient is a client that implements the DescribeDeliveries
-// operation.
-type DescribeDeliveriesAPIClient interface {
-	DescribeDeliveries(context.Context, *DescribeDeliveriesInput, ...func(*Options)) (*DescribeDeliveriesOutput, error)
-}
-
-var _ DescribeDeliveriesAPIClient = (*Client)(nil)
 
 // DescribeDeliveriesPaginatorOptions is the paginator options for
 // DescribeDeliveries
@@ -215,6 +210,9 @@ func (p *DescribeDeliveriesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDeliveries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeDeliveriesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeDeliveriesAPIClient is a client that implements the DescribeDeliveries
+// operation.
+type DescribeDeliveriesAPIClient interface {
+	DescribeDeliveries(context.Context, *DescribeDeliveriesInput, ...func(*Options)) (*DescribeDeliveriesOutput, error)
+}
+
+var _ DescribeDeliveriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDeliveries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

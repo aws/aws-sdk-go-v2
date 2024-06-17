@@ -123,6 +123,9 @@ func (c *Client) addOperationListMonitoredResourcesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMonitoredResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListMonitoredResourcesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListMonitoredResourcesAPIClient is a client that implements the
-// ListMonitoredResources operation.
-type ListMonitoredResourcesAPIClient interface {
-	ListMonitoredResources(context.Context, *ListMonitoredResourcesInput, ...func(*Options)) (*ListMonitoredResourcesOutput, error)
-}
-
-var _ ListMonitoredResourcesAPIClient = (*Client)(nil)
 
 // ListMonitoredResourcesPaginatorOptions is the paginator options for
 // ListMonitoredResources
@@ -220,6 +215,9 @@ func (p *ListMonitoredResourcesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitoredResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListMonitoredResourcesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListMonitoredResourcesAPIClient is a client that implements the
+// ListMonitoredResources operation.
+type ListMonitoredResourcesAPIClient interface {
+	ListMonitoredResources(context.Context, *ListMonitoredResourcesInput, ...func(*Options)) (*ListMonitoredResourcesOutput, error)
+}
+
+var _ ListMonitoredResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitoredResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

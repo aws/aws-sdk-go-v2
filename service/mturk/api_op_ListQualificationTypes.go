@@ -137,6 +137,9 @@ func (c *Client) addOperationListQualificationTypesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListQualificationTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListQualificationTypesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListQualificationTypesAPIClient is a client that implements the
-// ListQualificationTypes operation.
-type ListQualificationTypesAPIClient interface {
-	ListQualificationTypes(context.Context, *ListQualificationTypesInput, ...func(*Options)) (*ListQualificationTypesOutput, error)
-}
-
-var _ ListQualificationTypesAPIClient = (*Client)(nil)
 
 // ListQualificationTypesPaginatorOptions is the paginator options for
 // ListQualificationTypes
@@ -233,6 +228,9 @@ func (p *ListQualificationTypesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQualificationTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListQualificationTypesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListQualificationTypesAPIClient is a client that implements the
+// ListQualificationTypes operation.
+type ListQualificationTypesAPIClient interface {
+	ListQualificationTypes(context.Context, *ListQualificationTypesInput, ...func(*Options)) (*ListQualificationTypesOutput, error)
+}
+
+var _ ListQualificationTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQualificationTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

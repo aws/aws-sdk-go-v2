@@ -121,6 +121,9 @@ func (c *Client) addOperationListUsageTotalsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUsageTotals(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListUsageTotalsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListUsageTotalsAPIClient is a client that implements the ListUsageTotals
-// operation.
-type ListUsageTotalsAPIClient interface {
-	ListUsageTotals(context.Context, *ListUsageTotalsInput, ...func(*Options)) (*ListUsageTotalsOutput, error)
-}
-
-var _ ListUsageTotalsAPIClient = (*Client)(nil)
 
 // ListUsageTotalsPaginatorOptions is the paginator options for ListUsageTotals
 type ListUsageTotalsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListUsageTotalsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUsageTotals(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListUsageTotalsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListUsageTotalsAPIClient is a client that implements the ListUsageTotals
+// operation.
+type ListUsageTotalsAPIClient interface {
+	ListUsageTotals(context.Context, *ListUsageTotalsInput, ...func(*Options)) (*ListUsageTotalsOutput, error)
+}
+
+var _ ListUsageTotalsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUsageTotals(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

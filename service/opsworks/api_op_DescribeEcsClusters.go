@@ -140,6 +140,9 @@ func (c *Client) addOperationDescribeEcsClustersMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEcsClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationDescribeEcsClustersMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeEcsClustersAPIClient is a client that implements the
-// DescribeEcsClusters operation.
-type DescribeEcsClustersAPIClient interface {
-	DescribeEcsClusters(context.Context, *DescribeEcsClustersInput, ...func(*Options)) (*DescribeEcsClustersOutput, error)
-}
-
-var _ DescribeEcsClustersAPIClient = (*Client)(nil)
 
 // DescribeEcsClustersPaginatorOptions is the paginator options for
 // DescribeEcsClusters
@@ -236,6 +231,9 @@ func (p *DescribeEcsClustersPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeEcsClusters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *DescribeEcsClustersPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeEcsClustersAPIClient is a client that implements the
+// DescribeEcsClusters operation.
+type DescribeEcsClustersAPIClient interface {
+	DescribeEcsClusters(context.Context, *DescribeEcsClustersInput, ...func(*Options)) (*DescribeEcsClustersOutput, error)
+}
+
+var _ DescribeEcsClustersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEcsClusters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

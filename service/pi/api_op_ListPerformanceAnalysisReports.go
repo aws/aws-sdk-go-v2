@@ -138,6 +138,9 @@ func (c *Client) addOperationListPerformanceAnalysisReportsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPerformanceAnalysisReportsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListPerformanceAnalysisReportsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListPerformanceAnalysisReportsAPIClient is a client that implements the
-// ListPerformanceAnalysisReports operation.
-type ListPerformanceAnalysisReportsAPIClient interface {
-	ListPerformanceAnalysisReports(context.Context, *ListPerformanceAnalysisReportsInput, ...func(*Options)) (*ListPerformanceAnalysisReportsOutput, error)
-}
-
-var _ ListPerformanceAnalysisReportsAPIClient = (*Client)(nil)
 
 // ListPerformanceAnalysisReportsPaginatorOptions is the paginator options for
 // ListPerformanceAnalysisReports
@@ -238,6 +233,9 @@ func (p *ListPerformanceAnalysisReportsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPerformanceAnalysisReports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListPerformanceAnalysisReportsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListPerformanceAnalysisReportsAPIClient is a client that implements the
+// ListPerformanceAnalysisReports operation.
+type ListPerformanceAnalysisReportsAPIClient interface {
+	ListPerformanceAnalysisReports(context.Context, *ListPerformanceAnalysisReportsInput, ...func(*Options)) (*ListPerformanceAnalysisReportsOutput, error)
+}
+
+var _ ListPerformanceAnalysisReportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPerformanceAnalysisReports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

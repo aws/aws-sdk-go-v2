@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeRegistrationSectionDefinitionsMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRegistrationSectionDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationDescribeRegistrationSectionDefinitionsMiddlewares(s
 	}
 	return nil
 }
-
-// DescribeRegistrationSectionDefinitionsAPIClient is a client that implements the
-// DescribeRegistrationSectionDefinitions operation.
-type DescribeRegistrationSectionDefinitionsAPIClient interface {
-	DescribeRegistrationSectionDefinitions(context.Context, *DescribeRegistrationSectionDefinitionsInput, ...func(*Options)) (*DescribeRegistrationSectionDefinitionsOutput, error)
-}
-
-var _ DescribeRegistrationSectionDefinitionsAPIClient = (*Client)(nil)
 
 // DescribeRegistrationSectionDefinitionsPaginatorOptions is the paginator options
 // for DescribeRegistrationSectionDefinitions
@@ -229,6 +224,9 @@ func (p *DescribeRegistrationSectionDefinitionsPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRegistrationSectionDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *DescribeRegistrationSectionDefinitionsPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// DescribeRegistrationSectionDefinitionsAPIClient is a client that implements the
+// DescribeRegistrationSectionDefinitions operation.
+type DescribeRegistrationSectionDefinitionsAPIClient interface {
+	DescribeRegistrationSectionDefinitions(context.Context, *DescribeRegistrationSectionDefinitionsInput, ...func(*Options)) (*DescribeRegistrationSectionDefinitionsOutput, error)
+}
+
+var _ DescribeRegistrationSectionDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRegistrationSectionDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

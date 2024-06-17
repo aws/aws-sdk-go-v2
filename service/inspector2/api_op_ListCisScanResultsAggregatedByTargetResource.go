@@ -127,6 +127,9 @@ func (c *Client) addOperationListCisScanResultsAggregatedByTargetResourceMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCisScanResultsAggregatedByTargetResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListCisScanResultsAggregatedByTargetResourceMiddlew
 	}
 	return nil
 }
-
-// ListCisScanResultsAggregatedByTargetResourceAPIClient is a client that
-// implements the ListCisScanResultsAggregatedByTargetResource operation.
-type ListCisScanResultsAggregatedByTargetResourceAPIClient interface {
-	ListCisScanResultsAggregatedByTargetResource(context.Context, *ListCisScanResultsAggregatedByTargetResourceInput, ...func(*Options)) (*ListCisScanResultsAggregatedByTargetResourceOutput, error)
-}
-
-var _ ListCisScanResultsAggregatedByTargetResourceAPIClient = (*Client)(nil)
 
 // ListCisScanResultsAggregatedByTargetResourcePaginatorOptions is the paginator
 // options for ListCisScanResultsAggregatedByTargetResource
@@ -226,6 +221,9 @@ func (p *ListCisScanResultsAggregatedByTargetResourcePaginator) NextPage(ctx con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCisScanResultsAggregatedByTargetResource(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListCisScanResultsAggregatedByTargetResourcePaginator) NextPage(ctx con
 
 	return result, nil
 }
+
+// ListCisScanResultsAggregatedByTargetResourceAPIClient is a client that
+// implements the ListCisScanResultsAggregatedByTargetResource operation.
+type ListCisScanResultsAggregatedByTargetResourceAPIClient interface {
+	ListCisScanResultsAggregatedByTargetResource(context.Context, *ListCisScanResultsAggregatedByTargetResourceInput, ...func(*Options)) (*ListCisScanResultsAggregatedByTargetResourceOutput, error)
+}
+
+var _ ListCisScanResultsAggregatedByTargetResourceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCisScanResultsAggregatedByTargetResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -140,6 +140,9 @@ func (c *Client) addOperationListZonalShiftsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListZonalShifts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListZonalShiftsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListZonalShiftsAPIClient is a client that implements the ListZonalShifts
-// operation.
-type ListZonalShiftsAPIClient interface {
-	ListZonalShifts(context.Context, *ListZonalShiftsInput, ...func(*Options)) (*ListZonalShiftsOutput, error)
-}
-
-var _ ListZonalShiftsAPIClient = (*Client)(nil)
 
 // ListZonalShiftsPaginatorOptions is the paginator options for ListZonalShifts
 type ListZonalShiftsPaginatorOptions struct {
@@ -232,6 +227,9 @@ func (p *ListZonalShiftsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListZonalShifts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListZonalShiftsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListZonalShiftsAPIClient is a client that implements the ListZonalShifts
+// operation.
+type ListZonalShiftsAPIClient interface {
+	ListZonalShifts(context.Context, *ListZonalShiftsInput, ...func(*Options)) (*ListZonalShiftsOutput, error)
+}
+
+var _ ListZonalShiftsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListZonalShifts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

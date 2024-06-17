@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeMigrationProjectsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMigrationProjectsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationDescribeMigrationProjectsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeMigrationProjectsAPIClient is a client that implements the
-// DescribeMigrationProjects operation.
-type DescribeMigrationProjectsAPIClient interface {
-	DescribeMigrationProjects(context.Context, *DescribeMigrationProjectsInput, ...func(*Options)) (*DescribeMigrationProjectsOutput, error)
-}
-
-var _ DescribeMigrationProjectsAPIClient = (*Client)(nil)
 
 // DescribeMigrationProjectsPaginatorOptions is the paginator options for
 // DescribeMigrationProjects
@@ -230,6 +225,9 @@ func (p *DescribeMigrationProjectsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMigrationProjects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *DescribeMigrationProjectsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeMigrationProjectsAPIClient is a client that implements the
+// DescribeMigrationProjects operation.
+type DescribeMigrationProjectsAPIClient interface {
+	DescribeMigrationProjects(context.Context, *DescribeMigrationProjectsInput, ...func(*Options)) (*DescribeMigrationProjectsOutput, error)
+}
+
+var _ DescribeMigrationProjectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMigrationProjects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

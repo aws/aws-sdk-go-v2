@@ -141,6 +141,9 @@ func (c *Client) addOperationListEdgePackagingJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEdgePackagingJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListEdgePackagingJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListEdgePackagingJobsAPIClient is a client that implements the
-// ListEdgePackagingJobs operation.
-type ListEdgePackagingJobsAPIClient interface {
-	ListEdgePackagingJobs(context.Context, *ListEdgePackagingJobsInput, ...func(*Options)) (*ListEdgePackagingJobsOutput, error)
-}
-
-var _ ListEdgePackagingJobsAPIClient = (*Client)(nil)
 
 // ListEdgePackagingJobsPaginatorOptions is the paginator options for
 // ListEdgePackagingJobs
@@ -234,6 +229,9 @@ func (p *ListEdgePackagingJobsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEdgePackagingJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *ListEdgePackagingJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListEdgePackagingJobsAPIClient is a client that implements the
+// ListEdgePackagingJobs operation.
+type ListEdgePackagingJobsAPIClient interface {
+	ListEdgePackagingJobs(context.Context, *ListEdgePackagingJobsInput, ...func(*Options)) (*ListEdgePackagingJobsOutput, error)
+}
+
+var _ ListEdgePackagingJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEdgePackagingJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

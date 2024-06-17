@@ -115,6 +115,9 @@ func (c *Client) addOperationDeleteSlotTypeMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSlotTypeValidationMiddleware(stack); err != nil {
 		return err
 	}

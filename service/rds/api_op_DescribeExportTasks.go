@@ -161,6 +161,9 @@ func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeExportTasksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,14 +187,6 @@ func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeExportTasksAPIClient is a client that implements the
-// DescribeExportTasks operation.
-type DescribeExportTasksAPIClient interface {
-	DescribeExportTasks(context.Context, *DescribeExportTasksInput, ...func(*Options)) (*DescribeExportTasksOutput, error)
-}
-
-var _ DescribeExportTasksAPIClient = (*Client)(nil)
 
 // DescribeExportTasksPaginatorOptions is the paginator options for
 // DescribeExportTasks
@@ -264,6 +259,9 @@ func (p *DescribeExportTasksPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeExportTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -282,6 +280,14 @@ func (p *DescribeExportTasksPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeExportTasksAPIClient is a client that implements the
+// DescribeExportTasks operation.
+type DescribeExportTasksAPIClient interface {
+	DescribeExportTasks(context.Context, *DescribeExportTasksInput, ...func(*Options)) (*DescribeExportTasksOutput, error)
+}
+
+var _ DescribeExportTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeExportTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

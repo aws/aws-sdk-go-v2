@@ -178,6 +178,9 @@ func (c *Client) addOperationListRepositoryAssociationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositoryAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -198,14 +201,6 @@ func (c *Client) addOperationListRepositoryAssociationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListRepositoryAssociationsAPIClient is a client that implements the
-// ListRepositoryAssociations operation.
-type ListRepositoryAssociationsAPIClient interface {
-	ListRepositoryAssociations(context.Context, *ListRepositoryAssociationsInput, ...func(*Options)) (*ListRepositoryAssociationsOutput, error)
-}
-
-var _ ListRepositoryAssociationsAPIClient = (*Client)(nil)
 
 // ListRepositoryAssociationsPaginatorOptions is the paginator options for
 // ListRepositoryAssociations
@@ -280,6 +275,9 @@ func (p *ListRepositoryAssociationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRepositoryAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -298,6 +296,14 @@ func (p *ListRepositoryAssociationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListRepositoryAssociationsAPIClient is a client that implements the
+// ListRepositoryAssociations operation.
+type ListRepositoryAssociationsAPIClient interface {
+	ListRepositoryAssociations(context.Context, *ListRepositoryAssociationsInput, ...func(*Options)) (*ListRepositoryAssociationsOutput, error)
+}
+
+var _ ListRepositoryAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRepositoryAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

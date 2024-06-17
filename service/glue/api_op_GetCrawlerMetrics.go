@@ -114,6 +114,9 @@ func (c *Client) addOperationGetCrawlerMetricsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCrawlerMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationGetCrawlerMetricsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetCrawlerMetricsAPIClient is a client that implements the GetCrawlerMetrics
-// operation.
-type GetCrawlerMetricsAPIClient interface {
-	GetCrawlerMetrics(context.Context, *GetCrawlerMetricsInput, ...func(*Options)) (*GetCrawlerMetricsOutput, error)
-}
-
-var _ GetCrawlerMetricsAPIClient = (*Client)(nil)
 
 // GetCrawlerMetricsPaginatorOptions is the paginator options for GetCrawlerMetrics
 type GetCrawlerMetricsPaginatorOptions struct {
@@ -206,6 +201,9 @@ func (p *GetCrawlerMetricsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCrawlerMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *GetCrawlerMetricsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetCrawlerMetricsAPIClient is a client that implements the GetCrawlerMetrics
+// operation.
+type GetCrawlerMetricsAPIClient interface {
+	GetCrawlerMetrics(context.Context, *GetCrawlerMetricsInput, ...func(*Options)) (*GetCrawlerMetricsOutput, error)
+}
+
+var _ GetCrawlerMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCrawlerMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

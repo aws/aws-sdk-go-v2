@@ -120,6 +120,9 @@ func (c *Client) addOperationListFlowExecutionMessagesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFlowExecutionMessagesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListFlowExecutionMessagesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListFlowExecutionMessagesAPIClient is a client that implements the
-// ListFlowExecutionMessages operation.
-type ListFlowExecutionMessagesAPIClient interface {
-	ListFlowExecutionMessages(context.Context, *ListFlowExecutionMessagesInput, ...func(*Options)) (*ListFlowExecutionMessagesOutput, error)
-}
-
-var _ ListFlowExecutionMessagesAPIClient = (*Client)(nil)
 
 // ListFlowExecutionMessagesPaginatorOptions is the paginator options for
 // ListFlowExecutionMessages
@@ -217,6 +212,9 @@ func (p *ListFlowExecutionMessagesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFlowExecutionMessages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListFlowExecutionMessagesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListFlowExecutionMessagesAPIClient is a client that implements the
+// ListFlowExecutionMessages operation.
+type ListFlowExecutionMessagesAPIClient interface {
+	ListFlowExecutionMessages(context.Context, *ListFlowExecutionMessagesInput, ...func(*Options)) (*ListFlowExecutionMessagesOutput, error)
+}
+
+var _ ListFlowExecutionMessagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFlowExecutionMessages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -141,6 +141,9 @@ func (c *Client) addOperationSearchAvailablePhoneNumbersMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchAvailablePhoneNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationSearchAvailablePhoneNumbersMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// SearchAvailablePhoneNumbersAPIClient is a client that implements the
-// SearchAvailablePhoneNumbers operation.
-type SearchAvailablePhoneNumbersAPIClient interface {
-	SearchAvailablePhoneNumbers(context.Context, *SearchAvailablePhoneNumbersInput, ...func(*Options)) (*SearchAvailablePhoneNumbersOutput, error)
-}
-
-var _ SearchAvailablePhoneNumbersAPIClient = (*Client)(nil)
 
 // SearchAvailablePhoneNumbersPaginatorOptions is the paginator options for
 // SearchAvailablePhoneNumbers
@@ -239,6 +234,9 @@ func (p *SearchAvailablePhoneNumbersPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchAvailablePhoneNumbers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *SearchAvailablePhoneNumbersPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// SearchAvailablePhoneNumbersAPIClient is a client that implements the
+// SearchAvailablePhoneNumbers operation.
+type SearchAvailablePhoneNumbersAPIClient interface {
+	SearchAvailablePhoneNumbers(context.Context, *SearchAvailablePhoneNumbersInput, ...func(*Options)) (*SearchAvailablePhoneNumbersOutput, error)
+}
+
+var _ SearchAvailablePhoneNumbersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchAvailablePhoneNumbers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

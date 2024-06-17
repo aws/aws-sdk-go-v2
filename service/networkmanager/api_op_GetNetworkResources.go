@@ -176,6 +176,9 @@ func (c *Client) addOperationGetNetworkResourcesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetNetworkResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -199,14 +202,6 @@ func (c *Client) addOperationGetNetworkResourcesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetNetworkResourcesAPIClient is a client that implements the
-// GetNetworkResources operation.
-type GetNetworkResourcesAPIClient interface {
-	GetNetworkResources(context.Context, *GetNetworkResourcesInput, ...func(*Options)) (*GetNetworkResourcesOutput, error)
-}
-
-var _ GetNetworkResourcesAPIClient = (*Client)(nil)
 
 // GetNetworkResourcesPaginatorOptions is the paginator options for
 // GetNetworkResources
@@ -272,6 +267,9 @@ func (p *GetNetworkResourcesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetNetworkResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -290,6 +288,14 @@ func (p *GetNetworkResourcesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetNetworkResourcesAPIClient is a client that implements the
+// GetNetworkResources operation.
+type GetNetworkResourcesAPIClient interface {
+	GetNetworkResources(context.Context, *GetNetworkResourcesInput, ...func(*Options)) (*GetNetworkResourcesOutput, error)
+}
+
+var _ GetNetworkResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetNetworkResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

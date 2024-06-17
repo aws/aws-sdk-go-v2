@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSharedDirectoriesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeSharedDirectoriesAPIClient is a client that implements the
-// DescribeSharedDirectories operation.
-type DescribeSharedDirectoriesAPIClient interface {
-	DescribeSharedDirectories(context.Context, *DescribeSharedDirectoriesInput, ...func(*Options)) (*DescribeSharedDirectoriesOutput, error)
-}
-
-var _ DescribeSharedDirectoriesAPIClient = (*Client)(nil)
 
 // DescribeSharedDirectoriesPaginatorOptions is the paginator options for
 // DescribeSharedDirectories
@@ -218,6 +213,9 @@ func (p *DescribeSharedDirectoriesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSharedDirectories(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *DescribeSharedDirectoriesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeSharedDirectoriesAPIClient is a client that implements the
+// DescribeSharedDirectories operation.
+type DescribeSharedDirectoriesAPIClient interface {
+	DescribeSharedDirectories(context.Context, *DescribeSharedDirectoriesInput, ...func(*Options)) (*DescribeSharedDirectoriesOutput, error)
+}
+
+var _ DescribeSharedDirectoriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSharedDirectories(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

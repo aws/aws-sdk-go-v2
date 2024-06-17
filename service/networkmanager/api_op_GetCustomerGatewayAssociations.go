@@ -119,6 +119,9 @@ func (c *Client) addOperationGetCustomerGatewayAssociationsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCustomerGatewayAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationGetCustomerGatewayAssociationsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// GetCustomerGatewayAssociationsAPIClient is a client that implements the
-// GetCustomerGatewayAssociations operation.
-type GetCustomerGatewayAssociationsAPIClient interface {
-	GetCustomerGatewayAssociations(context.Context, *GetCustomerGatewayAssociationsInput, ...func(*Options)) (*GetCustomerGatewayAssociationsOutput, error)
-}
-
-var _ GetCustomerGatewayAssociationsAPIClient = (*Client)(nil)
 
 // GetCustomerGatewayAssociationsPaginatorOptions is the paginator options for
 // GetCustomerGatewayAssociations
@@ -217,6 +212,9 @@ func (p *GetCustomerGatewayAssociationsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCustomerGatewayAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *GetCustomerGatewayAssociationsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// GetCustomerGatewayAssociationsAPIClient is a client that implements the
+// GetCustomerGatewayAssociations operation.
+type GetCustomerGatewayAssociationsAPIClient interface {
+	GetCustomerGatewayAssociations(context.Context, *GetCustomerGatewayAssociationsInput, ...func(*Options)) (*GetCustomerGatewayAssociationsOutput, error)
+}
+
+var _ GetCustomerGatewayAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCustomerGatewayAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

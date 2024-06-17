@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteDomainConfigurationMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDomainConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

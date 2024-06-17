@@ -133,6 +133,9 @@ func (c *Client) addOperationGetContactChannelMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetContactChannelValidationMiddleware(stack); err != nil {
 		return err
 	}

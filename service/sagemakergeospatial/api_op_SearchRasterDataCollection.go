@@ -130,6 +130,9 @@ func (c *Client) addOperationSearchRasterDataCollectionMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchRasterDataCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationSearchRasterDataCollectionMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// SearchRasterDataCollectionAPIClient is a client that implements the
-// SearchRasterDataCollection operation.
-type SearchRasterDataCollectionAPIClient interface {
-	SearchRasterDataCollection(context.Context, *SearchRasterDataCollectionInput, ...func(*Options)) (*SearchRasterDataCollectionOutput, error)
-}
-
-var _ SearchRasterDataCollectionAPIClient = (*Client)(nil)
 
 // SearchRasterDataCollectionPaginatorOptions is the paginator options for
 // SearchRasterDataCollection
@@ -216,6 +211,9 @@ func (p *SearchRasterDataCollectionPaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchRasterDataCollection(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *SearchRasterDataCollectionPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// SearchRasterDataCollectionAPIClient is a client that implements the
+// SearchRasterDataCollection operation.
+type SearchRasterDataCollectionAPIClient interface {
+	SearchRasterDataCollection(context.Context, *SearchRasterDataCollectionInput, ...func(*Options)) (*SearchRasterDataCollectionOutput, error)
+}
+
+var _ SearchRasterDataCollectionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchRasterDataCollection(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

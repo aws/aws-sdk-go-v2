@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeAppsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApps(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationDescribeAppsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// DescribeAppsAPIClient is a client that implements the DescribeApps operation.
-type DescribeAppsAPIClient interface {
-	DescribeApps(context.Context, *DescribeAppsInput, ...func(*Options)) (*DescribeAppsOutput, error)
-}
-
-var _ DescribeAppsAPIClient = (*Client)(nil)
 
 // AppExistsWaiterOptions are waiter options for AppExistsWaiter
 type AppExistsWaiterOptions struct {
@@ -264,7 +260,13 @@ func (w *AppExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeApp
 		}
 
 		out, err := w.client.DescribeApps(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -312,6 +314,13 @@ func appExistsStateRetryable(ctx context.Context, input *DescribeAppsInput, outp
 
 	return true, nil
 }
+
+// DescribeAppsAPIClient is a client that implements the DescribeApps operation.
+type DescribeAppsAPIClient interface {
+	DescribeApps(context.Context, *DescribeAppsInput, ...func(*Options)) (*DescribeAppsOutput, error)
+}
+
+var _ DescribeAppsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeApps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

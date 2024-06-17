@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribeSourceServersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSourceServers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationDescribeSourceServersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeSourceServersAPIClient is a client that implements the
-// DescribeSourceServers operation.
-type DescribeSourceServersAPIClient interface {
-	DescribeSourceServers(context.Context, *DescribeSourceServersInput, ...func(*Options)) (*DescribeSourceServersOutput, error)
-}
-
-var _ DescribeSourceServersAPIClient = (*Client)(nil)
 
 // DescribeSourceServersPaginatorOptions is the paginator options for
 // DescribeSourceServers
@@ -206,6 +201,9 @@ func (p *DescribeSourceServersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSourceServers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *DescribeSourceServersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeSourceServersAPIClient is a client that implements the
+// DescribeSourceServers operation.
+type DescribeSourceServersAPIClient interface {
+	DescribeSourceServers(context.Context, *DescribeSourceServersInput, ...func(*Options)) (*DescribeSourceServersOutput, error)
+}
+
+var _ DescribeSourceServersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSourceServers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

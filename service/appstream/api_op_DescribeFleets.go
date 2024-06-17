@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeFleetsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationDescribeFleetsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// DescribeFleetsAPIClient is a client that implements the DescribeFleets
-// operation.
-type DescribeFleetsAPIClient interface {
-	DescribeFleets(context.Context, *DescribeFleetsInput, ...func(*Options)) (*DescribeFleetsOutput, error)
-}
-
-var _ DescribeFleetsAPIClient = (*Client)(nil)
 
 // FleetStartedWaiterOptions are waiter options for FleetStartedWaiter
 type FleetStartedWaiterOptions struct {
@@ -260,7 +255,13 @@ func (w *FleetStartedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeFleets(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -495,7 +496,13 @@ func (w *FleetStoppedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeFleets(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -615,6 +622,14 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 
 	return true, nil
 }
+
+// DescribeFleetsAPIClient is a client that implements the DescribeFleets
+// operation.
+type DescribeFleetsAPIClient interface {
+	DescribeFleets(context.Context, *DescribeFleetsInput, ...func(*Options)) (*DescribeFleetsOutput, error)
+}
+
+var _ DescribeFleetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFleets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -144,6 +144,9 @@ func (c *Client) addOperationDescribeCanariesLastRunMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCanariesLastRun(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationDescribeCanariesLastRunMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeCanariesLastRunAPIClient is a client that implements the
-// DescribeCanariesLastRun operation.
-type DescribeCanariesLastRunAPIClient interface {
-	DescribeCanariesLastRun(context.Context, *DescribeCanariesLastRunInput, ...func(*Options)) (*DescribeCanariesLastRunOutput, error)
-}
-
-var _ DescribeCanariesLastRunAPIClient = (*Client)(nil)
 
 // DescribeCanariesLastRunPaginatorOptions is the paginator options for
 // DescribeCanariesLastRun
@@ -240,6 +235,9 @@ func (p *DescribeCanariesLastRunPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCanariesLastRun(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +256,14 @@ func (p *DescribeCanariesLastRunPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeCanariesLastRunAPIClient is a client that implements the
+// DescribeCanariesLastRun operation.
+type DescribeCanariesLastRunAPIClient interface {
+	DescribeCanariesLastRun(context.Context, *DescribeCanariesLastRunInput, ...func(*Options)) (*DescribeCanariesLastRunOutput, error)
+}
+
+var _ DescribeCanariesLastRunAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCanariesLastRun(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

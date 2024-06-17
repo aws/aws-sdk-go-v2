@@ -109,6 +109,9 @@ func (c *Client) addOperationRejectAccountLinkInvitationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRejectAccountLinkInvitationValidationMiddleware(stack); err != nil {
 		return err
 	}

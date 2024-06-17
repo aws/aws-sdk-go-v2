@@ -114,6 +114,9 @@ func (c *Client) addOperationListProvisioningTemplatesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProvisioningTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListProvisioningTemplatesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListProvisioningTemplatesAPIClient is a client that implements the
-// ListProvisioningTemplates operation.
-type ListProvisioningTemplatesAPIClient interface {
-	ListProvisioningTemplates(context.Context, *ListProvisioningTemplatesInput, ...func(*Options)) (*ListProvisioningTemplatesOutput, error)
-}
-
-var _ ListProvisioningTemplatesAPIClient = (*Client)(nil)
 
 // ListProvisioningTemplatesPaginatorOptions is the paginator options for
 // ListProvisioningTemplates
@@ -208,6 +203,9 @@ func (p *ListProvisioningTemplatesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProvisioningTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListProvisioningTemplatesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListProvisioningTemplatesAPIClient is a client that implements the
+// ListProvisioningTemplates operation.
+type ListProvisioningTemplatesAPIClient interface {
+	ListProvisioningTemplates(context.Context, *ListProvisioningTemplatesInput, ...func(*Options)) (*ListProvisioningTemplatesOutput, error)
+}
+
+var _ ListProvisioningTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProvisioningTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

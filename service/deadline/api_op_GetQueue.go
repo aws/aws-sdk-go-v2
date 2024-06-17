@@ -180,6 +180,9 @@ func (c *Client) addOperationGetQueueMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetQueueMiddleware(stack); err != nil {
 		return err
 	}
@@ -206,40 +209,6 @@ func (c *Client) addOperationGetQueueMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-type endpointPrefix_opGetQueueMiddleware struct {
-}
-
-func (*endpointPrefix_opGetQueueMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetQueueMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetQueueMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetQueueMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetQueueAPIClient is a client that implements the GetQueue operation.
-type GetQueueAPIClient interface {
-	GetQueue(context.Context, *GetQueueInput, ...func(*Options)) (*GetQueueOutput, error)
-}
-
-var _ GetQueueAPIClient = (*Client)(nil)
 
 // QueueSchedulingBlockedWaiterOptions are waiter options for
 // QueueSchedulingBlockedWaiter
@@ -358,7 +327,13 @@ func (w *QueueSchedulingBlockedWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.GetQueue(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -531,7 +506,13 @@ func (w *QueueSchedulingWaiter) WaitForOutput(ctx context.Context, params *GetQu
 		}
 
 		out, err := w.client.GetQueue(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -588,6 +569,40 @@ func queueSchedulingStateRetryable(ctx context.Context, input *GetQueueInput, ou
 
 	return true, nil
 }
+
+type endpointPrefix_opGetQueueMiddleware struct {
+}
+
+func (*endpointPrefix_opGetQueueMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetQueueMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetQueueMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetQueueMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetQueueAPIClient is a client that implements the GetQueue operation.
+type GetQueueAPIClient interface {
+	GetQueue(context.Context, *GetQueueInput, ...func(*Options)) (*GetQueueOutput, error)
+}
+
+var _ GetQueueAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetQueue(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

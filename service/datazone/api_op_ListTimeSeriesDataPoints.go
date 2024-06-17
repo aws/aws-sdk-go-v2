@@ -150,6 +150,9 @@ func (c *Client) addOperationListTimeSeriesDataPointsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTimeSeriesDataPointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -173,14 +176,6 @@ func (c *Client) addOperationListTimeSeriesDataPointsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListTimeSeriesDataPointsAPIClient is a client that implements the
-// ListTimeSeriesDataPoints operation.
-type ListTimeSeriesDataPointsAPIClient interface {
-	ListTimeSeriesDataPoints(context.Context, *ListTimeSeriesDataPointsInput, ...func(*Options)) (*ListTimeSeriesDataPointsOutput, error)
-}
-
-var _ ListTimeSeriesDataPointsAPIClient = (*Client)(nil)
 
 // ListTimeSeriesDataPointsPaginatorOptions is the paginator options for
 // ListTimeSeriesDataPoints
@@ -251,6 +246,9 @@ func (p *ListTimeSeriesDataPointsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTimeSeriesDataPoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -269,6 +267,14 @@ func (p *ListTimeSeriesDataPointsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListTimeSeriesDataPointsAPIClient is a client that implements the
+// ListTimeSeriesDataPoints operation.
+type ListTimeSeriesDataPointsAPIClient interface {
+	ListTimeSeriesDataPoints(context.Context, *ListTimeSeriesDataPointsInput, ...func(*Options)) (*ListTimeSeriesDataPointsOutput, error)
+}
+
+var _ ListTimeSeriesDataPointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTimeSeriesDataPoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

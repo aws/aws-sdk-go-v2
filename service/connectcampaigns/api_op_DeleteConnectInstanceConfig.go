@@ -102,6 +102,9 @@ func (c *Client) addOperationDeleteConnectInstanceConfigMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteConnectInstanceConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

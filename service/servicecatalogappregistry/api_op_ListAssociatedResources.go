@@ -122,6 +122,9 @@ func (c *Client) addOperationListAssociatedResourcesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssociatedResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListAssociatedResourcesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListAssociatedResourcesAPIClient is a client that implements the
-// ListAssociatedResources operation.
-type ListAssociatedResourcesAPIClient interface {
-	ListAssociatedResources(context.Context, *ListAssociatedResourcesInput, ...func(*Options)) (*ListAssociatedResourcesOutput, error)
-}
-
-var _ ListAssociatedResourcesAPIClient = (*Client)(nil)
 
 // ListAssociatedResourcesPaginatorOptions is the paginator options for
 // ListAssociatedResources
@@ -220,6 +215,9 @@ func (p *ListAssociatedResourcesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListAssociatedResourcesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListAssociatedResourcesAPIClient is a client that implements the
+// ListAssociatedResources operation.
+type ListAssociatedResourcesAPIClient interface {
+	ListAssociatedResources(context.Context, *ListAssociatedResourcesInput, ...func(*Options)) (*ListAssociatedResourcesOutput, error)
+}
+
+var _ ListAssociatedResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

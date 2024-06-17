@@ -134,6 +134,9 @@ func (c *Client) addOperationUpdateRouteMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateRouteMiddleware(stack, options); err != nil {
 		return err
 	}

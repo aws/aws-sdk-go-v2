@@ -110,6 +110,9 @@ func (c *Client) addOperationGetFieldLevelEncryptionMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFieldLevelEncryptionValidationMiddleware(stack); err != nil {
 		return err
 	}

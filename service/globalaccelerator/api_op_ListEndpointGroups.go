@@ -118,6 +118,9 @@ func (c *Client) addOperationListEndpointGroupsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEndpointGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListEndpointGroupsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListEndpointGroupsAPIClient is a client that implements the ListEndpointGroups
-// operation.
-type ListEndpointGroupsAPIClient interface {
-	ListEndpointGroups(context.Context, *ListEndpointGroupsInput, ...func(*Options)) (*ListEndpointGroupsOutput, error)
-}
-
-var _ ListEndpointGroupsAPIClient = (*Client)(nil)
 
 // ListEndpointGroupsPaginatorOptions is the paginator options for
 // ListEndpointGroups
@@ -215,6 +210,9 @@ func (p *ListEndpointGroupsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEndpointGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListEndpointGroupsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListEndpointGroupsAPIClient is a client that implements the ListEndpointGroups
+// operation.
+type ListEndpointGroupsAPIClient interface {
+	ListEndpointGroups(context.Context, *ListEndpointGroupsInput, ...func(*Options)) (*ListEndpointGroupsOutput, error)
+}
+
+var _ ListEndpointGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEndpointGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -136,6 +136,9 @@ func (c *Client) addOperationListAccessEntriesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAccessEntriesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListAccessEntriesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListAccessEntriesAPIClient is a client that implements the ListAccessEntries
-// operation.
-type ListAccessEntriesAPIClient interface {
-	ListAccessEntries(context.Context, *ListAccessEntriesInput, ...func(*Options)) (*ListAccessEntriesOutput, error)
-}
-
-var _ ListAccessEntriesAPIClient = (*Client)(nil)
 
 // ListAccessEntriesPaginatorOptions is the paginator options for ListAccessEntries
 type ListAccessEntriesPaginatorOptions struct {
@@ -236,6 +231,9 @@ func (p *ListAccessEntriesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccessEntries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListAccessEntriesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListAccessEntriesAPIClient is a client that implements the ListAccessEntries
+// operation.
+type ListAccessEntriesAPIClient interface {
+	ListAccessEntries(context.Context, *ListAccessEntriesInput, ...func(*Options)) (*ListAccessEntriesOutput, error)
+}
+
+var _ ListAccessEntriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccessEntries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

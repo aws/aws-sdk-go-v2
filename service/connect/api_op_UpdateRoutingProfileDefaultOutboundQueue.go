@@ -114,6 +114,9 @@ func (c *Client) addOperationUpdateRoutingProfileDefaultOutboundQueueMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRoutingProfileDefaultOutboundQueueValidationMiddleware(stack); err != nil {
 		return err
 	}

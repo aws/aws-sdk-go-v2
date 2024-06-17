@@ -148,6 +148,9 @@ func (c *Client) addOperationGetPropertyValueMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetPropertyValueMiddleware(stack); err != nil {
 		return err
 	}
@@ -174,41 +177,6 @@ func (c *Client) addOperationGetPropertyValueMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-type endpointPrefix_opGetPropertyValueMiddleware struct {
-}
-
-func (*endpointPrefix_opGetPropertyValueMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetPropertyValueMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "data." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetPropertyValueMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetPropertyValueMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetPropertyValueAPIClient is a client that implements the GetPropertyValue
-// operation.
-type GetPropertyValueAPIClient interface {
-	GetPropertyValue(context.Context, *GetPropertyValueInput, ...func(*Options)) (*GetPropertyValueOutput, error)
-}
-
-var _ GetPropertyValueAPIClient = (*Client)(nil)
 
 // GetPropertyValuePaginatorOptions is the paginator options for GetPropertyValue
 type GetPropertyValuePaginatorOptions struct {
@@ -275,6 +243,9 @@ func (p *GetPropertyValuePaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetPropertyValue(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -293,6 +264,41 @@ func (p *GetPropertyValuePaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+type endpointPrefix_opGetPropertyValueMiddleware struct {
+}
+
+func (*endpointPrefix_opGetPropertyValueMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetPropertyValueMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "data." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetPropertyValueMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetPropertyValueMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetPropertyValueAPIClient is a client that implements the GetPropertyValue
+// operation.
+type GetPropertyValueAPIClient interface {
+	GetPropertyValue(context.Context, *GetPropertyValueInput, ...func(*Options)) (*GetPropertyValueOutput, error)
+}
+
+var _ GetPropertyValueAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetPropertyValue(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

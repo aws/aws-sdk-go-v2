@@ -111,6 +111,9 @@ func (c *Client) addOperationDeleteOutboundConnectionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteOutboundConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}

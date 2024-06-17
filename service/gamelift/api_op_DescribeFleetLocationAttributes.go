@@ -158,6 +158,9 @@ func (c *Client) addOperationDescribeFleetLocationAttributesMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetLocationAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,14 +184,6 @@ func (c *Client) addOperationDescribeFleetLocationAttributesMiddlewares(stack *m
 	}
 	return nil
 }
-
-// DescribeFleetLocationAttributesAPIClient is a client that implements the
-// DescribeFleetLocationAttributes operation.
-type DescribeFleetLocationAttributesAPIClient interface {
-	DescribeFleetLocationAttributes(context.Context, *DescribeFleetLocationAttributesInput, ...func(*Options)) (*DescribeFleetLocationAttributesOutput, error)
-}
-
-var _ DescribeFleetLocationAttributesAPIClient = (*Client)(nil)
 
 // DescribeFleetLocationAttributesPaginatorOptions is the paginator options for
 // DescribeFleetLocationAttributes
@@ -257,6 +252,9 @@ func (p *DescribeFleetLocationAttributesPaginator) NextPage(ctx context.Context,
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFleetLocationAttributes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +273,14 @@ func (p *DescribeFleetLocationAttributesPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// DescribeFleetLocationAttributesAPIClient is a client that implements the
+// DescribeFleetLocationAttributes operation.
+type DescribeFleetLocationAttributesAPIClient interface {
+	DescribeFleetLocationAttributes(context.Context, *DescribeFleetLocationAttributesInput, ...func(*Options)) (*DescribeFleetLocationAttributesOutput, error)
+}
+
+var _ DescribeFleetLocationAttributesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFleetLocationAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -133,6 +133,9 @@ func (c *Client) addOperationSearchImageSetsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opSearchImageSetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,41 +162,6 @@ func (c *Client) addOperationSearchImageSetsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-type endpointPrefix_opSearchImageSetsMiddleware struct {
-}
-
-func (*endpointPrefix_opSearchImageSetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opSearchImageSetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "runtime-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opSearchImageSetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opSearchImageSetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// SearchImageSetsAPIClient is a client that implements the SearchImageSets
-// operation.
-type SearchImageSetsAPIClient interface {
-	SearchImageSets(context.Context, *SearchImageSetsInput, ...func(*Options)) (*SearchImageSetsOutput, error)
-}
-
-var _ SearchImageSetsAPIClient = (*Client)(nil)
 
 // SearchImageSetsPaginatorOptions is the paginator options for SearchImageSets
 type SearchImageSetsPaginatorOptions struct {
@@ -258,6 +226,9 @@ func (p *SearchImageSetsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchImageSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +247,41 @@ func (p *SearchImageSetsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+type endpointPrefix_opSearchImageSetsMiddleware struct {
+}
+
+func (*endpointPrefix_opSearchImageSetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opSearchImageSetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "runtime-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opSearchImageSetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opSearchImageSetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// SearchImageSetsAPIClient is a client that implements the SearchImageSets
+// operation.
+type SearchImageSetsAPIClient interface {
+	SearchImageSets(context.Context, *SearchImageSetsInput, ...func(*Options)) (*SearchImageSetsOutput, error)
+}
+
+var _ SearchImageSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchImageSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

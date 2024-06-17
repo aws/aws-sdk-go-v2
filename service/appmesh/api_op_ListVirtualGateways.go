@@ -136,6 +136,9 @@ func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVirtualGatewaysValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListVirtualGatewaysAPIClient is a client that implements the
-// ListVirtualGateways operation.
-type ListVirtualGatewaysAPIClient interface {
-	ListVirtualGateways(context.Context, *ListVirtualGatewaysInput, ...func(*Options)) (*ListVirtualGatewaysOutput, error)
-}
-
-var _ ListVirtualGatewaysAPIClient = (*Client)(nil)
 
 // ListVirtualGatewaysPaginatorOptions is the paginator options for
 // ListVirtualGateways
@@ -238,6 +233,9 @@ func (p *ListVirtualGatewaysPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVirtualGateways(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListVirtualGatewaysPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListVirtualGatewaysAPIClient is a client that implements the
+// ListVirtualGateways operation.
+type ListVirtualGatewaysAPIClient interface {
+	ListVirtualGateways(context.Context, *ListVirtualGatewaysInput, ...func(*Options)) (*ListVirtualGatewaysOutput, error)
+}
+
+var _ ListVirtualGatewaysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVirtualGateways(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

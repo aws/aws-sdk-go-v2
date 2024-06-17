@@ -129,6 +129,9 @@ func (c *Client) addOperationDeleteEmailIdentityPolicyMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteEmailIdentityPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

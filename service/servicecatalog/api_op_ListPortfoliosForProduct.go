@@ -124,6 +124,9 @@ func (c *Client) addOperationListPortfoliosForProductMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPortfoliosForProductValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListPortfoliosForProductMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListPortfoliosForProductAPIClient is a client that implements the
-// ListPortfoliosForProduct operation.
-type ListPortfoliosForProductAPIClient interface {
-	ListPortfoliosForProduct(context.Context, *ListPortfoliosForProductInput, ...func(*Options)) (*ListPortfoliosForProductOutput, error)
-}
-
-var _ ListPortfoliosForProductAPIClient = (*Client)(nil)
 
 // ListPortfoliosForProductPaginatorOptions is the paginator options for
 // ListPortfoliosForProduct
@@ -217,6 +212,9 @@ func (p *ListPortfoliosForProductPaginator) NextPage(ctx context.Context, optFns
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPortfoliosForProduct(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListPortfoliosForProductPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListPortfoliosForProductAPIClient is a client that implements the
+// ListPortfoliosForProduct operation.
+type ListPortfoliosForProductAPIClient interface {
+	ListPortfoliosForProduct(context.Context, *ListPortfoliosForProductInput, ...func(*Options)) (*ListPortfoliosForProductOutput, error)
+}
+
+var _ ListPortfoliosForProductAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPortfoliosForProduct(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

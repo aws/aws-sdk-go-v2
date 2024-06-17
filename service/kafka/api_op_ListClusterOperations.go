@@ -121,6 +121,9 @@ func (c *Client) addOperationListClusterOperationsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListClusterOperationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListClusterOperationsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListClusterOperationsAPIClient is a client that implements the
-// ListClusterOperations operation.
-type ListClusterOperationsAPIClient interface {
-	ListClusterOperations(context.Context, *ListClusterOperationsInput, ...func(*Options)) (*ListClusterOperationsOutput, error)
-}
-
-var _ ListClusterOperationsAPIClient = (*Client)(nil)
 
 // ListClusterOperationsPaginatorOptions is the paginator options for
 // ListClusterOperations
@@ -218,6 +213,9 @@ func (p *ListClusterOperationsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClusterOperations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListClusterOperationsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListClusterOperationsAPIClient is a client that implements the
+// ListClusterOperations operation.
+type ListClusterOperationsAPIClient interface {
+	ListClusterOperations(context.Context, *ListClusterOperationsInput, ...func(*Options)) (*ListClusterOperationsOutput, error)
+}
+
+var _ ListClusterOperationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClusterOperations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

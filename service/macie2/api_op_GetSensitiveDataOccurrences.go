@@ -130,6 +130,9 @@ func (c *Client) addOperationGetSensitiveDataOccurrencesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSensitiveDataOccurrencesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationGetSensitiveDataOccurrencesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// GetSensitiveDataOccurrencesAPIClient is a client that implements the
-// GetSensitiveDataOccurrences operation.
-type GetSensitiveDataOccurrencesAPIClient interface {
-	GetSensitiveDataOccurrences(context.Context, *GetSensitiveDataOccurrencesInput, ...func(*Options)) (*GetSensitiveDataOccurrencesOutput, error)
-}
-
-var _ GetSensitiveDataOccurrencesAPIClient = (*Client)(nil)
 
 // FindingRevealedWaiterOptions are waiter options for FindingRevealedWaiter
 type FindingRevealedWaiterOptions struct {
@@ -277,7 +272,13 @@ func (w *FindingRevealedWaiter) WaitForOutput(ctx context.Context, params *GetSe
 		}
 
 		out, err := w.client.GetSensitiveDataOccurrences(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -351,6 +352,14 @@ func findingRevealedStateRetryable(ctx context.Context, input *GetSensitiveDataO
 
 	return true, nil
 }
+
+// GetSensitiveDataOccurrencesAPIClient is a client that implements the
+// GetSensitiveDataOccurrences operation.
+type GetSensitiveDataOccurrencesAPIClient interface {
+	GetSensitiveDataOccurrences(context.Context, *GetSensitiveDataOccurrencesInput, ...func(*Options)) (*GetSensitiveDataOccurrencesOutput, error)
+}
+
+var _ GetSensitiveDataOccurrencesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSensitiveDataOccurrences(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

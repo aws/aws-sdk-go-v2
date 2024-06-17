@@ -155,6 +155,9 @@ func (c *Client) addOperationListStackSetsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStackSets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -175,13 +178,6 @@ func (c *Client) addOperationListStackSetsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListStackSetsAPIClient is a client that implements the ListStackSets operation.
-type ListStackSetsAPIClient interface {
-	ListStackSets(context.Context, *ListStackSetsInput, ...func(*Options)) (*ListStackSetsOutput, error)
-}
-
-var _ ListStackSetsAPIClient = (*Client)(nil)
 
 // ListStackSetsPaginatorOptions is the paginator options for ListStackSets
 type ListStackSetsPaginatorOptions struct {
@@ -249,6 +245,9 @@ func (p *ListStackSetsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStackSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +266,13 @@ func (p *ListStackSetsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListStackSetsAPIClient is a client that implements the ListStackSets operation.
+type ListStackSetsAPIClient interface {
+	ListStackSets(context.Context, *ListStackSetsInput, ...func(*Options)) (*ListStackSetsOutput, error)
+}
+
+var _ ListStackSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStackSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

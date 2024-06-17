@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeDomainControllersMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainControllersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationDescribeDomainControllersMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeDomainControllersAPIClient is a client that implements the
-// DescribeDomainControllers operation.
-type DescribeDomainControllersAPIClient interface {
-	DescribeDomainControllers(context.Context, *DescribeDomainControllersInput, ...func(*Options)) (*DescribeDomainControllersOutput, error)
-}
-
-var _ DescribeDomainControllersAPIClient = (*Client)(nil)
 
 // DescribeDomainControllersPaginatorOptions is the paginator options for
 // DescribeDomainControllers
@@ -219,6 +214,9 @@ func (p *DescribeDomainControllersPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDomainControllers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *DescribeDomainControllersPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeDomainControllersAPIClient is a client that implements the
+// DescribeDomainControllers operation.
+type DescribeDomainControllersAPIClient interface {
+	DescribeDomainControllers(context.Context, *DescribeDomainControllersInput, ...func(*Options)) (*DescribeDomainControllersOutput, error)
+}
+
+var _ DescribeDomainControllersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDomainControllers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
