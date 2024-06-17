@@ -1,3 +1,34 @@
+# Release (2024-06-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.28.0
+  * **Feature**: Support accountID-based endpoint routing.
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.30.4](service/acmpca/CHANGELOG.md#v1304-2024-06-17)
+  * **Documentation**: Doc-only update that adds name constraints as an allowed extension for ImportCertificateAuthorityCertificate.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.39.0](service/batch/CHANGELOG.md#v1390-2024-06-17)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.38.0](service/codebuild/CHANGELOG.md#v1380-2024-06-17)
+  * **Feature**: AWS CodeBuild now supports global and organization GitHub webhooks
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.39.0](service/cognitoidentityprovider/CHANGELOG.md#v1390-2024-06-17)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.25.0](service/directoryservice/CHANGELOG.md#v1250-2024-06-17)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.29.0](service/efs/CHANGELOG.md#v1290-2024-06-17)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.86.0](service/glue/CHANGELOG.md#v1860-2024-06-17)
+  * **Feature**: This release introduces a new feature, Usage profiles. Usage profiles allow the AWS Glue admin to create different profiles for various classes of users within the account, enforcing limits and defaults for jobs and sessions.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.33.1](service/kms/CHANGELOG.md#v1331-2024-06-17)
+  * **Documentation**: Updating SDK example for KMS DeriveSharedSecret API.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.55.0](service/mediaconvert/CHANGELOG.md#v1550-2024-06-17)
+  * **Feature**: This release includes support for creating I-frame only video segments for DASH trick play.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.30.1](service/secretsmanager/CHANGELOG.md#v1301-2024-06-17)
+  * **Documentation**: Doc only update for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.21.0](service/waf/CHANGELOG.md#v1210-2024-06-17)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
 # Release (2024-06-14)
 
 ## Module Highlights

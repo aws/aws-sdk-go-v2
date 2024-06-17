@@ -1,3 +1,8 @@
+# v1.30.1 (2024-06-17)
+
+* **Documentation**: Doc only update for Secrets Manager
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2024-06-12)
 
 * **Feature**: Introducing RotationToken parameter for PutSecretValue API

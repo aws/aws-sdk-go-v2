@@ -1,3 +1,7 @@
+# v1.0.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0 (2024-06-11)
 
 * **Release**: New AWS service client module

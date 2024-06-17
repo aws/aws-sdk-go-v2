@@ -1,3 +1,8 @@
+# v1.38.0 (2024-06-17)
+
+* **Feature**: AWS CodeBuild now supports global and organization GitHub webhooks
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.3 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

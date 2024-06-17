@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/macie2
 go 1.20
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.27.2
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.9
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.9
+	github.com/aws/aws-sdk-go-v2 v1.28.0
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.10
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.10
 	github.com/aws/smithy-go v1.20.2
 	github.com/jmespath/go-jmespath v0.4.0
 )

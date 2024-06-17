@@ -1,3 +1,7 @@
+# v1.0.0-preview.29 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.28 (2024-06-07)
 
 * **Feature**: Added exceptions to B2Bi List operations and ConflictException to B2Bi StartTransformerJob operation. Also made capabilities field explicitly required when creating a Partnership.

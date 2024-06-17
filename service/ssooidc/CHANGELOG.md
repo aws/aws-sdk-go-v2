@@ -1,3 +1,7 @@
+# v1.24.6 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.5 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

@@ -1,3 +1,7 @@
+# v1.44.8 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.7 (2024-06-12)
 
 * **Documentation**: Updates to remove DC1 and DS2 node types.

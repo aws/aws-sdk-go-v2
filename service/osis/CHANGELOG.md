@@ -1,3 +1,7 @@
+# v1.10.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2024-06-12)
 
 * **Feature**: SDK changes for self-managed vpc endpoint to OpenSearch ingestion pipelines.

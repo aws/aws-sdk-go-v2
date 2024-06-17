@@ -1,3 +1,7 @@
+# v1.14.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2024-06-12)
 
 * **Feature**: This release updates request validation regex to account for non-commercial aws partitions.

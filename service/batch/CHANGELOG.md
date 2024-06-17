@@ -1,3 +1,8 @@
+# v1.39.0 (2024-06-17)
+
+* **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.1 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

@@ -1,3 +1,8 @@
+# v1.86.0 (2024-06-17)
+
+* **Feature**: This release introduces a new feature, Usage profiles. Usage profiles allow the AWS Glue admin to create different profiles for various classes of users within the account, enforcing limits and defaults for jobs and sessions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.85.0 (2024-06-13)
 
 * **Feature**: This release adds support for configuration of evaluation method for composite rules in Glue Data Quality rulesets.

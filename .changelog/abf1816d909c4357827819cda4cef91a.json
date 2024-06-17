@@ -1,8 +1,0 @@
-{
-    "id": "abf1816d-909c-4357-8278-19cda4cef91a",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports global and organization GitHub webhooks",
-    "modules": [
-        "service/codebuild"
-    ]
-}

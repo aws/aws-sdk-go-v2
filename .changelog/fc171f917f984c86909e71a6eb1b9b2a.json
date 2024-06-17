@@ -1,8 +1,0 @@
-{
-    "id": "fc171f91-7f98-4c86-909e-71a6eb1b9b2a",
-    "type": "dependency",
-    "description": "Drop golang.org/x/net codegen dependency.",
-    "modules": [
-        "internal/codegen"
-    ]
-}

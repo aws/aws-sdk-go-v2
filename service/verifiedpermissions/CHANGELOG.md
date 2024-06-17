@@ -1,3 +1,7 @@
+# v1.15.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2024-06-07)
 
 * **Feature**: This release adds OpenIdConnect (OIDC) configuration support for IdentitySources, allowing for external IDPs to be used in authorization requests.

@@ -1,3 +1,7 @@
+# v1.22.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2024-06-13)
 
 * **Feature**: Added support for hsm type hsm2m.medium. Added supported for creating a cluster in FIPS or NON_FIPS mode.

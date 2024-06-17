@@ -1,3 +1,7 @@
+# v1.30.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2024-06-12)
 
 * **Feature**: This release adds support for Amazon EventBridge as an email sending events destination.

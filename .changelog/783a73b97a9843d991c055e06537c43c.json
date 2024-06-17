@@ -1,8 +1,0 @@
-{
-    "id": "783a73b9-7a98-43d9-91c0-55e06537c43c",
-    "type": "feature",
-    "description": "Support accountID-based endpoint routing.",
-    "modules": [
-        "."
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.12.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-06-13)
 
 * **Feature**: This release adds support for CMAF ingest (DASH-IF live media ingest protocol interface 1)

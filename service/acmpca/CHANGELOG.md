@@ -1,3 +1,8 @@
+# v1.30.4 (2024-06-17)
+
+* **Documentation**: Doc-only update that adds name constraints as an allowed extension for ImportCertificateAuthorityCertificate.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.3 (2024-06-07)
 
 * **Bug Fix**: Add clock skew correction on all service clients

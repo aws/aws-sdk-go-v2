@@ -1,8 +1,0 @@
-{
-    "id": "c21f1ca0-d60a-443a-b023-bd3c7be7fee9",
-    "type": "documentation",
-    "description": "Updating SDK example for KMS DeriveSharedSecret API.",
-    "modules": [
-        "service/kms"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.43.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2024-06-11)
 
 * **Feature**: Added API support for GuardDuty Malware Protection for S3.

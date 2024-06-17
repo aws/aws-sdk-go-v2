@@ -1,3 +1,7 @@
+# v1.42.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2024-06-10)
 
 * **Feature**: This release introduces a new cluster configuration to support the customer-managed keys for ECS managed storage encryption.

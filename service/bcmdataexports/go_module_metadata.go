@@ -3,4 +3,4 @@
 package bcmdataexports
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.3.10"
+const goModuleVersion = "1.3.11"

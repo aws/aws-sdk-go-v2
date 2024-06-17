@@ -1,3 +1,8 @@
+# v1.55.0 (2024-06-17)
+
+* **Feature**: This release includes support for creating I-frame only video segments for DASH trick play.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2024-06-14)
 
 * **Feature**: This release adds the ability to search for historical job records within the management console using a search box and/or via the SDK/CLI with partial string matching search on input file name.

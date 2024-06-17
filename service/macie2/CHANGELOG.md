@@ -1,3 +1,7 @@
+# v1.39.1 (2024-06-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2024-06-14)
 
 * **Feature**: This release adds support for managing the status of automated sensitive data discovery for individual accounts in an organization, and determining whether individual S3 buckets are included in the scope of the analyses.
