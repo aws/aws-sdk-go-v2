@@ -4203,6 +4203,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 		ok.String(string(v.CodecSpecification))
 	}
 
+	if v.DashIFrameTrickPlayNameModifier != nil {
+		ok := object.Key("dashIFrameTrickPlayNameModifier")
+		ok.String(*v.DashIFrameTrickPlayNameModifier)
+	}
+
 	if len(v.DashManifestStyle) > 0 {
 		ok := object.Key("dashManifestStyle")
 		ok.String(string(v.DashManifestStyle))
@@ -4690,6 +4695,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if v.BaseUrl != nil {
 		ok := object.Key("baseUrl")
 		ok.String(*v.BaseUrl)
+	}
+
+	if v.DashIFrameTrickPlayNameModifier != nil {
+		ok := object.Key("dashIFrameTrickPlayNameModifier")
+		ok.String(*v.DashIFrameTrickPlayNameModifier)
 	}
 
 	if len(v.DashManifestStyle) > 0 {
@@ -7169,9 +7179,29 @@ func awsRestjson1_serializeDocumentInputVideoGenerator(v *types.InputVideoGenera
 	object := value.Object()
 	defer object.Close()
 
+	if v.Channels != nil {
+		ok := object.Key("channels")
+		ok.Integer(*v.Channels)
+	}
+
 	if v.Duration != nil {
 		ok := object.Key("duration")
 		ok.Integer(*v.Duration)
+	}
+
+	if v.FramerateDenominator != nil {
+		ok := object.Key("framerateDenominator")
+		ok.Integer(*v.FramerateDenominator)
+	}
+
+	if v.FramerateNumerator != nil {
+		ok := object.Key("framerateNumerator")
+		ok.Integer(*v.FramerateNumerator)
+	}
+
+	if v.SampleRate != nil {
+		ok := object.Key("sampleRate")
+		ok.Integer(*v.SampleRate)
 	}
 
 	return nil

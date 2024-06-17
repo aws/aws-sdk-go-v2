@@ -11,45 +11,48 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the metadata for a given job run. Job run history is accessible for
-// 90 days for your workflow and job run.
-func (c *Client) GetJobRun(ctx context.Context, params *GetJobRunInput, optFns ...func(*Options)) (*GetJobRunOutput, error) {
+// Creates an Glue usage profile.
+func (c *Client) CreateUsageProfile(ctx context.Context, params *CreateUsageProfileInput, optFns ...func(*Options)) (*CreateUsageProfileOutput, error) {
 	if params == nil {
-		params = &GetJobRunInput{}
+		params = &CreateUsageProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetJobRun", params, optFns, c.addOperationGetJobRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUsageProfile", params, optFns, c.addOperationCreateUsageProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetJobRunOutput)
+	out := result.(*CreateUsageProfileOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetJobRunInput struct {
+type CreateUsageProfileInput struct {
 
-	// Name of the job definition being run.
+	// A ProfileConfiguration object specifying the job and session values for the
+	// profile.
 	//
 	// This member is required.
-	JobName *string
+	Configuration *types.ProfileConfiguration
 
-	// The ID of the job run.
+	// The name of the usage profile.
 	//
 	// This member is required.
-	RunId *string
+	Name *string
 
-	// True if a list of predecessor runs should be returned.
-	PredecessorsIncluded bool
+	// A description of the usage profile.
+	Description *string
+
+	// A list of tags applied to the usage profile.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-type GetJobRunOutput struct {
+type CreateUsageProfileOutput struct {
 
-	// The requested job-run metadata.
-	JobRun *types.JobRun
+	// The name of the usage profile that was created.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,19 +60,19 @@ type GetJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUsageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetJobRun{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUsageProfile{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetJobRun{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUsageProfile{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetJobRun"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUsageProfile"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -115,10 +118,10 @@ func (c *Client) addOperationGetJobRunMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
-	if err = addOpGetJobRunValidationMiddleware(stack); err != nil {
+	if err = addOpCreateUsageProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobRun(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUsageProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -139,10 +142,10 @@ func (c *Client) addOperationGetJobRunMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetJobRun(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateUsageProfile(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetJobRun",
+		OperationName: "CreateUsageProfile",
 	}
 }

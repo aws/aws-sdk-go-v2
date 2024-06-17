@@ -3505,6 +3505,28 @@ func awsAwsjson11_serializeDocumentScalingConfigurationInput(v *types.ScalingCon
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentScopeConfiguration(v *types.ScopeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Domain != nil {
+		ok := object.Key("domain")
+		ok.String(*v.Domain)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Scope) > 0 {
+		ok := object.Key("scope")
+		ok.String(string(v.Scope))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4034,6 +4056,13 @@ func awsAwsjson11_serializeOpDocumentCreateWebhookInput(v *CreateWebhookInput, v
 	if v.ProjectName != nil {
 		ok := object.Key("projectName")
 		ok.String(*v.ProjectName)
+	}
+
+	if v.ScopeConfiguration != nil {
+		ok := object.Key("scopeConfiguration")
+		if err := awsAwsjson11_serializeDocumentScopeConfiguration(v.ScopeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

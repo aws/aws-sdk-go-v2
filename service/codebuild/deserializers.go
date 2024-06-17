@@ -11281,6 +11281,64 @@ func awsAwsjson11_deserializeDocumentScalingConfigurationOutput(v **types.Scalin
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentScopeConfiguration(v **types.ScopeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScopeConfiguration
+	if *v == nil {
+		sv = &types.ScopeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebhookScopeType to be of type string, got %T instead", value)
+				}
+				sv.Scope = types.WebhookScopeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSecurityGroupIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12031,6 +12089,11 @@ func awsAwsjson11_deserializeDocumentWebhook(v **types.Webhook, value interface{
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.PayloadUrl = ptr.String(jtv)
+			}
+
+		case "scopeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentScopeConfiguration(&sv.ScopeConfiguration, value); err != nil {
+				return err
 			}
 
 		case "secret":

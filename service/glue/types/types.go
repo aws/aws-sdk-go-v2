@@ -1466,6 +1466,25 @@ type Condition struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the values that an admin sets for each job or session parameter
+// configured in a Glue usage profile.
+type ConfigurationObject struct {
+
+	// A list of allowed values for the parameter.
+	AllowedValues []string
+
+	// A default value for the parameter.
+	DefaultValue *string
+
+	// A maximum allowed value for the parameter.
+	MaxValue *string
+
+	// A minimum allowed value for the parameter.
+	MinValue *string
+
+	noSmithyDocumentSerde
+}
+
 // The confusion matrix shows you what your transform is predicting accurately and
 // what types of errors it is making.
 //
@@ -4425,6 +4444,9 @@ type Job struct {
 	// runs.
 	NumberOfWorkers *int32
 
+	// The name of an Glue usage profile associated with the job.
+	ProfileName *string
+
 	// The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
 	Role *string
 
@@ -4736,6 +4758,9 @@ type JobRun struct {
 	// The ID of the previous run of this job. For example, the JobRunId specified in
 	// the StartJobRun action.
 	PreviousRunId *string
+
+	// The name of an Glue usage profile associated with the job run.
+	ProfileName *string
 
 	// The name of the SecurityConfiguration structure to be used with this job run.
 	SecurityConfiguration *string
@@ -6348,6 +6373,19 @@ type PrincipalPermissions struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the job and session values that an admin configures in an Glue usage
+// profile.
+type ProfileConfiguration struct {
+
+	// A key-value map of configuration parameters for Glue jobs.
+	JobConfiguration map[string]ConfigurationObject
+
+	// A key-value map of configuration parameters for Glue sessions.
+	SessionConfiguration map[string]ConfigurationObject
+
+	noSmithyDocumentSerde
+}
+
 // Defines a property predicate.
 type PropertyPredicate struct {
 
@@ -7602,6 +7640,9 @@ type Session struct {
 
 	// The number of workers of a defined WorkerType to use for the session.
 	NumberOfWorkers *int32
+
+	// The name of an Glue usage profile associated with the session.
+	ProfileName *string
 
 	// The code execution progress of the session.
 	Progress float64
@@ -8923,6 +8964,24 @@ type UpsertRedshiftTargetOptions struct {
 
 	// The keys used to determine whether to perform an update or insert.
 	UpsertKeys []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Glue usage profile.
+type UsageProfileDefinition struct {
+
+	// The date and time when the usage profile was created.
+	CreatedOn *time.Time
+
+	// A description of the usage profile.
+	Description *string
+
+	// The date and time when the usage profile was last modified.
+	LastModifiedOn *time.Time
+
+	// The name of the usage profile.
+	Name *string
 
 	noSmithyDocumentSerde
 }

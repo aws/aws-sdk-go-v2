@@ -8970,6 +8970,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				sv.CodecSpecification = types.CmafCodecSpecification(jtv)
 			}
 
+		case "dashIFrameTrickPlayNameModifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max256 to be of type string, got %T instead", value)
+				}
+				sv.DashIFrameTrickPlayNameModifier = ptr.String(jtv)
+			}
+
 		case "dashManifestStyle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9977,6 +9986,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.BaseUrl = ptr.String(jtv)
+			}
+
+		case "dashIFrameTrickPlayNameModifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max256 to be of type string, got %T instead", value)
+				}
+				sv.DashIFrameTrickPlayNameModifier = ptr.String(jtv)
 			}
 
 		case "dashManifestStyle":
@@ -15196,7 +15214,7 @@ func awsRestjson1_deserializeDocumentInputClipping(v **types.InputClipping, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPattern010920405090509092090909 to be of type string, got %T instead", value)
 				}
 				sv.EndTimecode = ptr.String(jtv)
 			}
@@ -15205,7 +15223,7 @@ func awsRestjson1_deserializeDocumentInputClipping(v **types.InputClipping, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPattern010920405090509092090909 to be of type string, got %T instead", value)
 				}
 				sv.StartTimecode = ptr.String(jtv)
 			}
@@ -15496,6 +15514,19 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 
 	for key, value := range shape {
 		switch key {
+		case "channels":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max32 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Channels = ptr.Int32(int32(i64))
+			}
+
 		case "duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15507,6 +15538,45 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 					return err
 				}
 				sv.Duration = ptr.Int32(int32(i64))
+			}
+
+		case "framerateDenominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max1001 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
+			}
+
+		case "framerateNumerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max60000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "sampleRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32000Max48000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SampleRate = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -19552,7 +19622,7 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMin1Max256 to be of type string, got %T instead", value)
 				}
 				sv.NameModifier = ptr.String(jtv)
 			}

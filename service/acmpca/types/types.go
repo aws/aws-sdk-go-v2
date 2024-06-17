@@ -334,7 +334,7 @@ type CertificateAuthorityConfiguration struct {
 // Authority User Guide
 //
 // [Planning a certificate revocation list (CRL)]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html
-// [Encrypting Your CRLs]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
+// [Encrypting Your CRLs]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption
 type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are

@@ -1,0 +1,8 @@
+{
+    "id": "3d2c24c9-759a-42c7-a2b2-d77911d1e3a7",
+    "type": "feature",
+    "description": "This release includes support for creating I-frame only video segments for DASH trick play.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

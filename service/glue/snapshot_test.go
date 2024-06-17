@@ -566,6 +566,18 @@ func TestCheckSnapshot_CreateTrigger(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateUsageProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateUserDefinedFunction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateUserDefinedFunction(context.Background(), nil, func(o *Options) {
@@ -871,6 +883,18 @@ func TestCheckSnapshot_DeleteTrigger(t *testing.T) {
 	_, err := svc.DeleteTrigger(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteUsageProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1646,6 +1670,18 @@ func TestCheckSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUsageProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetUserDefinedFunction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserDefinedFunction(context.Background(), nil, func(o *Options) {
@@ -1951,6 +1987,18 @@ func TestCheckSnapshot_ListTriggers(t *testing.T) {
 	_, err := svc.ListTriggers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTriggers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListUsageProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUsageProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUsageProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2594,6 +2642,18 @@ func TestCheckSnapshot_UpdateTrigger(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateUsageProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateUserDefinedFunction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateUserDefinedFunction(context.Background(), nil, func(o *Options) {
@@ -3121,6 +3181,18 @@ func TestUpdateSnapshot_CreateTrigger(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateUsageProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateUserDefinedFunction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateUserDefinedFunction(context.Background(), nil, func(o *Options) {
@@ -3426,6 +3498,18 @@ func TestUpdateSnapshot_DeleteTrigger(t *testing.T) {
 	_, err := svc.DeleteTrigger(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteUsageProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4201,6 +4285,18 @@ func TestUpdateSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUsageProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetUserDefinedFunction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserDefinedFunction(context.Background(), nil, func(o *Options) {
@@ -4506,6 +4602,18 @@ func TestUpdateSnapshot_ListTriggers(t *testing.T) {
 	_, err := svc.ListTriggers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTriggers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListUsageProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUsageProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUsageProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5142,6 +5250,18 @@ func TestUpdateSnapshot_UpdateTrigger(t *testing.T) {
 	_, err := svc.UpdateTrigger(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateTrigger")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateUsageProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUsageProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateUsageProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

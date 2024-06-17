@@ -1,0 +1,8 @@
+{
+    "id": "999b967b-cce2-443f-a405-e4551e56aadc",
+    "type": "documentation",
+    "description": "Doc-only update that adds name constraints as an allowed extension for ImportCertificateAuthorityCertificate.",
+    "modules": [
+        "service/acmpca"
+    ]
+}

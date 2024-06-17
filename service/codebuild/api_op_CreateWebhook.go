@@ -72,6 +72,12 @@ type CreateWebhookInput struct {
 	// manualCreation is only available for GitHub webhooks.
 	ManualCreation *bool
 
+	// The scope configuration for global or organization webhooks.
+	//
+	// Global or organization webhooks are only available for GitHub and Github
+	// Enterprise webhooks.
+	ScopeConfiguration *types.ScopeConfiguration
+
 	noSmithyDocumentSerde
 }
 

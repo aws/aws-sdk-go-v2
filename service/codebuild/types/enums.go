@@ -1000,3 +1000,22 @@ func (WebhookFilterType) Values() []WebhookFilterType {
 		"RELEASE_NAME",
 	}
 }
+
+type WebhookScopeType string
+
+// Enum values for WebhookScopeType
+const (
+	WebhookScopeTypeGithubOrganization WebhookScopeType = "GITHUB_ORGANIZATION"
+	WebhookScopeTypeGithubGlobal       WebhookScopeType = "GITHUB_GLOBAL"
+)
+
+// Values returns all known values for WebhookScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookScopeType) Values() []WebhookScopeType {
+	return []WebhookScopeType{
+		"GITHUB_ORGANIZATION",
+		"GITHUB_GLOBAL",
+	}
+}

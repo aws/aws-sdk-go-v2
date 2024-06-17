@@ -2304,6 +2304,28 @@ type ScalingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configuration information about the scope for a webhook.
+type ScopeConfiguration struct {
+
+	// The name of either the enterprise or organization that will send webhook events
+	// to CodeBuild, depending on if the webhook is a global or organization webhook
+	// respectively.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of scope for a GitHub webhook.
+	//
+	// This member is required.
+	Scope WebhookScopeType
+
+	// The domain of the GitHub Enterprise organization. Note that this parameter is
+	// only required if your project's source type is GITHUB_ENTERPRISE
+	Domain *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the authorization settings for CodeBuild to access the source
 // code to be built.
 //
@@ -2510,6 +2532,12 @@ type Webhook struct {
 	// The CodeBuild endpoint where webhook events are sent.
 	PayloadUrl *string
 
+	// The scope configuration for global or organization webhooks.
+	//
+	// Global or organization webhooks are only available for GitHub and Github
+	// Enterprise webhooks.
+	ScopeConfiguration *ScopeConfiguration
+
 	// The secret token of the associated repository.
 	//
 	// A Bitbucket webhook does not support secret .
@@ -2606,6 +2634,13 @@ type WebhookFilter struct {
 	//   expression pattern .
 	//
 	// Works with RELEASED and PRERELEASED events only.
+	//
+	//   - REPOSITORY_NAME
+	//
+	//   - A webhook triggers a build when the repository name matches the regular
+	//   expression pattern.
+	//
+	// Works with GitHub global or organization webhooks only.
 	//
 	//   - WORKFLOW_NAME
 	//

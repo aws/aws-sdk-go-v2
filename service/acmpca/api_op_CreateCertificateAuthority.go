@@ -33,7 +33,7 @@ import (
 // protected with encryption. For more information, see [Encrypting Your CRLs].
 //
 // [Access policies for CRLs in Amazon S3]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies
-// [Encrypting Your CRLs]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
+// [Encrypting Your CRLs]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption
 func (c *Client) CreateCertificateAuthority(ctx context.Context, params *CreateCertificateAuthorityInput, optFns ...func(*Options)) (*CreateCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &CreateCertificateAuthorityInput{}

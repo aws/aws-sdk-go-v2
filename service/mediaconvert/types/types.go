@@ -1501,6 +1501,18 @@ type CmafGroupSettings struct {
 	// generation.
 	CodecSpecification CmafCodecSpecification
 
+	// Specify whether MediaConvert generates I-frame only video segments for DASH
+	// trick play, also known as trick mode. When specified, the I-frame only video
+	// segments are included within an additional AdaptationSet in your DASH output
+	// manifest. To generate I-frame only video segments: Enter a name as a text
+	// string, up to 256 character long. This name is appended to the end of this
+	// output group's base filename, that you specify as part of your destination URI,
+	// and used for the I-frame only video segment files. You may also include format
+	// identifiers. For more information, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs
+	// To not generate I-frame only video segments: Leave blank.
+	DashIFrameTrickPlayNameModifier *string
+
 	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest.
 	// To write a SegmentTimeline in each video Representation: Keep the default value,
 	// Basic. To write a common SegmentTimeline in the video AdaptationSet: Choose
@@ -2063,6 +2075,18 @@ type DashIsoGroupSettings struct {
 	// level BaseURL element. Can be used if streams are delivered from a different URL
 	// than the manifest file.
 	BaseUrl *string
+
+	// Specify whether MediaConvert generates I-frame only video segments for DASH
+	// trick play, also known as trick mode. When specified, the I-frame only video
+	// segments are included within an additional AdaptationSet in your DASH output
+	// manifest. To generate I-frame only video segments: Enter a name as a text
+	// string, up to 256 character long. This name is appended to the end of this
+	// output group's base filename, that you specify as part of your destination URI,
+	// and used for the I-frame only video segment files. You may also include format
+	// identifiers. For more information, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs
+	// To not generate I-frame only video segments: Leave blank.
+	DashIFrameTrickPlayNameModifier *string
 
 	// Specify how MediaConvert writes SegmentTimeline in your output DASH manifest.
 	// To write a SegmentTimeline in each video Representation: Keep the default value,
@@ -4845,10 +4869,30 @@ type InputTemplate struct {
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
 type InputVideoGenerator struct {
 
-	// Specify an integer value for Black video duration from 50 to 86400000 to
-	// generate a black video input for that many milliseconds. Required when you
-	// include Video generator.
+	// Specify the number of audio channels to include in your video generator input.
+	// MediaConvert creates these audio channels as silent audio within a single audio
+	// track. Enter an integer from 1 to 32.
+	Channels *int32
+
+	// Specify the duration, in milliseconds, for your video generator input. Enter an
+	// integer from 50 to 86400000.
 	Duration *int32
+
+	// Specify the denominator of the fraction that represents the frame rate for your
+	// video generator input. When you do, you must also specify a value for Frame rate
+	// numerator. MediaConvert uses a default frame rate of 29.97 when you leave Frame
+	// rate numerator and Frame rate denominator blank.
+	FramerateDenominator *int32
+
+	// Specify the numerator of the fraction that represents the frame rate for your
+	// video generator input. When you do, you must also specify a value for Frame rate
+	// denominator. MediaConvert uses a default frame rate of 29.97 when you leave
+	// Frame rate numerator and Frame rate denominator blank.
+	FramerateNumerator *int32
+
+	// Specify the audio sample rate, in Hz, for the silent audio in your video
+	// generator input. Enter an integer from 32000 to 48000.
+	SampleRate *int32
 
 	noSmithyDocumentSerde
 }

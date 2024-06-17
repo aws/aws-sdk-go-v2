@@ -1,0 +1,8 @@
+{
+    "id": "74c3cbdb-7075-461a-8b06-0589d0b865bf",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

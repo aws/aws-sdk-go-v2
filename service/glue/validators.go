@@ -850,6 +850,26 @@ func (m *validateOpCreateTrigger) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateUsageProfile struct {
+}
+
+func (*validateOpCreateUsageProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUsageProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUsageProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUsageProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUserDefinedFunction struct {
 }
 
@@ -1345,6 +1365,26 @@ func (m *validateOpDeleteTrigger) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTriggerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteUsageProfile struct {
+}
+
+func (*validateOpDeleteUsageProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUsageProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUsageProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUsageProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2325,6 +2365,26 @@ func (m *validateOpGetUnfilteredTableMetadata) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetUnfilteredTableMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetUsageProfile struct {
+}
+
+func (*validateOpGetUsageProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUsageProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUsageProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUsageProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3590,6 +3650,26 @@ func (m *validateOpUpdateTrigger) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateUsageProfile struct {
+}
+
+func (*validateOpUpdateUsageProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateUsageProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateUsageProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateUsageProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserDefinedFunction struct {
 }
 
@@ -3798,6 +3878,10 @@ func addOpCreateTriggerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrigger{}, middleware.After)
 }
 
+func addOpCreateUsageProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUsageProfile{}, middleware.After)
+}
+
 func addOpCreateUserDefinedFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUserDefinedFunction{}, middleware.After)
 }
@@ -3896,6 +3980,10 @@ func addOpDeleteTableVersionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteTriggerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrigger{}, middleware.After)
+}
+
+func addOpDeleteUsageProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUsageProfile{}, middleware.After)
 }
 
 func addOpDeleteUserDefinedFunctionValidationMiddleware(stack *middleware.Stack) error {
@@ -4092,6 +4180,10 @@ func addOpGetUnfilteredPartitionsMetadataValidationMiddleware(stack *middleware.
 
 func addOpGetUnfilteredTableMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUnfilteredTableMetadata{}, middleware.After)
+}
+
+func addOpGetUsageProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUsageProfile{}, middleware.After)
 }
 
 func addOpGetUserDefinedFunctionValidationMiddleware(stack *middleware.Stack) error {
@@ -4344,6 +4436,10 @@ func addOpUpdateTableOptimizerValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateTriggerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTrigger{}, middleware.After)
+}
+
+func addOpUpdateUsageProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateUsageProfile{}, middleware.After)
 }
 
 func addOpUpdateUserDefinedFunctionValidationMiddleware(stack *middleware.Stack) error {
@@ -8844,6 +8940,24 @@ func validateOpCreateTriggerInput(v *CreateTriggerInput) error {
 	}
 }
 
+func validateOpCreateUsageProfileInput(v *CreateUsageProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUsageProfileInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateUserDefinedFunctionInput(v *CreateUserDefinedFunctionInput) error {
 	if v == nil {
 		return nil
@@ -9260,6 +9374,21 @@ func validateOpDeleteTriggerInput(v *DeleteTriggerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTriggerInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteUsageProfileInput(v *DeleteUsageProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUsageProfileInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -10147,6 +10276,21 @@ func validateOpGetUnfilteredTableMetadataInput(v *GetUnfilteredTableMetadataInpu
 	}
 	if v.SupportedPermissionTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUsageProfileInput(v *GetUsageProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUsageProfileInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11310,6 +11454,24 @@ func validateOpUpdateTriggerInput(v *UpdateTriggerInput) error {
 		if err := validateTriggerUpdate(v.TriggerUpdate); err != nil {
 			invalidParams.AddNested("TriggerUpdate", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateUsageProfileInput(v *UpdateUsageProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateUsageProfileInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

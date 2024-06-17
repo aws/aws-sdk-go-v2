@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the metadata for a given workflow run.
+// Retrieves the metadata for a given workflow run. Job run history is accessible
+// for 90 days for your workflow and job run.
 func (c *Client) GetWorkflowRun(ctx context.Context, params *GetWorkflowRunInput, optFns ...func(*Options)) (*GetWorkflowRunOutput, error) {
 	if params == nil {
 		params = &GetWorkflowRunInput{}

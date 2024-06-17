@@ -1207,6 +1207,24 @@ func validateS3LogsConfig(v *types.S3LogsConfig) error {
 	}
 }
 
+func validateScopeConfiguration(v *types.ScopeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSourceAuth(v *types.SourceAuth) error {
 	if v == nil {
 		return nil
@@ -1465,6 +1483,11 @@ func validateOpCreateWebhookInput(v *CreateWebhookInput) error {
 	if v.FilterGroups != nil {
 		if err := validateFilterGroups(v.FilterGroups); err != nil {
 			invalidParams.AddNested("FilterGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScopeConfiguration != nil {
+		if err := validateScopeConfiguration(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

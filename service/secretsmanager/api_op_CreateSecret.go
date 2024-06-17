@@ -48,8 +48,9 @@ import (
 // SecretString because it might be logged. For more information, see [Logging Secrets Manager events with CloudTrail].
 //
 // Required permissions: secretsmanager:CreateSecret . If you include tags in the
-// secret, you also need secretsmanager:TagResource . For more information, see [IAM policy actions for Secrets Manager]
-// and [Authentication and access control in Secrets Manager].
+// secret, you also need secretsmanager:TagResource . To add replica Regions, you
+// must also have secretsmanager:ReplicateSecretToRegions . For more information,
+// see [IAM policy actions for Secrets Manager]and [Authentication and access control in Secrets Manager].
 //
 // To encrypt the secret with a KMS key other than aws/secretsmanager , you need
 // kms:GenerateDataKey and kms:Decrypt permission to the key.
