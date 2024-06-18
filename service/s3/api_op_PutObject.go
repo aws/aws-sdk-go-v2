@@ -716,6 +716,9 @@ func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addIsExpressUserAgent(stack); err != nil {
 		return err
 	}
+	if err = addValidatePutObjectContentLength(stack); err != nil {
+		return err
+	}
 	if err = addOpPutObjectValidationMiddleware(stack); err != nil {
 		return err
 	}

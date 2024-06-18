@@ -1,0 +1,8 @@
+{
+    "id": "d32ee107-7541-48db-a31c-d1944f3ffcbf",
+    "type": "bugfix",
+    "description": "Add client-side validation to ensure PutObject requests have a derivable content length.",
+    "modules": [
+        "service/s3"
+    ]
+}
