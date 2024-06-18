@@ -4135,7 +4135,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details for the specified configuration recorders.\n\t\t\tIf the configuration recorder is not specified, this action returns\n\t\t\tthe details for all configuration recorders associated with the\n\t\t\taccount.</p>\n         <note>\n            <p>You can specify only one configuration recorder for each Amazon Web Services Region for each account.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns the details for the specified configuration recorders.\n\t\t\tIf the configuration recorder is not specified, this action returns\n\t\t\tthe details for all configuration recorders associated with the\n\t\t\taccount.</p>\n         <note>\n            <p>You can specify only one configuration recorder for each Amazon Web Services Region for each account.</p>\n         </note>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeConfigurationRecordersSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.configservice#DescribeConfigurationRecordersRequest": {

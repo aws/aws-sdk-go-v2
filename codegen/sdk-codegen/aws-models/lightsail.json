@@ -8637,7 +8637,20 @@
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetActiveNames",
                     "code": 200
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetActiveNamesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.lightsail#GetActiveNamesRequest": {

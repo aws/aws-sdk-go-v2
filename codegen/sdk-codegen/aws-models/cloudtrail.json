@@ -3133,7 +3133,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves settings for one or more trails associated with the current Region for your\n         account.</p>",
-                "smithy.api#idempotent": {}
+                "smithy.api#idempotent": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeTrailsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudtrail#DescribeTrailsRequest": {

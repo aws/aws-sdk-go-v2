@@ -6490,6 +6490,31 @@
                 "smithy.api#pattern": "^[a-z]{3}\\d-az\\d$"
             }
         },
+        "com.amazonaws.sagemaker#ClusterEbsVolumeConfig": {
+            "type": "structure",
+            "members": {
+                "VolumeSizeInGB": {
+                    "target": "com.amazonaws.sagemaker#ClusterEbsVolumeSizeInGB",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The size in gigabytes (GB) of the additional EBS volume to be attached to the instances\n         in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each\n         instance within the SageMaker HyperPod cluster instance group and mounted to\n            <code>/opt/sagemaker</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the configuration for attaching an additional Amazon Elastic Block Store (EBS)\n         volume to each instance of the SageMaker HyperPod cluster instance group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterEbsVolumeSizeInGB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 16384
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ClusterInstanceCount": {
             "type": "integer",
             "traits": {
@@ -6504,13 +6529,13 @@
                 "CurrentCount": {
                     "target": "com.amazonaws.sagemaker#ClusterNonNegativeInstanceCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instances that are currently in the instance group of a\n         SageMaker HyperPod cluster.</p>"
+                        "smithy.api#documentation": "<p>The number of instances that are currently in the instance group of a SageMaker HyperPod\n         cluster.</p>"
                     }
                 },
                 "TargetCount": {
                     "target": "com.amazonaws.sagemaker#ClusterInstanceCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.</p>"
+                        "smithy.api#documentation": "<p>The number of instances you specified to add to the instance group of a SageMaker HyperPod\n         cluster.</p>"
                     }
                 },
                 "InstanceGroupName": {
@@ -6540,7 +6565,13 @@
                 "ThreadsPerCore": {
                     "target": "com.amazonaws.sagemaker#ClusterThreadsPerCore",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number you specified to <code>TreadsPerCore</code> in <code>CreateCluster</code> for\n         enabling or disabling multithreading. For instance types that support multithreading, you\n         can specify 1 for disabling multithreading and 2 for enabling multithreading. For more\n         information, see the reference table of <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html\">CPU cores and threads per CPU core per instance type</a> in the <i>Amazon Elastic Compute Cloud\n            User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The number you specified to <code>TreadsPerCore</code> in <code>CreateCluster</code> for\n         enabling or disabling multithreading. For instance types that support multithreading, you\n         can specify 1 for disabling multithreading and 2 for enabling multithreading. For more\n         information, see the reference table of <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html\">CPU cores and\n            threads per CPU core per instance type</a> in the <i>Amazon Elastic Compute Cloud User\n            Guide</i>.</p>"
+                    }
+                },
+                "InstanceStorageConfigs": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional storage configurations for the instances in the SageMaker HyperPod cluster instance\n         group.</p>"
                     }
                 }
             },
@@ -6571,7 +6602,7 @@
                     "target": "com.amazonaws.sagemaker#ClusterInstanceCount",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Specifies the number of instances to add to the instance group of a SageMaker HyperPod cluster.</p>",
+                        "smithy.api#documentation": "<p>Specifies the number of instances to add to the instance group of a SageMaker HyperPod\n         cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6610,7 +6641,13 @@
                 "ThreadsPerCore": {
                     "target": "com.amazonaws.sagemaker#ClusterThreadsPerCore",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the value for <b>Threads per core</b>. For instance types that\n         support multithreading, you can specify <code>1</code> for disabling multithreading and\n            <code>2</code> for enabling multithreading. For instance types that doesn't support\n         multithreading, specify <code>1</code>. For more information, see the reference table of\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html\">CPU cores and threads per CPU core per instance type</a> in the <i>Amazon Elastic Compute Cloud\n            User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the value for <b>Threads per core</b>. For instance\n         types that support multithreading, you can specify <code>1</code> for disabling\n         multithreading and <code>2</code> for enabling multithreading. For instance types that\n         doesn't support multithreading, specify <code>1</code>. For more information, see the\n         reference table of <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html\">CPU cores and\n            threads per CPU core per instance type</a> in the <i>Amazon Elastic Compute Cloud User\n            Guide</i>.</p>"
+                    }
+                },
+                "InstanceStorageConfigs": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the additional storage configurations for the instances in the SageMaker HyperPod cluster\n         instance group.</p>"
                     }
                 }
             },
@@ -6705,6 +6742,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details of an instance in a SageMaker HyperPod cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterInstanceStorageConfig": {
+            "type": "union",
+            "members": {
+                "EbsVolumeConfig": {
+                    "target": "com.amazonaws.sagemaker#ClusterEbsVolumeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the configuration for attaching additional Amazon Elastic Block Store (EBS)\n         volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is\n         attached to each instance within the SageMaker HyperPod cluster instance group and mounted to\n            <code>/opt/sagemaker</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the configuration for attaching additional storage to the instances in the\n         SageMaker HyperPod cluster instance group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#ClusterInstanceType": {
@@ -7039,6 +7102,12 @@
                         "smithy.api#documentation": "<p>The number of threads per CPU core you specified under\n         <code>CreateCluster</code>.</p>"
                     }
                 },
+                "InstanceStorageConfigs": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations of additional storage specified to the instance group where the\n         instance (node) is launched.</p>"
+                    }
+                },
                 "PrivatePrimaryIp": {
                     "target": "com.amazonaws.sagemaker#ClusterPrivatePrimaryIp",
                     "traits": {
@@ -7069,7 +7138,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*$"
+                "smithy.api#pattern": "^i-[a-f0-9]{8}(?:[a-f0-9]{9})?$"
             }
         },
         "com.amazonaws.sagemaker#ClusterNodeSummaries": {
@@ -8993,7 +9062,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a SageMaker HyperPod cluster. SageMaker HyperPod is a capability of SageMaker for creating and managing\n         persistent clusters for developing large machine learning models, such as large language\n         models (LLMs) and diffusion models. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html\">Amazon SageMaker HyperPod</a> in the <i>Amazon SageMaker Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a SageMaker HyperPod cluster. SageMaker HyperPod is a capability of SageMaker for creating and managing\n         persistent clusters for developing large machine learning models, such as large language\n         models (LLMs) and diffusion models. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html\">Amazon SageMaker HyperPod</a> in the\n            <i>Amazon SageMaker Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateClusterRequest": {
@@ -9021,7 +9090,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web Services resource. You can\n         add tags to your cluster in the same way you add them in other Amazon Web Services services\n         that support tagging. To learn more about tagging Amazon Web Services resources in general,\n         see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging Amazon Web Services Resources User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web Services resource. You can\n         add tags to your cluster in the same way you add them in other Amazon Web Services services\n         that support tagging. To learn more about tagging Amazon Web Services resources in general,\n         see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging\n               Amazon Web Services Resources User Guide</a>.</p>"
                     }
                 }
             },
@@ -11094,6 +11163,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#CreateMlflowTrackingServer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreateMlflowTrackingServerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreateMlflowTrackingServerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an MLflow Tracking Server using a general purpose Amazon S3 bucket as the artifact\n      store. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server.html\">Create an MLflow Tracking\n        Server</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateMlflowTrackingServerRequest": {
+            "type": "structure",
+            "members": {
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique string identifying the tracking server name. This string is part of the tracking server\n      ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ArtifactStoreUri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The S3 URI for a general purpose bucket to use as the MLflow Tracking Server artifact\n      store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrackingServerSize": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the tracking server you want to create. You can choose between\n        <code>\"Small\"</code>, <code>\"Medium\"</code>, and <code>\"Large\"</code>. The default MLflow\n      Tracking Server configuration size is <code>\"Small\"</code>. You can choose a size depending on\n      the projected use of the tracking server such as the volume of data logged, number of users,\n      and frequency of use. </p>\n         <p>We recommend using a small tracking server for teams of up to 25 users, a medium tracking\n      server for teams of up to 50 users, and a large tracking server for teams of up to 100 users. </p>"
+                    }
+                },
+                "MlflowVersion": {
+                    "target": "com.amazonaws.sagemaker#MlflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of MLflow that the tracking server uses. To see which MLflow versions are\n      available to use, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html#mlflow-create-tracking-server-how-it-works\">How it works</a>.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow Tracking Server uses to\n      access the artifact store in Amazon S3. The role should have <code>AmazonS3FullAccess</code>\n      permissions. For more information on IAM permissions for tracking server creation, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server-iam.html\">Set up IAM permissions for MLflow</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutomaticModelRegistration": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. To enable automatic model registration, set this value to <code>True</code>. \n    To disable automatic model registration, set this value to <code>False</code>. If not specified, <code>AutomaticModelRegistration</code> defaults to <code>False</code>.</p>"
+                    }
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.sagemaker#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: TUE:03:30.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags consisting of key-value pairs used to manage metadata for the tracking server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreateMlflowTrackingServerResponse": {
+            "type": "structure",
+            "members": {
+                "TrackingServerArn": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the tracking server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#CreateModel": {
             "type": "operation",
             "input": {
@@ -12354,6 +12516,65 @@
                     "target": "com.amazonaws.sagemaker#PresignedDomainUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The presigned URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a presigned URL that you can use to connect to the MLflow UI attached to your\n      tracking server. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-launch-ui.html\">Launch the MLflow UI using a presigned URL</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrlRequest": {
+            "type": "structure",
+            "members": {
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the tracking server to connect to your MLflow UI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresInSeconds": {
+                    "target": "com.amazonaws.sagemaker#ExpiresInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds that your presigned URL is valid. The presigned URL can be used\n      only once.</p>"
+                    }
+                },
+                "SessionExpirationDurationInSeconds": {
+                    "target": "com.amazonaws.sagemaker#SessionExpirationDurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in seconds that your MLflow UI session is valid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrlResponse": {
+            "type": "structure",
+            "members": {
+                "AuthorizedUrl": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A presigned URL with an authorization token.</p>"
                     }
                 }
             },
@@ -15528,6 +15749,53 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DeleteMlflowTrackingServer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteMlflowTrackingServerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DeleteMlflowTrackingServerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an MLflow Tracking Server. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-cleanup.html.html\">Clean up MLflow resources</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteMlflowTrackingServerRequest": {
+            "type": "structure",
+            "members": {
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the the tracking server to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteMlflowTrackingServerResponse": {
+            "type": "structure",
+            "members": {
+                "TrackingServerArn": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>TrackingServerArn</code> object, the ARN of the tracking server that is deleted if\n      successfully found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DeleteModel": {
             "type": "operation",
             "input": {
@@ -16236,7 +16504,7 @@
                 "target": "com.amazonaws.sagemaker#DeleteWorkforceResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to delete a workforce.</p>\n         <p>If you want to create a new workforce in an Amazon Web Services Region where\n      a workforce already exists, use this operation to delete the \n      existing workforce and then use <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateWorkforce.html\">CreateWorkforce</a>\n      to create a new workforce.</p>\n         <important>\n            <p>If a private workforce contains one or more work teams, you must use \n                the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html\">DeleteWorkteam</a>\n            operation to delete all work teams before you delete the workforce.\n            If you try to delete a workforce that contains one or more work teams,\n            you will recieve a <code>ResourceInUse</code> error.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Use this operation to delete a workforce.</p>\n         <p>If you want to create a new workforce in an Amazon Web Services Region where\n      a workforce already exists, use this operation to delete the \n      existing workforce and then use <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateWorkforce.html\">CreateWorkforce</a>\n      to create a new workforce.</p>\n         <important>\n            <p>If a private workforce contains one or more work teams, you must use \n                the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html\">DeleteWorkteam</a>\n            operation to delete all work teams before you delete the workforce.\n            If you try to delete a workforce that contains one or more work teams,\n            you will receive a <code>ResourceInUse</code> error.</p>\n         </important>"
             }
         },
         "com.amazonaws.sagemaker#DeleteWorkforceRequest": {
@@ -21109,6 +21377,131 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DescribeMlflowTrackingServer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeMlflowTrackingServerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeMlflowTrackingServerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about an MLflow Tracking Server.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeMlflowTrackingServerRequest": {
+            "type": "structure",
+            "members": {
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the MLflow Tracking Server to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeMlflowTrackingServerResponse": {
+            "type": "structure",
+            "members": {
+                "TrackingServerArn": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the described tracking server.</p>"
+                    }
+                },
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the described tracking server.</p>"
+                    }
+                },
+                "ArtifactStoreUri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI of the general purpose bucket used as the MLflow Tracking Server\n      artifact store.</p>"
+                    }
+                },
+                "TrackingServerSize": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the described tracking server.</p>"
+                    }
+                },
+                "MlflowVersion": {
+                    "target": "com.amazonaws.sagemaker#MlflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MLflow version used for the described tracking server.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an IAM role in your account that the described MLflow Tracking Server\n      uses to access the artifact store in Amazon S3.</p>"
+                    }
+                },
+                "TrackingServerStatus": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current creation status of the described MLflow Tracking Server.</p>"
+                    }
+                },
+                "IsActive": {
+                    "target": "com.amazonaws.sagemaker#IsTrackingServerActive",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the described MLflow Tracking Server is currently active.</p>"
+                    }
+                },
+                "TrackingServerUrl": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to connect to the MLflow user interface for the described tracking server.</p>"
+                    }
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.sagemaker#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time of the week when weekly maintenance occurs on the described tracking server.</p>"
+                    }
+                },
+                "AutomaticModelRegistration": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether automatic registration of new MLflow models to the SageMaker Model Registry is enabled.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the described MLflow Tracking Server was created.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the described MLflow Tracking Server was last modified.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DescribeModel": {
             "type": "operation",
             "input": {
@@ -24367,7 +24760,7 @@
                 "target": "com.amazonaws.sagemaker#DescribeWorkteamResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specific work team. You can see information such as the\n            create date, the last updated date, membership information, and the work team's Amazon\n            Resource Name (ARN).</p>"
+                "smithy.api#documentation": "<p>Gets information about a specific work team. You can see information such as the\n            creation date, the last updated date, membership information, and the work team's Amazon\n            Resource Name (ARN).</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeWorkteamRequest": {
@@ -33916,6 +34309,23 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:rolealias/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
+        "com.amazonaws.sagemaker#IsTrackingServerActive": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ItemIdentifierAttributeName": {
             "type": "string",
             "traits": {
@@ -35856,14 +36266,14 @@
                     "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster in which you want to retrieve the list of nodes.</p>",
+                        "smithy.api#documentation": "<p>The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster in which you want to retrieve the\n         list of nodes.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CreationTimeAfter": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that returns nodes in a SageMaker HyperPod cluster created after the specified time. Timestamps are\n         formatted according to the ISO 8601 standard. </p>\n         <p>Acceptable formats include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>YYYY-MM-DDThh:mm:ss.sssTZD</code> (UTC), for example,\n                  <code>2014-10-01T20:30:00.000Z</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>YYYY-MM-DDThh:mm:ss.sssTZD</code> (with offset), for example,\n                  <code>2014-10-01T12:30:00.000-08:00</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>YYYY-MM-DD</code>, for example, <code>2014-10-01</code>\n               </p>\n            </li>\n            <li>\n               <p>Unix time in seconds, for example, <code>1412195400</code>. This is also referred to as Unix\n               Epoch time and represents the number of seconds since midnight, January 1, 1970\n               UTC.</p>\n            </li>\n         </ul>\n         <p>For more information about the timestamp format, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a> in the <i>Amazon Web Services Command Line Interface User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A filter that returns nodes in a SageMaker HyperPod cluster created after the specified time.\n         Timestamps are formatted according to the ISO 8601 standard. </p>\n         <p>Acceptable formats include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>YYYY-MM-DDThh:mm:ss.sssTZD</code> (UTC), for example,\n                  <code>2014-10-01T20:30:00.000Z</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>YYYY-MM-DDThh:mm:ss.sssTZD</code> (with offset), for example,\n                  <code>2014-10-01T12:30:00.000-08:00</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>YYYY-MM-DD</code>, for example, <code>2014-10-01</code>\n               </p>\n            </li>\n            <li>\n               <p>Unix time in seconds, for example, <code>1412195400</code>. This is also referred\n               to as Unix Epoch time and represents the number of seconds since midnight, January 1,\n               1970 UTC.</p>\n            </li>\n         </ul>\n         <p>For more information about the timestamp format, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a> in the <i>Amazon Web Services Command Line Interface User\n            Guide</i>.</p>"
                     }
                 },
                 "CreationTimeBefore": {
@@ -35955,7 +36365,7 @@
                 "CreationTimeBefore": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set an end time for the time range during which you want to list SageMaker HyperPod clusters. A\n         filter that returns nodes in a SageMaker HyperPod cluster created before the specified time. The acceptable\n         formats are the same as the timestamp formats for <code>CreationTimeAfter</code>. For more\n         information about the timestamp format, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a> in the <i>Amazon Web Services Command Line Interface User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Set an end time for the time range during which you want to list SageMaker HyperPod clusters. A\n         filter that returns nodes in a SageMaker HyperPod cluster created before the specified time. The\n         acceptable formats are the same as the timestamp formats for\n         <code>CreationTimeAfter</code>. For more information about the timestamp format, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a> in the <i>Amazon Web Services Command Line Interface User\n            Guide</i>.</p>"
                     }
                 },
                 "MaxResults": {
@@ -38943,6 +39353,100 @@
                 "smithy.api#range": {
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ListMlflowTrackingServers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListMlflowTrackingServersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListMlflowTrackingServersResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all MLflow Tracking Servers.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TrackingServerSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListMlflowTrackingServersRequest": {
+            "type": "structure",
+            "members": {
+                "CreatedAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>CreatedAfter</code> filter to only list tracking servers created after a\n      specific date and time. Listed tracking servers are shown with a date and time such as\n        <code>\"2024-03-16T01:46:56+00:00\"</code>. The <code>CreatedAfter</code> parameter takes in a\n      Unix timestamp. To convert a date and time into a Unix timestamp, see <a href=\"https://www.epochconverter.com/\">EpochConverter</a>.</p>"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>CreatedBefore</code> filter to only list tracking servers created before a\n      specific date and time. Listed tracking servers are shown with a date and time such as\n        <code>\"2024-03-16T01:46:56+00:00\"</code>. The <code>CreatedBefore</code> parameter takes in\n      a Unix timestamp. To convert a date and time into a Unix timestamp, see <a href=\"https://www.epochconverter.com/\">EpochConverter</a>.</p>"
+                    }
+                },
+                "TrackingServerStatus": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for tracking servers with a specified creation status.</p>"
+                    }
+                },
+                "MlflowVersion": {
+                    "target": "com.amazonaws.sagemaker#MlflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for tracking servers using the specified MLflow version.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.sagemaker#SortTrackingServerBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for trackings servers sorting by name, creation time, or creation status.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Change the order of the listed tracking servers. By default, tracking servers are listed in <code>Descending</code> order by creation time. \n      To change the list order, you can specify <code>SortOrder</code> to be <code>Ascending</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tracking servers to list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListMlflowTrackingServersResponse": {
+            "type": "structure",
+            "members": {
+                "TrackingServerSummaries": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tracking servers according to chosen filters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#ListModelBiasJobDefinitions": {
@@ -42915,6 +43419,16 @@
                     "max": 1
                 },
                 "smithy.api#pattern": "^1|2$"
+            }
+        },
+        "com.amazonaws.sagemaker#MlflowVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9]*.[0-9]*.[0-9]*$"
             }
         },
         "com.amazonaws.sagemaker#Model": {
@@ -55018,6 +55532,9 @@
                     "target": "com.amazonaws.sagemaker#CreateLabelingJob"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#CreateMlflowTrackingServer"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#CreateModel"
                 },
                 {
@@ -55055,6 +55572,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#CreatePresignedDomainUrl"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrl"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#CreatePresignedNotebookInstanceUrl"
@@ -55175,6 +55695,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteInferenceExperiment"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DeleteMlflowTrackingServer"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteModel"
@@ -55346,6 +55869,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeLineageGroup"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DescribeMlflowTrackingServer"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeModel"
@@ -55573,6 +56099,9 @@
                     "target": "com.amazonaws.sagemaker#ListLineageGroups"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListMlflowTrackingServers"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListModelBiasJobDefinitions"
                 },
                 {
@@ -55711,6 +56240,9 @@
                     "target": "com.amazonaws.sagemaker#StartInferenceExperiment"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#StartMlflowTrackingServer"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#StartMonitoringSchedule"
                 },
                 {
@@ -55742,6 +56274,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StopLabelingJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#StopMlflowTrackingServer"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#StopMonitoringSchedule"
@@ -55823,6 +56358,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateInferenceExperiment"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdateMlflowTrackingServer"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateModelCard"
@@ -58219,6 +58757,29 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#SortTrackingServerBy": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "CREATION_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationTime"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#SortTrialComponentsBy": {
             "type": "enum",
             "members": {
@@ -58322,7 +58883,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>). Used to create an allow\n            list of IP addresses for a private workforce. Workers will only be able to login to their worker portal from an \n            IP address within this range. By default, a workforce isn't restricted to specific IP addresses.</p>"
+                "smithy.api#documentation": "<p>A list of IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>). Used to create an allow\n            list of IP addresses for a private workforce. Workers will only be able to log in to their worker portal from an\n            IP address within this range. By default, a workforce isn't restricted to specific IP addresses.</p>"
             }
         },
         "com.amazonaws.sagemaker#SourceType": {
@@ -58838,6 +59399,56 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the started inference experiment to start.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#StartMlflowTrackingServer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#StartMlflowTrackingServerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#StartMlflowTrackingServerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Programmatically start an MLflow Tracking Server.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#StartMlflowTrackingServerRequest": {
+            "type": "structure",
+            "members": {
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the tracking server to start.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#StartMlflowTrackingServerResponse": {
+            "type": "structure",
+            "members": {
+                "TrackingServerArn": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the started tracking server.</p>"
                     }
                 }
             },
@@ -59429,6 +60040,56 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.sagemaker#StopMlflowTrackingServer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#StopMlflowTrackingServerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#StopMlflowTrackingServerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Programmatically stop an MLflow Tracking Server.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#StopMlflowTrackingServerRequest": {
+            "type": "structure",
+            "members": {
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the tracking server to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#StopMlflowTrackingServerResponse": {
+            "type": "structure",
+            "members": {
+                "TrackingServerArn": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the stopped tracking server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#StopMonitoringSchedule": {
             "type": "operation",
             "input": {
@@ -59979,7 +60640,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a work team of a vendor that does the a labelling job.</p>"
+                "smithy.api#documentation": "<p>Describes a work team of a vendor that does the labelling job.</p>"
             }
         },
         "com.amazonaws.sagemaker#SubscribedWorkteams": {
@@ -61087,6 +61748,227 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-tracking-server/"
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerSize": {
+            "type": "enum",
+            "members": {
+                "S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Small"
+                    }
+                },
+                "M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "L": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Large"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Created"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreateFailed"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updating"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updated"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateFailed"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeleteFailed"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                },
+                "STOP_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StopFailed"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Starting"
+                    }
+                },
+                "STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Started"
+                    }
+                },
+                "START_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StartFailed"
+                    }
+                },
+                "MAINTENANCE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceInProgress"
+                    }
+                },
+                "MAINTENANCE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceComplete"
+                    }
+                },
+                "MAINTENANCE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaintenanceFailed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerSummary": {
+            "type": "structure",
+            "members": {
+                "TrackingServerArn": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a listed tracking server.</p>"
+                    }
+                },
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a listed tracking server.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of a listed tracking server.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of a listed tracking server.</p>"
+                    }
+                },
+                "TrackingServerStatus": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation status of a listed tracking server.</p>"
+                    }
+                },
+                "IsActive": {
+                    "target": "com.amazonaws.sagemaker#IsTrackingServerActive",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The activity status of a listed tracking server.</p>"
+                    }
+                },
+                "MlflowVersion": {
+                    "target": "com.amazonaws.sagemaker#MlflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MLflow version used for a listed tracking server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the tracking server to list.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#TrackingServerSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TrackingServerUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
                 }
             }
         },
@@ -65787,6 +66669,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#UpdateMlflowTrackingServer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateMlflowTrackingServerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateMlflowTrackingServerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates properties of an existing MLflow Tracking Server.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateMlflowTrackingServerRequest": {
+            "type": "structure",
+            "members": {
+                "TrackingServerName": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the MLflow Tracking Server to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ArtifactStoreUri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new S3 URI for the general purpose bucket to use as the artifact store for the MLflow\n      Tracking Server.</p>"
+                    }
+                },
+                "TrackingServerSize": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new size for the MLflow Tracking Server.</p>"
+                    }
+                },
+                "AutomaticModelRegistration": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. \n      To enable automatic model registration, set this value to <code>True</code>. \n      To disable automatic model registration, set this value to <code>False</code>. \n      If not specified, <code>AutomaticModelRegistration</code> defaults to <code>False</code>\n         </p>"
+                    }
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.sagemaker#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new weekly maintenance window start day and time to update. The maintenance window day and time should be \n      in Coordinated Universal Time (UTC) 24-hour standard time. For example: TUE:03:30.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateMlflowTrackingServerResponse": {
+            "type": "structure",
+            "members": {
+                "TrackingServerArn": {
+                    "target": "com.amazonaws.sagemaker#TrackingServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the updated MLflow Tracking Server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#UpdateModelCard": {
             "type": "operation",
             "input": {
@@ -67709,6 +68668,16 @@
                 "smithy.api#documentation": "<p>Status and billing information about the warm pool.</p>"
             }
         },
+        "com.amazonaws.sagemaker#WeeklyMaintenanceWindowStart": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 9
+                },
+                "smithy.api#pattern": "^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):([0-5]\\d)$"
+            }
+        },
         "com.amazonaws.sagemaker#WorkerAccessConfiguration": {
             "type": "structure",
             "members": {
@@ -67922,7 +68891,7 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.sagemaker#WorkforceSecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.</p>"
+                        "smithy.api#documentation": "<p>The VPC security group IDs, in the form <code>sg-xxxxxxxx</code>. The security groups must be for the same VPC as specified in the subnet.</p>"
                     }
                 },
                 "Subnets": {

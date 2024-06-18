@@ -158,7 +158,20 @@
                     "method": "GET",
                     "uri": "/v1/voices",
                     "code": 200
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeVoicesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.polly#DescribeVoicesInput": {
