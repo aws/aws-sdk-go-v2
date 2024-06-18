@@ -7,21 +7,24 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// The model must request at least one tool (no text is generated).
+// The model must request at least one tool (no text is generated). For example,
+// {"any" : {}} .
 type AnyToolChoice struct {
 	noSmithyDocumentSerde
 }
 
-// The Model automatically decides if a tool should be called or to whether to
-// generate text instead.
+// The Model automatically decides if a tool should be called or whether to
+// generate text instead. For example, {"auto" : {}} .
 type AutoToolChoice struct {
 	noSmithyDocumentSerde
 }
 
-// A block of content for a message.
+// A block of content for a message that you pass to, or receive from, a model
+// with the Converse API (Converse and ConverseStream).
 //
 // The following types satisfy this interface:
 //
+//	ContentBlockMemberGuardContent
 //	ContentBlockMemberImage
 //	ContentBlockMemberText
 //	ContentBlockMemberToolResult
@@ -29,6 +32,20 @@ type AutoToolChoice struct {
 type ContentBlock interface {
 	isContentBlock()
 }
+
+// Contains the content to assess with the guardrail. If you don't specify
+// guardContent in a call to the Converse API, the guardrail (if passed in the
+// Converse API) assesses the entire message.
+//
+// For more information, see Use a guardrail with the Converse API in the Amazon
+// Bedrock User Guide.
+type ContentBlockMemberGuardContent struct {
+	Value GuardrailConverseContentBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberGuardContent) isContentBlock() {}
 
 // Image to include in the message.
 //
@@ -203,6 +220,10 @@ type ConverseStreamMetadataEvent struct {
 	// This member is required.
 	Usage *TokenUsage
 
+	// The trace object in the response from ConverseStream that contains information about the
+	// guardrail behavior.
+	Trace *ConverseStreamTrace
+
 	noSmithyDocumentSerde
 }
 
@@ -285,6 +306,307 @@ type ConverseStreamOutputMemberMetadata struct {
 
 func (*ConverseStreamOutputMemberMetadata) isConverseStreamOutput() {}
 
+// The trace object in a response from ConverseStream. Currently, you can only trace guardrails.
+type ConverseStreamTrace struct {
+
+	// The guardrail trace object.
+	Guardrail *GuardrailTraceAssessment
+
+	noSmithyDocumentSerde
+}
+
+// The trace object in a response from Converse. Currently, you can only trace guardrails.
+type ConverseTrace struct {
+
+	// The guardrail trace object.
+	Guardrail *GuardrailTraceAssessment
+
+	noSmithyDocumentSerde
+}
+
+// A behavior assessment of the guardrail policies used in a call to the Converse
+// API.
+type GuardrailAssessment struct {
+
+	// The content policy.
+	ContentPolicy *GuardrailContentPolicyAssessment
+
+	// The sensitive information policy.
+	SensitiveInformationPolicy *GuardrailSensitiveInformationPolicyAssessment
+
+	// The topic policy.
+	TopicPolicy *GuardrailTopicPolicyAssessment
+
+	// The word policy.
+	WordPolicy *GuardrailWordPolicyAssessment
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for a guardrail that you use with the Converse action.
+type GuardrailConfiguration struct {
+
+	// The identifier for the guardrail.
+	//
+	// This member is required.
+	GuardrailIdentifier *string
+
+	// The version of the guardrail.
+	//
+	// This member is required.
+	GuardrailVersion *string
+
+	// The trace behavior for the guardrail.
+	Trace GuardrailTrace
+
+	noSmithyDocumentSerde
+}
+
+// The content filter for a guardrail.
+type GuardrailContentFilter struct {
+
+	// The guardrail action.
+	//
+	// This member is required.
+	Action GuardrailContentPolicyAction
+
+	// The guardrail confidence.
+	//
+	// This member is required.
+	Confidence GuardrailContentFilterConfidence
+
+	// The guardrail type.
+	//
+	// This member is required.
+	Type GuardrailContentFilterType
+
+	noSmithyDocumentSerde
+}
+
+// An assessment of a content policy for a guardrail.
+type GuardrailContentPolicyAssessment struct {
+
+	// The content policy filters.
+	//
+	// This member is required.
+	Filters []GuardrailContentFilter
+
+	noSmithyDocumentSerde
+}
+
+// A content block for selective guarding with the Converse API (Converse and ConverseStream).
+//
+// The following types satisfy this interface:
+//
+//	GuardrailConverseContentBlockMemberText
+type GuardrailConverseContentBlock interface {
+	isGuardrailConverseContentBlock()
+}
+
+// The text to guard.
+type GuardrailConverseContentBlockMemberText struct {
+	Value GuardrailConverseTextBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailConverseContentBlockMemberText) isGuardrailConverseContentBlock() {}
+
+// A text block that contains text that you want to assess with a guardrail. For
+// more information, see GuardrailConverseContentBlock.
+type GuardrailConverseTextBlock struct {
+
+	// The text that you want to guard.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// A custom word configured in a guardrail.
+type GuardrailCustomWord struct {
+
+	// The action for the custom word.
+	//
+	// This member is required.
+	Action GuardrailWordPolicyAction
+
+	// The match for the custom word.
+	//
+	// This member is required.
+	Match *string
+
+	noSmithyDocumentSerde
+}
+
+// A managed word configured in a guardrail.
+type GuardrailManagedWord struct {
+
+	// The action for the managed word.
+	//
+	// This member is required.
+	Action GuardrailWordPolicyAction
+
+	// The match for the managed word.
+	//
+	// This member is required.
+	Match *string
+
+	// The type for the managed word.
+	//
+	// This member is required.
+	Type GuardrailManagedWordType
+
+	noSmithyDocumentSerde
+}
+
+// A Personally Identifiable Information (PII) entity configured in a guardrail.
+type GuardrailPiiEntityFilter struct {
+
+	// The PII entity filter action.
+	//
+	// This member is required.
+	Action GuardrailSensitiveInformationPolicyAction
+
+	// The PII entity filter match.
+	//
+	// This member is required.
+	Match *string
+
+	// The PII entity filter type.
+	//
+	// This member is required.
+	Type GuardrailPiiEntityType
+
+	noSmithyDocumentSerde
+}
+
+// A Regex filter configured in a guardrail.
+type GuardrailRegexFilter struct {
+
+	// The region filter action.
+	//
+	// This member is required.
+	Action GuardrailSensitiveInformationPolicyAction
+
+	// The regesx filter match.
+	Match *string
+
+	// The regex filter name.
+	Name *string
+
+	// The regex query.
+	Regex *string
+
+	noSmithyDocumentSerde
+}
+
+// The assessment for aPersonally Identifiable Information (PII) policy.
+type GuardrailSensitiveInformationPolicyAssessment struct {
+
+	// The PII entities in the assessment.
+	//
+	// This member is required.
+	PiiEntities []GuardrailPiiEntityFilter
+
+	// The regex queries in the assessment.
+	//
+	// This member is required.
+	Regexes []GuardrailRegexFilter
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for a guardrail that you use with the ConverseStream action.
+type GuardrailStreamConfiguration struct {
+
+	// The identifier for the guardrail.
+	//
+	// This member is required.
+	GuardrailIdentifier *string
+
+	// The version of the guardrail.
+	//
+	// This member is required.
+	GuardrailVersion *string
+
+	// The processing mode.
+	//
+	// The processing mode. For more information, see Configure streaming response
+	// behavior in the Amazon Bedrock User Guide.
+	StreamProcessingMode GuardrailStreamProcessingMode
+
+	// The trace behavior for the guardrail.
+	Trace GuardrailTrace
+
+	noSmithyDocumentSerde
+}
+
+// Information about a topic guardrail.
+type GuardrailTopic struct {
+
+	// The action the guardrail should take when it intervenes on a topic.
+	//
+	// This member is required.
+	Action GuardrailTopicPolicyAction
+
+	// The name for the guardrail.
+	//
+	// This member is required.
+	Name *string
+
+	// The type behavior that the guardrail should perform when the model detects the
+	// topic.
+	//
+	// This member is required.
+	Type GuardrailTopicType
+
+	noSmithyDocumentSerde
+}
+
+// A behavior assessment of a topic policy.
+type GuardrailTopicPolicyAssessment struct {
+
+	// The topics in the assessment.
+	//
+	// This member is required.
+	Topics []GuardrailTopic
+
+	noSmithyDocumentSerde
+}
+
+// A Top level guardrail trace object. For more information, see ConverseTrace.
+type GuardrailTraceAssessment struct {
+
+	// The input assessment.
+	InputAssessment map[string]GuardrailAssessment
+
+	// The output from the model.
+	ModelOutput []string
+
+	// the output assessments.
+	OutputAssessments map[string][]GuardrailAssessment
+
+	noSmithyDocumentSerde
+}
+
+// The word policy assessment.
+type GuardrailWordPolicyAssessment struct {
+
+	// Custom words in the assessment.
+	//
+	// This member is required.
+	CustomWords []GuardrailCustomWord
+
+	// Managed word lists in the assessment.
+	//
+	// This member is required.
+	ManagedWordLists []GuardrailManagedWord
+
+	noSmithyDocumentSerde
+}
+
 // Image content for a message.
 type ImageBlock struct {
 
@@ -335,9 +657,9 @@ type InferenceConfiguration struct {
 
 	// The maximum number of tokens to allow in the generated response. The default
 	// value is the maximum allowed value for the model that you are using. For more
-	// information, see [Inference parameters for foundatio{ "messages": [ { "role": "user", "content": [ { "text": "what's the weather in Queens, NY and Austin, TX?" } ] }, { "role": "assistant", "content": [ { "toolUse": { "toolUseId": "1", "name": "get_weather", "input": { "city": "Queens", "state": "NY" } } }, { "toolUse": { "toolUseId": "2", "name": "get_weather", "input": { "city": "Austin", "state": "TX" } } } ] }, { "role": "user", "content": [ { "toolResult": { "toolUseId": "2", "content": [ { "json": { "weather": "40" } } ] } }, { "text": "..." }, { "toolResult": { "toolUseId": "1", "content": [ { "text": "result text" } ] } } ] } ], "toolConfig": { "tools": [ { "name": "get_weather", "description": "Get weather", "inputSchema": { "type": "object", "properties": { "city": { "type": "string", "description": "City of location" }, "state": { "type": "string", "description": "State of location" } }, "required": ["city", "state"] } } ] } } n models].
+	// information, see [Inference parameters for foundation models].
 	//
-	// [Inference parameters for foundatio{ "messages": [ { "role": "user", "content": [ { "text": "what's the weather in Queens, NY and Austin, TX?" } ] }, { "role": "assistant", "content": [ { "toolUse": { "toolUseId": "1", "name": "get_weather", "input": { "city": "Queens", "state": "NY" } } }, { "toolUse": { "toolUseId": "2", "name": "get_weather", "input": { "city": "Austin", "state": "TX" } } } ] }, { "role": "user", "content": [ { "toolResult": { "toolUseId": "2", "content": [ { "json": { "weather": "40" } } ] } }, { "text": "..." }, { "toolResult": { "toolUseId": "1", "content": [ { "text": "result text" } ] } } ] } ], "toolConfig": { "tools": [ { "name": "get_weather", "description": "Get weather", "inputSchema": { "type": "object", "properties": { "city": { "type": "string", "description": "City of location" }, "state": { "type": "string", "description": "State of location" } }, "required": ["city", "state"] } } ] } } n models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 	MaxTokens *int32
 
 	// A list of stop sequences. A stop sequence is a sequence of characters that
@@ -369,10 +691,10 @@ type InferenceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A message in the [Message] field. Use to send a message in a call to [Converse].
+// A message input, or returned from, a call to [Converse] or [ConverseStream].
 //
-// [Message]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Message.html
 // [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type Message struct {
 
 	// The message content.
@@ -440,7 +762,8 @@ type ResponseStreamMemberChunk struct {
 
 func (*ResponseStreamMemberChunk) isResponseStream() {}
 
-// The model must request a specific tool.
+// The model must request a specific tool. For example, {"tool" : {"name" : "Your
+// tool name"}} .
 //
 // This field is only supported by Anthropic Claude 3 models.
 type SpecificToolChoice struct {
@@ -453,14 +776,28 @@ type SpecificToolChoice struct {
 	noSmithyDocumentSerde
 }
 
-// A system content block
+// A system content block.
 //
 // The following types satisfy this interface:
 //
+//	SystemContentBlockMemberGuardContent
 //	SystemContentBlockMemberText
 type SystemContentBlock interface {
 	isSystemContentBlock()
 }
+
+// A content block to assess with the guardrail. Use with the Converse API (Converse and ConverseStream
+// ).
+//
+// For more information, see Use a guardrail with the Converse API in the Amazon
+// Bedrock User Guide.
+type SystemContentBlockMemberGuardContent struct {
+	Value GuardrailConverseContentBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemContentBlockMemberGuardContent) isSystemContentBlock() {}
 
 // A system prompt for the model.
 type SystemContentBlockMemberText struct {
@@ -510,7 +847,9 @@ type ToolMemberToolSpec struct {
 
 func (*ToolMemberToolSpec) isTool() {}
 
-// Forces a model to use a tool.
+// Determines which tools the model should request in a call to Converse or
+// ConverseStream . ToolChoice is only supported by Anthropic Claude 3 models and
+// by Mistral AI Mistral Large.
 //
 // The following types satisfy this interface:
 //
@@ -530,8 +869,8 @@ type ToolChoiceMemberAny struct {
 
 func (*ToolChoiceMemberAny) isToolChoice() {}
 
-// The Model automatically decides if a tool should be called or to whether to
-// generate text instead.
+// (Default). The Model automatically decides if a tool should be called or
+// whether to generate text instead.
 type ToolChoiceMemberAuto struct {
 	Value AutoToolChoice
 
@@ -540,7 +879,8 @@ type ToolChoiceMemberAuto struct {
 
 func (*ToolChoiceMemberAuto) isToolChoice() {}
 
-// The Model must request the specified tool.
+// The Model must request the specified tool. Only supported by Anthropic Claude 3
+// models.
 type ToolChoiceMemberTool struct {
 	Value SpecificToolChoice
 
@@ -728,15 +1068,16 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isContentBlock()           {}
-func (*UnknownUnionMember) isContentBlockDelta()      {}
-func (*UnknownUnionMember) isContentBlockStart()      {}
-func (*UnknownUnionMember) isConverseOutput()         {}
-func (*UnknownUnionMember) isConverseStreamOutput()   {}
-func (*UnknownUnionMember) isImageSource()            {}
-func (*UnknownUnionMember) isResponseStream()         {}
-func (*UnknownUnionMember) isSystemContentBlock()     {}
-func (*UnknownUnionMember) isTool()                   {}
-func (*UnknownUnionMember) isToolChoice()             {}
-func (*UnknownUnionMember) isToolInputSchema()        {}
-func (*UnknownUnionMember) isToolResultContentBlock() {}
+func (*UnknownUnionMember) isContentBlock()                  {}
+func (*UnknownUnionMember) isContentBlockDelta()             {}
+func (*UnknownUnionMember) isContentBlockStart()             {}
+func (*UnknownUnionMember) isConverseOutput()                {}
+func (*UnknownUnionMember) isConverseStreamOutput()          {}
+func (*UnknownUnionMember) isGuardrailConverseContentBlock() {}
+func (*UnknownUnionMember) isImageSource()                   {}
+func (*UnknownUnionMember) isResponseStream()                {}
+func (*UnknownUnionMember) isSystemContentBlock()            {}
+func (*UnknownUnionMember) isTool()                          {}
+func (*UnknownUnionMember) isToolChoice()                    {}
+func (*UnknownUnionMember) isToolInputSchema()               {}
+func (*UnknownUnionMember) isToolResultContentBlock()        {}

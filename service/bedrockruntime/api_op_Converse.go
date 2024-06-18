@@ -16,11 +16,16 @@ import (
 // consistent interface that works with all models that support messages. This
 // allows you to write code once and use it with different models. Should a model
 // have unique inference parameters, you can also pass those unique parameters to
-// the model. For more information, see [Run inference]in the Bedrock User Guide.
+// the model.
+//
+// For information about the Converse API, see Use the Converse API in the Amazon
+// Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse
+// API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use
+// (Function calling) in the Amazon Bedrock User Guide
+//
+// For example code, see Converse API examples in the Amazon Bedrock User Guide.
 //
 // This operation requires permission for the bedrock:InvokeModel action.
-//
-// [Run inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
 func (c *Client) Converse(ctx context.Context, params *ConverseInput, optFns ...func(*Options)) (*ConverseOutput, error) {
 	if params == nil {
 		params = &ConverseInput{}
@@ -73,7 +78,7 @@ type ConverseInput struct {
 
 	// Additional model parameters field paths to return in the response. Converse
 	// returns the requested fields as a JSON Pointer object in the
-	// additionalModelResultFields field. The following is example JSON for
+	// additionalModelResponseFields field. The following is example JSON for
 	// additionalModelResponseFieldPaths .
 	//
 	//     [ "/stop_sequence" ]
@@ -86,6 +91,9 @@ type ConverseInput struct {
 	//
 	// [Internet Engineering Task Force (IETF)]: https://datatracker.ietf.org/doc/html/rfc6901
 	AdditionalModelResponseFieldPaths []string
+
+	// Configuration information for a guardrail that you want to use in the request.
+	GuardrailConfig *types.GuardrailConfiguration
 
 	// Inference parameters to pass to the model. Converse supports a base set of
 	// inference parameters. If you need to pass additional parameters that the model
@@ -130,6 +138,9 @@ type ConverseOutput struct {
 
 	// Additional fields in the response that are unique to the model.
 	AdditionalModelResponseFields document.Interface
+
+	// A trace object that contains information about the Guardrail behavior.
+	Trace *types.ConverseTrace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

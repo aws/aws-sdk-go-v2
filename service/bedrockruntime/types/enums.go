@@ -21,6 +21,279 @@ func (ConversationRole) Values() []ConversationRole {
 	}
 }
 
+type GuardrailContentFilterConfidence string
+
+// Enum values for GuardrailContentFilterConfidence
+const (
+	GuardrailContentFilterConfidenceNone   GuardrailContentFilterConfidence = "NONE"
+	GuardrailContentFilterConfidenceLow    GuardrailContentFilterConfidence = "LOW"
+	GuardrailContentFilterConfidenceMedium GuardrailContentFilterConfidence = "MEDIUM"
+	GuardrailContentFilterConfidenceHigh   GuardrailContentFilterConfidence = "HIGH"
+)
+
+// Values returns all known values for GuardrailContentFilterConfidence. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentFilterConfidence) Values() []GuardrailContentFilterConfidence {
+	return []GuardrailContentFilterConfidence{
+		"NONE",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
+type GuardrailContentFilterType string
+
+// Enum values for GuardrailContentFilterType
+const (
+	GuardrailContentFilterTypeInsults      GuardrailContentFilterType = "INSULTS"
+	GuardrailContentFilterTypeHate         GuardrailContentFilterType = "HATE"
+	GuardrailContentFilterTypeSexual       GuardrailContentFilterType = "SEXUAL"
+	GuardrailContentFilterTypeViolence     GuardrailContentFilterType = "VIOLENCE"
+	GuardrailContentFilterTypeMisconduct   GuardrailContentFilterType = "MISCONDUCT"
+	GuardrailContentFilterTypePromptAttack GuardrailContentFilterType = "PROMPT_ATTACK"
+)
+
+// Values returns all known values for GuardrailContentFilterType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentFilterType) Values() []GuardrailContentFilterType {
+	return []GuardrailContentFilterType{
+		"INSULTS",
+		"HATE",
+		"SEXUAL",
+		"VIOLENCE",
+		"MISCONDUCT",
+		"PROMPT_ATTACK",
+	}
+}
+
+type GuardrailContentPolicyAction string
+
+// Enum values for GuardrailContentPolicyAction
+const (
+	GuardrailContentPolicyActionBlocked GuardrailContentPolicyAction = "BLOCKED"
+)
+
+// Values returns all known values for GuardrailContentPolicyAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentPolicyAction) Values() []GuardrailContentPolicyAction {
+	return []GuardrailContentPolicyAction{
+		"BLOCKED",
+	}
+}
+
+type GuardrailManagedWordType string
+
+// Enum values for GuardrailManagedWordType
+const (
+	GuardrailManagedWordTypeProfanity GuardrailManagedWordType = "PROFANITY"
+)
+
+// Values returns all known values for GuardrailManagedWordType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailManagedWordType) Values() []GuardrailManagedWordType {
+	return []GuardrailManagedWordType{
+		"PROFANITY",
+	}
+}
+
+type GuardrailPiiEntityType string
+
+// Enum values for GuardrailPiiEntityType
+const (
+	GuardrailPiiEntityTypeAddress                             GuardrailPiiEntityType = "ADDRESS"
+	GuardrailPiiEntityTypeAge                                 GuardrailPiiEntityType = "AGE"
+	GuardrailPiiEntityTypeAwsAccessKey                        GuardrailPiiEntityType = "AWS_ACCESS_KEY"
+	GuardrailPiiEntityTypeAwsSecretKey                        GuardrailPiiEntityType = "AWS_SECRET_KEY"
+	GuardrailPiiEntityTypeCaHealthNumber                      GuardrailPiiEntityType = "CA_HEALTH_NUMBER"
+	GuardrailPiiEntityTypeCaSocialInsuranceNumber             GuardrailPiiEntityType = "CA_SOCIAL_INSURANCE_NUMBER"
+	GuardrailPiiEntityTypeCreditDebitCardCvv                  GuardrailPiiEntityType = "CREDIT_DEBIT_CARD_CVV"
+	GuardrailPiiEntityTypeCreditDebitCardExpiry               GuardrailPiiEntityType = "CREDIT_DEBIT_CARD_EXPIRY"
+	GuardrailPiiEntityTypeCreditDebitCardNumber               GuardrailPiiEntityType = "CREDIT_DEBIT_CARD_NUMBER"
+	GuardrailPiiEntityTypeDriverId                            GuardrailPiiEntityType = "DRIVER_ID"
+	GuardrailPiiEntityTypeEmail                               GuardrailPiiEntityType = "EMAIL"
+	GuardrailPiiEntityTypeInternationalBankAccountNumber      GuardrailPiiEntityType = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+	GuardrailPiiEntityTypeIpAddress                           GuardrailPiiEntityType = "IP_ADDRESS"
+	GuardrailPiiEntityTypeLicensePlate                        GuardrailPiiEntityType = "LICENSE_PLATE"
+	GuardrailPiiEntityTypeMacAddress                          GuardrailPiiEntityType = "MAC_ADDRESS"
+	GuardrailPiiEntityTypeName                                GuardrailPiiEntityType = "NAME"
+	GuardrailPiiEntityTypePassword                            GuardrailPiiEntityType = "PASSWORD"
+	GuardrailPiiEntityTypePhone                               GuardrailPiiEntityType = "PHONE"
+	GuardrailPiiEntityTypePin                                 GuardrailPiiEntityType = "PIN"
+	GuardrailPiiEntityTypeSwiftCode                           GuardrailPiiEntityType = "SWIFT_CODE"
+	GuardrailPiiEntityTypeUkNationalHealthServiceNumber       GuardrailPiiEntityType = "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+	GuardrailPiiEntityTypeUkNationalInsuranceNumber           GuardrailPiiEntityType = "UK_NATIONAL_INSURANCE_NUMBER"
+	GuardrailPiiEntityTypeUkUniqueTaxpayerReferenceNumber     GuardrailPiiEntityType = "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+	GuardrailPiiEntityTypeUrl                                 GuardrailPiiEntityType = "URL"
+	GuardrailPiiEntityTypeUsername                            GuardrailPiiEntityType = "USERNAME"
+	GuardrailPiiEntityTypeUsBankAccountNumber                 GuardrailPiiEntityType = "US_BANK_ACCOUNT_NUMBER"
+	GuardrailPiiEntityTypeUsBankRoutingNumber                 GuardrailPiiEntityType = "US_BANK_ROUTING_NUMBER"
+	GuardrailPiiEntityTypeUsIndividualTaxIdentificationNumber GuardrailPiiEntityType = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+	GuardrailPiiEntityTypeUsPassportNumber                    GuardrailPiiEntityType = "US_PASSPORT_NUMBER"
+	GuardrailPiiEntityTypeUsSocialSecurityNumber              GuardrailPiiEntityType = "US_SOCIAL_SECURITY_NUMBER"
+	GuardrailPiiEntityTypeVehicleIdentificationNumber         GuardrailPiiEntityType = "VEHICLE_IDENTIFICATION_NUMBER"
+)
+
+// Values returns all known values for GuardrailPiiEntityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailPiiEntityType) Values() []GuardrailPiiEntityType {
+	return []GuardrailPiiEntityType{
+		"ADDRESS",
+		"AGE",
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
+		"CA_HEALTH_NUMBER",
+		"CA_SOCIAL_INSURANCE_NUMBER",
+		"CREDIT_DEBIT_CARD_CVV",
+		"CREDIT_DEBIT_CARD_EXPIRY",
+		"CREDIT_DEBIT_CARD_NUMBER",
+		"DRIVER_ID",
+		"EMAIL",
+		"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		"IP_ADDRESS",
+		"LICENSE_PLATE",
+		"MAC_ADDRESS",
+		"NAME",
+		"PASSWORD",
+		"PHONE",
+		"PIN",
+		"SWIFT_CODE",
+		"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		"UK_NATIONAL_INSURANCE_NUMBER",
+		"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+		"URL",
+		"USERNAME",
+		"US_BANK_ACCOUNT_NUMBER",
+		"US_BANK_ROUTING_NUMBER",
+		"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		"US_PASSPORT_NUMBER",
+		"US_SOCIAL_SECURITY_NUMBER",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+	}
+}
+
+type GuardrailSensitiveInformationPolicyAction string
+
+// Enum values for GuardrailSensitiveInformationPolicyAction
+const (
+	GuardrailSensitiveInformationPolicyActionAnonymized GuardrailSensitiveInformationPolicyAction = "ANONYMIZED"
+	GuardrailSensitiveInformationPolicyActionBlocked    GuardrailSensitiveInformationPolicyAction = "BLOCKED"
+)
+
+// Values returns all known values for GuardrailSensitiveInformationPolicyAction.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailSensitiveInformationPolicyAction) Values() []GuardrailSensitiveInformationPolicyAction {
+	return []GuardrailSensitiveInformationPolicyAction{
+		"ANONYMIZED",
+		"BLOCKED",
+	}
+}
+
+type GuardrailStreamProcessingMode string
+
+// Enum values for GuardrailStreamProcessingMode
+const (
+	GuardrailStreamProcessingModeSync  GuardrailStreamProcessingMode = "sync"
+	GuardrailStreamProcessingModeAsync GuardrailStreamProcessingMode = "async"
+)
+
+// Values returns all known values for GuardrailStreamProcessingMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailStreamProcessingMode) Values() []GuardrailStreamProcessingMode {
+	return []GuardrailStreamProcessingMode{
+		"sync",
+		"async",
+	}
+}
+
+type GuardrailTopicPolicyAction string
+
+// Enum values for GuardrailTopicPolicyAction
+const (
+	GuardrailTopicPolicyActionBlocked GuardrailTopicPolicyAction = "BLOCKED"
+)
+
+// Values returns all known values for GuardrailTopicPolicyAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailTopicPolicyAction) Values() []GuardrailTopicPolicyAction {
+	return []GuardrailTopicPolicyAction{
+		"BLOCKED",
+	}
+}
+
+type GuardrailTopicType string
+
+// Enum values for GuardrailTopicType
+const (
+	GuardrailTopicTypeDeny GuardrailTopicType = "DENY"
+)
+
+// Values returns all known values for GuardrailTopicType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailTopicType) Values() []GuardrailTopicType {
+	return []GuardrailTopicType{
+		"DENY",
+	}
+}
+
+type GuardrailTrace string
+
+// Enum values for GuardrailTrace
+const (
+	GuardrailTraceEnabled  GuardrailTrace = "enabled"
+	GuardrailTraceDisabled GuardrailTrace = "disabled"
+)
+
+// Values returns all known values for GuardrailTrace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailTrace) Values() []GuardrailTrace {
+	return []GuardrailTrace{
+		"enabled",
+		"disabled",
+	}
+}
+
+type GuardrailWordPolicyAction string
+
+// Enum values for GuardrailWordPolicyAction
+const (
+	GuardrailWordPolicyActionBlocked GuardrailWordPolicyAction = "BLOCKED"
+)
+
+// Values returns all known values for GuardrailWordPolicyAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailWordPolicyAction) Values() []GuardrailWordPolicyAction {
+	return []GuardrailWordPolicyAction{
+		"BLOCKED",
+	}
+}
+
 type ImageFormat string
 
 // Enum values for ImageFormat
@@ -48,11 +321,12 @@ type StopReason string
 
 // Enum values for StopReason
 const (
-	StopReasonEndTurn         StopReason = "end_turn"
-	StopReasonToolUse         StopReason = "tool_use"
-	StopReasonMaxTokens       StopReason = "max_tokens"
-	StopReasonStopSequence    StopReason = "stop_sequence"
-	StopReasonContentFiltered StopReason = "content_filtered"
+	StopReasonEndTurn             StopReason = "end_turn"
+	StopReasonToolUse             StopReason = "tool_use"
+	StopReasonMaxTokens           StopReason = "max_tokens"
+	StopReasonStopSequence        StopReason = "stop_sequence"
+	StopReasonGuardrailIntervened StopReason = "guardrail_intervened"
+	StopReasonContentFiltered     StopReason = "content_filtered"
 )
 
 // Values returns all known values for StopReason. Note that this can be expanded
@@ -65,6 +339,7 @@ func (StopReason) Values() []StopReason {
 		"tool_use",
 		"max_tokens",
 		"stop_sequence",
+		"guardrail_intervened",
 		"content_filtered",
 	}
 }

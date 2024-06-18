@@ -3132,6 +3132,22 @@ type ClarifyTextConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the configuration for attaching an additional Amazon Elastic Block
+// Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance
+// group.
+type ClusterEbsVolumeConfig struct {
+
+	// The size in gigabytes (GB) of the additional EBS volume to be attached to the
+	// instances in the SageMaker HyperPod cluster instance group. The additional EBS
+	// volume is attached to each instance within the SageMaker HyperPod cluster
+	// instance group and mounted to /opt/sagemaker .
+	//
+	// This member is required.
+	VolumeSizeInGB *int32
+
+	noSmithyDocumentSerde
+}
+
 // Details of an instance group in a SageMaker HyperPod cluster.
 type ClusterInstanceGroupDetails struct {
 
@@ -3144,6 +3160,10 @@ type ClusterInstanceGroupDetails struct {
 
 	// The name of the instance group of a SageMaker HyperPod cluster.
 	InstanceGroupName *string
+
+	// The additional storage configurations for the instances in the SageMaker
+	// HyperPod cluster instance group.
+	InstanceStorageConfigs []ClusterInstanceStorageConfig
 
 	// The instance type of the instance group of a SageMaker HyperPod cluster.
 	InstanceType ClusterInstanceType
@@ -3196,6 +3216,10 @@ type ClusterInstanceGroupSpecification struct {
 	// This member is required.
 	LifeCycleConfig *ClusterLifeCycleConfig
 
+	// Specifies the additional storage configurations for the instances in the
+	// SageMaker HyperPod cluster instance group.
+	InstanceStorageConfigs []ClusterInstanceStorageConfig
+
 	// Specifies the value for Threads per core. For instance types that support
 	// multithreading, you can specify 1 for disabling multithreading and 2 for
 	// enabling multithreading. For instance types that doesn't support multithreading,
@@ -3238,6 +3262,28 @@ type ClusterInstanceStatusDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the configuration for attaching additional storage to the instances in
+// the SageMaker HyperPod cluster instance group.
+//
+// The following types satisfy this interface:
+//
+//	ClusterInstanceStorageConfigMemberEbsVolumeConfig
+type ClusterInstanceStorageConfig interface {
+	isClusterInstanceStorageConfig()
+}
+
+// Defines the configuration for attaching additional Amazon Elastic Block Store
+// (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group.
+// The additional EBS volume is attached to each instance within the SageMaker
+// HyperPod cluster instance group and mounted to /opt/sagemaker .
+type ClusterInstanceStorageConfigMemberEbsVolumeConfig struct {
+	Value ClusterEbsVolumeConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ClusterInstanceStorageConfigMemberEbsVolumeConfig) isClusterInstanceStorageConfig() {}
+
 // The lifecycle configuration for a SageMaker HyperPod cluster.
 type ClusterLifeCycleConfig struct {
 
@@ -3274,6 +3320,10 @@ type ClusterNodeDetails struct {
 
 	// The status of the instance.
 	InstanceStatus *ClusterInstanceStatusDetails
+
+	// The configurations of additional storage specified to the instance group where
+	// the instance (node) is launched.
+	InstanceStorageConfigs []ClusterInstanceStorageConfig
 
 	// The type of the instance.
 	InstanceType ClusterInstanceType
@@ -16074,7 +16124,7 @@ type SourceAlgorithmSpecification struct {
 }
 
 // A list of IP address ranges ([CIDRs] ). Used to create an allow list of IP addresses
-// for a private workforce. Workers will only be able to login to their worker
+// for a private workforce. Workers will only be able to log in to their worker
 // portal from an IP address within this range. By default, a workforce isn't
 // restricted to specific IP addresses.
 //
@@ -16321,7 +16371,7 @@ type StudioLifecycleConfigDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a work team of a vendor that does the a labelling job.
+// Describes a work team of a vendor that does the labelling job.
 type SubscribedWorkteam struct {
 
 	// The Amazon Resource Name (ARN) of the vendor that you have subscribed.
@@ -16960,6 +17010,33 @@ type TimeSeriesTransformations struct {
 	// set backfill to a value of 2 , you must include two parameters: "backfill":
 	// "value" and "backfill_value":"2" .
 	Filling map[string]map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the tracking server to list.
+type TrackingServerSummary struct {
+
+	// The creation time of a listed tracking server.
+	CreationTime *time.Time
+
+	// The activity status of a listed tracking server.
+	IsActive IsTrackingServerActive
+
+	// The last modified time of a listed tracking server.
+	LastModifiedTime *time.Time
+
+	// The MLflow version used for a listed tracking server.
+	MlflowVersion *string
+
+	// The ARN of a listed tracking server.
+	TrackingServerArn *string
+
+	// The name of a listed tracking server.
+	TrackingServerName *string
+
+	// The creation status of a listed tracking server.
+	TrackingServerStatus TrackingServerStatus
 
 	noSmithyDocumentSerde
 }
@@ -18796,7 +18873,7 @@ type Workforce struct {
 // The VPC object you use to create or update a workforce.
 type WorkforceVpcConfigRequest struct {
 
-	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must
+	// The VPC security group IDs, in the form sg-xxxxxxxx . The security groups must
 	// be for the same VPC as specified in the subnet.
 	SecurityGroupIds []string
 
@@ -18919,6 +18996,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAutoMLProblemTypeConfig()             {}
 func (*UnknownUnionMember) isAutoMLProblemTypeResolvedAttributes() {}
+func (*UnknownUnionMember) isClusterInstanceStorageConfig()        {}
 func (*UnknownUnionMember) isCollectionConfig()                    {}
 func (*UnknownUnionMember) isCustomFileSystem()                    {}
 func (*UnknownUnionMember) isCustomFileSystemConfig()              {}

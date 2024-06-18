@@ -11746,6 +11746,11 @@ func awsRestjson1_deserializeDocumentFargateProfile(v **types.FargateProfile, va
 				sv.FargateProfileName = ptr.String(jtv)
 			}
 
+		case "health":
+			if err := awsRestjson1_deserializeDocumentFargateProfileHealth(&sv.Health, value); err != nil {
+				return err
+			}
+
 		case "podExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11785,6 +11790,130 @@ func awsRestjson1_deserializeDocumentFargateProfile(v **types.FargateProfile, va
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFargateProfileHealth(v **types.FargateProfileHealth, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FargateProfileHealth
+	if *v == nil {
+		sv = &types.FargateProfileHealth{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "issues":
+			if err := awsRestjson1_deserializeDocumentFargateProfileIssueList(&sv.Issues, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFargateProfileIssue(v **types.FargateProfileIssue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FargateProfileIssue
+	if *v == nil {
+		sv = &types.FargateProfileIssue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FargateProfileIssueCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.FargateProfileIssueCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "resourceIds":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.ResourceIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFargateProfileIssueList(v *[]types.FargateProfileIssue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FargateProfileIssue
+	if *v == nil {
+		cv = []types.FargateProfileIssue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FargateProfileIssue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFargateProfileIssue(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

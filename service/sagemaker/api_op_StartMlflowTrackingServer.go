@@ -6,45 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specific work team. You can see information such as
-// the creation date, the last updated date, membership information, and the work
-// team's Amazon Resource Name (ARN).
-func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamInput, optFns ...func(*Options)) (*DescribeWorkteamOutput, error) {
+// Programmatically start an MLflow Tracking Server.
+func (c *Client) StartMlflowTrackingServer(ctx context.Context, params *StartMlflowTrackingServerInput, optFns ...func(*Options)) (*StartMlflowTrackingServerOutput, error) {
 	if params == nil {
-		params = &DescribeWorkteamInput{}
+		params = &StartMlflowTrackingServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkteam", params, optFns, c.addOperationDescribeWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMlflowTrackingServer", params, optFns, c.addOperationStartMlflowTrackingServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWorkteamOutput)
+	out := result.(*StartMlflowTrackingServerOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWorkteamInput struct {
+type StartMlflowTrackingServerInput struct {
 
-	// The name of the work team to return a description of.
+	// The name of the tracking server to start.
 	//
 	// This member is required.
-	WorkteamName *string
+	TrackingServerName *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeWorkteamOutput struct {
+type StartMlflowTrackingServerOutput struct {
 
-	// A Workteam instance that contains information about the work team.
-	//
-	// This member is required.
-	Workteam *types.Workteam
+	// The ARN of the started tracking server.
+	TrackingServerArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,19 +47,19 @@ type DescribeWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMlflowTrackingServer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMlflowTrackingServer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkteam"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMlflowTrackingServer"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -113,10 +108,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDescribeWorkteamValidationMiddleware(stack); err != nil {
+	if err = addOpStartMlflowTrackingServerValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkteam(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMlflowTrackingServer(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -137,10 +132,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWorkteam(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStartMlflowTrackingServer(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkteam",
+		OperationName: "StartMlflowTrackingServer",
 	}
 }

@@ -69,65 +69,6 @@ func (m *smithyRpcv2cbor_deserializeOpEmptyInputOutput) HandleDeserialize(ctx co
 	return out, metadata, nil
 }
 
-type smithyRpcv2cbor_deserializeOpFloat16 struct {
-}
-
-func (*smithyRpcv2cbor_deserializeOpFloat16) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *smithyRpcv2cbor_deserializeOpFloat16) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
-	}
-
-	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf(
-				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
-				resp.Header.Get("smithy-protocol"),
-				resp.Status,
-			),
-		}
-	}
-
-	if resp.StatusCode != 200 {
-		return out, metadata, rpc2_deserializeOpErrorFloat16(resp)
-	}
-
-	payload, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	if len(payload) == 0 {
-		out.Result = &Float16Output{}
-		return out, metadata, nil
-	}
-
-	cv, err := smithycbor.Decode(payload)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	output, err := deserializeCBOR_Float16Output(cv)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	out.Result = output
-
-	return out, metadata, nil
-}
-
 type smithyRpcv2cbor_deserializeOpFractionalSeconds struct {
 }
 
@@ -893,28 +834,6 @@ func deserializeCBOR_ValidationExceptionFieldList(v smithycbor.Value) ([]types.V
 		dl = append(dl, *di)
 	}
 	return dl, nil
-}
-
-func deserializeCBOR_Float16Output(v smithycbor.Value) (*Float16Output, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &Float16Output{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "value" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
-			dv, err := deserializeCBOR_Float64(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Value = ptr.Float64(dv)
-		}
-	}
-	return ds, nil
 }
 
 func deserializeCBOR_FractionalSecondsOutput(v smithycbor.Value) (*FractionalSecondsOutput, error) {
@@ -2297,33 +2216,6 @@ func deserializeCBOR_TimestampList(v smithycbor.Value) ([]time.Time, error) {
 	return dl, nil
 }
 func rpc2_deserializeOpErrorEmptyInputOutput(resp *smithyhttp.Response) error {
-	payload, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
-	}
-
-	typ, msg, v, err := getProtocolErrorInfo(payload)
-	if err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
-	}
-
-	if len(typ) == 0 {
-		typ = "UnknownError"
-	}
-	if len(msg) == 0 {
-		msg = "UnknownError"
-	}
-
-	_ = v
-	switch string(typ) {
-
-	default:
-
-		return &smithy.GenericAPIError{Code: typ, Message: msg}
-	}
-}
-
-func rpc2_deserializeOpErrorFloat16(resp *smithyhttp.Response) error {
 	payload, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}

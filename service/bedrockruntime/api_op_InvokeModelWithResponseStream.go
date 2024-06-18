@@ -46,9 +46,9 @@ func (c *Client) InvokeModelWithResponseStream(ctx context.Context, params *Invo
 type InvokeModelWithResponseStreamInput struct {
 
 	// The prompt and inference parameters in the format specified in the contentType
-	// in the header. To see the format and content of the request and response bodies
-	// for different models, refer to [Inference parameters]. For more information, see [Run inference] in the Bedrock User
-	// Guide.
+	// in the header. You must provide the body in JSON format. To see the format and
+	// content of the request and response bodies for different models, refer to [Inference parameters]. For
+	// more information, see [Run inference]in the Bedrock User Guide.
 	//
 	// [Inference parameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 	// [Run inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
@@ -81,7 +81,7 @@ type InvokeModelWithResponseStreamInput struct {
 	// is application/json .
 	Accept *string
 
-	// The MIME type of the input data in the request. The default value is
+	// The MIME type of the input data in the request. You must specify
 	// application/json .
 	ContentType *string
 

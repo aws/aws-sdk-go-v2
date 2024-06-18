@@ -12,6 +12,9 @@ func ExampleContentBlock_outputUsage() {
 	var union types.ContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ContentBlockMemberGuardContent:
+		_ = v.Value // Value is types.GuardrailConverseContentBlock
+
 	case *types.ContentBlockMemberImage:
 		_ = v.Value // Value is types.ImageBlock
 
@@ -34,6 +37,7 @@ func ExampleContentBlock_outputUsage() {
 }
 
 var _ *string
+var _ types.GuardrailConverseContentBlock
 var _ *types.ImageBlock
 var _ *types.ToolResultBlock
 var _ *types.ToolUseBlock
@@ -134,6 +138,24 @@ var _ *types.ContentBlockDeltaEvent
 var _ *types.ContentBlockStartEvent
 var _ *types.ConverseStreamMetadataEvent
 
+func ExampleGuardrailConverseContentBlock_outputUsage() {
+	var union types.GuardrailConverseContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GuardrailConverseContentBlockMemberText:
+		_ = v.Value // Value is types.GuardrailConverseTextBlock
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GuardrailConverseTextBlock
+
 func ExampleImageSource_outputUsage() {
 	var union types.ImageSource
 	// type switches can be used to check the union value
@@ -174,6 +196,9 @@ func ExampleSystemContentBlock_outputUsage() {
 	var union types.SystemContentBlock
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.SystemContentBlockMemberGuardContent:
+		_ = v.Value // Value is types.GuardrailConverseContentBlock
+
 	case *types.SystemContentBlockMemberText:
 		_ = v.Value // Value is string
 
@@ -187,6 +212,7 @@ func ExampleSystemContentBlock_outputUsage() {
 }
 
 var _ *string
+var _ types.GuardrailConverseContentBlock
 
 func ExampleTool_outputUsage() {
 	var union types.Tool

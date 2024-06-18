@@ -69,7 +69,7 @@ type CreateWorkforceInput struct {
 	OidcConfig *types.OidcConfig
 
 	// A list of IP address ranges ([CIDRs] ). Used to create an allow list of IP addresses
-	// for a private workforce. Workers will only be able to login to their worker
+	// for a private workforce. Workers will only be able to log in to their worker
 	// portal from an IP address within this range. By default, a workforce isn't
 	// restricted to specific IP addresses.
 	//

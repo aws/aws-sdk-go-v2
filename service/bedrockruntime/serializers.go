@@ -111,6 +111,13 @@ func awsRestjson1_serializeOpDocumentConverseInput(v *ConverseInput, value smith
 		}
 	}
 
+	if v.GuardrailConfig != nil {
+		ok := object.Key("guardrailConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailConfiguration(v.GuardrailConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InferenceConfig != nil {
 		ok := object.Key("inferenceConfig")
 		if err := awsRestjson1_serializeDocumentInferenceConfiguration(v.InferenceConfig, ok); err != nil {
@@ -232,6 +239,13 @@ func awsRestjson1_serializeOpDocumentConverseStreamInput(v *ConverseStreamInput,
 	if v.AdditionalModelResponseFieldPaths != nil {
 		ok := object.Key("additionalModelResponseFieldPaths")
 		if err := awsRestjson1_serializeDocumentAdditionalModelResponseFieldPaths(v.AdditionalModelResponseFieldPaths, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GuardrailConfig != nil {
+		ok := object.Key("guardrailConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailStreamConfiguration(v.GuardrailConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -501,6 +515,12 @@ func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberGuardContent:
+		av := object.Key("guardContent")
+		if err := awsRestjson1_serializeDocumentGuardrailConverseContentBlock(uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ContentBlockMemberImage:
 		av := object.Key("image")
 		if err := awsRestjson1_serializeDocumentImageBlock(&uv.Value, av); err != nil {
@@ -543,6 +563,85 @@ func awsRestjson1_serializeDocumentContentBlocks(v []types.ContentBlock, value s
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailConfiguration(v *types.GuardrailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GuardrailIdentifier != nil {
+		ok := object.Key("guardrailIdentifier")
+		ok.String(*v.GuardrailIdentifier)
+	}
+
+	if v.GuardrailVersion != nil {
+		ok := object.Key("guardrailVersion")
+		ok.String(*v.GuardrailVersion)
+	}
+
+	if len(v.Trace) > 0 {
+		ok := object.Key("trace")
+		ok.String(string(v.Trace))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailConverseContentBlock(v types.GuardrailConverseContentBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.GuardrailConverseContentBlockMemberText:
+		av := object.Key("text")
+		if err := awsRestjson1_serializeDocumentGuardrailConverseTextBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailConverseTextBlock(v *types.GuardrailConverseTextBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailStreamConfiguration(v *types.GuardrailStreamConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GuardrailIdentifier != nil {
+		ok := object.Key("guardrailIdentifier")
+		ok.String(*v.GuardrailIdentifier)
+	}
+
+	if v.GuardrailVersion != nil {
+		ok := object.Key("guardrailVersion")
+		ok.String(*v.GuardrailVersion)
+	}
+
+	if len(v.StreamProcessingMode) > 0 {
+		ok := object.Key("streamProcessingMode")
+		ok.String(string(v.StreamProcessingMode))
+	}
+
+	if len(v.Trace) > 0 {
+		ok := object.Key("trace")
+		ok.String(string(v.Trace))
+	}
+
 	return nil
 }
 
@@ -696,6 +795,12 @@ func awsRestjson1_serializeDocumentSystemContentBlock(v types.SystemContentBlock
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.SystemContentBlockMemberGuardContent:
+		av := object.Key("guardContent")
+		if err := awsRestjson1_serializeDocumentGuardrailConverseContentBlock(uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.SystemContentBlockMemberText:
 		av := object.Key("text")
 		av.String(uv.Value)

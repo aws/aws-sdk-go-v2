@@ -6,45 +6,50 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specific work team. You can see information such as
-// the creation date, the last updated date, membership information, and the work
-// team's Amazon Resource Name (ARN).
-func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamInput, optFns ...func(*Options)) (*DescribeWorkteamOutput, error) {
+// Returns a presigned URL that you can use to connect to the MLflow UI attached
+// to your tracking server. For more information, see [Launch the MLflow UI using a presigned URL].
+//
+// [Launch the MLflow UI using a presigned URL]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-launch-ui.html
+func (c *Client) CreatePresignedMlflowTrackingServerUrl(ctx context.Context, params *CreatePresignedMlflowTrackingServerUrlInput, optFns ...func(*Options)) (*CreatePresignedMlflowTrackingServerUrlOutput, error) {
 	if params == nil {
-		params = &DescribeWorkteamInput{}
+		params = &CreatePresignedMlflowTrackingServerUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkteam", params, optFns, c.addOperationDescribeWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePresignedMlflowTrackingServerUrl", params, optFns, c.addOperationCreatePresignedMlflowTrackingServerUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWorkteamOutput)
+	out := result.(*CreatePresignedMlflowTrackingServerUrlOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWorkteamInput struct {
+type CreatePresignedMlflowTrackingServerUrlInput struct {
 
-	// The name of the work team to return a description of.
+	// The name of the tracking server to connect to your MLflow UI.
 	//
 	// This member is required.
-	WorkteamName *string
+	TrackingServerName *string
+
+	// The duration in seconds that your presigned URL is valid. The presigned URL can
+	// be used only once.
+	ExpiresInSeconds *int32
+
+	// The duration in seconds that your MLflow UI session is valid.
+	SessionExpirationDurationInSeconds *int32
 
 	noSmithyDocumentSerde
 }
 
-type DescribeWorkteamOutput struct {
+type CreatePresignedMlflowTrackingServerUrlOutput struct {
 
-	// A Workteam instance that contains information about the work team.
-	//
-	// This member is required.
-	Workteam *types.Workteam
+	// A presigned URL with an authorization token.
+	AuthorizedUrl *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,19 +57,19 @@ type DescribeWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePresignedMlflowTrackingServerUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedMlflowTrackingServerUrl{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedMlflowTrackingServerUrl{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkteam"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePresignedMlflowTrackingServerUrl"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -113,10 +118,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDescribeWorkteamValidationMiddleware(stack); err != nil {
+	if err = addOpCreatePresignedMlflowTrackingServerUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkteam(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedMlflowTrackingServerUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -137,10 +142,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWorkteam(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreatePresignedMlflowTrackingServerUrl(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkteam",
+		OperationName: "CreatePresignedMlflowTrackingServerUrl",
 	}
 }

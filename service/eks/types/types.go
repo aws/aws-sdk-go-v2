@@ -689,6 +689,10 @@ type FargateProfile struct {
 	// The name of the Fargate profile.
 	FargateProfileName *string
 
+	// The health status of the Fargate profile. If there are issues with your Fargate
+	// profile's health, they are listed here.
+	Health *FargateProfileHealth
+
 	// The Amazon Resource Name (ARN) of the Pod execution role to use for any Pod
 	// that matches the selectors in the Fargate profile. For more information, see [Pod execution role]Pod
 	// in the Amazon EKS User Guide.
@@ -709,6 +713,31 @@ type FargateProfile struct {
 	// of a key and an optional value. You define both. Tags don't propagate to any
 	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The health status of the Fargate profile. If there are issues with your Fargate
+// profile's health, they are listed here.
+type FargateProfileHealth struct {
+
+	// Any issues that are associated with the Fargate profile.
+	Issues []FargateProfileIssue
+
+	noSmithyDocumentSerde
+}
+
+// An issue that is associated with the Fargate profile.
+type FargateProfileIssue struct {
+
+	// A brief description of the error.
+	Code FargateProfileIssueCode
+
+	// The error message associated with the issue.
+	Message *string
+
+	// The Amazon Web Services resources that are affected by this issue.
+	ResourceIds []string
 
 	noSmithyDocumentSerde
 }

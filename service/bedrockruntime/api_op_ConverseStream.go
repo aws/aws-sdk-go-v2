@@ -17,20 +17,23 @@ import (
 // in a stream. ConverseStream provides a consistent API that works with all
 // Amazon Bedrock models that support messages. This allows you to write code once
 // and use it with different models. Should a model have unique inference
-// parameters, you can also pass those unique parameters to the model. For more
-// information, see [Run inference]in the Bedrock User Guide.
+// parameters, you can also pass those unique parameters to the model.
 //
 // To find out if a model supports streaming, call [GetFoundationModel] and check the
 // responseStreamingSupported field in the response.
 //
-// For example code, see Invoke model with streaming code example in the Amazon
-// Bedrock User Guide.
+// For information about the Converse API, see Use the Converse API in the Amazon
+// Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse
+// API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use
+// (Function calling) in the Amazon Bedrock User Guide
+//
+// For example code, see Conversation streaming example in the Amazon Bedrock User
+// Guide.
 //
 // This operation requires permission for the bedrock:InvokeModelWithResponseStream
 // action.
 //
 // [GetFoundationModel]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html
-// [Run inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
 func (c *Client) ConverseStream(ctx context.Context, params *ConverseStreamInput, optFns ...func(*Options)) (*ConverseStreamOutput, error) {
 	if params == nil {
 		params = &ConverseStreamInput{}
@@ -80,7 +83,7 @@ type ConverseStreamInput struct {
 
 	// Additional model parameters field paths to return in the response.
 	// ConverseStream returns the requested fields as a JSON Pointer object in the
-	// additionalModelResultFields field. The following is example JSON for
+	// additionalModelResponseFields field. The following is example JSON for
 	// additionalModelResponseFieldPaths .
 	//
 	//     [ "/stop_sequence" ]
@@ -93,6 +96,9 @@ type ConverseStreamInput struct {
 	//
 	// [Internet Engineering Task Force (IETF)]: https://datatracker.ietf.org/doc/html/rfc6901
 	AdditionalModelResponseFieldPaths []string
+
+	// Configuration information for a guardrail that you want to use in the request.
+	GuardrailConfig *types.GuardrailStreamConfiguration
 
 	// Inference parameters to pass to the model. ConverseStream supports a base set
 	// of inference parameters. If you need to pass additional parameters that the

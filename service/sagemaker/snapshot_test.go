@@ -482,6 +482,18 @@ func TestCheckSnapshot_CreateLabelingJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateMlflowTrackingServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModel(context.Background(), nil, func(o *Options) {
@@ -631,6 +643,18 @@ func TestCheckSnapshot_CreatePresignedDomainUrl(t *testing.T) {
 	_, err := svc.CreatePresignedDomainUrl(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreatePresignedDomainUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePresignedMlflowTrackingServerUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePresignedMlflowTrackingServerUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePresignedMlflowTrackingServerUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1111,6 +1135,18 @@ func TestCheckSnapshot_DeleteInferenceExperiment(t *testing.T) {
 	_, err := svc.DeleteInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1795,6 +1831,18 @@ func TestCheckSnapshot_DescribeLineageGroup(t *testing.T) {
 	_, err := svc.DescribeLineageGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeLineageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2702,6 +2750,18 @@ func TestCheckSnapshot_ListLineageGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListMlflowTrackingServers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMlflowTrackingServers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMlflowTrackingServers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListModelBiasJobDefinitions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListModelBiasJobDefinitions(context.Background(), nil, func(o *Options) {
@@ -3254,6 +3314,18 @@ func TestCheckSnapshot_StartInferenceExperiment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMlflowTrackingServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMonitoringSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMonitoringSchedule(context.Background(), nil, func(o *Options) {
@@ -3379,6 +3451,18 @@ func TestCheckSnapshot_StopLabelingJob(t *testing.T) {
 	_, err := svc.StopLabelingJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopLabelingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3703,6 +3787,18 @@ func TestCheckSnapshot_UpdateInferenceExperiment(t *testing.T) {
 	_, err := svc.UpdateInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4321,6 +4417,18 @@ func TestUpdateSnapshot_CreateLabelingJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateMlflowTrackingServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModel(context.Background(), nil, func(o *Options) {
@@ -4470,6 +4578,18 @@ func TestUpdateSnapshot_CreatePresignedDomainUrl(t *testing.T) {
 	_, err := svc.CreatePresignedDomainUrl(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreatePresignedDomainUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePresignedMlflowTrackingServerUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePresignedMlflowTrackingServerUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePresignedMlflowTrackingServerUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4950,6 +5070,18 @@ func TestUpdateSnapshot_DeleteInferenceExperiment(t *testing.T) {
 	_, err := svc.DeleteInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5634,6 +5766,18 @@ func TestUpdateSnapshot_DescribeLineageGroup(t *testing.T) {
 	_, err := svc.DescribeLineageGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeLineageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6541,6 +6685,18 @@ func TestUpdateSnapshot_ListLineageGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListMlflowTrackingServers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMlflowTrackingServers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMlflowTrackingServers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListModelBiasJobDefinitions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListModelBiasJobDefinitions(context.Background(), nil, func(o *Options) {
@@ -7093,6 +7249,18 @@ func TestUpdateSnapshot_StartInferenceExperiment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMlflowTrackingServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartMonitoringSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMonitoringSchedule(context.Background(), nil, func(o *Options) {
@@ -7218,6 +7386,18 @@ func TestUpdateSnapshot_StopLabelingJob(t *testing.T) {
 	_, err := svc.StopLabelingJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopLabelingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7542,6 +7722,18 @@ func TestUpdateSnapshot_UpdateInferenceExperiment(t *testing.T) {
 	_, err := svc.UpdateInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMlflowTrackingServer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMlflowTrackingServer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMlflowTrackingServer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

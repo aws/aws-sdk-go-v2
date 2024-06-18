@@ -434,6 +434,29 @@ func (ErrorCode) Values() []ErrorCode {
 	}
 }
 
+type FargateProfileIssueCode string
+
+// Enum values for FargateProfileIssueCode
+const (
+	FargateProfileIssueCodePodExecutionRoleAlreadyInUse FargateProfileIssueCode = "PodExecutionRoleAlreadyInUse"
+	FargateProfileIssueCodeAccessDenied                 FargateProfileIssueCode = "AccessDenied"
+	FargateProfileIssueCodeClusterUnreachable           FargateProfileIssueCode = "ClusterUnreachable"
+	FargateProfileIssueCodeInternalFailure              FargateProfileIssueCode = "InternalFailure"
+)
+
+// Values returns all known values for FargateProfileIssueCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FargateProfileIssueCode) Values() []FargateProfileIssueCode {
+	return []FargateProfileIssueCode{
+		"PodExecutionRoleAlreadyInUse",
+		"AccessDenied",
+		"ClusterUnreachable",
+		"InternalFailure",
+	}
+}
+
 type FargateProfileStatus string
 
 // Enum values for FargateProfileStatus

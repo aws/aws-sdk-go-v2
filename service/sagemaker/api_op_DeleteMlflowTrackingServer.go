@@ -6,45 +6,43 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specific work team. You can see information such as
-// the creation date, the last updated date, membership information, and the work
-// team's Amazon Resource Name (ARN).
-func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamInput, optFns ...func(*Options)) (*DescribeWorkteamOutput, error) {
+// Deletes an MLflow Tracking Server. For more information, see [Clean up MLflow resources].
+//
+// [Clean up MLflow resources]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-cleanup.html.html
+func (c *Client) DeleteMlflowTrackingServer(ctx context.Context, params *DeleteMlflowTrackingServerInput, optFns ...func(*Options)) (*DeleteMlflowTrackingServerOutput, error) {
 	if params == nil {
-		params = &DescribeWorkteamInput{}
+		params = &DeleteMlflowTrackingServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkteam", params, optFns, c.addOperationDescribeWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMlflowTrackingServer", params, optFns, c.addOperationDeleteMlflowTrackingServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWorkteamOutput)
+	out := result.(*DeleteMlflowTrackingServerOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWorkteamInput struct {
+type DeleteMlflowTrackingServerInput struct {
 
-	// The name of the work team to return a description of.
+	// The name of the the tracking server to delete.
 	//
 	// This member is required.
-	WorkteamName *string
+	TrackingServerName *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeWorkteamOutput struct {
+type DeleteMlflowTrackingServerOutput struct {
 
-	// A Workteam instance that contains information about the work team.
-	//
-	// This member is required.
-	Workteam *types.Workteam
+	// A TrackingServerArn object, the ARN of the tracking server that is deleted if
+	// successfully found.
+	TrackingServerArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,19 +50,19 @@ type DescribeWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMlflowTrackingServer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMlflowTrackingServer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkteam"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMlflowTrackingServer"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -113,10 +111,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDescribeWorkteamValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteMlflowTrackingServerValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkteam(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMlflowTrackingServer(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -137,10 +135,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWorkteam(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteMlflowTrackingServer(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkteam",
+		OperationName: "DeleteMlflowTrackingServer",
 	}
 }

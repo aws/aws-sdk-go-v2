@@ -3470,6 +3470,25 @@ func (InstanceType) Values() []InstanceType {
 	}
 }
 
+type IsTrackingServerActive string
+
+// Enum values for IsTrackingServerActive
+const (
+	IsTrackingServerActiveActive   IsTrackingServerActive = "Active"
+	IsTrackingServerActiveInactive IsTrackingServerActive = "Inactive"
+)
+
+// Values returns all known values for IsTrackingServerActive. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IsTrackingServerActive) Values() []IsTrackingServerActive {
+	return []IsTrackingServerActive{
+		"Active",
+		"Inactive",
+	}
+}
+
 type JobType string
 
 // Enum values for JobType
@@ -6331,6 +6350,27 @@ func (SortPipelinesBy) Values() []SortPipelinesBy {
 	}
 }
 
+type SortTrackingServerBy string
+
+// Enum values for SortTrackingServerBy
+const (
+	SortTrackingServerByName         SortTrackingServerBy = "Name"
+	SortTrackingServerByCreationTime SortTrackingServerBy = "CreationTime"
+	SortTrackingServerByStatus       SortTrackingServerBy = "Status"
+)
+
+// Values returns all known values for SortTrackingServerBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortTrackingServerBy) Values() []SortTrackingServerBy {
+	return []SortTrackingServerBy{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
 type SortTrialComponentsBy string
 
 // Enum values for SortTrialComponentsBy
@@ -6800,6 +6840,76 @@ func (ThroughputMode) Values() []ThroughputMode {
 	return []ThroughputMode{
 		"OnDemand",
 		"Provisioned",
+	}
+}
+
+type TrackingServerSize string
+
+// Enum values for TrackingServerSize
+const (
+	TrackingServerSizeS TrackingServerSize = "Small"
+	TrackingServerSizeM TrackingServerSize = "Medium"
+	TrackingServerSizeL TrackingServerSize = "Large"
+)
+
+// Values returns all known values for TrackingServerSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrackingServerSize) Values() []TrackingServerSize {
+	return []TrackingServerSize{
+		"Small",
+		"Medium",
+		"Large",
+	}
+}
+
+type TrackingServerStatus string
+
+// Enum values for TrackingServerStatus
+const (
+	TrackingServerStatusCreating              TrackingServerStatus = "Creating"
+	TrackingServerStatusCreated               TrackingServerStatus = "Created"
+	TrackingServerStatusCreateFailed          TrackingServerStatus = "CreateFailed"
+	TrackingServerStatusUpdating              TrackingServerStatus = "Updating"
+	TrackingServerStatusUpdated               TrackingServerStatus = "Updated"
+	TrackingServerStatusUpdateFailed          TrackingServerStatus = "UpdateFailed"
+	TrackingServerStatusDeleting              TrackingServerStatus = "Deleting"
+	TrackingServerStatusDeleteFailed          TrackingServerStatus = "DeleteFailed"
+	TrackingServerStatusStopping              TrackingServerStatus = "Stopping"
+	TrackingServerStatusStopped               TrackingServerStatus = "Stopped"
+	TrackingServerStatusStopFailed            TrackingServerStatus = "StopFailed"
+	TrackingServerStatusStarting              TrackingServerStatus = "Starting"
+	TrackingServerStatusStarted               TrackingServerStatus = "Started"
+	TrackingServerStatusStartFailed           TrackingServerStatus = "StartFailed"
+	TrackingServerStatusMaintenanceInProgress TrackingServerStatus = "MaintenanceInProgress"
+	TrackingServerStatusMaintenanceComplete   TrackingServerStatus = "MaintenanceComplete"
+	TrackingServerStatusMaintenanceFailed     TrackingServerStatus = "MaintenanceFailed"
+)
+
+// Values returns all known values for TrackingServerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrackingServerStatus) Values() []TrackingServerStatus {
+	return []TrackingServerStatus{
+		"Creating",
+		"Created",
+		"CreateFailed",
+		"Updating",
+		"Updated",
+		"UpdateFailed",
+		"Deleting",
+		"DeleteFailed",
+		"Stopping",
+		"Stopped",
+		"StopFailed",
+		"Starting",
+		"Started",
+		"StartFailed",
+		"MaintenanceInProgress",
+		"MaintenanceComplete",
+		"MaintenanceFailed",
 	}
 }
 

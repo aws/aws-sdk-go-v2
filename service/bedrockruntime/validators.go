@@ -112,6 +112,11 @@ func validateContentBlock(v types.ContentBlock) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContentBlock"}
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberGuardContent:
+		if err := validateGuardrailConverseContentBlock(uv.Value); err != nil {
+			invalidParams.AddNested("[guardContent]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberImage:
 		if err := validateImageBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[image]", err.(smithy.InvalidParamsError))
@@ -144,6 +149,76 @@ func validateContentBlocks(v []types.ContentBlock) error {
 		if err := validateContentBlock(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailConfiguration(v *types.GuardrailConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailConfiguration"}
+	if v.GuardrailIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailIdentifier"))
+	}
+	if v.GuardrailVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailConverseContentBlock(v types.GuardrailConverseContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailConverseContentBlock"}
+	switch uv := v.(type) {
+	case *types.GuardrailConverseContentBlockMemberText:
+		if err := validateGuardrailConverseTextBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[text]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailConverseTextBlock(v *types.GuardrailConverseTextBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailConverseTextBlock"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailStreamConfiguration(v *types.GuardrailStreamConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailStreamConfiguration"}
+	if v.GuardrailIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailIdentifier"))
+	}
+	if v.GuardrailVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -216,6 +291,42 @@ func validateSpecificToolChoice(v *types.SpecificToolChoice) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SpecificToolChoice"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSystemContentBlock(v types.SystemContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemContentBlock"}
+	switch uv := v.(type) {
+	case *types.SystemContentBlockMemberGuardContent:
+		if err := validateGuardrailConverseContentBlock(uv.Value); err != nil {
+			invalidParams.AddNested("[guardContent]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSystemContentBlocks(v []types.SystemContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemContentBlocks"}
+	for i := range v {
+		if err := validateSystemContentBlock(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -415,9 +526,19 @@ func validateOpConverseInput(v *ConverseInput) error {
 			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.System != nil {
+		if err := validateSystemContentBlocks(v.System); err != nil {
+			invalidParams.AddNested("System", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ToolConfig != nil {
 		if err := validateToolConfiguration(v.ToolConfig); err != nil {
 			invalidParams.AddNested("ToolConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GuardrailConfig != nil {
+		if err := validateGuardrailConfiguration(v.GuardrailConfig); err != nil {
+			invalidParams.AddNested("GuardrailConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -442,9 +563,19 @@ func validateOpConverseStreamInput(v *ConverseStreamInput) error {
 			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.System != nil {
+		if err := validateSystemContentBlocks(v.System); err != nil {
+			invalidParams.AddNested("System", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ToolConfig != nil {
 		if err := validateToolConfiguration(v.ToolConfig); err != nil {
 			invalidParams.AddNested("ToolConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GuardrailConfig != nil {
+		if err := validateGuardrailStreamConfiguration(v.GuardrailConfig); err != nil {
+			invalidParams.AddNested("GuardrailConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

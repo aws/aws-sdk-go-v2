@@ -11,40 +11,54 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a specific work team. You can see information such as
-// the creation date, the last updated date, membership information, and the work
-// team's Amazon Resource Name (ARN).
-func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamInput, optFns ...func(*Options)) (*DescribeWorkteamOutput, error) {
+// Updates properties of an existing MLflow Tracking Server.
+func (c *Client) UpdateMlflowTrackingServer(ctx context.Context, params *UpdateMlflowTrackingServerInput, optFns ...func(*Options)) (*UpdateMlflowTrackingServerOutput, error) {
 	if params == nil {
-		params = &DescribeWorkteamInput{}
+		params = &UpdateMlflowTrackingServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkteam", params, optFns, c.addOperationDescribeWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMlflowTrackingServer", params, optFns, c.addOperationUpdateMlflowTrackingServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWorkteamOutput)
+	out := result.(*UpdateMlflowTrackingServerOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWorkteamInput struct {
+type UpdateMlflowTrackingServerInput struct {
 
-	// The name of the work team to return a description of.
+	// The name of the MLflow Tracking Server to update.
 	//
 	// This member is required.
-	WorkteamName *string
+	TrackingServerName *string
+
+	// The new S3 URI for the general purpose bucket to use as the artifact store for
+	// the MLflow Tracking Server.
+	ArtifactStoreUri *string
+
+	// Whether to enable or disable automatic registration of new MLflow models to the
+	// SageMaker Model Registry. To enable automatic model registration, set this value
+	// to True . To disable automatic model registration, set this value to False . If
+	// not specified, AutomaticModelRegistration defaults to False
+	AutomaticModelRegistration *bool
+
+	// The new size for the MLflow Tracking Server.
+	TrackingServerSize types.TrackingServerSize
+
+	// The new weekly maintenance window start day and time to update. The maintenance
+	// window day and time should be in Coordinated Universal Time (UTC) 24-hour
+	// standard time. For example: TUE:03:30.
+	WeeklyMaintenanceWindowStart *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeWorkteamOutput struct {
+type UpdateMlflowTrackingServerOutput struct {
 
-	// A Workteam instance that contains information about the work team.
-	//
-	// This member is required.
-	Workteam *types.Workteam
+	// The ARN of the updated MLflow Tracking Server.
+	TrackingServerArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,19 +66,19 @@ type DescribeWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMlflowTrackingServer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkteam{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMlflowTrackingServer{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkteam"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMlflowTrackingServer"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -113,10 +127,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDescribeWorkteamValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateMlflowTrackingServerValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkteam(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMlflowTrackingServer(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -137,10 +151,10 @@ func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWorkteam(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateMlflowTrackingServer(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkteam",
+		OperationName: "UpdateMlflowTrackingServer",
 	}
 }
