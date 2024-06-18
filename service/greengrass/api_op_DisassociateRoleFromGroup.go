@@ -106,6 +106,9 @@ func (c *Client) addOperationDisassociateRoleFromGroupMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateRoleFromGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

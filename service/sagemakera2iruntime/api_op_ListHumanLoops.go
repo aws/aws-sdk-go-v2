@@ -133,6 +133,9 @@ func (c *Client) addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListHumanLoopsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListHumanLoopsAPIClient is a client that implements the ListHumanLoops
-// operation.
-type ListHumanLoopsAPIClient interface {
-	ListHumanLoops(context.Context, *ListHumanLoopsInput, ...func(*Options)) (*ListHumanLoopsOutput, error)
-}
-
-var _ ListHumanLoopsAPIClient = (*Client)(nil)
 
 // ListHumanLoopsPaginatorOptions is the paginator options for ListHumanLoops
 type ListHumanLoopsPaginatorOptions struct {
@@ -230,6 +225,9 @@ func (p *ListHumanLoopsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHumanLoops(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListHumanLoopsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListHumanLoopsAPIClient is a client that implements the ListHumanLoops
+// operation.
+type ListHumanLoopsAPIClient interface {
+	ListHumanLoops(context.Context, *ListHumanLoopsInput, ...func(*Options)) (*ListHumanLoopsOutput, error)
+}
+
+var _ ListHumanLoopsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHumanLoops(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

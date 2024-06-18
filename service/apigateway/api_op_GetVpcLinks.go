@@ -113,6 +113,9 @@ func (c *Client) addOperationGetVpcLinksMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVpcLinks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,13 +139,6 @@ func (c *Client) addOperationGetVpcLinksMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// GetVpcLinksAPIClient is a client that implements the GetVpcLinks operation.
-type GetVpcLinksAPIClient interface {
-	GetVpcLinks(context.Context, *GetVpcLinksInput, ...func(*Options)) (*GetVpcLinksOutput, error)
-}
-
-var _ GetVpcLinksAPIClient = (*Client)(nil)
 
 // GetVpcLinksPaginatorOptions is the paginator options for GetVpcLinks
 type GetVpcLinksPaginatorOptions struct {
@@ -208,6 +204,9 @@ func (p *GetVpcLinksPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetVpcLinks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +225,13 @@ func (p *GetVpcLinksPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// GetVpcLinksAPIClient is a client that implements the GetVpcLinks operation.
+type GetVpcLinksAPIClient interface {
+	GetVpcLinks(context.Context, *GetVpcLinksInput, ...func(*Options)) (*GetVpcLinksOutput, error)
+}
+
+var _ GetVpcLinksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetVpcLinks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

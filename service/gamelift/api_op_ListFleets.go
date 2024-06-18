@@ -158,6 +158,9 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFleets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -178,13 +181,6 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListFleetsAPIClient is a client that implements the ListFleets operation.
-type ListFleetsAPIClient interface {
-	ListFleets(context.Context, *ListFleetsInput, ...func(*Options)) (*ListFleetsOutput, error)
-}
-
-var _ ListFleetsAPIClient = (*Client)(nil)
 
 // ListFleetsPaginatorOptions is the paginator options for ListFleets
 type ListFleetsPaginatorOptions struct {
@@ -250,6 +246,9 @@ func (p *ListFleetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFleets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +267,13 @@ func (p *ListFleetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListFleetsAPIClient is a client that implements the ListFleets operation.
+type ListFleetsAPIClient interface {
+	ListFleets(context.Context, *ListFleetsInput, ...func(*Options)) (*ListFleetsOutput, error)
+}
+
+var _ ListFleetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFleets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

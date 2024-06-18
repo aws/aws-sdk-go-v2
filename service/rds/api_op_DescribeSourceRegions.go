@@ -146,6 +146,9 @@ func (c *Client) addOperationDescribeSourceRegionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSourceRegionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationDescribeSourceRegionsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeSourceRegionsAPIClient is a client that implements the
-// DescribeSourceRegions operation.
-type DescribeSourceRegionsAPIClient interface {
-	DescribeSourceRegions(context.Context, *DescribeSourceRegionsInput, ...func(*Options)) (*DescribeSourceRegionsOutput, error)
-}
-
-var _ DescribeSourceRegionsAPIClient = (*Client)(nil)
 
 // DescribeSourceRegionsPaginatorOptions is the paginator options for
 // DescribeSourceRegions
@@ -248,6 +243,9 @@ func (p *DescribeSourceRegionsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSourceRegions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -266,6 +264,14 @@ func (p *DescribeSourceRegionsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeSourceRegionsAPIClient is a client that implements the
+// DescribeSourceRegions operation.
+type DescribeSourceRegionsAPIClient interface {
+	DescribeSourceRegions(context.Context, *DescribeSourceRegionsInput, ...func(*Options)) (*DescribeSourceRegionsOutput, error)
+}
+
+var _ DescribeSourceRegionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSourceRegions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

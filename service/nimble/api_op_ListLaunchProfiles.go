@@ -121,6 +121,9 @@ func (c *Client) addOperationListLaunchProfilesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLaunchProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListLaunchProfilesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListLaunchProfilesAPIClient is a client that implements the ListLaunchProfiles
-// operation.
-type ListLaunchProfilesAPIClient interface {
-	ListLaunchProfiles(context.Context, *ListLaunchProfilesInput, ...func(*Options)) (*ListLaunchProfilesOutput, error)
-}
-
-var _ ListLaunchProfilesAPIClient = (*Client)(nil)
 
 // ListLaunchProfilesPaginatorOptions is the paginator options for
 // ListLaunchProfiles
@@ -217,6 +212,9 @@ func (p *ListLaunchProfilesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLaunchProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListLaunchProfilesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListLaunchProfilesAPIClient is a client that implements the ListLaunchProfiles
+// operation.
+type ListLaunchProfilesAPIClient interface {
+	ListLaunchProfiles(context.Context, *ListLaunchProfilesInput, ...func(*Options)) (*ListLaunchProfilesOutput, error)
+}
+
+var _ ListLaunchProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLaunchProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

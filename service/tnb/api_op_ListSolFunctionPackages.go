@@ -121,6 +121,9 @@ func (c *Client) addOperationListSolFunctionPackagesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSolFunctionPackages(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListSolFunctionPackagesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListSolFunctionPackagesAPIClient is a client that implements the
-// ListSolFunctionPackages operation.
-type ListSolFunctionPackagesAPIClient interface {
-	ListSolFunctionPackages(context.Context, *ListSolFunctionPackagesInput, ...func(*Options)) (*ListSolFunctionPackagesOutput, error)
-}
-
-var _ ListSolFunctionPackagesAPIClient = (*Client)(nil)
 
 // ListSolFunctionPackagesPaginatorOptions is the paginator options for
 // ListSolFunctionPackages
@@ -215,6 +210,9 @@ func (p *ListSolFunctionPackagesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSolFunctionPackages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListSolFunctionPackagesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListSolFunctionPackagesAPIClient is a client that implements the
+// ListSolFunctionPackages operation.
+type ListSolFunctionPackagesAPIClient interface {
+	ListSolFunctionPackages(context.Context, *ListSolFunctionPackagesInput, ...func(*Options)) (*ListSolFunctionPackagesOutput, error)
+}
+
+var _ ListSolFunctionPackagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSolFunctionPackages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

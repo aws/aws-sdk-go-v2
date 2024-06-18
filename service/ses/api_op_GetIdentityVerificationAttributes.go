@@ -139,6 +139,9 @@ func (c *Client) addOperationGetIdentityVerificationAttributesMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityVerificationAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationGetIdentityVerificationAttributesMiddlewares(stack 
 	}
 	return nil
 }
-
-// GetIdentityVerificationAttributesAPIClient is a client that implements the
-// GetIdentityVerificationAttributes operation.
-type GetIdentityVerificationAttributesAPIClient interface {
-	GetIdentityVerificationAttributes(context.Context, *GetIdentityVerificationAttributesInput, ...func(*Options)) (*GetIdentityVerificationAttributesOutput, error)
-}
-
-var _ GetIdentityVerificationAttributesAPIClient = (*Client)(nil)
 
 // IdentityExistsWaiterOptions are waiter options for IdentityExistsWaiter
 type IdentityExistsWaiterOptions struct {
@@ -286,7 +281,13 @@ func (w *IdentityExistsWaiter) WaitForOutput(ctx context.Context, params *GetIde
 		}
 
 		out, err := w.client.GetIdentityVerificationAttributes(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -358,6 +359,14 @@ func identityExistsStateRetryable(ctx context.Context, input *GetIdentityVerific
 
 	return true, nil
 }
+
+// GetIdentityVerificationAttributesAPIClient is a client that implements the
+// GetIdentityVerificationAttributes operation.
+type GetIdentityVerificationAttributesAPIClient interface {
+	GetIdentityVerificationAttributes(context.Context, *GetIdentityVerificationAttributesInput, ...func(*Options)) (*GetIdentityVerificationAttributesOutput, error)
+}
+
+var _ GetIdentityVerificationAttributesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetIdentityVerificationAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

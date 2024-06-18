@@ -110,6 +110,9 @@ func (c *Client) addOperationListEulasMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEulas(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,13 +133,6 @@ func (c *Client) addOperationListEulasMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListEulasAPIClient is a client that implements the ListEulas operation.
-type ListEulasAPIClient interface {
-	ListEulas(context.Context, *ListEulasInput, ...func(*Options)) (*ListEulasOutput, error)
-}
-
-var _ ListEulasAPIClient = (*Client)(nil)
 
 // ListEulasPaginatorOptions is the paginator options for ListEulas
 type ListEulasPaginatorOptions struct {
@@ -189,6 +185,9 @@ func (p *ListEulasPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEulas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -207,6 +206,13 @@ func (p *ListEulasPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListEulasAPIClient is a client that implements the ListEulas operation.
+type ListEulasAPIClient interface {
+	ListEulas(context.Context, *ListEulasInput, ...func(*Options)) (*ListEulasOutput, error)
+}
+
+var _ ListEulasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEulas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -115,6 +115,9 @@ func (c *Client) addOperationGetInlinePolicyForPermissionSetMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetInlinePolicyForPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}

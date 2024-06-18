@@ -133,6 +133,9 @@ func (c *Client) addOperationSearchContactsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchContactsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationSearchContactsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// SearchContactsAPIClient is a client that implements the SearchContacts
-// operation.
-type SearchContactsAPIClient interface {
-	SearchContacts(context.Context, *SearchContactsInput, ...func(*Options)) (*SearchContactsOutput, error)
-}
-
-var _ SearchContactsAPIClient = (*Client)(nil)
 
 // SearchContactsPaginatorOptions is the paginator options for SearchContacts
 type SearchContactsPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *SearchContactsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchContacts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *SearchContactsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// SearchContactsAPIClient is a client that implements the SearchContacts
+// operation.
+type SearchContactsAPIClient interface {
+	SearchContacts(context.Context, *SearchContactsInput, ...func(*Options)) (*SearchContactsOutput, error)
+}
+
+var _ SearchContactsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchContacts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

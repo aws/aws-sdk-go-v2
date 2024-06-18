@@ -1,3 +1,5 @@
+software.amazon.smithy.aws.go.codegen.customization.AwsWaiters
+software.amazon.smithy.aws.go.codegen.customization.AwsPaginators
 software.amazon.smithy.aws.go.codegen.customization.auth.BackfillSigV4ATrait
 software.amazon.smithy.aws.go.codegen.AddProtocols
 software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode
@@ -78,3 +80,6 @@ software.amazon.smithy.go.codegen.integration.MiddlewareStackSnapshotTests
 software.amazon.smithy.aws.go.codegen.customization.s3.S3ExpiresShapeCustomization
 software.amazon.smithy.aws.go.codegen.ClockSkewGenerator
 software.amazon.smithy.aws.go.codegen.customization.AccountIDEndpointRouting
+software.amazon.smithy.aws.go.codegen.customization.RetryModeUserAgent
+software.amazon.smithy.aws.go.codegen.customization.RequestCompressionUserAgent
+software.amazon.smithy.aws.go.codegen.customization.s3.ExpressUserAgent

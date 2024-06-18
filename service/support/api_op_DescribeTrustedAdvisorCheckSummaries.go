@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeTrustedAdvisorCheckSummariesMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrustedAdvisorCheckSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}

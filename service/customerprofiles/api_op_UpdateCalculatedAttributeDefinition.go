@@ -151,6 +151,9 @@ func (c *Client) addOperationUpdateCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

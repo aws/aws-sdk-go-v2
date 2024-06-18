@@ -119,6 +119,9 @@ func (c *Client) addOperationListAppliedSchemaArnsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAppliedSchemaArnsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListAppliedSchemaArnsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAppliedSchemaArnsAPIClient is a client that implements the
-// ListAppliedSchemaArns operation.
-type ListAppliedSchemaArnsAPIClient interface {
-	ListAppliedSchemaArns(context.Context, *ListAppliedSchemaArnsInput, ...func(*Options)) (*ListAppliedSchemaArnsOutput, error)
-}
-
-var _ ListAppliedSchemaArnsAPIClient = (*Client)(nil)
 
 // ListAppliedSchemaArnsPaginatorOptions is the paginator options for
 // ListAppliedSchemaArns
@@ -215,6 +210,9 @@ func (p *ListAppliedSchemaArnsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppliedSchemaArns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListAppliedSchemaArnsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAppliedSchemaArnsAPIClient is a client that implements the
+// ListAppliedSchemaArns operation.
+type ListAppliedSchemaArnsAPIClient interface {
+	ListAppliedSchemaArns(context.Context, *ListAppliedSchemaArnsInput, ...func(*Options)) (*ListAppliedSchemaArnsOutput, error)
+}
+
+var _ ListAppliedSchemaArnsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppliedSchemaArns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

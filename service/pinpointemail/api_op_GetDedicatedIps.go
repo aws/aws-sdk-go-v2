@@ -124,6 +124,9 @@ func (c *Client) addOperationGetDedicatedIpsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDedicatedIps(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationGetDedicatedIpsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetDedicatedIpsAPIClient is a client that implements the GetDedicatedIps
-// operation.
-type GetDedicatedIpsAPIClient interface {
-	GetDedicatedIps(context.Context, *GetDedicatedIpsInput, ...func(*Options)) (*GetDedicatedIpsOutput, error)
-}
-
-var _ GetDedicatedIpsAPIClient = (*Client)(nil)
 
 // GetDedicatedIpsPaginatorOptions is the paginator options for GetDedicatedIps
 type GetDedicatedIpsPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *GetDedicatedIpsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDedicatedIps(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *GetDedicatedIpsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetDedicatedIpsAPIClient is a client that implements the GetDedicatedIps
+// operation.
+type GetDedicatedIpsAPIClient interface {
+	GetDedicatedIps(context.Context, *GetDedicatedIpsInput, ...func(*Options)) (*GetDedicatedIpsOutput, error)
+}
+
+var _ GetDedicatedIpsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDedicatedIps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

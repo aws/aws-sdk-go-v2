@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeGlobalNetworksMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGlobalNetworks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationDescribeGlobalNetworksMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeGlobalNetworksAPIClient is a client that implements the
-// DescribeGlobalNetworks operation.
-type DescribeGlobalNetworksAPIClient interface {
-	DescribeGlobalNetworks(context.Context, *DescribeGlobalNetworksInput, ...func(*Options)) (*DescribeGlobalNetworksOutput, error)
-}
-
-var _ DescribeGlobalNetworksAPIClient = (*Client)(nil)
 
 // DescribeGlobalNetworksPaginatorOptions is the paginator options for
 // DescribeGlobalNetworks
@@ -209,6 +204,9 @@ func (p *DescribeGlobalNetworksPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeGlobalNetworks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *DescribeGlobalNetworksPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeGlobalNetworksAPIClient is a client that implements the
+// DescribeGlobalNetworks operation.
+type DescribeGlobalNetworksAPIClient interface {
+	DescribeGlobalNetworks(context.Context, *DescribeGlobalNetworksInput, ...func(*Options)) (*DescribeGlobalNetworksOutput, error)
+}
+
+var _ DescribeGlobalNetworksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeGlobalNetworks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

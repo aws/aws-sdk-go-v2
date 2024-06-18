@@ -119,6 +119,9 @@ func (c *Client) addOperationListPlacementsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPlacementsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListPlacementsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListPlacementsAPIClient is a client that implements the ListPlacements
-// operation.
-type ListPlacementsAPIClient interface {
-	ListPlacements(context.Context, *ListPlacementsInput, ...func(*Options)) (*ListPlacementsOutput, error)
-}
-
-var _ ListPlacementsAPIClient = (*Client)(nil)
 
 // ListPlacementsPaginatorOptions is the paginator options for ListPlacements
 type ListPlacementsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListPlacementsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPlacements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListPlacementsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListPlacementsAPIClient is a client that implements the ListPlacements
+// operation.
+type ListPlacementsAPIClient interface {
+	ListPlacements(context.Context, *ListPlacementsInput, ...func(*Options)) (*ListPlacementsOutput, error)
+}
+
+var _ ListPlacementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPlacements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

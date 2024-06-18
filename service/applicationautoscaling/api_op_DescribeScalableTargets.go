@@ -271,6 +271,9 @@ func (c *Client) addOperationDescribeScalableTargetsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScalableTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -294,14 +297,6 @@ func (c *Client) addOperationDescribeScalableTargetsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeScalableTargetsAPIClient is a client that implements the
-// DescribeScalableTargets operation.
-type DescribeScalableTargetsAPIClient interface {
-	DescribeScalableTargets(context.Context, *DescribeScalableTargetsInput, ...func(*Options)) (*DescribeScalableTargetsOutput, error)
-}
-
-var _ DescribeScalableTargetsAPIClient = (*Client)(nil)
 
 // DescribeScalableTargetsPaginatorOptions is the paginator options for
 // DescribeScalableTargets
@@ -374,6 +369,9 @@ func (p *DescribeScalableTargetsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeScalableTargets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -392,6 +390,14 @@ func (p *DescribeScalableTargetsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeScalableTargetsAPIClient is a client that implements the
+// DescribeScalableTargets operation.
+type DescribeScalableTargetsAPIClient interface {
+	DescribeScalableTargets(context.Context, *DescribeScalableTargetsInput, ...func(*Options)) (*DescribeScalableTargetsOutput, error)
+}
+
+var _ DescribeScalableTargetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeScalableTargets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

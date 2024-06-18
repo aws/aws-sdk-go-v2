@@ -124,6 +124,9 @@ func (c *Client) addOperationListCollaborationPrivacyBudgetTemplatesMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCollaborationPrivacyBudgetTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListCollaborationPrivacyBudgetTemplatesMiddlewares(
 	}
 	return nil
 }
-
-// ListCollaborationPrivacyBudgetTemplatesAPIClient is a client that implements
-// the ListCollaborationPrivacyBudgetTemplates operation.
-type ListCollaborationPrivacyBudgetTemplatesAPIClient interface {
-	ListCollaborationPrivacyBudgetTemplates(context.Context, *ListCollaborationPrivacyBudgetTemplatesInput, ...func(*Options)) (*ListCollaborationPrivacyBudgetTemplatesOutput, error)
-}
-
-var _ ListCollaborationPrivacyBudgetTemplatesAPIClient = (*Client)(nil)
 
 // ListCollaborationPrivacyBudgetTemplatesPaginatorOptions is the paginator
 // options for ListCollaborationPrivacyBudgetTemplates
@@ -224,6 +219,9 @@ func (p *ListCollaborationPrivacyBudgetTemplatesPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCollaborationPrivacyBudgetTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListCollaborationPrivacyBudgetTemplatesPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListCollaborationPrivacyBudgetTemplatesAPIClient is a client that implements
+// the ListCollaborationPrivacyBudgetTemplates operation.
+type ListCollaborationPrivacyBudgetTemplatesAPIClient interface {
+	ListCollaborationPrivacyBudgetTemplates(context.Context, *ListCollaborationPrivacyBudgetTemplatesInput, ...func(*Options)) (*ListCollaborationPrivacyBudgetTemplatesOutput, error)
+}
+
+var _ ListCollaborationPrivacyBudgetTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCollaborationPrivacyBudgetTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

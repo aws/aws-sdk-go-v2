@@ -273,6 +273,9 @@ func (c *Client) addOperationGetLoadBalancerMetricDataMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLoadBalancerMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}

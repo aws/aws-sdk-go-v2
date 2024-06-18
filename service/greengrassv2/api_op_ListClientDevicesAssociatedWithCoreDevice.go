@@ -118,6 +118,9 @@ func (c *Client) addOperationListClientDevicesAssociatedWithCoreDeviceMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListClientDevicesAssociatedWithCoreDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListClientDevicesAssociatedWithCoreDeviceMiddleware
 	}
 	return nil
 }
-
-// ListClientDevicesAssociatedWithCoreDeviceAPIClient is a client that implements
-// the ListClientDevicesAssociatedWithCoreDevice operation.
-type ListClientDevicesAssociatedWithCoreDeviceAPIClient interface {
-	ListClientDevicesAssociatedWithCoreDevice(context.Context, *ListClientDevicesAssociatedWithCoreDeviceInput, ...func(*Options)) (*ListClientDevicesAssociatedWithCoreDeviceOutput, error)
-}
-
-var _ ListClientDevicesAssociatedWithCoreDeviceAPIClient = (*Client)(nil)
 
 // ListClientDevicesAssociatedWithCoreDevicePaginatorOptions is the paginator
 // options for ListClientDevicesAssociatedWithCoreDevice
@@ -216,6 +211,9 @@ func (p *ListClientDevicesAssociatedWithCoreDevicePaginator) NextPage(ctx contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClientDevicesAssociatedWithCoreDevice(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListClientDevicesAssociatedWithCoreDevicePaginator) NextPage(ctx contex
 
 	return result, nil
 }
+
+// ListClientDevicesAssociatedWithCoreDeviceAPIClient is a client that implements
+// the ListClientDevicesAssociatedWithCoreDevice operation.
+type ListClientDevicesAssociatedWithCoreDeviceAPIClient interface {
+	ListClientDevicesAssociatedWithCoreDevice(context.Context, *ListClientDevicesAssociatedWithCoreDeviceInput, ...func(*Options)) (*ListClientDevicesAssociatedWithCoreDeviceOutput, error)
+}
+
+var _ ListClientDevicesAssociatedWithCoreDeviceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClientDevicesAssociatedWithCoreDevice(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

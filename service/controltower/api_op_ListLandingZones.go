@@ -118,6 +118,9 @@ func (c *Client) addOperationListLandingZonesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLandingZones(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListLandingZonesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListLandingZonesAPIClient is a client that implements the ListLandingZones
-// operation.
-type ListLandingZonesAPIClient interface {
-	ListLandingZones(context.Context, *ListLandingZonesInput, ...func(*Options)) (*ListLandingZonesOutput, error)
-}
-
-var _ ListLandingZonesAPIClient = (*Client)(nil)
 
 // ListLandingZonesPaginatorOptions is the paginator options for ListLandingZones
 type ListLandingZonesPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListLandingZonesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLandingZones(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListLandingZonesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListLandingZonesAPIClient is a client that implements the ListLandingZones
+// operation.
+type ListLandingZonesAPIClient interface {
+	ListLandingZones(context.Context, *ListLandingZonesInput, ...func(*Options)) (*ListLandingZonesOutput, error)
+}
+
+var _ ListLandingZonesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLandingZones(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

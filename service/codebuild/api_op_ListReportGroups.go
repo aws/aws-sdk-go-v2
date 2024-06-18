@@ -138,6 +138,9 @@ func (c *Client) addOperationListReportGroupsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReportGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListReportGroupsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListReportGroupsAPIClient is a client that implements the ListReportGroups
-// operation.
-type ListReportGroupsAPIClient interface {
-	ListReportGroups(context.Context, *ListReportGroupsInput, ...func(*Options)) (*ListReportGroupsOutput, error)
-}
-
-var _ ListReportGroupsAPIClient = (*Client)(nil)
 
 // ListReportGroupsPaginatorOptions is the paginator options for ListReportGroups
 type ListReportGroupsPaginatorOptions struct {
@@ -232,6 +227,9 @@ func (p *ListReportGroupsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReportGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListReportGroupsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListReportGroupsAPIClient is a client that implements the ListReportGroups
+// operation.
+type ListReportGroupsAPIClient interface {
+	ListReportGroups(context.Context, *ListReportGroupsInput, ...func(*Options)) (*ListReportGroupsOutput, error)
+}
+
+var _ ListReportGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReportGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

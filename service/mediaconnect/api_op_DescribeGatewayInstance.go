@@ -107,6 +107,9 @@ func (c *Client) addOperationDescribeGatewayInstanceMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeGatewayInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

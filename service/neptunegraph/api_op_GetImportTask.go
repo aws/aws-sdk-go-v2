@@ -188,6 +188,9 @@ func (c *Client) addOperationGetImportTaskMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -211,13 +214,6 @@ func (c *Client) addOperationGetImportTaskMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetImportTaskAPIClient is a client that implements the GetImportTask operation.
-type GetImportTaskAPIClient interface {
-	GetImportTask(context.Context, *GetImportTaskInput, ...func(*Options)) (*GetImportTaskOutput, error)
-}
-
-var _ GetImportTaskAPIClient = (*Client)(nil)
 
 // ImportTaskSuccessfulWaiterOptions are waiter options for
 // ImportTaskSuccessfulWaiter
@@ -336,7 +332,13 @@ func (w *ImportTaskSuccessfulWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.GetImportTask(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -579,7 +581,13 @@ func (w *ImportTaskCancelledWaiter) WaitForOutput(ctx context.Context, params *G
 		}
 
 		out, err := w.client.GetImportTask(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -657,6 +665,13 @@ func importTaskCancelledStateRetryable(ctx context.Context, input *GetImportTask
 
 	return true, nil
 }
+
+// GetImportTaskAPIClient is a client that implements the GetImportTask operation.
+type GetImportTaskAPIClient interface {
+	GetImportTask(context.Context, *GetImportTaskInput, ...func(*Options)) (*GetImportTaskOutput, error)
+}
+
+var _ GetImportTaskAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetImportTask(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

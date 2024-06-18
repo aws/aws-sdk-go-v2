@@ -122,6 +122,9 @@ func (c *Client) addOperationListMilestonesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMilestonesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListMilestonesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListMilestonesAPIClient is a client that implements the ListMilestones
-// operation.
-type ListMilestonesAPIClient interface {
-	ListMilestones(context.Context, *ListMilestonesInput, ...func(*Options)) (*ListMilestonesOutput, error)
-}
-
-var _ ListMilestonesAPIClient = (*Client)(nil)
 
 // ListMilestonesPaginatorOptions is the paginator options for ListMilestones
 type ListMilestonesPaginatorOptions struct {
@@ -217,6 +212,9 @@ func (p *ListMilestonesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMilestones(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListMilestonesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListMilestonesAPIClient is a client that implements the ListMilestones
+// operation.
+type ListMilestonesAPIClient interface {
+	ListMilestones(context.Context, *ListMilestonesInput, ...func(*Options)) (*ListMilestonesOutput, error)
+}
+
+var _ ListMilestonesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMilestones(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

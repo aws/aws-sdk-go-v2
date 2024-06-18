@@ -120,6 +120,9 @@ func (c *Client) addOperationListWebExperiencesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWebExperiencesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListWebExperiencesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListWebExperiencesAPIClient is a client that implements the ListWebExperiences
-// operation.
-type ListWebExperiencesAPIClient interface {
-	ListWebExperiences(context.Context, *ListWebExperiencesInput, ...func(*Options)) (*ListWebExperiencesOutput, error)
-}
-
-var _ ListWebExperiencesAPIClient = (*Client)(nil)
 
 // ListWebExperiencesPaginatorOptions is the paginator options for
 // ListWebExperiences
@@ -216,6 +211,9 @@ func (p *ListWebExperiencesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWebExperiences(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListWebExperiencesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListWebExperiencesAPIClient is a client that implements the ListWebExperiences
+// operation.
+type ListWebExperiencesAPIClient interface {
+	ListWebExperiences(context.Context, *ListWebExperiencesInput, ...func(*Options)) (*ListWebExperiencesOutput, error)
+}
+
+var _ ListWebExperiencesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWebExperiences(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

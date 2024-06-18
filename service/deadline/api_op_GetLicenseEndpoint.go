@@ -135,6 +135,9 @@ func (c *Client) addOperationGetLicenseEndpointMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetLicenseEndpointMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,41 +164,6 @@ func (c *Client) addOperationGetLicenseEndpointMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-type endpointPrefix_opGetLicenseEndpointMiddleware struct {
-}
-
-func (*endpointPrefix_opGetLicenseEndpointMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetLicenseEndpointMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetLicenseEndpointMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetLicenseEndpointMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetLicenseEndpointAPIClient is a client that implements the GetLicenseEndpoint
-// operation.
-type GetLicenseEndpointAPIClient interface {
-	GetLicenseEndpoint(context.Context, *GetLicenseEndpointInput, ...func(*Options)) (*GetLicenseEndpointOutput, error)
-}
-
-var _ GetLicenseEndpointAPIClient = (*Client)(nil)
 
 // LicenseEndpointValidWaiterOptions are waiter options for
 // LicenseEndpointValidWaiter
@@ -314,7 +282,13 @@ func (w *LicenseEndpointValidWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.GetLicenseEndpoint(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -506,7 +480,13 @@ func (w *LicenseEndpointDeletedWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.GetLicenseEndpoint(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -570,6 +550,41 @@ func licenseEndpointDeletedStateRetryable(ctx context.Context, input *GetLicense
 
 	return true, nil
 }
+
+type endpointPrefix_opGetLicenseEndpointMiddleware struct {
+}
+
+func (*endpointPrefix_opGetLicenseEndpointMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetLicenseEndpointMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetLicenseEndpointMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetLicenseEndpointMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetLicenseEndpointAPIClient is a client that implements the GetLicenseEndpoint
+// operation.
+type GetLicenseEndpointAPIClient interface {
+	GetLicenseEndpoint(context.Context, *GetLicenseEndpointInput, ...func(*Options)) (*GetLicenseEndpointOutput, error)
+}
+
+var _ GetLicenseEndpointAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLicenseEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

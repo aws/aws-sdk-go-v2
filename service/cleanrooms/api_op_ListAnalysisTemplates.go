@@ -119,6 +119,9 @@ func (c *Client) addOperationListAnalysisTemplatesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnalysisTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListAnalysisTemplatesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAnalysisTemplatesAPIClient is a client that implements the
-// ListAnalysisTemplates operation.
-type ListAnalysisTemplatesAPIClient interface {
-	ListAnalysisTemplates(context.Context, *ListAnalysisTemplatesInput, ...func(*Options)) (*ListAnalysisTemplatesOutput, error)
-}
-
-var _ ListAnalysisTemplatesAPIClient = (*Client)(nil)
 
 // ListAnalysisTemplatesPaginatorOptions is the paginator options for
 // ListAnalysisTemplates
@@ -215,6 +210,9 @@ func (p *ListAnalysisTemplatesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnalysisTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListAnalysisTemplatesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAnalysisTemplatesAPIClient is a client that implements the
+// ListAnalysisTemplates operation.
+type ListAnalysisTemplatesAPIClient interface {
+	ListAnalysisTemplates(context.Context, *ListAnalysisTemplatesInput, ...func(*Options)) (*ListAnalysisTemplatesOutput, error)
+}
+
+var _ ListAnalysisTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnalysisTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

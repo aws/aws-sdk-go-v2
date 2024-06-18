@@ -152,6 +152,9 @@ func (c *Client) addOperationListPlatformBranchesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlatformBranches(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -172,14 +175,6 @@ func (c *Client) addOperationListPlatformBranchesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListPlatformBranchesAPIClient is a client that implements the
-// ListPlatformBranches operation.
-type ListPlatformBranchesAPIClient interface {
-	ListPlatformBranches(context.Context, *ListPlatformBranchesInput, ...func(*Options)) (*ListPlatformBranchesOutput, error)
-}
-
-var _ ListPlatformBranchesAPIClient = (*Client)(nil)
 
 // ListPlatformBranchesPaginatorOptions is the paginator options for
 // ListPlatformBranches
@@ -245,6 +240,9 @@ func (p *ListPlatformBranchesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPlatformBranches(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +261,14 @@ func (p *ListPlatformBranchesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListPlatformBranchesAPIClient is a client that implements the
+// ListPlatformBranches operation.
+type ListPlatformBranchesAPIClient interface {
+	ListPlatformBranches(context.Context, *ListPlatformBranchesInput, ...func(*Options)) (*ListPlatformBranchesOutput, error)
+}
+
+var _ ListPlatformBranchesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPlatformBranches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

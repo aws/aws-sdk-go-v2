@@ -113,6 +113,9 @@ func (c *Client) addOperationListControlPanelsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlPanels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListControlPanelsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListControlPanelsAPIClient is a client that implements the ListControlPanels
-// operation.
-type ListControlPanelsAPIClient interface {
-	ListControlPanels(context.Context, *ListControlPanelsInput, ...func(*Options)) (*ListControlPanelsOutput, error)
-}
-
-var _ ListControlPanelsAPIClient = (*Client)(nil)
 
 // ListControlPanelsPaginatorOptions is the paginator options for ListControlPanels
 type ListControlPanelsPaginatorOptions struct {
@@ -205,6 +200,9 @@ func (p *ListControlPanelsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListControlPanels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListControlPanelsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListControlPanelsAPIClient is a client that implements the ListControlPanels
+// operation.
+type ListControlPanelsAPIClient interface {
+	ListControlPanels(context.Context, *ListControlPanelsInput, ...func(*Options)) (*ListControlPanelsOutput, error)
+}
+
+var _ ListControlPanelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListControlPanels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

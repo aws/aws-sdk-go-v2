@@ -140,6 +140,9 @@ func (c *Client) addOperationUpdateGeofenceCollectionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateGeofenceCollectionMiddleware(stack); err != nil {
 		return err
 	}

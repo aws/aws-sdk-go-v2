@@ -107,6 +107,9 @@ func (c *Client) addOperationDeleteEnvironmentBlueprintConfigurationMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteEnvironmentBlueprintConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

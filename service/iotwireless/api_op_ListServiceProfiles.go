@@ -112,6 +112,9 @@ func (c *Client) addOperationListServiceProfilesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceProfiles(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListServiceProfilesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListServiceProfilesAPIClient is a client that implements the
-// ListServiceProfiles operation.
-type ListServiceProfilesAPIClient interface {
-	ListServiceProfiles(context.Context, *ListServiceProfilesInput, ...func(*Options)) (*ListServiceProfilesOutput, error)
-}
-
-var _ ListServiceProfilesAPIClient = (*Client)(nil)
 
 // ListServiceProfilesPaginatorOptions is the paginator options for
 // ListServiceProfiles
@@ -201,6 +196,9 @@ func (p *ListServiceProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +217,14 @@ func (p *ListServiceProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListServiceProfilesAPIClient is a client that implements the
+// ListServiceProfiles operation.
+type ListServiceProfilesAPIClient interface {
+	ListServiceProfiles(context.Context, *ListServiceProfilesInput, ...func(*Options)) (*ListServiceProfilesOutput, error)
+}
+
+var _ ListServiceProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

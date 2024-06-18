@@ -144,6 +144,9 @@ func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBuiltInIntentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,14 +170,6 @@ func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListBuiltInIntentsAPIClient is a client that implements the ListBuiltInIntents
-// operation.
-type ListBuiltInIntentsAPIClient interface {
-	ListBuiltInIntents(context.Context, *ListBuiltInIntentsInput, ...func(*Options)) (*ListBuiltInIntentsOutput, error)
-}
-
-var _ ListBuiltInIntentsAPIClient = (*Client)(nil)
 
 // ListBuiltInIntentsPaginatorOptions is the paginator options for
 // ListBuiltInIntents
@@ -242,6 +237,9 @@ func (p *ListBuiltInIntentsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBuiltInIntents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *ListBuiltInIntentsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListBuiltInIntentsAPIClient is a client that implements the ListBuiltInIntents
+// operation.
+type ListBuiltInIntentsAPIClient interface {
+	ListBuiltInIntents(context.Context, *ListBuiltInIntentsInput, ...func(*Options)) (*ListBuiltInIntentsOutput, error)
+}
+
+var _ ListBuiltInIntentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBuiltInIntents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

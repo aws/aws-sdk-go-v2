@@ -126,6 +126,9 @@ func (c *Client) addOperationListUserHierarchyGroupsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUserHierarchyGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListUserHierarchyGroupsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListUserHierarchyGroupsAPIClient is a client that implements the
-// ListUserHierarchyGroups operation.
-type ListUserHierarchyGroupsAPIClient interface {
-	ListUserHierarchyGroups(context.Context, *ListUserHierarchyGroupsInput, ...func(*Options)) (*ListUserHierarchyGroupsOutput, error)
-}
-
-var _ ListUserHierarchyGroupsAPIClient = (*Client)(nil)
 
 // ListUserHierarchyGroupsPaginatorOptions is the paginator options for
 // ListUserHierarchyGroups
@@ -224,6 +219,9 @@ func (p *ListUserHierarchyGroupsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUserHierarchyGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListUserHierarchyGroupsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListUserHierarchyGroupsAPIClient is a client that implements the
+// ListUserHierarchyGroups operation.
+type ListUserHierarchyGroupsAPIClient interface {
+	ListUserHierarchyGroups(context.Context, *ListUserHierarchyGroupsInput, ...func(*Options)) (*ListUserHierarchyGroupsOutput, error)
+}
+
+var _ ListUserHierarchyGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUserHierarchyGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

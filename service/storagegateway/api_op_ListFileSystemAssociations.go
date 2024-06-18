@@ -124,6 +124,9 @@ func (c *Client) addOperationListFileSystemAssociationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFileSystemAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListFileSystemAssociationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListFileSystemAssociationsAPIClient is a client that implements the
-// ListFileSystemAssociations operation.
-type ListFileSystemAssociationsAPIClient interface {
-	ListFileSystemAssociations(context.Context, *ListFileSystemAssociationsInput, ...func(*Options)) (*ListFileSystemAssociationsOutput, error)
-}
-
-var _ ListFileSystemAssociationsAPIClient = (*Client)(nil)
 
 // ListFileSystemAssociationsPaginatorOptions is the paginator options for
 // ListFileSystemAssociations
@@ -220,6 +215,9 @@ func (p *ListFileSystemAssociationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFileSystemAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListFileSystemAssociationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListFileSystemAssociationsAPIClient is a client that implements the
+// ListFileSystemAssociations operation.
+type ListFileSystemAssociationsAPIClient interface {
+	ListFileSystemAssociations(context.Context, *ListFileSystemAssociationsInput, ...func(*Options)) (*ListFileSystemAssociationsOutput, error)
+}
+
+var _ ListFileSystemAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFileSystemAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -193,6 +193,9 @@ func (c *Client) addOperationGetSegmentDetectionMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSegmentDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -216,14 +219,6 @@ func (c *Client) addOperationGetSegmentDetectionMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetSegmentDetectionAPIClient is a client that implements the
-// GetSegmentDetection operation.
-type GetSegmentDetectionAPIClient interface {
-	GetSegmentDetection(context.Context, *GetSegmentDetectionInput, ...func(*Options)) (*GetSegmentDetectionOutput, error)
-}
-
-var _ GetSegmentDetectionAPIClient = (*Client)(nil)
 
 // GetSegmentDetectionPaginatorOptions is the paginator options for
 // GetSegmentDetection
@@ -290,6 +285,9 @@ func (p *GetSegmentDetectionPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSegmentDetection(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -308,6 +306,14 @@ func (p *GetSegmentDetectionPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetSegmentDetectionAPIClient is a client that implements the
+// GetSegmentDetection operation.
+type GetSegmentDetectionAPIClient interface {
+	GetSegmentDetection(context.Context, *GetSegmentDetectionInput, ...func(*Options)) (*GetSegmentDetectionOutput, error)
+}
+
+var _ GetSegmentDetectionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSegmentDetection(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

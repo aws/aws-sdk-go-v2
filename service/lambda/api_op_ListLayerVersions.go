@@ -133,6 +133,9 @@ func (c *Client) addOperationListLayerVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLayerVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListLayerVersionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListLayerVersionsAPIClient is a client that implements the ListLayerVersions
-// operation.
-type ListLayerVersionsAPIClient interface {
-	ListLayerVersions(context.Context, *ListLayerVersionsInput, ...func(*Options)) (*ListLayerVersionsOutput, error)
-}
-
-var _ ListLayerVersionsAPIClient = (*Client)(nil)
 
 // ListLayerVersionsPaginatorOptions is the paginator options for ListLayerVersions
 type ListLayerVersionsPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *ListLayerVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLayerVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListLayerVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListLayerVersionsAPIClient is a client that implements the ListLayerVersions
+// operation.
+type ListLayerVersionsAPIClient interface {
+	ListLayerVersions(context.Context, *ListLayerVersionsInput, ...func(*Options)) (*ListLayerVersionsOutput, error)
+}
+
+var _ ListLayerVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLayerVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationCreateBillOfMaterialsImportJobMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateBillOfMaterialsImportJobMiddleware(stack, options); err != nil {
 		return err
 	}

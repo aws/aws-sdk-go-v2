@@ -124,6 +124,9 @@ func (c *Client) addOperationListOutpostsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOutposts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationListOutpostsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListOutpostsAPIClient is a client that implements the ListOutposts operation.
-type ListOutpostsAPIClient interface {
-	ListOutposts(context.Context, *ListOutpostsInput, ...func(*Options)) (*ListOutpostsOutput, error)
-}
-
-var _ ListOutpostsAPIClient = (*Client)(nil)
 
 // ListOutpostsPaginatorOptions is the paginator options for ListOutposts
 type ListOutpostsPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListOutpostsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOutposts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListOutpostsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListOutpostsAPIClient is a client that implements the ListOutposts operation.
+type ListOutpostsAPIClient interface {
+	ListOutposts(context.Context, *ListOutpostsInput, ...func(*Options)) (*ListOutpostsOutput, error)
+}
+
+var _ ListOutpostsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOutposts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

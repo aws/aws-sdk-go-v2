@@ -117,6 +117,9 @@ func (c *Client) addOperationListSamplesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSamplesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,13 +143,6 @@ func (c *Client) addOperationListSamplesMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListSamplesAPIClient is a client that implements the ListSamples operation.
-type ListSamplesAPIClient interface {
-	ListSamples(context.Context, *ListSamplesInput, ...func(*Options)) (*ListSamplesOutput, error)
-}
-
-var _ ListSamplesAPIClient = (*Client)(nil)
 
 // ListSamplesPaginatorOptions is the paginator options for ListSamples
 type ListSamplesPaginatorOptions struct {
@@ -199,6 +195,9 @@ func (p *ListSamplesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSamples(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -217,6 +216,13 @@ func (p *ListSamplesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListSamplesAPIClient is a client that implements the ListSamples operation.
+type ListSamplesAPIClient interface {
+	ListSamples(context.Context, *ListSamplesInput, ...func(*Options)) (*ListSamplesOutput, error)
+}
+
+var _ ListSamplesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSamples(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

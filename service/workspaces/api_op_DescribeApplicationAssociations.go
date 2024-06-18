@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeApplicationAssociationsMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeApplicationAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationDescribeApplicationAssociationsMiddlewares(stack *m
 	}
 	return nil
 }
-
-// DescribeApplicationAssociationsAPIClient is a client that implements the
-// DescribeApplicationAssociations operation.
-type DescribeApplicationAssociationsAPIClient interface {
-	DescribeApplicationAssociations(context.Context, *DescribeApplicationAssociationsInput, ...func(*Options)) (*DescribeApplicationAssociationsOutput, error)
-}
-
-var _ DescribeApplicationAssociationsAPIClient = (*Client)(nil)
 
 // DescribeApplicationAssociationsPaginatorOptions is the paginator options for
 // DescribeApplicationAssociations
@@ -221,6 +216,9 @@ func (p *DescribeApplicationAssociationsPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeApplicationAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeApplicationAssociationsPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// DescribeApplicationAssociationsAPIClient is a client that implements the
+// DescribeApplicationAssociations operation.
+type DescribeApplicationAssociationsAPIClient interface {
+	DescribeApplicationAssociations(context.Context, *DescribeApplicationAssociationsInput, ...func(*Options)) (*DescribeApplicationAssociationsOutput, error)
+}
+
+var _ DescribeApplicationAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeApplicationAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

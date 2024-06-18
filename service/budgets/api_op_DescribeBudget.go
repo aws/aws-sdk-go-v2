@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeBudgetMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBudgetValidationMiddleware(stack); err != nil {
 		return err
 	}

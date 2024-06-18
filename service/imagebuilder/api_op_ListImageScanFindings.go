@@ -130,6 +130,9 @@ func (c *Client) addOperationListImageScanFindingsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImageScanFindings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListImageScanFindingsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListImageScanFindingsAPIClient is a client that implements the
-// ListImageScanFindings operation.
-type ListImageScanFindingsAPIClient interface {
-	ListImageScanFindings(context.Context, *ListImageScanFindingsInput, ...func(*Options)) (*ListImageScanFindingsOutput, error)
-}
-
-var _ ListImageScanFindingsAPIClient = (*Client)(nil)
 
 // ListImageScanFindingsPaginatorOptions is the paginator options for
 // ListImageScanFindings
@@ -223,6 +218,9 @@ func (p *ListImageScanFindingsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImageScanFindings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListImageScanFindingsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListImageScanFindingsAPIClient is a client that implements the
+// ListImageScanFindings operation.
+type ListImageScanFindingsAPIClient interface {
+	ListImageScanFindings(context.Context, *ListImageScanFindingsInput, ...func(*Options)) (*ListImageScanFindingsOutput, error)
+}
+
+var _ ListImageScanFindingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImageScanFindings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

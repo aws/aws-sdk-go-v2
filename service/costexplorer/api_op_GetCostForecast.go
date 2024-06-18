@@ -197,6 +197,9 @@ func (c *Client) addOperationGetCostForecastMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCostForecastValidationMiddleware(stack); err != nil {
 		return err
 	}

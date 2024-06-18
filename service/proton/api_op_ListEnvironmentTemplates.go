@@ -116,6 +116,9 @@ func (c *Client) addOperationListEnvironmentTemplatesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnvironmentTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListEnvironmentTemplatesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListEnvironmentTemplatesAPIClient is a client that implements the
-// ListEnvironmentTemplates operation.
-type ListEnvironmentTemplatesAPIClient interface {
-	ListEnvironmentTemplates(context.Context, *ListEnvironmentTemplatesInput, ...func(*Options)) (*ListEnvironmentTemplatesOutput, error)
-}
-
-var _ ListEnvironmentTemplatesAPIClient = (*Client)(nil)
 
 // ListEnvironmentTemplatesPaginatorOptions is the paginator options for
 // ListEnvironmentTemplates
@@ -210,6 +205,9 @@ func (p *ListEnvironmentTemplatesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnvironmentTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListEnvironmentTemplatesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListEnvironmentTemplatesAPIClient is a client that implements the
+// ListEnvironmentTemplates operation.
+type ListEnvironmentTemplatesAPIClient interface {
+	ListEnvironmentTemplates(context.Context, *ListEnvironmentTemplatesInput, ...func(*Options)) (*ListEnvironmentTemplatesOutput, error)
+}
+
+var _ ListEnvironmentTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnvironmentTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

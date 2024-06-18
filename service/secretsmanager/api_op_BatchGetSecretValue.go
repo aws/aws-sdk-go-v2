@@ -153,6 +153,9 @@ func (c *Client) addOperationBatchGetSecretValueMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetSecretValue(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -173,14 +176,6 @@ func (c *Client) addOperationBatchGetSecretValueMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// BatchGetSecretValueAPIClient is a client that implements the
-// BatchGetSecretValue operation.
-type BatchGetSecretValueAPIClient interface {
-	BatchGetSecretValue(context.Context, *BatchGetSecretValueInput, ...func(*Options)) (*BatchGetSecretValueOutput, error)
-}
-
-var _ BatchGetSecretValueAPIClient = (*Client)(nil)
 
 // BatchGetSecretValuePaginatorOptions is the paginator options for
 // BatchGetSecretValue
@@ -251,6 +246,9 @@ func (p *BatchGetSecretValuePaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.BatchGetSecretValue(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -269,6 +267,14 @@ func (p *BatchGetSecretValuePaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// BatchGetSecretValueAPIClient is a client that implements the
+// BatchGetSecretValue operation.
+type BatchGetSecretValueAPIClient interface {
+	BatchGetSecretValue(context.Context, *BatchGetSecretValueInput, ...func(*Options)) (*BatchGetSecretValueOutput, error)
+}
+
+var _ BatchGetSecretValueAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opBatchGetSecretValue(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

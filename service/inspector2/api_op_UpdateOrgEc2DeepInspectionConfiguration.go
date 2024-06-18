@@ -104,6 +104,9 @@ func (c *Client) addOperationUpdateOrgEc2DeepInspectionConfigurationMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateOrgEc2DeepInspectionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

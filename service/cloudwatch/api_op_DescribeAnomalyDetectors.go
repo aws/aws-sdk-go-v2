@@ -140,6 +140,9 @@ func (c *Client) addOperationDescribeAnomalyDetectorsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAnomalyDetectorsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationDescribeAnomalyDetectorsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeAnomalyDetectorsAPIClient is a client that implements the
-// DescribeAnomalyDetectors operation.
-type DescribeAnomalyDetectorsAPIClient interface {
-	DescribeAnomalyDetectors(context.Context, *DescribeAnomalyDetectorsInput, ...func(*Options)) (*DescribeAnomalyDetectorsOutput, error)
-}
-
-var _ DescribeAnomalyDetectorsAPIClient = (*Client)(nil)
 
 // DescribeAnomalyDetectorsPaginatorOptions is the paginator options for
 // DescribeAnomalyDetectors
@@ -241,6 +236,9 @@ func (p *DescribeAnomalyDetectorsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAnomalyDetectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *DescribeAnomalyDetectorsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeAnomalyDetectorsAPIClient is a client that implements the
+// DescribeAnomalyDetectors operation.
+type DescribeAnomalyDetectorsAPIClient interface {
+	DescribeAnomalyDetectors(context.Context, *DescribeAnomalyDetectorsInput, ...func(*Options)) (*DescribeAnomalyDetectorsOutput, error)
+}
+
+var _ DescribeAnomalyDetectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAnomalyDetectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

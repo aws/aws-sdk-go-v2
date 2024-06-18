@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateApiMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

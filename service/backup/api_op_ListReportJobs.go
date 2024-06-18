@@ -132,6 +132,9 @@ func (c *Client) addOperationListReportJobsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListReportJobsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListReportJobsAPIClient is a client that implements the ListReportJobs
-// operation.
-type ListReportJobsAPIClient interface {
-	ListReportJobs(context.Context, *ListReportJobsInput, ...func(*Options)) (*ListReportJobsOutput, error)
-}
-
-var _ ListReportJobsAPIClient = (*Client)(nil)
 
 // ListReportJobsPaginatorOptions is the paginator options for ListReportJobs
 type ListReportJobsPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *ListReportJobsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListReportJobsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListReportJobsAPIClient is a client that implements the ListReportJobs
+// operation.
+type ListReportJobsAPIClient interface {
+	ListReportJobs(context.Context, *ListReportJobsInput, ...func(*Options)) (*ListReportJobsOutput, error)
+}
+
+var _ ListReportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

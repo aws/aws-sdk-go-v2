@@ -128,6 +128,9 @@ func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBuiltinIntents(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetBuiltinIntentsAPIClient is a client that implements the GetBuiltinIntents
-// operation.
-type GetBuiltinIntentsAPIClient interface {
-	GetBuiltinIntents(context.Context, *GetBuiltinIntentsInput, ...func(*Options)) (*GetBuiltinIntentsOutput, error)
-}
-
-var _ GetBuiltinIntentsAPIClient = (*Client)(nil)
 
 // GetBuiltinIntentsPaginatorOptions is the paginator options for GetBuiltinIntents
 type GetBuiltinIntentsPaginatorOptions struct {
@@ -220,6 +215,9 @@ func (p *GetBuiltinIntentsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBuiltinIntents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *GetBuiltinIntentsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetBuiltinIntentsAPIClient is a client that implements the GetBuiltinIntents
+// operation.
+type GetBuiltinIntentsAPIClient interface {
+	GetBuiltinIntents(context.Context, *GetBuiltinIntentsInput, ...func(*Options)) (*GetBuiltinIntentsOutput, error)
+}
+
+var _ GetBuiltinIntentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBuiltinIntents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

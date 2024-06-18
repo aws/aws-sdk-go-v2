@@ -300,6 +300,9 @@ func (c *Client) addOperationGetMetricDataMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -323,13 +326,6 @@ func (c *Client) addOperationGetMetricDataMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetMetricDataAPIClient is a client that implements the GetMetricData operation.
-type GetMetricDataAPIClient interface {
-	GetMetricData(context.Context, *GetMetricDataInput, ...func(*Options)) (*GetMetricDataOutput, error)
-}
-
-var _ GetMetricDataAPIClient = (*Client)(nil)
 
 // GetMetricDataPaginatorOptions is the paginator options for GetMetricData
 type GetMetricDataPaginatorOptions struct {
@@ -394,6 +390,9 @@ func (p *GetMetricDataPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetMetricData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -412,6 +411,13 @@ func (p *GetMetricDataPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetMetricDataAPIClient is a client that implements the GetMetricData operation.
+type GetMetricDataAPIClient interface {
+	GetMetricData(context.Context, *GetMetricDataInput, ...func(*Options)) (*GetMetricDataOutput, error)
+}
+
+var _ GetMetricDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetMetricData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

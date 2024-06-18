@@ -147,6 +147,9 @@ func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAssetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,40 +173,6 @@ func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-type endpointPrefix_opListAssetsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAssetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAssetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAssetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAssetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAssetsAPIClient is a client that implements the ListAssets operation.
-type ListAssetsAPIClient interface {
-	ListAssets(context.Context, *ListAssetsInput, ...func(*Options)) (*ListAssetsOutput, error)
-}
-
-var _ ListAssetsAPIClient = (*Client)(nil)
 
 // ListAssetsPaginatorOptions is the paginator options for ListAssets
 type ListAssetsPaginatorOptions struct {
@@ -270,6 +239,9 @@ func (p *ListAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -288,6 +260,40 @@ func (p *ListAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+type endpointPrefix_opListAssetsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAssetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAssetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAssetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAssetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAssetsAPIClient is a client that implements the ListAssets operation.
+type ListAssetsAPIClient interface {
+	ListAssets(context.Context, *ListAssetsInput, ...func(*Options)) (*ListAssetsOutput, error)
+}
+
+var _ ListAssetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

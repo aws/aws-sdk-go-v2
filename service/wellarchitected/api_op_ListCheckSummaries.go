@@ -139,6 +139,9 @@ func (c *Client) addOperationListCheckSummariesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCheckSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListCheckSummariesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListCheckSummariesAPIClient is a client that implements the ListCheckSummaries
-// operation.
-type ListCheckSummariesAPIClient interface {
-	ListCheckSummaries(context.Context, *ListCheckSummariesInput, ...func(*Options)) (*ListCheckSummariesOutput, error)
-}
-
-var _ ListCheckSummariesAPIClient = (*Client)(nil)
 
 // ListCheckSummariesPaginatorOptions is the paginator options for
 // ListCheckSummaries
@@ -235,6 +230,9 @@ func (p *ListCheckSummariesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCheckSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListCheckSummariesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListCheckSummariesAPIClient is a client that implements the ListCheckSummaries
+// operation.
+type ListCheckSummariesAPIClient interface {
+	ListCheckSummaries(context.Context, *ListCheckSummariesInput, ...func(*Options)) (*ListCheckSummariesOutput, error)
+}
+
+var _ ListCheckSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCheckSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

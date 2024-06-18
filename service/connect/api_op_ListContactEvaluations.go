@@ -128,6 +128,9 @@ func (c *Client) addOperationListContactEvaluationsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListContactEvaluationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListContactEvaluationsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListContactEvaluationsAPIClient is a client that implements the
-// ListContactEvaluations operation.
-type ListContactEvaluationsAPIClient interface {
-	ListContactEvaluations(context.Context, *ListContactEvaluationsInput, ...func(*Options)) (*ListContactEvaluationsOutput, error)
-}
-
-var _ ListContactEvaluationsAPIClient = (*Client)(nil)
 
 // ListContactEvaluationsPaginatorOptions is the paginator options for
 // ListContactEvaluations
@@ -212,6 +207,9 @@ func (p *ListContactEvaluationsPaginator) NextPage(ctx context.Context, optFns .
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContactEvaluations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListContactEvaluationsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListContactEvaluationsAPIClient is a client that implements the
+// ListContactEvaluations operation.
+type ListContactEvaluationsAPIClient interface {
+	ListContactEvaluations(context.Context, *ListContactEvaluationsInput, ...func(*Options)) (*ListContactEvaluationsOutput, error)
+}
+
+var _ ListContactEvaluationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContactEvaluations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

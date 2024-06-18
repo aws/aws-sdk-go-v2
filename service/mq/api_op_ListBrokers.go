@@ -113,6 +113,9 @@ func (c *Client) addOperationListBrokersMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBrokers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,13 +136,6 @@ func (c *Client) addOperationListBrokersMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListBrokersAPIClient is a client that implements the ListBrokers operation.
-type ListBrokersAPIClient interface {
-	ListBrokers(context.Context, *ListBrokersInput, ...func(*Options)) (*ListBrokersOutput, error)
-}
-
-var _ ListBrokersAPIClient = (*Client)(nil)
 
 // ListBrokersPaginatorOptions is the paginator options for ListBrokers
 type ListBrokersPaginatorOptions struct {
@@ -205,6 +201,9 @@ func (p *ListBrokersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBrokers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +222,13 @@ func (p *ListBrokersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListBrokersAPIClient is a client that implements the ListBrokers operation.
+type ListBrokersAPIClient interface {
+	ListBrokers(context.Context, *ListBrokersInput, ...func(*Options)) (*ListBrokersOutput, error)
+}
+
+var _ ListBrokersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBrokers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

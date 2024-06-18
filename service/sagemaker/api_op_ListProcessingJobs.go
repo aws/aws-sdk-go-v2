@@ -141,6 +141,9 @@ func (c *Client) addOperationListProcessingJobsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProcessingJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListProcessingJobsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListProcessingJobsAPIClient is a client that implements the ListProcessingJobs
-// operation.
-type ListProcessingJobsAPIClient interface {
-	ListProcessingJobs(context.Context, *ListProcessingJobsInput, ...func(*Options)) (*ListProcessingJobsOutput, error)
-}
-
-var _ ListProcessingJobsAPIClient = (*Client)(nil)
 
 // ListProcessingJobsPaginatorOptions is the paginator options for
 // ListProcessingJobs
@@ -234,6 +229,9 @@ func (p *ListProcessingJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProcessingJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *ListProcessingJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListProcessingJobsAPIClient is a client that implements the ListProcessingJobs
+// operation.
+type ListProcessingJobsAPIClient interface {
+	ListProcessingJobs(context.Context, *ListProcessingJobsInput, ...func(*Options)) (*ListProcessingJobsOutput, error)
+}
+
+var _ ListProcessingJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProcessingJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

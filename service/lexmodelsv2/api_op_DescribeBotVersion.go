@@ -156,6 +156,9 @@ func (c *Client) addOperationDescribeBotVersionMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -179,14 +182,6 @@ func (c *Client) addOperationDescribeBotVersionMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeBotVersionAPIClient is a client that implements the DescribeBotVersion
-// operation.
-type DescribeBotVersionAPIClient interface {
-	DescribeBotVersion(context.Context, *DescribeBotVersionInput, ...func(*Options)) (*DescribeBotVersionOutput, error)
-}
-
-var _ DescribeBotVersionAPIClient = (*Client)(nil)
 
 // BotVersionAvailableWaiterOptions are waiter options for
 // BotVersionAvailableWaiter
@@ -305,7 +300,13 @@ func (w *BotVersionAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeBotVersion(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -403,6 +404,14 @@ func botVersionAvailableStateRetryable(ctx context.Context, input *DescribeBotVe
 
 	return true, nil
 }
+
+// DescribeBotVersionAPIClient is a client that implements the DescribeBotVersion
+// operation.
+type DescribeBotVersionAPIClient interface {
+	DescribeBotVersion(context.Context, *DescribeBotVersionInput, ...func(*Options)) (*DescribeBotVersionOutput, error)
+}
+
+var _ DescribeBotVersionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBotVersion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

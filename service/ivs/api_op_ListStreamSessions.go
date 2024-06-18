@@ -120,6 +120,9 @@ func (c *Client) addOperationListStreamSessionsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListStreamSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListStreamSessionsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListStreamSessionsAPIClient is a client that implements the ListStreamSessions
-// operation.
-type ListStreamSessionsAPIClient interface {
-	ListStreamSessions(context.Context, *ListStreamSessionsInput, ...func(*Options)) (*ListStreamSessionsOutput, error)
-}
-
-var _ ListStreamSessionsAPIClient = (*Client)(nil)
 
 // ListStreamSessionsPaginatorOptions is the paginator options for
 // ListStreamSessions
@@ -216,6 +211,9 @@ func (p *ListStreamSessionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreamSessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListStreamSessionsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListStreamSessionsAPIClient is a client that implements the ListStreamSessions
+// operation.
+type ListStreamSessionsAPIClient interface {
+	ListStreamSessions(context.Context, *ListStreamSessionsInput, ...func(*Options)) (*ListStreamSessionsOutput, error)
+}
+
+var _ ListStreamSessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreamSessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

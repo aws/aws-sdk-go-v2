@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeImageTagsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeImageTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationDescribeImageTagsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeImageTagsAPIClient is a client that implements the DescribeImageTags
-// operation.
-type DescribeImageTagsAPIClient interface {
-	DescribeImageTags(context.Context, *DescribeImageTagsInput, ...func(*Options)) (*DescribeImageTagsOutput, error)
-}
-
-var _ DescribeImageTagsAPIClient = (*Client)(nil)
 
 // DescribeImageTagsPaginatorOptions is the paginator options for DescribeImageTags
 type DescribeImageTagsPaginatorOptions struct {
@@ -236,6 +231,9 @@ func (p *DescribeImageTagsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeImageTags(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *DescribeImageTagsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// DescribeImageTagsAPIClient is a client that implements the DescribeImageTags
+// operation.
+type DescribeImageTagsAPIClient interface {
+	DescribeImageTags(context.Context, *DescribeImageTagsInput, ...func(*Options)) (*DescribeImageTagsOutput, error)
+}
+
+var _ DescribeImageTagsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeImageTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeDirectoriesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDirectories(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationDescribeDirectoriesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeDirectoriesAPIClient is a client that implements the
-// DescribeDirectories operation.
-type DescribeDirectoriesAPIClient interface {
-	DescribeDirectories(context.Context, *DescribeDirectoriesInput, ...func(*Options)) (*DescribeDirectoriesOutput, error)
-}
-
-var _ DescribeDirectoriesAPIClient = (*Client)(nil)
 
 // DescribeDirectoriesPaginatorOptions is the paginator options for
 // DescribeDirectories
@@ -233,6 +228,9 @@ func (p *DescribeDirectoriesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDirectories(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *DescribeDirectoriesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeDirectoriesAPIClient is a client that implements the
+// DescribeDirectories operation.
+type DescribeDirectoriesAPIClient interface {
+	DescribeDirectories(context.Context, *DescribeDirectoriesInput, ...func(*Options)) (*DescribeDirectoriesOutput, error)
+}
+
+var _ DescribeDirectoriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDirectories(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

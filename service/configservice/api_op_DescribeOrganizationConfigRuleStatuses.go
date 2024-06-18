@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeOrganizationConfigRuleStatusesMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConfigRuleStatuses(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeOrganizationConfigRuleStatusesMiddlewares(s
 	}
 	return nil
 }
-
-// DescribeOrganizationConfigRuleStatusesAPIClient is a client that implements the
-// DescribeOrganizationConfigRuleStatuses operation.
-type DescribeOrganizationConfigRuleStatusesAPIClient interface {
-	DescribeOrganizationConfigRuleStatuses(context.Context, *DescribeOrganizationConfigRuleStatusesInput, ...func(*Options)) (*DescribeOrganizationConfigRuleStatusesOutput, error)
-}
-
-var _ DescribeOrganizationConfigRuleStatusesAPIClient = (*Client)(nil)
 
 // DescribeOrganizationConfigRuleStatusesPaginatorOptions is the paginator options
 // for DescribeOrganizationConfigRuleStatuses
@@ -219,6 +214,9 @@ func (p *DescribeOrganizationConfigRuleStatusesPaginator) NextPage(ctx context.C
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOrganizationConfigRuleStatuses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *DescribeOrganizationConfigRuleStatusesPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// DescribeOrganizationConfigRuleStatusesAPIClient is a client that implements the
+// DescribeOrganizationConfigRuleStatuses operation.
+type DescribeOrganizationConfigRuleStatusesAPIClient interface {
+	DescribeOrganizationConfigRuleStatuses(context.Context, *DescribeOrganizationConfigRuleStatusesInput, ...func(*Options)) (*DescribeOrganizationConfigRuleStatusesOutput, error)
+}
+
+var _ DescribeOrganizationConfigRuleStatusesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOrganizationConfigRuleStatuses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

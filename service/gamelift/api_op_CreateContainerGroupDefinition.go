@@ -206,6 +206,9 @@ func (c *Client) addOperationCreateContainerGroupDefinitionMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateContainerGroupDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}

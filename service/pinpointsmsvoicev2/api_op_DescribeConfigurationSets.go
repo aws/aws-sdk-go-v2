@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeConfigurationSetsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeConfigurationSetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationDescribeConfigurationSetsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeConfigurationSetsAPIClient is a client that implements the
-// DescribeConfigurationSets operation.
-type DescribeConfigurationSetsAPIClient interface {
-	DescribeConfigurationSets(context.Context, *DescribeConfigurationSetsInput, ...func(*Options)) (*DescribeConfigurationSetsOutput, error)
-}
-
-var _ DescribeConfigurationSetsAPIClient = (*Client)(nil)
 
 // DescribeConfigurationSetsPaginatorOptions is the paginator options for
 // DescribeConfigurationSets
@@ -224,6 +219,9 @@ func (p *DescribeConfigurationSetsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConfigurationSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *DescribeConfigurationSetsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeConfigurationSetsAPIClient is a client that implements the
+// DescribeConfigurationSets operation.
+type DescribeConfigurationSetsAPIClient interface {
+	DescribeConfigurationSets(context.Context, *DescribeConfigurationSetsInput, ...func(*Options)) (*DescribeConfigurationSetsOutput, error)
+}
+
+var _ DescribeConfigurationSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConfigurationSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

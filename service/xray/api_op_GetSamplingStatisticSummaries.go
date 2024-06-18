@@ -107,6 +107,9 @@ func (c *Client) addOperationGetSamplingStatisticSummariesMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSamplingStatisticSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -127,14 +130,6 @@ func (c *Client) addOperationGetSamplingStatisticSummariesMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// GetSamplingStatisticSummariesAPIClient is a client that implements the
-// GetSamplingStatisticSummaries operation.
-type GetSamplingStatisticSummariesAPIClient interface {
-	GetSamplingStatisticSummaries(context.Context, *GetSamplingStatisticSummariesInput, ...func(*Options)) (*GetSamplingStatisticSummariesOutput, error)
-}
-
-var _ GetSamplingStatisticSummariesAPIClient = (*Client)(nil)
 
 // GetSamplingStatisticSummariesPaginatorOptions is the paginator options for
 // GetSamplingStatisticSummaries
@@ -190,6 +185,9 @@ func (p *GetSamplingStatisticSummariesPaginator) NextPage(ctx context.Context, o
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSamplingStatisticSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -208,6 +206,14 @@ func (p *GetSamplingStatisticSummariesPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// GetSamplingStatisticSummariesAPIClient is a client that implements the
+// GetSamplingStatisticSummaries operation.
+type GetSamplingStatisticSummariesAPIClient interface {
+	GetSamplingStatisticSummaries(context.Context, *GetSamplingStatisticSummariesInput, ...func(*Options)) (*GetSamplingStatisticSummariesOutput, error)
+}
+
+var _ GetSamplingStatisticSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSamplingStatisticSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

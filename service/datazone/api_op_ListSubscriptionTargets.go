@@ -143,6 +143,9 @@ func (c *Client) addOperationListSubscriptionTargetsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSubscriptionTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationListSubscriptionTargetsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListSubscriptionTargetsAPIClient is a client that implements the
-// ListSubscriptionTargets operation.
-type ListSubscriptionTargetsAPIClient interface {
-	ListSubscriptionTargets(context.Context, *ListSubscriptionTargetsInput, ...func(*Options)) (*ListSubscriptionTargetsOutput, error)
-}
-
-var _ ListSubscriptionTargetsAPIClient = (*Client)(nil)
 
 // ListSubscriptionTargetsPaginatorOptions is the paginator options for
 // ListSubscriptionTargets
@@ -244,6 +239,9 @@ func (p *ListSubscriptionTargetsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSubscriptionTargets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *ListSubscriptionTargetsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListSubscriptionTargetsAPIClient is a client that implements the
+// ListSubscriptionTargets operation.
+type ListSubscriptionTargetsAPIClient interface {
+	ListSubscriptionTargets(context.Context, *ListSubscriptionTargetsInput, ...func(*Options)) (*ListSubscriptionTargetsOutput, error)
+}
+
+var _ ListSubscriptionTargetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSubscriptionTargets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

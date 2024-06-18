@@ -139,6 +139,9 @@ func (c *Client) addOperationListCheckDetailsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCheckDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListCheckDetailsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListCheckDetailsAPIClient is a client that implements the ListCheckDetails
-// operation.
-type ListCheckDetailsAPIClient interface {
-	ListCheckDetails(context.Context, *ListCheckDetailsInput, ...func(*Options)) (*ListCheckDetailsOutput, error)
-}
-
-var _ ListCheckDetailsAPIClient = (*Client)(nil)
 
 // ListCheckDetailsPaginatorOptions is the paginator options for ListCheckDetails
 type ListCheckDetailsPaginatorOptions struct {
@@ -234,6 +229,9 @@ func (p *ListCheckDetailsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCheckDetails(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *ListCheckDetailsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListCheckDetailsAPIClient is a client that implements the ListCheckDetails
+// operation.
+type ListCheckDetailsAPIClient interface {
+	ListCheckDetails(context.Context, *ListCheckDetailsInput, ...func(*Options)) (*ListCheckDetailsOutput, error)
+}
+
+var _ ListCheckDetailsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCheckDetails(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

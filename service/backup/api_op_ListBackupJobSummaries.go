@@ -199,6 +199,9 @@ func (c *Client) addOperationListBackupJobSummariesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBackupJobSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -219,14 +222,6 @@ func (c *Client) addOperationListBackupJobSummariesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListBackupJobSummariesAPIClient is a client that implements the
-// ListBackupJobSummaries operation.
-type ListBackupJobSummariesAPIClient interface {
-	ListBackupJobSummaries(context.Context, *ListBackupJobSummariesInput, ...func(*Options)) (*ListBackupJobSummariesOutput, error)
-}
-
-var _ ListBackupJobSummariesAPIClient = (*Client)(nil)
 
 // ListBackupJobSummariesPaginatorOptions is the paginator options for
 // ListBackupJobSummaries
@@ -294,6 +289,9 @@ func (p *ListBackupJobSummariesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBackupJobSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -312,6 +310,14 @@ func (p *ListBackupJobSummariesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListBackupJobSummariesAPIClient is a client that implements the
+// ListBackupJobSummaries operation.
+type ListBackupJobSummariesAPIClient interface {
+	ListBackupJobSummaries(context.Context, *ListBackupJobSummariesInput, ...func(*Options)) (*ListBackupJobSummariesOutput, error)
+}
+
+var _ ListBackupJobSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBackupJobSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

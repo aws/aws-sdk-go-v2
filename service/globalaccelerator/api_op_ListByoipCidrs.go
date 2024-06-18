@@ -114,6 +114,9 @@ func (c *Client) addOperationListByoipCidrsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListByoipCidrs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListByoipCidrsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListByoipCidrsAPIClient is a client that implements the ListByoipCidrs
-// operation.
-type ListByoipCidrsAPIClient interface {
-	ListByoipCidrs(context.Context, *ListByoipCidrsInput, ...func(*Options)) (*ListByoipCidrsOutput, error)
-}
-
-var _ ListByoipCidrsAPIClient = (*Client)(nil)
 
 // ListByoipCidrsPaginatorOptions is the paginator options for ListByoipCidrs
 type ListByoipCidrsPaginatorOptions struct {
@@ -207,6 +202,9 @@ func (p *ListByoipCidrsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListByoipCidrs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListByoipCidrsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListByoipCidrsAPIClient is a client that implements the ListByoipCidrs
+// operation.
+type ListByoipCidrsAPIClient interface {
+	ListByoipCidrs(context.Context, *ListByoipCidrsInput, ...func(*Options)) (*ListByoipCidrsOutput, error)
+}
+
+var _ ListByoipCidrsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListByoipCidrs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

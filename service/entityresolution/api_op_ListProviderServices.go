@@ -114,6 +114,9 @@ func (c *Client) addOperationListProviderServicesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProviderServices(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListProviderServicesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListProviderServicesAPIClient is a client that implements the
-// ListProviderServices operation.
-type ListProviderServicesAPIClient interface {
-	ListProviderServices(context.Context, *ListProviderServicesInput, ...func(*Options)) (*ListProviderServicesOutput, error)
-}
-
-var _ ListProviderServicesAPIClient = (*Client)(nil)
 
 // ListProviderServicesPaginatorOptions is the paginator options for
 // ListProviderServices
@@ -207,6 +202,9 @@ func (p *ListProviderServicesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProviderServices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListProviderServicesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListProviderServicesAPIClient is a client that implements the
+// ListProviderServices operation.
+type ListProviderServicesAPIClient interface {
+	ListProviderServices(context.Context, *ListProviderServicesInput, ...func(*Options)) (*ListProviderServicesOutput, error)
+}
+
+var _ ListProviderServicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProviderServices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

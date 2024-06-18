@@ -124,6 +124,9 @@ func (c *Client) addOperationListCasesForContactMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCasesForContactValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListCasesForContactMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListCasesForContactAPIClient is a client that implements the
-// ListCasesForContact operation.
-type ListCasesForContactAPIClient interface {
-	ListCasesForContact(context.Context, *ListCasesForContactInput, ...func(*Options)) (*ListCasesForContactOutput, error)
-}
-
-var _ ListCasesForContactAPIClient = (*Client)(nil)
 
 // ListCasesForContactPaginatorOptions is the paginator options for
 // ListCasesForContact
@@ -220,6 +215,9 @@ func (p *ListCasesForContactPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCasesForContact(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListCasesForContactPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListCasesForContactAPIClient is a client that implements the
+// ListCasesForContact operation.
+type ListCasesForContactAPIClient interface {
+	ListCasesForContact(context.Context, *ListCasesForContactInput, ...func(*Options)) (*ListCasesForContactOutput, error)
+}
+
+var _ ListCasesForContactAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCasesForContact(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -153,6 +153,9 @@ func (c *Client) addOperationUpdateWorkflowStepMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateWorkflowStepValidationMiddleware(stack); err != nil {
 		return err
 	}

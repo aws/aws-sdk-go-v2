@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTapeRecoveryPointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeTapeRecoveryPointsAPIClient is a client that implements the
-// DescribeTapeRecoveryPoints operation.
-type DescribeTapeRecoveryPointsAPIClient interface {
-	DescribeTapeRecoveryPoints(context.Context, *DescribeTapeRecoveryPointsInput, ...func(*Options)) (*DescribeTapeRecoveryPointsOutput, error)
-}
-
-var _ DescribeTapeRecoveryPointsAPIClient = (*Client)(nil)
 
 // DescribeTapeRecoveryPointsPaginatorOptions is the paginator options for
 // DescribeTapeRecoveryPoints
@@ -234,6 +229,9 @@ func (p *DescribeTapeRecoveryPointsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeTapeRecoveryPoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *DescribeTapeRecoveryPointsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeTapeRecoveryPointsAPIClient is a client that implements the
+// DescribeTapeRecoveryPoints operation.
+type DescribeTapeRecoveryPointsAPIClient interface {
+	DescribeTapeRecoveryPoints(context.Context, *DescribeTapeRecoveryPointsInput, ...func(*Options)) (*DescribeTapeRecoveryPointsOutput, error)
+}
+
+var _ DescribeTapeRecoveryPointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTapeRecoveryPoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

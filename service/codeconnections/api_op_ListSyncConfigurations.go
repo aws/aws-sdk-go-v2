@@ -124,6 +124,9 @@ func (c *Client) addOperationListSyncConfigurationsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSyncConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListSyncConfigurationsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListSyncConfigurationsAPIClient is a client that implements the
-// ListSyncConfigurations operation.
-type ListSyncConfigurationsAPIClient interface {
-	ListSyncConfigurations(context.Context, *ListSyncConfigurationsInput, ...func(*Options)) (*ListSyncConfigurationsOutput, error)
-}
-
-var _ ListSyncConfigurationsAPIClient = (*Client)(nil)
 
 // ListSyncConfigurationsPaginatorOptions is the paginator options for
 // ListSyncConfigurations
@@ -216,6 +211,9 @@ func (p *ListSyncConfigurationsPaginator) NextPage(ctx context.Context, optFns .
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSyncConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListSyncConfigurationsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListSyncConfigurationsAPIClient is a client that implements the
+// ListSyncConfigurations operation.
+type ListSyncConfigurationsAPIClient interface {
+	ListSyncConfigurations(context.Context, *ListSyncConfigurationsInput, ...func(*Options)) (*ListSyncConfigurationsOutput, error)
+}
+
+var _ ListSyncConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSyncConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

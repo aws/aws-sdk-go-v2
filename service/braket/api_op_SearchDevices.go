@@ -122,6 +122,9 @@ func (c *Client) addOperationSearchDevicesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchDevicesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationSearchDevicesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// SearchDevicesAPIClient is a client that implements the SearchDevices operation.
-type SearchDevicesAPIClient interface {
-	SearchDevices(context.Context, *SearchDevicesInput, ...func(*Options)) (*SearchDevicesOutput, error)
-}
-
-var _ SearchDevicesAPIClient = (*Client)(nil)
 
 // SearchDevicesPaginatorOptions is the paginator options for SearchDevices
 type SearchDevicesPaginatorOptions struct {
@@ -216,6 +212,9 @@ func (p *SearchDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchDevices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +233,13 @@ func (p *SearchDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// SearchDevicesAPIClient is a client that implements the SearchDevices operation.
+type SearchDevicesAPIClient interface {
+	SearchDevices(context.Context, *SearchDevicesInput, ...func(*Options)) (*SearchDevicesOutput, error)
+}
+
+var _ SearchDevicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchDevices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -114,6 +114,9 @@ func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListChannels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,13 +137,6 @@ func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListChannelsAPIClient is a client that implements the ListChannels operation.
-type ListChannelsAPIClient interface {
-	ListChannels(context.Context, *ListChannelsInput, ...func(*Options)) (*ListChannelsOutput, error)
-}
-
-var _ ListChannelsAPIClient = (*Client)(nil)
 
 // ListChannelsPaginatorOptions is the paginator options for ListChannels
 type ListChannelsPaginatorOptions struct {
@@ -205,6 +201,9 @@ func (p *ListChannelsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +222,13 @@ func (p *ListChannelsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListChannelsAPIClient is a client that implements the ListChannels operation.
+type ListChannelsAPIClient interface {
+	ListChannels(context.Context, *ListChannelsInput, ...func(*Options)) (*ListChannelsOutput, error)
+}
+
+var _ ListChannelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

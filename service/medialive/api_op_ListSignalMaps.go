@@ -120,6 +120,9 @@ func (c *Client) addOperationListSignalMapsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSignalMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListSignalMapsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListSignalMapsAPIClient is a client that implements the ListSignalMaps
-// operation.
-type ListSignalMapsAPIClient interface {
-	ListSignalMaps(context.Context, *ListSignalMapsInput, ...func(*Options)) (*ListSignalMapsOutput, error)
-}
-
-var _ ListSignalMapsAPIClient = (*Client)(nil)
 
 // ListSignalMapsPaginatorOptions is the paginator options for ListSignalMaps
 type ListSignalMapsPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListSignalMapsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSignalMaps(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListSignalMapsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListSignalMapsAPIClient is a client that implements the ListSignalMaps
+// operation.
+type ListSignalMapsAPIClient interface {
+	ListSignalMaps(context.Context, *ListSignalMapsInput, ...func(*Options)) (*ListSignalMapsOutput, error)
+}
+
+var _ ListSignalMapsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSignalMaps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

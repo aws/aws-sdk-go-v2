@@ -102,6 +102,9 @@ func (c *Client) addOperationDeleteReplicationConfigurationTemplateMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteReplicationConfigurationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

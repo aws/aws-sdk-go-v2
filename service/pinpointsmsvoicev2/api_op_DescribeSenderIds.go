@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeSenderIdsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSenderIdsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationDescribeSenderIdsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeSenderIdsAPIClient is a client that implements the DescribeSenderIds
-// operation.
-type DescribeSenderIdsAPIClient interface {
-	DescribeSenderIds(context.Context, *DescribeSenderIdsInput, ...func(*Options)) (*DescribeSenderIdsOutput, error)
-}
-
-var _ DescribeSenderIdsAPIClient = (*Client)(nil)
 
 // DescribeSenderIdsPaginatorOptions is the paginator options for DescribeSenderIds
 type DescribeSenderIdsPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *DescribeSenderIdsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSenderIds(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *DescribeSenderIdsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// DescribeSenderIdsAPIClient is a client that implements the DescribeSenderIds
+// operation.
+type DescribeSenderIdsAPIClient interface {
+	DescribeSenderIds(context.Context, *DescribeSenderIdsInput, ...func(*Options)) (*DescribeSenderIdsOutput, error)
+}
+
+var _ DescribeSenderIdsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSenderIds(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

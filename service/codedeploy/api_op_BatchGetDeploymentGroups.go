@@ -117,6 +117,9 @@ func (c *Client) addOperationBatchGetDeploymentGroupsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetDeploymentGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}

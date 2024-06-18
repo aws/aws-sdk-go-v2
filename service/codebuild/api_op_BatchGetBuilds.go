@@ -109,6 +109,9 @@ func (c *Client) addOperationBatchGetBuildsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetBuildsValidationMiddleware(stack); err != nil {
 		return err
 	}

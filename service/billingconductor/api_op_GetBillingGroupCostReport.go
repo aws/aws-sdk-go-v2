@@ -126,6 +126,9 @@ func (c *Client) addOperationGetBillingGroupCostReportMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBillingGroupCostReportValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationGetBillingGroupCostReportMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// GetBillingGroupCostReportAPIClient is a client that implements the
-// GetBillingGroupCostReport operation.
-type GetBillingGroupCostReportAPIClient interface {
-	GetBillingGroupCostReport(context.Context, *GetBillingGroupCostReportInput, ...func(*Options)) (*GetBillingGroupCostReportOutput, error)
-}
-
-var _ GetBillingGroupCostReportAPIClient = (*Client)(nil)
 
 // GetBillingGroupCostReportPaginatorOptions is the paginator options for
 // GetBillingGroupCostReport
@@ -223,6 +218,9 @@ func (p *GetBillingGroupCostReportPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBillingGroupCostReport(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *GetBillingGroupCostReportPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// GetBillingGroupCostReportAPIClient is a client that implements the
+// GetBillingGroupCostReport operation.
+type GetBillingGroupCostReportAPIClient interface {
+	GetBillingGroupCostReport(context.Context, *GetBillingGroupCostReportInput, ...func(*Options)) (*GetBillingGroupCostReportOutput, error)
+}
+
+var _ GetBillingGroupCostReportAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBillingGroupCostReport(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -126,6 +126,9 @@ func (c *Client) addOperationCreateAppBundleMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAppBundleMiddleware(stack, options); err != nil {
 		return err
 	}

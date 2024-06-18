@@ -127,6 +127,9 @@ func (c *Client) addOperationListProtocolsListsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProtocolsListsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListProtocolsListsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListProtocolsListsAPIClient is a client that implements the ListProtocolsLists
-// operation.
-type ListProtocolsListsAPIClient interface {
-	ListProtocolsLists(context.Context, *ListProtocolsListsInput, ...func(*Options)) (*ListProtocolsListsOutput, error)
-}
-
-var _ ListProtocolsListsAPIClient = (*Client)(nil)
 
 // ListProtocolsListsPaginatorOptions is the paginator options for
 // ListProtocolsLists
@@ -228,6 +223,9 @@ func (p *ListProtocolsListsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProtocolsLists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListProtocolsListsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListProtocolsListsAPIClient is a client that implements the ListProtocolsLists
+// operation.
+type ListProtocolsListsAPIClient interface {
+	ListProtocolsLists(context.Context, *ListProtocolsListsInput, ...func(*Options)) (*ListProtocolsListsOutput, error)
+}
+
+var _ ListProtocolsListsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProtocolsLists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

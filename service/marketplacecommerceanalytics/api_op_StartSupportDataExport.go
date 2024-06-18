@@ -179,6 +179,9 @@ func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartSupportDataExportValidationMiddleware(stack); err != nil {
 		return err
 	}

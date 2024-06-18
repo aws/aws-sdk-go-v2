@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeRecoverySnapshotsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRecoverySnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeRecoverySnapshotsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeRecoverySnapshotsAPIClient is a client that implements the
-// DescribeRecoverySnapshots operation.
-type DescribeRecoverySnapshotsAPIClient interface {
-	DescribeRecoverySnapshots(context.Context, *DescribeRecoverySnapshotsInput, ...func(*Options)) (*DescribeRecoverySnapshotsOutput, error)
-}
-
-var _ DescribeRecoverySnapshotsAPIClient = (*Client)(nil)
 
 // DescribeRecoverySnapshotsPaginatorOptions is the paginator options for
 // DescribeRecoverySnapshots
@@ -218,6 +213,9 @@ func (p *DescribeRecoverySnapshotsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRecoverySnapshots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *DescribeRecoverySnapshotsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeRecoverySnapshotsAPIClient is a client that implements the
+// DescribeRecoverySnapshots operation.
+type DescribeRecoverySnapshotsAPIClient interface {
+	DescribeRecoverySnapshots(context.Context, *DescribeRecoverySnapshotsInput, ...func(*Options)) (*DescribeRecoverySnapshotsOutput, error)
+}
+
+var _ DescribeRecoverySnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRecoverySnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

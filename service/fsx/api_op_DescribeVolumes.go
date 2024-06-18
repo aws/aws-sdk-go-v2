@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeVolumesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVolumes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationDescribeVolumesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeVolumesAPIClient is a client that implements the DescribeVolumes
-// operation.
-type DescribeVolumesAPIClient interface {
-	DescribeVolumes(context.Context, *DescribeVolumesInput, ...func(*Options)) (*DescribeVolumesOutput, error)
-}
-
-var _ DescribeVolumesAPIClient = (*Client)(nil)
 
 // DescribeVolumesPaginatorOptions is the paginator options for DescribeVolumes
 type DescribeVolumesPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *DescribeVolumesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeVolumes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeVolumesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// DescribeVolumesAPIClient is a client that implements the DescribeVolumes
+// operation.
+type DescribeVolumesAPIClient interface {
+	DescribeVolumes(context.Context, *DescribeVolumesInput, ...func(*Options)) (*DescribeVolumesOutput, error)
+}
+
+var _ DescribeVolumesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeVolumes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

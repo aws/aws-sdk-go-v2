@@ -123,6 +123,9 @@ func (c *Client) addOperationListCommonControlsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCommonControls(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListCommonControlsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListCommonControlsAPIClient is a client that implements the ListCommonControls
-// operation.
-type ListCommonControlsAPIClient interface {
-	ListCommonControls(context.Context, *ListCommonControlsInput, ...func(*Options)) (*ListCommonControlsOutput, error)
-}
-
-var _ ListCommonControlsAPIClient = (*Client)(nil)
 
 // ListCommonControlsPaginatorOptions is the paginator options for
 // ListCommonControls
@@ -216,6 +211,9 @@ func (p *ListCommonControlsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCommonControls(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListCommonControlsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListCommonControlsAPIClient is a client that implements the ListCommonControls
+// operation.
+type ListCommonControlsAPIClient interface {
+	ListCommonControls(context.Context, *ListCommonControlsInput, ...func(*Options)) (*ListCommonControlsOutput, error)
+}
+
+var _ ListCommonControlsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCommonControls(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

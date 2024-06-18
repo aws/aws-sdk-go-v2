@@ -134,6 +134,9 @@ func (c *Client) addOperationListResourceSharePermissionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListResourceSharePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListResourceSharePermissionsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListResourceSharePermissionsAPIClient is a client that implements the
-// ListResourceSharePermissions operation.
-type ListResourceSharePermissionsAPIClient interface {
-	ListResourceSharePermissions(context.Context, *ListResourceSharePermissionsInput, ...func(*Options)) (*ListResourceSharePermissionsOutput, error)
-}
-
-var _ ListResourceSharePermissionsAPIClient = (*Client)(nil)
 
 // ListResourceSharePermissionsPaginatorOptions is the paginator options for
 // ListResourceSharePermissions
@@ -240,6 +235,9 @@ func (p *ListResourceSharePermissionsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResourceSharePermissions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +256,14 @@ func (p *ListResourceSharePermissionsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListResourceSharePermissionsAPIClient is a client that implements the
+// ListResourceSharePermissions operation.
+type ListResourceSharePermissionsAPIClient interface {
+	ListResourceSharePermissions(context.Context, *ListResourceSharePermissionsInput, ...func(*Options)) (*ListResourceSharePermissionsOutput, error)
+}
+
+var _ ListResourceSharePermissionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResourceSharePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

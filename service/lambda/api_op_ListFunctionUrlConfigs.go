@@ -131,6 +131,9 @@ func (c *Client) addOperationListFunctionUrlConfigsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFunctionUrlConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListFunctionUrlConfigsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListFunctionUrlConfigsAPIClient is a client that implements the
-// ListFunctionUrlConfigs operation.
-type ListFunctionUrlConfigsAPIClient interface {
-	ListFunctionUrlConfigs(context.Context, *ListFunctionUrlConfigsInput, ...func(*Options)) (*ListFunctionUrlConfigsOutput, error)
-}
-
-var _ ListFunctionUrlConfigsAPIClient = (*Client)(nil)
 
 // ListFunctionUrlConfigsPaginatorOptions is the paginator options for
 // ListFunctionUrlConfigs
@@ -229,6 +224,9 @@ func (p *ListFunctionUrlConfigsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFunctionUrlConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListFunctionUrlConfigsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListFunctionUrlConfigsAPIClient is a client that implements the
+// ListFunctionUrlConfigs operation.
+type ListFunctionUrlConfigsAPIClient interface {
+	ListFunctionUrlConfigs(context.Context, *ListFunctionUrlConfigsInput, ...func(*Options)) (*ListFunctionUrlConfigsOutput, error)
+}
+
+var _ ListFunctionUrlConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFunctionUrlConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

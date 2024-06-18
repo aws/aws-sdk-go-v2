@@ -139,6 +139,9 @@ func (c *Client) addOperationGetNetworkTelemetryMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetNetworkTelemetryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationGetNetworkTelemetryMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetNetworkTelemetryAPIClient is a client that implements the
-// GetNetworkTelemetry operation.
-type GetNetworkTelemetryAPIClient interface {
-	GetNetworkTelemetry(context.Context, *GetNetworkTelemetryInput, ...func(*Options)) (*GetNetworkTelemetryOutput, error)
-}
-
-var _ GetNetworkTelemetryAPIClient = (*Client)(nil)
 
 // GetNetworkTelemetryPaginatorOptions is the paginator options for
 // GetNetworkTelemetry
@@ -235,6 +230,9 @@ func (p *GetNetworkTelemetryPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetNetworkTelemetry(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *GetNetworkTelemetryPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetNetworkTelemetryAPIClient is a client that implements the
+// GetNetworkTelemetry operation.
+type GetNetworkTelemetryAPIClient interface {
+	GetNetworkTelemetry(context.Context, *GetNetworkTelemetryInput, ...func(*Options)) (*GetNetworkTelemetryOutput, error)
+}
+
+var _ GetNetworkTelemetryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetNetworkTelemetry(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

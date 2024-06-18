@@ -129,6 +129,9 @@ func (c *Client) addOperationGetRouteResponseMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRouteResponseValidationMiddleware(stack); err != nil {
 		return err
 	}

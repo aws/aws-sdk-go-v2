@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeDeploymentsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDeployments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeDeploymentsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeDeploymentsAPIClient is a client that implements the
-// DescribeDeployments operation.
-type DescribeDeploymentsAPIClient interface {
-	DescribeDeployments(context.Context, *DescribeDeploymentsInput, ...func(*Options)) (*DescribeDeploymentsOutput, error)
-}
-
-var _ DescribeDeploymentsAPIClient = (*Client)(nil)
 
 // DeploymentSuccessfulWaiterOptions are waiter options for
 // DeploymentSuccessfulWaiter
@@ -273,7 +268,13 @@ func (w *DeploymentSuccessfulWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.DescribeDeployments(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -369,6 +370,14 @@ func deploymentSuccessfulStateRetryable(ctx context.Context, input *DescribeDepl
 
 	return true, nil
 }
+
+// DescribeDeploymentsAPIClient is a client that implements the
+// DescribeDeployments operation.
+type DescribeDeploymentsAPIClient interface {
+	DescribeDeployments(context.Context, *DescribeDeploymentsInput, ...func(*Options)) (*DescribeDeploymentsOutput, error)
+}
+
+var _ DescribeDeploymentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

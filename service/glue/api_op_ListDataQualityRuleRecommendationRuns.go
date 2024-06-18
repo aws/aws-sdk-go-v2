@@ -113,6 +113,9 @@ func (c *Client) addOperationListDataQualityRuleRecommendationRunsMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataQualityRuleRecommendationRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListDataQualityRuleRecommendationRunsMiddlewares(st
 	}
 	return nil
 }
-
-// ListDataQualityRuleRecommendationRunsAPIClient is a client that implements the
-// ListDataQualityRuleRecommendationRuns operation.
-type ListDataQualityRuleRecommendationRunsAPIClient interface {
-	ListDataQualityRuleRecommendationRuns(context.Context, *ListDataQualityRuleRecommendationRunsInput, ...func(*Options)) (*ListDataQualityRuleRecommendationRunsOutput, error)
-}
-
-var _ ListDataQualityRuleRecommendationRunsAPIClient = (*Client)(nil)
 
 // ListDataQualityRuleRecommendationRunsPaginatorOptions is the paginator options
 // for ListDataQualityRuleRecommendationRuns
@@ -211,6 +206,9 @@ func (p *ListDataQualityRuleRecommendationRunsPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataQualityRuleRecommendationRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListDataQualityRuleRecommendationRunsPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListDataQualityRuleRecommendationRunsAPIClient is a client that implements the
+// ListDataQualityRuleRecommendationRuns operation.
+type ListDataQualityRuleRecommendationRunsAPIClient interface {
+	ListDataQualityRuleRecommendationRuns(context.Context, *ListDataQualityRuleRecommendationRunsInput, ...func(*Options)) (*ListDataQualityRuleRecommendationRunsOutput, error)
+}
+
+var _ ListDataQualityRuleRecommendationRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataQualityRuleRecommendationRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

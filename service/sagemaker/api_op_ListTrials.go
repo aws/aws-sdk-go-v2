@@ -135,6 +135,9 @@ func (c *Client) addOperationListTrialsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrials(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,13 +158,6 @@ func (c *Client) addOperationListTrialsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListTrialsAPIClient is a client that implements the ListTrials operation.
-type ListTrialsAPIClient interface {
-	ListTrials(context.Context, *ListTrialsInput, ...func(*Options)) (*ListTrialsOutput, error)
-}
-
-var _ ListTrialsAPIClient = (*Client)(nil)
 
 // ListTrialsPaginatorOptions is the paginator options for ListTrials
 type ListTrialsPaginatorOptions struct {
@@ -226,6 +222,9 @@ func (p *ListTrialsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrials(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +243,13 @@ func (p *ListTrialsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListTrialsAPIClient is a client that implements the ListTrials operation.
+type ListTrialsAPIClient interface {
+	ListTrials(context.Context, *ListTrialsInput, ...func(*Options)) (*ListTrialsOutput, error)
+}
+
+var _ ListTrialsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrials(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

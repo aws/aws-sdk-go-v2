@@ -101,6 +101,9 @@ func (c *Client) addOperationDeleteLoggingConfigurationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

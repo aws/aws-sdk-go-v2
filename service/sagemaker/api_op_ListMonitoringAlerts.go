@@ -118,6 +118,9 @@ func (c *Client) addOperationListMonitoringAlertsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMonitoringAlertsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListMonitoringAlertsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListMonitoringAlertsAPIClient is a client that implements the
-// ListMonitoringAlerts operation.
-type ListMonitoringAlertsAPIClient interface {
-	ListMonitoringAlerts(context.Context, *ListMonitoringAlertsInput, ...func(*Options)) (*ListMonitoringAlertsOutput, error)
-}
-
-var _ ListMonitoringAlertsAPIClient = (*Client)(nil)
 
 // ListMonitoringAlertsPaginatorOptions is the paginator options for
 // ListMonitoringAlerts
@@ -214,6 +209,9 @@ func (p *ListMonitoringAlertsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitoringAlerts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListMonitoringAlertsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListMonitoringAlertsAPIClient is a client that implements the
+// ListMonitoringAlerts operation.
+type ListMonitoringAlertsAPIClient interface {
+	ListMonitoringAlerts(context.Context, *ListMonitoringAlertsInput, ...func(*Options)) (*ListMonitoringAlertsOutput, error)
+}
+
+var _ ListMonitoringAlertsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitoringAlerts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

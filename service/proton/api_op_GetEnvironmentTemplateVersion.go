@@ -123,6 +123,9 @@ func (c *Client) addOperationGetEnvironmentTemplateVersionMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEnvironmentTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationGetEnvironmentTemplateVersionMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// GetEnvironmentTemplateVersionAPIClient is a client that implements the
-// GetEnvironmentTemplateVersion operation.
-type GetEnvironmentTemplateVersionAPIClient interface {
-	GetEnvironmentTemplateVersion(context.Context, *GetEnvironmentTemplateVersionInput, ...func(*Options)) (*GetEnvironmentTemplateVersionOutput, error)
-}
-
-var _ GetEnvironmentTemplateVersionAPIClient = (*Client)(nil)
 
 // EnvironmentTemplateVersionRegisteredWaiterOptions are waiter options for
 // EnvironmentTemplateVersionRegisteredWaiter
@@ -275,7 +270,13 @@ func (w *EnvironmentTemplateVersionRegisteredWaiter) WaitForOutput(ctx context.C
 		}
 
 		out, err := w.client.GetEnvironmentTemplateVersion(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -366,6 +367,14 @@ func environmentTemplateVersionRegisteredStateRetryable(ctx context.Context, inp
 
 	return true, nil
 }
+
+// GetEnvironmentTemplateVersionAPIClient is a client that implements the
+// GetEnvironmentTemplateVersion operation.
+type GetEnvironmentTemplateVersionAPIClient interface {
+	GetEnvironmentTemplateVersion(context.Context, *GetEnvironmentTemplateVersionInput, ...func(*Options)) (*GetEnvironmentTemplateVersionOutput, error)
+}
+
+var _ GetEnvironmentTemplateVersionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEnvironmentTemplateVersion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

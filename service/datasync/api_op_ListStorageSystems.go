@@ -113,6 +113,9 @@ func (c *Client) addOperationListStorageSystemsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListStorageSystemsMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,41 +139,6 @@ func (c *Client) addOperationListStorageSystemsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-type endpointPrefix_opListStorageSystemsMiddleware struct {
-}
-
-func (*endpointPrefix_opListStorageSystemsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListStorageSystemsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "discovery-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListStorageSystemsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListStorageSystemsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListStorageSystemsAPIClient is a client that implements the ListStorageSystems
-// operation.
-type ListStorageSystemsAPIClient interface {
-	ListStorageSystems(context.Context, *ListStorageSystemsInput, ...func(*Options)) (*ListStorageSystemsOutput, error)
-}
-
-var _ ListStorageSystemsAPIClient = (*Client)(nil)
 
 // ListStorageSystemsPaginatorOptions is the paginator options for
 // ListStorageSystems
@@ -236,6 +204,9 @@ func (p *ListStorageSystemsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStorageSystems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +225,41 @@ func (p *ListStorageSystemsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+type endpointPrefix_opListStorageSystemsMiddleware struct {
+}
+
+func (*endpointPrefix_opListStorageSystemsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListStorageSystemsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "discovery-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListStorageSystemsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListStorageSystemsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListStorageSystemsAPIClient is a client that implements the ListStorageSystems
+// operation.
+type ListStorageSystemsAPIClient interface {
+	ListStorageSystems(context.Context, *ListStorageSystemsInput, ...func(*Options)) (*ListStorageSystemsOutput, error)
+}
+
+var _ ListStorageSystemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStorageSystems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

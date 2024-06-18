@@ -151,6 +151,9 @@ func (c *Client) addOperationUpdateProvisioningArtifactMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateProvisioningArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationListPermissionGroupsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPermissionGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListPermissionGroupsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListPermissionGroupsAPIClient is a client that implements the
-// ListPermissionGroups operation.
-type ListPermissionGroupsAPIClient interface {
-	ListPermissionGroups(context.Context, *ListPermissionGroupsInput, ...func(*Options)) (*ListPermissionGroupsOutput, error)
-}
-
-var _ ListPermissionGroupsAPIClient = (*Client)(nil)
 
 // ListPermissionGroupsPaginatorOptions is the paginator options for
 // ListPermissionGroups
@@ -213,6 +208,9 @@ func (p *ListPermissionGroupsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPermissionGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListPermissionGroupsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListPermissionGroupsAPIClient is a client that implements the
+// ListPermissionGroups operation.
+type ListPermissionGroupsAPIClient interface {
+	ListPermissionGroups(context.Context, *ListPermissionGroupsInput, ...func(*Options)) (*ListPermissionGroupsOutput, error)
+}
+
+var _ ListPermissionGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPermissionGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

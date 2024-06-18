@@ -123,6 +123,9 @@ func (c *Client) addOperationListMicrosoftTeamsChannelConfigurationsMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMicrosoftTeamsChannelConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListMicrosoftTeamsChannelConfigurationsMiddlewares(
 	}
 	return nil
 }
-
-// ListMicrosoftTeamsChannelConfigurationsAPIClient is a client that implements
-// the ListMicrosoftTeamsChannelConfigurations operation.
-type ListMicrosoftTeamsChannelConfigurationsAPIClient interface {
-	ListMicrosoftTeamsChannelConfigurations(context.Context, *ListMicrosoftTeamsChannelConfigurationsInput, ...func(*Options)) (*ListMicrosoftTeamsChannelConfigurationsOutput, error)
-}
-
-var _ ListMicrosoftTeamsChannelConfigurationsAPIClient = (*Client)(nil)
 
 // ListMicrosoftTeamsChannelConfigurationsPaginatorOptions is the paginator
 // options for ListMicrosoftTeamsChannelConfigurations
@@ -220,6 +215,9 @@ func (p *ListMicrosoftTeamsChannelConfigurationsPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMicrosoftTeamsChannelConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListMicrosoftTeamsChannelConfigurationsPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListMicrosoftTeamsChannelConfigurationsAPIClient is a client that implements
+// the ListMicrosoftTeamsChannelConfigurations operation.
+type ListMicrosoftTeamsChannelConfigurationsAPIClient interface {
+	ListMicrosoftTeamsChannelConfigurations(context.Context, *ListMicrosoftTeamsChannelConfigurationsInput, ...func(*Options)) (*ListMicrosoftTeamsChannelConfigurationsOutput, error)
+}
+
+var _ ListMicrosoftTeamsChannelConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMicrosoftTeamsChannelConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

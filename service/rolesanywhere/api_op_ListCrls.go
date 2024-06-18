@@ -117,6 +117,9 @@ func (c *Client) addOperationListCrlsMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCrls(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,13 +140,6 @@ func (c *Client) addOperationListCrlsMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// ListCrlsAPIClient is a client that implements the ListCrls operation.
-type ListCrlsAPIClient interface {
-	ListCrls(context.Context, *ListCrlsInput, ...func(*Options)) (*ListCrlsOutput, error)
-}
-
-var _ ListCrlsAPIClient = (*Client)(nil)
 
 // ListCrlsPaginatorOptions is the paginator options for ListCrls
 type ListCrlsPaginatorOptions struct {
@@ -196,6 +192,9 @@ func (p *ListCrlsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCrls(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -214,6 +213,13 @@ func (p *ListCrlsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// ListCrlsAPIClient is a client that implements the ListCrls operation.
+type ListCrlsAPIClient interface {
+	ListCrls(context.Context, *ListCrlsInput, ...func(*Options)) (*ListCrlsOutput, error)
+}
+
+var _ ListCrlsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCrls(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

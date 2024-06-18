@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteDirectoryConfigMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteDirectoryConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

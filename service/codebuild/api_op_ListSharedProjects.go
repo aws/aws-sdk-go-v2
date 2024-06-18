@@ -141,6 +141,9 @@ func (c *Client) addOperationListSharedProjectsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSharedProjects(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListSharedProjectsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListSharedProjectsAPIClient is a client that implements the ListSharedProjects
-// operation.
-type ListSharedProjectsAPIClient interface {
-	ListSharedProjects(context.Context, *ListSharedProjectsInput, ...func(*Options)) (*ListSharedProjectsOutput, error)
-}
-
-var _ ListSharedProjectsAPIClient = (*Client)(nil)
 
 // ListSharedProjectsPaginatorOptions is the paginator options for
 // ListSharedProjects
@@ -236,6 +231,9 @@ func (p *ListSharedProjectsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSharedProjects(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListSharedProjectsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListSharedProjectsAPIClient is a client that implements the ListSharedProjects
+// operation.
+type ListSharedProjectsAPIClient interface {
+	ListSharedProjects(context.Context, *ListSharedProjectsInput, ...func(*Options)) (*ListSharedProjectsOutput, error)
+}
+
+var _ ListSharedProjectsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSharedProjects(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

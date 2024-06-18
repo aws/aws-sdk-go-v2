@@ -161,6 +161,9 @@ func (c *Client) addOperationDescribeStackResourceDriftsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeStackResourceDriftsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,14 +187,6 @@ func (c *Client) addOperationDescribeStackResourceDriftsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeStackResourceDriftsAPIClient is a client that implements the
-// DescribeStackResourceDrifts operation.
-type DescribeStackResourceDriftsAPIClient interface {
-	DescribeStackResourceDrifts(context.Context, *DescribeStackResourceDriftsInput, ...func(*Options)) (*DescribeStackResourceDriftsOutput, error)
-}
-
-var _ DescribeStackResourceDriftsAPIClient = (*Client)(nil)
 
 // DescribeStackResourceDriftsPaginatorOptions is the paginator options for
 // DescribeStackResourceDrifts
@@ -262,6 +257,9 @@ func (p *DescribeStackResourceDriftsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeStackResourceDrifts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -280,6 +278,14 @@ func (p *DescribeStackResourceDriftsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeStackResourceDriftsAPIClient is a client that implements the
+// DescribeStackResourceDrifts operation.
+type DescribeStackResourceDriftsAPIClient interface {
+	DescribeStackResourceDrifts(context.Context, *DescribeStackResourceDriftsInput, ...func(*Options)) (*DescribeStackResourceDriftsOutput, error)
+}
+
+var _ DescribeStackResourceDriftsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStackResourceDrifts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

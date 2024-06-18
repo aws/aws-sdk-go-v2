@@ -173,6 +173,9 @@ func (c *Client) addOperationUpdateQuerySuggestionsConfigMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateQuerySuggestionsConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

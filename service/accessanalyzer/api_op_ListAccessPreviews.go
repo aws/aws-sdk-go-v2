@@ -119,6 +119,9 @@ func (c *Client) addOperationListAccessPreviewsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAccessPreviewsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListAccessPreviewsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListAccessPreviewsAPIClient is a client that implements the ListAccessPreviews
-// operation.
-type ListAccessPreviewsAPIClient interface {
-	ListAccessPreviews(context.Context, *ListAccessPreviewsInput, ...func(*Options)) (*ListAccessPreviewsOutput, error)
-}
-
-var _ ListAccessPreviewsAPIClient = (*Client)(nil)
 
 // ListAccessPreviewsPaginatorOptions is the paginator options for
 // ListAccessPreviews
@@ -215,6 +210,9 @@ func (p *ListAccessPreviewsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccessPreviews(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListAccessPreviewsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListAccessPreviewsAPIClient is a client that implements the ListAccessPreviews
+// operation.
+type ListAccessPreviewsAPIClient interface {
+	ListAccessPreviews(context.Context, *ListAccessPreviewsInput, ...func(*Options)) (*ListAccessPreviewsOutput, error)
+}
+
+var _ ListAccessPreviewsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccessPreviews(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -126,6 +126,9 @@ func (c *Client) addOperationListExtensionAssociationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExtensionAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListExtensionAssociationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListExtensionAssociationsAPIClient is a client that implements the
-// ListExtensionAssociations operation.
-type ListExtensionAssociationsAPIClient interface {
-	ListExtensionAssociations(context.Context, *ListExtensionAssociationsInput, ...func(*Options)) (*ListExtensionAssociationsOutput, error)
-}
-
-var _ ListExtensionAssociationsAPIClient = (*Client)(nil)
 
 // ListExtensionAssociationsPaginatorOptions is the paginator options for
 // ListExtensionAssociations
@@ -221,6 +216,9 @@ func (p *ListExtensionAssociationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExtensionAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListExtensionAssociationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListExtensionAssociationsAPIClient is a client that implements the
+// ListExtensionAssociations operation.
+type ListExtensionAssociationsAPIClient interface {
+	ListExtensionAssociations(context.Context, *ListExtensionAssociationsInput, ...func(*Options)) (*ListExtensionAssociationsOutput, error)
+}
+
+var _ ListExtensionAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExtensionAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

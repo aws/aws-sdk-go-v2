@@ -130,6 +130,9 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListTagsForResourceAPIClient is a client that implements the
-// ListTagsForResource operation.
-type ListTagsForResourceAPIClient interface {
-	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
-}
-
-var _ ListTagsForResourceAPIClient = (*Client)(nil)
 
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
@@ -232,6 +227,9 @@ func (p *ListTagsForResourcePaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTagsForResource(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListTagsForResourcePaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListTagsForResourceAPIClient is a client that implements the
+// ListTagsForResource operation.
+type ListTagsForResourceAPIClient interface {
+	ListTagsForResource(context.Context, *ListTagsForResourceInput, ...func(*Options)) (*ListTagsForResourceOutput, error)
+}
+
+var _ ListTagsForResourceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTagsForResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

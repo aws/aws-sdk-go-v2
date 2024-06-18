@@ -121,6 +121,9 @@ func (c *Client) addOperationDeleteLunaClientMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteLunaClientValidationMiddleware(stack); err != nil {
 		return err
 	}

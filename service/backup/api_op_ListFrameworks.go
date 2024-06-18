@@ -116,6 +116,9 @@ func (c *Client) addOperationListFrameworksMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFrameworks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListFrameworksMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListFrameworksAPIClient is a client that implements the ListFrameworks
-// operation.
-type ListFrameworksAPIClient interface {
-	ListFrameworks(context.Context, *ListFrameworksInput, ...func(*Options)) (*ListFrameworksOutput, error)
-}
-
-var _ ListFrameworksAPIClient = (*Client)(nil)
 
 // ListFrameworksPaginatorOptions is the paginator options for ListFrameworks
 type ListFrameworksPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListFrameworksPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFrameworks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListFrameworksPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListFrameworksAPIClient is a client that implements the ListFrameworks
+// operation.
+type ListFrameworksAPIClient interface {
+	ListFrameworks(context.Context, *ListFrameworksInput, ...func(*Options)) (*ListFrameworksOutput, error)
+}
+
+var _ ListFrameworksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFrameworks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationListBatchInferenceJobsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBatchInferenceJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListBatchInferenceJobsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListBatchInferenceJobsAPIClient is a client that implements the
-// ListBatchInferenceJobs operation.
-type ListBatchInferenceJobsAPIClient interface {
-	ListBatchInferenceJobs(context.Context, *ListBatchInferenceJobsInput, ...func(*Options)) (*ListBatchInferenceJobsOutput, error)
-}
-
-var _ ListBatchInferenceJobsAPIClient = (*Client)(nil)
 
 // ListBatchInferenceJobsPaginatorOptions is the paginator options for
 // ListBatchInferenceJobs
@@ -211,6 +206,9 @@ func (p *ListBatchInferenceJobsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBatchInferenceJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListBatchInferenceJobsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListBatchInferenceJobsAPIClient is a client that implements the
+// ListBatchInferenceJobs operation.
+type ListBatchInferenceJobsAPIClient interface {
+	ListBatchInferenceJobs(context.Context, *ListBatchInferenceJobsInput, ...func(*Options)) (*ListBatchInferenceJobsOutput, error)
+}
+
+var _ ListBatchInferenceJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBatchInferenceJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

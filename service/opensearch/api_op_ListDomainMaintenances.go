@@ -129,6 +129,9 @@ func (c *Client) addOperationListDomainMaintenancesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDomainMaintenancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListDomainMaintenancesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListDomainMaintenancesAPIClient is a client that implements the
-// ListDomainMaintenances operation.
-type ListDomainMaintenancesAPIClient interface {
-	ListDomainMaintenances(context.Context, *ListDomainMaintenancesInput, ...func(*Options)) (*ListDomainMaintenancesOutput, error)
-}
-
-var _ ListDomainMaintenancesAPIClient = (*Client)(nil)
 
 // ListDomainMaintenancesPaginatorOptions is the paginator options for
 // ListDomainMaintenances
@@ -222,6 +217,9 @@ func (p *ListDomainMaintenancesPaginator) NextPage(ctx context.Context, optFns .
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDomainMaintenances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListDomainMaintenancesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListDomainMaintenancesAPIClient is a client that implements the
+// ListDomainMaintenances operation.
+type ListDomainMaintenancesAPIClient interface {
+	ListDomainMaintenances(context.Context, *ListDomainMaintenancesInput, ...func(*Options)) (*ListDomainMaintenancesOutput, error)
+}
+
+var _ ListDomainMaintenancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDomainMaintenances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

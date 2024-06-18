@@ -241,6 +241,9 @@ func (c *Client) addOperationGetEventSourceMappingMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEventSourceMappingValidationMiddleware(stack); err != nil {
 		return err
 	}

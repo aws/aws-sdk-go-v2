@@ -118,6 +118,9 @@ func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRoutingControlsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListRoutingControlsAPIClient is a client that implements the
-// ListRoutingControls operation.
-type ListRoutingControlsAPIClient interface {
-	ListRoutingControls(context.Context, *ListRoutingControlsInput, ...func(*Options)) (*ListRoutingControlsOutput, error)
-}
-
-var _ ListRoutingControlsAPIClient = (*Client)(nil)
 
 // ListRoutingControlsPaginatorOptions is the paginator options for
 // ListRoutingControls
@@ -214,6 +209,9 @@ func (p *ListRoutingControlsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRoutingControls(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListRoutingControlsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListRoutingControlsAPIClient is a client that implements the
+// ListRoutingControls operation.
+type ListRoutingControlsAPIClient interface {
+	ListRoutingControls(context.Context, *ListRoutingControlsInput, ...func(*Options)) (*ListRoutingControlsOutput, error)
+}
+
+var _ ListRoutingControlsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRoutingControls(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

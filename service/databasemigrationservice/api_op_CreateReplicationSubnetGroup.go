@@ -138,6 +138,9 @@ func (c *Client) addOperationCreateReplicationSubnetGroupMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateReplicationSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

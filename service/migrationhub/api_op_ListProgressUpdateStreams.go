@@ -114,6 +114,9 @@ func (c *Client) addOperationListProgressUpdateStreamsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProgressUpdateStreams(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListProgressUpdateStreamsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListProgressUpdateStreamsAPIClient is a client that implements the
-// ListProgressUpdateStreams operation.
-type ListProgressUpdateStreamsAPIClient interface {
-	ListProgressUpdateStreams(context.Context, *ListProgressUpdateStreamsInput, ...func(*Options)) (*ListProgressUpdateStreamsOutput, error)
-}
-
-var _ ListProgressUpdateStreamsAPIClient = (*Client)(nil)
 
 // ListProgressUpdateStreamsPaginatorOptions is the paginator options for
 // ListProgressUpdateStreams
@@ -208,6 +203,9 @@ func (p *ListProgressUpdateStreamsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProgressUpdateStreams(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListProgressUpdateStreamsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListProgressUpdateStreamsAPIClient is a client that implements the
+// ListProgressUpdateStreams operation.
+type ListProgressUpdateStreamsAPIClient interface {
+	ListProgressUpdateStreams(context.Context, *ListProgressUpdateStreamsInput, ...func(*Options)) (*ListProgressUpdateStreamsOutput, error)
+}
+
+var _ ListProgressUpdateStreamsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProgressUpdateStreams(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

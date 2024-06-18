@@ -127,6 +127,9 @@ func (c *Client) addOperationListSchedulingPoliciesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSchedulingPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListSchedulingPoliciesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListSchedulingPoliciesAPIClient is a client that implements the
-// ListSchedulingPolicies operation.
-type ListSchedulingPoliciesAPIClient interface {
-	ListSchedulingPolicies(context.Context, *ListSchedulingPoliciesInput, ...func(*Options)) (*ListSchedulingPoliciesOutput, error)
-}
-
-var _ ListSchedulingPoliciesAPIClient = (*Client)(nil)
 
 // ListSchedulingPoliciesPaginatorOptions is the paginator options for
 // ListSchedulingPolicies
@@ -226,6 +221,9 @@ func (p *ListSchedulingPoliciesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSchedulingPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListSchedulingPoliciesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListSchedulingPoliciesAPIClient is a client that implements the
+// ListSchedulingPolicies operation.
+type ListSchedulingPoliciesAPIClient interface {
+	ListSchedulingPolicies(context.Context, *ListSchedulingPoliciesInput, ...func(*Options)) (*ListSchedulingPoliciesOutput, error)
+}
+
+var _ ListSchedulingPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSchedulingPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

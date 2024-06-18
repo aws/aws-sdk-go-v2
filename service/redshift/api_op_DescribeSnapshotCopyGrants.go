@@ -157,6 +157,9 @@ func (c *Client) addOperationDescribeSnapshotCopyGrantsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSnapshotCopyGrants(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -177,14 +180,6 @@ func (c *Client) addOperationDescribeSnapshotCopyGrantsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeSnapshotCopyGrantsAPIClient is a client that implements the
-// DescribeSnapshotCopyGrants operation.
-type DescribeSnapshotCopyGrantsAPIClient interface {
-	DescribeSnapshotCopyGrants(context.Context, *DescribeSnapshotCopyGrantsInput, ...func(*Options)) (*DescribeSnapshotCopyGrantsOutput, error)
-}
-
-var _ DescribeSnapshotCopyGrantsAPIClient = (*Client)(nil)
 
 // DescribeSnapshotCopyGrantsPaginatorOptions is the paginator options for
 // DescribeSnapshotCopyGrants
@@ -259,6 +254,9 @@ func (p *DescribeSnapshotCopyGrantsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSnapshotCopyGrants(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +275,14 @@ func (p *DescribeSnapshotCopyGrantsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeSnapshotCopyGrantsAPIClient is a client that implements the
+// DescribeSnapshotCopyGrants operation.
+type DescribeSnapshotCopyGrantsAPIClient interface {
+	DescribeSnapshotCopyGrants(context.Context, *DescribeSnapshotCopyGrantsInput, ...func(*Options)) (*DescribeSnapshotCopyGrantsOutput, error)
+}
+
+var _ DescribeSnapshotCopyGrantsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSnapshotCopyGrants(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

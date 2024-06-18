@@ -121,6 +121,9 @@ func (c *Client) addOperationListDiscoverersMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDiscoverers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListDiscoverersMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListDiscoverersAPIClient is a client that implements the ListDiscoverers
-// operation.
-type ListDiscoverersAPIClient interface {
-	ListDiscoverers(context.Context, *ListDiscoverersInput, ...func(*Options)) (*ListDiscoverersOutput, error)
-}
-
-var _ ListDiscoverersAPIClient = (*Client)(nil)
 
 // ListDiscoverersPaginatorOptions is the paginator options for ListDiscoverers
 type ListDiscoverersPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListDiscoverersPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDiscoverers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListDiscoverersPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListDiscoverersAPIClient is a client that implements the ListDiscoverers
+// operation.
+type ListDiscoverersAPIClient interface {
+	ListDiscoverers(context.Context, *ListDiscoverersInput, ...func(*Options)) (*ListDiscoverersOutput, error)
+}
+
+var _ ListDiscoverersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDiscoverers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

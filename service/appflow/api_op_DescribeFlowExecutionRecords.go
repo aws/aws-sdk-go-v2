@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFlowExecutionRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeFlowExecutionRecordsAPIClient is a client that implements the
-// DescribeFlowExecutionRecords operation.
-type DescribeFlowExecutionRecordsAPIClient interface {
-	DescribeFlowExecutionRecords(context.Context, *DescribeFlowExecutionRecordsInput, ...func(*Options)) (*DescribeFlowExecutionRecordsOutput, error)
-}
-
-var _ DescribeFlowExecutionRecordsAPIClient = (*Client)(nil)
 
 // DescribeFlowExecutionRecordsPaginatorOptions is the paginator options for
 // DescribeFlowExecutionRecords
@@ -216,6 +211,9 @@ func (p *DescribeFlowExecutionRecordsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFlowExecutionRecords(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *DescribeFlowExecutionRecordsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeFlowExecutionRecordsAPIClient is a client that implements the
+// DescribeFlowExecutionRecords operation.
+type DescribeFlowExecutionRecordsAPIClient interface {
+	DescribeFlowExecutionRecords(context.Context, *DescribeFlowExecutionRecordsInput, ...func(*Options)) (*DescribeFlowExecutionRecordsOutput, error)
+}
+
+var _ DescribeFlowExecutionRecordsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFlowExecutionRecords(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

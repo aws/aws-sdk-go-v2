@@ -129,6 +129,9 @@ func (c *Client) addOperationGetPackageVersionHistoryMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPackageVersionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationGetPackageVersionHistoryMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// GetPackageVersionHistoryAPIClient is a client that implements the
-// GetPackageVersionHistory operation.
-type GetPackageVersionHistoryAPIClient interface {
-	GetPackageVersionHistory(context.Context, *GetPackageVersionHistoryInput, ...func(*Options)) (*GetPackageVersionHistoryOutput, error)
-}
-
-var _ GetPackageVersionHistoryAPIClient = (*Client)(nil)
 
 // GetPackageVersionHistoryPaginatorOptions is the paginator options for
 // GetPackageVersionHistory
@@ -223,6 +218,9 @@ func (p *GetPackageVersionHistoryPaginator) NextPage(ctx context.Context, optFns
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetPackageVersionHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *GetPackageVersionHistoryPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// GetPackageVersionHistoryAPIClient is a client that implements the
+// GetPackageVersionHistory operation.
+type GetPackageVersionHistoryAPIClient interface {
+	GetPackageVersionHistory(context.Context, *GetPackageVersionHistoryInput, ...func(*Options)) (*GetPackageVersionHistoryOutput, error)
+}
+
+var _ GetPackageVersionHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetPackageVersionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

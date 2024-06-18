@@ -247,6 +247,9 @@ func (c *Client) addOperationDescribeReservedCacheNodesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedCacheNodes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -267,14 +270,6 @@ func (c *Client) addOperationDescribeReservedCacheNodesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeReservedCacheNodesAPIClient is a client that implements the
-// DescribeReservedCacheNodes operation.
-type DescribeReservedCacheNodesAPIClient interface {
-	DescribeReservedCacheNodes(context.Context, *DescribeReservedCacheNodesInput, ...func(*Options)) (*DescribeReservedCacheNodesOutput, error)
-}
-
-var _ DescribeReservedCacheNodesAPIClient = (*Client)(nil)
 
 // DescribeReservedCacheNodesPaginatorOptions is the paginator options for
 // DescribeReservedCacheNodes
@@ -348,6 +343,9 @@ func (p *DescribeReservedCacheNodesPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedCacheNodes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -366,6 +364,14 @@ func (p *DescribeReservedCacheNodesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeReservedCacheNodesAPIClient is a client that implements the
+// DescribeReservedCacheNodes operation.
+type DescribeReservedCacheNodesAPIClient interface {
+	DescribeReservedCacheNodes(context.Context, *DescribeReservedCacheNodesInput, ...func(*Options)) (*DescribeReservedCacheNodesOutput, error)
+}
+
+var _ DescribeReservedCacheNodesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedCacheNodes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

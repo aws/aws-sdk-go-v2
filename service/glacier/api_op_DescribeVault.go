@@ -165,6 +165,9 @@ func (c *Client) addOperationDescribeVaultMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeVaultValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -197,13 +200,6 @@ func (c *Client) addOperationDescribeVaultMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeVaultAPIClient is a client that implements the DescribeVault operation.
-type DescribeVaultAPIClient interface {
-	DescribeVault(context.Context, *DescribeVaultInput, ...func(*Options)) (*DescribeVaultOutput, error)
-}
-
-var _ DescribeVaultAPIClient = (*Client)(nil)
 
 // VaultExistsWaiterOptions are waiter options for VaultExistsWaiter
 type VaultExistsWaiterOptions struct {
@@ -319,7 +315,13 @@ func (w *VaultExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeV
 		}
 
 		out, err := w.client.DescribeVault(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -486,7 +488,13 @@ func (w *VaultNotExistsWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeVault(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -537,6 +545,13 @@ func vaultNotExistsStateRetryable(ctx context.Context, input *DescribeVaultInput
 
 	return true, nil
 }
+
+// DescribeVaultAPIClient is a client that implements the DescribeVault operation.
+type DescribeVaultAPIClient interface {
+	DescribeVault(context.Context, *DescribeVaultInput, ...func(*Options)) (*DescribeVaultOutput, error)
+}
+
+var _ DescribeVaultAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeVault(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

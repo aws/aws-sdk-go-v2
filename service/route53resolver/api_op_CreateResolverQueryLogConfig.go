@@ -155,6 +155,9 @@ func (c *Client) addOperationCreateResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateResolverQueryLogConfigMiddleware(stack, options); err != nil {
 		return err
 	}

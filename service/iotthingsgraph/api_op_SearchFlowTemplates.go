@@ -118,6 +118,9 @@ func (c *Client) addOperationSearchFlowTemplatesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchFlowTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationSearchFlowTemplatesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// SearchFlowTemplatesAPIClient is a client that implements the
-// SearchFlowTemplates operation.
-type SearchFlowTemplatesAPIClient interface {
-	SearchFlowTemplates(context.Context, *SearchFlowTemplatesInput, ...func(*Options)) (*SearchFlowTemplatesOutput, error)
-}
-
-var _ SearchFlowTemplatesAPIClient = (*Client)(nil)
 
 // SearchFlowTemplatesPaginatorOptions is the paginator options for
 // SearchFlowTemplates
@@ -214,6 +209,9 @@ func (p *SearchFlowTemplatesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchFlowTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *SearchFlowTemplatesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// SearchFlowTemplatesAPIClient is a client that implements the
+// SearchFlowTemplates operation.
+type SearchFlowTemplatesAPIClient interface {
+	SearchFlowTemplates(context.Context, *SearchFlowTemplatesInput, ...func(*Options)) (*SearchFlowTemplatesOutput, error)
+}
+
+var _ SearchFlowTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchFlowTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

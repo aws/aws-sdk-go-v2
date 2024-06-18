@@ -124,6 +124,9 @@ func (c *Client) addOperationListCoverageMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCoverageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,13 +150,6 @@ func (c *Client) addOperationListCoverageMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListCoverageAPIClient is a client that implements the ListCoverage operation.
-type ListCoverageAPIClient interface {
-	ListCoverage(context.Context, *ListCoverageInput, ...func(*Options)) (*ListCoverageOutput, error)
-}
-
-var _ ListCoverageAPIClient = (*Client)(nil)
 
 // ListCoveragePaginatorOptions is the paginator options for ListCoverage
 type ListCoveragePaginatorOptions struct {
@@ -220,6 +216,9 @@ func (p *ListCoveragePaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCoverage(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +237,13 @@ func (p *ListCoveragePaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListCoverageAPIClient is a client that implements the ListCoverage operation.
+type ListCoverageAPIClient interface {
+	ListCoverage(context.Context, *ListCoverageInput, ...func(*Options)) (*ListCoverageOutput, error)
+}
+
+var _ ListCoverageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCoverage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

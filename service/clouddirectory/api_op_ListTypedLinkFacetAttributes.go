@@ -124,6 +124,9 @@ func (c *Client) addOperationListTypedLinkFacetAttributesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTypedLinkFacetAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListTypedLinkFacetAttributesMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListTypedLinkFacetAttributesAPIClient is a client that implements the
-// ListTypedLinkFacetAttributes operation.
-type ListTypedLinkFacetAttributesAPIClient interface {
-	ListTypedLinkFacetAttributes(context.Context, *ListTypedLinkFacetAttributesInput, ...func(*Options)) (*ListTypedLinkFacetAttributesOutput, error)
-}
-
-var _ ListTypedLinkFacetAttributesAPIClient = (*Client)(nil)
 
 // ListTypedLinkFacetAttributesPaginatorOptions is the paginator options for
 // ListTypedLinkFacetAttributes
@@ -222,6 +217,9 @@ func (p *ListTypedLinkFacetAttributesPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTypedLinkFacetAttributes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListTypedLinkFacetAttributesPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListTypedLinkFacetAttributesAPIClient is a client that implements the
+// ListTypedLinkFacetAttributes operation.
+type ListTypedLinkFacetAttributesAPIClient interface {
+	ListTypedLinkFacetAttributes(context.Context, *ListTypedLinkFacetAttributesInput, ...func(*Options)) (*ListTypedLinkFacetAttributesOutput, error)
+}
+
+var _ ListTypedLinkFacetAttributesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTypedLinkFacetAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

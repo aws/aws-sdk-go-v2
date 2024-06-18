@@ -128,6 +128,9 @@ func (c *Client) addOperationListJournalS3ExportsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJournalS3Exports(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListJournalS3ExportsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListJournalS3ExportsAPIClient is a client that implements the
-// ListJournalS3Exports operation.
-type ListJournalS3ExportsAPIClient interface {
-	ListJournalS3Exports(context.Context, *ListJournalS3ExportsInput, ...func(*Options)) (*ListJournalS3ExportsOutput, error)
-}
-
-var _ ListJournalS3ExportsAPIClient = (*Client)(nil)
 
 // ListJournalS3ExportsPaginatorOptions is the paginator options for
 // ListJournalS3Exports
@@ -222,6 +217,9 @@ func (p *ListJournalS3ExportsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJournalS3Exports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListJournalS3ExportsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListJournalS3ExportsAPIClient is a client that implements the
+// ListJournalS3Exports operation.
+type ListJournalS3ExportsAPIClient interface {
+	ListJournalS3Exports(context.Context, *ListJournalS3ExportsInput, ...func(*Options)) (*ListJournalS3ExportsOutput, error)
+}
+
+var _ ListJournalS3ExportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJournalS3Exports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

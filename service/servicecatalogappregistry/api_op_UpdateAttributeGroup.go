@@ -121,6 +121,9 @@ func (c *Client) addOperationUpdateAttributeGroupMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateAttributeGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

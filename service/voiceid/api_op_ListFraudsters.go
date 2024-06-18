@@ -128,6 +128,9 @@ func (c *Client) addOperationListFraudstersMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFraudstersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListFraudstersMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListFraudstersAPIClient is a client that implements the ListFraudsters
-// operation.
-type ListFraudstersAPIClient interface {
-	ListFraudsters(context.Context, *ListFraudstersInput, ...func(*Options)) (*ListFraudstersOutput, error)
-}
-
-var _ ListFraudstersAPIClient = (*Client)(nil)
 
 // ListFraudstersPaginatorOptions is the paginator options for ListFraudsters
 type ListFraudstersPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *ListFraudstersPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFraudsters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListFraudstersPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListFraudstersAPIClient is a client that implements the ListFraudsters
+// operation.
+type ListFraudstersAPIClient interface {
+	ListFraudsters(context.Context, *ListFraudstersInput, ...func(*Options)) (*ListFraudstersOutput, error)
+}
+
+var _ ListFraudstersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFraudsters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

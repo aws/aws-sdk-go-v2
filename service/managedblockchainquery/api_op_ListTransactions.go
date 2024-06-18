@@ -148,6 +148,9 @@ func (c *Client) addOperationListTransactionsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTransactionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -171,14 +174,6 @@ func (c *Client) addOperationListTransactionsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListTransactionsAPIClient is a client that implements the ListTransactions
-// operation.
-type ListTransactionsAPIClient interface {
-	ListTransactions(context.Context, *ListTransactionsInput, ...func(*Options)) (*ListTransactionsOutput, error)
-}
-
-var _ ListTransactionsAPIClient = (*Client)(nil)
 
 // ListTransactionsPaginatorOptions is the paginator options for ListTransactions
 type ListTransactionsPaginatorOptions struct {
@@ -252,6 +247,9 @@ func (p *ListTransactionsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTransactions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -270,6 +268,14 @@ func (p *ListTransactionsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListTransactionsAPIClient is a client that implements the ListTransactions
+// operation.
+type ListTransactionsAPIClient interface {
+	ListTransactions(context.Context, *ListTransactionsInput, ...func(*Options)) (*ListTransactionsOutput, error)
+}
+
+var _ ListTransactionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTransactions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

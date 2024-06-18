@@ -115,6 +115,9 @@ func (c *Client) addOperationListEntitiesDetectionJobsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntitiesDetectionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListEntitiesDetectionJobsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListEntitiesDetectionJobsAPIClient is a client that implements the
-// ListEntitiesDetectionJobs operation.
-type ListEntitiesDetectionJobsAPIClient interface {
-	ListEntitiesDetectionJobs(context.Context, *ListEntitiesDetectionJobsInput, ...func(*Options)) (*ListEntitiesDetectionJobsOutput, error)
-}
-
-var _ ListEntitiesDetectionJobsAPIClient = (*Client)(nil)
 
 // ListEntitiesDetectionJobsPaginatorOptions is the paginator options for
 // ListEntitiesDetectionJobs
@@ -209,6 +204,9 @@ func (p *ListEntitiesDetectionJobsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEntitiesDetectionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListEntitiesDetectionJobsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListEntitiesDetectionJobsAPIClient is a client that implements the
+// ListEntitiesDetectionJobs operation.
+type ListEntitiesDetectionJobsAPIClient interface {
+	ListEntitiesDetectionJobs(context.Context, *ListEntitiesDetectionJobsInput, ...func(*Options)) (*ListEntitiesDetectionJobsOutput, error)
+}
+
+var _ ListEntitiesDetectionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEntitiesDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

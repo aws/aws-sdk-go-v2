@@ -119,6 +119,9 @@ func (c *Client) addOperationListArchiveRulesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListArchiveRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListArchiveRulesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListArchiveRulesAPIClient is a client that implements the ListArchiveRules
-// operation.
-type ListArchiveRulesAPIClient interface {
-	ListArchiveRules(context.Context, *ListArchiveRulesInput, ...func(*Options)) (*ListArchiveRulesOutput, error)
-}
-
-var _ ListArchiveRulesAPIClient = (*Client)(nil)
 
 // ListArchiveRulesPaginatorOptions is the paginator options for ListArchiveRules
 type ListArchiveRulesPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *ListArchiveRulesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListArchiveRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListArchiveRulesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListArchiveRulesAPIClient is a client that implements the ListArchiveRules
+// operation.
+type ListArchiveRulesAPIClient interface {
+	ListArchiveRules(context.Context, *ListArchiveRulesInput, ...func(*Options)) (*ListArchiveRulesOutput, error)
+}
+
+var _ ListArchiveRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListArchiveRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

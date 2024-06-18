@@ -111,6 +111,9 @@ func (c *Client) addOperationListIdMappingWorkflowsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIdMappingWorkflows(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -131,14 +134,6 @@ func (c *Client) addOperationListIdMappingWorkflowsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListIdMappingWorkflowsAPIClient is a client that implements the
-// ListIdMappingWorkflows operation.
-type ListIdMappingWorkflowsAPIClient interface {
-	ListIdMappingWorkflows(context.Context, *ListIdMappingWorkflowsInput, ...func(*Options)) (*ListIdMappingWorkflowsOutput, error)
-}
-
-var _ ListIdMappingWorkflowsAPIClient = (*Client)(nil)
 
 // ListIdMappingWorkflowsPaginatorOptions is the paginator options for
 // ListIdMappingWorkflows
@@ -204,6 +199,9 @@ func (p *ListIdMappingWorkflowsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIdMappingWorkflows(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListIdMappingWorkflowsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListIdMappingWorkflowsAPIClient is a client that implements the
+// ListIdMappingWorkflows operation.
+type ListIdMappingWorkflowsAPIClient interface {
+	ListIdMappingWorkflows(context.Context, *ListIdMappingWorkflowsInput, ...func(*Options)) (*ListIdMappingWorkflowsOutput, error)
+}
+
+var _ ListIdMappingWorkflowsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIdMappingWorkflows(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

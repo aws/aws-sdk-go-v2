@@ -145,6 +145,9 @@ func (c *Client) addOperationListAccountAssignmentsForPrincipalMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAccountAssignmentsForPrincipalValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListAccountAssignmentsForPrincipalMiddlewares(stack
 	}
 	return nil
 }
-
-// ListAccountAssignmentsForPrincipalAPIClient is a client that implements the
-// ListAccountAssignmentsForPrincipal operation.
-type ListAccountAssignmentsForPrincipalAPIClient interface {
-	ListAccountAssignmentsForPrincipal(context.Context, *ListAccountAssignmentsForPrincipalInput, ...func(*Options)) (*ListAccountAssignmentsForPrincipalOutput, error)
-}
-
-var _ ListAccountAssignmentsForPrincipalAPIClient = (*Client)(nil)
 
 // ListAccountAssignmentsForPrincipalPaginatorOptions is the paginator options for
 // ListAccountAssignmentsForPrincipal
@@ -249,6 +244,9 @@ func (p *ListAccountAssignmentsForPrincipalPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccountAssignmentsForPrincipal(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +265,14 @@ func (p *ListAccountAssignmentsForPrincipalPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListAccountAssignmentsForPrincipalAPIClient is a client that implements the
+// ListAccountAssignmentsForPrincipal operation.
+type ListAccountAssignmentsForPrincipalAPIClient interface {
+	ListAccountAssignmentsForPrincipal(context.Context, *ListAccountAssignmentsForPrincipalInput, ...func(*Options)) (*ListAccountAssignmentsForPrincipalOutput, error)
+}
+
+var _ ListAccountAssignmentsForPrincipalAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccountAssignmentsForPrincipal(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -144,6 +144,9 @@ func (c *Client) addOperationAddProfilePermissionMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAddProfilePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}

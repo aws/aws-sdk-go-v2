@@ -233,6 +233,9 @@ func (c *Client) addOperationGetLabelDetectionMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLabelDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -256,14 +259,6 @@ func (c *Client) addOperationGetLabelDetectionMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetLabelDetectionAPIClient is a client that implements the GetLabelDetection
-// operation.
-type GetLabelDetectionAPIClient interface {
-	GetLabelDetection(context.Context, *GetLabelDetectionInput, ...func(*Options)) (*GetLabelDetectionOutput, error)
-}
-
-var _ GetLabelDetectionAPIClient = (*Client)(nil)
 
 // GetLabelDetectionPaginatorOptions is the paginator options for GetLabelDetection
 type GetLabelDetectionPaginatorOptions struct {
@@ -330,6 +325,9 @@ func (p *GetLabelDetectionPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetLabelDetection(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -348,6 +346,14 @@ func (p *GetLabelDetectionPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetLabelDetectionAPIClient is a client that implements the GetLabelDetection
+// operation.
+type GetLabelDetectionAPIClient interface {
+	GetLabelDetection(context.Context, *GetLabelDetectionInput, ...func(*Options)) (*GetLabelDetectionOutput, error)
+}
+
+var _ GetLabelDetectionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLabelDetection(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

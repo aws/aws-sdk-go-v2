@@ -120,6 +120,9 @@ func (c *Client) addOperationGetRecoveryGroupReadinessSummaryMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetRecoveryGroupReadinessSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationGetRecoveryGroupReadinessSummaryMiddlewares(stack *
 	}
 	return nil
 }
-
-// GetRecoveryGroupReadinessSummaryAPIClient is a client that implements the
-// GetRecoveryGroupReadinessSummary operation.
-type GetRecoveryGroupReadinessSummaryAPIClient interface {
-	GetRecoveryGroupReadinessSummary(context.Context, *GetRecoveryGroupReadinessSummaryInput, ...func(*Options)) (*GetRecoveryGroupReadinessSummaryOutput, error)
-}
-
-var _ GetRecoveryGroupReadinessSummaryAPIClient = (*Client)(nil)
 
 // GetRecoveryGroupReadinessSummaryPaginatorOptions is the paginator options for
 // GetRecoveryGroupReadinessSummary
@@ -218,6 +213,9 @@ func (p *GetRecoveryGroupReadinessSummaryPaginator) NextPage(ctx context.Context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetRecoveryGroupReadinessSummary(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetRecoveryGroupReadinessSummaryPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// GetRecoveryGroupReadinessSummaryAPIClient is a client that implements the
+// GetRecoveryGroupReadinessSummary operation.
+type GetRecoveryGroupReadinessSummaryAPIClient interface {
+	GetRecoveryGroupReadinessSummary(context.Context, *GetRecoveryGroupReadinessSummaryInput, ...func(*Options)) (*GetRecoveryGroupReadinessSummaryOutput, error)
+}
+
+var _ GetRecoveryGroupReadinessSummaryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetRecoveryGroupReadinessSummary(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

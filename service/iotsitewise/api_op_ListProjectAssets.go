@@ -120,6 +120,9 @@ func (c *Client) addOperationListProjectAssetsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListProjectAssetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,41 +149,6 @@ func (c *Client) addOperationListProjectAssetsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-type endpointPrefix_opListProjectAssetsMiddleware struct {
-}
-
-func (*endpointPrefix_opListProjectAssetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListProjectAssetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "monitor." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListProjectAssetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListProjectAssetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListProjectAssetsAPIClient is a client that implements the ListProjectAssets
-// operation.
-type ListProjectAssetsAPIClient interface {
-	ListProjectAssets(context.Context, *ListProjectAssetsInput, ...func(*Options)) (*ListProjectAssetsOutput, error)
-}
-
-var _ ListProjectAssetsAPIClient = (*Client)(nil)
 
 // ListProjectAssetsPaginatorOptions is the paginator options for ListProjectAssets
 type ListProjectAssetsPaginatorOptions struct {
@@ -247,6 +215,9 @@ func (p *ListProjectAssetsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProjectAssets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +236,41 @@ func (p *ListProjectAssetsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+type endpointPrefix_opListProjectAssetsMiddleware struct {
+}
+
+func (*endpointPrefix_opListProjectAssetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListProjectAssetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "monitor." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListProjectAssetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListProjectAssetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListProjectAssetsAPIClient is a client that implements the ListProjectAssets
+// operation.
+type ListProjectAssetsAPIClient interface {
+	ListProjectAssets(context.Context, *ListProjectAssetsInput, ...func(*Options)) (*ListProjectAssetsOutput, error)
+}
+
+var _ ListProjectAssetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProjectAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -134,6 +134,9 @@ func (c *Client) addOperationListBotVersionReplicasMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBotVersionReplicasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListBotVersionReplicasMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListBotVersionReplicasAPIClient is a client that implements the
-// ListBotVersionReplicas operation.
-type ListBotVersionReplicasAPIClient interface {
-	ListBotVersionReplicas(context.Context, *ListBotVersionReplicasInput, ...func(*Options)) (*ListBotVersionReplicasOutput, error)
-}
-
-var _ ListBotVersionReplicasAPIClient = (*Client)(nil)
 
 // ListBotVersionReplicasPaginatorOptions is the paginator options for
 // ListBotVersionReplicas
@@ -230,6 +225,9 @@ func (p *ListBotVersionReplicasPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBotVersionReplicas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListBotVersionReplicasPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListBotVersionReplicasAPIClient is a client that implements the
+// ListBotVersionReplicas operation.
+type ListBotVersionReplicasAPIClient interface {
+	ListBotVersionReplicas(context.Context, *ListBotVersionReplicasInput, ...func(*Options)) (*ListBotVersionReplicasOutput, error)
+}
+
+var _ ListBotVersionReplicasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBotVersionReplicas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

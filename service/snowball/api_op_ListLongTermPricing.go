@@ -113,6 +113,9 @@ func (c *Client) addOperationListLongTermPricingMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLongTermPricing(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListLongTermPricingMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListLongTermPricingAPIClient is a client that implements the
-// ListLongTermPricing operation.
-type ListLongTermPricingAPIClient interface {
-	ListLongTermPricing(context.Context, *ListLongTermPricingInput, ...func(*Options)) (*ListLongTermPricingOutput, error)
-}
-
-var _ ListLongTermPricingAPIClient = (*Client)(nil)
 
 // ListLongTermPricingPaginatorOptions is the paginator options for
 // ListLongTermPricing
@@ -206,6 +201,9 @@ func (p *ListLongTermPricingPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLongTermPricing(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListLongTermPricingPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListLongTermPricingAPIClient is a client that implements the
+// ListLongTermPricing operation.
+type ListLongTermPricingAPIClient interface {
+	ListLongTermPricing(context.Context, *ListLongTermPricingInput, ...func(*Options)) (*ListLongTermPricingOutput, error)
+}
+
+var _ ListLongTermPricingAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLongTermPricing(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

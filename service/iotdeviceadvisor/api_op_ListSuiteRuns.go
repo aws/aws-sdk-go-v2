@@ -124,6 +124,9 @@ func (c *Client) addOperationListSuiteRunsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSuiteRuns(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationListSuiteRunsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListSuiteRunsAPIClient is a client that implements the ListSuiteRuns operation.
-type ListSuiteRunsAPIClient interface {
-	ListSuiteRuns(context.Context, *ListSuiteRunsInput, ...func(*Options)) (*ListSuiteRunsOutput, error)
-}
-
-var _ ListSuiteRunsAPIClient = (*Client)(nil)
 
 // ListSuiteRunsPaginatorOptions is the paginator options for ListSuiteRuns
 type ListSuiteRunsPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListSuiteRunsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSuiteRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListSuiteRunsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListSuiteRunsAPIClient is a client that implements the ListSuiteRuns operation.
+type ListSuiteRunsAPIClient interface {
+	ListSuiteRuns(context.Context, *ListSuiteRunsInput, ...func(*Options)) (*ListSuiteRunsOutput, error)
+}
+
+var _ ListSuiteRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSuiteRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

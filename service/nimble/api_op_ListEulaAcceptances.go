@@ -115,6 +115,9 @@ func (c *Client) addOperationListEulaAcceptancesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEulaAcceptancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListEulaAcceptancesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListEulaAcceptancesAPIClient is a client that implements the
-// ListEulaAcceptances operation.
-type ListEulaAcceptancesAPIClient interface {
-	ListEulaAcceptances(context.Context, *ListEulaAcceptancesInput, ...func(*Options)) (*ListEulaAcceptancesOutput, error)
-}
-
-var _ ListEulaAcceptancesAPIClient = (*Client)(nil)
 
 // ListEulaAcceptancesPaginatorOptions is the paginator options for
 // ListEulaAcceptances
@@ -199,6 +194,9 @@ func (p *ListEulaAcceptancesPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEulaAcceptances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -217,6 +215,14 @@ func (p *ListEulaAcceptancesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListEulaAcceptancesAPIClient is a client that implements the
+// ListEulaAcceptances operation.
+type ListEulaAcceptancesAPIClient interface {
+	ListEulaAcceptances(context.Context, *ListEulaAcceptancesInput, ...func(*Options)) (*ListEulaAcceptancesOutput, error)
+}
+
+var _ ListEulaAcceptancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEulaAcceptances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

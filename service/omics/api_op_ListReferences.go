@@ -121,6 +121,9 @@ func (c *Client) addOperationListReferencesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListReferencesMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,41 +150,6 @@ func (c *Client) addOperationListReferencesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-type endpointPrefix_opListReferencesMiddleware struct {
-}
-
-func (*endpointPrefix_opListReferencesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListReferencesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListReferencesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListReferencesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListReferencesAPIClient is a client that implements the ListReferences
-// operation.
-type ListReferencesAPIClient interface {
-	ListReferences(context.Context, *ListReferencesInput, ...func(*Options)) (*ListReferencesOutput, error)
-}
-
-var _ ListReferencesAPIClient = (*Client)(nil)
 
 // ListReferencesPaginatorOptions is the paginator options for ListReferences
 type ListReferencesPaginatorOptions struct {
@@ -246,6 +214,9 @@ func (p *ListReferencesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReferences(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +235,41 @@ func (p *ListReferencesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+type endpointPrefix_opListReferencesMiddleware struct {
+}
+
+func (*endpointPrefix_opListReferencesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListReferencesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListReferencesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListReferencesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListReferencesAPIClient is a client that implements the ListReferences
+// operation.
+type ListReferencesAPIClient interface {
+	ListReferences(context.Context, *ListReferencesInput, ...func(*Options)) (*ListReferencesOutput, error)
+}
+
+var _ ListReferencesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReferences(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

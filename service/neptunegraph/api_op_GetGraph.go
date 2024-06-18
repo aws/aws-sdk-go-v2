@@ -169,6 +169,9 @@ func (c *Client) addOperationGetGraphMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetGraphValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -192,13 +195,6 @@ func (c *Client) addOperationGetGraphMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// GetGraphAPIClient is a client that implements the GetGraph operation.
-type GetGraphAPIClient interface {
-	GetGraph(context.Context, *GetGraphInput, ...func(*Options)) (*GetGraphOutput, error)
-}
-
-var _ GetGraphAPIClient = (*Client)(nil)
 
 // GraphAvailableWaiterOptions are waiter options for GraphAvailableWaiter
 type GraphAvailableWaiterOptions struct {
@@ -315,7 +311,13 @@ func (w *GraphAvailableWaiter) WaitForOutput(ctx context.Context, params *GetGra
 		}
 
 		out, err := w.client.GetGraph(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -521,7 +523,13 @@ func (w *GraphDeletedWaiter) WaitForOutput(ctx context.Context, params *GetGraph
 		}
 
 		out, err := w.client.GetGraph(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -589,6 +597,13 @@ func graphDeletedStateRetryable(ctx context.Context, input *GetGraphInput, outpu
 
 	return true, nil
 }
+
+// GetGraphAPIClient is a client that implements the GetGraph operation.
+type GetGraphAPIClient interface {
+	GetGraph(context.Context, *GetGraphInput, ...func(*Options)) (*GetGraphOutput, error)
+}
+
+var _ GetGraphAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetGraph(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

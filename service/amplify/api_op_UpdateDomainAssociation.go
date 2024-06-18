@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateDomainAssociationMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

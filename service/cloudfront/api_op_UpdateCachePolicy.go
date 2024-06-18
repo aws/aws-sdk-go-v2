@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateCachePolicyMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCachePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}

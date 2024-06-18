@@ -132,6 +132,9 @@ func (c *Client) addOperationListFirewallDomainListsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFirewallDomainLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListFirewallDomainListsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListFirewallDomainListsAPIClient is a client that implements the
-// ListFirewallDomainLists operation.
-type ListFirewallDomainListsAPIClient interface {
-	ListFirewallDomainLists(context.Context, *ListFirewallDomainListsInput, ...func(*Options)) (*ListFirewallDomainListsOutput, error)
-}
-
-var _ ListFirewallDomainListsAPIClient = (*Client)(nil)
 
 // ListFirewallDomainListsPaginatorOptions is the paginator options for
 // ListFirewallDomainLists
@@ -232,6 +227,9 @@ func (p *ListFirewallDomainListsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFirewallDomainLists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListFirewallDomainListsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListFirewallDomainListsAPIClient is a client that implements the
+// ListFirewallDomainLists operation.
+type ListFirewallDomainListsAPIClient interface {
+	ListFirewallDomainLists(context.Context, *ListFirewallDomainListsInput, ...func(*Options)) (*ListFirewallDomainListsOutput, error)
+}
+
+var _ ListFirewallDomainListsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFirewallDomainLists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

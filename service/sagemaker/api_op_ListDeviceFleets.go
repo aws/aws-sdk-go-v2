@@ -136,6 +136,9 @@ func (c *Client) addOperationListDeviceFleetsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeviceFleets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListDeviceFleetsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListDeviceFleetsAPIClient is a client that implements the ListDeviceFleets
-// operation.
-type ListDeviceFleetsAPIClient interface {
-	ListDeviceFleets(context.Context, *ListDeviceFleetsInput, ...func(*Options)) (*ListDeviceFleetsOutput, error)
-}
-
-var _ ListDeviceFleetsAPIClient = (*Client)(nil)
 
 // ListDeviceFleetsPaginatorOptions is the paginator options for ListDeviceFleets
 type ListDeviceFleetsPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *ListDeviceFleetsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDeviceFleets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListDeviceFleetsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListDeviceFleetsAPIClient is a client that implements the ListDeviceFleets
+// operation.
+type ListDeviceFleetsAPIClient interface {
+	ListDeviceFleets(context.Context, *ListDeviceFleetsInput, ...func(*Options)) (*ListDeviceFleetsOutput, error)
+}
+
+var _ ListDeviceFleetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDeviceFleets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

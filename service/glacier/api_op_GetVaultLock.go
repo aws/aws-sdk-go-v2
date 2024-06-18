@@ -147,6 +147,9 @@ func (c *Client) addOperationGetVaultLockMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetVaultLockValidationMiddleware(stack); err != nil {
 		return err
 	}

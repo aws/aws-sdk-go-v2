@@ -123,6 +123,9 @@ func (c *Client) addOperationCreateAccessPreviewMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAccessPreviewMiddleware(stack, options); err != nil {
 		return err
 	}

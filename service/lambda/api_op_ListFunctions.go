@@ -132,6 +132,9 @@ func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFunctions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,13 +155,6 @@ func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListFunctionsAPIClient is a client that implements the ListFunctions operation.
-type ListFunctionsAPIClient interface {
-	ListFunctions(context.Context, *ListFunctionsInput, ...func(*Options)) (*ListFunctionsOutput, error)
-}
-
-var _ ListFunctionsAPIClient = (*Client)(nil)
 
 // ListFunctionsPaginatorOptions is the paginator options for ListFunctions
 type ListFunctionsPaginatorOptions struct {
@@ -225,6 +221,9 @@ func (p *ListFunctionsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFunctions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +242,13 @@ func (p *ListFunctionsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListFunctionsAPIClient is a client that implements the ListFunctions operation.
+type ListFunctionsAPIClient interface {
+	ListFunctions(context.Context, *ListFunctionsInput, ...func(*Options)) (*ListFunctionsOutput, error)
+}
+
+var _ ListFunctionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFunctions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

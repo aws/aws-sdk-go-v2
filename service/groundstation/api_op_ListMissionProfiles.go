@@ -112,6 +112,9 @@ func (c *Client) addOperationListMissionProfilesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMissionProfiles(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListMissionProfilesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListMissionProfilesAPIClient is a client that implements the
-// ListMissionProfiles operation.
-type ListMissionProfilesAPIClient interface {
-	ListMissionProfiles(context.Context, *ListMissionProfilesInput, ...func(*Options)) (*ListMissionProfilesOutput, error)
-}
-
-var _ ListMissionProfilesAPIClient = (*Client)(nil)
 
 // ListMissionProfilesPaginatorOptions is the paginator options for
 // ListMissionProfiles
@@ -205,6 +200,9 @@ func (p *ListMissionProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMissionProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListMissionProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListMissionProfilesAPIClient is a client that implements the
+// ListMissionProfiles operation.
+type ListMissionProfilesAPIClient interface {
+	ListMissionProfiles(context.Context, *ListMissionProfilesInput, ...func(*Options)) (*ListMissionProfilesOutput, error)
+}
+
+var _ ListMissionProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMissionProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

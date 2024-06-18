@@ -145,6 +145,9 @@ func (c *Client) addOperationListApplicationAssignmentsForPrincipalMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationAssignmentsForPrincipalValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListApplicationAssignmentsForPrincipalMiddlewares(s
 	}
 	return nil
 }
-
-// ListApplicationAssignmentsForPrincipalAPIClient is a client that implements the
-// ListApplicationAssignmentsForPrincipal operation.
-type ListApplicationAssignmentsForPrincipalAPIClient interface {
-	ListApplicationAssignmentsForPrincipal(context.Context, *ListApplicationAssignmentsForPrincipalInput, ...func(*Options)) (*ListApplicationAssignmentsForPrincipalOutput, error)
-}
-
-var _ ListApplicationAssignmentsForPrincipalAPIClient = (*Client)(nil)
 
 // ListApplicationAssignmentsForPrincipalPaginatorOptions is the paginator options
 // for ListApplicationAssignmentsForPrincipal
@@ -249,6 +244,9 @@ func (p *ListApplicationAssignmentsForPrincipalPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationAssignmentsForPrincipal(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +265,14 @@ func (p *ListApplicationAssignmentsForPrincipalPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListApplicationAssignmentsForPrincipalAPIClient is a client that implements the
+// ListApplicationAssignmentsForPrincipal operation.
+type ListApplicationAssignmentsForPrincipalAPIClient interface {
+	ListApplicationAssignmentsForPrincipal(context.Context, *ListApplicationAssignmentsForPrincipalInput, ...func(*Options)) (*ListApplicationAssignmentsForPrincipalOutput, error)
+}
+
+var _ ListApplicationAssignmentsForPrincipalAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationAssignmentsForPrincipal(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

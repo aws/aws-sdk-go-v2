@@ -1,0 +1,9 @@
+{
+    "id": "a048e0bc-5088-4e76-a29c-9524e4ee34eb",
+    "type": "feature",
+    "collapse": true,
+    "description": "Add framework for tracking specific features in user-agent string.",
+    "modules": [
+        "."
+    ]
+}

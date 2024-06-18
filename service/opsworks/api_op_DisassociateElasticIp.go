@@ -109,6 +109,9 @@ func (c *Client) addOperationDisassociateElasticIpMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateElasticIpValidationMiddleware(stack); err != nil {
 		return err
 	}

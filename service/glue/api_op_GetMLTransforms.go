@@ -122,6 +122,9 @@ func (c *Client) addOperationGetMLTransformsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMLTransformsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationGetMLTransformsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetMLTransformsAPIClient is a client that implements the GetMLTransforms
-// operation.
-type GetMLTransformsAPIClient interface {
-	GetMLTransforms(context.Context, *GetMLTransformsInput, ...func(*Options)) (*GetMLTransformsOutput, error)
-}
-
-var _ GetMLTransformsAPIClient = (*Client)(nil)
 
 // GetMLTransformsPaginatorOptions is the paginator options for GetMLTransforms
 type GetMLTransformsPaginatorOptions struct {
@@ -217,6 +212,9 @@ func (p *GetMLTransformsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetMLTransforms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *GetMLTransformsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetMLTransformsAPIClient is a client that implements the GetMLTransforms
+// operation.
+type GetMLTransformsAPIClient interface {
+	GetMLTransforms(context.Context, *GetMLTransformsInput, ...func(*Options)) (*GetMLTransformsOutput, error)
+}
+
+var _ GetMLTransformsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetMLTransforms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

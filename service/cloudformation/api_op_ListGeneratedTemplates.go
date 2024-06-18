@@ -116,6 +116,9 @@ func (c *Client) addOperationListGeneratedTemplatesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGeneratedTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListGeneratedTemplatesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListGeneratedTemplatesAPIClient is a client that implements the
-// ListGeneratedTemplates operation.
-type ListGeneratedTemplatesAPIClient interface {
-	ListGeneratedTemplates(context.Context, *ListGeneratedTemplatesInput, ...func(*Options)) (*ListGeneratedTemplatesOutput, error)
-}
-
-var _ ListGeneratedTemplatesAPIClient = (*Client)(nil)
 
 // ListGeneratedTemplatesPaginatorOptions is the paginator options for
 // ListGeneratedTemplates
@@ -212,6 +207,9 @@ func (p *ListGeneratedTemplatesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGeneratedTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListGeneratedTemplatesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListGeneratedTemplatesAPIClient is a client that implements the
+// ListGeneratedTemplates operation.
+type ListGeneratedTemplatesAPIClient interface {
+	ListGeneratedTemplates(context.Context, *ListGeneratedTemplatesInput, ...func(*Options)) (*ListGeneratedTemplatesOutput, error)
+}
+
+var _ ListGeneratedTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGeneratedTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

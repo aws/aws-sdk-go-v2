@@ -113,6 +113,9 @@ func (c *Client) addOperationUpdateExperimentMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}

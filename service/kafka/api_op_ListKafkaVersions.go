@@ -110,6 +110,9 @@ func (c *Client) addOperationListKafkaVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKafkaVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListKafkaVersionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListKafkaVersionsAPIClient is a client that implements the ListKafkaVersions
-// operation.
-type ListKafkaVersionsAPIClient interface {
-	ListKafkaVersions(context.Context, *ListKafkaVersionsInput, ...func(*Options)) (*ListKafkaVersionsOutput, error)
-}
-
-var _ ListKafkaVersionsAPIClient = (*Client)(nil)
 
 // ListKafkaVersionsPaginatorOptions is the paginator options for ListKafkaVersions
 type ListKafkaVersionsPaginatorOptions struct {
@@ -203,6 +198,9 @@ func (p *ListKafkaVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKafkaVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListKafkaVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListKafkaVersionsAPIClient is a client that implements the ListKafkaVersions
+// operation.
+type ListKafkaVersionsAPIClient interface {
+	ListKafkaVersions(context.Context, *ListKafkaVersionsInput, ...func(*Options)) (*ListKafkaVersionsOutput, error)
+}
+
+var _ ListKafkaVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKafkaVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

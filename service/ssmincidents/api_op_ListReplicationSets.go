@@ -113,6 +113,9 @@ func (c *Client) addOperationListReplicationSetsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReplicationSets(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListReplicationSetsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListReplicationSetsAPIClient is a client that implements the
-// ListReplicationSets operation.
-type ListReplicationSetsAPIClient interface {
-	ListReplicationSets(context.Context, *ListReplicationSetsInput, ...func(*Options)) (*ListReplicationSetsOutput, error)
-}
-
-var _ ListReplicationSetsAPIClient = (*Client)(nil)
 
 // ListReplicationSetsPaginatorOptions is the paginator options for
 // ListReplicationSets
@@ -206,6 +201,9 @@ func (p *ListReplicationSetsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReplicationSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListReplicationSetsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListReplicationSetsAPIClient is a client that implements the
+// ListReplicationSets operation.
+type ListReplicationSetsAPIClient interface {
+	ListReplicationSets(context.Context, *ListReplicationSetsInput, ...func(*Options)) (*ListReplicationSetsOutput, error)
+}
+
+var _ ListReplicationSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReplicationSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

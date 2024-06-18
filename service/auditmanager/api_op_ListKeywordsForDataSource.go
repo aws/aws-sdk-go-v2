@@ -116,6 +116,9 @@ func (c *Client) addOperationListKeywordsForDataSourceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListKeywordsForDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListKeywordsForDataSourceMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListKeywordsForDataSourceAPIClient is a client that implements the
-// ListKeywordsForDataSource operation.
-type ListKeywordsForDataSourceAPIClient interface {
-	ListKeywordsForDataSource(context.Context, *ListKeywordsForDataSourceInput, ...func(*Options)) (*ListKeywordsForDataSourceOutput, error)
-}
-
-var _ ListKeywordsForDataSourceAPIClient = (*Client)(nil)
 
 // ListKeywordsForDataSourcePaginatorOptions is the paginator options for
 // ListKeywordsForDataSource
@@ -213,6 +208,9 @@ func (p *ListKeywordsForDataSourcePaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKeywordsForDataSource(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListKeywordsForDataSourcePaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListKeywordsForDataSourceAPIClient is a client that implements the
+// ListKeywordsForDataSource operation.
+type ListKeywordsForDataSourceAPIClient interface {
+	ListKeywordsForDataSource(context.Context, *ListKeywordsForDataSourceInput, ...func(*Options)) (*ListKeywordsForDataSourceOutput, error)
+}
+
+var _ ListKeywordsForDataSourceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKeywordsForDataSource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

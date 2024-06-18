@@ -115,6 +115,9 @@ func (c *Client) addOperationGetStudioComponentMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStudioComponentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetStudioComponentMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetStudioComponentAPIClient is a client that implements the GetStudioComponent
-// operation.
-type GetStudioComponentAPIClient interface {
-	GetStudioComponent(context.Context, *GetStudioComponentInput, ...func(*Options)) (*GetStudioComponentOutput, error)
-}
-
-var _ GetStudioComponentAPIClient = (*Client)(nil)
 
 // StudioComponentReadyWaiterOptions are waiter options for
 // StudioComponentReadyWaiter
@@ -264,7 +259,13 @@ func (w *StudioComponentReadyWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.GetStudioComponent(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -473,7 +474,13 @@ func (w *StudioComponentDeletedWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.GetStudioComponent(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -547,6 +554,14 @@ func studioComponentDeletedStateRetryable(ctx context.Context, input *GetStudioC
 
 	return true, nil
 }
+
+// GetStudioComponentAPIClient is a client that implements the GetStudioComponent
+// operation.
+type GetStudioComponentAPIClient interface {
+	GetStudioComponent(context.Context, *GetStudioComponentInput, ...func(*Options)) (*GetStudioComponentOutput, error)
+}
+
+var _ GetStudioComponentAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetStudioComponent(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -120,6 +120,9 @@ func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeAccountAttributesAPIClient is a client that implements the
-// DescribeAccountAttributes operation.
-type DescribeAccountAttributesAPIClient interface {
-	DescribeAccountAttributes(context.Context, *DescribeAccountAttributesInput, ...func(*Options)) (*DescribeAccountAttributesOutput, error)
-}
-
-var _ DescribeAccountAttributesAPIClient = (*Client)(nil)
 
 // DescribeAccountAttributesPaginatorOptions is the paginator options for
 // DescribeAccountAttributes
@@ -214,6 +209,9 @@ func (p *DescribeAccountAttributesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAccountAttributes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *DescribeAccountAttributesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeAccountAttributesAPIClient is a client that implements the
+// DescribeAccountAttributes operation.
+type DescribeAccountAttributesAPIClient interface {
+	DescribeAccountAttributes(context.Context, *DescribeAccountAttributesInput, ...func(*Options)) (*DescribeAccountAttributesOutput, error)
+}
+
+var _ DescribeAccountAttributesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAccountAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -158,6 +158,9 @@ func (c *Client) addOperationListChildrenMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChildrenValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,13 +184,6 @@ func (c *Client) addOperationListChildrenMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListChildrenAPIClient is a client that implements the ListChildren operation.
-type ListChildrenAPIClient interface {
-	ListChildren(context.Context, *ListChildrenInput, ...func(*Options)) (*ListChildrenOutput, error)
-}
-
-var _ ListChildrenAPIClient = (*Client)(nil)
 
 // ListChildrenPaginatorOptions is the paginator options for ListChildren
 type ListChildrenPaginatorOptions struct {
@@ -260,6 +256,9 @@ func (p *ListChildrenPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChildren(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -278,6 +277,13 @@ func (p *ListChildrenPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListChildrenAPIClient is a client that implements the ListChildren operation.
+type ListChildrenAPIClient interface {
+	ListChildren(context.Context, *ListChildrenInput, ...func(*Options)) (*ListChildrenOutput, error)
+}
+
+var _ ListChildrenAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChildren(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

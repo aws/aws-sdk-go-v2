@@ -112,6 +112,9 @@ func (c *Client) addOperationGetServiceSyncBlockerSummaryMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetServiceSyncBlockerSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}

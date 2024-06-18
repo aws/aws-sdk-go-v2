@@ -116,6 +116,9 @@ func (c *Client) addOperationSendPipelineExecutionStepSuccessMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opSendPipelineExecutionStepSuccessMiddleware(stack, options); err != nil {
 		return err
 	}

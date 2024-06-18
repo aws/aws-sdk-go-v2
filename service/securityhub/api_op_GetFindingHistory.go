@@ -191,6 +191,9 @@ func (c *Client) addOperationGetFindingHistoryMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFindingHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -214,14 +217,6 @@ func (c *Client) addOperationGetFindingHistoryMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetFindingHistoryAPIClient is a client that implements the GetFindingHistory
-// operation.
-type GetFindingHistoryAPIClient interface {
-	GetFindingHistory(context.Context, *GetFindingHistoryInput, ...func(*Options)) (*GetFindingHistoryOutput, error)
-}
-
-var _ GetFindingHistoryAPIClient = (*Client)(nil)
 
 // GetFindingHistoryPaginatorOptions is the paginator options for GetFindingHistory
 type GetFindingHistoryPaginatorOptions struct {
@@ -287,6 +282,9 @@ func (p *GetFindingHistoryPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetFindingHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -305,6 +303,14 @@ func (p *GetFindingHistoryPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetFindingHistoryAPIClient is a client that implements the GetFindingHistory
+// operation.
+type GetFindingHistoryAPIClient interface {
+	GetFindingHistory(context.Context, *GetFindingHistoryInput, ...func(*Options)) (*GetFindingHistoryOutput, error)
+}
+
+var _ GetFindingHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFindingHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

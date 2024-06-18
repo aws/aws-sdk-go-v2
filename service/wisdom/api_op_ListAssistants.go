@@ -113,6 +113,9 @@ func (c *Client) addOperationListAssistantsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssistants(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListAssistantsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListAssistantsAPIClient is a client that implements the ListAssistants
-// operation.
-type ListAssistantsAPIClient interface {
-	ListAssistants(context.Context, *ListAssistantsInput, ...func(*Options)) (*ListAssistantsOutput, error)
-}
-
-var _ ListAssistantsAPIClient = (*Client)(nil)
 
 // ListAssistantsPaginatorOptions is the paginator options for ListAssistants
 type ListAssistantsPaginatorOptions struct {
@@ -205,6 +200,9 @@ func (p *ListAssistantsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssistants(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListAssistantsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListAssistantsAPIClient is a client that implements the ListAssistants
+// operation.
+type ListAssistantsAPIClient interface {
+	ListAssistants(context.Context, *ListAssistantsInput, ...func(*Options)) (*ListAssistantsOutput, error)
+}
+
+var _ ListAssistantsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssistants(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

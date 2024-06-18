@@ -127,6 +127,9 @@ func (c *Client) addOperationListAnomalyGroupRelatedMetricsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnomalyGroupRelatedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListAnomalyGroupRelatedMetricsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListAnomalyGroupRelatedMetricsAPIClient is a client that implements the
-// ListAnomalyGroupRelatedMetrics operation.
-type ListAnomalyGroupRelatedMetricsAPIClient interface {
-	ListAnomalyGroupRelatedMetrics(context.Context, *ListAnomalyGroupRelatedMetricsInput, ...func(*Options)) (*ListAnomalyGroupRelatedMetricsOutput, error)
-}
-
-var _ ListAnomalyGroupRelatedMetricsAPIClient = (*Client)(nil)
 
 // ListAnomalyGroupRelatedMetricsPaginatorOptions is the paginator options for
 // ListAnomalyGroupRelatedMetrics
@@ -225,6 +220,9 @@ func (p *ListAnomalyGroupRelatedMetricsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnomalyGroupRelatedMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListAnomalyGroupRelatedMetricsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListAnomalyGroupRelatedMetricsAPIClient is a client that implements the
+// ListAnomalyGroupRelatedMetrics operation.
+type ListAnomalyGroupRelatedMetricsAPIClient interface {
+	ListAnomalyGroupRelatedMetrics(context.Context, *ListAnomalyGroupRelatedMetricsInput, ...func(*Options)) (*ListAnomalyGroupRelatedMetricsOutput, error)
+}
+
+var _ ListAnomalyGroupRelatedMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnomalyGroupRelatedMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

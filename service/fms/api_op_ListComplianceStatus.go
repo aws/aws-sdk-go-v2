@@ -130,6 +130,9 @@ func (c *Client) addOperationListComplianceStatusMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListComplianceStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListComplianceStatusMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListComplianceStatusAPIClient is a client that implements the
-// ListComplianceStatus operation.
-type ListComplianceStatusAPIClient interface {
-	ListComplianceStatus(context.Context, *ListComplianceStatusInput, ...func(*Options)) (*ListComplianceStatusOutput, error)
-}
-
-var _ ListComplianceStatusAPIClient = (*Client)(nil)
 
 // ListComplianceStatusPaginatorOptions is the paginator options for
 // ListComplianceStatus
@@ -230,6 +225,9 @@ func (p *ListComplianceStatusPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListComplianceStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListComplianceStatusPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListComplianceStatusAPIClient is a client that implements the
+// ListComplianceStatus operation.
+type ListComplianceStatusAPIClient interface {
+	ListComplianceStatus(context.Context, *ListComplianceStatusInput, ...func(*Options)) (*ListComplianceStatusOutput, error)
+}
+
+var _ ListComplianceStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListComplianceStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

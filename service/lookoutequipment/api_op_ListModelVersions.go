@@ -148,6 +148,9 @@ func (c *Client) addOperationListModelVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListModelVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -171,14 +174,6 @@ func (c *Client) addOperationListModelVersionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListModelVersionsAPIClient is a client that implements the ListModelVersions
-// operation.
-type ListModelVersionsAPIClient interface {
-	ListModelVersions(context.Context, *ListModelVersionsInput, ...func(*Options)) (*ListModelVersionsOutput, error)
-}
-
-var _ ListModelVersionsAPIClient = (*Client)(nil)
 
 // ListModelVersionsPaginatorOptions is the paginator options for ListModelVersions
 type ListModelVersionsPaginatorOptions struct {
@@ -243,6 +238,9 @@ func (p *ListModelVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -261,6 +259,14 @@ func (p *ListModelVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListModelVersionsAPIClient is a client that implements the ListModelVersions
+// operation.
+type ListModelVersionsAPIClient interface {
+	ListModelVersions(context.Context, *ListModelVersionsInput, ...func(*Options)) (*ListModelVersionsOutput, error)
+}
+
+var _ ListModelVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

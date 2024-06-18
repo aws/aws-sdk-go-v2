@@ -123,6 +123,9 @@ func (c *Client) addOperationListKxClusterNodesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListKxClusterNodesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListKxClusterNodesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListKxClusterNodesAPIClient is a client that implements the ListKxClusterNodes
-// operation.
-type ListKxClusterNodesAPIClient interface {
-	ListKxClusterNodes(context.Context, *ListKxClusterNodesInput, ...func(*Options)) (*ListKxClusterNodesOutput, error)
-}
-
-var _ ListKxClusterNodesAPIClient = (*Client)(nil)
 
 // ListKxClusterNodesPaginatorOptions is the paginator options for
 // ListKxClusterNodes
@@ -215,6 +210,9 @@ func (p *ListKxClusterNodesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKxClusterNodes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListKxClusterNodesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListKxClusterNodesAPIClient is a client that implements the ListKxClusterNodes
+// operation.
+type ListKxClusterNodesAPIClient interface {
+	ListKxClusterNodes(context.Context, *ListKxClusterNodesInput, ...func(*Options)) (*ListKxClusterNodesOutput, error)
+}
+
+var _ ListKxClusterNodesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKxClusterNodes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -158,6 +158,9 @@ func (c *Client) addOperationListFirewallRulesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFirewallRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,14 +184,6 @@ func (c *Client) addOperationListFirewallRulesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListFirewallRulesAPIClient is a client that implements the ListFirewallRules
-// operation.
-type ListFirewallRulesAPIClient interface {
-	ListFirewallRules(context.Context, *ListFirewallRulesInput, ...func(*Options)) (*ListFirewallRulesOutput, error)
-}
-
-var _ ListFirewallRulesAPIClient = (*Client)(nil)
 
 // ListFirewallRulesPaginatorOptions is the paginator options for ListFirewallRules
 type ListFirewallRulesPaginatorOptions struct {
@@ -259,6 +254,9 @@ func (p *ListFirewallRulesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFirewallRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +275,14 @@ func (p *ListFirewallRulesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListFirewallRulesAPIClient is a client that implements the ListFirewallRules
+// operation.
+type ListFirewallRulesAPIClient interface {
+	ListFirewallRules(context.Context, *ListFirewallRulesInput, ...func(*Options)) (*ListFirewallRulesOutput, error)
+}
+
+var _ ListFirewallRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFirewallRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

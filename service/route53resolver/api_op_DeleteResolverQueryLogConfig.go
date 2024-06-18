@@ -123,6 +123,9 @@ func (c *Client) addOperationDeleteResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteResolverQueryLogConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

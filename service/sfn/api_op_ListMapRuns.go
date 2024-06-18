@@ -135,6 +135,9 @@ func (c *Client) addOperationListMapRunsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMapRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,13 +161,6 @@ func (c *Client) addOperationListMapRunsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListMapRunsAPIClient is a client that implements the ListMapRuns operation.
-type ListMapRunsAPIClient interface {
-	ListMapRuns(context.Context, *ListMapRunsInput, ...func(*Options)) (*ListMapRunsOutput, error)
-}
-
-var _ ListMapRunsAPIClient = (*Client)(nil)
 
 // ListMapRunsPaginatorOptions is the paginator options for ListMapRuns
 type ListMapRunsPaginatorOptions struct {
@@ -230,6 +226,9 @@ func (p *ListMapRunsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMapRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +247,13 @@ func (p *ListMapRunsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListMapRunsAPIClient is a client that implements the ListMapRuns operation.
+type ListMapRunsAPIClient interface {
+	ListMapRuns(context.Context, *ListMapRunsInput, ...func(*Options)) (*ListMapRunsOutput, error)
+}
+
+var _ ListMapRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMapRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

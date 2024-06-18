@@ -148,6 +148,9 @@ func (c *Client) addOperationListEnvironmentProfilesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEnvironmentProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -171,14 +174,6 @@ func (c *Client) addOperationListEnvironmentProfilesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListEnvironmentProfilesAPIClient is a client that implements the
-// ListEnvironmentProfiles operation.
-type ListEnvironmentProfilesAPIClient interface {
-	ListEnvironmentProfiles(context.Context, *ListEnvironmentProfilesInput, ...func(*Options)) (*ListEnvironmentProfilesOutput, error)
-}
-
-var _ ListEnvironmentProfilesAPIClient = (*Client)(nil)
 
 // ListEnvironmentProfilesPaginatorOptions is the paginator options for
 // ListEnvironmentProfiles
@@ -249,6 +244,9 @@ func (p *ListEnvironmentProfilesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnvironmentProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +265,14 @@ func (p *ListEnvironmentProfilesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListEnvironmentProfilesAPIClient is a client that implements the
+// ListEnvironmentProfiles operation.
+type ListEnvironmentProfilesAPIClient interface {
+	ListEnvironmentProfiles(context.Context, *ListEnvironmentProfilesInput, ...func(*Options)) (*ListEnvironmentProfilesOutput, error)
+}
+
+var _ ListEnvironmentProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnvironmentProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

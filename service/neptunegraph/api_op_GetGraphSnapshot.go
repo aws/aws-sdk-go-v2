@@ -146,6 +146,9 @@ func (c *Client) addOperationGetGraphSnapshotMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetGraphSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationGetGraphSnapshotMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetGraphSnapshotAPIClient is a client that implements the GetGraphSnapshot
-// operation.
-type GetGraphSnapshotAPIClient interface {
-	GetGraphSnapshot(context.Context, *GetGraphSnapshotInput, ...func(*Options)) (*GetGraphSnapshotOutput, error)
-}
-
-var _ GetGraphSnapshotAPIClient = (*Client)(nil)
 
 // GraphSnapshotAvailableWaiterOptions are waiter options for
 // GraphSnapshotAvailableWaiter
@@ -295,7 +290,13 @@ func (w *GraphSnapshotAvailableWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.GetGraphSnapshot(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -504,7 +505,13 @@ func (w *GraphSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.GetGraphSnapshot(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -572,6 +579,14 @@ func graphSnapshotDeletedStateRetryable(ctx context.Context, input *GetGraphSnap
 
 	return true, nil
 }
+
+// GetGraphSnapshotAPIClient is a client that implements the GetGraphSnapshot
+// operation.
+type GetGraphSnapshotAPIClient interface {
+	GetGraphSnapshot(context.Context, *GetGraphSnapshotInput, ...func(*Options)) (*GetGraphSnapshotOutput, error)
+}
+
+var _ GetGraphSnapshotAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetGraphSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

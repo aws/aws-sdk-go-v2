@@ -155,6 +155,9 @@ func (c *Client) addOperationDescribeImageScanFindingsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeImageScanFindingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -177,105 +180,6 @@ func (c *Client) addOperationDescribeImageScanFindingsMiddlewares(stack *middlew
 		return err
 	}
 	return nil
-}
-
-// DescribeImageScanFindingsAPIClient is a client that implements the
-// DescribeImageScanFindings operation.
-type DescribeImageScanFindingsAPIClient interface {
-	DescribeImageScanFindings(context.Context, *DescribeImageScanFindingsInput, ...func(*Options)) (*DescribeImageScanFindingsOutput, error)
-}
-
-var _ DescribeImageScanFindingsAPIClient = (*Client)(nil)
-
-// DescribeImageScanFindingsPaginatorOptions is the paginator options for
-// DescribeImageScanFindings
-type DescribeImageScanFindingsPaginatorOptions struct {
-	// The maximum number of image scan results returned by DescribeImageScanFindings
-	// in paginated output. When this parameter is used, DescribeImageScanFindings
-	// only returns maxResults results in a single page along with a nextToken
-	// response element. The remaining results of the initial request can be seen by
-	// sending another DescribeImageScanFindings request with the returned nextToken
-	// value. This value can be between 1 and 1000. If this parameter is not used, then
-	// DescribeImageScanFindings returns up to 100 results and a nextToken value, if
-	// applicable.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeImageScanFindingsPaginator is a paginator for DescribeImageScanFindings
-type DescribeImageScanFindingsPaginator struct {
-	options   DescribeImageScanFindingsPaginatorOptions
-	client    DescribeImageScanFindingsAPIClient
-	params    *DescribeImageScanFindingsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeImageScanFindingsPaginator returns a new
-// DescribeImageScanFindingsPaginator
-func NewDescribeImageScanFindingsPaginator(client DescribeImageScanFindingsAPIClient, params *DescribeImageScanFindingsInput, optFns ...func(*DescribeImageScanFindingsPaginatorOptions)) *DescribeImageScanFindingsPaginator {
-	if params == nil {
-		params = &DescribeImageScanFindingsInput{}
-	}
-
-	options := DescribeImageScanFindingsPaginatorOptions{}
-	if params.MaxResults != nil {
-		options.Limit = *params.MaxResults
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeImageScanFindingsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeImageScanFindingsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeImageScanFindings page.
-func (p *DescribeImageScanFindingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeImageScanFindingsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxResults = limit
-
-	result, err := p.client.DescribeImageScanFindings(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // ImageScanCompleteWaiterOptions are waiter options for ImageScanCompleteWaiter
@@ -393,7 +297,13 @@ func (w *ImageScanCompleteWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeImageScanFindings(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -467,6 +377,108 @@ func imageScanCompleteStateRetryable(ctx context.Context, input *DescribeImageSc
 
 	return true, nil
 }
+
+// DescribeImageScanFindingsPaginatorOptions is the paginator options for
+// DescribeImageScanFindings
+type DescribeImageScanFindingsPaginatorOptions struct {
+	// The maximum number of image scan results returned by DescribeImageScanFindings
+	// in paginated output. When this parameter is used, DescribeImageScanFindings
+	// only returns maxResults results in a single page along with a nextToken
+	// response element. The remaining results of the initial request can be seen by
+	// sending another DescribeImageScanFindings request with the returned nextToken
+	// value. This value can be between 1 and 1000. If this parameter is not used, then
+	// DescribeImageScanFindings returns up to 100 results and a nextToken value, if
+	// applicable.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeImageScanFindingsPaginator is a paginator for DescribeImageScanFindings
+type DescribeImageScanFindingsPaginator struct {
+	options   DescribeImageScanFindingsPaginatorOptions
+	client    DescribeImageScanFindingsAPIClient
+	params    *DescribeImageScanFindingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeImageScanFindingsPaginator returns a new
+// DescribeImageScanFindingsPaginator
+func NewDescribeImageScanFindingsPaginator(client DescribeImageScanFindingsAPIClient, params *DescribeImageScanFindingsInput, optFns ...func(*DescribeImageScanFindingsPaginatorOptions)) *DescribeImageScanFindingsPaginator {
+	if params == nil {
+		params = &DescribeImageScanFindingsInput{}
+	}
+
+	options := DescribeImageScanFindingsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeImageScanFindingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeImageScanFindingsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeImageScanFindings page.
+func (p *DescribeImageScanFindingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeImageScanFindingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeImageScanFindings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeImageScanFindingsAPIClient is a client that implements the
+// DescribeImageScanFindings operation.
+type DescribeImageScanFindingsAPIClient interface {
+	DescribeImageScanFindings(context.Context, *DescribeImageScanFindingsInput, ...func(*Options)) (*DescribeImageScanFindingsOutput, error)
+}
+
+var _ DescribeImageScanFindingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeImageScanFindings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

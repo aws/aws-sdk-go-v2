@@ -120,6 +120,9 @@ func (c *Client) addOperationDescribeClusterTracksMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterTracks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationDescribeClusterTracksMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeClusterTracksAPIClient is a client that implements the
-// DescribeClusterTracks operation.
-type DescribeClusterTracksAPIClient interface {
-	DescribeClusterTracks(context.Context, *DescribeClusterTracksInput, ...func(*Options)) (*DescribeClusterTracksOutput, error)
-}
-
-var _ DescribeClusterTracksAPIClient = (*Client)(nil)
 
 // DescribeClusterTracksPaginatorOptions is the paginator options for
 // DescribeClusterTracks
@@ -213,6 +208,9 @@ func (p *DescribeClusterTracksPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeClusterTracks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *DescribeClusterTracksPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeClusterTracksAPIClient is a client that implements the
+// DescribeClusterTracks operation.
+type DescribeClusterTracksAPIClient interface {
+	DescribeClusterTracks(context.Context, *DescribeClusterTracksInput, ...func(*Options)) (*DescribeClusterTracksOutput, error)
+}
+
+var _ DescribeClusterTracksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeClusterTracks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

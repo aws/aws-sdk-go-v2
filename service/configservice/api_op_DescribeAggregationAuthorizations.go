@@ -115,6 +115,9 @@ func (c *Client) addOperationDescribeAggregationAuthorizationsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAggregationAuthorizations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationDescribeAggregationAuthorizationsMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeAggregationAuthorizationsAPIClient is a client that implements the
-// DescribeAggregationAuthorizations operation.
-type DescribeAggregationAuthorizationsAPIClient interface {
-	DescribeAggregationAuthorizations(context.Context, *DescribeAggregationAuthorizationsInput, ...func(*Options)) (*DescribeAggregationAuthorizationsOutput, error)
-}
-
-var _ DescribeAggregationAuthorizationsAPIClient = (*Client)(nil)
 
 // DescribeAggregationAuthorizationsPaginatorOptions is the paginator options for
 // DescribeAggregationAuthorizations
@@ -207,6 +202,9 @@ func (p *DescribeAggregationAuthorizationsPaginator) NextPage(ctx context.Contex
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAggregationAuthorizations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *DescribeAggregationAuthorizationsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeAggregationAuthorizationsAPIClient is a client that implements the
+// DescribeAggregationAuthorizations operation.
+type DescribeAggregationAuthorizationsAPIClient interface {
+	DescribeAggregationAuthorizations(context.Context, *DescribeAggregationAuthorizationsInput, ...func(*Options)) (*DescribeAggregationAuthorizationsOutput, error)
+}
+
+var _ DescribeAggregationAuthorizationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAggregationAuthorizations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

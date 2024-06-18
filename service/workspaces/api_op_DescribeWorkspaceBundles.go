@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeWorkspaceBundlesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkspaceBundles(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationDescribeWorkspaceBundlesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeWorkspaceBundlesAPIClient is a client that implements the
-// DescribeWorkspaceBundles operation.
-type DescribeWorkspaceBundlesAPIClient interface {
-	DescribeWorkspaceBundles(context.Context, *DescribeWorkspaceBundlesInput, ...func(*Options)) (*DescribeWorkspaceBundlesOutput, error)
-}
-
-var _ DescribeWorkspaceBundlesAPIClient = (*Client)(nil)
 
 // DescribeWorkspaceBundlesPaginatorOptions is the paginator options for
 // DescribeWorkspaceBundles
@@ -205,6 +200,9 @@ func (p *DescribeWorkspaceBundlesPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeWorkspaceBundles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *DescribeWorkspaceBundlesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeWorkspaceBundlesAPIClient is a client that implements the
+// DescribeWorkspaceBundles operation.
+type DescribeWorkspaceBundlesAPIClient interface {
+	DescribeWorkspaceBundles(context.Context, *DescribeWorkspaceBundlesInput, ...func(*Options)) (*DescribeWorkspaceBundlesOutput, error)
+}
+
+var _ DescribeWorkspaceBundlesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeWorkspaceBundles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

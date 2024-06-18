@@ -132,6 +132,9 @@ func (c *Client) addOperationListFargateProfilesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFargateProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListFargateProfilesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListFargateProfilesAPIClient is a client that implements the
-// ListFargateProfiles operation.
-type ListFargateProfilesAPIClient interface {
-	ListFargateProfiles(context.Context, *ListFargateProfilesInput, ...func(*Options)) (*ListFargateProfilesOutput, error)
-}
-
-var _ ListFargateProfilesAPIClient = (*Client)(nil)
 
 // ListFargateProfilesPaginatorOptions is the paginator options for
 // ListFargateProfiles
@@ -233,6 +228,9 @@ func (p *ListFargateProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFargateProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListFargateProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListFargateProfilesAPIClient is a client that implements the
+// ListFargateProfiles operation.
+type ListFargateProfilesAPIClient interface {
+	ListFargateProfiles(context.Context, *ListFargateProfilesInput, ...func(*Options)) (*ListFargateProfilesOutput, error)
+}
+
+var _ ListFargateProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFargateProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

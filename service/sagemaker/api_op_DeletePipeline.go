@@ -114,6 +114,9 @@ func (c *Client) addOperationDeletePipelineMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeletePipelineMiddleware(stack, options); err != nil {
 		return err
 	}

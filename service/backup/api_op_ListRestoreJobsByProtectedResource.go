@@ -139,6 +139,9 @@ func (c *Client) addOperationListRestoreJobsByProtectedResourceMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRestoreJobsByProtectedResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListRestoreJobsByProtectedResourceMiddlewares(stack
 	}
 	return nil
 }
-
-// ListRestoreJobsByProtectedResourceAPIClient is a client that implements the
-// ListRestoreJobsByProtectedResource operation.
-type ListRestoreJobsByProtectedResourceAPIClient interface {
-	ListRestoreJobsByProtectedResource(context.Context, *ListRestoreJobsByProtectedResourceInput, ...func(*Options)) (*ListRestoreJobsByProtectedResourceOutput, error)
-}
-
-var _ ListRestoreJobsByProtectedResourceAPIClient = (*Client)(nil)
 
 // ListRestoreJobsByProtectedResourcePaginatorOptions is the paginator options for
 // ListRestoreJobsByProtectedResource
@@ -237,6 +232,9 @@ func (p *ListRestoreJobsByProtectedResourcePaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRestoreJobsByProtectedResource(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListRestoreJobsByProtectedResourcePaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListRestoreJobsByProtectedResourceAPIClient is a client that implements the
+// ListRestoreJobsByProtectedResource operation.
+type ListRestoreJobsByProtectedResourceAPIClient interface {
+	ListRestoreJobsByProtectedResource(context.Context, *ListRestoreJobsByProtectedResourceInput, ...func(*Options)) (*ListRestoreJobsByProtectedResourceOutput, error)
+}
+
+var _ ListRestoreJobsByProtectedResourceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRestoreJobsByProtectedResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

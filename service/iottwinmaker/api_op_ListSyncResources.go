@@ -135,6 +135,9 @@ func (c *Client) addOperationListSyncResourcesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListSyncResourcesMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,41 +164,6 @@ func (c *Client) addOperationListSyncResourcesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-type endpointPrefix_opListSyncResourcesMiddleware struct {
-}
-
-func (*endpointPrefix_opListSyncResourcesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListSyncResourcesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListSyncResourcesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListSyncResourcesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListSyncResourcesAPIClient is a client that implements the ListSyncResources
-// operation.
-type ListSyncResourcesAPIClient interface {
-	ListSyncResources(context.Context, *ListSyncResourcesInput, ...func(*Options)) (*ListSyncResourcesOutput, error)
-}
-
-var _ ListSyncResourcesAPIClient = (*Client)(nil)
 
 // ListSyncResourcesPaginatorOptions is the paginator options for ListSyncResources
 type ListSyncResourcesPaginatorOptions struct {
@@ -262,6 +230,9 @@ func (p *ListSyncResourcesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSyncResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -280,6 +251,41 @@ func (p *ListSyncResourcesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+type endpointPrefix_opListSyncResourcesMiddleware struct {
+}
+
+func (*endpointPrefix_opListSyncResourcesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListSyncResourcesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListSyncResourcesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListSyncResourcesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListSyncResourcesAPIClient is a client that implements the ListSyncResources
+// operation.
+type ListSyncResourcesAPIClient interface {
+	ListSyncResources(context.Context, *ListSyncResourcesInput, ...func(*Options)) (*ListSyncResourcesOutput, error)
+}
+
+var _ ListSyncResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSyncResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

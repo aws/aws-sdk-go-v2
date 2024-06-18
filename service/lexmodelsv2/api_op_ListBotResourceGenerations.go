@@ -143,6 +143,9 @@ func (c *Client) addOperationListBotResourceGenerationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBotResourceGenerationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationListBotResourceGenerationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListBotResourceGenerationsAPIClient is a client that implements the
-// ListBotResourceGenerations operation.
-type ListBotResourceGenerationsAPIClient interface {
-	ListBotResourceGenerations(context.Context, *ListBotResourceGenerationsInput, ...func(*Options)) (*ListBotResourceGenerationsOutput, error)
-}
-
-var _ ListBotResourceGenerationsAPIClient = (*Client)(nil)
 
 // ListBotResourceGenerationsPaginatorOptions is the paginator options for
 // ListBotResourceGenerations
@@ -241,6 +236,9 @@ func (p *ListBotResourceGenerationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBotResourceGenerations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *ListBotResourceGenerationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListBotResourceGenerationsAPIClient is a client that implements the
+// ListBotResourceGenerations operation.
+type ListBotResourceGenerationsAPIClient interface {
+	ListBotResourceGenerations(context.Context, *ListBotResourceGenerationsInput, ...func(*Options)) (*ListBotResourceGenerationsOutput, error)
+}
+
+var _ ListBotResourceGenerationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBotResourceGenerations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

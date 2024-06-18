@@ -138,6 +138,9 @@ func (c *Client) addOperationListChannelModeratorsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListChannelModeratorsMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,41 +167,6 @@ func (c *Client) addOperationListChannelModeratorsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-type endpointPrefix_opListChannelModeratorsMiddleware struct {
-}
-
-func (*endpointPrefix_opListChannelModeratorsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListChannelModeratorsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "messaging-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListChannelModeratorsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListChannelModeratorsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListChannelModeratorsAPIClient is a client that implements the
-// ListChannelModerators operation.
-type ListChannelModeratorsAPIClient interface {
-	ListChannelModerators(context.Context, *ListChannelModeratorsInput, ...func(*Options)) (*ListChannelModeratorsOutput, error)
-}
-
-var _ ListChannelModeratorsAPIClient = (*Client)(nil)
 
 // ListChannelModeratorsPaginatorOptions is the paginator options for
 // ListChannelModerators
@@ -264,6 +232,9 @@ func (p *ListChannelModeratorsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelModerators(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -282,6 +253,41 @@ func (p *ListChannelModeratorsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+type endpointPrefix_opListChannelModeratorsMiddleware struct {
+}
+
+func (*endpointPrefix_opListChannelModeratorsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListChannelModeratorsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "messaging-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListChannelModeratorsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListChannelModeratorsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListChannelModeratorsAPIClient is a client that implements the
+// ListChannelModerators operation.
+type ListChannelModeratorsAPIClient interface {
+	ListChannelModerators(context.Context, *ListChannelModeratorsInput, ...func(*Options)) (*ListChannelModeratorsOutput, error)
+}
+
+var _ ListChannelModeratorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelModerators(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

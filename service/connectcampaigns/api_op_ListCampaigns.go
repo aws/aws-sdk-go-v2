@@ -116,6 +116,9 @@ func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCampaignsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,13 +142,6 @@ func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListCampaignsAPIClient is a client that implements the ListCampaigns operation.
-type ListCampaignsAPIClient interface {
-	ListCampaigns(context.Context, *ListCampaignsInput, ...func(*Options)) (*ListCampaignsOutput, error)
-}
-
-var _ ListCampaignsAPIClient = (*Client)(nil)
 
 // ListCampaignsPaginatorOptions is the paginator options for ListCampaigns
 type ListCampaignsPaginatorOptions struct {
@@ -210,6 +206,9 @@ func (p *ListCampaignsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCampaigns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +227,13 @@ func (p *ListCampaignsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListCampaignsAPIClient is a client that implements the ListCampaigns operation.
+type ListCampaignsAPIClient interface {
+	ListCampaigns(context.Context, *ListCampaignsInput, ...func(*Options)) (*ListCampaignsOutput, error)
+}
+
+var _ ListCampaignsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCampaigns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

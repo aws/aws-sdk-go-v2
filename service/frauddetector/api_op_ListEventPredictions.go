@@ -140,6 +140,9 @@ func (c *Client) addOperationListEventPredictionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEventPredictionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationListEventPredictionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListEventPredictionsAPIClient is a client that implements the
-// ListEventPredictions operation.
-type ListEventPredictionsAPIClient interface {
-	ListEventPredictions(context.Context, *ListEventPredictionsInput, ...func(*Options)) (*ListEventPredictionsOutput, error)
-}
-
-var _ ListEventPredictionsAPIClient = (*Client)(nil)
 
 // ListEventPredictionsPaginatorOptions is the paginator options for
 // ListEventPredictions
@@ -236,6 +231,9 @@ func (p *ListEventPredictionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventPredictions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListEventPredictionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListEventPredictionsAPIClient is a client that implements the
+// ListEventPredictions operation.
+type ListEventPredictionsAPIClient interface {
+	ListEventPredictions(context.Context, *ListEventPredictionsInput, ...func(*Options)) (*ListEventPredictionsOutput, error)
+}
+
+var _ ListEventPredictionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventPredictions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

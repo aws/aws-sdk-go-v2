@@ -158,6 +158,9 @@ func (c *Client) addOperationListMonitoringExecutionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitoringExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -178,14 +181,6 @@ func (c *Client) addOperationListMonitoringExecutionsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListMonitoringExecutionsAPIClient is a client that implements the
-// ListMonitoringExecutions operation.
-type ListMonitoringExecutionsAPIClient interface {
-	ListMonitoringExecutions(context.Context, *ListMonitoringExecutionsInput, ...func(*Options)) (*ListMonitoringExecutionsOutput, error)
-}
-
-var _ ListMonitoringExecutionsAPIClient = (*Client)(nil)
 
 // ListMonitoringExecutionsPaginatorOptions is the paginator options for
 // ListMonitoringExecutions
@@ -252,6 +247,9 @@ func (p *ListMonitoringExecutionsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitoringExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -270,6 +268,14 @@ func (p *ListMonitoringExecutionsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListMonitoringExecutionsAPIClient is a client that implements the
+// ListMonitoringExecutions operation.
+type ListMonitoringExecutionsAPIClient interface {
+	ListMonitoringExecutions(context.Context, *ListMonitoringExecutionsInput, ...func(*Options)) (*ListMonitoringExecutionsOutput, error)
+}
+
+var _ ListMonitoringExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitoringExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

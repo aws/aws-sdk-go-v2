@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeScheduleMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationDescribeScheduleMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// DescribeScheduleAPIClient is a client that implements the DescribeSchedule
-// operation.
-type DescribeScheduleAPIClient interface {
-	DescribeSchedule(context.Context, *DescribeScheduleInput, ...func(*Options)) (*DescribeScheduleOutput, error)
-}
-
-var _ DescribeScheduleAPIClient = (*Client)(nil)
 
 // DescribeSchedulePaginatorOptions is the paginator options for DescribeSchedule
 type DescribeSchedulePaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *DescribeSchedulePaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSchedule(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *DescribeSchedulePaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// DescribeScheduleAPIClient is a client that implements the DescribeSchedule
+// operation.
+type DescribeScheduleAPIClient interface {
+	DescribeSchedule(context.Context, *DescribeScheduleInput, ...func(*Options)) (*DescribeScheduleOutput, error)
+}
+
+var _ DescribeScheduleAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

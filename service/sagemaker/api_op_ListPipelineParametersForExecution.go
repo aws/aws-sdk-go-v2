@@ -119,6 +119,9 @@ func (c *Client) addOperationListPipelineParametersForExecutionMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPipelineParametersForExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListPipelineParametersForExecutionMiddlewares(stack
 	}
 	return nil
 }
-
-// ListPipelineParametersForExecutionAPIClient is a client that implements the
-// ListPipelineParametersForExecution operation.
-type ListPipelineParametersForExecutionAPIClient interface {
-	ListPipelineParametersForExecution(context.Context, *ListPipelineParametersForExecutionInput, ...func(*Options)) (*ListPipelineParametersForExecutionOutput, error)
-}
-
-var _ ListPipelineParametersForExecutionAPIClient = (*Client)(nil)
 
 // ListPipelineParametersForExecutionPaginatorOptions is the paginator options for
 // ListPipelineParametersForExecution
@@ -217,6 +212,9 @@ func (p *ListPipelineParametersForExecutionPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPipelineParametersForExecution(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListPipelineParametersForExecutionPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListPipelineParametersForExecutionAPIClient is a client that implements the
+// ListPipelineParametersForExecution operation.
+type ListPipelineParametersForExecutionAPIClient interface {
+	ListPipelineParametersForExecution(context.Context, *ListPipelineParametersForExecutionInput, ...func(*Options)) (*ListPipelineParametersForExecutionOutput, error)
+}
+
+var _ ListPipelineParametersForExecutionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPipelineParametersForExecution(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -186,6 +186,9 @@ func (c *Client) addOperationDescribeDBSnapshotTenantDatabasesMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSnapshotTenantDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -209,14 +212,6 @@ func (c *Client) addOperationDescribeDBSnapshotTenantDatabasesMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeDBSnapshotTenantDatabasesAPIClient is a client that implements the
-// DescribeDBSnapshotTenantDatabases operation.
-type DescribeDBSnapshotTenantDatabasesAPIClient interface {
-	DescribeDBSnapshotTenantDatabases(context.Context, *DescribeDBSnapshotTenantDatabasesInput, ...func(*Options)) (*DescribeDBSnapshotTenantDatabasesOutput, error)
-}
-
-var _ DescribeDBSnapshotTenantDatabasesAPIClient = (*Client)(nil)
 
 // DescribeDBSnapshotTenantDatabasesPaginatorOptions is the paginator options for
 // DescribeDBSnapshotTenantDatabases
@@ -286,6 +281,9 @@ func (p *DescribeDBSnapshotTenantDatabasesPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBSnapshotTenantDatabases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -304,6 +302,14 @@ func (p *DescribeDBSnapshotTenantDatabasesPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeDBSnapshotTenantDatabasesAPIClient is a client that implements the
+// DescribeDBSnapshotTenantDatabases operation.
+type DescribeDBSnapshotTenantDatabasesAPIClient interface {
+	DescribeDBSnapshotTenantDatabases(context.Context, *DescribeDBSnapshotTenantDatabasesInput, ...func(*Options)) (*DescribeDBSnapshotTenantDatabasesOutput, error)
+}
+
+var _ DescribeDBSnapshotTenantDatabasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBSnapshotTenantDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

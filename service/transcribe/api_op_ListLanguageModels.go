@@ -134,6 +134,9 @@ func (c *Client) addOperationListLanguageModelsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLanguageModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListLanguageModelsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListLanguageModelsAPIClient is a client that implements the ListLanguageModels
-// operation.
-type ListLanguageModelsAPIClient interface {
-	ListLanguageModels(context.Context, *ListLanguageModelsInput, ...func(*Options)) (*ListLanguageModelsOutput, error)
-}
-
-var _ ListLanguageModelsAPIClient = (*Client)(nil)
 
 // ListLanguageModelsPaginatorOptions is the paginator options for
 // ListLanguageModels
@@ -229,6 +224,9 @@ func (p *ListLanguageModelsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLanguageModels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListLanguageModelsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListLanguageModelsAPIClient is a client that implements the ListLanguageModels
+// operation.
+type ListLanguageModelsAPIClient interface {
+	ListLanguageModels(context.Context, *ListLanguageModelsInput, ...func(*Options)) (*ListLanguageModelsOutput, error)
+}
+
+var _ ListLanguageModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLanguageModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

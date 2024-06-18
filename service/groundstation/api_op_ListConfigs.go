@@ -112,6 +112,9 @@ func (c *Client) addOperationListConfigsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,13 +135,6 @@ func (c *Client) addOperationListConfigsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListConfigsAPIClient is a client that implements the ListConfigs operation.
-type ListConfigsAPIClient interface {
-	ListConfigs(context.Context, *ListConfigsInput, ...func(*Options)) (*ListConfigsOutput, error)
-}
-
-var _ ListConfigsAPIClient = (*Client)(nil)
 
 // ListConfigsPaginatorOptions is the paginator options for ListConfigs
 type ListConfigsPaginatorOptions struct {
@@ -203,6 +199,9 @@ func (p *ListConfigsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +220,13 @@ func (p *ListConfigsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListConfigsAPIClient is a client that implements the ListConfigs operation.
+type ListConfigsAPIClient interface {
+	ListConfigs(context.Context, *ListConfigsInput, ...func(*Options)) (*ListConfigsOutput, error)
+}
+
+var _ ListConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

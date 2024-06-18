@@ -125,6 +125,9 @@ func (c *Client) addOperationListRestoreTestingSelectionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRestoreTestingSelectionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListRestoreTestingSelectionsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListRestoreTestingSelectionsAPIClient is a client that implements the
-// ListRestoreTestingSelections operation.
-type ListRestoreTestingSelectionsAPIClient interface {
-	ListRestoreTestingSelections(context.Context, *ListRestoreTestingSelectionsInput, ...func(*Options)) (*ListRestoreTestingSelectionsOutput, error)
-}
-
-var _ ListRestoreTestingSelectionsAPIClient = (*Client)(nil)
 
 // ListRestoreTestingSelectionsPaginatorOptions is the paginator options for
 // ListRestoreTestingSelections
@@ -223,6 +218,9 @@ func (p *ListRestoreTestingSelectionsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRestoreTestingSelections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListRestoreTestingSelectionsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListRestoreTestingSelectionsAPIClient is a client that implements the
+// ListRestoreTestingSelections operation.
+type ListRestoreTestingSelectionsAPIClient interface {
+	ListRestoreTestingSelections(context.Context, *ListRestoreTestingSelectionsInput, ...func(*Options)) (*ListRestoreTestingSelectionsOutput, error)
+}
+
+var _ ListRestoreTestingSelectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRestoreTestingSelections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

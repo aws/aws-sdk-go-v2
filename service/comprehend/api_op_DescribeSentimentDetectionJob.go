@@ -109,6 +109,9 @@ func (c *Client) addOperationDescribeSentimentDetectionJobMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSentimentDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

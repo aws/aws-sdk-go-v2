@@ -140,6 +140,9 @@ func (c *Client) addOperationGetInstancesHealthStatusMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetInstancesHealthStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationGetInstancesHealthStatusMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// GetInstancesHealthStatusAPIClient is a client that implements the
-// GetInstancesHealthStatus operation.
-type GetInstancesHealthStatusAPIClient interface {
-	GetInstancesHealthStatus(context.Context, *GetInstancesHealthStatusInput, ...func(*Options)) (*GetInstancesHealthStatusOutput, error)
-}
-
-var _ GetInstancesHealthStatusAPIClient = (*Client)(nil)
 
 // GetInstancesHealthStatusPaginatorOptions is the paginator options for
 // GetInstancesHealthStatus
@@ -239,6 +234,9 @@ func (p *GetInstancesHealthStatusPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetInstancesHealthStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *GetInstancesHealthStatusPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// GetInstancesHealthStatusAPIClient is a client that implements the
+// GetInstancesHealthStatus operation.
+type GetInstancesHealthStatusAPIClient interface {
+	GetInstancesHealthStatus(context.Context, *GetInstancesHealthStatusInput, ...func(*Options)) (*GetInstancesHealthStatusOutput, error)
+}
+
+var _ GetInstancesHealthStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetInstancesHealthStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

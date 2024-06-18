@@ -114,6 +114,9 @@ func (c *Client) addOperationGetListElementsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetListElementsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationGetListElementsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetListElementsAPIClient is a client that implements the GetListElements
-// operation.
-type GetListElementsAPIClient interface {
-	GetListElements(context.Context, *GetListElementsInput, ...func(*Options)) (*GetListElementsOutput, error)
-}
-
-var _ GetListElementsAPIClient = (*Client)(nil)
 
 // GetListElementsPaginatorOptions is the paginator options for GetListElements
 type GetListElementsPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *GetListElementsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetListElements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *GetListElementsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetListElementsAPIClient is a client that implements the GetListElements
+// operation.
+type GetListElementsAPIClient interface {
+	GetListElements(context.Context, *GetListElementsInput, ...func(*Options)) (*GetListElementsOutput, error)
+}
+
+var _ GetListElementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetListElements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

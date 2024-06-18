@@ -114,6 +114,9 @@ func (c *Client) addOperationListSlackChannelConfigurationsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSlackChannelConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListSlackChannelConfigurationsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListSlackChannelConfigurationsAPIClient is a client that implements the
-// ListSlackChannelConfigurations operation.
-type ListSlackChannelConfigurationsAPIClient interface {
-	ListSlackChannelConfigurations(context.Context, *ListSlackChannelConfigurationsInput, ...func(*Options)) (*ListSlackChannelConfigurationsOutput, error)
-}
-
-var _ ListSlackChannelConfigurationsAPIClient = (*Client)(nil)
 
 // ListSlackChannelConfigurationsPaginatorOptions is the paginator options for
 // ListSlackChannelConfigurations
@@ -197,6 +192,9 @@ func (p *ListSlackChannelConfigurationsPaginator) NextPage(ctx context.Context, 
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSlackChannelConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -215,6 +213,14 @@ func (p *ListSlackChannelConfigurationsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListSlackChannelConfigurationsAPIClient is a client that implements the
+// ListSlackChannelConfigurations operation.
+type ListSlackChannelConfigurationsAPIClient interface {
+	ListSlackChannelConfigurations(context.Context, *ListSlackChannelConfigurationsInput, ...func(*Options)) (*ListSlackChannelConfigurationsOutput, error)
+}
+
+var _ ListSlackChannelConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSlackChannelConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -130,6 +130,9 @@ func (c *Client) addOperationListAppInputSourcesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAppInputSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListAppInputSourcesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListAppInputSourcesAPIClient is a client that implements the
-// ListAppInputSources operation.
-type ListAppInputSourcesAPIClient interface {
-	ListAppInputSources(context.Context, *ListAppInputSourcesInput, ...func(*Options)) (*ListAppInputSourcesOutput, error)
-}
-
-var _ ListAppInputSourcesAPIClient = (*Client)(nil)
 
 // ListAppInputSourcesPaginatorOptions is the paginator options for
 // ListAppInputSources
@@ -226,6 +221,9 @@ func (p *ListAppInputSourcesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppInputSources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListAppInputSourcesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListAppInputSourcesAPIClient is a client that implements the
+// ListAppInputSources operation.
+type ListAppInputSourcesAPIClient interface {
+	ListAppInputSources(context.Context, *ListAppInputSourcesInput, ...func(*Options)) (*ListAppInputSourcesOutput, error)
+}
+
+var _ ListAppInputSourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppInputSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

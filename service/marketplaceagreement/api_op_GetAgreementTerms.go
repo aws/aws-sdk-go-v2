@@ -133,6 +133,9 @@ func (c *Client) addOperationGetAgreementTermsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetAgreementTermsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationGetAgreementTermsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetAgreementTermsAPIClient is a client that implements the GetAgreementTerms
-// operation.
-type GetAgreementTermsAPIClient interface {
-	GetAgreementTerms(context.Context, *GetAgreementTermsInput, ...func(*Options)) (*GetAgreementTermsOutput, error)
-}
-
-var _ GetAgreementTermsAPIClient = (*Client)(nil)
 
 // GetAgreementTermsPaginatorOptions is the paginator options for GetAgreementTerms
 type GetAgreementTermsPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *GetAgreementTermsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAgreementTerms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *GetAgreementTermsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetAgreementTermsAPIClient is a client that implements the GetAgreementTerms
+// operation.
+type GetAgreementTermsAPIClient interface {
+	GetAgreementTerms(context.Context, *GetAgreementTermsInput, ...func(*Options)) (*GetAgreementTermsOutput, error)
+}
+
+var _ GetAgreementTermsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAgreementTerms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

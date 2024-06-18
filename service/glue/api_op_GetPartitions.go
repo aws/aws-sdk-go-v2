@@ -217,6 +217,9 @@ func (c *Client) addOperationGetPartitionsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPartitionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -240,13 +243,6 @@ func (c *Client) addOperationGetPartitionsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetPartitionsAPIClient is a client that implements the GetPartitions operation.
-type GetPartitionsAPIClient interface {
-	GetPartitions(context.Context, *GetPartitionsInput, ...func(*Options)) (*GetPartitionsOutput, error)
-}
-
-var _ GetPartitionsAPIClient = (*Client)(nil)
 
 // GetPartitionsPaginatorOptions is the paginator options for GetPartitions
 type GetPartitionsPaginatorOptions struct {
@@ -311,6 +307,9 @@ func (p *GetPartitionsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetPartitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -329,6 +328,13 @@ func (p *GetPartitionsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetPartitionsAPIClient is a client that implements the GetPartitions operation.
+type GetPartitionsAPIClient interface {
+	GetPartitions(context.Context, *GetPartitionsInput, ...func(*Options)) (*GetPartitionsOutput, error)
+}
+
+var _ GetPartitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetPartitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

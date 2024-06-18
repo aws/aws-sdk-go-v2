@@ -350,6 +350,9 @@ func (c *Client) addOperationRunTaskMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRunTaskMiddleware(stack, options); err != nil {
 		return err
 	}

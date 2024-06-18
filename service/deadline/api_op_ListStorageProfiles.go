@@ -123,6 +123,9 @@ func (c *Client) addOperationListStorageProfilesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListStorageProfilesMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,41 +152,6 @@ func (c *Client) addOperationListStorageProfilesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-type endpointPrefix_opListStorageProfilesMiddleware struct {
-}
-
-func (*endpointPrefix_opListStorageProfilesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListStorageProfilesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListStorageProfilesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListStorageProfilesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListStorageProfilesAPIClient is a client that implements the
-// ListStorageProfiles operation.
-type ListStorageProfilesAPIClient interface {
-	ListStorageProfiles(context.Context, *ListStorageProfilesInput, ...func(*Options)) (*ListStorageProfilesOutput, error)
-}
-
-var _ ListStorageProfilesAPIClient = (*Client)(nil)
 
 // ListStorageProfilesPaginatorOptions is the paginator options for
 // ListStorageProfiles
@@ -250,6 +218,9 @@ func (p *ListStorageProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStorageProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +239,41 @@ func (p *ListStorageProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+type endpointPrefix_opListStorageProfilesMiddleware struct {
+}
+
+func (*endpointPrefix_opListStorageProfilesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListStorageProfilesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListStorageProfilesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListStorageProfilesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListStorageProfilesAPIClient is a client that implements the
+// ListStorageProfiles operation.
+type ListStorageProfilesAPIClient interface {
+	ListStorageProfiles(context.Context, *ListStorageProfilesInput, ...func(*Options)) (*ListStorageProfilesOutput, error)
+}
+
+var _ ListStorageProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStorageProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

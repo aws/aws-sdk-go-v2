@@ -164,6 +164,9 @@ func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -187,14 +190,6 @@ func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeInstancesAPIClient is a client that implements the DescribeInstances
-// operation.
-type DescribeInstancesAPIClient interface {
-	DescribeInstances(context.Context, *DescribeInstancesInput, ...func(*Options)) (*DescribeInstancesOutput, error)
-}
-
-var _ DescribeInstancesAPIClient = (*Client)(nil)
 
 // DescribeInstancesPaginatorOptions is the paginator options for DescribeInstances
 type DescribeInstancesPaginatorOptions struct {
@@ -260,6 +255,9 @@ func (p *DescribeInstancesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -278,6 +276,14 @@ func (p *DescribeInstancesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// DescribeInstancesAPIClient is a client that implements the DescribeInstances
+// operation.
+type DescribeInstancesAPIClient interface {
+	DescribeInstances(context.Context, *DescribeInstancesInput, ...func(*Options)) (*DescribeInstancesOutput, error)
+}
+
+var _ DescribeInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

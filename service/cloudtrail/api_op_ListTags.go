@@ -126,6 +126,9 @@ func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,13 +152,6 @@ func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// ListTagsAPIClient is a client that implements the ListTags operation.
-type ListTagsAPIClient interface {
-	ListTags(context.Context, *ListTagsInput, ...func(*Options)) (*ListTagsOutput, error)
-}
-
-var _ ListTagsAPIClient = (*Client)(nil)
 
 // ListTagsPaginatorOptions is the paginator options for ListTags
 type ListTagsPaginatorOptions struct {
@@ -208,6 +204,9 @@ func (p *ListTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTags(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +225,13 @@ func (p *ListTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// ListTagsAPIClient is a client that implements the ListTags operation.
+type ListTagsAPIClient interface {
+	ListTags(context.Context, *ListTagsInput, ...func(*Options)) (*ListTagsOutput, error)
+}
+
+var _ ListTagsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

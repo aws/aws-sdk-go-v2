@@ -133,6 +133,9 @@ func (c *Client) addOperationDescribeCodeBindingMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCodeBindingValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationDescribeCodeBindingMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeCodeBindingAPIClient is a client that implements the
-// DescribeCodeBinding operation.
-type DescribeCodeBindingAPIClient interface {
-	DescribeCodeBinding(context.Context, *DescribeCodeBindingInput, ...func(*Options)) (*DescribeCodeBindingOutput, error)
-}
-
-var _ DescribeCodeBindingAPIClient = (*Client)(nil)
 
 // CodeBindingExistsWaiterOptions are waiter options for CodeBindingExistsWaiter
 type CodeBindingExistsWaiterOptions struct {
@@ -280,7 +275,13 @@ func (w *CodeBindingExistsWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeCodeBinding(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -378,6 +379,14 @@ func codeBindingExistsStateRetryable(ctx context.Context, input *DescribeCodeBin
 
 	return true, nil
 }
+
+// DescribeCodeBindingAPIClient is a client that implements the
+// DescribeCodeBinding operation.
+type DescribeCodeBindingAPIClient interface {
+	DescribeCodeBinding(context.Context, *DescribeCodeBindingInput, ...func(*Options)) (*DescribeCodeBindingOutput, error)
+}
+
+var _ DescribeCodeBindingAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCodeBinding(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

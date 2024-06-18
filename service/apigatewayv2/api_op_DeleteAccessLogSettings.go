@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteAccessLogSettingsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteAccessLogSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

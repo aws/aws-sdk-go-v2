@@ -122,6 +122,9 @@ func (c *Client) addOperationListTrustStoreCertificatesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTrustStoreCertificatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListTrustStoreCertificatesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListTrustStoreCertificatesAPIClient is a client that implements the
-// ListTrustStoreCertificates operation.
-type ListTrustStoreCertificatesAPIClient interface {
-	ListTrustStoreCertificates(context.Context, *ListTrustStoreCertificatesInput, ...func(*Options)) (*ListTrustStoreCertificatesOutput, error)
-}
-
-var _ ListTrustStoreCertificatesAPIClient = (*Client)(nil)
 
 // ListTrustStoreCertificatesPaginatorOptions is the paginator options for
 // ListTrustStoreCertificates
@@ -220,6 +215,9 @@ func (p *ListTrustStoreCertificatesPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrustStoreCertificates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListTrustStoreCertificatesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListTrustStoreCertificatesAPIClient is a client that implements the
+// ListTrustStoreCertificates operation.
+type ListTrustStoreCertificatesAPIClient interface {
+	ListTrustStoreCertificates(context.Context, *ListTrustStoreCertificatesInput, ...func(*Options)) (*ListTrustStoreCertificatesOutput, error)
+}
+
+var _ ListTrustStoreCertificatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrustStoreCertificates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

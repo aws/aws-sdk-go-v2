@@ -136,6 +136,9 @@ func (c *Client) addOperationBatchGetRumMetricDefinitionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetRumMetricDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationBatchGetRumMetricDefinitionsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// BatchGetRumMetricDefinitionsAPIClient is a client that implements the
-// BatchGetRumMetricDefinitions operation.
-type BatchGetRumMetricDefinitionsAPIClient interface {
-	BatchGetRumMetricDefinitions(context.Context, *BatchGetRumMetricDefinitionsInput, ...func(*Options)) (*BatchGetRumMetricDefinitionsOutput, error)
-}
-
-var _ BatchGetRumMetricDefinitionsAPIClient = (*Client)(nil)
 
 // BatchGetRumMetricDefinitionsPaginatorOptions is the paginator options for
 // BatchGetRumMetricDefinitions
@@ -238,6 +233,9 @@ func (p *BatchGetRumMetricDefinitionsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.BatchGetRumMetricDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *BatchGetRumMetricDefinitionsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// BatchGetRumMetricDefinitionsAPIClient is a client that implements the
+// BatchGetRumMetricDefinitions operation.
+type BatchGetRumMetricDefinitionsAPIClient interface {
+	BatchGetRumMetricDefinitions(context.Context, *BatchGetRumMetricDefinitionsInput, ...func(*Options)) (*BatchGetRumMetricDefinitionsOutput, error)
+}
+
+var _ BatchGetRumMetricDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opBatchGetRumMetricDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

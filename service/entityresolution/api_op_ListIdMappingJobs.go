@@ -115,6 +115,9 @@ func (c *Client) addOperationListIdMappingJobsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIdMappingJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListIdMappingJobsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListIdMappingJobsAPIClient is a client that implements the ListIdMappingJobs
-// operation.
-type ListIdMappingJobsAPIClient interface {
-	ListIdMappingJobs(context.Context, *ListIdMappingJobsInput, ...func(*Options)) (*ListIdMappingJobsOutput, error)
-}
-
-var _ ListIdMappingJobsAPIClient = (*Client)(nil)
 
 // ListIdMappingJobsPaginatorOptions is the paginator options for ListIdMappingJobs
 type ListIdMappingJobsPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListIdMappingJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIdMappingJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListIdMappingJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListIdMappingJobsAPIClient is a client that implements the ListIdMappingJobs
+// operation.
+type ListIdMappingJobsAPIClient interface {
+	ListIdMappingJobs(context.Context, *ListIdMappingJobsInput, ...func(*Options)) (*ListIdMappingJobsOutput, error)
+}
+
+var _ ListIdMappingJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIdMappingJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

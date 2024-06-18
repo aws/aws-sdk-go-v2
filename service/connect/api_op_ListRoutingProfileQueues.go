@@ -132,6 +132,9 @@ func (c *Client) addOperationListRoutingProfileQueuesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRoutingProfileQueuesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListRoutingProfileQueuesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListRoutingProfileQueuesAPIClient is a client that implements the
-// ListRoutingProfileQueues operation.
-type ListRoutingProfileQueuesAPIClient interface {
-	ListRoutingProfileQueues(context.Context, *ListRoutingProfileQueuesInput, ...func(*Options)) (*ListRoutingProfileQueuesOutput, error)
-}
-
-var _ ListRoutingProfileQueuesAPIClient = (*Client)(nil)
 
 // ListRoutingProfileQueuesPaginatorOptions is the paginator options for
 // ListRoutingProfileQueues
@@ -230,6 +225,9 @@ func (p *ListRoutingProfileQueuesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRoutingProfileQueues(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListRoutingProfileQueuesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListRoutingProfileQueuesAPIClient is a client that implements the
+// ListRoutingProfileQueues operation.
+type ListRoutingProfileQueuesAPIClient interface {
+	ListRoutingProfileQueues(context.Context, *ListRoutingProfileQueuesInput, ...func(*Options)) (*ListRoutingProfileQueuesOutput, error)
+}
+
+var _ ListRoutingProfileQueuesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRoutingProfileQueues(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -156,6 +156,9 @@ func (c *Client) addOperationListRecommendedIntentsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRecommendedIntentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -179,14 +182,6 @@ func (c *Client) addOperationListRecommendedIntentsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListRecommendedIntentsAPIClient is a client that implements the
-// ListRecommendedIntents operation.
-type ListRecommendedIntentsAPIClient interface {
-	ListRecommendedIntents(context.Context, *ListRecommendedIntentsInput, ...func(*Options)) (*ListRecommendedIntentsOutput, error)
-}
-
-var _ ListRecommendedIntentsAPIClient = (*Client)(nil)
 
 // ListRecommendedIntentsPaginatorOptions is the paginator options for
 // ListRecommendedIntents
@@ -254,6 +249,9 @@ func (p *ListRecommendedIntentsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecommendedIntents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +270,14 @@ func (p *ListRecommendedIntentsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListRecommendedIntentsAPIClient is a client that implements the
+// ListRecommendedIntents operation.
+type ListRecommendedIntentsAPIClient interface {
+	ListRecommendedIntents(context.Context, *ListRecommendedIntentsInput, ...func(*Options)) (*ListRecommendedIntentsOutput, error)
+}
+
+var _ ListRecommendedIntentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecommendedIntents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

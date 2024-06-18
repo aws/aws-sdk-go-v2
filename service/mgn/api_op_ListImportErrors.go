@@ -117,6 +117,9 @@ func (c *Client) addOperationListImportErrorsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListImportErrorsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListImportErrorsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListImportErrorsAPIClient is a client that implements the ListImportErrors
-// operation.
-type ListImportErrorsAPIClient interface {
-	ListImportErrors(context.Context, *ListImportErrorsInput, ...func(*Options)) (*ListImportErrorsOutput, error)
-}
-
-var _ ListImportErrorsAPIClient = (*Client)(nil)
 
 // ListImportErrorsPaginatorOptions is the paginator options for ListImportErrors
 type ListImportErrorsPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListImportErrorsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImportErrors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListImportErrorsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListImportErrorsAPIClient is a client that implements the ListImportErrors
+// operation.
+type ListImportErrorsAPIClient interface {
+	ListImportErrors(context.Context, *ListImportErrorsInput, ...func(*Options)) (*ListImportErrorsOutput, error)
+}
+
+var _ ListImportErrorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImportErrors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

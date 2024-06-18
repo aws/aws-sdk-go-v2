@@ -123,6 +123,9 @@ func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBackups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeBackupsAPIClient is a client that implements the DescribeBackups
-// operation.
-type DescribeBackupsAPIClient interface {
-	DescribeBackups(context.Context, *DescribeBackupsInput, ...func(*Options)) (*DescribeBackupsOutput, error)
-}
-
-var _ DescribeBackupsAPIClient = (*Client)(nil)
 
 // DescribeBackupsPaginatorOptions is the paginator options for DescribeBackups
 type DescribeBackupsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *DescribeBackupsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeBackups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeBackupsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// DescribeBackupsAPIClient is a client that implements the DescribeBackups
+// operation.
+type DescribeBackupsAPIClient interface {
+	DescribeBackups(context.Context, *DescribeBackupsInput, ...func(*Options)) (*DescribeBackupsOutput, error)
+}
+
+var _ DescribeBackupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBackups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

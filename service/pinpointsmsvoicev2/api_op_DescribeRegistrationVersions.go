@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeRegistrationVersionsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRegistrationVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeRegistrationVersionsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeRegistrationVersionsAPIClient is a client that implements the
-// DescribeRegistrationVersions operation.
-type DescribeRegistrationVersionsAPIClient interface {
-	DescribeRegistrationVersions(context.Context, *DescribeRegistrationVersionsInput, ...func(*Options)) (*DescribeRegistrationVersionsOutput, error)
-}
-
-var _ DescribeRegistrationVersionsAPIClient = (*Client)(nil)
 
 // DescribeRegistrationVersionsPaginatorOptions is the paginator options for
 // DescribeRegistrationVersions
@@ -233,6 +228,9 @@ func (p *DescribeRegistrationVersionsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRegistrationVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *DescribeRegistrationVersionsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeRegistrationVersionsAPIClient is a client that implements the
+// DescribeRegistrationVersions operation.
+type DescribeRegistrationVersionsAPIClient interface {
+	DescribeRegistrationVersions(context.Context, *DescribeRegistrationVersionsInput, ...func(*Options)) (*DescribeRegistrationVersionsOutput, error)
+}
+
+var _ DescribeRegistrationVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRegistrationVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

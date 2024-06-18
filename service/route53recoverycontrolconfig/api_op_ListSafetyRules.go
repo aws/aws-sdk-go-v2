@@ -116,6 +116,9 @@ func (c *Client) addOperationListSafetyRulesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSafetyRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListSafetyRulesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListSafetyRulesAPIClient is a client that implements the ListSafetyRules
-// operation.
-type ListSafetyRulesAPIClient interface {
-	ListSafetyRules(context.Context, *ListSafetyRulesInput, ...func(*Options)) (*ListSafetyRulesOutput, error)
-}
-
-var _ ListSafetyRulesAPIClient = (*Client)(nil)
 
 // ListSafetyRulesPaginatorOptions is the paginator options for ListSafetyRules
 type ListSafetyRulesPaginatorOptions struct {
@@ -211,6 +206,9 @@ func (p *ListSafetyRulesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSafetyRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListSafetyRulesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListSafetyRulesAPIClient is a client that implements the ListSafetyRules
+// operation.
+type ListSafetyRulesAPIClient interface {
+	ListSafetyRules(context.Context, *ListSafetyRulesInput, ...func(*Options)) (*ListSafetyRulesOutput, error)
+}
+
+var _ ListSafetyRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSafetyRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

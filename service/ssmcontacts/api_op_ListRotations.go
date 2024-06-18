@@ -119,6 +119,9 @@ func (c *Client) addOperationListRotationsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRotations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,13 +142,6 @@ func (c *Client) addOperationListRotationsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListRotationsAPIClient is a client that implements the ListRotations operation.
-type ListRotationsAPIClient interface {
-	ListRotations(context.Context, *ListRotationsInput, ...func(*Options)) (*ListRotationsOutput, error)
-}
-
-var _ ListRotationsAPIClient = (*Client)(nil)
 
 // ListRotationsPaginatorOptions is the paginator options for ListRotations
 type ListRotationsPaginatorOptions struct {
@@ -211,6 +207,9 @@ func (p *ListRotationsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRotations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +228,13 @@ func (p *ListRotationsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListRotationsAPIClient is a client that implements the ListRotations operation.
+type ListRotationsAPIClient interface {
+	ListRotations(context.Context, *ListRotationsInput, ...func(*Options)) (*ListRotationsOutput, error)
+}
+
+var _ ListRotationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRotations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationListAvailabilityConfigurationsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAvailabilityConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListAvailabilityConfigurationsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListAvailabilityConfigurationsAPIClient is a client that implements the
-// ListAvailabilityConfigurations operation.
-type ListAvailabilityConfigurationsAPIClient interface {
-	ListAvailabilityConfigurations(context.Context, *ListAvailabilityConfigurationsInput, ...func(*Options)) (*ListAvailabilityConfigurationsOutput, error)
-}
-
-var _ ListAvailabilityConfigurationsAPIClient = (*Client)(nil)
 
 // ListAvailabilityConfigurationsPaginatorOptions is the paginator options for
 // ListAvailabilityConfigurations
@@ -217,6 +212,9 @@ func (p *ListAvailabilityConfigurationsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAvailabilityConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListAvailabilityConfigurationsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListAvailabilityConfigurationsAPIClient is a client that implements the
+// ListAvailabilityConfigurations operation.
+type ListAvailabilityConfigurationsAPIClient interface {
+	ListAvailabilityConfigurations(context.Context, *ListAvailabilityConfigurationsInput, ...func(*Options)) (*ListAvailabilityConfigurationsOutput, error)
+}
+
+var _ ListAvailabilityConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAvailabilityConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

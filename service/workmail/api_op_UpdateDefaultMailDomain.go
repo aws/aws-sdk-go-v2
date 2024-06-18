@@ -108,6 +108,9 @@ func (c *Client) addOperationUpdateDefaultMailDomainMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDefaultMailDomainValidationMiddleware(stack); err != nil {
 		return err
 	}

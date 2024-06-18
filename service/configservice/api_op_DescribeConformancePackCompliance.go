@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeConformancePackComplianceMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeConformancePackComplianceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationDescribeConformancePackComplianceMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeConformancePackComplianceAPIClient is a client that implements the
-// DescribeConformancePackCompliance operation.
-type DescribeConformancePackComplianceAPIClient interface {
-	DescribeConformancePackCompliance(context.Context, *DescribeConformancePackComplianceInput, ...func(*Options)) (*DescribeConformancePackComplianceOutput, error)
-}
-
-var _ DescribeConformancePackComplianceAPIClient = (*Client)(nil)
 
 // DescribeConformancePackCompliancePaginatorOptions is the paginator options for
 // DescribeConformancePackCompliance
@@ -225,6 +220,9 @@ func (p *DescribeConformancePackCompliancePaginator) NextPage(ctx context.Contex
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConformancePackCompliance(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeConformancePackCompliancePaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeConformancePackComplianceAPIClient is a client that implements the
+// DescribeConformancePackCompliance operation.
+type DescribeConformancePackComplianceAPIClient interface {
+	DescribeConformancePackCompliance(context.Context, *DescribeConformancePackComplianceInput, ...func(*Options)) (*DescribeConformancePackComplianceOutput, error)
+}
+
+var _ DescribeConformancePackComplianceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConformancePackCompliance(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

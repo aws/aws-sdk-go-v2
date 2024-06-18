@@ -150,6 +150,9 @@ func (c *Client) addOperationListImageScanFindingAggregationsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImageScanFindingAggregations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationListImageScanFindingAggregationsMiddlewares(stack *
 	}
 	return nil
 }
-
-// ListImageScanFindingAggregationsAPIClient is a client that implements the
-// ListImageScanFindingAggregations operation.
-type ListImageScanFindingAggregationsAPIClient interface {
-	ListImageScanFindingAggregations(context.Context, *ListImageScanFindingAggregationsInput, ...func(*Options)) (*ListImageScanFindingAggregationsOutput, error)
-}
-
-var _ ListImageScanFindingAggregationsAPIClient = (*Client)(nil)
 
 // ListImageScanFindingAggregationsPaginatorOptions is the paginator options for
 // ListImageScanFindingAggregations
@@ -233,6 +228,9 @@ func (p *ListImageScanFindingAggregationsPaginator) NextPage(ctx context.Context
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImageScanFindingAggregations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListImageScanFindingAggregationsPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// ListImageScanFindingAggregationsAPIClient is a client that implements the
+// ListImageScanFindingAggregations operation.
+type ListImageScanFindingAggregationsAPIClient interface {
+	ListImageScanFindingAggregations(context.Context, *ListImageScanFindingAggregationsInput, ...func(*Options)) (*ListImageScanFindingAggregationsOutput, error)
+}
+
+var _ ListImageScanFindingAggregationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImageScanFindingAggregations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

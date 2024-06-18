@@ -131,6 +131,9 @@ func (c *Client) addOperationListFirewallRuleGroupsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFirewallRuleGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListFirewallRuleGroupsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListFirewallRuleGroupsAPIClient is a client that implements the
-// ListFirewallRuleGroups operation.
-type ListFirewallRuleGroupsAPIClient interface {
-	ListFirewallRuleGroups(context.Context, *ListFirewallRuleGroupsInput, ...func(*Options)) (*ListFirewallRuleGroupsOutput, error)
-}
-
-var _ ListFirewallRuleGroupsAPIClient = (*Client)(nil)
 
 // ListFirewallRuleGroupsPaginatorOptions is the paginator options for
 // ListFirewallRuleGroups
@@ -230,6 +225,9 @@ func (p *ListFirewallRuleGroupsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFirewallRuleGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListFirewallRuleGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListFirewallRuleGroupsAPIClient is a client that implements the
+// ListFirewallRuleGroups operation.
+type ListFirewallRuleGroupsAPIClient interface {
+	ListFirewallRuleGroups(context.Context, *ListFirewallRuleGroupsInput, ...func(*Options)) (*ListFirewallRuleGroupsOutput, error)
+}
+
+var _ ListFirewallRuleGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFirewallRuleGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

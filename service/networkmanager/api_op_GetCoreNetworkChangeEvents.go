@@ -120,6 +120,9 @@ func (c *Client) addOperationGetCoreNetworkChangeEventsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCoreNetworkChangeEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationGetCoreNetworkChangeEventsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// GetCoreNetworkChangeEventsAPIClient is a client that implements the
-// GetCoreNetworkChangeEvents operation.
-type GetCoreNetworkChangeEventsAPIClient interface {
-	GetCoreNetworkChangeEvents(context.Context, *GetCoreNetworkChangeEventsInput, ...func(*Options)) (*GetCoreNetworkChangeEventsOutput, error)
-}
-
-var _ GetCoreNetworkChangeEventsAPIClient = (*Client)(nil)
 
 // GetCoreNetworkChangeEventsPaginatorOptions is the paginator options for
 // GetCoreNetworkChangeEvents
@@ -218,6 +213,9 @@ func (p *GetCoreNetworkChangeEventsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCoreNetworkChangeEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetCoreNetworkChangeEventsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// GetCoreNetworkChangeEventsAPIClient is a client that implements the
+// GetCoreNetworkChangeEvents operation.
+type GetCoreNetworkChangeEventsAPIClient interface {
+	GetCoreNetworkChangeEvents(context.Context, *GetCoreNetworkChangeEventsInput, ...func(*Options)) (*GetCoreNetworkChangeEventsOutput, error)
+}
+
+var _ GetCoreNetworkChangeEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCoreNetworkChangeEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

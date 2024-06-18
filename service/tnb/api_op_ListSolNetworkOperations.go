@@ -116,6 +116,9 @@ func (c *Client) addOperationListSolNetworkOperationsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSolNetworkOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListSolNetworkOperationsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListSolNetworkOperationsAPIClient is a client that implements the
-// ListSolNetworkOperations operation.
-type ListSolNetworkOperationsAPIClient interface {
-	ListSolNetworkOperations(context.Context, *ListSolNetworkOperationsInput, ...func(*Options)) (*ListSolNetworkOperationsOutput, error)
-}
-
-var _ ListSolNetworkOperationsAPIClient = (*Client)(nil)
 
 // ListSolNetworkOperationsPaginatorOptions is the paginator options for
 // ListSolNetworkOperations
@@ -210,6 +205,9 @@ func (p *ListSolNetworkOperationsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSolNetworkOperations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListSolNetworkOperationsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListSolNetworkOperationsAPIClient is a client that implements the
+// ListSolNetworkOperations operation.
+type ListSolNetworkOperationsAPIClient interface {
+	ListSolNetworkOperations(context.Context, *ListSolNetworkOperationsInput, ...func(*Options)) (*ListSolNetworkOperationsOutput, error)
+}
+
+var _ ListSolNetworkOperationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSolNetworkOperations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

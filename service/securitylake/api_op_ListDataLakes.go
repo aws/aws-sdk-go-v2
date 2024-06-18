@@ -106,6 +106,9 @@ func (c *Client) addOperationListDataLakesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataLakes(options.Region), middleware.Before); err != nil {
 		return err
 	}

@@ -114,6 +114,9 @@ func (c *Client) addOperationListIngressPointsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIngressPoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListIngressPointsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListIngressPointsAPIClient is a client that implements the ListIngressPoints
-// operation.
-type ListIngressPointsAPIClient interface {
-	ListIngressPoints(context.Context, *ListIngressPointsInput, ...func(*Options)) (*ListIngressPointsOutput, error)
-}
-
-var _ ListIngressPointsAPIClient = (*Client)(nil)
 
 // ListIngressPointsPaginatorOptions is the paginator options for ListIngressPoints
 type ListIngressPointsPaginatorOptions struct {
@@ -207,6 +202,9 @@ func (p *ListIngressPointsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIngressPoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListIngressPointsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListIngressPointsAPIClient is a client that implements the ListIngressPoints
+// operation.
+type ListIngressPointsAPIClient interface {
+	ListIngressPoints(context.Context, *ListIngressPointsInput, ...func(*Options)) (*ListIngressPointsOutput, error)
+}
+
+var _ ListIngressPointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIngressPoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

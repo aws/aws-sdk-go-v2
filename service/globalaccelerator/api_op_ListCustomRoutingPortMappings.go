@@ -137,6 +137,9 @@ func (c *Client) addOperationListCustomRoutingPortMappingsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomRoutingPortMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListCustomRoutingPortMappingsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListCustomRoutingPortMappingsAPIClient is a client that implements the
-// ListCustomRoutingPortMappings operation.
-type ListCustomRoutingPortMappingsAPIClient interface {
-	ListCustomRoutingPortMappings(context.Context, *ListCustomRoutingPortMappingsInput, ...func(*Options)) (*ListCustomRoutingPortMappingsOutput, error)
-}
-
-var _ ListCustomRoutingPortMappingsAPIClient = (*Client)(nil)
 
 // ListCustomRoutingPortMappingsPaginatorOptions is the paginator options for
 // ListCustomRoutingPortMappings
@@ -236,6 +231,9 @@ func (p *ListCustomRoutingPortMappingsPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomRoutingPortMappings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListCustomRoutingPortMappingsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListCustomRoutingPortMappingsAPIClient is a client that implements the
+// ListCustomRoutingPortMappings operation.
+type ListCustomRoutingPortMappingsAPIClient interface {
+	ListCustomRoutingPortMappings(context.Context, *ListCustomRoutingPortMappingsInput, ...func(*Options)) (*ListCustomRoutingPortMappingsOutput, error)
+}
+
+var _ ListCustomRoutingPortMappingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomRoutingPortMappings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

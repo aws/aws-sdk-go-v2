@@ -127,6 +127,9 @@ func (c *Client) addOperationListSubChannelsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSubChannelsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListSubChannelsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListSubChannelsAPIClient is a client that implements the ListSubChannels
-// operation.
-type ListSubChannelsAPIClient interface {
-	ListSubChannels(context.Context, *ListSubChannelsInput, ...func(*Options)) (*ListSubChannelsOutput, error)
-}
-
-var _ ListSubChannelsAPIClient = (*Client)(nil)
 
 // ListSubChannelsPaginatorOptions is the paginator options for ListSubChannels
 type ListSubChannelsPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *ListSubChannelsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSubChannels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListSubChannelsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListSubChannelsAPIClient is a client that implements the ListSubChannels
+// operation.
+type ListSubChannelsAPIClient interface {
+	ListSubChannels(context.Context, *ListSubChannelsInput, ...func(*Options)) (*ListSubChannelsOutput, error)
+}
+
+var _ ListSubChannelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSubChannels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteKeyValueStoreMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteKeyValueStoreValidationMiddleware(stack); err != nil {
 		return err
 	}

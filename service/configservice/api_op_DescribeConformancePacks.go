@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeConformancePacksMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConformancePacks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationDescribeConformancePacksMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeConformancePacksAPIClient is a client that implements the
-// DescribeConformancePacks operation.
-type DescribeConformancePacksAPIClient interface {
-	DescribeConformancePacks(context.Context, *DescribeConformancePacksInput, ...func(*Options)) (*DescribeConformancePacksOutput, error)
-}
-
-var _ DescribeConformancePacksAPIClient = (*Client)(nil)
 
 // DescribeConformancePacksPaginatorOptions is the paginator options for
 // DescribeConformancePacks
@@ -207,6 +202,9 @@ func (p *DescribeConformancePacksPaginator) NextPage(ctx context.Context, optFns
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConformancePacks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *DescribeConformancePacksPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeConformancePacksAPIClient is a client that implements the
+// DescribeConformancePacks operation.
+type DescribeConformancePacksAPIClient interface {
+	DescribeConformancePacks(context.Context, *DescribeConformancePacksInput, ...func(*Options)) (*DescribeConformancePacksOutput, error)
+}
+
+var _ DescribeConformancePacksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConformancePacks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

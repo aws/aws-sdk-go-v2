@@ -130,6 +130,9 @@ func (c *Client) addOperationListAppAuthorizationsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAppAuthorizationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListAppAuthorizationsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAppAuthorizationsAPIClient is a client that implements the
-// ListAppAuthorizations operation.
-type ListAppAuthorizationsAPIClient interface {
-	ListAppAuthorizations(context.Context, *ListAppAuthorizationsInput, ...func(*Options)) (*ListAppAuthorizationsOutput, error)
-}
-
-var _ ListAppAuthorizationsAPIClient = (*Client)(nil)
 
 // ListAppAuthorizationsPaginatorOptions is the paginator options for
 // ListAppAuthorizations
@@ -230,6 +225,9 @@ func (p *ListAppAuthorizationsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppAuthorizations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListAppAuthorizationsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAppAuthorizationsAPIClient is a client that implements the
+// ListAppAuthorizations operation.
+type ListAppAuthorizationsAPIClient interface {
+	ListAppAuthorizations(context.Context, *ListAppAuthorizationsInput, ...func(*Options)) (*ListAppAuthorizationsOutput, error)
+}
+
+var _ ListAppAuthorizationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppAuthorizations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

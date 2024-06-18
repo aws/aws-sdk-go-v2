@@ -132,6 +132,9 @@ func (c *Client) addOperationListClusterSnapshotsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClusterSnapshots(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListClusterSnapshotsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListClusterSnapshotsAPIClient is a client that implements the
-// ListClusterSnapshots operation.
-type ListClusterSnapshotsAPIClient interface {
-	ListClusterSnapshots(context.Context, *ListClusterSnapshotsInput, ...func(*Options)) (*ListClusterSnapshotsOutput, error)
-}
-
-var _ ListClusterSnapshotsAPIClient = (*Client)(nil)
 
 // ListClusterSnapshotsPaginatorOptions is the paginator options for
 // ListClusterSnapshots
@@ -226,6 +221,9 @@ func (p *ListClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClusterSnapshots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListClusterSnapshotsAPIClient is a client that implements the
+// ListClusterSnapshots operation.
+type ListClusterSnapshotsAPIClient interface {
+	ListClusterSnapshots(context.Context, *ListClusterSnapshotsInput, ...func(*Options)) (*ListClusterSnapshotsOutput, error)
+}
+
+var _ ListClusterSnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClusterSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

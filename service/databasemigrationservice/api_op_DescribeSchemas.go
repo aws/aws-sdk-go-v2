@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeSchemasMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSchemasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeSchemasMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeSchemasAPIClient is a client that implements the DescribeSchemas
-// operation.
-type DescribeSchemasAPIClient interface {
-	DescribeSchemas(context.Context, *DescribeSchemasInput, ...func(*Options)) (*DescribeSchemasOutput, error)
-}
-
-var _ DescribeSchemasAPIClient = (*Client)(nil)
 
 // DescribeSchemasPaginatorOptions is the paginator options for DescribeSchemas
 type DescribeSchemasPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *DescribeSchemasPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSchemas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeSchemasPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// DescribeSchemasAPIClient is a client that implements the DescribeSchemas
+// operation.
+type DescribeSchemasAPIClient interface {
+	DescribeSchemas(context.Context, *DescribeSchemasInput, ...func(*Options)) (*DescribeSchemasOutput, error)
+}
+
+var _ DescribeSchemasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSchemas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

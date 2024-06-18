@@ -128,6 +128,9 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListResourcesAssociatedToCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 	}
 	return nil
 }
-
-// ListResourcesAssociatedToCustomLineItemAPIClient is a client that implements
-// the ListResourcesAssociatedToCustomLineItem operation.
-type ListResourcesAssociatedToCustomLineItemAPIClient interface {
-	ListResourcesAssociatedToCustomLineItem(context.Context, *ListResourcesAssociatedToCustomLineItemInput, ...func(*Options)) (*ListResourcesAssociatedToCustomLineItemOutput, error)
-}
-
-var _ ListResourcesAssociatedToCustomLineItemAPIClient = (*Client)(nil)
 
 // ListResourcesAssociatedToCustomLineItemPaginatorOptions is the paginator
 // options for ListResourcesAssociatedToCustomLineItem
@@ -226,6 +221,9 @@ func (p *ListResourcesAssociatedToCustomLineItemPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResourcesAssociatedToCustomLineItem(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListResourcesAssociatedToCustomLineItemPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListResourcesAssociatedToCustomLineItemAPIClient is a client that implements
+// the ListResourcesAssociatedToCustomLineItem operation.
+type ListResourcesAssociatedToCustomLineItemAPIClient interface {
+	ListResourcesAssociatedToCustomLineItem(context.Context, *ListResourcesAssociatedToCustomLineItemInput, ...func(*Options)) (*ListResourcesAssociatedToCustomLineItemOutput, error)
+}
+
+var _ ListResourcesAssociatedToCustomLineItemAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResourcesAssociatedToCustomLineItem(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

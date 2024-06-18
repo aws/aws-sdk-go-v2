@@ -120,6 +120,9 @@ func (c *Client) addOperationGetDeploymentsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationGetDeploymentsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetDeploymentsAPIClient is a client that implements the GetDeployments
-// operation.
-type GetDeploymentsAPIClient interface {
-	GetDeployments(context.Context, *GetDeploymentsInput, ...func(*Options)) (*GetDeploymentsOutput, error)
-}
-
-var _ GetDeploymentsAPIClient = (*Client)(nil)
 
 // GetDeploymentsPaginatorOptions is the paginator options for GetDeployments
 type GetDeploymentsPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *GetDeploymentsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDeployments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *GetDeploymentsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// GetDeploymentsAPIClient is a client that implements the GetDeployments
+// operation.
+type GetDeploymentsAPIClient interface {
+	GetDeployments(context.Context, *GetDeploymentsInput, ...func(*Options)) (*GetDeploymentsOutput, error)
+}
+
+var _ GetDeploymentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -184,6 +184,9 @@ func (c *Client) addOperationGetSavingsPlansUtilizationDetailsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSavingsPlansUtilizationDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -207,14 +210,6 @@ func (c *Client) addOperationGetSavingsPlansUtilizationDetailsMiddlewares(stack 
 	}
 	return nil
 }
-
-// GetSavingsPlansUtilizationDetailsAPIClient is a client that implements the
-// GetSavingsPlansUtilizationDetails operation.
-type GetSavingsPlansUtilizationDetailsAPIClient interface {
-	GetSavingsPlansUtilizationDetails(context.Context, *GetSavingsPlansUtilizationDetailsInput, ...func(*Options)) (*GetSavingsPlansUtilizationDetailsOutput, error)
-}
-
-var _ GetSavingsPlansUtilizationDetailsAPIClient = (*Client)(nil)
 
 // GetSavingsPlansUtilizationDetailsPaginatorOptions is the paginator options for
 // GetSavingsPlansUtilizationDetails
@@ -283,6 +278,9 @@ func (p *GetSavingsPlansUtilizationDetailsPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSavingsPlansUtilizationDetails(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -301,6 +299,14 @@ func (p *GetSavingsPlansUtilizationDetailsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// GetSavingsPlansUtilizationDetailsAPIClient is a client that implements the
+// GetSavingsPlansUtilizationDetails operation.
+type GetSavingsPlansUtilizationDetailsAPIClient interface {
+	GetSavingsPlansUtilizationDetails(context.Context, *GetSavingsPlansUtilizationDetailsInput, ...func(*Options)) (*GetSavingsPlansUtilizationDetailsOutput, error)
+}
+
+var _ GetSavingsPlansUtilizationDetailsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSavingsPlansUtilizationDetails(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

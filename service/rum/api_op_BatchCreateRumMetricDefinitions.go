@@ -182,6 +182,9 @@ func (c *Client) addOperationBatchCreateRumMetricDefinitionsMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchCreateRumMetricDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}

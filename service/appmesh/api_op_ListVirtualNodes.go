@@ -136,6 +136,9 @@ func (c *Client) addOperationListVirtualNodesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVirtualNodesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListVirtualNodesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListVirtualNodesAPIClient is a client that implements the ListVirtualNodes
-// operation.
-type ListVirtualNodesAPIClient interface {
-	ListVirtualNodes(context.Context, *ListVirtualNodesInput, ...func(*Options)) (*ListVirtualNodesOutput, error)
-}
-
-var _ ListVirtualNodesAPIClient = (*Client)(nil)
 
 // ListVirtualNodesPaginatorOptions is the paginator options for ListVirtualNodes
 type ListVirtualNodesPaginatorOptions struct {
@@ -237,6 +232,9 @@ func (p *ListVirtualNodesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVirtualNodes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListVirtualNodesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListVirtualNodesAPIClient is a client that implements the ListVirtualNodes
+// operation.
+type ListVirtualNodesAPIClient interface {
+	ListVirtualNodes(context.Context, *ListVirtualNodesInput, ...func(*Options)) (*ListVirtualNodesOutput, error)
+}
+
+var _ ListVirtualNodesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVirtualNodes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -111,6 +111,9 @@ func (c *Client) addOperationDescribeWatchlistMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeWatchlistValidationMiddleware(stack); err != nil {
 		return err
 	}

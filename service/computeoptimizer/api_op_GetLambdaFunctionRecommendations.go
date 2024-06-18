@@ -149,6 +149,9 @@ func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLambdaFunctionRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *
 	}
 	return nil
 }
-
-// GetLambdaFunctionRecommendationsAPIClient is a client that implements the
-// GetLambdaFunctionRecommendations operation.
-type GetLambdaFunctionRecommendationsAPIClient interface {
-	GetLambdaFunctionRecommendations(context.Context, *GetLambdaFunctionRecommendationsInput, ...func(*Options)) (*GetLambdaFunctionRecommendationsOutput, error)
-}
-
-var _ GetLambdaFunctionRecommendationsAPIClient = (*Client)(nil)
 
 // GetLambdaFunctionRecommendationsPaginatorOptions is the paginator options for
 // GetLambdaFunctionRecommendations
@@ -247,6 +242,9 @@ func (p *GetLambdaFunctionRecommendationsPaginator) NextPage(ctx context.Context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetLambdaFunctionRecommendations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *GetLambdaFunctionRecommendationsPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// GetLambdaFunctionRecommendationsAPIClient is a client that implements the
+// GetLambdaFunctionRecommendations operation.
+type GetLambdaFunctionRecommendationsAPIClient interface {
+	GetLambdaFunctionRecommendations(context.Context, *GetLambdaFunctionRecommendationsInput, ...func(*Options)) (*GetLambdaFunctionRecommendationsOutput, error)
+}
+
+var _ GetLambdaFunctionRecommendationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLambdaFunctionRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

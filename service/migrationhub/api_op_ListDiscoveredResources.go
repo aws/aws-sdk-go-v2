@@ -123,6 +123,9 @@ func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDiscoveredResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListDiscoveredResourcesAPIClient is a client that implements the
-// ListDiscoveredResources operation.
-type ListDiscoveredResourcesAPIClient interface {
-	ListDiscoveredResources(context.Context, *ListDiscoveredResourcesInput, ...func(*Options)) (*ListDiscoveredResourcesOutput, error)
-}
-
-var _ ListDiscoveredResourcesAPIClient = (*Client)(nil)
 
 // ListDiscoveredResourcesPaginatorOptions is the paginator options for
 // ListDiscoveredResources
@@ -220,6 +215,9 @@ func (p *ListDiscoveredResourcesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDiscoveredResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListDiscoveredResourcesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListDiscoveredResourcesAPIClient is a client that implements the
+// ListDiscoveredResources operation.
+type ListDiscoveredResourcesAPIClient interface {
+	ListDiscoveredResources(context.Context, *ListDiscoveredResourcesInput, ...func(*Options)) (*ListDiscoveredResourcesOutput, error)
+}
+
+var _ ListDiscoveredResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDiscoveredResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

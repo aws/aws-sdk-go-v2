@@ -132,6 +132,9 @@ func (c *Client) addOperationDescribePoolsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribePoolsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,13 +158,6 @@ func (c *Client) addOperationDescribePoolsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribePoolsAPIClient is a client that implements the DescribePools operation.
-type DescribePoolsAPIClient interface {
-	DescribePools(context.Context, *DescribePoolsInput, ...func(*Options)) (*DescribePoolsOutput, error)
-}
-
-var _ DescribePoolsAPIClient = (*Client)(nil)
 
 // DescribePoolsPaginatorOptions is the paginator options for DescribePools
 type DescribePoolsPaginatorOptions struct {
@@ -226,6 +222,9 @@ func (p *DescribePoolsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribePools(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +243,13 @@ func (p *DescribePoolsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// DescribePoolsAPIClient is a client that implements the DescribePools operation.
+type DescribePoolsAPIClient interface {
+	DescribePools(context.Context, *DescribePoolsInput, ...func(*Options)) (*DescribePoolsOutput, error)
+}
+
+var _ DescribePoolsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribePools(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

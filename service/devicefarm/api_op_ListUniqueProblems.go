@@ -138,6 +138,9 @@ func (c *Client) addOperationListUniqueProblemsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUniqueProblemsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListUniqueProblemsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListUniqueProblemsAPIClient is a client that implements the ListUniqueProblems
-// operation.
-type ListUniqueProblemsAPIClient interface {
-	ListUniqueProblems(context.Context, *ListUniqueProblemsInput, ...func(*Options)) (*ListUniqueProblemsOutput, error)
-}
-
-var _ ListUniqueProblemsAPIClient = (*Client)(nil)
 
 // ListUniqueProblemsPaginatorOptions is the paginator options for
 // ListUniqueProblems
@@ -222,6 +217,9 @@ func (p *ListUniqueProblemsPaginator) NextPage(ctx context.Context, optFns ...fu
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUniqueProblems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListUniqueProblemsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListUniqueProblemsAPIClient is a client that implements the ListUniqueProblems
+// operation.
+type ListUniqueProblemsAPIClient interface {
+	ListUniqueProblems(context.Context, *ListUniqueProblemsInput, ...func(*Options)) (*ListUniqueProblemsOutput, error)
+}
+
+var _ ListUniqueProblemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUniqueProblems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

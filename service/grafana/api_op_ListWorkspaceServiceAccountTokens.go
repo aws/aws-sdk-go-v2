@@ -139,6 +139,9 @@ func (c *Client) addOperationListWorkspaceServiceAccountTokensMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWorkspaceServiceAccountTokensValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListWorkspaceServiceAccountTokensMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListWorkspaceServiceAccountTokensAPIClient is a client that implements the
-// ListWorkspaceServiceAccountTokens operation.
-type ListWorkspaceServiceAccountTokensAPIClient interface {
-	ListWorkspaceServiceAccountTokens(context.Context, *ListWorkspaceServiceAccountTokensInput, ...func(*Options)) (*ListWorkspaceServiceAccountTokensOutput, error)
-}
-
-var _ ListWorkspaceServiceAccountTokensAPIClient = (*Client)(nil)
 
 // ListWorkspaceServiceAccountTokensPaginatorOptions is the paginator options for
 // ListWorkspaceServiceAccountTokens
@@ -237,6 +232,9 @@ func (p *ListWorkspaceServiceAccountTokensPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkspaceServiceAccountTokens(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListWorkspaceServiceAccountTokensPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListWorkspaceServiceAccountTokensAPIClient is a client that implements the
+// ListWorkspaceServiceAccountTokens operation.
+type ListWorkspaceServiceAccountTokensAPIClient interface {
+	ListWorkspaceServiceAccountTokens(context.Context, *ListWorkspaceServiceAccountTokensInput, ...func(*Options)) (*ListWorkspaceServiceAccountTokensOutput, error)
+}
+
+var _ ListWorkspaceServiceAccountTokensAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkspaceServiceAccountTokens(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeOrganizationConformancePacksMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConformancePacks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationDescribeOrganizationConformancePacksMiddlewares(sta
 	}
 	return nil
 }
-
-// DescribeOrganizationConformancePacksAPIClient is a client that implements the
-// DescribeOrganizationConformancePacks operation.
-type DescribeOrganizationConformancePacksAPIClient interface {
-	DescribeOrganizationConformancePacks(context.Context, *DescribeOrganizationConformancePacksInput, ...func(*Options)) (*DescribeOrganizationConformancePacksOutput, error)
-}
-
-var _ DescribeOrganizationConformancePacksAPIClient = (*Client)(nil)
 
 // DescribeOrganizationConformancePacksPaginatorOptions is the paginator options
 // for DescribeOrganizationConformancePacks
@@ -228,6 +223,9 @@ func (p *DescribeOrganizationConformancePacksPaginator) NextPage(ctx context.Con
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOrganizationConformancePacks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *DescribeOrganizationConformancePacksPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// DescribeOrganizationConformancePacksAPIClient is a client that implements the
+// DescribeOrganizationConformancePacks operation.
+type DescribeOrganizationConformancePacksAPIClient interface {
+	DescribeOrganizationConformancePacks(context.Context, *DescribeOrganizationConformancePacksInput, ...func(*Options)) (*DescribeOrganizationConformancePacksOutput, error)
+}
+
+var _ DescribeOrganizationConformancePacksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOrganizationConformancePacks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

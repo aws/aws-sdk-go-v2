@@ -223,6 +223,9 @@ func (c *Client) addOperationDescribeDBSnapshotsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -245,103 +248,6 @@ func (c *Client) addOperationDescribeDBSnapshotsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
-}
-
-// DescribeDBSnapshotsAPIClient is a client that implements the
-// DescribeDBSnapshots operation.
-type DescribeDBSnapshotsAPIClient interface {
-	DescribeDBSnapshots(context.Context, *DescribeDBSnapshotsInput, ...func(*Options)) (*DescribeDBSnapshotsOutput, error)
-}
-
-var _ DescribeDBSnapshotsAPIClient = (*Client)(nil)
-
-// DescribeDBSnapshotsPaginatorOptions is the paginator options for
-// DescribeDBSnapshots
-type DescribeDBSnapshotsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeDBSnapshotsPaginator is a paginator for DescribeDBSnapshots
-type DescribeDBSnapshotsPaginator struct {
-	options   DescribeDBSnapshotsPaginatorOptions
-	client    DescribeDBSnapshotsAPIClient
-	params    *DescribeDBSnapshotsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeDBSnapshotsPaginator returns a new DescribeDBSnapshotsPaginator
-func NewDescribeDBSnapshotsPaginator(client DescribeDBSnapshotsAPIClient, params *DescribeDBSnapshotsInput, optFns ...func(*DescribeDBSnapshotsPaginatorOptions)) *DescribeDBSnapshotsPaginator {
-	if params == nil {
-		params = &DescribeDBSnapshotsInput{}
-	}
-
-	options := DescribeDBSnapshotsPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeDBSnapshotsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeDBSnapshotsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeDBSnapshots page.
-func (p *DescribeDBSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBSnapshotsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeDBSnapshots(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // DBSnapshotAvailableWaiterOptions are waiter options for
@@ -461,7 +367,13 @@ func (w *DBSnapshotAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeDBSnapshots(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -769,7 +681,13 @@ func (w *DBSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeDBSnapshots(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -938,6 +856,106 @@ func dBSnapshotDeletedStateRetryable(ctx context.Context, input *DescribeDBSnaps
 
 	return true, nil
 }
+
+// DescribeDBSnapshotsPaginatorOptions is the paginator options for
+// DescribeDBSnapshots
+type DescribeDBSnapshotsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBSnapshotsPaginator is a paginator for DescribeDBSnapshots
+type DescribeDBSnapshotsPaginator struct {
+	options   DescribeDBSnapshotsPaginatorOptions
+	client    DescribeDBSnapshotsAPIClient
+	params    *DescribeDBSnapshotsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBSnapshotsPaginator returns a new DescribeDBSnapshotsPaginator
+func NewDescribeDBSnapshotsPaginator(client DescribeDBSnapshotsAPIClient, params *DescribeDBSnapshotsInput, optFns ...func(*DescribeDBSnapshotsPaginatorOptions)) *DescribeDBSnapshotsPaginator {
+	if params == nil {
+		params = &DescribeDBSnapshotsInput{}
+	}
+
+	options := DescribeDBSnapshotsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDBSnapshotsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBSnapshotsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDBSnapshots page.
+func (p *DescribeDBSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBSnapshotsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeDBSnapshots(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeDBSnapshotsAPIClient is a client that implements the
+// DescribeDBSnapshots operation.
+type DescribeDBSnapshotsAPIClient interface {
+	DescribeDBSnapshots(context.Context, *DescribeDBSnapshotsInput, ...func(*Options)) (*DescribeDBSnapshotsOutput, error)
+}
+
+var _ DescribeDBSnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

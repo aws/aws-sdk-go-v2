@@ -115,6 +115,9 @@ func (c *Client) addOperationUpdateQuickConnectConfigMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateQuickConnectConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

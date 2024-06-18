@@ -133,6 +133,9 @@ func (c *Client) addOperationListCreatedArtifactsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCreatedArtifactsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListCreatedArtifactsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListCreatedArtifactsAPIClient is a client that implements the
-// ListCreatedArtifacts operation.
-type ListCreatedArtifactsAPIClient interface {
-	ListCreatedArtifacts(context.Context, *ListCreatedArtifactsInput, ...func(*Options)) (*ListCreatedArtifactsOutput, error)
-}
-
-var _ ListCreatedArtifactsAPIClient = (*Client)(nil)
 
 // ListCreatedArtifactsPaginatorOptions is the paginator options for
 // ListCreatedArtifacts
@@ -229,6 +224,9 @@ func (p *ListCreatedArtifactsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCreatedArtifacts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListCreatedArtifactsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListCreatedArtifactsAPIClient is a client that implements the
+// ListCreatedArtifacts operation.
+type ListCreatedArtifactsAPIClient interface {
+	ListCreatedArtifacts(context.Context, *ListCreatedArtifactsInput, ...func(*Options)) (*ListCreatedArtifactsOutput, error)
+}
+
+var _ ListCreatedArtifactsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCreatedArtifacts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

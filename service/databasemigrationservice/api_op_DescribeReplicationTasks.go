@@ -137,6 +137,9 @@ func (c *Client) addOperationDescribeReplicationTasksMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationTasksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,104 +162,6 @@ func (c *Client) addOperationDescribeReplicationTasksMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
-}
-
-// DescribeReplicationTasksAPIClient is a client that implements the
-// DescribeReplicationTasks operation.
-type DescribeReplicationTasksAPIClient interface {
-	DescribeReplicationTasks(context.Context, *DescribeReplicationTasksInput, ...func(*Options)) (*DescribeReplicationTasksOutput, error)
-}
-
-var _ DescribeReplicationTasksAPIClient = (*Client)(nil)
-
-// DescribeReplicationTasksPaginatorOptions is the paginator options for
-// DescribeReplicationTasks
-type DescribeReplicationTasksPaginatorOptions struct {
-	//  The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeReplicationTasksPaginator is a paginator for DescribeReplicationTasks
-type DescribeReplicationTasksPaginator struct {
-	options   DescribeReplicationTasksPaginatorOptions
-	client    DescribeReplicationTasksAPIClient
-	params    *DescribeReplicationTasksInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeReplicationTasksPaginator returns a new
-// DescribeReplicationTasksPaginator
-func NewDescribeReplicationTasksPaginator(client DescribeReplicationTasksAPIClient, params *DescribeReplicationTasksInput, optFns ...func(*DescribeReplicationTasksPaginatorOptions)) *DescribeReplicationTasksPaginator {
-	if params == nil {
-		params = &DescribeReplicationTasksInput{}
-	}
-
-	options := DescribeReplicationTasksPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeReplicationTasksPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeReplicationTasksPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeReplicationTasks page.
-func (p *DescribeReplicationTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationTasksOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeReplicationTasks(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // ReplicationTaskDeletedWaiterOptions are waiter options for
@@ -376,7 +281,13 @@ func (w *ReplicationTaskDeletedWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -661,7 +572,13 @@ func (w *ReplicationTaskReadyWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1043,7 +960,13 @@ func (w *ReplicationTaskRunningWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1425,7 +1348,13 @@ func (w *ReplicationTaskStoppedWaiter) WaitForOutput(ctx context.Context, params
 		}
 
 		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1665,6 +1594,107 @@ func replicationTaskStoppedStateRetryable(ctx context.Context, input *DescribeRe
 
 	return true, nil
 }
+
+// DescribeReplicationTasksPaginatorOptions is the paginator options for
+// DescribeReplicationTasks
+type DescribeReplicationTasksPaginatorOptions struct {
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeReplicationTasksPaginator is a paginator for DescribeReplicationTasks
+type DescribeReplicationTasksPaginator struct {
+	options   DescribeReplicationTasksPaginatorOptions
+	client    DescribeReplicationTasksAPIClient
+	params    *DescribeReplicationTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeReplicationTasksPaginator returns a new
+// DescribeReplicationTasksPaginator
+func NewDescribeReplicationTasksPaginator(client DescribeReplicationTasksAPIClient, params *DescribeReplicationTasksInput, optFns ...func(*DescribeReplicationTasksPaginatorOptions)) *DescribeReplicationTasksPaginator {
+	if params == nil {
+		params = &DescribeReplicationTasksInput{}
+	}
+
+	options := DescribeReplicationTasksPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeReplicationTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeReplicationTasksPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeReplicationTasks page.
+func (p *DescribeReplicationTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeReplicationTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeReplicationTasksAPIClient is a client that implements the
+// DescribeReplicationTasks operation.
+type DescribeReplicationTasksAPIClient interface {
+	DescribeReplicationTasks(context.Context, *DescribeReplicationTasksInput, ...func(*Options)) (*DescribeReplicationTasksOutput, error)
+}
+
+var _ DescribeReplicationTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

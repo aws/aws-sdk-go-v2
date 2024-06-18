@@ -107,6 +107,9 @@ func (c *Client) addOperationAssociateProfilesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}

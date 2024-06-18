@@ -125,6 +125,9 @@ func (c *Client) addOperationListDecoderManifestSignalsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDecoderManifestSignalsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListDecoderManifestSignalsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListDecoderManifestSignalsAPIClient is a client that implements the
-// ListDecoderManifestSignals operation.
-type ListDecoderManifestSignalsAPIClient interface {
-	ListDecoderManifestSignals(context.Context, *ListDecoderManifestSignalsInput, ...func(*Options)) (*ListDecoderManifestSignalsOutput, error)
-}
-
-var _ ListDecoderManifestSignalsAPIClient = (*Client)(nil)
 
 // ListDecoderManifestSignalsPaginatorOptions is the paginator options for
 // ListDecoderManifestSignals
@@ -223,6 +218,9 @@ func (p *ListDecoderManifestSignalsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDecoderManifestSignals(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListDecoderManifestSignalsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListDecoderManifestSignalsAPIClient is a client that implements the
+// ListDecoderManifestSignals operation.
+type ListDecoderManifestSignalsAPIClient interface {
+	ListDecoderManifestSignals(context.Context, *ListDecoderManifestSignalsInput, ...func(*Options)) (*ListDecoderManifestSignalsOutput, error)
+}
+
+var _ ListDecoderManifestSignalsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDecoderManifestSignals(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

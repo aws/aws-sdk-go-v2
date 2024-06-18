@@ -117,6 +117,9 @@ func (c *Client) addOperationListResiliencyPoliciesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResiliencyPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListResiliencyPoliciesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListResiliencyPoliciesAPIClient is a client that implements the
-// ListResiliencyPolicies operation.
-type ListResiliencyPoliciesAPIClient interface {
-	ListResiliencyPolicies(context.Context, *ListResiliencyPoliciesInput, ...func(*Options)) (*ListResiliencyPoliciesOutput, error)
-}
-
-var _ ListResiliencyPoliciesAPIClient = (*Client)(nil)
 
 // ListResiliencyPoliciesPaginatorOptions is the paginator options for
 // ListResiliencyPolicies
@@ -212,6 +207,9 @@ func (p *ListResiliencyPoliciesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResiliencyPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListResiliencyPoliciesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListResiliencyPoliciesAPIClient is a client that implements the
+// ListResiliencyPolicies operation.
+type ListResiliencyPoliciesAPIClient interface {
+	ListResiliencyPolicies(context.Context, *ListResiliencyPoliciesInput, ...func(*Options)) (*ListResiliencyPoliciesOutput, error)
+}
+
+var _ ListResiliencyPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResiliencyPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

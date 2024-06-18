@@ -123,6 +123,9 @@ func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUsersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,13 +149,6 @@ func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListUsersAPIClient is a client that implements the ListUsers operation.
-type ListUsersAPIClient interface {
-	ListUsers(context.Context, *ListUsersInput, ...func(*Options)) (*ListUsersOutput, error)
-}
-
-var _ ListUsersAPIClient = (*Client)(nil)
 
 // ListUsersPaginatorOptions is the paginator options for ListUsers
 type ListUsersPaginatorOptions struct {
@@ -217,6 +213,9 @@ func (p *ListUsersPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUsers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +234,13 @@ func (p *ListUsersPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListUsersAPIClient is a client that implements the ListUsers operation.
+type ListUsersAPIClient interface {
+	ListUsers(context.Context, *ListUsersInput, ...func(*Options)) (*ListUsersOutput, error)
+}
+
+var _ ListUsersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUsers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

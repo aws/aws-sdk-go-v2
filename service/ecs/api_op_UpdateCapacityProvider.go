@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateCapacityProviderMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCapacityProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

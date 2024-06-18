@@ -294,6 +294,9 @@ func (c *Client) addOperationCreateStackSetMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateStackSetMiddleware(stack, options); err != nil {
 		return err
 	}

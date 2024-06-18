@@ -127,6 +127,9 @@ func (c *Client) addOperationListDefaultVocabulariesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDefaultVocabulariesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListDefaultVocabulariesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListDefaultVocabulariesAPIClient is a client that implements the
-// ListDefaultVocabularies operation.
-type ListDefaultVocabulariesAPIClient interface {
-	ListDefaultVocabularies(context.Context, *ListDefaultVocabulariesInput, ...func(*Options)) (*ListDefaultVocabulariesOutput, error)
-}
-
-var _ ListDefaultVocabulariesAPIClient = (*Client)(nil)
 
 // ListDefaultVocabulariesPaginatorOptions is the paginator options for
 // ListDefaultVocabularies
@@ -224,6 +219,9 @@ func (p *ListDefaultVocabulariesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDefaultVocabularies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListDefaultVocabulariesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListDefaultVocabulariesAPIClient is a client that implements the
+// ListDefaultVocabularies operation.
+type ListDefaultVocabulariesAPIClient interface {
+	ListDefaultVocabularies(context.Context, *ListDefaultVocabulariesInput, ...func(*Options)) (*ListDefaultVocabulariesOutput, error)
+}
+
+var _ ListDefaultVocabulariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDefaultVocabularies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

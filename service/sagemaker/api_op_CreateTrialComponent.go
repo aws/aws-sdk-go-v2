@@ -162,6 +162,9 @@ func (c *Client) addOperationCreateTrialComponentMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateTrialComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

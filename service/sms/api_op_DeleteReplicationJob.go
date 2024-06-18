@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteReplicationJobMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteReplicationJobValidationMiddleware(stack); err != nil {
 		return err
 	}

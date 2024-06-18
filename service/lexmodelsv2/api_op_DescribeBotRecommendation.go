@@ -165,6 +165,9 @@ func (c *Client) addOperationDescribeBotRecommendationMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationListDataSetRevisionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataSetRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListDataSetRevisionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListDataSetRevisionsAPIClient is a client that implements the
-// ListDataSetRevisions operation.
-type ListDataSetRevisionsAPIClient interface {
-	ListDataSetRevisions(context.Context, *ListDataSetRevisionsInput, ...func(*Options)) (*ListDataSetRevisionsOutput, error)
-}
-
-var _ ListDataSetRevisionsAPIClient = (*Client)(nil)
 
 // ListDataSetRevisionsPaginatorOptions is the paginator options for
 // ListDataSetRevisions
@@ -210,6 +205,9 @@ func (p *ListDataSetRevisionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataSetRevisions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListDataSetRevisionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListDataSetRevisionsAPIClient is a client that implements the
+// ListDataSetRevisions operation.
+type ListDataSetRevisionsAPIClient interface {
+	ListDataSetRevisions(context.Context, *ListDataSetRevisionsInput, ...func(*Options)) (*ListDataSetRevisionsOutput, error)
+}
+
+var _ ListDataSetRevisionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataSetRevisions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

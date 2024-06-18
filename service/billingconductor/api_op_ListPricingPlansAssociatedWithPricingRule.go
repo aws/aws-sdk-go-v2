@@ -126,6 +126,9 @@ func (c *Client) addOperationListPricingPlansAssociatedWithPricingRuleMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPricingPlansAssociatedWithPricingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListPricingPlansAssociatedWithPricingRuleMiddleware
 	}
 	return nil
 }
-
-// ListPricingPlansAssociatedWithPricingRuleAPIClient is a client that implements
-// the ListPricingPlansAssociatedWithPricingRule operation.
-type ListPricingPlansAssociatedWithPricingRuleAPIClient interface {
-	ListPricingPlansAssociatedWithPricingRule(context.Context, *ListPricingPlansAssociatedWithPricingRuleInput, ...func(*Options)) (*ListPricingPlansAssociatedWithPricingRuleOutput, error)
-}
-
-var _ ListPricingPlansAssociatedWithPricingRuleAPIClient = (*Client)(nil)
 
 // ListPricingPlansAssociatedWithPricingRulePaginatorOptions is the paginator
 // options for ListPricingPlansAssociatedWithPricingRule
@@ -224,6 +219,9 @@ func (p *ListPricingPlansAssociatedWithPricingRulePaginator) NextPage(ctx contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPricingPlansAssociatedWithPricingRule(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListPricingPlansAssociatedWithPricingRulePaginator) NextPage(ctx contex
 
 	return result, nil
 }
+
+// ListPricingPlansAssociatedWithPricingRuleAPIClient is a client that implements
+// the ListPricingPlansAssociatedWithPricingRule operation.
+type ListPricingPlansAssociatedWithPricingRuleAPIClient interface {
+	ListPricingPlansAssociatedWithPricingRule(context.Context, *ListPricingPlansAssociatedWithPricingRuleInput, ...func(*Options)) (*ListPricingPlansAssociatedWithPricingRuleOutput, error)
+}
+
+var _ ListPricingPlansAssociatedWithPricingRuleAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPricingPlansAssociatedWithPricingRule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

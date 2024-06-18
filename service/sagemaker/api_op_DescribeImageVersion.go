@@ -186,6 +186,9 @@ func (c *Client) addOperationDescribeImageVersionMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeImageVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -209,14 +212,6 @@ func (c *Client) addOperationDescribeImageVersionMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeImageVersionAPIClient is a client that implements the
-// DescribeImageVersion operation.
-type DescribeImageVersionAPIClient interface {
-	DescribeImageVersion(context.Context, *DescribeImageVersionInput, ...func(*Options)) (*DescribeImageVersionOutput, error)
-}
-
-var _ DescribeImageVersionAPIClient = (*Client)(nil)
 
 // ImageVersionCreatedWaiterOptions are waiter options for
 // ImageVersionCreatedWaiter
@@ -335,7 +330,13 @@ func (w *ImageVersionCreatedWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeImageVersion(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -539,7 +540,13 @@ func (w *ImageVersionDeletedWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeImageVersion(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -620,6 +627,14 @@ func imageVersionDeletedStateRetryable(ctx context.Context, input *DescribeImage
 
 	return true, nil
 }
+
+// DescribeImageVersionAPIClient is a client that implements the
+// DescribeImageVersion operation.
+type DescribeImageVersionAPIClient interface {
+	DescribeImageVersion(context.Context, *DescribeImageVersionInput, ...func(*Options)) (*DescribeImageVersionOutput, error)
+}
+
+var _ DescribeImageVersionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeImageVersion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

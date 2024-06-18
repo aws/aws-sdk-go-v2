@@ -120,6 +120,9 @@ func (c *Client) addOperationListCrawlersMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCrawlers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,13 +143,6 @@ func (c *Client) addOperationListCrawlersMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListCrawlersAPIClient is a client that implements the ListCrawlers operation.
-type ListCrawlersAPIClient interface {
-	ListCrawlers(context.Context, *ListCrawlersInput, ...func(*Options)) (*ListCrawlersOutput, error)
-}
-
-var _ ListCrawlersAPIClient = (*Client)(nil)
 
 // ListCrawlersPaginatorOptions is the paginator options for ListCrawlers
 type ListCrawlersPaginatorOptions struct {
@@ -211,6 +207,9 @@ func (p *ListCrawlersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCrawlers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +228,13 @@ func (p *ListCrawlersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListCrawlersAPIClient is a client that implements the ListCrawlers operation.
+type ListCrawlersAPIClient interface {
+	ListCrawlers(context.Context, *ListCrawlersInput, ...func(*Options)) (*ListCrawlersOutput, error)
+}
+
+var _ ListCrawlersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCrawlers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

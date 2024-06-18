@@ -177,6 +177,9 @@ func (c *Client) addOperationDescribeBotLocaleMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBotLocaleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -200,14 +203,6 @@ func (c *Client) addOperationDescribeBotLocaleMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeBotLocaleAPIClient is a client that implements the DescribeBotLocale
-// operation.
-type DescribeBotLocaleAPIClient interface {
-	DescribeBotLocale(context.Context, *DescribeBotLocaleInput, ...func(*Options)) (*DescribeBotLocaleOutput, error)
-}
-
-var _ DescribeBotLocaleAPIClient = (*Client)(nil)
 
 // BotLocaleBuiltWaiterOptions are waiter options for BotLocaleBuiltWaiter
 type BotLocaleBuiltWaiterOptions struct {
@@ -324,7 +319,13 @@ func (w *BotLocaleBuiltWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeBotLocale(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -548,7 +549,13 @@ func (w *BotLocaleCreatedWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeBotLocale(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -794,7 +801,13 @@ func (w *BotLocaleExpressTestingAvailableWaiter) WaitForOutput(ctx context.Conte
 		}
 
 		out, err := w.client.DescribeBotLocale(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -919,6 +932,14 @@ func botLocaleExpressTestingAvailableStateRetryable(ctx context.Context, input *
 
 	return true, nil
 }
+
+// DescribeBotLocaleAPIClient is a client that implements the DescribeBotLocale
+// operation.
+type DescribeBotLocaleAPIClient interface {
+	DescribeBotLocale(context.Context, *DescribeBotLocaleInput, ...func(*Options)) (*DescribeBotLocaleOutput, error)
+}
+
+var _ DescribeBotLocaleAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBotLocale(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -114,6 +114,9 @@ func (c *Client) addOperationDescribeKinesisStreamingDestinationMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeKinesisStreamingDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

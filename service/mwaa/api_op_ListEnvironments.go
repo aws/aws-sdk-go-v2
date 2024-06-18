@@ -112,6 +112,9 @@ func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListEnvironmentsMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,41 +138,6 @@ func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-type endpointPrefix_opListEnvironmentsMiddleware struct {
-}
-
-func (*endpointPrefix_opListEnvironmentsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListEnvironmentsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListEnvironmentsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListEnvironmentsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListEnvironmentsAPIClient is a client that implements the ListEnvironments
-// operation.
-type ListEnvironmentsAPIClient interface {
-	ListEnvironments(context.Context, *ListEnvironmentsInput, ...func(*Options)) (*ListEnvironmentsOutput, error)
-}
-
-var _ ListEnvironmentsAPIClient = (*Client)(nil)
 
 // ListEnvironmentsPaginatorOptions is the paginator options for ListEnvironments
 type ListEnvironmentsPaginatorOptions struct {
@@ -235,6 +203,9 @@ func (p *ListEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnvironments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +224,41 @@ func (p *ListEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+type endpointPrefix_opListEnvironmentsMiddleware struct {
+}
+
+func (*endpointPrefix_opListEnvironmentsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListEnvironmentsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListEnvironmentsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListEnvironmentsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListEnvironmentsAPIClient is a client that implements the ListEnvironments
+// operation.
+type ListEnvironmentsAPIClient interface {
+	ListEnvironments(context.Context, *ListEnvironmentsInput, ...func(*Options)) (*ListEnvironmentsOutput, error)
+}
+
+var _ ListEnvironmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

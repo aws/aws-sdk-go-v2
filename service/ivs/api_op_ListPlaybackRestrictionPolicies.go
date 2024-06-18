@@ -114,6 +114,9 @@ func (c *Client) addOperationListPlaybackRestrictionPoliciesMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlaybackRestrictionPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListPlaybackRestrictionPoliciesMiddlewares(stack *m
 	}
 	return nil
 }
-
-// ListPlaybackRestrictionPoliciesAPIClient is a client that implements the
-// ListPlaybackRestrictionPolicies operation.
-type ListPlaybackRestrictionPoliciesAPIClient interface {
-	ListPlaybackRestrictionPolicies(context.Context, *ListPlaybackRestrictionPoliciesInput, ...func(*Options)) (*ListPlaybackRestrictionPoliciesOutput, error)
-}
-
-var _ ListPlaybackRestrictionPoliciesAPIClient = (*Client)(nil)
 
 // ListPlaybackRestrictionPoliciesPaginatorOptions is the paginator options for
 // ListPlaybackRestrictionPolicies
@@ -209,6 +204,9 @@ func (p *ListPlaybackRestrictionPoliciesPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPlaybackRestrictionPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListPlaybackRestrictionPoliciesPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// ListPlaybackRestrictionPoliciesAPIClient is a client that implements the
+// ListPlaybackRestrictionPolicies operation.
+type ListPlaybackRestrictionPoliciesAPIClient interface {
+	ListPlaybackRestrictionPolicies(context.Context, *ListPlaybackRestrictionPoliciesInput, ...func(*Options)) (*ListPlaybackRestrictionPoliciesOutput, error)
+}
+
+var _ ListPlaybackRestrictionPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPlaybackRestrictionPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

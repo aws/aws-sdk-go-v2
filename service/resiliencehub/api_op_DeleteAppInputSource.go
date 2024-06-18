@@ -140,6 +140,9 @@ func (c *Client) addOperationDeleteAppInputSourceMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteAppInputSourceMiddleware(stack, options); err != nil {
 		return err
 	}

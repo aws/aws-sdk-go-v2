@@ -114,6 +114,9 @@ func (c *Client) addOperationListSuggestedResiliencyPoliciesMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSuggestedResiliencyPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListSuggestedResiliencyPoliciesMiddlewares(stack *m
 	}
 	return nil
 }
-
-// ListSuggestedResiliencyPoliciesAPIClient is a client that implements the
-// ListSuggestedResiliencyPolicies operation.
-type ListSuggestedResiliencyPoliciesAPIClient interface {
-	ListSuggestedResiliencyPolicies(context.Context, *ListSuggestedResiliencyPoliciesInput, ...func(*Options)) (*ListSuggestedResiliencyPoliciesOutput, error)
-}
-
-var _ ListSuggestedResiliencyPoliciesAPIClient = (*Client)(nil)
 
 // ListSuggestedResiliencyPoliciesPaginatorOptions is the paginator options for
 // ListSuggestedResiliencyPolicies
@@ -211,6 +206,9 @@ func (p *ListSuggestedResiliencyPoliciesPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSuggestedResiliencyPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListSuggestedResiliencyPoliciesPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// ListSuggestedResiliencyPoliciesAPIClient is a client that implements the
+// ListSuggestedResiliencyPolicies operation.
+type ListSuggestedResiliencyPoliciesAPIClient interface {
+	ListSuggestedResiliencyPolicies(context.Context, *ListSuggestedResiliencyPoliciesInput, ...func(*Options)) (*ListSuggestedResiliencyPoliciesOutput, error)
+}
+
+var _ ListSuggestedResiliencyPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSuggestedResiliencyPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

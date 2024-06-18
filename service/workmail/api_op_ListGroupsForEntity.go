@@ -134,6 +134,9 @@ func (c *Client) addOperationListGroupsForEntityMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListGroupsForEntityValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListGroupsForEntityMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListGroupsForEntityAPIClient is a client that implements the
-// ListGroupsForEntity operation.
-type ListGroupsForEntityAPIClient interface {
-	ListGroupsForEntity(context.Context, *ListGroupsForEntityInput, ...func(*Options)) (*ListGroupsForEntityOutput, error)
-}
-
-var _ ListGroupsForEntityAPIClient = (*Client)(nil)
 
 // ListGroupsForEntityPaginatorOptions is the paginator options for
 // ListGroupsForEntity
@@ -230,6 +225,9 @@ func (p *ListGroupsForEntityPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGroupsForEntity(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListGroupsForEntityPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListGroupsForEntityAPIClient is a client that implements the
+// ListGroupsForEntity operation.
+type ListGroupsForEntityAPIClient interface {
+	ListGroupsForEntity(context.Context, *ListGroupsForEntityInput, ...func(*Options)) (*ListGroupsForEntityOutput, error)
+}
+
+var _ ListGroupsForEntityAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGroupsForEntity(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

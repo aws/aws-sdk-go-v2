@@ -120,6 +120,9 @@ func (c *Client) addOperationRegisterEcsClusterMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRegisterEcsClusterValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -134,6 +134,9 @@ func (c *Client) addOperationListMailboxPermissionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMailboxPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListMailboxPermissionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListMailboxPermissionsAPIClient is a client that implements the
-// ListMailboxPermissions operation.
-type ListMailboxPermissionsAPIClient interface {
-	ListMailboxPermissions(context.Context, *ListMailboxPermissionsInput, ...func(*Options)) (*ListMailboxPermissionsOutput, error)
-}
-
-var _ ListMailboxPermissionsAPIClient = (*Client)(nil)
 
 // ListMailboxPermissionsPaginatorOptions is the paginator options for
 // ListMailboxPermissions
@@ -230,6 +225,9 @@ func (p *ListMailboxPermissionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMailboxPermissions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListMailboxPermissionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListMailboxPermissionsAPIClient is a client that implements the
+// ListMailboxPermissions operation.
+type ListMailboxPermissionsAPIClient interface {
+	ListMailboxPermissions(context.Context, *ListMailboxPermissionsInput, ...func(*Options)) (*ListMailboxPermissionsOutput, error)
+}
+
+var _ ListMailboxPermissionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMailboxPermissions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

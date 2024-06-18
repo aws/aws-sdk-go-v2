@@ -127,6 +127,9 @@ func (c *Client) addOperationListDashboardVersionsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDashboardVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListDashboardVersionsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListDashboardVersionsAPIClient is a client that implements the
-// ListDashboardVersions operation.
-type ListDashboardVersionsAPIClient interface {
-	ListDashboardVersions(context.Context, *ListDashboardVersionsInput, ...func(*Options)) (*ListDashboardVersionsOutput, error)
-}
-
-var _ ListDashboardVersionsAPIClient = (*Client)(nil)
 
 // ListDashboardVersionsPaginatorOptions is the paginator options for
 // ListDashboardVersions
@@ -223,6 +218,9 @@ func (p *ListDashboardVersionsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDashboardVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListDashboardVersionsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListDashboardVersionsAPIClient is a client that implements the
+// ListDashboardVersions operation.
+type ListDashboardVersionsAPIClient interface {
+	ListDashboardVersions(context.Context, *ListDashboardVersionsInput, ...func(*Options)) (*ListDashboardVersionsOutput, error)
+}
+
+var _ ListDashboardVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDashboardVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -122,6 +122,9 @@ func (c *Client) addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAnomalyDetectorValidationMiddleware(stack); err != nil {
 		return err
 	}

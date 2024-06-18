@@ -115,6 +115,9 @@ func (c *Client) addOperationListLabelGroupsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLabelGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListLabelGroupsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListLabelGroupsAPIClient is a client that implements the ListLabelGroups
-// operation.
-type ListLabelGroupsAPIClient interface {
-	ListLabelGroups(context.Context, *ListLabelGroupsInput, ...func(*Options)) (*ListLabelGroupsOutput, error)
-}
-
-var _ ListLabelGroupsAPIClient = (*Client)(nil)
 
 // ListLabelGroupsPaginatorOptions is the paginator options for ListLabelGroups
 type ListLabelGroupsPaginatorOptions struct {
@@ -207,6 +202,9 @@ func (p *ListLabelGroupsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLabelGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListLabelGroupsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListLabelGroupsAPIClient is a client that implements the ListLabelGroups
+// operation.
+type ListLabelGroupsAPIClient interface {
+	ListLabelGroups(context.Context, *ListLabelGroupsInput, ...func(*Options)) (*ListLabelGroupsOutput, error)
+}
+
+var _ ListLabelGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLabelGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

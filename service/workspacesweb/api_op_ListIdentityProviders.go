@@ -117,6 +117,9 @@ func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIdentityProvidersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListIdentityProvidersAPIClient is a client that implements the
-// ListIdentityProviders operation.
-type ListIdentityProvidersAPIClient interface {
-	ListIdentityProviders(context.Context, *ListIdentityProvidersInput, ...func(*Options)) (*ListIdentityProvidersOutput, error)
-}
-
-var _ ListIdentityProvidersAPIClient = (*Client)(nil)
 
 // ListIdentityProvidersPaginatorOptions is the paginator options for
 // ListIdentityProviders
@@ -213,6 +208,9 @@ func (p *ListIdentityProvidersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIdentityProviders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListIdentityProvidersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListIdentityProvidersAPIClient is a client that implements the
+// ListIdentityProviders operation.
+type ListIdentityProvidersAPIClient interface {
+	ListIdentityProviders(context.Context, *ListIdentityProvidersInput, ...func(*Options)) (*ListIdentityProvidersOutput, error)
+}
+
+var _ ListIdentityProvidersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIdentityProviders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

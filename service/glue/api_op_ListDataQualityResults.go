@@ -115,6 +115,9 @@ func (c *Client) addOperationListDataQualityResultsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataQualityResultsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListDataQualityResultsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListDataQualityResultsAPIClient is a client that implements the
-// ListDataQualityResults operation.
-type ListDataQualityResultsAPIClient interface {
-	ListDataQualityResults(context.Context, *ListDataQualityResultsInput, ...func(*Options)) (*ListDataQualityResultsOutput, error)
-}
-
-var _ ListDataQualityResultsAPIClient = (*Client)(nil)
 
 // ListDataQualityResultsPaginatorOptions is the paginator options for
 // ListDataQualityResults
@@ -211,6 +206,9 @@ func (p *ListDataQualityResultsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataQualityResults(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListDataQualityResultsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListDataQualityResultsAPIClient is a client that implements the
+// ListDataQualityResults operation.
+type ListDataQualityResultsAPIClient interface {
+	ListDataQualityResults(context.Context, *ListDataQualityResultsInput, ...func(*Options)) (*ListDataQualityResultsOutput, error)
+}
+
+var _ ListDataQualityResultsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataQualityResults(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -118,6 +118,9 @@ func (c *Client) addOperationListCustomRoutingListenersMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomRoutingListenersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListCustomRoutingListenersMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListCustomRoutingListenersAPIClient is a client that implements the
-// ListCustomRoutingListeners operation.
-type ListCustomRoutingListenersAPIClient interface {
-	ListCustomRoutingListeners(context.Context, *ListCustomRoutingListenersInput, ...func(*Options)) (*ListCustomRoutingListenersOutput, error)
-}
-
-var _ ListCustomRoutingListenersAPIClient = (*Client)(nil)
 
 // ListCustomRoutingListenersPaginatorOptions is the paginator options for
 // ListCustomRoutingListeners
@@ -217,6 +212,9 @@ func (p *ListCustomRoutingListenersPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomRoutingListeners(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListCustomRoutingListenersPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListCustomRoutingListenersAPIClient is a client that implements the
+// ListCustomRoutingListeners operation.
+type ListCustomRoutingListenersAPIClient interface {
+	ListCustomRoutingListeners(context.Context, *ListCustomRoutingListenersInput, ...func(*Options)) (*ListCustomRoutingListenersOutput, error)
+}
+
+var _ ListCustomRoutingListenersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomRoutingListeners(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

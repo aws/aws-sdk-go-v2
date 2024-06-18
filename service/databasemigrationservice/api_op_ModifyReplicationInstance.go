@@ -190,6 +190,9 @@ func (c *Client) addOperationModifyReplicationInstanceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpModifyReplicationInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

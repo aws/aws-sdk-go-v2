@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeEngineVersionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEngineVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationDescribeEngineVersionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeEngineVersionsAPIClient is a client that implements the
-// DescribeEngineVersions operation.
-type DescribeEngineVersionsAPIClient interface {
-	DescribeEngineVersions(context.Context, *DescribeEngineVersionsInput, ...func(*Options)) (*DescribeEngineVersionsOutput, error)
-}
-
-var _ DescribeEngineVersionsAPIClient = (*Client)(nil)
 
 // DescribeEngineVersionsPaginatorOptions is the paginator options for
 // DescribeEngineVersions
@@ -212,6 +207,9 @@ func (p *DescribeEngineVersionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeEngineVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *DescribeEngineVersionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeEngineVersionsAPIClient is a client that implements the
+// DescribeEngineVersions operation.
+type DescribeEngineVersionsAPIClient interface {
+	DescribeEngineVersions(context.Context, *DescribeEngineVersionsInput, ...func(*Options)) (*DescribeEngineVersionsOutput, error)
+}
+
+var _ DescribeEngineVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

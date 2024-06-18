@@ -120,6 +120,9 @@ func (c *Client) addOperationSearchSystemTemplatesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchSystemTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationSearchSystemTemplatesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// SearchSystemTemplatesAPIClient is a client that implements the
-// SearchSystemTemplates operation.
-type SearchSystemTemplatesAPIClient interface {
-	SearchSystemTemplates(context.Context, *SearchSystemTemplatesInput, ...func(*Options)) (*SearchSystemTemplatesOutput, error)
-}
-
-var _ SearchSystemTemplatesAPIClient = (*Client)(nil)
 
 // SearchSystemTemplatesPaginatorOptions is the paginator options for
 // SearchSystemTemplates
@@ -216,6 +211,9 @@ func (p *SearchSystemTemplatesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchSystemTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *SearchSystemTemplatesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// SearchSystemTemplatesAPIClient is a client that implements the
+// SearchSystemTemplates operation.
+type SearchSystemTemplatesAPIClient interface {
+	SearchSystemTemplates(context.Context, *SearchSystemTemplatesInput, ...func(*Options)) (*SearchSystemTemplatesOutput, error)
+}
+
+var _ SearchSystemTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchSystemTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

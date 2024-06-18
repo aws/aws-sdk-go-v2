@@ -134,6 +134,9 @@ func (c *Client) addOperationListFindingsV2Middlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFindingsV2ValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListFindingsV2Middlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListFindingsV2APIClient is a client that implements the ListFindingsV2
-// operation.
-type ListFindingsV2APIClient interface {
-	ListFindingsV2(context.Context, *ListFindingsV2Input, ...func(*Options)) (*ListFindingsV2Output, error)
-}
-
-var _ ListFindingsV2APIClient = (*Client)(nil)
 
 // ListFindingsV2PaginatorOptions is the paginator options for ListFindingsV2
 type ListFindingsV2PaginatorOptions struct {
@@ -229,6 +224,9 @@ func (p *ListFindingsV2Paginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFindingsV2(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListFindingsV2Paginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListFindingsV2APIClient is a client that implements the ListFindingsV2
+// operation.
+type ListFindingsV2APIClient interface {
+	ListFindingsV2(context.Context, *ListFindingsV2Input, ...func(*Options)) (*ListFindingsV2Output, error)
+}
+
+var _ ListFindingsV2APIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFindingsV2(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

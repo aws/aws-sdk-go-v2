@@ -132,6 +132,9 @@ func (c *Client) addOperationListServiceQuotaIncreaseRequestsInTemplateMiddlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceQuotaIncreaseRequestsInTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListServiceQuotaIncreaseRequestsInTemplateMiddlewar
 	}
 	return nil
 }
-
-// ListServiceQuotaIncreaseRequestsInTemplateAPIClient is a client that implements
-// the ListServiceQuotaIncreaseRequestsInTemplate operation.
-type ListServiceQuotaIncreaseRequestsInTemplateAPIClient interface {
-	ListServiceQuotaIncreaseRequestsInTemplate(context.Context, *ListServiceQuotaIncreaseRequestsInTemplateInput, ...func(*Options)) (*ListServiceQuotaIncreaseRequestsInTemplateOutput, error)
-}
-
-var _ ListServiceQuotaIncreaseRequestsInTemplateAPIClient = (*Client)(nil)
 
 // ListServiceQuotaIncreaseRequestsInTemplatePaginatorOptions is the paginator
 // options for ListServiceQuotaIncreaseRequestsInTemplate
@@ -236,6 +231,9 @@ func (p *ListServiceQuotaIncreaseRequestsInTemplatePaginator) NextPage(ctx conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceQuotaIncreaseRequestsInTemplate(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListServiceQuotaIncreaseRequestsInTemplatePaginator) NextPage(ctx conte
 
 	return result, nil
 }
+
+// ListServiceQuotaIncreaseRequestsInTemplateAPIClient is a client that implements
+// the ListServiceQuotaIncreaseRequestsInTemplate operation.
+type ListServiceQuotaIncreaseRequestsInTemplateAPIClient interface {
+	ListServiceQuotaIncreaseRequestsInTemplate(context.Context, *ListServiceQuotaIncreaseRequestsInTemplateInput, ...func(*Options)) (*ListServiceQuotaIncreaseRequestsInTemplateOutput, error)
+}
+
+var _ ListServiceQuotaIncreaseRequestsInTemplateAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceQuotaIncreaseRequestsInTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

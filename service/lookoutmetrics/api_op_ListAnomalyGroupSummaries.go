@@ -124,6 +124,9 @@ func (c *Client) addOperationListAnomalyGroupSummariesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnomalyGroupSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListAnomalyGroupSummariesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListAnomalyGroupSummariesAPIClient is a client that implements the
-// ListAnomalyGroupSummaries operation.
-type ListAnomalyGroupSummariesAPIClient interface {
-	ListAnomalyGroupSummaries(context.Context, *ListAnomalyGroupSummariesInput, ...func(*Options)) (*ListAnomalyGroupSummariesOutput, error)
-}
-
-var _ ListAnomalyGroupSummariesAPIClient = (*Client)(nil)
 
 // ListAnomalyGroupSummariesPaginatorOptions is the paginator options for
 // ListAnomalyGroupSummaries
@@ -221,6 +216,9 @@ func (p *ListAnomalyGroupSummariesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnomalyGroupSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListAnomalyGroupSummariesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListAnomalyGroupSummariesAPIClient is a client that implements the
+// ListAnomalyGroupSummaries operation.
+type ListAnomalyGroupSummariesAPIClient interface {
+	ListAnomalyGroupSummaries(context.Context, *ListAnomalyGroupSummariesInput, ...func(*Options)) (*ListAnomalyGroupSummariesOutput, error)
+}
+
+var _ ListAnomalyGroupSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnomalyGroupSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -126,6 +126,9 @@ func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCommentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// DescribeCommentsAPIClient is a client that implements the DescribeComments
-// operation.
-type DescribeCommentsAPIClient interface {
-	DescribeComments(context.Context, *DescribeCommentsInput, ...func(*Options)) (*DescribeCommentsOutput, error)
-}
-
-var _ DescribeCommentsAPIClient = (*Client)(nil)
 
 // DescribeCommentsPaginatorOptions is the paginator options for DescribeComments
 type DescribeCommentsPaginatorOptions struct {
@@ -221,6 +216,9 @@ func (p *DescribeCommentsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeComments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeCommentsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// DescribeCommentsAPIClient is a client that implements the DescribeComments
+// operation.
+type DescribeCommentsAPIClient interface {
+	DescribeComments(context.Context, *DescribeCommentsInput, ...func(*Options)) (*DescribeCommentsOutput, error)
+}
+
+var _ DescribeCommentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeComments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

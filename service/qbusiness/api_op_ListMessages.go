@@ -126,6 +126,9 @@ func (c *Client) addOperationListMessagesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMessagesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,13 +152,6 @@ func (c *Client) addOperationListMessagesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListMessagesAPIClient is a client that implements the ListMessages operation.
-type ListMessagesAPIClient interface {
-	ListMessages(context.Context, *ListMessagesInput, ...func(*Options)) (*ListMessagesOutput, error)
-}
-
-var _ ListMessagesAPIClient = (*Client)(nil)
 
 // ListMessagesPaginatorOptions is the paginator options for ListMessages
 type ListMessagesPaginatorOptions struct {
@@ -220,6 +216,9 @@ func (p *ListMessagesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMessages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +237,13 @@ func (p *ListMessagesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListMessagesAPIClient is a client that implements the ListMessages operation.
+type ListMessagesAPIClient interface {
+	ListMessages(context.Context, *ListMessagesInput, ...func(*Options)) (*ListMessagesOutput, error)
+}
+
+var _ ListMessagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMessages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

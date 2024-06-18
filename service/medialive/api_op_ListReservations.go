@@ -136,6 +136,9 @@ func (c *Client) addOperationListReservationsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReservations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListReservationsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListReservationsAPIClient is a client that implements the ListReservations
-// operation.
-type ListReservationsAPIClient interface {
-	ListReservations(context.Context, *ListReservationsInput, ...func(*Options)) (*ListReservationsOutput, error)
-}
-
-var _ ListReservationsAPIClient = (*Client)(nil)
 
 // ListReservationsPaginatorOptions is the paginator options for ListReservations
 type ListReservationsPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *ListReservationsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReservations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListReservationsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListReservationsAPIClient is a client that implements the ListReservations
+// operation.
+type ListReservationsAPIClient interface {
+	ListReservations(context.Context, *ListReservationsInput, ...func(*Options)) (*ListReservationsOutput, error)
+}
+
+var _ ListReservationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReservations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

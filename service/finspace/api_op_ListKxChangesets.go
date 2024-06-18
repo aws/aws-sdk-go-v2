@@ -123,6 +123,9 @@ func (c *Client) addOperationListKxChangesetsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListKxChangesetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListKxChangesetsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListKxChangesetsAPIClient is a client that implements the ListKxChangesets
-// operation.
-type ListKxChangesetsAPIClient interface {
-	ListKxChangesets(context.Context, *ListKxChangesetsInput, ...func(*Options)) (*ListKxChangesetsOutput, error)
-}
-
-var _ ListKxChangesetsAPIClient = (*Client)(nil)
 
 // ListKxChangesetsPaginatorOptions is the paginator options for ListKxChangesets
 type ListKxChangesetsPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *ListKxChangesetsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKxChangesets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListKxChangesetsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListKxChangesetsAPIClient is a client that implements the ListKxChangesets
+// operation.
+type ListKxChangesetsAPIClient interface {
+	ListKxChangesets(context.Context, *ListKxChangesetsInput, ...func(*Options)) (*ListKxChangesetsOutput, error)
+}
+
+var _ ListKxChangesetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKxChangesets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

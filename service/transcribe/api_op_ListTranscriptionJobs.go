@@ -137,6 +137,9 @@ func (c *Client) addOperationListTranscriptionJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTranscriptionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListTranscriptionJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListTranscriptionJobsAPIClient is a client that implements the
-// ListTranscriptionJobs operation.
-type ListTranscriptionJobsAPIClient interface {
-	ListTranscriptionJobs(context.Context, *ListTranscriptionJobsInput, ...func(*Options)) (*ListTranscriptionJobsOutput, error)
-}
-
-var _ ListTranscriptionJobsAPIClient = (*Client)(nil)
 
 // ListTranscriptionJobsPaginatorOptions is the paginator options for
 // ListTranscriptionJobs
@@ -232,6 +227,9 @@ func (p *ListTranscriptionJobsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTranscriptionJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListTranscriptionJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListTranscriptionJobsAPIClient is a client that implements the
+// ListTranscriptionJobs operation.
+type ListTranscriptionJobsAPIClient interface {
+	ListTranscriptionJobs(context.Context, *ListTranscriptionJobsInput, ...func(*Options)) (*ListTranscriptionJobsOutput, error)
+}
+
+var _ ListTranscriptionJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTranscriptionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

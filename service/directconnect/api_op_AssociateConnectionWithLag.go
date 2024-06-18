@@ -224,6 +224,9 @@ func (c *Client) addOperationAssociateConnectionWithLagMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateConnectionWithLagValidationMiddleware(stack); err != nil {
 		return err
 	}

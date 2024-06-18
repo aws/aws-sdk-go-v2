@@ -181,6 +181,9 @@ func (c *Client) addOperationStartTopicsDetectionJobMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartTopicsDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}

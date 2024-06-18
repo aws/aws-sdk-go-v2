@@ -116,6 +116,9 @@ func (c *Client) addOperationListStoredQueriesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStoredQueries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListStoredQueriesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListStoredQueriesAPIClient is a client that implements the ListStoredQueries
-// operation.
-type ListStoredQueriesAPIClient interface {
-	ListStoredQueries(context.Context, *ListStoredQueriesInput, ...func(*Options)) (*ListStoredQueriesOutput, error)
-}
-
-var _ ListStoredQueriesAPIClient = (*Client)(nil)
 
 // ListStoredQueriesPaginatorOptions is the paginator options for ListStoredQueries
 type ListStoredQueriesPaginatorOptions struct {
@@ -208,6 +203,9 @@ func (p *ListStoredQueriesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStoredQueries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListStoredQueriesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListStoredQueriesAPIClient is a client that implements the ListStoredQueries
+// operation.
+type ListStoredQueriesAPIClient interface {
+	ListStoredQueries(context.Context, *ListStoredQueriesInput, ...func(*Options)) (*ListStoredQueriesOutput, error)
+}
+
+var _ ListStoredQueriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStoredQueries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeTasksMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTasksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,13 +156,6 @@ func (c *Client) addOperationDescribeTasksMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeTasksAPIClient is a client that implements the DescribeTasks operation.
-type DescribeTasksAPIClient interface {
-	DescribeTasks(context.Context, *DescribeTasksInput, ...func(*Options)) (*DescribeTasksOutput, error)
-}
-
-var _ DescribeTasksAPIClient = (*Client)(nil)
 
 // TasksRunningWaiterOptions are waiter options for TasksRunningWaiter
 type TasksRunningWaiterOptions struct {
@@ -275,7 +271,13 @@ func (w *TasksRunningWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeTasks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -510,7 +512,13 @@ func (w *TasksStoppedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeTasks(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -582,6 +590,13 @@ func tasksStoppedStateRetryable(ctx context.Context, input *DescribeTasksInput, 
 
 	return true, nil
 }
+
+// DescribeTasksAPIClient is a client that implements the DescribeTasks operation.
+type DescribeTasksAPIClient interface {
+	DescribeTasks(context.Context, *DescribeTasksInput, ...func(*Options)) (*DescribeTasksOutput, error)
+}
+
+var _ DescribeTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

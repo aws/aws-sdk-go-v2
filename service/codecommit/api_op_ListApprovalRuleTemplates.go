@@ -114,6 +114,9 @@ func (c *Client) addOperationListApprovalRuleTemplatesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApprovalRuleTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListApprovalRuleTemplatesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListApprovalRuleTemplatesAPIClient is a client that implements the
-// ListApprovalRuleTemplates operation.
-type ListApprovalRuleTemplatesAPIClient interface {
-	ListApprovalRuleTemplates(context.Context, *ListApprovalRuleTemplatesInput, ...func(*Options)) (*ListApprovalRuleTemplatesOutput, error)
-}
-
-var _ ListApprovalRuleTemplatesAPIClient = (*Client)(nil)
 
 // ListApprovalRuleTemplatesPaginatorOptions is the paginator options for
 // ListApprovalRuleTemplates
@@ -208,6 +203,9 @@ func (p *ListApprovalRuleTemplatesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApprovalRuleTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListApprovalRuleTemplatesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListApprovalRuleTemplatesAPIClient is a client that implements the
+// ListApprovalRuleTemplates operation.
+type ListApprovalRuleTemplatesAPIClient interface {
+	ListApprovalRuleTemplates(context.Context, *ListApprovalRuleTemplatesInput, ...func(*Options)) (*ListApprovalRuleTemplatesOutput, error)
+}
+
+var _ ListApprovalRuleTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApprovalRuleTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

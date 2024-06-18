@@ -110,6 +110,9 @@ func (c *Client) addOperationListReviewTemplatesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReviewTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListReviewTemplatesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListReviewTemplatesAPIClient is a client that implements the
-// ListReviewTemplates operation.
-type ListReviewTemplatesAPIClient interface {
-	ListReviewTemplates(context.Context, *ListReviewTemplatesInput, ...func(*Options)) (*ListReviewTemplatesOutput, error)
-}
-
-var _ ListReviewTemplatesAPIClient = (*Client)(nil)
 
 // ListReviewTemplatesPaginatorOptions is the paginator options for
 // ListReviewTemplates
@@ -203,6 +198,9 @@ func (p *ListReviewTemplatesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReviewTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListReviewTemplatesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListReviewTemplatesAPIClient is a client that implements the
+// ListReviewTemplates operation.
+type ListReviewTemplatesAPIClient interface {
+	ListReviewTemplates(context.Context, *ListReviewTemplatesInput, ...func(*Options)) (*ListReviewTemplatesOutput, error)
+}
+
+var _ ListReviewTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReviewTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

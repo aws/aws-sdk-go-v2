@@ -119,6 +119,9 @@ func (c *Client) addOperationListFieldsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFieldsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListFieldsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListFieldsAPIClient is a client that implements the ListFields operation.
-type ListFieldsAPIClient interface {
-	ListFields(context.Context, *ListFieldsInput, ...func(*Options)) (*ListFieldsOutput, error)
-}
-
-var _ ListFieldsAPIClient = (*Client)(nil)
 
 // ListFieldsPaginatorOptions is the paginator options for ListFields
 type ListFieldsPaginatorOptions struct {
@@ -213,6 +209,9 @@ func (p *ListFieldsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFields(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +230,13 @@ func (p *ListFieldsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListFieldsAPIClient is a client that implements the ListFields operation.
+type ListFieldsAPIClient interface {
+	ListFields(context.Context, *ListFieldsInput, ...func(*Options)) (*ListFieldsOutput, error)
+}
+
+var _ ListFieldsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFields(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

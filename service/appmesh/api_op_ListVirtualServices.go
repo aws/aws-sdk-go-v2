@@ -136,6 +136,9 @@ func (c *Client) addOperationListVirtualServicesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListVirtualServicesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListVirtualServicesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListVirtualServicesAPIClient is a client that implements the
-// ListVirtualServices operation.
-type ListVirtualServicesAPIClient interface {
-	ListVirtualServices(context.Context, *ListVirtualServicesInput, ...func(*Options)) (*ListVirtualServicesOutput, error)
-}
-
-var _ ListVirtualServicesAPIClient = (*Client)(nil)
 
 // ListVirtualServicesPaginatorOptions is the paginator options for
 // ListVirtualServices
@@ -238,6 +233,9 @@ func (p *ListVirtualServicesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVirtualServices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListVirtualServicesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListVirtualServicesAPIClient is a client that implements the
+// ListVirtualServices operation.
+type ListVirtualServicesAPIClient interface {
+	ListVirtualServices(context.Context, *ListVirtualServicesInput, ...func(*Options)) (*ListVirtualServicesOutput, error)
+}
+
+var _ ListVirtualServicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVirtualServices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -122,6 +122,9 @@ func (c *Client) addOperationGetLinkAssociationsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetLinkAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationGetLinkAssociationsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetLinkAssociationsAPIClient is a client that implements the
-// GetLinkAssociations operation.
-type GetLinkAssociationsAPIClient interface {
-	GetLinkAssociations(context.Context, *GetLinkAssociationsInput, ...func(*Options)) (*GetLinkAssociationsOutput, error)
-}
-
-var _ GetLinkAssociationsAPIClient = (*Client)(nil)
 
 // GetLinkAssociationsPaginatorOptions is the paginator options for
 // GetLinkAssociations
@@ -218,6 +213,9 @@ func (p *GetLinkAssociationsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetLinkAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetLinkAssociationsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetLinkAssociationsAPIClient is a client that implements the
+// GetLinkAssociations operation.
+type GetLinkAssociationsAPIClient interface {
+	GetLinkAssociations(context.Context, *GetLinkAssociationsInput, ...func(*Options)) (*GetLinkAssociationsOutput, error)
+}
+
+var _ GetLinkAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetLinkAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationListMultipartReadSetUploadsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListMultipartReadSetUploadsMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,41 +148,6 @@ func (c *Client) addOperationListMultipartReadSetUploadsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-type endpointPrefix_opListMultipartReadSetUploadsMiddleware struct {
-}
-
-func (*endpointPrefix_opListMultipartReadSetUploadsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListMultipartReadSetUploadsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListMultipartReadSetUploadsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListMultipartReadSetUploadsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListMultipartReadSetUploadsAPIClient is a client that implements the
-// ListMultipartReadSetUploads operation.
-type ListMultipartReadSetUploadsAPIClient interface {
-	ListMultipartReadSetUploads(context.Context, *ListMultipartReadSetUploadsInput, ...func(*Options)) (*ListMultipartReadSetUploadsOutput, error)
-}
-
-var _ ListMultipartReadSetUploadsAPIClient = (*Client)(nil)
 
 // ListMultipartReadSetUploadsPaginatorOptions is the paginator options for
 // ListMultipartReadSetUploads
@@ -247,6 +215,9 @@ func (p *ListMultipartReadSetUploadsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMultipartReadSetUploads(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +236,41 @@ func (p *ListMultipartReadSetUploadsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+type endpointPrefix_opListMultipartReadSetUploadsMiddleware struct {
+}
+
+func (*endpointPrefix_opListMultipartReadSetUploadsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListMultipartReadSetUploadsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListMultipartReadSetUploadsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListMultipartReadSetUploadsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListMultipartReadSetUploadsAPIClient is a client that implements the
+// ListMultipartReadSetUploads operation.
+type ListMultipartReadSetUploadsAPIClient interface {
+	ListMultipartReadSetUploads(context.Context, *ListMultipartReadSetUploadsInput, ...func(*Options)) (*ListMultipartReadSetUploadsOutput, error)
+}
+
+var _ ListMultipartReadSetUploadsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMultipartReadSetUploads(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeRegistrationFieldDefinitionsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRegistrationFieldDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeRegistrationFieldDefinitionsMiddlewares(sta
 	}
 	return nil
 }
-
-// DescribeRegistrationFieldDefinitionsAPIClient is a client that implements the
-// DescribeRegistrationFieldDefinitions operation.
-type DescribeRegistrationFieldDefinitionsAPIClient interface {
-	DescribeRegistrationFieldDefinitions(context.Context, *DescribeRegistrationFieldDefinitionsInput, ...func(*Options)) (*DescribeRegistrationFieldDefinitionsOutput, error)
-}
-
-var _ DescribeRegistrationFieldDefinitionsAPIClient = (*Client)(nil)
 
 // DescribeRegistrationFieldDefinitionsPaginatorOptions is the paginator options
 // for DescribeRegistrationFieldDefinitions
@@ -233,6 +228,9 @@ func (p *DescribeRegistrationFieldDefinitionsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRegistrationFieldDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *DescribeRegistrationFieldDefinitionsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// DescribeRegistrationFieldDefinitionsAPIClient is a client that implements the
+// DescribeRegistrationFieldDefinitions operation.
+type DescribeRegistrationFieldDefinitionsAPIClient interface {
+	DescribeRegistrationFieldDefinitions(context.Context, *DescribeRegistrationFieldDefinitionsInput, ...func(*Options)) (*DescribeRegistrationFieldDefinitionsOutput, error)
+}
+
+var _ DescribeRegistrationFieldDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRegistrationFieldDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

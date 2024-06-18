@@ -129,6 +129,9 @@ func (c *Client) addOperationListOrganizationInsightsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOrganizationInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListOrganizationInsightsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListOrganizationInsightsAPIClient is a client that implements the
-// ListOrganizationInsights operation.
-type ListOrganizationInsightsAPIClient interface {
-	ListOrganizationInsights(context.Context, *ListOrganizationInsightsInput, ...func(*Options)) (*ListOrganizationInsightsOutput, error)
-}
-
-var _ ListOrganizationInsightsAPIClient = (*Client)(nil)
 
 // ListOrganizationInsightsPaginatorOptions is the paginator options for
 // ListOrganizationInsights
@@ -227,6 +222,9 @@ func (p *ListOrganizationInsightsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOrganizationInsights(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListOrganizationInsightsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListOrganizationInsightsAPIClient is a client that implements the
+// ListOrganizationInsights operation.
+type ListOrganizationInsightsAPIClient interface {
+	ListOrganizationInsights(context.Context, *ListOrganizationInsightsInput, ...func(*Options)) (*ListOrganizationInsightsOutput, error)
+}
+
+var _ ListOrganizationInsightsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOrganizationInsights(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

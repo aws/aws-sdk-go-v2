@@ -122,6 +122,9 @@ func (c *Client) addOperationSearchQuantumTasksMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchQuantumTasksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationSearchQuantumTasksMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// SearchQuantumTasksAPIClient is a client that implements the SearchQuantumTasks
-// operation.
-type SearchQuantumTasksAPIClient interface {
-	SearchQuantumTasks(context.Context, *SearchQuantumTasksInput, ...func(*Options)) (*SearchQuantumTasksOutput, error)
-}
-
-var _ SearchQuantumTasksAPIClient = (*Client)(nil)
 
 // SearchQuantumTasksPaginatorOptions is the paginator options for
 // SearchQuantumTasks
@@ -218,6 +213,9 @@ func (p *SearchQuantumTasksPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchQuantumTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *SearchQuantumTasksPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// SearchQuantumTasksAPIClient is a client that implements the SearchQuantumTasks
+// operation.
+type SearchQuantumTasksAPIClient interface {
+	SearchQuantumTasks(context.Context, *SearchQuantumTasksInput, ...func(*Options)) (*SearchQuantumTasksOutput, error)
+}
+
+var _ SearchQuantumTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchQuantumTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

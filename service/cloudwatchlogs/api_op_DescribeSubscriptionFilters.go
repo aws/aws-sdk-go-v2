@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeSubscriptionFiltersMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSubscriptionFiltersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationDescribeSubscriptionFiltersMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeSubscriptionFiltersAPIClient is a client that implements the
-// DescribeSubscriptionFilters operation.
-type DescribeSubscriptionFiltersAPIClient interface {
-	DescribeSubscriptionFilters(context.Context, *DescribeSubscriptionFiltersInput, ...func(*Options)) (*DescribeSubscriptionFiltersOutput, error)
-}
-
-var _ DescribeSubscriptionFiltersAPIClient = (*Client)(nil)
 
 // DescribeSubscriptionFiltersPaginatorOptions is the paginator options for
 // DescribeSubscriptionFilters
@@ -221,6 +216,9 @@ func (p *DescribeSubscriptionFiltersPaginator) NextPage(ctx context.Context, opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSubscriptionFilters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeSubscriptionFiltersPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeSubscriptionFiltersAPIClient is a client that implements the
+// DescribeSubscriptionFilters operation.
+type DescribeSubscriptionFiltersAPIClient interface {
+	DescribeSubscriptionFilters(context.Context, *DescribeSubscriptionFiltersInput, ...func(*Options)) (*DescribeSubscriptionFiltersOutput, error)
+}
+
+var _ DescribeSubscriptionFiltersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSubscriptionFilters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

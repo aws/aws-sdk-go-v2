@@ -121,6 +121,9 @@ func (c *Client) addOperationListConfiguredAudienceModelAssociationsMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListConfiguredAudienceModelAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListConfiguredAudienceModelAssociationsMiddlewares(
 	}
 	return nil
 }
-
-// ListConfiguredAudienceModelAssociationsAPIClient is a client that implements
-// the ListConfiguredAudienceModelAssociations operation.
-type ListConfiguredAudienceModelAssociationsAPIClient interface {
-	ListConfiguredAudienceModelAssociations(context.Context, *ListConfiguredAudienceModelAssociationsInput, ...func(*Options)) (*ListConfiguredAudienceModelAssociationsOutput, error)
-}
-
-var _ ListConfiguredAudienceModelAssociationsAPIClient = (*Client)(nil)
 
 // ListConfiguredAudienceModelAssociationsPaginatorOptions is the paginator
 // options for ListConfiguredAudienceModelAssociations
@@ -221,6 +216,9 @@ func (p *ListConfiguredAudienceModelAssociationsPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConfiguredAudienceModelAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListConfiguredAudienceModelAssociationsPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListConfiguredAudienceModelAssociationsAPIClient is a client that implements
+// the ListConfiguredAudienceModelAssociations operation.
+type ListConfiguredAudienceModelAssociationsAPIClient interface {
+	ListConfiguredAudienceModelAssociations(context.Context, *ListConfiguredAudienceModelAssociationsInput, ...func(*Options)) (*ListConfiguredAudienceModelAssociationsOutput, error)
+}
+
+var _ ListConfiguredAudienceModelAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConfiguredAudienceModelAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

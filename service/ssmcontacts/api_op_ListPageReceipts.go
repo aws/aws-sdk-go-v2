@@ -115,6 +115,9 @@ func (c *Client) addOperationListPageReceiptsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPageReceiptsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListPageReceiptsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListPageReceiptsAPIClient is a client that implements the ListPageReceipts
-// operation.
-type ListPageReceiptsAPIClient interface {
-	ListPageReceipts(context.Context, *ListPageReceiptsInput, ...func(*Options)) (*ListPageReceiptsOutput, error)
-}
-
-var _ ListPageReceiptsAPIClient = (*Client)(nil)
 
 // ListPageReceiptsPaginatorOptions is the paginator options for ListPageReceipts
 type ListPageReceiptsPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListPageReceiptsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPageReceipts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListPageReceiptsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListPageReceiptsAPIClient is a client that implements the ListPageReceipts
+// operation.
+type ListPageReceiptsAPIClient interface {
+	ListPageReceipts(context.Context, *ListPageReceiptsInput, ...func(*Options)) (*ListPageReceiptsOutput, error)
+}
+
+var _ ListPageReceiptsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPageReceipts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -127,6 +127,9 @@ func (c *Client) addOperationListConstraintsForPortfolioMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListConstraintsForPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListConstraintsForPortfolioMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListConstraintsForPortfolioAPIClient is a client that implements the
-// ListConstraintsForPortfolio operation.
-type ListConstraintsForPortfolioAPIClient interface {
-	ListConstraintsForPortfolio(context.Context, *ListConstraintsForPortfolioInput, ...func(*Options)) (*ListConstraintsForPortfolioOutput, error)
-}
-
-var _ ListConstraintsForPortfolioAPIClient = (*Client)(nil)
 
 // ListConstraintsForPortfolioPaginatorOptions is the paginator options for
 // ListConstraintsForPortfolio
@@ -221,6 +216,9 @@ func (p *ListConstraintsForPortfolioPaginator) NextPage(ctx context.Context, opt
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConstraintsForPortfolio(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListConstraintsForPortfolioPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListConstraintsForPortfolioAPIClient is a client that implements the
+// ListConstraintsForPortfolio operation.
+type ListConstraintsForPortfolioAPIClient interface {
+	ListConstraintsForPortfolio(context.Context, *ListConstraintsForPortfolioInput, ...func(*Options)) (*ListConstraintsForPortfolioOutput, error)
+}
+
+var _ ListConstraintsForPortfolioAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConstraintsForPortfolio(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

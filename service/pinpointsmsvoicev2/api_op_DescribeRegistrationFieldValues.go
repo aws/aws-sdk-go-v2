@@ -144,6 +144,9 @@ func (c *Client) addOperationDescribeRegistrationFieldValuesMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRegistrationFieldValuesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,14 +170,6 @@ func (c *Client) addOperationDescribeRegistrationFieldValuesMiddlewares(stack *m
 	}
 	return nil
 }
-
-// DescribeRegistrationFieldValuesAPIClient is a client that implements the
-// DescribeRegistrationFieldValues operation.
-type DescribeRegistrationFieldValuesAPIClient interface {
-	DescribeRegistrationFieldValues(context.Context, *DescribeRegistrationFieldValuesInput, ...func(*Options)) (*DescribeRegistrationFieldValuesOutput, error)
-}
-
-var _ DescribeRegistrationFieldValuesAPIClient = (*Client)(nil)
 
 // DescribeRegistrationFieldValuesPaginatorOptions is the paginator options for
 // DescribeRegistrationFieldValues
@@ -242,6 +237,9 @@ func (p *DescribeRegistrationFieldValuesPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRegistrationFieldValues(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *DescribeRegistrationFieldValuesPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// DescribeRegistrationFieldValuesAPIClient is a client that implements the
+// DescribeRegistrationFieldValues operation.
+type DescribeRegistrationFieldValuesAPIClient interface {
+	DescribeRegistrationFieldValues(context.Context, *DescribeRegistrationFieldValuesInput, ...func(*Options)) (*DescribeRegistrationFieldValuesOutput, error)
+}
+
+var _ DescribeRegistrationFieldValuesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRegistrationFieldValues(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

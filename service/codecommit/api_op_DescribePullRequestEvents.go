@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribePullRequestEventsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribePullRequestEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationDescribePullRequestEventsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribePullRequestEventsAPIClient is a client that implements the
-// DescribePullRequestEvents operation.
-type DescribePullRequestEventsAPIClient interface {
-	DescribePullRequestEvents(context.Context, *DescribePullRequestEventsInput, ...func(*Options)) (*DescribePullRequestEventsOutput, error)
-}
-
-var _ DescribePullRequestEventsAPIClient = (*Client)(nil)
 
 // DescribePullRequestEventsPaginatorOptions is the paginator options for
 // DescribePullRequestEvents
@@ -229,6 +224,9 @@ func (p *DescribePullRequestEventsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribePullRequestEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *DescribePullRequestEventsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribePullRequestEventsAPIClient is a client that implements the
+// DescribePullRequestEvents operation.
+type DescribePullRequestEventsAPIClient interface {
+	DescribePullRequestEvents(context.Context, *DescribePullRequestEventsInput, ...func(*Options)) (*DescribePullRequestEventsOutput, error)
+}
+
+var _ DescribePullRequestEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribePullRequestEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

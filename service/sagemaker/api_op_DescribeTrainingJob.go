@@ -403,6 +403,9 @@ func (c *Client) addOperationDescribeTrainingJobMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrainingJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -426,14 +429,6 @@ func (c *Client) addOperationDescribeTrainingJobMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeTrainingJobAPIClient is a client that implements the
-// DescribeTrainingJob operation.
-type DescribeTrainingJobAPIClient interface {
-	DescribeTrainingJob(context.Context, *DescribeTrainingJobInput, ...func(*Options)) (*DescribeTrainingJobOutput, error)
-}
-
-var _ DescribeTrainingJobAPIClient = (*Client)(nil)
 
 // TrainingJobCompletedOrStoppedWaiterOptions are waiter options for
 // TrainingJobCompletedOrStoppedWaiter
@@ -555,7 +550,13 @@ func (w *TrainingJobCompletedOrStoppedWaiter) WaitForOutput(ctx context.Context,
 		}
 
 		out, err := w.client.DescribeTrainingJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -658,6 +659,14 @@ func trainingJobCompletedOrStoppedStateRetryable(ctx context.Context, input *Des
 
 	return true, nil
 }
+
+// DescribeTrainingJobAPIClient is a client that implements the
+// DescribeTrainingJob operation.
+type DescribeTrainingJobAPIClient interface {
+	DescribeTrainingJob(context.Context, *DescribeTrainingJobInput, ...func(*Options)) (*DescribeTrainingJobOutput, error)
+}
+
+var _ DescribeTrainingJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTrainingJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

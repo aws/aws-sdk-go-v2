@@ -141,6 +141,9 @@ func (c *Client) addOperationListTapesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTapes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,13 +164,6 @@ func (c *Client) addOperationListTapesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListTapesAPIClient is a client that implements the ListTapes operation.
-type ListTapesAPIClient interface {
-	ListTapes(context.Context, *ListTapesInput, ...func(*Options)) (*ListTapesOutput, error)
-}
-
-var _ ListTapesAPIClient = (*Client)(nil)
 
 // ListTapesPaginatorOptions is the paginator options for ListTapes
 type ListTapesPaginatorOptions struct {
@@ -232,6 +228,9 @@ func (p *ListTapesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTapes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +249,13 @@ func (p *ListTapesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListTapesAPIClient is a client that implements the ListTapes operation.
+type ListTapesAPIClient interface {
+	ListTapes(context.Context, *ListTapesInput, ...func(*Options)) (*ListTapesOutput, error)
+}
+
+var _ ListTapesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTapes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

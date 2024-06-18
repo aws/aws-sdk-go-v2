@@ -120,6 +120,9 @@ func (c *Client) addOperationListArchiveExportsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListArchiveExportsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListArchiveExportsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListArchiveExportsAPIClient is a client that implements the ListArchiveExports
-// operation.
-type ListArchiveExportsAPIClient interface {
-	ListArchiveExports(context.Context, *ListArchiveExportsInput, ...func(*Options)) (*ListArchiveExportsOutput, error)
-}
-
-var _ ListArchiveExportsAPIClient = (*Client)(nil)
 
 // ListArchiveExportsPaginatorOptions is the paginator options for
 // ListArchiveExports
@@ -217,6 +212,9 @@ func (p *ListArchiveExportsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListArchiveExports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListArchiveExportsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListArchiveExportsAPIClient is a client that implements the ListArchiveExports
+// operation.
+type ListArchiveExportsAPIClient interface {
+	ListArchiveExports(context.Context, *ListArchiveExportsInput, ...func(*Options)) (*ListArchiveExportsOutput, error)
+}
+
+var _ ListArchiveExportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListArchiveExports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

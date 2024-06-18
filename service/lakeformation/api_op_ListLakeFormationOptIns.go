@@ -117,6 +117,9 @@ func (c *Client) addOperationListLakeFormationOptInsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLakeFormationOptInsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListLakeFormationOptInsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListLakeFormationOptInsAPIClient is a client that implements the
-// ListLakeFormationOptIns operation.
-type ListLakeFormationOptInsAPIClient interface {
-	ListLakeFormationOptIns(context.Context, *ListLakeFormationOptInsInput, ...func(*Options)) (*ListLakeFormationOptInsOutput, error)
-}
-
-var _ ListLakeFormationOptInsAPIClient = (*Client)(nil)
 
 // ListLakeFormationOptInsPaginatorOptions is the paginator options for
 // ListLakeFormationOptIns
@@ -214,6 +209,9 @@ func (p *ListLakeFormationOptInsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLakeFormationOptIns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListLakeFormationOptInsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListLakeFormationOptInsAPIClient is a client that implements the
+// ListLakeFormationOptIns operation.
+type ListLakeFormationOptInsAPIClient interface {
+	ListLakeFormationOptIns(context.Context, *ListLakeFormationOptInsInput, ...func(*Options)) (*ListLakeFormationOptInsOutput, error)
+}
+
+var _ ListLakeFormationOptInsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLakeFormationOptIns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

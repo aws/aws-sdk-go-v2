@@ -121,6 +121,9 @@ func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRoomMembershipsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListRoomMembershipsAPIClient is a client that implements the
-// ListRoomMemberships operation.
-type ListRoomMembershipsAPIClient interface {
-	ListRoomMemberships(context.Context, *ListRoomMembershipsInput, ...func(*Options)) (*ListRoomMembershipsOutput, error)
-}
-
-var _ ListRoomMembershipsAPIClient = (*Client)(nil)
 
 // ListRoomMembershipsPaginatorOptions is the paginator options for
 // ListRoomMemberships
@@ -217,6 +212,9 @@ func (p *ListRoomMembershipsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRoomMemberships(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListRoomMembershipsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListRoomMembershipsAPIClient is a client that implements the
+// ListRoomMemberships operation.
+type ListRoomMembershipsAPIClient interface {
+	ListRoomMemberships(context.Context, *ListRoomMembershipsInput, ...func(*Options)) (*ListRoomMembershipsOutput, error)
+}
+
+var _ ListRoomMembershipsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRoomMemberships(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

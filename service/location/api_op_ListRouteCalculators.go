@@ -119,6 +119,9 @@ func (c *Client) addOperationListRouteCalculatorsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListRouteCalculatorsMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,41 +145,6 @@ func (c *Client) addOperationListRouteCalculatorsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-type endpointPrefix_opListRouteCalculatorsMiddleware struct {
-}
-
-func (*endpointPrefix_opListRouteCalculatorsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListRouteCalculatorsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "cp.routes." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListRouteCalculatorsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListRouteCalculatorsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListRouteCalculatorsAPIClient is a client that implements the
-// ListRouteCalculators operation.
-type ListRouteCalculatorsAPIClient interface {
-	ListRouteCalculators(context.Context, *ListRouteCalculatorsInput, ...func(*Options)) (*ListRouteCalculatorsOutput, error)
-}
-
-var _ ListRouteCalculatorsAPIClient = (*Client)(nil)
 
 // ListRouteCalculatorsPaginatorOptions is the paginator options for
 // ListRouteCalculators
@@ -244,6 +212,9 @@ func (p *ListRouteCalculatorsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRouteCalculators(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +233,41 @@ func (p *ListRouteCalculatorsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+type endpointPrefix_opListRouteCalculatorsMiddleware struct {
+}
+
+func (*endpointPrefix_opListRouteCalculatorsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListRouteCalculatorsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "cp.routes." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListRouteCalculatorsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListRouteCalculatorsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListRouteCalculatorsAPIClient is a client that implements the
+// ListRouteCalculators operation.
+type ListRouteCalculatorsAPIClient interface {
+	ListRouteCalculators(context.Context, *ListRouteCalculatorsInput, ...func(*Options)) (*ListRouteCalculatorsOutput, error)
+}
+
+var _ ListRouteCalculatorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRouteCalculators(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

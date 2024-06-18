@@ -131,6 +131,9 @@ func (c *Client) addOperationListUserPoolsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUserPoolsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,13 +157,6 @@ func (c *Client) addOperationListUserPoolsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListUserPoolsAPIClient is a client that implements the ListUserPools operation.
-type ListUserPoolsAPIClient interface {
-	ListUserPools(context.Context, *ListUserPoolsInput, ...func(*Options)) (*ListUserPoolsOutput, error)
-}
-
-var _ ListUserPoolsAPIClient = (*Client)(nil)
 
 // ListUserPoolsPaginatorOptions is the paginator options for ListUserPools
 type ListUserPoolsPaginatorOptions struct {
@@ -226,6 +222,9 @@ func (p *ListUserPoolsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUserPools(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +243,13 @@ func (p *ListUserPoolsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListUserPoolsAPIClient is a client that implements the ListUserPools operation.
+type ListUserPoolsAPIClient interface {
+	ListUserPools(context.Context, *ListUserPoolsInput, ...func(*Options)) (*ListUserPoolsOutput, error)
+}
+
+var _ ListUserPoolsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUserPools(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

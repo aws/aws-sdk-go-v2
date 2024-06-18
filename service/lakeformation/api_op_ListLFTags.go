@@ -123,6 +123,9 @@ func (c *Client) addOperationListLFTagsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLFTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,13 +146,6 @@ func (c *Client) addOperationListLFTagsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListLFTagsAPIClient is a client that implements the ListLFTags operation.
-type ListLFTagsAPIClient interface {
-	ListLFTags(context.Context, *ListLFTagsInput, ...func(*Options)) (*ListLFTagsOutput, error)
-}
-
-var _ ListLFTagsAPIClient = (*Client)(nil)
 
 // ListLFTagsPaginatorOptions is the paginator options for ListLFTags
 type ListLFTagsPaginatorOptions struct {
@@ -214,6 +210,9 @@ func (p *ListLFTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLFTags(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +231,13 @@ func (p *ListLFTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListLFTagsAPIClient is a client that implements the ListLFTags operation.
+type ListLFTagsAPIClient interface {
+	ListLFTags(context.Context, *ListLFTagsInput, ...func(*Options)) (*ListLFTagsOutput, error)
+}
+
+var _ ListLFTagsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLFTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

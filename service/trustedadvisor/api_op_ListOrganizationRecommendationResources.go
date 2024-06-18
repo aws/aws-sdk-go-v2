@@ -132,6 +132,9 @@ func (c *Client) addOperationListOrganizationRecommendationResourcesMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOrganizationRecommendationResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListOrganizationRecommendationResourcesMiddlewares(
 	}
 	return nil
 }
-
-// ListOrganizationRecommendationResourcesAPIClient is a client that implements
-// the ListOrganizationRecommendationResources operation.
-type ListOrganizationRecommendationResourcesAPIClient interface {
-	ListOrganizationRecommendationResources(context.Context, *ListOrganizationRecommendationResourcesInput, ...func(*Options)) (*ListOrganizationRecommendationResourcesOutput, error)
-}
-
-var _ ListOrganizationRecommendationResourcesAPIClient = (*Client)(nil)
 
 // ListOrganizationRecommendationResourcesPaginatorOptions is the paginator
 // options for ListOrganizationRecommendationResources
@@ -230,6 +225,9 @@ func (p *ListOrganizationRecommendationResourcesPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOrganizationRecommendationResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListOrganizationRecommendationResourcesPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListOrganizationRecommendationResourcesAPIClient is a client that implements
+// the ListOrganizationRecommendationResources operation.
+type ListOrganizationRecommendationResourcesAPIClient interface {
+	ListOrganizationRecommendationResources(context.Context, *ListOrganizationRecommendationResourcesInput, ...func(*Options)) (*ListOrganizationRecommendationResourcesOutput, error)
+}
+
+var _ ListOrganizationRecommendationResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOrganizationRecommendationResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

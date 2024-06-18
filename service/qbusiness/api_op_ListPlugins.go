@@ -119,6 +119,9 @@ func (c *Client) addOperationListPluginsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPluginsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListPluginsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListPluginsAPIClient is a client that implements the ListPlugins operation.
-type ListPluginsAPIClient interface {
-	ListPlugins(context.Context, *ListPluginsInput, ...func(*Options)) (*ListPluginsOutput, error)
-}
-
-var _ ListPluginsAPIClient = (*Client)(nil)
 
 // ListPluginsPaginatorOptions is the paginator options for ListPlugins
 type ListPluginsPaginatorOptions struct {
@@ -213,6 +209,9 @@ func (p *ListPluginsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPlugins(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +230,13 @@ func (p *ListPluginsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListPluginsAPIClient is a client that implements the ListPlugins operation.
+type ListPluginsAPIClient interface {
+	ListPlugins(context.Context, *ListPluginsInput, ...func(*Options)) (*ListPluginsOutput, error)
+}
+
+var _ ListPluginsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPlugins(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

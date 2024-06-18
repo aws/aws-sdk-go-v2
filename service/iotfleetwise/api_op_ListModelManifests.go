@@ -124,6 +124,9 @@ func (c *Client) addOperationListModelManifestsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelManifests(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListModelManifestsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListModelManifestsAPIClient is a client that implements the ListModelManifests
-// operation.
-type ListModelManifestsAPIClient interface {
-	ListModelManifests(context.Context, *ListModelManifestsInput, ...func(*Options)) (*ListModelManifestsOutput, error)
-}
-
-var _ ListModelManifestsAPIClient = (*Client)(nil)
 
 // ListModelManifestsPaginatorOptions is the paginator options for
 // ListModelManifests
@@ -217,6 +212,9 @@ func (p *ListModelManifestsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelManifests(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListModelManifestsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListModelManifestsAPIClient is a client that implements the ListModelManifests
+// operation.
+type ListModelManifestsAPIClient interface {
+	ListModelManifests(context.Context, *ListModelManifestsInput, ...func(*Options)) (*ListModelManifestsOutput, error)
+}
+
+var _ ListModelManifestsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelManifests(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

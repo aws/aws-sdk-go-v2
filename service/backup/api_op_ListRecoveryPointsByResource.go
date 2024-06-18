@@ -142,6 +142,9 @@ func (c *Client) addOperationListRecoveryPointsByResourceMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRecoveryPointsByResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationListRecoveryPointsByResourceMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListRecoveryPointsByResourceAPIClient is a client that implements the
-// ListRecoveryPointsByResource operation.
-type ListRecoveryPointsByResourceAPIClient interface {
-	ListRecoveryPointsByResource(context.Context, *ListRecoveryPointsByResourceInput, ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error)
-}
-
-var _ ListRecoveryPointsByResourceAPIClient = (*Client)(nil)
 
 // ListRecoveryPointsByResourcePaginatorOptions is the paginator options for
 // ListRecoveryPointsByResource
@@ -242,6 +237,9 @@ func (p *ListRecoveryPointsByResourcePaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecoveryPointsByResource(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *ListRecoveryPointsByResourcePaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListRecoveryPointsByResourceAPIClient is a client that implements the
+// ListRecoveryPointsByResource operation.
+type ListRecoveryPointsByResourceAPIClient interface {
+	ListRecoveryPointsByResource(context.Context, *ListRecoveryPointsByResourceInput, ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error)
+}
+
+var _ ListRecoveryPointsByResourceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecoveryPointsByResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

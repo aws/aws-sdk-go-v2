@@ -107,6 +107,9 @@ func (c *Client) addOperationUpdateResourceProfileMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateResourceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}

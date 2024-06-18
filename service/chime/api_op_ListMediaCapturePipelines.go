@@ -122,6 +122,9 @@ func (c *Client) addOperationListMediaCapturePipelinesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMediaCapturePipelines(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListMediaCapturePipelinesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListMediaCapturePipelinesAPIClient is a client that implements the
-// ListMediaCapturePipelines operation.
-type ListMediaCapturePipelinesAPIClient interface {
-	ListMediaCapturePipelines(context.Context, *ListMediaCapturePipelinesInput, ...func(*Options)) (*ListMediaCapturePipelinesOutput, error)
-}
-
-var _ ListMediaCapturePipelinesAPIClient = (*Client)(nil)
 
 // ListMediaCapturePipelinesPaginatorOptions is the paginator options for
 // ListMediaCapturePipelines
@@ -216,6 +211,9 @@ func (p *ListMediaCapturePipelinesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMediaCapturePipelines(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListMediaCapturePipelinesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListMediaCapturePipelinesAPIClient is a client that implements the
+// ListMediaCapturePipelines operation.
+type ListMediaCapturePipelinesAPIClient interface {
+	ListMediaCapturePipelines(context.Context, *ListMediaCapturePipelinesInput, ...func(*Options)) (*ListMediaCapturePipelinesOutput, error)
+}
+
+var _ ListMediaCapturePipelinesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMediaCapturePipelines(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

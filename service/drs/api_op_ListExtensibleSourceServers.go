@@ -118,6 +118,9 @@ func (c *Client) addOperationListExtensibleSourceServersMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListExtensibleSourceServersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListExtensibleSourceServersMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListExtensibleSourceServersAPIClient is a client that implements the
-// ListExtensibleSourceServers operation.
-type ListExtensibleSourceServersAPIClient interface {
-	ListExtensibleSourceServers(context.Context, *ListExtensibleSourceServersInput, ...func(*Options)) (*ListExtensibleSourceServersOutput, error)
-}
-
-var _ ListExtensibleSourceServersAPIClient = (*Client)(nil)
 
 // ListExtensibleSourceServersPaginatorOptions is the paginator options for
 // ListExtensibleSourceServers
@@ -216,6 +211,9 @@ func (p *ListExtensibleSourceServersPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExtensibleSourceServers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListExtensibleSourceServersPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListExtensibleSourceServersAPIClient is a client that implements the
+// ListExtensibleSourceServers operation.
+type ListExtensibleSourceServersAPIClient interface {
+	ListExtensibleSourceServers(context.Context, *ListExtensibleSourceServersInput, ...func(*Options)) (*ListExtensibleSourceServersOutput, error)
+}
+
+var _ ListExtensibleSourceServersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExtensibleSourceServers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

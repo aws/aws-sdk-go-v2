@@ -122,6 +122,9 @@ func (c *Client) addOperationListCompositionsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCompositions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListCompositionsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListCompositionsAPIClient is a client that implements the ListCompositions
-// operation.
-type ListCompositionsAPIClient interface {
-	ListCompositions(context.Context, *ListCompositionsInput, ...func(*Options)) (*ListCompositionsOutput, error)
-}
-
-var _ ListCompositionsAPIClient = (*Client)(nil)
 
 // ListCompositionsPaginatorOptions is the paginator options for ListCompositions
 type ListCompositionsPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *ListCompositionsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCompositions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListCompositionsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListCompositionsAPIClient is a client that implements the ListCompositions
+// operation.
+type ListCompositionsAPIClient interface {
+	ListCompositions(context.Context, *ListCompositionsInput, ...func(*Options)) (*ListCompositionsOutput, error)
+}
+
+var _ ListCompositionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCompositions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

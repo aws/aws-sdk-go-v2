@@ -105,6 +105,9 @@ func (c *Client) addOperationDeleteFleetAdvisorDatabasesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteFleetAdvisorDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}

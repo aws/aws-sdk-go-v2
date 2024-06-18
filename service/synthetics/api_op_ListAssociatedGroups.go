@@ -122,6 +122,9 @@ func (c *Client) addOperationListAssociatedGroupsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssociatedGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListAssociatedGroupsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListAssociatedGroupsAPIClient is a client that implements the
-// ListAssociatedGroups operation.
-type ListAssociatedGroupsAPIClient interface {
-	ListAssociatedGroups(context.Context, *ListAssociatedGroupsInput, ...func(*Options)) (*ListAssociatedGroupsOutput, error)
-}
-
-var _ ListAssociatedGroupsAPIClient = (*Client)(nil)
 
 // ListAssociatedGroupsPaginatorOptions is the paginator options for
 // ListAssociatedGroups
@@ -220,6 +215,9 @@ func (p *ListAssociatedGroupsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListAssociatedGroupsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListAssociatedGroupsAPIClient is a client that implements the
+// ListAssociatedGroups operation.
+type ListAssociatedGroupsAPIClient interface {
+	ListAssociatedGroups(context.Context, *ListAssociatedGroupsInput, ...func(*Options)) (*ListAssociatedGroupsOutput, error)
+}
+
+var _ ListAssociatedGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

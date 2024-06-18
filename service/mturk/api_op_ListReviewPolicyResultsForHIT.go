@@ -149,6 +149,9 @@ func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListReviewPolicyResultsForHITValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -172,14 +175,6 @@ func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListReviewPolicyResultsForHITAPIClient is a client that implements the
-// ListReviewPolicyResultsForHIT operation.
-type ListReviewPolicyResultsForHITAPIClient interface {
-	ListReviewPolicyResultsForHIT(context.Context, *ListReviewPolicyResultsForHITInput, ...func(*Options)) (*ListReviewPolicyResultsForHITOutput, error)
-}
-
-var _ ListReviewPolicyResultsForHITAPIClient = (*Client)(nil)
 
 // ListReviewPolicyResultsForHITPaginatorOptions is the paginator options for
 // ListReviewPolicyResultsForHIT
@@ -247,6 +242,9 @@ func (p *ListReviewPolicyResultsForHITPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReviewPolicyResultsForHIT(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *ListReviewPolicyResultsForHITPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListReviewPolicyResultsForHITAPIClient is a client that implements the
+// ListReviewPolicyResultsForHIT operation.
+type ListReviewPolicyResultsForHITAPIClient interface {
+	ListReviewPolicyResultsForHIT(context.Context, *ListReviewPolicyResultsForHITInput, ...func(*Options)) (*ListReviewPolicyResultsForHITOutput, error)
+}
+
+var _ ListReviewPolicyResultsForHITAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReviewPolicyResultsForHIT(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

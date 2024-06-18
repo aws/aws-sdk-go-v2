@@ -140,6 +140,9 @@ func (c *Client) addOperationListCreateAccountStatusMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCreateAccountStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListCreateAccountStatusMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListCreateAccountStatusAPIClient is a client that implements the
-// ListCreateAccountStatus operation.
-type ListCreateAccountStatusAPIClient interface {
-	ListCreateAccountStatus(context.Context, *ListCreateAccountStatusInput, ...func(*Options)) (*ListCreateAccountStatusOutput, error)
-}
-
-var _ ListCreateAccountStatusAPIClient = (*Client)(nil)
 
 // ListCreateAccountStatusPaginatorOptions is the paginator options for
 // ListCreateAccountStatus
@@ -242,6 +237,9 @@ func (p *ListCreateAccountStatusPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCreateAccountStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *ListCreateAccountStatusPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListCreateAccountStatusAPIClient is a client that implements the
+// ListCreateAccountStatus operation.
+type ListCreateAccountStatusAPIClient interface {
+	ListCreateAccountStatus(context.Context, *ListCreateAccountStatusInput, ...func(*Options)) (*ListCreateAccountStatusOutput, error)
+}
+
+var _ ListCreateAccountStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCreateAccountStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

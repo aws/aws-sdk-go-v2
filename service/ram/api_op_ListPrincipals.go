@@ -177,6 +177,9 @@ func (c *Client) addOperationListPrincipalsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPrincipalsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -200,14 +203,6 @@ func (c *Client) addOperationListPrincipalsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListPrincipalsAPIClient is a client that implements the ListPrincipals
-// operation.
-type ListPrincipalsAPIClient interface {
-	ListPrincipals(context.Context, *ListPrincipalsInput, ...func(*Options)) (*ListPrincipalsOutput, error)
-}
-
-var _ ListPrincipalsAPIClient = (*Client)(nil)
 
 // ListPrincipalsPaginatorOptions is the paginator options for ListPrincipals
 type ListPrincipalsPaginatorOptions struct {
@@ -280,6 +275,9 @@ func (p *ListPrincipalsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrincipals(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -298,6 +296,14 @@ func (p *ListPrincipalsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListPrincipalsAPIClient is a client that implements the ListPrincipals
+// operation.
+type ListPrincipalsAPIClient interface {
+	ListPrincipals(context.Context, *ListPrincipalsInput, ...func(*Options)) (*ListPrincipalsOutput, error)
+}
+
+var _ ListPrincipalsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrincipals(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

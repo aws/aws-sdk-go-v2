@@ -147,6 +147,9 @@ func (c *Client) addOperationDescribeCustomDomainsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCustomDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationDescribeCustomDomainsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeCustomDomainsAPIClient is a client that implements the
-// DescribeCustomDomains operation.
-type DescribeCustomDomainsAPIClient interface {
-	DescribeCustomDomains(context.Context, *DescribeCustomDomainsInput, ...func(*Options)) (*DescribeCustomDomainsOutput, error)
-}
-
-var _ DescribeCustomDomainsAPIClient = (*Client)(nil)
 
 // DescribeCustomDomainsPaginatorOptions is the paginator options for
 // DescribeCustomDomains
@@ -247,6 +242,9 @@ func (p *DescribeCustomDomainsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCustomDomains(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *DescribeCustomDomainsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeCustomDomainsAPIClient is a client that implements the
+// DescribeCustomDomains operation.
+type DescribeCustomDomainsAPIClient interface {
+	DescribeCustomDomains(context.Context, *DescribeCustomDomainsInput, ...func(*Options)) (*DescribeCustomDomainsOutput, error)
+}
+
+var _ DescribeCustomDomainsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCustomDomains(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

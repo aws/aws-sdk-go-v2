@@ -128,6 +128,9 @@ func (c *Client) addOperationListWorldExportJobsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorldExportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListWorldExportJobsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListWorldExportJobsAPIClient is a client that implements the
-// ListWorldExportJobs operation.
-type ListWorldExportJobsAPIClient interface {
-	ListWorldExportJobs(context.Context, *ListWorldExportJobsInput, ...func(*Options)) (*ListWorldExportJobsOutput, error)
-}
-
-var _ ListWorldExportJobsAPIClient = (*Client)(nil)
 
 // ListWorldExportJobsPaginatorOptions is the paginator options for
 // ListWorldExportJobs
@@ -226,6 +221,9 @@ func (p *ListWorldExportJobsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorldExportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListWorldExportJobsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListWorldExportJobsAPIClient is a client that implements the
+// ListWorldExportJobs operation.
+type ListWorldExportJobsAPIClient interface {
+	ListWorldExportJobs(context.Context, *ListWorldExportJobsInput, ...func(*Options)) (*ListWorldExportJobsOutput, error)
+}
+
+var _ ListWorldExportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorldExportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

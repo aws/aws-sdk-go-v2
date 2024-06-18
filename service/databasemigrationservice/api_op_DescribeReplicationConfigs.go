@@ -121,6 +121,9 @@ func (c *Client) addOperationDescribeReplicationConfigsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeReplicationConfigsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeReplicationConfigsAPIClient is a client that implements the
-// DescribeReplicationConfigs operation.
-type DescribeReplicationConfigsAPIClient interface {
-	DescribeReplicationConfigs(context.Context, *DescribeReplicationConfigsInput, ...func(*Options)) (*DescribeReplicationConfigsOutput, error)
-}
-
-var _ DescribeReplicationConfigsAPIClient = (*Client)(nil)
 
 // DescribeReplicationConfigsPaginatorOptions is the paginator options for
 // DescribeReplicationConfigs
@@ -221,6 +216,9 @@ func (p *DescribeReplicationConfigsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReplicationConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeReplicationConfigsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeReplicationConfigsAPIClient is a client that implements the
+// DescribeReplicationConfigs operation.
+type DescribeReplicationConfigsAPIClient interface {
+	DescribeReplicationConfigs(context.Context, *DescribeReplicationConfigsInput, ...func(*Options)) (*DescribeReplicationConfigsOutput, error)
+}
+
+var _ DescribeReplicationConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -133,6 +133,9 @@ func (c *Client) addOperationDescribeSnapshotSchedulesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSnapshotSchedules(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationDescribeSnapshotSchedulesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeSnapshotSchedulesAPIClient is a client that implements the
-// DescribeSnapshotSchedules operation.
-type DescribeSnapshotSchedulesAPIClient interface {
-	DescribeSnapshotSchedules(context.Context, *DescribeSnapshotSchedulesInput, ...func(*Options)) (*DescribeSnapshotSchedulesOutput, error)
-}
-
-var _ DescribeSnapshotSchedulesAPIClient = (*Client)(nil)
 
 // DescribeSnapshotSchedulesPaginatorOptions is the paginator options for
 // DescribeSnapshotSchedules
@@ -230,6 +225,9 @@ func (p *DescribeSnapshotSchedulesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSnapshotSchedules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *DescribeSnapshotSchedulesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeSnapshotSchedulesAPIClient is a client that implements the
+// DescribeSnapshotSchedules operation.
+type DescribeSnapshotSchedulesAPIClient interface {
+	DescribeSnapshotSchedules(context.Context, *DescribeSnapshotSchedulesInput, ...func(*Options)) (*DescribeSnapshotSchedulesOutput, error)
+}
+
+var _ DescribeSnapshotSchedulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSnapshotSchedules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

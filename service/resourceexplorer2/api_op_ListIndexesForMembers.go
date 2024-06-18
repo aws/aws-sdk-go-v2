@@ -135,6 +135,9 @@ func (c *Client) addOperationListIndexesForMembersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIndexesForMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListIndexesForMembersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListIndexesForMembersAPIClient is a client that implements the
-// ListIndexesForMembers operation.
-type ListIndexesForMembersAPIClient interface {
-	ListIndexesForMembers(context.Context, *ListIndexesForMembersInput, ...func(*Options)) (*ListIndexesForMembersOutput, error)
-}
-
-var _ ListIndexesForMembersAPIClient = (*Client)(nil)
 
 // ListIndexesForMembersPaginatorOptions is the paginator options for
 // ListIndexesForMembers
@@ -240,6 +235,9 @@ func (p *ListIndexesForMembersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIndexesForMembers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +256,14 @@ func (p *ListIndexesForMembersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListIndexesForMembersAPIClient is a client that implements the
+// ListIndexesForMembers operation.
+type ListIndexesForMembersAPIClient interface {
+	ListIndexesForMembers(context.Context, *ListIndexesForMembersInput, ...func(*Options)) (*ListIndexesForMembersOutput, error)
+}
+
+var _ ListIndexesForMembersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIndexesForMembers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationListCollaborationsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCollaborations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListCollaborationsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListCollaborationsAPIClient is a client that implements the ListCollaborations
-// operation.
-type ListCollaborationsAPIClient interface {
-	ListCollaborations(context.Context, *ListCollaborationsInput, ...func(*Options)) (*ListCollaborationsOutput, error)
-}
-
-var _ ListCollaborationsAPIClient = (*Client)(nil)
 
 // ListCollaborationsPaginatorOptions is the paginator options for
 // ListCollaborations
@@ -214,6 +209,9 @@ func (p *ListCollaborationsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCollaborations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListCollaborationsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListCollaborationsAPIClient is a client that implements the ListCollaborations
+// operation.
+type ListCollaborationsAPIClient interface {
+	ListCollaborations(context.Context, *ListCollaborationsInput, ...func(*Options)) (*ListCollaborationsOutput, error)
+}
+
+var _ ListCollaborationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCollaborations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

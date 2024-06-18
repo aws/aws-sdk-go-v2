@@ -120,6 +120,9 @@ func (c *Client) addOperationListAlertsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAlertsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,13 +146,6 @@ func (c *Client) addOperationListAlertsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListAlertsAPIClient is a client that implements the ListAlerts operation.
-type ListAlertsAPIClient interface {
-	ListAlerts(context.Context, *ListAlertsInput, ...func(*Options)) (*ListAlertsOutput, error)
-}
-
-var _ ListAlertsAPIClient = (*Client)(nil)
 
 // ListAlertsPaginatorOptions is the paginator options for ListAlerts
 type ListAlertsPaginatorOptions struct {
@@ -216,6 +212,9 @@ func (p *ListAlertsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAlerts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +233,13 @@ func (p *ListAlertsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListAlertsAPIClient is a client that implements the ListAlerts operation.
+type ListAlertsAPIClient interface {
+	ListAlerts(context.Context, *ListAlertsInput, ...func(*Options)) (*ListAlertsOutput, error)
+}
+
+var _ ListAlertsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAlerts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

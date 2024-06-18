@@ -132,6 +132,9 @@ func (c *Client) addOperationListIdentityProviderConfigsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIdentityProviderConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListIdentityProviderConfigsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListIdentityProviderConfigsAPIClient is a client that implements the
-// ListIdentityProviderConfigs operation.
-type ListIdentityProviderConfigsAPIClient interface {
-	ListIdentityProviderConfigs(context.Context, *ListIdentityProviderConfigsInput, ...func(*Options)) (*ListIdentityProviderConfigsOutput, error)
-}
-
-var _ ListIdentityProviderConfigsAPIClient = (*Client)(nil)
 
 // ListIdentityProviderConfigsPaginatorOptions is the paginator options for
 // ListIdentityProviderConfigs
@@ -235,6 +230,9 @@ func (p *ListIdentityProviderConfigsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIdentityProviderConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListIdentityProviderConfigsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListIdentityProviderConfigsAPIClient is a client that implements the
+// ListIdentityProviderConfigs operation.
+type ListIdentityProviderConfigsAPIClient interface {
+	ListIdentityProviderConfigs(context.Context, *ListIdentityProviderConfigsInput, ...func(*Options)) (*ListIdentityProviderConfigsOutput, error)
+}
+
+var _ ListIdentityProviderConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIdentityProviderConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

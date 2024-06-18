@@ -119,6 +119,9 @@ func (c *Client) addOperationListDatasourcePackagesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDatasourcePackagesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListDatasourcePackagesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListDatasourcePackagesAPIClient is a client that implements the
-// ListDatasourcePackages operation.
-type ListDatasourcePackagesAPIClient interface {
-	ListDatasourcePackages(context.Context, *ListDatasourcePackagesInput, ...func(*Options)) (*ListDatasourcePackagesOutput, error)
-}
-
-var _ ListDatasourcePackagesAPIClient = (*Client)(nil)
 
 // ListDatasourcePackagesPaginatorOptions is the paginator options for
 // ListDatasourcePackages
@@ -215,6 +210,9 @@ func (p *ListDatasourcePackagesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDatasourcePackages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListDatasourcePackagesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListDatasourcePackagesAPIClient is a client that implements the
+// ListDatasourcePackages operation.
+type ListDatasourcePackagesAPIClient interface {
+	ListDatasourcePackages(context.Context, *ListDatasourcePackagesInput, ...func(*Options)) (*ListDatasourcePackagesOutput, error)
+}
+
+var _ ListDatasourcePackagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDatasourcePackages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

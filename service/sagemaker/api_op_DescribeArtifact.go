@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeArtifactMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}

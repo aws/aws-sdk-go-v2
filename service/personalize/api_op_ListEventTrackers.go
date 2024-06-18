@@ -118,6 +118,9 @@ func (c *Client) addOperationListEventTrackersMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventTrackers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListEventTrackersMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListEventTrackersAPIClient is a client that implements the ListEventTrackers
-// operation.
-type ListEventTrackersAPIClient interface {
-	ListEventTrackers(context.Context, *ListEventTrackersInput, ...func(*Options)) (*ListEventTrackersOutput, error)
-}
-
-var _ ListEventTrackersAPIClient = (*Client)(nil)
 
 // ListEventTrackersPaginatorOptions is the paginator options for ListEventTrackers
 type ListEventTrackersPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *ListEventTrackersPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEventTrackers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListEventTrackersPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListEventTrackersAPIClient is a client that implements the ListEventTrackers
+// operation.
+type ListEventTrackersAPIClient interface {
+	ListEventTrackers(context.Context, *ListEventTrackersInput, ...func(*Options)) (*ListEventTrackersOutput, error)
+}
+
+var _ ListEventTrackersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEventTrackers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

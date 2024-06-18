@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribeDeliveryDestinationsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDeliveryDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationDescribeDeliveryDestinationsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeDeliveryDestinationsAPIClient is a client that implements the
-// DescribeDeliveryDestinations operation.
-type DescribeDeliveryDestinationsAPIClient interface {
-	DescribeDeliveryDestinations(context.Context, *DescribeDeliveryDestinationsInput, ...func(*Options)) (*DescribeDeliveryDestinationsOutput, error)
-}
-
-var _ DescribeDeliveryDestinationsAPIClient = (*Client)(nil)
 
 // DescribeDeliveryDestinationsPaginatorOptions is the paginator options for
 // DescribeDeliveryDestinations
@@ -209,6 +204,9 @@ func (p *DescribeDeliveryDestinationsPaginator) NextPage(ctx context.Context, op
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDeliveryDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *DescribeDeliveryDestinationsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeDeliveryDestinationsAPIClient is a client that implements the
+// DescribeDeliveryDestinations operation.
+type DescribeDeliveryDestinationsAPIClient interface {
+	DescribeDeliveryDestinations(context.Context, *DescribeDeliveryDestinationsInput, ...func(*Options)) (*DescribeDeliveryDestinationsOutput, error)
+}
+
+var _ DescribeDeliveryDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDeliveryDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

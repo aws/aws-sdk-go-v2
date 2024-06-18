@@ -142,6 +142,9 @@ func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStreams(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -162,13 +165,6 @@ func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListStreamsAPIClient is a client that implements the ListStreams operation.
-type ListStreamsAPIClient interface {
-	ListStreams(context.Context, *ListStreamsInput, ...func(*Options)) (*ListStreamsOutput, error)
-}
-
-var _ ListStreamsAPIClient = (*Client)(nil)
 
 // ListStreamsPaginatorOptions is the paginator options for ListStreams
 type ListStreamsPaginatorOptions struct {
@@ -234,6 +230,9 @@ func (p *ListStreamsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreams(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +251,13 @@ func (p *ListStreamsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListStreamsAPIClient is a client that implements the ListStreams operation.
+type ListStreamsAPIClient interface {
+	ListStreams(context.Context, *ListStreamsInput, ...func(*Options)) (*ListStreamsOutput, error)
+}
+
+var _ ListStreamsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreams(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

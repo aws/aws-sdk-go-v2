@@ -180,6 +180,9 @@ func (c *Client) addOperationDescribeAssetMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeAssetMiddleware(stack); err != nil {
 		return err
 	}
@@ -206,40 +209,6 @@ func (c *Client) addOperationDescribeAssetMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-type endpointPrefix_opDescribeAssetMiddleware struct {
-}
-
-func (*endpointPrefix_opDescribeAssetMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opDescribeAssetMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opDescribeAssetMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opDescribeAssetMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// DescribeAssetAPIClient is a client that implements the DescribeAsset operation.
-type DescribeAssetAPIClient interface {
-	DescribeAsset(context.Context, *DescribeAssetInput, ...func(*Options)) (*DescribeAssetOutput, error)
-}
-
-var _ DescribeAssetAPIClient = (*Client)(nil)
 
 // AssetActiveWaiterOptions are waiter options for AssetActiveWaiter
 type AssetActiveWaiterOptions struct {
@@ -355,7 +324,13 @@ func (w *AssetActiveWaiter) WaitForOutput(ctx context.Context, params *DescribeA
 		}
 
 		out, err := w.client.DescribeAsset(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -545,7 +520,13 @@ func (w *AssetNotExistsWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeAsset(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -592,6 +573,40 @@ func assetNotExistsStateRetryable(ctx context.Context, input *DescribeAssetInput
 
 	return true, nil
 }
+
+type endpointPrefix_opDescribeAssetMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribeAssetMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribeAssetMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opDescribeAssetMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opDescribeAssetMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// DescribeAssetAPIClient is a client that implements the DescribeAsset operation.
+type DescribeAssetAPIClient interface {
+	DescribeAsset(context.Context, *DescribeAssetInput, ...func(*Options)) (*DescribeAssetOutput, error)
+}
+
+var _ DescribeAssetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAsset(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

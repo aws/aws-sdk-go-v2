@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeIntegrationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeIntegrationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeIntegrationsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeIntegrationsAPIClient is a client that implements the
-// DescribeIntegrations operation.
-type DescribeIntegrationsAPIClient interface {
-	DescribeIntegrations(context.Context, *DescribeIntegrationsInput, ...func(*Options)) (*DescribeIntegrationsOutput, error)
-}
-
-var _ DescribeIntegrationsAPIClient = (*Client)(nil)
 
 // DescribeIntegrationsPaginatorOptions is the paginator options for
 // DescribeIntegrations
@@ -226,6 +221,9 @@ func (p *DescribeIntegrationsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeIntegrations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *DescribeIntegrationsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeIntegrationsAPIClient is a client that implements the
+// DescribeIntegrations operation.
+type DescribeIntegrationsAPIClient interface {
+	DescribeIntegrations(context.Context, *DescribeIntegrationsInput, ...func(*Options)) (*DescribeIntegrationsOutput, error)
+}
+
+var _ DescribeIntegrationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeIntegrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

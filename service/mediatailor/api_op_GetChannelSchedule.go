@@ -134,6 +134,9 @@ func (c *Client) addOperationGetChannelScheduleMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetChannelScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationGetChannelScheduleMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetChannelScheduleAPIClient is a client that implements the GetChannelSchedule
-// operation.
-type GetChannelScheduleAPIClient interface {
-	GetChannelSchedule(context.Context, *GetChannelScheduleInput, ...func(*Options)) (*GetChannelScheduleOutput, error)
-}
-
-var _ GetChannelScheduleAPIClient = (*Client)(nil)
 
 // GetChannelSchedulePaginatorOptions is the paginator options for
 // GetChannelSchedule
@@ -233,6 +228,9 @@ func (p *GetChannelSchedulePaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetChannelSchedule(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *GetChannelSchedulePaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetChannelScheduleAPIClient is a client that implements the GetChannelSchedule
+// operation.
+type GetChannelScheduleAPIClient interface {
+	GetChannelSchedule(context.Context, *GetChannelScheduleInput, ...func(*Options)) (*GetChannelScheduleOutput, error)
+}
+
+var _ GetChannelScheduleAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetChannelSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

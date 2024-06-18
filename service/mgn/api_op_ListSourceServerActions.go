@@ -122,6 +122,9 @@ func (c *Client) addOperationListSourceServerActionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSourceServerActionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListSourceServerActionsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListSourceServerActionsAPIClient is a client that implements the
-// ListSourceServerActions operation.
-type ListSourceServerActionsAPIClient interface {
-	ListSourceServerActions(context.Context, *ListSourceServerActionsInput, ...func(*Options)) (*ListSourceServerActionsOutput, error)
-}
-
-var _ ListSourceServerActionsAPIClient = (*Client)(nil)
 
 // ListSourceServerActionsPaginatorOptions is the paginator options for
 // ListSourceServerActions
@@ -220,6 +215,9 @@ func (p *ListSourceServerActionsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSourceServerActions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListSourceServerActionsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListSourceServerActionsAPIClient is a client that implements the
+// ListSourceServerActions operation.
+type ListSourceServerActionsAPIClient interface {
+	ListSourceServerActions(context.Context, *ListSourceServerActionsInput, ...func(*Options)) (*ListSourceServerActionsOutput, error)
+}
+
+var _ ListSourceServerActionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSourceServerActions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

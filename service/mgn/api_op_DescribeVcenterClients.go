@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeVcenterClientsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVcenterClients(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationDescribeVcenterClientsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeVcenterClientsAPIClient is a client that implements the
-// DescribeVcenterClients operation.
-type DescribeVcenterClientsAPIClient interface {
-	DescribeVcenterClients(context.Context, *DescribeVcenterClientsInput, ...func(*Options)) (*DescribeVcenterClientsOutput, error)
-}
-
-var _ DescribeVcenterClientsAPIClient = (*Client)(nil)
 
 // DescribeVcenterClientsPaginatorOptions is the paginator options for
 // DescribeVcenterClients
@@ -203,6 +198,9 @@ func (p *DescribeVcenterClientsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeVcenterClients(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *DescribeVcenterClientsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeVcenterClientsAPIClient is a client that implements the
+// DescribeVcenterClients operation.
+type DescribeVcenterClientsAPIClient interface {
+	DescribeVcenterClients(context.Context, *DescribeVcenterClientsInput, ...func(*Options)) (*DescribeVcenterClientsOutput, error)
+}
+
+var _ DescribeVcenterClientsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeVcenterClients(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

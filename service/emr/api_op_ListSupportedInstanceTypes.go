@@ -121,6 +121,9 @@ func (c *Client) addOperationListSupportedInstanceTypesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSupportedInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListSupportedInstanceTypesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListSupportedInstanceTypesAPIClient is a client that implements the
-// ListSupportedInstanceTypes operation.
-type ListSupportedInstanceTypesAPIClient interface {
-	ListSupportedInstanceTypes(context.Context, *ListSupportedInstanceTypesInput, ...func(*Options)) (*ListSupportedInstanceTypesOutput, error)
-}
-
-var _ ListSupportedInstanceTypesAPIClient = (*Client)(nil)
 
 // ListSupportedInstanceTypesPaginatorOptions is the paginator options for
 // ListSupportedInstanceTypes
@@ -207,6 +202,9 @@ func (p *ListSupportedInstanceTypesPaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.Marker = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSupportedInstanceTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListSupportedInstanceTypesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListSupportedInstanceTypesAPIClient is a client that implements the
+// ListSupportedInstanceTypes operation.
+type ListSupportedInstanceTypesAPIClient interface {
+	ListSupportedInstanceTypes(context.Context, *ListSupportedInstanceTypesInput, ...func(*Options)) (*ListSupportedInstanceTypesOutput, error)
+}
+
+var _ ListSupportedInstanceTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSupportedInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

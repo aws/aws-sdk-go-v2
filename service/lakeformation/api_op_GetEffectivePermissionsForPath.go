@@ -125,6 +125,9 @@ func (c *Client) addOperationGetEffectivePermissionsForPathMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEffectivePermissionsForPathValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationGetEffectivePermissionsForPathMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// GetEffectivePermissionsForPathAPIClient is a client that implements the
-// GetEffectivePermissionsForPath operation.
-type GetEffectivePermissionsForPathAPIClient interface {
-	GetEffectivePermissionsForPath(context.Context, *GetEffectivePermissionsForPathInput, ...func(*Options)) (*GetEffectivePermissionsForPathOutput, error)
-}
-
-var _ GetEffectivePermissionsForPathAPIClient = (*Client)(nil)
 
 // GetEffectivePermissionsForPathPaginatorOptions is the paginator options for
 // GetEffectivePermissionsForPath
@@ -223,6 +218,9 @@ func (p *GetEffectivePermissionsForPathPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetEffectivePermissionsForPath(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *GetEffectivePermissionsForPathPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// GetEffectivePermissionsForPathAPIClient is a client that implements the
+// GetEffectivePermissionsForPath operation.
+type GetEffectivePermissionsForPathAPIClient interface {
+	GetEffectivePermissionsForPath(context.Context, *GetEffectivePermissionsForPathInput, ...func(*Options)) (*GetEffectivePermissionsForPathOutput, error)
+}
+
+var _ GetEffectivePermissionsForPathAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEffectivePermissionsForPath(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

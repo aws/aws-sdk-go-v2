@@ -172,6 +172,9 @@ func (c *Client) addOperationDeleteBucketReplicationMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteBucketReplicationMiddleware(stack); err != nil {
 		return err
 	}

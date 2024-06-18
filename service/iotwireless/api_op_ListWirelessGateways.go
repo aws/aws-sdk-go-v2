@@ -112,6 +112,9 @@ func (c *Client) addOperationListWirelessGatewaysMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWirelessGateways(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListWirelessGatewaysMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListWirelessGatewaysAPIClient is a client that implements the
-// ListWirelessGateways operation.
-type ListWirelessGatewaysAPIClient interface {
-	ListWirelessGateways(context.Context, *ListWirelessGatewaysInput, ...func(*Options)) (*ListWirelessGatewaysOutput, error)
-}
-
-var _ ListWirelessGatewaysAPIClient = (*Client)(nil)
 
 // ListWirelessGatewaysPaginatorOptions is the paginator options for
 // ListWirelessGateways
@@ -201,6 +196,9 @@ func (p *ListWirelessGatewaysPaginator) NextPage(ctx context.Context, optFns ...
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWirelessGateways(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +217,14 @@ func (p *ListWirelessGatewaysPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListWirelessGatewaysAPIClient is a client that implements the
+// ListWirelessGateways operation.
+type ListWirelessGatewaysAPIClient interface {
+	ListWirelessGateways(context.Context, *ListWirelessGatewaysInput, ...func(*Options)) (*ListWirelessGatewaysOutput, error)
+}
+
+var _ ListWirelessGatewaysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWirelessGateways(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

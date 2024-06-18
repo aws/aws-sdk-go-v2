@@ -116,6 +116,9 @@ func (c *Client) addOperationListIdentityPoolsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIdentityPoolsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListIdentityPoolsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListIdentityPoolsAPIClient is a client that implements the ListIdentityPools
-// operation.
-type ListIdentityPoolsAPIClient interface {
-	ListIdentityPools(context.Context, *ListIdentityPoolsInput, ...func(*Options)) (*ListIdentityPoolsOutput, error)
-}
-
-var _ ListIdentityPoolsAPIClient = (*Client)(nil)
 
 // ListIdentityPoolsPaginatorOptions is the paginator options for ListIdentityPools
 type ListIdentityPoolsPaginatorOptions struct {
@@ -211,6 +206,9 @@ func (p *ListIdentityPoolsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIdentityPools(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListIdentityPoolsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListIdentityPoolsAPIClient is a client that implements the ListIdentityPools
+// operation.
+type ListIdentityPoolsAPIClient interface {
+	ListIdentityPools(context.Context, *ListIdentityPoolsInput, ...func(*Options)) (*ListIdentityPoolsOutput, error)
+}
+
+var _ ListIdentityPoolsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIdentityPools(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

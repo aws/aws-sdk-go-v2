@@ -126,6 +126,9 @@ func (c *Client) addOperationListSegmentReferencesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSegmentReferencesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListSegmentReferencesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListSegmentReferencesAPIClient is a client that implements the
-// ListSegmentReferences operation.
-type ListSegmentReferencesAPIClient interface {
-	ListSegmentReferences(context.Context, *ListSegmentReferencesInput, ...func(*Options)) (*ListSegmentReferencesOutput, error)
-}
-
-var _ ListSegmentReferencesAPIClient = (*Client)(nil)
 
 // ListSegmentReferencesPaginatorOptions is the paginator options for
 // ListSegmentReferences
@@ -223,6 +218,9 @@ func (p *ListSegmentReferencesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSegmentReferences(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListSegmentReferencesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListSegmentReferencesAPIClient is a client that implements the
+// ListSegmentReferences operation.
+type ListSegmentReferencesAPIClient interface {
+	ListSegmentReferences(context.Context, *ListSegmentReferencesInput, ...func(*Options)) (*ListSegmentReferencesOutput, error)
+}
+
+var _ ListSegmentReferencesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSegmentReferences(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

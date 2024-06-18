@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAggregateComplianceByConformancePacksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddle
 	}
 	return nil
 }
-
-// DescribeAggregateComplianceByConformancePacksAPIClient is a client that
-// implements the DescribeAggregateComplianceByConformancePacks operation.
-type DescribeAggregateComplianceByConformancePacksAPIClient interface {
-	DescribeAggregateComplianceByConformancePacks(context.Context, *DescribeAggregateComplianceByConformancePacksInput, ...func(*Options)) (*DescribeAggregateComplianceByConformancePacksOutput, error)
-}
-
-var _ DescribeAggregateComplianceByConformancePacksAPIClient = (*Client)(nil)
 
 // DescribeAggregateComplianceByConformancePacksPaginatorOptions is the paginator
 // options for DescribeAggregateComplianceByConformancePacks
@@ -223,6 +218,9 @@ func (p *DescribeAggregateComplianceByConformancePacksPaginator) NextPage(ctx co
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAggregateComplianceByConformancePacks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *DescribeAggregateComplianceByConformancePacksPaginator) NextPage(ctx co
 
 	return result, nil
 }
+
+// DescribeAggregateComplianceByConformancePacksAPIClient is a client that
+// implements the DescribeAggregateComplianceByConformancePacks operation.
+type DescribeAggregateComplianceByConformancePacksAPIClient interface {
+	DescribeAggregateComplianceByConformancePacks(context.Context, *DescribeAggregateComplianceByConformancePacksInput, ...func(*Options)) (*DescribeAggregateComplianceByConformancePacksOutput, error)
+}
+
+var _ DescribeAggregateComplianceByConformancePacksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAggregateComplianceByConformancePacks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

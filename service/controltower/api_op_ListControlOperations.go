@@ -116,6 +116,9 @@ func (c *Client) addOperationListControlOperationsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListControlOperationsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListControlOperationsAPIClient is a client that implements the
-// ListControlOperations operation.
-type ListControlOperationsAPIClient interface {
-	ListControlOperations(context.Context, *ListControlOperationsInput, ...func(*Options)) (*ListControlOperationsOutput, error)
-}
-
-var _ ListControlOperationsAPIClient = (*Client)(nil)
 
 // ListControlOperationsPaginatorOptions is the paginator options for
 // ListControlOperations
@@ -209,6 +204,9 @@ func (p *ListControlOperationsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListControlOperations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListControlOperationsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListControlOperationsAPIClient is a client that implements the
+// ListControlOperations operation.
+type ListControlOperationsAPIClient interface {
+	ListControlOperations(context.Context, *ListControlOperationsInput, ...func(*Options)) (*ListControlOperationsOutput, error)
+}
+
+var _ ListControlOperationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListControlOperations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

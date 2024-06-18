@@ -145,6 +145,9 @@ func (c *Client) addOperationListAvailableResourceMetricsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAvailableResourceMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationListAvailableResourceMetricsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListAvailableResourceMetricsAPIClient is a client that implements the
-// ListAvailableResourceMetrics operation.
-type ListAvailableResourceMetricsAPIClient interface {
-	ListAvailableResourceMetrics(context.Context, *ListAvailableResourceMetricsInput, ...func(*Options)) (*ListAvailableResourceMetricsOutput, error)
-}
-
-var _ ListAvailableResourceMetricsAPIClient = (*Client)(nil)
 
 // ListAvailableResourceMetricsPaginatorOptions is the paginator options for
 // ListAvailableResourceMetrics
@@ -244,6 +239,9 @@ func (p *ListAvailableResourceMetricsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAvailableResourceMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *ListAvailableResourceMetricsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListAvailableResourceMetricsAPIClient is a client that implements the
+// ListAvailableResourceMetrics operation.
+type ListAvailableResourceMetricsAPIClient interface {
+	ListAvailableResourceMetrics(context.Context, *ListAvailableResourceMetricsInput, ...func(*Options)) (*ListAvailableResourceMetricsOutput, error)
+}
+
+var _ ListAvailableResourceMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAvailableResourceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

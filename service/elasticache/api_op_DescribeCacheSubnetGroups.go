@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCacheSubnetGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeCacheSubnetGroupsAPIClient is a client that implements the
-// DescribeCacheSubnetGroups operation.
-type DescribeCacheSubnetGroupsAPIClient interface {
-	DescribeCacheSubnetGroups(context.Context, *DescribeCacheSubnetGroupsInput, ...func(*Options)) (*DescribeCacheSubnetGroupsOutput, error)
-}
-
-var _ DescribeCacheSubnetGroupsAPIClient = (*Client)(nil)
 
 // DescribeCacheSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeCacheSubnetGroups
@@ -228,6 +223,9 @@ func (p *DescribeCacheSubnetGroupsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCacheSubnetGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *DescribeCacheSubnetGroupsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeCacheSubnetGroupsAPIClient is a client that implements the
+// DescribeCacheSubnetGroups operation.
+type DescribeCacheSubnetGroupsAPIClient interface {
+	DescribeCacheSubnetGroups(context.Context, *DescribeCacheSubnetGroupsInput, ...func(*Options)) (*DescribeCacheSubnetGroupsOutput, error)
+}
+
+var _ DescribeCacheSubnetGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCacheSubnetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

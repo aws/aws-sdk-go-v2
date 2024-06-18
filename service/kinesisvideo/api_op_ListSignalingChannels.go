@@ -118,6 +118,9 @@ func (c *Client) addOperationListSignalingChannelsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSignalingChannels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListSignalingChannelsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListSignalingChannelsAPIClient is a client that implements the
-// ListSignalingChannels operation.
-type ListSignalingChannelsAPIClient interface {
-	ListSignalingChannels(context.Context, *ListSignalingChannelsInput, ...func(*Options)) (*ListSignalingChannelsOutput, error)
-}
-
-var _ ListSignalingChannelsAPIClient = (*Client)(nil)
 
 // ListSignalingChannelsPaginatorOptions is the paginator options for
 // ListSignalingChannels
@@ -211,6 +206,9 @@ func (p *ListSignalingChannelsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSignalingChannels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListSignalingChannelsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListSignalingChannelsAPIClient is a client that implements the
+// ListSignalingChannels operation.
+type ListSignalingChannelsAPIClient interface {
+	ListSignalingChannels(context.Context, *ListSignalingChannelsInput, ...func(*Options)) (*ListSignalingChannelsOutput, error)
+}
+
+var _ ListSignalingChannelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSignalingChannels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

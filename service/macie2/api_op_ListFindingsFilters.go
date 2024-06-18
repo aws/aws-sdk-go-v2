@@ -112,6 +112,9 @@ func (c *Client) addOperationListFindingsFiltersMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFindingsFilters(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListFindingsFiltersMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListFindingsFiltersAPIClient is a client that implements the
-// ListFindingsFilters operation.
-type ListFindingsFiltersAPIClient interface {
-	ListFindingsFilters(context.Context, *ListFindingsFiltersInput, ...func(*Options)) (*ListFindingsFiltersOutput, error)
-}
-
-var _ ListFindingsFiltersAPIClient = (*Client)(nil)
 
 // ListFindingsFiltersPaginatorOptions is the paginator options for
 // ListFindingsFilters
@@ -205,6 +200,9 @@ func (p *ListFindingsFiltersPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFindingsFilters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListFindingsFiltersPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListFindingsFiltersAPIClient is a client that implements the
+// ListFindingsFilters operation.
+type ListFindingsFiltersAPIClient interface {
+	ListFindingsFilters(context.Context, *ListFindingsFiltersInput, ...func(*Options)) (*ListFindingsFiltersOutput, error)
+}
+
+var _ ListFindingsFiltersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFindingsFilters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

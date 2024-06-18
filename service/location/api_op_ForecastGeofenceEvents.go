@@ -166,6 +166,9 @@ func (c *Client) addOperationForecastGeofenceEventsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opForecastGeofenceEventsMiddleware(stack); err != nil {
 		return err
 	}
@@ -192,41 +195,6 @@ func (c *Client) addOperationForecastGeofenceEventsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-type endpointPrefix_opForecastGeofenceEventsMiddleware struct {
-}
-
-func (*endpointPrefix_opForecastGeofenceEventsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opForecastGeofenceEventsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "geofencing." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opForecastGeofenceEventsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opForecastGeofenceEventsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ForecastGeofenceEventsAPIClient is a client that implements the
-// ForecastGeofenceEvents operation.
-type ForecastGeofenceEventsAPIClient interface {
-	ForecastGeofenceEvents(context.Context, *ForecastGeofenceEventsInput, ...func(*Options)) (*ForecastGeofenceEventsOutput, error)
-}
-
-var _ ForecastGeofenceEventsAPIClient = (*Client)(nil)
 
 // ForecastGeofenceEventsPaginatorOptions is the paginator options for
 // ForecastGeofenceEvents
@@ -294,6 +262,9 @@ func (p *ForecastGeofenceEventsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ForecastGeofenceEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -312,6 +283,41 @@ func (p *ForecastGeofenceEventsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+type endpointPrefix_opForecastGeofenceEventsMiddleware struct {
+}
+
+func (*endpointPrefix_opForecastGeofenceEventsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opForecastGeofenceEventsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "geofencing." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opForecastGeofenceEventsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opForecastGeofenceEventsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ForecastGeofenceEventsAPIClient is a client that implements the
+// ForecastGeofenceEvents operation.
+type ForecastGeofenceEventsAPIClient interface {
+	ForecastGeofenceEvents(context.Context, *ForecastGeofenceEventsInput, ...func(*Options)) (*ForecastGeofenceEventsOutput, error)
+}
+
+var _ ForecastGeofenceEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opForecastGeofenceEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

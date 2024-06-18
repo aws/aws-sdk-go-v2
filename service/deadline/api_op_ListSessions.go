@@ -133,6 +133,9 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListSessionsMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,40 +162,6 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-type endpointPrefix_opListSessionsMiddleware struct {
-}
-
-func (*endpointPrefix_opListSessionsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListSessionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListSessionsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListSessionsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListSessionsAPIClient is a client that implements the ListSessions operation.
-type ListSessionsAPIClient interface {
-	ListSessions(context.Context, *ListSessionsInput, ...func(*Options)) (*ListSessionsOutput, error)
-}
-
-var _ ListSessionsAPIClient = (*Client)(nil)
 
 // ListSessionsPaginatorOptions is the paginator options for ListSessions
 type ListSessionsPaginatorOptions struct {
@@ -258,6 +227,9 @@ func (p *ListSessionsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +248,40 @@ func (p *ListSessionsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+type endpointPrefix_opListSessionsMiddleware struct {
+}
+
+func (*endpointPrefix_opListSessionsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListSessionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListSessionsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListSessionsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListSessionsAPIClient is a client that implements the ListSessions operation.
+type ListSessionsAPIClient interface {
+	ListSessions(context.Context, *ListSessionsInput, ...func(*Options)) (*ListSessionsOutput, error)
+}
+
+var _ ListSessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

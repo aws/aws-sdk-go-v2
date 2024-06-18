@@ -124,6 +124,9 @@ func (c *Client) addOperationListProtectedQueriesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProtectedQueriesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListProtectedQueriesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListProtectedQueriesAPIClient is a client that implements the
-// ListProtectedQueries operation.
-type ListProtectedQueriesAPIClient interface {
-	ListProtectedQueries(context.Context, *ListProtectedQueriesInput, ...func(*Options)) (*ListProtectedQueriesOutput, error)
-}
-
-var _ ListProtectedQueriesAPIClient = (*Client)(nil)
 
 // ListProtectedQueriesPaginatorOptions is the paginator options for
 // ListProtectedQueries
@@ -222,6 +217,9 @@ func (p *ListProtectedQueriesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProtectedQueries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListProtectedQueriesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListProtectedQueriesAPIClient is a client that implements the
+// ListProtectedQueries operation.
+type ListProtectedQueriesAPIClient interface {
+	ListProtectedQueries(context.Context, *ListProtectedQueriesInput, ...func(*Options)) (*ListProtectedQueriesOutput, error)
+}
+
+var _ ListProtectedQueriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProtectedQueries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

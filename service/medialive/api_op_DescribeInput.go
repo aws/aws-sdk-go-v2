@@ -168,6 +168,9 @@ func (c *Client) addOperationDescribeInputMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeInputValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -191,13 +194,6 @@ func (c *Client) addOperationDescribeInputMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeInputAPIClient is a client that implements the DescribeInput operation.
-type DescribeInputAPIClient interface {
-	DescribeInput(context.Context, *DescribeInputInput, ...func(*Options)) (*DescribeInputOutput, error)
-}
-
-var _ DescribeInputAPIClient = (*Client)(nil)
 
 // InputAttachedWaiterOptions are waiter options for InputAttachedWaiter
 type InputAttachedWaiterOptions struct {
@@ -314,7 +310,13 @@ func (w *InputAttachedWaiter) WaitForOutput(ctx context.Context, params *Describ
 		}
 
 		out, err := w.client.DescribeInput(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -510,7 +512,13 @@ func (w *InputDeletedWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeInput(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -707,7 +715,13 @@ func (w *InputDetachedWaiter) WaitForOutput(ctx context.Context, params *Describ
 		}
 
 		out, err := w.client.DescribeInput(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -805,6 +819,13 @@ func inputDetachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 
 	return true, nil
 }
+
+// DescribeInputAPIClient is a client that implements the DescribeInput operation.
+type DescribeInputAPIClient interface {
+	DescribeInput(context.Context, *DescribeInputInput, ...func(*Options)) (*DescribeInputOutput, error)
+}
+
+var _ DescribeInputAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInput(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

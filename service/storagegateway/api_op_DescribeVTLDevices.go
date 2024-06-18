@@ -139,6 +139,9 @@ func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeVTLDevicesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeVTLDevicesAPIClient is a client that implements the DescribeVTLDevices
-// operation.
-type DescribeVTLDevicesAPIClient interface {
-	DescribeVTLDevices(context.Context, *DescribeVTLDevicesInput, ...func(*Options)) (*DescribeVTLDevicesOutput, error)
-}
-
-var _ DescribeVTLDevicesAPIClient = (*Client)(nil)
 
 // DescribeVTLDevicesPaginatorOptions is the paginator options for
 // DescribeVTLDevices
@@ -236,6 +231,9 @@ func (p *DescribeVTLDevicesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeVTLDevices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *DescribeVTLDevicesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeVTLDevicesAPIClient is a client that implements the DescribeVTLDevices
+// operation.
+type DescribeVTLDevicesAPIClient interface {
+	DescribeVTLDevices(context.Context, *DescribeVTLDevicesInput, ...func(*Options)) (*DescribeVTLDevicesOutput, error)
+}
+
+var _ DescribeVTLDevicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeVTLDevices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

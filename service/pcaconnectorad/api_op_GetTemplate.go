@@ -110,6 +110,9 @@ func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

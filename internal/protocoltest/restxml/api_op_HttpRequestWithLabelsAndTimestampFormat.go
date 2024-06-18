@@ -119,6 +119,9 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack); err != nil {
 		return err
 	}

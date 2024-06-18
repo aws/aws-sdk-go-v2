@@ -119,6 +119,9 @@ func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPhoneNumbersOptedOut(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListPhoneNumbersOptedOutAPIClient is a client that implements the
-// ListPhoneNumbersOptedOut operation.
-type ListPhoneNumbersOptedOutAPIClient interface {
-	ListPhoneNumbersOptedOut(context.Context, *ListPhoneNumbersOptedOutInput, ...func(*Options)) (*ListPhoneNumbersOptedOutOutput, error)
-}
-
-var _ ListPhoneNumbersOptedOutAPIClient = (*Client)(nil)
 
 // ListPhoneNumbersOptedOutPaginatorOptions is the paginator options for
 // ListPhoneNumbersOptedOut
@@ -201,6 +196,9 @@ func (p *ListPhoneNumbersOptedOutPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPhoneNumbersOptedOut(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +217,14 @@ func (p *ListPhoneNumbersOptedOutPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListPhoneNumbersOptedOutAPIClient is a client that implements the
+// ListPhoneNumbersOptedOut operation.
+type ListPhoneNumbersOptedOutAPIClient interface {
+	ListPhoneNumbersOptedOut(context.Context, *ListPhoneNumbersOptedOutInput, ...func(*Options)) (*ListPhoneNumbersOptedOutOutput, error)
+}
+
+var _ ListPhoneNumbersOptedOutAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPhoneNumbersOptedOut(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

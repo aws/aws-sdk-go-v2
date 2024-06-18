@@ -125,6 +125,9 @@ func (c *Client) addOperationGetConnectionsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationGetConnectionsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetConnectionsAPIClient is a client that implements the GetConnections
-// operation.
-type GetConnectionsAPIClient interface {
-	GetConnections(context.Context, *GetConnectionsInput, ...func(*Options)) (*GetConnectionsOutput, error)
-}
-
-var _ GetConnectionsAPIClient = (*Client)(nil)
 
 // GetConnectionsPaginatorOptions is the paginator options for GetConnections
 type GetConnectionsPaginatorOptions struct {
@@ -217,6 +212,9 @@ func (p *GetConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetConnections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *GetConnectionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// GetConnectionsAPIClient is a client that implements the GetConnections
+// operation.
+type GetConnectionsAPIClient interface {
+	GetConnections(context.Context, *GetConnectionsInput, ...func(*Options)) (*GetConnectionsOutput, error)
+}
+
+var _ GetConnectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetConnections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

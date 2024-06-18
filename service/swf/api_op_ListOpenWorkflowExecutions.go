@@ -193,6 +193,9 @@ func (c *Client) addOperationListOpenWorkflowExecutionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOpenWorkflowExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -216,14 +219,6 @@ func (c *Client) addOperationListOpenWorkflowExecutionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListOpenWorkflowExecutionsAPIClient is a client that implements the
-// ListOpenWorkflowExecutions operation.
-type ListOpenWorkflowExecutionsAPIClient interface {
-	ListOpenWorkflowExecutions(context.Context, *ListOpenWorkflowExecutionsInput, ...func(*Options)) (*ListOpenWorkflowExecutionsOutput, error)
-}
-
-var _ ListOpenWorkflowExecutionsAPIClient = (*Client)(nil)
 
 // ListOpenWorkflowExecutionsPaginatorOptions is the paginator options for
 // ListOpenWorkflowExecutions
@@ -288,6 +283,9 @@ func (p *ListOpenWorkflowExecutionsPaginator) NextPage(ctx context.Context, optF
 
 	params.MaximumPageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOpenWorkflowExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -306,6 +304,14 @@ func (p *ListOpenWorkflowExecutionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListOpenWorkflowExecutionsAPIClient is a client that implements the
+// ListOpenWorkflowExecutions operation.
+type ListOpenWorkflowExecutionsAPIClient interface {
+	ListOpenWorkflowExecutions(context.Context, *ListOpenWorkflowExecutionsInput, ...func(*Options)) (*ListOpenWorkflowExecutionsOutput, error)
+}
+
+var _ ListOpenWorkflowExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOpenWorkflowExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -112,6 +112,9 @@ func (c *Client) addOperationGetStudioMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStudioValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,13 +138,6 @@ func (c *Client) addOperationGetStudioMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// GetStudioAPIClient is a client that implements the GetStudio operation.
-type GetStudioAPIClient interface {
-	GetStudio(context.Context, *GetStudioInput, ...func(*Options)) (*GetStudioOutput, error)
-}
-
-var _ GetStudioAPIClient = (*Client)(nil)
 
 // StudioReadyWaiterOptions are waiter options for StudioReadyWaiter
 type StudioReadyWaiterOptions struct {
@@ -257,7 +253,13 @@ func (w *StudioReadyWaiter) WaitForOutput(ctx context.Context, params *GetStudio
 		}
 
 		out, err := w.client.GetStudio(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -464,7 +466,13 @@ func (w *StudioDeletedWaiter) WaitForOutput(ctx context.Context, params *GetStud
 		}
 
 		out, err := w.client.GetStudio(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -538,6 +546,13 @@ func studioDeletedStateRetryable(ctx context.Context, input *GetStudioInput, out
 
 	return true, nil
 }
+
+// GetStudioAPIClient is a client that implements the GetStudio operation.
+type GetStudioAPIClient interface {
+	GetStudio(context.Context, *GetStudioInput, ...func(*Options)) (*GetStudioOutput, error)
+}
+
+var _ GetStudioAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetStudio(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

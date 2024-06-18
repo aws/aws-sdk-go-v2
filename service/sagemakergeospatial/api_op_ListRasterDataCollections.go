@@ -114,6 +114,9 @@ func (c *Client) addOperationListRasterDataCollectionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRasterDataCollections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListRasterDataCollectionsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListRasterDataCollectionsAPIClient is a client that implements the
-// ListRasterDataCollections operation.
-type ListRasterDataCollectionsAPIClient interface {
-	ListRasterDataCollections(context.Context, *ListRasterDataCollectionsInput, ...func(*Options)) (*ListRasterDataCollectionsOutput, error)
-}
-
-var _ ListRasterDataCollectionsAPIClient = (*Client)(nil)
 
 // ListRasterDataCollectionsPaginatorOptions is the paginator options for
 // ListRasterDataCollections
@@ -196,6 +191,9 @@ func (p *ListRasterDataCollectionsPaginator) NextPage(ctx context.Context, optFn
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRasterDataCollections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -214,6 +212,14 @@ func (p *ListRasterDataCollectionsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListRasterDataCollectionsAPIClient is a client that implements the
+// ListRasterDataCollections operation.
+type ListRasterDataCollectionsAPIClient interface {
+	ListRasterDataCollections(context.Context, *ListRasterDataCollectionsInput, ...func(*Options)) (*ListRasterDataCollectionsOutput, error)
+}
+
+var _ ListRasterDataCollectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRasterDataCollections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

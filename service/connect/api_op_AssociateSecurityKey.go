@@ -116,6 +116,9 @@ func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateSecurityKeyValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -119,6 +119,9 @@ func (c *Client) addOperationListConfigurationRevisionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListConfigurationRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListConfigurationRevisionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListConfigurationRevisionsAPIClient is a client that implements the
-// ListConfigurationRevisions operation.
-type ListConfigurationRevisionsAPIClient interface {
-	ListConfigurationRevisions(context.Context, *ListConfigurationRevisionsInput, ...func(*Options)) (*ListConfigurationRevisionsOutput, error)
-}
-
-var _ ListConfigurationRevisionsAPIClient = (*Client)(nil)
 
 // ListConfigurationRevisionsPaginatorOptions is the paginator options for
 // ListConfigurationRevisions
@@ -218,6 +213,9 @@ func (p *ListConfigurationRevisionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConfigurationRevisions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListConfigurationRevisionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListConfigurationRevisionsAPIClient is a client that implements the
+// ListConfigurationRevisions operation.
+type ListConfigurationRevisionsAPIClient interface {
+	ListConfigurationRevisions(context.Context, *ListConfigurationRevisionsInput, ...func(*Options)) (*ListConfigurationRevisionsOutput, error)
+}
+
+var _ ListConfigurationRevisionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConfigurationRevisions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -125,6 +125,9 @@ func (c *Client) addOperationListTemplateSharesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTemplateSharesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListTemplateSharesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListTemplateSharesAPIClient is a client that implements the ListTemplateShares
-// operation.
-type ListTemplateSharesAPIClient interface {
-	ListTemplateShares(context.Context, *ListTemplateSharesInput, ...func(*Options)) (*ListTemplateSharesOutput, error)
-}
-
-var _ ListTemplateSharesAPIClient = (*Client)(nil)
 
 // ListTemplateSharesPaginatorOptions is the paginator options for
 // ListTemplateShares
@@ -221,6 +216,9 @@ func (p *ListTemplateSharesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTemplateShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListTemplateSharesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListTemplateSharesAPIClient is a client that implements the ListTemplateShares
+// operation.
+type ListTemplateSharesAPIClient interface {
+	ListTemplateShares(context.Context, *ListTemplateSharesInput, ...func(*Options)) (*ListTemplateSharesOutput, error)
+}
+
+var _ ListTemplateSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTemplateShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

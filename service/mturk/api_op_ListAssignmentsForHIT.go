@@ -144,6 +144,9 @@ func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssignmentsForHITValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,14 +170,6 @@ func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAssignmentsForHITAPIClient is a client that implements the
-// ListAssignmentsForHIT operation.
-type ListAssignmentsForHITAPIClient interface {
-	ListAssignmentsForHIT(context.Context, *ListAssignmentsForHITInput, ...func(*Options)) (*ListAssignmentsForHITOutput, error)
-}
-
-var _ ListAssignmentsForHITAPIClient = (*Client)(nil)
 
 // ListAssignmentsForHITPaginatorOptions is the paginator options for
 // ListAssignmentsForHIT
@@ -239,6 +234,9 @@ func (p *ListAssignmentsForHITPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssignmentsForHIT(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *ListAssignmentsForHITPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAssignmentsForHITAPIClient is a client that implements the
+// ListAssignmentsForHIT operation.
+type ListAssignmentsForHITAPIClient interface {
+	ListAssignmentsForHIT(context.Context, *ListAssignmentsForHITInput, ...func(*Options)) (*ListAssignmentsForHITOutput, error)
+}
+
+var _ ListAssignmentsForHITAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssignmentsForHIT(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

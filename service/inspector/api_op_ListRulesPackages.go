@@ -118,6 +118,9 @@ func (c *Client) addOperationListRulesPackagesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRulesPackages(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListRulesPackagesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListRulesPackagesAPIClient is a client that implements the ListRulesPackages
-// operation.
-type ListRulesPackagesAPIClient interface {
-	ListRulesPackages(context.Context, *ListRulesPackagesInput, ...func(*Options)) (*ListRulesPackagesOutput, error)
-}
-
-var _ ListRulesPackagesAPIClient = (*Client)(nil)
 
 // ListRulesPackagesPaginatorOptions is the paginator options for ListRulesPackages
 type ListRulesPackagesPaginatorOptions struct {
@@ -211,6 +206,9 @@ func (p *ListRulesPackagesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRulesPackages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListRulesPackagesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListRulesPackagesAPIClient is a client that implements the ListRulesPackages
+// operation.
+type ListRulesPackagesAPIClient interface {
+	ListRulesPackages(context.Context, *ListRulesPackagesInput, ...func(*Options)) (*ListRulesPackagesOutput, error)
+}
+
+var _ ListRulesPackagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRulesPackages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

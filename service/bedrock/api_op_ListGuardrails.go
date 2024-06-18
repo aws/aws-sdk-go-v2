@@ -127,6 +127,9 @@ func (c *Client) addOperationListGuardrailsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGuardrails(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListGuardrailsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListGuardrailsAPIClient is a client that implements the ListGuardrails
-// operation.
-type ListGuardrailsAPIClient interface {
-	ListGuardrails(context.Context, *ListGuardrailsInput, ...func(*Options)) (*ListGuardrailsOutput, error)
-}
-
-var _ ListGuardrailsAPIClient = (*Client)(nil)
 
 // ListGuardrailsPaginatorOptions is the paginator options for ListGuardrails
 type ListGuardrailsPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *ListGuardrailsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGuardrails(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListGuardrailsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListGuardrailsAPIClient is a client that implements the ListGuardrails
+// operation.
+type ListGuardrailsAPIClient interface {
+	ListGuardrails(context.Context, *ListGuardrailsInput, ...func(*Options)) (*ListGuardrailsOutput, error)
+}
+
+var _ ListGuardrailsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGuardrails(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

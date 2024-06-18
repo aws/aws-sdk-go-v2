@@ -143,6 +143,9 @@ func (c *Client) addOperationListGatewayRoutesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListGatewayRoutesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationListGatewayRoutesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListGatewayRoutesAPIClient is a client that implements the ListGatewayRoutes
-// operation.
-type ListGatewayRoutesAPIClient interface {
-	ListGatewayRoutes(context.Context, *ListGatewayRoutesInput, ...func(*Options)) (*ListGatewayRoutesOutput, error)
-}
-
-var _ ListGatewayRoutesAPIClient = (*Client)(nil)
 
 // ListGatewayRoutesPaginatorOptions is the paginator options for ListGatewayRoutes
 type ListGatewayRoutesPaginatorOptions struct {
@@ -244,6 +239,9 @@ func (p *ListGatewayRoutesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGatewayRoutes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *ListGatewayRoutesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListGatewayRoutesAPIClient is a client that implements the ListGatewayRoutes
+// operation.
+type ListGatewayRoutesAPIClient interface {
+	ListGatewayRoutes(context.Context, *ListGatewayRoutesInput, ...func(*Options)) (*ListGatewayRoutesOutput, error)
+}
+
+var _ ListGatewayRoutesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGatewayRoutes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

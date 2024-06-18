@@ -116,6 +116,9 @@ func (c *Client) addOperationListFlywheelsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFlywheels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,13 +139,6 @@ func (c *Client) addOperationListFlywheelsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListFlywheelsAPIClient is a client that implements the ListFlywheels operation.
-type ListFlywheelsAPIClient interface {
-	ListFlywheels(context.Context, *ListFlywheelsInput, ...func(*Options)) (*ListFlywheelsOutput, error)
-}
-
-var _ ListFlywheelsAPIClient = (*Client)(nil)
 
 // ListFlywheelsPaginatorOptions is the paginator options for ListFlywheels
 type ListFlywheelsPaginatorOptions struct {
@@ -207,6 +203,9 @@ func (p *ListFlywheelsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFlywheels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +224,13 @@ func (p *ListFlywheelsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListFlywheelsAPIClient is a client that implements the ListFlywheels operation.
+type ListFlywheelsAPIClient interface {
+	ListFlywheels(context.Context, *ListFlywheelsInput, ...func(*Options)) (*ListFlywheelsOutput, error)
+}
+
+var _ ListFlywheelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFlywheels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

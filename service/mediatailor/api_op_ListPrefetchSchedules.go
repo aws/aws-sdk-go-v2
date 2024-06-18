@@ -133,6 +133,9 @@ func (c *Client) addOperationListPrefetchSchedulesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPrefetchSchedulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListPrefetchSchedulesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListPrefetchSchedulesAPIClient is a client that implements the
-// ListPrefetchSchedules operation.
-type ListPrefetchSchedulesAPIClient interface {
-	ListPrefetchSchedules(context.Context, *ListPrefetchSchedulesInput, ...func(*Options)) (*ListPrefetchSchedulesOutput, error)
-}
-
-var _ ListPrefetchSchedulesAPIClient = (*Client)(nil)
 
 // ListPrefetchSchedulesPaginatorOptions is the paginator options for
 // ListPrefetchSchedules
@@ -232,6 +227,9 @@ func (p *ListPrefetchSchedulesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrefetchSchedules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListPrefetchSchedulesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListPrefetchSchedulesAPIClient is a client that implements the
+// ListPrefetchSchedules operation.
+type ListPrefetchSchedulesAPIClient interface {
+	ListPrefetchSchedules(context.Context, *ListPrefetchSchedulesInput, ...func(*Options)) (*ListPrefetchSchedulesOutput, error)
+}
+
+var _ ListPrefetchSchedulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrefetchSchedules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

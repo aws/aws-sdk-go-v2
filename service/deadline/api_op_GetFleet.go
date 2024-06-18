@@ -186,6 +186,9 @@ func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetFleetMiddleware(stack); err != nil {
 		return err
 	}
@@ -212,40 +215,6 @@ func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-type endpointPrefix_opGetFleetMiddleware struct {
-}
-
-func (*endpointPrefix_opGetFleetMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetFleetMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetFleetMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetFleetMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetFleetAPIClient is a client that implements the GetFleet operation.
-type GetFleetAPIClient interface {
-	GetFleet(context.Context, *GetFleetInput, ...func(*Options)) (*GetFleetOutput, error)
-}
-
-var _ GetFleetAPIClient = (*Client)(nil)
 
 // FleetActiveWaiterOptions are waiter options for FleetActiveWaiter
 type FleetActiveWaiterOptions struct {
@@ -361,7 +330,13 @@ func (w *FleetActiveWaiter) WaitForOutput(ctx context.Context, params *GetFleetI
 		}
 
 		out, err := w.client.GetFleet(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -452,6 +427,40 @@ func fleetActiveStateRetryable(ctx context.Context, input *GetFleetInput, output
 
 	return true, nil
 }
+
+type endpointPrefix_opGetFleetMiddleware struct {
+}
+
+func (*endpointPrefix_opGetFleetMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetFleetMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetFleetMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetFleetMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetFleetAPIClient is a client that implements the GetFleet operation.
+type GetFleetAPIClient interface {
+	GetFleet(context.Context, *GetFleetInput, ...func(*Options)) (*GetFleetOutput, error)
+}
+
+var _ GetFleetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFleet(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

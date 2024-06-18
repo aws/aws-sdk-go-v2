@@ -117,6 +117,9 @@ func (c *Client) addOperationListBatchSegmentJobsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBatchSegmentJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListBatchSegmentJobsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListBatchSegmentJobsAPIClient is a client that implements the
-// ListBatchSegmentJobs operation.
-type ListBatchSegmentJobsAPIClient interface {
-	ListBatchSegmentJobs(context.Context, *ListBatchSegmentJobsInput, ...func(*Options)) (*ListBatchSegmentJobsOutput, error)
-}
-
-var _ ListBatchSegmentJobsAPIClient = (*Client)(nil)
 
 // ListBatchSegmentJobsPaginatorOptions is the paginator options for
 // ListBatchSegmentJobs
@@ -211,6 +206,9 @@ func (p *ListBatchSegmentJobsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBatchSegmentJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListBatchSegmentJobsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListBatchSegmentJobsAPIClient is a client that implements the
+// ListBatchSegmentJobs operation.
+type ListBatchSegmentJobsAPIClient interface {
+	ListBatchSegmentJobs(context.Context, *ListBatchSegmentJobsInput, ...func(*Options)) (*ListBatchSegmentJobsOutput, error)
+}
+
+var _ ListBatchSegmentJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBatchSegmentJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

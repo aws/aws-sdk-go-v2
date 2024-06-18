@@ -122,6 +122,9 @@ func (c *Client) addOperationListCustomLineItemsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomLineItems(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListCustomLineItemsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListCustomLineItemsAPIClient is a client that implements the
-// ListCustomLineItems operation.
-type ListCustomLineItemsAPIClient interface {
-	ListCustomLineItems(context.Context, *ListCustomLineItemsInput, ...func(*Options)) (*ListCustomLineItemsOutput, error)
-}
-
-var _ ListCustomLineItemsAPIClient = (*Client)(nil)
 
 // ListCustomLineItemsPaginatorOptions is the paginator options for
 // ListCustomLineItems
@@ -215,6 +210,9 @@ func (p *ListCustomLineItemsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomLineItems(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListCustomLineItemsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListCustomLineItemsAPIClient is a client that implements the
+// ListCustomLineItems operation.
+type ListCustomLineItemsAPIClient interface {
+	ListCustomLineItems(context.Context, *ListCustomLineItemsInput, ...func(*Options)) (*ListCustomLineItemsOutput, error)
+}
+
+var _ ListCustomLineItemsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomLineItems(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

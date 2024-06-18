@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeReservedElasticsearchInstancesMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedElasticsearchInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationDescribeReservedElasticsearchInstancesMiddlewares(s
 	}
 	return nil
 }
-
-// DescribeReservedElasticsearchInstancesAPIClient is a client that implements the
-// DescribeReservedElasticsearchInstances operation.
-type DescribeReservedElasticsearchInstancesAPIClient interface {
-	DescribeReservedElasticsearchInstances(context.Context, *DescribeReservedElasticsearchInstancesInput, ...func(*Options)) (*DescribeReservedElasticsearchInstancesOutput, error)
-}
-
-var _ DescribeReservedElasticsearchInstancesAPIClient = (*Client)(nil)
 
 // DescribeReservedElasticsearchInstancesPaginatorOptions is the paginator options
 // for DescribeReservedElasticsearchInstances
@@ -210,6 +205,9 @@ func (p *DescribeReservedElasticsearchInstancesPaginator) NextPage(ctx context.C
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedElasticsearchInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *DescribeReservedElasticsearchInstancesPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// DescribeReservedElasticsearchInstancesAPIClient is a client that implements the
+// DescribeReservedElasticsearchInstances operation.
+type DescribeReservedElasticsearchInstancesAPIClient interface {
+	DescribeReservedElasticsearchInstances(context.Context, *DescribeReservedElasticsearchInstancesInput, ...func(*Options)) (*DescribeReservedElasticsearchInstancesOutput, error)
+}
+
+var _ DescribeReservedElasticsearchInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedElasticsearchInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

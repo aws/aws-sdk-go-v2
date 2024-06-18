@@ -137,6 +137,9 @@ func (c *Client) addOperationListDataSourceRunsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDataSourceRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListDataSourceRunsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListDataSourceRunsAPIClient is a client that implements the ListDataSourceRuns
-// operation.
-type ListDataSourceRunsAPIClient interface {
-	ListDataSourceRuns(context.Context, *ListDataSourceRunsInput, ...func(*Options)) (*ListDataSourceRunsOutput, error)
-}
-
-var _ ListDataSourceRunsAPIClient = (*Client)(nil)
 
 // ListDataSourceRunsPaginatorOptions is the paginator options for
 // ListDataSourceRuns
@@ -236,6 +231,9 @@ func (p *ListDataSourceRunsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataSourceRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListDataSourceRunsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListDataSourceRunsAPIClient is a client that implements the ListDataSourceRuns
+// operation.
+type ListDataSourceRunsAPIClient interface {
+	ListDataSourceRuns(context.Context, *ListDataSourceRunsInput, ...func(*Options)) (*ListDataSourceRunsOutput, error)
+}
+
+var _ ListDataSourceRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataSourceRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

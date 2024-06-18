@@ -132,6 +132,9 @@ func (c *Client) addOperationGetBotVersionsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBotVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationGetBotVersionsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetBotVersionsAPIClient is a client that implements the GetBotVersions
-// operation.
-type GetBotVersionsAPIClient interface {
-	GetBotVersions(context.Context, *GetBotVersionsInput, ...func(*Options)) (*GetBotVersionsOutput, error)
-}
-
-var _ GetBotVersionsAPIClient = (*Client)(nil)
 
 // GetBotVersionsPaginatorOptions is the paginator options for GetBotVersions
 type GetBotVersionsPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *GetBotVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBotVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *GetBotVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// GetBotVersionsAPIClient is a client that implements the GetBotVersions
+// operation.
+type GetBotVersionsAPIClient interface {
+	GetBotVersions(context.Context, *GetBotVersionsInput, ...func(*Options)) (*GetBotVersionsOutput, error)
+}
+
+var _ GetBotVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBotVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

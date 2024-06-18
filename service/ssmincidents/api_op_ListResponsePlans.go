@@ -114,6 +114,9 @@ func (c *Client) addOperationListResponsePlansMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResponsePlans(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListResponsePlansMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListResponsePlansAPIClient is a client that implements the ListResponsePlans
-// operation.
-type ListResponsePlansAPIClient interface {
-	ListResponsePlans(context.Context, *ListResponsePlansInput, ...func(*Options)) (*ListResponsePlansOutput, error)
-}
-
-var _ ListResponsePlansAPIClient = (*Client)(nil)
 
 // ListResponsePlansPaginatorOptions is the paginator options for ListResponsePlans
 type ListResponsePlansPaginatorOptions struct {
@@ -206,6 +201,9 @@ func (p *ListResponsePlansPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResponsePlans(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListResponsePlansPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListResponsePlansAPIClient is a client that implements the ListResponsePlans
+// operation.
+type ListResponsePlansAPIClient interface {
+	ListResponsePlans(context.Context, *ListResponsePlansInput, ...func(*Options)) (*ListResponsePlansOutput, error)
+}
+
+var _ ListResponsePlansAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResponsePlans(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

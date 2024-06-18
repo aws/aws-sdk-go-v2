@@ -135,6 +135,9 @@ func (c *Client) addOperationSearchThingsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchThingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,13 +161,6 @@ func (c *Client) addOperationSearchThingsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// SearchThingsAPIClient is a client that implements the SearchThings operation.
-type SearchThingsAPIClient interface {
-	SearchThings(context.Context, *SearchThingsInput, ...func(*Options)) (*SearchThingsOutput, error)
-}
-
-var _ SearchThingsAPIClient = (*Client)(nil)
 
 // SearchThingsPaginatorOptions is the paginator options for SearchThings
 type SearchThingsPaginatorOptions struct {
@@ -229,6 +225,9 @@ func (p *SearchThingsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchThings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +246,13 @@ func (p *SearchThingsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// SearchThingsAPIClient is a client that implements the SearchThings operation.
+type SearchThingsAPIClient interface {
+	SearchThings(context.Context, *SearchThingsInput, ...func(*Options)) (*SearchThingsOutput, error)
+}
+
+var _ SearchThingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchThings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

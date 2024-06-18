@@ -136,6 +136,9 @@ func (c *Client) addOperationListModelBiasJobDefinitionsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelBiasJobDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListModelBiasJobDefinitionsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListModelBiasJobDefinitionsAPIClient is a client that implements the
-// ListModelBiasJobDefinitions operation.
-type ListModelBiasJobDefinitionsAPIClient interface {
-	ListModelBiasJobDefinitions(context.Context, *ListModelBiasJobDefinitionsInput, ...func(*Options)) (*ListModelBiasJobDefinitionsOutput, error)
-}
-
-var _ ListModelBiasJobDefinitionsAPIClient = (*Client)(nil)
 
 // ListModelBiasJobDefinitionsPaginatorOptions is the paginator options for
 // ListModelBiasJobDefinitions
@@ -232,6 +227,9 @@ func (p *ListModelBiasJobDefinitionsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelBiasJobDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListModelBiasJobDefinitionsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListModelBiasJobDefinitionsAPIClient is a client that implements the
+// ListModelBiasJobDefinitions operation.
+type ListModelBiasJobDefinitionsAPIClient interface {
+	ListModelBiasJobDefinitions(context.Context, *ListModelBiasJobDefinitionsInput, ...func(*Options)) (*ListModelBiasJobDefinitionsOutput, error)
+}
+
+var _ ListModelBiasJobDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelBiasJobDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

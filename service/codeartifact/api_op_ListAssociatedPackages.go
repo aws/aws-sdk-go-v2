@@ -136,6 +136,9 @@ func (c *Client) addOperationListAssociatedPackagesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssociatedPackagesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListAssociatedPackagesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListAssociatedPackagesAPIClient is a client that implements the
-// ListAssociatedPackages operation.
-type ListAssociatedPackagesAPIClient interface {
-	ListAssociatedPackages(context.Context, *ListAssociatedPackagesInput, ...func(*Options)) (*ListAssociatedPackagesOutput, error)
-}
-
-var _ ListAssociatedPackagesAPIClient = (*Client)(nil)
 
 // ListAssociatedPackagesPaginatorOptions is the paginator options for
 // ListAssociatedPackages
@@ -232,6 +227,9 @@ func (p *ListAssociatedPackagesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedPackages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListAssociatedPackagesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListAssociatedPackagesAPIClient is a client that implements the
+// ListAssociatedPackages operation.
+type ListAssociatedPackagesAPIClient interface {
+	ListAssociatedPackages(context.Context, *ListAssociatedPackagesInput, ...func(*Options)) (*ListAssociatedPackagesOutput, error)
+}
+
+var _ ListAssociatedPackagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedPackages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

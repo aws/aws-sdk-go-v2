@@ -147,6 +147,9 @@ func (c *Client) addOperationSubmitRegistrationVersionMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSubmitRegistrationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

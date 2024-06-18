@@ -118,6 +118,9 @@ func (c *Client) addOperationListListenersMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListListenersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,13 +144,6 @@ func (c *Client) addOperationListListenersMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListListenersAPIClient is a client that implements the ListListeners operation.
-type ListListenersAPIClient interface {
-	ListListeners(context.Context, *ListListenersInput, ...func(*Options)) (*ListListenersOutput, error)
-}
-
-var _ ListListenersAPIClient = (*Client)(nil)
 
 // ListListenersPaginatorOptions is the paginator options for ListListeners
 type ListListenersPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *ListListenersPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListListeners(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *ListListenersPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListListenersAPIClient is a client that implements the ListListeners operation.
+type ListListenersAPIClient interface {
+	ListListeners(context.Context, *ListListenersInput, ...func(*Options)) (*ListListenersOutput, error)
+}
+
+var _ ListListenersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListListeners(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

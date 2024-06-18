@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeWorkspaceDirectoriesMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkspaceDirectories(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationDescribeWorkspaceDirectoriesMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeWorkspaceDirectoriesAPIClient is a client that implements the
-// DescribeWorkspaceDirectories operation.
-type DescribeWorkspaceDirectoriesAPIClient interface {
-	DescribeWorkspaceDirectories(context.Context, *DescribeWorkspaceDirectoriesInput, ...func(*Options)) (*DescribeWorkspaceDirectoriesOutput, error)
-}
-
-var _ DescribeWorkspaceDirectoriesAPIClient = (*Client)(nil)
 
 // DescribeWorkspaceDirectoriesPaginatorOptions is the paginator options for
 // DescribeWorkspaceDirectories
@@ -199,6 +194,9 @@ func (p *DescribeWorkspaceDirectoriesPaginator) NextPage(ctx context.Context, op
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeWorkspaceDirectories(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -217,6 +215,14 @@ func (p *DescribeWorkspaceDirectoriesPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeWorkspaceDirectoriesAPIClient is a client that implements the
+// DescribeWorkspaceDirectories operation.
+type DescribeWorkspaceDirectoriesAPIClient interface {
+	DescribeWorkspaceDirectories(context.Context, *DescribeWorkspaceDirectoriesInput, ...func(*Options)) (*DescribeWorkspaceDirectoriesOutput, error)
+}
+
+var _ DescribeWorkspaceDirectoriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeWorkspaceDirectories(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

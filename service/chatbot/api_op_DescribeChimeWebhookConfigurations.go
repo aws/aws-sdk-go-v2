@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeChimeWebhookConfigurationsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeChimeWebhookConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeChimeWebhookConfigurationsMiddlewares(stack
 	}
 	return nil
 }
-
-// DescribeChimeWebhookConfigurationsAPIClient is a client that implements the
-// DescribeChimeWebhookConfigurations operation.
-type DescribeChimeWebhookConfigurationsAPIClient interface {
-	DescribeChimeWebhookConfigurations(context.Context, *DescribeChimeWebhookConfigurationsInput, ...func(*Options)) (*DescribeChimeWebhookConfigurationsOutput, error)
-}
-
-var _ DescribeChimeWebhookConfigurationsAPIClient = (*Client)(nil)
 
 // DescribeChimeWebhookConfigurationsPaginatorOptions is the paginator options for
 // DescribeChimeWebhookConfigurations
@@ -216,6 +211,9 @@ func (p *DescribeChimeWebhookConfigurationsPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeChimeWebhookConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *DescribeChimeWebhookConfigurationsPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// DescribeChimeWebhookConfigurationsAPIClient is a client that implements the
+// DescribeChimeWebhookConfigurations operation.
+type DescribeChimeWebhookConfigurationsAPIClient interface {
+	DescribeChimeWebhookConfigurations(context.Context, *DescribeChimeWebhookConfigurationsInput, ...func(*Options)) (*DescribeChimeWebhookConfigurationsOutput, error)
+}
+
+var _ DescribeChimeWebhookConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeChimeWebhookConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

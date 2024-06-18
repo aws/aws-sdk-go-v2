@@ -133,6 +133,9 @@ func (c *Client) addOperationGetSlotTypeVersionsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSlotTypeVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationGetSlotTypeVersionsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetSlotTypeVersionsAPIClient is a client that implements the
-// GetSlotTypeVersions operation.
-type GetSlotTypeVersionsAPIClient interface {
-	GetSlotTypeVersions(context.Context, *GetSlotTypeVersionsInput, ...func(*Options)) (*GetSlotTypeVersionsOutput, error)
-}
-
-var _ GetSlotTypeVersionsAPIClient = (*Client)(nil)
 
 // GetSlotTypeVersionsPaginatorOptions is the paginator options for
 // GetSlotTypeVersions
@@ -230,6 +225,9 @@ func (p *GetSlotTypeVersionsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSlotTypeVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *GetSlotTypeVersionsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetSlotTypeVersionsAPIClient is a client that implements the
+// GetSlotTypeVersions operation.
+type GetSlotTypeVersionsAPIClient interface {
+	GetSlotTypeVersions(context.Context, *GetSlotTypeVersionsInput, ...func(*Options)) (*GetSlotTypeVersionsOutput, error)
+}
+
+var _ GetSlotTypeVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSlotTypeVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

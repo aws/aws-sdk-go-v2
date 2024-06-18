@@ -160,6 +160,9 @@ func (c *Client) addOperationListIntentsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIntentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -183,13 +186,6 @@ func (c *Client) addOperationListIntentsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListIntentsAPIClient is a client that implements the ListIntents operation.
-type ListIntentsAPIClient interface {
-	ListIntents(context.Context, *ListIntentsInput, ...func(*Options)) (*ListIntentsOutput, error)
-}
-
-var _ ListIntentsAPIClient = (*Client)(nil)
 
 // ListIntentsPaginatorOptions is the paginator options for ListIntents
 type ListIntentsPaginatorOptions struct {
@@ -256,6 +252,9 @@ func (p *ListIntentsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIntents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -274,6 +273,13 @@ func (p *ListIntentsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListIntentsAPIClient is a client that implements the ListIntents operation.
+type ListIntentsAPIClient interface {
+	ListIntents(context.Context, *ListIntentsInput, ...func(*Options)) (*ListIntentsOutput, error)
+}
+
+var _ ListIntentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIntents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

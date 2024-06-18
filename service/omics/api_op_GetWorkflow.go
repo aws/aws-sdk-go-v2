@@ -169,6 +169,9 @@ func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetWorkflowMiddleware(stack); err != nil {
 		return err
 	}
@@ -195,40 +198,6 @@ func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-type endpointPrefix_opGetWorkflowMiddleware struct {
-}
-
-func (*endpointPrefix_opGetWorkflowMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetWorkflowMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "workflows-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetWorkflowMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetWorkflowMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetWorkflowAPIClient is a client that implements the GetWorkflow operation.
-type GetWorkflowAPIClient interface {
-	GetWorkflow(context.Context, *GetWorkflowInput, ...func(*Options)) (*GetWorkflowOutput, error)
-}
-
-var _ GetWorkflowAPIClient = (*Client)(nil)
 
 // WorkflowActiveWaiterOptions are waiter options for WorkflowActiveWaiter
 type WorkflowActiveWaiterOptions struct {
@@ -345,7 +314,13 @@ func (w *WorkflowActiveWaiter) WaitForOutput(ctx context.Context, params *GetWor
 		}
 
 		out, err := w.client.GetWorkflow(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -453,6 +428,40 @@ func workflowActiveStateRetryable(ctx context.Context, input *GetWorkflowInput, 
 
 	return true, nil
 }
+
+type endpointPrefix_opGetWorkflowMiddleware struct {
+}
+
+func (*endpointPrefix_opGetWorkflowMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetWorkflowMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "workflows-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetWorkflowMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetWorkflowMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetWorkflowAPIClient is a client that implements the GetWorkflow operation.
+type GetWorkflowAPIClient interface {
+	GetWorkflow(context.Context, *GetWorkflowInput, ...func(*Options)) (*GetWorkflowOutput, error)
+}
+
+var _ GetWorkflowAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

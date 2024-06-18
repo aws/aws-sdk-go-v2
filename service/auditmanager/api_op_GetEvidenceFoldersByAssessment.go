@@ -116,6 +116,9 @@ func (c *Client) addOperationGetEvidenceFoldersByAssessmentMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEvidenceFoldersByAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationGetEvidenceFoldersByAssessmentMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// GetEvidenceFoldersByAssessmentAPIClient is a client that implements the
-// GetEvidenceFoldersByAssessment operation.
-type GetEvidenceFoldersByAssessmentAPIClient interface {
-	GetEvidenceFoldersByAssessment(context.Context, *GetEvidenceFoldersByAssessmentInput, ...func(*Options)) (*GetEvidenceFoldersByAssessmentOutput, error)
-}
-
-var _ GetEvidenceFoldersByAssessmentAPIClient = (*Client)(nil)
 
 // GetEvidenceFoldersByAssessmentPaginatorOptions is the paginator options for
 // GetEvidenceFoldersByAssessment
@@ -214,6 +209,9 @@ func (p *GetEvidenceFoldersByAssessmentPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetEvidenceFoldersByAssessment(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *GetEvidenceFoldersByAssessmentPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// GetEvidenceFoldersByAssessmentAPIClient is a client that implements the
+// GetEvidenceFoldersByAssessment operation.
+type GetEvidenceFoldersByAssessmentAPIClient interface {
+	GetEvidenceFoldersByAssessment(context.Context, *GetEvidenceFoldersByAssessmentInput, ...func(*Options)) (*GetEvidenceFoldersByAssessmentOutput, error)
+}
+
+var _ GetEvidenceFoldersByAssessmentAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEvidenceFoldersByAssessment(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

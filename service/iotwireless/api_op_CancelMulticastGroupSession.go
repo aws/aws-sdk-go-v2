@@ -101,6 +101,9 @@ func (c *Client) addOperationCancelMulticastGroupSessionMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCancelMulticastGroupSessionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,6 +131,9 @@ func (c *Client) addOperationListServiceActionsForProvisioningArtifactMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListServiceActionsForProvisioningArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListServiceActionsForProvisioningArtifactMiddleware
 	}
 	return nil
 }
-
-// ListServiceActionsForProvisioningArtifactAPIClient is a client that implements
-// the ListServiceActionsForProvisioningArtifact operation.
-type ListServiceActionsForProvisioningArtifactAPIClient interface {
-	ListServiceActionsForProvisioningArtifact(context.Context, *ListServiceActionsForProvisioningArtifactInput, ...func(*Options)) (*ListServiceActionsForProvisioningArtifactOutput, error)
-}
-
-var _ ListServiceActionsForProvisioningArtifactAPIClient = (*Client)(nil)
 
 // ListServiceActionsForProvisioningArtifactPaginatorOptions is the paginator
 // options for ListServiceActionsForProvisioningArtifact
@@ -225,6 +220,9 @@ func (p *ListServiceActionsForProvisioningArtifactPaginator) NextPage(ctx contex
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceActionsForProvisioningArtifact(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListServiceActionsForProvisioningArtifactPaginator) NextPage(ctx contex
 
 	return result, nil
 }
+
+// ListServiceActionsForProvisioningArtifactAPIClient is a client that implements
+// the ListServiceActionsForProvisioningArtifact operation.
+type ListServiceActionsForProvisioningArtifactAPIClient interface {
+	ListServiceActionsForProvisioningArtifact(context.Context, *ListServiceActionsForProvisioningArtifactInput, ...func(*Options)) (*ListServiceActionsForProvisioningArtifactOutput, error)
+}
+
+var _ ListServiceActionsForProvisioningArtifactAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceActionsForProvisioningArtifact(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeDBProxiesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBProxiesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationDescribeDBProxiesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeDBProxiesAPIClient is a client that implements the DescribeDBProxies
-// operation.
-type DescribeDBProxiesAPIClient interface {
-	DescribeDBProxies(context.Context, *DescribeDBProxiesInput, ...func(*Options)) (*DescribeDBProxiesOutput, error)
-}
-
-var _ DescribeDBProxiesAPIClient = (*Client)(nil)
 
 // DescribeDBProxiesPaginatorOptions is the paginator options for DescribeDBProxies
 type DescribeDBProxiesPaginatorOptions struct {
@@ -228,6 +223,9 @@ func (p *DescribeDBProxiesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBProxies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *DescribeDBProxiesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// DescribeDBProxiesAPIClient is a client that implements the DescribeDBProxies
+// operation.
+type DescribeDBProxiesAPIClient interface {
+	DescribeDBProxies(context.Context, *DescribeDBProxiesInput, ...func(*Options)) (*DescribeDBProxiesOutput, error)
+}
+
+var _ DescribeDBProxiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBProxies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

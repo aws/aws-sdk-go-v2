@@ -126,6 +126,9 @@ func (c *Client) addOperationListQualificationRequestsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQualificationRequests(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListQualificationRequestsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListQualificationRequestsAPIClient is a client that implements the
-// ListQualificationRequests operation.
-type ListQualificationRequestsAPIClient interface {
-	ListQualificationRequests(context.Context, *ListQualificationRequestsInput, ...func(*Options)) (*ListQualificationRequestsOutput, error)
-}
-
-var _ ListQualificationRequestsAPIClient = (*Client)(nil)
 
 // ListQualificationRequestsPaginatorOptions is the paginator options for
 // ListQualificationRequests
@@ -220,6 +215,9 @@ func (p *ListQualificationRequestsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQualificationRequests(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListQualificationRequestsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListQualificationRequestsAPIClient is a client that implements the
+// ListQualificationRequests operation.
+type ListQualificationRequestsAPIClient interface {
+	ListQualificationRequests(context.Context, *ListQualificationRequestsInput, ...func(*Options)) (*ListQualificationRequestsOutput, error)
+}
+
+var _ ListQualificationRequestsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQualificationRequests(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

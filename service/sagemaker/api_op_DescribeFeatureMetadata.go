@@ -148,6 +148,9 @@ func (c *Client) addOperationDescribeFeatureMetadataMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFeatureMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

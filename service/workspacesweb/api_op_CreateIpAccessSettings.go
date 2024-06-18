@@ -133,6 +133,9 @@ func (c *Client) addOperationCreateIpAccessSettingsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIpAccessSettingsMiddleware(stack, options); err != nil {
 		return err
 	}

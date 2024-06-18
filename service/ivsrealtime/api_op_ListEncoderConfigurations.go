@@ -115,6 +115,9 @@ func (c *Client) addOperationListEncoderConfigurationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEncoderConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListEncoderConfigurationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListEncoderConfigurationsAPIClient is a client that implements the
-// ListEncoderConfigurations operation.
-type ListEncoderConfigurationsAPIClient interface {
-	ListEncoderConfigurations(context.Context, *ListEncoderConfigurationsInput, ...func(*Options)) (*ListEncoderConfigurationsOutput, error)
-}
-
-var _ ListEncoderConfigurationsAPIClient = (*Client)(nil)
 
 // ListEncoderConfigurationsPaginatorOptions is the paginator options for
 // ListEncoderConfigurations
@@ -209,6 +204,9 @@ func (p *ListEncoderConfigurationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEncoderConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListEncoderConfigurationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListEncoderConfigurationsAPIClient is a client that implements the
+// ListEncoderConfigurations operation.
+type ListEncoderConfigurationsAPIClient interface {
+	ListEncoderConfigurations(context.Context, *ListEncoderConfigurationsInput, ...func(*Options)) (*ListEncoderConfigurationsOutput, error)
+}
+
+var _ ListEncoderConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEncoderConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

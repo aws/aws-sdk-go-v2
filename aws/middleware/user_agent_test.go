@@ -231,6 +231,71 @@ func TestAddUserAgentKeyValue(t *testing.T) {
 	}
 }
 
+func TestAddUserAgentFeature(t *testing.T) {
+	restoreEnv := clearEnv()
+	defer restoreEnv()
+
+	cases := map[string]struct {
+		Features []UserAgentFeature
+		Expect   string
+	}{
+		"none": {
+			Features: []UserAgentFeature{},
+			Expect:   expectedAgent,
+		},
+		"one": {
+			Features: []UserAgentFeature{
+				UserAgentFeatureWaiter,
+			},
+			Expect: "m/B " + expectedAgent,
+		},
+		"two": {
+			Features: []UserAgentFeature{
+				UserAgentFeatureRetryModeAdaptive, // ensure stable order, and idempotent
+				UserAgentFeatureRetryModeAdaptive,
+				UserAgentFeatureWaiter,
+			},
+			Expect: "m/B,F " + expectedAgent,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			b := NewRequestUserAgent()
+			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
+			err := stack.Build.Add(b, middleware.After)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			for _, f := range c.Features {
+				b.AddUserAgentFeature(f)
+			}
+
+			in := middleware.BuildInput{
+				Request: &smithyhttp.Request{
+					Request: &http.Request{
+						Header: map[string][]string{},
+					},
+				},
+			}
+			_, _, err = b.HandleBuild(context.Background(), in, middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
+				return o, m, err
+			}))
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			ua, ok := in.Request.(*smithyhttp.Request).Header["User-Agent"]
+			if !ok {
+				t.Fatalf("expect User-Agent to be present")
+			}
+			if ua[0] != c.Expect {
+				t.Errorf("User-Agent did not match expected, %v != %v", c.Expect, ua[0])
+			}
+		})
+	}
+}
+
 func TestAddSDKAgentKey(t *testing.T) {
 	restoreEnv := clearEnv()
 	defer restoreEnv()

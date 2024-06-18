@@ -112,6 +112,9 @@ func (c *Client) addOperationBatchPutMetricsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchPutMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

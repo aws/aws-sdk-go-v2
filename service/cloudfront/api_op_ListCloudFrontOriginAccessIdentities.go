@@ -113,6 +113,9 @@ func (c *Client) addOperationListCloudFrontOriginAccessIdentitiesMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCloudFrontOriginAccessIdentities(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListCloudFrontOriginAccessIdentitiesMiddlewares(sta
 	}
 	return nil
 }
-
-// ListCloudFrontOriginAccessIdentitiesAPIClient is a client that implements the
-// ListCloudFrontOriginAccessIdentities operation.
-type ListCloudFrontOriginAccessIdentitiesAPIClient interface {
-	ListCloudFrontOriginAccessIdentities(context.Context, *ListCloudFrontOriginAccessIdentitiesInput, ...func(*Options)) (*ListCloudFrontOriginAccessIdentitiesOutput, error)
-}
-
-var _ ListCloudFrontOriginAccessIdentitiesAPIClient = (*Client)(nil)
 
 // ListCloudFrontOriginAccessIdentitiesPaginatorOptions is the paginator options
 // for ListCloudFrontOriginAccessIdentities
@@ -208,6 +203,9 @@ func (p *ListCloudFrontOriginAccessIdentitiesPaginator) NextPage(ctx context.Con
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCloudFrontOriginAccessIdentities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListCloudFrontOriginAccessIdentitiesPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListCloudFrontOriginAccessIdentitiesAPIClient is a client that implements the
+// ListCloudFrontOriginAccessIdentities operation.
+type ListCloudFrontOriginAccessIdentitiesAPIClient interface {
+	ListCloudFrontOriginAccessIdentities(context.Context, *ListCloudFrontOriginAccessIdentitiesInput, ...func(*Options)) (*ListCloudFrontOriginAccessIdentitiesOutput, error)
+}
+
+var _ ListCloudFrontOriginAccessIdentitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCloudFrontOriginAccessIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

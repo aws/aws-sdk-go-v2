@@ -141,6 +141,9 @@ func (c *Client) addOperationListModelQualityJobDefinitionsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelQualityJobDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListModelQualityJobDefinitionsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListModelQualityJobDefinitionsAPIClient is a client that implements the
-// ListModelQualityJobDefinitions operation.
-type ListModelQualityJobDefinitionsAPIClient interface {
-	ListModelQualityJobDefinitions(context.Context, *ListModelQualityJobDefinitionsInput, ...func(*Options)) (*ListModelQualityJobDefinitionsOutput, error)
-}
-
-var _ ListModelQualityJobDefinitionsAPIClient = (*Client)(nil)
 
 // ListModelQualityJobDefinitionsPaginatorOptions is the paginator options for
 // ListModelQualityJobDefinitions
@@ -237,6 +232,9 @@ func (p *ListModelQualityJobDefinitionsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelQualityJobDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListModelQualityJobDefinitionsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListModelQualityJobDefinitionsAPIClient is a client that implements the
+// ListModelQualityJobDefinitions operation.
+type ListModelQualityJobDefinitionsAPIClient interface {
+	ListModelQualityJobDefinitions(context.Context, *ListModelQualityJobDefinitionsInput, ...func(*Options)) (*ListModelQualityJobDefinitionsOutput, error)
+}
+
+var _ ListModelQualityJobDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelQualityJobDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

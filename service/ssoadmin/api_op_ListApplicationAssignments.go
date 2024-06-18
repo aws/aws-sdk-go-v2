@@ -128,6 +128,9 @@ func (c *Client) addOperationListApplicationAssignmentsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationAssignmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListApplicationAssignmentsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListApplicationAssignmentsAPIClient is a client that implements the
-// ListApplicationAssignments operation.
-type ListApplicationAssignmentsAPIClient interface {
-	ListApplicationAssignments(context.Context, *ListApplicationAssignmentsInput, ...func(*Options)) (*ListApplicationAssignmentsOutput, error)
-}
-
-var _ ListApplicationAssignmentsAPIClient = (*Client)(nil)
 
 // ListApplicationAssignmentsPaginatorOptions is the paginator options for
 // ListApplicationAssignments
@@ -232,6 +227,9 @@ func (p *ListApplicationAssignmentsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationAssignments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListApplicationAssignmentsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListApplicationAssignmentsAPIClient is a client that implements the
+// ListApplicationAssignments operation.
+type ListApplicationAssignmentsAPIClient interface {
+	ListApplicationAssignments(context.Context, *ListApplicationAssignmentsInput, ...func(*Options)) (*ListApplicationAssignmentsOutput, error)
+}
+
+var _ ListApplicationAssignmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationAssignments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

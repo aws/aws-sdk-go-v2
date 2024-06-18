@@ -121,6 +121,9 @@ func (c *Client) addOperationListSecurityKeysMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSecurityKeysValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListSecurityKeysMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListSecurityKeysAPIClient is a client that implements the ListSecurityKeys
-// operation.
-type ListSecurityKeysAPIClient interface {
-	ListSecurityKeys(context.Context, *ListSecurityKeysInput, ...func(*Options)) (*ListSecurityKeysOutput, error)
-}
-
-var _ ListSecurityKeysAPIClient = (*Client)(nil)
 
 // ListSecurityKeysPaginatorOptions is the paginator options for ListSecurityKeys
 type ListSecurityKeysPaginatorOptions struct {
@@ -216,6 +211,9 @@ func (p *ListSecurityKeysPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSecurityKeys(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListSecurityKeysPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListSecurityKeysAPIClient is a client that implements the ListSecurityKeys
+// operation.
+type ListSecurityKeysAPIClient interface {
+	ListSecurityKeys(context.Context, *ListSecurityKeysInput, ...func(*Options)) (*ListSecurityKeysOutput, error)
+}
+
+var _ ListSecurityKeysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSecurityKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

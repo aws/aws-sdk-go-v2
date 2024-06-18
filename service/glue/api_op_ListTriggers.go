@@ -124,6 +124,9 @@ func (c *Client) addOperationListTriggersMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTriggers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationListTriggersMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListTriggersAPIClient is a client that implements the ListTriggers operation.
-type ListTriggersAPIClient interface {
-	ListTriggers(context.Context, *ListTriggersInput, ...func(*Options)) (*ListTriggersOutput, error)
-}
-
-var _ ListTriggersAPIClient = (*Client)(nil)
 
 // ListTriggersPaginatorOptions is the paginator options for ListTriggers
 type ListTriggersPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListTriggersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTriggers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListTriggersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListTriggersAPIClient is a client that implements the ListTriggers operation.
+type ListTriggersAPIClient interface {
+	ListTriggers(context.Context, *ListTriggersInput, ...func(*Options)) (*ListTriggersOutput, error)
+}
+
+var _ ListTriggersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTriggers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

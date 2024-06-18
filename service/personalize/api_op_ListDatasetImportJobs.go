@@ -122,6 +122,9 @@ func (c *Client) addOperationListDatasetImportJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasetImportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListDatasetImportJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListDatasetImportJobsAPIClient is a client that implements the
-// ListDatasetImportJobs operation.
-type ListDatasetImportJobsAPIClient interface {
-	ListDatasetImportJobs(context.Context, *ListDatasetImportJobsInput, ...func(*Options)) (*ListDatasetImportJobsOutput, error)
-}
-
-var _ ListDatasetImportJobsAPIClient = (*Client)(nil)
 
 // ListDatasetImportJobsPaginatorOptions is the paginator options for
 // ListDatasetImportJobs
@@ -215,6 +210,9 @@ func (p *ListDatasetImportJobsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDatasetImportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListDatasetImportJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListDatasetImportJobsAPIClient is a client that implements the
+// ListDatasetImportJobs operation.
+type ListDatasetImportJobsAPIClient interface {
+	ListDatasetImportJobs(context.Context, *ListDatasetImportJobsInput, ...func(*Options)) (*ListDatasetImportJobsOutput, error)
+}
+
+var _ ListDatasetImportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDatasetImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -125,6 +125,9 @@ func (c *Client) addOperationPreviewAgentsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPreviewAgentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,13 +151,6 @@ func (c *Client) addOperationPreviewAgentsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// PreviewAgentsAPIClient is a client that implements the PreviewAgents operation.
-type PreviewAgentsAPIClient interface {
-	PreviewAgents(context.Context, *PreviewAgentsInput, ...func(*Options)) (*PreviewAgentsOutput, error)
-}
-
-var _ PreviewAgentsAPIClient = (*Client)(nil)
 
 // PreviewAgentsPaginatorOptions is the paginator options for PreviewAgents
 type PreviewAgentsPaginatorOptions struct {
@@ -220,6 +216,9 @@ func (p *PreviewAgentsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.PreviewAgents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +237,13 @@ func (p *PreviewAgentsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// PreviewAgentsAPIClient is a client that implements the PreviewAgents operation.
+type PreviewAgentsAPIClient interface {
+	PreviewAgents(context.Context, *PreviewAgentsInput, ...func(*Options)) (*PreviewAgentsOutput, error)
+}
+
+var _ PreviewAgentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opPreviewAgents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

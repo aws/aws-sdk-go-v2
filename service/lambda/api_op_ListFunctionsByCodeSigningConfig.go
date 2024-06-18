@@ -117,6 +117,9 @@ func (c *Client) addOperationListFunctionsByCodeSigningConfigMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFunctionsByCodeSigningConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListFunctionsByCodeSigningConfigMiddlewares(stack *
 	}
 	return nil
 }
-
-// ListFunctionsByCodeSigningConfigAPIClient is a client that implements the
-// ListFunctionsByCodeSigningConfig operation.
-type ListFunctionsByCodeSigningConfigAPIClient interface {
-	ListFunctionsByCodeSigningConfig(context.Context, *ListFunctionsByCodeSigningConfigInput, ...func(*Options)) (*ListFunctionsByCodeSigningConfigOutput, error)
-}
-
-var _ ListFunctionsByCodeSigningConfigAPIClient = (*Client)(nil)
 
 // ListFunctionsByCodeSigningConfigPaginatorOptions is the paginator options for
 // ListFunctionsByCodeSigningConfig
@@ -215,6 +210,9 @@ func (p *ListFunctionsByCodeSigningConfigPaginator) NextPage(ctx context.Context
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFunctionsByCodeSigningConfig(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListFunctionsByCodeSigningConfigPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// ListFunctionsByCodeSigningConfigAPIClient is a client that implements the
+// ListFunctionsByCodeSigningConfig operation.
+type ListFunctionsByCodeSigningConfigAPIClient interface {
+	ListFunctionsByCodeSigningConfig(context.Context, *ListFunctionsByCodeSigningConfigInput, ...func(*Options)) (*ListFunctionsByCodeSigningConfigOutput, error)
+}
+
+var _ ListFunctionsByCodeSigningConfigAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFunctionsByCodeSigningConfig(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

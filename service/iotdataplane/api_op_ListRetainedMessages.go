@@ -128,6 +128,9 @@ func (c *Client) addOperationListRetainedMessagesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRetainedMessages(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListRetainedMessagesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListRetainedMessagesAPIClient is a client that implements the
-// ListRetainedMessages operation.
-type ListRetainedMessagesAPIClient interface {
-	ListRetainedMessages(context.Context, *ListRetainedMessagesInput, ...func(*Options)) (*ListRetainedMessagesOutput, error)
-}
-
-var _ ListRetainedMessagesAPIClient = (*Client)(nil)
 
 // ListRetainedMessagesPaginatorOptions is the paginator options for
 // ListRetainedMessages
@@ -221,6 +216,9 @@ func (p *ListRetainedMessagesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRetainedMessages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListRetainedMessagesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListRetainedMessagesAPIClient is a client that implements the
+// ListRetainedMessages operation.
+type ListRetainedMessagesAPIClient interface {
+	ListRetainedMessages(context.Context, *ListRetainedMessagesInput, ...func(*Options)) (*ListRetainedMessagesOutput, error)
+}
+
+var _ ListRetainedMessagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRetainedMessages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

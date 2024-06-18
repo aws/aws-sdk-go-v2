@@ -106,6 +106,9 @@ func (c *Client) addOperationDeleteLaunchActionMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteLaunchActionValidationMiddleware(stack); err != nil {
 		return err
 	}

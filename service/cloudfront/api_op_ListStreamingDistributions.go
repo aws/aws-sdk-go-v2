@@ -109,6 +109,9 @@ func (c *Client) addOperationListStreamingDistributionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStreamingDistributions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -129,14 +132,6 @@ func (c *Client) addOperationListStreamingDistributionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListStreamingDistributionsAPIClient is a client that implements the
-// ListStreamingDistributions operation.
-type ListStreamingDistributionsAPIClient interface {
-	ListStreamingDistributions(context.Context, *ListStreamingDistributionsInput, ...func(*Options)) (*ListStreamingDistributionsOutput, error)
-}
-
-var _ ListStreamingDistributionsAPIClient = (*Client)(nil)
 
 // ListStreamingDistributionsPaginatorOptions is the paginator options for
 // ListStreamingDistributions
@@ -204,6 +199,9 @@ func (p *ListStreamingDistributionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreamingDistributions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListStreamingDistributionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListStreamingDistributionsAPIClient is a client that implements the
+// ListStreamingDistributions operation.
+type ListStreamingDistributionsAPIClient interface {
+	ListStreamingDistributions(context.Context, *ListStreamingDistributionsInput, ...func(*Options)) (*ListStreamingDistributionsOutput, error)
+}
+
+var _ ListStreamingDistributionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreamingDistributions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -134,6 +134,9 @@ func (c *Client) addOperationListAlgorithmsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAlgorithms(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListAlgorithmsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListAlgorithmsAPIClient is a client that implements the ListAlgorithms
-// operation.
-type ListAlgorithmsAPIClient interface {
-	ListAlgorithms(context.Context, *ListAlgorithmsInput, ...func(*Options)) (*ListAlgorithmsOutput, error)
-}
-
-var _ ListAlgorithmsAPIClient = (*Client)(nil)
 
 // ListAlgorithmsPaginatorOptions is the paginator options for ListAlgorithms
 type ListAlgorithmsPaginatorOptions struct {
@@ -226,6 +221,9 @@ func (p *ListAlgorithmsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAlgorithms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListAlgorithmsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListAlgorithmsAPIClient is a client that implements the ListAlgorithms
+// operation.
+type ListAlgorithmsAPIClient interface {
+	ListAlgorithms(context.Context, *ListAlgorithmsInput, ...func(*Options)) (*ListAlgorithmsOutput, error)
+}
+
+var _ ListAlgorithmsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAlgorithms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

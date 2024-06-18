@@ -120,6 +120,9 @@ func (c *Client) addOperationListTestExecutionsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListTestExecutionsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListTestExecutionsAPIClient is a client that implements the ListTestExecutions
-// operation.
-type ListTestExecutionsAPIClient interface {
-	ListTestExecutions(context.Context, *ListTestExecutionsInput, ...func(*Options)) (*ListTestExecutionsOutput, error)
-}
-
-var _ ListTestExecutionsAPIClient = (*Client)(nil)
 
 // ListTestExecutionsPaginatorOptions is the paginator options for
 // ListTestExecutions
@@ -218,6 +213,9 @@ func (p *ListTestExecutionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListTestExecutionsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListTestExecutionsAPIClient is a client that implements the ListTestExecutions
+// operation.
+type ListTestExecutionsAPIClient interface {
+	ListTestExecutions(context.Context, *ListTestExecutionsInput, ...func(*Options)) (*ListTestExecutionsOutput, error)
+}
+
+var _ ListTestExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -110,6 +110,9 @@ func (c *Client) addOperationListManagedDataIdentifiersMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedDataIdentifiers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListManagedDataIdentifiersMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListManagedDataIdentifiersAPIClient is a client that implements the
-// ListManagedDataIdentifiers operation.
-type ListManagedDataIdentifiersAPIClient interface {
-	ListManagedDataIdentifiers(context.Context, *ListManagedDataIdentifiersInput, ...func(*Options)) (*ListManagedDataIdentifiersOutput, error)
-}
-
-var _ ListManagedDataIdentifiersAPIClient = (*Client)(nil)
 
 // ListManagedDataIdentifiersPaginatorOptions is the paginator options for
 // ListManagedDataIdentifiers
@@ -193,6 +188,9 @@ func (p *ListManagedDataIdentifiersPaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListManagedDataIdentifiers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -211,6 +209,14 @@ func (p *ListManagedDataIdentifiersPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListManagedDataIdentifiersAPIClient is a client that implements the
+// ListManagedDataIdentifiers operation.
+type ListManagedDataIdentifiersAPIClient interface {
+	ListManagedDataIdentifiers(context.Context, *ListManagedDataIdentifiersInput, ...func(*Options)) (*ListManagedDataIdentifiersOutput, error)
+}
+
+var _ ListManagedDataIdentifiersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListManagedDataIdentifiers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

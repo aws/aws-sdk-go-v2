@@ -214,6 +214,9 @@ func (c *Client) addOperationListAggregatedUtterancesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAggregatedUtterancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -237,14 +240,6 @@ func (c *Client) addOperationListAggregatedUtterancesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListAggregatedUtterancesAPIClient is a client that implements the
-// ListAggregatedUtterances operation.
-type ListAggregatedUtterancesAPIClient interface {
-	ListAggregatedUtterances(context.Context, *ListAggregatedUtterancesInput, ...func(*Options)) (*ListAggregatedUtterancesOutput, error)
-}
-
-var _ ListAggregatedUtterancesAPIClient = (*Client)(nil)
 
 // ListAggregatedUtterancesPaginatorOptions is the paginator options for
 // ListAggregatedUtterances
@@ -314,6 +309,9 @@ func (p *ListAggregatedUtterancesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAggregatedUtterances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -332,6 +330,14 @@ func (p *ListAggregatedUtterancesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListAggregatedUtterancesAPIClient is a client that implements the
+// ListAggregatedUtterances operation.
+type ListAggregatedUtterancesAPIClient interface {
+	ListAggregatedUtterances(context.Context, *ListAggregatedUtterancesInput, ...func(*Options)) (*ListAggregatedUtterancesOutput, error)
+}
+
+var _ ListAggregatedUtterancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAggregatedUtterances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

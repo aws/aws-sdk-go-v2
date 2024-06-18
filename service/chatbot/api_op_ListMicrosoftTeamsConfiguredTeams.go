@@ -116,6 +116,9 @@ func (c *Client) addOperationListMicrosoftTeamsConfiguredTeamsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMicrosoftTeamsConfiguredTeams(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListMicrosoftTeamsConfiguredTeamsMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListMicrosoftTeamsConfiguredTeamsAPIClient is a client that implements the
-// ListMicrosoftTeamsConfiguredTeams operation.
-type ListMicrosoftTeamsConfiguredTeamsAPIClient interface {
-	ListMicrosoftTeamsConfiguredTeams(context.Context, *ListMicrosoftTeamsConfiguredTeamsInput, ...func(*Options)) (*ListMicrosoftTeamsConfiguredTeamsOutput, error)
-}
-
-var _ ListMicrosoftTeamsConfiguredTeamsAPIClient = (*Client)(nil)
 
 // ListMicrosoftTeamsConfiguredTeamsPaginatorOptions is the paginator options for
 // ListMicrosoftTeamsConfiguredTeams
@@ -213,6 +208,9 @@ func (p *ListMicrosoftTeamsConfiguredTeamsPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMicrosoftTeamsConfiguredTeams(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListMicrosoftTeamsConfiguredTeamsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListMicrosoftTeamsConfiguredTeamsAPIClient is a client that implements the
+// ListMicrosoftTeamsConfiguredTeams operation.
+type ListMicrosoftTeamsConfiguredTeamsAPIClient interface {
+	ListMicrosoftTeamsConfiguredTeams(context.Context, *ListMicrosoftTeamsConfiguredTeamsInput, ...func(*Options)) (*ListMicrosoftTeamsConfiguredTeamsOutput, error)
+}
+
+var _ ListMicrosoftTeamsConfiguredTeamsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMicrosoftTeamsConfiguredTeams(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -115,6 +115,9 @@ func (c *Client) addOperationListCollectorsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCollectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListCollectorsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListCollectorsAPIClient is a client that implements the ListCollectors
-// operation.
-type ListCollectorsAPIClient interface {
-	ListCollectors(context.Context, *ListCollectorsInput, ...func(*Options)) (*ListCollectorsOutput, error)
-}
-
-var _ ListCollectorsAPIClient = (*Client)(nil)
 
 // ListCollectorsPaginatorOptions is the paginator options for ListCollectors
 type ListCollectorsPaginatorOptions struct {
@@ -208,6 +203,9 @@ func (p *ListCollectorsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCollectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListCollectorsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListCollectorsAPIClient is a client that implements the ListCollectors
+// operation.
+type ListCollectorsAPIClient interface {
+	ListCollectors(context.Context, *ListCollectorsInput, ...func(*Options)) (*ListCollectorsOutput, error)
+}
+
+var _ ListCollectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCollectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

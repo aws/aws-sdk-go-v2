@@ -118,6 +118,9 @@ func (c *Client) addOperationListEnvironmentProvisionedResourcesMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEnvironmentProvisionedResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListEnvironmentProvisionedResourcesMiddlewares(stac
 	}
 	return nil
 }
-
-// ListEnvironmentProvisionedResourcesAPIClient is a client that implements the
-// ListEnvironmentProvisionedResources operation.
-type ListEnvironmentProvisionedResourcesAPIClient interface {
-	ListEnvironmentProvisionedResources(context.Context, *ListEnvironmentProvisionedResourcesInput, ...func(*Options)) (*ListEnvironmentProvisionedResourcesOutput, error)
-}
-
-var _ ListEnvironmentProvisionedResourcesAPIClient = (*Client)(nil)
 
 // ListEnvironmentProvisionedResourcesPaginatorOptions is the paginator options
 // for ListEnvironmentProvisionedResources
@@ -204,6 +199,9 @@ func (p *ListEnvironmentProvisionedResourcesPaginator) NextPage(ctx context.Cont
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEnvironmentProvisionedResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListEnvironmentProvisionedResourcesPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// ListEnvironmentProvisionedResourcesAPIClient is a client that implements the
+// ListEnvironmentProvisionedResources operation.
+type ListEnvironmentProvisionedResourcesAPIClient interface {
+	ListEnvironmentProvisionedResources(context.Context, *ListEnvironmentProvisionedResourcesInput, ...func(*Options)) (*ListEnvironmentProvisionedResourcesOutput, error)
+}
+
+var _ ListEnvironmentProvisionedResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEnvironmentProvisionedResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

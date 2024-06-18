@@ -120,6 +120,9 @@ func (c *Client) addOperationListApplicationAuthenticationMethodsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationAuthenticationMethodsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListApplicationAuthenticationMethodsMiddlewares(sta
 	}
 	return nil
 }
-
-// ListApplicationAuthenticationMethodsAPIClient is a client that implements the
-// ListApplicationAuthenticationMethods operation.
-type ListApplicationAuthenticationMethodsAPIClient interface {
-	ListApplicationAuthenticationMethods(context.Context, *ListApplicationAuthenticationMethodsInput, ...func(*Options)) (*ListApplicationAuthenticationMethodsOutput, error)
-}
-
-var _ ListApplicationAuthenticationMethodsAPIClient = (*Client)(nil)
 
 // ListApplicationAuthenticationMethodsPaginatorOptions is the paginator options
 // for ListApplicationAuthenticationMethods
@@ -206,6 +201,9 @@ func (p *ListApplicationAuthenticationMethodsPaginator) NextPage(ctx context.Con
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationAuthenticationMethods(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListApplicationAuthenticationMethodsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListApplicationAuthenticationMethodsAPIClient is a client that implements the
+// ListApplicationAuthenticationMethods operation.
+type ListApplicationAuthenticationMethodsAPIClient interface {
+	ListApplicationAuthenticationMethods(context.Context, *ListApplicationAuthenticationMethodsInput, ...func(*Options)) (*ListApplicationAuthenticationMethodsOutput, error)
+}
+
+var _ ListApplicationAuthenticationMethodsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationAuthenticationMethods(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

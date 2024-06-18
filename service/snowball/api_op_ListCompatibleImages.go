@@ -122,6 +122,9 @@ func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCompatibleImages(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListCompatibleImagesAPIClient is a client that implements the
-// ListCompatibleImages operation.
-type ListCompatibleImagesAPIClient interface {
-	ListCompatibleImages(context.Context, *ListCompatibleImagesInput, ...func(*Options)) (*ListCompatibleImagesOutput, error)
-}
-
-var _ ListCompatibleImagesAPIClient = (*Client)(nil)
 
 // ListCompatibleImagesPaginatorOptions is the paginator options for
 // ListCompatibleImages
@@ -216,6 +211,9 @@ func (p *ListCompatibleImagesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCompatibleImages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListCompatibleImagesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListCompatibleImagesAPIClient is a client that implements the
+// ListCompatibleImages operation.
+type ListCompatibleImagesAPIClient interface {
+	ListCompatibleImages(context.Context, *ListCompatibleImagesInput, ...func(*Options)) (*ListCompatibleImagesOutput, error)
+}
+
+var _ ListCompatibleImagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCompatibleImages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

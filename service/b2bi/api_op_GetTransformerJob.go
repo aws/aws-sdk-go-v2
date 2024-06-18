@@ -123,6 +123,9 @@ func (c *Client) addOperationGetTransformerJobMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTransformerJobValidationMiddleware(stack); err != nil {
 		return err
 	}

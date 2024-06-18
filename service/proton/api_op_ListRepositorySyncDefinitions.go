@@ -128,6 +128,9 @@ func (c *Client) addOperationListRepositorySyncDefinitionsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRepositorySyncDefinitionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListRepositorySyncDefinitionsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListRepositorySyncDefinitionsAPIClient is a client that implements the
-// ListRepositorySyncDefinitions operation.
-type ListRepositorySyncDefinitionsAPIClient interface {
-	ListRepositorySyncDefinitions(context.Context, *ListRepositorySyncDefinitionsInput, ...func(*Options)) (*ListRepositorySyncDefinitionsOutput, error)
-}
-
-var _ ListRepositorySyncDefinitionsAPIClient = (*Client)(nil)
 
 // ListRepositorySyncDefinitionsPaginatorOptions is the paginator options for
 // ListRepositorySyncDefinitions
@@ -214,6 +209,9 @@ func (p *ListRepositorySyncDefinitionsPaginator) NextPage(ctx context.Context, o
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRepositorySyncDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListRepositorySyncDefinitionsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListRepositorySyncDefinitionsAPIClient is a client that implements the
+// ListRepositorySyncDefinitions operation.
+type ListRepositorySyncDefinitionsAPIClient interface {
+	ListRepositorySyncDefinitions(context.Context, *ListRepositorySyncDefinitionsInput, ...func(*Options)) (*ListRepositorySyncDefinitionsOutput, error)
+}
+
+var _ ListRepositorySyncDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRepositorySyncDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

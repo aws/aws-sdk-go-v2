@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,102 +155,6 @@ func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
-}
-
-// DescribeEndpointsAPIClient is a client that implements the DescribeEndpoints
-// operation.
-type DescribeEndpointsAPIClient interface {
-	DescribeEndpoints(context.Context, *DescribeEndpointsInput, ...func(*Options)) (*DescribeEndpointsOutput, error)
-}
-
-var _ DescribeEndpointsAPIClient = (*Client)(nil)
-
-// DescribeEndpointsPaginatorOptions is the paginator options for DescribeEndpoints
-type DescribeEndpointsPaginatorOptions struct {
-	//  The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeEndpointsPaginator is a paginator for DescribeEndpoints
-type DescribeEndpointsPaginator struct {
-	options   DescribeEndpointsPaginatorOptions
-	client    DescribeEndpointsAPIClient
-	params    *DescribeEndpointsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeEndpointsPaginator returns a new DescribeEndpointsPaginator
-func NewDescribeEndpointsPaginator(client DescribeEndpointsAPIClient, params *DescribeEndpointsInput, optFns ...func(*DescribeEndpointsPaginatorOptions)) *DescribeEndpointsPaginator {
-	if params == nil {
-		params = &DescribeEndpointsInput{}
-	}
-
-	options := DescribeEndpointsPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeEndpointsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeEndpointsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeEndpoints page.
-func (p *DescribeEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeEndpoints(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // EndpointDeletedWaiterOptions are waiter options for EndpointDeletedWaiter
@@ -365,7 +272,13 @@ func (w *EndpointDeletedWaiter) WaitForOutput(ctx context.Context, params *Descr
 		}
 
 		out, err := w.client.DescribeEndpoints(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -460,6 +373,105 @@ func endpointDeletedStateRetryable(ctx context.Context, input *DescribeEndpoints
 
 	return true, nil
 }
+
+// DescribeEndpointsPaginatorOptions is the paginator options for DescribeEndpoints
+type DescribeEndpointsPaginatorOptions struct {
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEndpointsPaginator is a paginator for DescribeEndpoints
+type DescribeEndpointsPaginator struct {
+	options   DescribeEndpointsPaginatorOptions
+	client    DescribeEndpointsAPIClient
+	params    *DescribeEndpointsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEndpointsPaginator returns a new DescribeEndpointsPaginator
+func NewDescribeEndpointsPaginator(client DescribeEndpointsAPIClient, params *DescribeEndpointsInput, optFns ...func(*DescribeEndpointsPaginatorOptions)) *DescribeEndpointsPaginator {
+	if params == nil {
+		params = &DescribeEndpointsInput{}
+	}
+
+	options := DescribeEndpointsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeEndpointsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEndpointsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeEndpoints page.
+func (p *DescribeEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeEndpoints(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeEndpointsAPIClient is a client that implements the DescribeEndpoints
+// operation.
+type DescribeEndpointsAPIClient interface {
+	DescribeEndpoints(context.Context, *DescribeEndpointsInput, ...func(*Options)) (*DescribeEndpointsOutput, error)
+}
+
+var _ DescribeEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

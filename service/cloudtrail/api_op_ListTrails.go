@@ -115,6 +115,9 @@ func (c *Client) addOperationListTrailsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrails(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,13 +138,6 @@ func (c *Client) addOperationListTrailsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListTrailsAPIClient is a client that implements the ListTrails operation.
-type ListTrailsAPIClient interface {
-	ListTrails(context.Context, *ListTrailsInput, ...func(*Options)) (*ListTrailsOutput, error)
-}
-
-var _ ListTrailsAPIClient = (*Client)(nil)
 
 // ListTrailsPaginatorOptions is the paginator options for ListTrails
 type ListTrailsPaginatorOptions struct {
@@ -194,6 +190,9 @@ func (p *ListTrailsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrails(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -212,6 +211,13 @@ func (p *ListTrailsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListTrailsAPIClient is a client that implements the ListTrails operation.
+type ListTrailsAPIClient interface {
+	ListTrails(context.Context, *ListTrailsInput, ...func(*Options)) (*ListTrailsOutput, error)
+}
+
+var _ ListTrailsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrails(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

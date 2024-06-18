@@ -144,6 +144,9 @@ func (c *Client) addOperationListAppImageConfigsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppImageConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationListAppImageConfigsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListAppImageConfigsAPIClient is a client that implements the
-// ListAppImageConfigs operation.
-type ListAppImageConfigsAPIClient interface {
-	ListAppImageConfigs(context.Context, *ListAppImageConfigsInput, ...func(*Options)) (*ListAppImageConfigsOutput, error)
-}
-
-var _ ListAppImageConfigsAPIClient = (*Client)(nil)
 
 // ListAppImageConfigsPaginatorOptions is the paginator options for
 // ListAppImageConfigs
@@ -240,6 +235,9 @@ func (p *ListAppImageConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppImageConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +256,14 @@ func (p *ListAppImageConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListAppImageConfigsAPIClient is a client that implements the
+// ListAppImageConfigs operation.
+type ListAppImageConfigsAPIClient interface {
+	ListAppImageConfigs(context.Context, *ListAppImageConfigsInput, ...func(*Options)) (*ListAppImageConfigsOutput, error)
+}
+
+var _ ListAppImageConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppImageConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

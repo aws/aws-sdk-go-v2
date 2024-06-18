@@ -117,6 +117,9 @@ func (c *Client) addOperationListResourceEvaluationsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceEvaluations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListResourceEvaluationsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListResourceEvaluationsAPIClient is a client that implements the
-// ListResourceEvaluations operation.
-type ListResourceEvaluationsAPIClient interface {
-	ListResourceEvaluations(context.Context, *ListResourceEvaluationsInput, ...func(*Options)) (*ListResourceEvaluationsOutput, error)
-}
-
-var _ ListResourceEvaluationsAPIClient = (*Client)(nil)
 
 // ListResourceEvaluationsPaginatorOptions is the paginator options for
 // ListResourceEvaluations
@@ -209,6 +204,9 @@ func (p *ListResourceEvaluationsPaginator) NextPage(ctx context.Context, optFns 
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResourceEvaluations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListResourceEvaluationsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListResourceEvaluationsAPIClient is a client that implements the
+// ListResourceEvaluations operation.
+type ListResourceEvaluationsAPIClient interface {
+	ListResourceEvaluations(context.Context, *ListResourceEvaluationsInput, ...func(*Options)) (*ListResourceEvaluationsOutput, error)
+}
+
+var _ ListResourceEvaluationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResourceEvaluations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

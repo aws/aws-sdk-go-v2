@@ -170,6 +170,9 @@ func (c *Client) addOperationDescribeSigningJobMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSigningJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -193,14 +196,6 @@ func (c *Client) addOperationDescribeSigningJobMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeSigningJobAPIClient is a client that implements the DescribeSigningJob
-// operation.
-type DescribeSigningJobAPIClient interface {
-	DescribeSigningJob(context.Context, *DescribeSigningJobInput, ...func(*Options)) (*DescribeSigningJobOutput, error)
-}
-
-var _ DescribeSigningJobAPIClient = (*Client)(nil)
 
 // SuccessfulSigningJobWaiterOptions are waiter options for
 // SuccessfulSigningJobWaiter
@@ -319,7 +314,13 @@ func (w *SuccessfulSigningJobWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.DescribeSigningJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -400,6 +401,14 @@ func successfulSigningJobStateRetryable(ctx context.Context, input *DescribeSign
 
 	return true, nil
 }
+
+// DescribeSigningJobAPIClient is a client that implements the DescribeSigningJob
+// operation.
+type DescribeSigningJobAPIClient interface {
+	DescribeSigningJob(context.Context, *DescribeSigningJobInput, ...func(*Options)) (*DescribeSigningJobOutput, error)
+}
+
+var _ DescribeSigningJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSigningJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

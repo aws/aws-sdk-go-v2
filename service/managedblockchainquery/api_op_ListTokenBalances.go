@@ -147,6 +147,9 @@ func (c *Client) addOperationListTokenBalancesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTokenBalancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationListTokenBalancesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListTokenBalancesAPIClient is a client that implements the ListTokenBalances
-// operation.
-type ListTokenBalancesAPIClient interface {
-	ListTokenBalances(context.Context, *ListTokenBalancesInput, ...func(*Options)) (*ListTokenBalancesOutput, error)
-}
-
-var _ ListTokenBalancesAPIClient = (*Client)(nil)
 
 // ListTokenBalancesPaginatorOptions is the paginator options for ListTokenBalances
 type ListTokenBalancesPaginatorOptions struct {
@@ -251,6 +246,9 @@ func (p *ListTokenBalancesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTokenBalances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -269,6 +267,14 @@ func (p *ListTokenBalancesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListTokenBalancesAPIClient is a client that implements the ListTokenBalances
+// operation.
+type ListTokenBalancesAPIClient interface {
+	ListTokenBalances(context.Context, *ListTokenBalancesInput, ...func(*Options)) (*ListTokenBalancesOutput, error)
+}
+
+var _ ListTokenBalancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTokenBalances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

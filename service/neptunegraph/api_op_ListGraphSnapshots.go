@@ -134,6 +134,9 @@ func (c *Client) addOperationListGraphSnapshotsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGraphSnapshots(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListGraphSnapshotsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListGraphSnapshotsAPIClient is a client that implements the ListGraphSnapshots
-// operation.
-type ListGraphSnapshotsAPIClient interface {
-	ListGraphSnapshots(context.Context, *ListGraphSnapshotsInput, ...func(*Options)) (*ListGraphSnapshotsOutput, error)
-}
-
-var _ ListGraphSnapshotsAPIClient = (*Client)(nil)
 
 // ListGraphSnapshotsPaginatorOptions is the paginator options for
 // ListGraphSnapshots
@@ -232,6 +227,9 @@ func (p *ListGraphSnapshotsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGraphSnapshots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListGraphSnapshotsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListGraphSnapshotsAPIClient is a client that implements the ListGraphSnapshots
+// operation.
+type ListGraphSnapshotsAPIClient interface {
+	ListGraphSnapshots(context.Context, *ListGraphSnapshotsInput, ...func(*Options)) (*ListGraphSnapshotsOutput, error)
+}
+
+var _ ListGraphSnapshotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGraphSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

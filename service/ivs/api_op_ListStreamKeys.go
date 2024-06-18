@@ -119,6 +119,9 @@ func (c *Client) addOperationListStreamKeysMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListStreamKeysValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListStreamKeysMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListStreamKeysAPIClient is a client that implements the ListStreamKeys
-// operation.
-type ListStreamKeysAPIClient interface {
-	ListStreamKeys(context.Context, *ListStreamKeysInput, ...func(*Options)) (*ListStreamKeysOutput, error)
-}
-
-var _ ListStreamKeysAPIClient = (*Client)(nil)
 
 // ListStreamKeysPaginatorOptions is the paginator options for ListStreamKeys
 type ListStreamKeysPaginatorOptions struct {
@@ -214,6 +209,9 @@ func (p *ListStreamKeysPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreamKeys(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListStreamKeysPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListStreamKeysAPIClient is a client that implements the ListStreamKeys
+// operation.
+type ListStreamKeysAPIClient interface {
+	ListStreamKeys(context.Context, *ListStreamKeysInput, ...func(*Options)) (*ListStreamKeysOutput, error)
+}
+
+var _ ListStreamKeysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreamKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -123,6 +123,9 @@ func (c *Client) addOperationListClusterJobsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListClusterJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListClusterJobsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListClusterJobsAPIClient is a client that implements the ListClusterJobs
-// operation.
-type ListClusterJobsAPIClient interface {
-	ListClusterJobs(context.Context, *ListClusterJobsInput, ...func(*Options)) (*ListClusterJobsOutput, error)
-}
-
-var _ ListClusterJobsAPIClient = (*Client)(nil)
 
 // ListClusterJobsPaginatorOptions is the paginator options for ListClusterJobs
 type ListClusterJobsPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *ListClusterJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListClusterJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListClusterJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListClusterJobsAPIClient is a client that implements the ListClusterJobs
+// operation.
+type ListClusterJobsAPIClient interface {
+	ListClusterJobs(context.Context, *ListClusterJobsInput, ...func(*Options)) (*ListClusterJobsOutput, error)
+}
+
+var _ ListClusterJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListClusterJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

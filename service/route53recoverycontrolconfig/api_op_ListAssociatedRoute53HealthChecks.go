@@ -115,6 +115,9 @@ func (c *Client) addOperationListAssociatedRoute53HealthChecksMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssociatedRoute53HealthChecksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListAssociatedRoute53HealthChecksMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListAssociatedRoute53HealthChecksAPIClient is a client that implements the
-// ListAssociatedRoute53HealthChecks operation.
-type ListAssociatedRoute53HealthChecksAPIClient interface {
-	ListAssociatedRoute53HealthChecks(context.Context, *ListAssociatedRoute53HealthChecksInput, ...func(*Options)) (*ListAssociatedRoute53HealthChecksOutput, error)
-}
-
-var _ ListAssociatedRoute53HealthChecksAPIClient = (*Client)(nil)
 
 // ListAssociatedRoute53HealthChecksPaginatorOptions is the paginator options for
 // ListAssociatedRoute53HealthChecks
@@ -213,6 +208,9 @@ func (p *ListAssociatedRoute53HealthChecksPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedRoute53HealthChecks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListAssociatedRoute53HealthChecksPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListAssociatedRoute53HealthChecksAPIClient is a client that implements the
+// ListAssociatedRoute53HealthChecks operation.
+type ListAssociatedRoute53HealthChecksAPIClient interface {
+	ListAssociatedRoute53HealthChecks(context.Context, *ListAssociatedRoute53HealthChecksInput, ...func(*Options)) (*ListAssociatedRoute53HealthChecksOutput, error)
+}
+
+var _ ListAssociatedRoute53HealthChecksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedRoute53HealthChecks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

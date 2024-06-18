@@ -115,6 +115,9 @@ func (c *Client) addOperationListAccessTokensMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccessTokens(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListAccessTokensMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListAccessTokensAPIClient is a client that implements the ListAccessTokens
-// operation.
-type ListAccessTokensAPIClient interface {
-	ListAccessTokens(context.Context, *ListAccessTokensInput, ...func(*Options)) (*ListAccessTokensOutput, error)
-}
-
-var _ ListAccessTokensAPIClient = (*Client)(nil)
 
 // ListAccessTokensPaginatorOptions is the paginator options for ListAccessTokens
 type ListAccessTokensPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListAccessTokensPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccessTokens(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListAccessTokensPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListAccessTokensAPIClient is a client that implements the ListAccessTokens
+// operation.
+type ListAccessTokensAPIClient interface {
+	ListAccessTokens(context.Context, *ListAccessTokensInput, ...func(*Options)) (*ListAccessTokensOutput, error)
+}
+
+var _ ListAccessTokensAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccessTokens(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

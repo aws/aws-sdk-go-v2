@@ -125,6 +125,9 @@ func (c *Client) addOperationSearchResourceTagsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchResourceTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationSearchResourceTagsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// SearchResourceTagsAPIClient is a client that implements the SearchResourceTags
-// operation.
-type SearchResourceTagsAPIClient interface {
-	SearchResourceTags(context.Context, *SearchResourceTagsInput, ...func(*Options)) (*SearchResourceTagsOutput, error)
-}
-
-var _ SearchResourceTagsAPIClient = (*Client)(nil)
 
 // SearchResourceTagsPaginatorOptions is the paginator options for
 // SearchResourceTags
@@ -221,6 +216,9 @@ func (p *SearchResourceTagsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchResourceTags(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *SearchResourceTagsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// SearchResourceTagsAPIClient is a client that implements the SearchResourceTags
+// operation.
+type SearchResourceTagsAPIClient interface {
+	SearchResourceTags(context.Context, *SearchResourceTagsInput, ...func(*Options)) (*SearchResourceTagsOutput, error)
+}
+
+var _ SearchResourceTagsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchResourceTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

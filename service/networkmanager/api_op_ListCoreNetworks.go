@@ -110,6 +110,9 @@ func (c *Client) addOperationListCoreNetworksMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCoreNetworks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListCoreNetworksMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListCoreNetworksAPIClient is a client that implements the ListCoreNetworks
-// operation.
-type ListCoreNetworksAPIClient interface {
-	ListCoreNetworks(context.Context, *ListCoreNetworksInput, ...func(*Options)) (*ListCoreNetworksOutput, error)
-}
-
-var _ ListCoreNetworksAPIClient = (*Client)(nil)
 
 // ListCoreNetworksPaginatorOptions is the paginator options for ListCoreNetworks
 type ListCoreNetworksPaginatorOptions struct {
@@ -202,6 +197,9 @@ func (p *ListCoreNetworksPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCoreNetworks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +218,14 @@ func (p *ListCoreNetworksPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListCoreNetworksAPIClient is a client that implements the ListCoreNetworks
+// operation.
+type ListCoreNetworksAPIClient interface {
+	ListCoreNetworks(context.Context, *ListCoreNetworksInput, ...func(*Options)) (*ListCoreNetworksOutput, error)
+}
+
+var _ ListCoreNetworksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCoreNetworks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

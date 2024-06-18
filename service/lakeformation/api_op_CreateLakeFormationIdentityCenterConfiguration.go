@@ -130,6 +130,9 @@ func (c *Client) addOperationCreateLakeFormationIdentityCenterConfigurationMiddl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLakeFormationIdentityCenterConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

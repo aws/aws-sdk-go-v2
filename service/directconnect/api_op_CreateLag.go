@@ -254,6 +254,9 @@ func (c *Client) addOperationCreateLagMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLagValidationMiddleware(stack); err != nil {
 		return err
 	}

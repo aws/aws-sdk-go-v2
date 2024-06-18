@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeDBSubnetGroupsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSubnetGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationDescribeDBSubnetGroupsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeDBSubnetGroupsAPIClient is a client that implements the
-// DescribeDBSubnetGroups operation.
-type DescribeDBSubnetGroupsAPIClient interface {
-	DescribeDBSubnetGroups(context.Context, *DescribeDBSubnetGroupsInput, ...func(*Options)) (*DescribeDBSubnetGroupsOutput, error)
-}
-
-var _ DescribeDBSubnetGroupsAPIClient = (*Client)(nil)
 
 // DescribeDBSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeDBSubnetGroups
@@ -236,6 +231,9 @@ func (p *DescribeDBSubnetGroupsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBSubnetGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *DescribeDBSubnetGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeDBSubnetGroupsAPIClient is a client that implements the
+// DescribeDBSubnetGroups operation.
+type DescribeDBSubnetGroupsAPIClient interface {
+	DescribeDBSubnetGroups(context.Context, *DescribeDBSubnetGroupsInput, ...func(*Options)) (*DescribeDBSubnetGroupsOutput, error)
+}
+
+var _ DescribeDBSubnetGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBSubnetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

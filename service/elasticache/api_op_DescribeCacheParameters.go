@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeCacheParametersMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCacheParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeCacheParametersMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeCacheParametersAPIClient is a client that implements the
-// DescribeCacheParameters operation.
-type DescribeCacheParametersAPIClient interface {
-	DescribeCacheParameters(context.Context, *DescribeCacheParametersInput, ...func(*Options)) (*DescribeCacheParametersOutput, error)
-}
-
-var _ DescribeCacheParametersAPIClient = (*Client)(nil)
 
 // DescribeCacheParametersPaginatorOptions is the paginator options for
 // DescribeCacheParameters
@@ -238,6 +233,9 @@ func (p *DescribeCacheParametersPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCacheParameters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *DescribeCacheParametersPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeCacheParametersAPIClient is a client that implements the
+// DescribeCacheParameters operation.
+type DescribeCacheParametersAPIClient interface {
+	DescribeCacheParameters(context.Context, *DescribeCacheParametersInput, ...func(*Options)) (*DescribeCacheParametersOutput, error)
+}
+
+var _ DescribeCacheParametersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCacheParameters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

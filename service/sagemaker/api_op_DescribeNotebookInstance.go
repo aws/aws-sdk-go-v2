@@ -212,6 +212,9 @@ func (c *Client) addOperationDescribeNotebookInstanceMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeNotebookInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -235,14 +238,6 @@ func (c *Client) addOperationDescribeNotebookInstanceMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeNotebookInstanceAPIClient is a client that implements the
-// DescribeNotebookInstance operation.
-type DescribeNotebookInstanceAPIClient interface {
-	DescribeNotebookInstance(context.Context, *DescribeNotebookInstanceInput, ...func(*Options)) (*DescribeNotebookInstanceOutput, error)
-}
-
-var _ DescribeNotebookInstanceAPIClient = (*Client)(nil)
 
 // NotebookInstanceDeletedWaiterOptions are waiter options for
 // NotebookInstanceDeletedWaiter
@@ -361,7 +356,13 @@ func (w *NotebookInstanceDeletedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.DescribeNotebookInstance(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -549,7 +550,13 @@ func (w *NotebookInstanceInServiceWaiter) WaitForOutput(ctx context.Context, par
 		}
 
 		out, err := w.client.DescribeNotebookInstance(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -741,7 +748,13 @@ func (w *NotebookInstanceStoppedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.DescribeNotebookInstance(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -815,6 +828,14 @@ func notebookInstanceStoppedStateRetryable(ctx context.Context, input *DescribeN
 
 	return true, nil
 }
+
+// DescribeNotebookInstanceAPIClient is a client that implements the
+// DescribeNotebookInstance operation.
+type DescribeNotebookInstanceAPIClient interface {
+	DescribeNotebookInstance(context.Context, *DescribeNotebookInstanceInput, ...func(*Options)) (*DescribeNotebookInstanceOutput, error)
+}
+
+var _ DescribeNotebookInstanceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeNotebookInstance(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

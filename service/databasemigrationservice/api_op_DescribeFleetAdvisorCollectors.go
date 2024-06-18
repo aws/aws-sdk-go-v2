@@ -129,6 +129,9 @@ func (c *Client) addOperationDescribeFleetAdvisorCollectorsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetAdvisorCollectorsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationDescribeFleetAdvisorCollectorsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// DescribeFleetAdvisorCollectorsAPIClient is a client that implements the
-// DescribeFleetAdvisorCollectors operation.
-type DescribeFleetAdvisorCollectorsAPIClient interface {
-	DescribeFleetAdvisorCollectors(context.Context, *DescribeFleetAdvisorCollectorsInput, ...func(*Options)) (*DescribeFleetAdvisorCollectorsOutput, error)
-}
-
-var _ DescribeFleetAdvisorCollectorsAPIClient = (*Client)(nil)
 
 // DescribeFleetAdvisorCollectorsPaginatorOptions is the paginator options for
 // DescribeFleetAdvisorCollectors
@@ -227,6 +222,9 @@ func (p *DescribeFleetAdvisorCollectorsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFleetAdvisorCollectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *DescribeFleetAdvisorCollectorsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// DescribeFleetAdvisorCollectorsAPIClient is a client that implements the
+// DescribeFleetAdvisorCollectors operation.
+type DescribeFleetAdvisorCollectorsAPIClient interface {
+	DescribeFleetAdvisorCollectors(context.Context, *DescribeFleetAdvisorCollectorsInput, ...func(*Options)) (*DescribeFleetAdvisorCollectorsOutput, error)
+}
+
+var _ DescribeFleetAdvisorCollectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFleetAdvisorCollectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

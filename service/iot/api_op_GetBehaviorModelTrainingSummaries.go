@@ -121,6 +121,9 @@ func (c *Client) addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBehaviorModelTrainingSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack 
 	}
 	return nil
 }
-
-// GetBehaviorModelTrainingSummariesAPIClient is a client that implements the
-// GetBehaviorModelTrainingSummaries operation.
-type GetBehaviorModelTrainingSummariesAPIClient interface {
-	GetBehaviorModelTrainingSummaries(context.Context, *GetBehaviorModelTrainingSummariesInput, ...func(*Options)) (*GetBehaviorModelTrainingSummariesOutput, error)
-}
-
-var _ GetBehaviorModelTrainingSummariesAPIClient = (*Client)(nil)
 
 // GetBehaviorModelTrainingSummariesPaginatorOptions is the paginator options for
 // GetBehaviorModelTrainingSummaries
@@ -216,6 +211,9 @@ func (p *GetBehaviorModelTrainingSummariesPaginator) NextPage(ctx context.Contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBehaviorModelTrainingSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *GetBehaviorModelTrainingSummariesPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// GetBehaviorModelTrainingSummariesAPIClient is a client that implements the
+// GetBehaviorModelTrainingSummaries operation.
+type GetBehaviorModelTrainingSummariesAPIClient interface {
+	GetBehaviorModelTrainingSummaries(context.Context, *GetBehaviorModelTrainingSummariesInput, ...func(*Options)) (*GetBehaviorModelTrainingSummariesOutput, error)
+}
+
+var _ GetBehaviorModelTrainingSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBehaviorModelTrainingSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

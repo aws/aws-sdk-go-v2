@@ -130,6 +130,9 @@ func (c *Client) addOperationListTrustedTokenIssuersMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTrustedTokenIssuersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListTrustedTokenIssuersMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListTrustedTokenIssuersAPIClient is a client that implements the
-// ListTrustedTokenIssuers operation.
-type ListTrustedTokenIssuersAPIClient interface {
-	ListTrustedTokenIssuers(context.Context, *ListTrustedTokenIssuersInput, ...func(*Options)) (*ListTrustedTokenIssuersOutput, error)
-}
-
-var _ ListTrustedTokenIssuersAPIClient = (*Client)(nil)
 
 // ListTrustedTokenIssuersPaginatorOptions is the paginator options for
 // ListTrustedTokenIssuers
@@ -233,6 +228,9 @@ func (p *ListTrustedTokenIssuersPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrustedTokenIssuers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListTrustedTokenIssuersPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListTrustedTokenIssuersAPIClient is a client that implements the
+// ListTrustedTokenIssuers operation.
+type ListTrustedTokenIssuersAPIClient interface {
+	ListTrustedTokenIssuers(context.Context, *ListTrustedTokenIssuersInput, ...func(*Options)) (*ListTrustedTokenIssuersOutput, error)
+}
+
+var _ ListTrustedTokenIssuersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrustedTokenIssuers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

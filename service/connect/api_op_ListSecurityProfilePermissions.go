@@ -133,6 +133,9 @@ func (c *Client) addOperationListSecurityProfilePermissionsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSecurityProfilePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListSecurityProfilePermissionsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListSecurityProfilePermissionsAPIClient is a client that implements the
-// ListSecurityProfilePermissions operation.
-type ListSecurityProfilePermissionsAPIClient interface {
-	ListSecurityProfilePermissions(context.Context, *ListSecurityProfilePermissionsInput, ...func(*Options)) (*ListSecurityProfilePermissionsOutput, error)
-}
-
-var _ ListSecurityProfilePermissionsAPIClient = (*Client)(nil)
 
 // ListSecurityProfilePermissionsPaginatorOptions is the paginator options for
 // ListSecurityProfilePermissions
@@ -231,6 +226,9 @@ func (p *ListSecurityProfilePermissionsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSecurityProfilePermissions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListSecurityProfilePermissionsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListSecurityProfilePermissionsAPIClient is a client that implements the
+// ListSecurityProfilePermissions operation.
+type ListSecurityProfilePermissionsAPIClient interface {
+	ListSecurityProfilePermissions(context.Context, *ListSecurityProfilePermissionsInput, ...func(*Options)) (*ListSecurityProfilePermissionsOutput, error)
+}
+
+var _ ListSecurityProfilePermissionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSecurityProfilePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

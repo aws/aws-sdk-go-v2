@@ -115,6 +115,9 @@ func (c *Client) addOperationListBundlesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBundles(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,13 +138,6 @@ func (c *Client) addOperationListBundlesMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListBundlesAPIClient is a client that implements the ListBundles operation.
-type ListBundlesAPIClient interface {
-	ListBundles(context.Context, *ListBundlesInput, ...func(*Options)) (*ListBundlesOutput, error)
-}
-
-var _ ListBundlesAPIClient = (*Client)(nil)
 
 // ListBundlesPaginatorOptions is the paginator options for ListBundles
 type ListBundlesPaginatorOptions struct {
@@ -202,6 +198,9 @@ func (p *ListBundlesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBundles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +219,13 @@ func (p *ListBundlesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListBundlesAPIClient is a client that implements the ListBundles operation.
+type ListBundlesAPIClient interface {
+	ListBundles(context.Context, *ListBundlesInput, ...func(*Options)) (*ListBundlesOutput, error)
+}
+
+var _ ListBundlesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBundles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

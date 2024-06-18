@@ -130,6 +130,9 @@ func (c *Client) addOperationDescribeTapeArchivesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTapeArchives(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationDescribeTapeArchivesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeTapeArchivesAPIClient is a client that implements the
-// DescribeTapeArchives operation.
-type DescribeTapeArchivesAPIClient interface {
-	DescribeTapeArchives(context.Context, *DescribeTapeArchivesInput, ...func(*Options)) (*DescribeTapeArchivesOutput, error)
-}
-
-var _ DescribeTapeArchivesAPIClient = (*Client)(nil)
 
 // DescribeTapeArchivesPaginatorOptions is the paginator options for
 // DescribeTapeArchives
@@ -224,6 +219,9 @@ func (p *DescribeTapeArchivesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeTapeArchives(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *DescribeTapeArchivesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeTapeArchivesAPIClient is a client that implements the
+// DescribeTapeArchives operation.
+type DescribeTapeArchivesAPIClient interface {
+	DescribeTapeArchives(context.Context, *DescribeTapeArchivesInput, ...func(*Options)) (*DescribeTapeArchivesOutput, error)
+}
+
+var _ DescribeTapeArchivesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTapeArchives(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

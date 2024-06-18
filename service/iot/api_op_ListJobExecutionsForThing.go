@@ -140,6 +140,9 @@ func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListJobExecutionsForThingValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListJobExecutionsForThingAPIClient is a client that implements the
-// ListJobExecutionsForThing operation.
-type ListJobExecutionsForThingAPIClient interface {
-	ListJobExecutionsForThing(context.Context, *ListJobExecutionsForThingInput, ...func(*Options)) (*ListJobExecutionsForThingOutput, error)
-}
-
-var _ ListJobExecutionsForThingAPIClient = (*Client)(nil)
 
 // ListJobExecutionsForThingPaginatorOptions is the paginator options for
 // ListJobExecutionsForThing
@@ -237,6 +232,9 @@ func (p *ListJobExecutionsForThingPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListJobExecutionsForThing(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListJobExecutionsForThingPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListJobExecutionsForThingAPIClient is a client that implements the
+// ListJobExecutionsForThing operation.
+type ListJobExecutionsForThingAPIClient interface {
+	ListJobExecutionsForThing(context.Context, *ListJobExecutionsForThingInput, ...func(*Options)) (*ListJobExecutionsForThingOutput, error)
+}
+
+var _ ListJobExecutionsForThingAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListJobExecutionsForThing(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

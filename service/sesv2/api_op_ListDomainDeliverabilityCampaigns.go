@@ -146,6 +146,9 @@ func (c *Client) addOperationListDomainDeliverabilityCampaignsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDomainDeliverabilityCampaignsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationListDomainDeliverabilityCampaignsMiddlewares(stack 
 	}
 	return nil
 }
-
-// ListDomainDeliverabilityCampaignsAPIClient is a client that implements the
-// ListDomainDeliverabilityCampaigns operation.
-type ListDomainDeliverabilityCampaignsAPIClient interface {
-	ListDomainDeliverabilityCampaigns(context.Context, *ListDomainDeliverabilityCampaignsInput, ...func(*Options)) (*ListDomainDeliverabilityCampaignsOutput, error)
-}
-
-var _ ListDomainDeliverabilityCampaignsAPIClient = (*Client)(nil)
 
 // ListDomainDeliverabilityCampaignsPaginatorOptions is the paginator options for
 // ListDomainDeliverabilityCampaigns
@@ -247,6 +242,9 @@ func (p *ListDomainDeliverabilityCampaignsPaginator) NextPage(ctx context.Contex
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDomainDeliverabilityCampaigns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *ListDomainDeliverabilityCampaignsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// ListDomainDeliverabilityCampaignsAPIClient is a client that implements the
+// ListDomainDeliverabilityCampaigns operation.
+type ListDomainDeliverabilityCampaignsAPIClient interface {
+	ListDomainDeliverabilityCampaigns(context.Context, *ListDomainDeliverabilityCampaignsInput, ...func(*Options)) (*ListDomainDeliverabilityCampaignsOutput, error)
+}
+
+var _ ListDomainDeliverabilityCampaignsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDomainDeliverabilityCampaigns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

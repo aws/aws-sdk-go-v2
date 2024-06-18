@@ -124,6 +124,9 @@ func (c *Client) addOperationListResourcesForTagOptionMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListResourcesForTagOptionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListResourcesForTagOptionMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListResourcesForTagOptionAPIClient is a client that implements the
-// ListResourcesForTagOption operation.
-type ListResourcesForTagOptionAPIClient interface {
-	ListResourcesForTagOption(context.Context, *ListResourcesForTagOptionInput, ...func(*Options)) (*ListResourcesForTagOptionOutput, error)
-}
-
-var _ ListResourcesForTagOptionAPIClient = (*Client)(nil)
 
 // ListResourcesForTagOptionPaginatorOptions is the paginator options for
 // ListResourcesForTagOption
@@ -217,6 +212,9 @@ func (p *ListResourcesForTagOptionPaginator) NextPage(ctx context.Context, optFn
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResourcesForTagOption(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListResourcesForTagOptionPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListResourcesForTagOptionAPIClient is a client that implements the
+// ListResourcesForTagOption operation.
+type ListResourcesForTagOptionAPIClient interface {
+	ListResourcesForTagOption(context.Context, *ListResourcesForTagOptionInput, ...func(*Options)) (*ListResourcesForTagOptionOutput, error)
+}
+
+var _ ListResourcesForTagOptionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResourcesForTagOption(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

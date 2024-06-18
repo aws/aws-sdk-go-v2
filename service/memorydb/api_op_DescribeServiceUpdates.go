@@ -129,6 +129,9 @@ func (c *Client) addOperationDescribeServiceUpdatesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeServiceUpdates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationDescribeServiceUpdatesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeServiceUpdatesAPIClient is a client that implements the
-// DescribeServiceUpdates operation.
-type DescribeServiceUpdatesAPIClient interface {
-	DescribeServiceUpdates(context.Context, *DescribeServiceUpdatesInput, ...func(*Options)) (*DescribeServiceUpdatesOutput, error)
-}
-
-var _ DescribeServiceUpdatesAPIClient = (*Client)(nil)
 
 // DescribeServiceUpdatesPaginatorOptions is the paginator options for
 // DescribeServiceUpdates
@@ -224,6 +219,9 @@ func (p *DescribeServiceUpdatesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeServiceUpdates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *DescribeServiceUpdatesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeServiceUpdatesAPIClient is a client that implements the
+// DescribeServiceUpdates operation.
+type DescribeServiceUpdatesAPIClient interface {
+	DescribeServiceUpdates(context.Context, *DescribeServiceUpdatesInput, ...func(*Options)) (*DescribeServiceUpdatesOutput, error)
+}
+
+var _ DescribeServiceUpdatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeServiceUpdates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -125,6 +125,9 @@ func (c *Client) addOperationListDomainsForPackageMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDomainsForPackageValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListDomainsForPackageMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListDomainsForPackageAPIClient is a client that implements the
-// ListDomainsForPackage operation.
-type ListDomainsForPackageAPIClient interface {
-	ListDomainsForPackage(context.Context, *ListDomainsForPackageInput, ...func(*Options)) (*ListDomainsForPackageOutput, error)
-}
-
-var _ ListDomainsForPackageAPIClient = (*Client)(nil)
 
 // ListDomainsForPackagePaginatorOptions is the paginator options for
 // ListDomainsForPackage
@@ -218,6 +213,9 @@ func (p *ListDomainsForPackagePaginator) NextPage(ctx context.Context, optFns ..
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDomainsForPackage(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListDomainsForPackagePaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListDomainsForPackageAPIClient is a client that implements the
+// ListDomainsForPackage operation.
+type ListDomainsForPackageAPIClient interface {
+	ListDomainsForPackage(context.Context, *ListDomainsForPackageInput, ...func(*Options)) (*ListDomainsForPackageOutput, error)
+}
+
+var _ ListDomainsForPackageAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDomainsForPackage(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

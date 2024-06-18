@@ -141,6 +141,9 @@ func (c *Client) addOperationAdminListUserAuthEventsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAdminListUserAuthEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationAdminListUserAuthEventsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// AdminListUserAuthEventsAPIClient is a client that implements the
-// AdminListUserAuthEvents operation.
-type AdminListUserAuthEventsAPIClient interface {
-	AdminListUserAuthEvents(context.Context, *AdminListUserAuthEventsInput, ...func(*Options)) (*AdminListUserAuthEventsOutput, error)
-}
-
-var _ AdminListUserAuthEventsAPIClient = (*Client)(nil)
 
 // AdminListUserAuthEventsPaginatorOptions is the paginator options for
 // AdminListUserAuthEvents
@@ -239,6 +234,9 @@ func (p *AdminListUserAuthEventsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.AdminListUserAuthEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *AdminListUserAuthEventsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// AdminListUserAuthEventsAPIClient is a client that implements the
+// AdminListUserAuthEvents operation.
+type AdminListUserAuthEventsAPIClient interface {
+	AdminListUserAuthEvents(context.Context, *AdminListUserAuthEventsInput, ...func(*Options)) (*AdminListUserAuthEventsOutput, error)
+}
+
+var _ AdminListUserAuthEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opAdminListUserAuthEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

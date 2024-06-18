@@ -120,6 +120,9 @@ func (c *Client) addOperationListThingsInBillingGroupMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListThingsInBillingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListThingsInBillingGroupMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListThingsInBillingGroupAPIClient is a client that implements the
-// ListThingsInBillingGroup operation.
-type ListThingsInBillingGroupAPIClient interface {
-	ListThingsInBillingGroup(context.Context, *ListThingsInBillingGroupInput, ...func(*Options)) (*ListThingsInBillingGroupOutput, error)
-}
-
-var _ ListThingsInBillingGroupAPIClient = (*Client)(nil)
 
 // ListThingsInBillingGroupPaginatorOptions is the paginator options for
 // ListThingsInBillingGroup
@@ -217,6 +212,9 @@ func (p *ListThingsInBillingGroupPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListThingsInBillingGroup(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListThingsInBillingGroupPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListThingsInBillingGroupAPIClient is a client that implements the
+// ListThingsInBillingGroup operation.
+type ListThingsInBillingGroupAPIClient interface {
+	ListThingsInBillingGroup(context.Context, *ListThingsInBillingGroupInput, ...func(*Options)) (*ListThingsInBillingGroupOutput, error)
+}
+
+var _ ListThingsInBillingGroupAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListThingsInBillingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

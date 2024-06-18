@@ -117,6 +117,9 @@ func (c *Client) addOperationUpdateRoutingProfileAgentAvailabilityTimerMiddlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateRoutingProfileAgentAvailabilityTimerValidationMiddleware(stack); err != nil {
 		return err
 	}

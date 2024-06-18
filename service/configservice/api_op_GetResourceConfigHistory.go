@@ -159,6 +159,9 @@ func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResourceConfigHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -182,14 +185,6 @@ func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// GetResourceConfigHistoryAPIClient is a client that implements the
-// GetResourceConfigHistory operation.
-type GetResourceConfigHistoryAPIClient interface {
-	GetResourceConfigHistory(context.Context, *GetResourceConfigHistoryInput, ...func(*Options)) (*GetResourceConfigHistoryOutput, error)
-}
-
-var _ GetResourceConfigHistoryAPIClient = (*Client)(nil)
 
 // GetResourceConfigHistoryPaginatorOptions is the paginator options for
 // GetResourceConfigHistory
@@ -254,6 +249,9 @@ func (p *GetResourceConfigHistoryPaginator) NextPage(ctx context.Context, optFns
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetResourceConfigHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +270,14 @@ func (p *GetResourceConfigHistoryPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// GetResourceConfigHistoryAPIClient is a client that implements the
+// GetResourceConfigHistory operation.
+type GetResourceConfigHistoryAPIClient interface {
+	GetResourceConfigHistory(context.Context, *GetResourceConfigHistoryInput, ...func(*Options)) (*GetResourceConfigHistoryOutput, error)
+}
+
+var _ GetResourceConfigHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetResourceConfigHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -128,6 +128,9 @@ func (c *Client) addOperationSearchPromptsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchPromptsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,13 +154,6 @@ func (c *Client) addOperationSearchPromptsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// SearchPromptsAPIClient is a client that implements the SearchPrompts operation.
-type SearchPromptsAPIClient interface {
-	SearchPrompts(context.Context, *SearchPromptsInput, ...func(*Options)) (*SearchPromptsOutput, error)
-}
-
-var _ SearchPromptsAPIClient = (*Client)(nil)
 
 // SearchPromptsPaginatorOptions is the paginator options for SearchPrompts
 type SearchPromptsPaginatorOptions struct {
@@ -222,6 +218,9 @@ func (p *SearchPromptsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchPrompts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +239,13 @@ func (p *SearchPromptsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// SearchPromptsAPIClient is a client that implements the SearchPrompts operation.
+type SearchPromptsAPIClient interface {
+	SearchPrompts(context.Context, *SearchPromptsInput, ...func(*Options)) (*SearchPromptsOutput, error)
+}
+
+var _ SearchPromptsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchPrompts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

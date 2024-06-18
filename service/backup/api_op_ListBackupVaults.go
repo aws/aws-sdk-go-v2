@@ -126,6 +126,9 @@ func (c *Client) addOperationListBackupVaultsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBackupVaults(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListBackupVaultsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListBackupVaultsAPIClient is a client that implements the ListBackupVaults
-// operation.
-type ListBackupVaultsAPIClient interface {
-	ListBackupVaults(context.Context, *ListBackupVaultsInput, ...func(*Options)) (*ListBackupVaultsOutput, error)
-}
-
-var _ ListBackupVaultsAPIClient = (*Client)(nil)
 
 // ListBackupVaultsPaginatorOptions is the paginator options for ListBackupVaults
 type ListBackupVaultsPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *ListBackupVaultsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBackupVaults(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListBackupVaultsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListBackupVaultsAPIClient is a client that implements the ListBackupVaults
+// operation.
+type ListBackupVaultsAPIClient interface {
+	ListBackupVaults(context.Context, *ListBackupVaultsInput, ...func(*Options)) (*ListBackupVaultsOutput, error)
+}
+
+var _ ListBackupVaultsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBackupVaults(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

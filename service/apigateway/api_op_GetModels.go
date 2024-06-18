@@ -118,6 +118,9 @@ func (c *Client) addOperationGetModelsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetModelsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationGetModelsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// GetModelsAPIClient is a client that implements the GetModels operation.
-type GetModelsAPIClient interface {
-	GetModels(context.Context, *GetModelsInput, ...func(*Options)) (*GetModelsOutput, error)
-}
-
-var _ GetModelsAPIClient = (*Client)(nil)
 
 // GetModelsPaginatorOptions is the paginator options for GetModels
 type GetModelsPaginatorOptions struct {
@@ -216,6 +212,9 @@ func (p *GetModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetModels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +233,13 @@ func (p *GetModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// GetModelsAPIClient is a client that implements the GetModels operation.
+type GetModelsAPIClient interface {
+	GetModels(context.Context, *GetModelsInput, ...func(*Options)) (*GetModelsOutput, error)
+}
+
+var _ GetModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

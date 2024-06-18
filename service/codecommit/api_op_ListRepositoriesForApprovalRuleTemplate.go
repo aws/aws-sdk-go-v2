@@ -118,6 +118,9 @@ func (c *Client) addOperationListRepositoriesForApprovalRuleTemplateMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRepositoriesForApprovalRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListRepositoriesForApprovalRuleTemplateMiddlewares(
 	}
 	return nil
 }
-
-// ListRepositoriesForApprovalRuleTemplateAPIClient is a client that implements
-// the ListRepositoriesForApprovalRuleTemplate operation.
-type ListRepositoriesForApprovalRuleTemplateAPIClient interface {
-	ListRepositoriesForApprovalRuleTemplate(context.Context, *ListRepositoriesForApprovalRuleTemplateInput, ...func(*Options)) (*ListRepositoriesForApprovalRuleTemplateOutput, error)
-}
-
-var _ ListRepositoriesForApprovalRuleTemplateAPIClient = (*Client)(nil)
 
 // ListRepositoriesForApprovalRuleTemplatePaginatorOptions is the paginator
 // options for ListRepositoriesForApprovalRuleTemplate
@@ -216,6 +211,9 @@ func (p *ListRepositoriesForApprovalRuleTemplatePaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRepositoriesForApprovalRuleTemplate(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListRepositoriesForApprovalRuleTemplatePaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// ListRepositoriesForApprovalRuleTemplateAPIClient is a client that implements
+// the ListRepositoriesForApprovalRuleTemplate operation.
+type ListRepositoriesForApprovalRuleTemplateAPIClient interface {
+	ListRepositoriesForApprovalRuleTemplate(context.Context, *ListRepositoriesForApprovalRuleTemplateInput, ...func(*Options)) (*ListRepositoriesForApprovalRuleTemplateOutput, error)
+}
+
+var _ ListRepositoriesForApprovalRuleTemplateAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRepositoriesForApprovalRuleTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

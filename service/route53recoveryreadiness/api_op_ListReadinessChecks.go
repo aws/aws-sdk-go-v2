@@ -110,6 +110,9 @@ func (c *Client) addOperationListReadinessChecksMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReadinessChecks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListReadinessChecksMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListReadinessChecksAPIClient is a client that implements the
-// ListReadinessChecks operation.
-type ListReadinessChecksAPIClient interface {
-	ListReadinessChecks(context.Context, *ListReadinessChecksInput, ...func(*Options)) (*ListReadinessChecksOutput, error)
-}
-
-var _ ListReadinessChecksAPIClient = (*Client)(nil)
 
 // ListReadinessChecksPaginatorOptions is the paginator options for
 // ListReadinessChecks
@@ -203,6 +198,9 @@ func (p *ListReadinessChecksPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReadinessChecks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListReadinessChecksPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListReadinessChecksAPIClient is a client that implements the
+// ListReadinessChecks operation.
+type ListReadinessChecksAPIClient interface {
+	ListReadinessChecks(context.Context, *ListReadinessChecksInput, ...func(*Options)) (*ListReadinessChecksOutput, error)
+}
+
+var _ ListReadinessChecksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReadinessChecks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

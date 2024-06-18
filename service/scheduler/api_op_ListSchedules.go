@@ -126,6 +126,9 @@ func (c *Client) addOperationListSchedulesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSchedules(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,13 +149,6 @@ func (c *Client) addOperationListSchedulesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListSchedulesAPIClient is a client that implements the ListSchedules operation.
-type ListSchedulesAPIClient interface {
-	ListSchedules(context.Context, *ListSchedulesInput, ...func(*Options)) (*ListSchedulesOutput, error)
-}
-
-var _ ListSchedulesAPIClient = (*Client)(nil)
 
 // ListSchedulesPaginatorOptions is the paginator options for ListSchedules
 type ListSchedulesPaginatorOptions struct {
@@ -219,6 +215,9 @@ func (p *ListSchedulesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSchedules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +236,13 @@ func (p *ListSchedulesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListSchedulesAPIClient is a client that implements the ListSchedules operation.
+type ListSchedulesAPIClient interface {
+	ListSchedules(context.Context, *ListSchedulesInput, ...func(*Options)) (*ListSchedulesOutput, error)
+}
+
+var _ ListSchedulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSchedules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

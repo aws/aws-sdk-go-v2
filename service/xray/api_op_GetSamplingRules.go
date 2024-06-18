@@ -107,6 +107,9 @@ func (c *Client) addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSamplingRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -127,14 +130,6 @@ func (c *Client) addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetSamplingRulesAPIClient is a client that implements the GetSamplingRules
-// operation.
-type GetSamplingRulesAPIClient interface {
-	GetSamplingRules(context.Context, *GetSamplingRulesInput, ...func(*Options)) (*GetSamplingRulesOutput, error)
-}
-
-var _ GetSamplingRulesAPIClient = (*Client)(nil)
 
 // GetSamplingRulesPaginatorOptions is the paginator options for GetSamplingRules
 type GetSamplingRulesPaginatorOptions struct {
@@ -187,6 +182,9 @@ func (p *GetSamplingRulesPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSamplingRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -205,6 +203,14 @@ func (p *GetSamplingRulesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetSamplingRulesAPIClient is a client that implements the GetSamplingRules
+// operation.
+type GetSamplingRulesAPIClient interface {
+	GetSamplingRules(context.Context, *GetSamplingRulesInput, ...func(*Options)) (*GetSamplingRulesOutput, error)
+}
+
+var _ GetSamplingRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSamplingRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

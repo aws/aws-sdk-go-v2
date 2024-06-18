@@ -123,6 +123,9 @@ func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDashboardsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListDashboardsAPIClient is a client that implements the ListDashboards
-// operation.
-type ListDashboardsAPIClient interface {
-	ListDashboards(context.Context, *ListDashboardsInput, ...func(*Options)) (*ListDashboardsOutput, error)
-}
-
-var _ ListDashboardsAPIClient = (*Client)(nil)
 
 // ListDashboardsPaginatorOptions is the paginator options for ListDashboards
 type ListDashboardsPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *ListDashboardsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDashboards(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListDashboardsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListDashboardsAPIClient is a client that implements the ListDashboards
+// operation.
+type ListDashboardsAPIClient interface {
+	ListDashboards(context.Context, *ListDashboardsInput, ...func(*Options)) (*ListDashboardsOutput, error)
+}
+
+var _ ListDashboardsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDashboards(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

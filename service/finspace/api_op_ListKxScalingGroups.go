@@ -119,6 +119,9 @@ func (c *Client) addOperationListKxScalingGroupsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListKxScalingGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListKxScalingGroupsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListKxScalingGroupsAPIClient is a client that implements the
-// ListKxScalingGroups operation.
-type ListKxScalingGroupsAPIClient interface {
-	ListKxScalingGroups(context.Context, *ListKxScalingGroupsInput, ...func(*Options)) (*ListKxScalingGroupsOutput, error)
-}
-
-var _ ListKxScalingGroupsAPIClient = (*Client)(nil)
 
 // ListKxScalingGroupsPaginatorOptions is the paginator options for
 // ListKxScalingGroups
@@ -211,6 +206,9 @@ func (p *ListKxScalingGroupsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKxScalingGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListKxScalingGroupsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListKxScalingGroupsAPIClient is a client that implements the
+// ListKxScalingGroups operation.
+type ListKxScalingGroupsAPIClient interface {
+	ListKxScalingGroups(context.Context, *ListKxScalingGroupsInput, ...func(*Options)) (*ListKxScalingGroupsOutput, error)
+}
+
+var _ ListKxScalingGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKxScalingGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

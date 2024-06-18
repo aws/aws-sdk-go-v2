@@ -128,6 +128,9 @@ func (c *Client) addOperationListEmailTemplatesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEmailTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListEmailTemplatesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListEmailTemplatesAPIClient is a client that implements the ListEmailTemplates
-// operation.
-type ListEmailTemplatesAPIClient interface {
-	ListEmailTemplates(context.Context, *ListEmailTemplatesInput, ...func(*Options)) (*ListEmailTemplatesOutput, error)
-}
-
-var _ ListEmailTemplatesAPIClient = (*Client)(nil)
 
 // ListEmailTemplatesPaginatorOptions is the paginator options for
 // ListEmailTemplates
@@ -226,6 +221,9 @@ func (p *ListEmailTemplatesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEmailTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListEmailTemplatesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListEmailTemplatesAPIClient is a client that implements the ListEmailTemplates
+// operation.
+type ListEmailTemplatesAPIClient interface {
+	ListEmailTemplates(context.Context, *ListEmailTemplatesInput, ...func(*Options)) (*ListEmailTemplatesOutput, error)
+}
+
+var _ ListEmailTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEmailTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

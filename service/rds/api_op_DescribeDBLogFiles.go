@@ -141,6 +141,9 @@ func (c *Client) addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBLogFilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeDBLogFilesAPIClient is a client that implements the DescribeDBLogFiles
-// operation.
-type DescribeDBLogFilesAPIClient interface {
-	DescribeDBLogFiles(context.Context, *DescribeDBLogFilesInput, ...func(*Options)) (*DescribeDBLogFilesOutput, error)
-}
-
-var _ DescribeDBLogFilesAPIClient = (*Client)(nil)
 
 // DescribeDBLogFilesPaginatorOptions is the paginator options for
 // DescribeDBLogFiles
@@ -239,6 +234,9 @@ func (p *DescribeDBLogFilesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBLogFiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *DescribeDBLogFilesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeDBLogFilesAPIClient is a client that implements the DescribeDBLogFiles
+// operation.
+type DescribeDBLogFilesAPIClient interface {
+	DescribeDBLogFiles(context.Context, *DescribeDBLogFilesInput, ...func(*Options)) (*DescribeDBLogFilesOutput, error)
+}
+
+var _ DescribeDBLogFilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBLogFiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -123,6 +123,9 @@ func (c *Client) addOperationListProposalVotesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProposalVotesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListProposalVotesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListProposalVotesAPIClient is a client that implements the ListProposalVotes
-// operation.
-type ListProposalVotesAPIClient interface {
-	ListProposalVotes(context.Context, *ListProposalVotesInput, ...func(*Options)) (*ListProposalVotesOutput, error)
-}
-
-var _ ListProposalVotesAPIClient = (*Client)(nil)
 
 // ListProposalVotesPaginatorOptions is the paginator options for ListProposalVotes
 type ListProposalVotesPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *ListProposalVotesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProposalVotes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListProposalVotesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListProposalVotesAPIClient is a client that implements the ListProposalVotes
+// operation.
+type ListProposalVotesAPIClient interface {
+	ListProposalVotes(context.Context, *ListProposalVotesInput, ...func(*Options)) (*ListProposalVotesOutput, error)
+}
+
+var _ ListProposalVotesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProposalVotes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -132,6 +132,9 @@ func (c *Client) addOperationListTableMetadataMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTableMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListTableMetadataMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListTableMetadataAPIClient is a client that implements the ListTableMetadata
-// operation.
-type ListTableMetadataAPIClient interface {
-	ListTableMetadata(context.Context, *ListTableMetadataInput, ...func(*Options)) (*ListTableMetadataOutput, error)
-}
-
-var _ ListTableMetadataAPIClient = (*Client)(nil)
 
 // ListTableMetadataPaginatorOptions is the paginator options for ListTableMetadata
 type ListTableMetadataPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *ListTableMetadataPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTableMetadata(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListTableMetadataPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListTableMetadataAPIClient is a client that implements the ListTableMetadata
+// operation.
+type ListTableMetadataAPIClient interface {
+	ListTableMetadata(context.Context, *ListTableMetadataInput, ...func(*Options)) (*ListTableMetadataOutput, error)
+}
+
+var _ ListTableMetadataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTableMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

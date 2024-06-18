@@ -125,6 +125,9 @@ func (c *Client) addOperationListSMSSandboxPhoneNumbersMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSMSSandboxPhoneNumbers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListSMSSandboxPhoneNumbersMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListSMSSandboxPhoneNumbersAPIClient is a client that implements the
-// ListSMSSandboxPhoneNumbers operation.
-type ListSMSSandboxPhoneNumbersAPIClient interface {
-	ListSMSSandboxPhoneNumbers(context.Context, *ListSMSSandboxPhoneNumbersInput, ...func(*Options)) (*ListSMSSandboxPhoneNumbersOutput, error)
-}
-
-var _ ListSMSSandboxPhoneNumbersAPIClient = (*Client)(nil)
 
 // ListSMSSandboxPhoneNumbersPaginatorOptions is the paginator options for
 // ListSMSSandboxPhoneNumbers
@@ -220,6 +215,9 @@ func (p *ListSMSSandboxPhoneNumbersPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSMSSandboxPhoneNumbers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListSMSSandboxPhoneNumbersPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListSMSSandboxPhoneNumbersAPIClient is a client that implements the
+// ListSMSSandboxPhoneNumbers operation.
+type ListSMSSandboxPhoneNumbersAPIClient interface {
+	ListSMSSandboxPhoneNumbers(context.Context, *ListSMSSandboxPhoneNumbersInput, ...func(*Options)) (*ListSMSSandboxPhoneNumbersOutput, error)
+}
+
+var _ ListSMSSandboxPhoneNumbersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSMSSandboxPhoneNumbers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

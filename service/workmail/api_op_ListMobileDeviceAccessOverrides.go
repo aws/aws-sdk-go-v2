@@ -133,6 +133,9 @@ func (c *Client) addOperationListMobileDeviceAccessOverridesMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMobileDeviceAccessOverridesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListMobileDeviceAccessOverridesMiddlewares(stack *m
 	}
 	return nil
 }
-
-// ListMobileDeviceAccessOverridesAPIClient is a client that implements the
-// ListMobileDeviceAccessOverrides operation.
-type ListMobileDeviceAccessOverridesAPIClient interface {
-	ListMobileDeviceAccessOverrides(context.Context, *ListMobileDeviceAccessOverridesInput, ...func(*Options)) (*ListMobileDeviceAccessOverridesOutput, error)
-}
-
-var _ ListMobileDeviceAccessOverridesAPIClient = (*Client)(nil)
 
 // ListMobileDeviceAccessOverridesPaginatorOptions is the paginator options for
 // ListMobileDeviceAccessOverrides
@@ -231,6 +226,9 @@ func (p *ListMobileDeviceAccessOverridesPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMobileDeviceAccessOverrides(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListMobileDeviceAccessOverridesPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// ListMobileDeviceAccessOverridesAPIClient is a client that implements the
+// ListMobileDeviceAccessOverrides operation.
+type ListMobileDeviceAccessOverridesAPIClient interface {
+	ListMobileDeviceAccessOverrides(context.Context, *ListMobileDeviceAccessOverridesInput, ...func(*Options)) (*ListMobileDeviceAccessOverridesOutput, error)
+}
+
+var _ ListMobileDeviceAccessOverridesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMobileDeviceAccessOverrides(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

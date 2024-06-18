@@ -123,6 +123,9 @@ func (c *Client) addOperationListSecurityConfigsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSecurityConfigsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListSecurityConfigsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListSecurityConfigsAPIClient is a client that implements the
-// ListSecurityConfigs operation.
-type ListSecurityConfigsAPIClient interface {
-	ListSecurityConfigs(context.Context, *ListSecurityConfigsInput, ...func(*Options)) (*ListSecurityConfigsOutput, error)
-}
-
-var _ ListSecurityConfigsAPIClient = (*Client)(nil)
 
 // ListSecurityConfigsPaginatorOptions is the paginator options for
 // ListSecurityConfigs
@@ -207,6 +202,9 @@ func (p *ListSecurityConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSecurityConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListSecurityConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListSecurityConfigsAPIClient is a client that implements the
+// ListSecurityConfigs operation.
+type ListSecurityConfigsAPIClient interface {
+	ListSecurityConfigs(context.Context, *ListSecurityConfigsInput, ...func(*Options)) (*ListSecurityConfigsOutput, error)
+}
+
+var _ ListSecurityConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSecurityConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

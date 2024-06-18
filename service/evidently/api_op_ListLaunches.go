@@ -122,6 +122,9 @@ func (c *Client) addOperationListLaunchesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLaunchesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationListLaunchesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListLaunchesAPIClient is a client that implements the ListLaunches operation.
-type ListLaunchesAPIClient interface {
-	ListLaunches(context.Context, *ListLaunchesInput, ...func(*Options)) (*ListLaunchesOutput, error)
-}
-
-var _ ListLaunchesAPIClient = (*Client)(nil)
 
 // ListLaunchesPaginatorOptions is the paginator options for ListLaunches
 type ListLaunchesPaginatorOptions struct {
@@ -216,6 +212,9 @@ func (p *ListLaunchesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLaunches(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +233,13 @@ func (p *ListLaunchesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListLaunchesAPIClient is a client that implements the ListLaunches operation.
+type ListLaunchesAPIClient interface {
+	ListLaunches(context.Context, *ListLaunchesInput, ...func(*Options)) (*ListLaunchesOutput, error)
+}
+
+var _ ListLaunchesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLaunches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

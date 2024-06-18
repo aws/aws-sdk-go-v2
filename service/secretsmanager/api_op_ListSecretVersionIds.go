@@ -156,6 +156,9 @@ func (c *Client) addOperationListSecretVersionIdsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSecretVersionIdsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -179,14 +182,6 @@ func (c *Client) addOperationListSecretVersionIdsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListSecretVersionIdsAPIClient is a client that implements the
-// ListSecretVersionIds operation.
-type ListSecretVersionIdsAPIClient interface {
-	ListSecretVersionIds(context.Context, *ListSecretVersionIdsInput, ...func(*Options)) (*ListSecretVersionIdsOutput, error)
-}
-
-var _ ListSecretVersionIdsAPIClient = (*Client)(nil)
 
 // ListSecretVersionIdsPaginatorOptions is the paginator options for
 // ListSecretVersionIds
@@ -256,6 +251,9 @@ func (p *ListSecretVersionIdsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSecretVersionIds(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -274,6 +272,14 @@ func (p *ListSecretVersionIdsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListSecretVersionIdsAPIClient is a client that implements the
+// ListSecretVersionIds operation.
+type ListSecretVersionIdsAPIClient interface {
+	ListSecretVersionIds(context.Context, *ListSecretVersionIdsInput, ...func(*Options)) (*ListSecretVersionIdsOutput, error)
+}
+
+var _ ListSecretVersionIdsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSecretVersionIds(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

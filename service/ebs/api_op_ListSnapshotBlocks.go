@@ -147,6 +147,9 @@ func (c *Client) addOperationListSnapshotBlocksMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSnapshotBlocksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,14 +173,6 @@ func (c *Client) addOperationListSnapshotBlocksMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListSnapshotBlocksAPIClient is a client that implements the ListSnapshotBlocks
-// operation.
-type ListSnapshotBlocksAPIClient interface {
-	ListSnapshotBlocks(context.Context, *ListSnapshotBlocksInput, ...func(*Options)) (*ListSnapshotBlocksOutput, error)
-}
-
-var _ ListSnapshotBlocksAPIClient = (*Client)(nil)
 
 // ListSnapshotBlocksPaginatorOptions is the paginator options for
 // ListSnapshotBlocks
@@ -250,6 +245,9 @@ func (p *ListSnapshotBlocksPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSnapshotBlocks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +266,14 @@ func (p *ListSnapshotBlocksPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListSnapshotBlocksAPIClient is a client that implements the ListSnapshotBlocks
+// operation.
+type ListSnapshotBlocksAPIClient interface {
+	ListSnapshotBlocks(context.Context, *ListSnapshotBlocksInput, ...func(*Options)) (*ListSnapshotBlocksOutput, error)
+}
+
+var _ ListSnapshotBlocksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSnapshotBlocks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

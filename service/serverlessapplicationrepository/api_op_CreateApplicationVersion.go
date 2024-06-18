@@ -195,6 +195,9 @@ func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateApplicationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}

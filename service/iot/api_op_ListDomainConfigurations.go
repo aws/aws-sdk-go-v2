@@ -119,6 +119,9 @@ func (c *Client) addOperationListDomainConfigurationsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDomainConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListDomainConfigurationsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListDomainConfigurationsAPIClient is a client that implements the
-// ListDomainConfigurations operation.
-type ListDomainConfigurationsAPIClient interface {
-	ListDomainConfigurations(context.Context, *ListDomainConfigurationsInput, ...func(*Options)) (*ListDomainConfigurationsOutput, error)
-}
-
-var _ ListDomainConfigurationsAPIClient = (*Client)(nil)
 
 // ListDomainConfigurationsPaginatorOptions is the paginator options for
 // ListDomainConfigurations
@@ -213,6 +208,9 @@ func (p *ListDomainConfigurationsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDomainConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListDomainConfigurationsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListDomainConfigurationsAPIClient is a client that implements the
+// ListDomainConfigurations operation.
+type ListDomainConfigurationsAPIClient interface {
+	ListDomainConfigurations(context.Context, *ListDomainConfigurationsInput, ...func(*Options)) (*ListDomainConfigurationsOutput, error)
+}
+
+var _ ListDomainConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDomainConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

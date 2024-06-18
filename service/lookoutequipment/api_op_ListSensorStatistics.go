@@ -128,6 +128,9 @@ func (c *Client) addOperationListSensorStatisticsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSensorStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListSensorStatisticsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListSensorStatisticsAPIClient is a client that implements the
-// ListSensorStatistics operation.
-type ListSensorStatisticsAPIClient interface {
-	ListSensorStatistics(context.Context, *ListSensorStatisticsInput, ...func(*Options)) (*ListSensorStatisticsOutput, error)
-}
-
-var _ ListSensorStatisticsAPIClient = (*Client)(nil)
 
 // ListSensorStatisticsPaginatorOptions is the paginator options for
 // ListSensorStatistics
@@ -224,6 +219,9 @@ func (p *ListSensorStatisticsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSensorStatistics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListSensorStatisticsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListSensorStatisticsAPIClient is a client that implements the
+// ListSensorStatistics operation.
+type ListSensorStatisticsAPIClient interface {
+	ListSensorStatistics(context.Context, *ListSensorStatisticsInput, ...func(*Options)) (*ListSensorStatisticsOutput, error)
+}
+
+var _ ListSensorStatisticsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSensorStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

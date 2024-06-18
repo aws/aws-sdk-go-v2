@@ -140,6 +140,9 @@ func (c *Client) addOperationGetResourceEvaluationSummaryMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetResourceEvaluationSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}

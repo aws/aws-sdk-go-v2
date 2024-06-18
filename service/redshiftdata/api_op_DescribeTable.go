@@ -195,6 +195,9 @@ func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTableValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -218,13 +221,6 @@ func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeTableAPIClient is a client that implements the DescribeTable operation.
-type DescribeTableAPIClient interface {
-	DescribeTable(context.Context, *DescribeTableInput, ...func(*Options)) (*DescribeTableOutput, error)
-}
-
-var _ DescribeTableAPIClient = (*Client)(nil)
 
 // DescribeTablePaginatorOptions is the paginator options for DescribeTable
 type DescribeTablePaginatorOptions struct {
@@ -287,6 +283,9 @@ func (p *DescribeTablePaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeTable(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -305,6 +304,13 @@ func (p *DescribeTablePaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// DescribeTableAPIClient is a client that implements the DescribeTable operation.
+type DescribeTableAPIClient interface {
+	DescribeTable(context.Context, *DescribeTableInput, ...func(*Options)) (*DescribeTableOutput, error)
+}
+
+var _ DescribeTableAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTable(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

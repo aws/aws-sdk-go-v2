@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateACLMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateACLValidationMiddleware(stack); err != nil {
 		return err
 	}

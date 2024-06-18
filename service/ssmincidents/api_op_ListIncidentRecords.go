@@ -137,6 +137,9 @@ func (c *Client) addOperationListIncidentRecordsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIncidentRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListIncidentRecordsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListIncidentRecordsAPIClient is a client that implements the
-// ListIncidentRecords operation.
-type ListIncidentRecordsAPIClient interface {
-	ListIncidentRecords(context.Context, *ListIncidentRecordsInput, ...func(*Options)) (*ListIncidentRecordsOutput, error)
-}
-
-var _ ListIncidentRecordsAPIClient = (*Client)(nil)
 
 // ListIncidentRecordsPaginatorOptions is the paginator options for
 // ListIncidentRecords
@@ -233,6 +228,9 @@ func (p *ListIncidentRecordsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIncidentRecords(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListIncidentRecordsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListIncidentRecordsAPIClient is a client that implements the
+// ListIncidentRecords operation.
+type ListIncidentRecordsAPIClient interface {
+	ListIncidentRecords(context.Context, *ListIncidentRecordsInput, ...func(*Options)) (*ListIncidentRecordsOutput, error)
+}
+
+var _ ListIncidentRecordsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIncidentRecords(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

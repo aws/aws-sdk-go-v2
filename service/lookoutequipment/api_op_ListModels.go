@@ -124,6 +124,9 @@ func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListModelsAPIClient is a client that implements the ListModels operation.
-type ListModelsAPIClient interface {
-	ListModels(context.Context, *ListModelsInput, ...func(*Options)) (*ListModelsOutput, error)
-}
-
-var _ ListModelsAPIClient = (*Client)(nil)
 
 // ListModelsPaginatorOptions is the paginator options for ListModels
 type ListModelsPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListModelsAPIClient is a client that implements the ListModels operation.
+type ListModelsAPIClient interface {
+	ListModels(context.Context, *ListModelsInput, ...func(*Options)) (*ListModelsOutput, error)
+}
+
+var _ ListModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

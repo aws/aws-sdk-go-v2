@@ -193,6 +193,9 @@ func (c *Client) addOperationDescribeMLModelsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMLModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -212,97 +215,6 @@ func (c *Client) addOperationDescribeMLModelsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
-}
-
-// DescribeMLModelsAPIClient is a client that implements the DescribeMLModels
-// operation.
-type DescribeMLModelsAPIClient interface {
-	DescribeMLModels(context.Context, *DescribeMLModelsInput, ...func(*Options)) (*DescribeMLModelsOutput, error)
-}
-
-var _ DescribeMLModelsAPIClient = (*Client)(nil)
-
-// DescribeMLModelsPaginatorOptions is the paginator options for DescribeMLModels
-type DescribeMLModelsPaginatorOptions struct {
-	// The number of pages of information to include in the result. The range of
-	// acceptable values is 1 through 100 . The default value is 100 .
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeMLModelsPaginator is a paginator for DescribeMLModels
-type DescribeMLModelsPaginator struct {
-	options   DescribeMLModelsPaginatorOptions
-	client    DescribeMLModelsAPIClient
-	params    *DescribeMLModelsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeMLModelsPaginator returns a new DescribeMLModelsPaginator
-func NewDescribeMLModelsPaginator(client DescribeMLModelsAPIClient, params *DescribeMLModelsInput, optFns ...func(*DescribeMLModelsPaginatorOptions)) *DescribeMLModelsPaginator {
-	if params == nil {
-		params = &DescribeMLModelsInput{}
-	}
-
-	options := DescribeMLModelsPaginatorOptions{}
-	if params.Limit != nil {
-		options.Limit = *params.Limit
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeMLModelsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeMLModelsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeMLModels page.
-func (p *DescribeMLModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeMLModelsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.Limit = limit
-
-	result, err := p.client.DescribeMLModels(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // MLModelAvailableWaiterOptions are waiter options for MLModelAvailableWaiter
@@ -420,7 +332,13 @@ func (w *MLModelAvailableWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeMLModels(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -516,6 +434,100 @@ func mLModelAvailableStateRetryable(ctx context.Context, input *DescribeMLModels
 
 	return true, nil
 }
+
+// DescribeMLModelsPaginatorOptions is the paginator options for DescribeMLModels
+type DescribeMLModelsPaginatorOptions struct {
+	// The number of pages of information to include in the result. The range of
+	// acceptable values is 1 through 100 . The default value is 100 .
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeMLModelsPaginator is a paginator for DescribeMLModels
+type DescribeMLModelsPaginator struct {
+	options   DescribeMLModelsPaginatorOptions
+	client    DescribeMLModelsAPIClient
+	params    *DescribeMLModelsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeMLModelsPaginator returns a new DescribeMLModelsPaginator
+func NewDescribeMLModelsPaginator(client DescribeMLModelsAPIClient, params *DescribeMLModelsInput, optFns ...func(*DescribeMLModelsPaginatorOptions)) *DescribeMLModelsPaginator {
+	if params == nil {
+		params = &DescribeMLModelsInput{}
+	}
+
+	options := DescribeMLModelsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeMLModelsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeMLModelsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeMLModels page.
+func (p *DescribeMLModelsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeMLModelsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeMLModels(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeMLModelsAPIClient is a client that implements the DescribeMLModels
+// operation.
+type DescribeMLModelsAPIClient interface {
+	DescribeMLModels(context.Context, *DescribeMLModelsInput, ...func(*Options)) (*DescribeMLModelsOutput, error)
+}
+
+var _ DescribeMLModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMLModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

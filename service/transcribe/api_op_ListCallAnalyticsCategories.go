@@ -126,6 +126,9 @@ func (c *Client) addOperationListCallAnalyticsCategoriesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCallAnalyticsCategories(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListCallAnalyticsCategoriesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListCallAnalyticsCategoriesAPIClient is a client that implements the
-// ListCallAnalyticsCategories operation.
-type ListCallAnalyticsCategoriesAPIClient interface {
-	ListCallAnalyticsCategories(context.Context, *ListCallAnalyticsCategoriesInput, ...func(*Options)) (*ListCallAnalyticsCategoriesOutput, error)
-}
-
-var _ ListCallAnalyticsCategoriesAPIClient = (*Client)(nil)
 
 // ListCallAnalyticsCategoriesPaginatorOptions is the paginator options for
 // ListCallAnalyticsCategories
@@ -224,6 +219,9 @@ func (p *ListCallAnalyticsCategoriesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCallAnalyticsCategories(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListCallAnalyticsCategoriesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListCallAnalyticsCategoriesAPIClient is a client that implements the
+// ListCallAnalyticsCategories operation.
+type ListCallAnalyticsCategoriesAPIClient interface {
+	ListCallAnalyticsCategories(context.Context, *ListCallAnalyticsCategoriesInput, ...func(*Options)) (*ListCallAnalyticsCategoriesOutput, error)
+}
+
+var _ ListCallAnalyticsCategoriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCallAnalyticsCategories(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

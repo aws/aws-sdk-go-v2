@@ -146,6 +146,9 @@ func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListExecutionsAPIClient is a client that implements the ListExecutions
-// operation.
-type ListExecutionsAPIClient interface {
-	ListExecutions(context.Context, *ListExecutionsInput, ...func(*Options)) (*ListExecutionsOutput, error)
-}
-
-var _ ListExecutionsAPIClient = (*Client)(nil)
 
 // ListExecutionsPaginatorOptions is the paginator options for ListExecutions
 type ListExecutionsPaginatorOptions struct {
@@ -241,6 +236,9 @@ func (p *ListExecutionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *ListExecutionsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListExecutionsAPIClient is a client that implements the ListExecutions
+// operation.
+type ListExecutionsAPIClient interface {
+	ListExecutions(context.Context, *ListExecutionsInput, ...func(*Options)) (*ListExecutionsOutput, error)
+}
+
+var _ ListExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

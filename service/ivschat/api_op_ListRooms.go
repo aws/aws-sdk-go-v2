@@ -124,6 +124,9 @@ func (c *Client) addOperationListRoomsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRooms(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,13 +147,6 @@ func (c *Client) addOperationListRoomsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListRoomsAPIClient is a client that implements the ListRooms operation.
-type ListRoomsAPIClient interface {
-	ListRooms(context.Context, *ListRoomsInput, ...func(*Options)) (*ListRoomsOutput, error)
-}
-
-var _ ListRoomsAPIClient = (*Client)(nil)
 
 // ListRoomsPaginatorOptions is the paginator options for ListRooms
 type ListRoomsPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListRoomsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRooms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListRoomsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListRoomsAPIClient is a client that implements the ListRooms operation.
+type ListRoomsAPIClient interface {
+	ListRooms(context.Context, *ListRoomsInput, ...func(*Options)) (*ListRoomsOutput, error)
+}
+
+var _ ListRoomsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRooms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

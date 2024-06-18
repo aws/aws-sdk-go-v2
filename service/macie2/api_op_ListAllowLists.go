@@ -112,6 +112,9 @@ func (c *Client) addOperationListAllowListsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAllowLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListAllowListsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListAllowListsAPIClient is a client that implements the ListAllowLists
-// operation.
-type ListAllowListsAPIClient interface {
-	ListAllowLists(context.Context, *ListAllowListsInput, ...func(*Options)) (*ListAllowListsOutput, error)
-}
-
-var _ ListAllowListsAPIClient = (*Client)(nil)
 
 // ListAllowListsPaginatorOptions is the paginator options for ListAllowLists
 type ListAllowListsPaginatorOptions struct {
@@ -204,6 +199,9 @@ func (p *ListAllowListsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAllowLists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListAllowListsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListAllowListsAPIClient is a client that implements the ListAllowLists
+// operation.
+type ListAllowListsAPIClient interface {
+	ListAllowLists(context.Context, *ListAllowListsInput, ...func(*Options)) (*ListAllowListsOutput, error)
+}
+
+var _ ListAllowListsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAllowLists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

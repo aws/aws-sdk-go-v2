@@ -123,6 +123,9 @@ func (c *Client) addOperationListAdminsManagingAccountMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAdminsManagingAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListAdminsManagingAccountMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListAdminsManagingAccountAPIClient is a client that implements the
-// ListAdminsManagingAccount operation.
-type ListAdminsManagingAccountAPIClient interface {
-	ListAdminsManagingAccount(context.Context, *ListAdminsManagingAccountInput, ...func(*Options)) (*ListAdminsManagingAccountOutput, error)
-}
-
-var _ ListAdminsManagingAccountAPIClient = (*Client)(nil)
 
 // ListAdminsManagingAccountPaginatorOptions is the paginator options for
 // ListAdminsManagingAccount
@@ -220,6 +215,9 @@ func (p *ListAdminsManagingAccountPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAdminsManagingAccount(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListAdminsManagingAccountPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListAdminsManagingAccountAPIClient is a client that implements the
+// ListAdminsManagingAccount operation.
+type ListAdminsManagingAccountAPIClient interface {
+	ListAdminsManagingAccount(context.Context, *ListAdminsManagingAccountInput, ...func(*Options)) (*ListAdminsManagingAccountOutput, error)
+}
+
+var _ ListAdminsManagingAccountAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAdminsManagingAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

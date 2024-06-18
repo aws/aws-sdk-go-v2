@@ -112,6 +112,9 @@ func (c *Client) addOperationListInputSecurityGroupsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInputSecurityGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListInputSecurityGroupsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListInputSecurityGroupsAPIClient is a client that implements the
-// ListInputSecurityGroups operation.
-type ListInputSecurityGroupsAPIClient interface {
-	ListInputSecurityGroups(context.Context, *ListInputSecurityGroupsInput, ...func(*Options)) (*ListInputSecurityGroupsOutput, error)
-}
-
-var _ ListInputSecurityGroupsAPIClient = (*Client)(nil)
 
 // ListInputSecurityGroupsPaginatorOptions is the paginator options for
 // ListInputSecurityGroups
@@ -206,6 +201,9 @@ func (p *ListInputSecurityGroupsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInputSecurityGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListInputSecurityGroupsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListInputSecurityGroupsAPIClient is a client that implements the
+// ListInputSecurityGroups operation.
+type ListInputSecurityGroupsAPIClient interface {
+	ListInputSecurityGroups(context.Context, *ListInputSecurityGroupsInput, ...func(*Options)) (*ListInputSecurityGroupsOutput, error)
+}
+
+var _ ListInputSecurityGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInputSecurityGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

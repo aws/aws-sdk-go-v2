@@ -113,6 +113,9 @@ func (c *Client) addOperationDeleteResolverEndpointMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteResolverEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}

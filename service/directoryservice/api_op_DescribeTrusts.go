@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeTrustsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrusts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationDescribeTrustsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// DescribeTrustsAPIClient is a client that implements the DescribeTrusts
-// operation.
-type DescribeTrustsAPIClient interface {
-	DescribeTrusts(context.Context, *DescribeTrustsInput, ...func(*Options)) (*DescribeTrustsOutput, error)
-}
-
-var _ DescribeTrustsAPIClient = (*Client)(nil)
 
 // DescribeTrustsPaginatorOptions is the paginator options for DescribeTrusts
 type DescribeTrustsPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *DescribeTrustsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeTrusts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *DescribeTrustsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// DescribeTrustsAPIClient is a client that implements the DescribeTrusts
+// operation.
+type DescribeTrustsAPIClient interface {
+	DescribeTrusts(context.Context, *DescribeTrustsInput, ...func(*Options)) (*DescribeTrustsOutput, error)
+}
+
+var _ DescribeTrustsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTrusts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

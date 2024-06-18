@@ -147,6 +147,9 @@ func (c *Client) addOperationDescribeMailboxExportJobMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMailboxExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}

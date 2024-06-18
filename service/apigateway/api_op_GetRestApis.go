@@ -114,6 +114,9 @@ func (c *Client) addOperationGetRestApisMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRestApis(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,13 +140,6 @@ func (c *Client) addOperationGetRestApisMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// GetRestApisAPIClient is a client that implements the GetRestApis operation.
-type GetRestApisAPIClient interface {
-	GetRestApis(context.Context, *GetRestApisInput, ...func(*Options)) (*GetRestApisOutput, error)
-}
-
-var _ GetRestApisAPIClient = (*Client)(nil)
 
 // GetRestApisPaginatorOptions is the paginator options for GetRestApis
 type GetRestApisPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *GetRestApisPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetRestApis(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *GetRestApisPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// GetRestApisAPIClient is a client that implements the GetRestApis operation.
+type GetRestApisAPIClient interface {
+	GetRestApis(context.Context, *GetRestApisInput, ...func(*Options)) (*GetRestApisOutput, error)
+}
+
+var _ GetRestApisAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetRestApis(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

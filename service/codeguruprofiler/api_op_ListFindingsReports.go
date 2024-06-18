@@ -155,6 +155,9 @@ func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFindingsReportsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -178,14 +181,6 @@ func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListFindingsReportsAPIClient is a client that implements the
-// ListFindingsReports operation.
-type ListFindingsReportsAPIClient interface {
-	ListFindingsReports(context.Context, *ListFindingsReportsInput, ...func(*Options)) (*ListFindingsReportsOutput, error)
-}
-
-var _ ListFindingsReportsAPIClient = (*Client)(nil)
 
 // ListFindingsReportsPaginatorOptions is the paginator options for
 // ListFindingsReports
@@ -255,6 +250,9 @@ func (p *ListFindingsReportsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFindingsReports(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -273,6 +271,14 @@ func (p *ListFindingsReportsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListFindingsReportsAPIClient is a client that implements the
+// ListFindingsReports operation.
+type ListFindingsReportsAPIClient interface {
+	ListFindingsReports(context.Context, *ListFindingsReportsInput, ...func(*Options)) (*ListFindingsReportsOutput, error)
+}
+
+var _ ListFindingsReportsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFindingsReports(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

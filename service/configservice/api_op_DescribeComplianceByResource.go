@@ -151,6 +151,9 @@ func (c *Client) addOperationDescribeComplianceByResourceMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComplianceByResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -171,14 +174,6 @@ func (c *Client) addOperationDescribeComplianceByResourceMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeComplianceByResourceAPIClient is a client that implements the
-// DescribeComplianceByResource operation.
-type DescribeComplianceByResourceAPIClient interface {
-	DescribeComplianceByResource(context.Context, *DescribeComplianceByResourceInput, ...func(*Options)) (*DescribeComplianceByResourceOutput, error)
-}
-
-var _ DescribeComplianceByResourceAPIClient = (*Client)(nil)
 
 // DescribeComplianceByResourcePaginatorOptions is the paginator options for
 // DescribeComplianceByResource
@@ -244,6 +239,9 @@ func (p *DescribeComplianceByResourcePaginator) NextPage(ctx context.Context, op
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeComplianceByResource(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *DescribeComplianceByResourcePaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeComplianceByResourceAPIClient is a client that implements the
+// DescribeComplianceByResource operation.
+type DescribeComplianceByResourceAPIClient interface {
+	DescribeComplianceByResource(context.Context, *DescribeComplianceByResourceInput, ...func(*Options)) (*DescribeComplianceByResourceOutput, error)
+}
+
+var _ DescribeComplianceByResourceAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeComplianceByResource(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

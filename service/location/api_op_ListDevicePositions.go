@@ -126,6 +126,9 @@ func (c *Client) addOperationListDevicePositionsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListDevicePositionsMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,41 +155,6 @@ func (c *Client) addOperationListDevicePositionsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-type endpointPrefix_opListDevicePositionsMiddleware struct {
-}
-
-func (*endpointPrefix_opListDevicePositionsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListDevicePositionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "tracking." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListDevicePositionsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListDevicePositionsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListDevicePositionsAPIClient is a client that implements the
-// ListDevicePositions operation.
-type ListDevicePositionsAPIClient interface {
-	ListDevicePositions(context.Context, *ListDevicePositionsInput, ...func(*Options)) (*ListDevicePositionsOutput, error)
-}
-
-var _ ListDevicePositionsAPIClient = (*Client)(nil)
 
 // ListDevicePositionsPaginatorOptions is the paginator options for
 // ListDevicePositions
@@ -254,6 +222,9 @@ func (p *ListDevicePositionsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDevicePositions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +243,41 @@ func (p *ListDevicePositionsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+type endpointPrefix_opListDevicePositionsMiddleware struct {
+}
+
+func (*endpointPrefix_opListDevicePositionsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListDevicePositionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "tracking." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListDevicePositionsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListDevicePositionsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListDevicePositionsAPIClient is a client that implements the
+// ListDevicePositions operation.
+type ListDevicePositionsAPIClient interface {
+	ListDevicePositions(context.Context, *ListDevicePositionsInput, ...func(*Options)) (*ListDevicePositionsOutput, error)
+}
+
+var _ ListDevicePositionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDevicePositions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

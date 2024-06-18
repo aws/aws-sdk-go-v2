@@ -118,6 +118,9 @@ func (c *Client) addOperationGetSitesMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSitesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,13 +144,6 @@ func (c *Client) addOperationGetSitesMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-// GetSitesAPIClient is a client that implements the GetSites operation.
-type GetSitesAPIClient interface {
-	GetSites(context.Context, *GetSitesInput, ...func(*Options)) (*GetSitesOutput, error)
-}
-
-var _ GetSitesAPIClient = (*Client)(nil)
 
 // GetSitesPaginatorOptions is the paginator options for GetSites
 type GetSitesPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *GetSitesPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSites(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *GetSitesPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+// GetSitesAPIClient is a client that implements the GetSites operation.
+type GetSitesAPIClient interface {
+	GetSites(context.Context, *GetSitesInput, ...func(*Options)) (*GetSitesOutput, error)
+}
+
+var _ GetSitesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSites(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

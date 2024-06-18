@@ -127,6 +127,9 @@ func (c *Client) addOperationGetTableVersionsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTableVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationGetTableVersionsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetTableVersionsAPIClient is a client that implements the GetTableVersions
-// operation.
-type GetTableVersionsAPIClient interface {
-	GetTableVersions(context.Context, *GetTableVersionsInput, ...func(*Options)) (*GetTableVersionsOutput, error)
-}
-
-var _ GetTableVersionsAPIClient = (*Client)(nil)
 
 // GetTableVersionsPaginatorOptions is the paginator options for GetTableVersions
 type GetTableVersionsPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *GetTableVersionsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTableVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *GetTableVersionsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetTableVersionsAPIClient is a client that implements the GetTableVersions
+// operation.
+type GetTableVersionsAPIClient interface {
+	GetTableVersions(context.Context, *GetTableVersionsInput, ...func(*Options)) (*GetTableVersionsOutput, error)
+}
+
+var _ GetTableVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTableVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

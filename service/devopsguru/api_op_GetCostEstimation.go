@@ -130,6 +130,9 @@ func (c *Client) addOperationGetCostEstimationMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostEstimation(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationGetCostEstimationMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetCostEstimationAPIClient is a client that implements the GetCostEstimation
-// operation.
-type GetCostEstimationAPIClient interface {
-	GetCostEstimation(context.Context, *GetCostEstimationInput, ...func(*Options)) (*GetCostEstimationOutput, error)
-}
-
-var _ GetCostEstimationAPIClient = (*Client)(nil)
 
 // GetCostEstimationPaginatorOptions is the paginator options for GetCostEstimation
 type GetCostEstimationPaginatorOptions struct {
@@ -210,6 +205,9 @@ func (p *GetCostEstimationPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCostEstimation(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *GetCostEstimationPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetCostEstimationAPIClient is a client that implements the GetCostEstimation
+// operation.
+type GetCostEstimationAPIClient interface {
+	GetCostEstimation(context.Context, *GetCostEstimationInput, ...func(*Options)) (*GetCostEstimationOutput, error)
+}
+
+var _ GetCostEstimationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCostEstimation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

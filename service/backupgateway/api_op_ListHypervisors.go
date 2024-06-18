@@ -117,6 +117,9 @@ func (c *Client) addOperationListHypervisorsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHypervisors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListHypervisorsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListHypervisorsAPIClient is a client that implements the ListHypervisors
-// operation.
-type ListHypervisorsAPIClient interface {
-	ListHypervisors(context.Context, *ListHypervisorsInput, ...func(*Options)) (*ListHypervisorsOutput, error)
-}
-
-var _ ListHypervisorsAPIClient = (*Client)(nil)
 
 // ListHypervisorsPaginatorOptions is the paginator options for ListHypervisors
 type ListHypervisorsPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListHypervisorsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHypervisors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListHypervisorsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListHypervisorsAPIClient is a client that implements the ListHypervisors
+// operation.
+type ListHypervisorsAPIClient interface {
+	ListHypervisors(context.Context, *ListHypervisorsInput, ...func(*Options)) (*ListHypervisorsOutput, error)
+}
+
+var _ ListHypervisorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHypervisors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

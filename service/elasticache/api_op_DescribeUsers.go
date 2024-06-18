@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeUsersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,13 +153,6 @@ func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// DescribeUsersAPIClient is a client that implements the DescribeUsers operation.
-type DescribeUsersAPIClient interface {
-	DescribeUsers(context.Context, *DescribeUsersInput, ...func(*Options)) (*DescribeUsersOutput, error)
-}
-
-var _ DescribeUsersAPIClient = (*Client)(nil)
 
 // DescribeUsersPaginatorOptions is the paginator options for DescribeUsers
 type DescribeUsersPaginatorOptions struct {
@@ -223,6 +219,9 @@ func (p *DescribeUsersPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeUsers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +240,13 @@ func (p *DescribeUsersPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// DescribeUsersAPIClient is a client that implements the DescribeUsers operation.
+type DescribeUsersAPIClient interface {
+	DescribeUsers(context.Context, *DescribeUsersInput, ...func(*Options)) (*DescribeUsersOutput, error)
+}
+
+var _ DescribeUsersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeUsers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

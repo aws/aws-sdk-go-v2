@@ -120,6 +120,9 @@ func (c *Client) addOperationListApprovedOriginsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApprovedOriginsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListApprovedOriginsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListApprovedOriginsAPIClient is a client that implements the
-// ListApprovedOrigins operation.
-type ListApprovedOriginsAPIClient interface {
-	ListApprovedOrigins(context.Context, *ListApprovedOriginsInput, ...func(*Options)) (*ListApprovedOriginsOutput, error)
-}
-
-var _ ListApprovedOriginsAPIClient = (*Client)(nil)
 
 // ListApprovedOriginsPaginatorOptions is the paginator options for
 // ListApprovedOrigins
@@ -216,6 +211,9 @@ func (p *ListApprovedOriginsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApprovedOrigins(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListApprovedOriginsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListApprovedOriginsAPIClient is a client that implements the
+// ListApprovedOrigins operation.
+type ListApprovedOriginsAPIClient interface {
+	ListApprovedOrigins(context.Context, *ListApprovedOriginsInput, ...func(*Options)) (*ListApprovedOriginsOutput, error)
+}
+
+var _ ListApprovedOriginsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApprovedOrigins(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

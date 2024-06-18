@@ -110,6 +110,9 @@ func (c *Client) addOperationDescribeSecurityConfigurationMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeSecurityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

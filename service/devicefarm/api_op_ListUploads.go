@@ -187,6 +187,9 @@ func (c *Client) addOperationListUploadsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUploadsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -210,13 +213,6 @@ func (c *Client) addOperationListUploadsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListUploadsAPIClient is a client that implements the ListUploads operation.
-type ListUploadsAPIClient interface {
-	ListUploads(context.Context, *ListUploadsInput, ...func(*Options)) (*ListUploadsOutput, error)
-}
-
-var _ ListUploadsAPIClient = (*Client)(nil)
 
 // ListUploadsPaginatorOptions is the paginator options for ListUploads
 type ListUploadsPaginatorOptions struct {
@@ -269,6 +265,9 @@ func (p *ListUploadsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUploads(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -287,6 +286,13 @@ func (p *ListUploadsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListUploadsAPIClient is a client that implements the ListUploads operation.
+type ListUploadsAPIClient interface {
+	ListUploads(context.Context, *ListUploadsInput, ...func(*Options)) (*ListUploadsOutput, error)
+}
+
+var _ ListUploadsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUploads(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -134,6 +134,9 @@ func (c *Client) addOperationListThirdPartyFirewallFirewallPoliciesMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListThirdPartyFirewallFirewallPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListThirdPartyFirewallFirewallPoliciesMiddlewares(s
 	}
 	return nil
 }
-
-// ListThirdPartyFirewallFirewallPoliciesAPIClient is a client that implements the
-// ListThirdPartyFirewallFirewallPolicies operation.
-type ListThirdPartyFirewallFirewallPoliciesAPIClient interface {
-	ListThirdPartyFirewallFirewallPolicies(context.Context, *ListThirdPartyFirewallFirewallPoliciesInput, ...func(*Options)) (*ListThirdPartyFirewallFirewallPoliciesOutput, error)
-}
-
-var _ ListThirdPartyFirewallFirewallPoliciesAPIClient = (*Client)(nil)
 
 // ListThirdPartyFirewallFirewallPoliciesPaginatorOptions is the paginator options
 // for ListThirdPartyFirewallFirewallPolicies
@@ -237,6 +232,9 @@ func (p *ListThirdPartyFirewallFirewallPoliciesPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListThirdPartyFirewallFirewallPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListThirdPartyFirewallFirewallPoliciesPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListThirdPartyFirewallFirewallPoliciesAPIClient is a client that implements the
+// ListThirdPartyFirewallFirewallPolicies operation.
+type ListThirdPartyFirewallFirewallPoliciesAPIClient interface {
+	ListThirdPartyFirewallFirewallPolicies(context.Context, *ListThirdPartyFirewallFirewallPoliciesInput, ...func(*Options)) (*ListThirdPartyFirewallFirewallPoliciesOutput, error)
+}
+
+var _ ListThirdPartyFirewallFirewallPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListThirdPartyFirewallFirewallPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeStandardsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStandards(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationDescribeStandardsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeStandardsAPIClient is a client that implements the DescribeStandards
-// operation.
-type DescribeStandardsAPIClient interface {
-	DescribeStandards(context.Context, *DescribeStandardsInput, ...func(*Options)) (*DescribeStandardsOutput, error)
-}
-
-var _ DescribeStandardsAPIClient = (*Client)(nil)
 
 // DescribeStandardsPaginatorOptions is the paginator options for DescribeStandards
 type DescribeStandardsPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *DescribeStandardsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeStandards(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *DescribeStandardsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// DescribeStandardsAPIClient is a client that implements the DescribeStandards
+// operation.
+type DescribeStandardsAPIClient interface {
+	DescribeStandards(context.Context, *DescribeStandardsInput, ...func(*Options)) (*DescribeStandardsOutput, error)
+}
+
+var _ DescribeStandardsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStandards(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -145,6 +145,9 @@ func (c *Client) addOperationDescribeGlobalClustersMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeGlobalClustersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationDescribeGlobalClustersMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeGlobalClustersAPIClient is a client that implements the
-// DescribeGlobalClusters operation.
-type DescribeGlobalClustersAPIClient interface {
-	DescribeGlobalClusters(context.Context, *DescribeGlobalClustersInput, ...func(*Options)) (*DescribeGlobalClustersOutput, error)
-}
-
-var _ DescribeGlobalClustersAPIClient = (*Client)(nil)
 
 // DescribeGlobalClustersPaginatorOptions is the paginator options for
 // DescribeGlobalClusters
@@ -247,6 +242,9 @@ func (p *DescribeGlobalClustersPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeGlobalClusters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *DescribeGlobalClustersPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeGlobalClustersAPIClient is a client that implements the
+// DescribeGlobalClusters operation.
+type DescribeGlobalClustersAPIClient interface {
+	DescribeGlobalClusters(context.Context, *DescribeGlobalClustersInput, ...func(*Options)) (*DescribeGlobalClustersOutput, error)
+}
+
+var _ DescribeGlobalClustersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeGlobalClusters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

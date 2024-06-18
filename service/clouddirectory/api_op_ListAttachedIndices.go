@@ -123,6 +123,9 @@ func (c *Client) addOperationListAttachedIndicesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAttachedIndicesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListAttachedIndicesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListAttachedIndicesAPIClient is a client that implements the
-// ListAttachedIndices operation.
-type ListAttachedIndicesAPIClient interface {
-	ListAttachedIndices(context.Context, *ListAttachedIndicesInput, ...func(*Options)) (*ListAttachedIndicesOutput, error)
-}
-
-var _ ListAttachedIndicesAPIClient = (*Client)(nil)
 
 // ListAttachedIndicesPaginatorOptions is the paginator options for
 // ListAttachedIndices
@@ -219,6 +214,9 @@ func (p *ListAttachedIndicesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAttachedIndices(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListAttachedIndicesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListAttachedIndicesAPIClient is a client that implements the
+// ListAttachedIndices operation.
+type ListAttachedIndicesAPIClient interface {
+	ListAttachedIndices(context.Context, *ListAttachedIndicesInput, ...func(*Options)) (*ListAttachedIndicesOutput, error)
+}
+
+var _ ListAttachedIndicesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAttachedIndices(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

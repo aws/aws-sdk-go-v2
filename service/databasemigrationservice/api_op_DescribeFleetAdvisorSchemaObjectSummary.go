@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetAdvisorSchemaObjectSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(
 	}
 	return nil
 }
-
-// DescribeFleetAdvisorSchemaObjectSummaryAPIClient is a client that implements
-// the DescribeFleetAdvisorSchemaObjectSummary operation.
-type DescribeFleetAdvisorSchemaObjectSummaryAPIClient interface {
-	DescribeFleetAdvisorSchemaObjectSummary(context.Context, *DescribeFleetAdvisorSchemaObjectSummaryInput, ...func(*Options)) (*DescribeFleetAdvisorSchemaObjectSummaryOutput, error)
-}
-
-var _ DescribeFleetAdvisorSchemaObjectSummaryAPIClient = (*Client)(nil)
 
 // DescribeFleetAdvisorSchemaObjectSummaryPaginatorOptions is the paginator
 // options for DescribeFleetAdvisorSchemaObjectSummary
@@ -225,6 +220,9 @@ func (p *DescribeFleetAdvisorSchemaObjectSummaryPaginator) NextPage(ctx context.
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFleetAdvisorSchemaObjectSummary(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeFleetAdvisorSchemaObjectSummaryPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// DescribeFleetAdvisorSchemaObjectSummaryAPIClient is a client that implements
+// the DescribeFleetAdvisorSchemaObjectSummary operation.
+type DescribeFleetAdvisorSchemaObjectSummaryAPIClient interface {
+	DescribeFleetAdvisorSchemaObjectSummary(context.Context, *DescribeFleetAdvisorSchemaObjectSummaryInput, ...func(*Options)) (*DescribeFleetAdvisorSchemaObjectSummaryOutput, error)
+}
+
+var _ DescribeFleetAdvisorSchemaObjectSummaryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFleetAdvisorSchemaObjectSummary(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

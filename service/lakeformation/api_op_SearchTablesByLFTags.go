@@ -126,6 +126,9 @@ func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchTablesByLFTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// SearchTablesByLFTagsAPIClient is a client that implements the
-// SearchTablesByLFTags operation.
-type SearchTablesByLFTagsAPIClient interface {
-	SearchTablesByLFTags(context.Context, *SearchTablesByLFTagsInput, ...func(*Options)) (*SearchTablesByLFTagsOutput, error)
-}
-
-var _ SearchTablesByLFTagsAPIClient = (*Client)(nil)
 
 // SearchTablesByLFTagsPaginatorOptions is the paginator options for
 // SearchTablesByLFTags
@@ -222,6 +217,9 @@ func (p *SearchTablesByLFTagsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchTablesByLFTags(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *SearchTablesByLFTagsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// SearchTablesByLFTagsAPIClient is a client that implements the
+// SearchTablesByLFTags operation.
+type SearchTablesByLFTagsAPIClient interface {
+	SearchTablesByLFTags(context.Context, *SearchTablesByLFTagsInput, ...func(*Options)) (*SearchTablesByLFTagsOutput, error)
+}
+
+var _ SearchTablesByLFTagsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchTablesByLFTags(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

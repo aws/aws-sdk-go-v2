@@ -121,6 +121,9 @@ func (c *Client) addOperationListThingGroupsForThingMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListThingGroupsForThingValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListThingGroupsForThingMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListThingGroupsForThingAPIClient is a client that implements the
-// ListThingGroupsForThing operation.
-type ListThingGroupsForThingAPIClient interface {
-	ListThingGroupsForThing(context.Context, *ListThingGroupsForThingInput, ...func(*Options)) (*ListThingGroupsForThingOutput, error)
-}
-
-var _ ListThingGroupsForThingAPIClient = (*Client)(nil)
 
 // ListThingGroupsForThingPaginatorOptions is the paginator options for
 // ListThingGroupsForThing
@@ -218,6 +213,9 @@ func (p *ListThingGroupsForThingPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListThingGroupsForThing(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListThingGroupsForThingPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListThingGroupsForThingAPIClient is a client that implements the
+// ListThingGroupsForThing operation.
+type ListThingGroupsForThingAPIClient interface {
+	ListThingGroupsForThing(context.Context, *ListThingGroupsForThingInput, ...func(*Options)) (*ListThingGroupsForThingOutput, error)
+}
+
+var _ ListThingGroupsForThingAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListThingGroupsForThing(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

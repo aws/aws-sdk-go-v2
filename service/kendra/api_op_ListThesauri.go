@@ -119,6 +119,9 @@ func (c *Client) addOperationListThesauriMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListThesauriValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListThesauriMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListThesauriAPIClient is a client that implements the ListThesauri operation.
-type ListThesauriAPIClient interface {
-	ListThesauri(context.Context, *ListThesauriInput, ...func(*Options)) (*ListThesauriOutput, error)
-}
-
-var _ ListThesauriAPIClient = (*Client)(nil)
 
 // ListThesauriPaginatorOptions is the paginator options for ListThesauri
 type ListThesauriPaginatorOptions struct {
@@ -213,6 +209,9 @@ func (p *ListThesauriPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListThesauri(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +230,13 @@ func (p *ListThesauriPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListThesauriAPIClient is a client that implements the ListThesauri operation.
+type ListThesauriAPIClient interface {
+	ListThesauri(context.Context, *ListThesauriInput, ...func(*Options)) (*ListThesauriOutput, error)
+}
+
+var _ ListThesauriAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListThesauri(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -119,6 +119,9 @@ func (c *Client) addOperationGetInvalidationMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetInvalidationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationGetInvalidationMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetInvalidationAPIClient is a client that implements the GetInvalidation
-// operation.
-type GetInvalidationAPIClient interface {
-	GetInvalidation(context.Context, *GetInvalidationInput, ...func(*Options)) (*GetInvalidationOutput, error)
-}
-
-var _ GetInvalidationAPIClient = (*Client)(nil)
 
 // InvalidationCompletedWaiterOptions are waiter options for
 // InvalidationCompletedWaiter
@@ -268,7 +263,13 @@ func (w *InvalidationCompletedWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.GetInvalidation(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -325,6 +326,14 @@ func invalidationCompletedStateRetryable(ctx context.Context, input *GetInvalida
 
 	return true, nil
 }
+
+// GetInvalidationAPIClient is a client that implements the GetInvalidation
+// operation.
+type GetInvalidationAPIClient interface {
+	GetInvalidation(context.Context, *GetInvalidationInput, ...func(*Options)) (*GetInvalidationOutput, error)
+}
+
+var _ GetInvalidationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetInvalidation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

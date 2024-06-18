@@ -175,6 +175,9 @@ func (c *Client) addOperationListAnswersMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnswersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,13 +201,6 @@ func (c *Client) addOperationListAnswersMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListAnswersAPIClient is a client that implements the ListAnswers operation.
-type ListAnswersAPIClient interface {
-	ListAnswers(context.Context, *ListAnswersInput, ...func(*Options)) (*ListAnswersOutput, error)
-}
-
-var _ ListAnswersAPIClient = (*Client)(nil)
 
 // ListAnswersPaginatorOptions is the paginator options for ListAnswers
 type ListAnswersPaginatorOptions struct {
@@ -269,6 +265,9 @@ func (p *ListAnswersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnswers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -287,6 +286,13 @@ func (p *ListAnswersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListAnswersAPIClient is a client that implements the ListAnswers operation.
+type ListAnswersAPIClient interface {
+	ListAnswers(context.Context, *ListAnswersInput, ...func(*Options)) (*ListAnswersOutput, error)
+}
+
+var _ ListAnswersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnswers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

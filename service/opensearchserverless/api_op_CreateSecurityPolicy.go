@@ -130,6 +130,9 @@ func (c *Client) addOperationCreateSecurityPolicyMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateSecurityPolicyMiddleware(stack, options); err != nil {
 		return err
 	}

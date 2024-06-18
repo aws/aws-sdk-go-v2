@@ -123,6 +123,9 @@ func (c *Client) addOperationListRevisionAssetsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRevisionAssetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListRevisionAssetsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListRevisionAssetsAPIClient is a client that implements the ListRevisionAssets
-// operation.
-type ListRevisionAssetsAPIClient interface {
-	ListRevisionAssets(context.Context, *ListRevisionAssetsInput, ...func(*Options)) (*ListRevisionAssetsOutput, error)
-}
-
-var _ ListRevisionAssetsAPIClient = (*Client)(nil)
 
 // ListRevisionAssetsPaginatorOptions is the paginator options for
 // ListRevisionAssets
@@ -215,6 +210,9 @@ func (p *ListRevisionAssetsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRevisionAssets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListRevisionAssetsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListRevisionAssetsAPIClient is a client that implements the ListRevisionAssets
+// operation.
+type ListRevisionAssetsAPIClient interface {
+	ListRevisionAssets(context.Context, *ListRevisionAssetsInput, ...func(*Options)) (*ListRevisionAssetsOutput, error)
+}
+
+var _ ListRevisionAssetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRevisionAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

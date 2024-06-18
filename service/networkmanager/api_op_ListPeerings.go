@@ -122,6 +122,9 @@ func (c *Client) addOperationListPeeringsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPeerings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListPeeringsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListPeeringsAPIClient is a client that implements the ListPeerings operation.
-type ListPeeringsAPIClient interface {
-	ListPeerings(context.Context, *ListPeeringsInput, ...func(*Options)) (*ListPeeringsOutput, error)
-}
-
-var _ ListPeeringsAPIClient = (*Client)(nil)
 
 // ListPeeringsPaginatorOptions is the paginator options for ListPeerings
 type ListPeeringsPaginatorOptions struct {
@@ -213,6 +209,9 @@ func (p *ListPeeringsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPeerings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +230,13 @@ func (p *ListPeeringsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListPeeringsAPIClient is a client that implements the ListPeerings operation.
+type ListPeeringsAPIClient interface {
+	ListPeerings(context.Context, *ListPeeringsInput, ...func(*Options)) (*ListPeeringsOutput, error)
+}
+
+var _ ListPeeringsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPeerings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

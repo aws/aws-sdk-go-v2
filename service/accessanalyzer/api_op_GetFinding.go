@@ -118,6 +118,9 @@ func (c *Client) addOperationGetFindingMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFindingValidationMiddleware(stack); err != nil {
 		return err
 	}

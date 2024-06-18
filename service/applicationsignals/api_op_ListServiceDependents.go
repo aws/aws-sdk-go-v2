@@ -169,6 +169,9 @@ func (c *Client) addOperationListServiceDependentsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListServiceDependentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -192,14 +195,6 @@ func (c *Client) addOperationListServiceDependentsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListServiceDependentsAPIClient is a client that implements the
-// ListServiceDependents operation.
-type ListServiceDependentsAPIClient interface {
-	ListServiceDependents(context.Context, *ListServiceDependentsInput, ...func(*Options)) (*ListServiceDependentsOutput, error)
-}
-
-var _ ListServiceDependentsAPIClient = (*Client)(nil)
 
 // ListServiceDependentsPaginatorOptions is the paginator options for
 // ListServiceDependents
@@ -266,6 +261,9 @@ func (p *ListServiceDependentsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListServiceDependents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -284,6 +282,14 @@ func (p *ListServiceDependentsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListServiceDependentsAPIClient is a client that implements the
+// ListServiceDependents operation.
+type ListServiceDependentsAPIClient interface {
+	ListServiceDependents(context.Context, *ListServiceDependentsInput, ...func(*Options)) (*ListServiceDependentsOutput, error)
+}
+
+var _ ListServiceDependentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListServiceDependents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -168,6 +168,9 @@ func (c *Client) addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBInstanceAutomatedBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -191,14 +194,6 @@ func (c *Client) addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack
 	}
 	return nil
 }
-
-// DescribeDBInstanceAutomatedBackupsAPIClient is a client that implements the
-// DescribeDBInstanceAutomatedBackups operation.
-type DescribeDBInstanceAutomatedBackupsAPIClient interface {
-	DescribeDBInstanceAutomatedBackups(context.Context, *DescribeDBInstanceAutomatedBackupsInput, ...func(*Options)) (*DescribeDBInstanceAutomatedBackupsOutput, error)
-}
-
-var _ DescribeDBInstanceAutomatedBackupsAPIClient = (*Client)(nil)
 
 // DescribeDBInstanceAutomatedBackupsPaginatorOptions is the paginator options for
 // DescribeDBInstanceAutomatedBackups
@@ -268,6 +263,9 @@ func (p *DescribeDBInstanceAutomatedBackupsPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBInstanceAutomatedBackups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -286,6 +284,14 @@ func (p *DescribeDBInstanceAutomatedBackupsPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// DescribeDBInstanceAutomatedBackupsAPIClient is a client that implements the
+// DescribeDBInstanceAutomatedBackups operation.
+type DescribeDBInstanceAutomatedBackupsAPIClient interface {
+	DescribeDBInstanceAutomatedBackups(context.Context, *DescribeDBInstanceAutomatedBackupsInput, ...func(*Options)) (*DescribeDBInstanceAutomatedBackupsOutput, error)
+}
+
+var _ DescribeDBInstanceAutomatedBackupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBInstanceAutomatedBackups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

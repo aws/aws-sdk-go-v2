@@ -238,6 +238,9 @@ func (c *Client) addOperationAssociateVirtualInterfaceMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}

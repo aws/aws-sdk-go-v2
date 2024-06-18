@@ -113,6 +113,9 @@ func (c *Client) addOperationGetRecommenderConfigurationsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecommenderConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}

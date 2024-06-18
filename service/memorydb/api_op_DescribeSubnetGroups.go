@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSubnetGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeSubnetGroupsAPIClient is a client that implements the
-// DescribeSubnetGroups operation.
-type DescribeSubnetGroupsAPIClient interface {
-	DescribeSubnetGroups(context.Context, *DescribeSubnetGroupsInput, ...func(*Options)) (*DescribeSubnetGroupsOutput, error)
-}
-
-var _ DescribeSubnetGroupsAPIClient = (*Client)(nil)
 
 // DescribeSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeSubnetGroups
@@ -220,6 +215,9 @@ func (p *DescribeSubnetGroupsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeSubnetGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *DescribeSubnetGroupsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// DescribeSubnetGroupsAPIClient is a client that implements the
+// DescribeSubnetGroups operation.
+type DescribeSubnetGroupsAPIClient interface {
+	DescribeSubnetGroups(context.Context, *DescribeSubnetGroupsInput, ...func(*Options)) (*DescribeSubnetGroupsOutput, error)
+}
+
+var _ DescribeSubnetGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeSubnetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

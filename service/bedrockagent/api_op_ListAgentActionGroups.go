@@ -129,6 +129,9 @@ func (c *Client) addOperationListAgentActionGroupsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAgentActionGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListAgentActionGroupsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAgentActionGroupsAPIClient is a client that implements the
-// ListAgentActionGroups operation.
-type ListAgentActionGroupsAPIClient interface {
-	ListAgentActionGroups(context.Context, *ListAgentActionGroupsInput, ...func(*Options)) (*ListAgentActionGroupsOutput, error)
-}
-
-var _ ListAgentActionGroupsAPIClient = (*Client)(nil)
 
 // ListAgentActionGroupsPaginatorOptions is the paginator options for
 // ListAgentActionGroups
@@ -228,6 +223,9 @@ func (p *ListAgentActionGroupsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAgentActionGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListAgentActionGroupsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAgentActionGroupsAPIClient is a client that implements the
+// ListAgentActionGroups operation.
+type ListAgentActionGroupsAPIClient interface {
+	ListAgentActionGroups(context.Context, *ListAgentActionGroupsInput, ...func(*Options)) (*ListAgentActionGroupsOutput, error)
+}
+
+var _ ListAgentActionGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAgentActionGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

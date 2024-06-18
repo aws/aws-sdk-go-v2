@@ -133,6 +133,9 @@ func (c *Client) addOperationListRuleGroupsNamespacesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRuleGroupsNamespacesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListRuleGroupsNamespacesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListRuleGroupsNamespacesAPIClient is a client that implements the
-// ListRuleGroupsNamespaces operation.
-type ListRuleGroupsNamespacesAPIClient interface {
-	ListRuleGroupsNamespaces(context.Context, *ListRuleGroupsNamespacesInput, ...func(*Options)) (*ListRuleGroupsNamespacesOutput, error)
-}
-
-var _ ListRuleGroupsNamespacesAPIClient = (*Client)(nil)
 
 // ListRuleGroupsNamespacesPaginatorOptions is the paginator options for
 // ListRuleGroupsNamespaces
@@ -230,6 +225,9 @@ func (p *ListRuleGroupsNamespacesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRuleGroupsNamespaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListRuleGroupsNamespacesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListRuleGroupsNamespacesAPIClient is a client that implements the
+// ListRuleGroupsNamespaces operation.
+type ListRuleGroupsNamespacesAPIClient interface {
+	ListRuleGroupsNamespaces(context.Context, *ListRuleGroupsNamespacesInput, ...func(*Options)) (*ListRuleGroupsNamespacesOutput, error)
+}
+
+var _ ListRuleGroupsNamespacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRuleGroupsNamespaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

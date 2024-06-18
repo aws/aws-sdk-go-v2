@@ -121,6 +121,9 @@ func (c *Client) addOperationDeleteCapacityProviderMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteCapacityProviderValidationMiddleware(stack); err != nil {
 		return err
 	}

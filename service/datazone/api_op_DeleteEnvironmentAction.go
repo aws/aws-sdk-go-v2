@@ -112,6 +112,9 @@ func (c *Client) addOperationDeleteEnvironmentActionMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteEnvironmentActionValidationMiddleware(stack); err != nil {
 		return err
 	}

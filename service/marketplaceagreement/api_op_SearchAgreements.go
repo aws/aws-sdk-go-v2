@@ -184,6 +184,9 @@ func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAgreements(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -204,14 +207,6 @@ func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// SearchAgreementsAPIClient is a client that implements the SearchAgreements
-// operation.
-type SearchAgreementsAPIClient interface {
-	SearchAgreements(context.Context, *SearchAgreementsInput, ...func(*Options)) (*SearchAgreementsOutput, error)
-}
-
-var _ SearchAgreementsAPIClient = (*Client)(nil)
 
 // SearchAgreementsPaginatorOptions is the paginator options for SearchAgreements
 type SearchAgreementsPaginatorOptions struct {
@@ -276,6 +271,9 @@ func (p *SearchAgreementsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchAgreements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -294,6 +292,14 @@ func (p *SearchAgreementsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// SearchAgreementsAPIClient is a client that implements the SearchAgreements
+// operation.
+type SearchAgreementsAPIClient interface {
+	SearchAgreements(context.Context, *SearchAgreementsInput, ...func(*Options)) (*SearchAgreementsOutput, error)
+}
+
+var _ SearchAgreementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchAgreements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

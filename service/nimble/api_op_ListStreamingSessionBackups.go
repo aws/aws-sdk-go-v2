@@ -115,6 +115,9 @@ func (c *Client) addOperationListStreamingSessionBackupsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListStreamingSessionBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListStreamingSessionBackupsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListStreamingSessionBackupsAPIClient is a client that implements the
-// ListStreamingSessionBackups operation.
-type ListStreamingSessionBackupsAPIClient interface {
-	ListStreamingSessionBackups(context.Context, *ListStreamingSessionBackupsInput, ...func(*Options)) (*ListStreamingSessionBackupsOutput, error)
-}
-
-var _ ListStreamingSessionBackupsAPIClient = (*Client)(nil)
 
 // ListStreamingSessionBackupsPaginatorOptions is the paginator options for
 // ListStreamingSessionBackups
@@ -201,6 +196,9 @@ func (p *ListStreamingSessionBackupsPaginator) NextPage(ctx context.Context, opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStreamingSessionBackups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +217,14 @@ func (p *ListStreamingSessionBackupsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListStreamingSessionBackupsAPIClient is a client that implements the
+// ListStreamingSessionBackups operation.
+type ListStreamingSessionBackupsAPIClient interface {
+	ListStreamingSessionBackups(context.Context, *ListStreamingSessionBackupsInput, ...func(*Options)) (*ListStreamingSessionBackupsOutput, error)
+}
+
+var _ ListStreamingSessionBackupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStreamingSessionBackups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

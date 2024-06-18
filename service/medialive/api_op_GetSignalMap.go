@@ -167,6 +167,9 @@ func (c *Client) addOperationGetSignalMapMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSignalMapValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -190,13 +193,6 @@ func (c *Client) addOperationGetSignalMapMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetSignalMapAPIClient is a client that implements the GetSignalMap operation.
-type GetSignalMapAPIClient interface {
-	GetSignalMap(context.Context, *GetSignalMapInput, ...func(*Options)) (*GetSignalMapOutput, error)
-}
-
-var _ GetSignalMapAPIClient = (*Client)(nil)
 
 // SignalMapCreatedWaiterOptions are waiter options for SignalMapCreatedWaiter
 type SignalMapCreatedWaiterOptions struct {
@@ -313,7 +309,13 @@ func (w *SignalMapCreatedWaiter) WaitForOutput(ctx context.Context, params *GetS
 		}
 
 		out, err := w.client.GetSignalMap(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -522,7 +524,13 @@ func (w *SignalMapMonitorDeletedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.GetSignalMap(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -731,7 +739,13 @@ func (w *SignalMapMonitorDeployedWaiter) WaitForOutput(ctx context.Context, para
 		}
 
 		out, err := w.client.GetSignalMap(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -989,7 +1003,13 @@ func (w *SignalMapUpdatedWaiter) WaitForOutput(ctx context.Context, params *GetS
 		}
 
 		out, err := w.client.GetSignalMap(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1097,6 +1117,13 @@ func signalMapUpdatedStateRetryable(ctx context.Context, input *GetSignalMapInpu
 
 	return true, nil
 }
+
+// GetSignalMapAPIClient is a client that implements the GetSignalMap operation.
+type GetSignalMapAPIClient interface {
+	GetSignalMap(context.Context, *GetSignalMapInput, ...func(*Options)) (*GetSignalMapOutput, error)
+}
+
+var _ GetSignalMapAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSignalMap(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

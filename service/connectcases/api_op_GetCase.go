@@ -135,6 +135,9 @@ func (c *Client) addOperationGetCaseMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCaseValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,13 +161,6 @@ func (c *Client) addOperationGetCaseMiddlewares(stack *middleware.Stack, options
 	}
 	return nil
 }
-
-// GetCaseAPIClient is a client that implements the GetCase operation.
-type GetCaseAPIClient interface {
-	GetCase(context.Context, *GetCaseInput, ...func(*Options)) (*GetCaseOutput, error)
-}
-
-var _ GetCaseAPIClient = (*Client)(nil)
 
 // GetCasePaginatorOptions is the paginator options for GetCase
 type GetCasePaginatorOptions struct {
@@ -217,6 +213,9 @@ func (p *GetCasePaginator) NextPage(ctx context.Context, optFns ...func(*Options
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCase(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +234,13 @@ func (p *GetCasePaginator) NextPage(ctx context.Context, optFns ...func(*Options
 
 	return result, nil
 }
+
+// GetCaseAPIClient is a client that implements the GetCase operation.
+type GetCaseAPIClient interface {
+	GetCase(context.Context, *GetCaseInput, ...func(*Options)) (*GetCaseOutput, error)
+}
+
+var _ GetCaseAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCase(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

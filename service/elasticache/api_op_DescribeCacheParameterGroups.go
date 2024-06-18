@@ -126,6 +126,9 @@ func (c *Client) addOperationDescribeCacheParameterGroupsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCacheParameterGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationDescribeCacheParameterGroupsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeCacheParameterGroupsAPIClient is a client that implements the
-// DescribeCacheParameterGroups operation.
-type DescribeCacheParameterGroupsAPIClient interface {
-	DescribeCacheParameterGroups(context.Context, *DescribeCacheParameterGroupsInput, ...func(*Options)) (*DescribeCacheParameterGroupsOutput, error)
-}
-
-var _ DescribeCacheParameterGroupsAPIClient = (*Client)(nil)
 
 // DescribeCacheParameterGroupsPaginatorOptions is the paginator options for
 // DescribeCacheParameterGroups
@@ -227,6 +222,9 @@ func (p *DescribeCacheParameterGroupsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCacheParameterGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *DescribeCacheParameterGroupsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeCacheParameterGroupsAPIClient is a client that implements the
+// DescribeCacheParameterGroups operation.
+type DescribeCacheParameterGroupsAPIClient interface {
+	DescribeCacheParameterGroups(context.Context, *DescribeCacheParameterGroupsInput, ...func(*Options)) (*DescribeCacheParameterGroupsOutput, error)
+}
+
+var _ DescribeCacheParameterGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCacheParameterGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

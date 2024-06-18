@@ -124,6 +124,9 @@ func (c *Client) addOperationListApplicationProvidersMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationProviders(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListApplicationProvidersMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListApplicationProvidersAPIClient is a client that implements the
-// ListApplicationProviders operation.
-type ListApplicationProvidersAPIClient interface {
-	ListApplicationProviders(context.Context, *ListApplicationProvidersInput, ...func(*Options)) (*ListApplicationProvidersOutput, error)
-}
-
-var _ ListApplicationProvidersAPIClient = (*Client)(nil)
 
 // ListApplicationProvidersPaginatorOptions is the paginator options for
 // ListApplicationProviders
@@ -224,6 +219,9 @@ func (p *ListApplicationProvidersPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationProviders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListApplicationProvidersPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListApplicationProvidersAPIClient is a client that implements the
+// ListApplicationProviders operation.
+type ListApplicationProvidersAPIClient interface {
+	ListApplicationProviders(context.Context, *ListApplicationProvidersInput, ...func(*Options)) (*ListApplicationProvidersOutput, error)
+}
+
+var _ ListApplicationProvidersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationProviders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

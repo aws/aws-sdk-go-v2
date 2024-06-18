@@ -118,6 +118,9 @@ func (c *Client) addOperationListRetrieversMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRetrieversValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListRetrieversMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListRetrieversAPIClient is a client that implements the ListRetrievers
-// operation.
-type ListRetrieversAPIClient interface {
-	ListRetrievers(context.Context, *ListRetrieversInput, ...func(*Options)) (*ListRetrieversOutput, error)
-}
-
-var _ ListRetrieversAPIClient = (*Client)(nil)
 
 // ListRetrieversPaginatorOptions is the paginator options for ListRetrievers
 type ListRetrieversPaginatorOptions struct {
@@ -213,6 +208,9 @@ func (p *ListRetrieversPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRetrievers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListRetrieversPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListRetrieversAPIClient is a client that implements the ListRetrievers
+// operation.
+type ListRetrieversAPIClient interface {
+	ListRetrievers(context.Context, *ListRetrieversInput, ...func(*Options)) (*ListRetrieversOutput, error)
+}
+
+var _ ListRetrieversAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRetrievers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -207,6 +207,9 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetRunMiddleware(stack); err != nil {
 		return err
 	}
@@ -233,40 +236,6 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 	}
 	return nil
 }
-
-type endpointPrefix_opGetRunMiddleware struct {
-}
-
-func (*endpointPrefix_opGetRunMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetRunMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "workflows-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetRunMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetRunMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetRunAPIClient is a client that implements the GetRun operation.
-type GetRunAPIClient interface {
-	GetRun(context.Context, *GetRunInput, ...func(*Options)) (*GetRunOutput, error)
-}
-
-var _ GetRunAPIClient = (*Client)(nil)
 
 // RunRunningWaiterOptions are waiter options for RunRunningWaiter
 type RunRunningWaiterOptions struct {
@@ -382,7 +351,13 @@ func (w *RunRunningWaiter) WaitForOutput(ctx context.Context, params *GetRunInpu
 		}
 
 		out, err := w.client.GetRun(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -622,7 +597,13 @@ func (w *RunCompletedWaiter) WaitForOutput(ctx context.Context, params *GetRunIn
 		}
 
 		out, err := w.client.GetRun(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -764,6 +745,40 @@ func runCompletedStateRetryable(ctx context.Context, input *GetRunInput, output 
 
 	return true, nil
 }
+
+type endpointPrefix_opGetRunMiddleware struct {
+}
+
+func (*endpointPrefix_opGetRunMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetRunMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "workflows-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetRunMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetRunMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetRunAPIClient is a client that implements the GetRun operation.
+type GetRunAPIClient interface {
+	GetRun(context.Context, *GetRunInput, ...func(*Options)) (*GetRunOutput, error)
+}
+
+var _ GetRunAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetRun(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -176,6 +176,9 @@ func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -199,13 +202,6 @@ func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListDatabasesAPIClient is a client that implements the ListDatabases operation.
-type ListDatabasesAPIClient interface {
-	ListDatabases(context.Context, *ListDatabasesInput, ...func(*Options)) (*ListDatabasesOutput, error)
-}
-
-var _ ListDatabasesAPIClient = (*Client)(nil)
 
 // ListDatabasesPaginatorOptions is the paginator options for ListDatabases
 type ListDatabasesPaginatorOptions struct {
@@ -268,6 +264,9 @@ func (p *ListDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDatabases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -286,6 +285,13 @@ func (p *ListDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListDatabasesAPIClient is a client that implements the ListDatabases operation.
+type ListDatabasesAPIClient interface {
+	ListDatabases(context.Context, *ListDatabasesInput, ...func(*Options)) (*ListDatabasesOutput, error)
+}
+
+var _ ListDatabasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

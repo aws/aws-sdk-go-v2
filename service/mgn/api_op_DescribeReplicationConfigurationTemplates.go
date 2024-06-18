@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribeReplicationConfigurationTemplatesMiddleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationConfigurationTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationDescribeReplicationConfigurationTemplatesMiddleware
 	}
 	return nil
 }
-
-// DescribeReplicationConfigurationTemplatesAPIClient is a client that implements
-// the DescribeReplicationConfigurationTemplates operation.
-type DescribeReplicationConfigurationTemplatesAPIClient interface {
-	DescribeReplicationConfigurationTemplates(context.Context, *DescribeReplicationConfigurationTemplatesInput, ...func(*Options)) (*DescribeReplicationConfigurationTemplatesOutput, error)
-}
-
-var _ DescribeReplicationConfigurationTemplatesAPIClient = (*Client)(nil)
 
 // DescribeReplicationConfigurationTemplatesPaginatorOptions is the paginator
 // options for DescribeReplicationConfigurationTemplates
@@ -208,6 +203,9 @@ func (p *DescribeReplicationConfigurationTemplatesPaginator) NextPage(ctx contex
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReplicationConfigurationTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *DescribeReplicationConfigurationTemplatesPaginator) NextPage(ctx contex
 
 	return result, nil
 }
+
+// DescribeReplicationConfigurationTemplatesAPIClient is a client that implements
+// the DescribeReplicationConfigurationTemplates operation.
+type DescribeReplicationConfigurationTemplatesAPIClient interface {
+	DescribeReplicationConfigurationTemplates(context.Context, *DescribeReplicationConfigurationTemplatesInput, ...func(*Options)) (*DescribeReplicationConfigurationTemplatesOutput, error)
+}
+
+var _ DescribeReplicationConfigurationTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationConfigurationTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

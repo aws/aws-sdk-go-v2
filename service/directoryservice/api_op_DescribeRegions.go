@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeRegionsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRegionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationDescribeRegionsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeRegionsAPIClient is a client that implements the DescribeRegions
-// operation.
-type DescribeRegionsAPIClient interface {
-	DescribeRegions(context.Context, *DescribeRegionsInput, ...func(*Options)) (*DescribeRegionsOutput, error)
-}
-
-var _ DescribeRegionsAPIClient = (*Client)(nil)
 
 // DescribeRegionsPaginatorOptions is the paginator options for DescribeRegions
 type DescribeRegionsPaginatorOptions struct {
@@ -201,6 +196,9 @@ func (p *DescribeRegionsPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRegions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +217,14 @@ func (p *DescribeRegionsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// DescribeRegionsAPIClient is a client that implements the DescribeRegions
+// operation.
+type DescribeRegionsAPIClient interface {
+	DescribeRegions(context.Context, *DescribeRegionsInput, ...func(*Options)) (*DescribeRegionsOutput, error)
+}
+
+var _ DescribeRegionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRegions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

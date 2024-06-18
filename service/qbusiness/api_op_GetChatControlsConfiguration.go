@@ -135,6 +135,9 @@ func (c *Client) addOperationGetChatControlsConfigurationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetChatControlsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationGetChatControlsConfigurationMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// GetChatControlsConfigurationAPIClient is a client that implements the
-// GetChatControlsConfiguration operation.
-type GetChatControlsConfigurationAPIClient interface {
-	GetChatControlsConfiguration(context.Context, *GetChatControlsConfigurationInput, ...func(*Options)) (*GetChatControlsConfigurationOutput, error)
-}
-
-var _ GetChatControlsConfigurationAPIClient = (*Client)(nil)
 
 // GetChatControlsConfigurationPaginatorOptions is the paginator options for
 // GetChatControlsConfiguration
@@ -233,6 +228,9 @@ func (p *GetChatControlsConfigurationPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetChatControlsConfiguration(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *GetChatControlsConfigurationPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// GetChatControlsConfigurationAPIClient is a client that implements the
+// GetChatControlsConfiguration operation.
+type GetChatControlsConfigurationAPIClient interface {
+	GetChatControlsConfiguration(context.Context, *GetChatControlsConfigurationInput, ...func(*Options)) (*GetChatControlsConfigurationOutput, error)
+}
+
+var _ GetChatControlsConfigurationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetChatControlsConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

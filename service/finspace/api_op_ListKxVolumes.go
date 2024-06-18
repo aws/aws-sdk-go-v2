@@ -123,6 +123,9 @@ func (c *Client) addOperationListKxVolumesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListKxVolumesValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -123,6 +123,9 @@ func (c *Client) addOperationListCollectionsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCollections(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListCollectionsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListCollectionsAPIClient is a client that implements the ListCollections
-// operation.
-type ListCollectionsAPIClient interface {
-	ListCollections(context.Context, *ListCollectionsInput, ...func(*Options)) (*ListCollectionsOutput, error)
-}
-
-var _ ListCollectionsAPIClient = (*Client)(nil)
 
 // ListCollectionsPaginatorOptions is the paginator options for ListCollections
 type ListCollectionsPaginatorOptions struct {
@@ -203,6 +198,9 @@ func (p *ListCollectionsPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCollections(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListCollectionsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListCollectionsAPIClient is a client that implements the ListCollections
+// operation.
+type ListCollectionsAPIClient interface {
+	ListCollections(context.Context, *ListCollectionsInput, ...func(*Options)) (*ListCollectionsOutput, error)
+}
+
+var _ ListCollectionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCollections(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

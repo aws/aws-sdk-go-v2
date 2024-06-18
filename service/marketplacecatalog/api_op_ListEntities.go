@@ -146,6 +146,9 @@ func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEntitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,13 +172,6 @@ func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListEntitiesAPIClient is a client that implements the ListEntities operation.
-type ListEntitiesAPIClient interface {
-	ListEntities(context.Context, *ListEntitiesInput, ...func(*Options)) (*ListEntitiesOutput, error)
-}
-
-var _ ListEntitiesAPIClient = (*Client)(nil)
 
 // ListEntitiesPaginatorOptions is the paginator options for ListEntities
 type ListEntitiesPaginatorOptions struct {
@@ -241,6 +237,9 @@ func (p *ListEntitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEntities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +258,13 @@ func (p *ListEntitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListEntitiesAPIClient is a client that implements the ListEntities operation.
+type ListEntitiesAPIClient interface {
+	ListEntities(context.Context, *ListEntitiesInput, ...func(*Options)) (*ListEntitiesOutput, error)
+}
+
+var _ ListEntitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEntities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

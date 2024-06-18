@@ -112,6 +112,9 @@ func (c *Client) addOperationListGameServerGroupsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGameServerGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListGameServerGroupsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListGameServerGroupsAPIClient is a client that implements the
-// ListGameServerGroups operation.
-type ListGameServerGroupsAPIClient interface {
-	ListGameServerGroups(context.Context, *ListGameServerGroupsInput, ...func(*Options)) (*ListGameServerGroupsOutput, error)
-}
-
-var _ ListGameServerGroupsAPIClient = (*Client)(nil)
 
 // ListGameServerGroupsPaginatorOptions is the paginator options for
 // ListGameServerGroups
@@ -205,6 +200,9 @@ func (p *ListGameServerGroupsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGameServerGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListGameServerGroupsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListGameServerGroupsAPIClient is a client that implements the
+// ListGameServerGroups operation.
+type ListGameServerGroupsAPIClient interface {
+	ListGameServerGroups(context.Context, *ListGameServerGroupsInput, ...func(*Options)) (*ListGameServerGroupsOutput, error)
+}
+
+var _ ListGameServerGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGameServerGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

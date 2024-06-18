@@ -145,6 +145,9 @@ func (c *Client) addOperationGetCurrentUserDataMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCurrentUserDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationGetCurrentUserDataMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetCurrentUserDataAPIClient is a client that implements the GetCurrentUserData
-// operation.
-type GetCurrentUserDataAPIClient interface {
-	GetCurrentUserData(context.Context, *GetCurrentUserDataInput, ...func(*Options)) (*GetCurrentUserDataOutput, error)
-}
-
-var _ GetCurrentUserDataAPIClient = (*Client)(nil)
 
 // GetCurrentUserDataPaginatorOptions is the paginator options for
 // GetCurrentUserData
@@ -241,6 +236,9 @@ func (p *GetCurrentUserDataPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCurrentUserData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *GetCurrentUserDataPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetCurrentUserDataAPIClient is a client that implements the GetCurrentUserData
+// operation.
+type GetCurrentUserDataAPIClient interface {
+	GetCurrentUserData(context.Context, *GetCurrentUserDataInput, ...func(*Options)) (*GetCurrentUserDataOutput, error)
+}
+
+var _ GetCurrentUserDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCurrentUserData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

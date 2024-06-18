@@ -97,6 +97,9 @@ func (c *Client) addOperationDatetimeOffsetsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDatetimeOffsets(options.Region), middleware.Before); err != nil {
 		return err
 	}

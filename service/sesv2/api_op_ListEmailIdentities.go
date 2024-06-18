@@ -129,6 +129,9 @@ func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEmailIdentities(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListEmailIdentitiesAPIClient is a client that implements the
-// ListEmailIdentities operation.
-type ListEmailIdentitiesAPIClient interface {
-	ListEmailIdentities(context.Context, *ListEmailIdentitiesInput, ...func(*Options)) (*ListEmailIdentitiesOutput, error)
-}
-
-var _ ListEmailIdentitiesAPIClient = (*Client)(nil)
 
 // ListEmailIdentitiesPaginatorOptions is the paginator options for
 // ListEmailIdentities
@@ -227,6 +222,9 @@ func (p *ListEmailIdentitiesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEmailIdentities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListEmailIdentitiesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListEmailIdentitiesAPIClient is a client that implements the
+// ListEmailIdentities operation.
+type ListEmailIdentitiesAPIClient interface {
+	ListEmailIdentities(context.Context, *ListEmailIdentitiesInput, ...func(*Options)) (*ListEmailIdentitiesOutput, error)
+}
+
+var _ ListEmailIdentitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEmailIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

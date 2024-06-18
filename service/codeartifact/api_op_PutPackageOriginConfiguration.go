@@ -172,6 +172,9 @@ func (c *Client) addOperationPutPackageOriginConfigurationMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutPackageOriginConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

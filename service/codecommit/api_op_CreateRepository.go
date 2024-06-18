@@ -139,6 +139,9 @@ func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}

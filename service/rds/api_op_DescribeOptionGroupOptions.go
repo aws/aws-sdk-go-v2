@@ -160,6 +160,9 @@ func (c *Client) addOperationDescribeOptionGroupOptionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeOptionGroupOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -183,14 +186,6 @@ func (c *Client) addOperationDescribeOptionGroupOptionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeOptionGroupOptionsAPIClient is a client that implements the
-// DescribeOptionGroupOptions operation.
-type DescribeOptionGroupOptionsAPIClient interface {
-	DescribeOptionGroupOptions(context.Context, *DescribeOptionGroupOptionsInput, ...func(*Options)) (*DescribeOptionGroupOptionsOutput, error)
-}
-
-var _ DescribeOptionGroupOptionsAPIClient = (*Client)(nil)
 
 // DescribeOptionGroupOptionsPaginatorOptions is the paginator options for
 // DescribeOptionGroupOptions
@@ -264,6 +259,9 @@ func (p *DescribeOptionGroupOptionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOptionGroupOptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -282,6 +280,14 @@ func (p *DescribeOptionGroupOptionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeOptionGroupOptionsAPIClient is a client that implements the
+// DescribeOptionGroupOptions operation.
+type DescribeOptionGroupOptionsAPIClient interface {
+	DescribeOptionGroupOptions(context.Context, *DescribeOptionGroupOptionsInput, ...func(*Options)) (*DescribeOptionGroupOptionsOutput, error)
+}
+
+var _ DescribeOptionGroupOptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOptionGroupOptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

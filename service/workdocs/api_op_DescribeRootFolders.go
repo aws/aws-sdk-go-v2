@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeRootFoldersMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRootFoldersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeRootFoldersMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeRootFoldersAPIClient is a client that implements the
-// DescribeRootFolders operation.
-type DescribeRootFoldersAPIClient interface {
-	DescribeRootFolders(context.Context, *DescribeRootFoldersInput, ...func(*Options)) (*DescribeRootFoldersOutput, error)
-}
-
-var _ DescribeRootFoldersAPIClient = (*Client)(nil)
 
 // DescribeRootFoldersPaginatorOptions is the paginator options for
 // DescribeRootFolders
@@ -221,6 +216,9 @@ func (p *DescribeRootFoldersPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRootFolders(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeRootFoldersPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeRootFoldersAPIClient is a client that implements the
+// DescribeRootFolders operation.
+type DescribeRootFoldersAPIClient interface {
+	DescribeRootFolders(context.Context, *DescribeRootFoldersInput, ...func(*Options)) (*DescribeRootFoldersOutput, error)
+}
+
+var _ DescribeRootFoldersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRootFolders(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

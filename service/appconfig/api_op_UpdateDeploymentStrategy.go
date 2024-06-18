@@ -170,6 +170,9 @@ func (c *Client) addOperationUpdateDeploymentStrategyMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateDeploymentStrategyValidationMiddleware(stack); err != nil {
 		return err
 	}

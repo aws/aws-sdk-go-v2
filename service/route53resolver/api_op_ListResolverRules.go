@@ -131,6 +131,9 @@ func (c *Client) addOperationListResolverRulesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListResolverRulesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListResolverRulesAPIClient is a client that implements the ListResolverRules
-// operation.
-type ListResolverRulesAPIClient interface {
-	ListResolverRules(context.Context, *ListResolverRulesInput, ...func(*Options)) (*ListResolverRulesOutput, error)
-}
-
-var _ ListResolverRulesAPIClient = (*Client)(nil)
 
 // ListResolverRulesPaginatorOptions is the paginator options for ListResolverRules
 type ListResolverRulesPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *ListResolverRulesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResolverRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListResolverRulesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListResolverRulesAPIClient is a client that implements the ListResolverRules
+// operation.
+type ListResolverRulesAPIClient interface {
+	ListResolverRules(context.Context, *ListResolverRulesInput, ...func(*Options)) (*ListResolverRulesOutput, error)
+}
+
+var _ ListResolverRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResolverRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -141,6 +141,9 @@ func (c *Client) addOperationListSharedReportGroupsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSharedReportGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationListSharedReportGroupsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListSharedReportGroupsAPIClient is a client that implements the
-// ListSharedReportGroups operation.
-type ListSharedReportGroupsAPIClient interface {
-	ListSharedReportGroups(context.Context, *ListSharedReportGroupsInput, ...func(*Options)) (*ListSharedReportGroupsOutput, error)
-}
-
-var _ ListSharedReportGroupsAPIClient = (*Client)(nil)
 
 // ListSharedReportGroupsPaginatorOptions is the paginator options for
 // ListSharedReportGroups
@@ -236,6 +231,9 @@ func (p *ListSharedReportGroupsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSharedReportGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListSharedReportGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListSharedReportGroupsAPIClient is a client that implements the
+// ListSharedReportGroups operation.
+type ListSharedReportGroupsAPIClient interface {
+	ListSharedReportGroups(context.Context, *ListSharedReportGroupsInput, ...func(*Options)) (*ListSharedReportGroupsOutput, error)
+}
+
+var _ ListSharedReportGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSharedReportGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

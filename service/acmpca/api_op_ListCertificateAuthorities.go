@@ -125,6 +125,9 @@ func (c *Client) addOperationListCertificateAuthoritiesMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCertificateAuthorities(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListCertificateAuthoritiesMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListCertificateAuthoritiesAPIClient is a client that implements the
-// ListCertificateAuthorities operation.
-type ListCertificateAuthoritiesAPIClient interface {
-	ListCertificateAuthorities(context.Context, *ListCertificateAuthoritiesInput, ...func(*Options)) (*ListCertificateAuthoritiesOutput, error)
-}
-
-var _ ListCertificateAuthoritiesAPIClient = (*Client)(nil)
 
 // ListCertificateAuthoritiesPaginatorOptions is the paginator options for
 // ListCertificateAuthorities
@@ -226,6 +221,9 @@ func (p *ListCertificateAuthoritiesPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCertificateAuthorities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListCertificateAuthoritiesPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListCertificateAuthoritiesAPIClient is a client that implements the
+// ListCertificateAuthorities operation.
+type ListCertificateAuthoritiesAPIClient interface {
+	ListCertificateAuthorities(context.Context, *ListCertificateAuthoritiesInput, ...func(*Options)) (*ListCertificateAuthoritiesOutput, error)
+}
+
+var _ ListCertificateAuthoritiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCertificateAuthorities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

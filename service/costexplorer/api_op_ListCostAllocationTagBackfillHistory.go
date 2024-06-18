@@ -114,6 +114,9 @@ func (c *Client) addOperationListCostAllocationTagBackfillHistoryMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCostAllocationTagBackfillHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListCostAllocationTagBackfillHistoryMiddlewares(sta
 	}
 	return nil
 }
-
-// ListCostAllocationTagBackfillHistoryAPIClient is a client that implements the
-// ListCostAllocationTagBackfillHistory operation.
-type ListCostAllocationTagBackfillHistoryAPIClient interface {
-	ListCostAllocationTagBackfillHistory(context.Context, *ListCostAllocationTagBackfillHistoryInput, ...func(*Options)) (*ListCostAllocationTagBackfillHistoryOutput, error)
-}
-
-var _ ListCostAllocationTagBackfillHistoryAPIClient = (*Client)(nil)
 
 // ListCostAllocationTagBackfillHistoryPaginatorOptions is the paginator options
 // for ListCostAllocationTagBackfillHistory
@@ -209,6 +204,9 @@ func (p *ListCostAllocationTagBackfillHistoryPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCostAllocationTagBackfillHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListCostAllocationTagBackfillHistoryPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListCostAllocationTagBackfillHistoryAPIClient is a client that implements the
+// ListCostAllocationTagBackfillHistory operation.
+type ListCostAllocationTagBackfillHistoryAPIClient interface {
+	ListCostAllocationTagBackfillHistory(context.Context, *ListCostAllocationTagBackfillHistoryInput, ...func(*Options)) (*ListCostAllocationTagBackfillHistoryOutput, error)
+}
+
+var _ ListCostAllocationTagBackfillHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCostAllocationTagBackfillHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

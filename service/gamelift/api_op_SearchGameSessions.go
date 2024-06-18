@@ -262,6 +262,9 @@ func (c *Client) addOperationSearchGameSessionsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchGameSessions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -282,14 +285,6 @@ func (c *Client) addOperationSearchGameSessionsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// SearchGameSessionsAPIClient is a client that implements the SearchGameSessions
-// operation.
-type SearchGameSessionsAPIClient interface {
-	SearchGameSessions(context.Context, *SearchGameSessionsInput, ...func(*Options)) (*SearchGameSessionsOutput, error)
-}
-
-var _ SearchGameSessionsAPIClient = (*Client)(nil)
 
 // SearchGameSessionsPaginatorOptions is the paginator options for
 // SearchGameSessions
@@ -357,6 +352,9 @@ func (p *SearchGameSessionsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchGameSessions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -375,6 +373,14 @@ func (p *SearchGameSessionsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// SearchGameSessionsAPIClient is a client that implements the SearchGameSessions
+// operation.
+type SearchGameSessionsAPIClient interface {
+	SearchGameSessions(context.Context, *SearchGameSessionsInput, ...func(*Options)) (*SearchGameSessionsOutput, error)
+}
+
+var _ SearchGameSessionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchGameSessions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

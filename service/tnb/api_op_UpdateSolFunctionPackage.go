@@ -118,6 +118,9 @@ func (c *Client) addOperationUpdateSolFunctionPackageMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSolFunctionPackageValidationMiddleware(stack); err != nil {
 		return err
 	}

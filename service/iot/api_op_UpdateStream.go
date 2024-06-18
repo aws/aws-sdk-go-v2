@@ -129,6 +129,9 @@ func (c *Client) addOperationUpdateStreamMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateStreamValidationMiddleware(stack); err != nil {
 		return err
 	}

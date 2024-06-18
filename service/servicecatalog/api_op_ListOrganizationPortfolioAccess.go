@@ -141,6 +141,9 @@ func (c *Client) addOperationListOrganizationPortfolioAccessMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOrganizationPortfolioAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationListOrganizationPortfolioAccessMiddlewares(stack *m
 	}
 	return nil
 }
-
-// ListOrganizationPortfolioAccessAPIClient is a client that implements the
-// ListOrganizationPortfolioAccess operation.
-type ListOrganizationPortfolioAccessAPIClient interface {
-	ListOrganizationPortfolioAccess(context.Context, *ListOrganizationPortfolioAccessInput, ...func(*Options)) (*ListOrganizationPortfolioAccessOutput, error)
-}
-
-var _ ListOrganizationPortfolioAccessAPIClient = (*Client)(nil)
 
 // ListOrganizationPortfolioAccessPaginatorOptions is the paginator options for
 // ListOrganizationPortfolioAccess
@@ -235,6 +230,9 @@ func (p *ListOrganizationPortfolioAccessPaginator) NextPage(ctx context.Context,
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOrganizationPortfolioAccess(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListOrganizationPortfolioAccessPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// ListOrganizationPortfolioAccessAPIClient is a client that implements the
+// ListOrganizationPortfolioAccess operation.
+type ListOrganizationPortfolioAccessAPIClient interface {
+	ListOrganizationPortfolioAccess(context.Context, *ListOrganizationPortfolioAccessInput, ...func(*Options)) (*ListOrganizationPortfolioAccessOutput, error)
+}
+
+var _ ListOrganizationPortfolioAccessAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOrganizationPortfolioAccess(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

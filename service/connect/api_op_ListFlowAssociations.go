@@ -122,6 +122,9 @@ func (c *Client) addOperationListFlowAssociationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFlowAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListFlowAssociationsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListFlowAssociationsAPIClient is a client that implements the
-// ListFlowAssociations operation.
-type ListFlowAssociationsAPIClient interface {
-	ListFlowAssociations(context.Context, *ListFlowAssociationsInput, ...func(*Options)) (*ListFlowAssociationsOutput, error)
-}
-
-var _ ListFlowAssociationsAPIClient = (*Client)(nil)
 
 // ListFlowAssociationsPaginatorOptions is the paginator options for
 // ListFlowAssociations
@@ -218,6 +213,9 @@ func (p *ListFlowAssociationsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFlowAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListFlowAssociationsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListFlowAssociationsAPIClient is a client that implements the
+// ListFlowAssociations operation.
+type ListFlowAssociationsAPIClient interface {
+	ListFlowAssociations(context.Context, *ListFlowAssociationsInput, ...func(*Options)) (*ListFlowAssociationsOutput, error)
+}
+
+var _ ListFlowAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFlowAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

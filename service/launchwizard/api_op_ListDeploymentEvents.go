@@ -118,6 +118,9 @@ func (c *Client) addOperationListDeploymentEventsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDeploymentEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListDeploymentEventsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListDeploymentEventsAPIClient is a client that implements the
-// ListDeploymentEvents operation.
-type ListDeploymentEventsAPIClient interface {
-	ListDeploymentEvents(context.Context, *ListDeploymentEventsInput, ...func(*Options)) (*ListDeploymentEventsOutput, error)
-}
-
-var _ ListDeploymentEventsAPIClient = (*Client)(nil)
 
 // ListDeploymentEventsPaginatorOptions is the paginator options for
 // ListDeploymentEvents
@@ -215,6 +210,9 @@ func (p *ListDeploymentEventsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDeploymentEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListDeploymentEventsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListDeploymentEventsAPIClient is a client that implements the
+// ListDeploymentEvents operation.
+type ListDeploymentEventsAPIClient interface {
+	ListDeploymentEvents(context.Context, *ListDeploymentEventsInput, ...func(*Options)) (*ListDeploymentEventsOutput, error)
+}
+
+var _ ListDeploymentEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDeploymentEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

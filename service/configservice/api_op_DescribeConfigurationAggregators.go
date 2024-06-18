@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeConfigurationAggregatorsMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurationAggregators(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationDescribeConfigurationAggregatorsMiddlewares(stack *
 	}
 	return nil
 }
-
-// DescribeConfigurationAggregatorsAPIClient is a client that implements the
-// DescribeConfigurationAggregators operation.
-type DescribeConfigurationAggregatorsAPIClient interface {
-	DescribeConfigurationAggregators(context.Context, *DescribeConfigurationAggregatorsInput, ...func(*Options)) (*DescribeConfigurationAggregatorsOutput, error)
-}
-
-var _ DescribeConfigurationAggregatorsAPIClient = (*Client)(nil)
 
 // DescribeConfigurationAggregatorsPaginatorOptions is the paginator options for
 // DescribeConfigurationAggregators
@@ -210,6 +205,9 @@ func (p *DescribeConfigurationAggregatorsPaginator) NextPage(ctx context.Context
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeConfigurationAggregators(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *DescribeConfigurationAggregatorsPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// DescribeConfigurationAggregatorsAPIClient is a client that implements the
+// DescribeConfigurationAggregators operation.
+type DescribeConfigurationAggregatorsAPIClient interface {
+	DescribeConfigurationAggregators(context.Context, *DescribeConfigurationAggregatorsInput, ...func(*Options)) (*DescribeConfigurationAggregatorsOutput, error)
+}
+
+var _ DescribeConfigurationAggregatorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeConfigurationAggregators(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

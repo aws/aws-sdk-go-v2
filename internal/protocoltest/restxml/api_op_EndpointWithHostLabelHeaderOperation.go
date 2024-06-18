@@ -100,6 +100,9 @@ func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opEndpointWithHostLabelHeaderOperationMiddleware(stack); err != nil {
 		return err
 	}

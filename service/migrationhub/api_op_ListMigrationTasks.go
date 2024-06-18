@@ -126,6 +126,9 @@ func (c *Client) addOperationListMigrationTasksMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMigrationTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListMigrationTasksMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListMigrationTasksAPIClient is a client that implements the ListMigrationTasks
-// operation.
-type ListMigrationTasksAPIClient interface {
-	ListMigrationTasks(context.Context, *ListMigrationTasksInput, ...func(*Options)) (*ListMigrationTasksOutput, error)
-}
-
-var _ ListMigrationTasksAPIClient = (*Client)(nil)
 
 // ListMigrationTasksPaginatorOptions is the paginator options for
 // ListMigrationTasks
@@ -219,6 +214,9 @@ func (p *ListMigrationTasksPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMigrationTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListMigrationTasksPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListMigrationTasksAPIClient is a client that implements the ListMigrationTasks
+// operation.
+type ListMigrationTasksAPIClient interface {
+	ListMigrationTasks(context.Context, *ListMigrationTasksInput, ...func(*Options)) (*ListMigrationTasksOutput, error)
+}
+
+var _ ListMigrationTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMigrationTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

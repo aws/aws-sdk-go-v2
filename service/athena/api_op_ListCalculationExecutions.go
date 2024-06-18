@@ -142,6 +142,9 @@ func (c *Client) addOperationListCalculationExecutionsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCalculationExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationListCalculationExecutionsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListCalculationExecutionsAPIClient is a client that implements the
-// ListCalculationExecutions operation.
-type ListCalculationExecutionsAPIClient interface {
-	ListCalculationExecutions(context.Context, *ListCalculationExecutionsInput, ...func(*Options)) (*ListCalculationExecutionsOutput, error)
-}
-
-var _ ListCalculationExecutionsAPIClient = (*Client)(nil)
 
 // ListCalculationExecutionsPaginatorOptions is the paginator options for
 // ListCalculationExecutions
@@ -239,6 +234,9 @@ func (p *ListCalculationExecutionsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCalculationExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *ListCalculationExecutionsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListCalculationExecutionsAPIClient is a client that implements the
+// ListCalculationExecutions operation.
+type ListCalculationExecutionsAPIClient interface {
+	ListCalculationExecutions(context.Context, *ListCalculationExecutionsInput, ...func(*Options)) (*ListCalculationExecutionsOutput, error)
+}
+
+var _ ListCalculationExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCalculationExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

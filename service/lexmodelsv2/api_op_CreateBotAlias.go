@@ -178,6 +178,9 @@ func (c *Client) addOperationCreateBotAliasMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateBotAliasValidationMiddleware(stack); err != nil {
 		return err
 	}

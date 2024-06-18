@@ -126,6 +126,9 @@ func (c *Client) addOperationListAssetBundleExportJobsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssetBundleExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListAssetBundleExportJobsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListAssetBundleExportJobsAPIClient is a client that implements the
-// ListAssetBundleExportJobs operation.
-type ListAssetBundleExportJobsAPIClient interface {
-	ListAssetBundleExportJobs(context.Context, *ListAssetBundleExportJobsInput, ...func(*Options)) (*ListAssetBundleExportJobsOutput, error)
-}
-
-var _ ListAssetBundleExportJobsAPIClient = (*Client)(nil)
 
 // ListAssetBundleExportJobsPaginatorOptions is the paginator options for
 // ListAssetBundleExportJobs
@@ -223,6 +218,9 @@ func (p *ListAssetBundleExportJobsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssetBundleExportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListAssetBundleExportJobsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListAssetBundleExportJobsAPIClient is a client that implements the
+// ListAssetBundleExportJobs operation.
+type ListAssetBundleExportJobsAPIClient interface {
+	ListAssetBundleExportJobs(context.Context, *ListAssetBundleExportJobsInput, ...func(*Options)) (*ListAssetBundleExportJobsOutput, error)
+}
+
+var _ ListAssetBundleExportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssetBundleExportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

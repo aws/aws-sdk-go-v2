@@ -156,6 +156,9 @@ func (c *Client) addOperationListCodeRepositoriesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCodeRepositories(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -176,14 +179,6 @@ func (c *Client) addOperationListCodeRepositoriesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListCodeRepositoriesAPIClient is a client that implements the
-// ListCodeRepositories operation.
-type ListCodeRepositoriesAPIClient interface {
-	ListCodeRepositories(context.Context, *ListCodeRepositoriesInput, ...func(*Options)) (*ListCodeRepositoriesOutput, error)
-}
-
-var _ ListCodeRepositoriesAPIClient = (*Client)(nil)
 
 // ListCodeRepositoriesPaginatorOptions is the paginator options for
 // ListCodeRepositories
@@ -249,6 +244,9 @@ func (p *ListCodeRepositoriesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCodeRepositories(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +265,14 @@ func (p *ListCodeRepositoriesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListCodeRepositoriesAPIClient is a client that implements the
+// ListCodeRepositories operation.
+type ListCodeRepositoriesAPIClient interface {
+	ListCodeRepositories(context.Context, *ListCodeRepositoriesInput, ...func(*Options)) (*ListCodeRepositoriesOutput, error)
+}
+
+var _ ListCodeRepositoriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCodeRepositories(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

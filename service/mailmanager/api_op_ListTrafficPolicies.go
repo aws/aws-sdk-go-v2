@@ -114,6 +114,9 @@ func (c *Client) addOperationListTrafficPoliciesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrafficPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,14 +137,6 @@ func (c *Client) addOperationListTrafficPoliciesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListTrafficPoliciesAPIClient is a client that implements the
-// ListTrafficPolicies operation.
-type ListTrafficPoliciesAPIClient interface {
-	ListTrafficPolicies(context.Context, *ListTrafficPoliciesInput, ...func(*Options)) (*ListTrafficPoliciesOutput, error)
-}
-
-var _ ListTrafficPoliciesAPIClient = (*Client)(nil)
 
 // ListTrafficPoliciesPaginatorOptions is the paginator options for
 // ListTrafficPolicies
@@ -208,6 +203,9 @@ func (p *ListTrafficPoliciesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrafficPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListTrafficPoliciesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListTrafficPoliciesAPIClient is a client that implements the
+// ListTrafficPolicies operation.
+type ListTrafficPoliciesAPIClient interface {
+	ListTrafficPolicies(context.Context, *ListTrafficPoliciesInput, ...func(*Options)) (*ListTrafficPoliciesOutput, error)
+}
+
+var _ ListTrafficPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrafficPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

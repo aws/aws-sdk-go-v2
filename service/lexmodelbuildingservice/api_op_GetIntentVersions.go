@@ -133,6 +133,9 @@ func (c *Client) addOperationGetIntentVersionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetIntentVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationGetIntentVersionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetIntentVersionsAPIClient is a client that implements the GetIntentVersions
-// operation.
-type GetIntentVersionsAPIClient interface {
-	GetIntentVersions(context.Context, *GetIntentVersionsInput, ...func(*Options)) (*GetIntentVersionsOutput, error)
-}
-
-var _ GetIntentVersionsAPIClient = (*Client)(nil)
 
 // GetIntentVersionsPaginatorOptions is the paginator options for GetIntentVersions
 type GetIntentVersionsPaginatorOptions struct {
@@ -229,6 +224,9 @@ func (p *GetIntentVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetIntentVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *GetIntentVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// GetIntentVersionsAPIClient is a client that implements the GetIntentVersions
+// operation.
+type GetIntentVersionsAPIClient interface {
+	GetIntentVersions(context.Context, *GetIntentVersionsInput, ...func(*Options)) (*GetIntentVersionsOutput, error)
+}
+
+var _ GetIntentVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetIntentVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

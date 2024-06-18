@@ -138,6 +138,9 @@ func (c *Client) addOperationListStepConsumersMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListStepConsumersMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,41 +167,6 @@ func (c *Client) addOperationListStepConsumersMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-type endpointPrefix_opListStepConsumersMiddleware struct {
-}
-
-func (*endpointPrefix_opListStepConsumersMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListStepConsumersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListStepConsumersMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListStepConsumersMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListStepConsumersAPIClient is a client that implements the ListStepConsumers
-// operation.
-type ListStepConsumersAPIClient interface {
-	ListStepConsumers(context.Context, *ListStepConsumersInput, ...func(*Options)) (*ListStepConsumersOutput, error)
-}
-
-var _ ListStepConsumersAPIClient = (*Client)(nil)
 
 // ListStepConsumersPaginatorOptions is the paginator options for ListStepConsumers
 type ListStepConsumersPaginatorOptions struct {
@@ -264,6 +232,9 @@ func (p *ListStepConsumersPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListStepConsumers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -282,6 +253,41 @@ func (p *ListStepConsumersPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+type endpointPrefix_opListStepConsumersMiddleware struct {
+}
+
+func (*endpointPrefix_opListStepConsumersMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListStepConsumersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListStepConsumersMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListStepConsumersMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListStepConsumersAPIClient is a client that implements the ListStepConsumers
+// operation.
+type ListStepConsumersAPIClient interface {
+	ListStepConsumers(context.Context, *ListStepConsumersInput, ...func(*Options)) (*ListStepConsumersOutput, error)
+}
+
+var _ ListStepConsumersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListStepConsumers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -120,6 +120,9 @@ func (c *Client) addOperationListNamedQueriesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNamedQueries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListNamedQueriesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListNamedQueriesAPIClient is a client that implements the ListNamedQueries
-// operation.
-type ListNamedQueriesAPIClient interface {
-	ListNamedQueries(context.Context, *ListNamedQueriesInput, ...func(*Options)) (*ListNamedQueriesOutput, error)
-}
-
-var _ ListNamedQueriesAPIClient = (*Client)(nil)
 
 // ListNamedQueriesPaginatorOptions is the paginator options for ListNamedQueries
 type ListNamedQueriesPaginatorOptions struct {
@@ -212,6 +207,9 @@ func (p *ListNamedQueriesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListNamedQueries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListNamedQueriesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListNamedQueriesAPIClient is a client that implements the ListNamedQueries
+// operation.
+type ListNamedQueriesAPIClient interface {
+	ListNamedQueries(context.Context, *ListNamedQueriesInput, ...func(*Options)) (*ListNamedQueriesOutput, error)
+}
+
+var _ ListNamedQueriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListNamedQueries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

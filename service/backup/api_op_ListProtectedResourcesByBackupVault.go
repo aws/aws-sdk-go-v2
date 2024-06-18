@@ -127,6 +127,9 @@ func (c *Client) addOperationListProtectedResourcesByBackupVaultMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProtectedResourcesByBackupVaultValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListProtectedResourcesByBackupVaultMiddlewares(stac
 	}
 	return nil
 }
-
-// ListProtectedResourcesByBackupVaultAPIClient is a client that implements the
-// ListProtectedResourcesByBackupVault operation.
-type ListProtectedResourcesByBackupVaultAPIClient interface {
-	ListProtectedResourcesByBackupVault(context.Context, *ListProtectedResourcesByBackupVaultInput, ...func(*Options)) (*ListProtectedResourcesByBackupVaultOutput, error)
-}
-
-var _ ListProtectedResourcesByBackupVaultAPIClient = (*Client)(nil)
 
 // ListProtectedResourcesByBackupVaultPaginatorOptions is the paginator options
 // for ListProtectedResourcesByBackupVault
@@ -225,6 +220,9 @@ func (p *ListProtectedResourcesByBackupVaultPaginator) NextPage(ctx context.Cont
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProtectedResourcesByBackupVault(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListProtectedResourcesByBackupVaultPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// ListProtectedResourcesByBackupVaultAPIClient is a client that implements the
+// ListProtectedResourcesByBackupVault operation.
+type ListProtectedResourcesByBackupVaultAPIClient interface {
+	ListProtectedResourcesByBackupVault(context.Context, *ListProtectedResourcesByBackupVaultInput, ...func(*Options)) (*ListProtectedResourcesByBackupVaultOutput, error)
+}
+
+var _ ListProtectedResourcesByBackupVaultAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProtectedResourcesByBackupVault(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

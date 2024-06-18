@@ -117,6 +117,9 @@ func (c *Client) addOperationListHarvestJobsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHarvestJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListHarvestJobsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListHarvestJobsAPIClient is a client that implements the ListHarvestJobs
-// operation.
-type ListHarvestJobsAPIClient interface {
-	ListHarvestJobs(context.Context, *ListHarvestJobsInput, ...func(*Options)) (*ListHarvestJobsOutput, error)
-}
-
-var _ ListHarvestJobsAPIClient = (*Client)(nil)
 
 // ListHarvestJobsPaginatorOptions is the paginator options for ListHarvestJobs
 type ListHarvestJobsPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListHarvestJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHarvestJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListHarvestJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListHarvestJobsAPIClient is a client that implements the ListHarvestJobs
+// operation.
+type ListHarvestJobsAPIClient interface {
+	ListHarvestJobs(context.Context, *ListHarvestJobsInput, ...func(*Options)) (*ListHarvestJobsOutput, error)
+}
+
+var _ ListHarvestJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHarvestJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

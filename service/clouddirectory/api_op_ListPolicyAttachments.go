@@ -126,6 +126,9 @@ func (c *Client) addOperationListPolicyAttachmentsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPolicyAttachmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListPolicyAttachmentsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListPolicyAttachmentsAPIClient is a client that implements the
-// ListPolicyAttachments operation.
-type ListPolicyAttachmentsAPIClient interface {
-	ListPolicyAttachments(context.Context, *ListPolicyAttachmentsInput, ...func(*Options)) (*ListPolicyAttachmentsOutput, error)
-}
-
-var _ ListPolicyAttachmentsAPIClient = (*Client)(nil)
 
 // ListPolicyAttachmentsPaginatorOptions is the paginator options for
 // ListPolicyAttachments
@@ -223,6 +218,9 @@ func (p *ListPolicyAttachmentsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPolicyAttachments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListPolicyAttachmentsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListPolicyAttachmentsAPIClient is a client that implements the
+// ListPolicyAttachments operation.
+type ListPolicyAttachmentsAPIClient interface {
+	ListPolicyAttachments(context.Context, *ListPolicyAttachmentsInput, ...func(*Options)) (*ListPolicyAttachmentsOutput, error)
+}
+
+var _ ListPolicyAttachmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPolicyAttachments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

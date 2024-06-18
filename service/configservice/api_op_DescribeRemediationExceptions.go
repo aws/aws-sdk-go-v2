@@ -136,6 +136,9 @@ func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRemediationExceptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// DescribeRemediationExceptionsAPIClient is a client that implements the
-// DescribeRemediationExceptions operation.
-type DescribeRemediationExceptionsAPIClient interface {
-	DescribeRemediationExceptions(context.Context, *DescribeRemediationExceptionsInput, ...func(*Options)) (*DescribeRemediationExceptionsOutput, error)
-}
-
-var _ DescribeRemediationExceptionsAPIClient = (*Client)(nil)
 
 // DescribeRemediationExceptionsPaginatorOptions is the paginator options for
 // DescribeRemediationExceptions
@@ -231,6 +226,9 @@ func (p *DescribeRemediationExceptionsPaginator) NextPage(ctx context.Context, o
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeRemediationExceptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *DescribeRemediationExceptionsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// DescribeRemediationExceptionsAPIClient is a client that implements the
+// DescribeRemediationExceptions operation.
+type DescribeRemediationExceptionsAPIClient interface {
+	DescribeRemediationExceptions(context.Context, *DescribeRemediationExceptionsInput, ...func(*Options)) (*DescribeRemediationExceptionsOutput, error)
+}
+
+var _ DescribeRemediationExceptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRemediationExceptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

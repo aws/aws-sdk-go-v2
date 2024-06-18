@@ -137,6 +137,9 @@ func (c *Client) addOperationViewBillingMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opViewBilling(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,13 +160,6 @@ func (c *Client) addOperationViewBillingMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ViewBillingAPIClient is a client that implements the ViewBilling operation.
-type ViewBillingAPIClient interface {
-	ViewBilling(context.Context, *ViewBillingInput, ...func(*Options)) (*ViewBillingOutput, error)
-}
-
-var _ ViewBillingAPIClient = (*Client)(nil)
 
 // ViewBillingPaginatorOptions is the paginator options for ViewBilling
 type ViewBillingPaginatorOptions struct {
@@ -230,6 +226,9 @@ func (p *ViewBillingPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ViewBilling(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +247,13 @@ func (p *ViewBillingPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ViewBillingAPIClient is a client that implements the ViewBilling operation.
+type ViewBillingAPIClient interface {
+	ViewBilling(context.Context, *ViewBillingInput, ...func(*Options)) (*ViewBillingOutput, error)
+}
+
+var _ ViewBillingAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opViewBilling(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

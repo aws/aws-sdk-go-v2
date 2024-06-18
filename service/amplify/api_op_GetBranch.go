@@ -114,6 +114,9 @@ func (c *Client) addOperationGetBranchMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBranchValidationMiddleware(stack); err != nil {
 		return err
 	}

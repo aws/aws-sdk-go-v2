@@ -136,6 +136,9 @@ func (c *Client) addOperationListBatchJobExecutionsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBatchJobExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListBatchJobExecutionsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListBatchJobExecutionsAPIClient is a client that implements the
-// ListBatchJobExecutions operation.
-type ListBatchJobExecutionsAPIClient interface {
-	ListBatchJobExecutions(context.Context, *ListBatchJobExecutionsInput, ...func(*Options)) (*ListBatchJobExecutionsOutput, error)
-}
-
-var _ ListBatchJobExecutionsAPIClient = (*Client)(nil)
 
 // ListBatchJobExecutionsPaginatorOptions is the paginator options for
 // ListBatchJobExecutions
@@ -232,6 +227,9 @@ func (p *ListBatchJobExecutionsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBatchJobExecutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListBatchJobExecutionsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListBatchJobExecutionsAPIClient is a client that implements the
+// ListBatchJobExecutions operation.
+type ListBatchJobExecutionsAPIClient interface {
+	ListBatchJobExecutions(context.Context, *ListBatchJobExecutionsInput, ...func(*Options)) (*ListBatchJobExecutionsOutput, error)
+}
+
+var _ ListBatchJobExecutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBatchJobExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

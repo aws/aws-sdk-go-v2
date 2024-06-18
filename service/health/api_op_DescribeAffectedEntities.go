@@ -144,6 +144,9 @@ func (c *Client) addOperationDescribeAffectedEntitiesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAffectedEntitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,14 +170,6 @@ func (c *Client) addOperationDescribeAffectedEntitiesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DescribeAffectedEntitiesAPIClient is a client that implements the
-// DescribeAffectedEntities operation.
-type DescribeAffectedEntitiesAPIClient interface {
-	DescribeAffectedEntities(context.Context, *DescribeAffectedEntitiesInput, ...func(*Options)) (*DescribeAffectedEntitiesOutput, error)
-}
-
-var _ DescribeAffectedEntitiesAPIClient = (*Client)(nil)
 
 // DescribeAffectedEntitiesPaginatorOptions is the paginator options for
 // DescribeAffectedEntities
@@ -242,6 +237,9 @@ func (p *DescribeAffectedEntitiesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAffectedEntities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *DescribeAffectedEntitiesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DescribeAffectedEntitiesAPIClient is a client that implements the
+// DescribeAffectedEntities operation.
+type DescribeAffectedEntitiesAPIClient interface {
+	DescribeAffectedEntities(context.Context, *DescribeAffectedEntitiesInput, ...func(*Options)) (*DescribeAffectedEntitiesOutput, error)
+}
+
+var _ DescribeAffectedEntitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAffectedEntities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

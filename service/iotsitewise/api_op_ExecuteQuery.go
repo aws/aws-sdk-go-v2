@@ -119,6 +119,9 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opExecuteQueryMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,40 +148,6 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-type endpointPrefix_opExecuteQueryMiddleware struct {
-}
-
-func (*endpointPrefix_opExecuteQueryMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opExecuteQueryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "data." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opExecuteQueryMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opExecuteQueryMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ExecuteQueryAPIClient is a client that implements the ExecuteQuery operation.
-type ExecuteQueryAPIClient interface {
-	ExecuteQuery(context.Context, *ExecuteQueryInput, ...func(*Options)) (*ExecuteQueryOutput, error)
-}
-
-var _ ExecuteQueryAPIClient = (*Client)(nil)
 
 // ExecuteQueryPaginatorOptions is the paginator options for ExecuteQuery
 type ExecuteQueryPaginatorOptions struct {
@@ -243,6 +212,9 @@ func (p *ExecuteQueryPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ExecuteQuery(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -261,6 +233,40 @@ func (p *ExecuteQueryPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+type endpointPrefix_opExecuteQueryMiddleware struct {
+}
+
+func (*endpointPrefix_opExecuteQueryMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opExecuteQueryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "data." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opExecuteQueryMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opExecuteQueryMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ExecuteQueryAPIClient is a client that implements the ExecuteQuery operation.
+type ExecuteQueryAPIClient interface {
+	ExecuteQuery(context.Context, *ExecuteQueryInput, ...func(*Options)) (*ExecuteQueryOutput, error)
+}
+
+var _ ExecuteQueryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opExecuteQuery(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

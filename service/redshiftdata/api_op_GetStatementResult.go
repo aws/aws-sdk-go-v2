@@ -141,6 +141,9 @@ func (c *Client) addOperationGetStatementResultMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetStatementResultValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationGetStatementResultMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetStatementResultAPIClient is a client that implements the GetStatementResult
-// operation.
-type GetStatementResultAPIClient interface {
-	GetStatementResult(context.Context, *GetStatementResultInput, ...func(*Options)) (*GetStatementResultOutput, error)
-}
-
-var _ GetStatementResultAPIClient = (*Client)(nil)
 
 // GetStatementResultPaginatorOptions is the paginator options for
 // GetStatementResult
@@ -225,6 +220,9 @@ func (p *GetStatementResultPaginator) NextPage(ctx context.Context, optFns ...fu
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetStatementResult(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *GetStatementResultPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetStatementResultAPIClient is a client that implements the GetStatementResult
+// operation.
+type GetStatementResultAPIClient interface {
+	GetStatementResult(context.Context, *GetStatementResultInput, ...func(*Options)) (*GetStatementResultOutput, error)
+}
+
+var _ GetStatementResultAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetStatementResult(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -185,6 +185,9 @@ func (c *Client) addOperationLookupEventsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpLookupEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -208,13 +211,6 @@ func (c *Client) addOperationLookupEventsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// LookupEventsAPIClient is a client that implements the LookupEvents operation.
-type LookupEventsAPIClient interface {
-	LookupEvents(context.Context, *LookupEventsInput, ...func(*Options)) (*LookupEventsOutput, error)
-}
-
-var _ LookupEventsAPIClient = (*Client)(nil)
 
 // LookupEventsPaginatorOptions is the paginator options for LookupEvents
 type LookupEventsPaginatorOptions struct {
@@ -280,6 +276,9 @@ func (p *LookupEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.LookupEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -298,6 +297,13 @@ func (p *LookupEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// LookupEventsAPIClient is a client that implements the LookupEvents operation.
+type LookupEventsAPIClient interface {
+	LookupEvents(context.Context, *LookupEventsInput, ...func(*Options)) (*LookupEventsOutput, error)
+}
+
+var _ LookupEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opLookupEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -112,6 +112,9 @@ func (c *Client) addOperationListDestinationsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListDestinationsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListDestinationsAPIClient is a client that implements the ListDestinations
-// operation.
-type ListDestinationsAPIClient interface {
-	ListDestinations(context.Context, *ListDestinationsInput, ...func(*Options)) (*ListDestinationsOutput, error)
-}
-
-var _ ListDestinationsAPIClient = (*Client)(nil)
 
 // ListDestinationsPaginatorOptions is the paginator options for ListDestinations
 type ListDestinationsPaginatorOptions struct {
@@ -200,6 +195,9 @@ func (p *ListDestinationsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -218,6 +216,14 @@ func (p *ListDestinationsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListDestinationsAPIClient is a client that implements the ListDestinations
+// operation.
+type ListDestinationsAPIClient interface {
+	ListDestinations(context.Context, *ListDestinationsInput, ...func(*Options)) (*ListDestinationsOutput, error)
+}
+
+var _ ListDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

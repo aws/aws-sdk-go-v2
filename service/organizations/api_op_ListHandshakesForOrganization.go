@@ -149,6 +149,9 @@ func (c *Client) addOperationListHandshakesForOrganizationMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHandshakesForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationListHandshakesForOrganizationMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListHandshakesForOrganizationAPIClient is a client that implements the
-// ListHandshakesForOrganization operation.
-type ListHandshakesForOrganizationAPIClient interface {
-	ListHandshakesForOrganization(context.Context, *ListHandshakesForOrganizationInput, ...func(*Options)) (*ListHandshakesForOrganizationOutput, error)
-}
-
-var _ ListHandshakesForOrganizationAPIClient = (*Client)(nil)
 
 // ListHandshakesForOrganizationPaginatorOptions is the paginator options for
 // ListHandshakesForOrganization
@@ -252,6 +247,9 @@ func (p *ListHandshakesForOrganizationPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListHandshakesForOrganization(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -270,6 +268,14 @@ func (p *ListHandshakesForOrganizationPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListHandshakesForOrganizationAPIClient is a client that implements the
+// ListHandshakesForOrganization operation.
+type ListHandshakesForOrganizationAPIClient interface {
+	ListHandshakesForOrganization(context.Context, *ListHandshakesForOrganizationInput, ...func(*Options)) (*ListHandshakesForOrganizationOutput, error)
+}
+
+var _ ListHandshakesForOrganizationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListHandshakesForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

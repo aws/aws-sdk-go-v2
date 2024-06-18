@@ -126,6 +126,9 @@ func (c *Client) addOperationRevokeCacheSecurityGroupIngressMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRevokeCacheSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteMobileDeviceAccessRuleMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteMobileDeviceAccessRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

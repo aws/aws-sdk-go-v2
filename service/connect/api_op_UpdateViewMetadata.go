@@ -114,6 +114,9 @@ func (c *Client) addOperationUpdateViewMetadataMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateViewMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}

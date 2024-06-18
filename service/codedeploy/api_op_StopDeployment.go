@@ -120,6 +120,9 @@ func (c *Client) addOperationStopDeploymentMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStopDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}

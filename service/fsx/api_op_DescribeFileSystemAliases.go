@@ -133,6 +133,9 @@ func (c *Client) addOperationDescribeFileSystemAliasesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDescribeFileSystemAliasesMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationDescribeFileSystemAliasesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// DescribeFileSystemAliasesAPIClient is a client that implements the
-// DescribeFileSystemAliases operation.
-type DescribeFileSystemAliasesAPIClient interface {
-	DescribeFileSystemAliases(context.Context, *DescribeFileSystemAliasesInput, ...func(*Options)) (*DescribeFileSystemAliasesOutput, error)
-}
-
-var _ DescribeFileSystemAliasesAPIClient = (*Client)(nil)
 
 // DescribeFileSystemAliasesPaginatorOptions is the paginator options for
 // DescribeFileSystemAliases
@@ -236,6 +231,9 @@ func (p *DescribeFileSystemAliasesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFileSystemAliases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *DescribeFileSystemAliasesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// DescribeFileSystemAliasesAPIClient is a client that implements the
+// DescribeFileSystemAliases operation.
+type DescribeFileSystemAliasesAPIClient interface {
+	DescribeFileSystemAliases(context.Context, *DescribeFileSystemAliasesInput, ...func(*Options)) (*DescribeFileSystemAliasesOutput, error)
+}
+
+var _ DescribeFileSystemAliasesAPIClient = (*Client)(nil)
 
 type idempotencyToken_initializeOpDescribeFileSystemAliases struct {
 	tokenProvider IdempotencyTokenProvider

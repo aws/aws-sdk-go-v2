@@ -110,6 +110,9 @@ func (c *Client) addOperationListEntityRecognizerSummariesMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntityRecognizerSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListEntityRecognizerSummariesMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListEntityRecognizerSummariesAPIClient is a client that implements the
-// ListEntityRecognizerSummaries operation.
-type ListEntityRecognizerSummariesAPIClient interface {
-	ListEntityRecognizerSummaries(context.Context, *ListEntityRecognizerSummariesInput, ...func(*Options)) (*ListEntityRecognizerSummariesOutput, error)
-}
-
-var _ ListEntityRecognizerSummariesAPIClient = (*Client)(nil)
 
 // ListEntityRecognizerSummariesPaginatorOptions is the paginator options for
 // ListEntityRecognizerSummaries
@@ -205,6 +200,9 @@ func (p *ListEntityRecognizerSummariesPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEntityRecognizerSummaries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListEntityRecognizerSummariesPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListEntityRecognizerSummariesAPIClient is a client that implements the
+// ListEntityRecognizerSummaries operation.
+type ListEntityRecognizerSummariesAPIClient interface {
+	ListEntityRecognizerSummaries(context.Context, *ListEntityRecognizerSummariesInput, ...func(*Options)) (*ListEntityRecognizerSummariesOutput, error)
+}
+
+var _ ListEntityRecognizerSummariesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEntityRecognizerSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

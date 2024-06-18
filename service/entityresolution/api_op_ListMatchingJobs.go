@@ -116,6 +116,9 @@ func (c *Client) addOperationListMatchingJobsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMatchingJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListMatchingJobsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListMatchingJobsAPIClient is a client that implements the ListMatchingJobs
-// operation.
-type ListMatchingJobsAPIClient interface {
-	ListMatchingJobs(context.Context, *ListMatchingJobsInput, ...func(*Options)) (*ListMatchingJobsOutput, error)
-}
-
-var _ ListMatchingJobsAPIClient = (*Client)(nil)
 
 // ListMatchingJobsPaginatorOptions is the paginator options for ListMatchingJobs
 type ListMatchingJobsPaginatorOptions struct {
@@ -211,6 +206,9 @@ func (p *ListMatchingJobsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMatchingJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListMatchingJobsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListMatchingJobsAPIClient is a client that implements the ListMatchingJobs
+// operation.
+type ListMatchingJobsAPIClient interface {
+	ListMatchingJobs(context.Context, *ListMatchingJobsInput, ...func(*Options)) (*ListMatchingJobsOutput, error)
+}
+
+var _ ListMatchingJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMatchingJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

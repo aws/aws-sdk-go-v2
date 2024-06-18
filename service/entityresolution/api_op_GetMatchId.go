@@ -120,6 +120,9 @@ func (c *Client) addOperationGetMatchIdMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMatchIdValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -188,6 +188,9 @@ func (c *Client) addOperationDescribeEvaluationsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvaluations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -207,97 +210,6 @@ func (c *Client) addOperationDescribeEvaluationsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
-}
-
-// DescribeEvaluationsAPIClient is a client that implements the
-// DescribeEvaluations operation.
-type DescribeEvaluationsAPIClient interface {
-	DescribeEvaluations(context.Context, *DescribeEvaluationsInput, ...func(*Options)) (*DescribeEvaluationsOutput, error)
-}
-
-var _ DescribeEvaluationsAPIClient = (*Client)(nil)
-
-// DescribeEvaluationsPaginatorOptions is the paginator options for
-// DescribeEvaluations
-type DescribeEvaluationsPaginatorOptions struct {
-	//  The maximum number of Evaluation to include in the result.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeEvaluationsPaginator is a paginator for DescribeEvaluations
-type DescribeEvaluationsPaginator struct {
-	options   DescribeEvaluationsPaginatorOptions
-	client    DescribeEvaluationsAPIClient
-	params    *DescribeEvaluationsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeEvaluationsPaginator returns a new DescribeEvaluationsPaginator
-func NewDescribeEvaluationsPaginator(client DescribeEvaluationsAPIClient, params *DescribeEvaluationsInput, optFns ...func(*DescribeEvaluationsPaginatorOptions)) *DescribeEvaluationsPaginator {
-	if params == nil {
-		params = &DescribeEvaluationsInput{}
-	}
-
-	options := DescribeEvaluationsPaginatorOptions{}
-	if params.Limit != nil {
-		options.Limit = *params.Limit
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeEvaluationsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.NextToken,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeEvaluationsPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeEvaluations page.
-func (p *DescribeEvaluationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEvaluationsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.Limit = limit
-
-	result, err := p.client.DescribeEvaluations(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // EvaluationAvailableWaiterOptions are waiter options for
@@ -417,7 +329,13 @@ func (w *EvaluationAvailableWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeEvaluations(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -513,6 +431,100 @@ func evaluationAvailableStateRetryable(ctx context.Context, input *DescribeEvalu
 
 	return true, nil
 }
+
+// DescribeEvaluationsPaginatorOptions is the paginator options for
+// DescribeEvaluations
+type DescribeEvaluationsPaginatorOptions struct {
+	//  The maximum number of Evaluation to include in the result.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEvaluationsPaginator is a paginator for DescribeEvaluations
+type DescribeEvaluationsPaginator struct {
+	options   DescribeEvaluationsPaginatorOptions
+	client    DescribeEvaluationsAPIClient
+	params    *DescribeEvaluationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEvaluationsPaginator returns a new DescribeEvaluationsPaginator
+func NewDescribeEvaluationsPaginator(client DescribeEvaluationsAPIClient, params *DescribeEvaluationsInput, optFns ...func(*DescribeEvaluationsPaginatorOptions)) *DescribeEvaluationsPaginator {
+	if params == nil {
+		params = &DescribeEvaluationsInput{}
+	}
+
+	options := DescribeEvaluationsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeEvaluationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEvaluationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeEvaluations page.
+func (p *DescribeEvaluationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEvaluationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeEvaluations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeEvaluationsAPIClient is a client that implements the
+// DescribeEvaluations operation.
+type DescribeEvaluationsAPIClient interface {
+	DescribeEvaluations(context.Context, *DescribeEvaluationsInput, ...func(*Options)) (*DescribeEvaluationsOutput, error)
+}
+
+var _ DescribeEvaluationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEvaluations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

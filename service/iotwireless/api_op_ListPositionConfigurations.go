@@ -122,6 +122,9 @@ func (c *Client) addOperationListPositionConfigurationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPositionConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListPositionConfigurationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListPositionConfigurationsAPIClient is a client that implements the
-// ListPositionConfigurations operation.
-type ListPositionConfigurationsAPIClient interface {
-	ListPositionConfigurations(context.Context, *ListPositionConfigurationsInput, ...func(*Options)) (*ListPositionConfigurationsOutput, error)
-}
-
-var _ ListPositionConfigurationsAPIClient = (*Client)(nil)
 
 // ListPositionConfigurationsPaginatorOptions is the paginator options for
 // ListPositionConfigurations
@@ -213,6 +208,9 @@ func (p *ListPositionConfigurationsPaginator) NextPage(ctx context.Context, optF
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPositionConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListPositionConfigurationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListPositionConfigurationsAPIClient is a client that implements the
+// ListPositionConfigurations operation.
+type ListPositionConfigurationsAPIClient interface {
+	ListPositionConfigurations(context.Context, *ListPositionConfigurationsInput, ...func(*Options)) (*ListPositionConfigurationsOutput, error)
+}
+
+var _ ListPositionConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPositionConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

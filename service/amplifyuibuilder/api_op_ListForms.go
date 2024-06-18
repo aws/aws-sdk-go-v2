@@ -122,6 +122,9 @@ func (c *Client) addOperationListFormsMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFormsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationListFormsMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListFormsAPIClient is a client that implements the ListForms operation.
-type ListFormsAPIClient interface {
-	ListForms(context.Context, *ListFormsInput, ...func(*Options)) (*ListFormsOutput, error)
-}
-
-var _ ListFormsAPIClient = (*Client)(nil)
 
 // ListFormsPaginatorOptions is the paginator options for ListForms
 type ListFormsPaginatorOptions struct {
@@ -216,6 +212,9 @@ func (p *ListFormsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListForms(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +233,13 @@ func (p *ListFormsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListFormsAPIClient is a client that implements the ListForms operation.
+type ListFormsAPIClient interface {
+	ListForms(context.Context, *ListFormsInput, ...func(*Options)) (*ListFormsOutput, error)
+}
+
+var _ ListFormsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListForms(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

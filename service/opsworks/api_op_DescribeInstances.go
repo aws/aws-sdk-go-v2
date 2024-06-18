@@ -128,6 +128,9 @@ func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// DescribeInstancesAPIClient is a client that implements the DescribeInstances
-// operation.
-type DescribeInstancesAPIClient interface {
-	DescribeInstances(context.Context, *DescribeInstancesInput, ...func(*Options)) (*DescribeInstancesOutput, error)
-}
-
-var _ DescribeInstancesAPIClient = (*Client)(nil)
 
 // InstanceOnlineWaiterOptions are waiter options for InstanceOnlineWaiter
 type InstanceOnlineWaiterOptions struct {
@@ -272,7 +267,13 @@ func (w *InstanceOnlineWaiter) WaitForOutput(ctx context.Context, params *Descri
 		}
 
 		out, err := w.client.DescribeInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -652,7 +653,13 @@ func (w *InstanceRegisteredWaiter) WaitForOutput(ctx context.Context, params *De
 		}
 
 		out, err := w.client.DescribeInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1008,7 +1015,13 @@ func (w *InstanceStoppedWaiter) WaitForOutput(ctx context.Context, params *Descr
 		}
 
 		out, err := w.client.DescribeInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1388,7 +1401,13 @@ func (w *InstanceTerminatedWaiter) WaitForOutput(ctx context.Context, params *De
 		}
 
 		out, err := w.client.DescribeInstances(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -1659,6 +1678,14 @@ func instanceTerminatedStateRetryable(ctx context.Context, input *DescribeInstan
 
 	return true, nil
 }
+
+// DescribeInstancesAPIClient is a client that implements the DescribeInstances
+// operation.
+type DescribeInstancesAPIClient interface {
+	DescribeInstances(context.Context, *DescribeInstancesInput, ...func(*Options)) (*DescribeInstancesOutput, error)
+}
+
+var _ DescribeInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

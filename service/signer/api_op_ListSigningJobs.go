@@ -147,6 +147,9 @@ func (c *Client) addOperationListSigningJobsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSigningJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -167,14 +170,6 @@ func (c *Client) addOperationListSigningJobsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListSigningJobsAPIClient is a client that implements the ListSigningJobs
-// operation.
-type ListSigningJobsAPIClient interface {
-	ListSigningJobs(context.Context, *ListSigningJobsInput, ...func(*Options)) (*ListSigningJobsOutput, error)
-}
-
-var _ ListSigningJobsAPIClient = (*Client)(nil)
 
 // ListSigningJobsPaginatorOptions is the paginator options for ListSigningJobs
 type ListSigningJobsPaginatorOptions struct {
@@ -242,6 +237,9 @@ func (p *ListSigningJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSigningJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -260,6 +258,14 @@ func (p *ListSigningJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListSigningJobsAPIClient is a client that implements the ListSigningJobs
+// operation.
+type ListSigningJobsAPIClient interface {
+	ListSigningJobs(context.Context, *ListSigningJobsInput, ...func(*Options)) (*ListSigningJobsOutput, error)
+}
+
+var _ ListSigningJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSigningJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

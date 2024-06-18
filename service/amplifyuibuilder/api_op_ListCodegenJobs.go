@@ -123,6 +123,9 @@ func (c *Client) addOperationListCodegenJobsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCodegenJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListCodegenJobsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListCodegenJobsAPIClient is a client that implements the ListCodegenJobs
-// operation.
-type ListCodegenJobsAPIClient interface {
-	ListCodegenJobs(context.Context, *ListCodegenJobsInput, ...func(*Options)) (*ListCodegenJobsOutput, error)
-}
-
-var _ ListCodegenJobsAPIClient = (*Client)(nil)
 
 // ListCodegenJobsPaginatorOptions is the paginator options for ListCodegenJobs
 type ListCodegenJobsPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *ListCodegenJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCodegenJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListCodegenJobsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListCodegenJobsAPIClient is a client that implements the ListCodegenJobs
+// operation.
+type ListCodegenJobsAPIClient interface {
+	ListCodegenJobs(context.Context, *ListCodegenJobsInput, ...func(*Options)) (*ListCodegenJobsOutput, error)
+}
+
+var _ ListCodegenJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCodegenJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

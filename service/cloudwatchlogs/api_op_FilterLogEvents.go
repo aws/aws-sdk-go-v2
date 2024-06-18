@@ -206,6 +206,9 @@ func (c *Client) addOperationFilterLogEventsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFilterLogEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -226,14 +229,6 @@ func (c *Client) addOperationFilterLogEventsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// FilterLogEventsAPIClient is a client that implements the FilterLogEvents
-// operation.
-type FilterLogEventsAPIClient interface {
-	FilterLogEvents(context.Context, *FilterLogEventsInput, ...func(*Options)) (*FilterLogEventsOutput, error)
-}
-
-var _ FilterLogEventsAPIClient = (*Client)(nil)
 
 // FilterLogEventsPaginatorOptions is the paginator options for FilterLogEvents
 type FilterLogEventsPaginatorOptions struct {
@@ -298,6 +293,9 @@ func (p *FilterLogEventsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.FilterLogEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -316,6 +314,14 @@ func (p *FilterLogEventsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// FilterLogEventsAPIClient is a client that implements the FilterLogEvents
+// operation.
+type FilterLogEventsAPIClient interface {
+	FilterLogEvents(context.Context, *FilterLogEventsInput, ...func(*Options)) (*FilterLogEventsOutput, error)
+}
+
+var _ FilterLogEventsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opFilterLogEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

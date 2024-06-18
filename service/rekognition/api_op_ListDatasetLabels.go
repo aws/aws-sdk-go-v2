@@ -130,6 +130,9 @@ func (c *Client) addOperationListDatasetLabelsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDatasetLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListDatasetLabelsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListDatasetLabelsAPIClient is a client that implements the ListDatasetLabels
-// operation.
-type ListDatasetLabelsAPIClient interface {
-	ListDatasetLabels(context.Context, *ListDatasetLabelsInput, ...func(*Options)) (*ListDatasetLabelsOutput, error)
-}
-
-var _ ListDatasetLabelsAPIClient = (*Client)(nil)
 
 // ListDatasetLabelsPaginatorOptions is the paginator options for ListDatasetLabels
 type ListDatasetLabelsPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *ListDatasetLabelsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDatasetLabels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListDatasetLabelsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListDatasetLabelsAPIClient is a client that implements the ListDatasetLabels
+// operation.
+type ListDatasetLabelsAPIClient interface {
+	ListDatasetLabels(context.Context, *ListDatasetLabelsInput, ...func(*Options)) (*ListDatasetLabelsOutput, error)
+}
+
+var _ ListDatasetLabelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDatasetLabels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -118,6 +118,9 @@ func (c *Client) addOperationListChannelFlowsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChannelFlowsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListChannelFlowsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListChannelFlowsAPIClient is a client that implements the ListChannelFlows
-// operation.
-type ListChannelFlowsAPIClient interface {
-	ListChannelFlows(context.Context, *ListChannelFlowsInput, ...func(*Options)) (*ListChannelFlowsOutput, error)
-}
-
-var _ ListChannelFlowsAPIClient = (*Client)(nil)
 
 // ListChannelFlowsPaginatorOptions is the paginator options for ListChannelFlows
 type ListChannelFlowsPaginatorOptions struct {
@@ -213,6 +208,9 @@ func (p *ListChannelFlowsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelFlows(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListChannelFlowsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListChannelFlowsAPIClient is a client that implements the ListChannelFlows
+// operation.
+type ListChannelFlowsAPIClient interface {
+	ListChannelFlows(context.Context, *ListChannelFlowsInput, ...func(*Options)) (*ListChannelFlowsOutput, error)
+}
+
+var _ ListChannelFlowsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelFlows(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

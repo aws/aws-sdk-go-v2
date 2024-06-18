@@ -140,6 +140,9 @@ func (c *Client) addOperationListCodeReviewsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCodeReviewsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationListCodeReviewsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListCodeReviewsAPIClient is a client that implements the ListCodeReviews
-// operation.
-type ListCodeReviewsAPIClient interface {
-	ListCodeReviews(context.Context, *ListCodeReviewsInput, ...func(*Options)) (*ListCodeReviewsOutput, error)
-}
-
-var _ ListCodeReviewsAPIClient = (*Client)(nil)
 
 // ListCodeReviewsPaginatorOptions is the paginator options for ListCodeReviews
 type ListCodeReviewsPaginatorOptions struct {
@@ -235,6 +230,9 @@ func (p *ListCodeReviewsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCodeReviews(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListCodeReviewsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListCodeReviewsAPIClient is a client that implements the ListCodeReviews
+// operation.
+type ListCodeReviewsAPIClient interface {
+	ListCodeReviews(context.Context, *ListCodeReviewsInput, ...func(*Options)) (*ListCodeReviewsOutput, error)
+}
+
+var _ ListCodeReviewsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCodeReviews(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

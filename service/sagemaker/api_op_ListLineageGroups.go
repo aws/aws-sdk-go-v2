@@ -131,6 +131,9 @@ func (c *Client) addOperationListLineageGroupsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLineageGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListLineageGroupsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListLineageGroupsAPIClient is a client that implements the ListLineageGroups
-// operation.
-type ListLineageGroupsAPIClient interface {
-	ListLineageGroups(context.Context, *ListLineageGroupsInput, ...func(*Options)) (*ListLineageGroupsOutput, error)
-}
-
-var _ ListLineageGroupsAPIClient = (*Client)(nil)
 
 // ListLineageGroupsPaginatorOptions is the paginator options for ListLineageGroups
 type ListLineageGroupsPaginatorOptions struct {
@@ -224,6 +219,9 @@ func (p *ListLineageGroupsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLineageGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListLineageGroupsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListLineageGroupsAPIClient is a client that implements the ListLineageGroups
+// operation.
+type ListLineageGroupsAPIClient interface {
+	ListLineageGroups(context.Context, *ListLineageGroupsInput, ...func(*Options)) (*ListLineageGroupsOutput, error)
+}
+
+var _ ListLineageGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLineageGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -139,6 +139,9 @@ func (c *Client) addOperationListRecommendationFeedbackMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRecommendationFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListRecommendationFeedbackMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListRecommendationFeedbackAPIClient is a client that implements the
-// ListRecommendationFeedback operation.
-type ListRecommendationFeedbackAPIClient interface {
-	ListRecommendationFeedback(context.Context, *ListRecommendationFeedbackInput, ...func(*Options)) (*ListRecommendationFeedbackOutput, error)
-}
-
-var _ ListRecommendationFeedbackAPIClient = (*Client)(nil)
 
 // ListRecommendationFeedbackPaginatorOptions is the paginator options for
 // ListRecommendationFeedback
@@ -237,6 +232,9 @@ func (p *ListRecommendationFeedbackPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecommendationFeedback(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListRecommendationFeedbackPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListRecommendationFeedbackAPIClient is a client that implements the
+// ListRecommendationFeedback operation.
+type ListRecommendationFeedbackAPIClient interface {
+	ListRecommendationFeedback(context.Context, *ListRecommendationFeedbackInput, ...func(*Options)) (*ListRecommendationFeedbackOutput, error)
+}
+
+var _ ListRecommendationFeedbackAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecommendationFeedback(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

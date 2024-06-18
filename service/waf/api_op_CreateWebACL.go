@@ -173,6 +173,9 @@ func (c *Client) addOperationCreateWebACLMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateWebACLValidationMiddleware(stack); err != nil {
 		return err
 	}

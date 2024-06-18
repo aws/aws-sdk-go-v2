@@ -142,6 +142,9 @@ func (c *Client) addOperationDescribeDataRepositoryAssociationsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataRepositoryAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationDescribeDataRepositoryAssociationsMiddlewares(stack
 	}
 	return nil
 }
-
-// DescribeDataRepositoryAssociationsAPIClient is a client that implements the
-// DescribeDataRepositoryAssociations operation.
-type DescribeDataRepositoryAssociationsAPIClient interface {
-	DescribeDataRepositoryAssociations(context.Context, *DescribeDataRepositoryAssociationsInput, ...func(*Options)) (*DescribeDataRepositoryAssociationsOutput, error)
-}
-
-var _ DescribeDataRepositoryAssociationsAPIClient = (*Client)(nil)
 
 // DescribeDataRepositoryAssociationsPaginatorOptions is the paginator options for
 // DescribeDataRepositoryAssociations
@@ -238,6 +233,9 @@ func (p *DescribeDataRepositoryAssociationsPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDataRepositoryAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *DescribeDataRepositoryAssociationsPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// DescribeDataRepositoryAssociationsAPIClient is a client that implements the
+// DescribeDataRepositoryAssociations operation.
+type DescribeDataRepositoryAssociationsAPIClient interface {
+	DescribeDataRepositoryAssociations(context.Context, *DescribeDataRepositoryAssociationsInput, ...func(*Options)) (*DescribeDataRepositoryAssociationsOutput, error)
+}
+
+var _ DescribeDataRepositoryAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDataRepositoryAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

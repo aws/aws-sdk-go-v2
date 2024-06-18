@@ -127,6 +127,9 @@ func (c *Client) addOperationTagMiddlewares(stack *middleware.Stack, options Opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpTagValidationMiddleware(stack); err != nil {
 		return err
 	}

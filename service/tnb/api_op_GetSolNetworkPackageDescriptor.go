@@ -113,6 +113,9 @@ func (c *Client) addOperationGetSolNetworkPackageDescriptorMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSolNetworkPackageDescriptorValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -116,6 +116,9 @@ func (c *Client) addOperationListSequenceStoresMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListSequenceStoresMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,41 +142,6 @@ func (c *Client) addOperationListSequenceStoresMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-type endpointPrefix_opListSequenceStoresMiddleware struct {
-}
-
-func (*endpointPrefix_opListSequenceStoresMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListSequenceStoresMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListSequenceStoresMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListSequenceStoresMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListSequenceStoresAPIClient is a client that implements the ListSequenceStores
-// operation.
-type ListSequenceStoresAPIClient interface {
-	ListSequenceStores(context.Context, *ListSequenceStoresInput, ...func(*Options)) (*ListSequenceStoresOutput, error)
-}
-
-var _ ListSequenceStoresAPIClient = (*Client)(nil)
 
 // ListSequenceStoresPaginatorOptions is the paginator options for
 // ListSequenceStores
@@ -239,6 +207,9 @@ func (p *ListSequenceStoresPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSequenceStores(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +228,41 @@ func (p *ListSequenceStoresPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+type endpointPrefix_opListSequenceStoresMiddleware struct {
+}
+
+func (*endpointPrefix_opListSequenceStoresMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListSequenceStoresMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListSequenceStoresMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListSequenceStoresMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListSequenceStoresAPIClient is a client that implements the ListSequenceStores
+// operation.
+type ListSequenceStoresAPIClient interface {
+	ListSequenceStores(context.Context, *ListSequenceStoresInput, ...func(*Options)) (*ListSequenceStoresOutput, error)
+}
+
+var _ ListSequenceStoresAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSequenceStores(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

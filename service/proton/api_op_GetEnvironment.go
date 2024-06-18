@@ -112,6 +112,9 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetEnvironmentAPIClient is a client that implements the GetEnvironment
-// operation.
-type GetEnvironmentAPIClient interface {
-	GetEnvironment(context.Context, *GetEnvironmentInput, ...func(*Options)) (*GetEnvironmentOutput, error)
-}
-
-var _ GetEnvironmentAPIClient = (*Client)(nil)
 
 // EnvironmentDeployedWaiterOptions are waiter options for
 // EnvironmentDeployedWaiter
@@ -261,7 +256,13 @@ func (w *EnvironmentDeployedWaiter) WaitForOutput(ctx context.Context, params *G
 		}
 
 		out, err := w.client.GetEnvironment(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -335,6 +336,14 @@ func environmentDeployedStateRetryable(ctx context.Context, input *GetEnvironmen
 
 	return true, nil
 }
+
+// GetEnvironmentAPIClient is a client that implements the GetEnvironment
+// operation.
+type GetEnvironmentAPIClient interface {
+	GetEnvironment(context.Context, *GetEnvironmentInput, ...func(*Options)) (*GetEnvironmentOutput, error)
+}
+
+var _ GetEnvironmentAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

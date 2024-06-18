@@ -171,6 +171,9 @@ func (c *Client) addOperationDescribeOrganizationResourceCollectionHealthMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeOrganizationResourceCollectionHealthValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -194,14 +197,6 @@ func (c *Client) addOperationDescribeOrganizationResourceCollectionHealthMiddlew
 	}
 	return nil
 }
-
-// DescribeOrganizationResourceCollectionHealthAPIClient is a client that
-// implements the DescribeOrganizationResourceCollectionHealth operation.
-type DescribeOrganizationResourceCollectionHealthAPIClient interface {
-	DescribeOrganizationResourceCollectionHealth(context.Context, *DescribeOrganizationResourceCollectionHealthInput, ...func(*Options)) (*DescribeOrganizationResourceCollectionHealthOutput, error)
-}
-
-var _ DescribeOrganizationResourceCollectionHealthAPIClient = (*Client)(nil)
 
 // DescribeOrganizationResourceCollectionHealthPaginatorOptions is the paginator
 // options for DescribeOrganizationResourceCollectionHealth
@@ -257,6 +252,9 @@ func (p *DescribeOrganizationResourceCollectionHealthPaginator) NextPage(ctx con
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOrganizationResourceCollectionHealth(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +273,14 @@ func (p *DescribeOrganizationResourceCollectionHealthPaginator) NextPage(ctx con
 
 	return result, nil
 }
+
+// DescribeOrganizationResourceCollectionHealthAPIClient is a client that
+// implements the DescribeOrganizationResourceCollectionHealth operation.
+type DescribeOrganizationResourceCollectionHealthAPIClient interface {
+	DescribeOrganizationResourceCollectionHealth(context.Context, *DescribeOrganizationResourceCollectionHealthInput, ...func(*Options)) (*DescribeOrganizationResourceCollectionHealthOutput, error)
+}
+
+var _ DescribeOrganizationResourceCollectionHealthAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOrganizationResourceCollectionHealth(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

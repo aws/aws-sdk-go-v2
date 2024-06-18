@@ -120,6 +120,9 @@ func (c *Client) addOperationListCollaborationAnalysisTemplatesMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCollaborationAnalysisTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListCollaborationAnalysisTemplatesMiddlewares(stack
 	}
 	return nil
 }
-
-// ListCollaborationAnalysisTemplatesAPIClient is a client that implements the
-// ListCollaborationAnalysisTemplates operation.
-type ListCollaborationAnalysisTemplatesAPIClient interface {
-	ListCollaborationAnalysisTemplates(context.Context, *ListCollaborationAnalysisTemplatesInput, ...func(*Options)) (*ListCollaborationAnalysisTemplatesOutput, error)
-}
-
-var _ ListCollaborationAnalysisTemplatesAPIClient = (*Client)(nil)
 
 // ListCollaborationAnalysisTemplatesPaginatorOptions is the paginator options for
 // ListCollaborationAnalysisTemplates
@@ -218,6 +213,9 @@ func (p *ListCollaborationAnalysisTemplatesPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCollaborationAnalysisTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListCollaborationAnalysisTemplatesPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListCollaborationAnalysisTemplatesAPIClient is a client that implements the
+// ListCollaborationAnalysisTemplates operation.
+type ListCollaborationAnalysisTemplatesAPIClient interface {
+	ListCollaborationAnalysisTemplates(context.Context, *ListCollaborationAnalysisTemplatesInput, ...func(*Options)) (*ListCollaborationAnalysisTemplatesOutput, error)
+}
+
+var _ ListCollaborationAnalysisTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCollaborationAnalysisTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

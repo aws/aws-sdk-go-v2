@@ -110,6 +110,9 @@ func (c *Client) addOperationListRecoveryGroupsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecoveryGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListRecoveryGroupsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListRecoveryGroupsAPIClient is a client that implements the ListRecoveryGroups
-// operation.
-type ListRecoveryGroupsAPIClient interface {
-	ListRecoveryGroups(context.Context, *ListRecoveryGroupsInput, ...func(*Options)) (*ListRecoveryGroupsOutput, error)
-}
-
-var _ ListRecoveryGroupsAPIClient = (*Client)(nil)
 
 // ListRecoveryGroupsPaginatorOptions is the paginator options for
 // ListRecoveryGroups
@@ -203,6 +198,9 @@ func (p *ListRecoveryGroupsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecoveryGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListRecoveryGroupsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListRecoveryGroupsAPIClient is a client that implements the ListRecoveryGroups
+// operation.
+type ListRecoveryGroupsAPIClient interface {
+	ListRecoveryGroups(context.Context, *ListRecoveryGroupsInput, ...func(*Options)) (*ListRecoveryGroupsOutput, error)
+}
+
+var _ ListRecoveryGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecoveryGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

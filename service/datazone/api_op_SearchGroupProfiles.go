@@ -135,6 +135,9 @@ func (c *Client) addOperationSearchGroupProfilesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchGroupProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationSearchGroupProfilesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// SearchGroupProfilesAPIClient is a client that implements the
-// SearchGroupProfiles operation.
-type SearchGroupProfilesAPIClient interface {
-	SearchGroupProfiles(context.Context, *SearchGroupProfilesInput, ...func(*Options)) (*SearchGroupProfilesOutput, error)
-}
-
-var _ SearchGroupProfilesAPIClient = (*Client)(nil)
 
 // SearchGroupProfilesPaginatorOptions is the paginator options for
 // SearchGroupProfiles
@@ -234,6 +229,9 @@ func (p *SearchGroupProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchGroupProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *SearchGroupProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// SearchGroupProfilesAPIClient is a client that implements the
+// SearchGroupProfiles operation.
+type SearchGroupProfilesAPIClient interface {
+	SearchGroupProfiles(context.Context, *SearchGroupProfilesInput, ...func(*Options)) (*SearchGroupProfilesOutput, error)
+}
+
+var _ SearchGroupProfilesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchGroupProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -146,6 +146,9 @@ func (c *Client) addOperationCreateVodSourceMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateVodSourceValidationMiddleware(stack); err != nil {
 		return err
 	}

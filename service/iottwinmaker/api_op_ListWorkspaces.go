@@ -112,6 +112,9 @@ func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListWorkspacesMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,41 +138,6 @@ func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-type endpointPrefix_opListWorkspacesMiddleware struct {
-}
-
-func (*endpointPrefix_opListWorkspacesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListWorkspacesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListWorkspacesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListWorkspacesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListWorkspacesAPIClient is a client that implements the ListWorkspaces
-// operation.
-type ListWorkspacesAPIClient interface {
-	ListWorkspaces(context.Context, *ListWorkspacesInput, ...func(*Options)) (*ListWorkspacesOutput, error)
-}
-
-var _ ListWorkspacesAPIClient = (*Client)(nil)
 
 // ListWorkspacesPaginatorOptions is the paginator options for ListWorkspaces
 type ListWorkspacesPaginatorOptions struct {
@@ -236,6 +204,9 @@ func (p *ListWorkspacesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkspaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +225,41 @@ func (p *ListWorkspacesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+type endpointPrefix_opListWorkspacesMiddleware struct {
+}
+
+func (*endpointPrefix_opListWorkspacesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListWorkspacesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListWorkspacesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListWorkspacesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListWorkspacesAPIClient is a client that implements the ListWorkspaces
+// operation.
+type ListWorkspacesAPIClient interface {
+	ListWorkspaces(context.Context, *ListWorkspacesInput, ...func(*Options)) (*ListWorkspacesOutput, error)
+}
+
+var _ ListWorkspacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

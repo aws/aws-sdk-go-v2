@@ -128,6 +128,9 @@ func (c *Client) addOperationGetEvidenceFoldersByAssessmentControlMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEvidenceFoldersByAssessmentControlValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationGetEvidenceFoldersByAssessmentControlMiddlewares(st
 	}
 	return nil
 }
-
-// GetEvidenceFoldersByAssessmentControlAPIClient is a client that implements the
-// GetEvidenceFoldersByAssessmentControl operation.
-type GetEvidenceFoldersByAssessmentControlAPIClient interface {
-	GetEvidenceFoldersByAssessmentControl(context.Context, *GetEvidenceFoldersByAssessmentControlInput, ...func(*Options)) (*GetEvidenceFoldersByAssessmentControlOutput, error)
-}
-
-var _ GetEvidenceFoldersByAssessmentControlAPIClient = (*Client)(nil)
 
 // GetEvidenceFoldersByAssessmentControlPaginatorOptions is the paginator options
 // for GetEvidenceFoldersByAssessmentControl
@@ -226,6 +221,9 @@ func (p *GetEvidenceFoldersByAssessmentControlPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetEvidenceFoldersByAssessmentControl(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *GetEvidenceFoldersByAssessmentControlPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// GetEvidenceFoldersByAssessmentControlAPIClient is a client that implements the
+// GetEvidenceFoldersByAssessmentControl operation.
+type GetEvidenceFoldersByAssessmentControlAPIClient interface {
+	GetEvidenceFoldersByAssessmentControl(context.Context, *GetEvidenceFoldersByAssessmentControlInput, ...func(*Options)) (*GetEvidenceFoldersByAssessmentControlOutput, error)
+}
+
+var _ GetEvidenceFoldersByAssessmentControlAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEvidenceFoldersByAssessmentControl(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

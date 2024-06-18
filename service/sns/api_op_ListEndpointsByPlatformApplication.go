@@ -127,6 +127,9 @@ func (c *Client) addOperationListEndpointsByPlatformApplicationMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEndpointsByPlatformApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListEndpointsByPlatformApplicationMiddlewares(stack
 	}
 	return nil
 }
-
-// ListEndpointsByPlatformApplicationAPIClient is a client that implements the
-// ListEndpointsByPlatformApplication operation.
-type ListEndpointsByPlatformApplicationAPIClient interface {
-	ListEndpointsByPlatformApplication(context.Context, *ListEndpointsByPlatformApplicationInput, ...func(*Options)) (*ListEndpointsByPlatformApplicationOutput, error)
-}
-
-var _ ListEndpointsByPlatformApplicationAPIClient = (*Client)(nil)
 
 // ListEndpointsByPlatformApplicationPaginatorOptions is the paginator options for
 // ListEndpointsByPlatformApplication
@@ -213,6 +208,9 @@ func (p *ListEndpointsByPlatformApplicationPaginator) NextPage(ctx context.Conte
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEndpointsByPlatformApplication(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListEndpointsByPlatformApplicationPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListEndpointsByPlatformApplicationAPIClient is a client that implements the
+// ListEndpointsByPlatformApplication operation.
+type ListEndpointsByPlatformApplicationAPIClient interface {
+	ListEndpointsByPlatformApplication(context.Context, *ListEndpointsByPlatformApplicationInput, ...func(*Options)) (*ListEndpointsByPlatformApplicationOutput, error)
+}
+
+var _ ListEndpointsByPlatformApplicationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEndpointsByPlatformApplication(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

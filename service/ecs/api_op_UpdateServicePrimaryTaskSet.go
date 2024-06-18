@@ -125,6 +125,9 @@ func (c *Client) addOperationUpdateServicePrimaryTaskSetMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateServicePrimaryTaskSetValidationMiddleware(stack); err != nil {
 		return err
 	}

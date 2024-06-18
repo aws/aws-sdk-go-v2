@@ -120,6 +120,9 @@ func (c *Client) addOperationGetTransitGatewayRegistrationsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTransitGatewayRegistrationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationGetTransitGatewayRegistrationsMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// GetTransitGatewayRegistrationsAPIClient is a client that implements the
-// GetTransitGatewayRegistrations operation.
-type GetTransitGatewayRegistrationsAPIClient interface {
-	GetTransitGatewayRegistrations(context.Context, *GetTransitGatewayRegistrationsInput, ...func(*Options)) (*GetTransitGatewayRegistrationsOutput, error)
-}
-
-var _ GetTransitGatewayRegistrationsAPIClient = (*Client)(nil)
 
 // GetTransitGatewayRegistrationsPaginatorOptions is the paginator options for
 // GetTransitGatewayRegistrations
@@ -218,6 +213,9 @@ func (p *GetTransitGatewayRegistrationsPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTransitGatewayRegistrations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *GetTransitGatewayRegistrationsPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// GetTransitGatewayRegistrationsAPIClient is a client that implements the
+// GetTransitGatewayRegistrations operation.
+type GetTransitGatewayRegistrationsAPIClient interface {
+	GetTransitGatewayRegistrations(context.Context, *GetTransitGatewayRegistrationsInput, ...func(*Options)) (*GetTransitGatewayRegistrationsOutput, error)
+}
+
+var _ GetTransitGatewayRegistrationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTransitGatewayRegistrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

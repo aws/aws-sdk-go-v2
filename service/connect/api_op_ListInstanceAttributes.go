@@ -121,6 +121,9 @@ func (c *Client) addOperationListInstanceAttributesMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInstanceAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListInstanceAttributesMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListInstanceAttributesAPIClient is a client that implements the
-// ListInstanceAttributes operation.
-type ListInstanceAttributesAPIClient interface {
-	ListInstanceAttributes(context.Context, *ListInstanceAttributesInput, ...func(*Options)) (*ListInstanceAttributesOutput, error)
-}
-
-var _ ListInstanceAttributesAPIClient = (*Client)(nil)
 
 // ListInstanceAttributesPaginatorOptions is the paginator options for
 // ListInstanceAttributes
@@ -217,6 +212,9 @@ func (p *ListInstanceAttributesPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInstanceAttributes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListInstanceAttributesPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListInstanceAttributesAPIClient is a client that implements the
+// ListInstanceAttributes operation.
+type ListInstanceAttributesAPIClient interface {
+	ListInstanceAttributes(context.Context, *ListInstanceAttributesInput, ...func(*Options)) (*ListInstanceAttributesOutput, error)
+}
+
+var _ ListInstanceAttributesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInstanceAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

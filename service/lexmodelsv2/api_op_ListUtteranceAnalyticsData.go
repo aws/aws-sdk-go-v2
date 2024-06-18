@@ -176,6 +176,9 @@ func (c *Client) addOperationListUtteranceAnalyticsDataMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUtteranceAnalyticsDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -199,14 +202,6 @@ func (c *Client) addOperationListUtteranceAnalyticsDataMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListUtteranceAnalyticsDataAPIClient is a client that implements the
-// ListUtteranceAnalyticsData operation.
-type ListUtteranceAnalyticsDataAPIClient interface {
-	ListUtteranceAnalyticsData(context.Context, *ListUtteranceAnalyticsDataInput, ...func(*Options)) (*ListUtteranceAnalyticsDataOutput, error)
-}
-
-var _ ListUtteranceAnalyticsDataAPIClient = (*Client)(nil)
 
 // ListUtteranceAnalyticsDataPaginatorOptions is the paginator options for
 // ListUtteranceAnalyticsData
@@ -276,6 +271,9 @@ func (p *ListUtteranceAnalyticsDataPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUtteranceAnalyticsData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -294,6 +292,14 @@ func (p *ListUtteranceAnalyticsDataPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListUtteranceAnalyticsDataAPIClient is a client that implements the
+// ListUtteranceAnalyticsData operation.
+type ListUtteranceAnalyticsDataAPIClient interface {
+	ListUtteranceAnalyticsData(context.Context, *ListUtteranceAnalyticsDataInput, ...func(*Options)) (*ListUtteranceAnalyticsDataOutput, error)
+}
+
+var _ ListUtteranceAnalyticsDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUtteranceAnalyticsData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

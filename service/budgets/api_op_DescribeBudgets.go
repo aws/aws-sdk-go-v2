@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeBudgetsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBudgetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeBudgetsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// DescribeBudgetsAPIClient is a client that implements the DescribeBudgets
-// operation.
-type DescribeBudgetsAPIClient interface {
-	DescribeBudgets(context.Context, *DescribeBudgetsInput, ...func(*Options)) (*DescribeBudgetsOutput, error)
-}
-
-var _ DescribeBudgetsAPIClient = (*Client)(nil)
 
 // DescribeBudgetsPaginatorOptions is the paginator options for DescribeBudgets
 type DescribeBudgetsPaginatorOptions struct {
@@ -221,6 +216,9 @@ func (p *DescribeBudgetsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeBudgets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeBudgetsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// DescribeBudgetsAPIClient is a client that implements the DescribeBudgets
+// operation.
+type DescribeBudgetsAPIClient interface {
+	DescribeBudgets(context.Context, *DescribeBudgetsInput, ...func(*Options)) (*DescribeBudgetsOutput, error)
+}
+
+var _ DescribeBudgetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBudgets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

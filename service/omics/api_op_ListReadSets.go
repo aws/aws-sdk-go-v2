@@ -121,6 +121,9 @@ func (c *Client) addOperationListReadSetsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListReadSetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,40 +150,6 @@ func (c *Client) addOperationListReadSetsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-type endpointPrefix_opListReadSetsMiddleware struct {
-}
-
-func (*endpointPrefix_opListReadSetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListReadSetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "control-storage-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListReadSetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListReadSetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListReadSetsAPIClient is a client that implements the ListReadSets operation.
-type ListReadSetsAPIClient interface {
-	ListReadSets(context.Context, *ListReadSetsInput, ...func(*Options)) (*ListReadSetsOutput, error)
-}
-
-var _ ListReadSetsAPIClient = (*Client)(nil)
 
 // ListReadSetsPaginatorOptions is the paginator options for ListReadSets
 type ListReadSetsPaginatorOptions struct {
@@ -245,6 +214,9 @@ func (p *ListReadSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReadSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +235,40 @@ func (p *ListReadSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+type endpointPrefix_opListReadSetsMiddleware struct {
+}
+
+func (*endpointPrefix_opListReadSetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListReadSetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "control-storage-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListReadSetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListReadSetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListReadSetsAPIClient is a client that implements the ListReadSets operation.
+type ListReadSetsAPIClient interface {
+	ListReadSets(context.Context, *ListReadSetsInput, ...func(*Options)) (*ListReadSetsOutput, error)
+}
+
+var _ ListReadSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReadSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

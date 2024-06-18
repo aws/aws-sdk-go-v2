@@ -127,6 +127,9 @@ func (c *Client) addOperationListChallengeMetadataMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChallengeMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListChallengeMetadataMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListChallengeMetadataAPIClient is a client that implements the
-// ListChallengeMetadata operation.
-type ListChallengeMetadataAPIClient interface {
-	ListChallengeMetadata(context.Context, *ListChallengeMetadataInput, ...func(*Options)) (*ListChallengeMetadataOutput, error)
-}
-
-var _ ListChallengeMetadataAPIClient = (*Client)(nil)
 
 // ListChallengeMetadataPaginatorOptions is the paginator options for
 // ListChallengeMetadata
@@ -226,6 +221,9 @@ func (p *ListChallengeMetadataPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChallengeMetadata(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListChallengeMetadataPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListChallengeMetadataAPIClient is a client that implements the
+// ListChallengeMetadata operation.
+type ListChallengeMetadataAPIClient interface {
+	ListChallengeMetadata(context.Context, *ListChallengeMetadataInput, ...func(*Options)) (*ListChallengeMetadataOutput, error)
+}
+
+var _ ListChallengeMetadataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChallengeMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

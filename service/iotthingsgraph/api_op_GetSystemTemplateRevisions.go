@@ -126,6 +126,9 @@ func (c *Client) addOperationGetSystemTemplateRevisionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSystemTemplateRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationGetSystemTemplateRevisionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// GetSystemTemplateRevisionsAPIClient is a client that implements the
-// GetSystemTemplateRevisions operation.
-type GetSystemTemplateRevisionsAPIClient interface {
-	GetSystemTemplateRevisions(context.Context, *GetSystemTemplateRevisionsInput, ...func(*Options)) (*GetSystemTemplateRevisionsOutput, error)
-}
-
-var _ GetSystemTemplateRevisionsAPIClient = (*Client)(nil)
 
 // GetSystemTemplateRevisionsPaginatorOptions is the paginator options for
 // GetSystemTemplateRevisions
@@ -224,6 +219,9 @@ func (p *GetSystemTemplateRevisionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetSystemTemplateRevisions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *GetSystemTemplateRevisionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// GetSystemTemplateRevisionsAPIClient is a client that implements the
+// GetSystemTemplateRevisions operation.
+type GetSystemTemplateRevisionsAPIClient interface {
+	GetSystemTemplateRevisions(context.Context, *GetSystemTemplateRevisionsInput, ...func(*Options)) (*GetSystemTemplateRevisionsOutput, error)
+}
+
+var _ GetSystemTemplateRevisionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetSystemTemplateRevisions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

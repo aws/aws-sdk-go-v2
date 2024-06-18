@@ -134,6 +134,9 @@ func (c *Client) addOperationListLensSharesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLensSharesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListLensSharesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListLensSharesAPIClient is a client that implements the ListLensShares
-// operation.
-type ListLensSharesAPIClient interface {
-	ListLensShares(context.Context, *ListLensSharesInput, ...func(*Options)) (*ListLensSharesOutput, error)
-}
-
-var _ ListLensSharesAPIClient = (*Client)(nil)
 
 // ListLensSharesPaginatorOptions is the paginator options for ListLensShares
 type ListLensSharesPaginatorOptions struct {
@@ -229,6 +224,9 @@ func (p *ListLensSharesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLensShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *ListLensSharesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListLensSharesAPIClient is a client that implements the ListLensShares
+// operation.
+type ListLensSharesAPIClient interface {
+	ListLensShares(context.Context, *ListLensSharesInput, ...func(*Options)) (*ListLensSharesOutput, error)
+}
+
+var _ ListLensSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLensShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

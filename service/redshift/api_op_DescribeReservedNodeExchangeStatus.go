@@ -127,6 +127,9 @@ func (c *Client) addOperationDescribeReservedNodeExchangeStatusMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedNodeExchangeStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationDescribeReservedNodeExchangeStatusMiddlewares(stack
 	}
 	return nil
 }
-
-// DescribeReservedNodeExchangeStatusAPIClient is a client that implements the
-// DescribeReservedNodeExchangeStatus operation.
-type DescribeReservedNodeExchangeStatusAPIClient interface {
-	DescribeReservedNodeExchangeStatus(context.Context, *DescribeReservedNodeExchangeStatusInput, ...func(*Options)) (*DescribeReservedNodeExchangeStatusOutput, error)
-}
-
-var _ DescribeReservedNodeExchangeStatusAPIClient = (*Client)(nil)
 
 // DescribeReservedNodeExchangeStatusPaginatorOptions is the paginator options for
 // DescribeReservedNodeExchangeStatus
@@ -225,6 +220,9 @@ func (p *DescribeReservedNodeExchangeStatusPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedNodeExchangeStatus(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *DescribeReservedNodeExchangeStatusPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// DescribeReservedNodeExchangeStatusAPIClient is a client that implements the
+// DescribeReservedNodeExchangeStatus operation.
+type DescribeReservedNodeExchangeStatusAPIClient interface {
+	DescribeReservedNodeExchangeStatus(context.Context, *DescribeReservedNodeExchangeStatusInput, ...func(*Options)) (*DescribeReservedNodeExchangeStatusOutput, error)
+}
+
+var _ DescribeReservedNodeExchangeStatusAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedNodeExchangeStatus(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -222,6 +222,9 @@ func (c *Client) addOperationDescribeStateMachineMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeStateMachineValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -113,6 +113,9 @@ func (c *Client) addOperationListPackageImportJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPackageImportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListPackageImportJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListPackageImportJobsAPIClient is a client that implements the
-// ListPackageImportJobs operation.
-type ListPackageImportJobsAPIClient interface {
-	ListPackageImportJobs(context.Context, *ListPackageImportJobsInput, ...func(*Options)) (*ListPackageImportJobsOutput, error)
-}
-
-var _ ListPackageImportJobsAPIClient = (*Client)(nil)
 
 // ListPackageImportJobsPaginatorOptions is the paginator options for
 // ListPackageImportJobs
@@ -202,6 +197,9 @@ func (p *ListPackageImportJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPackageImportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +218,14 @@ func (p *ListPackageImportJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListPackageImportJobsAPIClient is a client that implements the
+// ListPackageImportJobs operation.
+type ListPackageImportJobsAPIClient interface {
+	ListPackageImportJobs(context.Context, *ListPackageImportJobsInput, ...func(*Options)) (*ListPackageImportJobsOutput, error)
+}
+
+var _ ListPackageImportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPackageImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

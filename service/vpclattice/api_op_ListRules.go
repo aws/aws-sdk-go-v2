@@ -123,6 +123,9 @@ func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,13 +149,6 @@ func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListRulesAPIClient is a client that implements the ListRules operation.
-type ListRulesAPIClient interface {
-	ListRules(context.Context, *ListRulesInput, ...func(*Options)) (*ListRulesOutput, error)
-}
-
-var _ ListRulesAPIClient = (*Client)(nil)
 
 // ListRulesPaginatorOptions is the paginator options for ListRules
 type ListRulesPaginatorOptions struct {
@@ -217,6 +213,9 @@ func (p *ListRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +234,13 @@ func (p *ListRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListRulesAPIClient is a client that implements the ListRules operation.
+type ListRulesAPIClient interface {
+	ListRules(context.Context, *ListRulesInput, ...func(*Options)) (*ListRulesOutput, error)
+}
+
+var _ ListRulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

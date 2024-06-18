@@ -137,6 +137,9 @@ func (c *Client) addOperationListBuiltInSlotTypesMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBuiltInSlotTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListBuiltInSlotTypesMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListBuiltInSlotTypesAPIClient is a client that implements the
-// ListBuiltInSlotTypes operation.
-type ListBuiltInSlotTypesAPIClient interface {
-	ListBuiltInSlotTypes(context.Context, *ListBuiltInSlotTypesInput, ...func(*Options)) (*ListBuiltInSlotTypesOutput, error)
-}
-
-var _ ListBuiltInSlotTypesAPIClient = (*Client)(nil)
 
 // ListBuiltInSlotTypesPaginatorOptions is the paginator options for
 // ListBuiltInSlotTypes
@@ -235,6 +230,9 @@ func (p *ListBuiltInSlotTypesPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBuiltInSlotTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListBuiltInSlotTypesPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListBuiltInSlotTypesAPIClient is a client that implements the
+// ListBuiltInSlotTypes operation.
+type ListBuiltInSlotTypesAPIClient interface {
+	ListBuiltInSlotTypes(context.Context, *ListBuiltInSlotTypesInput, ...func(*Options)) (*ListBuiltInSlotTypesOutput, error)
+}
+
+var _ ListBuiltInSlotTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBuiltInSlotTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

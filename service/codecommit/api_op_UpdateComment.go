@@ -112,6 +112,9 @@ func (c *Client) addOperationUpdateCommentMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateCommentValidationMiddleware(stack); err != nil {
 		return err
 	}

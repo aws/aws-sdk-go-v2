@@ -110,6 +110,9 @@ func (c *Client) addOperationListIdNamespacesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIdNamespaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListIdNamespacesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListIdNamespacesAPIClient is a client that implements the ListIdNamespaces
-// operation.
-type ListIdNamespacesAPIClient interface {
-	ListIdNamespaces(context.Context, *ListIdNamespacesInput, ...func(*Options)) (*ListIdNamespacesOutput, error)
-}
-
-var _ ListIdNamespacesAPIClient = (*Client)(nil)
 
 // ListIdNamespacesPaginatorOptions is the paginator options for ListIdNamespaces
 type ListIdNamespacesPaginatorOptions struct {
@@ -202,6 +197,9 @@ func (p *ListIdNamespacesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIdNamespaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +218,14 @@ func (p *ListIdNamespacesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListIdNamespacesAPIClient is a client that implements the ListIdNamespaces
+// operation.
+type ListIdNamespacesAPIClient interface {
+	ListIdNamespaces(context.Context, *ListIdNamespacesInput, ...func(*Options)) (*ListIdNamespacesOutput, error)
+}
+
+var _ ListIdNamespacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIdNamespaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

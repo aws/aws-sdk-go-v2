@@ -120,6 +120,9 @@ func (c *Client) addOperationListLaunchProfileMembersMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLaunchProfileMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListLaunchProfileMembersMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListLaunchProfileMembersAPIClient is a client that implements the
-// ListLaunchProfileMembers operation.
-type ListLaunchProfileMembersAPIClient interface {
-	ListLaunchProfileMembers(context.Context, *ListLaunchProfileMembersInput, ...func(*Options)) (*ListLaunchProfileMembersOutput, error)
-}
-
-var _ ListLaunchProfileMembersAPIClient = (*Client)(nil)
 
 // ListLaunchProfileMembersPaginatorOptions is the paginator options for
 // ListLaunchProfileMembers
@@ -217,6 +212,9 @@ func (p *ListLaunchProfileMembersPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLaunchProfileMembers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListLaunchProfileMembersPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListLaunchProfileMembersAPIClient is a client that implements the
+// ListLaunchProfileMembers operation.
+type ListLaunchProfileMembersAPIClient interface {
+	ListLaunchProfileMembers(context.Context, *ListLaunchProfileMembersInput, ...func(*Options)) (*ListLaunchProfileMembersOutput, error)
+}
+
+var _ ListLaunchProfileMembersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLaunchProfileMembers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

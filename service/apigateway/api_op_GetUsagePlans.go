@@ -116,6 +116,9 @@ func (c *Client) addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsagePlans(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,13 +142,6 @@ func (c *Client) addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetUsagePlansAPIClient is a client that implements the GetUsagePlans operation.
-type GetUsagePlansAPIClient interface {
-	GetUsagePlans(context.Context, *GetUsagePlansInput, ...func(*Options)) (*GetUsagePlansOutput, error)
-}
-
-var _ GetUsagePlansAPIClient = (*Client)(nil)
 
 // GetUsagePlansPaginatorOptions is the paginator options for GetUsagePlans
 type GetUsagePlansPaginatorOptions struct {
@@ -211,6 +207,9 @@ func (p *GetUsagePlansPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetUsagePlans(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +228,13 @@ func (p *GetUsagePlansPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetUsagePlansAPIClient is a client that implements the GetUsagePlans operation.
+type GetUsagePlansAPIClient interface {
+	GetUsagePlans(context.Context, *GetUsagePlansInput, ...func(*Options)) (*GetUsagePlansOutput, error)
+}
+
+var _ GetUsagePlansAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetUsagePlans(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

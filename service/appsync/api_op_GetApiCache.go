@@ -108,6 +108,9 @@ func (c *Client) addOperationGetApiCacheMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetApiCacheValidationMiddleware(stack); err != nil {
 		return err
 	}

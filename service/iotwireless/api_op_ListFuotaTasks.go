@@ -112,6 +112,9 @@ func (c *Client) addOperationListFuotaTasksMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFuotaTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListFuotaTasksMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListFuotaTasksAPIClient is a client that implements the ListFuotaTasks
-// operation.
-type ListFuotaTasksAPIClient interface {
-	ListFuotaTasks(context.Context, *ListFuotaTasksInput, ...func(*Options)) (*ListFuotaTasksOutput, error)
-}
-
-var _ ListFuotaTasksAPIClient = (*Client)(nil)
 
 // ListFuotaTasksPaginatorOptions is the paginator options for ListFuotaTasks
 type ListFuotaTasksPaginatorOptions struct {
@@ -200,6 +195,9 @@ func (p *ListFuotaTasksPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFuotaTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -218,6 +216,14 @@ func (p *ListFuotaTasksPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListFuotaTasksAPIClient is a client that implements the ListFuotaTasks
+// operation.
+type ListFuotaTasksAPIClient interface {
+	ListFuotaTasks(context.Context, *ListFuotaTasksInput, ...func(*Options)) (*ListFuotaTasksOutput, error)
+}
+
+var _ ListFuotaTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFuotaTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

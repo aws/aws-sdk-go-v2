@@ -140,6 +140,9 @@ func (c *Client) addOperationListIdentitySourcesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIdentitySourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationListIdentitySourcesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListIdentitySourcesAPIClient is a client that implements the
-// ListIdentitySources operation.
-type ListIdentitySourcesAPIClient interface {
-	ListIdentitySources(context.Context, *ListIdentitySourcesInput, ...func(*Options)) (*ListIdentitySourcesOutput, error)
-}
-
-var _ ListIdentitySourcesAPIClient = (*Client)(nil)
 
 // ListIdentitySourcesPaginatorOptions is the paginator options for
 // ListIdentitySources
@@ -246,6 +241,9 @@ func (p *ListIdentitySourcesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIdentitySources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -264,6 +262,14 @@ func (p *ListIdentitySourcesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListIdentitySourcesAPIClient is a client that implements the
+// ListIdentitySources operation.
+type ListIdentitySourcesAPIClient interface {
+	ListIdentitySources(context.Context, *ListIdentitySourcesInput, ...func(*Options)) (*ListIdentitySourcesOutput, error)
+}
+
+var _ ListIdentitySourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIdentitySources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

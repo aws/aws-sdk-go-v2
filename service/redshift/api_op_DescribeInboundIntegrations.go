@@ -131,6 +131,9 @@ func (c *Client) addOperationDescribeInboundIntegrationsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInboundIntegrations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationDescribeInboundIntegrationsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeInboundIntegrationsAPIClient is a client that implements the
-// DescribeInboundIntegrations operation.
-type DescribeInboundIntegrationsAPIClient interface {
-	DescribeInboundIntegrations(context.Context, *DescribeInboundIntegrationsInput, ...func(*Options)) (*DescribeInboundIntegrationsOutput, error)
-}
-
-var _ DescribeInboundIntegrationsAPIClient = (*Client)(nil)
 
 // DescribeInboundIntegrationsPaginatorOptions is the paginator options for
 // DescribeInboundIntegrations
@@ -233,6 +228,9 @@ func (p *DescribeInboundIntegrationsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeInboundIntegrations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *DescribeInboundIntegrationsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeInboundIntegrationsAPIClient is a client that implements the
+// DescribeInboundIntegrations operation.
+type DescribeInboundIntegrationsAPIClient interface {
+	DescribeInboundIntegrations(context.Context, *DescribeInboundIntegrationsInput, ...func(*Options)) (*DescribeInboundIntegrationsOutput, error)
+}
+
+var _ DescribeInboundIntegrationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeInboundIntegrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

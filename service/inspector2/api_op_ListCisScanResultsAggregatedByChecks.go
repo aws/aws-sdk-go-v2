@@ -127,6 +127,9 @@ func (c *Client) addOperationListCisScanResultsAggregatedByChecksMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCisScanResultsAggregatedByChecksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListCisScanResultsAggregatedByChecksMiddlewares(sta
 	}
 	return nil
 }
-
-// ListCisScanResultsAggregatedByChecksAPIClient is a client that implements the
-// ListCisScanResultsAggregatedByChecks operation.
-type ListCisScanResultsAggregatedByChecksAPIClient interface {
-	ListCisScanResultsAggregatedByChecks(context.Context, *ListCisScanResultsAggregatedByChecksInput, ...func(*Options)) (*ListCisScanResultsAggregatedByChecksOutput, error)
-}
-
-var _ ListCisScanResultsAggregatedByChecksAPIClient = (*Client)(nil)
 
 // ListCisScanResultsAggregatedByChecksPaginatorOptions is the paginator options
 // for ListCisScanResultsAggregatedByChecks
@@ -226,6 +221,9 @@ func (p *ListCisScanResultsAggregatedByChecksPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCisScanResultsAggregatedByChecks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListCisScanResultsAggregatedByChecksPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListCisScanResultsAggregatedByChecksAPIClient is a client that implements the
+// ListCisScanResultsAggregatedByChecks operation.
+type ListCisScanResultsAggregatedByChecksAPIClient interface {
+	ListCisScanResultsAggregatedByChecks(context.Context, *ListCisScanResultsAggregatedByChecksInput, ...func(*Options)) (*ListCisScanResultsAggregatedByChecksOutput, error)
+}
+
+var _ ListCisScanResultsAggregatedByChecksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCisScanResultsAggregatedByChecks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -113,6 +113,9 @@ func (c *Client) addOperationGetReplicationSetMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetReplicationSetValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationGetReplicationSetMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// GetReplicationSetAPIClient is a client that implements the GetReplicationSet
-// operation.
-type GetReplicationSetAPIClient interface {
-	GetReplicationSet(context.Context, *GetReplicationSetInput, ...func(*Options)) (*GetReplicationSetOutput, error)
-}
-
-var _ GetReplicationSetAPIClient = (*Client)(nil)
 
 // WaitForReplicationSetActiveWaiterOptions are waiter options for
 // WaitForReplicationSetActiveWaiter
@@ -264,7 +259,13 @@ func (w *WaitForReplicationSetActiveWaiter) WaitForOutput(ctx context.Context, p
 		}
 
 		out, err := w.client.GetReplicationSet(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -492,7 +493,13 @@ func (w *WaitForReplicationSetDeletedWaiter) WaitForOutput(ctx context.Context, 
 		}
 
 		out, err := w.client.GetReplicationSet(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -573,6 +580,14 @@ func waitForReplicationSetDeletedStateRetryable(ctx context.Context, input *GetR
 
 	return true, nil
 }
+
+// GetReplicationSetAPIClient is a client that implements the GetReplicationSet
+// operation.
+type GetReplicationSetAPIClient interface {
+	GetReplicationSet(context.Context, *GetReplicationSetInput, ...func(*Options)) (*GetReplicationSetOutput, error)
+}
+
+var _ GetReplicationSetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReplicationSet(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

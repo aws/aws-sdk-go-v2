@@ -103,6 +103,9 @@ func (c *Client) addOperationDeletePlaceIndexMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeletePlaceIndexMiddleware(stack); err != nil {
 		return err
 	}

@@ -117,6 +117,9 @@ func (c *Client) addOperationListApplicationInstancesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListApplicationInstancesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListApplicationInstancesAPIClient is a client that implements the
-// ListApplicationInstances operation.
-type ListApplicationInstancesAPIClient interface {
-	ListApplicationInstances(context.Context, *ListApplicationInstancesInput, ...func(*Options)) (*ListApplicationInstancesOutput, error)
-}
-
-var _ ListApplicationInstancesAPIClient = (*Client)(nil)
 
 // ListApplicationInstancesPaginatorOptions is the paginator options for
 // ListApplicationInstances
@@ -207,6 +202,9 @@ func (p *ListApplicationInstancesPaginator) NextPage(ctx context.Context, optFns
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListApplicationInstancesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListApplicationInstancesAPIClient is a client that implements the
+// ListApplicationInstances operation.
+type ListApplicationInstancesAPIClient interface {
+	ListApplicationInstances(context.Context, *ListApplicationInstancesInput, ...func(*Options)) (*ListApplicationInstancesOutput, error)
+}
+
+var _ ListApplicationInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

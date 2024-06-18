@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeRoutingControlMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeRoutingControlValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeRoutingControlMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeRoutingControlAPIClient is a client that implements the
-// DescribeRoutingControl operation.
-type DescribeRoutingControlAPIClient interface {
-	DescribeRoutingControl(context.Context, *DescribeRoutingControlInput, ...func(*Options)) (*DescribeRoutingControlOutput, error)
-}
-
-var _ DescribeRoutingControlAPIClient = (*Client)(nil)
 
 // RoutingControlCreatedWaiterOptions are waiter options for
 // RoutingControlCreatedWaiter
@@ -265,7 +260,13 @@ func (w *RoutingControlCreatedWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.DescribeRoutingControl(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -464,7 +465,13 @@ func (w *RoutingControlDeletedWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.DescribeRoutingControl(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -535,6 +542,14 @@ func routingControlDeletedStateRetryable(ctx context.Context, input *DescribeRou
 
 	return true, nil
 }
+
+// DescribeRoutingControlAPIClient is a client that implements the
+// DescribeRoutingControl operation.
+type DescribeRoutingControlAPIClient interface {
+	DescribeRoutingControl(context.Context, *DescribeRoutingControlInput, ...func(*Options)) (*DescribeRoutingControlOutput, error)
+}
+
+var _ DescribeRoutingControlAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeRoutingControl(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -133,6 +133,9 @@ func (c *Client) addOperationListFacesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFacesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,13 +159,6 @@ func (c *Client) addOperationListFacesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListFacesAPIClient is a client that implements the ListFaces operation.
-type ListFacesAPIClient interface {
-	ListFaces(context.Context, *ListFacesInput, ...func(*Options)) (*ListFacesOutput, error)
-}
-
-var _ ListFacesAPIClient = (*Client)(nil)
 
 // ListFacesPaginatorOptions is the paginator options for ListFaces
 type ListFacesPaginatorOptions struct {
@@ -227,6 +223,9 @@ func (p *ListFacesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +244,13 @@ func (p *ListFacesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListFacesAPIClient is a client that implements the ListFaces operation.
+type ListFacesAPIClient interface {
+	ListFaces(context.Context, *ListFacesInput, ...func(*Options)) (*ListFacesOutput, error)
+}
+
+var _ ListFacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

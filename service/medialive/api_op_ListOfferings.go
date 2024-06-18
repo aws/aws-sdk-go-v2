@@ -143,6 +143,9 @@ func (c *Client) addOperationListOfferingsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOfferings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -163,13 +166,6 @@ func (c *Client) addOperationListOfferingsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListOfferingsAPIClient is a client that implements the ListOfferings operation.
-type ListOfferingsAPIClient interface {
-	ListOfferings(context.Context, *ListOfferingsInput, ...func(*Options)) (*ListOfferingsOutput, error)
-}
-
-var _ ListOfferingsAPIClient = (*Client)(nil)
 
 // ListOfferingsPaginatorOptions is the paginator options for ListOfferings
 type ListOfferingsPaginatorOptions struct {
@@ -234,6 +230,9 @@ func (p *ListOfferingsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOfferings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +251,13 @@ func (p *ListOfferingsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListOfferingsAPIClient is a client that implements the ListOfferings operation.
+type ListOfferingsAPIClient interface {
+	ListOfferings(context.Context, *ListOfferingsInput, ...func(*Options)) (*ListOfferingsOutput, error)
+}
+
+var _ ListOfferingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOfferings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

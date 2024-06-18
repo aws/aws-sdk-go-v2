@@ -168,6 +168,9 @@ func (c *Client) addOperationDescribeResourceCollectionHealthMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeResourceCollectionHealthValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -191,14 +194,6 @@ func (c *Client) addOperationDescribeResourceCollectionHealthMiddlewares(stack *
 	}
 	return nil
 }
-
-// DescribeResourceCollectionHealthAPIClient is a client that implements the
-// DescribeResourceCollectionHealth operation.
-type DescribeResourceCollectionHealthAPIClient interface {
-	DescribeResourceCollectionHealth(context.Context, *DescribeResourceCollectionHealthInput, ...func(*Options)) (*DescribeResourceCollectionHealthOutput, error)
-}
-
-var _ DescribeResourceCollectionHealthAPIClient = (*Client)(nil)
 
 // DescribeResourceCollectionHealthPaginatorOptions is the paginator options for
 // DescribeResourceCollectionHealth
@@ -254,6 +249,9 @@ func (p *DescribeResourceCollectionHealthPaginator) NextPage(ctx context.Context
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeResourceCollectionHealth(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -272,6 +270,14 @@ func (p *DescribeResourceCollectionHealthPaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// DescribeResourceCollectionHealthAPIClient is a client that implements the
+// DescribeResourceCollectionHealth operation.
+type DescribeResourceCollectionHealthAPIClient interface {
+	DescribeResourceCollectionHealth(context.Context, *DescribeResourceCollectionHealthInput, ...func(*Options)) (*DescribeResourceCollectionHealthOutput, error)
+}
+
+var _ DescribeResourceCollectionHealthAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeResourceCollectionHealth(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

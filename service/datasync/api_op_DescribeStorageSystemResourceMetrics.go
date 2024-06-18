@@ -143,6 +143,9 @@ func (c *Client) addOperationDescribeStorageSystemResourceMetricsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,41 +172,6 @@ func (c *Client) addOperationDescribeStorageSystemResourceMetricsMiddlewares(sta
 	}
 	return nil
 }
-
-type endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware struct {
-}
-
-func (*endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "discovery-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// DescribeStorageSystemResourceMetricsAPIClient is a client that implements the
-// DescribeStorageSystemResourceMetrics operation.
-type DescribeStorageSystemResourceMetricsAPIClient interface {
-	DescribeStorageSystemResourceMetrics(context.Context, *DescribeStorageSystemResourceMetricsInput, ...func(*Options)) (*DescribeStorageSystemResourceMetricsOutput, error)
-}
-
-var _ DescribeStorageSystemResourceMetricsAPIClient = (*Client)(nil)
 
 // DescribeStorageSystemResourceMetricsPaginatorOptions is the paginator options
 // for DescribeStorageSystemResourceMetrics
@@ -271,6 +239,9 @@ func (p *DescribeStorageSystemResourceMetricsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeStorageSystemResourceMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -289,6 +260,41 @@ func (p *DescribeStorageSystemResourceMetricsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+type endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "discovery-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opDescribeStorageSystemResourceMetricsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// DescribeStorageSystemResourceMetricsAPIClient is a client that implements the
+// DescribeStorageSystemResourceMetrics operation.
+type DescribeStorageSystemResourceMetricsAPIClient interface {
+	DescribeStorageSystemResourceMetrics(context.Context, *DescribeStorageSystemResourceMetricsInput, ...func(*Options)) (*DescribeStorageSystemResourceMetricsOutput, error)
+}
+
+var _ DescribeStorageSystemResourceMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStorageSystemResourceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

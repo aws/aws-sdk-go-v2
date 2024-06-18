@@ -122,6 +122,9 @@ func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListEndpointsAPIClient is a client that implements the ListEndpoints operation.
-type ListEndpointsAPIClient interface {
-	ListEndpoints(context.Context, *ListEndpointsInput, ...func(*Options)) (*ListEndpointsOutput, error)
-}
-
-var _ ListEndpointsAPIClient = (*Client)(nil)
 
 // ListEndpointsPaginatorOptions is the paginator options for ListEndpoints
 type ListEndpointsPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *ListEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *ListEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListEndpointsAPIClient is a client that implements the ListEndpoints operation.
+type ListEndpointsAPIClient interface {
+	ListEndpoints(context.Context, *ListEndpointsInput, ...func(*Options)) (*ListEndpointsOutput, error)
+}
+
+var _ ListEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

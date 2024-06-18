@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteInvitationsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInvitationsValidationMiddleware(stack); err != nil {
 		return err
 	}

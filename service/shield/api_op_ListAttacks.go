@@ -161,6 +161,9 @@ func (c *Client) addOperationListAttacksMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAttacks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -181,13 +184,6 @@ func (c *Client) addOperationListAttacksMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListAttacksAPIClient is a client that implements the ListAttacks operation.
-type ListAttacksAPIClient interface {
-	ListAttacks(context.Context, *ListAttacksInput, ...func(*Options)) (*ListAttacksOutput, error)
-}
-
-var _ ListAttacksAPIClient = (*Client)(nil)
 
 // ListAttacksPaginatorOptions is the paginator options for ListAttacks
 type ListAttacksPaginatorOptions struct {
@@ -258,6 +254,9 @@ func (p *ListAttacksPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAttacks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +275,13 @@ func (p *ListAttacksPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListAttacksAPIClient is a client that implements the ListAttacks operation.
+type ListAttacksAPIClient interface {
+	ListAttacks(context.Context, *ListAttacksInput, ...func(*Options)) (*ListAttacksOutput, error)
+}
+
+var _ ListAttacksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAttacks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

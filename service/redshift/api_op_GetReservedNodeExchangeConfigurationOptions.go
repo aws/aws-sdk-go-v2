@@ -137,6 +137,9 @@ func (c *Client) addOperationGetReservedNodeExchangeConfigurationOptionsMiddlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetReservedNodeExchangeConfigurationOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationGetReservedNodeExchangeConfigurationOptionsMiddlewa
 	}
 	return nil
 }
-
-// GetReservedNodeExchangeConfigurationOptionsAPIClient is a client that
-// implements the GetReservedNodeExchangeConfigurationOptions operation.
-type GetReservedNodeExchangeConfigurationOptionsAPIClient interface {
-	GetReservedNodeExchangeConfigurationOptions(context.Context, *GetReservedNodeExchangeConfigurationOptionsInput, ...func(*Options)) (*GetReservedNodeExchangeConfigurationOptionsOutput, error)
-}
-
-var _ GetReservedNodeExchangeConfigurationOptionsAPIClient = (*Client)(nil)
 
 // GetReservedNodeExchangeConfigurationOptionsPaginatorOptions is the paginator
 // options for GetReservedNodeExchangeConfigurationOptions
@@ -238,6 +233,9 @@ func (p *GetReservedNodeExchangeConfigurationOptionsPaginator) NextPage(ctx cont
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetReservedNodeExchangeConfigurationOptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *GetReservedNodeExchangeConfigurationOptionsPaginator) NextPage(ctx cont
 
 	return result, nil
 }
+
+// GetReservedNodeExchangeConfigurationOptionsAPIClient is a client that
+// implements the GetReservedNodeExchangeConfigurationOptions operation.
+type GetReservedNodeExchangeConfigurationOptionsAPIClient interface {
+	GetReservedNodeExchangeConfigurationOptions(context.Context, *GetReservedNodeExchangeConfigurationOptionsInput, ...func(*Options)) (*GetReservedNodeExchangeConfigurationOptionsOutput, error)
+}
+
+var _ GetReservedNodeExchangeConfigurationOptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReservedNodeExchangeConfigurationOptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

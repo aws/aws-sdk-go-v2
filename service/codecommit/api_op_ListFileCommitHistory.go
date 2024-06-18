@@ -129,6 +129,9 @@ func (c *Client) addOperationListFileCommitHistoryMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFileCommitHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListFileCommitHistoryMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListFileCommitHistoryAPIClient is a client that implements the
-// ListFileCommitHistory operation.
-type ListFileCommitHistoryAPIClient interface {
-	ListFileCommitHistory(context.Context, *ListFileCommitHistoryInput, ...func(*Options)) (*ListFileCommitHistoryOutput, error)
-}
-
-var _ ListFileCommitHistoryAPIClient = (*Client)(nil)
 
 // ListFileCommitHistoryPaginatorOptions is the paginator options for
 // ListFileCommitHistory
@@ -225,6 +220,9 @@ func (p *ListFileCommitHistoryPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFileCommitHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListFileCommitHistoryPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListFileCommitHistoryAPIClient is a client that implements the
+// ListFileCommitHistory operation.
+type ListFileCommitHistoryAPIClient interface {
+	ListFileCommitHistory(context.Context, *ListFileCommitHistoryInput, ...func(*Options)) (*ListFileCommitHistoryOutput, error)
+}
+
+var _ ListFileCommitHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFileCommitHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

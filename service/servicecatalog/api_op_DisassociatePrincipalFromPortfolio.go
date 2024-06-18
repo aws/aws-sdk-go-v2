@@ -142,6 +142,9 @@ func (c *Client) addOperationDisassociatePrincipalFromPortfolioMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociatePrincipalFromPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}

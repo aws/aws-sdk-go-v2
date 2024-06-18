@@ -199,6 +199,9 @@ func (c *Client) addOperationListResolverQueryLogConfigAssociationsMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverQueryLogConfigAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -219,14 +222,6 @@ func (c *Client) addOperationListResolverQueryLogConfigAssociationsMiddlewares(s
 	}
 	return nil
 }
-
-// ListResolverQueryLogConfigAssociationsAPIClient is a client that implements the
-// ListResolverQueryLogConfigAssociations operation.
-type ListResolverQueryLogConfigAssociationsAPIClient interface {
-	ListResolverQueryLogConfigAssociations(context.Context, *ListResolverQueryLogConfigAssociationsInput, ...func(*Options)) (*ListResolverQueryLogConfigAssociationsOutput, error)
-}
-
-var _ ListResolverQueryLogConfigAssociationsAPIClient = (*Client)(nil)
 
 // ListResolverQueryLogConfigAssociationsPaginatorOptions is the paginator options
 // for ListResolverQueryLogConfigAssociations
@@ -297,6 +292,9 @@ func (p *ListResolverQueryLogConfigAssociationsPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListResolverQueryLogConfigAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -315,6 +313,14 @@ func (p *ListResolverQueryLogConfigAssociationsPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListResolverQueryLogConfigAssociationsAPIClient is a client that implements the
+// ListResolverQueryLogConfigAssociations operation.
+type ListResolverQueryLogConfigAssociationsAPIClient interface {
+	ListResolverQueryLogConfigAssociations(context.Context, *ListResolverQueryLogConfigAssociationsInput, ...func(*Options)) (*ListResolverQueryLogConfigAssociationsOutput, error)
+}
+
+var _ ListResolverQueryLogConfigAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListResolverQueryLogConfigAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

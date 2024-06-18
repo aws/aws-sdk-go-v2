@@ -118,6 +118,9 @@ func (c *Client) addOperationGetBatchImportJobsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBatchImportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationGetBatchImportJobsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetBatchImportJobsAPIClient is a client that implements the GetBatchImportJobs
-// operation.
-type GetBatchImportJobsAPIClient interface {
-	GetBatchImportJobs(context.Context, *GetBatchImportJobsInput, ...func(*Options)) (*GetBatchImportJobsOutput, error)
-}
-
-var _ GetBatchImportJobsAPIClient = (*Client)(nil)
 
 // GetBatchImportJobsPaginatorOptions is the paginator options for
 // GetBatchImportJobs
@@ -211,6 +206,9 @@ func (p *GetBatchImportJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBatchImportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *GetBatchImportJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetBatchImportJobsAPIClient is a client that implements the GetBatchImportJobs
+// operation.
+type GetBatchImportJobsAPIClient interface {
+	GetBatchImportJobs(context.Context, *GetBatchImportJobsInput, ...func(*Options)) (*GetBatchImportJobsOutput, error)
+}
+
+var _ GetBatchImportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBatchImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -116,6 +116,9 @@ func (c *Client) addOperationListSourceLocationsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSourceLocations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListSourceLocationsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListSourceLocationsAPIClient is a client that implements the
-// ListSourceLocations operation.
-type ListSourceLocationsAPIClient interface {
-	ListSourceLocations(context.Context, *ListSourceLocationsInput, ...func(*Options)) (*ListSourceLocationsOutput, error)
-}
-
-var _ ListSourceLocationsAPIClient = (*Client)(nil)
 
 // ListSourceLocationsPaginatorOptions is the paginator options for
 // ListSourceLocations
@@ -212,6 +207,9 @@ func (p *ListSourceLocationsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSourceLocations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListSourceLocationsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListSourceLocationsAPIClient is a client that implements the
+// ListSourceLocations operation.
+type ListSourceLocationsAPIClient interface {
+	ListSourceLocations(context.Context, *ListSourceLocationsInput, ...func(*Options)) (*ListSourceLocationsOutput, error)
+}
+
+var _ ListSourceLocationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSourceLocations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

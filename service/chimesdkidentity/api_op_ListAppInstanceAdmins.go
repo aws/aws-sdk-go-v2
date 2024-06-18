@@ -120,6 +120,9 @@ func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAppInstanceAdminsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAppInstanceAdminsAPIClient is a client that implements the
-// ListAppInstanceAdmins operation.
-type ListAppInstanceAdminsAPIClient interface {
-	ListAppInstanceAdmins(context.Context, *ListAppInstanceAdminsInput, ...func(*Options)) (*ListAppInstanceAdminsOutput, error)
-}
-
-var _ ListAppInstanceAdminsAPIClient = (*Client)(nil)
 
 // ListAppInstanceAdminsPaginatorOptions is the paginator options for
 // ListAppInstanceAdmins
@@ -216,6 +211,9 @@ func (p *ListAppInstanceAdminsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppInstanceAdmins(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListAppInstanceAdminsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAppInstanceAdminsAPIClient is a client that implements the
+// ListAppInstanceAdmins operation.
+type ListAppInstanceAdminsAPIClient interface {
+	ListAppInstanceAdmins(context.Context, *ListAppInstanceAdminsInput, ...func(*Options)) (*ListAppInstanceAdminsOutput, error)
+}
+
+var _ ListAppInstanceAdminsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppInstanceAdmins(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

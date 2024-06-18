@@ -155,6 +155,9 @@ func (c *Client) addOperationDetectProtectiveEquipmentMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetectProtectiveEquipmentValidationMiddleware(stack); err != nil {
 		return err
 	}

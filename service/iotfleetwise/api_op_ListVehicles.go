@@ -135,6 +135,9 @@ func (c *Client) addOperationListVehiclesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVehicles(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,13 +158,6 @@ func (c *Client) addOperationListVehiclesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListVehiclesAPIClient is a client that implements the ListVehicles operation.
-type ListVehiclesAPIClient interface {
-	ListVehicles(context.Context, *ListVehiclesInput, ...func(*Options)) (*ListVehiclesOutput, error)
-}
-
-var _ ListVehiclesAPIClient = (*Client)(nil)
 
 // ListVehiclesPaginatorOptions is the paginator options for ListVehicles
 type ListVehiclesPaginatorOptions struct {
@@ -226,6 +222,9 @@ func (p *ListVehiclesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVehicles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +243,13 @@ func (p *ListVehiclesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListVehiclesAPIClient is a client that implements the ListVehicles operation.
+type ListVehiclesAPIClient interface {
+	ListVehicles(context.Context, *ListVehiclesInput, ...func(*Options)) (*ListVehiclesOutput, error)
+}
+
+var _ ListVehiclesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVehicles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

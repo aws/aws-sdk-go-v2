@@ -123,6 +123,9 @@ func (c *Client) addOperationListTrackerConsumersMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListTrackerConsumersMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,41 +152,6 @@ func (c *Client) addOperationListTrackerConsumersMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-type endpointPrefix_opListTrackerConsumersMiddleware struct {
-}
-
-func (*endpointPrefix_opListTrackerConsumersMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListTrackerConsumersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "cp.tracking." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListTrackerConsumersMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListTrackerConsumersMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListTrackerConsumersAPIClient is a client that implements the
-// ListTrackerConsumers operation.
-type ListTrackerConsumersAPIClient interface {
-	ListTrackerConsumers(context.Context, *ListTrackerConsumersInput, ...func(*Options)) (*ListTrackerConsumersOutput, error)
-}
-
-var _ ListTrackerConsumersAPIClient = (*Client)(nil)
 
 // ListTrackerConsumersPaginatorOptions is the paginator options for
 // ListTrackerConsumers
@@ -251,6 +219,9 @@ func (p *ListTrackerConsumersPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrackerConsumers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -269,6 +240,41 @@ func (p *ListTrackerConsumersPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+type endpointPrefix_opListTrackerConsumersMiddleware struct {
+}
+
+func (*endpointPrefix_opListTrackerConsumersMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListTrackerConsumersMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "cp.tracking." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListTrackerConsumersMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListTrackerConsumersMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListTrackerConsumersAPIClient is a client that implements the
+// ListTrackerConsumers operation.
+type ListTrackerConsumersAPIClient interface {
+	ListTrackerConsumers(context.Context, *ListTrackerConsumersInput, ...func(*Options)) (*ListTrackerConsumersOutput, error)
+}
+
+var _ ListTrackerConsumersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrackerConsumers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -170,6 +170,9 @@ func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetFaceDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -193,14 +196,6 @@ func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// GetFaceDetectionAPIClient is a client that implements the GetFaceDetection
-// operation.
-type GetFaceDetectionAPIClient interface {
-	GetFaceDetection(context.Context, *GetFaceDetectionInput, ...func(*Options)) (*GetFaceDetectionOutput, error)
-}
-
-var _ GetFaceDetectionAPIClient = (*Client)(nil)
 
 // GetFaceDetectionPaginatorOptions is the paginator options for GetFaceDetection
 type GetFaceDetectionPaginatorOptions struct {
@@ -267,6 +262,9 @@ func (p *GetFaceDetectionPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetFaceDetection(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -285,6 +283,14 @@ func (p *GetFaceDetectionPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// GetFaceDetectionAPIClient is a client that implements the GetFaceDetection
+// operation.
+type GetFaceDetectionAPIClient interface {
+	GetFaceDetection(context.Context, *GetFaceDetectionInput, ...func(*Options)) (*GetFaceDetectionOutput, error)
+}
+
+var _ GetFaceDetectionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetFaceDetection(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

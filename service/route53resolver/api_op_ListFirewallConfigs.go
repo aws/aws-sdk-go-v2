@@ -129,6 +129,9 @@ func (c *Client) addOperationListFirewallConfigsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFirewallConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListFirewallConfigsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListFirewallConfigsAPIClient is a client that implements the
-// ListFirewallConfigs operation.
-type ListFirewallConfigsAPIClient interface {
-	ListFirewallConfigs(context.Context, *ListFirewallConfigsInput, ...func(*Options)) (*ListFirewallConfigsOutput, error)
-}
-
-var _ ListFirewallConfigsAPIClient = (*Client)(nil)
 
 // ListFirewallConfigsPaginatorOptions is the paginator options for
 // ListFirewallConfigs
@@ -228,6 +223,9 @@ func (p *ListFirewallConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFirewallConfigs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListFirewallConfigsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListFirewallConfigsAPIClient is a client that implements the
+// ListFirewallConfigs operation.
+type ListFirewallConfigsAPIClient interface {
+	ListFirewallConfigs(context.Context, *ListFirewallConfigsInput, ...func(*Options)) (*ListFirewallConfigsOutput, error)
+}
+
+var _ ListFirewallConfigsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFirewallConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

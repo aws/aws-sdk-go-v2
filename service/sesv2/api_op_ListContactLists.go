@@ -118,6 +118,9 @@ func (c *Client) addOperationListContactListsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContactLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListContactListsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListContactListsAPIClient is a client that implements the ListContactLists
-// operation.
-type ListContactListsAPIClient interface {
-	ListContactLists(context.Context, *ListContactListsInput, ...func(*Options)) (*ListContactListsOutput, error)
-}
-
-var _ ListContactListsAPIClient = (*Client)(nil)
 
 // ListContactListsPaginatorOptions is the paginator options for ListContactLists
 type ListContactListsPaginatorOptions struct {
@@ -213,6 +208,9 @@ func (p *ListContactListsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContactLists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +229,14 @@ func (p *ListContactListsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListContactListsAPIClient is a client that implements the ListContactLists
+// operation.
+type ListContactListsAPIClient interface {
+	ListContactLists(context.Context, *ListContactListsInput, ...func(*Options)) (*ListContactListsOutput, error)
+}
+
+var _ ListContactListsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContactLists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -149,6 +149,9 @@ func (c *Client) addOperationListPendingInvitationResourcesMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPendingInvitationResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -172,14 +175,6 @@ func (c *Client) addOperationListPendingInvitationResourcesMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListPendingInvitationResourcesAPIClient is a client that implements the
-// ListPendingInvitationResources operation.
-type ListPendingInvitationResourcesAPIClient interface {
-	ListPendingInvitationResources(context.Context, *ListPendingInvitationResourcesInput, ...func(*Options)) (*ListPendingInvitationResourcesOutput, error)
-}
-
-var _ ListPendingInvitationResourcesAPIClient = (*Client)(nil)
 
 // ListPendingInvitationResourcesPaginatorOptions is the paginator options for
 // ListPendingInvitationResources
@@ -255,6 +250,9 @@ func (p *ListPendingInvitationResourcesPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPendingInvitationResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -273,6 +271,14 @@ func (p *ListPendingInvitationResourcesPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListPendingInvitationResourcesAPIClient is a client that implements the
+// ListPendingInvitationResources operation.
+type ListPendingInvitationResourcesAPIClient interface {
+	ListPendingInvitationResources(context.Context, *ListPendingInvitationResourcesInput, ...func(*Options)) (*ListPendingInvitationResourcesOutput, error)
+}
+
+var _ ListPendingInvitationResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPendingInvitationResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

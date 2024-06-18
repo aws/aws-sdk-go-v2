@@ -164,6 +164,9 @@ func (c *Client) addOperationDescribeReservedDBInstancesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReservedDBInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -187,14 +190,6 @@ func (c *Client) addOperationDescribeReservedDBInstancesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeReservedDBInstancesAPIClient is a client that implements the
-// DescribeReservedDBInstances operation.
-type DescribeReservedDBInstancesAPIClient interface {
-	DescribeReservedDBInstances(context.Context, *DescribeReservedDBInstancesInput, ...func(*Options)) (*DescribeReservedDBInstancesOutput, error)
-}
-
-var _ DescribeReservedDBInstancesAPIClient = (*Client)(nil)
 
 // DescribeReservedDBInstancesPaginatorOptions is the paginator options for
 // DescribeReservedDBInstances
@@ -268,6 +263,9 @@ func (p *DescribeReservedDBInstancesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedDBInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -286,6 +284,14 @@ func (p *DescribeReservedDBInstancesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeReservedDBInstancesAPIClient is a client that implements the
+// DescribeReservedDBInstances operation.
+type DescribeReservedDBInstancesAPIClient interface {
+	DescribeReservedDBInstances(context.Context, *DescribeReservedDBInstancesInput, ...func(*Options)) (*DescribeReservedDBInstancesOutput, error)
+}
+
+var _ DescribeReservedDBInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedDBInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

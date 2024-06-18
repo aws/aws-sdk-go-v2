@@ -156,6 +156,9 @@ func (c *Client) addOperationGetTranscriptMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTranscriptValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -179,13 +182,6 @@ func (c *Client) addOperationGetTranscriptMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetTranscriptAPIClient is a client that implements the GetTranscript operation.
-type GetTranscriptAPIClient interface {
-	GetTranscript(context.Context, *GetTranscriptInput, ...func(*Options)) (*GetTranscriptOutput, error)
-}
-
-var _ GetTranscriptAPIClient = (*Client)(nil)
 
 // GetTranscriptPaginatorOptions is the paginator options for GetTranscript
 type GetTranscriptPaginatorOptions struct {
@@ -250,6 +246,9 @@ func (p *GetTranscriptPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTranscript(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +267,13 @@ func (p *GetTranscriptPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetTranscriptAPIClient is a client that implements the GetTranscript operation.
+type GetTranscriptAPIClient interface {
+	GetTranscript(context.Context, *GetTranscriptInput, ...func(*Options)) (*GetTranscriptOutput, error)
+}
+
+var _ GetTranscriptAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTranscript(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

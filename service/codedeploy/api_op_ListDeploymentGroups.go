@@ -121,6 +121,9 @@ func (c *Client) addOperationListDeploymentGroupsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDeploymentGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListDeploymentGroupsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListDeploymentGroupsAPIClient is a client that implements the
-// ListDeploymentGroups operation.
-type ListDeploymentGroupsAPIClient interface {
-	ListDeploymentGroups(context.Context, *ListDeploymentGroupsInput, ...func(*Options)) (*ListDeploymentGroupsOutput, error)
-}
-
-var _ ListDeploymentGroupsAPIClient = (*Client)(nil)
 
 // ListDeploymentGroupsPaginatorOptions is the paginator options for
 // ListDeploymentGroups
@@ -205,6 +200,9 @@ func (p *ListDeploymentGroupsPaginator) NextPage(ctx context.Context, optFns ...
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDeploymentGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListDeploymentGroupsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListDeploymentGroupsAPIClient is a client that implements the
+// ListDeploymentGroups operation.
+type ListDeploymentGroupsAPIClient interface {
+	ListDeploymentGroups(context.Context, *ListDeploymentGroupsInput, ...func(*Options)) (*ListDeploymentGroupsOutput, error)
+}
+
+var _ ListDeploymentGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDeploymentGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

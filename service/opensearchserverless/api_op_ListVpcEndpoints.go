@@ -122,6 +122,9 @@ func (c *Client) addOperationListVpcEndpointsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVpcEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListVpcEndpointsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListVpcEndpointsAPIClient is a client that implements the ListVpcEndpoints
-// operation.
-type ListVpcEndpointsAPIClient interface {
-	ListVpcEndpoints(context.Context, *ListVpcEndpointsInput, ...func(*Options)) (*ListVpcEndpointsOutput, error)
-}
-
-var _ ListVpcEndpointsAPIClient = (*Client)(nil)
 
 // ListVpcEndpointsPaginatorOptions is the paginator options for ListVpcEndpoints
 type ListVpcEndpointsPaginatorOptions struct {
@@ -202,6 +197,9 @@ func (p *ListVpcEndpointsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVpcEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +218,14 @@ func (p *ListVpcEndpointsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListVpcEndpointsAPIClient is a client that implements the ListVpcEndpoints
+// operation.
+type ListVpcEndpointsAPIClient interface {
+	ListVpcEndpoints(context.Context, *ListVpcEndpointsInput, ...func(*Options)) (*ListVpcEndpointsOutput, error)
+}
+
+var _ ListVpcEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVpcEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

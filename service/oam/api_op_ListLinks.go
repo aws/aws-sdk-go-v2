@@ -119,6 +119,9 @@ func (c *Client) addOperationListLinksMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLinks(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,13 +142,6 @@ func (c *Client) addOperationListLinksMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListLinksAPIClient is a client that implements the ListLinks operation.
-type ListLinksAPIClient interface {
-	ListLinks(context.Context, *ListLinksInput, ...func(*Options)) (*ListLinksOutput, error)
-}
-
-var _ ListLinksAPIClient = (*Client)(nil)
 
 // ListLinksPaginatorOptions is the paginator options for ListLinks
 type ListLinksPaginatorOptions struct {
@@ -210,6 +206,9 @@ func (p *ListLinksPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLinks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +227,13 @@ func (p *ListLinksPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListLinksAPIClient is a client that implements the ListLinks operation.
+type ListLinksAPIClient interface {
+	ListLinks(context.Context, *ListLinksInput, ...func(*Options)) (*ListLinksOutput, error)
+}
+
+var _ ListLinksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLinks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

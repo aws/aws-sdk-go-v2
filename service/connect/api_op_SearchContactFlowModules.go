@@ -131,6 +131,9 @@ func (c *Client) addOperationSearchContactFlowModulesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchContactFlowModulesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationSearchContactFlowModulesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// SearchContactFlowModulesAPIClient is a client that implements the
-// SearchContactFlowModules operation.
-type SearchContactFlowModulesAPIClient interface {
-	SearchContactFlowModules(context.Context, *SearchContactFlowModulesInput, ...func(*Options)) (*SearchContactFlowModulesOutput, error)
-}
-
-var _ SearchContactFlowModulesAPIClient = (*Client)(nil)
 
 // SearchContactFlowModulesPaginatorOptions is the paginator options for
 // SearchContactFlowModules
@@ -228,6 +223,9 @@ func (p *SearchContactFlowModulesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchContactFlowModules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *SearchContactFlowModulesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// SearchContactFlowModulesAPIClient is a client that implements the
+// SearchContactFlowModules operation.
+type SearchContactFlowModulesAPIClient interface {
+	SearchContactFlowModules(context.Context, *SearchContactFlowModulesInput, ...func(*Options)) (*SearchContactFlowModulesOutput, error)
+}
+
+var _ SearchContactFlowModulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchContactFlowModules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -153,6 +153,9 @@ func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDownloadDBLogFilePortionValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -176,14 +179,6 @@ func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// DownloadDBLogFilePortionAPIClient is a client that implements the
-// DownloadDBLogFilePortion operation.
-type DownloadDBLogFilePortionAPIClient interface {
-	DownloadDBLogFilePortion(context.Context, *DownloadDBLogFilePortionInput, ...func(*Options)) (*DownloadDBLogFilePortionOutput, error)
-}
-
-var _ DownloadDBLogFilePortionAPIClient = (*Client)(nil)
 
 // DownloadDBLogFilePortionPaginatorOptions is the paginator options for
 // DownloadDBLogFilePortion
@@ -271,6 +266,9 @@ func (p *DownloadDBLogFilePortionPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.NumberOfLines = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DownloadDBLogFilePortion(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -289,6 +287,14 @@ func (p *DownloadDBLogFilePortionPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// DownloadDBLogFilePortionAPIClient is a client that implements the
+// DownloadDBLogFilePortion operation.
+type DownloadDBLogFilePortionAPIClient interface {
+	DownloadDBLogFilePortion(context.Context, *DownloadDBLogFilePortionInput, ...func(*Options)) (*DownloadDBLogFilePortionOutput, error)
+}
+
+var _ DownloadDBLogFilePortionAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDownloadDBLogFilePortion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

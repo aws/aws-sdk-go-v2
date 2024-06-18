@@ -137,6 +137,9 @@ func (c *Client) addOperationDetectEntitiesV2Middlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDetectEntitiesV2ValidationMiddleware(stack); err != nil {
 		return err
 	}

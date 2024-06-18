@@ -134,6 +134,9 @@ func (c *Client) addOperationListReplacePermissionAssociationsWorkMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReplacePermissionAssociationsWork(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListReplacePermissionAssociationsWorkMiddlewares(st
 	}
 	return nil
 }
-
-// ListReplacePermissionAssociationsWorkAPIClient is a client that implements the
-// ListReplacePermissionAssociationsWork operation.
-type ListReplacePermissionAssociationsWorkAPIClient interface {
-	ListReplacePermissionAssociationsWork(context.Context, *ListReplacePermissionAssociationsWorkInput, ...func(*Options)) (*ListReplacePermissionAssociationsWorkOutput, error)
-}
-
-var _ ListReplacePermissionAssociationsWorkAPIClient = (*Client)(nil)
 
 // ListReplacePermissionAssociationsWorkPaginatorOptions is the paginator options
 // for ListReplacePermissionAssociationsWork
@@ -237,6 +232,9 @@ func (p *ListReplacePermissionAssociationsWorkPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListReplacePermissionAssociationsWork(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListReplacePermissionAssociationsWorkPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListReplacePermissionAssociationsWorkAPIClient is a client that implements the
+// ListReplacePermissionAssociationsWork operation.
+type ListReplacePermissionAssociationsWorkAPIClient interface {
+	ListReplacePermissionAssociationsWork(context.Context, *ListReplacePermissionAssociationsWorkInput, ...func(*Options)) (*ListReplacePermissionAssociationsWorkOutput, error)
+}
+
+var _ ListReplacePermissionAssociationsWorkAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListReplacePermissionAssociationsWork(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

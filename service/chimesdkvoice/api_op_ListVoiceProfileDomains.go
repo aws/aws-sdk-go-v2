@@ -110,6 +110,9 @@ func (c *Client) addOperationListVoiceProfileDomainsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVoiceProfileDomains(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListVoiceProfileDomainsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListVoiceProfileDomainsAPIClient is a client that implements the
-// ListVoiceProfileDomains operation.
-type ListVoiceProfileDomainsAPIClient interface {
-	ListVoiceProfileDomains(context.Context, *ListVoiceProfileDomainsInput, ...func(*Options)) (*ListVoiceProfileDomainsOutput, error)
-}
-
-var _ ListVoiceProfileDomainsAPIClient = (*Client)(nil)
 
 // ListVoiceProfileDomainsPaginatorOptions is the paginator options for
 // ListVoiceProfileDomains
@@ -204,6 +199,9 @@ func (p *ListVoiceProfileDomainsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVoiceProfileDomains(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListVoiceProfileDomainsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListVoiceProfileDomainsAPIClient is a client that implements the
+// ListVoiceProfileDomains operation.
+type ListVoiceProfileDomainsAPIClient interface {
+	ListVoiceProfileDomains(context.Context, *ListVoiceProfileDomainsInput, ...func(*Options)) (*ListVoiceProfileDomainsOutput, error)
+}
+
+var _ ListVoiceProfileDomainsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVoiceProfileDomains(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationDescribeStepMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeStepValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,13 +143,6 @@ func (c *Client) addOperationDescribeStepMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// DescribeStepAPIClient is a client that implements the DescribeStep operation.
-type DescribeStepAPIClient interface {
-	DescribeStep(context.Context, *DescribeStepInput, ...func(*Options)) (*DescribeStepOutput, error)
-}
-
-var _ DescribeStepAPIClient = (*Client)(nil)
 
 // StepCompleteWaiterOptions are waiter options for StepCompleteWaiter
 type StepCompleteWaiterOptions struct {
@@ -262,7 +258,13 @@ func (w *StepCompleteWaiter) WaitForOutput(ctx context.Context, params *Describe
 		}
 
 		out, err := w.client.DescribeStep(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -353,6 +355,13 @@ func stepCompleteStateRetryable(ctx context.Context, input *DescribeStepInput, o
 
 	return true, nil
 }
+
+// DescribeStepAPIClient is a client that implements the DescribeStep operation.
+type DescribeStepAPIClient interface {
+	DescribeStep(context.Context, *DescribeStepInput, ...func(*Options)) (*DescribeStepOutput, error)
+}
+
+var _ DescribeStepAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeStep(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

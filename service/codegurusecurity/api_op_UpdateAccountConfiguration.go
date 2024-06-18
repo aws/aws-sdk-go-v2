@@ -113,6 +113,9 @@ func (c *Client) addOperationUpdateAccountConfigurationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateAccountConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

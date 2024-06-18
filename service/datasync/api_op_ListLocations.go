@@ -125,6 +125,9 @@ func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLocationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,13 +151,6 @@ func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListLocationsAPIClient is a client that implements the ListLocations operation.
-type ListLocationsAPIClient interface {
-	ListLocations(context.Context, *ListLocationsInput, ...func(*Options)) (*ListLocationsOutput, error)
-}
-
-var _ ListLocationsAPIClient = (*Client)(nil)
 
 // ListLocationsPaginatorOptions is the paginator options for ListLocations
 type ListLocationsPaginatorOptions struct {
@@ -219,6 +215,9 @@ func (p *ListLocationsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLocations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +236,13 @@ func (p *ListLocationsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListLocationsAPIClient is a client that implements the ListLocations operation.
+type ListLocationsAPIClient interface {
+	ListLocations(context.Context, *ListLocationsInput, ...func(*Options)) (*ListLocationsOutput, error)
+}
+
+var _ ListLocationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLocations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -116,6 +116,9 @@ func (c *Client) addOperationResetNotificationSettingsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpResetNotificationSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}

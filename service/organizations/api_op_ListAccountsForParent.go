@@ -143,6 +143,9 @@ func (c *Client) addOperationListAccountsForParentMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAccountsForParentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationListAccountsForParentMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListAccountsForParentAPIClient is a client that implements the
-// ListAccountsForParent operation.
-type ListAccountsForParentAPIClient interface {
-	ListAccountsForParent(context.Context, *ListAccountsForParentInput, ...func(*Options)) (*ListAccountsForParentOutput, error)
-}
-
-var _ ListAccountsForParentAPIClient = (*Client)(nil)
 
 // ListAccountsForParentPaginatorOptions is the paginator options for
 // ListAccountsForParent
@@ -247,6 +242,9 @@ func (p *ListAccountsForParentPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccountsForParent(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -265,6 +263,14 @@ func (p *ListAccountsForParentPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListAccountsForParentAPIClient is a client that implements the
+// ListAccountsForParent operation.
+type ListAccountsForParentAPIClient interface {
+	ListAccountsForParent(context.Context, *ListAccountsForParentInput, ...func(*Options)) (*ListAccountsForParentOutput, error)
+}
+
+var _ ListAccountsForParentAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccountsForParent(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

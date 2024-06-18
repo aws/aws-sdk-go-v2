@@ -164,6 +164,9 @@ func (c *Client) addOperationListNotebookInstancesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNotebookInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -184,14 +187,6 @@ func (c *Client) addOperationListNotebookInstancesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListNotebookInstancesAPIClient is a client that implements the
-// ListNotebookInstances operation.
-type ListNotebookInstancesAPIClient interface {
-	ListNotebookInstances(context.Context, *ListNotebookInstancesInput, ...func(*Options)) (*ListNotebookInstancesOutput, error)
-}
-
-var _ ListNotebookInstancesAPIClient = (*Client)(nil)
 
 // ListNotebookInstancesPaginatorOptions is the paginator options for
 // ListNotebookInstances
@@ -257,6 +252,9 @@ func (p *ListNotebookInstancesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListNotebookInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +273,14 @@ func (p *ListNotebookInstancesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListNotebookInstancesAPIClient is a client that implements the
+// ListNotebookInstances operation.
+type ListNotebookInstancesAPIClient interface {
+	ListNotebookInstances(context.Context, *ListNotebookInstancesInput, ...func(*Options)) (*ListNotebookInstancesOutput, error)
+}
+
+var _ ListNotebookInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListNotebookInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

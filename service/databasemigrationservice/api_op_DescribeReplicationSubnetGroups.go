@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeReplicationSubnetGroupsMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationSubnetGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeReplicationSubnetGroupsMiddlewares(stack *m
 	}
 	return nil
 }
-
-// DescribeReplicationSubnetGroupsAPIClient is a client that implements the
-// DescribeReplicationSubnetGroups operation.
-type DescribeReplicationSubnetGroupsAPIClient interface {
-	DescribeReplicationSubnetGroups(context.Context, *DescribeReplicationSubnetGroupsInput, ...func(*Options)) (*DescribeReplicationSubnetGroupsOutput, error)
-}
-
-var _ DescribeReplicationSubnetGroupsAPIClient = (*Client)(nil)
 
 // DescribeReplicationSubnetGroupsPaginatorOptions is the paginator options for
 // DescribeReplicationSubnetGroups
@@ -229,6 +224,9 @@ func (p *DescribeReplicationSubnetGroupsPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReplicationSubnetGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *DescribeReplicationSubnetGroupsPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+// DescribeReplicationSubnetGroupsAPIClient is a client that implements the
+// DescribeReplicationSubnetGroups operation.
+type DescribeReplicationSubnetGroupsAPIClient interface {
+	DescribeReplicationSubnetGroups(context.Context, *DescribeReplicationSubnetGroupsInput, ...func(*Options)) (*DescribeReplicationSubnetGroupsOutput, error)
+}
+
+var _ DescribeReplicationSubnetGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReplicationSubnetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

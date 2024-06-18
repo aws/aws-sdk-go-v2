@@ -192,6 +192,9 @@ func (c *Client) addOperationGetJobMiddlewares(stack *middleware.Stack, options 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -218,40 +221,6 @@ func (c *Client) addOperationGetJobMiddlewares(stack *middleware.Stack, options 
 	}
 	return nil
 }
-
-type endpointPrefix_opGetJobMiddleware struct {
-}
-
-func (*endpointPrefix_opGetJobMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetJobMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetJobAPIClient is a client that implements the GetJob operation.
-type GetJobAPIClient interface {
-	GetJob(context.Context, *GetJobInput, ...func(*Options)) (*GetJobOutput, error)
-}
-
-var _ GetJobAPIClient = (*Client)(nil)
 
 // JobCreateCompleteWaiterOptions are waiter options for JobCreateCompleteWaiter
 type JobCreateCompleteWaiterOptions struct {
@@ -368,7 +337,13 @@ func (w *JobCreateCompleteWaiter) WaitForOutput(ctx context.Context, params *Get
 		}
 
 		out, err := w.client.GetJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -510,6 +485,40 @@ func jobCreateCompleteStateRetryable(ctx context.Context, input *GetJobInput, ou
 
 	return true, nil
 }
+
+type endpointPrefix_opGetJobMiddleware struct {
+}
+
+func (*endpointPrefix_opGetJobMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetJobMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetJobMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetJobAPIClient is a client that implements the GetJob operation.
+type GetJobAPIClient interface {
+	GetJob(context.Context, *GetJobInput, ...func(*Options)) (*GetJobOutput, error)
+}
+
+var _ GetJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

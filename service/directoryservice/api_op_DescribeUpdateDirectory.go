@@ -122,6 +122,9 @@ func (c *Client) addOperationDescribeUpdateDirectoryMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeUpdateDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationDescribeUpdateDirectoryMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeUpdateDirectoryAPIClient is a client that implements the
-// DescribeUpdateDirectory operation.
-type DescribeUpdateDirectoryAPIClient interface {
-	DescribeUpdateDirectory(context.Context, *DescribeUpdateDirectoryInput, ...func(*Options)) (*DescribeUpdateDirectoryOutput, error)
-}
-
-var _ DescribeUpdateDirectoryAPIClient = (*Client)(nil)
 
 // DescribeUpdateDirectoryPaginatorOptions is the paginator options for
 // DescribeUpdateDirectory
@@ -207,6 +202,9 @@ func (p *DescribeUpdateDirectoryPaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeUpdateDirectory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *DescribeUpdateDirectoryPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeUpdateDirectoryAPIClient is a client that implements the
+// DescribeUpdateDirectory operation.
+type DescribeUpdateDirectoryAPIClient interface {
+	DescribeUpdateDirectory(context.Context, *DescribeUpdateDirectoryInput, ...func(*Options)) (*DescribeUpdateDirectoryOutput, error)
+}
+
+var _ DescribeUpdateDirectoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeUpdateDirectory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -148,6 +148,9 @@ func (c *Client) addOperationDescribeCacheEngineVersionsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCacheEngineVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -168,14 +171,6 @@ func (c *Client) addOperationDescribeCacheEngineVersionsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeCacheEngineVersionsAPIClient is a client that implements the
-// DescribeCacheEngineVersions operation.
-type DescribeCacheEngineVersionsAPIClient interface {
-	DescribeCacheEngineVersions(context.Context, *DescribeCacheEngineVersionsInput, ...func(*Options)) (*DescribeCacheEngineVersionsOutput, error)
-}
-
-var _ DescribeCacheEngineVersionsAPIClient = (*Client)(nil)
 
 // DescribeCacheEngineVersionsPaginatorOptions is the paginator options for
 // DescribeCacheEngineVersions
@@ -249,6 +244,9 @@ func (p *DescribeCacheEngineVersionsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCacheEngineVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -267,6 +265,14 @@ func (p *DescribeCacheEngineVersionsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeCacheEngineVersionsAPIClient is a client that implements the
+// DescribeCacheEngineVersions operation.
+type DescribeCacheEngineVersionsAPIClient interface {
+	DescribeCacheEngineVersions(context.Context, *DescribeCacheEngineVersionsInput, ...func(*Options)) (*DescribeCacheEngineVersionsOutput, error)
+}
+
+var _ DescribeCacheEngineVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCacheEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

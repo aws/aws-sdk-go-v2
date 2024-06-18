@@ -196,6 +196,9 @@ func (c *Client) addOperationListPackageVersionAssetsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPackageVersionAssetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -219,14 +222,6 @@ func (c *Client) addOperationListPackageVersionAssetsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListPackageVersionAssetsAPIClient is a client that implements the
-// ListPackageVersionAssets operation.
-type ListPackageVersionAssetsAPIClient interface {
-	ListPackageVersionAssets(context.Context, *ListPackageVersionAssetsInput, ...func(*Options)) (*ListPackageVersionAssetsOutput, error)
-}
-
-var _ ListPackageVersionAssetsAPIClient = (*Client)(nil)
 
 // ListPackageVersionAssetsPaginatorOptions is the paginator options for
 // ListPackageVersionAssets
@@ -293,6 +288,9 @@ func (p *ListPackageVersionAssetsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPackageVersionAssets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -311,6 +309,14 @@ func (p *ListPackageVersionAssetsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListPackageVersionAssetsAPIClient is a client that implements the
+// ListPackageVersionAssets operation.
+type ListPackageVersionAssetsAPIClient interface {
+	ListPackageVersionAssets(context.Context, *ListPackageVersionAssetsInput, ...func(*Options)) (*ListPackageVersionAssetsOutput, error)
+}
+
+var _ ListPackageVersionAssetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPackageVersionAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

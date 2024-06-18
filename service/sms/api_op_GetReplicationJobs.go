@@ -116,6 +116,9 @@ func (c *Client) addOperationGetReplicationJobsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetReplicationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationGetReplicationJobsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetReplicationJobsAPIClient is a client that implements the GetReplicationJobs
-// operation.
-type GetReplicationJobsAPIClient interface {
-	GetReplicationJobs(context.Context, *GetReplicationJobsInput, ...func(*Options)) (*GetReplicationJobsOutput, error)
-}
-
-var _ GetReplicationJobsAPIClient = (*Client)(nil)
 
 // GetReplicationJobsPaginatorOptions is the paginator options for
 // GetReplicationJobs
@@ -211,6 +206,9 @@ func (p *GetReplicationJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetReplicationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *GetReplicationJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetReplicationJobsAPIClient is a client that implements the GetReplicationJobs
+// operation.
+type GetReplicationJobsAPIClient interface {
+	GetReplicationJobs(context.Context, *GetReplicationJobsInput, ...func(*Options)) (*GetReplicationJobsOutput, error)
+}
+
+var _ GetReplicationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetReplicationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

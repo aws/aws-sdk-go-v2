@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeParameterGroupsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeParameterGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationDescribeParameterGroupsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeParameterGroupsAPIClient is a client that implements the
-// DescribeParameterGroups operation.
-type DescribeParameterGroupsAPIClient interface {
-	DescribeParameterGroups(context.Context, *DescribeParameterGroupsInput, ...func(*Options)) (*DescribeParameterGroupsOutput, error)
-}
-
-var _ DescribeParameterGroupsAPIClient = (*Client)(nil)
 
 // DescribeParameterGroupsPaginatorOptions is the paginator options for
 // DescribeParameterGroups
@@ -221,6 +216,9 @@ func (p *DescribeParameterGroupsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeParameterGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeParameterGroupsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeParameterGroupsAPIClient is a client that implements the
+// DescribeParameterGroups operation.
+type DescribeParameterGroupsAPIClient interface {
+	DescribeParameterGroups(context.Context, *DescribeParameterGroupsInput, ...func(*Options)) (*DescribeParameterGroupsOutput, error)
+}
+
+var _ DescribeParameterGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeParameterGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

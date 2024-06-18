@@ -148,6 +148,9 @@ func (c *Client) addOperationStartResourceEvaluationMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartResourceEvaluationValidationMiddleware(stack); err != nil {
 		return err
 	}

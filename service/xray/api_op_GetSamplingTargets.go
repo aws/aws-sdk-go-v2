@@ -120,6 +120,9 @@ func (c *Client) addOperationGetSamplingTargetsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetSamplingTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}

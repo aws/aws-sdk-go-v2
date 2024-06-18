@@ -155,6 +155,9 @@ func (c *Client) addOperationListAssociatedAssetsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAssociatedAssetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,41 +184,6 @@ func (c *Client) addOperationListAssociatedAssetsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-type endpointPrefix_opListAssociatedAssetsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAssociatedAssetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAssociatedAssetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAssociatedAssetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAssociatedAssetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAssociatedAssetsAPIClient is a client that implements the
-// ListAssociatedAssets operation.
-type ListAssociatedAssetsAPIClient interface {
-	ListAssociatedAssets(context.Context, *ListAssociatedAssetsInput, ...func(*Options)) (*ListAssociatedAssetsOutput, error)
-}
-
-var _ ListAssociatedAssetsAPIClient = (*Client)(nil)
 
 // ListAssociatedAssetsPaginatorOptions is the paginator options for
 // ListAssociatedAssets
@@ -283,6 +251,9 @@ func (p *ListAssociatedAssetsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedAssets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -301,6 +272,41 @@ func (p *ListAssociatedAssetsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+type endpointPrefix_opListAssociatedAssetsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAssociatedAssetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAssociatedAssetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAssociatedAssetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAssociatedAssetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAssociatedAssetsAPIClient is a client that implements the
+// ListAssociatedAssets operation.
+type ListAssociatedAssetsAPIClient interface {
+	ListAssociatedAssets(context.Context, *ListAssociatedAssetsInput, ...func(*Options)) (*ListAssociatedAssetsOutput, error)
+}
+
+var _ ListAssociatedAssetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

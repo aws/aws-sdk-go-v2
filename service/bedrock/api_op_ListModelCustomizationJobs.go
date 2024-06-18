@@ -135,6 +135,9 @@ func (c *Client) addOperationListModelCustomizationJobsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelCustomizationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListModelCustomizationJobsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListModelCustomizationJobsAPIClient is a client that implements the
-// ListModelCustomizationJobs operation.
-type ListModelCustomizationJobsAPIClient interface {
-	ListModelCustomizationJobs(context.Context, *ListModelCustomizationJobsInput, ...func(*Options)) (*ListModelCustomizationJobsOutput, error)
-}
-
-var _ ListModelCustomizationJobsAPIClient = (*Client)(nil)
 
 // ListModelCustomizationJobsPaginatorOptions is the paginator options for
 // ListModelCustomizationJobs
@@ -230,6 +225,9 @@ func (p *ListModelCustomizationJobsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListModelCustomizationJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListModelCustomizationJobsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListModelCustomizationJobsAPIClient is a client that implements the
+// ListModelCustomizationJobs operation.
+type ListModelCustomizationJobsAPIClient interface {
+	ListModelCustomizationJobs(context.Context, *ListModelCustomizationJobsInput, ...func(*Options)) (*ListModelCustomizationJobsOutput, error)
+}
+
+var _ ListModelCustomizationJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListModelCustomizationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

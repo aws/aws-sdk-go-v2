@@ -122,6 +122,9 @@ func (c *Client) addOperationListAnomaliesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnomalies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -142,13 +145,6 @@ func (c *Client) addOperationListAnomaliesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListAnomaliesAPIClient is a client that implements the ListAnomalies operation.
-type ListAnomaliesAPIClient interface {
-	ListAnomalies(context.Context, *ListAnomaliesInput, ...func(*Options)) (*ListAnomaliesOutput, error)
-}
-
-var _ ListAnomaliesAPIClient = (*Client)(nil)
 
 // ListAnomaliesPaginatorOptions is the paginator options for ListAnomalies
 type ListAnomaliesPaginatorOptions struct {
@@ -214,6 +210,9 @@ func (p *ListAnomaliesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnomalies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +231,13 @@ func (p *ListAnomaliesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListAnomaliesAPIClient is a client that implements the ListAnomalies operation.
+type ListAnomaliesAPIClient interface {
+	ListAnomalies(context.Context, *ListAnomaliesInput, ...func(*Options)) (*ListAnomaliesOutput, error)
+}
+
+var _ ListAnomaliesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnomalies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

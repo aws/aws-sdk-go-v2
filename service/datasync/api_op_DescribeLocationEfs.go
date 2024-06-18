@@ -133,6 +133,9 @@ func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeLocationEfsValidationMiddleware(stack); err != nil {
 		return err
 	}

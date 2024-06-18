@@ -118,6 +118,9 @@ func (c *Client) addOperationListAppInstanceBotsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAppInstanceBotsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListAppInstanceBotsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListAppInstanceBotsAPIClient is a client that implements the
-// ListAppInstanceBots operation.
-type ListAppInstanceBotsAPIClient interface {
-	ListAppInstanceBots(context.Context, *ListAppInstanceBotsInput, ...func(*Options)) (*ListAppInstanceBotsOutput, error)
-}
-
-var _ ListAppInstanceBotsAPIClient = (*Client)(nil)
 
 // ListAppInstanceBotsPaginatorOptions is the paginator options for
 // ListAppInstanceBots
@@ -214,6 +209,9 @@ func (p *ListAppInstanceBotsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAppInstanceBots(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *ListAppInstanceBotsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListAppInstanceBotsAPIClient is a client that implements the
+// ListAppInstanceBots operation.
+type ListAppInstanceBotsAPIClient interface {
+	ListAppInstanceBots(context.Context, *ListAppInstanceBotsInput, ...func(*Options)) (*ListAppInstanceBotsOutput, error)
+}
+
+var _ ListAppInstanceBotsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAppInstanceBots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

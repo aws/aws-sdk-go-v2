@@ -118,6 +118,9 @@ func (c *Client) addOperationListTestGridSessionArtifactsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestGridSessionArtifactsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListTestGridSessionArtifactsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListTestGridSessionArtifactsAPIClient is a client that implements the
-// ListTestGridSessionArtifacts operation.
-type ListTestGridSessionArtifactsAPIClient interface {
-	ListTestGridSessionArtifacts(context.Context, *ListTestGridSessionArtifactsInput, ...func(*Options)) (*ListTestGridSessionArtifactsOutput, error)
-}
-
-var _ ListTestGridSessionArtifactsAPIClient = (*Client)(nil)
 
 // ListTestGridSessionArtifactsPaginatorOptions is the paginator options for
 // ListTestGridSessionArtifacts
@@ -216,6 +211,9 @@ func (p *ListTestGridSessionArtifactsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResult = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestGridSessionArtifacts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListTestGridSessionArtifactsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListTestGridSessionArtifactsAPIClient is a client that implements the
+// ListTestGridSessionArtifacts operation.
+type ListTestGridSessionArtifactsAPIClient interface {
+	ListTestGridSessionArtifacts(context.Context, *ListTestGridSessionArtifactsInput, ...func(*Options)) (*ListTestGridSessionArtifactsOutput, error)
+}
+
+var _ ListTestGridSessionArtifactsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestGridSessionArtifacts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

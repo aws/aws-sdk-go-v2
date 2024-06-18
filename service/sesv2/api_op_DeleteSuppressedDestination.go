@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteSuppressedDestinationMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSuppressedDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}

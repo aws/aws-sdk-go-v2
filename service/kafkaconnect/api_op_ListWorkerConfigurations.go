@@ -117,6 +117,9 @@ func (c *Client) addOperationListWorkerConfigurationsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkerConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListWorkerConfigurationsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListWorkerConfigurationsAPIClient is a client that implements the
-// ListWorkerConfigurations operation.
-type ListWorkerConfigurationsAPIClient interface {
-	ListWorkerConfigurations(context.Context, *ListWorkerConfigurationsInput, ...func(*Options)) (*ListWorkerConfigurationsOutput, error)
-}
-
-var _ ListWorkerConfigurationsAPIClient = (*Client)(nil)
 
 // ListWorkerConfigurationsPaginatorOptions is the paginator options for
 // ListWorkerConfigurations
@@ -207,6 +202,9 @@ func (p *ListWorkerConfigurationsPaginator) NextPage(ctx context.Context, optFns
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWorkerConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListWorkerConfigurationsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListWorkerConfigurationsAPIClient is a client that implements the
+// ListWorkerConfigurations operation.
+type ListWorkerConfigurationsAPIClient interface {
+	ListWorkerConfigurations(context.Context, *ListWorkerConfigurationsInput, ...func(*Options)) (*ListWorkerConfigurationsOutput, error)
+}
+
+var _ ListWorkerConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWorkerConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

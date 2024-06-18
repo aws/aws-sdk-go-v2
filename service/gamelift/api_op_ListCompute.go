@@ -150,6 +150,9 @@ func (c *Client) addOperationListComputeMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListComputeValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -173,13 +176,6 @@ func (c *Client) addOperationListComputeMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListComputeAPIClient is a client that implements the ListCompute operation.
-type ListComputeAPIClient interface {
-	ListCompute(context.Context, *ListComputeInput, ...func(*Options)) (*ListComputeOutput, error)
-}
-
-var _ ListComputeAPIClient = (*Client)(nil)
 
 // ListComputePaginatorOptions is the paginator options for ListCompute
 type ListComputePaginatorOptions struct {
@@ -245,6 +241,9 @@ func (p *ListComputePaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCompute(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -263,6 +262,13 @@ func (p *ListComputePaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListComputeAPIClient is a client that implements the ListCompute operation.
+type ListComputeAPIClient interface {
+	ListCompute(context.Context, *ListComputeInput, ...func(*Options)) (*ListComputeOutput, error)
+}
+
+var _ ListComputeAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCompute(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

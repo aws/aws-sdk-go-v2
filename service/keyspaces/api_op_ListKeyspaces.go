@@ -117,6 +117,9 @@ func (c *Client) addOperationListKeyspacesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKeyspaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,13 +140,6 @@ func (c *Client) addOperationListKeyspacesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListKeyspacesAPIClient is a client that implements the ListKeyspaces operation.
-type ListKeyspacesAPIClient interface {
-	ListKeyspaces(context.Context, *ListKeyspacesInput, ...func(*Options)) (*ListKeyspacesOutput, error)
-}
-
-var _ ListKeyspacesAPIClient = (*Client)(nil)
 
 // ListKeyspacesPaginatorOptions is the paginator options for ListKeyspaces
 type ListKeyspacesPaginatorOptions struct {
@@ -211,6 +207,9 @@ func (p *ListKeyspacesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKeyspaces(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +228,13 @@ func (p *ListKeyspacesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListKeyspacesAPIClient is a client that implements the ListKeyspaces operation.
+type ListKeyspacesAPIClient interface {
+	ListKeyspaces(context.Context, *ListKeyspacesInput, ...func(*Options)) (*ListKeyspacesOutput, error)
+}
+
+var _ ListKeyspacesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKeyspaces(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

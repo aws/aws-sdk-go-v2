@@ -133,6 +133,9 @@ func (c *Client) addOperationListRepositoriesInDomainMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRepositoriesInDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListRepositoriesInDomainMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListRepositoriesInDomainAPIClient is a client that implements the
-// ListRepositoriesInDomain operation.
-type ListRepositoriesInDomainAPIClient interface {
-	ListRepositoriesInDomain(context.Context, *ListRepositoriesInDomainInput, ...func(*Options)) (*ListRepositoriesInDomainOutput, error)
-}
-
-var _ ListRepositoriesInDomainAPIClient = (*Client)(nil)
 
 // ListRepositoriesInDomainPaginatorOptions is the paginator options for
 // ListRepositoriesInDomain
@@ -230,6 +225,9 @@ func (p *ListRepositoriesInDomainPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRepositoriesInDomain(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -248,6 +246,14 @@ func (p *ListRepositoriesInDomainPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListRepositoriesInDomainAPIClient is a client that implements the
+// ListRepositoriesInDomain operation.
+type ListRepositoriesInDomainAPIClient interface {
+	ListRepositoriesInDomain(context.Context, *ListRepositoriesInDomainInput, ...func(*Options)) (*ListRepositoriesInDomainOutput, error)
+}
+
+var _ ListRepositoriesInDomainAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRepositoriesInDomain(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

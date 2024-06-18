@@ -117,6 +117,9 @@ func (c *Client) addOperationDisassociateHealthCheckMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateHealthCheckValidationMiddleware(stack); err != nil {
 		return err
 	}

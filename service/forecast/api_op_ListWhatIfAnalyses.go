@@ -139,6 +139,9 @@ func (c *Client) addOperationListWhatIfAnalysesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListWhatIfAnalysesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListWhatIfAnalysesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListWhatIfAnalysesAPIClient is a client that implements the ListWhatIfAnalyses
-// operation.
-type ListWhatIfAnalysesAPIClient interface {
-	ListWhatIfAnalyses(context.Context, *ListWhatIfAnalysesInput, ...func(*Options)) (*ListWhatIfAnalysesOutput, error)
-}
-
-var _ ListWhatIfAnalysesAPIClient = (*Client)(nil)
 
 // ListWhatIfAnalysesPaginatorOptions is the paginator options for
 // ListWhatIfAnalyses
@@ -235,6 +230,9 @@ func (p *ListWhatIfAnalysesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListWhatIfAnalyses(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListWhatIfAnalysesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListWhatIfAnalysesAPIClient is a client that implements the ListWhatIfAnalyses
+// operation.
+type ListWhatIfAnalysesAPIClient interface {
+	ListWhatIfAnalyses(context.Context, *ListWhatIfAnalysesInput, ...func(*Options)) (*ListWhatIfAnalysesOutput, error)
+}
+
+var _ ListWhatIfAnalysesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListWhatIfAnalyses(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

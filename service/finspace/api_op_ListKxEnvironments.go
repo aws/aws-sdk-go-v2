@@ -113,6 +113,9 @@ func (c *Client) addOperationListKxEnvironmentsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKxEnvironments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationListKxEnvironmentsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListKxEnvironmentsAPIClient is a client that implements the ListKxEnvironments
-// operation.
-type ListKxEnvironmentsAPIClient interface {
-	ListKxEnvironments(context.Context, *ListKxEnvironmentsInput, ...func(*Options)) (*ListKxEnvironmentsOutput, error)
-}
-
-var _ ListKxEnvironmentsAPIClient = (*Client)(nil)
 
 // ListKxEnvironmentsPaginatorOptions is the paginator options for
 // ListKxEnvironments
@@ -206,6 +201,9 @@ func (p *ListKxEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListKxEnvironments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListKxEnvironmentsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListKxEnvironmentsAPIClient is a client that implements the ListKxEnvironments
+// operation.
+type ListKxEnvironmentsAPIClient interface {
+	ListKxEnvironments(context.Context, *ListKxEnvironmentsInput, ...func(*Options)) (*ListKxEnvironmentsOutput, error)
+}
+
+var _ ListKxEnvironmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListKxEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

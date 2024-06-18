@@ -115,6 +115,9 @@ func (c *Client) addOperationListOriginationNumbersMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOriginationNumbers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListOriginationNumbersMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListOriginationNumbersAPIClient is a client that implements the
-// ListOriginationNumbers operation.
-type ListOriginationNumbersAPIClient interface {
-	ListOriginationNumbers(context.Context, *ListOriginationNumbersInput, ...func(*Options)) (*ListOriginationNumbersOutput, error)
-}
-
-var _ ListOriginationNumbersAPIClient = (*Client)(nil)
 
 // ListOriginationNumbersPaginatorOptions is the paginator options for
 // ListOriginationNumbers
@@ -208,6 +203,9 @@ func (p *ListOriginationNumbersPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOriginationNumbers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListOriginationNumbersPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListOriginationNumbersAPIClient is a client that implements the
+// ListOriginationNumbers operation.
+type ListOriginationNumbersAPIClient interface {
+	ListOriginationNumbers(context.Context, *ListOriginationNumbersInput, ...func(*Options)) (*ListOriginationNumbersOutput, error)
+}
+
+var _ ListOriginationNumbersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOriginationNumbers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

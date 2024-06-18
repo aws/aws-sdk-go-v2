@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeDataSharesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataShares(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationDescribeDataSharesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// DescribeDataSharesAPIClient is a client that implements the DescribeDataShares
-// operation.
-type DescribeDataSharesAPIClient interface {
-	DescribeDataShares(context.Context, *DescribeDataSharesInput, ...func(*Options)) (*DescribeDataSharesOutput, error)
-}
-
-var _ DescribeDataSharesAPIClient = (*Client)(nil)
 
 // DescribeDataSharesPaginatorOptions is the paginator options for
 // DescribeDataShares
@@ -221,6 +216,9 @@ func (p *DescribeDataSharesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDataShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *DescribeDataSharesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// DescribeDataSharesAPIClient is a client that implements the DescribeDataShares
+// operation.
+type DescribeDataSharesAPIClient interface {
+	DescribeDataShares(context.Context, *DescribeDataSharesInput, ...func(*Options)) (*DescribeDataSharesOutput, error)
+}
+
+var _ DescribeDataSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDataShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

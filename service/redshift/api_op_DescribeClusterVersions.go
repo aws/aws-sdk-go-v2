@@ -149,6 +149,9 @@ func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -169,14 +172,6 @@ func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeClusterVersionsAPIClient is a client that implements the
-// DescribeClusterVersions operation.
-type DescribeClusterVersionsAPIClient interface {
-	DescribeClusterVersions(context.Context, *DescribeClusterVersionsInput, ...func(*Options)) (*DescribeClusterVersionsOutput, error)
-}
-
-var _ DescribeClusterVersionsAPIClient = (*Client)(nil)
 
 // DescribeClusterVersionsPaginatorOptions is the paginator options for
 // DescribeClusterVersions
@@ -250,6 +245,9 @@ func (p *DescribeClusterVersionsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeClusterVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +266,14 @@ func (p *DescribeClusterVersionsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeClusterVersionsAPIClient is a client that implements the
+// DescribeClusterVersions operation.
+type DescribeClusterVersionsAPIClient interface {
+	DescribeClusterVersions(context.Context, *DescribeClusterVersionsInput, ...func(*Options)) (*DescribeClusterVersionsOutput, error)
+}
+
+var _ DescribeClusterVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeClusterVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

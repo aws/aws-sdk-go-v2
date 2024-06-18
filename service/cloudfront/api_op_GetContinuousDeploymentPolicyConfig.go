@@ -111,6 +111,9 @@ func (c *Client) addOperationGetContinuousDeploymentPolicyConfigMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetContinuousDeploymentPolicyConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

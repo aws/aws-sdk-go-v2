@@ -125,6 +125,9 @@ func (c *Client) addOperationListAnomalousLogGroupsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnomalousLogGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListAnomalousLogGroupsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListAnomalousLogGroupsAPIClient is a client that implements the
-// ListAnomalousLogGroups operation.
-type ListAnomalousLogGroupsAPIClient interface {
-	ListAnomalousLogGroups(context.Context, *ListAnomalousLogGroupsInput, ...func(*Options)) (*ListAnomalousLogGroupsOutput, error)
-}
-
-var _ ListAnomalousLogGroupsAPIClient = (*Client)(nil)
 
 // ListAnomalousLogGroupsPaginatorOptions is the paginator options for
 // ListAnomalousLogGroups
@@ -222,6 +217,9 @@ func (p *ListAnomalousLogGroupsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnomalousLogGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListAnomalousLogGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListAnomalousLogGroupsAPIClient is a client that implements the
+// ListAnomalousLogGroups operation.
+type ListAnomalousLogGroupsAPIClient interface {
+	ListAnomalousLogGroups(context.Context, *ListAnomalousLogGroupsInput, ...func(*Options)) (*ListAnomalousLogGroupsOutput, error)
+}
+
+var _ ListAnomalousLogGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnomalousLogGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

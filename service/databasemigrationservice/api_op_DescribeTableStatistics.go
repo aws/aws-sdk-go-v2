@@ -141,6 +141,9 @@ func (c *Client) addOperationDescribeTableStatisticsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTableStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationDescribeTableStatisticsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeTableStatisticsAPIClient is a client that implements the
-// DescribeTableStatistics operation.
-type DescribeTableStatisticsAPIClient interface {
-	DescribeTableStatistics(context.Context, *DescribeTableStatisticsInput, ...func(*Options)) (*DescribeTableStatisticsOutput, error)
-}
-
-var _ DescribeTableStatisticsAPIClient = (*Client)(nil)
 
 // DescribeTableStatisticsPaginatorOptions is the paginator options for
 // DescribeTableStatistics
@@ -244,6 +239,9 @@ func (p *DescribeTableStatisticsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeTableStatistics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -262,6 +260,14 @@ func (p *DescribeTableStatisticsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeTableStatisticsAPIClient is a client that implements the
+// DescribeTableStatistics operation.
+type DescribeTableStatisticsAPIClient interface {
+	DescribeTableStatistics(context.Context, *DescribeTableStatisticsInput, ...func(*Options)) (*DescribeTableStatisticsOutput, error)
+}
+
+var _ DescribeTableStatisticsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTableStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

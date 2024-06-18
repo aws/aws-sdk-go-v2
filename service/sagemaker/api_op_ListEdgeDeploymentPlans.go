@@ -139,6 +139,9 @@ func (c *Client) addOperationListEdgeDeploymentPlansMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEdgeDeploymentPlans(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListEdgeDeploymentPlansMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListEdgeDeploymentPlansAPIClient is a client that implements the
-// ListEdgeDeploymentPlans operation.
-type ListEdgeDeploymentPlansAPIClient interface {
-	ListEdgeDeploymentPlans(context.Context, *ListEdgeDeploymentPlansInput, ...func(*Options)) (*ListEdgeDeploymentPlansOutput, error)
-}
-
-var _ ListEdgeDeploymentPlansAPIClient = (*Client)(nil)
 
 // ListEdgeDeploymentPlansPaginatorOptions is the paginator options for
 // ListEdgeDeploymentPlans
@@ -233,6 +228,9 @@ func (p *ListEdgeDeploymentPlansPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEdgeDeploymentPlans(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListEdgeDeploymentPlansPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListEdgeDeploymentPlansAPIClient is a client that implements the
+// ListEdgeDeploymentPlans operation.
+type ListEdgeDeploymentPlansAPIClient interface {
+	ListEdgeDeploymentPlans(context.Context, *ListEdgeDeploymentPlansInput, ...func(*Options)) (*ListEdgeDeploymentPlansOutput, error)
+}
+
+var _ ListEdgeDeploymentPlansAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEdgeDeploymentPlans(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

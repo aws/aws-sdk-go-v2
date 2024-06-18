@@ -155,6 +155,9 @@ func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateJobPriorityMiddleware(stack); err != nil {
 		return err
 	}

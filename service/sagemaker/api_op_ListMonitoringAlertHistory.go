@@ -136,6 +136,9 @@ func (c *Client) addOperationListMonitoringAlertHistoryMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitoringAlertHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListMonitoringAlertHistoryMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListMonitoringAlertHistoryAPIClient is a client that implements the
-// ListMonitoringAlertHistory operation.
-type ListMonitoringAlertHistoryAPIClient interface {
-	ListMonitoringAlertHistory(context.Context, *ListMonitoringAlertHistoryInput, ...func(*Options)) (*ListMonitoringAlertHistoryOutput, error)
-}
-
-var _ ListMonitoringAlertHistoryAPIClient = (*Client)(nil)
 
 // ListMonitoringAlertHistoryPaginatorOptions is the paginator options for
 // ListMonitoringAlertHistory
@@ -231,6 +226,9 @@ func (p *ListMonitoringAlertHistoryPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitoringAlertHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListMonitoringAlertHistoryPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListMonitoringAlertHistoryAPIClient is a client that implements the
+// ListMonitoringAlertHistory operation.
+type ListMonitoringAlertHistoryAPIClient interface {
+	ListMonitoringAlertHistory(context.Context, *ListMonitoringAlertHistoryInput, ...func(*Options)) (*ListMonitoringAlertHistoryOutput, error)
+}
+
+var _ ListMonitoringAlertHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitoringAlertHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

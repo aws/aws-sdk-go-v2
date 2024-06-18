@@ -118,6 +118,9 @@ func (c *Client) addOperationListFeaturesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFeaturesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,13 +144,6 @@ func (c *Client) addOperationListFeaturesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListFeaturesAPIClient is a client that implements the ListFeatures operation.
-type ListFeaturesAPIClient interface {
-	ListFeatures(context.Context, *ListFeaturesInput, ...func(*Options)) (*ListFeaturesOutput, error)
-}
-
-var _ ListFeaturesAPIClient = (*Client)(nil)
 
 // ListFeaturesPaginatorOptions is the paginator options for ListFeatures
 type ListFeaturesPaginatorOptions struct {
@@ -212,6 +208,9 @@ func (p *ListFeaturesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFeatures(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +229,13 @@ func (p *ListFeaturesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListFeaturesAPIClient is a client that implements the ListFeatures operation.
+type ListFeaturesAPIClient interface {
+	ListFeatures(context.Context, *ListFeaturesInput, ...func(*Options)) (*ListFeaturesOutput, error)
+}
+
+var _ ListFeaturesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFeatures(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

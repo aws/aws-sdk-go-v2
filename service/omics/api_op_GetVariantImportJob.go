@@ -158,6 +158,9 @@ func (c *Client) addOperationGetVariantImportJobMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetVariantImportJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,41 +187,6 @@ func (c *Client) addOperationGetVariantImportJobMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-type endpointPrefix_opGetVariantImportJobMiddleware struct {
-}
-
-func (*endpointPrefix_opGetVariantImportJobMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetVariantImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetVariantImportJobMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetVariantImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetVariantImportJobAPIClient is a client that implements the
-// GetVariantImportJob operation.
-type GetVariantImportJobAPIClient interface {
-	GetVariantImportJob(context.Context, *GetVariantImportJobInput, ...func(*Options)) (*GetVariantImportJobOutput, error)
-}
-
-var _ GetVariantImportJobAPIClient = (*Client)(nil)
 
 // VariantImportJobCreatedWaiterOptions are waiter options for
 // VariantImportJobCreatedWaiter
@@ -337,7 +305,13 @@ func (w *VariantImportJobCreatedWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.GetVariantImportJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -462,6 +436,41 @@ func variantImportJobCreatedStateRetryable(ctx context.Context, input *GetVarian
 
 	return true, nil
 }
+
+type endpointPrefix_opGetVariantImportJobMiddleware struct {
+}
+
+func (*endpointPrefix_opGetVariantImportJobMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetVariantImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetVariantImportJobMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetVariantImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetVariantImportJobAPIClient is a client that implements the
+// GetVariantImportJob operation.
+type GetVariantImportJobAPIClient interface {
+	GetVariantImportJob(context.Context, *GetVariantImportJobInput, ...func(*Options)) (*GetVariantImportJobOutput, error)
+}
+
+var _ GetVariantImportJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetVariantImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

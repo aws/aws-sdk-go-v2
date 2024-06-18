@@ -99,6 +99,9 @@ func (c *Client) addOperationPingMiddlewares(stack *middleware.Stack, options Op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPing(options.Region), middleware.Before); err != nil {
 		return err
 	}

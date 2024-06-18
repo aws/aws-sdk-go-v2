@@ -139,6 +139,9 @@ func (c *Client) addOperationListIndexesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIndexes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -159,13 +162,6 @@ func (c *Client) addOperationListIndexesMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListIndexesAPIClient is a client that implements the ListIndexes operation.
-type ListIndexesAPIClient interface {
-	ListIndexes(context.Context, *ListIndexesInput, ...func(*Options)) (*ListIndexesOutput, error)
-}
-
-var _ ListIndexesAPIClient = (*Client)(nil)
 
 // ListIndexesPaginatorOptions is the paginator options for ListIndexes
 type ListIndexesPaginatorOptions struct {
@@ -239,6 +235,9 @@ func (p *ListIndexesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIndexes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +256,13 @@ func (p *ListIndexesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListIndexesAPIClient is a client that implements the ListIndexes operation.
+type ListIndexesAPIClient interface {
+	ListIndexes(context.Context, *ListIndexesInput, ...func(*Options)) (*ListIndexesOutput, error)
+}
+
+var _ ListIndexesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIndexes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

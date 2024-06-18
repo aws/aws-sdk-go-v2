@@ -130,6 +130,9 @@ func (c *Client) addOperationListDistributionsByWebACLIdMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDistributionsByWebACLIdValidationMiddleware(stack); err != nil {
 		return err
 	}

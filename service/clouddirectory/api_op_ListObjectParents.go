@@ -136,6 +136,9 @@ func (c *Client) addOperationListObjectParentsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListObjectParentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,14 +162,6 @@ func (c *Client) addOperationListObjectParentsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListObjectParentsAPIClient is a client that implements the ListObjectParents
-// operation.
-type ListObjectParentsAPIClient interface {
-	ListObjectParents(context.Context, *ListObjectParentsInput, ...func(*Options)) (*ListObjectParentsOutput, error)
-}
-
-var _ ListObjectParentsAPIClient = (*Client)(nil)
 
 // ListObjectParentsPaginatorOptions is the paginator options for ListObjectParents
 type ListObjectParentsPaginatorOptions struct {
@@ -232,6 +227,9 @@ func (p *ListObjectParentsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListObjectParents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListObjectParentsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListObjectParentsAPIClient is a client that implements the ListObjectParents
+// operation.
+type ListObjectParentsAPIClient interface {
+	ListObjectParents(context.Context, *ListObjectParentsInput, ...func(*Options)) (*ListObjectParentsOutput, error)
+}
+
+var _ ListObjectParentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListObjectParents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

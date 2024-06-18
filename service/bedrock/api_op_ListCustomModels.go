@@ -140,6 +140,9 @@ func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListCustomModelsAPIClient is a client that implements the ListCustomModels
-// operation.
-type ListCustomModelsAPIClient interface {
-	ListCustomModels(context.Context, *ListCustomModelsInput, ...func(*Options)) (*ListCustomModelsOutput, error)
-}
-
-var _ ListCustomModelsAPIClient = (*Client)(nil)
 
 // ListCustomModelsPaginatorOptions is the paginator options for ListCustomModels
 type ListCustomModelsPaginatorOptions struct {
@@ -232,6 +227,9 @@ func (p *ListCustomModelsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomModels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListCustomModelsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListCustomModelsAPIClient is a client that implements the ListCustomModels
+// operation.
+type ListCustomModelsAPIClient interface {
+	ListCustomModels(context.Context, *ListCustomModelsInput, ...func(*Options)) (*ListCustomModelsOutput, error)
+}
+
+var _ ListCustomModelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomModels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

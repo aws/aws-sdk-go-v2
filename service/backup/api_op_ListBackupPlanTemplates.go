@@ -117,6 +117,9 @@ func (c *Client) addOperationListBackupPlanTemplatesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBackupPlanTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListBackupPlanTemplatesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListBackupPlanTemplatesAPIClient is a client that implements the
-// ListBackupPlanTemplates operation.
-type ListBackupPlanTemplatesAPIClient interface {
-	ListBackupPlanTemplates(context.Context, *ListBackupPlanTemplatesInput, ...func(*Options)) (*ListBackupPlanTemplatesOutput, error)
-}
-
-var _ ListBackupPlanTemplatesAPIClient = (*Client)(nil)
 
 // ListBackupPlanTemplatesPaginatorOptions is the paginator options for
 // ListBackupPlanTemplates
@@ -211,6 +206,9 @@ func (p *ListBackupPlanTemplatesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBackupPlanTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +227,14 @@ func (p *ListBackupPlanTemplatesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListBackupPlanTemplatesAPIClient is a client that implements the
+// ListBackupPlanTemplates operation.
+type ListBackupPlanTemplatesAPIClient interface {
+	ListBackupPlanTemplates(context.Context, *ListBackupPlanTemplatesInput, ...func(*Options)) (*ListBackupPlanTemplatesOutput, error)
+}
+
+var _ ListBackupPlanTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBackupPlanTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

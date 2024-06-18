@@ -191,6 +191,9 @@ func (c *Client) addOperationDescribeAssetModelMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeAssetModelMiddleware(stack); err != nil {
 		return err
 	}
@@ -217,41 +220,6 @@ func (c *Client) addOperationDescribeAssetModelMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-type endpointPrefix_opDescribeAssetModelMiddleware struct {
-}
-
-func (*endpointPrefix_opDescribeAssetModelMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opDescribeAssetModelMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opDescribeAssetModelMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opDescribeAssetModelMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// DescribeAssetModelAPIClient is a client that implements the DescribeAssetModel
-// operation.
-type DescribeAssetModelAPIClient interface {
-	DescribeAssetModel(context.Context, *DescribeAssetModelInput, ...func(*Options)) (*DescribeAssetModelOutput, error)
-}
-
-var _ DescribeAssetModelAPIClient = (*Client)(nil)
 
 // AssetModelActiveWaiterOptions are waiter options for AssetModelActiveWaiter
 type AssetModelActiveWaiterOptions struct {
@@ -368,7 +336,13 @@ func (w *AssetModelActiveWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeAssetModel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -560,7 +534,13 @@ func (w *AssetModelNotExistsWaiter) WaitForOutput(ctx context.Context, params *D
 		}
 
 		out, err := w.client.DescribeAssetModel(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -607,6 +587,41 @@ func assetModelNotExistsStateRetryable(ctx context.Context, input *DescribeAsset
 
 	return true, nil
 }
+
+type endpointPrefix_opDescribeAssetModelMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribeAssetModelMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribeAssetModelMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opDescribeAssetModelMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opDescribeAssetModelMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// DescribeAssetModelAPIClient is a client that implements the DescribeAssetModel
+// operation.
+type DescribeAssetModelAPIClient interface {
+	DescribeAssetModel(context.Context, *DescribeAssetModelInput, ...func(*Options)) (*DescribeAssetModelOutput, error)
+}
+
+var _ DescribeAssetModelAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAssetModel(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

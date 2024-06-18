@@ -138,6 +138,9 @@ func (c *Client) addOperationGetCommentsForPullRequestMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCommentsForPullRequestValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationGetCommentsForPullRequestMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// GetCommentsForPullRequestAPIClient is a client that implements the
-// GetCommentsForPullRequest operation.
-type GetCommentsForPullRequestAPIClient interface {
-	GetCommentsForPullRequest(context.Context, *GetCommentsForPullRequestInput, ...func(*Options)) (*GetCommentsForPullRequestOutput, error)
-}
-
-var _ GetCommentsForPullRequestAPIClient = (*Client)(nil)
 
 // GetCommentsForPullRequestPaginatorOptions is the paginator options for
 // GetCommentsForPullRequest
@@ -237,6 +232,9 @@ func (p *GetCommentsForPullRequestPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCommentsForPullRequest(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *GetCommentsForPullRequestPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// GetCommentsForPullRequestAPIClient is a client that implements the
+// GetCommentsForPullRequest operation.
+type GetCommentsForPullRequestAPIClient interface {
+	GetCommentsForPullRequest(context.Context, *GetCommentsForPullRequestInput, ...func(*Options)) (*GetCommentsForPullRequestOutput, error)
+}
+
+var _ GetCommentsForPullRequestAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCommentsForPullRequest(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

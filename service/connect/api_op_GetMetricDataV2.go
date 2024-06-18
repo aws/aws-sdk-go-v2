@@ -1074,6 +1074,9 @@ func (c *Client) addOperationGetMetricDataV2Middlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetMetricDataV2ValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -1097,14 +1100,6 @@ func (c *Client) addOperationGetMetricDataV2Middlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetMetricDataV2APIClient is a client that implements the GetMetricDataV2
-// operation.
-type GetMetricDataV2APIClient interface {
-	GetMetricDataV2(context.Context, *GetMetricDataV2Input, ...func(*Options)) (*GetMetricDataV2Output, error)
-}
-
-var _ GetMetricDataV2APIClient = (*Client)(nil)
 
 // GetMetricDataV2PaginatorOptions is the paginator options for GetMetricDataV2
 type GetMetricDataV2PaginatorOptions struct {
@@ -1169,6 +1164,9 @@ func (p *GetMetricDataV2Paginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetMetricDataV2(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -1187,6 +1185,14 @@ func (p *GetMetricDataV2Paginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetMetricDataV2APIClient is a client that implements the GetMetricDataV2
+// operation.
+type GetMetricDataV2APIClient interface {
+	GetMetricDataV2(context.Context, *GetMetricDataV2Input, ...func(*Options)) (*GetMetricDataV2Output, error)
+}
+
+var _ GetMetricDataV2APIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetMetricDataV2(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -131,6 +131,9 @@ func (c *Client) addOperationListDeviceEventsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListDeviceEventsValidationMiddleware(stack); err != nil {
 		return err
 	}

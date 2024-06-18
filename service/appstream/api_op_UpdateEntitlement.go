@@ -120,6 +120,9 @@ func (c *Client) addOperationUpdateEntitlementMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateEntitlementValidationMiddleware(stack); err != nil {
 		return err
 	}

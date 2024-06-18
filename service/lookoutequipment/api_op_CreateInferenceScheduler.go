@@ -200,6 +200,9 @@ func (c *Client) addOperationCreateInferenceSchedulerMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateInferenceSchedulerMiddleware(stack, options); err != nil {
 		return err
 	}

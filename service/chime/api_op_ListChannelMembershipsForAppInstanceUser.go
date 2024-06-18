@@ -134,6 +134,9 @@ func (c *Client) addOperationListChannelMembershipsForAppInstanceUserMiddlewares
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,41 +160,6 @@ func (c *Client) addOperationListChannelMembershipsForAppInstanceUserMiddlewares
 	}
 	return nil
 }
-
-type endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware struct {
-}
-
-func (*endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "messaging-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListChannelMembershipsForAppInstanceUserAPIClient is a client that implements
-// the ListChannelMembershipsForAppInstanceUser operation.
-type ListChannelMembershipsForAppInstanceUserAPIClient interface {
-	ListChannelMembershipsForAppInstanceUser(context.Context, *ListChannelMembershipsForAppInstanceUserInput, ...func(*Options)) (*ListChannelMembershipsForAppInstanceUserOutput, error)
-}
-
-var _ ListChannelMembershipsForAppInstanceUserAPIClient = (*Client)(nil)
 
 // ListChannelMembershipsForAppInstanceUserPaginatorOptions is the paginator
 // options for ListChannelMembershipsForAppInstanceUser
@@ -259,6 +227,9 @@ func (p *ListChannelMembershipsForAppInstanceUserPaginator) NextPage(ctx context
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelMembershipsForAppInstanceUser(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +248,41 @@ func (p *ListChannelMembershipsForAppInstanceUserPaginator) NextPage(ctx context
 
 	return result, nil
 }
+
+type endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware struct {
+}
+
+func (*endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "messaging-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListChannelMembershipsForAppInstanceUserMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListChannelMembershipsForAppInstanceUserAPIClient is a client that implements
+// the ListChannelMembershipsForAppInstanceUser operation.
+type ListChannelMembershipsForAppInstanceUserAPIClient interface {
+	ListChannelMembershipsForAppInstanceUser(context.Context, *ListChannelMembershipsForAppInstanceUserInput, ...func(*Options)) (*ListChannelMembershipsForAppInstanceUserOutput, error)
+}
+
+var _ ListChannelMembershipsForAppInstanceUserAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelMembershipsForAppInstanceUser(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

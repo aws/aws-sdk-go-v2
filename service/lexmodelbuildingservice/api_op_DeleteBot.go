@@ -116,6 +116,9 @@ func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteBotValidationMiddleware(stack); err != nil {
 		return err
 	}

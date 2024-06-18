@@ -140,6 +140,9 @@ func (c *Client) addOperationListScrapersMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScrapers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -160,13 +163,6 @@ func (c *Client) addOperationListScrapersMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListScrapersAPIClient is a client that implements the ListScrapers operation.
-type ListScrapersAPIClient interface {
-	ListScrapers(context.Context, *ListScrapersInput, ...func(*Options)) (*ListScrapersOutput, error)
-}
-
-var _ ListScrapersAPIClient = (*Client)(nil)
 
 // ListScrapersPaginatorOptions is the paginator options for ListScrapers
 type ListScrapersPaginatorOptions struct {
@@ -234,6 +230,9 @@ func (p *ListScrapersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScrapers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +251,13 @@ func (p *ListScrapersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListScrapersAPIClient is a client that implements the ListScrapers operation.
+type ListScrapersAPIClient interface {
+	ListScrapers(context.Context, *ListScrapersInput, ...func(*Options)) (*ListScrapersOutput, error)
+}
+
+var _ ListScrapersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScrapers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

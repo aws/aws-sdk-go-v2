@@ -129,6 +129,9 @@ func (c *Client) addOperationListBonusPaymentsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBonusPayments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListBonusPaymentsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListBonusPaymentsAPIClient is a client that implements the ListBonusPayments
-// operation.
-type ListBonusPaymentsAPIClient interface {
-	ListBonusPayments(context.Context, *ListBonusPaymentsInput, ...func(*Options)) (*ListBonusPaymentsOutput, error)
-}
-
-var _ ListBonusPaymentsAPIClient = (*Client)(nil)
 
 // ListBonusPaymentsPaginatorOptions is the paginator options for ListBonusPayments
 type ListBonusPaymentsPaginatorOptions struct {
@@ -220,6 +215,9 @@ func (p *ListBonusPaymentsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBonusPayments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListBonusPaymentsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListBonusPaymentsAPIClient is a client that implements the ListBonusPayments
+// operation.
+type ListBonusPaymentsAPIClient interface {
+	ListBonusPayments(context.Context, *ListBonusPaymentsInput, ...func(*Options)) (*ListBonusPaymentsOutput, error)
+}
+
+var _ ListBonusPaymentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBonusPayments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -126,6 +126,9 @@ func (c *Client) addOperationGetTagValuesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetTagValuesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,13 +152,6 @@ func (c *Client) addOperationGetTagValuesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetTagValuesAPIClient is a client that implements the GetTagValues operation.
-type GetTagValuesAPIClient interface {
-	GetTagValues(context.Context, *GetTagValuesInput, ...func(*Options)) (*GetTagValuesOutput, error)
-}
-
-var _ GetTagValuesAPIClient = (*Client)(nil)
 
 // GetTagValuesPaginatorOptions is the paginator options for GetTagValues
 type GetTagValuesPaginatorOptions struct {
@@ -208,6 +204,9 @@ func (p *GetTagValuesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.PaginationToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTagValues(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +225,13 @@ func (p *GetTagValuesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetTagValuesAPIClient is a client that implements the GetTagValues operation.
+type GetTagValuesAPIClient interface {
+	GetTagValues(context.Context, *GetTagValuesInput, ...func(*Options)) (*GetTagValuesOutput, error)
+}
+
+var _ GetTagValuesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTagValues(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

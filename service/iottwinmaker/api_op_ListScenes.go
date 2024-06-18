@@ -115,6 +115,9 @@ func (c *Client) addOperationListScenesMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListScenesMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,40 +144,6 @@ func (c *Client) addOperationListScenesMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-type endpointPrefix_opListScenesMiddleware struct {
-}
-
-func (*endpointPrefix_opListScenesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListScenesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListScenesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListScenesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListScenesAPIClient is a client that implements the ListScenes operation.
-type ListScenesAPIClient interface {
-	ListScenes(context.Context, *ListScenesInput, ...func(*Options)) (*ListScenesOutput, error)
-}
-
-var _ ListScenesAPIClient = (*Client)(nil)
 
 // ListScenesPaginatorOptions is the paginator options for ListScenes
 type ListScenesPaginatorOptions struct {
@@ -239,6 +208,9 @@ func (p *ListScenesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListScenes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +229,40 @@ func (p *ListScenesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+type endpointPrefix_opListScenesMiddleware struct {
+}
+
+func (*endpointPrefix_opListScenesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListScenesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListScenesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListScenesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListScenesAPIClient is a client that implements the ListScenes operation.
+type ListScenesAPIClient interface {
+	ListScenes(context.Context, *ListScenesInput, ...func(*Options)) (*ListScenesOutput, error)
+}
+
+var _ ListScenesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListScenes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

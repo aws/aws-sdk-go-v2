@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeThemePermissionsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeThemePermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}

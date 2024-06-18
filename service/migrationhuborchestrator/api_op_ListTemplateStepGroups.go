@@ -117,6 +117,9 @@ func (c *Client) addOperationListTemplateStepGroupsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTemplateStepGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,14 +143,6 @@ func (c *Client) addOperationListTemplateStepGroupsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListTemplateStepGroupsAPIClient is a client that implements the
-// ListTemplateStepGroups operation.
-type ListTemplateStepGroupsAPIClient interface {
-	ListTemplateStepGroups(context.Context, *ListTemplateStepGroupsInput, ...func(*Options)) (*ListTemplateStepGroupsOutput, error)
-}
-
-var _ ListTemplateStepGroupsAPIClient = (*Client)(nil)
 
 // ListTemplateStepGroupsPaginatorOptions is the paginator options for
 // ListTemplateStepGroups
@@ -209,6 +204,9 @@ func (p *ListTemplateStepGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTemplateStepGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListTemplateStepGroupsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListTemplateStepGroupsAPIClient is a client that implements the
+// ListTemplateStepGroups operation.
+type ListTemplateStepGroupsAPIClient interface {
+	ListTemplateStepGroups(context.Context, *ListTemplateStepGroupsInput, ...func(*Options)) (*ListTemplateStepGroupsOutput, error)
+}
+
+var _ ListTemplateStepGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTemplateStepGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

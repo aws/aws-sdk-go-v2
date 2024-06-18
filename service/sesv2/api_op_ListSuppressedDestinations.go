@@ -134,6 +134,9 @@ func (c *Client) addOperationListSuppressedDestinationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSuppressedDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListSuppressedDestinationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListSuppressedDestinationsAPIClient is a client that implements the
-// ListSuppressedDestinations operation.
-type ListSuppressedDestinationsAPIClient interface {
-	ListSuppressedDestinations(context.Context, *ListSuppressedDestinationsInput, ...func(*Options)) (*ListSuppressedDestinationsOutput, error)
-}
-
-var _ ListSuppressedDestinationsAPIClient = (*Client)(nil)
 
 // ListSuppressedDestinationsPaginatorOptions is the paginator options for
 // ListSuppressedDestinations
@@ -232,6 +227,9 @@ func (p *ListSuppressedDestinationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSuppressedDestinations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListSuppressedDestinationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListSuppressedDestinationsAPIClient is a client that implements the
+// ListSuppressedDestinations operation.
+type ListSuppressedDestinationsAPIClient interface {
+	ListSuppressedDestinations(context.Context, *ListSuppressedDestinationsInput, ...func(*Options)) (*ListSuppressedDestinationsOutput, error)
+}
+
+var _ ListSuppressedDestinationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSuppressedDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

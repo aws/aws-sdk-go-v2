@@ -123,6 +123,9 @@ func (c *Client) addOperationListControlDomainInsightsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlDomainInsights(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListControlDomainInsightsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListControlDomainInsightsAPIClient is a client that implements the
-// ListControlDomainInsights operation.
-type ListControlDomainInsightsAPIClient interface {
-	ListControlDomainInsights(context.Context, *ListControlDomainInsightsInput, ...func(*Options)) (*ListControlDomainInsightsOutput, error)
-}
-
-var _ ListControlDomainInsightsAPIClient = (*Client)(nil)
 
 // ListControlDomainInsightsPaginatorOptions is the paginator options for
 // ListControlDomainInsights
@@ -217,6 +212,9 @@ func (p *ListControlDomainInsightsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListControlDomainInsights(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListControlDomainInsightsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListControlDomainInsightsAPIClient is a client that implements the
+// ListControlDomainInsights operation.
+type ListControlDomainInsightsAPIClient interface {
+	ListControlDomainInsights(context.Context, *ListControlDomainInsightsInput, ...func(*Options)) (*ListControlDomainInsightsOutput, error)
+}
+
+var _ ListControlDomainInsightsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListControlDomainInsights(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

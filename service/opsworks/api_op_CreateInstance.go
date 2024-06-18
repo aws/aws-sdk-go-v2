@@ -261,6 +261,9 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}

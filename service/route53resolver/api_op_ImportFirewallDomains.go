@@ -143,6 +143,9 @@ func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportFirewallDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}

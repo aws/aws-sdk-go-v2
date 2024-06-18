@@ -118,6 +118,9 @@ func (c *Client) addOperationGetApplicationComponentDetailsMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetApplicationComponentDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}

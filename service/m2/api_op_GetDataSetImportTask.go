@@ -121,6 +121,9 @@ func (c *Client) addOperationGetDataSetImportTaskMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDataSetImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

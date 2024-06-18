@@ -121,6 +121,9 @@ func (c *Client) addOperationListFlywheelIterationHistoryMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFlywheelIterationHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListFlywheelIterationHistoryMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// ListFlywheelIterationHistoryAPIClient is a client that implements the
-// ListFlywheelIterationHistory operation.
-type ListFlywheelIterationHistoryAPIClient interface {
-	ListFlywheelIterationHistory(context.Context, *ListFlywheelIterationHistoryInput, ...func(*Options)) (*ListFlywheelIterationHistoryOutput, error)
-}
-
-var _ ListFlywheelIterationHistoryAPIClient = (*Client)(nil)
 
 // ListFlywheelIterationHistoryPaginatorOptions is the paginator options for
 // ListFlywheelIterationHistory
@@ -219,6 +214,9 @@ func (p *ListFlywheelIterationHistoryPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFlywheelIterationHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListFlywheelIterationHistoryPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// ListFlywheelIterationHistoryAPIClient is a client that implements the
+// ListFlywheelIterationHistory operation.
+type ListFlywheelIterationHistoryAPIClient interface {
+	ListFlywheelIterationHistory(context.Context, *ListFlywheelIterationHistoryInput, ...func(*Options)) (*ListFlywheelIterationHistoryOutput, error)
+}
+
+var _ ListFlywheelIterationHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFlywheelIterationHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

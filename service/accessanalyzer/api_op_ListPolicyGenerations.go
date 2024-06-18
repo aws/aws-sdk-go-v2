@@ -117,6 +117,9 @@ func (c *Client) addOperationListPolicyGenerationsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicyGenerations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,14 +140,6 @@ func (c *Client) addOperationListPolicyGenerationsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListPolicyGenerationsAPIClient is a client that implements the
-// ListPolicyGenerations operation.
-type ListPolicyGenerationsAPIClient interface {
-	ListPolicyGenerations(context.Context, *ListPolicyGenerationsInput, ...func(*Options)) (*ListPolicyGenerationsOutput, error)
-}
-
-var _ ListPolicyGenerationsAPIClient = (*Client)(nil)
 
 // ListPolicyGenerationsPaginatorOptions is the paginator options for
 // ListPolicyGenerations
@@ -210,6 +205,9 @@ func (p *ListPolicyGenerationsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPolicyGenerations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListPolicyGenerationsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListPolicyGenerationsAPIClient is a client that implements the
+// ListPolicyGenerations operation.
+type ListPolicyGenerationsAPIClient interface {
+	ListPolicyGenerations(context.Context, *ListPolicyGenerationsInput, ...func(*Options)) (*ListPolicyGenerationsOutput, error)
+}
+
+var _ ListPolicyGenerationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPolicyGenerations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -244,6 +244,9 @@ func (c *Client) addOperationDescribeReservedCacheNodesOfferingsMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedCacheNodesOfferings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -264,14 +267,6 @@ func (c *Client) addOperationDescribeReservedCacheNodesOfferingsMiddlewares(stac
 	}
 	return nil
 }
-
-// DescribeReservedCacheNodesOfferingsAPIClient is a client that implements the
-// DescribeReservedCacheNodesOfferings operation.
-type DescribeReservedCacheNodesOfferingsAPIClient interface {
-	DescribeReservedCacheNodesOfferings(context.Context, *DescribeReservedCacheNodesOfferingsInput, ...func(*Options)) (*DescribeReservedCacheNodesOfferingsOutput, error)
-}
-
-var _ DescribeReservedCacheNodesOfferingsAPIClient = (*Client)(nil)
 
 // DescribeReservedCacheNodesOfferingsPaginatorOptions is the paginator options
 // for DescribeReservedCacheNodesOfferings
@@ -345,6 +340,9 @@ func (p *DescribeReservedCacheNodesOfferingsPaginator) NextPage(ctx context.Cont
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeReservedCacheNodesOfferings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -363,6 +361,14 @@ func (p *DescribeReservedCacheNodesOfferingsPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// DescribeReservedCacheNodesOfferingsAPIClient is a client that implements the
+// DescribeReservedCacheNodesOfferings operation.
+type DescribeReservedCacheNodesOfferingsAPIClient interface {
+	DescribeReservedCacheNodesOfferings(context.Context, *DescribeReservedCacheNodesOfferingsInput, ...func(*Options)) (*DescribeReservedCacheNodesOfferingsOutput, error)
+}
+
+var _ DescribeReservedCacheNodesOfferingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeReservedCacheNodesOfferings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

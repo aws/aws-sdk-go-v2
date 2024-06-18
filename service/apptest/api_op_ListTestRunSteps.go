@@ -123,6 +123,9 @@ func (c *Client) addOperationListTestRunStepsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTestRunStepsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListTestRunStepsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListTestRunStepsAPIClient is a client that implements the ListTestRunSteps
-// operation.
-type ListTestRunStepsAPIClient interface {
-	ListTestRunSteps(context.Context, *ListTestRunStepsInput, ...func(*Options)) (*ListTestRunStepsOutput, error)
-}
-
-var _ ListTestRunStepsAPIClient = (*Client)(nil)
 
 // ListTestRunStepsPaginatorOptions is the paginator options for ListTestRunSteps
 type ListTestRunStepsPaginatorOptions struct {
@@ -218,6 +213,9 @@ func (p *ListTestRunStepsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTestRunSteps(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListTestRunStepsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListTestRunStepsAPIClient is a client that implements the ListTestRunSteps
+// operation.
+type ListTestRunStepsAPIClient interface {
+	ListTestRunSteps(context.Context, *ListTestRunStepsInput, ...func(*Options)) (*ListTestRunStepsOutput, error)
+}
+
+var _ ListTestRunStepsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTestRunSteps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

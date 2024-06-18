@@ -115,6 +115,9 @@ func (c *Client) addOperationListTaxRegistrationsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTaxRegistrations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListTaxRegistrationsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListTaxRegistrationsAPIClient is a client that implements the
-// ListTaxRegistrations operation.
-type ListTaxRegistrationsAPIClient interface {
-	ListTaxRegistrations(context.Context, *ListTaxRegistrationsInput, ...func(*Options)) (*ListTaxRegistrationsOutput, error)
-}
-
-var _ ListTaxRegistrationsAPIClient = (*Client)(nil)
 
 // ListTaxRegistrationsPaginatorOptions is the paginator options for
 // ListTaxRegistrations
@@ -208,6 +203,9 @@ func (p *ListTaxRegistrationsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTaxRegistrations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListTaxRegistrationsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListTaxRegistrationsAPIClient is a client that implements the
+// ListTaxRegistrations operation.
+type ListTaxRegistrationsAPIClient interface {
+	ListTaxRegistrations(context.Context, *ListTaxRegistrationsInput, ...func(*Options)) (*ListTaxRegistrationsOutput, error)
+}
+
+var _ ListTaxRegistrationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTaxRegistrations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

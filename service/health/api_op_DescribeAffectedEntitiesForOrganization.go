@@ -157,6 +157,9 @@ func (c *Client) addOperationDescribeAffectedEntitiesForOrganizationMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeAffectedEntitiesForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -180,14 +183,6 @@ func (c *Client) addOperationDescribeAffectedEntitiesForOrganizationMiddlewares(
 	}
 	return nil
 }
-
-// DescribeAffectedEntitiesForOrganizationAPIClient is a client that implements
-// the DescribeAffectedEntitiesForOrganization operation.
-type DescribeAffectedEntitiesForOrganizationAPIClient interface {
-	DescribeAffectedEntitiesForOrganization(context.Context, *DescribeAffectedEntitiesForOrganizationInput, ...func(*Options)) (*DescribeAffectedEntitiesForOrganizationOutput, error)
-}
-
-var _ DescribeAffectedEntitiesForOrganizationAPIClient = (*Client)(nil)
 
 // DescribeAffectedEntitiesForOrganizationPaginatorOptions is the paginator
 // options for DescribeAffectedEntitiesForOrganization
@@ -256,6 +251,9 @@ func (p *DescribeAffectedEntitiesForOrganizationPaginator) NextPage(ctx context.
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeAffectedEntitiesForOrganization(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -274,6 +272,14 @@ func (p *DescribeAffectedEntitiesForOrganizationPaginator) NextPage(ctx context.
 
 	return result, nil
 }
+
+// DescribeAffectedEntitiesForOrganizationAPIClient is a client that implements
+// the DescribeAffectedEntitiesForOrganization operation.
+type DescribeAffectedEntitiesForOrganizationAPIClient interface {
+	DescribeAffectedEntitiesForOrganization(context.Context, *DescribeAffectedEntitiesForOrganizationInput, ...func(*Options)) (*DescribeAffectedEntitiesForOrganizationOutput, error)
+}
+
+var _ DescribeAffectedEntitiesForOrganizationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeAffectedEntitiesForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

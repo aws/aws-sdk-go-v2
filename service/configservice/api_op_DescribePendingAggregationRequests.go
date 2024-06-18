@@ -113,6 +113,9 @@ func (c *Client) addOperationDescribePendingAggregationRequestsMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePendingAggregationRequests(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -133,14 +136,6 @@ func (c *Client) addOperationDescribePendingAggregationRequestsMiddlewares(stack
 	}
 	return nil
 }
-
-// DescribePendingAggregationRequestsAPIClient is a client that implements the
-// DescribePendingAggregationRequests operation.
-type DescribePendingAggregationRequestsAPIClient interface {
-	DescribePendingAggregationRequests(context.Context, *DescribePendingAggregationRequestsInput, ...func(*Options)) (*DescribePendingAggregationRequestsOutput, error)
-}
-
-var _ DescribePendingAggregationRequestsAPIClient = (*Client)(nil)
 
 // DescribePendingAggregationRequestsPaginatorOptions is the paginator options for
 // DescribePendingAggregationRequests
@@ -205,6 +200,9 @@ func (p *DescribePendingAggregationRequestsPaginator) NextPage(ctx context.Conte
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribePendingAggregationRequests(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *DescribePendingAggregationRequestsPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// DescribePendingAggregationRequestsAPIClient is a client that implements the
+// DescribePendingAggregationRequests operation.
+type DescribePendingAggregationRequestsAPIClient interface {
+	DescribePendingAggregationRequests(context.Context, *DescribePendingAggregationRequestsInput, ...func(*Options)) (*DescribePendingAggregationRequestsOutput, error)
+}
+
+var _ DescribePendingAggregationRequestsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribePendingAggregationRequests(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

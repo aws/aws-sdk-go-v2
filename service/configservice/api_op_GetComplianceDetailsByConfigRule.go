@@ -130,6 +130,9 @@ func (c *Client) addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetComplianceDetailsByConfigRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *
 	}
 	return nil
 }
-
-// GetComplianceDetailsByConfigRuleAPIClient is a client that implements the
-// GetComplianceDetailsByConfigRule operation.
-type GetComplianceDetailsByConfigRuleAPIClient interface {
-	GetComplianceDetailsByConfigRule(context.Context, *GetComplianceDetailsByConfigRuleInput, ...func(*Options)) (*GetComplianceDetailsByConfigRuleOutput, error)
-}
-
-var _ GetComplianceDetailsByConfigRuleAPIClient = (*Client)(nil)
 
 // GetComplianceDetailsByConfigRulePaginatorOptions is the paginator options for
 // GetComplianceDetailsByConfigRule
@@ -226,6 +221,9 @@ func (p *GetComplianceDetailsByConfigRulePaginator) NextPage(ctx context.Context
 
 	params.Limit = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetComplianceDetailsByConfigRule(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *GetComplianceDetailsByConfigRulePaginator) NextPage(ctx context.Context
 
 	return result, nil
 }
+
+// GetComplianceDetailsByConfigRuleAPIClient is a client that implements the
+// GetComplianceDetailsByConfigRule operation.
+type GetComplianceDetailsByConfigRuleAPIClient interface {
+	GetComplianceDetailsByConfigRule(context.Context, *GetComplianceDetailsByConfigRuleInput, ...func(*Options)) (*GetComplianceDetailsByConfigRuleOutput, error)
+}
+
+var _ GetComplianceDetailsByConfigRuleAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetComplianceDetailsByConfigRule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationListCustomerManagedPolicyReferencesInPermissionSetM
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCustomerManagedPolicyReferencesInPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListCustomerManagedPolicyReferencesInPermissionSetM
 	}
 	return nil
 }
-
-// ListCustomerManagedPolicyReferencesInPermissionSetAPIClient is a client that
-// implements the ListCustomerManagedPolicyReferencesInPermissionSet operation.
-type ListCustomerManagedPolicyReferencesInPermissionSetAPIClient interface {
-	ListCustomerManagedPolicyReferencesInPermissionSet(context.Context, *ListCustomerManagedPolicyReferencesInPermissionSetInput, ...func(*Options)) (*ListCustomerManagedPolicyReferencesInPermissionSetOutput, error)
-}
-
-var _ ListCustomerManagedPolicyReferencesInPermissionSetAPIClient = (*Client)(nil)
 
 // ListCustomerManagedPolicyReferencesInPermissionSetPaginatorOptions is the
 // paginator options for ListCustomerManagedPolicyReferencesInPermissionSet
@@ -223,6 +218,9 @@ func (p *ListCustomerManagedPolicyReferencesInPermissionSetPaginator) NextPage(c
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCustomerManagedPolicyReferencesInPermissionSet(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +239,14 @@ func (p *ListCustomerManagedPolicyReferencesInPermissionSetPaginator) NextPage(c
 
 	return result, nil
 }
+
+// ListCustomerManagedPolicyReferencesInPermissionSetAPIClient is a client that
+// implements the ListCustomerManagedPolicyReferencesInPermissionSet operation.
+type ListCustomerManagedPolicyReferencesInPermissionSetAPIClient interface {
+	ListCustomerManagedPolicyReferencesInPermissionSet(context.Context, *ListCustomerManagedPolicyReferencesInPermissionSetInput, ...func(*Options)) (*ListCustomerManagedPolicyReferencesInPermissionSetOutput, error)
+}
+
+var _ ListCustomerManagedPolicyReferencesInPermissionSetAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCustomerManagedPolicyReferencesInPermissionSet(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -121,6 +121,9 @@ func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAnnotationStoreVersionsMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,41 +150,6 @@ func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-type endpointPrefix_opListAnnotationStoreVersionsMiddleware struct {
-}
-
-func (*endpointPrefix_opListAnnotationStoreVersionsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListAnnotationStoreVersionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListAnnotationStoreVersionsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListAnnotationStoreVersionsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListAnnotationStoreVersionsAPIClient is a client that implements the
-// ListAnnotationStoreVersions operation.
-type ListAnnotationStoreVersionsAPIClient interface {
-	ListAnnotationStoreVersions(context.Context, *ListAnnotationStoreVersionsInput, ...func(*Options)) (*ListAnnotationStoreVersionsOutput, error)
-}
-
-var _ ListAnnotationStoreVersionsAPIClient = (*Client)(nil)
 
 // ListAnnotationStoreVersionsPaginatorOptions is the paginator options for
 // ListAnnotationStoreVersions
@@ -250,6 +218,9 @@ func (p *ListAnnotationStoreVersionsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnnotationStoreVersions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +239,41 @@ func (p *ListAnnotationStoreVersionsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+type endpointPrefix_opListAnnotationStoreVersionsMiddleware struct {
+}
+
+func (*endpointPrefix_opListAnnotationStoreVersionsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListAnnotationStoreVersionsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListAnnotationStoreVersionsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListAnnotationStoreVersionsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListAnnotationStoreVersionsAPIClient is a client that implements the
+// ListAnnotationStoreVersions operation.
+type ListAnnotationStoreVersionsAPIClient interface {
+	ListAnnotationStoreVersions(context.Context, *ListAnnotationStoreVersionsInput, ...func(*Options)) (*ListAnnotationStoreVersionsOutput, error)
+}
+
+var _ ListAnnotationStoreVersionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnnotationStoreVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

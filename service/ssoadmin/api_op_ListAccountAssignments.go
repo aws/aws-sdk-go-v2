@@ -132,6 +132,9 @@ func (c *Client) addOperationListAccountAssignmentsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAccountAssignmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationListAccountAssignmentsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListAccountAssignmentsAPIClient is a client that implements the
-// ListAccountAssignments operation.
-type ListAccountAssignmentsAPIClient interface {
-	ListAccountAssignments(context.Context, *ListAccountAssignmentsInput, ...func(*Options)) (*ListAccountAssignmentsOutput, error)
-}
-
-var _ ListAccountAssignmentsAPIClient = (*Client)(nil)
 
 // ListAccountAssignmentsPaginatorOptions is the paginator options for
 // ListAccountAssignments
@@ -228,6 +223,9 @@ func (p *ListAccountAssignmentsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAccountAssignments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -246,6 +244,14 @@ func (p *ListAccountAssignmentsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListAccountAssignmentsAPIClient is a client that implements the
+// ListAccountAssignments operation.
+type ListAccountAssignmentsAPIClient interface {
+	ListAccountAssignments(context.Context, *ListAccountAssignmentsInput, ...func(*Options)) (*ListAccountAssignmentsOutput, error)
+}
+
+var _ ListAccountAssignmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAccountAssignments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

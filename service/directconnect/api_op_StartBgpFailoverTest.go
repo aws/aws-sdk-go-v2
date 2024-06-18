@@ -127,6 +127,9 @@ func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartBgpFailoverTestValidationMiddleware(stack); err != nil {
 		return err
 	}

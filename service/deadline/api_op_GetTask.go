@@ -168,6 +168,9 @@ func (c *Client) addOperationGetTaskMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetTaskMiddleware(stack); err != nil {
 		return err
 	}

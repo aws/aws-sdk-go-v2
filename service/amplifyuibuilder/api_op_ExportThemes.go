@@ -120,6 +120,9 @@ func (c *Client) addOperationExportThemesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExportThemesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,13 +146,6 @@ func (c *Client) addOperationExportThemesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ExportThemesAPIClient is a client that implements the ExportThemes operation.
-type ExportThemesAPIClient interface {
-	ExportThemes(context.Context, *ExportThemesInput, ...func(*Options)) (*ExportThemesOutput, error)
-}
-
-var _ ExportThemesAPIClient = (*Client)(nil)
 
 // ExportThemesPaginatorOptions is the paginator options for ExportThemes
 type ExportThemesPaginatorOptions struct {
@@ -202,6 +198,9 @@ func (p *ExportThemesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ExportThemes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -220,6 +219,13 @@ func (p *ExportThemesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ExportThemesAPIClient is a client that implements the ExportThemes operation.
+type ExportThemesAPIClient interface {
+	ExportThemes(context.Context, *ExportThemesInput, ...func(*Options)) (*ExportThemesOutput, error)
+}
+
+var _ ExportThemesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opExportThemes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

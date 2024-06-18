@@ -138,6 +138,9 @@ func (c *Client) addOperationGetImportFileTaskMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetImportFileTaskValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -131,6 +131,9 @@ func (c *Client) addOperationGetECSServiceRecommendationProjectedMetricsMiddlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetECSServiceRecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}

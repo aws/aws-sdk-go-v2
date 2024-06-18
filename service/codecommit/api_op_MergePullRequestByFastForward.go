@@ -119,6 +119,9 @@ func (c *Client) addOperationMergePullRequestByFastForwardMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpMergePullRequestByFastForwardValidationMiddleware(stack); err != nil {
 		return err
 	}

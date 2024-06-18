@@ -129,6 +129,9 @@ func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPublicKeys(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListPublicKeysAPIClient is a client that implements the ListPublicKeys
-// operation.
-type ListPublicKeysAPIClient interface {
-	ListPublicKeys(context.Context, *ListPublicKeysInput, ...func(*Options)) (*ListPublicKeysOutput, error)
-}
-
-var _ ListPublicKeysAPIClient = (*Client)(nil)
 
 // ListPublicKeysPaginatorOptions is the paginator options for ListPublicKeys
 type ListPublicKeysPaginatorOptions struct {
@@ -209,6 +204,9 @@ func (p *ListPublicKeysPaginator) NextPage(ctx context.Context, optFns ...func(*
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPublicKeys(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +225,14 @@ func (p *ListPublicKeysPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListPublicKeysAPIClient is a client that implements the ListPublicKeys
+// operation.
+type ListPublicKeysAPIClient interface {
+	ListPublicKeys(context.Context, *ListPublicKeysInput, ...func(*Options)) (*ListPublicKeysOutput, error)
+}
+
+var _ ListPublicKeysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPublicKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

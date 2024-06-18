@@ -165,6 +165,9 @@ func (c *Client) addOperationListTrainingJobsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainingJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -185,14 +188,6 @@ func (c *Client) addOperationListTrainingJobsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListTrainingJobsAPIClient is a client that implements the ListTrainingJobs
-// operation.
-type ListTrainingJobsAPIClient interface {
-	ListTrainingJobs(context.Context, *ListTrainingJobsInput, ...func(*Options)) (*ListTrainingJobsOutput, error)
-}
-
-var _ ListTrainingJobsAPIClient = (*Client)(nil)
 
 // ListTrainingJobsPaginatorOptions is the paginator options for ListTrainingJobs
 type ListTrainingJobsPaginatorOptions struct {
@@ -257,6 +252,9 @@ func (p *ListTrainingJobsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrainingJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -275,6 +273,14 @@ func (p *ListTrainingJobsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListTrainingJobsAPIClient is a client that implements the ListTrainingJobs
+// operation.
+type ListTrainingJobsAPIClient interface {
+	ListTrainingJobs(context.Context, *ListTrainingJobsInput, ...func(*Options)) (*ListTrainingJobsOutput, error)
+}
+
+var _ ListTrainingJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrainingJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

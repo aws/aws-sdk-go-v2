@@ -117,6 +117,9 @@ func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListArchives(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,13 +140,6 @@ func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListArchivesAPIClient is a client that implements the ListArchives operation.
-type ListArchivesAPIClient interface {
-	ListArchives(context.Context, *ListArchivesInput, ...func(*Options)) (*ListArchivesOutput, error)
-}
-
-var _ ListArchivesAPIClient = (*Client)(nil)
 
 // ListArchivesPaginatorOptions is the paginator options for ListArchives
 type ListArchivesPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *ListArchivesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.PageSize = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListArchives(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *ListArchivesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListArchivesAPIClient is a client that implements the ListArchives operation.
+type ListArchivesAPIClient interface {
+	ListArchives(context.Context, *ListArchivesInput, ...func(*Options)) (*ListArchivesOutput, error)
+}
+
+var _ ListArchivesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListArchives(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

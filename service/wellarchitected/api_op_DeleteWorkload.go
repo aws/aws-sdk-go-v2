@@ -119,6 +119,9 @@ func (c *Client) addOperationDeleteWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteWorkloadMiddleware(stack, options); err != nil {
 		return err
 	}

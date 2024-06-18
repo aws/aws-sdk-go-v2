@@ -152,6 +152,9 @@ func (c *Client) addOperationPutLoggingConfigurationMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -103,6 +103,9 @@ func (c *Client) addOperationRegisterCrossAccountAccessRoleMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRegisterCrossAccountAccessRoleValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -118,6 +118,9 @@ func (c *Client) addOperationListMapsMiddlewares(stack *middleware.Stack, option
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListMapsMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,40 +144,6 @@ func (c *Client) addOperationListMapsMiddlewares(stack *middleware.Stack, option
 	}
 	return nil
 }
-
-type endpointPrefix_opListMapsMiddleware struct {
-}
-
-func (*endpointPrefix_opListMapsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListMapsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "cp.maps." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListMapsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListMapsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListMapsAPIClient is a client that implements the ListMaps operation.
-type ListMapsAPIClient interface {
-	ListMaps(context.Context, *ListMapsInput, ...func(*Options)) (*ListMapsOutput, error)
-}
-
-var _ ListMapsAPIClient = (*Client)(nil)
 
 // ListMapsPaginatorOptions is the paginator options for ListMaps
 type ListMapsPaginatorOptions struct {
@@ -241,6 +210,9 @@ func (p *ListMapsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMaps(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +231,40 @@ func (p *ListMapsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 
 	return result, nil
 }
+
+type endpointPrefix_opListMapsMiddleware struct {
+}
+
+func (*endpointPrefix_opListMapsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListMapsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "cp.maps." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListMapsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListMapsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListMapsAPIClient is a client that implements the ListMaps operation.
+type ListMapsAPIClient interface {
+	ListMaps(context.Context, *ListMapsInput, ...func(*Options)) (*ListMapsOutput, error)
+}
+
+var _ ListMapsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMaps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

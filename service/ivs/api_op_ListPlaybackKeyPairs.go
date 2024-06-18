@@ -118,6 +118,9 @@ func (c *Client) addOperationListPlaybackKeyPairsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlaybackKeyPairs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,14 +141,6 @@ func (c *Client) addOperationListPlaybackKeyPairsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListPlaybackKeyPairsAPIClient is a client that implements the
-// ListPlaybackKeyPairs operation.
-type ListPlaybackKeyPairsAPIClient interface {
-	ListPlaybackKeyPairs(context.Context, *ListPlaybackKeyPairsInput, ...func(*Options)) (*ListPlaybackKeyPairsOutput, error)
-}
-
-var _ ListPlaybackKeyPairsAPIClient = (*Client)(nil)
 
 // ListPlaybackKeyPairsPaginatorOptions is the paginator options for
 // ListPlaybackKeyPairs
@@ -212,6 +207,9 @@ func (p *ListPlaybackKeyPairsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPlaybackKeyPairs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListPlaybackKeyPairsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListPlaybackKeyPairsAPIClient is a client that implements the
+// ListPlaybackKeyPairs operation.
+type ListPlaybackKeyPairsAPIClient interface {
+	ListPlaybackKeyPairs(context.Context, *ListPlaybackKeyPairsInput, ...func(*Options)) (*ListPlaybackKeyPairsOutput, error)
+}
+
+var _ ListPlaybackKeyPairsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPlaybackKeyPairs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

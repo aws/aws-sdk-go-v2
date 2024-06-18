@@ -131,6 +131,9 @@ func (c *Client) addOperationListImagePipelinesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImagePipelines(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,14 +154,6 @@ func (c *Client) addOperationListImagePipelinesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListImagePipelinesAPIClient is a client that implements the ListImagePipelines
-// operation.
-type ListImagePipelinesAPIClient interface {
-	ListImagePipelines(context.Context, *ListImagePipelinesInput, ...func(*Options)) (*ListImagePipelinesOutput, error)
-}
-
-var _ ListImagePipelinesAPIClient = (*Client)(nil)
 
 // ListImagePipelinesPaginatorOptions is the paginator options for
 // ListImagePipelines
@@ -224,6 +219,9 @@ func (p *ListImagePipelinesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListImagePipelines(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListImagePipelinesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListImagePipelinesAPIClient is a client that implements the ListImagePipelines
+// operation.
+type ListImagePipelinesAPIClient interface {
+	ListImagePipelines(context.Context, *ListImagePipelinesInput, ...func(*Options)) (*ListImagePipelinesOutput, error)
+}
+
+var _ ListImagePipelinesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListImagePipelines(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

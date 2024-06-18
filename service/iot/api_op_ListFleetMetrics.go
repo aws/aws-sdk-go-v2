@@ -116,6 +116,9 @@ func (c *Client) addOperationListFleetMetricsMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFleetMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListFleetMetricsMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListFleetMetricsAPIClient is a client that implements the ListFleetMetrics
-// operation.
-type ListFleetMetricsAPIClient interface {
-	ListFleetMetrics(context.Context, *ListFleetMetricsInput, ...func(*Options)) (*ListFleetMetricsOutput, error)
-}
-
-var _ ListFleetMetricsAPIClient = (*Client)(nil)
 
 // ListFleetMetricsPaginatorOptions is the paginator options for ListFleetMetrics
 type ListFleetMetricsPaginatorOptions struct {
@@ -208,6 +203,9 @@ func (p *ListFleetMetricsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFleetMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListFleetMetricsPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListFleetMetricsAPIClient is a client that implements the ListFleetMetrics
+// operation.
+type ListFleetMetricsAPIClient interface {
+	ListFleetMetrics(context.Context, *ListFleetMetricsInput, ...func(*Options)) (*ListFleetMetricsOutput, error)
+}
+
+var _ ListFleetMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFleetMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

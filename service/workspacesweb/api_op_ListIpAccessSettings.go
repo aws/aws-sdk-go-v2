@@ -112,6 +112,9 @@ func (c *Client) addOperationListIpAccessSettingsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIpAccessSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListIpAccessSettingsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListIpAccessSettingsAPIClient is a client that implements the
-// ListIpAccessSettings operation.
-type ListIpAccessSettingsAPIClient interface {
-	ListIpAccessSettings(context.Context, *ListIpAccessSettingsInput, ...func(*Options)) (*ListIpAccessSettingsOutput, error)
-}
-
-var _ ListIpAccessSettingsAPIClient = (*Client)(nil)
 
 // ListIpAccessSettingsPaginatorOptions is the paginator options for
 // ListIpAccessSettings
@@ -205,6 +200,9 @@ func (p *ListIpAccessSettingsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIpAccessSettings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListIpAccessSettingsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListIpAccessSettingsAPIClient is a client that implements the
+// ListIpAccessSettings operation.
+type ListIpAccessSettingsAPIClient interface {
+	ListIpAccessSettings(context.Context, *ListIpAccessSettingsInput, ...func(*Options)) (*ListIpAccessSettingsOutput, error)
+}
+
+var _ ListIpAccessSettingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIpAccessSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

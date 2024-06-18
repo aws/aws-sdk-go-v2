@@ -137,6 +137,9 @@ func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRequestedServiceQuotaChangeHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(s
 	}
 	return nil
 }
-
-// ListRequestedServiceQuotaChangeHistoryAPIClient is a client that implements the
-// ListRequestedServiceQuotaChangeHistory operation.
-type ListRequestedServiceQuotaChangeHistoryAPIClient interface {
-	ListRequestedServiceQuotaChangeHistory(context.Context, *ListRequestedServiceQuotaChangeHistoryInput, ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryOutput, error)
-}
-
-var _ ListRequestedServiceQuotaChangeHistoryAPIClient = (*Client)(nil)
 
 // ListRequestedServiceQuotaChangeHistoryPaginatorOptions is the paginator options
 // for ListRequestedServiceQuotaChangeHistory
@@ -241,6 +236,9 @@ func (p *ListRequestedServiceQuotaChangeHistoryPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRequestedServiceQuotaChangeHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -259,6 +257,14 @@ func (p *ListRequestedServiceQuotaChangeHistoryPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListRequestedServiceQuotaChangeHistoryAPIClient is a client that implements the
+// ListRequestedServiceQuotaChangeHistory operation.
+type ListRequestedServiceQuotaChangeHistoryAPIClient interface {
+	ListRequestedServiceQuotaChangeHistory(context.Context, *ListRequestedServiceQuotaChangeHistoryInput, ...func(*Options)) (*ListRequestedServiceQuotaChangeHistoryOutput, error)
+}
+
+var _ ListRequestedServiceQuotaChangeHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRequestedServiceQuotaChangeHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

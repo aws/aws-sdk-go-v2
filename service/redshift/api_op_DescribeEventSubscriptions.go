@@ -157,6 +157,9 @@ func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventSubscriptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -177,14 +180,6 @@ func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// DescribeEventSubscriptionsAPIClient is a client that implements the
-// DescribeEventSubscriptions operation.
-type DescribeEventSubscriptionsAPIClient interface {
-	DescribeEventSubscriptions(context.Context, *DescribeEventSubscriptionsInput, ...func(*Options)) (*DescribeEventSubscriptionsOutput, error)
-}
-
-var _ DescribeEventSubscriptionsAPIClient = (*Client)(nil)
 
 // DescribeEventSubscriptionsPaginatorOptions is the paginator options for
 // DescribeEventSubscriptions
@@ -259,6 +254,9 @@ func (p *DescribeEventSubscriptionsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeEventSubscriptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -277,6 +275,14 @@ func (p *DescribeEventSubscriptionsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// DescribeEventSubscriptionsAPIClient is a client that implements the
+// DescribeEventSubscriptions operation.
+type DescribeEventSubscriptionsAPIClient interface {
+	DescribeEventSubscriptions(context.Context, *DescribeEventSubscriptionsInput, ...func(*Options)) (*DescribeEventSubscriptionsOutput, error)
+}
+
+var _ DescribeEventSubscriptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEventSubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

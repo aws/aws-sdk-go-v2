@@ -114,6 +114,9 @@ func (c *Client) addOperationGetTriggersMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTriggers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -134,13 +137,6 @@ func (c *Client) addOperationGetTriggersMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// GetTriggersAPIClient is a client that implements the GetTriggers operation.
-type GetTriggersAPIClient interface {
-	GetTriggers(context.Context, *GetTriggersInput, ...func(*Options)) (*GetTriggersOutput, error)
-}
-
-var _ GetTriggersAPIClient = (*Client)(nil)
 
 // GetTriggersPaginatorOptions is the paginator options for GetTriggers
 type GetTriggersPaginatorOptions struct {
@@ -205,6 +201,9 @@ func (p *GetTriggersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetTriggers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +222,13 @@ func (p *GetTriggersPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// GetTriggersAPIClient is a client that implements the GetTriggers operation.
+type GetTriggersAPIClient interface {
+	GetTriggers(context.Context, *GetTriggersInput, ...func(*Options)) (*GetTriggersOutput, error)
+}
+
+var _ GetTriggersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetTriggers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

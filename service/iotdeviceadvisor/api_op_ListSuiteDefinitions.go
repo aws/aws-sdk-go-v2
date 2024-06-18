@@ -115,6 +115,9 @@ func (c *Client) addOperationListSuiteDefinitionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSuiteDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListSuiteDefinitionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListSuiteDefinitionsAPIClient is a client that implements the
-// ListSuiteDefinitions operation.
-type ListSuiteDefinitionsAPIClient interface {
-	ListSuiteDefinitions(context.Context, *ListSuiteDefinitionsInput, ...func(*Options)) (*ListSuiteDefinitionsOutput, error)
-}
-
-var _ ListSuiteDefinitionsAPIClient = (*Client)(nil)
 
 // ListSuiteDefinitionsPaginatorOptions is the paginator options for
 // ListSuiteDefinitions
@@ -208,6 +203,9 @@ func (p *ListSuiteDefinitionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSuiteDefinitions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +224,14 @@ func (p *ListSuiteDefinitionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListSuiteDefinitionsAPIClient is a client that implements the
+// ListSuiteDefinitions operation.
+type ListSuiteDefinitionsAPIClient interface {
+	ListSuiteDefinitions(context.Context, *ListSuiteDefinitionsInput, ...func(*Options)) (*ListSuiteDefinitionsOutput, error)
+}
+
+var _ ListSuiteDefinitionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSuiteDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

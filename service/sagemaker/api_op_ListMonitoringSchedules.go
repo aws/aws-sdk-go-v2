@@ -154,6 +154,9 @@ func (c *Client) addOperationListMonitoringSchedulesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitoringSchedules(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -174,14 +177,6 @@ func (c *Client) addOperationListMonitoringSchedulesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListMonitoringSchedulesAPIClient is a client that implements the
-// ListMonitoringSchedules operation.
-type ListMonitoringSchedulesAPIClient interface {
-	ListMonitoringSchedules(context.Context, *ListMonitoringSchedulesInput, ...func(*Options)) (*ListMonitoringSchedulesOutput, error)
-}
-
-var _ ListMonitoringSchedulesAPIClient = (*Client)(nil)
 
 // ListMonitoringSchedulesPaginatorOptions is the paginator options for
 // ListMonitoringSchedules
@@ -248,6 +243,9 @@ func (p *ListMonitoringSchedulesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMonitoringSchedules(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -266,6 +264,14 @@ func (p *ListMonitoringSchedulesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListMonitoringSchedulesAPIClient is a client that implements the
+// ListMonitoringSchedules operation.
+type ListMonitoringSchedulesAPIClient interface {
+	ListMonitoringSchedules(context.Context, *ListMonitoringSchedulesInput, ...func(*Options)) (*ListMonitoringSchedulesOutput, error)
+}
+
+var _ ListMonitoringSchedulesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMonitoringSchedules(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

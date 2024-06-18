@@ -154,6 +154,9 @@ func (c *Client) addOperationListChannelMessagesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChannelMessagesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -177,14 +180,6 @@ func (c *Client) addOperationListChannelMessagesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListChannelMessagesAPIClient is a client that implements the
-// ListChannelMessages operation.
-type ListChannelMessagesAPIClient interface {
-	ListChannelMessages(context.Context, *ListChannelMessagesInput, ...func(*Options)) (*ListChannelMessagesOutput, error)
-}
-
-var _ ListChannelMessagesAPIClient = (*Client)(nil)
 
 // ListChannelMessagesPaginatorOptions is the paginator options for
 // ListChannelMessages
@@ -250,6 +245,9 @@ func (p *ListChannelMessagesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChannelMessages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -268,6 +266,14 @@ func (p *ListChannelMessagesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListChannelMessagesAPIClient is a client that implements the
+// ListChannelMessages operation.
+type ListChannelMessagesAPIClient interface {
+	ListChannelMessages(context.Context, *ListChannelMessagesInput, ...func(*Options)) (*ListChannelMessagesOutput, error)
+}
+
+var _ ListChannelMessagesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChannelMessages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

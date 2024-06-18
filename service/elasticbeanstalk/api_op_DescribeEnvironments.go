@@ -153,6 +153,9 @@ func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironments(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -173,14 +176,6 @@ func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// DescribeEnvironmentsAPIClient is a client that implements the
-// DescribeEnvironments operation.
-type DescribeEnvironmentsAPIClient interface {
-	DescribeEnvironments(context.Context, *DescribeEnvironmentsInput, ...func(*Options)) (*DescribeEnvironmentsOutput, error)
-}
-
-var _ DescribeEnvironmentsAPIClient = (*Client)(nil)
 
 // EnvironmentExistsWaiterOptions are waiter options for EnvironmentExistsWaiter
 type EnvironmentExistsWaiterOptions struct {
@@ -297,7 +292,13 @@ func (w *EnvironmentExistsWaiter) WaitForOutput(ctx context.Context, params *Des
 		}
 
 		out, err := w.client.DescribeEnvironments(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -519,7 +520,13 @@ func (w *EnvironmentTerminatedWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.DescribeEnvironments(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -739,7 +746,13 @@ func (w *EnvironmentUpdatedWaiter) WaitForOutput(ctx context.Context, params *De
 		}
 
 		out, err := w.client.DescribeEnvironments(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -843,6 +856,14 @@ func environmentUpdatedStateRetryable(ctx context.Context, input *DescribeEnviro
 
 	return true, nil
 }
+
+// DescribeEnvironmentsAPIClient is a client that implements the
+// DescribeEnvironments operation.
+type DescribeEnvironmentsAPIClient interface {
+	DescribeEnvironments(context.Context, *DescribeEnvironmentsInput, ...func(*Options)) (*DescribeEnvironmentsOutput, error)
+}
+
+var _ DescribeEnvironmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

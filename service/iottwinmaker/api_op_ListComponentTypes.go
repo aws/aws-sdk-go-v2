@@ -130,6 +130,9 @@ func (c *Client) addOperationListComponentTypesMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListComponentTypesMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,41 +159,6 @@ func (c *Client) addOperationListComponentTypesMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-type endpointPrefix_opListComponentTypesMiddleware struct {
-}
-
-func (*endpointPrefix_opListComponentTypesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListComponentTypesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListComponentTypesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListComponentTypesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListComponentTypesAPIClient is a client that implements the ListComponentTypes
-// operation.
-type ListComponentTypesAPIClient interface {
-	ListComponentTypes(context.Context, *ListComponentTypesInput, ...func(*Options)) (*ListComponentTypesOutput, error)
-}
-
-var _ ListComponentTypesAPIClient = (*Client)(nil)
 
 // ListComponentTypesPaginatorOptions is the paginator options for
 // ListComponentTypes
@@ -258,6 +226,9 @@ func (p *ListComponentTypesPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListComponentTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +247,41 @@ func (p *ListComponentTypesPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+type endpointPrefix_opListComponentTypesMiddleware struct {
+}
+
+func (*endpointPrefix_opListComponentTypesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListComponentTypesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListComponentTypesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListComponentTypesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListComponentTypesAPIClient is a client that implements the ListComponentTypes
+// operation.
+type ListComponentTypesAPIClient interface {
+	ListComponentTypes(context.Context, *ListComponentTypesInput, ...func(*Options)) (*ListComponentTypesOutput, error)
+}
+
+var _ ListComponentTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListComponentTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

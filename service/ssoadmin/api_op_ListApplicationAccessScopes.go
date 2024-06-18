@@ -131,6 +131,9 @@ func (c *Client) addOperationListApplicationAccessScopesMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListApplicationAccessScopesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListApplicationAccessScopesMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListApplicationAccessScopesAPIClient is a client that implements the
-// ListApplicationAccessScopes operation.
-type ListApplicationAccessScopesAPIClient interface {
-	ListApplicationAccessScopes(context.Context, *ListApplicationAccessScopesInput, ...func(*Options)) (*ListApplicationAccessScopesOutput, error)
-}
-
-var _ ListApplicationAccessScopesAPIClient = (*Client)(nil)
 
 // ListApplicationAccessScopesPaginatorOptions is the paginator options for
 // ListApplicationAccessScopes
@@ -235,6 +230,9 @@ func (p *ListApplicationAccessScopesPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListApplicationAccessScopes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListApplicationAccessScopesPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListApplicationAccessScopesAPIClient is a client that implements the
+// ListApplicationAccessScopes operation.
+type ListApplicationAccessScopesAPIClient interface {
+	ListApplicationAccessScopes(context.Context, *ListApplicationAccessScopesInput, ...func(*Options)) (*ListApplicationAccessScopesOutput, error)
+}
+
+var _ ListApplicationAccessScopesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListApplicationAccessScopes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

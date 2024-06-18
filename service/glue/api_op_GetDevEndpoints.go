@@ -115,6 +115,9 @@ func (c *Client) addOperationGetDevEndpointsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDevEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationGetDevEndpointsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetDevEndpointsAPIClient is a client that implements the GetDevEndpoints
-// operation.
-type GetDevEndpointsAPIClient interface {
-	GetDevEndpoints(context.Context, *GetDevEndpointsInput, ...func(*Options)) (*GetDevEndpointsOutput, error)
-}
-
-var _ GetDevEndpointsAPIClient = (*Client)(nil)
 
 // GetDevEndpointsPaginatorOptions is the paginator options for GetDevEndpoints
 type GetDevEndpointsPaginatorOptions struct {
@@ -207,6 +202,9 @@ func (p *GetDevEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDevEndpoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *GetDevEndpointsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetDevEndpointsAPIClient is a client that implements the GetDevEndpoints
+// operation.
+type GetDevEndpointsAPIClient interface {
+	GetDevEndpoints(context.Context, *GetDevEndpointsInput, ...func(*Options)) (*GetDevEndpointsOutput, error)
+}
+
+var _ GetDevEndpointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDevEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

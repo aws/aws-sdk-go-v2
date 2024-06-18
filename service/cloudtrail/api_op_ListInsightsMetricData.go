@@ -212,6 +212,9 @@ func (c *Client) addOperationListInsightsMetricDataMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInsightsMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -235,14 +238,6 @@ func (c *Client) addOperationListInsightsMetricDataMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// ListInsightsMetricDataAPIClient is a client that implements the
-// ListInsightsMetricData operation.
-type ListInsightsMetricDataAPIClient interface {
-	ListInsightsMetricData(context.Context, *ListInsightsMetricDataInput, ...func(*Options)) (*ListInsightsMetricDataOutput, error)
-}
-
-var _ ListInsightsMetricDataAPIClient = (*Client)(nil)
 
 // ListInsightsMetricDataPaginatorOptions is the paginator options for
 // ListInsightsMetricData
@@ -309,6 +304,9 @@ func (p *ListInsightsMetricDataPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInsightsMetricData(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -327,6 +325,14 @@ func (p *ListInsightsMetricDataPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// ListInsightsMetricDataAPIClient is a client that implements the
+// ListInsightsMetricData operation.
+type ListInsightsMetricDataAPIClient interface {
+	ListInsightsMetricData(context.Context, *ListInsightsMetricDataInput, ...func(*Options)) (*ListInsightsMetricDataOutput, error)
+}
+
+var _ ListInsightsMetricDataAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInsightsMetricData(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

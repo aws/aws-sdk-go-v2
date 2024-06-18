@@ -143,6 +143,9 @@ func (c *Client) addOperationGetDifferencesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDifferencesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,14 +169,6 @@ func (c *Client) addOperationGetDifferencesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetDifferencesAPIClient is a client that implements the GetDifferences
-// operation.
-type GetDifferencesAPIClient interface {
-	GetDifferences(context.Context, *GetDifferencesInput, ...func(*Options)) (*GetDifferencesOutput, error)
-}
-
-var _ GetDifferencesAPIClient = (*Client)(nil)
 
 // GetDifferencesPaginatorOptions is the paginator options for GetDifferences
 type GetDifferencesPaginatorOptions struct {
@@ -238,6 +233,9 @@ func (p *GetDifferencesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDifferences(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *GetDifferencesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// GetDifferencesAPIClient is a client that implements the GetDifferences
+// operation.
+type GetDifferencesAPIClient interface {
+	GetDifferences(context.Context, *GetDifferencesInput, ...func(*Options)) (*GetDifferencesOutput, error)
+}
+
+var _ GetDifferencesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDifferences(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

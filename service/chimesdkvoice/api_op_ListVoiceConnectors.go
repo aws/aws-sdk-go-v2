@@ -110,6 +110,9 @@ func (c *Client) addOperationListVoiceConnectorsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVoiceConnectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListVoiceConnectorsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListVoiceConnectorsAPIClient is a client that implements the
-// ListVoiceConnectors operation.
-type ListVoiceConnectorsAPIClient interface {
-	ListVoiceConnectors(context.Context, *ListVoiceConnectorsInput, ...func(*Options)) (*ListVoiceConnectorsOutput, error)
-}
-
-var _ ListVoiceConnectorsAPIClient = (*Client)(nil)
 
 // ListVoiceConnectorsPaginatorOptions is the paginator options for
 // ListVoiceConnectors
@@ -203,6 +198,9 @@ func (p *ListVoiceConnectorsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVoiceConnectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListVoiceConnectorsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListVoiceConnectorsAPIClient is a client that implements the
+// ListVoiceConnectors operation.
+type ListVoiceConnectorsAPIClient interface {
+	ListVoiceConnectors(context.Context, *ListVoiceConnectorsInput, ...func(*Options)) (*ListVoiceConnectorsOutput, error)
+}
+
+var _ ListVoiceConnectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVoiceConnectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

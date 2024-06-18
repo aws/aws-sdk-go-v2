@@ -139,6 +139,9 @@ func (c *Client) addOperationListUnsupportedAppVersionResourcesMiddlewares(stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUnsupportedAppVersionResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListUnsupportedAppVersionResourcesMiddlewares(stack
 	}
 	return nil
 }
-
-// ListUnsupportedAppVersionResourcesAPIClient is a client that implements the
-// ListUnsupportedAppVersionResources operation.
-type ListUnsupportedAppVersionResourcesAPIClient interface {
-	ListUnsupportedAppVersionResources(context.Context, *ListUnsupportedAppVersionResourcesInput, ...func(*Options)) (*ListUnsupportedAppVersionResourcesOutput, error)
-}
-
-var _ ListUnsupportedAppVersionResourcesAPIClient = (*Client)(nil)
 
 // ListUnsupportedAppVersionResourcesPaginatorOptions is the paginator options for
 // ListUnsupportedAppVersionResources
@@ -239,6 +234,9 @@ func (p *ListUnsupportedAppVersionResourcesPaginator) NextPage(ctx context.Conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUnsupportedAppVersionResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -257,6 +255,14 @@ func (p *ListUnsupportedAppVersionResourcesPaginator) NextPage(ctx context.Conte
 
 	return result, nil
 }
+
+// ListUnsupportedAppVersionResourcesAPIClient is a client that implements the
+// ListUnsupportedAppVersionResources operation.
+type ListUnsupportedAppVersionResourcesAPIClient interface {
+	ListUnsupportedAppVersionResources(context.Context, *ListUnsupportedAppVersionResourcesInput, ...func(*Options)) (*ListUnsupportedAppVersionResourcesOutput, error)
+}
+
+var _ ListUnsupportedAppVersionResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUnsupportedAppVersionResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

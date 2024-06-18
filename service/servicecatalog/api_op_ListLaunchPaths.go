@@ -134,6 +134,9 @@ func (c *Client) addOperationListLaunchPathsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLaunchPathsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListLaunchPathsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListLaunchPathsAPIClient is a client that implements the ListLaunchPaths
-// operation.
-type ListLaunchPathsAPIClient interface {
-	ListLaunchPaths(context.Context, *ListLaunchPathsInput, ...func(*Options)) (*ListLaunchPathsOutput, error)
-}
-
-var _ ListLaunchPathsAPIClient = (*Client)(nil)
 
 // ListLaunchPathsPaginatorOptions is the paginator options for ListLaunchPaths
 type ListLaunchPathsPaginatorOptions struct {
@@ -225,6 +220,9 @@ func (p *ListLaunchPathsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLaunchPaths(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -243,6 +241,14 @@ func (p *ListLaunchPathsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListLaunchPathsAPIClient is a client that implements the ListLaunchPaths
+// operation.
+type ListLaunchPathsAPIClient interface {
+	ListLaunchPaths(context.Context, *ListLaunchPathsInput, ...func(*Options)) (*ListLaunchPathsOutput, error)
+}
+
+var _ ListLaunchPathsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLaunchPaths(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -132,6 +132,9 @@ func (c *Client) addOperationUpdateLaunchConfigurationTemplateMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateLaunchConfigurationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}

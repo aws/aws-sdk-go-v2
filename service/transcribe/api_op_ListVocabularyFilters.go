@@ -130,6 +130,9 @@ func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVocabularyFilters(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListVocabularyFiltersAPIClient is a client that implements the
-// ListVocabularyFilters operation.
-type ListVocabularyFiltersAPIClient interface {
-	ListVocabularyFilters(context.Context, *ListVocabularyFiltersInput, ...func(*Options)) (*ListVocabularyFiltersOutput, error)
-}
-
-var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
 
 // ListVocabularyFiltersPaginatorOptions is the paginator options for
 // ListVocabularyFilters
@@ -226,6 +221,9 @@ func (p *ListVocabularyFiltersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVocabularyFilters(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListVocabularyFiltersPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListVocabularyFiltersAPIClient is a client that implements the
+// ListVocabularyFilters operation.
+type ListVocabularyFiltersAPIClient interface {
+	ListVocabularyFilters(context.Context, *ListVocabularyFiltersInput, ...func(*Options)) (*ListVocabularyFiltersOutput, error)
+}
+
+var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVocabularyFilters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

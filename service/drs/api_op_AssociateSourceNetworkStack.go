@@ -113,6 +113,9 @@ func (c *Client) addOperationAssociateSourceNetworkStackMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpAssociateSourceNetworkStackValidationMiddleware(stack); err != nil {
 		return err
 	}

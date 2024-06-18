@@ -112,6 +112,9 @@ func (c *Client) addOperationListDeploymentStrategiesMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeploymentStrategies(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListDeploymentStrategiesMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListDeploymentStrategiesAPIClient is a client that implements the
-// ListDeploymentStrategies operation.
-type ListDeploymentStrategiesAPIClient interface {
-	ListDeploymentStrategies(context.Context, *ListDeploymentStrategiesInput, ...func(*Options)) (*ListDeploymentStrategiesOutput, error)
-}
-
-var _ ListDeploymentStrategiesAPIClient = (*Client)(nil)
 
 // ListDeploymentStrategiesPaginatorOptions is the paginator options for
 // ListDeploymentStrategies
@@ -207,6 +202,9 @@ func (p *ListDeploymentStrategiesPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDeploymentStrategies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListDeploymentStrategiesPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListDeploymentStrategiesAPIClient is a client that implements the
+// ListDeploymentStrategies operation.
+type ListDeploymentStrategiesAPIClient interface {
+	ListDeploymentStrategies(context.Context, *ListDeploymentStrategiesInput, ...func(*Options)) (*ListDeploymentStrategiesOutput, error)
+}
+
+var _ ListDeploymentStrategiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDeploymentStrategies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

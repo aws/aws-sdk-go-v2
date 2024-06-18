@@ -130,6 +130,9 @@ func (c *Client) addOperationListIAMPolicyAssignmentsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListIAMPolicyAssignmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListIAMPolicyAssignmentsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListIAMPolicyAssignmentsAPIClient is a client that implements the
-// ListIAMPolicyAssignments operation.
-type ListIAMPolicyAssignmentsAPIClient interface {
-	ListIAMPolicyAssignments(context.Context, *ListIAMPolicyAssignmentsInput, ...func(*Options)) (*ListIAMPolicyAssignmentsOutput, error)
-}
-
-var _ ListIAMPolicyAssignmentsAPIClient = (*Client)(nil)
 
 // ListIAMPolicyAssignmentsPaginatorOptions is the paginator options for
 // ListIAMPolicyAssignments
@@ -227,6 +222,9 @@ func (p *ListIAMPolicyAssignmentsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListIAMPolicyAssignments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListIAMPolicyAssignmentsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListIAMPolicyAssignmentsAPIClient is a client that implements the
+// ListIAMPolicyAssignments operation.
+type ListIAMPolicyAssignmentsAPIClient interface {
+	ListIAMPolicyAssignments(context.Context, *ListIAMPolicyAssignmentsInput, ...func(*Options)) (*ListIAMPolicyAssignmentsOutput, error)
+}
+
+var _ ListIAMPolicyAssignmentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListIAMPolicyAssignments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

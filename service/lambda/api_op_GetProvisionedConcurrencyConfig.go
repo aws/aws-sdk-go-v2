@@ -143,6 +143,9 @@ func (c *Client) addOperationGetProvisionedConcurrencyConfigMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetProvisionedConcurrencyConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

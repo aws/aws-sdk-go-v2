@@ -126,6 +126,9 @@ func (c *Client) addOperationListPrincipalsForPortfolioMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPrincipalsForPortfolioValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,14 +152,6 @@ func (c *Client) addOperationListPrincipalsForPortfolioMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListPrincipalsForPortfolioAPIClient is a client that implements the
-// ListPrincipalsForPortfolio operation.
-type ListPrincipalsForPortfolioAPIClient interface {
-	ListPrincipalsForPortfolio(context.Context, *ListPrincipalsForPortfolioInput, ...func(*Options)) (*ListPrincipalsForPortfolioOutput, error)
-}
-
-var _ ListPrincipalsForPortfolioAPIClient = (*Client)(nil)
 
 // ListPrincipalsForPortfolioPaginatorOptions is the paginator options for
 // ListPrincipalsForPortfolio
@@ -220,6 +215,9 @@ func (p *ListPrincipalsForPortfolioPaginator) NextPage(ctx context.Context, optF
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrincipalsForPortfolio(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +236,14 @@ func (p *ListPrincipalsForPortfolioPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListPrincipalsForPortfolioAPIClient is a client that implements the
+// ListPrincipalsForPortfolio operation.
+type ListPrincipalsForPortfolioAPIClient interface {
+	ListPrincipalsForPortfolio(context.Context, *ListPrincipalsForPortfolioInput, ...func(*Options)) (*ListPrincipalsForPortfolioOutput, error)
+}
+
+var _ ListPrincipalsForPortfolioAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrincipalsForPortfolio(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

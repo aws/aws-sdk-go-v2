@@ -124,6 +124,9 @@ func (c *Client) addOperationDescribeOptOutListsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOptOutLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationDescribeOptOutListsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// DescribeOptOutListsAPIClient is a client that implements the
-// DescribeOptOutLists operation.
-type DescribeOptOutListsAPIClient interface {
-	DescribeOptOutLists(context.Context, *DescribeOptOutListsInput, ...func(*Options)) (*DescribeOptOutListsOutput, error)
-}
-
-var _ DescribeOptOutListsAPIClient = (*Client)(nil)
 
 // DescribeOptOutListsPaginatorOptions is the paginator options for
 // DescribeOptOutLists
@@ -217,6 +212,9 @@ func (p *DescribeOptOutListsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeOptOutLists(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *DescribeOptOutListsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// DescribeOptOutListsAPIClient is a client that implements the
+// DescribeOptOutLists operation.
+type DescribeOptOutListsAPIClient interface {
+	DescribeOptOutLists(context.Context, *DescribeOptOutListsInput, ...func(*Options)) (*DescribeOptOutListsOutput, error)
+}
+
+var _ DescribeOptOutListsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeOptOutLists(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -161,6 +161,9 @@ func (c *Client) addOperationGetAssetPropertyValueHistoryMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAssetPropertyValueHistoryMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,41 +187,6 @@ func (c *Client) addOperationGetAssetPropertyValueHistoryMiddlewares(stack *midd
 	}
 	return nil
 }
-
-type endpointPrefix_opGetAssetPropertyValueHistoryMiddleware struct {
-}
-
-func (*endpointPrefix_opGetAssetPropertyValueHistoryMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetAssetPropertyValueHistoryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "data." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetAssetPropertyValueHistoryMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetAssetPropertyValueHistoryMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetAssetPropertyValueHistoryAPIClient is a client that implements the
-// GetAssetPropertyValueHistory operation.
-type GetAssetPropertyValueHistoryAPIClient interface {
-	GetAssetPropertyValueHistory(context.Context, *GetAssetPropertyValueHistoryInput, ...func(*Options)) (*GetAssetPropertyValueHistoryOutput, error)
-}
-
-var _ GetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 
 // GetAssetPropertyValueHistoryPaginatorOptions is the paginator options for
 // GetAssetPropertyValueHistory
@@ -292,6 +260,9 @@ func (p *GetAssetPropertyValueHistoryPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetAssetPropertyValueHistory(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -310,6 +281,41 @@ func (p *GetAssetPropertyValueHistoryPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+type endpointPrefix_opGetAssetPropertyValueHistoryMiddleware struct {
+}
+
+func (*endpointPrefix_opGetAssetPropertyValueHistoryMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetAssetPropertyValueHistoryMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "data." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetAssetPropertyValueHistoryMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetAssetPropertyValueHistoryMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetAssetPropertyValueHistoryAPIClient is a client that implements the
+// GetAssetPropertyValueHistory operation.
+type GetAssetPropertyValueHistoryAPIClient interface {
+	GetAssetPropertyValueHistory(context.Context, *GetAssetPropertyValueHistoryInput, ...func(*Options)) (*GetAssetPropertyValueHistoryOutput, error)
+}
+
+var _ GetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAssetPropertyValueHistory(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -124,6 +124,9 @@ func (c *Client) addOperationListConversationsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListConversationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationListConversationsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListConversationsAPIClient is a client that implements the ListConversations
-// operation.
-type ListConversationsAPIClient interface {
-	ListConversations(context.Context, *ListConversationsInput, ...func(*Options)) (*ListConversationsOutput, error)
-}
-
-var _ ListConversationsAPIClient = (*Client)(nil)
 
 // ListConversationsPaginatorOptions is the paginator options for ListConversations
 type ListConversationsPaginatorOptions struct {
@@ -219,6 +214,9 @@ func (p *ListConversationsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListConversations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListConversationsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListConversationsAPIClient is a client that implements the ListConversations
+// operation.
+type ListConversationsAPIClient interface {
+	ListConversations(context.Context, *ListConversationsInput, ...func(*Options)) (*ListConversationsOutput, error)
+}
+
+var _ ListConversationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListConversations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

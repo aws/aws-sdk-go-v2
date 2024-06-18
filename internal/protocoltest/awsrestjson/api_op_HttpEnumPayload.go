@@ -99,6 +99,9 @@ func (c *Client) addOperationHttpEnumPayloadMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpEnumPayload(options.Region), middleware.Before); err != nil {
 		return err
 	}

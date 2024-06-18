@@ -133,6 +133,9 @@ func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetEntitlementsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// GetEntitlementsAPIClient is a client that implements the GetEntitlements
-// operation.
-type GetEntitlementsAPIClient interface {
-	GetEntitlements(context.Context, *GetEntitlementsInput, ...func(*Options)) (*GetEntitlementsOutput, error)
-}
-
-var _ GetEntitlementsAPIClient = (*Client)(nil)
 
 // GetEntitlementsPaginatorOptions is the paginator options for GetEntitlements
 type GetEntitlementsPaginatorOptions struct {
@@ -229,6 +224,9 @@ func (p *GetEntitlementsPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetEntitlements(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +245,14 @@ func (p *GetEntitlementsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// GetEntitlementsAPIClient is a client that implements the GetEntitlements
+// operation.
+type GetEntitlementsAPIClient interface {
+	GetEntitlements(context.Context, *GetEntitlementsInput, ...func(*Options)) (*GetEntitlementsOutput, error)
+}
+
+var _ GetEntitlementsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetEntitlements(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

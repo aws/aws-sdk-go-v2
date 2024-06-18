@@ -129,6 +129,9 @@ func (c *Client) addOperationListQueueFleetAssociationsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListQueueFleetAssociationsMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,41 +158,6 @@ func (c *Client) addOperationListQueueFleetAssociationsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-type endpointPrefix_opListQueueFleetAssociationsMiddleware struct {
-}
-
-func (*endpointPrefix_opListQueueFleetAssociationsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListQueueFleetAssociationsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListQueueFleetAssociationsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListQueueFleetAssociationsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListQueueFleetAssociationsAPIClient is a client that implements the
-// ListQueueFleetAssociations operation.
-type ListQueueFleetAssociationsAPIClient interface {
-	ListQueueFleetAssociations(context.Context, *ListQueueFleetAssociationsInput, ...func(*Options)) (*ListQueueFleetAssociationsOutput, error)
-}
-
-var _ ListQueueFleetAssociationsAPIClient = (*Client)(nil)
 
 // ListQueueFleetAssociationsPaginatorOptions is the paginator options for
 // ListQueueFleetAssociations
@@ -258,6 +226,9 @@ func (p *ListQueueFleetAssociationsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListQueueFleetAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -276,6 +247,41 @@ func (p *ListQueueFleetAssociationsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+type endpointPrefix_opListQueueFleetAssociationsMiddleware struct {
+}
+
+func (*endpointPrefix_opListQueueFleetAssociationsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListQueueFleetAssociationsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListQueueFleetAssociationsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListQueueFleetAssociationsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListQueueFleetAssociationsAPIClient is a client that implements the
+// ListQueueFleetAssociations operation.
+type ListQueueFleetAssociationsAPIClient interface {
+	ListQueueFleetAssociations(context.Context, *ListQueueFleetAssociationsInput, ...func(*Options)) (*ListQueueFleetAssociationsOutput, error)
+}
+
+var _ ListQueueFleetAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListQueueFleetAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

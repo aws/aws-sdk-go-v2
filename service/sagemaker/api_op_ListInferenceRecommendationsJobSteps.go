@@ -129,6 +129,9 @@ func (c *Client) addOperationListInferenceRecommendationsJobStepsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInferenceRecommendationsJobStepsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListInferenceRecommendationsJobStepsMiddlewares(sta
 	}
 	return nil
 }
-
-// ListInferenceRecommendationsJobStepsAPIClient is a client that implements the
-// ListInferenceRecommendationsJobSteps operation.
-type ListInferenceRecommendationsJobStepsAPIClient interface {
-	ListInferenceRecommendationsJobSteps(context.Context, *ListInferenceRecommendationsJobStepsInput, ...func(*Options)) (*ListInferenceRecommendationsJobStepsOutput, error)
-}
-
-var _ ListInferenceRecommendationsJobStepsAPIClient = (*Client)(nil)
 
 // ListInferenceRecommendationsJobStepsPaginatorOptions is the paginator options
 // for ListInferenceRecommendationsJobSteps
@@ -227,6 +222,9 @@ func (p *ListInferenceRecommendationsJobStepsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInferenceRecommendationsJobSteps(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListInferenceRecommendationsJobStepsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListInferenceRecommendationsJobStepsAPIClient is a client that implements the
+// ListInferenceRecommendationsJobSteps operation.
+type ListInferenceRecommendationsJobStepsAPIClient interface {
+	ListInferenceRecommendationsJobSteps(context.Context, *ListInferenceRecommendationsJobStepsInput, ...func(*Options)) (*ListInferenceRecommendationsJobStepsOutput, error)
+}
+
+var _ ListInferenceRecommendationsJobStepsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInferenceRecommendationsJobSteps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

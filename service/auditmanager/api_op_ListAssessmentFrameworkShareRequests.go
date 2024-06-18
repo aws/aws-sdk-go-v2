@@ -118,6 +118,9 @@ func (c *Client) addOperationListAssessmentFrameworkShareRequestsMiddlewares(sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssessmentFrameworkShareRequestsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListAssessmentFrameworkShareRequestsMiddlewares(sta
 	}
 	return nil
 }
-
-// ListAssessmentFrameworkShareRequestsAPIClient is a client that implements the
-// ListAssessmentFrameworkShareRequests operation.
-type ListAssessmentFrameworkShareRequestsAPIClient interface {
-	ListAssessmentFrameworkShareRequests(context.Context, *ListAssessmentFrameworkShareRequestsInput, ...func(*Options)) (*ListAssessmentFrameworkShareRequestsOutput, error)
-}
-
-var _ ListAssessmentFrameworkShareRequestsAPIClient = (*Client)(nil)
 
 // ListAssessmentFrameworkShareRequestsPaginatorOptions is the paginator options
 // for ListAssessmentFrameworkShareRequests
@@ -216,6 +211,9 @@ func (p *ListAssessmentFrameworkShareRequestsPaginator) NextPage(ctx context.Con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssessmentFrameworkShareRequests(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -234,6 +232,14 @@ func (p *ListAssessmentFrameworkShareRequestsPaginator) NextPage(ctx context.Con
 
 	return result, nil
 }
+
+// ListAssessmentFrameworkShareRequestsAPIClient is a client that implements the
+// ListAssessmentFrameworkShareRequests operation.
+type ListAssessmentFrameworkShareRequestsAPIClient interface {
+	ListAssessmentFrameworkShareRequests(context.Context, *ListAssessmentFrameworkShareRequestsInput, ...func(*Options)) (*ListAssessmentFrameworkShareRequestsOutput, error)
+}
+
+var _ ListAssessmentFrameworkShareRequestsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssessmentFrameworkShareRequests(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -117,6 +117,9 @@ func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,13 +143,6 @@ func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetDeploymentAPIClient is a client that implements the GetDeployment operation.
-type GetDeploymentAPIClient interface {
-	GetDeployment(context.Context, *GetDeploymentInput, ...func(*Options)) (*GetDeploymentOutput, error)
-}
-
-var _ GetDeploymentAPIClient = (*Client)(nil)
 
 // DeploymentSuccessfulWaiterOptions are waiter options for
 // DeploymentSuccessfulWaiter
@@ -265,7 +261,13 @@ func (w *DeploymentSuccessfulWaiter) WaitForOutput(ctx context.Context, params *
 		}
 
 		out, err := w.client.GetDeployment(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -356,6 +358,13 @@ func deploymentSuccessfulStateRetryable(ctx context.Context, input *GetDeploymen
 
 	return true, nil
 }
+
+// GetDeploymentAPIClient is a client that implements the GetDeployment operation.
+type GetDeploymentAPIClient interface {
+	GetDeployment(context.Context, *GetDeploymentInput, ...func(*Options)) (*GetDeploymentOutput, error)
+}
+
+var _ GetDeploymentAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

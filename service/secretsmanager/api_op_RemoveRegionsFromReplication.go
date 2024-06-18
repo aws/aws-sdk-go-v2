@@ -126,6 +126,9 @@ func (c *Client) addOperationRemoveRegionsFromReplicationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveRegionsFromReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}

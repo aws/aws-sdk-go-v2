@@ -133,6 +133,9 @@ func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsageStatistics(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// GetUsageStatisticsAPIClient is a client that implements the GetUsageStatistics
-// operation.
-type GetUsageStatisticsAPIClient interface {
-	GetUsageStatistics(context.Context, *GetUsageStatisticsInput, ...func(*Options)) (*GetUsageStatisticsOutput, error)
-}
-
-var _ GetUsageStatisticsAPIClient = (*Client)(nil)
 
 // GetUsageStatisticsPaginatorOptions is the paginator options for
 // GetUsageStatistics
@@ -226,6 +221,9 @@ func (p *GetUsageStatisticsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetUsageStatistics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *GetUsageStatisticsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// GetUsageStatisticsAPIClient is a client that implements the GetUsageStatistics
+// operation.
+type GetUsageStatisticsAPIClient interface {
+	GetUsageStatistics(context.Context, *GetUsageStatisticsInput, ...func(*Options)) (*GetUsageStatisticsOutput, error)
+}
+
+var _ GetUsageStatisticsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetUsageStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

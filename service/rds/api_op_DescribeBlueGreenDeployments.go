@@ -159,6 +159,9 @@ func (c *Client) addOperationDescribeBlueGreenDeploymentsMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBlueGreenDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -182,14 +185,6 @@ func (c *Client) addOperationDescribeBlueGreenDeploymentsMiddlewares(stack *midd
 	}
 	return nil
 }
-
-// DescribeBlueGreenDeploymentsAPIClient is a client that implements the
-// DescribeBlueGreenDeployments operation.
-type DescribeBlueGreenDeploymentsAPIClient interface {
-	DescribeBlueGreenDeployments(context.Context, *DescribeBlueGreenDeploymentsInput, ...func(*Options)) (*DescribeBlueGreenDeploymentsOutput, error)
-}
-
-var _ DescribeBlueGreenDeploymentsAPIClient = (*Client)(nil)
 
 // DescribeBlueGreenDeploymentsPaginatorOptions is the paginator options for
 // DescribeBlueGreenDeployments
@@ -267,6 +262,9 @@ func (p *DescribeBlueGreenDeploymentsPaginator) NextPage(ctx context.Context, op
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeBlueGreenDeployments(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -285,6 +283,14 @@ func (p *DescribeBlueGreenDeploymentsPaginator) NextPage(ctx context.Context, op
 
 	return result, nil
 }
+
+// DescribeBlueGreenDeploymentsAPIClient is a client that implements the
+// DescribeBlueGreenDeployments operation.
+type DescribeBlueGreenDeploymentsAPIClient interface {
+	DescribeBlueGreenDeployments(context.Context, *DescribeBlueGreenDeploymentsInput, ...func(*Options)) (*DescribeBlueGreenDeploymentsOutput, error)
+}
+
+var _ DescribeBlueGreenDeploymentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBlueGreenDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

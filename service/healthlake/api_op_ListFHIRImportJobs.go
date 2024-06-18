@@ -139,6 +139,9 @@ func (c *Client) addOperationListFHIRImportJobsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListFHIRImportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListFHIRImportJobsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListFHIRImportJobsAPIClient is a client that implements the ListFHIRImportJobs
-// operation.
-type ListFHIRImportJobsAPIClient interface {
-	ListFHIRImportJobs(context.Context, *ListFHIRImportJobsInput, ...func(*Options)) (*ListFHIRImportJobsOutput, error)
-}
-
-var _ ListFHIRImportJobsAPIClient = (*Client)(nil)
 
 // ListFHIRImportJobsPaginatorOptions is the paginator options for
 // ListFHIRImportJobs
@@ -236,6 +231,9 @@ func (p *ListFHIRImportJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListFHIRImportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *ListFHIRImportJobsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListFHIRImportJobsAPIClient is a client that implements the ListFHIRImportJobs
+// operation.
+type ListFHIRImportJobsAPIClient interface {
+	ListFHIRImportJobs(context.Context, *ListFHIRImportJobsInput, ...func(*Options)) (*ListFHIRImportJobsOutput, error)
+}
+
+var _ ListFHIRImportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListFHIRImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

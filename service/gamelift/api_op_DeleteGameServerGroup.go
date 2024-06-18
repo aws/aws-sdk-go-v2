@@ -152,6 +152,9 @@ func (c *Client) addOperationDeleteGameServerGroupMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteGameServerGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

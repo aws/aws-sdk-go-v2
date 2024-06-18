@@ -104,6 +104,9 @@ func (c *Client) addOperationDeleteMedicalTranscriptionJobMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteMedicalTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}

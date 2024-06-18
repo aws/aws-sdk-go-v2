@@ -170,6 +170,9 @@ func (c *Client) addOperationGetAnnotationImportJobMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAnnotationImportJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -196,41 +199,6 @@ func (c *Client) addOperationGetAnnotationImportJobMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-type endpointPrefix_opGetAnnotationImportJobMiddleware struct {
-}
-
-func (*endpointPrefix_opGetAnnotationImportJobMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetAnnotationImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "analytics-" + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opGetAnnotationImportJobMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opGetAnnotationImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// GetAnnotationImportJobAPIClient is a client that implements the
-// GetAnnotationImportJob operation.
-type GetAnnotationImportJobAPIClient interface {
-	GetAnnotationImportJob(context.Context, *GetAnnotationImportJobInput, ...func(*Options)) (*GetAnnotationImportJobOutput, error)
-}
-
-var _ GetAnnotationImportJobAPIClient = (*Client)(nil)
 
 // AnnotationImportJobCreatedWaiterOptions are waiter options for
 // AnnotationImportJobCreatedWaiter
@@ -351,7 +319,13 @@ func (w *AnnotationImportJobCreatedWaiter) WaitForOutput(ctx context.Context, pa
 		}
 
 		out, err := w.client.GetAnnotationImportJob(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -476,6 +450,41 @@ func annotationImportJobCreatedStateRetryable(ctx context.Context, input *GetAnn
 
 	return true, nil
 }
+
+type endpointPrefix_opGetAnnotationImportJobMiddleware struct {
+}
+
+func (*endpointPrefix_opGetAnnotationImportJobMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetAnnotationImportJobMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "analytics-" + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opGetAnnotationImportJobMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opGetAnnotationImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// GetAnnotationImportJobAPIClient is a client that implements the
+// GetAnnotationImportJob operation.
+type GetAnnotationImportJobAPIClient interface {
+	GetAnnotationImportJob(context.Context, *GetAnnotationImportJobInput, ...func(*Options)) (*GetAnnotationImportJobOutput, error)
+}
+
+var _ GetAnnotationImportJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetAnnotationImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -128,6 +128,9 @@ func (c *Client) addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBotAliasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,13 +154,6 @@ func (c *Client) addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetBotAliasesAPIClient is a client that implements the GetBotAliases operation.
-type GetBotAliasesAPIClient interface {
-	GetBotAliases(context.Context, *GetBotAliasesInput, ...func(*Options)) (*GetBotAliasesOutput, error)
-}
-
-var _ GetBotAliasesAPIClient = (*Client)(nil)
 
 // GetBotAliasesPaginatorOptions is the paginator options for GetBotAliases
 type GetBotAliasesPaginatorOptions struct {
@@ -222,6 +218,9 @@ func (p *GetBotAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBotAliases(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +239,13 @@ func (p *GetBotAliasesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetBotAliasesAPIClient is a client that implements the GetBotAliases operation.
+type GetBotAliasesAPIClient interface {
+	GetBotAliases(context.Context, *GetBotAliasesInput, ...func(*Options)) (*GetBotAliasesOutput, error)
+}
+
+var _ GetBotAliasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBotAliases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

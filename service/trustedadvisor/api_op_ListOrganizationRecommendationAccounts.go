@@ -123,6 +123,9 @@ func (c *Client) addOperationListOrganizationRecommendationAccountsMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListOrganizationRecommendationAccountsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,14 +149,6 @@ func (c *Client) addOperationListOrganizationRecommendationAccountsMiddlewares(s
 	}
 	return nil
 }
-
-// ListOrganizationRecommendationAccountsAPIClient is a client that implements the
-// ListOrganizationRecommendationAccounts operation.
-type ListOrganizationRecommendationAccountsAPIClient interface {
-	ListOrganizationRecommendationAccounts(context.Context, *ListOrganizationRecommendationAccountsInput, ...func(*Options)) (*ListOrganizationRecommendationAccountsOutput, error)
-}
-
-var _ ListOrganizationRecommendationAccountsAPIClient = (*Client)(nil)
 
 // ListOrganizationRecommendationAccountsPaginatorOptions is the paginator options
 // for ListOrganizationRecommendationAccounts
@@ -221,6 +216,9 @@ func (p *ListOrganizationRecommendationAccountsPaginator) NextPage(ctx context.C
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOrganizationRecommendationAccounts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -239,6 +237,14 @@ func (p *ListOrganizationRecommendationAccountsPaginator) NextPage(ctx context.C
 
 	return result, nil
 }
+
+// ListOrganizationRecommendationAccountsAPIClient is a client that implements the
+// ListOrganizationRecommendationAccounts operation.
+type ListOrganizationRecommendationAccountsAPIClient interface {
+	ListOrganizationRecommendationAccounts(context.Context, *ListOrganizationRecommendationAccountsInput, ...func(*Options)) (*ListOrganizationRecommendationAccountsOutput, error)
+}
+
+var _ ListOrganizationRecommendationAccountsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOrganizationRecommendationAccounts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

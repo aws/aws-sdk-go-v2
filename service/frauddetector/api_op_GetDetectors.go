@@ -118,6 +118,9 @@ func (c *Client) addOperationGetDetectorsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDetectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -138,13 +141,6 @@ func (c *Client) addOperationGetDetectorsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// GetDetectorsAPIClient is a client that implements the GetDetectors operation.
-type GetDetectorsAPIClient interface {
-	GetDetectors(context.Context, *GetDetectorsInput, ...func(*Options)) (*GetDetectorsOutput, error)
-}
-
-var _ GetDetectorsAPIClient = (*Client)(nil)
 
 // GetDetectorsPaginatorOptions is the paginator options for GetDetectors
 type GetDetectorsPaginatorOptions struct {
@@ -209,6 +205,9 @@ func (p *GetDetectorsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetDetectors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -227,6 +226,13 @@ func (p *GetDetectorsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// GetDetectorsAPIClient is a client that implements the GetDetectors operation.
+type GetDetectorsAPIClient interface {
+	GetDetectors(context.Context, *GetDetectorsInput, ...func(*Options)) (*GetDetectorsOutput, error)
+}
+
+var _ GetDetectorsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetDetectors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

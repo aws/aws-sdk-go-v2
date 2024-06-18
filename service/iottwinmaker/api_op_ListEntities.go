@@ -122,6 +122,9 @@ func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListEntitiesMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,40 +151,6 @@ func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-type endpointPrefix_opListEntitiesMiddleware struct {
-}
-
-func (*endpointPrefix_opListEntitiesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListEntitiesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListEntitiesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListEntitiesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListEntitiesAPIClient is a client that implements the ListEntities operation.
-type ListEntitiesAPIClient interface {
-	ListEntities(context.Context, *ListEntitiesInput, ...func(*Options)) (*ListEntitiesOutput, error)
-}
-
-var _ ListEntitiesAPIClient = (*Client)(nil)
 
 // ListEntitiesPaginatorOptions is the paginator options for ListEntities
 type ListEntitiesPaginatorOptions struct {
@@ -248,6 +217,9 @@ func (p *ListEntitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEntities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -266,6 +238,40 @@ func (p *ListEntitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+type endpointPrefix_opListEntitiesMiddleware struct {
+}
+
+func (*endpointPrefix_opListEntitiesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListEntitiesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListEntitiesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListEntitiesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListEntitiesAPIClient is a client that implements the ListEntities operation.
+type ListEntitiesAPIClient interface {
+	ListEntities(context.Context, *ListEntitiesInput, ...func(*Options)) (*ListEntitiesOutput, error)
+}
+
+var _ ListEntitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEntities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

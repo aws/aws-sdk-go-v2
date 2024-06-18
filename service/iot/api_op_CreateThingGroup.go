@@ -132,6 +132,9 @@ func (c *Client) addOperationCreateThingGroupMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateThingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -112,6 +112,9 @@ func (c *Client) addOperationListSchemaMappingsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSchemaMappings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListSchemaMappingsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListSchemaMappingsAPIClient is a client that implements the ListSchemaMappings
-// operation.
-type ListSchemaMappingsAPIClient interface {
-	ListSchemaMappings(context.Context, *ListSchemaMappingsInput, ...func(*Options)) (*ListSchemaMappingsOutput, error)
-}
-
-var _ ListSchemaMappingsAPIClient = (*Client)(nil)
 
 // ListSchemaMappingsPaginatorOptions is the paginator options for
 // ListSchemaMappings
@@ -205,6 +200,9 @@ func (p *ListSchemaMappingsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSchemaMappings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListSchemaMappingsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListSchemaMappingsAPIClient is a client that implements the ListSchemaMappings
+// operation.
+type ListSchemaMappingsAPIClient interface {
+	ListSchemaMappings(context.Context, *ListSchemaMappingsInput, ...func(*Options)) (*ListSchemaMappingsOutput, error)
+}
+
+var _ ListSchemaMappingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSchemaMappings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

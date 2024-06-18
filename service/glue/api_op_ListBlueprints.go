@@ -112,6 +112,9 @@ func (c *Client) addOperationListBlueprintsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBlueprints(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListBlueprintsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListBlueprintsAPIClient is a client that implements the ListBlueprints
-// operation.
-type ListBlueprintsAPIClient interface {
-	ListBlueprints(context.Context, *ListBlueprintsInput, ...func(*Options)) (*ListBlueprintsOutput, error)
-}
-
-var _ ListBlueprintsAPIClient = (*Client)(nil)
 
 // ListBlueprintsPaginatorOptions is the paginator options for ListBlueprints
 type ListBlueprintsPaginatorOptions struct {
@@ -204,6 +199,9 @@ func (p *ListBlueprintsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBlueprints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListBlueprintsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListBlueprintsAPIClient is a client that implements the ListBlueprints
+// operation.
+type ListBlueprintsAPIClient interface {
+	ListBlueprints(context.Context, *ListBlueprintsInput, ...func(*Options)) (*ListBlueprintsOutput, error)
+}
+
+var _ ListBlueprintsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBlueprints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

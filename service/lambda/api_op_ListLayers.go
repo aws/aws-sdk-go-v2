@@ -129,6 +129,9 @@ func (c *Client) addOperationListLayersMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLayers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -149,13 +152,6 @@ func (c *Client) addOperationListLayersMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListLayersAPIClient is a client that implements the ListLayers operation.
-type ListLayersAPIClient interface {
-	ListLayers(context.Context, *ListLayersInput, ...func(*Options)) (*ListLayersOutput, error)
-}
-
-var _ ListLayersAPIClient = (*Client)(nil)
 
 // ListLayersPaginatorOptions is the paginator options for ListLayers
 type ListLayersPaginatorOptions struct {
@@ -220,6 +216,9 @@ func (p *ListLayersPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLayers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -238,6 +237,13 @@ func (p *ListLayersPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListLayersAPIClient is a client that implements the ListLayers operation.
+type ListLayersAPIClient interface {
+	ListLayers(context.Context, *ListLayersInput, ...func(*Options)) (*ListLayersOutput, error)
+}
+
+var _ ListLayersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLayers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

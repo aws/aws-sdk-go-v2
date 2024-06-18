@@ -117,6 +117,9 @@ func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContacts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -137,13 +140,6 @@ func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-// ListContactsAPIClient is a client that implements the ListContacts operation.
-type ListContactsAPIClient interface {
-	ListContacts(context.Context, *ListContactsInput, ...func(*Options)) (*ListContactsOutput, error)
-}
-
-var _ ListContactsAPIClient = (*Client)(nil)
 
 // ListContactsPaginatorOptions is the paginator options for ListContacts
 type ListContactsPaginatorOptions struct {
@@ -208,6 +204,9 @@ func (p *ListContactsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListContacts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -226,6 +225,13 @@ func (p *ListContactsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+// ListContactsAPIClient is a client that implements the ListContacts operation.
+type ListContactsAPIClient interface {
+	ListContacts(context.Context, *ListContactsInput, ...func(*Options)) (*ListContactsOutput, error)
+}
+
+var _ ListContactsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListContacts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

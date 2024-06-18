@@ -131,6 +131,9 @@ func (c *Client) addOperationListEphemeridesMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListEphemeridesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,14 +157,6 @@ func (c *Client) addOperationListEphemeridesMiddlewares(stack *middleware.Stack,
 	}
 	return nil
 }
-
-// ListEphemeridesAPIClient is a client that implements the ListEphemerides
-// operation.
-type ListEphemeridesAPIClient interface {
-	ListEphemerides(context.Context, *ListEphemeridesInput, ...func(*Options)) (*ListEphemeridesOutput, error)
-}
-
-var _ ListEphemeridesAPIClient = (*Client)(nil)
 
 // ListEphemeridesPaginatorOptions is the paginator options for ListEphemerides
 type ListEphemeridesPaginatorOptions struct {
@@ -226,6 +221,9 @@ func (p *ListEphemeridesPaginator) NextPage(ctx context.Context, optFns ...func(
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEphemerides(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListEphemeridesPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	return result, nil
 }
+
+// ListEphemeridesAPIClient is a client that implements the ListEphemerides
+// operation.
+type ListEphemeridesAPIClient interface {
+	ListEphemerides(context.Context, *ListEphemeridesInput, ...func(*Options)) (*ListEphemeridesOutput, error)
+}
+
+var _ ListEphemeridesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEphemerides(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

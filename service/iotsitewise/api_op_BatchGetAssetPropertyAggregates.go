@@ -143,6 +143,9 @@ func (c *Client) addOperationBatchGetAssetPropertyAggregatesMiddlewares(stack *m
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware(stack); err != nil {
 		return err
 	}
@@ -169,41 +172,6 @@ func (c *Client) addOperationBatchGetAssetPropertyAggregatesMiddlewares(stack *m
 	}
 	return nil
 }
-
-type endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware struct {
-}
-
-func (*endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "data." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// BatchGetAssetPropertyAggregatesAPIClient is a client that implements the
-// BatchGetAssetPropertyAggregates operation.
-type BatchGetAssetPropertyAggregatesAPIClient interface {
-	BatchGetAssetPropertyAggregates(context.Context, *BatchGetAssetPropertyAggregatesInput, ...func(*Options)) (*BatchGetAssetPropertyAggregatesOutput, error)
-}
-
-var _ BatchGetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 
 // BatchGetAssetPropertyAggregatesPaginatorOptions is the paginator options for
 // BatchGetAssetPropertyAggregates
@@ -277,6 +245,9 @@ func (p *BatchGetAssetPropertyAggregatesPaginator) NextPage(ctx context.Context,
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.BatchGetAssetPropertyAggregates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -295,6 +266,41 @@ func (p *BatchGetAssetPropertyAggregatesPaginator) NextPage(ctx context.Context,
 
 	return result, nil
 }
+
+type endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware struct {
+}
+
+func (*endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "data." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// BatchGetAssetPropertyAggregatesAPIClient is a client that implements the
+// BatchGetAssetPropertyAggregates operation.
+type BatchGetAssetPropertyAggregatesAPIClient interface {
+	BatchGetAssetPropertyAggregates(context.Context, *BatchGetAssetPropertyAggregatesInput, ...func(*Options)) (*BatchGetAssetPropertyAggregatesOutput, error)
+}
+
+var _ BatchGetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opBatchGetAssetPropertyAggregates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -135,6 +135,9 @@ func (c *Client) addOperationListAnomaliesForInsightMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAnomaliesForInsightValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationListAnomaliesForInsightMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListAnomaliesForInsightAPIClient is a client that implements the
-// ListAnomaliesForInsight operation.
-type ListAnomaliesForInsightAPIClient interface {
-	ListAnomaliesForInsight(context.Context, *ListAnomaliesForInsightInput, ...func(*Options)) (*ListAnomaliesForInsightOutput, error)
-}
-
-var _ ListAnomaliesForInsightAPIClient = (*Client)(nil)
 
 // ListAnomaliesForInsightPaginatorOptions is the paginator options for
 // ListAnomaliesForInsight
@@ -233,6 +228,9 @@ func (p *ListAnomaliesForInsightPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAnomaliesForInsight(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -251,6 +249,14 @@ func (p *ListAnomaliesForInsightPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListAnomaliesForInsightAPIClient is a client that implements the
+// ListAnomaliesForInsight operation.
+type ListAnomaliesForInsightAPIClient interface {
+	ListAnomaliesForInsight(context.Context, *ListAnomaliesForInsightInput, ...func(*Options)) (*ListAnomaliesForInsightOutput, error)
+}
+
+var _ ListAnomaliesForInsightAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAnomaliesForInsight(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

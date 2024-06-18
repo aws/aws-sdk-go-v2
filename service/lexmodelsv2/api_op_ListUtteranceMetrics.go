@@ -207,6 +207,9 @@ func (c *Client) addOperationListUtteranceMetricsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListUtteranceMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -230,14 +233,6 @@ func (c *Client) addOperationListUtteranceMetricsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListUtteranceMetricsAPIClient is a client that implements the
-// ListUtteranceMetrics operation.
-type ListUtteranceMetricsAPIClient interface {
-	ListUtteranceMetrics(context.Context, *ListUtteranceMetricsInput, ...func(*Options)) (*ListUtteranceMetricsOutput, error)
-}
-
-var _ ListUtteranceMetricsAPIClient = (*Client)(nil)
 
 // ListUtteranceMetricsPaginatorOptions is the paginator options for
 // ListUtteranceMetrics
@@ -305,6 +300,9 @@ func (p *ListUtteranceMetricsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListUtteranceMetrics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -323,6 +321,14 @@ func (p *ListUtteranceMetricsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListUtteranceMetricsAPIClient is a client that implements the
+// ListUtteranceMetrics operation.
+type ListUtteranceMetricsAPIClient interface {
+	ListUtteranceMetrics(context.Context, *ListUtteranceMetricsInput, ...func(*Options)) (*ListUtteranceMetricsOutput, error)
+}
+
+var _ ListUtteranceMetricsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListUtteranceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

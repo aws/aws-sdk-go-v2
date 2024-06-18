@@ -116,6 +116,9 @@ func (c *Client) addOperationListAssociatedAttributeGroupsMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssociatedAttributeGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListAssociatedAttributeGroupsMiddlewares(stack *mid
 	}
 	return nil
 }
-
-// ListAssociatedAttributeGroupsAPIClient is a client that implements the
-// ListAssociatedAttributeGroups operation.
-type ListAssociatedAttributeGroupsAPIClient interface {
-	ListAssociatedAttributeGroups(context.Context, *ListAssociatedAttributeGroupsInput, ...func(*Options)) (*ListAssociatedAttributeGroupsOutput, error)
-}
-
-var _ ListAssociatedAttributeGroupsAPIClient = (*Client)(nil)
 
 // ListAssociatedAttributeGroupsPaginatorOptions is the paginator options for
 // ListAssociatedAttributeGroups
@@ -215,6 +210,9 @@ func (p *ListAssociatedAttributeGroupsPaginator) NextPage(ctx context.Context, o
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssociatedAttributeGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListAssociatedAttributeGroupsPaginator) NextPage(ctx context.Context, o
 
 	return result, nil
 }
+
+// ListAssociatedAttributeGroupsAPIClient is a client that implements the
+// ListAssociatedAttributeGroups operation.
+type ListAssociatedAttributeGroupsAPIClient interface {
+	ListAssociatedAttributeGroups(context.Context, *ListAssociatedAttributeGroupsInput, ...func(*Options)) (*ListAssociatedAttributeGroupsOutput, error)
+}
+
+var _ ListAssociatedAttributeGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssociatedAttributeGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -128,6 +128,9 @@ func (c *Client) addOperationListEndpointAccessMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEndpointAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListEndpointAccessMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListEndpointAccessAPIClient is a client that implements the ListEndpointAccess
-// operation.
-type ListEndpointAccessAPIClient interface {
-	ListEndpointAccess(context.Context, *ListEndpointAccessInput, ...func(*Options)) (*ListEndpointAccessOutput, error)
-}
-
-var _ ListEndpointAccessAPIClient = (*Client)(nil)
 
 // ListEndpointAccessPaginatorOptions is the paginator options for
 // ListEndpointAccess
@@ -222,6 +217,9 @@ func (p *ListEndpointAccessPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListEndpointAccess(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *ListEndpointAccessPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListEndpointAccessAPIClient is a client that implements the ListEndpointAccess
+// operation.
+type ListEndpointAccessAPIClient interface {
+	ListEndpointAccess(context.Context, *ListEndpointAccessInput, ...func(*Options)) (*ListEndpointAccessOutput, error)
+}
+
+var _ ListEndpointAccessAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListEndpointAccess(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

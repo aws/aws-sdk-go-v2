@@ -139,6 +139,9 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	}
 	return nil
 }
-
-// ListTrainingJobsForHyperParameterTuningJobAPIClient is a client that implements
-// the ListTrainingJobsForHyperParameterTuningJob operation.
-type ListTrainingJobsForHyperParameterTuningJobAPIClient interface {
-	ListTrainingJobsForHyperParameterTuningJob(context.Context, *ListTrainingJobsForHyperParameterTuningJobInput, ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error)
-}
-
-var _ ListTrainingJobsForHyperParameterTuningJobAPIClient = (*Client)(nil)
 
 // ListTrainingJobsForHyperParameterTuningJobPaginatorOptions is the paginator
 // options for ListTrainingJobsForHyperParameterTuningJob
@@ -237,6 +232,9 @@ func (p *ListTrainingJobsForHyperParameterTuningJobPaginator) NextPage(ctx conte
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTrainingJobsForHyperParameterTuningJob(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *ListTrainingJobsForHyperParameterTuningJobPaginator) NextPage(ctx conte
 
 	return result, nil
 }
+
+// ListTrainingJobsForHyperParameterTuningJobAPIClient is a client that implements
+// the ListTrainingJobsForHyperParameterTuningJob operation.
+type ListTrainingJobsForHyperParameterTuningJobAPIClient interface {
+	ListTrainingJobsForHyperParameterTuningJob(context.Context, *ListTrainingJobsForHyperParameterTuningJobInput, ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error)
+}
+
+var _ ListTrainingJobsForHyperParameterTuningJobAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTrainingJobsForHyperParameterTuningJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

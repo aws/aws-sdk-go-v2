@@ -122,6 +122,9 @@ func (c *Client) addOperationListProfileSharesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProfileSharesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationListProfileSharesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListProfileSharesAPIClient is a client that implements the ListProfileShares
-// operation.
-type ListProfileSharesAPIClient interface {
-	ListProfileShares(context.Context, *ListProfileSharesInput, ...func(*Options)) (*ListProfileSharesOutput, error)
-}
-
-var _ ListProfileSharesAPIClient = (*Client)(nil)
 
 // ListProfileSharesPaginatorOptions is the paginator options for ListProfileShares
 type ListProfileSharesPaginatorOptions struct {
@@ -217,6 +212,9 @@ func (p *ListProfileSharesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProfileShares(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -235,6 +233,14 @@ func (p *ListProfileSharesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListProfileSharesAPIClient is a client that implements the ListProfileShares
+// operation.
+type ListProfileSharesAPIClient interface {
+	ListProfileShares(context.Context, *ListProfileSharesInput, ...func(*Options)) (*ListProfileSharesOutput, error)
+}
+
+var _ ListProfileSharesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProfileShares(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

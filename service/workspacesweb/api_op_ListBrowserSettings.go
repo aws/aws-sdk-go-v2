@@ -112,6 +112,9 @@ func (c *Client) addOperationListBrowserSettingsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBrowserSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListBrowserSettingsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListBrowserSettingsAPIClient is a client that implements the
-// ListBrowserSettings operation.
-type ListBrowserSettingsAPIClient interface {
-	ListBrowserSettings(context.Context, *ListBrowserSettingsInput, ...func(*Options)) (*ListBrowserSettingsOutput, error)
-}
-
-var _ ListBrowserSettingsAPIClient = (*Client)(nil)
 
 // ListBrowserSettingsPaginatorOptions is the paginator options for
 // ListBrowserSettings
@@ -205,6 +200,9 @@ func (p *ListBrowserSettingsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBrowserSettings(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -223,6 +221,14 @@ func (p *ListBrowserSettingsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListBrowserSettingsAPIClient is a client that implements the
+// ListBrowserSettings operation.
+type ListBrowserSettingsAPIClient interface {
+	ListBrowserSettings(context.Context, *ListBrowserSettingsInput, ...func(*Options)) (*ListBrowserSettingsOutput, error)
+}
+
+var _ ListBrowserSettingsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBrowserSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

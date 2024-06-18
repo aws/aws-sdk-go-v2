@@ -125,6 +125,9 @@ func (c *Client) addOperationListTemplateGroupAccessControlEntriesMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTemplateGroupAccessControlEntriesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationListTemplateGroupAccessControlEntriesMiddlewares(st
 	}
 	return nil
 }
-
-// ListTemplateGroupAccessControlEntriesAPIClient is a client that implements the
-// ListTemplateGroupAccessControlEntries operation.
-type ListTemplateGroupAccessControlEntriesAPIClient interface {
-	ListTemplateGroupAccessControlEntries(context.Context, *ListTemplateGroupAccessControlEntriesInput, ...func(*Options)) (*ListTemplateGroupAccessControlEntriesOutput, error)
-}
-
-var _ ListTemplateGroupAccessControlEntriesAPIClient = (*Client)(nil)
 
 // ListTemplateGroupAccessControlEntriesPaginatorOptions is the paginator options
 // for ListTemplateGroupAccessControlEntries
@@ -226,6 +221,9 @@ func (p *ListTemplateGroupAccessControlEntriesPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTemplateGroupAccessControlEntries(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -244,6 +242,14 @@ func (p *ListTemplateGroupAccessControlEntriesPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// ListTemplateGroupAccessControlEntriesAPIClient is a client that implements the
+// ListTemplateGroupAccessControlEntries operation.
+type ListTemplateGroupAccessControlEntriesAPIClient interface {
+	ListTemplateGroupAccessControlEntries(context.Context, *ListTemplateGroupAccessControlEntriesInput, ...func(*Options)) (*ListTemplateGroupAccessControlEntriesOutput, error)
+}
+
+var _ ListTemplateGroupAccessControlEntriesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTemplateGroupAccessControlEntries(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

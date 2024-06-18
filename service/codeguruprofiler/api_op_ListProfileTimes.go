@@ -162,6 +162,9 @@ func (c *Client) addOperationListProfileTimesMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListProfileTimesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -185,14 +188,6 @@ func (c *Client) addOperationListProfileTimesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
-
-// ListProfileTimesAPIClient is a client that implements the ListProfileTimes
-// operation.
-type ListProfileTimesAPIClient interface {
-	ListProfileTimes(context.Context, *ListProfileTimesInput, ...func(*Options)) (*ListProfileTimesOutput, error)
-}
-
-var _ ListProfileTimesAPIClient = (*Client)(nil)
 
 // ListProfileTimesPaginatorOptions is the paginator options for ListProfileTimes
 type ListProfileTimesPaginatorOptions struct {
@@ -261,6 +256,9 @@ func (p *ListProfileTimesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListProfileTimes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -279,6 +277,14 @@ func (p *ListProfileTimesPaginator) NextPage(ctx context.Context, optFns ...func
 
 	return result, nil
 }
+
+// ListProfileTimesAPIClient is a client that implements the ListProfileTimes
+// operation.
+type ListProfileTimesAPIClient interface {
+	ListProfileTimes(context.Context, *ListProfileTimesInput, ...func(*Options)) (*ListProfileTimesOutput, error)
+}
+
+var _ ListProfileTimesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListProfileTimes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

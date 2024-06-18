@@ -172,6 +172,9 @@ func (c *Client) addOperationDescribeDBClustersMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClustersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -194,103 +197,6 @@ func (c *Client) addOperationDescribeDBClustersMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
-}
-
-// DescribeDBClustersAPIClient is a client that implements the DescribeDBClusters
-// operation.
-type DescribeDBClustersAPIClient interface {
-	DescribeDBClusters(context.Context, *DescribeDBClustersInput, ...func(*Options)) (*DescribeDBClustersOutput, error)
-}
-
-var _ DescribeDBClustersAPIClient = (*Client)(nil)
-
-// DescribeDBClustersPaginatorOptions is the paginator options for
-// DescribeDBClusters
-type DescribeDBClustersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeDBClustersPaginator is a paginator for DescribeDBClusters
-type DescribeDBClustersPaginator struct {
-	options   DescribeDBClustersPaginatorOptions
-	client    DescribeDBClustersAPIClient
-	params    *DescribeDBClustersInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeDBClustersPaginator returns a new DescribeDBClustersPaginator
-func NewDescribeDBClustersPaginator(client DescribeDBClustersAPIClient, params *DescribeDBClustersInput, optFns ...func(*DescribeDBClustersPaginatorOptions)) *DescribeDBClustersPaginator {
-	if params == nil {
-		params = &DescribeDBClustersInput{}
-	}
-
-	options := DescribeDBClustersPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeDBClustersPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeDBClustersPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeDBClusters page.
-func (p *DescribeDBClustersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeDBClusters(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // DBClusterAvailableWaiterOptions are waiter options for DBClusterAvailableWaiter
@@ -408,7 +314,13 @@ func (w *DBClusterAvailableWaiter) WaitForOutput(ctx context.Context, params *De
 		}
 
 		out, err := w.client.DescribeDBClusters(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -716,7 +628,13 @@ func (w *DBClusterDeletedWaiter) WaitForOutput(ctx context.Context, params *Desc
 		}
 
 		out, err := w.client.DescribeDBClusters(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -880,6 +798,106 @@ func dBClusterDeletedStateRetryable(ctx context.Context, input *DescribeDBCluste
 
 	return true, nil
 }
+
+// DescribeDBClustersPaginatorOptions is the paginator options for
+// DescribeDBClusters
+type DescribeDBClustersPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBClustersPaginator is a paginator for DescribeDBClusters
+type DescribeDBClustersPaginator struct {
+	options   DescribeDBClustersPaginatorOptions
+	client    DescribeDBClustersAPIClient
+	params    *DescribeDBClustersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBClustersPaginator returns a new DescribeDBClustersPaginator
+func NewDescribeDBClustersPaginator(client DescribeDBClustersAPIClient, params *DescribeDBClustersInput, optFns ...func(*DescribeDBClustersPaginatorOptions)) *DescribeDBClustersPaginator {
+	if params == nil {
+		params = &DescribeDBClustersInput{}
+	}
+
+	options := DescribeDBClustersPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDBClustersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBClustersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDBClusters page.
+func (p *DescribeDBClustersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBClustersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeDBClusters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeDBClustersAPIClient is a client that implements the DescribeDBClusters
+// operation.
+type DescribeDBClustersAPIClient interface {
+	DescribeDBClusters(context.Context, *DescribeDBClustersInput, ...func(*Options)) (*DescribeDBClustersOutput, error)
+}
+
+var _ DescribeDBClustersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBClusters(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

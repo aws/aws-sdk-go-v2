@@ -140,6 +140,9 @@ func (c *Client) addOperationListLabelingJobsForWorkteamMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLabelingJobsForWorkteamValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,14 +166,6 @@ func (c *Client) addOperationListLabelingJobsForWorkteamMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListLabelingJobsForWorkteamAPIClient is a client that implements the
-// ListLabelingJobsForWorkteam operation.
-type ListLabelingJobsForWorkteamAPIClient interface {
-	ListLabelingJobsForWorkteam(context.Context, *ListLabelingJobsForWorkteamInput, ...func(*Options)) (*ListLabelingJobsForWorkteamOutput, error)
-}
-
-var _ ListLabelingJobsForWorkteamAPIClient = (*Client)(nil)
 
 // ListLabelingJobsForWorkteamPaginatorOptions is the paginator options for
 // ListLabelingJobsForWorkteam
@@ -238,6 +233,9 @@ func (p *ListLabelingJobsForWorkteamPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLabelingJobsForWorkteam(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *ListLabelingJobsForWorkteamPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListLabelingJobsForWorkteamAPIClient is a client that implements the
+// ListLabelingJobsForWorkteam operation.
+type ListLabelingJobsForWorkteamAPIClient interface {
+	ListLabelingJobsForWorkteam(context.Context, *ListLabelingJobsForWorkteamInput, ...func(*Options)) (*ListLabelingJobsForWorkteamOutput, error)
+}
+
+var _ ListLabelingJobsForWorkteamAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLabelingJobsForWorkteam(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

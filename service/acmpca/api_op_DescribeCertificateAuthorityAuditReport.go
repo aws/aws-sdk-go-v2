@@ -137,6 +137,9 @@ func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCertificateAuthorityAuditReportValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,14 +163,6 @@ func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(
 	}
 	return nil
 }
-
-// DescribeCertificateAuthorityAuditReportAPIClient is a client that implements
-// the DescribeCertificateAuthorityAuditReport operation.
-type DescribeCertificateAuthorityAuditReportAPIClient interface {
-	DescribeCertificateAuthorityAuditReport(context.Context, *DescribeCertificateAuthorityAuditReportInput, ...func(*Options)) (*DescribeCertificateAuthorityAuditReportOutput, error)
-}
-
-var _ DescribeCertificateAuthorityAuditReportAPIClient = (*Client)(nil)
 
 // AuditReportCreatedWaiterOptions are waiter options for AuditReportCreatedWaiter
 type AuditReportCreatedWaiterOptions struct {
@@ -284,7 +279,13 @@ func (w *AuditReportCreatedWaiter) WaitForOutput(ctx context.Context, params *De
 		}
 
 		out, err := w.client.DescribeCertificateAuthorityAuditReport(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -370,6 +371,14 @@ func auditReportCreatedStateRetryable(ctx context.Context, input *DescribeCertif
 
 	return true, nil
 }
+
+// DescribeCertificateAuthorityAuditReportAPIClient is a client that implements
+// the DescribeCertificateAuthorityAuditReport operation.
+type DescribeCertificateAuthorityAuditReportAPIClient interface {
+	DescribeCertificateAuthorityAuditReport(context.Context, *DescribeCertificateAuthorityAuditReportInput, ...func(*Options)) (*DescribeCertificateAuthorityAuditReportOutput, error)
+}
+
+var _ DescribeCertificateAuthorityAuditReportAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCertificateAuthorityAuditReport(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

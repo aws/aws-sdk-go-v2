@@ -121,6 +121,9 @@ func (c *Client) addOperationListOutpostsWithS3Middlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOutpostsWithS3(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -141,14 +144,6 @@ func (c *Client) addOperationListOutpostsWithS3Middlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListOutpostsWithS3APIClient is a client that implements the ListOutpostsWithS3
-// operation.
-type ListOutpostsWithS3APIClient interface {
-	ListOutpostsWithS3(context.Context, *ListOutpostsWithS3Input, ...func(*Options)) (*ListOutpostsWithS3Output, error)
-}
-
-var _ ListOutpostsWithS3APIClient = (*Client)(nil)
 
 // ListOutpostsWithS3PaginatorOptions is the paginator options for
 // ListOutpostsWithS3
@@ -210,6 +205,9 @@ func (p *ListOutpostsWithS3Paginator) NextPage(ctx context.Context, optFns ...fu
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListOutpostsWithS3(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -228,6 +226,14 @@ func (p *ListOutpostsWithS3Paginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListOutpostsWithS3APIClient is a client that implements the ListOutpostsWithS3
+// operation.
+type ListOutpostsWithS3APIClient interface {
+	ListOutpostsWithS3(context.Context, *ListOutpostsWithS3Input, ...func(*Options)) (*ListOutpostsWithS3Output, error)
+}
+
+var _ ListOutpostsWithS3APIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListOutpostsWithS3(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

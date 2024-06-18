@@ -217,6 +217,9 @@ func (c *Client) addOperationImportCertificateAuthorityCertificateMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpImportCertificateAuthorityCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}

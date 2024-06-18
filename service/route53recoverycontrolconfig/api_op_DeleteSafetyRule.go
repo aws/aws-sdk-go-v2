@@ -103,6 +103,9 @@ func (c *Client) addOperationDeleteSafetyRuleMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteSafetyRuleValidationMiddleware(stack); err != nil {
 		return err
 	}

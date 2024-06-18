@@ -117,6 +117,9 @@ func (c *Client) addOperationDisableFederationMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisableFederationValidationMiddleware(stack); err != nil {
 		return err
 	}

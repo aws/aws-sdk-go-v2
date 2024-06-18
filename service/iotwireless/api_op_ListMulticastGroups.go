@@ -112,6 +112,9 @@ func (c *Client) addOperationListMulticastGroupsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMulticastGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListMulticastGroupsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListMulticastGroupsAPIClient is a client that implements the
-// ListMulticastGroups operation.
-type ListMulticastGroupsAPIClient interface {
-	ListMulticastGroups(context.Context, *ListMulticastGroupsInput, ...func(*Options)) (*ListMulticastGroupsOutput, error)
-}
-
-var _ ListMulticastGroupsAPIClient = (*Client)(nil)
 
 // ListMulticastGroupsPaginatorOptions is the paginator options for
 // ListMulticastGroups
@@ -201,6 +196,9 @@ func (p *ListMulticastGroupsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMulticastGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -219,6 +217,14 @@ func (p *ListMulticastGroupsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListMulticastGroupsAPIClient is a client that implements the
+// ListMulticastGroups operation.
+type ListMulticastGroupsAPIClient interface {
+	ListMulticastGroups(context.Context, *ListMulticastGroupsInput, ...func(*Options)) (*ListMulticastGroupsOutput, error)
+}
+
+var _ ListMulticastGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMulticastGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

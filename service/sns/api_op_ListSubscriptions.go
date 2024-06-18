@@ -115,6 +115,9 @@ func (c *Client) addOperationListSubscriptionsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSubscriptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -135,14 +138,6 @@ func (c *Client) addOperationListSubscriptionsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListSubscriptionsAPIClient is a client that implements the ListSubscriptions
-// operation.
-type ListSubscriptionsAPIClient interface {
-	ListSubscriptions(context.Context, *ListSubscriptionsInput, ...func(*Options)) (*ListSubscriptionsOutput, error)
-}
-
-var _ ListSubscriptionsAPIClient = (*Client)(nil)
 
 // ListSubscriptionsPaginatorOptions is the paginator options for ListSubscriptions
 type ListSubscriptionsPaginatorOptions struct {
@@ -195,6 +190,9 @@ func (p *ListSubscriptionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSubscriptions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -213,6 +211,14 @@ func (p *ListSubscriptionsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListSubscriptionsAPIClient is a client that implements the ListSubscriptions
+// operation.
+type ListSubscriptionsAPIClient interface {
+	ListSubscriptions(context.Context, *ListSubscriptionsInput, ...func(*Options)) (*ListSubscriptionsOutput, error)
+}
+
+var _ ListSubscriptionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

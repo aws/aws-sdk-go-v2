@@ -143,6 +143,9 @@ func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateFindingsFilterMiddleware(stack, options); err != nil {
 		return err
 	}

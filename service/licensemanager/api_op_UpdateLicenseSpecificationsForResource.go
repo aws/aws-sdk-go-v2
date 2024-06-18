@@ -114,6 +114,9 @@ func (c *Client) addOperationUpdateLicenseSpecificationsForResourceMiddlewares(s
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateLicenseSpecificationsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}

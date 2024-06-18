@@ -150,6 +150,9 @@ func (c *Client) addOperationCreateLegalHoldMiddlewares(stack *middleware.Stack,
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateLegalHoldValidationMiddleware(stack); err != nil {
 		return err
 	}

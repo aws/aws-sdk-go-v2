@@ -118,6 +118,9 @@ func (c *Client) addOperationDescribeActiveReceiptRuleSetMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeActiveReceiptRuleSet(options.Region), middleware.Before); err != nil {
 		return err
 	}

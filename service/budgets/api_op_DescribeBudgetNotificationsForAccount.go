@@ -116,6 +116,9 @@ func (c *Client) addOperationDescribeBudgetNotificationsForAccountMiddlewares(st
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeBudgetNotificationsForAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeBudgetNotificationsForAccountMiddlewares(st
 	}
 	return nil
 }
-
-// DescribeBudgetNotificationsForAccountAPIClient is a client that implements the
-// DescribeBudgetNotificationsForAccount operation.
-type DescribeBudgetNotificationsForAccountAPIClient interface {
-	DescribeBudgetNotificationsForAccount(context.Context, *DescribeBudgetNotificationsForAccountInput, ...func(*Options)) (*DescribeBudgetNotificationsForAccountOutput, error)
-}
-
-var _ DescribeBudgetNotificationsForAccountAPIClient = (*Client)(nil)
 
 // DescribeBudgetNotificationsForAccountPaginatorOptions is the paginator options
 // for DescribeBudgetNotificationsForAccount
@@ -215,6 +210,9 @@ func (p *DescribeBudgetNotificationsForAccountPaginator) NextPage(ctx context.Co
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeBudgetNotificationsForAccount(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *DescribeBudgetNotificationsForAccountPaginator) NextPage(ctx context.Co
 
 	return result, nil
 }
+
+// DescribeBudgetNotificationsForAccountAPIClient is a client that implements the
+// DescribeBudgetNotificationsForAccount operation.
+type DescribeBudgetNotificationsForAccountAPIClient interface {
+	DescribeBudgetNotificationsForAccount(context.Context, *DescribeBudgetNotificationsForAccountInput, ...func(*Options)) (*DescribeBudgetNotificationsForAccountOutput, error)
+}
+
+var _ DescribeBudgetNotificationsForAccountAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeBudgetNotificationsForAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

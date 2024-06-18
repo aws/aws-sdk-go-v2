@@ -113,6 +113,9 @@ func (c *Client) addOperationPromoteMiddlewares(stack *middleware.Stack, options
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPromoteValidationMiddleware(stack); err != nil {
 		return err
 	}

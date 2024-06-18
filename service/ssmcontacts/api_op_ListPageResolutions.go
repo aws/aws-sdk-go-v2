@@ -119,6 +119,9 @@ func (c *Client) addOperationListPageResolutionsMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPageResolutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListPageResolutionsMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// ListPageResolutionsAPIClient is a client that implements the
-// ListPageResolutions operation.
-type ListPageResolutionsAPIClient interface {
-	ListPageResolutions(context.Context, *ListPageResolutionsInput, ...func(*Options)) (*ListPageResolutionsOutput, error)
-}
-
-var _ ListPageResolutionsAPIClient = (*Client)(nil)
 
 // ListPageResolutionsPaginatorOptions is the paginator options for
 // ListPageResolutions
@@ -203,6 +198,9 @@ func (p *ListPageResolutionsPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPageResolutions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -221,6 +219,14 @@ func (p *ListPageResolutionsPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// ListPageResolutionsAPIClient is a client that implements the
+// ListPageResolutions operation.
+type ListPageResolutionsAPIClient interface {
+	ListPageResolutions(context.Context, *ListPageResolutionsInput, ...func(*Options)) (*ListPageResolutionsOutput, error)
+}
+
+var _ ListPageResolutionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPageResolutions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

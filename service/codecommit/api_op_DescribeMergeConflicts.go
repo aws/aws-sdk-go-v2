@@ -177,6 +177,9 @@ func (c *Client) addOperationDescribeMergeConflictsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeMergeConflictsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -200,14 +203,6 @@ func (c *Client) addOperationDescribeMergeConflictsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeMergeConflictsAPIClient is a client that implements the
-// DescribeMergeConflicts operation.
-type DescribeMergeConflictsAPIClient interface {
-	DescribeMergeConflicts(context.Context, *DescribeMergeConflictsInput, ...func(*Options)) (*DescribeMergeConflictsOutput, error)
-}
-
-var _ DescribeMergeConflictsAPIClient = (*Client)(nil)
 
 // DescribeMergeConflictsPaginatorOptions is the paginator options for
 // DescribeMergeConflicts
@@ -273,6 +268,9 @@ func (p *DescribeMergeConflictsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.MaxMergeHunks = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMergeConflicts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -291,6 +289,14 @@ func (p *DescribeMergeConflictsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeMergeConflictsAPIClient is a client that implements the
+// DescribeMergeConflicts operation.
+type DescribeMergeConflictsAPIClient interface {
+	DescribeMergeConflicts(context.Context, *DescribeMergeConflictsInput, ...func(*Options)) (*DescribeMergeConflictsOutput, error)
+}
+
+var _ DescribeMergeConflictsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMergeConflicts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

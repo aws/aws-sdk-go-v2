@@ -138,6 +138,9 @@ func (c *Client) addOperationListTasksMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListTasksMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,40 +167,6 @@ func (c *Client) addOperationListTasksMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-type endpointPrefix_opListTasksMiddleware struct {
-}
-
-func (*endpointPrefix_opListTasksMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListTasksMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListTasksMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListTasksMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListTasksAPIClient is a client that implements the ListTasks operation.
-type ListTasksAPIClient interface {
-	ListTasks(context.Context, *ListTasksInput, ...func(*Options)) (*ListTasksOutput, error)
-}
-
-var _ ListTasksAPIClient = (*Client)(nil)
 
 // ListTasksPaginatorOptions is the paginator options for ListTasks
 type ListTasksPaginatorOptions struct {
@@ -263,6 +232,9 @@ func (p *ListTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTasks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -281,6 +253,40 @@ func (p *ListTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+type endpointPrefix_opListTasksMiddleware struct {
+}
+
+func (*endpointPrefix_opListTasksMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListTasksMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListTasksMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListTasksMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListTasksAPIClient is a client that implements the ListTasks operation.
+type ListTasksAPIClient interface {
+	ListTasks(context.Context, *ListTasksInput, ...func(*Options)) (*ListTasksOutput, error)
+}
+
+var _ ListTasksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTasks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

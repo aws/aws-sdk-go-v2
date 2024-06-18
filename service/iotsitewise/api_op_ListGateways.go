@@ -115,6 +115,9 @@ func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, op
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListGatewaysMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,40 +141,6 @@ func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, op
 	}
 	return nil
 }
-
-type endpointPrefix_opListGatewaysMiddleware struct {
-}
-
-func (*endpointPrefix_opListGatewaysMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListGatewaysMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListGatewaysMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListGatewaysMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListGatewaysAPIClient is a client that implements the ListGateways operation.
-type ListGatewaysAPIClient interface {
-	ListGateways(context.Context, *ListGatewaysInput, ...func(*Options)) (*ListGatewaysOutput, error)
-}
-
-var _ ListGatewaysAPIClient = (*Client)(nil)
 
 // ListGatewaysPaginatorOptions is the paginator options for ListGateways
 type ListGatewaysPaginatorOptions struct {
@@ -238,6 +207,9 @@ func (p *ListGatewaysPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListGateways(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +228,40 @@ func (p *ListGatewaysPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 
 	return result, nil
 }
+
+type endpointPrefix_opListGatewaysMiddleware struct {
+}
+
+func (*endpointPrefix_opListGatewaysMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListGatewaysMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListGatewaysMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListGatewaysMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListGatewaysAPIClient is a client that implements the ListGateways operation.
+type ListGatewaysAPIClient interface {
+	ListGateways(context.Context, *ListGatewaysInput, ...func(*Options)) (*ListGatewaysOutput, error)
+}
+
+var _ ListGatewaysAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListGateways(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

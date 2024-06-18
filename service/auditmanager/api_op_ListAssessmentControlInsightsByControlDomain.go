@@ -134,6 +134,9 @@ func (c *Client) addOperationListAssessmentControlInsightsByControlDomainMiddlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssessmentControlInsightsByControlDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,14 +160,6 @@ func (c *Client) addOperationListAssessmentControlInsightsByControlDomainMiddlew
 	}
 	return nil
 }
-
-// ListAssessmentControlInsightsByControlDomainAPIClient is a client that
-// implements the ListAssessmentControlInsightsByControlDomain operation.
-type ListAssessmentControlInsightsByControlDomainAPIClient interface {
-	ListAssessmentControlInsightsByControlDomain(context.Context, *ListAssessmentControlInsightsByControlDomainInput, ...func(*Options)) (*ListAssessmentControlInsightsByControlDomainOutput, error)
-}
-
-var _ ListAssessmentControlInsightsByControlDomainAPIClient = (*Client)(nil)
 
 // ListAssessmentControlInsightsByControlDomainPaginatorOptions is the paginator
 // options for ListAssessmentControlInsightsByControlDomain
@@ -232,6 +227,9 @@ func (p *ListAssessmentControlInsightsByControlDomainPaginator) NextPage(ctx con
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssessmentControlInsightsByControlDomain(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +248,14 @@ func (p *ListAssessmentControlInsightsByControlDomainPaginator) NextPage(ctx con
 
 	return result, nil
 }
+
+// ListAssessmentControlInsightsByControlDomainAPIClient is a client that
+// implements the ListAssessmentControlInsightsByControlDomain operation.
+type ListAssessmentControlInsightsByControlDomainAPIClient interface {
+	ListAssessmentControlInsightsByControlDomain(context.Context, *ListAssessmentControlInsightsByControlDomainInput, ...func(*Options)) (*ListAssessmentControlInsightsByControlDomainOutput, error)
+}
+
+var _ ListAssessmentControlInsightsByControlDomainAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssessmentControlInsightsByControlDomain(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

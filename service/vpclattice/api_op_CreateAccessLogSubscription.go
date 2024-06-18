@@ -150,6 +150,9 @@ func (c *Client) addOperationCreateAccessLogSubscriptionMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAccessLogSubscriptionMiddleware(stack, options); err != nil {
 		return err
 	}

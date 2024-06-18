@@ -126,6 +126,9 @@ func (c *Client) addOperationListBudgetsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListBudgetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,40 +155,6 @@ func (c *Client) addOperationListBudgetsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-type endpointPrefix_opListBudgetsMiddleware struct {
-}
-
-func (*endpointPrefix_opListBudgetsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListBudgetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "management." + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListBudgetsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListBudgetsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListBudgetsAPIClient is a client that implements the ListBudgets operation.
-type ListBudgetsAPIClient interface {
-	ListBudgets(context.Context, *ListBudgetsInput, ...func(*Options)) (*ListBudgetsOutput, error)
-}
-
-var _ ListBudgetsAPIClient = (*Client)(nil)
 
 // ListBudgetsPaginatorOptions is the paginator options for ListBudgets
 type ListBudgetsPaginatorOptions struct {
@@ -251,6 +220,9 @@ func (p *ListBudgetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListBudgets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -269,6 +241,40 @@ func (p *ListBudgetsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+type endpointPrefix_opListBudgetsMiddleware struct {
+}
+
+func (*endpointPrefix_opListBudgetsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListBudgetsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "management." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListBudgetsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListBudgetsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListBudgetsAPIClient is a client that implements the ListBudgets operation.
+type ListBudgetsAPIClient interface {
+	ListBudgets(context.Context, *ListBudgetsInput, ...func(*Options)) (*ListBudgetsOutput, error)
+}
+
+var _ ListBudgetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListBudgets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

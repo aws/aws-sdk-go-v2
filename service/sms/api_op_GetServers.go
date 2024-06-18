@@ -125,6 +125,9 @@ func (c *Client) addOperationGetServersMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServers(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationGetServersMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// GetServersAPIClient is a client that implements the GetServers operation.
-type GetServersAPIClient interface {
-	GetServers(context.Context, *GetServersInput, ...func(*Options)) (*GetServersOutput, error)
-}
-
-var _ GetServersAPIClient = (*Client)(nil)
 
 // GetServersPaginatorOptions is the paginator options for GetServers
 type GetServersPaginatorOptions struct {
@@ -218,6 +214,9 @@ func (p *GetServersPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetServers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +235,13 @@ func (p *GetServersPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// GetServersAPIClient is a client that implements the GetServers operation.
+type GetServersAPIClient interface {
+	GetServers(context.Context, *GetServersInput, ...func(*Options)) (*GetServersOutput, error)
+}
+
+var _ GetServersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetServers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

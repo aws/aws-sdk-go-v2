@@ -124,6 +124,9 @@ func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVectorEnrichmentJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListVectorEnrichmentJobsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListVectorEnrichmentJobsAPIClient is a client that implements the
-// ListVectorEnrichmentJobs operation.
-type ListVectorEnrichmentJobsAPIClient interface {
-	ListVectorEnrichmentJobs(context.Context, *ListVectorEnrichmentJobsInput, ...func(*Options)) (*ListVectorEnrichmentJobsOutput, error)
-}
-
-var _ ListVectorEnrichmentJobsAPIClient = (*Client)(nil)
 
 // ListVectorEnrichmentJobsPaginatorOptions is the paginator options for
 // ListVectorEnrichmentJobs
@@ -206,6 +201,9 @@ func (p *ListVectorEnrichmentJobsPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListVectorEnrichmentJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *ListVectorEnrichmentJobsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListVectorEnrichmentJobsAPIClient is a client that implements the
+// ListVectorEnrichmentJobs operation.
+type ListVectorEnrichmentJobsAPIClient interface {
+	ListVectorEnrichmentJobs(context.Context, *ListVectorEnrichmentJobsInput, ...func(*Options)) (*ListVectorEnrichmentJobsOutput, error)
+}
+
+var _ ListVectorEnrichmentJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListVectorEnrichmentJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

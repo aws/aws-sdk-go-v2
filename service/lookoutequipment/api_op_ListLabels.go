@@ -135,6 +135,9 @@ func (c *Client) addOperationListLabelsMiddlewares(stack *middleware.Stack, opti
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,13 +161,6 @@ func (c *Client) addOperationListLabelsMiddlewares(stack *middleware.Stack, opti
 	}
 	return nil
 }
-
-// ListLabelsAPIClient is a client that implements the ListLabels operation.
-type ListLabelsAPIClient interface {
-	ListLabels(context.Context, *ListLabelsInput, ...func(*Options)) (*ListLabelsOutput, error)
-}
-
-var _ ListLabelsAPIClient = (*Client)(nil)
 
 // ListLabelsPaginatorOptions is the paginator options for ListLabels
 type ListLabelsPaginatorOptions struct {
@@ -229,6 +225,9 @@ func (p *ListLabelsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLabels(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -247,6 +246,13 @@ func (p *ListLabelsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 
 	return result, nil
 }
+
+// ListLabelsAPIClient is a client that implements the ListLabels operation.
+type ListLabelsAPIClient interface {
+	ListLabels(context.Context, *ListLabelsInput, ...func(*Options)) (*ListLabelsOutput, error)
+}
+
+var _ ListLabelsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLabels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

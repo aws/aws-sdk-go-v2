@@ -177,6 +177,9 @@ func (c *Client) addOperationDescribeDBClusterBacktracksMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterBacktracksValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -200,14 +203,6 @@ func (c *Client) addOperationDescribeDBClusterBacktracksMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// DescribeDBClusterBacktracksAPIClient is a client that implements the
-// DescribeDBClusterBacktracks operation.
-type DescribeDBClusterBacktracksAPIClient interface {
-	DescribeDBClusterBacktracks(context.Context, *DescribeDBClusterBacktracksInput, ...func(*Options)) (*DescribeDBClusterBacktracksOutput, error)
-}
-
-var _ DescribeDBClusterBacktracksAPIClient = (*Client)(nil)
 
 // DescribeDBClusterBacktracksPaginatorOptions is the paginator options for
 // DescribeDBClusterBacktracks
@@ -281,6 +276,9 @@ func (p *DescribeDBClusterBacktracksPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeDBClusterBacktracks(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -299,6 +297,14 @@ func (p *DescribeDBClusterBacktracksPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// DescribeDBClusterBacktracksAPIClient is a client that implements the
+// DescribeDBClusterBacktracks operation.
+type DescribeDBClusterBacktracksAPIClient interface {
+	DescribeDBClusterBacktracks(context.Context, *DescribeDBClusterBacktracksInput, ...func(*Options)) (*DescribeDBClusterBacktracksOutput, error)
+}
+
+var _ DescribeDBClusterBacktracksAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeDBClusterBacktracks(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -125,6 +125,9 @@ func (c *Client) addOperationDescribeEndpointTypesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeEndpointTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationDescribeEndpointTypesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeEndpointTypesAPIClient is a client that implements the
-// DescribeEndpointTypes operation.
-type DescribeEndpointTypesAPIClient interface {
-	DescribeEndpointTypes(context.Context, *DescribeEndpointTypesInput, ...func(*Options)) (*DescribeEndpointTypesOutput, error)
-}
-
-var _ DescribeEndpointTypesAPIClient = (*Client)(nil)
 
 // DescribeEndpointTypesPaginatorOptions is the paginator options for
 // DescribeEndpointTypes
@@ -227,6 +222,9 @@ func (p *DescribeEndpointTypesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxRecords = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeEndpointTypes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *DescribeEndpointTypesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeEndpointTypesAPIClient is a client that implements the
+// DescribeEndpointTypes operation.
+type DescribeEndpointTypesAPIClient interface {
+	DescribeEndpointTypes(context.Context, *DescribeEndpointTypesInput, ...func(*Options)) (*DescribeEndpointTypesOutput, error)
+}
+
+var _ DescribeEndpointTypesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeEndpointTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

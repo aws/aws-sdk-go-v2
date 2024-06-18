@@ -186,6 +186,9 @@ func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSchemasValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -209,13 +212,6 @@ func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListSchemasAPIClient is a client that implements the ListSchemas operation.
-type ListSchemasAPIClient interface {
-	ListSchemas(context.Context, *ListSchemasInput, ...func(*Options)) (*ListSchemasOutput, error)
-}
-
-var _ ListSchemasAPIClient = (*Client)(nil)
 
 // ListSchemasPaginatorOptions is the paginator options for ListSchemas
 type ListSchemasPaginatorOptions struct {
@@ -278,6 +274,9 @@ func (p *ListSchemasPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSchemas(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -296,6 +295,13 @@ func (p *ListSchemasPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListSchemasAPIClient is a client that implements the ListSchemas operation.
+type ListSchemasAPIClient interface {
+	ListSchemas(context.Context, *ListSchemasInput, ...func(*Options)) (*ListSchemasOutput, error)
+}
+
+var _ ListSchemasAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSchemas(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

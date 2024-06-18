@@ -138,6 +138,9 @@ func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetBotChannelAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// GetBotChannelAssociationsAPIClient is a client that implements the
-// GetBotChannelAssociations operation.
-type GetBotChannelAssociationsAPIClient interface {
-	GetBotChannelAssociations(context.Context, *GetBotChannelAssociationsInput, ...func(*Options)) (*GetBotChannelAssociationsOutput, error)
-}
-
-var _ GetBotChannelAssociationsAPIClient = (*Client)(nil)
 
 // GetBotChannelAssociationsPaginatorOptions is the paginator options for
 // GetBotChannelAssociations
@@ -236,6 +231,9 @@ func (p *GetBotChannelAssociationsPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetBotChannelAssociations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -254,6 +252,14 @@ func (p *GetBotChannelAssociationsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// GetBotChannelAssociationsAPIClient is a client that implements the
+// GetBotChannelAssociations operation.
+type GetBotChannelAssociationsAPIClient interface {
+	GetBotChannelAssociations(context.Context, *GetBotChannelAssociationsInput, ...func(*Options)) (*GetBotChannelAssociationsOutput, error)
+}
+
+var _ GetBotChannelAssociationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetBotChannelAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

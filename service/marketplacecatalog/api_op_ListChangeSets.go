@@ -130,6 +130,9 @@ func (c *Client) addOperationListChangeSetsMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListChangeSetsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -153,14 +156,6 @@ func (c *Client) addOperationListChangeSetsMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// ListChangeSetsAPIClient is a client that implements the ListChangeSets
-// operation.
-type ListChangeSetsAPIClient interface {
-	ListChangeSets(context.Context, *ListChangeSetsInput, ...func(*Options)) (*ListChangeSetsOutput, error)
-}
-
-var _ ListChangeSetsAPIClient = (*Client)(nil)
 
 // ListChangeSetsPaginatorOptions is the paginator options for ListChangeSets
 type ListChangeSetsPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *ListChangeSetsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListChangeSets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListChangeSetsPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// ListChangeSetsAPIClient is a client that implements the ListChangeSets
+// operation.
+type ListChangeSetsAPIClient interface {
+	ListChangeSets(context.Context, *ListChangeSetsInput, ...func(*Options)) (*ListChangeSetsOutput, error)
+}
+
+var _ ListChangeSetsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListChangeSets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -142,6 +142,9 @@ func (c *Client) addOperationListTransformJobsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTransformJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -162,14 +165,6 @@ func (c *Client) addOperationListTransformJobsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListTransformJobsAPIClient is a client that implements the ListTransformJobs
-// operation.
-type ListTransformJobsAPIClient interface {
-	ListTransformJobs(context.Context, *ListTransformJobsInput, ...func(*Options)) (*ListTransformJobsOutput, error)
-}
-
-var _ ListTransformJobsAPIClient = (*Client)(nil)
 
 // ListTransformJobsPaginatorOptions is the paginator options for ListTransformJobs
 type ListTransformJobsPaginatorOptions struct {
@@ -235,6 +230,9 @@ func (p *ListTransformJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTransformJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -253,6 +251,14 @@ func (p *ListTransformJobsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListTransformJobsAPIClient is a client that implements the ListTransformJobs
+// operation.
+type ListTransformJobsAPIClient interface {
+	ListTransformJobs(context.Context, *ListTransformJobsInput, ...func(*Options)) (*ListTransformJobsOutput, error)
+}
+
+var _ ListTransformJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTransformJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

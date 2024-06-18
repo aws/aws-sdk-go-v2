@@ -127,6 +127,9 @@ func (c *Client) addOperationListRotationShiftsMiddlewares(stack *middleware.Sta
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListRotationShiftsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationListRotationShiftsMiddlewares(stack *middleware.Sta
 	}
 	return nil
 }
-
-// ListRotationShiftsAPIClient is a client that implements the ListRotationShifts
-// operation.
-type ListRotationShiftsAPIClient interface {
-	ListRotationShifts(context.Context, *ListRotationShiftsInput, ...func(*Options)) (*ListRotationShiftsOutput, error)
-}
-
-var _ ListRotationShiftsAPIClient = (*Client)(nil)
 
 // ListRotationShiftsPaginatorOptions is the paginator options for
 // ListRotationShifts
@@ -224,6 +219,9 @@ func (p *ListRotationShiftsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRotationShifts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -242,6 +240,14 @@ func (p *ListRotationShiftsPaginator) NextPage(ctx context.Context, optFns ...fu
 
 	return result, nil
 }
+
+// ListRotationShiftsAPIClient is a client that implements the ListRotationShifts
+// operation.
+type ListRotationShiftsAPIClient interface {
+	ListRotationShifts(context.Context, *ListRotationShiftsInput, ...func(*Options)) (*ListRotationShiftsOutput, error)
+}
+
+var _ ListRotationShiftsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRotationShifts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

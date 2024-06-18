@@ -119,6 +119,9 @@ func (c *Client) addOperationDescribeMappedResourceConfigurationMiddlewares(stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMappedResourceConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationDescribeMappedResourceConfigurationMiddlewares(stac
 	}
 	return nil
 }
-
-// DescribeMappedResourceConfigurationAPIClient is a client that implements the
-// DescribeMappedResourceConfiguration operation.
-type DescribeMappedResourceConfigurationAPIClient interface {
-	DescribeMappedResourceConfiguration(context.Context, *DescribeMappedResourceConfigurationInput, ...func(*Options)) (*DescribeMappedResourceConfigurationOutput, error)
-}
-
-var _ DescribeMappedResourceConfigurationAPIClient = (*Client)(nil)
 
 // DescribeMappedResourceConfigurationPaginatorOptions is the paginator options
 // for DescribeMappedResourceConfiguration
@@ -214,6 +209,9 @@ func (p *DescribeMappedResourceConfigurationPaginator) NextPage(ctx context.Cont
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMappedResourceConfiguration(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +230,14 @@ func (p *DescribeMappedResourceConfigurationPaginator) NextPage(ctx context.Cont
 
 	return result, nil
 }
+
+// DescribeMappedResourceConfigurationAPIClient is a client that implements the
+// DescribeMappedResourceConfiguration operation.
+type DescribeMappedResourceConfigurationAPIClient interface {
+	DescribeMappedResourceConfiguration(context.Context, *DescribeMappedResourceConfigurationInput, ...func(*Options)) (*DescribeMappedResourceConfigurationOutput, error)
+}
+
+var _ DescribeMappedResourceConfigurationAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMappedResourceConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

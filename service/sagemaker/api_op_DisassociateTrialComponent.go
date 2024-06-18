@@ -123,6 +123,9 @@ func (c *Client) addOperationDisassociateTrialComponentMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociateTrialComponentValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -125,6 +125,9 @@ func (c *Client) addOperationDisassociatePhoneNumbersFromVoiceConnectorMiddlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDisassociatePhoneNumbersFromVoiceConnectorValidationMiddleware(stack); err != nil {
 		return err
 	}

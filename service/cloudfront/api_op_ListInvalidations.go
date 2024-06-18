@@ -120,6 +120,9 @@ func (c *Client) addOperationListInvalidationsMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListInvalidationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,14 +146,6 @@ func (c *Client) addOperationListInvalidationsMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// ListInvalidationsAPIClient is a client that implements the ListInvalidations
-// operation.
-type ListInvalidationsAPIClient interface {
-	ListInvalidations(context.Context, *ListInvalidationsInput, ...func(*Options)) (*ListInvalidationsOutput, error)
-}
-
-var _ ListInvalidationsAPIClient = (*Client)(nil)
 
 // ListInvalidationsPaginatorOptions is the paginator options for ListInvalidations
 type ListInvalidationsPaginatorOptions struct {
@@ -215,6 +210,9 @@ func (p *ListInvalidationsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxItems = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListInvalidations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +234,14 @@ func (p *ListInvalidationsPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// ListInvalidationsAPIClient is a client that implements the ListInvalidations
+// operation.
+type ListInvalidationsAPIClient interface {
+	ListInvalidations(context.Context, *ListInvalidationsInput, ...func(*Options)) (*ListInvalidationsOutput, error)
+}
+
+var _ ListInvalidationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListInvalidations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

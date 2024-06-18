@@ -281,6 +281,9 @@ func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeScalingPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -304,14 +307,6 @@ func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// DescribeScalingPoliciesAPIClient is a client that implements the
-// DescribeScalingPolicies operation.
-type DescribeScalingPoliciesAPIClient interface {
-	DescribeScalingPolicies(context.Context, *DescribeScalingPoliciesInput, ...func(*Options)) (*DescribeScalingPoliciesOutput, error)
-}
-
-var _ DescribeScalingPoliciesAPIClient = (*Client)(nil)
 
 // DescribeScalingPoliciesPaginatorOptions is the paginator options for
 // DescribeScalingPolicies
@@ -384,6 +379,9 @@ func (p *DescribeScalingPoliciesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeScalingPolicies(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -402,6 +400,14 @@ func (p *DescribeScalingPoliciesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// DescribeScalingPoliciesAPIClient is a client that implements the
+// DescribeScalingPolicies operation.
+type DescribeScalingPoliciesAPIClient interface {
+	DescribeScalingPolicies(context.Context, *DescribeScalingPoliciesInput, ...func(*Options)) (*DescribeScalingPoliciesOutput, error)
+}
+
+var _ DescribeScalingPoliciesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeScalingPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

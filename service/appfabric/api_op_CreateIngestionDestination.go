@@ -144,6 +144,9 @@ func (c *Client) addOperationCreateIngestionDestinationMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIngestionDestinationMiddleware(stack, options); err != nil {
 		return err
 	}

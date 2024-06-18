@@ -148,6 +148,9 @@ func (c *Client) addOperationDescribeTenantDatabasesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeTenantDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,100 +173,6 @@ func (c *Client) addOperationDescribeTenantDatabasesMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
-}
-
-// DescribeTenantDatabasesAPIClient is a client that implements the
-// DescribeTenantDatabases operation.
-type DescribeTenantDatabasesAPIClient interface {
-	DescribeTenantDatabases(context.Context, *DescribeTenantDatabasesInput, ...func(*Options)) (*DescribeTenantDatabasesOutput, error)
-}
-
-var _ DescribeTenantDatabasesAPIClient = (*Client)(nil)
-
-// DescribeTenantDatabasesPaginatorOptions is the paginator options for
-// DescribeTenantDatabases
-type DescribeTenantDatabasesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that you can retrieve the remaining results.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// DescribeTenantDatabasesPaginator is a paginator for DescribeTenantDatabases
-type DescribeTenantDatabasesPaginator struct {
-	options   DescribeTenantDatabasesPaginatorOptions
-	client    DescribeTenantDatabasesAPIClient
-	params    *DescribeTenantDatabasesInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewDescribeTenantDatabasesPaginator returns a new
-// DescribeTenantDatabasesPaginator
-func NewDescribeTenantDatabasesPaginator(client DescribeTenantDatabasesAPIClient, params *DescribeTenantDatabasesInput, optFns ...func(*DescribeTenantDatabasesPaginatorOptions)) *DescribeTenantDatabasesPaginator {
-	if params == nil {
-		params = &DescribeTenantDatabasesInput{}
-	}
-
-	options := DescribeTenantDatabasesPaginatorOptions{}
-	if params.MaxRecords != nil {
-		options.Limit = *params.MaxRecords
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	return &DescribeTenantDatabasesPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-		nextToken: params.Marker,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeTenantDatabasesPaginator) HasMorePages() bool {
-	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
-}
-
-// NextPage retrieves the next DescribeTenantDatabases page.
-func (p *DescribeTenantDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTenantDatabasesOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.Marker = p.nextToken
-
-	var limit *int32
-	if p.options.Limit > 0 {
-		limit = &p.options.Limit
-	}
-	params.MaxRecords = limit
-
-	result, err := p.client.DescribeTenantDatabases(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.Marker
-
-	if p.options.StopOnDuplicateToken &&
-		prevToken != nil &&
-		p.nextToken != nil &&
-		*prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 // TenantDatabaseAvailableWaiterOptions are waiter options for
@@ -383,7 +292,13 @@ func (w *TenantDatabaseAvailableWaiter) WaitForOutput(ctx context.Context, param
 		}
 
 		out, err := w.client.DescribeTenantDatabases(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -645,7 +560,13 @@ func (w *TenantDatabaseDeletedWaiter) WaitForOutput(ctx context.Context, params 
 		}
 
 		out, err := w.client.DescribeTenantDatabases(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -713,6 +634,103 @@ func tenantDatabaseDeletedStateRetryable(ctx context.Context, input *DescribeTen
 
 	return true, nil
 }
+
+// DescribeTenantDatabasesPaginatorOptions is the paginator options for
+// DescribeTenantDatabases
+type DescribeTenantDatabasesPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeTenantDatabasesPaginator is a paginator for DescribeTenantDatabases
+type DescribeTenantDatabasesPaginator struct {
+	options   DescribeTenantDatabasesPaginatorOptions
+	client    DescribeTenantDatabasesAPIClient
+	params    *DescribeTenantDatabasesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeTenantDatabasesPaginator returns a new
+// DescribeTenantDatabasesPaginator
+func NewDescribeTenantDatabasesPaginator(client DescribeTenantDatabasesAPIClient, params *DescribeTenantDatabasesInput, optFns ...func(*DescribeTenantDatabasesPaginatorOptions)) *DescribeTenantDatabasesPaginator {
+	if params == nil {
+		params = &DescribeTenantDatabasesInput{}
+	}
+
+	options := DescribeTenantDatabasesPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeTenantDatabasesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeTenantDatabasesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeTenantDatabases page.
+func (p *DescribeTenantDatabasesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeTenantDatabasesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.DescribeTenantDatabases(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// DescribeTenantDatabasesAPIClient is a client that implements the
+// DescribeTenantDatabases operation.
+type DescribeTenantDatabasesAPIClient interface {
+	DescribeTenantDatabases(context.Context, *DescribeTenantDatabasesInput, ...func(*Options)) (*DescribeTenantDatabasesOutput, error)
+}
+
+var _ DescribeTenantDatabasesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeTenantDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

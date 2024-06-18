@@ -119,6 +119,9 @@ func (c *Client) addOperationListSchemaExtensionsMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListSchemaExtensionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,14 +145,6 @@ func (c *Client) addOperationListSchemaExtensionsMiddlewares(stack *middleware.S
 	}
 	return nil
 }
-
-// ListSchemaExtensionsAPIClient is a client that implements the
-// ListSchemaExtensions operation.
-type ListSchemaExtensionsAPIClient interface {
-	ListSchemaExtensions(context.Context, *ListSchemaExtensionsInput, ...func(*Options)) (*ListSchemaExtensionsOutput, error)
-}
-
-var _ ListSchemaExtensionsAPIClient = (*Client)(nil)
 
 // ListSchemaExtensionsPaginatorOptions is the paginator options for
 // ListSchemaExtensions
@@ -215,6 +210,9 @@ func (p *ListSchemaExtensionsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSchemaExtensions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +231,14 @@ func (p *ListSchemaExtensionsPaginator) NextPage(ctx context.Context, optFns ...
 
 	return result, nil
 }
+
+// ListSchemaExtensionsAPIClient is a client that implements the
+// ListSchemaExtensions operation.
+type ListSchemaExtensionsAPIClient interface {
+	ListSchemaExtensions(context.Context, *ListSchemaExtensionsInput, ...func(*Options)) (*ListSchemaExtensionsOutput, error)
+}
+
+var _ ListSchemaExtensionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSchemaExtensions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

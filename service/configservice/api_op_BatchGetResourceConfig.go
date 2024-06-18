@@ -124,6 +124,9 @@ func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchGetResourceConfigValidationMiddleware(stack); err != nil {
 		return err
 	}

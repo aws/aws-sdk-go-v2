@@ -133,6 +133,9 @@ func (c *Client) addOperationListAssessmentRunAgentsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListAssessmentRunAgentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,14 +159,6 @@ func (c *Client) addOperationListAssessmentRunAgentsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListAssessmentRunAgentsAPIClient is a client that implements the
-// ListAssessmentRunAgents operation.
-type ListAssessmentRunAgentsAPIClient interface {
-	ListAssessmentRunAgents(context.Context, *ListAssessmentRunAgentsInput, ...func(*Options)) (*ListAssessmentRunAgentsOutput, error)
-}
-
-var _ ListAssessmentRunAgentsAPIClient = (*Client)(nil)
 
 // ListAssessmentRunAgentsPaginatorOptions is the paginator options for
 // ListAssessmentRunAgents
@@ -231,6 +226,9 @@ func (p *ListAssessmentRunAgentsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListAssessmentRunAgents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *ListAssessmentRunAgentsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListAssessmentRunAgentsAPIClient is a client that implements the
+// ListAssessmentRunAgents operation.
+type ListAssessmentRunAgentsAPIClient interface {
+	ListAssessmentRunAgents(context.Context, *ListAssessmentRunAgentsInput, ...func(*Options)) (*ListAssessmentRunAgentsOutput, error)
+}
+
+var _ ListAssessmentRunAgentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListAssessmentRunAgents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

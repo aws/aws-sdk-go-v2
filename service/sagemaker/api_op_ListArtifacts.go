@@ -131,6 +131,9 @@ func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListArtifacts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -151,13 +154,6 @@ func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListArtifactsAPIClient is a client that implements the ListArtifacts operation.
-type ListArtifactsAPIClient interface {
-	ListArtifacts(context.Context, *ListArtifactsInput, ...func(*Options)) (*ListArtifactsOutput, error)
-}
-
-var _ ListArtifactsAPIClient = (*Client)(nil)
 
 // ListArtifactsPaginatorOptions is the paginator options for ListArtifacts
 type ListArtifactsPaginatorOptions struct {
@@ -223,6 +219,9 @@ func (p *ListArtifactsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListArtifacts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -241,6 +240,13 @@ func (p *ListArtifactsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListArtifactsAPIClient is a client that implements the ListArtifacts operation.
+type ListArtifactsAPIClient interface {
+	ListArtifacts(context.Context, *ListArtifactsInput, ...func(*Options)) (*ListArtifactsOutput, error)
+}
+
+var _ ListArtifactsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListArtifacts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

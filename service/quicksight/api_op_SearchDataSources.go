@@ -127,6 +127,9 @@ func (c *Client) addOperationSearchDataSourcesMiddlewares(stack *middleware.Stac
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchDataSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,14 +153,6 @@ func (c *Client) addOperationSearchDataSourcesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
-
-// SearchDataSourcesAPIClient is a client that implements the SearchDataSources
-// operation.
-type SearchDataSourcesAPIClient interface {
-	SearchDataSources(context.Context, *SearchDataSourcesInput, ...func(*Options)) (*SearchDataSourcesOutput, error)
-}
-
-var _ SearchDataSourcesAPIClient = (*Client)(nil)
 
 // SearchDataSourcesPaginatorOptions is the paginator options for SearchDataSources
 type SearchDataSourcesPaginatorOptions struct {
@@ -222,6 +217,9 @@ func (p *SearchDataSourcesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchDataSources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *SearchDataSourcesPaginator) NextPage(ctx context.Context, optFns ...fun
 
 	return result, nil
 }
+
+// SearchDataSourcesAPIClient is a client that implements the SearchDataSources
+// operation.
+type SearchDataSourcesAPIClient interface {
+	SearchDataSources(context.Context, *SearchDataSourcesInput, ...func(*Options)) (*SearchDataSourcesOutput, error)
+}
+
+var _ SearchDataSourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchDataSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

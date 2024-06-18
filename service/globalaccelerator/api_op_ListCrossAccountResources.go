@@ -121,6 +121,9 @@ func (c *Client) addOperationListCrossAccountResourcesMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListCrossAccountResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,14 +147,6 @@ func (c *Client) addOperationListCrossAccountResourcesMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// ListCrossAccountResourcesAPIClient is a client that implements the
-// ListCrossAccountResources operation.
-type ListCrossAccountResourcesAPIClient interface {
-	ListCrossAccountResources(context.Context, *ListCrossAccountResourcesInput, ...func(*Options)) (*ListCrossAccountResourcesOutput, error)
-}
-
-var _ ListCrossAccountResourcesAPIClient = (*Client)(nil)
 
 // ListCrossAccountResourcesPaginatorOptions is the paginator options for
 // ListCrossAccountResources
@@ -219,6 +214,9 @@ func (p *ListCrossAccountResourcesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListCrossAccountResources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -237,6 +235,14 @@ func (p *ListCrossAccountResourcesPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// ListCrossAccountResourcesAPIClient is a client that implements the
+// ListCrossAccountResources operation.
+type ListCrossAccountResourcesAPIClient interface {
+	ListCrossAccountResources(context.Context, *ListCrossAccountResourcesInput, ...func(*Options)) (*ListCrossAccountResourcesOutput, error)
+}
+
+var _ ListCrossAccountResourcesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListCrossAccountResources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -144,6 +144,9 @@ func (c *Client) addOperationSearchProvisionedProductsMiddlewares(stack *middlew
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchProvisionedProducts(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -164,14 +167,6 @@ func (c *Client) addOperationSearchProvisionedProductsMiddlewares(stack *middlew
 	}
 	return nil
 }
-
-// SearchProvisionedProductsAPIClient is a client that implements the
-// SearchProvisionedProducts operation.
-type SearchProvisionedProductsAPIClient interface {
-	SearchProvisionedProducts(context.Context, *SearchProvisionedProductsInput, ...func(*Options)) (*SearchProvisionedProductsOutput, error)
-}
-
-var _ SearchProvisionedProductsAPIClient = (*Client)(nil)
 
 // SearchProvisionedProductsPaginatorOptions is the paginator options for
 // SearchProvisionedProducts
@@ -234,6 +229,9 @@ func (p *SearchProvisionedProductsPaginator) NextPage(ctx context.Context, optFn
 
 	params.PageSize = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchProvisionedProducts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -252,6 +250,14 @@ func (p *SearchProvisionedProductsPaginator) NextPage(ctx context.Context, optFn
 
 	return result, nil
 }
+
+// SearchProvisionedProductsAPIClient is a client that implements the
+// SearchProvisionedProducts operation.
+type SearchProvisionedProductsAPIClient interface {
+	SearchProvisionedProducts(context.Context, *SearchProvisionedProductsInput, ...func(*Options)) (*SearchProvisionedProductsOutput, error)
+}
+
+var _ SearchProvisionedProductsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchProvisionedProducts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

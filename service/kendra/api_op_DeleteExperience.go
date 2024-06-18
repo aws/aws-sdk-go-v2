@@ -109,6 +109,9 @@ func (c *Client) addOperationDeleteExperienceMiddlewares(stack *middleware.Stack
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteExperienceValidationMiddleware(stack); err != nil {
 		return err
 	}

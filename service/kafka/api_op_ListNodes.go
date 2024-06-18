@@ -120,6 +120,9 @@ func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, optio
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListNodesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,13 +146,6 @@ func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, optio
 	}
 	return nil
 }
-
-// ListNodesAPIClient is a client that implements the ListNodes operation.
-type ListNodesAPIClient interface {
-	ListNodes(context.Context, *ListNodesInput, ...func(*Options)) (*ListNodesOutput, error)
-}
-
-var _ ListNodesAPIClient = (*Client)(nil)
 
 // ListNodesPaginatorOptions is the paginator options for ListNodes
 type ListNodesPaginatorOptions struct {
@@ -215,6 +211,9 @@ func (p *ListNodesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListNodes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -233,6 +232,13 @@ func (p *ListNodesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	return result, nil
 }
+
+// ListNodesAPIClient is a client that implements the ListNodes operation.
+type ListNodesAPIClient interface {
+	ListNodes(context.Context, *ListNodesInput, ...func(*Options)) (*ListNodesOutput, error)
+}
+
+var _ ListNodesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListNodes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

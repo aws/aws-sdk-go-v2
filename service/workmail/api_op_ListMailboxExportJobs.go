@@ -116,6 +116,9 @@ func (c *Client) addOperationListMailboxExportJobsMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListMailboxExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,14 +142,6 @@ func (c *Client) addOperationListMailboxExportJobsMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// ListMailboxExportJobsAPIClient is a client that implements the
-// ListMailboxExportJobs operation.
-type ListMailboxExportJobsAPIClient interface {
-	ListMailboxExportJobs(context.Context, *ListMailboxExportJobsInput, ...func(*Options)) (*ListMailboxExportJobsOutput, error)
-}
-
-var _ ListMailboxExportJobsAPIClient = (*Client)(nil)
 
 // ListMailboxExportJobsPaginatorOptions is the paginator options for
 // ListMailboxExportJobs
@@ -212,6 +207,9 @@ func (p *ListMailboxExportJobsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMailboxExportJobs(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListMailboxExportJobsPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// ListMailboxExportJobsAPIClient is a client that implements the
+// ListMailboxExportJobs operation.
+type ListMailboxExportJobsAPIClient interface {
+	ListMailboxExportJobs(context.Context, *ListMailboxExportJobsInput, ...func(*Options)) (*ListMailboxExportJobsOutput, error)
+}
+
+var _ ListMailboxExportJobsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMailboxExportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

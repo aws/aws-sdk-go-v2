@@ -124,6 +124,9 @@ func (c *Client) addOperationGetCertificateAuthorityCsrMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCertificateAuthorityCsrValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,14 +150,6 @@ func (c *Client) addOperationGetCertificateAuthorityCsrMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// GetCertificateAuthorityCsrAPIClient is a client that implements the
-// GetCertificateAuthorityCsr operation.
-type GetCertificateAuthorityCsrAPIClient interface {
-	GetCertificateAuthorityCsr(context.Context, *GetCertificateAuthorityCsrInput, ...func(*Options)) (*GetCertificateAuthorityCsrOutput, error)
-}
-
-var _ GetCertificateAuthorityCsrAPIClient = (*Client)(nil)
 
 // CertificateAuthorityCSRCreatedWaiterOptions are waiter options for
 // CertificateAuthorityCSRCreatedWaiter
@@ -276,7 +271,13 @@ func (w *CertificateAuthorityCSRCreatedWaiter) WaitForOutput(ctx context.Context
 		}
 
 		out, err := w.client.GetCertificateAuthorityCsr(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -339,6 +340,14 @@ func certificateAuthorityCSRCreatedStateRetryable(ctx context.Context, input *Ge
 
 	return true, nil
 }
+
+// GetCertificateAuthorityCsrAPIClient is a client that implements the
+// GetCertificateAuthorityCsr operation.
+type GetCertificateAuthorityCsrAPIClient interface {
+	GetCertificateAuthorityCsr(context.Context, *GetCertificateAuthorityCsrInput, ...func(*Options)) (*GetCertificateAuthorityCsrOutput, error)
+}
+
+var _ GetCertificateAuthorityCsrAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCertificateAuthorityCsr(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

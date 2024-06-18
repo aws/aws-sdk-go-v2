@@ -145,6 +145,9 @@ func (c *Client) addOperationListLinuxSubscriptionInstancesMiddlewares(stack *mi
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLinuxSubscriptionInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationListLinuxSubscriptionInstancesMiddlewares(stack *mi
 	}
 	return nil
 }
-
-// ListLinuxSubscriptionInstancesAPIClient is a client that implements the
-// ListLinuxSubscriptionInstances operation.
-type ListLinuxSubscriptionInstancesAPIClient interface {
-	ListLinuxSubscriptionInstances(context.Context, *ListLinuxSubscriptionInstancesInput, ...func(*Options)) (*ListLinuxSubscriptionInstancesOutput, error)
-}
-
-var _ ListLinuxSubscriptionInstancesAPIClient = (*Client)(nil)
 
 // ListLinuxSubscriptionInstancesPaginatorOptions is the paginator options for
 // ListLinuxSubscriptionInstances
@@ -240,6 +235,9 @@ func (p *ListLinuxSubscriptionInstancesPaginator) NextPage(ctx context.Context, 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLinuxSubscriptionInstances(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -258,6 +256,14 @@ func (p *ListLinuxSubscriptionInstancesPaginator) NextPage(ctx context.Context, 
 
 	return result, nil
 }
+
+// ListLinuxSubscriptionInstancesAPIClient is a client that implements the
+// ListLinuxSubscriptionInstances operation.
+type ListLinuxSubscriptionInstancesAPIClient interface {
+	ListLinuxSubscriptionInstances(context.Context, *ListLinuxSubscriptionInstancesInput, ...func(*Options)) (*ListLinuxSubscriptionInstancesOutput, error)
+}
+
+var _ ListLinuxSubscriptionInstancesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLinuxSubscriptionInstances(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

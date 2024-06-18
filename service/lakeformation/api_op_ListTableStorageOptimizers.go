@@ -129,6 +129,9 @@ func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListTableStorageOptimizersValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,14 +155,6 @@ func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListTableStorageOptimizersAPIClient is a client that implements the
-// ListTableStorageOptimizers operation.
-type ListTableStorageOptimizersAPIClient interface {
-	ListTableStorageOptimizers(context.Context, *ListTableStorageOptimizersInput, ...func(*Options)) (*ListTableStorageOptimizersOutput, error)
-}
-
-var _ ListTableStorageOptimizersAPIClient = (*Client)(nil)
 
 // ListTableStorageOptimizersPaginatorOptions is the paginator options for
 // ListTableStorageOptimizers
@@ -227,6 +222,9 @@ func (p *ListTableStorageOptimizersPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListTableStorageOptimizers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *ListTableStorageOptimizersPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListTableStorageOptimizersAPIClient is a client that implements the
+// ListTableStorageOptimizers operation.
+type ListTableStorageOptimizersAPIClient interface {
+	ListTableStorageOptimizers(context.Context, *ListTableStorageOptimizersInput, ...func(*Options)) (*ListTableStorageOptimizersOutput, error)
+}
+
+var _ ListTableStorageOptimizersAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListTableStorageOptimizers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

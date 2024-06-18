@@ -138,6 +138,9 @@ func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// GetCertificateAPIClient is a client that implements the GetCertificate
-// operation.
-type GetCertificateAPIClient interface {
-	GetCertificate(context.Context, *GetCertificateInput, ...func(*Options)) (*GetCertificateOutput, error)
-}
-
-var _ GetCertificateAPIClient = (*Client)(nil)
 
 // CertificateIssuedWaiterOptions are waiter options for CertificateIssuedWaiter
 type CertificateIssuedWaiterOptions struct {
@@ -285,7 +280,13 @@ func (w *CertificateIssuedWaiter) WaitForOutput(ctx context.Context, params *Get
 		}
 
 		out, err := w.client.GetCertificate(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
 			for _, opt := range options.ClientOptions {
 				opt(o)
 			}
@@ -348,6 +349,14 @@ func certificateIssuedStateRetryable(ctx context.Context, input *GetCertificateI
 
 	return true, nil
 }
+
+// GetCertificateAPIClient is a client that implements the GetCertificate
+// operation.
+type GetCertificateAPIClient interface {
+	GetCertificate(context.Context, *GetCertificateInput, ...func(*Options)) (*GetCertificateOutput, error)
+}
+
+var _ GetCertificateAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

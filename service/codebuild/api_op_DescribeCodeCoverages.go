@@ -135,6 +135,9 @@ func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeCodeCoveragesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,14 +161,6 @@ func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.
 	}
 	return nil
 }
-
-// DescribeCodeCoveragesAPIClient is a client that implements the
-// DescribeCodeCoverages operation.
-type DescribeCodeCoveragesAPIClient interface {
-	DescribeCodeCoverages(context.Context, *DescribeCodeCoveragesInput, ...func(*Options)) (*DescribeCodeCoveragesOutput, error)
-}
-
-var _ DescribeCodeCoveragesAPIClient = (*Client)(nil)
 
 // DescribeCodeCoveragesPaginatorOptions is the paginator options for
 // DescribeCodeCoverages
@@ -231,6 +226,9 @@ func (p *DescribeCodeCoveragesPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeCodeCoverages(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -249,6 +247,14 @@ func (p *DescribeCodeCoveragesPaginator) NextPage(ctx context.Context, optFns ..
 
 	return result, nil
 }
+
+// DescribeCodeCoveragesAPIClient is a client that implements the
+// DescribeCodeCoverages operation.
+type DescribeCodeCoveragesAPIClient interface {
+	DescribeCodeCoverages(context.Context, *DescribeCodeCoveragesInput, ...func(*Options)) (*DescribeCodeCoveragesOutput, error)
+}
+
+var _ DescribeCodeCoveragesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeCodeCoverages(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

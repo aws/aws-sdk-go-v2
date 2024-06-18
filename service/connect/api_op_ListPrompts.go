@@ -118,6 +118,9 @@ func (c *Client) addOperationListPromptsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListPromptsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,13 +144,6 @@ func (c *Client) addOperationListPromptsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListPromptsAPIClient is a client that implements the ListPrompts operation.
-type ListPromptsAPIClient interface {
-	ListPrompts(context.Context, *ListPromptsInput, ...func(*Options)) (*ListPromptsOutput, error)
-}
-
-var _ ListPromptsAPIClient = (*Client)(nil)
 
 // ListPromptsPaginatorOptions is the paginator options for ListPrompts
 type ListPromptsPaginatorOptions struct {
@@ -213,6 +209,9 @@ func (p *ListPromptsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListPrompts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -231,6 +230,13 @@ func (p *ListPromptsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListPromptsAPIClient is a client that implements the ListPrompts operation.
+type ListPromptsAPIClient interface {
+	ListPrompts(context.Context, *ListPromptsInput, ...func(*Options)) (*ListPromptsOutput, error)
+}
+
+var _ ListPromptsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListPrompts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -143,6 +143,9 @@ func (c *Client) addOperationStartFraudsterRegistrationJobMiddlewares(stack *mid
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartFraudsterRegistrationJobMiddleware(stack, options); err != nil {
 		return err
 	}

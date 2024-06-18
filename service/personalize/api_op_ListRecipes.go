@@ -120,6 +120,9 @@ func (c *Client) addOperationListRecipesMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecipes(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -140,13 +143,6 @@ func (c *Client) addOperationListRecipesMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListRecipesAPIClient is a client that implements the ListRecipes operation.
-type ListRecipesAPIClient interface {
-	ListRecipes(context.Context, *ListRecipesInput, ...func(*Options)) (*ListRecipesOutput, error)
-}
-
-var _ ListRecipesAPIClient = (*Client)(nil)
 
 // ListRecipesPaginatorOptions is the paginator options for ListRecipes
 type ListRecipesPaginatorOptions struct {
@@ -211,6 +207,9 @@ func (p *ListRecipesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecipes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -229,6 +228,13 @@ func (p *ListRecipesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListRecipesAPIClient is a client that implements the ListRecipes operation.
+type ListRecipesAPIClient interface {
+	ListRecipes(context.Context, *ListRecipesInput, ...func(*Options)) (*ListRecipesOutput, error)
+}
+
+var _ ListRecipesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecipes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

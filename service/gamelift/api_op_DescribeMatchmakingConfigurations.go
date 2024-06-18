@@ -141,6 +141,9 @@ func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMatchmakingConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -161,14 +164,6 @@ func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack 
 	}
 	return nil
 }
-
-// DescribeMatchmakingConfigurationsAPIClient is a client that implements the
-// DescribeMatchmakingConfigurations operation.
-type DescribeMatchmakingConfigurationsAPIClient interface {
-	DescribeMatchmakingConfigurations(context.Context, *DescribeMatchmakingConfigurationsInput, ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error)
-}
-
-var _ DescribeMatchmakingConfigurationsAPIClient = (*Client)(nil)
 
 // DescribeMatchmakingConfigurationsPaginatorOptions is the paginator options for
 // DescribeMatchmakingConfigurations
@@ -237,6 +232,9 @@ func (p *DescribeMatchmakingConfigurationsPaginator) NextPage(ctx context.Contex
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeMatchmakingConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -255,6 +253,14 @@ func (p *DescribeMatchmakingConfigurationsPaginator) NextPage(ctx context.Contex
 
 	return result, nil
 }
+
+// DescribeMatchmakingConfigurationsAPIClient is a client that implements the
+// DescribeMatchmakingConfigurations operation.
+type DescribeMatchmakingConfigurationsAPIClient interface {
+	DescribeMatchmakingConfigurations(context.Context, *DescribeMatchmakingConfigurationsInput, ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error)
+}
+
+var _ DescribeMatchmakingConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeMatchmakingConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

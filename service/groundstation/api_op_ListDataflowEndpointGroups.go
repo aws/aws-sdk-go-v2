@@ -112,6 +112,9 @@ func (c *Client) addOperationListDataflowEndpointGroupsMiddlewares(stack *middle
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataflowEndpointGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListDataflowEndpointGroupsMiddlewares(stack *middle
 	}
 	return nil
 }
-
-// ListDataflowEndpointGroupsAPIClient is a client that implements the
-// ListDataflowEndpointGroups operation.
-type ListDataflowEndpointGroupsAPIClient interface {
-	ListDataflowEndpointGroups(context.Context, *ListDataflowEndpointGroupsInput, ...func(*Options)) (*ListDataflowEndpointGroupsOutput, error)
-}
-
-var _ ListDataflowEndpointGroupsAPIClient = (*Client)(nil)
 
 // ListDataflowEndpointGroupsPaginatorOptions is the paginator options for
 // ListDataflowEndpointGroups
@@ -207,6 +202,9 @@ func (p *ListDataflowEndpointGroupsPaginator) NextPage(ctx context.Context, optF
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListDataflowEndpointGroups(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListDataflowEndpointGroupsPaginator) NextPage(ctx context.Context, optF
 
 	return result, nil
 }
+
+// ListDataflowEndpointGroupsAPIClient is a client that implements the
+// ListDataflowEndpointGroups operation.
+type ListDataflowEndpointGroupsAPIClient interface {
+	ListDataflowEndpointGroups(context.Context, *ListDataflowEndpointGroupsInput, ...func(*Options)) (*ListDataflowEndpointGroupsOutput, error)
+}
+
+var _ ListDataflowEndpointGroupsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListDataflowEndpointGroups(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

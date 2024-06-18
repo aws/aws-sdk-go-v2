@@ -116,6 +116,9 @@ func (c *Client) addOperationListRecordingConfigurationsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecordingConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -136,14 +139,6 @@ func (c *Client) addOperationListRecordingConfigurationsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-// ListRecordingConfigurationsAPIClient is a client that implements the
-// ListRecordingConfigurations operation.
-type ListRecordingConfigurationsAPIClient interface {
-	ListRecordingConfigurations(context.Context, *ListRecordingConfigurationsInput, ...func(*Options)) (*ListRecordingConfigurationsOutput, error)
-}
-
-var _ ListRecordingConfigurationsAPIClient = (*Client)(nil)
 
 // ListRecordingConfigurationsPaginatorOptions is the paginator options for
 // ListRecordingConfigurations
@@ -212,6 +207,9 @@ func (p *ListRecordingConfigurationsPaginator) NextPage(ctx context.Context, opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListRecordingConfigurations(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -230,6 +228,14 @@ func (p *ListRecordingConfigurationsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+// ListRecordingConfigurationsAPIClient is a client that implements the
+// ListRecordingConfigurations operation.
+type ListRecordingConfigurationsAPIClient interface {
+	ListRecordingConfigurations(context.Context, *ListRecordingConfigurationsInput, ...func(*Options)) (*ListRecordingConfigurationsOutput, error)
+}
+
+var _ ListRecordingConfigurationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListRecordingConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

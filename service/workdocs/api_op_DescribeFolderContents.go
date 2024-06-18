@@ -142,6 +142,9 @@ func (c *Client) addOperationDescribeFolderContentsMiddlewares(stack *middleware
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeFolderContentsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,14 +168,6 @@ func (c *Client) addOperationDescribeFolderContentsMiddlewares(stack *middleware
 	}
 	return nil
 }
-
-// DescribeFolderContentsAPIClient is a client that implements the
-// DescribeFolderContents operation.
-type DescribeFolderContentsAPIClient interface {
-	DescribeFolderContents(context.Context, *DescribeFolderContentsInput, ...func(*Options)) (*DescribeFolderContentsOutput, error)
-}
-
-var _ DescribeFolderContentsAPIClient = (*Client)(nil)
 
 // DescribeFolderContentsPaginatorOptions is the paginator options for
 // DescribeFolderContents
@@ -238,6 +233,9 @@ func (p *DescribeFolderContentsPaginator) NextPage(ctx context.Context, optFns .
 	}
 	params.Limit = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.DescribeFolderContents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -256,6 +254,14 @@ func (p *DescribeFolderContentsPaginator) NextPage(ctx context.Context, optFns .
 
 	return result, nil
 }
+
+// DescribeFolderContentsAPIClient is a client that implements the
+// DescribeFolderContents operation.
+type DescribeFolderContentsAPIClient interface {
+	DescribeFolderContents(context.Context, *DescribeFolderContentsInput, ...func(*Options)) (*DescribeFolderContentsOutput, error)
+}
+
+var _ DescribeFolderContentsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opDescribeFolderContents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

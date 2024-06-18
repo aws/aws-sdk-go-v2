@@ -122,6 +122,9 @@ func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.St
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetPartitionIndexesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,14 +148,6 @@ func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.St
 	}
 	return nil
 }
-
-// GetPartitionIndexesAPIClient is a client that implements the
-// GetPartitionIndexes operation.
-type GetPartitionIndexesAPIClient interface {
-	GetPartitionIndexes(context.Context, *GetPartitionIndexesInput, ...func(*Options)) (*GetPartitionIndexesOutput, error)
-}
-
-var _ GetPartitionIndexesAPIClient = (*Client)(nil)
 
 // GetPartitionIndexesPaginatorOptions is the paginator options for
 // GetPartitionIndexes
@@ -206,6 +201,9 @@ func (p *GetPartitionIndexesPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetPartitionIndexes(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -224,6 +222,14 @@ func (p *GetPartitionIndexesPaginator) NextPage(ctx context.Context, optFns ...f
 
 	return result, nil
 }
+
+// GetPartitionIndexesAPIClient is a client that implements the
+// GetPartitionIndexes operation.
+type GetPartitionIndexesAPIClient interface {
+	GetPartitionIndexes(context.Context, *GetPartitionIndexesInput, ...func(*Options)) (*GetPartitionIndexesOutput, error)
+}
+
+var _ GetPartitionIndexesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetPartitionIndexes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -132,6 +132,9 @@ func (c *Client) addOperationSearchEntitiesMiddlewares(stack *middleware.Stack, 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSearchEntitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,14 +158,6 @@ func (c *Client) addOperationSearchEntitiesMiddlewares(stack *middleware.Stack, 
 	}
 	return nil
 }
-
-// SearchEntitiesAPIClient is a client that implements the SearchEntities
-// operation.
-type SearchEntitiesAPIClient interface {
-	SearchEntities(context.Context, *SearchEntitiesInput, ...func(*Options)) (*SearchEntitiesOutput, error)
-}
-
-var _ SearchEntitiesAPIClient = (*Client)(nil)
 
 // SearchEntitiesPaginatorOptions is the paginator options for SearchEntities
 type SearchEntitiesPaginatorOptions struct {
@@ -227,6 +222,9 @@ func (p *SearchEntitiesPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.SearchEntities(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -245,6 +243,14 @@ func (p *SearchEntitiesPaginator) NextPage(ctx context.Context, optFns ...func(*
 
 	return result, nil
 }
+
+// SearchEntitiesAPIClient is a client that implements the SearchEntities
+// operation.
+type SearchEntitiesAPIClient interface {
+	SearchEntities(context.Context, *SearchEntitiesInput, ...func(*Options)) (*SearchEntitiesOutput, error)
+}
+
+var _ SearchEntitiesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opSearchEntities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -120,6 +120,9 @@ func (c *Client) addOperationListLayoutsMiddlewares(stack *middleware.Stack, opt
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListLayoutsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,13 +146,6 @@ func (c *Client) addOperationListLayoutsMiddlewares(stack *middleware.Stack, opt
 	}
 	return nil
 }
-
-// ListLayoutsAPIClient is a client that implements the ListLayouts operation.
-type ListLayoutsAPIClient interface {
-	ListLayouts(context.Context, *ListLayoutsInput, ...func(*Options)) (*ListLayoutsOutput, error)
-}
-
-var _ ListLayoutsAPIClient = (*Client)(nil)
 
 // ListLayoutsPaginatorOptions is the paginator options for ListLayouts
 type ListLayoutsPaginatorOptions struct {
@@ -214,6 +210,9 @@ func (p *ListLayoutsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListLayouts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -232,6 +231,13 @@ func (p *ListLayoutsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 
 	return result, nil
 }
+
+// ListLayoutsAPIClient is a client that implements the ListLayouts operation.
+type ListLayoutsAPIClient interface {
+	ListLayouts(context.Context, *ListLayoutsInput, ...func(*Options)) (*ListLayoutsOutput, error)
+}
+
+var _ ListLayoutsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListLayouts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

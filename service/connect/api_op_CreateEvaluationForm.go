@@ -143,6 +143,9 @@ func (c *Client) addOperationCreateEvaluationFormMiddlewares(stack *middleware.S
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEvaluationFormMiddleware(stack, options); err != nil {
 		return err
 	}

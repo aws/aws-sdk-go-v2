@@ -138,6 +138,9 @@ func (c *Client) addOperationListForecastsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListForecastsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,13 +164,6 @@ func (c *Client) addOperationListForecastsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// ListForecastsAPIClient is a client that implements the ListForecasts operation.
-type ListForecastsAPIClient interface {
-	ListForecasts(context.Context, *ListForecastsInput, ...func(*Options)) (*ListForecastsOutput, error)
-}
-
-var _ ListForecastsAPIClient = (*Client)(nil)
 
 // ListForecastsPaginatorOptions is the paginator options for ListForecasts
 type ListForecastsPaginatorOptions struct {
@@ -232,6 +228,9 @@ func (p *ListForecastsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListForecasts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -250,6 +249,13 @@ func (p *ListForecastsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// ListForecastsAPIClient is a client that implements the ListForecasts operation.
+type ListForecastsAPIClient interface {
+	ListForecasts(context.Context, *ListForecastsInput, ...func(*Options)) (*ListForecastsOutput, error)
+}
+
+var _ ListForecastsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListForecasts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

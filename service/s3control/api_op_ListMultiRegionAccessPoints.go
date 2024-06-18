@@ -157,6 +157,9 @@ func (c *Client) addOperationListMultiRegionAccessPointsMiddlewares(stack *middl
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,56 +201,6 @@ func (c *Client) addOperationListMultiRegionAccessPointsMiddlewares(stack *middl
 	}
 	return nil
 }
-
-type endpointPrefix_opListMultiRegionAccessPointsMiddleware struct {
-}
-
-func (*endpointPrefix_opListMultiRegionAccessPointsMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opListMultiRegionAccessPointsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
-	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleFinalize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	opaqueInput := getOperationInput(ctx)
-	input, ok := opaqueInput.(*ListMultiRegionAccessPointsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleFinalize(ctx, in)
-}
-func addEndpointPrefix_opListMultiRegionAccessPointsMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opListMultiRegionAccessPointsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-// ListMultiRegionAccessPointsAPIClient is a client that implements the
-// ListMultiRegionAccessPoints operation.
-type ListMultiRegionAccessPointsAPIClient interface {
-	ListMultiRegionAccessPoints(context.Context, *ListMultiRegionAccessPointsInput, ...func(*Options)) (*ListMultiRegionAccessPointsOutput, error)
-}
-
-var _ ListMultiRegionAccessPointsAPIClient = (*Client)(nil)
 
 // ListMultiRegionAccessPointsPaginatorOptions is the paginator options for
 // ListMultiRegionAccessPoints
@@ -311,6 +264,9 @@ func (p *ListMultiRegionAccessPointsPaginator) NextPage(ctx context.Context, opt
 
 	params.MaxResults = p.options.Limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListMultiRegionAccessPoints(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -329,6 +285,56 @@ func (p *ListMultiRegionAccessPointsPaginator) NextPage(ctx context.Context, opt
 
 	return result, nil
 }
+
+type endpointPrefix_opListMultiRegionAccessPointsMiddleware struct {
+}
+
+func (*endpointPrefix_opListMultiRegionAccessPointsMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opListMultiRegionAccessPointsMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	opaqueInput := getOperationInput(ctx)
+	input, ok := opaqueInput.(*ListMultiRegionAccessPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", opaqueInput)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opListMultiRegionAccessPointsMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opListMultiRegionAccessPointsMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// ListMultiRegionAccessPointsAPIClient is a client that implements the
+// ListMultiRegionAccessPoints operation.
+type ListMultiRegionAccessPointsAPIClient interface {
+	ListMultiRegionAccessPoints(context.Context, *ListMultiRegionAccessPointsInput, ...func(*Options)) (*ListMultiRegionAccessPointsOutput, error)
+}
+
+var _ ListMultiRegionAccessPointsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListMultiRegionAccessPoints(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

@@ -109,6 +109,9 @@ func (c *Client) addOperationRemoveSourceServerActionMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpRemoveSourceServerActionValidationMiddleware(stack); err != nil {
 		return err
 	}

@@ -137,6 +137,9 @@ func (c *Client) addOperationGetConfigurationPolicyAssociationMiddlewares(stack 
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetConfigurationPolicyAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}

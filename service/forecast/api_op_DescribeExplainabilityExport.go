@@ -152,6 +152,9 @@ func (c *Client) addOperationDescribeExplainabilityExportMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDescribeExplainabilityExportValidationMiddleware(stack); err != nil {
 		return err
 	}

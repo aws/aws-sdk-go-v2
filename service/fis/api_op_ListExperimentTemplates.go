@@ -112,6 +112,9 @@ func (c *Client) addOperationListExperimentTemplatesMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExperimentTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -132,14 +135,6 @@ func (c *Client) addOperationListExperimentTemplatesMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// ListExperimentTemplatesAPIClient is a client that implements the
-// ListExperimentTemplates operation.
-type ListExperimentTemplatesAPIClient interface {
-	ListExperimentTemplates(context.Context, *ListExperimentTemplatesInput, ...func(*Options)) (*ListExperimentTemplatesOutput, error)
-}
-
-var _ ListExperimentTemplatesAPIClient = (*Client)(nil)
 
 // ListExperimentTemplatesPaginatorOptions is the paginator options for
 // ListExperimentTemplates
@@ -207,6 +202,9 @@ func (p *ListExperimentTemplatesPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListExperimentTemplates(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -225,6 +223,14 @@ func (p *ListExperimentTemplatesPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// ListExperimentTemplatesAPIClient is a client that implements the
+// ListExperimentTemplates operation.
+type ListExperimentTemplatesAPIClient interface {
+	ListExperimentTemplates(context.Context, *ListExperimentTemplatesInput, ...func(*Options)) (*ListExperimentTemplatesOutput, error)
+}
+
+var _ ListExperimentTemplatesAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListExperimentTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

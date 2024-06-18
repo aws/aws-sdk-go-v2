@@ -122,6 +122,9 @@ func (c *Client) addOperationGetCanaryRunsMiddlewares(stack *middleware.Stack, o
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetCanaryRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,13 +148,6 @@ func (c *Client) addOperationGetCanaryRunsMiddlewares(stack *middleware.Stack, o
 	}
 	return nil
 }
-
-// GetCanaryRunsAPIClient is a client that implements the GetCanaryRuns operation.
-type GetCanaryRunsAPIClient interface {
-	GetCanaryRuns(context.Context, *GetCanaryRunsInput, ...func(*Options)) (*GetCanaryRunsOutput, error)
-}
-
-var _ GetCanaryRunsAPIClient = (*Client)(nil)
 
 // GetCanaryRunsPaginatorOptions is the paginator options for GetCanaryRuns
 type GetCanaryRunsPaginatorOptions struct {
@@ -218,6 +214,9 @@ func (p *GetCanaryRunsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetCanaryRuns(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -236,6 +235,13 @@ func (p *GetCanaryRunsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	return result, nil
 }
+
+// GetCanaryRunsAPIClient is a client that implements the GetCanaryRuns operation.
+type GetCanaryRunsAPIClient interface {
+	GetCanaryRuns(context.Context, *GetCanaryRunsInput, ...func(*Options)) (*GetCanaryRunsOutput, error)
+}
+
+var _ GetCanaryRunsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetCanaryRuns(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

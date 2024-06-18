@@ -125,6 +125,9 @@ func (c *Client) addOperationGetUserDefinedFunctionsMiddlewares(stack *middlewar
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpGetUserDefinedFunctionsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,14 +151,6 @@ func (c *Client) addOperationGetUserDefinedFunctionsMiddlewares(stack *middlewar
 	}
 	return nil
 }
-
-// GetUserDefinedFunctionsAPIClient is a client that implements the
-// GetUserDefinedFunctions operation.
-type GetUserDefinedFunctionsAPIClient interface {
-	GetUserDefinedFunctions(context.Context, *GetUserDefinedFunctionsInput, ...func(*Options)) (*GetUserDefinedFunctionsOutput, error)
-}
-
-var _ GetUserDefinedFunctionsAPIClient = (*Client)(nil)
 
 // GetUserDefinedFunctionsPaginatorOptions is the paginator options for
 // GetUserDefinedFunctions
@@ -222,6 +217,9 @@ func (p *GetUserDefinedFunctionsPaginator) NextPage(ctx context.Context, optFns 
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.GetUserDefinedFunctions(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -240,6 +238,14 @@ func (p *GetUserDefinedFunctionsPaginator) NextPage(ctx context.Context, optFns 
 
 	return result, nil
 }
+
+// GetUserDefinedFunctionsAPIClient is a client that implements the
+// GetUserDefinedFunctions operation.
+type GetUserDefinedFunctionsAPIClient interface {
+	GetUserDefinedFunctions(context.Context, *GetUserDefinedFunctionsInput, ...func(*Options)) (*GetUserDefinedFunctionsOutput, error)
+}
+
+var _ GetUserDefinedFunctionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opGetUserDefinedFunctions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

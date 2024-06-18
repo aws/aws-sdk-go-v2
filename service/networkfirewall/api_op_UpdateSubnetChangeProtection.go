@@ -160,6 +160,9 @@ func (c *Client) addOperationUpdateSubnetChangeProtectionMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateSubnetChangeProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}

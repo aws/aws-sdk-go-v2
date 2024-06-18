@@ -110,6 +110,9 @@ func (c *Client) addOperationListSipMediaApplicationsMiddlewares(stack *middlewa
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSipMediaApplications(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -130,14 +133,6 @@ func (c *Client) addOperationListSipMediaApplicationsMiddlewares(stack *middlewa
 	}
 	return nil
 }
-
-// ListSipMediaApplicationsAPIClient is a client that implements the
-// ListSipMediaApplications operation.
-type ListSipMediaApplicationsAPIClient interface {
-	ListSipMediaApplications(context.Context, *ListSipMediaApplicationsInput, ...func(*Options)) (*ListSipMediaApplicationsOutput, error)
-}
-
-var _ ListSipMediaApplicationsAPIClient = (*Client)(nil)
 
 // ListSipMediaApplicationsPaginatorOptions is the paginator options for
 // ListSipMediaApplications
@@ -204,6 +199,9 @@ func (p *ListSipMediaApplicationsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxResults = limit
 
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
 	result, err := p.client.ListSipMediaApplications(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
@@ -222,6 +220,14 @@ func (p *ListSipMediaApplicationsPaginator) NextPage(ctx context.Context, optFns
 
 	return result, nil
 }
+
+// ListSipMediaApplicationsAPIClient is a client that implements the
+// ListSipMediaApplications operation.
+type ListSipMediaApplicationsAPIClient interface {
+	ListSipMediaApplications(context.Context, *ListSipMediaApplicationsInput, ...func(*Options)) (*ListSipMediaApplicationsOutput, error)
+}
+
+var _ ListSipMediaApplicationsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListSipMediaApplications(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

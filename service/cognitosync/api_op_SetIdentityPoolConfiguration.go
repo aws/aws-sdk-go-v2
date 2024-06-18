@@ -146,6 +146,9 @@ func (c *Client) addOperationSetIdentityPoolConfigurationMiddlewares(stack *midd
 	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
+	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityPoolConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
