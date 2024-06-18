@@ -1,8 +1,0 @@
-{
-    "id": "5ac7bf9b-dd41-4df7-a709-5ca69860fcfb",
-    "type": "feature",
-    "description": "This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response.",
-    "modules": [
-        "service/eks"
-    ]
-}

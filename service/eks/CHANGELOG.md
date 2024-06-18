@@ -1,3 +1,9 @@
+# v1.44.0 (2024-06-18)
+
+* **Feature**: This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response.
+* **Feature**: Track usage of various AWS SDK features in user-agent string.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.2 (2024-06-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

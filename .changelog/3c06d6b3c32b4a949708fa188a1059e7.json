@@ -1,8 +1,0 @@
-{
-    "id": "3c06d6b3-c32b-4a94-9708-fa188a1059e7",
-    "type": "feature",
-    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

@@ -1,3 +1,32 @@
+# Release (2024-06-18)
+
+## General Highlights
+* **Feature**: Add framework for tracking specific features in user-agent string.
+* **Feature**: Track usage of various AWS SDK features in user-agent string.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.10.0](service/bedrockruntime/CHANGELOG.md#v1100-2024-06-18)
+  * **Feature**: This release adds support for using Guardrails with the Converse and ConverseStream APIs.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.41.0](service/cloudtrail/CHANGELOG.md#v1410-2024-06-18)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.47.0](service/configservice/CHANGELOG.md#v1470-2024-06-18)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.44.0](service/eks/CHANGELOG.md#v1440-2024-06-18)
+  * **Feature**: This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.39.0](service/lightsail/CHANGELOG.md#v1390-2024-06-18)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.41.0](service/polly/CHANGELOG.md#v1410-2024-06-18)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.41.0](service/rekognition/CHANGELOG.md#v1410-2024-06-18)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.146.0](service/sagemaker/CHANGELOG.md#v11460-2024-06-18)
+  * **Feature**: Launched a new feature in SageMaker to provide managed MLflow Tracking Servers for customers to track ML experiments. This release also adds a new capability of attaching additional storage to SageMaker HyperPod cluster instances.
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.26.0](service/shield/CHANGELOG.md#v1260-2024-06-18)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.27.0](service/snowball/CHANGELOG.md#v1270-2024-06-18)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
 # Release (2024-06-17)
 
 ## General Highlights

@@ -1,3 +1,8 @@
+# v1.56.0 (2024-06-18)
+
+* **Feature**: Track usage of various AWS SDK features in user-agent string.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2024-06-17)
 
 * **Feature**: This release includes support for creating I-frame only video segments for DASH trick play.

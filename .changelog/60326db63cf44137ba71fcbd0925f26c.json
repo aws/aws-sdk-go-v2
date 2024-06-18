@@ -1,8 +1,0 @@
-{
-    "id": "60326db6-3cf4-4137-ba71-fcbd0925f26c",
-    "type": "feature",
-    "description": "This release adds support for using Guardrails with the Converse and ConverseStream APIs.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

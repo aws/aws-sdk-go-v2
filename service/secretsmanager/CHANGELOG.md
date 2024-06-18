@@ -1,3 +1,8 @@
+# v1.31.0 (2024-06-18)
+
+* **Feature**: Track usage of various AWS SDK features in user-agent string.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.1 (2024-06-17)
 
 * **Documentation**: Doc only update for Secrets Manager

@@ -1,8 +1,0 @@
-{
-    "id": "660844da-2e1f-464c-8d2f-a5840133e531",
-    "type": "feature",
-    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

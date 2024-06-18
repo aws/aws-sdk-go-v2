@@ -1,3 +1,8 @@
+# v1.30.0 (2024-06-18)
+
+* **Feature**: Track usage of various AWS SDK features in user-agent string.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2024-06-17)
 
 * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.

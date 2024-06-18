@@ -1,3 +1,8 @@
+# v1.25.0 (2024-06-18)
+
+* **Feature**: Track usage of various AWS SDK features in user-agent string.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.6 (2024-06-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions
