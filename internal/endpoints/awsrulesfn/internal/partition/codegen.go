@@ -53,11 +53,12 @@ var partitions = []Partition {
 				ID: {{ quote $partition.ID }},
 				RegionRegex: {{ quote $partition.RegionRegex }},
 				DefaultConfig: PartitionConfig{
-					Name:               {{ quote $partition.DefaultConfig.Name }},
-					DnsSuffix:          {{ quote $partition.DefaultConfig.DnsSuffix }},
-					DualStackDnsSuffix: {{ quote $partition.DefaultConfig.DualStackDnsSuffix }},
-					SupportsFIPS:       {{ $partition.DefaultConfig.SupportsFIPS }},
-					SupportsDualStack:  {{ $partition.DefaultConfig.SupportsDualStack }},
+					Name:                 {{ quote $partition.DefaultConfig.Name }},
+					DnsSuffix:            {{ quote $partition.DefaultConfig.DnsSuffix }},
+					DualStackDnsSuffix:   {{ quote $partition.DefaultConfig.DualStackDnsSuffix }},
+					SupportsFIPS:         {{ $partition.DefaultConfig.SupportsFIPS }},
+					SupportsDualStack:    {{ $partition.DefaultConfig.SupportsDualStack }},
+					ImplicitGlobalRegion: {{ quote $partition.DefaultConfig.ImplicitGlobalRegion }},
 				},
 				Regions: map[string]RegionOverrides {
 				{{- range $region, $config := $partition.Regions }}
