@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 
+	presignedurl "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +34,10 @@ func (*validatePutObjectContentLength) HandleInitialize(
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if presignedurl.GetIsPresigning(ctx) { // won't have a body
+		return next.HandleInitialize(ctx, in)
+	}
+
 	input, ok := in.Parameters.(*PutObjectInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
