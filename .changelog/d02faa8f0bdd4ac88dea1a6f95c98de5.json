@@ -1,0 +1,8 @@
+{
+    "id": "d02faa8f-0bdd-4ac8-8dea-1a6f95c98de5",
+    "type": "bugfix",
+    "description": "revert commit of validating PutObject content length causing integration test failure",
+    "modules": [
+        "service/s3"
+    ]
+}
