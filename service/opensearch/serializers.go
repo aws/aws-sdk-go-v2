@@ -5112,6 +5112,13 @@ func awsRestjson1_serializeDocumentAdvancedSecurityOptionsInput(v *types.Advance
 		ok.Boolean(*v.InternalUserDatabaseEnabled)
 	}
 
+	if v.JWTOptions != nil {
+		ok := object.Key("JWTOptions")
+		if err := awsRestjson1_serializeDocumentJWTOptionsInput(v.JWTOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MasterUserOptions != nil {
 		ok := object.Key("MasterUserOptions")
 		if err := awsRestjson1_serializeDocumentMasterUserOptions(v.MasterUserOptions, ok); err != nil {
@@ -5595,6 +5602,33 @@ func awsRestjson1_serializeDocumentFilterList(v []types.Filter, value smithyjson
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJWTOptionsInput(v *types.JWTOptionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.PublicKey != nil {
+		ok := object.Key("PublicKey")
+		ok.String(*v.PublicKey)
+	}
+
+	if v.RolesKey != nil {
+		ok := object.Key("RolesKey")
+		ok.String(*v.RolesKey)
+	}
+
+	if v.SubjectKey != nil {
+		ok := object.Key("SubjectKey")
+		ok.String(*v.SubjectKey)
+	}
+
 	return nil
 }
 

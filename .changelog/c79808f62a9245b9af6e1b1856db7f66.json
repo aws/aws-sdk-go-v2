@@ -1,0 +1,8 @@
+{
+    "id": "c79808f6-2a92-45b9-af6e-1b1856db7f66",
+    "type": "feature",
+    "description": "This release adds an acceptanceType field to the ReportSummary structure (used in the ListReports API response).",
+    "modules": [
+        "service/artifact"
+    ]
+}

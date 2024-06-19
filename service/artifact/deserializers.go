@@ -1817,6 +1817,15 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "acceptanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AcceptanceType to be of type string, got %T instead", value)
+				}
+				sv.AcceptanceType = types.AcceptanceType(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)

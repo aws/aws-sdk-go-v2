@@ -50,7 +50,7 @@ type UpdateDataSourceInput struct {
 	// A new description of the data source.
 	Description *string
 
-	// The status of the data source update request.
+	// The status of the data source update.
 	Status types.DataSourceStatus
 
 	noSmithyDocumentSerde

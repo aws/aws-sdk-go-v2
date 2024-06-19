@@ -55,7 +55,7 @@ type GetDataSourceOutput struct {
 	// The name of the data source.
 	Name *string
 
-	// The status of the data source response.
+	// The status of the data source.
 	Status types.DataSourceStatus
 
 	// Metadata pertaining to the operation's result.

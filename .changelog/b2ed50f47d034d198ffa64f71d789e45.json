@@ -1,0 +1,8 @@
+{
+    "id": "b2ed50f4-7d03-4d19-8ffa-64f71d789e45",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/athena"
+    ]
+}

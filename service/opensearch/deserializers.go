@@ -11114,6 +11114,11 @@ func awsRestjson1_deserializeDocumentAdvancedSecurityOptions(v **types.AdvancedS
 				sv.InternalUserDatabaseEnabled = ptr.Bool(jtv)
 			}
 
+		case "JWTOptions":
+			if err := awsRestjson1_deserializeDocumentJWTOptionsOutput(&sv.JWTOptions, value); err != nil {
+				return err
+			}
+
 		case "SAMLOptions":
 			if err := awsRestjson1_deserializeDocumentSAMLOptionsOutput(&sv.SAMLOptions, value); err != nil {
 				return err
@@ -15426,6 +15431,73 @@ func awsRestjson1_deserializeDocumentIssues(v *[]string, value interface{}) erro
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJWTOptionsOutput(v **types.JWTOptionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JWTOptionsOutput
+	if *v == nil {
+		sv = &types.JWTOptionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "PublicKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PublicKey = ptr.String(jtv)
+			}
+
+		case "RolesKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolesKey = ptr.String(jtv)
+			}
+
+		case "SubjectKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SubjectKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

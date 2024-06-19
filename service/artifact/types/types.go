@@ -85,6 +85,9 @@ type ReportDetail struct {
 // Summary for report resource.
 type ReportSummary struct {
 
+	// Acceptance type for report.
+	AcceptanceType AcceptanceType
+
 	// ARN for the report resource.
 	Arn *string
 

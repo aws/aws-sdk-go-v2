@@ -106,6 +106,10 @@ type AdvancedSecurityOptions struct {
 	// True if the internal user database is enabled.
 	InternalUserDatabaseEnabled *bool
 
+	// Container for information about the JWT configuration of the Amazon OpenSearch
+	// Service.
+	JWTOptions *JWTOptionsOutput
+
 	// Container for information about the SAML configuration for OpenSearch
 	// Dashboards.
 	SAMLOptions *SAMLOptionsOutput
@@ -130,6 +134,10 @@ type AdvancedSecurityOptionsInput struct {
 
 	// True to enable the internal user database.
 	InternalUserDatabaseEnabled *bool
+
+	// Container for information about the JWT configuration of the Amazon OpenSearch
+	// Service.
+	JWTOptions *JWTOptionsInput
 
 	// Container for information about the master user.
 	MasterUserOptions *MasterUserOptions
@@ -1370,6 +1378,43 @@ type IPAddressTypeStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The JWT authentication and authorization configuration for an Amazon OpenSearch
+// Service domain.
+type JWTOptionsInput struct {
+
+	// True to enable JWT authentication and authorization for a domain.
+	Enabled *bool
+
+	// Element of the JWT assertion used by the cluster to verify JWT signatures.
+	PublicKey *string
+
+	// Element of the JWT assertion to use for roles.
+	RolesKey *string
+
+	// Element of the JWT assertion to use for the user name.
+	SubjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the JWT options configured for the domain.
+type JWTOptionsOutput struct {
+
+	// True if JWT use is enabled.
+	Enabled *bool
+
+	// The key used to verify the signature of incoming JWT requests.
+	PublicKey *string
+
+	// The key used for matching the JWT roles attribute.
+	RolesKey *string
+
+	// The key used for matching the JWT subject attribute.
+	SubjectKey *string
 
 	noSmithyDocumentSerde
 }
