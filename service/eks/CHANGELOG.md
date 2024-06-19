@@ -1,3 +1,7 @@
+# v1.44.1 (2024-06-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-06-18)
 
 * **Feature**: This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response.

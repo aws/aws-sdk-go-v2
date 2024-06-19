@@ -1,8 +1,0 @@
-{
-    "id": "3b2f6d4b-9809-4443-8c7a-016a72f799b1",
-    "type": "feature",
-    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
-    "modules": [
-        "service/elastictranscoder"
-    ]
-}

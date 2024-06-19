@@ -1,3 +1,8 @@
+# v1.36.0 (2024-06-19)
+
+* **Feature**: This release enables customers to use JSON Web Tokens (JWT) for authentication on their Amazon OpenSearch Service domains.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2024-06-18)
 
 * **Feature**: Track usage of various AWS SDK features in user-agent string.

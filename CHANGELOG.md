@@ -1,3 +1,24 @@
+# Release (2024-06-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.30.0
+  * **Feature**: Add implicit global region to internal endpoint resolution metadata.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.3.0](service/artifact/CHANGELOG.md#v130-2024-06-19)
+  * **Feature**: This release adds an acceptanceType field to the ReportSummary structure (used in the ListReports API response).
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.43.0](service/athena/CHANGELOG.md#v1430-2024-06-19)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.25.0](service/costandusagereportservice/CHANGELOG.md#v1250-2024-06-19)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.26.0](service/directconnect/CHANGELOG.md#v1260-2024-06-19)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/elastictranscoder`: [v1.24.0](service/elastictranscoder/CHANGELOG.md#v1240-2024-06-19)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.36.0](service/opensearch/CHANGELOG.md#v1360-2024-06-19)
+  * **Feature**: This release enables customers to use JSON Web Tokens (JWT) for authentication on their Amazon OpenSearch Service domains.
+
 # Release (2024-06-18)
 
 ## General Highlights

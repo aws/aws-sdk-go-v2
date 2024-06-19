@@ -1,3 +1,8 @@
+# v1.3.0 (2024-06-19)
+
+* **Feature**: This release adds an acceptanceType field to the ReportSummary structure (used in the ListReports API response).
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2024-06-18)
 
 * **Feature**: Track usage of various AWS SDK features in user-agent string.
