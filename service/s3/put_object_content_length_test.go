@@ -3,8 +3,8 @@ package s3
 import (
 	"bytes"
 	"context"
+	"errors"
 	"io"
-	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -62,10 +62,10 @@ func TestValidatePutObjectContentLength(t *testing.T) {
 			})
 
 			_, err := svc.PutObject(context.Background(), cs.Input)
-			if cs.ExpectErr && !strings.Contains(err.Error(), errNoContentLength.Error()) {
+			if cs.ExpectErr && !errors.Is(err, errNoContentLength) {
 				t.Errorf("expected errNoContentLength, got %v", err)
 			}
-			if !cs.ExpectErr && strings.Contains(err.Error(), errNoContentLength.Error()) {
+			if !cs.ExpectErr && errors.Is(err, errNoContentLength) {
 				t.Errorf("expected no errNoContentLength but got it")
 			}
 		})
