@@ -1085,7 +1085,20 @@
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeReportDefinitionsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.costandusagereportservice#DescribeReportDefinitionsRequest": {

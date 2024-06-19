@@ -485,6 +485,12 @@
                         "smithy.api#documentation": "<p>Container for information about the SAML configuration for OpenSearch Dashboards.</p>"
                     }
                 },
+                "JWTOptions": {
+                    "target": "com.amazonaws.opensearch#JWTOptionsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for information about the JWT configuration of the Amazon OpenSearch Service.</p>"
+                    }
+                },
                 "AnonymousAuthDisableDate": {
                     "target": "com.amazonaws.opensearch#DisableTimestamp",
                     "traits": {
@@ -527,6 +533,12 @@
                     "target": "com.amazonaws.opensearch#SAMLOptionsInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for information about the SAML configuration for OpenSearch Dashboards.</p>"
+                    }
+                },
+                "JWTOptions": {
+                    "target": "com.amazonaws.opensearch#JWTOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for information about the JWT configuration of the Amazon OpenSearch Service. </p>"
                     }
                 },
                 "AnonymousAuthEnabled": {
@@ -6883,7 +6895,7 @@
                 "Status": {
                     "target": "com.amazonaws.opensearch#DataSourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the data source response.</p>"
+                        "smithy.api#documentation": "<p>The status of the data source.</p>"
                     }
                 }
             },
@@ -7639,6 +7651,70 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearch#Issue"
+            }
+        },
+        "com.amazonaws.opensearch#JWTOptionsInput": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True to enable JWT authentication and authorization for a domain.</p>"
+                    }
+                },
+                "SubjectKey": {
+                    "target": "com.amazonaws.opensearch#SubjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Element of the JWT assertion to use for the user name.</p>"
+                    }
+                },
+                "RolesKey": {
+                    "target": "com.amazonaws.opensearch#RolesKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Element of the JWT assertion to use for roles.</p>"
+                    }
+                },
+                "PublicKey": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Element of the JWT assertion used by the cluster to verify JWT signatures.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The JWT authentication and authorization configuration for an Amazon OpenSearch Service domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#JWTOptionsOutput": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True if JWT use is enabled.</p>"
+                    }
+                },
+                "SubjectKey": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key used for matching the JWT subject attribute.</p>"
+                    }
+                },
+                "RolesKey": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key used for matching the JWT roles attribute.</p>"
+                    }
+                },
+                "PublicKey": {
+                    "target": "com.amazonaws.opensearch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key used to verify the signature of incoming JWT requests.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the JWT options configured for the domain.</p>"
             }
         },
         "com.amazonaws.opensearch#KmsKeyId": {
@@ -10954,6 +11030,15 @@
                 "smithy.api#pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):iam::[0-9]+:role\\/"
             }
         },
+        "com.amazonaws.opensearch#RolesKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.opensearch#RollbackOnDisable": {
             "type": "enum",
             "members": {
@@ -11768,6 +11853,15 @@
                 "target": "com.amazonaws.opensearch#String"
             }
         },
+        "com.amazonaws.opensearch#SubjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.opensearch#TLSSecurityPolicy": {
             "type": "enum",
             "members": {
@@ -11948,7 +12042,7 @@
                 "Status": {
                     "target": "com.amazonaws.opensearch#DataSourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the data source update request.</p>"
+                        "smithy.api#documentation": "<p>The status of the data source update.</p>"
                     }
                 }
             },

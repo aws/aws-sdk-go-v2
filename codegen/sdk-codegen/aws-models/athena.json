@@ -5229,7 +5229,20 @@
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListNamedQueriesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.athena#ListNamedQueriesInput": {

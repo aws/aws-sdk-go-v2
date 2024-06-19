@@ -1678,6 +1678,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The message associated with the current upload state.</p>"
                     }
+                },
+                "acceptanceType": {
+                    "target": "com.amazonaws.artifact#AcceptanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Acceptance type for report.</p>"
+                    }
                 }
             },
             "traits": {
