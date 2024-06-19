@@ -5,7 +5,6 @@ PutObject
 		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
-		validatePutObjectContentLength
 		OperationInputValidation
 	Serialize stack step
 		putBucketContext
