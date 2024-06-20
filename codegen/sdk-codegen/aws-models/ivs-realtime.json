@@ -812,6 +812,37 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
             }
         },
+        "com.amazonaws.ivsrealtime#AutoParticipantRecordingConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageConfigurationArn": {
+                    "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingStorageConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the <a>StorageConfiguration</a> resource to use for auto participant recording. Default: \"\" (empty string, no storage configuration is specified).  Individual participant recording cannot be started unless a storage configuration is specified, when a  <a>Stage</a> is created or updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mediaTypes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingMediaTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Types of media to be recorded. Default: <code>AUDIO_VIDEO</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying an auto-participant-recording configuration.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#AutoParticipantRecordingStorageConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:storage-configuration/[a-zA-Z0-9-]+$$"
+            }
+        },
         "com.amazonaws.ivsrealtime#Bitrate": {
             "type": "integer",
             "traits": {
@@ -1244,6 +1275,12 @@
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there. </p>"
+                    }
+                },
+                "autoParticipantRecordingConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Auto participant recording configuration object attached to the stage.</p>"
                     }
                 }
             }
@@ -2784,20 +2821,20 @@
                 "filterByUserId": {
                     "target": "com.amazonaws.ivsrealtime#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the response list to match the specified user ID. Only one of\n            <code>filterByUserId</code>, <code>filterByPublished</code>, or\n            <code>filterByState</code> can be provided per request. A <code>userId</code> is a\n         customer-assigned name to help identify the token; this can be used to link a participant\n         to a user in the customer’s own systems.</p>"
+                        "smithy.api#documentation": "<p>Filters the response list to match the specified user ID. \n            Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, \n            <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.\n\t    A <code>userId</code> is a\n            customer-assigned name to help identify the token; this can be used to link a participant\n            to a user in the customer’s own systems.</p>"
                     }
                 },
                 "filterByPublished": {
                     "target": "com.amazonaws.ivsrealtime#Published",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Filters the response list to only show participants who published during the stage\n         session. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, or\n            <code>filterByState</code> can be provided per request.</p>"
+                        "smithy.api#documentation": "<p>Filters the response list to only show participants who published during the stage session.\n            Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, \n            <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>"
                     }
                 },
                 "filterByState": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the response list to only show participants in the specified state. Only one of\n            <code>filterByUserId</code>, <code>filterByPublished</code>, or\n            <code>filterByState</code> can be provided per request.</p>"
+                        "smithy.api#documentation": "<p>Filters the response list to only show participants in the specified state. \n            Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, \n            <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>"
                     }
                 },
                 "nextToken": {
@@ -2810,6 +2847,12 @@
                     "target": "com.amazonaws.ivsrealtime#MaxParticipantResults",
                     "traits": {
                         "smithy.api#documentation": "<p>Maximum number of results to return. Default: 50.</p>"
+                    }
+                },
+                "filterByRecordingState": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingFilterByRecordingState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the response list to only show participants with the specified recording state.\n            Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, \n            <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>"
                     }
                 }
             },
@@ -3271,6 +3314,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The participant’s SDK version.</p>"
                     }
+                },
+                "recordingS3BucketName": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or \"\" (empty string), if recording is not enabled.</p>"
+                    }
+                },
+                "recordingS3Prefix": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or \"\" (empty string), if recording is not enabled.</p>"
+                    }
+                },
+                "recordingState": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant’s recording state.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3310,6 +3371,111 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ivsrealtime#ParticipantSummary"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingFilterByRecordingState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingMediaType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AUDIO_VIDEO",
+                        "name": "AUDIO_VIDEO"
+                    },
+                    {
+                        "value": "AUDIO_ONLY",
+                        "name": "AUDIO_ONLY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingMediaTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#ParticipantRecordingMediaType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingS3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9-.]*$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingS3Prefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]*$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantRecordingState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantState": {
@@ -3359,6 +3525,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the participant ever published to the stage session.</p>"
+                    }
+                },
+                "recordingState": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantRecordingState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant’s recording state.</p>"
                     }
                 }
             },
@@ -3860,6 +4032,12 @@
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                    }
+                },
+                "autoParticipantRecordingConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Auto-participant-recording configuration object attached to the stage.</p>"
                     }
                 }
             },
@@ -4445,6 +4623,12 @@
                     "target": "com.amazonaws.ivsrealtime#StageName",
                     "traits": {
                         "smithy.api#documentation": "<p>Name of the stage to be updated.</p>"
+                    }
+                },
+                "autoParticipantRecordingConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Auto-participant-recording configuration object to attach to the stage.\n      Auto-participant-recording configuration cannot be updated while recording is active.</p>"
                     }
                 }
             }

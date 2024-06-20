@@ -10322,7 +10322,96 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Create a hub.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateHubContentReference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreateHubContentReferenceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreateHubContentReferenceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a hub content reference in order to add a model in the JumpStart public hub to a private hub.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CreateHubContentReferenceRequest": {
+            "type": "structure",
+            "members": {
+                "HubName": {
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub to add the hub content reference to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SageMakerPublicHubContentArn": {
+                    "target": "com.amazonaws.sagemaker#SageMakerPublicHubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the public hub content to reference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentName": {
+                    "target": "com.amazonaws.sagemaker#HubContentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the hub content to reference.</p>"
+                    }
+                },
+                "MinVersion": {
+                    "target": "com.amazonaws.sagemaker#HubContentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum version of the hub content to reference.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the hub content to reference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreateHubContentReferenceResponse": {
+            "type": "structure",
+            "members": {
+                "HubArn": {
+                    "target": "com.amazonaws.sagemaker#HubArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the hub that the hub content reference was added to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentArn": {
+                    "target": "com.amazonaws.sagemaker#HubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#CreateHubRequest": {
@@ -15424,7 +15513,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Delete a hub.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteHubContent": {
@@ -15444,14 +15533,63 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete the contents of a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Delete the contents of a hub.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteHubContentReference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteHubContentReferenceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a hub content reference in order to remove a model from a private hub.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteHubContentReferenceRequest": {
+            "type": "structure",
+            "members": {
+                "HubName": {
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub to delete the hub content reference from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentType": {
+                    "target": "com.amazonaws.sagemaker#HubContentType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of hub content to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentName": {
+                    "target": "com.amazonaws.sagemaker#HubContentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub content to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sagemaker#DeleteHubContentRequest": {
             "type": "structure",
             "members": {
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub that you want to delete content in.</p>",
@@ -15491,7 +15629,7 @@
             "type": "structure",
             "members": {
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub to delete.</p>",
@@ -19804,7 +19942,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describe a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes a hub.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeHubContent": {
@@ -19821,14 +19959,14 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describe the content of a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describe the content of a hub.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeHubContentRequest": {
             "type": "structure",
             "members": {
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub that contains the content to describe.</p>",
@@ -19947,6 +20085,24 @@
                         "smithy.api#required": {}
                     }
                 },
+                "SageMakerPublicHubContentArn": {
+                    "target": "com.amazonaws.sagemaker#SageMakerPublicHubContentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the public hub content.</p>"
+                    }
+                },
+                "ReferenceMinVersion": {
+                    "target": "com.amazonaws.sagemaker#ReferenceMinVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum version of the hub content.</p>"
+                    }
+                },
+                "SupportStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentSupportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The support status of the hub content.</p>"
+                    }
+                },
                 "HubContentSearchKeywords": {
                     "target": "com.amazonaws.sagemaker#HubContentSearchKeywordList",
                     "traits": {
@@ -19990,7 +20146,7 @@
             "type": "structure",
             "members": {
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub to describe.</p>",
@@ -29590,6 +29746,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "SageMakerPublicHubContentArn": {
+                    "target": "com.amazonaws.sagemaker#SageMakerPublicHubContentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the public hub content.</p>"
+                    }
+                },
                 "HubContentVersion": {
                     "target": "com.amazonaws.sagemaker#HubContentVersion",
                     "traits": {
@@ -29626,6 +29788,12 @@
                         "smithy.api#documentation": "<p>A description of the hub content.</p>"
                     }
                 },
+                "SupportStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentSupportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The support status of the hub content.</p>"
+                    }
+                },
                 "HubContentSearchKeywords": {
                     "target": "com.amazonaws.sagemaker#HubContentSearchKeywordList",
                     "traits": {
@@ -29647,6 +29815,12 @@
                         "smithy.api#documentation": "<p>The date and time that the hub content was created.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "OriginalCreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the hub content was originally created, before any updates or revisions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -29665,8 +29839,7 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 65535
-                },
-                "smithy.api#pattern": ".*"
+                }
             }
         },
         "com.amazonaws.sagemaker#HubContentName": {
@@ -29749,6 +29922,23 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#HubContentSupportStatus": {
+            "type": "enum",
+            "members": {
+                "SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Supported"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deprecated"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#HubContentType": {
             "type": "enum",
             "members": {
@@ -29762,6 +29952,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Notebook"
+                    }
+                },
+                "MODEL_REFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ModelReference"
                     }
                 }
             }
@@ -29876,6 +30072,12 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemaker#HubNameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:(\\d{12}|aws):hub\\/)?[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#HubS3StorageConfig": {
@@ -31944,7 +32146,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Import hub content.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Import hub content.</p>"
             }
         },
         "com.amazonaws.sagemaker#ImportHubContentRequest": {
@@ -31981,7 +32183,7 @@
                     }
                 },
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub to import content into.</p>",
@@ -32714,6 +32916,22 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#InferenceHubAccessConfig": {
+            "type": "structure",
+            "members": {
+                "HubContentArn": {
+                    "target": "com.amazonaws.sagemaker#HubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the hub content for which deployment access is allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information specifying which hub contents have accessible deployment options.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#InferenceImage": {
             "type": "string",
             "traits": {
@@ -32759,9 +32977,7 @@
                 "Metrics": {
                     "target": "com.amazonaws.sagemaker#RecommendationMetrics",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The metrics used to decide what recommendation to make.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The metrics used to decide what recommendation to make.</p>"
                     }
                 },
                 "EndpointConfiguration": {
@@ -37876,14 +38092,14 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List hub content versions.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>List hub content versions.</p>"
             }
         },
         "com.amazonaws.sagemaker#ListHubContentVersionsRequest": {
             "type": "structure",
             "members": {
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub to list the content versions of.</p>",
@@ -37995,14 +38211,14 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the contents of a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>List the contents of a hub.</p>"
             }
         },
         "com.amazonaws.sagemaker#ListHubContentsRequest": {
             "type": "structure",
             "members": {
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub to list the contents of.</p>",
@@ -38101,7 +38317,7 @@
                 "target": "com.amazonaws.sagemaker#ListHubsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List all existing hubs.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>List all existing hubs.</p>"
             }
         },
         "com.amazonaws.sagemaker#ListHubsRequest": {
@@ -53941,33 +54157,25 @@
                 "CostPerHour": {
                     "target": "com.amazonaws.sagemaker#Float",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Defines the cost per hour for the instance. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Defines the cost per hour for the instance. </p>"
                     }
                 },
                 "CostPerInference": {
                     "target": "com.amazonaws.sagemaker#Float",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Defines the cost per inference for the instance .</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Defines the cost per inference for the instance .</p>"
                     }
                 },
                 "MaxInvocations": {
                     "target": "com.amazonaws.sagemaker#Integer",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The expected maximum number of requests per minute for the instance.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The expected maximum number of requests per minute for the instance.</p>"
                     }
                 },
                 "ModelLatency": {
                     "target": "com.amazonaws.sagemaker#Integer",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The expected model latency at maximum invocation per minute for the instance.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The expected model latency at maximum invocation per minute for the instance.</p>"
                     }
                 },
                 "CpuUtilization": {
@@ -54218,6 +54426,16 @@
                     "max": 128
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ReferenceMinVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 14
+                },
+                "smithy.api#pattern": "^\\d{1,4}.\\d{1,4}.\\d{1,4}$"
             }
         },
         "com.amazonaws.sagemaker#RegisterDevices": {
@@ -55327,6 +55545,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the access configuration file for the ML model. You can explicitly accept the\n         model end-user license agreement (EULA) within the <code>ModelAccessConfig</code>. You are\n         responsible for reviewing and complying with any applicable license terms and making sure\n         they are acceptable for your use case before downloading or using a model.</p>"
                     }
+                },
+                "HubAccessConfig": {
+                    "target": "com.amazonaws.sagemaker#InferenceHubAccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for hub access.</p>"
+                    }
                 }
             },
             "traits": {
@@ -55508,6 +55732,9 @@
                     "target": "com.amazonaws.sagemaker#CreateHub"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#CreateHubContentReference"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#CreateHumanTaskUi"
                 },
                 {
@@ -55677,6 +55904,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteHubContent"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DeleteHubContentReference"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DeleteHumanTaskUi"
@@ -57460,6 +57690,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#SageMakerImageVersionAlias"
+            }
+        },
+        "com.amazonaws.sagemaker#SageMakerPublicHubContentArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:aws:hub-content\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}\\/Model\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
             }
         },
         "com.amazonaws.sagemaker#SagemakerServicecatalogStatus": {
@@ -66226,14 +66466,14 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a hub.</p>\n         <note>\n            <p>Hub APIs are only callable through SageMaker Studio.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Update a hub.</p>"
             }
         },
         "com.amazonaws.sagemaker#UpdateHubRequest": {
             "type": "structure",
             "members": {
                 "HubName": {
-                    "target": "com.amazonaws.sagemaker#HubName",
+                    "target": "com.amazonaws.sagemaker#HubNameOrArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the hub to update.</p>",

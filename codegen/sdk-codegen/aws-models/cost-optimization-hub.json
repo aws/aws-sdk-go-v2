@@ -936,6 +936,20 @@
         "com.amazonaws.costoptimizationhub#Datetime": {
             "type": "timestamp"
         },
+        "com.amazonaws.costoptimizationhub#DbInstanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "dbInstanceClass": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB instance class of the DB instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DB instance configuration used for recommendations.</p>"
+            }
+        },
         "com.amazonaws.costoptimizationhub#EbsVolume": {
             "type": "structure",
             "members": {
@@ -1690,7 +1704,7 @@
                 "estimatedMonthlyCost": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated monthly cost of the recommendation.</p>"
+                        "smithy.api#documentation": "<p>The estimated monthly cost of the current resource. For Reserved Instances and Savings Plans, it refers to the cost for eligible usage.</p>"
                     }
                 },
                 "implementationEffort": {
@@ -2307,6 +2321,92 @@
                 "smithy.api#documentation": "<p>Defines how rows will be sorted in the response.</p>"
             }
         },
+        "com.amazonaws.costoptimizationhub#RdsDbInstance": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.costoptimizationhub#RdsDbInstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon RDS DB instance configuration used for recommendations.</p>"
+                    }
+                },
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details of an Amazon RDS DB instance.</p>",
+                "smithy.api#tags": [
+                    "rds"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#RdsDbInstanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "instance": {
+                    "target": "com.amazonaws.costoptimizationhub#DbInstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the instance configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon RDS DB instance configuration used for recommendations.</p>"
+            }
+        },
+        "com.amazonaws.costoptimizationhub#RdsDbInstanceStorage": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.costoptimizationhub#RdsDbInstanceStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon RDS DB instance storage configuration used for recommendations.</p>"
+                    }
+                },
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details of an Amazon RDS DB instance storage.</p>",
+                "smithy.api#tags": [
+                    "rds"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#RdsDbInstanceStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB instance.</p>"
+                    }
+                },
+                "allocatedStorageInGb": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new amount of storage in GB to allocate for the DB instance.</p>"
+                    }
+                },
+                "iops": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of Provisioned IOPS (input/output operations per second) to be initially\n      allocated for the DB instance.</p>"
+                    }
+                },
+                "storageThroughput": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput for the DB instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon RDS DB instance storage configuration used for recommendations.</p>"
+            }
+        },
         "com.amazonaws.costoptimizationhub#RdsReservedInstances": {
             "type": "structure",
             "members": {
@@ -2497,7 +2597,7 @@
                 "estimatedMonthlyCost": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated monthly cost for the recommendation.</p>"
+                        "smithy.api#documentation": "<p>The estimated monthly cost of the current resource. For Reserved Instances and Savings Plans, it refers to the cost for eligible usage.</p>"
                     }
                 },
                 "currencyCode": {
@@ -2897,6 +2997,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The SageMaker Savings Plans recommendation details.</p>"
                     }
+                },
+                "rdsDbInstance": {
+                    "target": "com.amazonaws.costoptimizationhub#RdsDbInstance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB instance recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "rds"
+                        ]
+                    }
+                },
+                "rdsDbInstanceStorage": {
+                    "target": "com.amazonaws.costoptimizationhub#RdsDbInstanceStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB instance storage recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "rds"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -3049,6 +3167,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ElastiCacheReservedInstances"
+                    }
+                },
+                "RDS_DB_INSTANCE_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsDbInstanceStorage",
+                        "smithy.api#tags": [
+                            "rds"
+                        ]
+                    }
+                },
+                "RDS_DB_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsDbInstance",
+                        "smithy.api#tags": [
+                            "rds"
+                        ]
                     }
                 }
             }

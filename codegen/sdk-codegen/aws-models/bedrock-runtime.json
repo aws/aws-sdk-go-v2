@@ -755,6 +755,12 @@
                         "smithy.api#documentation": "<p>Image to include in the message. </p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3 models.</p>\n         </note>"
                     }
                 },
+                "document": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A document to include in the message.</p>"
+                    }
+                },
                 "toolUse": {
                     "target": "com.amazonaws.bedrockruntime#ToolUseBlock",
                     "traits": {
@@ -1344,6 +1350,115 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The trace object in a response from <a>Converse</a>. Currently, you can only trace guardrails.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#DocumentBlock": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of a document, or its extension.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the document.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the content of the document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A document to include in a message when sending a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> request. You can include up to 5 documents in a request. The maximum document size is 50 MB.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#DocumentFormat": {
+            "type": "enum",
+            "members": {
+                "PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pdf"
+                    }
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "csv"
+                    }
+                },
+                "DOC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "doc"
+                    }
+                },
+                "DOCX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "docx"
+                    }
+                },
+                "XLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "xls"
+                    }
+                },
+                "XLSX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "xlsx"
+                    }
+                },
+                "HTML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "html"
+                    }
+                },
+                "TXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "txt"
+                    }
+                },
+                "MD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "md"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#DocumentSource": {
+            "type": "union",
+            "members": {
+                "bytes": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A base64-encoded string of a UTF-8 encoded file, that is the document to include in the message.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the content of the document included in a message when sending a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> request or in the response.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailAssessment": {
@@ -3152,6 +3267,12 @@
                     "target": "com.amazonaws.bedrockruntime#ImageBlock",
                     "traits": {
                         "smithy.api#documentation": "<p>A tool result that is an image.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3 models.</p>\n         </note>"
+                    }
+                },
+                "document": {
+                    "target": "com.amazonaws.bedrockruntime#DocumentBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tool result that is a document.</p>"
                     }
                 }
             },

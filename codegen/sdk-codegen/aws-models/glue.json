@@ -17570,6 +17570,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobRuns",
                     "pageSize": "MaxResults"
                 }
             }
@@ -17648,6 +17649,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Jobs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -20115,6 +20117,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Triggers",
                     "pageSize": "MaxResults"
                 }
             }
@@ -21083,6 +21086,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Runs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -23860,6 +23864,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Blueprints",
                     "pageSize": "MaxResults"
                 }
             }
@@ -24600,6 +24605,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobNames",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25282,6 +25288,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TriggerNames",
                     "pageSize": "MaxResults"
                 }
             }
@@ -25434,6 +25441,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Workflows",
                     "pageSize": "MaxResults"
                 }
             }

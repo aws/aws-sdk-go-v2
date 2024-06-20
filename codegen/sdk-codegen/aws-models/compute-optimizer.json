@@ -89,6 +89,12 @@
                 "target": "com.amazonaws.computeoptimizer#AccountId"
             }
         },
+        "com.amazonaws.computeoptimizer#AllocatedStorage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.computeoptimizer#AutoScalingConfiguration": {
             "type": "enum",
             "members": {
@@ -220,6 +226,12 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the current configuration of the Auto Scaling\n            group.</p>"
                     }
                 },
+                "currentInstanceGpuInfo": {
+                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the current instance type of the Auto Scaling group.\n        </p>"
+                    }
+                },
                 "recommendationOptions": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOptions",
                     "traits": {
@@ -249,12 +261,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The applications that might be running on the instances in the Auto Scaling group\n            as inferred by Compute Optimizer.</p>\n         <p>Compute Optimizer can infer if one of the following applications might be running on\n            the instances:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmazonEmr</code> - Infers that Amazon EMR might be running on\n                    the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running\n                    on the instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Memcached</code> - Infers that Memcached might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NGINX</code> - Infers that NGINX might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PostgreSql</code> - Infers that PostgreSQL might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redis</code> - Infers that Redis might be running on the\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Kafka</code> - Infers that Kafka might be running on the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SQLServer</code> - Infers that SQLServer might be running on the\n                    instance.</p>\n            </li>\n         </ul>"
                     }
-                },
-                "currentInstanceGpuInfo": {
-                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the current instance type of the Auto Scaling group.\n        </p>"
-                    }
                 }
             },
             "traits": {
@@ -268,6 +274,12 @@
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that describe an Auto Scaling group configuration.</p>"
+                    }
+                },
+                "instanceGpuInfo": {
+                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type of the Auto Scaling group.\n        </p>"
                     }
                 },
                 "projectedUtilizationMetrics": {
@@ -296,22 +308,16 @@
                         "smithy.api#documentation": "<p>An object that describes the savings opportunity for the Auto Scaling group\n            recommendation option. Savings opportunity includes the estimated monthly savings amount\n            and percentage.</p>"
                     }
                 },
-                "migrationEffort": {
-                    "target": "com.amazonaws.computeoptimizer#MigrationEffort",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n         <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
-                    }
-                },
-                "instanceGpuInfo": {
-                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type of the Auto Scaling group.\n        </p>"
-                    }
-                },
                 "savingsOpportunityAfterDiscounts": {
                     "target": "com.amazonaws.computeoptimizer#AutoScalingGroupSavingsOpportunityAfterDiscounts",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            An object that describes the savings opportunity for the Auto Scaling group recommendation option that includes Savings Plans and Reserved Instances discounts. \n            Savings opportunity includes the estimated monthly savings and percentage.\n        </p>"
+                    }
+                },
+                "migrationEffort": {
+                    "target": "com.amazonaws.computeoptimizer#MigrationEffort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n         <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
                     }
                 }
             },
@@ -384,6 +390,9 @@
                     "target": "com.amazonaws.computeoptimizer#ExportLicenseRecommendations"
                 },
                 {
+                    "target": "com.amazonaws.computeoptimizer#ExportRDSDatabaseRecommendations"
+                },
+                {
                     "target": "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendations"
                 },
                 {
@@ -415,6 +424,12 @@
                 },
                 {
                     "target": "com.amazonaws.computeoptimizer#GetLicenseRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationProjectedMetrics"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendations"
                 },
                 {
                     "target": "com.amazonaws.computeoptimizer#GetRecommendationPreferences"
@@ -1397,6 +1412,9 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizer#CurrentDBInstanceClass": {
+            "type": "string"
+        },
         "com.amazonaws.computeoptimizer#CurrentInstanceType": {
             "type": "string"
         },
@@ -1554,6 +1572,48 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizer#DBInstanceClass": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#DBStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageType": {
+                    "target": "com.amazonaws.computeoptimizer#StorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The type of RDS storage.\n        </p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.computeoptimizer#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The size of the RDS storage in gigabytes (GB).\n        </p>"
+                    }
+                },
+                "iops": {
+                    "target": "com.amazonaws.computeoptimizer#NullableIOPS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The provisioned IOPs of the RDS storage.\n        </p>"
+                    }
+                },
+                "maxAllocatedStorage": {
+                    "target": "com.amazonaws.computeoptimizer#NullableMaxAllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the RDS instance.\n        </p>"
+                    }
+                },
+                "storageThroughput": {
+                    "target": "com.amazonaws.computeoptimizer#NullableStorageThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The storage throughput of the RDS storage.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The configuration of the recommended RDS storage.\n        </p>"
+            }
+        },
         "com.amazonaws.computeoptimizer#DeleteRecommendationPreferences": {
             "type": "operation",
             "input": {
@@ -1598,7 +1658,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to delete.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>\n         <note>\n            <p>The valid values for this parameter are <code>Ec2Instance</code> and\n                    <code>AutoScalingGroup</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to delete.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2239,16 +2299,16 @@
                         "smithy.api#documentation": "<p>\n            The risk of the current Amazon ECS service not meeting the performance needs of its workloads. \n            The higher the risk, the more likely the current service can't meet the performance \n            requirements of its workload.\n        </p>"
                     }
                 },
-                "tags": {
-                    "target": "com.amazonaws.computeoptimizer#Tags",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon ECS service recommendations.\n        </p>"
-                    }
-                },
                 "effectiveRecommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#ECSEffectiveRecommendationPreferences",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Amazon ECS services.\n        </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon ECS service recommendations.\n        </p>"
                     }
                 }
             },
@@ -2375,6 +2435,12 @@
                 "savingsOpportunity": {
                     "target": "com.amazonaws.computeoptimizer#SavingsOpportunity"
                 },
+                "savingsOpportunityAfterDiscounts": {
+                    "target": "com.amazonaws.computeoptimizer#ECSSavingsOpportunityAfterDiscounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon ECS service recommendations or for the recommendation option.\n        </p>\n         <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.</p>"
+                    }
+                },
                 "projectedUtilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#ECSServiceProjectedUtilizationMetrics",
                     "traits": {
@@ -2385,12 +2451,6 @@
                     "target": "com.amazonaws.computeoptimizer#ContainerRecommendations",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The CPU and memory size recommendations for the containers within the task of your Amazon ECS service.\n        </p>"
-                    }
-                },
-                "savingsOpportunityAfterDiscounts": {
-                    "target": "com.amazonaws.computeoptimizer#ECSSavingsOpportunityAfterDiscounts",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon ECS service recommendations or for the recommendation option.\n        </p>\n         <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.</p>"
                     }
                 }
             },
@@ -2521,7 +2581,7 @@
                 "cpuVendorArchitectures": {
                     "target": "com.amazonaws.computeoptimizer#CpuVendorArchitectures",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the CPU vendor and architecture for an instance or Auto Scaling group\n            recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton2 instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton2 instance types only.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Describes the CPU vendor and architecture for an instance or Auto Scaling group\n            recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton instance types only.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "enhancedInfrastructureMetrics": {
@@ -2570,6 +2630,12 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes the effective recommendation preferences for a resource.</p>"
             }
+        },
+        "com.amazonaws.computeoptimizer#Engine": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#EngineVersion": {
+            "type": "string"
         },
         "com.amazonaws.computeoptimizer#EnhancedInfrastructureMetrics": {
             "type": "enum",
@@ -3283,6 +3349,109 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizer#ExportRDSDatabaseRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#ExportRDSDatabaseRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#ExportRDSDatabaseRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Export optimization recommendations for your Amazon Relational Database Service (Amazon RDS).\n        </p>\n         <p>Recommendations are exported in a comma-separated values (CSV) file, and its metadata\n            in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>\n         <p>You can have only one Amazon RDS export job in progress per Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportRDSDatabaseRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account IDs for the export Amazon RDS recommendations.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to specify the member account you want to \n            export recommendations to.</p>\n         <p>This parameter can't be specified together with the include member accounts \n            parameter. The parameters are mutually exclusive.</p>\n         <p>If this parameter or the include member accounts parameter is omitted,\n            the recommendations for member accounts aren't included in the export.</p>\n         <p>You can specify multiple account IDs per request.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBRecommendationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that exports a more specific set of \n            Amazon RDS recommendations.\n        </p>"
+                    }
+                },
+                "fieldsToExport": {
+                    "target": "com.amazonaws.computeoptimizer#ExportableRDSDBFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations data to include in the export file. For more information about the\n            fields that can be exported, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files\">Exported files</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>"
+                    }
+                },
+                "s3DestinationConfig": {
+                    "target": "com.amazonaws.computeoptimizer#S3DestinationConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.computeoptimizer#FileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The format of the export file. \n        </p>\n         <p>The CSV file is the only export file format currently supported.</p>"
+                    }
+                },
+                "includeMemberAccounts": {
+                    "target": "com.amazonaws.computeoptimizer#IncludeMemberAccounts",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If your account is the management account or the delegated administrator of an organization,\n            this parameter indicates whether to include recommendations for resources in all member accounts of\n            the organization.</p>\n         <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for\n            Compute Optimizer must be enabled in the organization account. For more information,\n            see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access\">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the\n            <i>Compute Optimizer User Guide</i>.</p>\n         <p>If this parameter is omitted, recommendations for member accounts of the \n            organization aren't included in the export file.</p>\n         <p>If this parameter or the account ID parameter is omitted, recommendations for \n            member accounts aren't included in the export.</p>"
+                    }
+                },
+                "recommendationPreferences": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationPreferences"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportRDSDatabaseRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.computeoptimizer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identification number of the export job.\n        </p>\n         <p>To view the status of an export job, use the \n            <a>DescribeRecommendationExportJobs</a> action and specify the job ID.\n        </p>"
+                    }
+                },
+                "s3Destination": {
+                    "target": "com.amazonaws.computeoptimizer#S3Destination"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizer#ExportableAutoScalingGroupField": {
             "type": "enum",
             "members": {
@@ -3598,6 +3767,18 @@
                         "smithy.api#enumValue": "EffectiveRecommendationPreferencesInferredWorkloadTypes"
                     }
                 },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesPreferredResources"
+                    }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesLookBackPeriod"
+                    }
+                },
                 "INFERRED_WORKLOAD_TYPES": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -3668,18 +3849,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
-                    }
-                },
-                "EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesPreferredResources"
-                    }
-                },
-                "EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesLookBackPeriod"
                     }
                 }
             }
@@ -4190,16 +4359,16 @@
                         "smithy.api#enumValue": "EffectiveRecommendationPreferencesExternalMetricsSource"
                     }
                 },
-                "INSTANCE_STATE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "InstanceState"
-                    }
-                },
                 "TAGS": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Tags"
+                    }
+                },
+                "INSTANCE_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceState"
                     }
                 },
                 "EXTERNAL_METRIC_STATUS_CODE": {
@@ -4640,6 +4809,371 @@
                 "target": "com.amazonaws.computeoptimizer#ExportableLicenseField"
             }
         },
+        "com.amazonaws.computeoptimizer#ExportableRDSDBField": {
+            "type": "enum",
+            "members": {
+                "RESOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceArn"
+                    }
+                },
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountId"
+                    }
+                },
+                "ENGINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Engine"
+                    }
+                },
+                "ENGINE_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EngineVersion"
+                    }
+                },
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Idle"
+                    }
+                },
+                "MULTI_AZ_DB_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultiAZDBInstance"
+                    }
+                },
+                "CURRENT_DB_INSTANCE_CLASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentDBInstanceClass"
+                    }
+                },
+                "CURRENT_STORAGE_CONFIGURATION_STORAGE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageConfigurationStorageType"
+                    }
+                },
+                "CURRENT_STORAGE_CONFIGURATION_ALLOCATED_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageConfigurationAllocatedStorage"
+                    }
+                },
+                "CURRENT_STORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageConfigurationMaxAllocatedStorage"
+                    }
+                },
+                "CURRENT_STORAGE_CONFIGURATION_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageConfigurationIOPS"
+                    }
+                },
+                "CURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageConfigurationStorageThroughput"
+                    }
+                },
+                "CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentInstanceOnDemandHourlyPrice"
+                    }
+                },
+                "CURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentStorageOnDemandMonthlyPrice"
+                    }
+                },
+                "LOOKBACK_PERIOD_IN_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LookbackPeriodInDays"
+                    }
+                },
+                "UTILIZATION_METRICS_CPU_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsCpuMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_MEMORY_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsMemoryMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsNetworkReceiveThroughputMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsNetworkTransmitThroughputMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEBSVolumeReadIOPSMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEBSVolumeWriteIOPSMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEBSVolumeReadThroughputMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEBSVolumeWriteThroughputMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsDatabaseConnectionsMaximum"
+                    }
+                },
+                "INSTANCE_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceFinding"
+                    }
+                },
+                "INSTANCE_FINDING_REASON_CODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceFindingReasonCodes"
+                    }
+                },
+                "STORAGE_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageFinding"
+                    }
+                },
+                "STORAGE_FINDING_REASON_CODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageFindingReasonCodes"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsDBInstanceClass"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_RANK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsRank"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsPerformanceRisk"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_STORAGE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsStorageType"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ALLOCATED_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsAllocatedStorage"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsMaxAllocatedStorage"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsIOPS"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsStorageThroughput"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_RANK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsRank"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsInstanceOnDemandHourlyPrice"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsSavingsOpportunityPercentage"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsEstimatedMonthlySavingsValue"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
+                    }
+                },
+                "INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsOnDemandMonthlyPrice"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsSavingsOpportunityPercentage"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedMonthlySavingsCurrency"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedMonthlySavingsValue"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
+                    }
+                },
+                "STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+                    }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesCpuVendorArchitectures"
+                    }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"
+                    }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesLookBackPeriod"
+                    }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesSavingsEstimationMode"
+                    }
+                },
+                "LAST_REFRESH_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastRefreshTimestamp"
+                    }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tags"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableRDSDBFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ExportableRDSDBField"
+            }
+        },
         "com.amazonaws.computeoptimizer#ExportableVolumeField": {
             "type": "enum",
             "members": {
@@ -4811,16 +5345,16 @@
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValue"
                     }
                 },
-                "ROOT_VOLUME": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "RootVolume"
-                    }
-                },
                 "TAGS": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Tags"
+                    }
+                },
+                "ROOT_VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RootVolume"
                     }
                 },
                 "CURRENT_CONFIGURATION_ROOT_VOLUME": {
@@ -6203,6 +6737,210 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationProjectedMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationProjectedMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationProjectedMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Returns the projected metrics of Amazon RDS recommendations.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationProjectedMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon RDS.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stat": {
+                    "target": "com.amazonaws.computeoptimizer#MetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The statistic of the projected metrics.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "period": {
+                    "target": "com.amazonaws.computeoptimizer#Period",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The granularity, in seconds, of the projected metrics data points.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.computeoptimizer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp of the first projected metrics data point to return.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.computeoptimizer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp of the last projected metrics data point to return.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recommendationPreferences": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationPreferences"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationProjectedMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "recommendedOptionProjectedMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDatabaseRecommendedOptionProjectedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describes the projected metrics.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Returns Amazon RDS recommendations.\n        </p>\n         <p>Compute Optimizer generates recommendations for Amazon RDS that \n            meet a specific set of requirements. For more\n            information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArns": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN that identifies the Amazon RDS.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>\n         <p> The following is the format of a DB Cluster ARN: </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:cluster:{resourceName}</code>\n         </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon RDS recommendations.\n        </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Amazon RDS recommendations to return with a single\n            request.</p>\n         <p>To retrieve the remaining results, make another request with the returned\n            <code>nextToken</code> value.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBRecommendationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects to specify a filter that returns a more specific list of Amazon RDS recommendations.\n        </p>"
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Return the Amazon RDS recommendations to the specified Amazon Web Services account IDs.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to return the Amazon RDS recommendations to specific\n            member accounts.</p>\n         <p>You can only specify one account ID per request.</p>"
+                    }
+                },
+                "recommendationPreferences": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationPreferences"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRDSDatabaseRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The token to advance to the next page of Amazon RDS recommendations.\n        </p>"
+                    }
+                },
+                "rdsDBRecommendations": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the Amazon RDS recommendations.\n        </p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.computeoptimizer#GetRecommendationErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe errors of the request.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizer#GetRecommendationError": {
             "type": "structure",
             "members": {
@@ -6285,7 +7023,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference for which to return\n            preferences.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>\n         <note>\n            <p>The valid values for this parameter are <code>Ec2Instance</code> and\n                    <code>AutoScalingGroup</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference for which to return\n            preferences.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6482,6 +7220,23 @@
         "com.amazonaws.computeoptimizer#Identifier": {
             "type": "string"
         },
+        "com.amazonaws.computeoptimizer#Idle": {
+            "type": "enum",
+            "members": {
+                "TRUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "True"
+                    }
+                },
+                "FALSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "False"
+                    }
+                }
+            }
+        },
         "com.amazonaws.computeoptimizer#IncludeMemberAccounts": {
             "type": "boolean",
             "traits": {
@@ -6676,7 +7431,7 @@
                 "finding": {
                     "target": "com.amazonaws.computeoptimizer#Finding",
                     "traits": {
-                        "smithy.api#documentation": "<p>The finding classification of the instance.</p>\n         <p>Findings for instances include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b>—An instance is\n                    considered under-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, does not meet the performance requirements of\n                    your workload. Under-provisioned instances may lead to poor application\n                    performance.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b>—An instance is\n                    considered over-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, can be sized down while still meeting the\n                    performance requirements of your workload, and no specification is\n                    under-provisioned. Over-provisioned instances may lead to unnecessary\n                    infrastructure cost.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An instance is\n                    considered optimized when all specifications of your instance, such as CPU,\n                    memory, and network, meet the performance requirements of your workload and is\n                    not over provisioned. For optimized resources, Compute Optimizer might\n                    recommend a new generation instance type.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The finding classification of the instance.</p>\n         <p>Findings for instances include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b>—An instance is\n                    considered under-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, does not meet the performance requirements of\n                    your workload. Under-provisioned instances may lead to poor application\n                    performance.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b>—An instance is\n                    considered over-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, can be sized down while still meeting the\n                    performance requirements of your workload, and no specification is\n                    under-provisioned. Over-provisioned instances may lead to unnecessary\n                    infrastructure cost.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An instance is\n                    considered optimized when all specifications of your instance, such as CPU,\n                    memory, and network, meet the performance requirements of your workload and is\n                    not over provisioned. For optimized resources, Compute Optimizer might\n                    recommend a new generation instance type.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The valid values in your API responses appear as OVER_PROVISIONED, UNDER_PROVISIONED, or OPTIMIZED.</p>\n         </note>"
                     }
                 },
                 "findingReasonCodes": {
@@ -6909,6 +7664,12 @@
                         "smithy.api#documentation": "<p>The instance type of the instance recommendation.</p>"
                     }
                 },
+                "instanceGpuInfo": {
+                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type.\n        </p>"
+                    }
+                },
                 "projectedUtilizationMetrics": {
                     "target": "com.amazonaws.computeoptimizer#ProjectedUtilizationMetrics",
                     "traits": {
@@ -6941,22 +7702,16 @@
                         "smithy.api#documentation": "<p>An object that describes the savings opportunity for the instance recommendation\n            option. Savings opportunity includes the estimated monthly savings amount and\n            percentage.</p>"
                     }
                 },
-                "migrationEffort": {
-                    "target": "com.amazonaws.computeoptimizer#MigrationEffort",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n         <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
-                    }
-                },
-                "instanceGpuInfo": {
-                    "target": "com.amazonaws.computeoptimizer#GpuInfo",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            Describes the GPU accelerator settings for the recommended instance type.\n        </p>"
-                    }
-                },
                 "savingsOpportunityAfterDiscounts": {
                     "target": "com.amazonaws.computeoptimizer#InstanceSavingsOpportunityAfterDiscounts",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            An object that describes the savings opportunity for the instance recommendation option that includes Savings Plans and Reserved Instances \n            discounts. Savings opportunity includes the estimated monthly savings and percentage.\n        </p>"
+                    }
+                },
+                "migrationEffort": {
+                    "target": "com.amazonaws.computeoptimizer#MigrationEffort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of effort required to migrate from the current instance type to the\n            recommended instance type.</p>\n         <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the\n            inferred workload type and an Amazon Web Services Graviton instance type is recommended.\n            The migration effort is <code>Medium</code> if a workload type couldn't be inferred but\n            an Amazon Web Services Graviton instance type is recommended. The migration effort is\n                <code>VeryLow</code> if both the current and recommended instance types are of the\n            same CPU architecture.</p>"
                     }
                 }
             },
@@ -7439,16 +8194,16 @@
                         "smithy.api#documentation": "<p>The risk of the current Lambda function not meeting the performance needs\n            of its workloads. The higher the risk, the more likely the current Lambda\n            function requires more memory.</p>"
                     }
                 },
-                "tags": {
-                    "target": "com.amazonaws.computeoptimizer#Tags",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Lambda function recommendations.\n        </p>"
-                    }
-                },
                 "effectiveRecommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#LambdaEffectiveRecommendationPreferences",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Lambda functions.\n        </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Lambda function recommendations.\n        </p>"
                     }
                 }
             },
@@ -8332,10 +9087,19 @@
         "com.amazonaws.computeoptimizer#NullableCpu": {
             "type": "integer"
         },
+        "com.amazonaws.computeoptimizer#NullableIOPS": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#NullableMaxAllocatedStorage": {
+            "type": "integer"
+        },
         "com.amazonaws.computeoptimizer#NullableMemory": {
             "type": "integer"
         },
         "com.amazonaws.computeoptimizer#NullableMemoryReservation": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#NullableStorageThroughput": {
             "type": "integer"
         },
         "com.amazonaws.computeoptimizer#NumberOfCores": {
@@ -8566,7 +9330,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>\n         <note>\n            <p>The valid values for this parameter are <code>Ec2Instance</code> and\n                    <code>AutoScalingGroup</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n         <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8628,6 +9392,772 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBInstanceRecommendationOption": {
+            "type": "structure",
+            "members": {
+                "dbInstanceClass": {
+                    "target": "com.amazonaws.computeoptimizer#DBInstanceClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the DB instance class recommendation option for your Amazon RDS instance.\n        </p>"
+                    }
+                },
+                "projectedUtilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBProjectedUtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the projected utilization metrics of the RDS instance recommendation option.\n        </p>"
+                    }
+                },
+                "performanceRisk": {
+                    "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The performance risk of the RDS instance recommendation option.\n        </p>"
+                    }
+                },
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The rank identifier of the RDS instance recommendation option.\n        </p>"
+                    }
+                },
+                "savingsOpportunity": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunity"
+                },
+                "savingsOpportunityAfterDiscounts": {
+                    "target": "com.amazonaws.computeoptimizer#RDSInstanceSavingsOpportunityAfterDiscounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon RDS recommendations or for the recommendation option.\n        </p>\n         <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the recommendation options for an Amazon RDS instance.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBInstanceRecommendationOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDBInstanceRecommendationOption"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBMetricName": {
+            "type": "enum",
+            "members": {
+                "CPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPU"
+                    }
+                },
+                "MEMORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Memory"
+                    }
+                },
+                "EBS_VOLUME_STORAGE_SPACE_UTILIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeStorageSpaceUtilization"
+                    }
+                },
+                "NETWORK_RECEIVE_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkReceiveThroughput"
+                    }
+                },
+                "NETWORK_TRANSMIT_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkTransmitThroughput"
+                    }
+                },
+                "EBS_VOLUME_READ_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeReadIOPS"
+                    }
+                },
+                "EBS_VOLUME_WRITE_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeWriteIOPS"
+                    }
+                },
+                "EBS_VOLUME_READ_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeReadThroughput"
+                    }
+                },
+                "EBS_VOLUME_WRITE_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeWriteThroughput"
+                    }
+                },
+                "DATABASE_CONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DatabaseConnections"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBMetricStatistic": {
+            "type": "enum",
+            "members": {
+                "MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Maximum"
+                    }
+                },
+                "MINIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Minimum"
+                    }
+                },
+                "AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Average"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBProjectedUtilizationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDBUtilizationMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBRecommendation": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The ARN of the current Amazon RDS.\n        </p>\n         <p>\n            The following is the format of the ARN:\n        </p>\n         <p>\n            <code>arn:aws:rds:{region}:{accountId}:db:{resourceName}</code>\n         </p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account ID of the Amazon RDS.\n        </p>"
+                    }
+                },
+                "engine": {
+                    "target": "com.amazonaws.computeoptimizer#Engine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The engine of the RDS instance.\n        </p>"
+                    }
+                },
+                "engineVersion": {
+                    "target": "com.amazonaws.computeoptimizer#EngineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The database engine version.\n        </p>"
+                    }
+                },
+                "currentDBInstanceClass": {
+                    "target": "com.amazonaws.computeoptimizer#CurrentDBInstanceClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The DB instance class of the current RDS instance.\n        </p>"
+                    }
+                },
+                "currentStorageConfiguration": {
+                    "target": "com.amazonaws.computeoptimizer#DBStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The configuration of the current RDS storage.\n        </p>"
+                    }
+                },
+                "idle": {
+                    "target": "com.amazonaws.computeoptimizer#Idle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            This indicates if the RDS instance is idle or not.\n        </p>"
+                    }
+                },
+                "instanceFinding": {
+                    "target": "com.amazonaws.computeoptimizer#RDSInstanceFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The finding classification of an Amazon RDS instance.\n        </p>\n         <p>Findings for Amazon RDS instance include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s not enough resource specifications, an Amazon RDS \n                    is considered under-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s excessive resource specifications, an Amazon RDS \n                    is considered over-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — \n                    When the specifications of your Amazon RDS instance meet the performance requirements \n                    of your workload, the service is considered optimized.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "storageFinding": {
+                    "target": "com.amazonaws.computeoptimizer#RDSStorageFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The finding classification of Amazon RDS storage.\n        </p>\n         <p>Findings for Amazon RDS instance include:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s not enough storage, an Amazon RDS \n                    is considered under-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b> — \n                    When Compute Optimizer detects that there’s excessive storage, an Amazon RDS \n                    is considered over-provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — \n                    When the storage of your Amazon RDS meet the performance requirements \n                    of your workload, the service is considered optimized.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "instanceFindingReasonCodes": {
+                    "target": "com.amazonaws.computeoptimizer#RDSInstanceFindingReasonCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of an Amazon RDS instance.\n        </p>"
+                    }
+                },
+                "storageFindingReasonCodes": {
+                    "target": "com.amazonaws.computeoptimizer#RDSStorageFindingReasonCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The reason for the finding classification of Amazon RDS storage.\n        </p>"
+                    }
+                },
+                "instanceRecommendationOptions": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBInstanceRecommendationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for the Amazon RDS instance.\n        </p>"
+                    }
+                },
+                "storageRecommendationOptions": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBStorageRecommendationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the recommendation options for Amazon RDS storage.\n        </p>"
+                    }
+                },
+                "utilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBUtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the utilization metrics of the Amazon RDS.\n        </p>"
+                    }
+                },
+                "effectiveRecommendationPreferences": {
+                    "target": "com.amazonaws.computeoptimizer#RDSEffectiveRecommendationPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Amazon RDS.\n        </p>"
+                    }
+                },
+                "lookbackPeriodInDays": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The number of days the Amazon RDS utilization metrics were analyzed.\n        </p>"
+                    }
+                },
+                "lastRefreshTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp of when the Amazon RDS recommendation was last generated.\n        </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon RDS recommendations.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes an Amazon RDS recommendation.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBRecommendationFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBRecommendationFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the filter.\n        </p>\n         <p>\n            Specify <code>Finding</code> to return recommendations with a specific finding classification.\n        </p>\n         <p>You can filter your Amazon RDS recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            Amazon RDS recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all Amazon RDS service recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon RDS recommendations. Use \n            this filter to find all of your Amazon RDS recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your Amazon RDS service recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The value of the filter.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes a filter that returns a more specific list of Amazon RDS \n            recommendations. Use this filter with the <a>GetECSServiceRecommendations</a> action.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBRecommendationFilterName": {
+            "type": "enum",
+            "members": {
+                "INSTANCE_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceFinding"
+                    }
+                },
+                "INSTANCE_FINDING_REASON_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceFindingReasonCode"
+                    }
+                },
+                "STORAGE_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageFinding"
+                    }
+                },
+                "STORAGE_FINDING_REASON_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageFindingReasonCode"
+                    }
+                },
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Idle"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBRecommendationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDBRecommendationFilter"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDBRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBStorageRecommendationOption": {
+            "type": "structure",
+            "members": {
+                "storageConfiguration": {
+                    "target": "com.amazonaws.computeoptimizer#DBStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The recommended storage configuration.\n        </p>"
+                    }
+                },
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The rank identifier of the RDS storage recommendation option.\n        </p>"
+                    }
+                },
+                "savingsOpportunity": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunity"
+                },
+                "savingsOpportunityAfterDiscounts": {
+                    "target": "com.amazonaws.computeoptimizer#RDSStorageSavingsOpportunityAfterDiscounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon RDS storage recommendations or for the recommendation option.\n        </p>\n         <p>\n            Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. You can achieve\n            this by implementing a given Compute Optimizer recommendation.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the recommendation options for Amazon RDS storage.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBStorageRecommendationOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDBStorageRecommendationOption"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBUtilizationMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the utilization metric.\n        </p>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The statistic of the utilization metric.\n        </p>\n         <p>The Compute Optimizer API, Command Line Interface (CLI), and SDKs\n            return utilization metrics using only the <code>Maximum</code> statistic, which is the\n            highest value observed during the specified period.</p>\n         <p>The Compute Optimizer console displays graphs for some utilization metrics using the\n            <code>Average</code> statistic, which is the value of <code>Sum</code> /\n            <code>SampleCount</code> during the specified period. For more information, see\n            <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html\">Viewing resource\n                recommendations</a> in the <i>Compute Optimizer User\n                    Guide</i>. You can also get averaged utilization metric data for your resources\n            using Amazon CloudWatch. For more information, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html\">Amazon CloudWatch\n                User Guide</a>.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The value of the utilization metric.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the utilization metric of an Amazon RDS.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon RDS and the recommended option, \n            compare the utilization metric data of your service against its projected utilization metric data.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDBUtilizationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDBUtilizationMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDatabaseProjectedMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDBMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the projected metric.\n        </p>"
+                    }
+                },
+                "timestamps": {
+                    "target": "com.amazonaws.computeoptimizer#Timestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamps of the projected metric.\n        </p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The values for the projected metric.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon RDS recommendation option.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon RDS \n            and the recommended option, compare the metric data of your service against \n            its projected metric data.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDatabaseProjectedMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDatabaseProjectedMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDatabaseRecommendedOptionProjectedMetric": {
+            "type": "structure",
+            "members": {
+                "recommendedDBInstanceClass": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendedDBInstanceClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The recommended DB instance class for the Amazon RDS.\n        </p>"
+                    }
+                },
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The rank identifier of the RDS instance recommendation option.\n        </p>"
+                    }
+                },
+                "projectedMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#RDSDatabaseProjectedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An array of objects that describe the projected metric.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the projected metrics of an Amazon RDS recommendation option.\n        </p>\n         <p>\n            To determine the performance difference between your current Amazon RDS and the recommended option, compare \n            the metric data of your service against its projected metric data.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSDatabaseRecommendedOptionProjectedMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSDatabaseRecommendedOptionProjectedMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSEffectiveRecommendationPreferences": {
+            "type": "structure",
+            "members": {
+                "cpuVendorArchitectures": {
+                    "target": "com.amazonaws.computeoptimizer#CpuVendorArchitectures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the CPU vendor and architecture for Amazon RDS recommendations.\n        </p>"
+                    }
+                },
+                "enhancedInfrastructureMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#EnhancedInfrastructureMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the activation status of the enhanced infrastructure metrics\n            preference.\n        </p>\n         <p>A status of <code>Active</code> confirms that the preference is applied in the latest\n            recommendation refresh, and a status of <code>Inactive</code> confirms that it's not yet\n            applied to recommendations.\n        </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html\">Enhanced\n            infrastructure metrics</a> in the <i>Compute Optimizer User\n                Guide</i>.\n        </p>"
+                    }
+                },
+                "lookBackPeriod": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The number of days the utilization metrics of the Amazon RDS are analyzed.\n        </p>"
+                    }
+                },
+                "savingsEstimationMode": {
+                    "target": "com.amazonaws.computeoptimizer#RDSSavingsEstimationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon RDS.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Amazon RDS.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSInstanceEstimatedMonthlySavings": {
+            "type": "structure",
+            "members": {
+                "currency": {
+                    "target": "com.amazonaws.computeoptimizer#Currency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The currency of the estimated monthly savings.\n        </p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#Value",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The value of the estimated monthly savings for Amazon RDS instances.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the estimated monthly savings possible for Amazon RDS instances by adopting \n            Compute Optimizer recommendations. This is based on Amazon RDS pricing after applying \n            Savings Plans discounts.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSInstanceFinding": {
+            "type": "enum",
+            "members": {
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Optimized"
+                    }
+                },
+                "UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Underprovisioned"
+                    }
+                },
+                "OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Overprovisioned"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSInstanceFindingReasonCode": {
+            "type": "enum",
+            "members": {
+                "CPU_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPUOverprovisioned"
+                    }
+                },
+                "NETWORK_BANDWIDTH_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkBandwidthOverprovisioned"
+                    }
+                },
+                "EBS_IOPS_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSIOPSOverprovisioned"
+                    }
+                },
+                "EBS_THROUGHPUT_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSThroughputOverprovisioned"
+                    }
+                },
+                "CPU_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPUUnderprovisioned"
+                    }
+                },
+                "NETWORK_BANDWIDTH_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkBandwidthUnderprovisioned"
+                    }
+                },
+                "EBS_THROUGHPUT_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSThroughputUnderprovisioned"
+                    }
+                },
+                "NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NewGenerationDBInstanceClassAvailable"
+                    }
+                },
+                "NEW_ENGINE_VERSION_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NewEngineVersionAvailable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSInstanceFindingReasonCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSInstanceFindingReasonCode"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSInstanceSavingsOpportunityAfterDiscounts": {
+            "type": "structure",
+            "members": {
+                "savingsOpportunityPercentage": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s \n            Amazon RDS instance recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
+                    }
+                },
+                "estimatedMonthlySavings": {
+                    "target": "com.amazonaws.computeoptimizer#RDSInstanceEstimatedMonthlySavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible by adopting Compute Optimizer’s Amazon RDS instance recommendations. \n            This includes any applicable Savings Plans discounts.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon RDS instance recommendations after applying Savings Plans discounts.\n        </p>\n         <p>\n            Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSSavingsEstimationMode": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.computeoptimizer#RDSSavingsEstimationModeSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the source for calculating the savings opportunity for Amazon RDS.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the savings estimation mode used for calculating savings opportunity for Amazon RDS.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSSavingsEstimationModeSource": {
+            "type": "enum",
+            "members": {
+                "PUBLIC_PRICING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PublicPricing"
+                    }
+                },
+                "COST_EXPLORER_RIGHTSIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CostExplorerRightsizing"
+                    }
+                },
+                "COST_OPTIMIZATION_HUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CostOptimizationHub"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSStorageEstimatedMonthlySavings": {
+            "type": "structure",
+            "members": {
+                "currency": {
+                    "target": "com.amazonaws.computeoptimizer#Currency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The currency of the estimated monthly savings.\n        </p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#Value",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The value of the estimated monthly savings for Amazon RDS storage.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the estimated monthly savings possible for Amazon RDS storage by adopting Compute Optimizer \n            recommendations. This is based on Amazon RDS pricing after applying Savings Plans discounts.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSStorageFinding": {
+            "type": "enum",
+            "members": {
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Optimized"
+                    }
+                },
+                "UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Underprovisioned"
+                    }
+                },
+                "OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Overprovisioned"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSStorageFindingReasonCode": {
+            "type": "enum",
+            "members": {
+                "EBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeAllocatedStorageUnderprovisioned"
+                    }
+                },
+                "EBS_VOLUME_THROUGHPUT_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeThroughputUnderprovisioned"
+                    }
+                },
+                "EBS_VOLUME_IOPS_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeIOPSOverprovisioned"
+                    }
+                },
+                "EBS_VOLUME_THROUGHPUT_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeThroughputOverprovisioned"
+                    }
+                },
+                "NEW_GENERATION_STORAGE_TYPE_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NewGenerationStorageTypeAvailable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSStorageFindingReasonCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RDSStorageFindingReasonCode"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSStorageSavingsOpportunityAfterDiscounts": {
+            "type": "structure",
+            "members": {
+                "savingsOpportunityPercentage": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s \n            Amazon RDS storage recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
+                    }
+                },
+                "estimatedMonthlySavings": {
+                    "target": "com.amazonaws.computeoptimizer#RDSStorageEstimatedMonthlySavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The estimated monthly savings possible by adopting Compute Optimizer’s Amazon RDS storage recommendations. This includes any applicable Savings Plans discounts.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the savings opportunity for Amazon RDS storage recommendations after applying Savings Plans discounts.\n        </p>\n         <p>\n            Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. \n            You can achieve this by implementing a given Compute Optimizer recommendation.\n        </p>"
             }
         },
         "com.amazonaws.computeoptimizer#Rank": {
@@ -8778,12 +10308,12 @@
                 "cpuVendorArchitectures": {
                     "target": "com.amazonaws.computeoptimizer#CpuVendorArchitectures",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto Scaling group recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton2 instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton2 instance types only.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto Scaling group recommendations.</p>\n         <p>For example, when you specify <code>AWS_ARM64</code> with:</p>\n         <ul>\n            <li>\n               <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    returns recommendations that consist of Graviton instance types only.</p>\n            </li>\n            <li>\n               <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton instance type\n                    recommendations only.</p>\n            </li>\n            <li>\n               <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer\n                    exports recommendations that consist of Graviton instance types only.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, and <a>GetEC2RecommendationProjectedMetrics</a> request.</p>"
+                "smithy.api#documentation": "<p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, <a>GetEC2RecommendationProjectedMetrics</a>, <a>GetRDSDatabaseRecommendations</a>, and <a>GetRDSDatabaseRecommendationProjectedMetrics</a> request.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#RecommendationPreferencesDetail": {
@@ -8915,6 +10445,18 @@
                     "traits": {
                         "smithy.api#enumValue": "License"
                     }
+                },
+                "RDS_DB_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsDBInstance"
+                    }
+                },
+                "RDS_DB_INSTANCE_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsDBInstanceStorage"
+                    }
                 }
             }
         },
@@ -8973,6 +10515,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>A summary of a recommendation.</p>"
             }
+        },
+        "com.amazonaws.computeoptimizer#RecommendedDBInstanceClass": {
+            "type": "string"
         },
         "com.amazonaws.computeoptimizer#RecommendedInstanceType": {
             "type": "string"
@@ -9075,6 +10620,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "License"
+                    }
+                },
+                "RDS_DB_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsDBInstance"
                     }
                 }
             }
@@ -9310,6 +10861,9 @@
         "com.amazonaws.computeoptimizer#StatusReason": {
             "type": "string"
         },
+        "com.amazonaws.computeoptimizer#StorageType": {
+            "type": "string"
+        },
         "com.amazonaws.computeoptimizer#Summaries": {
             "type": "list",
             "member": {
@@ -9539,7 +11093,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The preference to control the resource’s CPU utilization thresholds - threshold and headroom.\n        </p>\n         <note>\n            <p>This preference is only available for the Amazon EC2 instance resource type.</p>\n         </note>"
+                "smithy.api#documentation": "<p>\n            The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom.\n        </p>\n         <note>\n            <p>This preference is only available for the Amazon EC2 instance resource type.</p>\n         </note>"
             }
         },
         "com.amazonaws.computeoptimizer#UtilizationPreferences": {
@@ -9706,16 +11260,16 @@
                         "smithy.api#documentation": "<p>The risk of the current EBS volume not meeting the performance needs of its workloads.\n            The higher the risk, the more likely the current EBS volume doesn't have sufficient\n            capacity.</p>"
                     }
                 },
-                "tags": {
-                    "target": "com.amazonaws.computeoptimizer#Tags",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon EBS volume recommendations.\n        </p>"
-                    }
-                },
                 "effectiveRecommendationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#EBSEffectiveRecommendationPreferences",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Describes the effective recommendation preferences for Amazon EBS volume.\n        </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon EBS volume recommendations.\n        </p>"
                     }
                 }
             },
