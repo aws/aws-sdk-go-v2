@@ -40,8 +40,6 @@ type PutRecommendationPreferencesInput struct {
 	// part of Auto Scaling groups. The AutoScalingGroup option encompasses only
 	// instances that are part of an Auto Scaling group.
 	//
-	// The valid values for this parameter are Ec2Instance and AutoScalingGroup .
-	//
 	// This member is required.
 	ResourceType types.ResourceType
 

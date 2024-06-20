@@ -12,8 +12,6 @@ import (
 )
 
 // Delete the contents of a hub.
-//
-// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) DeleteHubContent(ctx context.Context, params *DeleteHubContentInput, optFns ...func(*Options)) (*DeleteHubContentOutput, error) {
 	if params == nil {
 		params = &DeleteHubContentInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "8cd267ad-6556-4ba3-a170-3c0c41d633bb",
+    "type": "feature",
+    "description": "This release adds document support to Converse and ConverseStream APIs",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

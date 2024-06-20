@@ -149,6 +149,26 @@ func (m *validateOpExportLicenseRecommendations) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExportRDSDatabaseRecommendations struct {
+}
+
+func (*validateOpExportRDSDatabaseRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportRDSDatabaseRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportRDSDatabaseRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportRDSDatabaseRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEC2RecommendationProjectedMetrics struct {
 }
 
@@ -204,6 +224,26 @@ func (m *validateOpGetEffectiveRecommendationPreferences) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEffectiveRecommendationPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRDSDatabaseRecommendationProjectedMetrics struct {
+}
+
+func (*validateOpGetRDSDatabaseRecommendationProjectedMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRDSDatabaseRecommendationProjectedMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRDSDatabaseRecommendationProjectedMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRDSDatabaseRecommendationProjectedMetricsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -297,6 +337,10 @@ func addOpExportLicenseRecommendationsValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpExportLicenseRecommendations{}, middleware.After)
 }
 
+func addOpExportRDSDatabaseRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportRDSDatabaseRecommendations{}, middleware.After)
+}
+
 func addOpGetEC2RecommendationProjectedMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEC2RecommendationProjectedMetrics{}, middleware.After)
 }
@@ -307,6 +351,10 @@ func addOpGetECSServiceRecommendationProjectedMetricsValidationMiddleware(stack 
 
 func addOpGetEffectiveRecommendationPreferencesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEffectiveRecommendationPreferences{}, middleware.After)
+}
+
+func addOpGetRDSDatabaseRecommendationProjectedMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRDSDatabaseRecommendationProjectedMetrics{}, middleware.After)
 }
 
 func addOpGetRecommendationPreferencesValidationMiddleware(stack *middleware.Stack) error {
@@ -429,6 +477,21 @@ func validateOpExportLicenseRecommendationsInput(v *ExportLicenseRecommendations
 	}
 }
 
+func validateOpExportRDSDatabaseRecommendationsInput(v *ExportRDSDatabaseRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportRDSDatabaseRecommendationsInput"}
+	if v.S3DestinationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DestinationConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEC2RecommendationProjectedMetricsInput(v *GetEC2RecommendationProjectedMetricsInput) error {
 	if v == nil {
 		return nil
@@ -484,6 +547,30 @@ func validateOpGetEffectiveRecommendationPreferencesInput(v *GetEffectiveRecomme
 	invalidParams := smithy.InvalidParamsError{Context: "GetEffectiveRecommendationPreferencesInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRDSDatabaseRecommendationProjectedMetricsInput(v *GetRDSDatabaseRecommendationProjectedMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRDSDatabaseRecommendationProjectedMetricsInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if len(v.Stat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

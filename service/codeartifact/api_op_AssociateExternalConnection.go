@@ -57,6 +57,10 @@ type AssociateExternalConnectionInput struct {
 	//
 	//   - public:maven-clojars - for the Clojars repository.
 	//
+	//   - public:ruby-gems-org - for RubyGems.org.
+	//
+	//   - public:crates-io - for Crates.io.
+	//
 	// This member is required.
 	ExternalConnection *string
 

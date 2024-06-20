@@ -13,8 +13,6 @@ import (
 )
 
 // Describe the content of a hub.
-//
-// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) DescribeHubContent(ctx context.Context, params *DescribeHubContentInput, optFns ...func(*Options)) (*DescribeHubContentOutput, error) {
 	if params == nil {
 		params = &DescribeHubContentInput{}
@@ -125,6 +123,15 @@ type DescribeHubContentOutput struct {
 
 	// The searchable keywords for the hub content.
 	HubContentSearchKeywords []string
+
+	// The minimum version of the hub content.
+	ReferenceMinVersion *string
+
+	// The ARN of the public hub content.
+	SageMakerPublicHubContentArn *string
+
+	// The support status of the hub content.
+	SupportStatus types.HubContentSupportStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

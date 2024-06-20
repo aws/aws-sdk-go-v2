@@ -1,0 +1,8 @@
+{
+    "id": "4f8a3d7b-1ed9-4122-a5b3-c47236dd65e4",
+    "type": "feature",
+    "description": "This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

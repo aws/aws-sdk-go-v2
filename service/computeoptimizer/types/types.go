@@ -318,6 +318,28 @@ type CustomizableMetricParameters struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the recommended RDS storage.
+type DBStorageConfiguration struct {
+
+	//  The size of the RDS storage in gigabytes (GB).
+	AllocatedStorage int32
+
+	//  The provisioned IOPs of the RDS storage.
+	Iops *int32
+
+	//  The maximum limit in gibibytes (GiB) to which Amazon RDS can automatically
+	// scale the storage of the RDS instance.
+	MaxAllocatedStorage *int32
+
+	//  The storage throughput of the RDS storage.
+	StorageThroughput *int32
+
+	//  The type of RDS storage.
+	StorageType *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the effective recommendation preferences for Amazon EBS volumes.
 type EBSEffectiveRecommendationPreferences struct {
 
@@ -872,13 +894,13 @@ type EffectiveRecommendationPreferences struct {
 	// For example, when you specify AWS_ARM64 with:
 	//
 	//   - A GetEC2InstanceRecommendationsor GetAutoScalingGroupRecommendationsrequest, Compute Optimizer returns recommendations that consist of
-	//   Graviton2 instance types only.
+	//   Graviton instance types only.
 	//
 	//   - A GetEC2RecommendationProjectedMetricsrequest, Compute Optimizer returns projected utilization metrics for
-	//   Graviton2 instance type recommendations only.
+	//   Graviton instance type recommendations only.
 	//
 	//   - A ExportEC2InstanceRecommendationsor ExportAutoScalingGroupRecommendationsrequest, Compute Optimizer exports recommendations that consist of
-	//   Graviton2 instance types only.
+	//   Graviton instance types only.
 	CpuVendorArchitectures []CpuVendorArchitecture
 
 	// Describes the activation status of the enhanced infrastructure metrics
@@ -1266,6 +1288,9 @@ type InstanceRecommendation struct {
 	//   your instance, such as CPU, memory, and network, meet the performance
 	//   requirements of your workload and is not over provisioned. For optimized
 	//   resources, Compute Optimizer might recommend a new generation instance type.
+	//
+	// The valid values in your API responses appear as OVER_PROVISIONED,
+	// UNDER_PROVISIONED, or OPTIMIZED.
 	Finding Finding
 
 	// The reason for the finding classification of the instance.
@@ -2223,6 +2248,394 @@ type ProjectedMetric struct {
 	noSmithyDocumentSerde
 }
 
+//	Describes the projected metrics of an Amazon RDS recommendation option.
+//
+// To determine the performance difference between your current Amazon RDS and the
+// recommended option, compare the metric data of your service against its
+// projected metric data.
+type RDSDatabaseProjectedMetric struct {
+
+	//  The name of the projected metric.
+	Name RDSDBMetricName
+
+	//  The timestamps of the projected metric.
+	Timestamps []time.Time
+
+	//  The values for the projected metric.
+	Values []float64
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the projected metrics of an Amazon RDS recommendation option.
+//
+// To determine the performance difference between your current Amazon RDS and the
+// recommended option, compare the metric data of your service against its
+// projected metric data.
+type RDSDatabaseRecommendedOptionProjectedMetric struct {
+
+	//  An array of objects that describe the projected metric.
+	ProjectedMetrics []RDSDatabaseProjectedMetric
+
+	//  The rank identifier of the RDS instance recommendation option.
+	Rank int32
+
+	//  The recommended DB instance class for the Amazon RDS.
+	RecommendedDBInstanceClass *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the recommendation options for an Amazon RDS instance.
+type RDSDBInstanceRecommendationOption struct {
+
+	//  Describes the DB instance class recommendation option for your Amazon RDS
+	// instance.
+	DbInstanceClass *string
+
+	//  The performance risk of the RDS instance recommendation option.
+	PerformanceRisk float64
+
+	//  An array of objects that describe the projected utilization metrics of the RDS
+	// instance recommendation option.
+	ProjectedUtilizationMetrics []RDSDBUtilizationMetric
+
+	//  The rank identifier of the RDS instance recommendation option.
+	Rank int32
+
+	// Describes the savings opportunity for recommendations of a given resource type
+	// or for the recommendation option of an individual resource.
+	//
+	// Savings opportunity represents the estimated monthly savings you can achieve by
+	// implementing a given Compute Optimizer recommendation.
+	//
+	// Savings opportunity data requires that you opt in to Cost Explorer, as well as
+	// activate Receive Amazon EC2 resource recommendations in the Cost Explorer
+	// preferences page. That creates a connection between Cost Explorer and Compute
+	// Optimizer. With this connection, Cost Explorer generates savings estimates
+	// considering the price of existing resources, the price of recommended resources,
+	// and historical usage data. Estimated monthly savings reflects the projected
+	// dollar savings associated with each of the recommendations generated. For more
+	// information, see [Enabling Cost Explorer]and [Optimizing your cost with Rightsizing Recommendations] in the Cost Management User Guide.
+	//
+	// [Optimizing your cost with Rightsizing Recommendations]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+	// [Enabling Cost Explorer]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+	SavingsOpportunity *SavingsOpportunity
+
+	//  Describes the savings opportunity for Amazon RDS recommendations or for the
+	// recommendation option.
+	//
+	// Savings opportunity represents the estimated monthly savings after applying
+	// Savings Plans discounts. You can achieve this by implementing a given Compute
+	// Optimizer recommendation.
+	SavingsOpportunityAfterDiscounts *RDSInstanceSavingsOpportunityAfterDiscounts
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Amazon RDS recommendation.
+type RDSDBRecommendation struct {
+
+	//  The Amazon Web Services account ID of the Amazon RDS.
+	AccountId *string
+
+	//  The DB instance class of the current RDS instance.
+	CurrentDBInstanceClass *string
+
+	//  The configuration of the current RDS storage.
+	CurrentStorageConfiguration *DBStorageConfiguration
+
+	//  Describes the effective recommendation preferences for Amazon RDS.
+	EffectiveRecommendationPreferences *RDSEffectiveRecommendationPreferences
+
+	//  The engine of the RDS instance.
+	Engine *string
+
+	//  The database engine version.
+	EngineVersion *string
+
+	//  This indicates if the RDS instance is idle or not.
+	Idle Idle
+
+	//  The finding classification of an Amazon RDS instance.
+	//
+	// Findings for Amazon RDS instance include:
+	//
+	//   - Underprovisioned — When Compute Optimizer detects that there’s not enough
+	//   resource specifications, an Amazon RDS is considered under-provisioned.
+	//
+	//   - Overprovisioned — When Compute Optimizer detects that there’s excessive
+	//   resource specifications, an Amazon RDS is considered over-provisioned.
+	//
+	//   - Optimized — When the specifications of your Amazon RDS instance meet the
+	//   performance requirements of your workload, the service is considered optimized.
+	InstanceFinding RDSInstanceFinding
+
+	//  The reason for the finding classification of an Amazon RDS instance.
+	InstanceFindingReasonCodes []RDSInstanceFindingReasonCode
+
+	//  An array of objects that describe the recommendation options for the Amazon
+	// RDS instance.
+	InstanceRecommendationOptions []RDSDBInstanceRecommendationOption
+
+	//  The timestamp of when the Amazon RDS recommendation was last generated.
+	LastRefreshTimestamp *time.Time
+
+	//  The number of days the Amazon RDS utilization metrics were analyzed.
+	LookbackPeriodInDays float64
+
+	//  The ARN of the current Amazon RDS.
+	//
+	// The following is the format of the ARN:
+	//
+	//     arn:aws:rds:{region}:{accountId}:db:{resourceName}
+	ResourceArn *string
+
+	//  The finding classification of Amazon RDS storage.
+	//
+	// Findings for Amazon RDS instance include:
+	//
+	//   - Underprovisioned — When Compute Optimizer detects that there’s not enough
+	//   storage, an Amazon RDS is considered under-provisioned.
+	//
+	//   - Overprovisioned — When Compute Optimizer detects that there’s excessive
+	//   storage, an Amazon RDS is considered over-provisioned.
+	//
+	//   - Optimized — When the storage of your Amazon RDS meet the performance
+	//   requirements of your workload, the service is considered optimized.
+	StorageFinding RDSStorageFinding
+
+	//  The reason for the finding classification of Amazon RDS storage.
+	StorageFindingReasonCodes []RDSStorageFindingReasonCode
+
+	//  An array of objects that describe the recommendation options for Amazon RDS
+	// storage.
+	StorageRecommendationOptions []RDSDBStorageRecommendationOption
+
+	//  A list of tags assigned to your Amazon RDS recommendations.
+	Tags []Tag
+
+	//  An array of objects that describe the utilization metrics of the Amazon RDS.
+	UtilizationMetrics []RDSDBUtilizationMetric
+
+	noSmithyDocumentSerde
+}
+
+//	Describes a filter that returns a more specific list of Amazon RDS
+//
+// recommendations. Use this filter with the GetECSServiceRecommendationsaction.
+type RDSDBRecommendationFilter struct {
+
+	//  The name of the filter.
+	//
+	// Specify Finding to return recommendations with a specific finding
+	// classification.
+	//
+	// You can filter your Amazon RDS recommendations by tag:key and tag-key tags.
+	//
+	// A tag:key is a key and value combination of a tag assigned to your Amazon RDS
+	// recommendations. Use the tag key in the filter name and the tag value as the
+	// filter value. For example, to find all Amazon RDS service recommendations that
+	// have a tag with the key of Owner and the value of TeamA , specify tag:Owner for
+	// the filter name and TeamA for the filter value.
+	//
+	// A tag-key is the key of a tag assigned to your Amazon RDS recommendations. Use
+	// this filter to find all of your Amazon RDS recommendations that have a tag with
+	// a specific key. This doesn’t consider the tag value. For example, you can find
+	// your Amazon RDS service recommendations with a tag key value of Owner or
+	// without any tag keys assigned.
+	Name RDSDBRecommendationFilterName
+
+	//  The value of the filter.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the recommendation options for Amazon RDS storage.
+type RDSDBStorageRecommendationOption struct {
+
+	//  The rank identifier of the RDS storage recommendation option.
+	Rank int32
+
+	// Describes the savings opportunity for recommendations of a given resource type
+	// or for the recommendation option of an individual resource.
+	//
+	// Savings opportunity represents the estimated monthly savings you can achieve by
+	// implementing a given Compute Optimizer recommendation.
+	//
+	// Savings opportunity data requires that you opt in to Cost Explorer, as well as
+	// activate Receive Amazon EC2 resource recommendations in the Cost Explorer
+	// preferences page. That creates a connection between Cost Explorer and Compute
+	// Optimizer. With this connection, Cost Explorer generates savings estimates
+	// considering the price of existing resources, the price of recommended resources,
+	// and historical usage data. Estimated monthly savings reflects the projected
+	// dollar savings associated with each of the recommendations generated. For more
+	// information, see [Enabling Cost Explorer]and [Optimizing your cost with Rightsizing Recommendations] in the Cost Management User Guide.
+	//
+	// [Optimizing your cost with Rightsizing Recommendations]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+	// [Enabling Cost Explorer]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+	SavingsOpportunity *SavingsOpportunity
+
+	//  Describes the savings opportunity for Amazon RDS storage recommendations or
+	// for the recommendation option.
+	//
+	// Savings opportunity represents the estimated monthly savings after applying
+	// Savings Plans discounts. You can achieve this by implementing a given Compute
+	// Optimizer recommendation.
+	SavingsOpportunityAfterDiscounts *RDSStorageSavingsOpportunityAfterDiscounts
+
+	//  The recommended storage configuration.
+	StorageConfiguration *DBStorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the utilization metric of an Amazon RDS.
+//
+// To determine the performance difference between your current Amazon RDS and the
+// recommended option, compare the utilization metric data of your service against
+// its projected utilization metric data.
+type RDSDBUtilizationMetric struct {
+
+	//  The name of the utilization metric.
+	Name RDSDBMetricName
+
+	//  The statistic of the utilization metric.
+	//
+	// The Compute Optimizer API, Command Line Interface (CLI), and SDKs return
+	// utilization metrics using only the Maximum statistic, which is the highest
+	// value observed during the specified period.
+	//
+	// The Compute Optimizer console displays graphs for some utilization metrics
+	// using the Average statistic, which is the value of Sum / SampleCount during the
+	// specified period. For more information, see [Viewing resource recommendations]in the Compute Optimizer User
+	// Guide. You can also get averaged utilization metric data for your resources
+	// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch User Guide].
+	//
+	// [Viewing resource recommendations]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+	// [Amazon CloudWatch User Guide]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+	Statistic RDSDBMetricStatistic
+
+	//  The value of the utilization metric.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the effective recommendation preferences for Amazon RDS.
+type RDSEffectiveRecommendationPreferences struct {
+
+	//  Describes the CPU vendor and architecture for Amazon RDS recommendations.
+	CpuVendorArchitectures []CpuVendorArchitecture
+
+	// Describes the activation status of the enhanced infrastructure metrics
+	// preference.
+	//
+	// A status of Active confirms that the preference is applied in the latest
+	// recommendation refresh, and a status of Inactive confirms that it's not yet
+	// applied to recommendations.
+	//
+	// For more information, see [Enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+	//
+	// [Enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
+
+	//  The number of days the utilization metrics of the Amazon RDS are analyzed.
+	LookBackPeriod LookBackPeriodPreference
+
+	//  Describes the savings estimation mode preference applied for calculating
+	// savings opportunity for Amazon RDS.
+	SavingsEstimationMode *RDSSavingsEstimationMode
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the estimated monthly savings possible for Amazon RDS instances by
+//
+// adopting Compute Optimizer recommendations. This is based on Amazon RDS pricing
+// after applying Savings Plans discounts.
+type RDSInstanceEstimatedMonthlySavings struct {
+
+	//  The currency of the estimated monthly savings.
+	Currency Currency
+
+	//  The value of the estimated monthly savings for Amazon RDS instances.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the savings opportunity for Amazon RDS instance recommendations
+//
+// after applying Savings Plans discounts.
+//
+// Savings opportunity represents the estimated monthly savings after applying
+// Savings Plans discounts. You can achieve this by implementing a given Compute
+// Optimizer recommendation.
+type RDSInstanceSavingsOpportunityAfterDiscounts struct {
+
+	//  The estimated monthly savings possible by adopting Compute Optimizer’s Amazon
+	// RDS instance recommendations. This includes any applicable Savings Plans
+	// discounts.
+	EstimatedMonthlySavings *RDSInstanceEstimatedMonthlySavings
+
+	//  The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer’s Amazon RDS instance recommendations. This includes
+	// any applicable Savings Plans discounts.
+	SavingsOpportunityPercentage float64
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the savings estimation mode used for calculating savings opportunity
+//
+// for Amazon RDS.
+type RDSSavingsEstimationMode struct {
+
+	//  Describes the source for calculating the savings opportunity for Amazon RDS.
+	Source RDSSavingsEstimationModeSource
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the estimated monthly savings possible for Amazon RDS storage by
+//
+// adopting Compute Optimizer recommendations. This is based on Amazon RDS pricing
+// after applying Savings Plans discounts.
+type RDSStorageEstimatedMonthlySavings struct {
+
+	//  The currency of the estimated monthly savings.
+	Currency Currency
+
+	//  The value of the estimated monthly savings for Amazon RDS storage.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the savings opportunity for Amazon RDS storage recommendations after
+//
+// applying Savings Plans discounts.
+//
+// Savings opportunity represents the estimated monthly savings after applying
+// Savings Plans discounts. You can achieve this by implementing a given Compute
+// Optimizer recommendation.
+type RDSStorageSavingsOpportunityAfterDiscounts struct {
+
+	//  The estimated monthly savings possible by adopting Compute Optimizer’s Amazon
+	// RDS storage recommendations. This includes any applicable Savings Plans
+	// discounts.
+	EstimatedMonthlySavings *RDSStorageEstimatedMonthlySavings
+
+	//  The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer’s Amazon RDS storage recommendations. This includes
+	// any applicable Savings Plans discounts.
+	SavingsOpportunityPercentage float64
+
+	noSmithyDocumentSerde
+}
+
 // A summary of a finding reason code.
 type ReasonCodeSummary struct {
 
@@ -2266,8 +2679,8 @@ type RecommendationExportJob struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the recommendation preferences to return in the response of a GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, and GetEC2RecommendationProjectedMetrics
-// request.
+// Describes the recommendation preferences to return in the response of a GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, GetEC2RecommendationProjectedMetrics, GetRDSDatabaseRecommendations,
+// and GetRDSDatabaseRecommendationProjectedMetricsrequest.
 type RecommendationPreferences struct {
 
 	// Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto
@@ -2276,13 +2689,13 @@ type RecommendationPreferences struct {
 	// For example, when you specify AWS_ARM64 with:
 	//
 	//   - A GetEC2InstanceRecommendationsor GetAutoScalingGroupRecommendationsrequest, Compute Optimizer returns recommendations that consist of
-	//   Graviton2 instance types only.
+	//   Graviton instance types only.
 	//
 	//   - A GetEC2RecommendationProjectedMetricsrequest, Compute Optimizer returns projected utilization metrics for
-	//   Graviton2 instance type recommendations only.
+	//   Graviton instance type recommendations only.
 	//
 	//   - A ExportEC2InstanceRecommendationsor ExportAutoScalingGroupRecommendationsrequest, Compute Optimizer exports recommendations that consist of
-	//   Graviton2 instance types only.
+	//   Graviton instance types only.
 	CpuVendorArchitectures []CpuVendorArchitecture
 
 	noSmithyDocumentSerde
@@ -2752,9 +3165,9 @@ type UtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
-//	The preference to control the resource’s CPU utilization thresholds -
+//	The preference to control the resource’s CPU utilization threshold, CPU
 //
-// threshold and headroom.
+// utilization headroom, and memory utilization headroom.
 //
 // This preference is only available for the Amazon EC2 instance resource type.
 type UtilizationPreference struct {

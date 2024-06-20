@@ -29,6 +29,9 @@ func (c *Client) CreateStage(ctx context.Context, params *CreateStageInput, optF
 
 type CreateStageInput struct {
 
+	// Auto participant recording configuration object attached to the stage.
+	AutoParticipantRecordingConfiguration *types.AutoParticipantRecordingConfiguration
+
 	// Optional name that can be specified for the stage being created.
 	Name *string
 
@@ -120,6 +123,9 @@ func (c *Client) addOperationCreateStageMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addOpCreateStageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStage(options.Region), middleware.Before); err != nil {

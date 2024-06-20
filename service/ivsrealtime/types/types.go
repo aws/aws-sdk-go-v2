@@ -7,6 +7,23 @@ import (
 	"time"
 )
 
+// Object specifying an auto-participant-recording configuration.
+type AutoParticipantRecordingConfiguration struct {
+
+	// ARN of the StorageConfiguration resource to use for auto participant recording. Default: "" (empty
+	// string, no storage configuration is specified). Individual participant recording
+	// cannot be started unless a storage configuration is specified, when a Stageis
+	// created or updated.
+	//
+	// This member is required.
+	StorageConfigurationArn *string
+
+	// Types of media to be recorded. Default: AUDIO_VIDEO .
+	MediaTypes []ParticipantRecordingMediaType
+
+	noSmithyDocumentSerde
+}
+
 // Object specifying a channel as a destination.
 type ChannelDestinationConfiguration struct {
 
@@ -352,6 +369,19 @@ type Participant struct {
 	// Whether the participant ever published to the stage session.
 	Published bool
 
+	// Name of the S3 bucket to where the participant is being recorded, if individual
+	// participant recording is enabled, or "" (empty string), if recording is not
+	// enabled.
+	RecordingS3BucketName *string
+
+	// S3 prefix of the S3 bucket to where the participant is being recorded, if
+	// individual participant recording is enabled, or "" (empty string), if recording
+	// is not enabled.
+	RecordingS3Prefix *string
+
+	// Participant’s recording state.
+	RecordingState ParticipantRecordingState
+
 	// The participant’s SDK version.
 	SdkVersion *string
 
@@ -379,6 +409,9 @@ type ParticipantSummary struct {
 
 	// Whether the participant ever published to the stage session.
 	Published bool
+
+	// Participant’s recording state.
+	RecordingState ParticipantRecordingState
 
 	// Whether the participant is connected to or disconnected from the stage.
 	State ParticipantState
@@ -567,6 +600,9 @@ type Stage struct {
 
 	// ID of the active session within the stage.
 	ActiveSessionId *string
+
+	// Auto-participant-recording configuration object attached to the stage.
+	AutoParticipantRecordingConfiguration *AutoParticipantRecordingConfiguration
 
 	// Stage name.
 	Name *string

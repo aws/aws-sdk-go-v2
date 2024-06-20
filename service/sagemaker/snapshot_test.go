@@ -386,6 +386,18 @@ func TestCheckSnapshot_CreateHub(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateHubContentReference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHubContentReference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHubContentReference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateHumanTaskUi(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHumanTaskUi(context.Background(), nil, func(o *Options) {
@@ -1063,6 +1075,18 @@ func TestCheckSnapshot_DeleteHubContent(t *testing.T) {
 	_, err := svc.DeleteHubContent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteHubContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteHubContentReference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHubContentReference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteHubContentReference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4321,6 +4345,18 @@ func TestUpdateSnapshot_CreateHub(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateHubContentReference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHubContentReference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHubContentReference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateHumanTaskUi(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHumanTaskUi(context.Background(), nil, func(o *Options) {
@@ -4998,6 +5034,18 @@ func TestUpdateSnapshot_DeleteHubContent(t *testing.T) {
 	_, err := svc.DeleteHubContent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteHubContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteHubContentReference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHubContentReference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteHubContentReference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

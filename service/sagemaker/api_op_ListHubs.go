@@ -13,8 +13,6 @@ import (
 )
 
 // List all existing hubs.
-//
-// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) ListHubs(ctx context.Context, params *ListHubsInput, optFns ...func(*Options)) (*ListHubsOutput, error) {
 	if params == nil {
 		params = &ListHubsInput{}

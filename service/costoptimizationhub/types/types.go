@@ -92,6 +92,15 @@ type ComputeSavingsPlansConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The DB instance configuration used for recommendations.
+type DbInstanceConfiguration struct {
+
+	// The DB instance class of the DB instance.
+	DbInstanceClass *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the Amazon Elastic Block Store volume configuration of the current
 // and recommended resource configuration for a recommendation.
 type EbsVolume struct {
@@ -501,6 +510,58 @@ type OrderBy struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details of an Amazon RDS DB instance.
+type RdsDbInstance struct {
+
+	// The Amazon RDS DB instance configuration used for recommendations.
+	Configuration *RdsDbInstanceConfiguration
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon RDS DB instance configuration used for recommendations.
+type RdsDbInstanceConfiguration struct {
+
+	// Details about the instance configuration.
+	Instance *DbInstanceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of an Amazon RDS DB instance storage.
+type RdsDbInstanceStorage struct {
+
+	// The Amazon RDS DB instance storage configuration used for recommendations.
+	Configuration *RdsDbInstanceStorageConfiguration
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon RDS DB instance storage configuration used for recommendations.
+type RdsDbInstanceStorageConfiguration struct {
+
+	// The new amount of storage in GB to allocate for the DB instance.
+	AllocatedStorageInGb *float64
+
+	// The amount of Provisioned IOPS (input/output operations per second) to be
+	// initially allocated for the DB instance.
+	Iops *float64
+
+	// The storage throughput for the DB instance.
+	StorageThroughput *float64
+
+	// The storage type to associate with the DB instance.
+	StorageType *string
+
+	noSmithyDocumentSerde
+}
+
 // The RDS reserved instances recommendation details.
 type RdsReservedInstances struct {
 
@@ -590,7 +651,8 @@ type Recommendation struct {
 	// The current resource type.
 	CurrentResourceType *string
 
-	// The estimated monthly cost for the recommendation.
+	// The estimated monthly cost of the current resource. For Reserved Instances and
+	// Savings Plans, it refers to the cost for eligible usage.
 	EstimatedMonthlyCost *float64
 
 	// The estimated monthly savings amount for the recommendation.
@@ -772,6 +834,8 @@ type ResourceCostCalculation struct {
 //	ResourceDetailsMemberElastiCacheReservedInstances
 //	ResourceDetailsMemberLambdaFunction
 //	ResourceDetailsMemberOpenSearchReservedInstances
+//	ResourceDetailsMemberRdsDbInstance
+//	ResourceDetailsMemberRdsDbInstanceStorage
 //	ResourceDetailsMemberRdsReservedInstances
 //	ResourceDetailsMemberRedshiftReservedInstances
 //	ResourceDetailsMemberSageMakerSavingsPlans
@@ -868,6 +932,24 @@ type ResourceDetailsMemberOpenSearchReservedInstances struct {
 }
 
 func (*ResourceDetailsMemberOpenSearchReservedInstances) isResourceDetails() {}
+
+// The DB instance recommendation details.
+type ResourceDetailsMemberRdsDbInstance struct {
+	Value RdsDbInstance
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberRdsDbInstance) isResourceDetails() {}
+
+// The DB instance storage recommendation details.
+type ResourceDetailsMemberRdsDbInstanceStorage struct {
+	Value RdsDbInstanceStorage
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberRdsDbInstanceStorage) isResourceDetails() {}
 
 // The RDS reserved instances recommendation details.
 type ResourceDetailsMemberRdsReservedInstances struct {

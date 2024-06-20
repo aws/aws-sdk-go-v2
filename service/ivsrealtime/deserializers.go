@@ -4198,6 +4198,51 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutoParticipantRecordingConfiguration(v **types.AutoParticipantRecordingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoParticipantRecordingConfiguration
+	if *v == nil {
+		sv = &types.AutoParticipantRecordingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mediaTypes":
+			if err := awsRestjson1_deserializeDocumentParticipantRecordingMediaTypeList(&sv.MediaTypes, value); err != nil {
+				return err
+			}
+
+		case "storageConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoParticipantRecordingStorageConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.StorageConfigurationArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentChannelDestinationConfiguration(v **types.ChannelDestinationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5389,6 +5434,33 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 				sv.Published = jtv
 			}
 
+		case "recordingS3BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantRecordingS3BucketName to be of type string, got %T instead", value)
+				}
+				sv.RecordingS3BucketName = ptr.String(jtv)
+			}
+
+		case "recordingS3Prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantRecordingS3Prefix to be of type string, got %T instead", value)
+				}
+				sv.RecordingS3Prefix = ptr.String(jtv)
+			}
+
+		case "recordingState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantRecordingState to be of type string, got %T instead", value)
+				}
+				sv.RecordingState = types.ParticipantRecordingState(jtv)
+			}
+
 		case "sdkVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5495,6 +5567,42 @@ func awsRestjson1_deserializeDocumentParticipantList(v *[]types.ParticipantSumma
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentParticipantRecordingMediaTypeList(v *[]types.ParticipantRecordingMediaType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ParticipantRecordingMediaType
+	if *v == nil {
+		cv = []types.ParticipantRecordingMediaType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ParticipantRecordingMediaType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ParticipantRecordingMediaType to be of type string, got %T instead", value)
+			}
+			col = types.ParticipantRecordingMediaType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentParticipantSummary(v **types.ParticipantSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5546,6 +5654,15 @@ func awsRestjson1_deserializeDocumentParticipantSummary(v **types.ParticipantSum
 					return fmt.Errorf("expected Published to be of type *bool, got %T instead", value)
 				}
 				sv.Published = jtv
+			}
+
+		case "recordingState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantRecordingState to be of type string, got %T instead", value)
+				}
+				sv.RecordingState = types.ParticipantRecordingState(jtv)
 			}
 
 		case "state":
@@ -6240,6 +6357,11 @@ func awsRestjson1_deserializeDocumentStage(v **types.Stage, value interface{}) e
 					return fmt.Errorf("expected StageArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "autoParticipantRecordingConfiguration":
+			if err := awsRestjson1_deserializeDocumentAutoParticipantRecordingConfiguration(&sv.AutoParticipantRecordingConfiguration, value); err != nil {
+				return err
 			}
 
 		case "name":

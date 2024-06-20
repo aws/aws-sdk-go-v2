@@ -1,0 +1,8 @@
+{
+    "id": "66d114b0-8fa3-411e-bd17-8743ab3e1406",
+    "type": "feature",
+    "description": "This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

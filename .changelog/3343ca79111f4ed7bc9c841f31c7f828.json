@@ -1,0 +1,8 @@
+{
+    "id": "3343ca79-111f-4ed7-bc9c-841f31c7f828",
+    "type": "feature",
+    "description": "Add support for the Cargo package format.",
+    "modules": [
+        "service/codeartifact"
+    ]
+}

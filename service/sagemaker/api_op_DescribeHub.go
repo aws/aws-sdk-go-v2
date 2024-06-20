@@ -12,9 +12,7 @@ import (
 	"time"
 )
 
-// Describe a hub.
-//
-// Hub APIs are only callable through SageMaker Studio.
+// Describes a hub.
 func (c *Client) DescribeHub(ctx context.Context, params *DescribeHubInput, optFns ...func(*Options)) (*DescribeHubOutput, error) {
 	if params == nil {
 		params = &DescribeHubInput{}

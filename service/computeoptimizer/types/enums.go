@@ -464,6 +464,8 @@ const (
 	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesCpuVendorArchitectures           ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesCpuVendorArchitectures"
 	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesEnhancedInfrastructureMetrics    ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"
 	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesInferredWorkloadTypes            ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesInferredWorkloadTypes"
+	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesPreferredResources               ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesPreferredResources"
+	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesLookbackPeriod                   ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesLookBackPeriod"
 	ExportableAutoScalingGroupFieldInferredWorkloadTypes                                              ExportableAutoScalingGroupField = "InferredWorkloadTypes"
 	ExportableAutoScalingGroupFieldRecommendationOptionsMigrationEffort                               ExportableAutoScalingGroupField = "RecommendationOptionsMigrationEffort"
 	ExportableAutoScalingGroupFieldCurrentInstanceGpuInfo                                             ExportableAutoScalingGroupField = "CurrentInstanceGpuInfo"
@@ -476,8 +478,6 @@ const (
 	ExportableAutoScalingGroupFieldRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage    ExportableAutoScalingGroupField = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
 	ExportableAutoScalingGroupFieldRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts ExportableAutoScalingGroupField = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
 	ExportableAutoScalingGroupFieldRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts    ExportableAutoScalingGroupField = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
-	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesPreferredResources               ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesPreferredResources"
-	ExportableAutoScalingGroupFieldEffectiveRecommendationPreferencesLookbackPeriod                   ExportableAutoScalingGroupField = "EffectiveRecommendationPreferencesLookBackPeriod"
 )
 
 // Values returns all known values for ExportableAutoScalingGroupField. Note that
@@ -539,6 +539,8 @@ func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupFiel
 		"EffectiveRecommendationPreferencesCpuVendorArchitectures",
 		"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics",
 		"EffectiveRecommendationPreferencesInferredWorkloadTypes",
+		"EffectiveRecommendationPreferencesPreferredResources",
+		"EffectiveRecommendationPreferencesLookBackPeriod",
 		"InferredWorkloadTypes",
 		"RecommendationOptionsMigrationEffort",
 		"CurrentInstanceGpuInfo",
@@ -551,8 +553,6 @@ func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupFiel
 		"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
 		"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
-		"EffectiveRecommendationPreferencesPreferredResources",
-		"EffectiveRecommendationPreferencesLookBackPeriod",
 	}
 }
 
@@ -684,8 +684,8 @@ const (
 	ExportableInstanceFieldInferredWorkloadTypes                                                      ExportableInstanceField = "InferredWorkloadTypes"
 	ExportableInstanceFieldRecommendationOptionsMigrationEffort                                       ExportableInstanceField = "RecommendationOptionsMigrationEffort"
 	ExportableInstanceFieldEffectiveRecommendationPreferencesExternalMetricsSource                    ExportableInstanceField = "EffectiveRecommendationPreferencesExternalMetricsSource"
-	ExportableInstanceFieldInstanceState                                                              ExportableInstanceField = "InstanceState"
 	ExportableInstanceFieldTags                                                                       ExportableInstanceField = "Tags"
+	ExportableInstanceFieldInstanceState                                                              ExportableInstanceField = "InstanceState"
 	ExportableInstanceFieldExternalMetricStatusCode                                                   ExportableInstanceField = "ExternalMetricStatusCode"
 	ExportableInstanceFieldExternalMetricStatusReason                                                 ExportableInstanceField = "ExternalMetricStatusReason"
 	ExportableInstanceFieldCurrentInstanceGpuInfo                                                     ExportableInstanceField = "CurrentInstanceGpuInfo"
@@ -763,8 +763,8 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"InferredWorkloadTypes",
 		"RecommendationOptionsMigrationEffort",
 		"EffectiveRecommendationPreferencesExternalMetricsSource",
-		"InstanceState",
 		"Tags",
+		"InstanceState",
 		"ExternalMetricStatusCode",
 		"ExternalMetricStatusReason",
 		"CurrentInstanceGpuInfo",
@@ -919,6 +919,139 @@ func (ExportableLicenseField) Values() []ExportableLicenseField {
 	}
 }
 
+type ExportableRDSDBField string
+
+// Enum values for ExportableRDSDBField
+const (
+	ExportableRDSDBFieldResourceArn                                                                ExportableRDSDBField = "ResourceArn"
+	ExportableRDSDBFieldAccountId                                                                  ExportableRDSDBField = "AccountId"
+	ExportableRDSDBFieldEngine                                                                     ExportableRDSDBField = "Engine"
+	ExportableRDSDBFieldEngineVersion                                                              ExportableRDSDBField = "EngineVersion"
+	ExportableRDSDBFieldIdle                                                                       ExportableRDSDBField = "Idle"
+	ExportableRDSDBFieldMultiAzDbInstance                                                          ExportableRDSDBField = "MultiAZDBInstance"
+	ExportableRDSDBFieldCurrentDbInstanceClass                                                     ExportableRDSDBField = "CurrentDBInstanceClass"
+	ExportableRDSDBFieldCurrentStorageConfigurationStorageType                                     ExportableRDSDBField = "CurrentStorageConfigurationStorageType"
+	ExportableRDSDBFieldCurrentStorageConfigurationAllocatedStorage                                ExportableRDSDBField = "CurrentStorageConfigurationAllocatedStorage"
+	ExportableRDSDBFieldCurrentStorageConfigurationMaxAllocatedStorage                             ExportableRDSDBField = "CurrentStorageConfigurationMaxAllocatedStorage"
+	ExportableRDSDBFieldCurrentStorageConfigurationIops                                            ExportableRDSDBField = "CurrentStorageConfigurationIOPS"
+	ExportableRDSDBFieldCurrentStorageConfigurationStorageThroughput                               ExportableRDSDBField = "CurrentStorageConfigurationStorageThroughput"
+	ExportableRDSDBFieldCurrentInstanceOnDemandHourlyPrice                                         ExportableRDSDBField = "CurrentInstanceOnDemandHourlyPrice"
+	ExportableRDSDBFieldCurrentStorageOnDemandMonthlyPrice                                         ExportableRDSDBField = "CurrentStorageOnDemandMonthlyPrice"
+	ExportableRDSDBFieldLookbackPeriodInDays                                                       ExportableRDSDBField = "LookbackPeriodInDays"
+	ExportableRDSDBFieldUtilizationMetricsCpuMaximum                                               ExportableRDSDBField = "UtilizationMetricsCpuMaximum"
+	ExportableRDSDBFieldUtilizationMetricsMemoryMaximum                                            ExportableRDSDBField = "UtilizationMetricsMemoryMaximum"
+	ExportableRDSDBFieldUtilizationMetricsEbsVolumeStorageSpaceUtilizationMaximum                  ExportableRDSDBField = "UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum"
+	ExportableRDSDBFieldUtilizationMetricsNetworkReceiveThroughputMaximum                          ExportableRDSDBField = "UtilizationMetricsNetworkReceiveThroughputMaximum"
+	ExportableRDSDBFieldUtilizationMetricsNetworkTransmitThroughputMaximum                         ExportableRDSDBField = "UtilizationMetricsNetworkTransmitThroughputMaximum"
+	ExportableRDSDBFieldUtilizationMetricsEbsVolumeReadIopsMaximum                                 ExportableRDSDBField = "UtilizationMetricsEBSVolumeReadIOPSMaximum"
+	ExportableRDSDBFieldUtilizationMetricsEbsVolumeWriteIopsMaximum                                ExportableRDSDBField = "UtilizationMetricsEBSVolumeWriteIOPSMaximum"
+	ExportableRDSDBFieldUtilizationMetricsEbsVolumeReadThroughputMaximum                           ExportableRDSDBField = "UtilizationMetricsEBSVolumeReadThroughputMaximum"
+	ExportableRDSDBFieldUtilizationMetricsEbsVolumeWriteThroughputMaximum                          ExportableRDSDBField = "UtilizationMetricsEBSVolumeWriteThroughputMaximum"
+	ExportableRDSDBFieldUtilizationMetricsDatabaseConnectionsMaximum                               ExportableRDSDBField = "UtilizationMetricsDatabaseConnectionsMaximum"
+	ExportableRDSDBFieldInstanceFinding                                                            ExportableRDSDBField = "InstanceFinding"
+	ExportableRDSDBFieldInstanceFindingReasonCodes                                                 ExportableRDSDBField = "InstanceFindingReasonCodes"
+	ExportableRDSDBFieldStorageFinding                                                             ExportableRDSDBField = "StorageFinding"
+	ExportableRDSDBFieldStorageFindingReasonCodes                                                  ExportableRDSDBField = "StorageFindingReasonCodes"
+	ExportableRDSDBFieldInstanceRecommendationOptionsDbInstanceClass                               ExportableRDSDBField = "InstanceRecommendationOptionsDBInstanceClass"
+	ExportableRDSDBFieldInstanceRecommendationOptionsRank                                          ExportableRDSDBField = "InstanceRecommendationOptionsRank"
+	ExportableRDSDBFieldInstanceRecommendationOptionsPerformanceRisk                               ExportableRDSDBField = "InstanceRecommendationOptionsPerformanceRisk"
+	ExportableRDSDBFieldInstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum         ExportableRDSDBField = "InstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum"
+	ExportableRDSDBFieldStorageRecommendationOptionsStorageType                                    ExportableRDSDBField = "StorageRecommendationOptionsStorageType"
+	ExportableRDSDBFieldStorageRecommendationOptionsAllocatedStorage                               ExportableRDSDBField = "StorageRecommendationOptionsAllocatedStorage"
+	ExportableRDSDBFieldStorageRecommendationOptionsMaxAllocatedStorage                            ExportableRDSDBField = "StorageRecommendationOptionsMaxAllocatedStorage"
+	ExportableRDSDBFieldStorageRecommendationOptionsIops                                           ExportableRDSDBField = "StorageRecommendationOptionsIOPS"
+	ExportableRDSDBFieldStorageRecommendationOptionsStorageThroughput                              ExportableRDSDBField = "StorageRecommendationOptionsStorageThroughput"
+	ExportableRDSDBFieldStorageRecommendationOptionsRank                                           ExportableRDSDBField = "StorageRecommendationOptionsRank"
+	ExportableRDSDBFieldInstanceRecommendationOptionsInstanceOnDemandHourlyPrice                   ExportableRDSDBField = "InstanceRecommendationOptionsInstanceOnDemandHourlyPrice"
+	ExportableRDSDBFieldInstanceRecommendationOptionsSavingsOpportunityPercentage                  ExportableRDSDBField = "InstanceRecommendationOptionsSavingsOpportunityPercentage"
+	ExportableRDSDBFieldInstanceRecommendationOptionsEstimatedMonthlySavingsCurrency               ExportableRDSDBField = "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency"
+	ExportableRDSDBFieldInstanceRecommendationOptionsEstimatedMonthlySavingsValue                  ExportableRDSDBField = "InstanceRecommendationOptionsEstimatedMonthlySavingsValue"
+	ExportableRDSDBFieldInstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage    ExportableRDSDBField = "InstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
+	ExportableRDSDBFieldInstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts ExportableRDSDBField = "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
+	ExportableRDSDBFieldInstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts    ExportableRDSDBField = "InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+	ExportableRDSDBFieldStorageRecommendationOptionsOnDemandMonthlyPrice                           ExportableRDSDBField = "StorageRecommendationOptionsOnDemandMonthlyPrice"
+	ExportableRDSDBFieldStorageRecommendationOptionsSavingsOpportunityPercentage                   ExportableRDSDBField = "StorageRecommendationOptionsSavingsOpportunityPercentage"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedMonthlySavingsCurrency                ExportableRDSDBField = "StorageRecommendationOptionsEstimatedMonthlySavingsCurrency"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedMonthlySavingsValue                   ExportableRDSDBField = "StorageRecommendationOptionsEstimatedMonthlySavingsValue"
+	ExportableRDSDBFieldStorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage     ExportableRDSDBField = "StorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts  ExportableRDSDBField = "StorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
+	ExportableRDSDBFieldStorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts     ExportableRDSDBField = "StorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+	ExportableRDSDBFieldEffectiveRecommendationPreferencesCpuVendorArchitectures                   ExportableRDSDBField = "EffectiveRecommendationPreferencesCpuVendorArchitectures"
+	ExportableRDSDBFieldEffectiveRecommendationPreferencesEnhancedInfrastructureMetrics            ExportableRDSDBField = "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"
+	ExportableRDSDBFieldEffectiveRecommendationPreferencesLookbackPeriod                           ExportableRDSDBField = "EffectiveRecommendationPreferencesLookBackPeriod"
+	ExportableRDSDBFieldEffectiveRecommendationPreferencesSavingsEstimationMode                    ExportableRDSDBField = "EffectiveRecommendationPreferencesSavingsEstimationMode"
+	ExportableRDSDBFieldLastRefreshTimestamp                                                       ExportableRDSDBField = "LastRefreshTimestamp"
+	ExportableRDSDBFieldTags                                                                       ExportableRDSDBField = "Tags"
+)
+
+// Values returns all known values for ExportableRDSDBField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportableRDSDBField) Values() []ExportableRDSDBField {
+	return []ExportableRDSDBField{
+		"ResourceArn",
+		"AccountId",
+		"Engine",
+		"EngineVersion",
+		"Idle",
+		"MultiAZDBInstance",
+		"CurrentDBInstanceClass",
+		"CurrentStorageConfigurationStorageType",
+		"CurrentStorageConfigurationAllocatedStorage",
+		"CurrentStorageConfigurationMaxAllocatedStorage",
+		"CurrentStorageConfigurationIOPS",
+		"CurrentStorageConfigurationStorageThroughput",
+		"CurrentInstanceOnDemandHourlyPrice",
+		"CurrentStorageOnDemandMonthlyPrice",
+		"LookbackPeriodInDays",
+		"UtilizationMetricsCpuMaximum",
+		"UtilizationMetricsMemoryMaximum",
+		"UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum",
+		"UtilizationMetricsNetworkReceiveThroughputMaximum",
+		"UtilizationMetricsNetworkTransmitThroughputMaximum",
+		"UtilizationMetricsEBSVolumeReadIOPSMaximum",
+		"UtilizationMetricsEBSVolumeWriteIOPSMaximum",
+		"UtilizationMetricsEBSVolumeReadThroughputMaximum",
+		"UtilizationMetricsEBSVolumeWriteThroughputMaximum",
+		"UtilizationMetricsDatabaseConnectionsMaximum",
+		"InstanceFinding",
+		"InstanceFindingReasonCodes",
+		"StorageFinding",
+		"StorageFindingReasonCodes",
+		"InstanceRecommendationOptionsDBInstanceClass",
+		"InstanceRecommendationOptionsRank",
+		"InstanceRecommendationOptionsPerformanceRisk",
+		"InstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+		"StorageRecommendationOptionsStorageType",
+		"StorageRecommendationOptionsAllocatedStorage",
+		"StorageRecommendationOptionsMaxAllocatedStorage",
+		"StorageRecommendationOptionsIOPS",
+		"StorageRecommendationOptionsStorageThroughput",
+		"StorageRecommendationOptionsRank",
+		"InstanceRecommendationOptionsInstanceOnDemandHourlyPrice",
+		"InstanceRecommendationOptionsSavingsOpportunityPercentage",
+		"InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency",
+		"InstanceRecommendationOptionsEstimatedMonthlySavingsValue",
+		"InstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
+		"InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
+		"InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+		"StorageRecommendationOptionsOnDemandMonthlyPrice",
+		"StorageRecommendationOptionsSavingsOpportunityPercentage",
+		"StorageRecommendationOptionsEstimatedMonthlySavingsCurrency",
+		"StorageRecommendationOptionsEstimatedMonthlySavingsValue",
+		"StorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
+		"StorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
+		"StorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+		"EffectiveRecommendationPreferencesCpuVendorArchitectures",
+		"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics",
+		"EffectiveRecommendationPreferencesLookBackPeriod",
+		"EffectiveRecommendationPreferencesSavingsEstimationMode",
+		"LastRefreshTimestamp",
+		"Tags",
+	}
+}
+
 type ExportableVolumeField string
 
 // Enum values for ExportableVolumeField
@@ -951,8 +1084,8 @@ const (
 	ExportableVolumeFieldRecommendationOptionsSavingsOpportunityPercentage                  ExportableVolumeField = "RecommendationOptionsSavingsOpportunityPercentage"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsCurrency               ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsCurrency"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsValue                  ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsValue"
-	ExportableVolumeFieldRootVolume                                                         ExportableVolumeField = "RootVolume"
 	ExportableVolumeFieldTags                                                               ExportableVolumeField = "Tags"
+	ExportableVolumeFieldRootVolume                                                         ExportableVolumeField = "RootVolume"
 	ExportableVolumeFieldCurrentConfigurationRootVolume                                     ExportableVolumeField = "CurrentConfigurationRootVolume"
 	ExportableVolumeFieldEffectiveRecommendationPreferencesSavingsEstimationMode            ExportableVolumeField = "EffectiveRecommendationPreferencesSavingsEstimationMode"
 	ExportableVolumeFieldRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage    ExportableVolumeField = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
@@ -994,8 +1127,8 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"RecommendationOptionsSavingsOpportunityPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrency",
 		"RecommendationOptionsEstimatedMonthlySavingsValue",
-		"RootVolume",
 		"Tags",
+		"RootVolume",
 		"CurrentConfigurationRootVolume",
 		"EffectiveRecommendationPreferencesSavingsEstimationMode",
 		"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
@@ -1141,6 +1274,25 @@ func (FindingReasonCode) Values() []FindingReasonCode {
 	return []FindingReasonCode{
 		"MemoryOverprovisioned",
 		"MemoryUnderprovisioned",
+	}
+}
+
+type Idle string
+
+// Enum values for Idle
+const (
+	IdleTrue  Idle = "True"
+	IdleFalse Idle = "False"
+)
+
+// Values returns all known values for Idle. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Idle) Values() []Idle {
+	return []Idle{
+		"True",
+		"False",
 	}
 }
 
@@ -1826,6 +1978,211 @@ func (PreferredResourceName) Values() []PreferredResourceName {
 	}
 }
 
+type RDSDBMetricName string
+
+// Enum values for RDSDBMetricName
+const (
+	RDSDBMetricNameCpu                              RDSDBMetricName = "CPU"
+	RDSDBMetricNameMemory                           RDSDBMetricName = "Memory"
+	RDSDBMetricNameEbsVolumeStorageSpaceUtilization RDSDBMetricName = "EBSVolumeStorageSpaceUtilization"
+	RDSDBMetricNameNetworkReceiveThroughput         RDSDBMetricName = "NetworkReceiveThroughput"
+	RDSDBMetricNameNetworkTransmitThroughput        RDSDBMetricName = "NetworkTransmitThroughput"
+	RDSDBMetricNameEbsVolumeReadIops                RDSDBMetricName = "EBSVolumeReadIOPS"
+	RDSDBMetricNameEbsVolumeWriteIops               RDSDBMetricName = "EBSVolumeWriteIOPS"
+	RDSDBMetricNameEbsVolumeReadThroughput          RDSDBMetricName = "EBSVolumeReadThroughput"
+	RDSDBMetricNameEbsVolumeWriteThroughput         RDSDBMetricName = "EBSVolumeWriteThroughput"
+	RDSDBMetricNameDatabaseConnections              RDSDBMetricName = "DatabaseConnections"
+)
+
+// Values returns all known values for RDSDBMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSDBMetricName) Values() []RDSDBMetricName {
+	return []RDSDBMetricName{
+		"CPU",
+		"Memory",
+		"EBSVolumeStorageSpaceUtilization",
+		"NetworkReceiveThroughput",
+		"NetworkTransmitThroughput",
+		"EBSVolumeReadIOPS",
+		"EBSVolumeWriteIOPS",
+		"EBSVolumeReadThroughput",
+		"EBSVolumeWriteThroughput",
+		"DatabaseConnections",
+	}
+}
+
+type RDSDBMetricStatistic string
+
+// Enum values for RDSDBMetricStatistic
+const (
+	RDSDBMetricStatisticMaximum RDSDBMetricStatistic = "Maximum"
+	RDSDBMetricStatisticMinimum RDSDBMetricStatistic = "Minimum"
+	RDSDBMetricStatisticAverage RDSDBMetricStatistic = "Average"
+)
+
+// Values returns all known values for RDSDBMetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSDBMetricStatistic) Values() []RDSDBMetricStatistic {
+	return []RDSDBMetricStatistic{
+		"Maximum",
+		"Minimum",
+		"Average",
+	}
+}
+
+type RDSDBRecommendationFilterName string
+
+// Enum values for RDSDBRecommendationFilterName
+const (
+	RDSDBRecommendationFilterNameInstanceFinding           RDSDBRecommendationFilterName = "InstanceFinding"
+	RDSDBRecommendationFilterNameInstanceFindingReasonCode RDSDBRecommendationFilterName = "InstanceFindingReasonCode"
+	RDSDBRecommendationFilterNameStorageFinding            RDSDBRecommendationFilterName = "StorageFinding"
+	RDSDBRecommendationFilterNameStorageFindingReasonCode  RDSDBRecommendationFilterName = "StorageFindingReasonCode"
+	RDSDBRecommendationFilterNameIdle                      RDSDBRecommendationFilterName = "Idle"
+)
+
+// Values returns all known values for RDSDBRecommendationFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSDBRecommendationFilterName) Values() []RDSDBRecommendationFilterName {
+	return []RDSDBRecommendationFilterName{
+		"InstanceFinding",
+		"InstanceFindingReasonCode",
+		"StorageFinding",
+		"StorageFindingReasonCode",
+		"Idle",
+	}
+}
+
+type RDSInstanceFinding string
+
+// Enum values for RDSInstanceFinding
+const (
+	RDSInstanceFindingOptimized        RDSInstanceFinding = "Optimized"
+	RDSInstanceFindingUnderProvisioned RDSInstanceFinding = "Underprovisioned"
+	RDSInstanceFindingOverProvisioned  RDSInstanceFinding = "Overprovisioned"
+)
+
+// Values returns all known values for RDSInstanceFinding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSInstanceFinding) Values() []RDSInstanceFinding {
+	return []RDSInstanceFinding{
+		"Optimized",
+		"Underprovisioned",
+		"Overprovisioned",
+	}
+}
+
+type RDSInstanceFindingReasonCode string
+
+// Enum values for RDSInstanceFindingReasonCode
+const (
+	RDSInstanceFindingReasonCodeCpuOverProvisioned                    RDSInstanceFindingReasonCode = "CPUOverprovisioned"
+	RDSInstanceFindingReasonCodeNetworkBandwidthOverProvisioned       RDSInstanceFindingReasonCode = "NetworkBandwidthOverprovisioned"
+	RDSInstanceFindingReasonCodeEbsIopsOverProvisioned                RDSInstanceFindingReasonCode = "EBSIOPSOverprovisioned"
+	RDSInstanceFindingReasonCodeEbsThroughputOverProvisioned          RDSInstanceFindingReasonCode = "EBSThroughputOverprovisioned"
+	RDSInstanceFindingReasonCodeCpuUnderProvisioned                   RDSInstanceFindingReasonCode = "CPUUnderprovisioned"
+	RDSInstanceFindingReasonCodeNetworkBandwidthUnderProvisioned      RDSInstanceFindingReasonCode = "NetworkBandwidthUnderprovisioned"
+	RDSInstanceFindingReasonCodeEbsThroughputUnderProvisioned         RDSInstanceFindingReasonCode = "EBSThroughputUnderprovisioned"
+	RDSInstanceFindingReasonCodeNewGenerationDbInstanceClassAvailable RDSInstanceFindingReasonCode = "NewGenerationDBInstanceClassAvailable"
+	RDSInstanceFindingReasonCodeNewEngineVersionAvailable             RDSInstanceFindingReasonCode = "NewEngineVersionAvailable"
+)
+
+// Values returns all known values for RDSInstanceFindingReasonCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSInstanceFindingReasonCode) Values() []RDSInstanceFindingReasonCode {
+	return []RDSInstanceFindingReasonCode{
+		"CPUOverprovisioned",
+		"NetworkBandwidthOverprovisioned",
+		"EBSIOPSOverprovisioned",
+		"EBSThroughputOverprovisioned",
+		"CPUUnderprovisioned",
+		"NetworkBandwidthUnderprovisioned",
+		"EBSThroughputUnderprovisioned",
+		"NewGenerationDBInstanceClassAvailable",
+		"NewEngineVersionAvailable",
+	}
+}
+
+type RDSSavingsEstimationModeSource string
+
+// Enum values for RDSSavingsEstimationModeSource
+const (
+	RDSSavingsEstimationModeSourcePublicPricing           RDSSavingsEstimationModeSource = "PublicPricing"
+	RDSSavingsEstimationModeSourceCostExplorerRightsizing RDSSavingsEstimationModeSource = "CostExplorerRightsizing"
+	RDSSavingsEstimationModeSourceCostOptimizationHub     RDSSavingsEstimationModeSource = "CostOptimizationHub"
+)
+
+// Values returns all known values for RDSSavingsEstimationModeSource. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSSavingsEstimationModeSource) Values() []RDSSavingsEstimationModeSource {
+	return []RDSSavingsEstimationModeSource{
+		"PublicPricing",
+		"CostExplorerRightsizing",
+		"CostOptimizationHub",
+	}
+}
+
+type RDSStorageFinding string
+
+// Enum values for RDSStorageFinding
+const (
+	RDSStorageFindingOptimized        RDSStorageFinding = "Optimized"
+	RDSStorageFindingUnderProvisioned RDSStorageFinding = "Underprovisioned"
+	RDSStorageFindingOverProvisioned  RDSStorageFinding = "Overprovisioned"
+)
+
+// Values returns all known values for RDSStorageFinding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSStorageFinding) Values() []RDSStorageFinding {
+	return []RDSStorageFinding{
+		"Optimized",
+		"Underprovisioned",
+		"Overprovisioned",
+	}
+}
+
+type RDSStorageFindingReasonCode string
+
+// Enum values for RDSStorageFindingReasonCode
+const (
+	RDSStorageFindingReasonCodeEbsVolumeAllocatedStorageUnderProvisioned RDSStorageFindingReasonCode = "EBSVolumeAllocatedStorageUnderprovisioned"
+	RDSStorageFindingReasonCodeEbsVolumeThroughputUnderProvisioned       RDSStorageFindingReasonCode = "EBSVolumeThroughputUnderprovisioned"
+	RDSStorageFindingReasonCodeEbsVolumeIopsOverProvisioned              RDSStorageFindingReasonCode = "EBSVolumeIOPSOverprovisioned"
+	RDSStorageFindingReasonCodeEbsVolumeThroughputOverProvisioned        RDSStorageFindingReasonCode = "EBSVolumeThroughputOverprovisioned"
+	RDSStorageFindingReasonCodeNewGenerationStorageTypeAvailable         RDSStorageFindingReasonCode = "NewGenerationStorageTypeAvailable"
+)
+
+// Values returns all known values for RDSStorageFindingReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSStorageFindingReasonCode) Values() []RDSStorageFindingReasonCode {
+	return []RDSStorageFindingReasonCode{
+		"EBSVolumeAllocatedStorageUnderprovisioned",
+		"EBSVolumeThroughputUnderprovisioned",
+		"EBSVolumeIOPSOverprovisioned",
+		"EBSVolumeThroughputOverprovisioned",
+		"NewGenerationStorageTypeAvailable",
+	}
+}
+
 type RecommendationPreferenceName string
 
 // Enum values for RecommendationPreferenceName
@@ -1858,12 +2215,14 @@ type RecommendationSourceType string
 
 // Enum values for RecommendationSourceType
 const (
-	RecommendationSourceTypeEc2Instance      RecommendationSourceType = "Ec2Instance"
-	RecommendationSourceTypeAutoScalingGroup RecommendationSourceType = "AutoScalingGroup"
-	RecommendationSourceTypeEbsVolume        RecommendationSourceType = "EbsVolume"
-	RecommendationSourceTypeLambdaFunction   RecommendationSourceType = "LambdaFunction"
-	RecommendationSourceTypeEcsService       RecommendationSourceType = "EcsService"
-	RecommendationSourceTypeLicense          RecommendationSourceType = "License"
+	RecommendationSourceTypeEc2Instance          RecommendationSourceType = "Ec2Instance"
+	RecommendationSourceTypeAutoScalingGroup     RecommendationSourceType = "AutoScalingGroup"
+	RecommendationSourceTypeEbsVolume            RecommendationSourceType = "EbsVolume"
+	RecommendationSourceTypeLambdaFunction       RecommendationSourceType = "LambdaFunction"
+	RecommendationSourceTypeEcsService           RecommendationSourceType = "EcsService"
+	RecommendationSourceTypeLicense              RecommendationSourceType = "License"
+	RecommendationSourceTypeRdsDbInstance        RecommendationSourceType = "RdsDBInstance"
+	RecommendationSourceTypeRdsDbInstanceStorage RecommendationSourceType = "RdsDBInstanceStorage"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this
@@ -1878,6 +2237,8 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 		"LambdaFunction",
 		"EcsService",
 		"License",
+		"RdsDBInstance",
+		"RdsDBInstanceStorage",
 	}
 }
 
@@ -1892,6 +2253,7 @@ const (
 	ResourceTypeNotApplicable    ResourceType = "NotApplicable"
 	ResourceTypeEcsService       ResourceType = "EcsService"
 	ResourceTypeLicense          ResourceType = "License"
+	ResourceTypeRdsDbInstance    ResourceType = "RdsDBInstance"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1907,6 +2269,7 @@ func (ResourceType) Values() []ResourceType {
 		"NotApplicable",
 		"EcsService",
 		"License",
+		"RdsDBInstance",
 	}
 }
 

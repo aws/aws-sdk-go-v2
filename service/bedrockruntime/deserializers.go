@@ -3496,6 +3496,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "document":
+			var mv types.DocumentBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDocumentBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ContentBlockMemberDocument{Value: mv}
+			break loop
+
 		case "guardContent":
 			var mv types.GuardrailConverseContentBlock
 			if err := awsRestjson1_deserializeDocumentGuardrailConverseContentBlock(&mv, value); err != nil {
@@ -3705,6 +3715,106 @@ func awsRestjson1_deserializeDocumentConverseTrace(v **types.ConverseTrace, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDocumentBlock(v **types.DocumentBlock, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocumentBlock
+	if *v == nil {
+		sv = &types.DocumentBlock{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.DocumentFormat(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentDocumentSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDocumentSource(v *types.DocumentSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DocumentSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "bytes":
+			var mv []byte
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Blob to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode Blob, %w", err)
+				}
+				mv = dv
+			}
+			uv = &types.DocumentSourceMemberBytes{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -4180,6 +4290,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "document":
+			var mv types.DocumentBlock
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDocumentBlock(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ToolResultContentBlockMemberDocument{Value: mv}
+			break loop
+
 		case "image":
 			var mv types.ImageBlock
 			destAddr := &mv

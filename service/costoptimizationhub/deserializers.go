@@ -1477,6 +1477,46 @@ func awsAwsjson10_deserializeDocumentComputeSavingsPlansConfiguration(v **types.
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentDbInstanceConfiguration(v **types.DbInstanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DbInstanceConfiguration
+	if *v == nil {
+		sv = &types.DbInstanceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dbInstanceClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DbInstanceClass = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEbsVolume(v **types.EbsVolume, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2800,6 +2840,266 @@ func awsAwsjson10_deserializeDocumentOpenSearchReservedInstancesConfiguration(v 
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentRdsDbInstance(v **types.RdsDbInstance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RdsDbInstance
+	if *v == nil {
+		sv = &types.RdsDbInstance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentRdsDbInstanceConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRdsDbInstanceConfiguration(v **types.RdsDbInstanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RdsDbInstanceConfiguration
+	if *v == nil {
+		sv = &types.RdsDbInstanceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "instance":
+			if err := awsAwsjson10_deserializeDocumentDbInstanceConfiguration(&sv.Instance, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRdsDbInstanceStorage(v **types.RdsDbInstanceStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RdsDbInstanceStorage
+	if *v == nil {
+		sv = &types.RdsDbInstanceStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentRdsDbInstanceStorageConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRdsDbInstanceStorageConfiguration(v **types.RdsDbInstanceStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RdsDbInstanceStorageConfiguration
+	if *v == nil {
+		sv = &types.RdsDbInstanceStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allocatedStorageInGb":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AllocatedStorageInGb = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.AllocatedStorageInGb = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "iops":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Iops = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Iops = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "storageThroughput":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StorageThroughput = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.StorageThroughput = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "storageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StorageType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentRdsReservedInstances(v **types.RdsReservedInstances, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4033,6 +4333,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ResourceDetailsMemberOpenSearchReservedInstances{Value: mv}
+			break loop
+
+		case "rdsDbInstance":
+			var mv types.RdsDbInstance
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentRdsDbInstance(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberRdsDbInstance{Value: mv}
+			break loop
+
+		case "rdsDbInstanceStorage":
+			var mv types.RdsDbInstanceStorage
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentRdsDbInstanceStorage(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberRdsDbInstanceStorage{Value: mv}
 			break loop
 
 		case "rdsReservedInstances":

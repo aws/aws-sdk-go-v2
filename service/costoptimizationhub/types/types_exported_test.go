@@ -41,6 +41,12 @@ func ExampleResourceDetails_outputUsage() {
 	case *types.ResourceDetailsMemberOpenSearchReservedInstances:
 		_ = v.Value // Value is types.OpenSearchReservedInstances
 
+	case *types.ResourceDetailsMemberRdsDbInstance:
+		_ = v.Value // Value is types.RdsDbInstance
+
+	case *types.ResourceDetailsMemberRdsDbInstanceStorage:
+		_ = v.Value // Value is types.RdsDbInstanceStorage
+
 	case *types.ResourceDetailsMemberRdsReservedInstances:
 		_ = v.Value // Value is types.RdsReservedInstances
 
@@ -67,8 +73,10 @@ var _ *types.Ec2ReservedInstances
 var _ *types.SageMakerSavingsPlans
 var _ *types.Ec2Instance
 var _ *types.Ec2InstanceSavingsPlans
+var _ *types.RdsDbInstanceStorage
 var _ *types.EcsService
 var _ *types.RedshiftReservedInstances
+var _ *types.RdsDbInstance
 var _ *types.ElastiCacheReservedInstances
 var _ *types.LambdaFunction
 var _ *types.EbsVolume

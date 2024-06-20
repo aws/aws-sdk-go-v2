@@ -158,6 +158,18 @@ func TestCheckSnapshot_ExportLicenseRecommendations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ExportRDSDatabaseRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportRDSDatabaseRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExportRDSDatabaseRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAutoScalingGroupRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAutoScalingGroupRecommendations(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,30 @@ func TestCheckSnapshot_GetLicenseRecommendations(t *testing.T) {
 	_, err := svc.GetLicenseRecommendations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetLicenseRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRDSDatabaseRecommendationProjectedMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRDSDatabaseRecommendationProjectedMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRDSDatabaseRecommendationProjectedMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRDSDatabaseRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRDSDatabaseRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRDSDatabaseRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,6 +469,18 @@ func TestUpdateSnapshot_ExportLicenseRecommendations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ExportRDSDatabaseRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportRDSDatabaseRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExportRDSDatabaseRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAutoScalingGroupRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAutoScalingGroupRecommendations(context.Background(), nil, func(o *Options) {
@@ -558,6 +606,30 @@ func TestUpdateSnapshot_GetLicenseRecommendations(t *testing.T) {
 	_, err := svc.GetLicenseRecommendations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLicenseRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRDSDatabaseRecommendationProjectedMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRDSDatabaseRecommendationProjectedMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRDSDatabaseRecommendationProjectedMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRDSDatabaseRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRDSDatabaseRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRDSDatabaseRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

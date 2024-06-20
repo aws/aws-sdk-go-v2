@@ -30,6 +30,26 @@ func (m *validateOpCreateParticipantToken) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStage struct {
+}
+
+func (*validateOpCreateStage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateStorageConfiguration struct {
 }
 
@@ -434,6 +454,10 @@ func addOpCreateParticipantTokenValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateParticipantToken{}, middleware.After)
 }
 
+func addOpCreateStageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStage{}, middleware.After)
+}
+
 func addOpCreateStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStorageConfiguration{}, middleware.After)
 }
@@ -512,6 +536,21 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStage{}, middleware.After)
+}
+
+func validateAutoParticipantRecordingConfiguration(v *types.AutoParticipantRecordingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoParticipantRecordingConfiguration"}
+	if v.StorageConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateChannelDestinationConfiguration(v *types.ChannelDestinationConfiguration) error {
@@ -608,6 +647,23 @@ func validateOpCreateParticipantTokenInput(v *CreateParticipantTokenInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateParticipantTokenInput"}
 	if v.StageArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStageInput(v *CreateStageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStageInput"}
+	if v.AutoParticipantRecordingConfiguration != nil {
+		if err := validateAutoParticipantRecordingConfiguration(v.AutoParticipantRecordingConfiguration); err != nil {
+			invalidParams.AddNested("AutoParticipantRecordingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -946,6 +1002,11 @@ func validateOpUpdateStageInput(v *UpdateStageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStageInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.AutoParticipantRecordingConfiguration != nil {
+		if err := validateAutoParticipantRecordingConfiguration(v.AutoParticipantRecordingConfiguration); err != nil {
+			invalidParams.AddNested("AutoParticipantRecordingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

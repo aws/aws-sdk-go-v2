@@ -21,6 +21,39 @@ func (ConversationRole) Values() []ConversationRole {
 	}
 }
 
+type DocumentFormat string
+
+// Enum values for DocumentFormat
+const (
+	DocumentFormatPdf  DocumentFormat = "pdf"
+	DocumentFormatCsv  DocumentFormat = "csv"
+	DocumentFormatDoc  DocumentFormat = "doc"
+	DocumentFormatDocx DocumentFormat = "docx"
+	DocumentFormatXls  DocumentFormat = "xls"
+	DocumentFormatXlsx DocumentFormat = "xlsx"
+	DocumentFormatHtml DocumentFormat = "html"
+	DocumentFormatTxt  DocumentFormat = "txt"
+	DocumentFormatMd   DocumentFormat = "md"
+)
+
+// Values returns all known values for DocumentFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentFormat) Values() []DocumentFormat {
+	return []DocumentFormat{
+		"pdf",
+		"csv",
+		"doc",
+		"docx",
+		"xls",
+		"xlsx",
+		"html",
+		"txt",
+		"md",
+	}
+}
+
 type GuardrailContentFilterConfidence string
 
 // Enum values for GuardrailContentFilterConfidence

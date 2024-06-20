@@ -63,7 +63,8 @@ type GetRecommendationOutput struct {
 	// The type of resource.
 	CurrentResourceType types.ResourceType
 
-	// The estimated monthly cost of the recommendation.
+	// The estimated monthly cost of the current resource. For Reserved Instances and
+	// Savings Plans, it refers to the cost for eligible usage.
 	EstimatedMonthlyCost *float64
 
 	// The estimated monthly savings amount for the recommendation.

@@ -43,9 +43,9 @@
 //
 //	- Package: A package is a bundle of software and the metadata required to
 //	resolve dependencies and install the software. CodeArtifact supports npm, PyPI,
-//	Maven, NuGet, Swift, Ruby, and generic package formats. For more information
-//	about the supported package formats and how to use CodeArtifact with them, see
-//	the [CodeArtifact User Guide].
+//	Maven, NuGet, Swift, Ruby, Cargo, and generic package formats. For more
+//	information about the supported package formats and how to use CodeArtifact with
+//	them, see the [CodeArtifact User Guide].
 //
 // In CodeArtifact, a package consists of:
 //
@@ -154,6 +154,8 @@
 //
 //   - GetRepositoryEndpoint : Returns the endpoint of a repository for a specific
 //     package format. A repository has one endpoint for each package format:
+//
+//   - cargo
 //
 //   - generic
 //

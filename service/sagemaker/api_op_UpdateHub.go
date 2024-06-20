@@ -11,8 +11,6 @@ import (
 )
 
 // Update a hub.
-//
-// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) UpdateHub(ctx context.Context, params *UpdateHubInput, optFns ...func(*Options)) (*UpdateHubOutput, error) {
 	if params == nil {
 		params = &UpdateHubInput{}

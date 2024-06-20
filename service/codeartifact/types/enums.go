@@ -110,6 +110,7 @@ const (
 	PackageFormatGeneric PackageFormat = "generic"
 	PackageFormatRuby    PackageFormat = "ruby"
 	PackageFormatSwift   PackageFormat = "swift"
+	PackageFormatCargo   PackageFormat = "cargo"
 )
 
 // Values returns all known values for PackageFormat. Note that this can be
@@ -125,6 +126,7 @@ func (PackageFormat) Values() []PackageFormat {
 		"generic",
 		"ruby",
 		"swift",
+		"cargo",
 	}
 }
 

@@ -129,6 +129,8 @@ const (
 	ResourceTypeOpenSearchReservedInstances  ResourceType = "OpenSearchReservedInstances"
 	ResourceTypeRedshiftReservedInstances    ResourceType = "RedshiftReservedInstances"
 	ResourceTypeElastiCacheReservedInstances ResourceType = "ElastiCacheReservedInstances"
+	ResourceTypeRdsDbInstanceStorage         ResourceType = "RdsDbInstanceStorage"
+	ResourceTypeRdsDbInstance                ResourceType = "RdsDbInstance"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -150,6 +152,8 @@ func (ResourceType) Values() []ResourceType {
 		"OpenSearchReservedInstances",
 		"RedshiftReservedInstances",
 		"ElastiCacheReservedInstances",
+		"RdsDbInstanceStorage",
+		"RdsDbInstance",
 	}
 }
 

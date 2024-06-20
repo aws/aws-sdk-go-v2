@@ -1053,6 +1053,134 @@ func awsAwsjson10_deserializeOpErrorExportLicenseRecommendations(response *smith
 	}
 }
 
+type awsAwsjson10_deserializeOpExportRDSDatabaseRecommendations struct {
+}
+
+func (*awsAwsjson10_deserializeOpExportRDSDatabaseRecommendations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpExportRDSDatabaseRecommendations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorExportRDSDatabaseRecommendations(response, &metadata)
+	}
+	output := &ExportRDSDatabaseRecommendationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentExportRDSDatabaseRecommendationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorExportRDSDatabaseRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("MissingAuthenticationToken", errorCode):
+		return awsAwsjson10_deserializeErrorMissingAuthenticationToken(response, errorBody)
+
+	case strings.EqualFold("OptInRequiredException", errorCode):
+		return awsAwsjson10_deserializeErrorOptInRequiredException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsAwsjson10_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations struct {
 }
 
@@ -2379,6 +2507,262 @@ func (m *awsAwsjson10_deserializeOpGetLicenseRecommendations) HandleDeserialize(
 }
 
 func awsAwsjson10_deserializeOpErrorGetLicenseRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("MissingAuthenticationToken", errorCode):
+		return awsAwsjson10_deserializeErrorMissingAuthenticationToken(response, errorBody)
+
+	case strings.EqualFold("OptInRequiredException", errorCode):
+		return awsAwsjson10_deserializeErrorOptInRequiredException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsAwsjson10_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson10_deserializeOpGetRDSDatabaseRecommendationProjectedMetrics struct {
+}
+
+func (*awsAwsjson10_deserializeOpGetRDSDatabaseRecommendationProjectedMetrics) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpGetRDSDatabaseRecommendationProjectedMetrics) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetRDSDatabaseRecommendationProjectedMetrics(response, &metadata)
+	}
+	output := &GetRDSDatabaseRecommendationProjectedMetricsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentGetRDSDatabaseRecommendationProjectedMetricsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorGetRDSDatabaseRecommendationProjectedMetrics(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("MissingAuthenticationToken", errorCode):
+		return awsAwsjson10_deserializeErrorMissingAuthenticationToken(response, errorBody)
+
+	case strings.EqualFold("OptInRequiredException", errorCode):
+		return awsAwsjson10_deserializeErrorOptInRequiredException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsAwsjson10_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson10_deserializeOpGetRDSDatabaseRecommendations struct {
+}
+
+func (*awsAwsjson10_deserializeOpGetRDSDatabaseRecommendations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpGetRDSDatabaseRecommendations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetRDSDatabaseRecommendations(response, &metadata)
+	}
+	output := &GetRDSDatabaseRecommendationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentGetRDSDatabaseRecommendationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorGetRDSDatabaseRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4315,6 +4699,98 @@ func awsAwsjson10_deserializeDocumentCustomizableMetricParameters(v **types.Cust
 					return fmt.Errorf("expected CustomizableMetricThreshold to be of type string, got %T instead", value)
 				}
 				sv.Threshold = types.CustomizableMetricThreshold(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDBStorageConfiguration(v **types.DBStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DBStorageConfiguration
+	if *v == nil {
+		sv = &types.DBStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AllocatedStorage to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = int32(i64)
+			}
+
+		case "iops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableIOPS to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
+			}
+
+		case "maxAllocatedStorage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableMaxAllocatedStorage to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case "storageThroughput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableStorageThroughput to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
+			}
+
+		case "storageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageType to be of type string, got %T instead", value)
+				}
+				sv.StorageType = ptr.String(jtv)
 			}
 
 		default:
@@ -8756,6 +9232,1248 @@ func awsAwsjson10_deserializeDocumentProjectedUtilizationMetrics(v *[]types.Util
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentRDSDatabaseProjectedMetric(v **types.RDSDatabaseProjectedMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSDatabaseProjectedMetric
+	if *v == nil {
+		sv = &types.RDSDatabaseProjectedMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSDBMetricName to be of type string, got %T instead", value)
+				}
+				sv.Name = types.RDSDBMetricName(jtv)
+			}
+
+		case "timestamps":
+			if err := awsAwsjson10_deserializeDocumentTimestamps(&sv.Timestamps, value); err != nil {
+				return err
+			}
+
+		case "values":
+			if err := awsAwsjson10_deserializeDocumentMetricValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDatabaseProjectedMetrics(v *[]types.RDSDatabaseProjectedMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSDatabaseProjectedMetric
+	if *v == nil {
+		cv = []types.RDSDatabaseProjectedMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSDatabaseProjectedMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRDSDatabaseProjectedMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetric(v **types.RDSDatabaseRecommendedOptionProjectedMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSDatabaseRecommendedOptionProjectedMetric
+	if *v == nil {
+		sv = &types.RDSDatabaseRecommendedOptionProjectedMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "projectedMetrics":
+			if err := awsAwsjson10_deserializeDocumentRDSDatabaseProjectedMetrics(&sv.ProjectedMetrics, value); err != nil {
+				return err
+			}
+
+		case "rank":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Rank to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Rank = int32(i64)
+			}
+
+		case "recommendedDBInstanceClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendedDBInstanceClass to be of type string, got %T instead", value)
+				}
+				sv.RecommendedDBInstanceClass = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetrics(v *[]types.RDSDatabaseRecommendedOptionProjectedMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSDatabaseRecommendedOptionProjectedMetric
+	if *v == nil {
+		cv = []types.RDSDatabaseRecommendedOptionProjectedMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSDatabaseRecommendedOptionProjectedMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOption(v **types.RDSDBInstanceRecommendationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSDBInstanceRecommendationOption
+	if *v == nil {
+		sv = &types.RDSDBInstanceRecommendationOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dbInstanceClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DBInstanceClass to be of type string, got %T instead", value)
+				}
+				sv.DbInstanceClass = ptr.String(jtv)
+			}
+
+		case "performanceRisk":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PerformanceRisk = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.PerformanceRisk = f64
+
+				default:
+					return fmt.Errorf("expected PerformanceRisk to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "projectedUtilizationMetrics":
+			if err := awsAwsjson10_deserializeDocumentRDSDBProjectedUtilizationMetrics(&sv.ProjectedUtilizationMetrics, value); err != nil {
+				return err
+			}
+
+		case "rank":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Rank to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Rank = int32(i64)
+			}
+
+		case "savingsOpportunity":
+			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityAfterDiscounts":
+			if err := awsAwsjson10_deserializeDocumentRDSInstanceSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOptions(v *[]types.RDSDBInstanceRecommendationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSDBInstanceRecommendationOption
+	if *v == nil {
+		cv = []types.RDSDBInstanceRecommendationOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSDBInstanceRecommendationOption
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBProjectedUtilizationMetrics(v *[]types.RDSDBUtilizationMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSDBUtilizationMetric
+	if *v == nil {
+		cv = []types.RDSDBUtilizationMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSDBUtilizationMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRDSDBUtilizationMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommendation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSDBRecommendation
+	if *v == nil {
+		sv = &types.RDSDBRecommendation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "currentDBInstanceClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CurrentDBInstanceClass to be of type string, got %T instead", value)
+				}
+				sv.CurrentDBInstanceClass = ptr.String(jtv)
+			}
+
+		case "currentStorageConfiguration":
+			if err := awsAwsjson10_deserializeDocumentDBStorageConfiguration(&sv.CurrentStorageConfiguration, value); err != nil {
+				return err
+			}
+
+		case "effectiveRecommendationPreferences":
+			if err := awsAwsjson10_deserializeDocumentRDSEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
+				return err
+			}
+
+		case "engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Engine to be of type string, got %T instead", value)
+				}
+				sv.Engine = ptr.String(jtv)
+			}
+
+		case "engineVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EngineVersion to be of type string, got %T instead", value)
+				}
+				sv.EngineVersion = ptr.String(jtv)
+			}
+
+		case "idle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Idle to be of type string, got %T instead", value)
+				}
+				sv.Idle = types.Idle(jtv)
+			}
+
+		case "instanceFinding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSInstanceFinding to be of type string, got %T instead", value)
+				}
+				sv.InstanceFinding = types.RDSInstanceFinding(jtv)
+			}
+
+		case "instanceFindingReasonCodes":
+			if err := awsAwsjson10_deserializeDocumentRDSInstanceFindingReasonCodes(&sv.InstanceFindingReasonCodes, value); err != nil {
+				return err
+			}
+
+		case "instanceRecommendationOptions":
+			if err := awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOptions(&sv.InstanceRecommendationOptions, value); err != nil {
+				return err
+			}
+
+		case "lastRefreshTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastRefreshTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastRefreshTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "lookbackPeriodInDays":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LookbackPeriodInDays = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LookbackPeriodInDays = f64
+
+				default:
+					return fmt.Errorf("expected LookBackPeriodInDays to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "storageFinding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSStorageFinding to be of type string, got %T instead", value)
+				}
+				sv.StorageFinding = types.RDSStorageFinding(jtv)
+			}
+
+		case "storageFindingReasonCodes":
+			if err := awsAwsjson10_deserializeDocumentRDSStorageFindingReasonCodes(&sv.StorageFindingReasonCodes, value); err != nil {
+				return err
+			}
+
+		case "storageRecommendationOptions":
+			if err := awsAwsjson10_deserializeDocumentRDSDBStorageRecommendationOptions(&sv.StorageRecommendationOptions, value); err != nil {
+				return err
+			}
+
+		case "tags":
+			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "utilizationMetrics":
+			if err := awsAwsjson10_deserializeDocumentRDSDBUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBRecommendations(v *[]types.RDSDBRecommendation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSDBRecommendation
+	if *v == nil {
+		cv = []types.RDSDBRecommendation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSDBRecommendation
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRDSDBRecommendation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBStorageRecommendationOption(v **types.RDSDBStorageRecommendationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSDBStorageRecommendationOption
+	if *v == nil {
+		sv = &types.RDSDBStorageRecommendationOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "rank":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Rank to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Rank = int32(i64)
+			}
+
+		case "savingsOpportunity":
+			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityAfterDiscounts":
+			if err := awsAwsjson10_deserializeDocumentRDSStorageSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
+				return err
+			}
+
+		case "storageConfiguration":
+			if err := awsAwsjson10_deserializeDocumentDBStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBStorageRecommendationOptions(v *[]types.RDSDBStorageRecommendationOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSDBStorageRecommendationOption
+	if *v == nil {
+		cv = []types.RDSDBStorageRecommendationOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSDBStorageRecommendationOption
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRDSDBStorageRecommendationOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBUtilizationMetric(v **types.RDSDBUtilizationMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSDBUtilizationMetric
+	if *v == nil {
+		sv = &types.RDSDBUtilizationMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSDBMetricName to be of type string, got %T instead", value)
+				}
+				sv.Name = types.RDSDBMetricName(jtv)
+			}
+
+		case "statistic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSDBMetricStatistic to be of type string, got %T instead", value)
+				}
+				sv.Statistic = types.RDSDBMetricStatistic(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected MetricValue to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSDBUtilizationMetrics(v *[]types.RDSDBUtilizationMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSDBUtilizationMetric
+	if *v == nil {
+		cv = []types.RDSDBUtilizationMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSDBUtilizationMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRDSDBUtilizationMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSEffectiveRecommendationPreferences(v **types.RDSEffectiveRecommendationPreferences, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSEffectiveRecommendationPreferences
+	if *v == nil {
+		sv = &types.RDSEffectiveRecommendationPreferences{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cpuVendorArchitectures":
+			if err := awsAwsjson10_deserializeDocumentCpuVendorArchitectures(&sv.CpuVendorArchitectures, value); err != nil {
+				return err
+			}
+
+		case "enhancedInfrastructureMetrics":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnhancedInfrastructureMetrics to be of type string, got %T instead", value)
+				}
+				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
+			}
+
+		case "lookBackPeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LookBackPeriodPreference to be of type string, got %T instead", value)
+				}
+				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
+			}
+
+		case "savingsEstimationMode":
+			if err := awsAwsjson10_deserializeDocumentRDSSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSInstanceEstimatedMonthlySavings(v **types.RDSInstanceEstimatedMonthlySavings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSInstanceEstimatedMonthlySavings
+	if *v == nil {
+		sv = &types.RDSInstanceEstimatedMonthlySavings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Currency to be of type string, got %T instead", value)
+				}
+				sv.Currency = types.Currency(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSInstanceFindingReasonCodes(v *[]types.RDSInstanceFindingReasonCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSInstanceFindingReasonCode
+	if *v == nil {
+		cv = []types.RDSInstanceFindingReasonCode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSInstanceFindingReasonCode
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RDSInstanceFindingReasonCode to be of type string, got %T instead", value)
+			}
+			col = types.RDSInstanceFindingReasonCode(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSInstanceSavingsOpportunityAfterDiscounts(v **types.RDSInstanceSavingsOpportunityAfterDiscounts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSInstanceSavingsOpportunityAfterDiscounts
+	if *v == nil {
+		sv = &types.RDSInstanceSavingsOpportunityAfterDiscounts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentRDSInstanceEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				default:
+					return fmt.Errorf("expected SavingsOpportunityPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSSavingsEstimationMode(v **types.RDSSavingsEstimationMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSSavingsEstimationMode
+	if *v == nil {
+		sv = &types.RDSSavingsEstimationMode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RDSSavingsEstimationModeSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.RDSSavingsEstimationModeSource(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSStorageEstimatedMonthlySavings(v **types.RDSStorageEstimatedMonthlySavings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSStorageEstimatedMonthlySavings
+	if *v == nil {
+		sv = &types.RDSStorageEstimatedMonthlySavings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Currency to be of type string, got %T instead", value)
+				}
+				sv.Currency = types.Currency(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSStorageFindingReasonCodes(v *[]types.RDSStorageFindingReasonCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RDSStorageFindingReasonCode
+	if *v == nil {
+		cv = []types.RDSStorageFindingReasonCode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RDSStorageFindingReasonCode
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RDSStorageFindingReasonCode to be of type string, got %T instead", value)
+			}
+			col = types.RDSStorageFindingReasonCode(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentRDSStorageSavingsOpportunityAfterDiscounts(v **types.RDSStorageSavingsOpportunityAfterDiscounts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RDSStorageSavingsOpportunityAfterDiscounts
+	if *v == nil {
+		sv = &types.RDSStorageSavingsOpportunityAfterDiscounts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "estimatedMonthlySavings":
+			if err := awsAwsjson10_deserializeDocumentRDSStorageEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
+				return err
+			}
+
+		case "savingsOpportunityPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SavingsOpportunityPercentage = f64
+
+				default:
+					return fmt.Errorf("expected SavingsOpportunityPercentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentReasonCodeSummaries(v *[]types.ReasonCodeSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11019,6 +12737,51 @@ func awsAwsjson10_deserializeOpDocumentExportLicenseRecommendationsOutput(v **Ex
 	return nil
 }
 
+func awsAwsjson10_deserializeOpDocumentExportRDSDatabaseRecommendationsOutput(v **ExportRDSDatabaseRecommendationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ExportRDSDatabaseRecommendationsOutput
+	if *v == nil {
+		sv = &ExportRDSDatabaseRecommendationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
+				}
+				sv.JobId = ptr.String(jtv)
+			}
+
+		case "s3Destination":
+			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeOpDocumentGetAutoScalingGroupRecommendationsOutput(v **GetAutoScalingGroupRecommendationsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11571,6 +13334,92 @@ func awsAwsjson10_deserializeOpDocumentGetLicenseRecommendationsOutput(v **GetLi
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentGetRDSDatabaseRecommendationProjectedMetricsOutput(v **GetRDSDatabaseRecommendationProjectedMetricsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetRDSDatabaseRecommendationProjectedMetricsOutput
+	if *v == nil {
+		sv = &GetRDSDatabaseRecommendationProjectedMetricsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "recommendedOptionProjectedMetrics":
+			if err := awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetrics(&sv.RecommendedOptionProjectedMetrics, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentGetRDSDatabaseRecommendationsOutput(v **GetRDSDatabaseRecommendationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetRDSDatabaseRecommendationsOutput
+	if *v == nil {
+		sv = &GetRDSDatabaseRecommendationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errors":
+			if err := awsAwsjson10_deserializeDocumentGetRecommendationErrors(&sv.Errors, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "rdsDBRecommendations":
+			if err := awsAwsjson10_deserializeDocumentRDSDBRecommendations(&sv.RdsDBRecommendations, value); err != nil {
+				return err
 			}
 
 		default:

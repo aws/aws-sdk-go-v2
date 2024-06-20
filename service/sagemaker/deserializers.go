@@ -2880,6 +2880,119 @@ func awsAwsjson11_deserializeOpErrorCreateHub(response *smithyhttp.Response, met
 	}
 }
 
+type awsAwsjson11_deserializeOpCreateHubContentReference struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateHubContentReference) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateHubContentReference) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateHubContentReference(response, &metadata)
+	}
+	output := &CreateHubContentReferenceOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateHubContentReferenceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateHubContentReference(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ResourceInUse", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
+
+	case strings.EqualFold("ResourceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpCreateHumanTaskUi struct {
 }
 
@@ -8723,6 +8836,91 @@ func awsAwsjson11_deserializeOpErrorDeleteHubContent(response *smithyhttp.Respon
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDeleteHubContentReference struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteHubContentReference) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteHubContentReference) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteHubContentReference(response, &metadata)
+	}
+	output := &DeleteHubContentReferenceOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteHubContentReference(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
 
@@ -50251,6 +50449,40 @@ func awsAwsjson11_deserializeDocumentHubContentInfo(v **types.HubContentInfo, va
 				sv.HubContentVersion = ptr.String(jtv)
 			}
 
+		case "OriginalCreationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.OriginalCreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "SageMakerPublicHubContentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SageMakerPublicHubContentArn to be of type string, got %T instead", value)
+				}
+				sv.SageMakerPublicHubContentArn = ptr.String(jtv)
+			}
+
+		case "SupportStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HubContentSupportStatus to be of type string, got %T instead", value)
+				}
+				sv.SupportStatus = types.HubContentSupportStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -53968,6 +54200,46 @@ func awsAwsjson11_deserializeDocumentInferenceExperimentSummary(v **types.Infere
 					return fmt.Errorf("expected InferenceExperimentType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.InferenceExperimentType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInferenceHubAccessConfig(v **types.InferenceHubAccessConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceHubAccessConfig
+	if *v == nil {
+		sv = &types.InferenceHubAccessConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HubContentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HubContentArn to be of type string, got %T instead", value)
+				}
+				sv.HubContentArn = ptr.String(jtv)
 			}
 
 		default:
@@ -71280,6 +71552,11 @@ func awsAwsjson11_deserializeDocumentS3ModelDataSource(v **types.S3ModelDataSour
 				sv.CompressionType = types.ModelCompressionType(jtv)
 			}
 
+		case "HubAccessConfig":
+			if err := awsAwsjson11_deserializeDocumentInferenceHubAccessConfig(&sv.HubAccessConfig, value); err != nil {
+				return err
+			}
+
 		case "ModelAccessConfig":
 			if err := awsAwsjson11_deserializeDocumentModelAccessConfig(&sv.ModelAccessConfig, value); err != nil {
 				return err
@@ -80463,6 +80740,55 @@ func awsAwsjson11_deserializeOpDocumentCreateFlowDefinitionOutput(v **CreateFlow
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentCreateHubContentReferenceOutput(v **CreateHubContentReferenceOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateHubContentReferenceOutput
+	if *v == nil {
+		sv = &CreateHubContentReferenceOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HubArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HubArn to be of type string, got %T instead", value)
+				}
+				sv.HubArn = ptr.String(jtv)
+			}
+
+		case "HubContentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HubContentArn to be of type string, got %T instead", value)
+				}
+				sv.HubContentArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentCreateHubOutput(v **CreateHubOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -86032,6 +86358,33 @@ func awsAwsjson11_deserializeOpDocumentDescribeHubContentOutput(v **DescribeHubC
 					return fmt.Errorf("expected HubName to be of type string, got %T instead", value)
 				}
 				sv.HubName = ptr.String(jtv)
+			}
+
+		case "ReferenceMinVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReferenceMinVersion to be of type string, got %T instead", value)
+				}
+				sv.ReferenceMinVersion = ptr.String(jtv)
+			}
+
+		case "SageMakerPublicHubContentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SageMakerPublicHubContentArn to be of type string, got %T instead", value)
+				}
+				sv.SageMakerPublicHubContentArn = ptr.String(jtv)
+			}
+
+		case "SupportStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HubContentSupportStatus to be of type string, got %T instead", value)
+				}
+				sv.SupportStatus = types.HubContentSupportStatus(jtv)
 			}
 
 		default:

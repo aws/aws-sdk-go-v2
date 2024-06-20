@@ -108,6 +108,79 @@ func (EventName) Values() []EventName {
 	}
 }
 
+type ParticipantRecordingFilterByRecordingState string
+
+// Enum values for ParticipantRecordingFilterByRecordingState
+const (
+	ParticipantRecordingFilterByRecordingStateStarting ParticipantRecordingFilterByRecordingState = "STARTING"
+	ParticipantRecordingFilterByRecordingStateActive   ParticipantRecordingFilterByRecordingState = "ACTIVE"
+	ParticipantRecordingFilterByRecordingStateStopping ParticipantRecordingFilterByRecordingState = "STOPPING"
+	ParticipantRecordingFilterByRecordingStateStopped  ParticipantRecordingFilterByRecordingState = "STOPPED"
+	ParticipantRecordingFilterByRecordingStateFailed   ParticipantRecordingFilterByRecordingState = "FAILED"
+)
+
+// Values returns all known values for ParticipantRecordingFilterByRecordingState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantRecordingFilterByRecordingState) Values() []ParticipantRecordingFilterByRecordingState {
+	return []ParticipantRecordingFilterByRecordingState{
+		"STARTING",
+		"ACTIVE",
+		"STOPPING",
+		"STOPPED",
+		"FAILED",
+	}
+}
+
+type ParticipantRecordingMediaType string
+
+// Enum values for ParticipantRecordingMediaType
+const (
+	ParticipantRecordingMediaTypeAudioVideo ParticipantRecordingMediaType = "AUDIO_VIDEO"
+	ParticipantRecordingMediaTypeAudioOnly  ParticipantRecordingMediaType = "AUDIO_ONLY"
+)
+
+// Values returns all known values for ParticipantRecordingMediaType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantRecordingMediaType) Values() []ParticipantRecordingMediaType {
+	return []ParticipantRecordingMediaType{
+		"AUDIO_VIDEO",
+		"AUDIO_ONLY",
+	}
+}
+
+type ParticipantRecordingState string
+
+// Enum values for ParticipantRecordingState
+const (
+	ParticipantRecordingStateStarting ParticipantRecordingState = "STARTING"
+	ParticipantRecordingStateActive   ParticipantRecordingState = "ACTIVE"
+	ParticipantRecordingStateStopping ParticipantRecordingState = "STOPPING"
+	ParticipantRecordingStateStopped  ParticipantRecordingState = "STOPPED"
+	ParticipantRecordingStateFailed   ParticipantRecordingState = "FAILED"
+	ParticipantRecordingStateDisabled ParticipantRecordingState = "DISABLED"
+)
+
+// Values returns all known values for ParticipantRecordingState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantRecordingState) Values() []ParticipantRecordingState {
+	return []ParticipantRecordingState{
+		"STARTING",
+		"ACTIVE",
+		"STOPPING",
+		"STOPPED",
+		"FAILED",
+		"DISABLED",
+	}
+}
+
 type ParticipantState string
 
 // Enum values for ParticipantState

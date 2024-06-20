@@ -515,6 +515,12 @@ func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberDocument:
+		av := object.Key("document")
+		if err := awsRestjson1_serializeDocumentDocumentBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ContentBlockMemberGuardContent:
 		av := object.Key("guardContent")
 		if err := awsRestjson1_serializeDocumentGuardrailConverseContentBlock(uv.Value, av); err != nil {
@@ -562,6 +568,46 @@ func awsRestjson1_serializeDocumentContentBlocks(v []types.ContentBlock, value s
 		if err := awsRestjson1_serializeDocumentContentBlock(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocumentBlock(v *types.DocumentBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentDocumentSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocumentSource(v types.DocumentSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DocumentSourceMemberBytes:
+		av := object.Key("bytes")
+		av.Base64EncodeBytes(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
@@ -944,6 +990,12 @@ func awsRestjson1_serializeDocumentToolResultContentBlock(v types.ToolResultCont
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ToolResultContentBlockMemberDocument:
+		av := object.Key("document")
+		if err := awsRestjson1_serializeDocumentDocumentBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ToolResultContentBlockMemberImage:
 		av := object.Key("image")
 		if err := awsRestjson1_serializeDocumentImageBlock(&uv.Value, av); err != nil {

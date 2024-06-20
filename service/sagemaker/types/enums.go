@@ -2592,12 +2592,32 @@ func (HubContentStatus) Values() []HubContentStatus {
 	}
 }
 
+type HubContentSupportStatus string
+
+// Enum values for HubContentSupportStatus
+const (
+	HubContentSupportStatusSupported  HubContentSupportStatus = "Supported"
+	HubContentSupportStatusDeprecated HubContentSupportStatus = "Deprecated"
+)
+
+// Values returns all known values for HubContentSupportStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HubContentSupportStatus) Values() []HubContentSupportStatus {
+	return []HubContentSupportStatus{
+		"Supported",
+		"Deprecated",
+	}
+}
+
 type HubContentType string
 
 // Enum values for HubContentType
 const (
-	HubContentTypeModel    HubContentType = "Model"
-	HubContentTypeNotebook HubContentType = "Notebook"
+	HubContentTypeModel          HubContentType = "Model"
+	HubContentTypeNotebook       HubContentType = "Notebook"
+	HubContentTypeModelReference HubContentType = "ModelReference"
 )
 
 // Values returns all known values for HubContentType. Note that this can be
@@ -2608,6 +2628,7 @@ func (HubContentType) Values() []HubContentType {
 	return []HubContentType{
 		"Model",
 		"Notebook",
+		"ModelReference",
 	}
 }
 

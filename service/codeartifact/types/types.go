@@ -49,8 +49,9 @@ type AssociatedPackage struct {
 	//
 	//   - The namespace of a generic package is its namespace .
 	//
-	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
-	//   component, package versions of those formats do not have a namespace.
+	//   - Python, NuGet, Ruby, and Cargo package versions do not contain a
+	//   corresponding component, package versions of those formats do not have a
+	//   namespace.
 	Namespace *string
 
 	//  The name of the associated package.
@@ -186,8 +187,9 @@ type PackageDependency struct {
 	//
 	//   - The namespace of a generic package is its namespace .
 	//
-	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
-	//   component, package versions of those formats do not have a namespace.
+	//   - Python, NuGet, Ruby, and Cargo package versions do not contain a
+	//   corresponding component, package versions of those formats do not have a
+	//   namespace.
 	Namespace *string
 
 	//  The name of the package that this package depends on.
@@ -219,8 +221,9 @@ type PackageDescription struct {
 	//
 	//   - The namespace of a generic package is its namespace .
 	//
-	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
-	//   component, package versions of those formats do not have a namespace.
+	//   - Python, NuGet, Ruby, and Cargo package versions do not contain a
+	//   corresponding component, package versions of those formats do not have a
+	//   namespace.
 	Namespace *string
 
 	// The package origin configuration for the package.
@@ -412,8 +415,9 @@ type PackageSummary struct {
 	//
 	//   - The namespace of a generic package is its namespace .
 	//
-	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
-	//   component, package versions of those formats do not have a namespace.
+	//   - Python, NuGet, Ruby, and Cargo package versions do not contain a
+	//   corresponding component, package versions of those formats do not have a
+	//   namespace.
 	Namespace *string
 
 	// A [PackageOriginConfiguration] object that contains a [PackageOriginRestrictions] object that contains information about the upstream
@@ -455,8 +459,9 @@ type PackageVersionDescription struct {
 	//
 	//   - The namespace of a generic package is its namespace .
 	//
-	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
-	//   component, package versions of those formats do not have a namespace.
+	//   - Python, NuGet, Ruby, and Cargo package versions do not contain a
+	//   corresponding component, package versions of those formats do not have a
+	//   namespace.
 	Namespace *string
 
 	// A [PackageVersionOrigin] object that contains information about how the package version was added to

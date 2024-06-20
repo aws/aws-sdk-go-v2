@@ -40,19 +40,25 @@ type ListParticipantsInput struct {
 	StageArn *string
 
 	// Filters the response list to only show participants who published during the
-	// stage session. Only one of filterByUserId , filterByPublished , or filterByState
-	// can be provided per request.
+	// stage session. Only one of filterByUserId , filterByPublished , filterByState ,
+	// or filterByRecordingState can be provided per request.
 	FilterByPublished bool
 
+	// Filters the response list to only show participants with the specified
+	// recording state. Only one of filterByUserId , filterByPublished , filterByState
+	// , or filterByRecordingState can be provided per request.
+	FilterByRecordingState types.ParticipantRecordingFilterByRecordingState
+
 	// Filters the response list to only show participants in the specified state.
-	// Only one of filterByUserId , filterByPublished , or filterByState can be
-	// provided per request.
+	// Only one of filterByUserId , filterByPublished , filterByState , or
+	// filterByRecordingState can be provided per request.
 	FilterByState types.ParticipantState
 
 	// Filters the response list to match the specified user ID. Only one of
-	// filterByUserId , filterByPublished , or filterByState can be provided per
-	// request. A userId is a customer-assigned name to help identify the token; this
-	// can be used to link a participant to a user in the customer’s own systems.
+	// filterByUserId , filterByPublished , filterByState , or filterByRecordingState
+	// can be provided per request. A userId is a customer-assigned name to help
+	// identify the token; this can be used to link a participant to a user in the
+	// customer’s own systems.
 	FilterByUserId *string
 
 	// Maximum number of results to return. Default: 50.

@@ -270,6 +270,13 @@ func awsRestjson1_serializeOpDocumentCreateStageInput(v *CreateStageInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoParticipantRecordingConfiguration != nil {
+		ok := object.Key("autoParticipantRecordingConfiguration")
+		if err := awsRestjson1_serializeDocumentAutoParticipantRecordingConfiguration(v.AutoParticipantRecordingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -1493,6 +1500,11 @@ func awsRestjson1_serializeOpDocumentListParticipantsInput(v *ListParticipantsIn
 		ok.Boolean(v.FilterByPublished)
 	}
 
+	if len(v.FilterByRecordingState) > 0 {
+		ok := object.Key("filterByRecordingState")
+		ok.String(string(v.FilterByRecordingState))
+	}
+
 	if len(v.FilterByState) > 0 {
 		ok := object.Key("filterByState")
 		ok.String(string(v.FilterByState))
@@ -2245,9 +2257,35 @@ func awsRestjson1_serializeOpDocumentUpdateStageInput(v *UpdateStageInput, value
 		ok.String(*v.Arn)
 	}
 
+	if v.AutoParticipantRecordingConfiguration != nil {
+		ok := object.Key("autoParticipantRecordingConfiguration")
+		if err := awsRestjson1_serializeDocumentAutoParticipantRecordingConfiguration(v.AutoParticipantRecordingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoParticipantRecordingConfiguration(v *types.AutoParticipantRecordingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaTypes != nil {
+		ok := object.Key("mediaTypes")
+		if err := awsRestjson1_serializeDocumentParticipantRecordingMediaTypeList(v.MediaTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageConfigurationArn != nil {
+		ok := object.Key("storageConfigurationArn")
+		ok.String(*v.StorageConfigurationArn)
 	}
 
 	return nil
@@ -2370,6 +2408,17 @@ func awsRestjson1_serializeDocumentLayoutConfiguration(v *types.LayoutConfigurat
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipantRecordingMediaTypeList(v []types.ParticipantRecordingMediaType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

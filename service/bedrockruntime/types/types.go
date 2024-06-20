@@ -24,6 +24,7 @@ type AutoToolChoice struct {
 //
 // The following types satisfy this interface:
 //
+//	ContentBlockMemberDocument
 //	ContentBlockMemberGuardContent
 //	ContentBlockMemberImage
 //	ContentBlockMemberText
@@ -32,6 +33,15 @@ type AutoToolChoice struct {
 type ContentBlock interface {
 	isContentBlock()
 }
+
+// A document to include in the message.
+type ContentBlockMemberDocument struct {
+	Value DocumentBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberDocument) isContentBlock() {}
 
 // Contains the content to assess with the guardrail. If you don't specify
 // guardContent in a call to the Converse API, the guardrail (if passed in the
@@ -323,6 +333,54 @@ type ConverseTrace struct {
 
 	noSmithyDocumentSerde
 }
+
+// A document to include in a message when sending a [Converse] or [ConverseStream] request. You can include
+// up to 5 documents in a request. The maximum document size is 50 MB.
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+type DocumentBlock struct {
+
+	// The format of a document, or its extension.
+	//
+	// This member is required.
+	Format DocumentFormat
+
+	// A name for the document.
+	//
+	// This member is required.
+	Name *string
+
+	// Contains the content of the document.
+	//
+	// This member is required.
+	Source DocumentSource
+
+	noSmithyDocumentSerde
+}
+
+// Contains the content of the document included in a message when sending a [Converse] or [ConverseStream]
+// request or in the response.
+//
+// The following types satisfy this interface:
+//
+//	DocumentSourceMemberBytes
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+type DocumentSource interface {
+	isDocumentSource()
+}
+
+// A base64-encoded string of a UTF-8 encoded file, that is the document to
+// include in the message.
+type DocumentSourceMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentSourceMemberBytes) isDocumentSource() {}
 
 // A behavior assessment of the guardrail policies used in a call to the Converse
 // API.
@@ -952,12 +1010,22 @@ type ToolResultBlock struct {
 //
 // The following types satisfy this interface:
 //
+//	ToolResultContentBlockMemberDocument
 //	ToolResultContentBlockMemberImage
 //	ToolResultContentBlockMemberJson
 //	ToolResultContentBlockMemberText
 type ToolResultContentBlock interface {
 	isToolResultContentBlock()
 }
+
+// A tool result that is a document.
+type ToolResultContentBlockMemberDocument struct {
+	Value DocumentBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolResultContentBlockMemberDocument) isToolResultContentBlock() {}
 
 // A tool result that is an image.
 //
@@ -1073,6 +1141,7 @@ func (*UnknownUnionMember) isContentBlockDelta()             {}
 func (*UnknownUnionMember) isContentBlockStart()             {}
 func (*UnknownUnionMember) isConverseOutput()                {}
 func (*UnknownUnionMember) isConverseStreamOutput()          {}
+func (*UnknownUnionMember) isDocumentSource()                {}
 func (*UnknownUnionMember) isGuardrailConverseContentBlock() {}
 func (*UnknownUnionMember) isImageSource()                   {}
 func (*UnknownUnionMember) isResponseStream()                {}

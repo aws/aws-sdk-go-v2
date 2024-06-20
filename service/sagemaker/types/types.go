@@ -6318,6 +6318,16 @@ type HubContentInfo struct {
 	// The searchable keywords for the hub content.
 	HubContentSearchKeywords []string
 
+	// The date and time when the hub content was originally created, before any
+	// updates or revisions.
+	OriginalCreationTime *time.Time
+
+	// The ARN of the public hub content.
+	SageMakerPublicHubContentArn *string
+
+	// The support status of the hub content.
+	SupportStatus HubContentSupportStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -8856,6 +8866,18 @@ type InferenceExperimentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information specifying which hub contents have accessible
+// deployment options.
+type InferenceHubAccessConfig struct {
+
+	// The ARN of the hub content for which deployment access is allowed.
+	//
+	// This member is required.
+	HubContentArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The metrics for an existing endpoint compared in an Inference Recommender job.
 type InferenceMetrics struct {
 
@@ -8880,11 +8902,6 @@ type InferenceRecommendation struct {
 	// This member is required.
 	EndpointConfiguration *EndpointOutputConfiguration
 
-	// The metrics used to decide what recommendation to make.
-	//
-	// This member is required.
-	Metrics *RecommendationMetrics
-
 	// Defines the model configuration.
 	//
 	// This member is required.
@@ -8895,6 +8912,9 @@ type InferenceRecommendation struct {
 
 	// A timestamp that shows when the benchmark started.
 	InvocationStartTime *time.Time
+
+	// The metrics used to decide what recommendation to make.
+	Metrics *RecommendationMetrics
 
 	// The recommendation ID which uniquely identifies each recommendation.
 	RecommendationId *string
@@ -14804,35 +14824,27 @@ type RecommendationJobVpcConfig struct {
 type RecommendationMetrics struct {
 
 	// Defines the cost per hour for the instance.
-	//
-	// This member is required.
 	CostPerHour *float32
 
 	// Defines the cost per inference for the instance .
-	//
-	// This member is required.
 	CostPerInference *float32
-
-	// The expected maximum number of requests per minute for the instance.
-	//
-	// This member is required.
-	MaxInvocations *int32
-
-	// The expected model latency at maximum invocation per minute for the instance.
-	//
-	// This member is required.
-	ModelLatency *int32
 
 	// The expected CPU utilization at maximum invocations per minute for the instance.
 	//
 	// NaN indicates that the value is not available.
 	CpuUtilization *float32
 
+	// The expected maximum number of requests per minute for the instance.
+	MaxInvocations *int32
+
 	// The expected memory utilization at maximum invocations per minute for the
 	// instance.
 	//
 	// NaN indicates that the value is not available.
 	MemoryUtilization *float32
+
+	// The expected model latency at maximum invocation per minute for the instance.
+	ModelLatency *int32
 
 	// The time it takes to launch new compute resources for a serverless endpoint.
 	// The time can vary depending on the model size, how long it takes to download the
@@ -15489,6 +15501,9 @@ type S3ModelDataSource struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// Configuration information for hub access.
+	HubAccessConfig *InferenceHubAccessConfig
 
 	// Specifies the access configuration file for the ML model. You can explicitly
 	// accept the model end-user license agreement (EULA) within the ModelAccessConfig

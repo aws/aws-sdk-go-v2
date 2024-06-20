@@ -1,0 +1,8 @@
+{
+    "id": "539243ec-88c0-458d-b577-cb5261ebf469",
+    "type": "feature",
+    "description": "Adds support for model references in Hub service, and adds support for cross-account access of Hubs",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

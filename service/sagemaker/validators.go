@@ -530,6 +530,26 @@ func (m *validateOpCreateFlowDefinition) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHubContentReference struct {
+}
+
+func (*validateOpCreateHubContentReference) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHubContentReference) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHubContentReferenceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHubContentReferenceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateHub struct {
 }
 
@@ -1665,6 +1685,26 @@ func (m *validateOpDeleteHubContent) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteHubContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteHubContentReference struct {
+}
+
+func (*validateOpDeleteHubContentReference) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHubContentReference) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHubContentReferenceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHubContentReferenceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5414,6 +5454,10 @@ func addOpCreateFlowDefinitionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateFlowDefinition{}, middleware.After)
 }
 
+func addOpCreateHubContentReferenceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHubContentReference{}, middleware.After)
+}
+
 func addOpCreateHubValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHub{}, middleware.After)
 }
@@ -5640,6 +5684,10 @@ func addOpDeleteFlowDefinitionValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteHubContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHubContent{}, middleware.After)
+}
+
+func addOpDeleteHubContentReferenceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHubContentReference{}, middleware.After)
 }
 
 func addOpDeleteHubValidationMiddleware(stack *middleware.Stack) error {
@@ -9243,6 +9291,21 @@ func validateInferenceExperimentDataStorageConfig(v *types.InferenceExperimentDa
 	}
 }
 
+func validateInferenceHubAccessConfig(v *types.InferenceHubAccessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceHubAccessConfig"}
+	if v.HubContentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceSpecification(v *types.InferenceSpecification) error {
 	if v == nil {
 		return nil
@@ -11497,6 +11560,11 @@ func validateS3ModelDataSource(v *types.S3ModelDataSource) error {
 			invalidParams.AddNested("ModelAccessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HubAccessConfig != nil {
+		if err := validateInferenceHubAccessConfig(v.HubAccessConfig); err != nil {
+			invalidParams.AddNested("HubAccessConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -13382,6 +13450,29 @@ func validateOpCreateFlowDefinitionInput(v *CreateFlowDefinitionInput) error {
 	}
 }
 
+func validateOpCreateHubContentReferenceInput(v *CreateHubContentReferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHubContentReferenceInput"}
+	if v.HubName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubName"))
+	}
+	if v.SageMakerPublicHubContentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SageMakerPublicHubContentArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateHubInput(v *CreateHubInput) error {
 	if v == nil {
 		return nil
@@ -14985,6 +15076,27 @@ func validateOpDeleteHubContentInput(v *DeleteHubContentInput) error {
 	}
 	if v.HubContentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HubContentVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteHubContentReferenceInput(v *DeleteHubContentReferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHubContentReferenceInput"}
+	if v.HubName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubName"))
+	}
+	if len(v.HubContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentType"))
+	}
+	if v.HubContentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubContentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

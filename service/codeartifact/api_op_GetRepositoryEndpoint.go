@@ -15,6 +15,8 @@ import (
 //
 // repository has one endpoint for each package format:
 //
+//   - cargo
+//
 //   - generic
 //
 //   - maven

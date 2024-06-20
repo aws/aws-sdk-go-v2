@@ -1502,6 +1502,61 @@ func (m *awsAwsjson11_serializeOpCreateHub) HandleSerialize(ctx context.Context,
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateHubContentReference struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateHubContentReference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateHubContentReference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateHubContentReferenceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.CreateHubContentReference")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateHubContentReferenceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateHumanTaskUi struct {
 }
 
@@ -4622,6 +4677,61 @@ func (m *awsAwsjson11_serializeOpDeleteHubContent) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteHubContentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteHubContentReference struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteHubContentReference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteHubContentReference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteHubContentReferenceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.DeleteHubContentReference")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteHubContentReferenceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -22960,6 +23070,18 @@ func awsAwsjson11_serializeDocumentInferenceExperimentSchedule(v *types.Inferenc
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInferenceHubAccessConfig(v *types.InferenceHubAccessConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HubContentArn != nil {
+		ok := object.Key("HubContentArn")
+		ok.String(*v.HubContentArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInferenceSpecification(v *types.InferenceSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26970,6 +27092,13 @@ func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource,
 		ok.String(string(v.CompressionType))
 	}
 
+	if v.HubAccessConfig != nil {
+		ok := object.Key("HubAccessConfig")
+		if err := awsAwsjson11_serializeDocumentInferenceHubAccessConfig(v.HubAccessConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelAccessConfig != nil {
 		ok := object.Key("ModelAccessConfig")
 		if err := awsAwsjson11_serializeDocumentModelAccessConfig(v.ModelAccessConfig, ok); err != nil {
@@ -30061,6 +30190,40 @@ func awsAwsjson11_serializeOpDocumentCreateFlowDefinitionInput(v *CreateFlowDefi
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateHubContentReferenceInput(v *CreateHubContentReferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HubContentName != nil {
+		ok := object.Key("HubContentName")
+		ok.String(*v.HubContentName)
+	}
+
+	if v.HubName != nil {
+		ok := object.Key("HubName")
+		ok.String(*v.HubName)
+	}
+
+	if v.MinVersion != nil {
+		ok := object.Key("MinVersion")
+		ok.String(*v.MinVersion)
+	}
+
+	if v.SageMakerPublicHubContentArn != nil {
+		ok := object.Key("SageMakerPublicHubContentArn")
+		ok.String(*v.SageMakerPublicHubContentArn)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateHubInput(v *CreateHubInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32358,6 +32521,28 @@ func awsAwsjson11_serializeOpDocumentDeleteHubContentInput(v *DeleteHubContentIn
 	if v.HubContentVersion != nil {
 		ok := object.Key("HubContentVersion")
 		ok.String(*v.HubContentVersion)
+	}
+
+	if v.HubName != nil {
+		ok := object.Key("HubName")
+		ok.String(*v.HubName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteHubContentReferenceInput(v *DeleteHubContentReferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HubContentName != nil {
+		ok := object.Key("HubContentName")
+		ok.String(*v.HubContentName)
+	}
+
+	if len(v.HubContentType) > 0 {
+		ok := object.Key("HubContentType")
+		ok.String(string(v.HubContentType))
 	}
 
 	if v.HubName != nil {

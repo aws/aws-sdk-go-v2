@@ -112,6 +112,11 @@ func validateContentBlock(v types.ContentBlock) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContentBlock"}
 	switch uv := v.(type) {
+	case *types.ContentBlockMemberDocument:
+		if err := validateDocumentBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[document]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberGuardContent:
 		if err := validateGuardrailConverseContentBlock(uv.Value); err != nil {
 			invalidParams.AddNested("[guardContent]", err.(smithy.InvalidParamsError))
@@ -149,6 +154,27 @@ func validateContentBlocks(v []types.ContentBlock) error {
 		if err := validateContentBlock(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentBlock(v *types.DocumentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentBlock"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -425,6 +451,11 @@ func validateToolResultContentBlock(v types.ToolResultContentBlock) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ToolResultContentBlock"}
 	switch uv := v.(type) {
+	case *types.ToolResultContentBlockMemberDocument:
+		if err := validateDocumentBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[document]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ToolResultContentBlockMemberImage:
 		if err := validateImageBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[image]", err.(smithy.InvalidParamsError))

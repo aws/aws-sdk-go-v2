@@ -92,8 +92,9 @@ type DisposePackageVersionsInput struct {
 	//
 	//   - The namespace of a generic package is its namespace .
 	//
-	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
-	//   component, package versions of those formats do not have a namespace.
+	//   - Python, NuGet, Ruby, and Cargo package versions do not contain a
+	//   corresponding component, package versions of those formats do not have a
+	//   namespace.
 	Namespace *string
 
 	//  The revisions of the package versions you want to dispose.
