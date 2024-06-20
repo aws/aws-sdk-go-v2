@@ -1,8 +1,0 @@
-{
-    "id": "e8ad5f0f-7838-49c3-adf6-a4d6d5d9821f",
-    "type": "documentation",
-    "description": "Doc-only update for DynamoDB. Fixed Important note in 6 Global table APIs - CreateGlobalTable, DescribeGlobalTable, DescribeGlobalTableSettings, ListGlobalTables, UpdateGlobalTable, and UpdateGlobalTableSettings.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

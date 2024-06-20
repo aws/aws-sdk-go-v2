@@ -1,8 +1,0 @@
-{
-    "id": "02fcaf2a-425f-479c-a53e-4f396324c634",
-    "type": "feature",
-    "description": "IVS Real-Time now offers customers the ability to record individual stage participants to S3.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "7c3f20d6-fa41-4843-9034-de5f6a7c6ab3",
-    "type": "feature",
-    "description": "Fix Glue paginators for Jobs, JobRuns, Triggers, Blueprints and Workflows.",
-    "modules": [
-        "service/glue"
-    ]
-}

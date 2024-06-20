@@ -1,3 +1,7 @@
+# v1.6.0 (2024-06-20)
+
+* **Feature**: This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+
 # v1.5.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

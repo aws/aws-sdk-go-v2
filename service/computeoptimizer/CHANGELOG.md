@@ -1,3 +1,7 @@
+# v1.36.0 (2024-06-20)
+
+* **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+
 # v1.35.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

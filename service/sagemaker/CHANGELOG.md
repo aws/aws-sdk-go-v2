@@ -1,3 +1,7 @@
+# v1.147.0 (2024-06-20)
+
+* **Feature**: Adds support for model references in Hub service, and adds support for cross-account access of Hubs
+
 # v1.146.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

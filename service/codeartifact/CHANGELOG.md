@@ -1,3 +1,7 @@
+# v1.29.0 (2024-06-20)
+
+* **Feature**: Add support for the Cargo package format.
+
 # v1.28.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

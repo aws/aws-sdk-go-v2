@@ -1,3 +1,26 @@
+# Release (2024-06-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.11.0](service/bedrockruntime/CHANGELOG.md#v1110-2024-06-20)
+  * **Feature**: This release adds document support to Converse and ConverseStream APIs
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.29.0](service/codeartifact/CHANGELOG.md#v1290-2024-06-20)
+  * **Feature**: Add support for the Cargo package format.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.36.0](service/computeoptimizer/CHANGELOG.md#v1360-2024-06-20)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.6.0](service/costoptimizationhub/CHANGELOG.md#v160-2024-06-20)
+  * **Feature**: This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.33.2](service/dynamodb/CHANGELOG.md#v1332-2024-06-20)
+  * **Documentation**: Doc-only update for DynamoDB. Fixed Important note in 6 Global table APIs - CreateGlobalTable, DescribeGlobalTable, DescribeGlobalTableSettings, ListGlobalTables, UpdateGlobalTable, and UpdateGlobalTableSettings.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.15.0](service/ivsrealtime/CHANGELOG.md#v1150-2024-06-20)
+  * **Feature**: IVS Real-Time now offers customers the ability to record individual stage participants to S3.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.147.0](service/sagemaker/CHANGELOG.md#v11470-2024-06-20)
+  * **Feature**: Adds support for model references in Hub service, and adds support for cross-account access of Hubs
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.50.2](service/securityhub/CHANGELOG.md#v1502-2024-06-20)
+  * **Documentation**: Documentation updates for Security Hub
+
 # Release (2024-06-19)
 
 ## General Highlights

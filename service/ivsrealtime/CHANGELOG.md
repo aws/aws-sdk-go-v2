@@ -1,3 +1,7 @@
+# v1.15.0 (2024-06-20)
+
+* **Feature**: IVS Real-Time now offers customers the ability to record individual stage participants to S3.
+
 # v1.14.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

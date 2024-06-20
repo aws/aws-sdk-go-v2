@@ -1,3 +1,7 @@
+# v1.50.2 (2024-06-20)
+
+* **Documentation**: Documentation updates for Security Hub
+
 # v1.50.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

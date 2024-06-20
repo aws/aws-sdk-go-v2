@@ -1,3 +1,7 @@
+# v1.33.2 (2024-06-20)
+
+* **Documentation**: Doc-only update for DynamoDB. Fixed Important note in 6 Global table APIs - CreateGlobalTable, DescribeGlobalTable, DescribeGlobalTableSettings, ListGlobalTables, UpdateGlobalTable, and UpdateGlobalTableSettings.
+
 # v1.33.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions
