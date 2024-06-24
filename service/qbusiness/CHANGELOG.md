@@ -1,3 +1,7 @@
+# v1.8.0 (2024-06-24)
+
+* **Feature**: Allow enable/disable Q Apps when creating/updating a Q application; Return the Q Apps enablement information when getting a Q application.
+
 # v1.7.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

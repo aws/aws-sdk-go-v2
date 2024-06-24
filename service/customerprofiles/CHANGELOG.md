@@ -1,3 +1,7 @@
+# v1.38.0 (2024-06-24)
+
+* **Feature**: This release includes changes to ProfileObjectType APIs, adds functionality top set and get capacity for profile object types.
+
 # v1.37.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

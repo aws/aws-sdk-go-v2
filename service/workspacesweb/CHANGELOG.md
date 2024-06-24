@@ -1,3 +1,7 @@
+# v1.20.0 (2024-06-24)
+
+* **Feature**: Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.
+
 # v1.19.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

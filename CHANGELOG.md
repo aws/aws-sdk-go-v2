@@ -1,3 +1,13 @@
+# Release (2024-06-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.38.0](service/customerprofiles/CHANGELOG.md#v1380-2024-06-24)
+  * **Feature**: This release includes changes to ProfileObjectType APIs, adds functionality top set and get capacity for profile object types.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.8.0](service/qbusiness/CHANGELOG.md#v180-2024-06-24)
+  * **Feature**: Allow enable/disable Q Apps when creating/updating a Q application; Return the Q Apps enablement information when getting a Q application.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.20.0](service/workspacesweb/CHANGELOG.md#v1200-2024-06-24)
+  * **Feature**: Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.
+
 # Release (2024-06-20)
 
 ## General Highlights

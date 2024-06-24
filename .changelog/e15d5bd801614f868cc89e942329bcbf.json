@@ -1,8 +1,0 @@
-{
-    "id": "e15d5bd8-0161-4f86-8cc8-9e942329bcbf",
-    "type": "bugfix",
-    "description": "Remove broken opsworks integration test.",
-    "modules": [
-        "service/internal/integrationtest"
-    ]
-}

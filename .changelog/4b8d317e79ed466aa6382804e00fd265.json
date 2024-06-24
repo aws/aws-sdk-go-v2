@@ -1,8 +1,0 @@
-{
-    "id": "4b8d317e-79ed-466a-a638-2804e00fd265",
-    "type": "feature",
-    "description": "Add sensitive trait to SSM IPAddress property for CloudTrail redaction",
-    "modules": [
-        "service/ssm"
-    ]
-}
