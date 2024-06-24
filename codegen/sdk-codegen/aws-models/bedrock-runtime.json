@@ -1368,7 +1368,7 @@
                         "smithy.api#documentation": "<p>A name for the document.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 64
+                            "max": 200
                         },
                         "smithy.api#required": {}
                     }

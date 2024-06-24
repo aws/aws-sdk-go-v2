@@ -760,7 +760,7 @@
                 "containsAny": {
                     "target": "com.amazonaws.qbusiness#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns <code>true</code> when a document contains any of the specified document\n            attributes or metadata fields. Supported for the following <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html\">document attribute value types</a>: <code>dateValue</code>,\n                <code>longValue</code>, <code>stringListValue</code> and\n            <code>stringValue</code>.</p>"
+                        "smithy.api#documentation": "<p>Returns <code>true</code> when a document contains any of the specified document\n            attributes or metadata fields. Supported for the following <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html\">document attribute value types</a>:\n                <code>stringListValue</code>.</p>"
                     }
                 },
                 "greaterThan": {
@@ -1539,7 +1539,7 @@
                 "parentMessageId": {
                     "target": "com.amazonaws.qbusiness#MessageId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the previous end user text input message in a conversation.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the previous system message in a conversation.</p>"
                     }
                 },
                 "attributeFilter": {
@@ -1878,7 +1878,7 @@
                     "kms:DescribeKey",
                     "kms:CreateGrant"
                 ],
-                "smithy.api#documentation": "<p>Creates an Amazon Q Business application.</p>\n         <note>\n            <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are \n                also available in Amazon Q Business Lite. For information on what's included in \n                Amazon Q Business Lite and what's included in \n                Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers\">Amazon Q Business tiers</a>. \n                You must use the Amazon Q Business console to assign subscription tiers to users.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates an Amazon Q Business application.</p>\n         <note>\n            <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are \n                also available in Amazon Q Business Lite. For information on what's included in \n                Amazon Q Business Lite and what's included in \n                Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers\">Amazon Q Business tiers</a>. \n                You must use the Amazon Q Business console to assign subscription tiers to users.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/applications",
                     "method": "POST"
@@ -1939,6 +1939,12 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>An option to allow end users to upload files directly during chat.</p>"
+                    }
+                },
+                "qAppsConfiguration": {
+                    "target": "com.amazonaws.qbusiness#QAppsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web experience.</p>"
                     }
                 }
             },
@@ -2178,7 +2184,7 @@
                 "type": {
                     "target": "com.amazonaws.qbusiness#IndexType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The index type that's suitable for your needs. For more information on what's included\n            in each type of index or index tier, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers\">Amazon Q Business\n            tiers</a>.</p>"
+                        "smithy.api#documentation": "<p>The index type that's suitable for your needs. For more information on what's included\n            in each type of index, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers\">Amazon Q Business\n            tiers</a>.</p>"
                     }
                 },
                 "description": {
@@ -5245,6 +5251,12 @@
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>Settings for whether end users can upload files directly during chat.</p>"
+                    }
+                },
+                "qAppsConfiguration": {
+                    "target": "com.amazonaws.qbusiness#QAppsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for whether end users can create and use Amazon Q Apps in the web experience.</p>"
                     }
                 }
             },
@@ -9046,6 +9058,38 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qbusiness#QAppsConfiguration": {
+            "type": "structure",
+            "members": {
+                "qAppsControlMode": {
+                    "target": "com.amazonaws.qbusiness#QAppsControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status information about whether end users can create and use Amazon Q Apps in the web experience.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information about Amazon Q Apps. (preview feature)</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#QAppsControlMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.qbusiness#ReadAccessType": {
             "type": "enum",
             "members": {
@@ -10370,6 +10414,12 @@
                     "target": "com.amazonaws.qbusiness#AttachmentsConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>An option to allow end users to upload files directly during chat.</p>"
+                    }
+                },
+                "qAppsConfiguration": {
+                    "target": "com.amazonaws.qbusiness#QAppsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web experience.</p>"
                     }
                 }
             },
