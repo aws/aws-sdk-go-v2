@@ -2421,6 +2421,21 @@ func validatePrincipalUser(v *types.PrincipalUser) error {
 	}
 }
 
+func validateQAppsConfiguration(v *types.QAppsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QAppsConfiguration"}
+	if len(v.QAppsControlMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("QAppsControlMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRetrieverConfiguration(v types.RetrieverConfiguration) error {
 	if v == nil {
 		return nil
@@ -2807,6 +2822,11 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 	if v.AttachmentsConfiguration != nil {
 		if err := validateAttachmentsConfiguration(v.AttachmentsConfiguration); err != nil {
 			invalidParams.AddNested("AttachmentsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QAppsConfiguration != nil {
+		if err := validateQAppsConfiguration(v.QAppsConfiguration); err != nil {
+			invalidParams.AddNested("QAppsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3670,6 +3690,11 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	if v.AttachmentsConfiguration != nil {
 		if err := validateAttachmentsConfiguration(v.AttachmentsConfiguration); err != nil {
 			invalidParams.AddNested("AttachmentsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QAppsConfiguration != nil {
+		if err := validateQAppsConfiguration(v.QAppsConfiguration); err != nil {
+			invalidParams.AddNested("QAppsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

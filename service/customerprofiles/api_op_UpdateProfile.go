@@ -44,7 +44,7 @@ type UpdateProfileInput struct {
 	// This member is required.
 	ProfileId *string
 
-	// A unique account number that you have given to the customer.
+	// An account number that you have given to the customer.
 	AccountNumber *string
 
 	// Any additional information relevant to the customer’s profile.

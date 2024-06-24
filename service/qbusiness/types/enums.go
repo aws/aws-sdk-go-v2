@@ -691,6 +691,25 @@ func (PluginType) Values() []PluginType {
 	}
 }
 
+type QAppsControlMode string
+
+// Enum values for QAppsControlMode
+const (
+	QAppsControlModeEnabled  QAppsControlMode = "ENABLED"
+	QAppsControlModeDisabled QAppsControlMode = "DISABLED"
+)
+
+// Values returns all known values for QAppsControlMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QAppsControlMode) Values() []QAppsControlMode {
+	return []QAppsControlMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ReadAccessType string
 
 // Enum values for ReadAccessType

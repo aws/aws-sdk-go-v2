@@ -1,0 +1,8 @@
+{
+    "id": "6d127882-839e-45bc-8c18-63e4ad796d96",
+    "type": "feature",
+    "description": "Fix EC2 multi-protocol info in models.",
+    "modules": [
+        "service/ec2"
+    ]
+}

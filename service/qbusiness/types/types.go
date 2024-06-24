@@ -356,8 +356,7 @@ type AttributeFilter struct {
 	ContainsAll *DocumentAttribute
 
 	// Returns true when a document contains any of the specified document attributes
-	// or metadata fields. Supported for the following [document attribute value types]: dateValue , longValue ,
-	// stringListValue and stringValue .
+	// or metadata fields. Supported for the following [document attribute value types]: stringListValue .
 	//
 	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	ContainsAny *DocumentAttribute
@@ -1885,6 +1884,18 @@ type PrincipalUser struct {
 
 	// The type of group.
 	MembershipType MembershipType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information about Amazon Q Apps. (preview feature)
+type QAppsConfiguration struct {
+
+	// Status information about whether end users can create and use Amazon Q Apps in
+	// the web experience.
+	//
+	// This member is required.
+	QAppsControlMode QAppsControlMode
 
 	noSmithyDocumentSerde
 }

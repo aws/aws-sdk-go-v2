@@ -47,6 +47,10 @@ type UpdateApplicationInput struct {
 	// either creating for—or connecting to—your Amazon Q Business application.
 	IdentityCenterInstanceArn *string
 
+	// An option to allow end users to create and use Amazon Q Apps in the web
+	// experience.
+	QAppsConfiguration *types.QAppsConfiguration
+
 	// An Amazon Web Services Identity and Access Management (IAM) role that gives
 	// Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
 	RoleArn *string

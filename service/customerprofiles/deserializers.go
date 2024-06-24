@@ -4632,6 +4632,32 @@ func awsRestjson1_deserializeOpDocumentGetProfileObjectTypeOutput(v **GetProfile
 				}
 			}
 
+		case "MaxAvailableProfileObjectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAvailableProfileObjectCount = ptr.Int32(int32(i64))
+			}
+
+		case "MaxProfileObjectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxProfileObjectCount = ptr.Int32(int32(i64))
+			}
+
 		case "ObjectTypeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8493,6 +8519,32 @@ func awsRestjson1_deserializeOpDocumentPutProfileObjectTypeOutput(v **PutProfile
 				}
 			}
 
+		case "MaxAvailableProfileObjectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAvailableProfileObjectCount = ptr.Int32(int32(i64))
+			}
+
+		case "MaxProfileObjectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxProfileObjectCount = ptr.Int32(int32(i64))
+			}
+
 		case "ObjectTypeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12259,6 +12311,32 @@ func awsRestjson1_deserializeDocumentListProfileObjectTypeItem(v **types.ListPro
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MaxAvailableProfileObjectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAvailableProfileObjectCount = ptr.Int32(int32(i64))
+			}
+
+		case "MaxProfileObjectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected minSize1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxProfileObjectCount = ptr.Int32(int32(i64))
 			}
 
 		case "ObjectTypeName":

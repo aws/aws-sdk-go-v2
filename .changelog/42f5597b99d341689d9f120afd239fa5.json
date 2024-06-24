@@ -1,0 +1,8 @@
+{
+    "id": "42f5597b-99d3-4168-9d9f-120afd239fa5",
+    "type": "feature",
+    "description": "Increases Converse API's document name length",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

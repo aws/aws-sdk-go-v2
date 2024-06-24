@@ -58,7 +58,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.39.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.32.1
-	github.com/aws/aws-sdk-go-v2/service/opsworks v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/polly v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/rds v1.80.1

@@ -1,0 +1,8 @@
+{
+    "id": "ddc7ef2d-e158-4631-9ab2-bec8c72444ad",
+    "type": "feature",
+    "description": "Allow enable/disable Q Apps when creating/updating a Q application; Return the Q Apps enablement information when getting a Q application.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

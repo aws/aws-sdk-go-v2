@@ -19,7 +19,7 @@ import (
 // Business Pro, see [Amazon Q Business tiers]. You must use the Amazon Q Business console to assign
 // subscription tiers to users.
 //
-// [Amazon Q Business tiers]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
+// [Amazon Q Business tiers]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -59,6 +59,10 @@ type CreateApplicationInput struct {
 	//  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
 	// either creating for—or connecting to—your Amazon Q Business application.
 	IdentityCenterInstanceArn *string
+
+	// An option to allow end users to create and use Amazon Q Apps in the web
+	// experience.
+	QAppsConfiguration *types.QAppsConfiguration
 
 	//  The Amazon Resource Name (ARN) of an IAM role with permissions to access your
 	// Amazon CloudWatch logs and metrics.

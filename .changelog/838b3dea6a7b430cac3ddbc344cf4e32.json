@@ -1,0 +1,8 @@
+{
+    "id": "838b3dea-6a7b-430c-ac3d-dbc344cf4e32",
+    "type": "feature",
+    "description": "Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

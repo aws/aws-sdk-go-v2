@@ -124,6 +124,9 @@ type CreateIdentityProviderInput struct {
 	// Amazon Web Services SDK.
 	ClientToken *string
 
+	// The tags to add to the identity provider resource. A tag is a key-value pair.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

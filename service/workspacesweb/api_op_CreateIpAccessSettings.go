@@ -56,7 +56,7 @@ type CreateIpAccessSettingsInput struct {
 	// The display name of the IP access settings.
 	DisplayName *string
 
-	// The tags to add to the browser settings resource. A tag is a key-value pair.
+	// The tags to add to the IP access settings resource. A tag is a key-value pair.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
