@@ -50,6 +50,7 @@ type UpdateKeysInput struct {
 }
 
 func (in *UpdateKeysInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.KvsARN = in.KvsARN
 
 }

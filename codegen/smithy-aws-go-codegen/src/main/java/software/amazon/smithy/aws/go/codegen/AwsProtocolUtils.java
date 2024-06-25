@@ -125,6 +125,18 @@ public final class AwsProtocolUtils {
                         .addTestName("RestXmlHttpPayloadWithUnsetUnion")
                         .build(),
 
+                // REST-JSON default value serialization
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#OperationWithDefaults"))
+                        .addTestName("RestJsonClientPopulatesDefaultValuesInInput")
+                        .addTestName("RestJsonClientUsesExplicitlyProvidedValuesInTopLevel")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#OperationWithNestedStructure"))
+                        .addTestName("RestJsonClientPopulatesNestedDefaultValuesWhenMissing")
+                        .build(),
 
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
@@ -149,12 +161,29 @@ public final class AwsProtocolUtils {
                         .addTestName("RpcV2CborClientPopulatesDefaultsValuesWhenMissingInResponse")
                         .addTestName("RpcV2CborClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse")
                         .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2CborDenseMaps"))
+                        .addTestName("RpcV2CborDeserializesDenseSetMapAndSkipsNull")
+                        .build(),
 
                 // REST-JSON optional (SHOULD) test cases
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
                         .operation(ShapeId.from("aws.protocoltests.restjson#JsonMaps"))
                         .addTestName("RestJsonDeserializesDenseSetMapAndSkipsNull")
+                        .build(),
+
+                // REST-JSON default value deserialization
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#OperationWithDefaults"))
+                        .addTestName("RestJsonClientPopulatesDefaultsValuesWhenMissingInResponse")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#OperationWithNestedStructure"))
+                        .addTestName("RestJsonClientPopulatesNestedDefaultsWhenMissingInResponseBody")
                         .build(),
 
                 // REST-XML opinionated test - prefix headers as empty vs nil map

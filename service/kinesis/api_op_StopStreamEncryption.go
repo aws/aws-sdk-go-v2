@@ -86,6 +86,7 @@ type StopStreamEncryptionInput struct {
 }
 
 func (in *StopStreamEncryptionInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

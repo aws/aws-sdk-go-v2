@@ -42,6 +42,9 @@ func TestClient_HttpStringPayload_awsRestxmlSerialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/StringPayload",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"text/plain"},
+			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderBytes(actual, []byte(`rawstring`))
 			},
@@ -121,7 +124,10 @@ func TestClient_HttpStringPayload_awsRestxmlDeserialize(t *testing.T) {
 	}{
 		"RestXmlStringPayloadResponse": {
 			StatusCode: 200,
-			Body:       []byte(`rawstring`),
+			Header: http.Header{
+				"Content-Type": []string{"text/plain"},
+			},
+			Body: []byte(`rawstring`),
 			ExpectResult: &HttpStringPayloadOutput{
 				Payload: ptr.String("rawstring"),
 			},

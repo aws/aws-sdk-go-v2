@@ -58,6 +58,7 @@ type GetStorageLensConfigurationTaggingInput struct {
 }
 
 func (in *GetStorageLensConfigurationTaggingInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

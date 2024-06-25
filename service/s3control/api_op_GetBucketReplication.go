@@ -108,6 +108,7 @@ type GetBucketReplicationInput struct {
 }
 
 func (in *GetBucketReplicationInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket
 	p.RequiresAccountId = ptr.Bool(true)

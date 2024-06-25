@@ -123,6 +123,7 @@ type GetShardIteratorInput struct {
 }
 
 func (in *GetShardIteratorInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("data")
 }

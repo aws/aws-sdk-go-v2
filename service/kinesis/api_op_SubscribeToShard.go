@@ -75,6 +75,7 @@ type SubscribeToShardInput struct {
 }
 
 func (in *SubscribeToShardInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.ConsumerARN = in.ConsumerARN
 	p.OperationType = ptr.String("data")
 }

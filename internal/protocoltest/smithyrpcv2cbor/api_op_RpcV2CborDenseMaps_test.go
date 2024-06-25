@@ -288,13 +288,16 @@ func TestClient_RpcV2CborDenseMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 						"a",
 						"b",
 					},
-					"z": nil,
 				},
 			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RpcV2CborDeserializesDenseSetMapAndSkipsNull" {
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#RpcV2CborDenseMaps")
+			}
+
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {

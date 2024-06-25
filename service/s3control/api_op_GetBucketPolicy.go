@@ -102,6 +102,7 @@ type GetBucketPolicyInput struct {
 }
 
 func (in *GetBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket
 	p.RequiresAccountId = ptr.Bool(true)

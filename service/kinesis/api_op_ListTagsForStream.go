@@ -55,6 +55,7 @@ type ListTagsForStreamInput struct {
 }
 
 func (in *ListTagsForStreamInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

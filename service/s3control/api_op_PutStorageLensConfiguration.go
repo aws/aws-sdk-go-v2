@@ -70,6 +70,7 @@ type PutStorageLensConfigurationInput struct {
 }
 
 func (in *PutStorageLensConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

@@ -38,6 +38,7 @@ type DescribeKeyValueStoreInput struct {
 }
 
 func (in *DescribeKeyValueStoreInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.KvsARN = in.KvsARN
 
 }

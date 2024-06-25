@@ -48,6 +48,7 @@ type DeleteKeyInput struct {
 }
 
 func (in *DeleteKeyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.KvsARN = in.KvsARN
 
 }

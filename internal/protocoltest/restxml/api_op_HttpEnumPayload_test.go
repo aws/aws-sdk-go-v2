@@ -42,6 +42,9 @@ func TestClient_HttpEnumPayload_awsRestxmlSerialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/EnumPayload",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"text/plain"},
+			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderBytes(actual, []byte(`enumvalue`))
 			},
@@ -121,7 +124,10 @@ func TestClient_HttpEnumPayload_awsRestxmlDeserialize(t *testing.T) {
 	}{
 		"RestXmlEnumPayloadResponse": {
 			StatusCode: 200,
-			Body:       []byte(`enumvalue`),
+			Header: http.Header{
+				"Content-Type": []string{"text/plain"},
+			},
+			Body: []byte(`enumvalue`),
 			ExpectResult: &HttpEnumPayloadOutput{
 				Payload: types.StringEnum("enumvalue"),
 			},

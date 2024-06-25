@@ -53,7 +53,7 @@ func TestClient_XmlEnums_awsEc2queryDeserialize(t *testing.T) {
 			            <value>0</value>
 			        </entry>
 			    </fooEnumMap>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlEnumsResponse>
 			`),
 			ExpectResult: &XmlEnumsOutput{

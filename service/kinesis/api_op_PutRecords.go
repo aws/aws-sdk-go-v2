@@ -115,6 +115,7 @@ type PutRecordsInput struct {
 }
 
 func (in *PutRecordsInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("data")
 }
