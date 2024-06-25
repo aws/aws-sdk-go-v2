@@ -1,3 +1,15 @@
+# Release (2024-06-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.42.0](service/autoscaling/CHANGELOG.md#v1420-2024-06-25)
+  * **Feature**: Doc only update for Auto Scaling's TargetTrackingMetricDataQuery
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.166.0](service/ec2/CHANGELOG.md#v11660-2024-06-25)
+  * **Feature**: This release is for the launch of the new u7ib-12tb.224xlarge, R8g, c7gn.metal and mac2-m1ultra.metal instance types
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.28.0](service/networkmanager/CHANGELOG.md#v1280-2024-06-25)
+  * **Feature**: This is model changes & documentation update for the Asynchronous Error Reporting feature for AWS Cloud WAN. This feature allows customers to view errors that occur while their resources are being provisioned, enabling customers to fix their resources without needing external support.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.7.0](service/workspacesthinclient/CHANGELOG.md#v170-2024-06-25)
+  * **Feature**: This release adds the deviceCreationTags field to CreateEnvironment API input, UpdateEnvironment API input and GetEnvironment API output.
+
 # Release (2024-06-24)
 
 ## Module Highlights

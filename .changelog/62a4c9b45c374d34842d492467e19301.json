@@ -1,8 +1,0 @@
-{
-    "id": "62a4c9b4-5c37-4d34-842d-492467e19301",
-    "type": "feature",
-    "description": "This release adds the deviceCreationTags field to CreateEnvironment API input, UpdateEnvironment API input and GetEnvironment API output.",
-    "modules": [
-        "service/workspacesthinclient"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.42.0 (2024-06-25)
+
+* **Feature**: Doc only update for Auto Scaling's TargetTrackingMetricDataQuery
+
 # v1.41.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

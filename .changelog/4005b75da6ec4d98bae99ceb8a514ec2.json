@@ -1,8 +1,0 @@
-{
-    "id": "4005b75d-a6ec-4d98-bae9-9ceb8a514ec2",
-    "type": "feature",
-    "description": "This release is for the launch of the new u7ib-12tb.224xlarge, R8g, c7gn.metal and mac2-m1ultra.metal instance types",
-    "modules": [
-        "service/ec2"
-    ]
-}

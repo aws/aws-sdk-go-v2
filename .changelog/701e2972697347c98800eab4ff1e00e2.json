@@ -1,8 +1,0 @@
-{
-    "id": "701e2972-6973-47c9-8800-eab4ff1e00e2",
-    "type": "feature",
-    "description": "This is model changes \u0026 documentation update for the Asynchronous Error Reporting feature for AWS Cloud WAN. This feature allows customers to view errors that occur while their resources are being provisioned, enabling customers to fix their resources without needing external support.",
-    "modules": [
-        "service/networkmanager"
-    ]
-}
