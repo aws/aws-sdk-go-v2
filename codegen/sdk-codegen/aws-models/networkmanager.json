@@ -638,10 +638,113 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the attachment was last updated.</p>"
                     }
+                },
+                "LastModificationErrors": {
+                    "target": "com.amazonaws.networkmanager#AttachmentErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the error associated with the attachment request.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a core network attachment.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#AttachmentError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.networkmanager#AttachmentErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the attachment request. </p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.networkmanager#ServerSideString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the error <code>code</code>.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the requested attachment resource.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.networkmanager#ServerSideString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the attachment request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the error associated with an attachment request.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#AttachmentErrorCode": {
+            "type": "enum",
+            "members": {
+                "VPC_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_NOT_FOUND"
+                    }
+                },
+                "SUBNET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_NOT_FOUND"
+                    }
+                },
+                "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE"
+                    }
+                },
+                "SUBNET_NO_FREE_ADDRESSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_NO_FREE_ADDRESSES"
+                    }
+                },
+                "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE"
+                    }
+                },
+                "SUBNET_NO_IPV6_CIDRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_NO_IPV6_CIDRS"
+                    }
+                },
+                "VPN_CONNECTION_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPN_CONNECTION_NOT_FOUND"
+                    }
+                },
+                "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#AttachmentErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#AttachmentError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.networkmanager#AttachmentId": {
@@ -1082,6 +1185,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The subnet ARN for the Connect peer. This only applies only when the protocol is NO_ENCAP.</p>"
                     }
+                },
+                "LastModificationErrors": {
+                    "target": "com.amazonaws.networkmanager#ConnectPeerErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the error associated with the attachment request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1235,6 +1344,91 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a core network Connect peer configuration.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#ConnectPeerError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.networkmanager#ConnectPeerErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the Connect peer request.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.networkmanager#ServerSideString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the error <code>code</code>.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the requested Connect peer resource.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.networkmanager#ServerSideString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Connect peer request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an error associated with a Connect peer request</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#ConnectPeerErrorCode": {
+            "type": "enum",
+            "members": {
+                "EDGE_LOCATION_NO_FREE_IPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE_LOCATION_NO_FREE_IPS"
+                    }
+                },
+                "EDGE_LOCATION_PEER_DUPLICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE_LOCATION_PEER_DUPLICATE"
+                    }
+                },
+                "SUBNET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_NOT_FOUND"
+                    }
+                },
+                "IP_OUTSIDE_SUBNET_CIDR_RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_OUTSIDE_SUBNET_CIDR_RANGE"
+                    }
+                },
+                "INVALID_INSIDE_CIDR_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_INSIDE_CIDR_BLOCK"
+                    }
+                },
+                "NO_ASSOCIATED_CIDR_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_ASSOCIATED_CIDR_BLOCK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ConnectPeerErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#ConnectPeerError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.networkmanager#ConnectPeerId": {
@@ -10043,10 +10237,107 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the attachment peer was created.</p>"
                     }
+                },
+                "LastModificationErrors": {
+                    "target": "com.amazonaws.networkmanager#PeeringErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the error associated with the Connect peer request.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a peering connection.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#PeeringError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.networkmanager#PeeringErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the peering request.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.networkmanager#ServerSideString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the error <code>code</code>.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the requested peering resource.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.networkmanager#ServerSideString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Peering request.</p>"
+                    }
+                },
+                "MissingPermissionsContext": {
+                    "target": "com.amazonaws.networkmanager#PermissionsErrorContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional information about missing permissions for the peering\n            error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an error associated with a peering request.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#PeeringErrorCode": {
+            "type": "enum",
+            "members": {
+                "TRANSIT_GATEWAY_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_NOT_FOUND"
+                    }
+                },
+                "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED"
+                    }
+                },
+                "MISSING_REQUIRED_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_PERMISSIONS"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "EDGE_LOCATION_PEER_DUPLICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE_LOCATION_PEER_DUPLICATE"
+                    }
+                },
+                "INVALID_TRANSIT_GATEWAY_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_TRANSIT_GATEWAY_STATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#PeeringErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#PeeringError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.networkmanager#PeeringId": {
@@ -10103,6 +10394,20 @@
                         "smithy.api#enumValue": "TRANSIT_GATEWAY"
                     }
                 }
+            }
+        },
+        "com.amazonaws.networkmanager#PermissionsErrorContext": {
+            "type": "structure",
+            "members": {
+                "MissingPermission": {
+                    "target": "com.amazonaws.networkmanager#ServerSideString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The missing permissions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes additional information about missing permissions. </p>"
             }
         },
         "com.amazonaws.networkmanager#ProposedNetworkFunctionGroupChange": {
