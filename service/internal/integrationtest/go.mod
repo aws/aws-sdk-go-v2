@@ -246,8 +246,6 @@ replace github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics => ../
 
 replace github.com/aws/aws-sdk-go-v2/service/neptune => ../../../service/neptune/
 
-replace github.com/aws/aws-sdk-go-v2/service/opsworks => ../../../service/opsworks/
-
 replace github.com/aws/aws-sdk-go-v2/service/pinpointemail => ../../../service/pinpointemail/
 
 replace github.com/aws/aws-sdk-go-v2/service/polly => ../../../service/polly/

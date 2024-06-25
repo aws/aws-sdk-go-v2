@@ -44,6 +44,9 @@ type Attachment struct {
 	// The Region where the edge is located.
 	EdgeLocation *string
 
+	// Describes the error associated with the attachment request.
+	LastModificationErrors []AttachmentError
+
 	// The name of the network function group.
 	NetworkFunctionGroupName *string
 
@@ -71,6 +74,24 @@ type Attachment struct {
 
 	// The timestamp when the attachment was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the error associated with an attachment request.
+type AttachmentError struct {
+
+	// The error code for the attachment request.
+	Code AttachmentErrorCode
+
+	// The message associated with the error code .
+	Message *string
+
+	// The ID of the attachment request.
+	RequestId *string
+
+	// The ARN of the requested attachment resource.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -208,6 +229,9 @@ type ConnectPeer struct {
 	// The Connect peer Regions where edges are located.
 	EdgeLocation *string
 
+	// Describes the error associated with the attachment request.
+	LastModificationErrors []ConnectPeerError
+
 	// The state of the Connect peer.
 	State ConnectPeerState
 
@@ -277,6 +301,24 @@ type ConnectPeerConfiguration struct {
 
 	// The protocol used for a Connect peer configuration.
 	Protocol TunnelProtocol
+
+	noSmithyDocumentSerde
+}
+
+// Describes an error associated with a Connect peer request
+type ConnectPeerError struct {
+
+	// The error code for the Connect peer request.
+	Code ConnectPeerErrorCode
+
+	// The message associated with the error code .
+	Message *string
+
+	// The ID of the Connect peer request.
+	RequestId *string
+
+	// The ARN of the requested Connect peer resource.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1073,6 +1115,9 @@ type Peering struct {
 	// The edge location for the peer.
 	EdgeLocation *string
 
+	// Describes the error associated with the Connect peer request.
+	LastModificationErrors []PeeringError
+
 	// The ID of the account owner.
 	OwnerAccountId *string
 
@@ -1090,6 +1135,36 @@ type Peering struct {
 
 	// The list of key-value tags associated with the peering.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Describes an error associated with a peering request.
+type PeeringError struct {
+
+	// The error code for the peering request.
+	Code PeeringErrorCode
+
+	// The message associated with the error code .
+	Message *string
+
+	// Provides additional information about missing permissions for the peering error.
+	MissingPermissionsContext *PermissionsErrorContext
+
+	// The ID of the Peering request.
+	RequestId *string
+
+	// The ARN of the requested peering resource.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes additional information about missing permissions.
+type PermissionsErrorContext struct {
+
+	// The missing permissions.
+	MissingPermission *string
 
 	noSmithyDocumentSerde
 }

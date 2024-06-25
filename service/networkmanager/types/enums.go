@@ -2,6 +2,37 @@
 
 package types
 
+type AttachmentErrorCode string
+
+// Enum values for AttachmentErrorCode
+const (
+	AttachmentErrorCodeVpcNotFound                        AttachmentErrorCode = "VPC_NOT_FOUND"
+	AttachmentErrorCodeSubnetNotFound                     AttachmentErrorCode = "SUBNET_NOT_FOUND"
+	AttachmentErrorCodeSubnetDuplicatedInAvailabilityZone AttachmentErrorCode = "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE"
+	AttachmentErrorCodeSubnetNoFreeAddresses              AttachmentErrorCode = "SUBNET_NO_FREE_ADDRESSES"
+	AttachmentErrorCodeSubnetUnsupportedAvailabilityZone  AttachmentErrorCode = "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE"
+	AttachmentErrorCodeSubnetNoIpv6Cidrs                  AttachmentErrorCode = "SUBNET_NO_IPV6_CIDRS"
+	AttachmentErrorCodeVpnConnectionNotFound              AttachmentErrorCode = "VPN_CONNECTION_NOT_FOUND"
+	AttachmentErrorCodeMaximumNoEncapLimitExceeded        AttachmentErrorCode = "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+)
+
+// Values returns all known values for AttachmentErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentErrorCode) Values() []AttachmentErrorCode {
+	return []AttachmentErrorCode{
+		"VPC_NOT_FOUND",
+		"SUBNET_NOT_FOUND",
+		"SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE",
+		"SUBNET_NO_FREE_ADDRESSES",
+		"SUBNET_UNSUPPORTED_AVAILABILITY_ZONE",
+		"SUBNET_NO_IPV6_CIDRS",
+		"VPN_CONNECTION_NOT_FOUND",
+		"MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED",
+	}
+}
+
 type AttachmentState string
 
 // Enum values for AttachmentState
@@ -248,6 +279,33 @@ func (ConnectPeerAssociationState) Values() []ConnectPeerAssociationState {
 	}
 }
 
+type ConnectPeerErrorCode string
+
+// Enum values for ConnectPeerErrorCode
+const (
+	ConnectPeerErrorCodeEdgeLocationNoFreeIps     ConnectPeerErrorCode = "EDGE_LOCATION_NO_FREE_IPS"
+	ConnectPeerErrorCodeEdgeLocationPeerDuplicate ConnectPeerErrorCode = "EDGE_LOCATION_PEER_DUPLICATE"
+	ConnectPeerErrorCodeSubnetNotFound            ConnectPeerErrorCode = "SUBNET_NOT_FOUND"
+	ConnectPeerErrorCodeIpOutsideSubnetCidrRange  ConnectPeerErrorCode = "IP_OUTSIDE_SUBNET_CIDR_RANGE"
+	ConnectPeerErrorCodeInvalidInsideCidrBlock    ConnectPeerErrorCode = "INVALID_INSIDE_CIDR_BLOCK"
+	ConnectPeerErrorCodeNoAssociatedCidrBlock     ConnectPeerErrorCode = "NO_ASSOCIATED_CIDR_BLOCK"
+)
+
+// Values returns all known values for ConnectPeerErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectPeerErrorCode) Values() []ConnectPeerErrorCode {
+	return []ConnectPeerErrorCode{
+		"EDGE_LOCATION_NO_FREE_IPS",
+		"EDGE_LOCATION_PEER_DUPLICATE",
+		"SUBNET_NOT_FOUND",
+		"IP_OUTSIDE_SUBNET_CIDR_RANGE",
+		"INVALID_INSIDE_CIDR_BLOCK",
+		"NO_ASSOCIATED_CIDR_BLOCK",
+	}
+}
+
 type ConnectPeerState string
 
 // Enum values for ConnectPeerState
@@ -426,6 +484,33 @@ func (LinkState) Values() []LinkState {
 		"AVAILABLE",
 		"DELETING",
 		"UPDATING",
+	}
+}
+
+type PeeringErrorCode string
+
+// Enum values for PeeringErrorCode
+const (
+	PeeringErrorCodeTransitGatewayNotFound           PeeringErrorCode = "TRANSIT_GATEWAY_NOT_FOUND"
+	PeeringErrorCodeTransitGatewayPeersLimitExceeded PeeringErrorCode = "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED"
+	PeeringErrorCodeMissingRequiredPermissions       PeeringErrorCode = "MISSING_PERMISSIONS"
+	PeeringErrorCodeInternalError                    PeeringErrorCode = "INTERNAL_ERROR"
+	PeeringErrorCodeEdgeLocationPeerDuplicate        PeeringErrorCode = "EDGE_LOCATION_PEER_DUPLICATE"
+	PeeringErrorCodeInvalidTransitGatewayState       PeeringErrorCode = "INVALID_TRANSIT_GATEWAY_STATE"
+)
+
+// Values returns all known values for PeeringErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PeeringErrorCode) Values() []PeeringErrorCode {
+	return []PeeringErrorCode{
+		"TRANSIT_GATEWAY_NOT_FOUND",
+		"TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED",
+		"MISSING_PERMISSIONS",
+		"INTERNAL_ERROR",
+		"EDGE_LOCATION_PEER_DUPLICATE",
+		"INVALID_TRANSIT_GATEWAY_STATE",
 	}
 }
 

@@ -14180,6 +14180,11 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				sv.EdgeLocation = ptr.String(jtv)
 			}
 
+		case "LastModificationErrors":
+			if err := awsRestjson1_deserializeDocumentAttachmentErrorList(&sv.LastModificationErrors, value); err != nil {
+				return err
+			}
+
 		case "NetworkFunctionGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14262,6 +14267,107 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAttachmentError(v **types.AttachmentError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AttachmentError
+	if *v == nil {
+		sv = &types.AttachmentError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttachmentErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.AttachmentErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideString to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAttachmentErrorList(v *[]types.AttachmentError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AttachmentError
+	if *v == nil {
+		cv = []types.AttachmentError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AttachmentError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAttachmentError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -14864,6 +14970,11 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				sv.EdgeLocation = ptr.String(jtv)
 			}
 
+		case "LastModificationErrors":
+			if err := awsRestjson1_deserializeDocumentConnectPeerErrorList(&sv.LastModificationErrors, value); err != nil {
+				return err
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15180,6 +15291,107 @@ func awsRestjson1_deserializeDocumentConnectPeerConfiguration(v **types.ConnectP
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConnectPeerError(v **types.ConnectPeerError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectPeerError
+	if *v == nil {
+		sv = &types.ConnectPeerError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectPeerErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.ConnectPeerErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideString to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConnectPeerErrorList(v *[]types.ConnectPeerError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConnectPeerError
+	if *v == nil {
+		cv = []types.ConnectPeerError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConnectPeerError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentConnectPeerError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -18718,6 +18930,11 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				sv.EdgeLocation = ptr.String(jtv)
 			}
 
+		case "LastModificationErrors":
+			if err := awsRestjson1_deserializeDocumentPeeringErrorList(&sv.LastModificationErrors, value); err != nil {
+				return err
+			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18777,6 +18994,112 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPeeringError(v **types.PeeringError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PeeringError
+	if *v == nil {
+		sv = &types.PeeringError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PeeringErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.PeeringErrorCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "MissingPermissionsContext":
+			if err := awsRestjson1_deserializeDocumentPermissionsErrorContext(&sv.MissingPermissionsContext, value); err != nil {
+				return err
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideString to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPeeringErrorList(v *[]types.PeeringError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PeeringError
+	if *v == nil {
+		cv = []types.PeeringError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PeeringError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPeeringError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPeeringList(v *[]types.Peering, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18808,6 +19131,46 @@ func awsRestjson1_deserializeDocumentPeeringList(v *[]types.Peering, value inter
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPermissionsErrorContext(v **types.PermissionsErrorContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PermissionsErrorContext
+	if *v == nil {
+		sv = &types.PermissionsErrorContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MissingPermission":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideString to be of type string, got %T instead", value)
+				}
+				sv.MissingPermission = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "799e70cd-bc16-4fae-8886-09489fb0fc2c",
+    "type": "feature",
+    "description": "Doc only update for Auto Scaling's TargetTrackingMetricDataQuery",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

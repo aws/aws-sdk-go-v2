@@ -45,6 +45,10 @@ type UpdateEnvironmentInput struct {
 	// AppStream 2.0).
 	DesktopEndpoint *string
 
+	// A map of the key-value pairs of the tag or tags to assign to the newly created
+	// devices for this environment.
+	DeviceCreationTags map[string]string
+
 	// A specification for a time window to apply software updates.
 	MaintenanceWindow *types.MaintenanceWindow
 

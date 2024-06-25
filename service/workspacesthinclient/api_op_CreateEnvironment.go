@@ -57,6 +57,10 @@ type CreateEnvironmentInput struct {
 	// AppStream 2.0).
 	DesktopEndpoint *string
 
+	// A map of the key-value pairs of the tag or tags to assign to the newly created
+	// devices for this environment.
+	DeviceCreationTags map[string]string
+
 	// The Amazon Resource Name (ARN) of the Key Management Service key to use to
 	// encrypt the environment.
 	KmsKeyArn *string
