@@ -34,7 +34,7 @@ func TestClient_DatetimeOffsets_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<DatetimeOffsetsResponse xmlns="https://example.com/">
 			    <datetime>2019-12-16T22:48:18-01:00</datetime>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</DatetimeOffsetsResponse>
 			`),
 			ExpectResult: &DatetimeOffsetsOutput{
@@ -50,7 +50,7 @@ func TestClient_DatetimeOffsets_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<DatetimeOffsetsResponse xmlns="https://example.com/">
 			    <datetime>2019-12-17T00:48:18+01:00</datetime>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</DatetimeOffsetsResponse>
 			`),
 			ExpectResult: &DatetimeOffsetsOutput{

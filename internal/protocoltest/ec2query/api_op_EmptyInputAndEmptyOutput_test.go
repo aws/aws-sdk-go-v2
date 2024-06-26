@@ -129,7 +129,7 @@ func TestClient_EmptyInputAndEmptyOutput_awsEc2queryDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			Body: []byte(`<EmptyInputAndEmptyOutputResponse xmlns="https://example.com/">
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</EmptyInputAndEmptyOutputResponse>
 			`),
 			ExpectResult: &EmptyInputAndEmptyOutputOutput{},

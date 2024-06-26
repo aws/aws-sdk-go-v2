@@ -77,6 +77,7 @@ type DeleteAccessPointPolicyInput struct {
 }
 
 func (in *DeleteAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.AccessPointName = in.Name
 	p.RequiresAccountId = ptr.Bool(true)

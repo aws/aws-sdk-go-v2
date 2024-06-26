@@ -33,7 +33,7 @@ func TestClient_IgnoresWrappingXmlName_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<IgnoresWrappingXmlNameResponse xmlns="https://example.com/">
 			    <foo>bar</foo>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</IgnoresWrappingXmlNameResponse>
 			`),
 			ExpectResult: &IgnoresWrappingXmlNameOutput{

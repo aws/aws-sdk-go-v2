@@ -60,6 +60,7 @@ type IncreaseStreamRetentionPeriodInput struct {
 }
 
 func (in *IncreaseStreamRetentionPeriodInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

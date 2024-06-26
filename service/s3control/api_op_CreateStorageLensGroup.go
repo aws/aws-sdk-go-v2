@@ -71,6 +71,7 @@ type CreateStorageLensGroupInput struct {
 }
 
 func (in *CreateStorageLensGroupInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

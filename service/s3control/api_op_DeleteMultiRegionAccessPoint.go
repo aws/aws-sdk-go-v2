@@ -84,6 +84,7 @@ type DeleteMultiRegionAccessPointInput struct {
 }
 
 func (in *DeleteMultiRegionAccessPointInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

@@ -42,7 +42,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 				ByteValue:         ptr.Int8(5),
 				DoubleValue:       ptr.Float64(1.889),
 				FalseBooleanValue: ptr.Bool(false),
-				FloatValue:        ptr.Float32(7.624),
+				FloatValue:        ptr.Float32(7.625),
 				IntegerValue:      ptr.Int32(256),
 				LongValue:         ptr.Int64(9873),
 				ShortValue:        ptr.Int16(9898),
@@ -62,7 +62,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
+				return smithytesting.CompareCBOR(actual, `v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
 			},
 		},
 		// RpcV2 Cbor should not serialize null structure values
@@ -229,7 +229,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb2//`)
+				p, err := base64.StdEncoding.DecodeString(`v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb2//`)
 				if err != nil {
 					panic(err)
 				}
@@ -241,7 +241,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 				FalseBooleanValue: ptr.Bool(false),
 				ByteValue:         ptr.Int8(5),
 				DoubleValue:       ptr.Float64(1.889),
-				FloatValue:        ptr.Float32(7.624),
+				FloatValue:        ptr.Float32(7.625),
 				IntegerValue:      ptr.Int32(256),
 				ShortValue:        ptr.Int16(9898),
 				StringValue:       ptr.String("simple"),
@@ -257,7 +257,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`qXB0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb28=`)
+				p, err := base64.StdEncoding.DecodeString(`qXB0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb28=`)
 				if err != nil {
 					panic(err)
 				}
@@ -269,7 +269,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 				FalseBooleanValue: ptr.Bool(false),
 				ByteValue:         ptr.Int8(5),
 				DoubleValue:       ptr.Float64(1.889),
-				FloatValue:        ptr.Float32(7.624),
+				FloatValue:        ptr.Float32(7.625),
 				IntegerValue:      ptr.Int32(256),
 				ShortValue:        ptr.Int16(9898),
 				StringValue:       ptr.String("simple"),
@@ -393,7 +393,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989rZXh0cmFPYmplY3S/c2luZGVmaW5pdGVMZW5ndGhNYXC/a3dpdGhBbkFycmF5nwECA///cWRlZmluaXRlTGVuZ3RoTWFwo3J3aXRoQURlZmluaXRlQXJyYXmDAQIDeB1hbmRTb21lSW5kZWZpbml0ZUxlbmd0aFN0cmluZ3gfdGhhdCBoYXMsIGJlZW4gY2h1bmtlZCBvbiBjb21tYWxub3JtYWxTdHJpbmdjZm9vanNob3J0VmFsdWUZJw9uc29tZU90aGVyRmllbGR2dGhpcyBzaG91bGQgYmUgc2tpcHBlZP9saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
+				p, err := base64.StdEncoding.DecodeString(`v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABrZXh0cmFPYmplY3S/c2luZGVmaW5pdGVMZW5ndGhNYXC/a3dpdGhBbkFycmF5nwECA///cWRlZmluaXRlTGVuZ3RoTWFwo3J3aXRoQURlZmluaXRlQXJyYXmDAQIDeB1hbmRTb21lSW5kZWZpbml0ZUxlbmd0aFN0cmluZ3gfdGhhdCBoYXMsIGJlZW4gY2h1bmtlZCBvbiBjb21tYWxub3JtYWxTdHJpbmdjZm9vanNob3J0VmFsdWUZJw9uc29tZU90aGVyRmllbGR2dGhpcyBzaG91bGQgYmUgc2tpcHBlZP9saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
 				if err != nil {
 					panic(err)
 				}
@@ -404,7 +404,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 				ByteValue:         ptr.Int8(5),
 				DoubleValue:       ptr.Float64(1.889),
 				FalseBooleanValue: ptr.Bool(false),
-				FloatValue:        ptr.Float32(7.624),
+				FloatValue:        ptr.Float32(7.625),
 				IntegerValue:      ptr.Int32(256),
 				LongValue:         ptr.Int64(9873),
 				ShortValue:        ptr.Int16(9898),

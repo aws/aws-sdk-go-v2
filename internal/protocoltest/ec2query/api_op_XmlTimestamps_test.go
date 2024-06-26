@@ -34,7 +34,7 @@ func TestClient_XmlTimestamps_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
 			    <normal>2014-04-29T18:30:38Z</normal>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
@@ -50,7 +50,7 @@ func TestClient_XmlTimestamps_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
 			    <dateTime>2014-04-29T18:30:38Z</dateTime>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
@@ -67,7 +67,7 @@ func TestClient_XmlTimestamps_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
 			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
@@ -83,7 +83,7 @@ func TestClient_XmlTimestamps_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
 			    <epochSeconds>1398796238</epochSeconds>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
@@ -99,7 +99,7 @@ func TestClient_XmlTimestamps_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
 			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
@@ -115,7 +115,7 @@ func TestClient_XmlTimestamps_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
 			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
@@ -131,7 +131,7 @@ func TestClient_XmlTimestamps_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlTimestampsResponse xmlns="https://example.com/">
 			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{

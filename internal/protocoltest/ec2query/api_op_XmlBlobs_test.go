@@ -32,7 +32,7 @@ func TestClient_XmlBlobs_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlBlobsResponse xmlns="https://example.com/">
 			    <data>dmFsdWU=</data>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlBlobsResponse>
 			`),
 			ExpectResult: &XmlBlobsOutput{

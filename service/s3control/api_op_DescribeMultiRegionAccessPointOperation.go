@@ -72,6 +72,7 @@ type DescribeMultiRegionAccessPointOperationInput struct {
 }
 
 func (in *DescribeMultiRegionAccessPointOperationInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

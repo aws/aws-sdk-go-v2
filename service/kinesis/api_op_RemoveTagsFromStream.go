@@ -54,6 +54,7 @@ type RemoveTagsFromStreamInput struct {
 }
 
 func (in *RemoveTagsFromStreamInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

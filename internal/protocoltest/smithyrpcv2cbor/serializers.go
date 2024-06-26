@@ -58,6 +58,36 @@ func (m *smithyRpcv2cbor_serializeOpEmptyInputOutput) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpFloat16 struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpFloat16) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpFloat16) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*Float16Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/RpcV2Protocol/operation/Float16"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Accept", "application/cbor")
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpFractionalSeconds struct {
 }
 
@@ -547,6 +577,12 @@ func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
 }
 
 func serializeCBOR_EmptyInputOutputInput(v *EmptyInputOutputInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
+func serializeCBOR_Float16Input(v *Float16Input) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 
 	return vm, nil

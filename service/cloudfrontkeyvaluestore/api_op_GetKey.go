@@ -42,6 +42,7 @@ type GetKeyInput struct {
 }
 
 func (in *GetKeyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.KvsARN = in.KvsARN
 
 }

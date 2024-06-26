@@ -91,6 +91,7 @@ type MergeShardsInput struct {
 }
 
 func (in *MergeShardsInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

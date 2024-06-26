@@ -40,7 +40,7 @@ func TestClient_XmlNamespaces_awsEc2queryDeserialize(t *testing.T) {
 			            <member xmlns="http://bux.com">Baz</member>
 			        </values>
 			    </nested>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlNamespacesResponse>
 			`),
 			ExpectResult: &XmlNamespacesOutput{

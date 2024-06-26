@@ -16,6 +16,8 @@
         "api_op_ConstantAndVariableQueryString_test.go",
         "api_op_ConstantQueryString.go",
         "api_op_ConstantQueryString_test.go",
+        "api_op_ContentTypeParameters.go",
+        "api_op_ContentTypeParameters_test.go",
         "api_op_DatetimeOffsets.go",
         "api_op_DatetimeOffsets_test.go",
         "api_op_EmptyInputAndEmptyOutput.go",

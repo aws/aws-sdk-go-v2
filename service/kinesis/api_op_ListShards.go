@@ -128,6 +128,7 @@ type ListShardsInput struct {
 }
 
 func (in *ListShardsInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

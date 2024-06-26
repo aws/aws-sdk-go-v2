@@ -46,6 +46,7 @@ type GetAccessGrantsInstanceInput struct {
 }
 
 func (in *GetAccessGrantsInstanceInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

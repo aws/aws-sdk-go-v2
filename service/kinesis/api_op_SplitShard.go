@@ -105,6 +105,7 @@ type SplitShardInput struct {
 }
 
 func (in *SplitShardInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

@@ -97,6 +97,7 @@ type DeleteBucketPolicyInput struct {
 }
 
 func (in *DeleteBucketPolicyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.Bucket = in.Bucket
 	p.RequiresAccountId = ptr.Bool(true)

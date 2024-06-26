@@ -62,6 +62,7 @@ type DeleteAccessPointForObjectLambdaInput struct {
 }
 
 func (in *DeleteAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }
