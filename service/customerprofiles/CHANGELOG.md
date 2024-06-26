@@ -1,3 +1,7 @@
+# v1.39.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.38.0 (2024-06-24)
 
 * **Feature**: This release includes changes to ProfileObjectType APIs, adds functionality top set and get capacity for profile object types.

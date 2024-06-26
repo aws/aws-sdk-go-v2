@@ -1,8 +1,0 @@
-{
-    "id": "72de1fbd-e0cb-42b1-bdaf-b7d4eb23e5ab",
-    "type": "feature",
-    "description": "This release adds support for new ListApplicationOperations and DescribeApplicationOperation APIs. It adds a new configuration to enable system rollbacks, adds field ApplicationVersionCreateTimestamp for clarity and improves support for pagination for APIs.",
-    "modules": [
-        "service/kinesisanalyticsv2"
-    ]
-}

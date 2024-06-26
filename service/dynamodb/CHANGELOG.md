@@ -1,3 +1,7 @@
+# v1.34.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.33.2 (2024-06-20)
 
 * **Documentation**: Doc-only update for DynamoDB. Fixed Important note in 6 Global table APIs - CreateGlobalTable, DescribeGlobalTable, DescribeGlobalTableSettings, ListGlobalTables, UpdateGlobalTable, and UpdateGlobalTableSettings.

@@ -1,8 +1,0 @@
-{
-    "id": "bf3f12cb-a5e6-48c5-82e9-b56ca49518de",
-    "type": "feature",
-    "description": "IVS Real-Time now offers customers the ability to upload public keys for customer vended participant tokens.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

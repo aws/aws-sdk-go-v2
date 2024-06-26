@@ -1,3 +1,7 @@
+# v1.25.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.24.0 (2024-06-19)
 
 * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.

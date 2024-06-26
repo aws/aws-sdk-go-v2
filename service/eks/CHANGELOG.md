@@ -1,3 +1,8 @@
+# v1.45.0 (2024-06-26)
+
+* **Feature**: Added support for disabling unmanaged addons during cluster creation.
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.44.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

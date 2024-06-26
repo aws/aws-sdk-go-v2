@@ -1,3 +1,7 @@
+# v1.7.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.6.0 (2024-06-20)
 
 * **Feature**: This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.

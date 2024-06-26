@@ -1,3 +1,8 @@
+# v1.16.0 (2024-06-26)
+
+* **Feature**: Added ListLandingZoneOperations API.
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.15.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

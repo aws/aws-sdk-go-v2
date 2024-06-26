@@ -1,3 +1,8 @@
+# v1.16.0 (2024-06-26)
+
+* **Feature**: IVS Real-Time now offers customers the ability to upload public keys for customer vended participant tokens.
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.15.0 (2024-06-20)
 
 * **Feature**: IVS Real-Time now offers customers the ability to record individual stage participants to S3.

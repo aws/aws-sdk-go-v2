@@ -1,3 +1,8 @@
+# v1.37.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+* **Feature**: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
+
 # v1.36.0 (2024-06-19)
 
 * **Feature**: This release enables customers to use JSON Web Tokens (JWT) for authentication on their Amazon OpenSearch Service domains.

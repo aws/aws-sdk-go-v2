@@ -1,3 +1,7 @@
+# v1.51.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.50.2 (2024-06-20)
 
 * **Documentation**: Documentation updates for Security Hub

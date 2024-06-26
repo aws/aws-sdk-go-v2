@@ -1,8 +1,0 @@
-{
-    "id": "7fd4b065-7379-4ea4-b061-32398b4fa93a",
-    "type": "feature",
-    "description": "Added ListLandingZoneOperations API.",
-    "modules": [
-        "service/controltower"
-    ]
-}

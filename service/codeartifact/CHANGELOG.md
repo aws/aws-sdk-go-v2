@@ -1,3 +1,7 @@
+# v1.30.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.29.0 (2024-06-20)
 
 * **Feature**: Add support for the Cargo package format.

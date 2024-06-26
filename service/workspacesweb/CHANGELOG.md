@@ -1,3 +1,7 @@
+# v1.21.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.20.0 (2024-06-24)
 
 * **Feature**: Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.

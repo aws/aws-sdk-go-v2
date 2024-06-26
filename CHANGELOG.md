@@ -1,3 +1,21 @@
+# Release (2024-06-26)
+
+## General Highlights
+* **Feature**: Support list-of-string endpoint parameter.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.16.0](service/controltower/CHANGELOG.md#v1160-2024-06-26)
+  * **Feature**: Added ListLandingZoneOperations API.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.45.0](service/eks/CHANGELOG.md#v1450-2024-06-26)
+  * **Feature**: Added support for disabling unmanaged addons during cluster creation.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.16.0](service/ivsrealtime/CHANGELOG.md#v1160-2024-06-26)
+  * **Feature**: IVS Real-Time now offers customers the ability to upload public keys for customer vended participant tokens.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.27.0](service/kinesisanalyticsv2/CHANGELOG.md#v1270-2024-06-26)
+  * **Feature**: This release adds support for new ListApplicationOperations and DescribeApplicationOperation APIs. It adds a new configuration to enable system rollbacks, adds field ApplicationVersionCreateTimestamp for clarity and improves support for pagination for APIs.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.37.0](service/opensearch/CHANGELOG.md#v1370-2024-06-26)
+  * **Feature**: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
+
 # Release (2024-06-25)
 
 ## Module Highlights

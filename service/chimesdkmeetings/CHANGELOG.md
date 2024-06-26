@@ -1,3 +1,7 @@
+# v1.25.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.24.2 (2024-06-24)
 
 * No change notes available for this release.

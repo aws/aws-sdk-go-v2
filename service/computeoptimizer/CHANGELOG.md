@@ -1,3 +1,7 @@
+# v1.37.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.36.0 (2024-06-20)
 
 * **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.

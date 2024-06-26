@@ -1,3 +1,7 @@
+# v1.148.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.147.0 (2024-06-20)
 
 * **Feature**: Adds support for model references in Hub service, and adds support for cross-account access of Hubs
