@@ -146,6 +146,101 @@ func (c *Client) addOperationListApplicationSnapshotsMiddlewares(stack *middlewa
 	return nil
 }
 
+// ListApplicationSnapshotsPaginatorOptions is the paginator options for
+// ListApplicationSnapshots
+type ListApplicationSnapshotsPaginatorOptions struct {
+	// The maximum number of application snapshots to list.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListApplicationSnapshotsPaginator is a paginator for ListApplicationSnapshots
+type ListApplicationSnapshotsPaginator struct {
+	options   ListApplicationSnapshotsPaginatorOptions
+	client    ListApplicationSnapshotsAPIClient
+	params    *ListApplicationSnapshotsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListApplicationSnapshotsPaginator returns a new
+// ListApplicationSnapshotsPaginator
+func NewListApplicationSnapshotsPaginator(client ListApplicationSnapshotsAPIClient, params *ListApplicationSnapshotsInput, optFns ...func(*ListApplicationSnapshotsPaginatorOptions)) *ListApplicationSnapshotsPaginator {
+	if params == nil {
+		params = &ListApplicationSnapshotsInput{}
+	}
+
+	options := ListApplicationSnapshotsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListApplicationSnapshotsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListApplicationSnapshotsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListApplicationSnapshots page.
+func (p *ListApplicationSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListApplicationSnapshotsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListApplicationSnapshots(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListApplicationSnapshotsAPIClient is a client that implements the
+// ListApplicationSnapshots operation.
+type ListApplicationSnapshotsAPIClient interface {
+	ListApplicationSnapshots(context.Context, *ListApplicationSnapshotsInput, ...func(*Options)) (*ListApplicationSnapshotsOutput, error)
+}
+
+var _ ListApplicationSnapshotsAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListApplicationSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

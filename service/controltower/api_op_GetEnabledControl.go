@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves details about an enabled control. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+// Retrieves details about an enabled control. For usage examples, see the [Controls Reference Guide].
 //
-// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+// [Controls Reference Guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
 func (c *Client) GetEnabledControl(ctx context.Context, params *GetEnabledControlInput, optFns ...func(*Options)) (*GetEnabledControlOutput, error) {
 	if params == nil {
 		params = &GetEnabledControlInput{}

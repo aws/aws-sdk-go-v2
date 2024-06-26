@@ -57,6 +57,10 @@ type StopApplicationInput struct {
 }
 
 type StopApplicationOutput struct {
+
+	// Operation ID for tracking StopApplication request
+	OperationId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

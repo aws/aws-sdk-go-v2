@@ -98,6 +98,15 @@ type CreateClusterInput struct {
 	// The access configuration for the cluster.
 	AccessConfig *types.CreateAccessConfigRequest
 
+	// If you set this value to False when creating a cluster, the default networking
+	// add-ons will not be installed.
+	//
+	// The default networking addons include vpc-cni, coredns, and kube-proxy.
+	//
+	// Use this option when you plan to install third-party alternative add-ons or
+	// self-manage the default networking add-ons.
+	BootstrapSelfManagedAddons *bool
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientRequestToken *string

@@ -36,8 +36,10 @@ type UpdateLandingZoneInput struct {
 	// This member is required.
 	LandingZoneIdentifier *string
 
-	// The manifest JSON file is a text file that describes your Amazon Web Services
-	// resources. For examples, review [Launch your landing zone].
+	// The manifest file (JSON) is a text file that describes your Amazon Web Services
+	// resources. For an example, review [Launch your landing zone]. The example manifest file contains each of
+	// the available parameters. The schema for the landing zone's JSON manifest file
+	// is not published, by design.
 	//
 	// [Launch your landing zone]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
 	//

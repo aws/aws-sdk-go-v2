@@ -203,6 +203,29 @@ func (MetricsLevel) Values() []MetricsLevel {
 	}
 }
 
+type OperationStatus string
+
+// Enum values for OperationStatus
+const (
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusCancelled  OperationStatus = "CANCELLED"
+	OperationStatusSuccessful OperationStatus = "SUCCESSFUL"
+	OperationStatusFailed     OperationStatus = "FAILED"
+)
+
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"IN_PROGRESS",
+		"CANCELLED",
+		"SUCCESSFUL",
+		"FAILED",
+	}
+}
+
 type RecordFormatType string
 
 // Enum values for RecordFormatType

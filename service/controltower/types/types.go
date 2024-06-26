@@ -89,7 +89,7 @@ type ControlOperation struct {
 	noSmithyDocumentSerde
 }
 
-// A filter object that lets you call ListCOntrolOperations with a specific filter.
+// A filter object that lets you call ListControlOperations with a specific filter.
 type ControlOperationFilter struct {
 
 	// The set of controlIdentifier returned by the filter.
@@ -184,7 +184,7 @@ type EnabledBaselineDetails struct {
 	// This member is required.
 	BaselineIdentifier *string
 
-	// The deployment summary of the enabled control.
+	// The deployment summary of an EnabledControl or EnabledBaseline resource.
 	//
 	// This member is required.
 	StatusSummary *EnablementStatusSummary
@@ -262,7 +262,7 @@ type EnabledBaselineSummary struct {
 	// This member is required.
 	BaselineIdentifier *string
 
-	// The deployment summary of the enabled control.
+	// The deployment summary of an EnabledControl or EnabledBaseline resource.
 	//
 	// This member is required.
 	StatusSummary *EnablementStatusSummary
@@ -380,21 +380,24 @@ type EnabledControlSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The deployment summary of the enabled control.
+// The deployment summary of an EnabledControl or EnabledBaseline resource.
 type EnablementStatusSummary struct {
 
-	// The last operation identifier for the enabled control.
+	// The last operation identifier for the enabled resource.
 	LastOperationIdentifier *string
 
-	//  The deployment status of the enabled control.
+	//  The deployment status of the enabled resource.
 	//
 	// Valid values:
 	//
-	//   - SUCCEEDED : The enabledControl configuration was deployed successfully.
+	//   - SUCCEEDED : The EnabledControl or EnabledBaseline configuration was deployed
+	//   successfully.
 	//
-	//   - UNDER_CHANGE : The enabledControl configuration is changing.
+	//   - UNDER_CHANGE : The EnabledControl or EnabledBaseline configuration is
+	//   changing.
 	//
-	//   - FAILED : The enabledControl configuration failed to deploy.
+	//   - FAILED : The EnabledControl or EnabledBaseline configuration failed to
+	//   deploy.
 	Status EnablementStatus
 
 	noSmithyDocumentSerde
@@ -455,6 +458,9 @@ type LandingZoneOperationDetail struct {
 	// The landing zone operation end time.
 	EndTime *time.Time
 
+	// The operationIdentifier of the landing zone operation.
+	OperationIdentifier *string
+
 	// The landing zone operation type.
 	//
 	// Valid values:
@@ -483,6 +489,34 @@ type LandingZoneOperationDetail struct {
 	// If the operation result is FAILED, this string contains a message explaining
 	// why the operation failed.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter object that lets you call ListLandingZoneOperations with a specific
+// filter.
+type LandingZoneOperationFilter struct {
+
+	// The statuses of the set of landing zone operations selected by the filter.
+	Statuses []LandingZoneOperationStatus
+
+	// The set of landing zone operation types selected by the filter.
+	Types []LandingZoneOperationType
+
+	noSmithyDocumentSerde
+}
+
+// Returns a summary of information about a landing zone operation.
+type LandingZoneOperationSummary struct {
+
+	// The operationIdentifier of the landing zone operation.
+	OperationIdentifier *string
+
+	// The type of the landing zone operation.
+	OperationType LandingZoneOperationType
+
+	// The status of the landing zone operation.
+	Status LandingZoneOperationStatus
 
 	noSmithyDocumentSerde
 }

@@ -61,6 +61,10 @@ type ApplicationConfiguration struct {
 	// application.
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfiguration
 
+	// Describes system rollback configuration for a Managed Service for Apache Flink
+	// application
+	ApplicationSystemRollbackConfiguration *ApplicationSystemRollbackConfiguration
+
 	// Describes execution properties for a Managed Service for Apache Flink
 	// application.
 	EnvironmentProperties *EnvironmentProperties
@@ -94,6 +98,10 @@ type ApplicationConfigurationDescription struct {
 	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
 	// application.
 	ApplicationSnapshotConfigurationDescription *ApplicationSnapshotConfigurationDescription
+
+	// Describes system rollback configuration for a Managed Service for Apache Flink
+	// application
+	ApplicationSystemRollbackConfigurationDescription *ApplicationSystemRollbackConfigurationDescription
 
 	// Describes execution properties for a Managed Service for Apache Flink
 	// application.
@@ -129,6 +137,10 @@ type ApplicationConfigurationUpdate struct {
 	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
 	// application.
 	ApplicationSnapshotConfigurationUpdate *ApplicationSnapshotConfigurationUpdate
+
+	// Describes system rollback configuration for a Managed Service for Apache Flink
+	// application
+	ApplicationSystemRollbackConfigurationUpdate *ApplicationSystemRollbackConfigurationUpdate
 
 	// Describes updates to the environment properties for a Managed Service for
 	// Apache Flink application.
@@ -198,6 +210,9 @@ type ApplicationDetail struct {
 	// application, the mode is optional.
 	ApplicationMode ApplicationMode
 
+	// The current timestamp when the application version was created.
+	ApplicationVersionCreateTimestamp *time.Time
+
 	// If you reverted the application using RollbackApplication, the application version when
 	// RollbackApplication was called.
 	ApplicationVersionRolledBackFrom *int64
@@ -250,6 +265,60 @@ type ApplicationMaintenanceConfigurationUpdate struct {
 	//
 	// This member is required.
 	ApplicationMaintenanceWindowStartTimeUpdate *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a description of the operation, such as the type and status of
+// operation
+type ApplicationOperationInfo struct {
+
+	// The timestamp at which the operation finished for the application
+	EndTime *time.Time
+
+	// Type of operation performed on an application
+	Operation *string
+
+	// Identifier of the Operation
+	OperationId *string
+
+	// Status of the operation performed on an application
+	OperationStatus OperationStatus
+
+	// The timestamp at which the operation was created
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Provides a description of the operation, such as the operation-type and status
+type ApplicationOperationInfoDetails struct {
+
+	// The timestamp at which the operation finished for the application
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// Type of operation performed on an application
+	//
+	// This member is required.
+	Operation *string
+
+	// Status of the operation performed on an application
+	//
+	// This member is required.
+	OperationStatus OperationStatus
+
+	// The timestamp at which the operation was created
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Contains information about the application version changes due to an operation
+	ApplicationVersionChangeDetails *ApplicationVersionChangeDetails
+
+	// Provides a description of the operation failure
+	OperationFailureDetails *OperationFailureDetails
 
 	noSmithyDocumentSerde
 }
@@ -341,6 +410,62 @@ type ApplicationSummary struct {
 	// For a Managed Service for Apache Flink application, the mode is STREAMING . For
 	// a Managed Service for Apache Flink Studio notebook, it is INTERACTIVE .
 	ApplicationMode ApplicationMode
+
+	noSmithyDocumentSerde
+}
+
+// Describes system rollback configuration for a Managed Service for Apache Flink
+// application
+type ApplicationSystemRollbackConfiguration struct {
+
+	// Describes whether system rollbacks are enabled for a Managed Service for Apache
+	// Flink application
+	//
+	// This member is required.
+	RollbackEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes system rollback configuration for a Managed Service for Apache Flink
+// application
+type ApplicationSystemRollbackConfigurationDescription struct {
+
+	// Describes whether system rollbacks are enabled for a Managed Service for Apache
+	// Flink application
+	//
+	// This member is required.
+	RollbackEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes system rollback configuration for a Managed Service for Apache Flink
+// application
+type ApplicationSystemRollbackConfigurationUpdate struct {
+
+	// Describes whether system rollbacks are enabled for a Managed Service for Apache
+	// Flink application
+	//
+	// This member is required.
+	RollbackEnabledUpdate *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the application version changes due to an operation
+type ApplicationVersionChangeDetails struct {
+
+	// The operation was performed on this version of the application
+	//
+	// This member is required.
+	ApplicationVersionUpdatedFrom *int64
+
+	// The operation execution resulted in the transition to the following version of
+	// the application
+	//
+	// This member is required.
+	ApplicationVersionUpdatedTo *int64
 
 	noSmithyDocumentSerde
 }
@@ -798,6 +923,15 @@ type EnvironmentPropertyUpdates struct {
 	//
 	// This member is required.
 	PropertyGroups []PropertyGroup
+
+	noSmithyDocumentSerde
+}
+
+// Provides a description of the operation failure error
+type ErrorInfo struct {
+
+	// Error message resulting in failure of the operation
+	ErrorString *string
 
 	noSmithyDocumentSerde
 }
@@ -1567,6 +1701,19 @@ type MonitoringConfigurationUpdate struct {
 	// The Parallelism level is not recommended for applications with a Parallelism
 	// over 64 due to excessive costs.
 	MetricsLevelUpdate MetricsLevel
+
+	noSmithyDocumentSerde
+}
+
+// Provides a description of the operation failure
+type OperationFailureDetails struct {
+
+	// Provides a description of the operation failure error
+	ErrorInfo *ErrorInfo
+
+	// Provides the operation ID of a system-rollback operation executed due to
+	// failure in the current operation
+	RollbackOperationId *string
 
 	noSmithyDocumentSerde
 }

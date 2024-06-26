@@ -34,9 +34,8 @@ type UpdateStageInput struct {
 	// This member is required.
 	Arn *string
 
-	// Auto-participant-recording configuration object to attach to the stage.
-	// Auto-participant-recording configuration cannot be updated while recording is
-	// active.
+	// Configuration object for individual participant recording, to attach to the
+	// stage. Note that this cannot be updated while recording is active.
 	AutoParticipantRecordingConfiguration *types.AutoParticipantRecordingConfiguration
 
 	// Name of the stage to be updated.

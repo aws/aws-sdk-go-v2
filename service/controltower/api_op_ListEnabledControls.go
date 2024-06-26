@@ -13,9 +13,9 @@ import (
 
 // Lists the controls enabled by Amazon Web Services Control Tower on the
 // specified organizational unit and the accounts it contains. For usage examples,
-// see [the Amazon Web Services Control Tower User Guide].
+// see the [Controls Reference Guide].
 //
-// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+// [Controls Reference Guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
 func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledControlsInput, optFns ...func(*Options)) (*ListEnabledControlsOutput, error) {
 	if params == nil {
 		params = &ListEnabledControlsInput{}
@@ -33,7 +33,7 @@ func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledCon
 
 type ListEnabledControlsInput struct {
 
-	// An input filter for the ListCEnabledControls API that lets you select the types
+	// An input filter for the ListEnabledControls API that lets you select the types
 	// of control operations to view.
 	Filter *types.EnabledControlFilter
 

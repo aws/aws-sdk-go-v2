@@ -29,7 +29,8 @@ func (c *Client) CreateStage(ctx context.Context, params *CreateStageInput, optF
 
 type CreateStageInput struct {
 
-	// Auto participant recording configuration object attached to the stage.
+	// Configuration object for individual participant recording, to attach to the new
+	// stage.
 	AutoParticipantRecordingConfiguration *types.AutoParticipantRecordingConfiguration
 
 	// Optional name that can be specified for the stage being created.

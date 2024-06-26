@@ -552,6 +552,56 @@ func (MasterNodeStatus) Values() []MasterNodeStatus {
 	}
 }
 
+type NaturalLanguageQueryGenerationCurrentState string
+
+// Enum values for NaturalLanguageQueryGenerationCurrentState
+const (
+	NaturalLanguageQueryGenerationCurrentStateNotEnabled        NaturalLanguageQueryGenerationCurrentState = "NOT_ENABLED"
+	NaturalLanguageQueryGenerationCurrentStateEnableComplete    NaturalLanguageQueryGenerationCurrentState = "ENABLE_COMPLETE"
+	NaturalLanguageQueryGenerationCurrentStateEnableInProgress  NaturalLanguageQueryGenerationCurrentState = "ENABLE_IN_PROGRESS"
+	NaturalLanguageQueryGenerationCurrentStateEnableFailed      NaturalLanguageQueryGenerationCurrentState = "ENABLE_FAILED"
+	NaturalLanguageQueryGenerationCurrentStateDisableComplete   NaturalLanguageQueryGenerationCurrentState = "DISABLE_COMPLETE"
+	NaturalLanguageQueryGenerationCurrentStateDisableInProgress NaturalLanguageQueryGenerationCurrentState = "DISABLE_IN_PROGRESS"
+	NaturalLanguageQueryGenerationCurrentStateDisableFailed     NaturalLanguageQueryGenerationCurrentState = "DISABLE_FAILED"
+)
+
+// Values returns all known values for NaturalLanguageQueryGenerationCurrentState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NaturalLanguageQueryGenerationCurrentState) Values() []NaturalLanguageQueryGenerationCurrentState {
+	return []NaturalLanguageQueryGenerationCurrentState{
+		"NOT_ENABLED",
+		"ENABLE_COMPLETE",
+		"ENABLE_IN_PROGRESS",
+		"ENABLE_FAILED",
+		"DISABLE_COMPLETE",
+		"DISABLE_IN_PROGRESS",
+		"DISABLE_FAILED",
+	}
+}
+
+type NaturalLanguageQueryGenerationDesiredState string
+
+// Enum values for NaturalLanguageQueryGenerationDesiredState
+const (
+	NaturalLanguageQueryGenerationDesiredStateEnabled  NaturalLanguageQueryGenerationDesiredState = "ENABLED"
+	NaturalLanguageQueryGenerationDesiredStateDisabled NaturalLanguageQueryGenerationDesiredState = "DISABLED"
+)
+
+// Values returns all known values for NaturalLanguageQueryGenerationDesiredState.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NaturalLanguageQueryGenerationDesiredState) Values() []NaturalLanguageQueryGenerationDesiredState {
+	return []NaturalLanguageQueryGenerationDesiredState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type NodeStatus string
 
 // Enum values for NodeStatus

@@ -1,0 +1,8 @@
+{
+    "id": "84946d29-0313-4bb2-8007-0801cff35867",
+    "type": "feature",
+    "description": "Added support for disabling unmanaged addons during cluster creation.",
+    "modules": [
+        "service/eks"
+    ]
+}

@@ -266,6 +266,18 @@ func TestCheckSnapshot_ListEnabledControls(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListLandingZoneOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLandingZoneOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLandingZoneOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListLandingZones(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLandingZones(context.Background(), nil, func(o *Options) {
@@ -570,6 +582,18 @@ func TestUpdateSnapshot_ListEnabledControls(t *testing.T) {
 	_, err := svc.ListEnabledControls(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEnabledControls")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLandingZoneOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLandingZoneOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLandingZoneOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

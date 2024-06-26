@@ -350,6 +350,26 @@ func (m *validateOpDescribeApplication) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeApplicationOperation struct {
+}
+
+func (*validateOpDescribeApplicationOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeApplicationOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeApplicationOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeApplicationOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeApplicationSnapshot struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpDiscoverInputSchema) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDiscoverInputSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationOperations struct {
+}
+
+func (*validateOpListApplicationOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationOperationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -678,6 +718,10 @@ func addOpDescribeApplicationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeApplication{}, middleware.After)
 }
 
+func addOpDescribeApplicationOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeApplicationOperation{}, middleware.After)
+}
+
 func addOpDescribeApplicationSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeApplicationSnapshot{}, middleware.After)
 }
@@ -688,6 +732,10 @@ func addOpDescribeApplicationVersionValidationMiddleware(stack *middleware.Stack
 
 func addOpDiscoverInputSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDiscoverInputSchema{}, middleware.After)
+}
+
+func addOpListApplicationOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationOperations{}, middleware.After)
 }
 
 func addOpListApplicationSnapshotsValidationMiddleware(stack *middleware.Stack) error {
@@ -780,6 +828,11 @@ func validateApplicationConfiguration(v *types.ApplicationConfiguration) error {
 			invalidParams.AddNested("ApplicationSnapshotConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ApplicationSystemRollbackConfiguration != nil {
+		if err := validateApplicationSystemRollbackConfiguration(v.ApplicationSystemRollbackConfiguration); err != nil {
+			invalidParams.AddNested("ApplicationSystemRollbackConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.VpcConfigurations != nil {
 		if err := validateVpcConfigurations(v.VpcConfigurations); err != nil {
 			invalidParams.AddNested("VpcConfigurations", err.(smithy.InvalidParamsError))
@@ -815,6 +868,11 @@ func validateApplicationConfigurationUpdate(v *types.ApplicationConfigurationUpd
 	if v.ApplicationSnapshotConfigurationUpdate != nil {
 		if err := validateApplicationSnapshotConfigurationUpdate(v.ApplicationSnapshotConfigurationUpdate); err != nil {
 			invalidParams.AddNested("ApplicationSnapshotConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApplicationSystemRollbackConfigurationUpdate != nil {
+		if err := validateApplicationSystemRollbackConfigurationUpdate(v.ApplicationSystemRollbackConfigurationUpdate); err != nil {
+			invalidParams.AddNested("ApplicationSystemRollbackConfigurationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.VpcConfigurationUpdates != nil {
@@ -886,6 +944,36 @@ func validateApplicationSnapshotConfigurationUpdate(v *types.ApplicationSnapshot
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationSnapshotConfigurationUpdate"}
 	if v.SnapshotsEnabledUpdate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotsEnabledUpdate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApplicationSystemRollbackConfiguration(v *types.ApplicationSystemRollbackConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplicationSystemRollbackConfiguration"}
+	if v.RollbackEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RollbackEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApplicationSystemRollbackConfigurationUpdate(v *types.ApplicationSystemRollbackConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplicationSystemRollbackConfigurationUpdate"}
+	if v.RollbackEnabledUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RollbackEnabledUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2708,6 +2796,24 @@ func validateOpDescribeApplicationInput(v *DescribeApplicationInput) error {
 	}
 }
 
+func validateOpDescribeApplicationOperationInput(v *DescribeApplicationOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeApplicationOperationInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.OperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeApplicationSnapshotInput(v *DescribeApplicationSnapshotInput) error {
 	if v == nil {
 		return nil
@@ -2761,6 +2867,21 @@ func validateOpDiscoverInputSchemaInput(v *DiscoverInputSchemaInput) error {
 		if err := validateInputProcessingConfiguration(v.InputProcessingConfiguration); err != nil {
 			invalidParams.AddNested("InputProcessingConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationOperationsInput(v *ListApplicationOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationOperationsInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

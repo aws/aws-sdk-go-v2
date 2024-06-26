@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a list of operations in progress or queued.
+// Provides a list of operations in progress or queued. For usage examples, see [ListControlOperation examples].
+//
+// [ListControlOperation examples]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html#list-control-operations-api-examples
 func (c *Client) ListControlOperations(ctx context.Context, params *ListControlOperationsInput, optFns ...func(*Options)) (*ListControlOperationsOutput, error) {
 	if params == nil {
 		params = &ListControlOperationsInput{}
@@ -44,7 +46,7 @@ type ListControlOperationsInput struct {
 
 type ListControlOperationsOutput struct {
 
-	// Returns a list of output from control operations. PLACEHOLDER
+	// Returns a list of output from control operations.
 	//
 	// This member is required.
 	ControlOperations []types.ControlOperationSummary

@@ -7,11 +7,63 @@
 // (API) operations that support programmatic interaction with these types of
 // resources:
 //
-// [controls]
+// [Controls]
 //
-// [landing zones]
+// [DisableControl]
 //
-// [baselines]
+// [EnableControl]
+//
+// [GetEnabledControl]
+//
+// [ListControlOperations]
+//
+// [ListEnabledControls]
+//
+// [UpdateEnabledControl]
+//
+// [Landing zones]
+//
+// [CreateLandingZone]
+//
+// [DeleteLandingZone]
+//
+// [GetLandingZone]
+//
+// [GetLandingZoneOperation]
+//
+// [ListLandingZones]
+//
+// [ResetLandingZone]
+//
+// [UpdateLandingZone]
+//
+// [Baselines]
+//
+// [DisableBaseline]
+//
+// [EnableBaseline]
+//
+// [GetBaseline]
+//
+// [GetBaselineOperation]
+//
+// [GetEnabledBaseline]
+//
+// [ListBaselines]
+//
+// [ListEnabledBaselines]
+//
+// [ResetEnabledBaseline]
+//
+// [UpdateEnabledBaseline]
+//
+// [Tagging]
+//
+// [ListTagsForResource]
+//
+// [TagResource]
+//
+// [UntagResource]
 //
 // For more information about these types of resources, see the [Amazon Web Services Control Tower User Guide].
 //
@@ -39,12 +91,11 @@
 //
 // The controlIdentifier is unique in each Amazon Web Services Region for each
 // control. You can find the controlIdentifier for each Region and control in the [Tables of control metadata]
-// or the [Control availability by Region tables]in the Amazon Web Services Control Tower User Guide.
+// or the [Control availability by Region tables]in the Amazon Web Services Control Tower Controls Reference Guide.
 //
 // A quick-reference list of control identifers for the Amazon Web Services
 // Control Tower legacy Strongly recommended and Elective controls is given in [Resource identifiers for APIs and controls]in
-// the [Controls reference guide section]of the Amazon Web Services Control Tower User Guide. Remember that
-// Mandatory controls cannot be added or removed.
+// the [Amazon Web Services Control Tower Controls Reference Guide]. Remember that Mandatory controls cannot be added or removed.
 //
 // ARN format: arn:aws:controltower:{REGION}::control/{CONTROL_NAME}
 //
@@ -121,28 +172,54 @@
 // more about CloudTrail, including how to turn it on and find your log files, see
 // the Amazon Web Services CloudTrail User Guide.
 //
-// [Controls reference guide section]: https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html
-// [Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation]: https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html
-// [controls]: https://docs.aws.amazon.com/controltower/latest/userguide/controls.html
-// [baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html
-// [API reference manual]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_Operations.html
-// [Tables of control metadata]: https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html
-// [Amazon Web Services Control Tower supports APIs for OU registration and configuration with baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/2024-all.html#baseline-apis
 // [Getting started with Amazon Web Services Control Tower using APIs]: https://docs.aws.amazon.com/controltower/latest/userguide/getting-started-apis.html
-// [Resource identifiers for APIs and controls]: https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html
-// [Baseline API input and output examples with CLI]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
-// [Control availability by Region tables (large page)]: https://docs.aws.amazon.com/controltower/latest/userguide/control-region-tables.html
-// [Control API input and output examples with CLI]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
-// [Controls reference guide]: https://docs.aws.amazon.com/controltower/latest/userguide/controls.html
 // [Launch a landing zone with CloudFormation]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-apis-cfn-setup.html
-// [Amazon Web Services Control Tower supports landing zone APIs]: https://docs.aws.amazon.com/controltower/latest/userguide/2023-all.html#landing-zone-apis
-// [Control availability by Region tables]: https://docs.aws.amazon.com/controltower/latest/userguide/control-region-tables.html
-// [Control metadata tables (large page)]: https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html
-// [Controls library groupings]: https://docs.aws.amazon.com/controltower/latest/userguide/controls-reference.html
-// [List of identifiers for legacy controls]: https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html
+// [GetLandingZone]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetLandingZone.html
+// [DisableBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_DisableBaseline.html
 // [aws-cloudformation/aws-cloudformation-resource-providers-controltower]: https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower
+// [ListBaselines]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListBaselines.html
+// [ListEnabledBaselines]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListEnabledBaselines.html
+// [ResetLandingZone]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ResetLandingZone.html
+// [Amazon Web Services Control Tower Controls Reference Guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html
+// [GetLandingZoneOperation]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetLandingZoneOperation.html
+// [GetBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetBaseline.html
+// [Control API input and output examples with CLI]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
+// [DisableControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_DisableControl.html
+// [EnableControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html
+// [Amazon Web Services Control Tower supports landing zone APIs]: https://docs.aws.amazon.com/controltower/latest/userguide/2023-all.html#landing-zone-apis
+// [CreateLandingZone]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_CreateLandingZone.html
+// [Control availability by Region tables]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-region-tables.html
+// [Control metadata tables (large page)]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-metadata-tables.html
+// [Controls library groupings]: https://docs.aws.amazon.com/controltower/latest/controlreference/controls-reference.html
+// [ResetEnabledBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ResetEnabledBaseline.html
+// [GetEnabledBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetEnabledBaseline.html
+// [UntagResource]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UntagResource.html
 // [Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html
-// [landing zones]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch.html
-// [Enable controls with CloudFormation]: https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html
+// [Enable controls with CloudFormation]: https://docs.aws.amazon.com/controltower/latest/controlreference/enable-controls.html
+// [EnableBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableBaseline.html
 // [Logging Amazon Web Services Control Tower Actions with Amazon Web Services CloudTrail]: https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html
+// [UpdateEnabledControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html
+// [ListTagsForResource]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListTagsForResource.html
+// [UpdateLandingZone]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateLandingZone.html
+// [Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation]: https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html
+// [TagResource]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_TagResource.html
+// [Amazon Web Services Control Tower supports APIs for OU registration and configuration with baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/2024-all.html#baseline-apis
+// [Resource identifiers for APIs and controls]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html.html
+// [Baseline API input and output examples with CLI]: https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html
+// [GetBaselineOperation]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetBaselineOperation.html
+// [Controls reference guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/controls.html
+// [Baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html
+// [ListEnabledControls]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListEnabledControls.html
+// [GetEnabledControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetEnabledControl.html
+// [List of identifiers for legacy controls]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html
+// [Controls]: https://docs.aws.amazon.com/controltower/latest/userguide/controls.html
+// [DeleteLandingZone]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_DeleteLandingZone.html
+// [ListControlOperations]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListControlOperations.html
+// [API reference manual]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_Operations.html
+// [Tables of control metadata]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-metadata-tables.html
+// [Control availability by Region tables (large page)]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-region-tables.html
+// [Tagging]: https://docs.aws.amazon.com/controltower/latest/controlreference/tagging.html
+// [Landing zones]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch.html
+// [ListLandingZones]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListLandingZones.html
+// [UpdateEnabledBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledBaseline.html
 package controltower

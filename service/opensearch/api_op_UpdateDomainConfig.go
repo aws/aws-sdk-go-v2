@@ -36,6 +36,9 @@ type UpdateDomainConfigInput struct {
 	// This member is required.
 	DomainName *string
 
+	// Options for all machine learning features for the specified domain.
+	AIMLOptions *types.AIMLOptionsInput
+
 	// Identity and Access Management (IAM) access policy as a JSON-formatted string.
 	AccessPolicies *string
 
