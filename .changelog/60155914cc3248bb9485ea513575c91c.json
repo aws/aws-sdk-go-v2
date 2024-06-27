@@ -1,8 +1,0 @@
-{
-    "id": "60155914-cc32-48bb-9485-ea513575c91c",
-    "type": "feature",
-    "description": "Adds CreateContentAssociation, ListContentAssociations, GetContentAssociation, and DeleteContentAssociation APIs.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

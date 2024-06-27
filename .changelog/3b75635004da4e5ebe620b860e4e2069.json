@@ -1,8 +1,0 @@
-{
-    "id": "3b756350-04da-4e5e-be62-0b860e4e2069",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for TAZ export to S3.",
-    "modules": [
-        "service/rds"
-    ]
-}

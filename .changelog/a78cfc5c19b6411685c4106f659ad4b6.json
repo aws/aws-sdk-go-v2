@@ -1,8 +1,0 @@
-{
-    "id": "a78cfc5c-19b6-4116-85c4-106f659ad4b6",
-    "type": "feature",
-    "description": "Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

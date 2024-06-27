@@ -1,8 +1,0 @@
-{
-    "id": "e9d96ca0-1e7b-4486-8668-701f868ccbee",
-    "type": "feature",
-    "description": "Added support for WorkSpaces Pools.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

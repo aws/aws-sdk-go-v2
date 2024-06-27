@@ -1,3 +1,7 @@
+# v1.30.0 (2024-06-27)
+
+* **Feature**: Amazon WorkSpaces customers can now use Application Auto Scaling to automatically scale the number of virtual desktops in a WorkSpaces pool.
+
 # v1.29.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

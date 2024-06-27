@@ -1,3 +1,7 @@
+# v1.12.0 (2024-06-27)
+
+* **Feature**: This release supports the data lineage feature of business data catalog in Amazon DataZone.
+
 # v1.11.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

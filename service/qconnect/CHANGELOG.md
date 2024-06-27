@@ -1,3 +1,7 @@
+# v1.9.0 (2024-06-27)
+
+* **Feature**: Adds CreateContentAssociation, ListContentAssociations, GetContentAssociation, and DeleteContentAssociation APIs.
+
 # v1.8.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

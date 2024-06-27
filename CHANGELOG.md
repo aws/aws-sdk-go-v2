@@ -1,3 +1,27 @@
+# Release (2024-06-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.30.0](service/applicationautoscaling/CHANGELOG.md#v1300-2024-06-27)
+  * **Feature**: Amazon WorkSpaces customers can now use Application Auto Scaling to automatically scale the number of virtual desktops in a WorkSpaces pool.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.18.0](service/chimesdkmediapipelines/CHANGELOG.md#v1180-2024-06-27)
+  * **Feature**: Added Amazon Transcribe multi language identification to Chime SDK call analytics. Enabling customers sending single stream audio to generate call recordings using Chime SDK call analytics
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.38.1](service/cloudfront/CHANGELOG.md#v1381-2024-06-27)
+  * **Documentation**: Doc only update for CloudFront that fixes customer-reported issue
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.12.0](service/datazone/CHANGELOG.md#v1120-2024-06-27)
+  * **Feature**: This release supports the data lineage feature of business data catalog in Amazon DataZone.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.25.0](service/mq/CHANGELOG.md#v1250-2024-06-27)
+  * **Feature**: This release makes the EngineVersion field optional for both broker and configuration and uses the latest available version by default. The AutoMinorVersionUpgrade field is also now optional for broker creation and defaults to 'true'.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.9.0](service/qconnect/CHANGELOG.md#v190-2024-06-27)
+  * **Feature**: Adds CreateContentAssociation, ListContentAssociations, GetContentAssociation, and DeleteContentAssociation APIs.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.67.0](service/quicksight/CHANGELOG.md#v1670-2024-06-27)
+  * **Feature**: Adding support for Repeating Sections, Nested Filters
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.81.1](service/rds/CHANGELOG.md#v1811-2024-06-27)
+  * **Documentation**: Updates Amazon RDS documentation for TAZ export to S3.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.149.0](service/sagemaker/CHANGELOG.md#v11490-2024-06-27)
+  * **Feature**: Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.42.0](service/workspaces/CHANGELOG.md#v1420-2024-06-27)
+  * **Feature**: Added support for WorkSpaces Pools.
+
 # Release (2024-06-26)
 
 ## General Highlights

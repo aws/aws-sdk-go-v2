@@ -1,8 +1,0 @@
-{
-    "id": "c25a45a4-c2e3-4f05-bbb7-cf5a758e4242",
-    "type": "feature",
-    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

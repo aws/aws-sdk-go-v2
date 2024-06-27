@@ -1,3 +1,7 @@
+# v1.42.0 (2024-06-27)
+
+* **Feature**: Added support for WorkSpaces Pools.
+
 # v1.41.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

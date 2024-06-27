@@ -1,3 +1,7 @@
+# v1.18.0 (2024-06-27)
+
+* **Feature**: Added Amazon Transcribe multi language identification to Chime SDK call analytics. Enabling customers sending single stream audio to generate call recordings using Chime SDK call analytics
+
 # v1.17.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

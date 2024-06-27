@@ -1,3 +1,7 @@
+# v1.149.0 (2024-06-27)
+
+* **Feature**: Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.
+
 # v1.148.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

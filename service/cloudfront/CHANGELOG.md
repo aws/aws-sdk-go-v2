@@ -1,3 +1,7 @@
+# v1.38.1 (2024-06-27)
+
+* **Documentation**: Doc only update for CloudFront that fixes customer-reported issue
+
 # v1.38.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

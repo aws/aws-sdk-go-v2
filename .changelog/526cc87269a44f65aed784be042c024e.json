@@ -1,8 +1,0 @@
-{
-    "id": "526cc872-69a4-4f65-aed7-84be042c024e",
-    "type": "feature",
-    "description": "This release makes the EngineVersion field optional for both broker and configuration and uses the latest available version by default. The AutoMinorVersionUpgrade field is also now optional for broker creation and defaults to 'true'.",
-    "modules": [
-        "service/mq"
-    ]
-}

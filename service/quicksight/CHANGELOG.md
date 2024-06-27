@@ -1,3 +1,7 @@
+# v1.67.0 (2024-06-27)
+
+* **Feature**: Adding support for Repeating Sections, Nested Filters
+
 # v1.66.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

@@ -1,8 +1,0 @@
-{
-    "id": "4d7a0a76-95a2-4776-98c1-87ae0e6467d5",
-    "type": "feature",
-    "description": "This release supports the data lineage feature of business data catalog in Amazon DataZone.",
-    "modules": [
-        "service/datazone"
-    ]
-}
