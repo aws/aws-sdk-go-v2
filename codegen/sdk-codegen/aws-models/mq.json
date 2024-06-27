@@ -427,7 +427,7 @@
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see, <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
+                        "smithy.api#documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For a list of supported engine versions, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>",
                         "smithy.api#jsonName": "engineVersion",
                         "smithy.api#required": {}
                     }
@@ -628,10 +628,8 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.</p>",
-                        "smithy.api#jsonName": "autoMinorVersionUpgrade",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot. Set to true by default, if no value is specified.</p> <note><p>Must be set to true for ActiveMQ brokers version 5.18 and above and for RabbitMQ brokers version 3.13 and above.</p></note>",
+                        "smithy.api#jsonName": "autoMinorVersionUpgrade"
                     }
                 },
                 "BrokerName": {
@@ -686,10 +684,8 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
-                        "smithy.api#jsonName": "engineVersion",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>",
+                        "smithy.api#jsonName": "engineVersion"
                     }
                 },
                 "HostInstanceType": {
@@ -863,10 +859,8 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
-                        "smithy.api#jsonName": "engineVersion",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>",
+                        "smithy.api#jsonName": "engineVersion"
                     }
                 },
                 "Name": {
@@ -1668,7 +1662,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.</p>",
+                        "smithy.api#documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot.</p>",
                         "smithy.api#jsonName": "autoMinorVersionUpgrade"
                     }
                 },
@@ -1745,7 +1739,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The broker engine's version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
+                        "smithy.api#documentation": "<p>The broker engine version. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>",
                         "smithy.api#jsonName": "engineVersion"
                     }
                 },
@@ -1787,7 +1781,7 @@
                 "PendingEngineVersion": {
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The broker engine version to upgrade to. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
+                        "smithy.api#documentation": "<p>The broker engine version to upgrade to. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>",
                         "smithy.api#jsonName": "pendingEngineVersion"
                     }
                 },
@@ -1975,7 +1969,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required. The broker engine's version. For a list of supported engine versions, see, <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
+                        "smithy.api#documentation": "<p>The broker engine version. Defaults to the latest available version for the specified broker engine type. For a list of supported engine versions, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>",
                         "smithy.api#jsonName": "engineVersion"
                     }
                 },
@@ -3315,7 +3309,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.</p>",
+                        "smithy.api#documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot.</p> <note><p>Must be set to true for ActiveMQ brokers version 5.18 and above and for RabbitMQ brokers version 3.13 and above.</p></note>",
                         "smithy.api#jsonName": "autoMinorVersionUpgrade"
                     }
                 },
@@ -3337,7 +3331,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The broker engine version. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
+                        "smithy.api#documentation": "<p>The broker engine version. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p> <note><p>When upgrading to ActiveMQ version 5.18 and above or RabbitMQ version 3.13 and above, you must have autoMinorVersionUpgrade set to true for the broker.</p></note>",
                         "smithy.api#jsonName": "engineVersion"
                     }
                 },
@@ -3402,7 +3396,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new boolean value that specifies whether broker engines automatically upgrade to new minor versions as new versions are released and supported by Amazon MQ.</p>",
+                        "smithy.api#documentation": "<p>Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot.</p>",
                         "smithy.api#jsonName": "autoMinorVersionUpgrade"
                     }
                 },
@@ -3423,7 +3417,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.mq#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The broker engine version to upgrade to. For a list of supported engine versions, see <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html\">Supported engines</a>.</p>",
+                        "smithy.api#documentation": "<p>The broker engine version to upgrade to. For more information, see the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html\">ActiveMQ version management</a> and the <a href=\"https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html\">RabbitMQ version management</a> sections in the Amazon MQ Developer Guide.</p>",
                         "smithy.api#jsonName": "engineVersion"
                     }
                 },
@@ -4050,6 +4044,9 @@
                     "name": "mq"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "<p>Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.</p>",
                 "smithy.api#title": "AmazonMQ",
                 "smithy.rules#endpointRuleSet": {

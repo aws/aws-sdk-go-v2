@@ -6503,7 +6503,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the configuration for attaching an additional Amazon Elastic Block Store (EBS)\n         volume to each instance of the SageMaker HyperPod cluster instance group.</p>"
+                "smithy.api#documentation": "<p>Defines the configuration for attaching an additional Amazon Elastic Block Store (EBS)\n         volume to each instance of the SageMaker HyperPod cluster instance group. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620\">SageMaker HyperPod release notes: June 20, 2024</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterEbsVolumeSizeInGB": {
@@ -6755,7 +6755,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the configuration for attaching additional storage to the instances in the\n         SageMaker HyperPod cluster instance group.</p>"
+                "smithy.api#documentation": "<p>Defines the configuration for attaching additional storage to the instances in the\n         SageMaker HyperPod cluster instance group. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620\">SageMaker HyperPod release notes: June 20, 2024</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs": {
@@ -15568,7 +15568,7 @@
                     "target": "com.amazonaws.sagemaker#HubContentType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The type of hub content to delete.</p>",
+                        "smithy.api#documentation": "<p>The type of hub content reference to delete. The only supported type of hub content reference to delete is <code>ModelReference</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -29599,6 +29599,18 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#HiddenAppTypesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AppType"
+            }
+        },
+        "com.amazonaws.sagemaker#HiddenMlToolsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#MlTools"
             }
         },
         "com.amazonaws.sagemaker#HolidayConfig": {
@@ -43635,6 +43647,89 @@
                     "max": 1
                 },
                 "smithy.api#pattern": "^1|2$"
+            }
+        },
+        "com.amazonaws.sagemaker#MlTools": {
+            "type": "enum",
+            "members": {
+                "DATA_WRANGLER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataWrangler"
+                    }
+                },
+                "FEATURE_STORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FeatureStore"
+                    }
+                },
+                "EMR_CLUSTERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EmrClusters"
+                    }
+                },
+                "AUTO_ML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoMl"
+                    }
+                },
+                "EXPERIMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Experiments"
+                    }
+                },
+                "TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Training"
+                    }
+                },
+                "MODEL_EVALUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ModelEvaluation"
+                    }
+                },
+                "PIPELINES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pipelines"
+                    }
+                },
+                "MODELS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Models"
+                    }
+                },
+                "JUMP_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JumpStart"
+                    }
+                },
+                "INFERENCE_RECOMMENDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InferenceRecommender"
+                    }
+                },
+                "ENDPOINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Endpoints"
+                    }
+                },
+                "PROJECTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Projects"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#MlflowVersion": {
@@ -60821,6 +60916,26 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#StudioWebPortalSettings": {
+            "type": "structure",
+            "members": {
+                "HiddenMlTools": {
+                    "target": "com.amazonaws.sagemaker#HiddenMlToolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning tools that are hidden from the Studio left navigation pane.</p>"
+                    }
+                },
+                "HiddenAppTypes": {
+                    "target": "com.amazonaws.sagemaker#HiddenAppTypesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-apps.html\">Applications supported in Studio</a> that are hidden from the Studio left navigation pane.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#SubnetId": {
             "type": "string",
             "traits": {
@@ -68472,6 +68587,12 @@
                     "target": "com.amazonaws.sagemaker#CustomFileSystemConfigs",
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for assigning a custom file system to a user profile. Permitted users can\n            access this file system in Amazon SageMaker Studio.</p>"
+                    }
+                },
+                "StudioWebPortalSettings": {
+                    "target": "com.amazonaws.sagemaker#StudioWebPortalSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.</p>"
                     }
                 }
             },
