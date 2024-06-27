@@ -77,7 +77,7 @@ type RegisterScalableTargetInput struct {
 	// This string consists of the resource type and unique identifier.
 	//
 	//   - ECS service - The resource type is service and the unique identifier is the
-	//   cluster name and service name. Example: service/default/sample-webapp .
+	//   cluster name and service name. Example: service/my-cluster/my-service .
 	//
 	//   - Spot Fleet - The resource type is spot-fleet-request and the unique
 	//   identifier is the Spot Fleet request ID. Example:
@@ -137,13 +137,16 @@ type RegisterScalableTargetInput struct {
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
 	//
-	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
+	//   - SageMaker serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
 	//
 	//   - SageMaker inference component - The resource type is inference-component and
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
+	//
+	//   - Amazon WorkSpaces - The resource type is workspacespool and the unique
+	//   identifier is the pool ID. Example: workspacespool/wspool-123456 .
 	//
 	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
 	//
@@ -153,15 +156,14 @@ type RegisterScalableTargetInput struct {
 	// The scalable dimension associated with the scalable target. This string
 	// consists of the service namespace, resource type, and scaling property.
 	//
-	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//   - ecs:service:DesiredCount - The task count of an ECS service.
 	//
 	//   - elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
 	//   Instance Group.
 	//
 	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
 	//
-	//   - appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
-	//   fleet.
+	//   - appstream:fleet:DesiredCapacity - The capacity of an AppStream 2.0 fleet.
 	//
 	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB table.
@@ -213,10 +215,13 @@ type RegisterScalableTargetInput struct {
 	//   Neptune DB cluster.
 	//
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
-	//   concurrency for a SageMaker Serverless endpoint.
+	//   concurrency for a SageMaker serverless endpoint.
 	//
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
+	//
+	//   - workspaces:workspacespool:DesiredUserSessions - The capacity of a WorkSpaces
+	//   pool.
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension
@@ -262,7 +267,9 @@ type RegisterScalableTargetInput struct {
 	//
 	//   - SageMaker endpoint variants
 	//
-	//   - SageMaker Serverless endpoint provisioned concurrency
+	//   - SageMaker inference components
+	//
+	//   - SageMaker serverless endpoint provisioned concurrency
 	//
 	//   - Spot Fleets
 	//
@@ -284,9 +291,9 @@ type RegisterScalableTargetInput struct {
 	//
 	// If the service supports service-linked roles, Application Auto Scaling uses a
 	// service-linked role, which it creates if it does not yet exist. For more
-	// information, see [Application Auto Scaling IAM roles].
+	// information, see [How Application Auto Scaling works with IAM].
 	//
-	// [Application Auto Scaling IAM roles]: https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-roles
+	// [How Application Auto Scaling works with IAM]: https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html
 	RoleARN *string
 
 	// An embedded object that contains attributes and attribute values that are used
@@ -305,9 +312,9 @@ type RegisterScalableTargetInput struct {
 	//   - For ScheduledScalingSuspended , while a suspension is in effect, all scaling
 	//   activities that involve scheduled actions are suspended.
 	//
-	// For more information, see [Suspending and resuming scaling] in the Application Auto Scaling User Guide.
+	// For more information, see [Suspend and resume scaling] in the Application Auto Scaling User Guide.
 	//
-	// [Suspending and resuming scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
+	// [Suspend and resume scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html
 	SuspendedState *types.SuspendedState
 
 	// Assigns one or more tags to the scalable target. Use this parameter to tag the

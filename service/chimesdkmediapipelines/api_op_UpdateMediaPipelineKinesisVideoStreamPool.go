@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Kinesis video stream pool in a media pipeline.
+// Updates an Amazon Kinesis Video Stream pool in a media pipeline.
 func (c *Client) UpdateMediaPipelineKinesisVideoStreamPool(ctx context.Context, params *UpdateMediaPipelineKinesisVideoStreamPoolInput, optFns ...func(*Options)) (*UpdateMediaPipelineKinesisVideoStreamPoolOutput, error) {
 	if params == nil {
 		params = &UpdateMediaPipelineKinesisVideoStreamPoolInput{}
@@ -29,7 +29,8 @@ func (c *Client) UpdateMediaPipelineKinesisVideoStreamPool(ctx context.Context, 
 
 type UpdateMediaPipelineKinesisVideoStreamPoolInput struct {
 
-	// The ID of the video stream pool.
+	// The unique identifier of the requested resource. Valid values include the name
+	// and ARN of the media pipeline Kinesis Video Stream pool.
 	//
 	// This member is required.
 	Identifier *string

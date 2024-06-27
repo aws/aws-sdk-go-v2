@@ -46,9 +46,9 @@ type DescribeBrokerOutput struct {
 	// The authentication strategy used to secure the broker. The default is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
-	// Enables automatic upgrades to new minor versions for brokers, as new versions
+	// Enables automatic upgrades to new patch versions for brokers as new versions
 	// are released and supported by Amazon MQ. Automatic upgrades occur during the
-	// scheduled maintenance window of the broker or after a manual broker reboot.
+	// scheduled maintenance window or after a manual broker reboot.
 	AutoMinorVersionUpgrade *bool
 
 	// The broker's Amazon Resource Name (ARN).
@@ -91,9 +91,11 @@ type DescribeBrokerOutput struct {
 	// The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
 	EngineType types.EngineType
 
-	// The broker engine's version. For a list of supported engine versions, see [Supported engines].
+	// The broker engine version. For more information, see the [ActiveMQ version management] and the [RabbitMQ version management] sections in
+	// the Amazon MQ Developer Guide.
 	//
-	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+	// [RabbitMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
+	// [ActiveMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
 	EngineVersion *string
 
 	// The broker's instance type.
@@ -122,10 +124,11 @@ type DescribeBrokerOutput struct {
 	// reboot.
 	PendingDataReplicationMode types.DataReplicationMode
 
-	// The broker engine version to upgrade to. For a list of supported engine
-	// versions, see [Supported engines].
+	// The broker engine version to upgrade to. For more information, see the [ActiveMQ version management] and the [RabbitMQ version management]
+	// sections in the Amazon MQ Developer Guide.
 	//
-	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+	// [RabbitMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
+	// [ActiveMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
 	PendingEngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance

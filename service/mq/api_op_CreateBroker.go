@@ -68,14 +68,6 @@ func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, op
 // Creates a broker using the specified properties.
 type CreateBrokerInput struct {
 
-	// Enables automatic upgrades to new minor versions for brokers, as new versions
-	// are released and supported by Amazon MQ. Automatic upgrades occur during the
-	// scheduled maintenance window of the broker or after a manual broker reboot. Set
-	// to true by default, if no value is specified.
-	//
-	// This member is required.
-	AutoMinorVersionUpgrade *bool
-
 	// Required. The broker's name. This value must be unique in your Amazon Web
 	// Services account, 1-50 characters long, must contain only letters, numbers,
 	// dashes, and underscores, and must not contain white spaces, brackets, wildcard
@@ -99,14 +91,6 @@ type CreateBrokerInput struct {
 	//
 	// This member is required.
 	EngineType types.EngineType
-
-	// Required. The broker engine's version. For a list of supported engine versions,
-	// see [Supported engines].
-	//
-	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
-	//
-	// This member is required.
-	EngineVersion *string
 
 	// Required. The broker's instance type.
 	//
@@ -132,6 +116,15 @@ type CreateBrokerInput struct {
 	// SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
+	// Enables automatic upgrades to new patch versions for brokers as new versions
+	// are released and supported by Amazon MQ. Automatic upgrades occur during the
+	// scheduled maintenance window or after a manual broker reboot. Set to true by
+	// default, if no value is specified.
+	//
+	// Must be set to true for ActiveMQ brokers version 5.18 and above and for
+	// RabbitMQ brokers version 3.13 and above.
+	AutoMinorVersionUpgrade *bool
+
 	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
 
@@ -153,6 +146,14 @@ type CreateBrokerInput struct {
 
 	// Encryption options for the broker.
 	EncryptionOptions *types.EncryptionOptions
+
+	// The broker engine version. Defaults to the latest available version for the
+	// specified broker engine type. For more information, see the [ActiveMQ version management]and the [RabbitMQ version management] sections
+	// in the Amazon MQ Developer Guide.
+	//
+	// [RabbitMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
+	// [ActiveMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+	EngineVersion *string
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize
 	// connections to the broker. Does not apply to RabbitMQ brokers.

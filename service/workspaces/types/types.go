@@ -52,6 +52,22 @@ type AccountModification struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Active Directory config.
+type ActiveDirectoryConfig struct {
+
+	// The name of the domain.
+	//
+	// This member is required.
+	DomainName *string
+
+	// Indicates the secret ARN on the service account.
+	//
+	// This member is required.
+	ServiceAccountSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the association between an application and an application resource.
 type ApplicationResourceAssociation struct {
 
@@ -75,6 +91,45 @@ type ApplicationResourceAssociation struct {
 
 	// The reason the association deployment failed.
 	StateReason *AssociationStateReason
+
+	noSmithyDocumentSerde
+}
+
+// The persistent application settings for users of a WorkSpaces pool.
+type ApplicationSettingsRequest struct {
+
+	// Enables or disables persistent application settings for users during their pool
+	// sessions.
+	//
+	// This member is required.
+	Status ApplicationSettingsStatusEnum
+
+	// The path prefix for the S3 bucket where users’ persistent application settings
+	// are stored. You can allow the same persistent application settings to be used
+	// across multiple pools by specifying the same settings group for each pool.
+	SettingsGroup *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the persistent application settings for users of a WorkSpaces pool.
+type ApplicationSettingsResponse struct {
+
+	// Specifies whether persistent application settings are enabled for users during
+	// their pool sessions.
+	//
+	// This member is required.
+	Status ApplicationSettingsStatusEnum
+
+	// The S3 bucket where users’ persistent application settings are stored. When
+	// persistent application settings are enabled for the first time for an account in
+	// an Amazon Web Services Region, an S3 bucket is created. The bucket is unique to
+	// the Amazon Web Services account and the Region.
+	S3BucketName *string
+
+	// The path prefix for the S3 bucket where users’ persistent application settings
+	// are stored.
+	SettingsGroup *string
 
 	noSmithyDocumentSerde
 }
@@ -115,6 +170,48 @@ type BundleResourceAssociation struct {
 
 	// The reason the association deployment failed.
 	StateReason *AssociationStateReason
+
+	noSmithyDocumentSerde
+}
+
+// Describes the user capacity for a WorkSpaces pool.
+type Capacity struct {
+
+	// The desired number of user sessions for a multi-session pool. This is not
+	// allowed for single-session pools.
+	//
+	// This member is required.
+	DesiredUserSessions *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the capacity status for a WorkSpaces pool
+type CapacityStatus struct {
+
+	// The number of user sessions currently being used for pool sessions. This only
+	// applies to multi-session pools.
+	//
+	// This member is required.
+	ActiveUserSessions *int32
+
+	// The total number of session slots that are available for WorkSpaces pools.
+	//
+	// This member is required.
+	ActualUserSessions *int32
+
+	// The number of user sessions currently being used for pool sessions. This only
+	// applies to multi-session pools.
+	//
+	// This member is required.
+	AvailableUserSessions *int32
+
+	// The total number of sessions slots that are either running or pending. This
+	// represents the total number of concurrent streaming sessions your pool can
+	// support in a steady state.
+	//
+	// This member is required.
+	DesiredUserSessions *int32
 
 	noSmithyDocumentSerde
 }
@@ -401,8 +498,32 @@ type DefaultWorkspaceCreationProperties struct {
 	// Specifies whether the directory is enabled for Amazon WorkDocs.
 	EnableWorkDocs *bool
 
+	// Indicates the IAM role ARN of the instance.
+	InstanceIamRoleArn *string
+
 	// Specifies whether WorkSpace users are local administrators on their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the filter conditions for the WorkSpaces pool to return.
+type DescribeWorkspacesPoolsFilter struct {
+
+	// The name of the pool to filter.
+	//
+	// This member is required.
+	Name DescribeWorkspacesPoolsFilterName
+
+	// The operator values for filtering WorkSpaces pools.
+	//
+	// This member is required.
+	Operator DescribeWorkspacesPoolsFilterOperator
+
+	// The values for filtering WorkSpaces pools.
+	//
+	// This member is required.
+	Values []string
 
 	noSmithyDocumentSerde
 }
@@ -663,6 +784,21 @@ type ModificationState struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the network details of a WorkSpaces pool.
+type NetworkAccessConfiguration struct {
+
+	// The resource identifier of the elastic network interface that is attached to
+	// instances in your VPC. All network interfaces have the eni-xxxxxxxx resource
+	// identifier.
+	EniId *string
+
+	// The private IP address of the elastic network interface that is attached to
+	// instances in your VPC.
+	EniPrivateIpAddress *string
+
+	noSmithyDocumentSerde
+}
+
 // The operating system that the image is running.
 type OperatingSystem struct {
 
@@ -883,6 +1019,37 @@ type StopRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the storage connector.
+type StorageConnector struct {
+
+	// The type of connector used to save user files.
+	//
+	// This member is required.
+	ConnectorType StorageConnectorTypeEnum
+
+	// Indicates if the storage connetor is enabled or disabled.
+	//
+	// This member is required.
+	Status StorageConnectorStatusEnum
+
+	noSmithyDocumentSerde
+}
+
+// Describes the streaming properties.
+type StreamingProperties struct {
+
+	// Indicates the storage connector used
+	StorageConnectors []StorageConnector
+
+	// Indicates the type of preferred protocol for the streaming experience.
+	StreamingExperiencePreferredProtocol StreamingExperiencePreferredProtocolEnum
+
+	// Indicates the permission settings asscoiated with the user.
+	UserSettings []UserSetting
+
+	noSmithyDocumentSerde
+}
+
 // Describes a tag.
 type Tag struct {
 
@@ -908,6 +1075,29 @@ type TerminateRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the timeout settings for a WorkSpaces pool.
+type TimeoutSettings struct {
+
+	// Specifies the amount of time, in seconds, that a streaming session remains
+	// active after users disconnect. If users try to reconnect to the streaming
+	// session after a disconnection or network interruption within the time set, they
+	// are connected to their previous session. Otherwise, they are connected to a new
+	// session with a new streaming instance.
+	DisconnectTimeoutInSeconds *int32
+
+	// The amount of time in seconds a connection will stay active while idle.
+	IdleDisconnectTimeoutInSeconds *int32
+
+	// Specifies the maximum amount of time, in seconds, that a streaming session can
+	// remain active. If users are still connected to a streaming instance five minutes
+	// before this limit is reached, they are prompted to save any open documents
+	// before being disconnected. After this time elapses, the instance is terminated
+	// and replaced by a new instance.
+	MaxUserDurationInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes whether a WorkSpace image needs to be updated with the latest drivers
 // and other components required by Amazon WorkSpaces.
 //
@@ -921,6 +1111,25 @@ type UpdateResult struct {
 	// Indicates whether updated drivers or other components are available for the
 	// specified WorkSpace image.
 	UpdateAvailable *bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about the user's permission settings.
+type UserSetting struct {
+
+	// Indicates the type of action.
+	//
+	// This member is required.
+	Action UserSettingActionEnum
+
+	// Indicates if the setting is enabled or disabled.
+	//
+	// This member is required.
+	Permission UserSettingPermissionEnum
+
+	// Indicates the maximum character length for the specified user setting.
+	MaximumLength *int32
 
 	noSmithyDocumentSerde
 }
@@ -1238,6 +1447,9 @@ type WorkspaceCreationProperties struct {
 	// [Disabling Users]: https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html
 	EnableWorkDocs *bool
 
+	// Indicates the IAM role ARN of the instance.
+	InstanceIamRoleArn *string
+
 	// Indicates whether users are local administrators of their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool
 
@@ -1246,6 +1458,9 @@ type WorkspaceCreationProperties struct {
 
 // Describes a directory that is used with Amazon WorkSpaces.
 type WorkspaceDirectory struct {
+
+	// Information about the Active Directory config.
+	ActiveDirectoryConfig *ActiveDirectoryConfig
 
 	// The directory alias.
 	Alias *string
@@ -1269,6 +1484,9 @@ type WorkspaceDirectory struct {
 
 	// The IP addresses of the DNS servers for the directory.
 	DnsIpAddresses []string
+
+	// The error message returned.
+	ErrorMessage *string
 
 	// The identifier of the IAM role. This is the role that allows Amazon WorkSpaces
 	// to make calls to other services, such as Amazon EC2, on your behalf.
@@ -1299,6 +1517,9 @@ type WorkspaceDirectory struct {
 	// [DescribeWorkspaceDirectories]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceDirectories.html
 	State WorkspaceDirectoryState
 
+	// The streaming properties to configure.
+	StreamingProperties *StreamingProperties
+
 	// The identifiers of the subnets used with the directory.
 	SubnetIds []string
 
@@ -1309,14 +1530,26 @@ type WorkspaceDirectory struct {
 	// [Bring Your Own Windows Desktop Images]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
 	Tenancy Tenancy
 
+	// Indicates the identity type of the specifired user.
+	UserIdentityType UserIdentityType
+
 	// The devices and operating systems that users can use to access WorkSpaces.
 	WorkspaceAccessProperties *WorkspaceAccessProperties
 
 	// The default creation properties for all WorkSpaces in the directory.
 	WorkspaceCreationProperties *DefaultWorkspaceCreationProperties
 
+	// The description of the WorkSpace directory
+	WorkspaceDirectoryDescription *string
+
+	// The name fo the WorkSpace directory.
+	WorkspaceDirectoryName *string
+
 	// The identifier of the security group that is assigned to new WorkSpaces.
 	WorkspaceSecurityGroupId *string
+
+	// Indicates whether the directory's WorkSpace type is personal or pools.
+	WorkspaceType WorkspaceType
 
 	noSmithyDocumentSerde
 }
@@ -1508,6 +1741,120 @@ type WorkspacesIpGroup struct {
 
 	// The rules.
 	UserRules []IpRuleItem
+
+	noSmithyDocumentSerde
+}
+
+// Describes a WorkSpaces pool.
+type WorkspacesPool struct {
+
+	// The identifier of the bundle used by the pool.
+	//
+	// This member is required.
+	BundleId *string
+
+	// The capacity status for the pool
+	//
+	// This member is required.
+	CapacityStatus *CapacityStatus
+
+	// The time the pool was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the directory used by the pool.
+	//
+	// This member is required.
+	DirectoryId *string
+
+	// The Amazon Resource Name (ARN) for the WorkSpaces pool.
+	//
+	// This member is required.
+	PoolArn *string
+
+	// The identifier of a WorkSpaces pool.
+	//
+	// This member is required.
+	PoolId *string
+
+	// The name of the pool,
+	//
+	// This member is required.
+	PoolName *string
+
+	// The current state of the pool.
+	//
+	// This member is required.
+	State WorkspacesPoolState
+
+	// The persistent application settings for users of the pool.
+	ApplicationSettings *ApplicationSettingsResponse
+
+	// The description of the pool.
+	Description *string
+
+	// The pool errors.
+	Errors []WorkspacesPoolError
+
+	// The amount of time that a pool session remains active after users disconnect.
+	// If they try to reconnect to the pool session after a disconnection or network
+	// interruption within this time interval, they are connected to their previous
+	// session. Otherwise, they are connected to a new session with a new pool
+	// instance.
+	TimeoutSettings *TimeoutSettings
+
+	noSmithyDocumentSerde
+}
+
+// Describes a WorkSpaces pool error.
+type WorkspacesPoolError struct {
+
+	// The error code.
+	ErrorCode WorkspacesPoolErrorCode
+
+	// The error message.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a WorkSpaces pool session.
+type WorkspacesPoolSession struct {
+
+	// The identifier of the pool.
+	//
+	// This member is required.
+	PoolId *string
+
+	// The identifier of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The identifier of the user.
+	//
+	// This member is required.
+	UserId *string
+
+	// The authentication method. The user is authenticated using a WorkSpaces pool
+	// URL (API) or SAML 2.0 federation (SAML).
+	AuthenticationType AuthenticationType
+
+	// Specifies whether a user is connected to the pool session.
+	ConnectionState SessionConnectionState
+
+	// The time that the pool session ended.
+	ExpirationTime *time.Time
+
+	// The identifier for the instance hosting the session.
+	InstanceId *string
+
+	// Describes the network details of the pool.
+	NetworkAccessConfiguration *NetworkAccessConfiguration
+
+	// The time that the pool sission started.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }

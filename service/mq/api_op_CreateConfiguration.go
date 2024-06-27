@@ -39,14 +39,6 @@ type CreateConfigurationInput struct {
 	// This member is required.
 	EngineType types.EngineType
 
-	// Required. The broker engine's version. For a list of supported engine versions,
-	// see [Supported engines].
-	//
-	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
-	//
-	// This member is required.
-	EngineVersion *string
-
 	// Required. The name of the configuration. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 1-150 characters long.
@@ -57,6 +49,14 @@ type CreateConfigurationInput struct {
 	// Optional. The authentication strategy associated with the configuration. The
 	// default is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
+
+	// The broker engine version. Defaults to the latest available version for the
+	// specified broker engine type. For more information, see the [ActiveMQ version management]and the [RabbitMQ version management] sections
+	// in the Amazon MQ Developer Guide.
+	//
+	// [RabbitMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
+	// [ActiveMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+	EngineVersion *string
 
 	// Create tags when creating the configuration.
 	Tags map[string]string

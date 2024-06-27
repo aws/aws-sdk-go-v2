@@ -1,0 +1,8 @@
+{
+    "id": "574c5614-9ab0-47d7-a5d9-78be96a9b0dd",
+    "type": "documentation",
+    "description": "Doc only update for CloudFront that fixes customer-reported issue",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

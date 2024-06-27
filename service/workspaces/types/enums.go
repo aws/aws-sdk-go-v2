@@ -87,6 +87,26 @@ func (ApplicationAssociatedResourceType) Values() []ApplicationAssociatedResourc
 	}
 }
 
+type ApplicationSettingsStatusEnum string
+
+// Enum values for ApplicationSettingsStatusEnum
+const (
+	ApplicationSettingsStatusEnumDisabled ApplicationSettingsStatusEnum = "DISABLED"
+	ApplicationSettingsStatusEnumEnabled  ApplicationSettingsStatusEnum = "ENABLED"
+)
+
+// Values returns all known values for ApplicationSettingsStatusEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationSettingsStatusEnum) Values() []ApplicationSettingsStatusEnum {
+	return []ApplicationSettingsStatusEnum{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type AssociationErrorCode string
 
 // Enum values for AssociationErrorCode
@@ -167,6 +187,23 @@ func (AssociationStatus) Values() []AssociationStatus {
 		"ASSOCIATED_WITH_SHARED_ACCOUNT",
 		"PENDING_ASSOCIATION",
 		"PENDING_DISASSOCIATION",
+	}
+}
+
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypeSaml AuthenticationType = "SAML"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"SAML",
 	}
 }
 
@@ -463,6 +500,48 @@ func (DeletableSamlProperty) Values() []DeletableSamlProperty {
 	}
 }
 
+type DescribeWorkspacesPoolsFilterName string
+
+// Enum values for DescribeWorkspacesPoolsFilterName
+const (
+	DescribeWorkspacesPoolsFilterNamePoolname DescribeWorkspacesPoolsFilterName = "PoolName"
+)
+
+// Values returns all known values for DescribeWorkspacesPoolsFilterName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DescribeWorkspacesPoolsFilterName) Values() []DescribeWorkspacesPoolsFilterName {
+	return []DescribeWorkspacesPoolsFilterName{
+		"PoolName",
+	}
+}
+
+type DescribeWorkspacesPoolsFilterOperator string
+
+// Enum values for DescribeWorkspacesPoolsFilterOperator
+const (
+	DescribeWorkspacesPoolsFilterOperatorEquals      DescribeWorkspacesPoolsFilterOperator = "EQUALS"
+	DescribeWorkspacesPoolsFilterOperatorNotequals   DescribeWorkspacesPoolsFilterOperator = "NOTEQUALS"
+	DescribeWorkspacesPoolsFilterOperatorContains    DescribeWorkspacesPoolsFilterOperator = "CONTAINS"
+	DescribeWorkspacesPoolsFilterOperatorNotcontains DescribeWorkspacesPoolsFilterOperator = "NOTCONTAINS"
+)
+
+// Values returns all known values for DescribeWorkspacesPoolsFilterOperator. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DescribeWorkspacesPoolsFilterOperator) Values() []DescribeWorkspacesPoolsFilterOperator {
+	return []DescribeWorkspacesPoolsFilterOperator{
+		"EQUALS",
+		"NOTEQUALS",
+		"CONTAINS",
+		"NOTCONTAINS",
+	}
+}
+
 type ImageAssociatedResourceType string
 
 // Enum values for ImageAssociatedResourceType
@@ -694,6 +773,25 @@ func (SamlStatusEnum) Values() []SamlStatusEnum {
 	}
 }
 
+type SessionConnectionState string
+
+// Enum values for SessionConnectionState
+const (
+	SessionConnectionStateConnected    SessionConnectionState = "CONNECTED"
+	SessionConnectionStateNotConnected SessionConnectionState = "NOT_CONNECTED"
+)
+
+// Values returns all known values for SessionConnectionState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionConnectionState) Values() []SessionConnectionState {
+	return []SessionConnectionState{
+		"CONNECTED",
+		"NOT_CONNECTED",
+	}
+}
+
 type StandbyWorkspaceRelationshipType string
 
 // Enum values for StandbyWorkspaceRelationshipType
@@ -711,6 +809,62 @@ func (StandbyWorkspaceRelationshipType) Values() []StandbyWorkspaceRelationshipT
 	return []StandbyWorkspaceRelationshipType{
 		"PRIMARY",
 		"STANDBY",
+	}
+}
+
+type StorageConnectorStatusEnum string
+
+// Enum values for StorageConnectorStatusEnum
+const (
+	StorageConnectorStatusEnumEnabled  StorageConnectorStatusEnum = "ENABLED"
+	StorageConnectorStatusEnumDisabled StorageConnectorStatusEnum = "DISABLED"
+)
+
+// Values returns all known values for StorageConnectorStatusEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageConnectorStatusEnum) Values() []StorageConnectorStatusEnum {
+	return []StorageConnectorStatusEnum{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type StorageConnectorTypeEnum string
+
+// Enum values for StorageConnectorTypeEnum
+const (
+	StorageConnectorTypeEnumHomeFolder StorageConnectorTypeEnum = "HOME_FOLDER"
+)
+
+// Values returns all known values for StorageConnectorTypeEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageConnectorTypeEnum) Values() []StorageConnectorTypeEnum {
+	return []StorageConnectorTypeEnum{
+		"HOME_FOLDER",
+	}
+}
+
+type StreamingExperiencePreferredProtocolEnum string
+
+// Enum values for StreamingExperiencePreferredProtocolEnum
+const (
+	StreamingExperiencePreferredProtocolEnumTcp StreamingExperiencePreferredProtocolEnum = "TCP"
+	StreamingExperiencePreferredProtocolEnumUdp StreamingExperiencePreferredProtocolEnum = "UDP"
+)
+
+// Values returns all known values for StreamingExperiencePreferredProtocolEnum.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamingExperiencePreferredProtocolEnum) Values() []StreamingExperiencePreferredProtocolEnum {
+	return []StreamingExperiencePreferredProtocolEnum{
+		"TCP",
+		"UDP",
 	}
 }
 
@@ -749,6 +903,67 @@ func (Tenancy) Values() []Tenancy {
 	return []Tenancy{
 		"DEDICATED",
 		"SHARED",
+	}
+}
+
+type UserIdentityType string
+
+// Enum values for UserIdentityType
+const (
+	UserIdentityTypeCustomerManaged     UserIdentityType = "CUSTOMER_MANAGED"
+	UserIdentityTypeAwsDirectoryService UserIdentityType = "AWS_DIRECTORY_SERVICE"
+)
+
+// Values returns all known values for UserIdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserIdentityType) Values() []UserIdentityType {
+	return []UserIdentityType{
+		"CUSTOMER_MANAGED",
+		"AWS_DIRECTORY_SERVICE",
+	}
+}
+
+type UserSettingActionEnum string
+
+// Enum values for UserSettingActionEnum
+const (
+	UserSettingActionEnumClipboardCopyFromLocalDevice UserSettingActionEnum = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"
+	UserSettingActionEnumClipboardCopyToLocalDevice   UserSettingActionEnum = "CLIPBOARD_COPY_TO_LOCAL_DEVICE"
+	UserSettingActionEnumPrintingToLocalDevice        UserSettingActionEnum = "PRINTING_TO_LOCAL_DEVICE"
+	UserSettingActionEnumSmartCard                    UserSettingActionEnum = "SMART_CARD"
+)
+
+// Values returns all known values for UserSettingActionEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserSettingActionEnum) Values() []UserSettingActionEnum {
+	return []UserSettingActionEnum{
+		"CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
+		"CLIPBOARD_COPY_TO_LOCAL_DEVICE",
+		"PRINTING_TO_LOCAL_DEVICE",
+		"SMART_CARD",
+	}
+}
+
+type UserSettingPermissionEnum string
+
+// Enum values for UserSettingPermissionEnum
+const (
+	UserSettingPermissionEnumEnabled  UserSettingPermissionEnum = "ENABLED"
+	UserSettingPermissionEnumDisabled UserSettingPermissionEnum = "DISABLED"
+)
+
+// Values returns all known values for UserSettingPermissionEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserSettingPermissionEnum) Values() []UserSettingPermissionEnum {
+	return []UserSettingPermissionEnum{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -863,8 +1078,9 @@ type WorkspaceDirectoryType string
 
 // Enum values for WorkspaceDirectoryType
 const (
-	WorkspaceDirectoryTypeSimpleAd    WorkspaceDirectoryType = "SIMPLE_AD"
-	WorkspaceDirectoryTypeAdConnector WorkspaceDirectoryType = "AD_CONNECTOR"
+	WorkspaceDirectoryTypeSimpleAd        WorkspaceDirectoryType = "SIMPLE_AD"
+	WorkspaceDirectoryTypeAdConnector     WorkspaceDirectoryType = "AD_CONNECTOR"
+	WorkspaceDirectoryTypeCustomerManaged WorkspaceDirectoryType = "CUSTOMER_MANAGED"
 )
 
 // Values returns all known values for WorkspaceDirectoryType. Note that this can
@@ -875,6 +1091,7 @@ func (WorkspaceDirectoryType) Values() []WorkspaceDirectoryType {
 	return []WorkspaceDirectoryType{
 		"SIMPLE_AD",
 		"AD_CONNECTOR",
+		"CUSTOMER_MANAGED",
 	}
 }
 
@@ -1017,6 +1234,130 @@ func (WorkspaceImageState) Values() []WorkspaceImageState {
 	}
 }
 
+type WorkspacesPoolErrorCode string
+
+// Enum values for WorkspacesPoolErrorCode
+const (
+	WorkspacesPoolErrorCodeIamServiceRoleIsMissing                           WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"
+	WorkspacesPoolErrorCodeIamServiceRoleMissingEniDescribeAction            WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
+	WorkspacesPoolErrorCodeIamServiceRoleMissingEniCreateAction              WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
+	WorkspacesPoolErrorCodeIamServiceRoleMissingEniDeleteAction              WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
+	WorkspacesPoolErrorCodeNetworkInterfaceLimitExceeded                     WorkspacesPoolErrorCode = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
+	WorkspacesPoolErrorCodeInternalServiceError                              WorkspacesPoolErrorCode = "INTERNAL_SERVICE_ERROR"
+	WorkspacesPoolErrorCodeMachineRoleIsMissing                              WorkspacesPoolErrorCode = "MACHINE_ROLE_IS_MISSING"
+	WorkspacesPoolErrorCodeStsDisabledInRegion                               WorkspacesPoolErrorCode = "STS_DISABLED_IN_REGION"
+	WorkspacesPoolErrorCodeSubnetHasInsufficientIpAddresses                  WorkspacesPoolErrorCode = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
+	WorkspacesPoolErrorCodeIamServiceRoleMissingDescribeSubnetAction         WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
+	WorkspacesPoolErrorCodeSubnetNotFound                                    WorkspacesPoolErrorCode = "SUBNET_NOT_FOUND"
+	WorkspacesPoolErrorCodeImageNotFound                                     WorkspacesPoolErrorCode = "IMAGE_NOT_FOUND"
+	WorkspacesPoolErrorCodeInvalidSubnetConfiguration                        WorkspacesPoolErrorCode = "INVALID_SUBNET_CONFIGURATION"
+	WorkspacesPoolErrorCodeSecurityGroupsNotFound                            WorkspacesPoolErrorCode = "SECURITY_GROUPS_NOT_FOUND"
+	WorkspacesPoolErrorCodeIgwNotAttached                                    WorkspacesPoolErrorCode = "IGW_NOT_ATTACHED"
+	WorkspacesPoolErrorCodeIamServiceRoleMissingDescribeSecurityGroupsAction WorkspacesPoolErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
+	WorkspacesPoolErrorCodeWorkspacesPoolStopped                             WorkspacesPoolErrorCode = "WORKSPACES_POOL_STOPPED"
+	WorkspacesPoolErrorCodeWorkspacesPoolInstanceProvisioningFailure         WorkspacesPoolErrorCode = "WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE"
+	WorkspacesPoolErrorCodeDomainJoinErrorFileNotFound                       WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
+	WorkspacesPoolErrorCodeDomainJoinErrorAccessDenied                       WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
+	WorkspacesPoolErrorCodeDomainJoinErrorLogonFailure                       WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
+	WorkspacesPoolErrorCodeDomainJoinErrorInvalidParameter                   WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
+	WorkspacesPoolErrorCodeDomainJoinErrorMoreData                           WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_MORE_DATA"
+	WorkspacesPoolErrorCodeDomainJoinErrorNoSuchDomain                       WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
+	WorkspacesPoolErrorCodeDomainJoinErrorNotSupported                       WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
+	WorkspacesPoolErrorCodeDomainJoinNerrInvalidWorkgroupName                WorkspacesPoolErrorCode = "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
+	WorkspacesPoolErrorCodeDomainJoinNerrWorkstationNotStarted               WorkspacesPoolErrorCode = "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
+	WorkspacesPoolErrorCodeDomainJoinErrorDsMachineAccountQuotaExceeded      WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
+	WorkspacesPoolErrorCodeDomainJoinNerrPasswordExpired                     WorkspacesPoolErrorCode = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
+	WorkspacesPoolErrorCodeDomainJoinInternalServiceError                    WorkspacesPoolErrorCode = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+	WorkspacesPoolErrorCodeDomainJoinErrorSecretActionPermissionIsMissing    WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING"
+	WorkspacesPoolErrorCodeDomainJoinErrorSecretDecryptionFailure            WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE"
+	WorkspacesPoolErrorCodeDomainJoinErrorSecretStateInvalid                 WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID"
+	WorkspacesPoolErrorCodeDomainJoinErrorSecretNotFound                     WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND"
+	WorkspacesPoolErrorCodeDomainJoinErrorSecretValueKeyNotFound             WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND"
+	WorkspacesPoolErrorCodeDomainJoinErrorSecretInvalid                      WorkspacesPoolErrorCode = "DOMAIN_JOIN_ERROR_SECRET_INVALID"
+	WorkspacesPoolErrorCodeBundleNotFound                                    WorkspacesPoolErrorCode = "BUNDLE_NOT_FOUND"
+	WorkspacesPoolErrorCodeDirectoryNotFound                                 WorkspacesPoolErrorCode = "DIRECTORY_NOT_FOUND"
+	WorkspacesPoolErrorCodeInsufficientPermissionsError                      WorkspacesPoolErrorCode = "INSUFFICIENT_PERMISSIONS_ERROR"
+	WorkspacesPoolErrorCodeDefaultOuIsMissing                                WorkspacesPoolErrorCode = "DEFAULT_OU_IS_MISSING"
+)
+
+// Values returns all known values for WorkspacesPoolErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspacesPoolErrorCode) Values() []WorkspacesPoolErrorCode {
+	return []WorkspacesPoolErrorCode{
+		"IAM_SERVICE_ROLE_IS_MISSING",
+		"IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION",
+		"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION",
+		"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION",
+		"NETWORK_INTERFACE_LIMIT_EXCEEDED",
+		"INTERNAL_SERVICE_ERROR",
+		"MACHINE_ROLE_IS_MISSING",
+		"STS_DISABLED_IN_REGION",
+		"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES",
+		"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION",
+		"SUBNET_NOT_FOUND",
+		"IMAGE_NOT_FOUND",
+		"INVALID_SUBNET_CONFIGURATION",
+		"SECURITY_GROUPS_NOT_FOUND",
+		"IGW_NOT_ATTACHED",
+		"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION",
+		"WORKSPACES_POOL_STOPPED",
+		"WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE",
+		"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND",
+		"DOMAIN_JOIN_ERROR_ACCESS_DENIED",
+		"DOMAIN_JOIN_ERROR_LOGON_FAILURE",
+		"DOMAIN_JOIN_ERROR_INVALID_PARAMETER",
+		"DOMAIN_JOIN_ERROR_MORE_DATA",
+		"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN",
+		"DOMAIN_JOIN_ERROR_NOT_SUPPORTED",
+		"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME",
+		"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED",
+		"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED",
+		"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED",
+		"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR",
+		"DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING",
+		"DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE",
+		"DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID",
+		"DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND",
+		"DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND",
+		"DOMAIN_JOIN_ERROR_SECRET_INVALID",
+		"BUNDLE_NOT_FOUND",
+		"DIRECTORY_NOT_FOUND",
+		"INSUFFICIENT_PERMISSIONS_ERROR",
+		"DEFAULT_OU_IS_MISSING",
+	}
+}
+
+type WorkspacesPoolState string
+
+// Enum values for WorkspacesPoolState
+const (
+	WorkspacesPoolStateCreating WorkspacesPoolState = "CREATING"
+	WorkspacesPoolStateDeleting WorkspacesPoolState = "DELETING"
+	WorkspacesPoolStateRunning  WorkspacesPoolState = "RUNNING"
+	WorkspacesPoolStateStarting WorkspacesPoolState = "STARTING"
+	WorkspacesPoolStateStopped  WorkspacesPoolState = "STOPPED"
+	WorkspacesPoolStateStopping WorkspacesPoolState = "STOPPING"
+	WorkspacesPoolStateUpdating WorkspacesPoolState = "UPDATING"
+)
+
+// Values returns all known values for WorkspacesPoolState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspacesPoolState) Values() []WorkspacesPoolState {
+	return []WorkspacesPoolState{
+		"CREATING",
+		"DELETING",
+		"RUNNING",
+		"STARTING",
+		"STOPPED",
+		"STOPPING",
+		"UPDATING",
+	}
+}
+
 type WorkspaceState string
 
 // Enum values for WorkspaceState
@@ -1063,5 +1404,24 @@ func (WorkspaceState) Values() []WorkspaceState {
 		"STOPPING",
 		"STOPPED",
 		"ERROR",
+	}
+}
+
+type WorkspaceType string
+
+// Enum values for WorkspaceType
+const (
+	WorkspaceTypePersonal WorkspaceType = "PERSONAL"
+	WorkspaceTypePools    WorkspaceType = "POOLS"
+)
+
+// Values returns all known values for WorkspaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceType) Values() []WorkspaceType {
+	return []WorkspaceType{
+		"PERSONAL",
+		"POOLS",
 	}
 }

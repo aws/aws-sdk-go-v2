@@ -39,9 +39,12 @@ type UpdateBrokerInput struct {
 	// SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
-	// Enables automatic upgrades to new minor versions for brokers, as new versions
+	// Enables automatic upgrades to new patch versions for brokers as new versions
 	// are released and supported by Amazon MQ. Automatic upgrades occur during the
-	// scheduled maintenance window of the broker or after a manual broker reboot.
+	// scheduled maintenance window or after a manual broker reboot.
+	//
+	// Must be set to true for ActiveMQ brokers version 5.18 and above and for
+	// RabbitMQ brokers version 3.13 and above.
 	AutoMinorVersionUpgrade *bool
 
 	// A list of information about the configuration.
@@ -50,9 +53,14 @@ type UpdateBrokerInput struct {
 	// Defines whether this broker is a part of a data replication pair.
 	DataReplicationMode types.DataReplicationMode
 
-	// The broker engine version. For a list of supported engine versions, see [Supported engines].
+	// The broker engine version. For more information, see the [ActiveMQ version management] and the [RabbitMQ version management] sections in
+	// the Amazon MQ Developer Guide.
 	//
-	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+	// When upgrading to ActiveMQ version 5.18 and above or RabbitMQ version 3.13 and
+	// above, you must have autoMinorVersionUpgrade set to true for the broker.
+	//
+	// [RabbitMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
+	// [ActiveMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
 	EngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance
@@ -84,9 +92,9 @@ type UpdateBrokerOutput struct {
 	// SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
-	// The new boolean value that specifies whether broker engines automatically
-	// upgrade to new minor versions as new versions are released and supported by
-	// Amazon MQ.
+	// Enables automatic upgrades to new patch versions for brokers as new versions
+	// are released and supported by Amazon MQ. Automatic upgrades occur during the
+	// scheduled maintenance window or after a manual broker reboot.
 	AutoMinorVersionUpgrade *bool
 
 	// Required. The unique ID that Amazon MQ generates for the broker.
@@ -102,10 +110,11 @@ type UpdateBrokerOutput struct {
 	// Describes whether this broker is a part of a data replication pair.
 	DataReplicationMode types.DataReplicationMode
 
-	// The broker engine version to upgrade to. For a list of supported engine
-	// versions, see [Supported engines].
+	// The broker engine version to upgrade to. For more information, see the [ActiveMQ version management] and the [RabbitMQ version management]
+	// sections in the Amazon MQ Developer Guide.
 	//
-	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+	// [RabbitMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
+	// [ActiveMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
 	EngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance

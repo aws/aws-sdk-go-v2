@@ -1514,6 +1514,105 @@ type Import struct {
 	noSmithyDocumentSerde
 }
 
+// The reference details for the data lineage node.
+type LineageNodeReference struct {
+
+	// The event timestamp of the data lineage node.
+	EventTimestamp *time.Time
+
+	// The ID of the data lineage node.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the data lineage node.
+type LineageNodeSummary struct {
+
+	// The ID of the domain of the data lineage node.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The ID of the data lineage node.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the type of the data lineage node.
+	//
+	// This member is required.
+	TypeName *string
+
+	// The timestamp at which the data lineage node was created.
+	CreatedAt *time.Time
+
+	// The user who created the data lineage node.
+	CreatedBy *string
+
+	// The description of the data lineage node.
+	Description *string
+
+	// The event timestamp of the data lineage node.
+	EventTimestamp *time.Time
+
+	// The name of the data lineage node.
+	Name *string
+
+	// The alternate ID of the data lineage node.
+	SourceIdentifier *string
+
+	// The type of the revision of the data lineage node.
+	TypeRevision *string
+
+	// The timestamp at which the data lineage node was updated.
+	UpdatedAt *time.Time
+
+	// The user who updated the data lineage node.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a data lineage node type.
+type LineageNodeTypeItem struct {
+
+	// The ID of the domain where the data lineage node type lives.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The forms output of the data lineage node type.
+	//
+	// This member is required.
+	FormsOutput map[string]FormEntryOutput
+
+	// The revision of the data lineage node type.
+	//
+	// This member is required.
+	Revision *string
+
+	// The timestamp at which the data lineage node type was created.
+	CreatedAt *time.Time
+
+	// The user who created the data lineage node type.
+	CreatedBy *string
+
+	// The description of the data lineage node type.
+	Description *string
+
+	// The name of the data lineage node type.
+	Name *string
+
+	// The timestamp at which the data lineage node type was updated.
+	UpdatedAt *time.Time
+
+	// The user who updated the data lineage node type.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a listing (aka asset published in a Amazon DataZone catalog).
 //
 // The following types satisfy this interface:
@@ -2218,6 +2317,7 @@ type SearchSort struct {
 //
 //	SearchTypesResultItemMemberAssetTypeItem
 //	SearchTypesResultItemMemberFormTypeItem
+//	SearchTypesResultItemMemberLineageNodeTypeItem
 type SearchTypesResultItem interface {
 	isSearchTypesResultItem()
 }
@@ -2239,6 +2339,15 @@ type SearchTypesResultItemMemberFormTypeItem struct {
 }
 
 func (*SearchTypesResultItemMemberFormTypeItem) isSearchTypesResultItem() {}
+
+// The details of a data lineage node type.
+type SearchTypesResultItemMemberLineageNodeTypeItem struct {
+	Value LineageNodeTypeItem
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchTypesResultItemMemberLineageNodeTypeItem) isSearchTypesResultItem() {}
 
 // The details for the self granting status.
 type SelfGrantStatusDetail struct {

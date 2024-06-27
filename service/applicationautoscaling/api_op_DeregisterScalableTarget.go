@@ -39,7 +39,7 @@ type DeregisterScalableTargetInput struct {
 	// consists of the resource type and unique identifier.
 	//
 	//   - ECS service - The resource type is service and the unique identifier is the
-	//   cluster name and service name. Example: service/default/sample-webapp .
+	//   cluster name and service name. Example: service/my-cluster/my-service .
 	//
 	//   - Spot Fleet - The resource type is spot-fleet-request and the unique
 	//   identifier is the Spot Fleet request ID. Example:
@@ -99,13 +99,16 @@ type DeregisterScalableTargetInput struct {
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
 	//
-	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
+	//   - SageMaker serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
 	//
 	//   - SageMaker inference component - The resource type is inference-component and
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
+	//
+	//   - Amazon WorkSpaces - The resource type is workspacespool and the unique
+	//   identifier is the pool ID. Example: workspacespool/wspool-123456 .
 	//
 	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
 	//
@@ -115,15 +118,14 @@ type DeregisterScalableTargetInput struct {
 	// The scalable dimension associated with the scalable target. This string
 	// consists of the service namespace, resource type, and scaling property.
 	//
-	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//   - ecs:service:DesiredCount - The task count of an ECS service.
 	//
 	//   - elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
 	//   Instance Group.
 	//
 	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
 	//
-	//   - appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
-	//   fleet.
+	//   - appstream:fleet:DesiredCapacity - The capacity of an AppStream 2.0 fleet.
 	//
 	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB table.
@@ -175,10 +177,13 @@ type DeregisterScalableTargetInput struct {
 	//   Neptune DB cluster.
 	//
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
-	//   concurrency for a SageMaker Serverless endpoint.
+	//   concurrency for a SageMaker serverless endpoint.
 	//
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
+	//
+	//   - workspaces:workspacespool:DesiredUserSessions - The capacity of a WorkSpaces
+	//   pool.
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension

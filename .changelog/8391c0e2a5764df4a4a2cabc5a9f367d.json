@@ -1,0 +1,8 @@
+{
+    "id": "8391c0e2-a576-4df4-a4a2-cabc5a9f367d",
+    "type": "feature",
+    "description": "Added Amazon Transcribe multi language identification to Chime SDK call analytics. Enabling customers sending single stream audio to generate call recordings using Chime SDK call analytics",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}

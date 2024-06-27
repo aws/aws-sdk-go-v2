@@ -34,26 +34,25 @@ func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *Registe
 
 type RegisterWorkspaceDirectoryInput struct {
 
+	// The active directory config of the directory.
+	ActiveDirectoryConfig *types.ActiveDirectoryConfig
+
 	// The identifier of the directory. You cannot register a directory if it does not
 	// have a status of Active. If the directory does not have a status of Active, you
 	// will receive an InvalidResourceStateException error. If you have already
 	// registered the maximum number of directories that you can register with Amazon
 	// WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister
 	// directories that you are not using for WorkSpaces, and try again.
-	//
-	// This member is required.
 	DirectoryId *string
+
+	// Indicates whether self-service capabilities are enabled or disabled.
+	EnableSelfService *bool
 
 	// Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled
 	// this parameter and WorkDocs is not available in the Region, you will receive an
 	// OperationNotSupportedException error. Set EnableWorkDocs to disabled, and try
 	// again.
-	//
-	// This member is required.
 	EnableWorkDocs *bool
-
-	// Indicates whether self-service capabilities are enabled or disabled.
-	EnableSelfService *bool
 
 	// The identifiers of the subnets for your virtual private cloud (VPC). Make sure
 	// that the subnets are in supported Availability Zones. The subnets must also be
@@ -73,10 +72,29 @@ type RegisterWorkspaceDirectoryInput struct {
 	// [Bring Your Own Windows Desktop Images]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
 	Tenancy types.Tenancy
 
+	// The type of identity management the user is using.
+	UserIdentityType types.UserIdentityType
+
+	// Description of the directory to register.
+	WorkspaceDirectoryDescription *string
+
+	// The name of the directory to register.
+	WorkspaceDirectoryName *string
+
+	// Indicates whether the directory's WorkSpace type is personal or pools.
+	WorkspaceType types.WorkspaceType
+
 	noSmithyDocumentSerde
 }
 
 type RegisterWorkspaceDirectoryOutput struct {
+
+	// The identifier of the directory.
+	DirectoryId *string
+
+	// The registration status of the WorkSpace directory.
+	State types.WorkspaceDirectoryState
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -3134,7 +3134,9 @@ type ClarifyTextConfig struct {
 
 // Defines the configuration for attaching an additional Amazon Elastic Block
 // Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance
-// group.
+// group. To learn more, see [SageMaker HyperPod release notes: June 20, 2024].
+//
+// [SageMaker HyperPod release notes: June 20, 2024]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
 type ClusterEbsVolumeConfig struct {
 
 	// The size in gigabytes (GB) of the additional EBS volume to be attached to the
@@ -3263,11 +3265,13 @@ type ClusterInstanceStatusDetails struct {
 }
 
 // Defines the configuration for attaching additional storage to the instances in
-// the SageMaker HyperPod cluster instance group.
+// the SageMaker HyperPod cluster instance group. To learn more, see [SageMaker HyperPod release notes: June 20, 2024].
 //
 // The following types satisfy this interface:
 //
 //	ClusterInstanceStorageConfigMemberEbsVolumeConfig
+//
+// [SageMaker HyperPod release notes: June 20, 2024]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
 type ClusterInstanceStorageConfig interface {
 	isClusterInstanceStorageConfig()
 }
@@ -16386,6 +16390,21 @@ type StudioLifecycleConfigDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Studio settings. If these settings are applied on a user level, they take
+// priority over the settings applied on a domain level.
+type StudioWebPortalSettings struct {
+
+	// The [Applications supported in Studio] that are hidden from the Studio left navigation pane.
+	//
+	// [Applications supported in Studio]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-apps.html
+	HiddenAppTypes []AppType
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	HiddenMlTools []MlTools
+
+	noSmithyDocumentSerde
+}
+
 // Describes a work team of a vendor that does the labelling job.
 type SubscribedWorkteam struct {
 
@@ -18677,6 +18696,10 @@ type UserSettings struct {
 	// Whether the user can access Studio. If this value is set to DISABLED , the user
 	// cannot access Studio, even if that is the default experience for the domain.
 	StudioWebPortal StudioWebPortal
+
+	// Studio settings. If these settings are applied on a user level, they take
+	// priority over the settings applied on a domain level.
+	StudioWebPortalSettings *StudioWebPortalSettings
 
 	// The TensorBoard app settings.
 	TensorBoardAppSettings *TensorBoardAppSettings

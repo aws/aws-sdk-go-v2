@@ -2620,6 +2620,11 @@ func awsRestjson1_serializeDocumentAmazonTranscribeProcessorConfiguration(v *typ
 		ok.Boolean(v.IdentifyLanguage)
 	}
 
+	if v.IdentifyMultipleLanguages {
+		ok := object.Key("IdentifyMultipleLanguages")
+		ok.Boolean(v.IdentifyMultipleLanguages)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))

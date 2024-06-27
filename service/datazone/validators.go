@@ -1170,6 +1170,26 @@ func (m *validateOpGetIamPortalLoginUrl) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetLineageNode struct {
+}
+
+func (*validateOpGetLineageNode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLineageNode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLineageNodeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLineageNodeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetListing struct {
 }
 
@@ -1530,6 +1550,26 @@ func (m *validateOpListEnvironments) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListLineageNodeHistory struct {
+}
+
+func (*validateOpListLineageNodeHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLineageNodeHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLineageNodeHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLineageNodeHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMetadataGenerationRuns struct {
 }
 
@@ -1725,6 +1765,26 @@ func (m *validateOpListTimeSeriesDataPoints) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTimeSeriesDataPointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPostLineageEvent struct {
+}
+
+func (*validateOpPostLineageEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPostLineageEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PostLineageEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPostLineageEventInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2502,6 +2562,10 @@ func addOpGetIamPortalLoginUrlValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetIamPortalLoginUrl{}, middleware.After)
 }
 
+func addOpGetLineageNodeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLineageNode{}, middleware.After)
+}
+
 func addOpGetListingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetListing{}, middleware.After)
 }
@@ -2574,6 +2638,10 @@ func addOpListEnvironmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironments{}, middleware.After)
 }
 
+func addOpListLineageNodeHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLineageNodeHistory{}, middleware.After)
+}
+
 func addOpListMetadataGenerationRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMetadataGenerationRuns{}, middleware.After)
 }
@@ -2612,6 +2680,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTimeSeriesDataPoints{}, middleware.After)
+}
+
+func addOpPostLineageEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPostLineageEvent{}, middleware.After)
 }
 
 func addOpPostTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
@@ -4578,6 +4650,24 @@ func validateOpGetIamPortalLoginUrlInput(v *GetIamPortalLoginUrlInput) error {
 	}
 }
 
+func validateOpGetLineageNodeInput(v *GetLineageNodeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLineageNodeInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetListingInput(v *GetListingInput) error {
 	if v == nil {
 		return nil
@@ -4905,6 +4995,24 @@ func validateOpListEnvironmentsInput(v *ListEnvironmentsInput) error {
 	}
 }
 
+func validateOpListLineageNodeHistoryInput(v *ListLineageNodeHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLineageNodeHistoryInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListMetadataGenerationRunsInput(v *ListMetadataGenerationRunsInput) error {
 	if v == nil {
 		return nil
@@ -5065,6 +5173,24 @@ func validateOpListTimeSeriesDataPointsInput(v *ListTimeSeriesDataPointsInput) e
 	}
 	if v.FormName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPostLineageEventInput(v *PostLineageEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostLineageEventInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Event == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Event"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

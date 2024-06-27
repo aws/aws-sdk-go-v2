@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List tags for a CloudFront resource.
+// List tags for a CloudFront resource. For more information, see [Tagging a distribution] in the Amazon
+// CloudFront Developer Guide.
+//
+// [Tagging a distribution]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

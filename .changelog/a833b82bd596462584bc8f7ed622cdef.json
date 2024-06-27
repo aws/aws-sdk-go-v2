@@ -1,0 +1,8 @@
+{
+    "id": "a833b82b-d596-4625-84bc-8f7ed622cdef",
+    "type": "feature",
+    "description": "Amazon WorkSpaces customers can now use Application Auto Scaling to automatically scale the number of virtual desktops in a WorkSpaces pool.",
+    "modules": [
+        "service/applicationautoscaling"
+    ]
+}

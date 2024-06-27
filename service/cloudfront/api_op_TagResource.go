@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add tags to a CloudFront resource.
+// Add tags to a CloudFront resource. For more information, see [Tagging a distribution] in the Amazon
+// CloudFront Developer Guide.
+//
+// [Tagging a distribution]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

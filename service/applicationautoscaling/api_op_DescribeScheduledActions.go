@@ -17,9 +17,8 @@ import (
 // You can filter the results using the ResourceId , ScalableDimension , and
 // ScheduledActionNames parameters.
 //
-// For more information, see [Scheduled scaling] and [Managing scheduled scaling] in the Application Auto Scaling User Guide.
+// For more information, see [Scheduled scaling] in the Application Auto Scaling User Guide.
 //
-// [Managing scheduled scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html
 // [Scheduled scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
 func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeScheduledActionsInput, optFns ...func(*Options)) (*DescribeScheduledActionsOutput, error) {
 	if params == nil {
@@ -61,7 +60,7 @@ type DescribeScheduledActionsInput struct {
 	// string consists of the resource type and unique identifier.
 	//
 	//   - ECS service - The resource type is service and the unique identifier is the
-	//   cluster name and service name. Example: service/default/sample-webapp .
+	//   cluster name and service name. Example: service/my-cluster/my-service .
 	//
 	//   - Spot Fleet - The resource type is spot-fleet-request and the unique
 	//   identifier is the Spot Fleet request ID. Example:
@@ -121,13 +120,16 @@ type DescribeScheduledActionsInput struct {
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
 	//
-	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
+	//   - SageMaker serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
 	//
 	//   - SageMaker inference component - The resource type is inference-component and
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
+	//
+	//   - Amazon WorkSpaces - The resource type is workspacespool and the unique
+	//   identifier is the pool ID. Example: workspacespool/wspool-123456 .
 	//
 	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
 	ResourceId *string
@@ -136,15 +138,14 @@ type DescribeScheduledActionsInput struct {
 	// type, and scaling property. If you specify a scalable dimension, you must also
 	// specify a resource ID.
 	//
-	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//   - ecs:service:DesiredCount - The task count of an ECS service.
 	//
 	//   - elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
 	//   Instance Group.
 	//
 	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
 	//
-	//   - appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
-	//   fleet.
+	//   - appstream:fleet:DesiredCapacity - The capacity of an AppStream 2.0 fleet.
 	//
 	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB table.
@@ -196,10 +197,13 @@ type DescribeScheduledActionsInput struct {
 	//   Neptune DB cluster.
 	//
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
-	//   concurrency for a SageMaker Serverless endpoint.
+	//   concurrency for a SageMaker serverless endpoint.
 	//
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
+	//
+	//   - workspaces:workspacespool:DesiredUserSessions - The capacity of a WorkSpaces
+	//   pool.
 	ScalableDimension types.ScalableDimension
 
 	// The names of the scheduled actions to describe.

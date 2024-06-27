@@ -198,8 +198,6 @@ type CreateDBClusterInput struct {
 	//
 	//   - Must match the name of an existing DB subnet group.
 	//
-	//   - Must not be default .
-	//
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 

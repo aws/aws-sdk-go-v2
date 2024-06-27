@@ -1,0 +1,8 @@
+{
+    "id": "a714ec1c-38f5-4e86-8c32-101a33917873",
+    "type": "feature",
+    "description": "Adding support for Repeating Sections, Nested Filters",
+    "modules": [
+        "service/quicksight"
+    ]
+}

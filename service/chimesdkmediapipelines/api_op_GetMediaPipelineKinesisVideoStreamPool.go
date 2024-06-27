@@ -29,7 +29,8 @@ func (c *Client) GetMediaPipelineKinesisVideoStreamPool(ctx context.Context, par
 
 type GetMediaPipelineKinesisVideoStreamPoolInput struct {
 
-	// The ID of the video stream pool.
+	// The unique identifier of the requested resource. Valid values include the name
+	// and ARN of the media pipeline Kinesis Video Stream pool.
 	//
 	// This member is required.
 	Identifier *string

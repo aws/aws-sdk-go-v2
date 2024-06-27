@@ -22088,6 +22088,28 @@ func awsAwsjson11_serializeDocumentGroups(v []string, value smithyjson.Value) er
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHiddenAppTypesList(v []types.AppType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHiddenMlToolsList(v []types.MlTools, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHolidayConfig(v []types.HolidayConfigAttributes, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -27673,6 +27695,27 @@ func awsAwsjson11_serializeDocumentStoppingCondition(v *types.StoppingCondition,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentStudioWebPortalSettings(v *types.StudioWebPortalSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HiddenAppTypes != nil {
+		ok := object.Key("HiddenAppTypes")
+		if err := awsAwsjson11_serializeDocumentHiddenAppTypesList(v.HiddenAppTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HiddenMlTools != nil {
+		ok := object.Key("HiddenMlTools")
+		if err := awsAwsjson11_serializeDocumentHiddenMlToolsList(v.HiddenMlTools, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSubnets(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -28826,6 +28869,13 @@ func awsAwsjson11_serializeDocumentUserSettings(v *types.UserSettings, value smi
 	if len(v.StudioWebPortal) > 0 {
 		ok := object.Key("StudioWebPortal")
 		ok.String(string(v.StudioWebPortal))
+	}
+
+	if v.StudioWebPortalSettings != nil {
+		ok := object.Key("StudioWebPortalSettings")
+		if err := awsAwsjson11_serializeDocumentStudioWebPortalSettings(v.StudioWebPortalSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TensorBoardAppSettings != nil {

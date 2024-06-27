@@ -50141,6 +50141,78 @@ func awsAwsjson11_deserializeDocumentGroups(v *[]string, value interface{}) erro
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentHiddenAppTypesList(v *[]types.AppType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AppType
+	if *v == nil {
+		cv = []types.AppType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AppType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AppType to be of type string, got %T instead", value)
+			}
+			col = types.AppType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHiddenMlToolsList(v *[]types.MlTools, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MlTools
+	if *v == nil {
+		cv = []types.MlTools{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MlTools
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MlTools to be of type string, got %T instead", value)
+			}
+			col = types.MlTools(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentHolidayConfig(v *[]types.HolidayConfigAttributes, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -73639,6 +73711,47 @@ func awsAwsjson11_deserializeDocumentStudioLifecycleConfigsList(v *[]types.Studi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStudioWebPortalSettings(v **types.StudioWebPortalSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StudioWebPortalSettings
+	if *v == nil {
+		sv = &types.StudioWebPortalSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HiddenAppTypes":
+			if err := awsAwsjson11_deserializeDocumentHiddenAppTypesList(&sv.HiddenAppTypes, value); err != nil {
+				return err
+			}
+
+		case "HiddenMlTools":
+			if err := awsAwsjson11_deserializeDocumentHiddenMlToolsList(&sv.HiddenMlTools, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSubnets(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -78929,6 +79042,11 @@ func awsAwsjson11_deserializeDocumentUserSettings(v **types.UserSettings, value 
 					return fmt.Errorf("expected StudioWebPortal to be of type string, got %T instead", value)
 				}
 				sv.StudioWebPortal = types.StudioWebPortal(jtv)
+			}
+
+		case "StudioWebPortalSettings":
+			if err := awsAwsjson11_deserializeDocumentStudioWebPortalSettings(&sv.StudioWebPortalSettings, value); err != nil {
+				return err
 			}
 
 		case "TensorBoardAppSettings":
