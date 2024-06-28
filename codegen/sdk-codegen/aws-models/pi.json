@@ -523,7 +523,7 @@
                 "Filter": {
                     "target": "com.amazonaws.pi#MetricQueryFilterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters to apply in the request. Restrictions:</p>\n         <ul>\n            <li>\n               <p>Any number of filters by the same dimension, as specified in the <code>GroupBy</code> or\n          <code>Partition</code> parameters.</p>\n            </li>\n            <li>\n               <p>A single filter for any other dimension in this dimension group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One or more filters to apply in the request. Restrictions:</p>\n         <ul>\n            <li>\n               <p>Any number of filters by the same dimension, as specified in the <code>GroupBy</code> or\n          <code>Partition</code> parameters.</p>\n            </li>\n            <li>\n               <p>A single filter for any other dimension in this dimension group.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>db.sql.db_id</code> filter isn't available for RDS for SQL Server DB instances.</p>\n         </note>"
                     }
                 },
                 "MaxResults": {
@@ -1796,7 +1796,7 @@
                 "Filter": {
                     "target": "com.amazonaws.pi#MetricQueryFilterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters to apply in the request.  Restrictions:</p>\n         <ul>\n            <li>\n               <p>Any number of filters by the same dimension, as specified in the <code>GroupBy</code> parameter.</p>\n            </li>\n            <li>\n               <p>A single filter for any other dimension in this dimension group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One or more filters to apply in the request.  Restrictions:</p>\n         <ul>\n            <li>\n               <p>Any number of filters by the same dimension, as specified in the <code>GroupBy</code> parameter.</p>\n            </li>\n            <li>\n               <p>A single filter for any other dimension in this dimension group.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>db.sql.db_id</code> filter isn't available for RDS for SQL Server DB instances.</p>\n         </note>"
                     }
                 }
             },

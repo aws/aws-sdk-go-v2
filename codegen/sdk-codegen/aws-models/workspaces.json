@@ -462,7 +462,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The persistent application settings for users of a WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>The persistent application settings for WorkSpaces Pools users.</p>"
             }
         },
         "com.amazonaws.workspaces#ApplicationSettingsResponse": {
@@ -489,7 +489,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the persistent application settings for users of a WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Describes the persistent application settings for WorkSpaces Pools users.</p>"
             }
         },
         "com.amazonaws.workspaces#ApplicationSettingsStatusEnum": {
@@ -1082,7 +1082,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the user capacity for a WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Describes the user capacity for a pool of WorkSpaces.</p>"
             }
         },
         "com.amazonaws.workspaces#CapacityStatus": {
@@ -1105,7 +1105,7 @@
                 "ActualUserSessions": {
                     "target": "com.amazonaws.workspaces#ActualUserSessions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of session slots that are available for WorkSpaces pools.</p>",
+                        "smithy.api#documentation": "<p>The total number of session slots that are available for a pool of WorkSpaces.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1118,7 +1118,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the capacity status for a WorkSpaces pool</p>"
+                "smithy.api#documentation": "<p>Describes the capacity status for a pool of WorkSpaces.</p>"
             }
         },
         "com.amazonaws.workspaces#CertificateAuthorityArn": {
@@ -2519,54 +2519,54 @@
                 "PoolName": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The name of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.workspaces#UpdateDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The WorkSpaces pool description.</p>",
+                        "smithy.api#documentation": "<p>The pool description.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "BundleId": {
                     "target": "com.amazonaws.workspaces#BundleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the bundle for the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the bundle for the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DirectoryId": {
                     "target": "com.amazonaws.workspaces#DirectoryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the directory for the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the directory for the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Capacity": {
                     "target": "com.amazonaws.workspaces#Capacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user capacity of the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The user capacity of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags for the WorkSpaces pool.</p>"
+                        "smithy.api#documentation": "<p>The tags for the pool.</p>"
                     }
                 },
                 "ApplicationSettings": {
                     "target": "com.amazonaws.workspaces#ApplicationSettingsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the application settings of the WorkSpaces pool.</p>"
+                        "smithy.api#documentation": "<p>Indicates the application settings of the pool.</p>"
                     }
                 },
                 "TimeoutSettings": {
                     "target": "com.amazonaws.workspaces#TimeoutSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the timeout settings of the WorkSpaces pool.</p>"
+                        "smithy.api#documentation": "<p>Indicates the timeout settings of the pool.</p>"
                     }
                 }
             },
@@ -2580,7 +2580,7 @@
                 "WorkspacesPool": {
                     "target": "com.amazonaws.workspaces#WorkspacesPool",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the WorkSpaces pool to create.</p>"
+                        "smithy.api#documentation": "<p>Indicates the pool to create.</p>"
                     }
                 }
             },
@@ -4838,7 +4838,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list that describes the streaming sessions for a specified WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list that describes the streaming sessions for a specified pool.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesPoolSessionsRequest": {
@@ -4847,7 +4847,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4880,7 +4880,7 @@
                 "Sessions": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolSessions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the WorkSpaces pool sessions.</p>"
+                        "smithy.api#documentation": "<p>Describes the pool sessions.</p>"
                     }
                 },
                 "NextToken": {
@@ -4914,7 +4914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Describes the specified WorkSpaces Pools.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesPoolsFilter": {
@@ -4930,20 +4930,20 @@
                 "Values": {
                     "target": "com.amazonaws.workspaces#DescribeWorkspacesPoolsFilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values for filtering WorkSpaces pools.</p>",
+                        "smithy.api#documentation": "<p>The values for filtering WorkSpaces Pools.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Operator": {
                     "target": "com.amazonaws.workspaces#DescribeWorkspacesPoolsFilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator values for filtering WorkSpaces pools.</p>",
+                        "smithy.api#documentation": "<p>The operator values for filtering WorkSpaces Pools.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the filter conditions for the WorkSpaces pool to return.</p>"
+                "smithy.api#documentation": "<p>Describes the filter conditions for WorkSpaces Pools to return.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesPoolsFilterName": {
@@ -5026,13 +5026,13 @@
                 "PoolIds": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the WorkSpaces pool.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the WorkSpaces Pools.</p>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.workspaces#DescribeWorkspacesPoolsFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter conditions for the WorkSpaces pool to return.</p>"
+                        "smithy.api#documentation": "<p>The filter conditions for the WorkSpaces Pool to return.</p>"
                     }
                 },
                 "Limit": {
@@ -5058,7 +5058,7 @@
                 "WorkspacesPools": {
                     "target": "com.amazonaws.workspaces#WorkspacesPools",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the WorkSpaces pools.</p>"
+                        "smithy.api#documentation": "<p>Information about the WorkSpaces Pools.</p>"
                     }
                 },
                 "NextToken": {
@@ -7125,7 +7125,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the network details of a WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Describes the network details of a WorkSpaces Pool.</p>"
             }
         },
         "com.amazonaws.workspaces#NonEmptyString": {
@@ -7217,6 +7217,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WINDOWS_SERVER_2022"
+                    }
+                },
+                "RHEL_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RHEL_8"
                     }
                 }
             }
@@ -8384,7 +8390,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the specified WorkSpaces pool.</p>\n         <p>You cannot start a WorkSpace pool unless it has a running mode of \n         <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>"
+                "smithy.api#documentation": "<p>Starts the specified pool.</p>\n         <p>You cannot start a pool unless it has a running mode of \n         <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>"
             }
         },
         "com.amazonaws.workspaces#StartWorkspacesPoolRequest": {
@@ -8393,7 +8399,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8502,7 +8508,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops the specifiedWorkSpaces pool.</p>\n         <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code> \n         and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>"
+                "smithy.api#documentation": "<p>Stops the specified pool.</p>\n         <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code> \n         and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>"
             }
         },
         "com.amazonaws.workspaces#StopWorkspacesPoolRequest": {
@@ -8511,7 +8517,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8841,7 +8847,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Terminates the specified pool.</p>"
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesPoolRequest": {
@@ -8850,7 +8856,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8892,7 +8898,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the WorkSpaces pool session.</p>"
+                "smithy.api#documentation": "<p>Terminates the pool session.</p>"
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesPoolSessionRequest": {
@@ -8901,7 +8907,7 @@
                 "SessionId": {
                     "target": "com.amazonaws.workspaces#AmazonUuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the WorkSpaces pool session.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the pool session.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8969,7 +8975,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the timeout settings for a WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Describes the timeout settings for a pool of WorkSpaces.</p>"
             }
         },
         "com.amazonaws.workspaces#Timestamp": {
@@ -9368,7 +9374,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Updates the specified pool.</p>"
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspacesPoolRequest": {
@@ -9377,14 +9383,14 @@
                 "PoolId": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the specified WorkSpaces pool to update.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the specified pool to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.workspaces#UpdateDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the specified WorkSpaces pool to update.</p>"
+                        "smithy.api#documentation": "<p>Describes the specified pool to update.</p>"
                     }
                 },
                 "BundleId": {
@@ -9402,7 +9408,7 @@
                 "Capacity": {
                     "target": "com.amazonaws.workspaces#Capacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired capacity for the WorkSpaces pool.</p>"
+                        "smithy.api#documentation": "<p>The desired capacity for the pool.</p>"
                     }
                 },
                 "ApplicationSettings": {
@@ -9414,7 +9420,7 @@
                 "TimeoutSettings": {
                     "target": "com.amazonaws.workspaces#TimeoutSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the timeout settings of the specified WorkSpaces pool.</p>"
+                        "smithy.api#documentation": "<p>Indicates the timeout settings of the specified pool.</p>"
                     }
                 }
             },
@@ -9428,7 +9434,7 @@
                 "WorkspacesPool": {
                     "target": "com.amazonaws.workspaces#WorkspacesPool",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the specified WorkSpaces pool.</p>"
+                        "smithy.api#documentation": "<p>Describes the specified pool.</p>"
                     }
                 }
             },
@@ -11148,14 +11154,14 @@
                 "PoolId": {
                     "target": "com.amazonaws.workspaces#WorkspacesPoolId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of a WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The identifier of a pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PoolArn": {
                     "target": "com.amazonaws.workspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the WorkSpaces pool.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11227,7 +11233,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a WorkSpaces pool.</p>"
+                "smithy.api#documentation": "<p>Describes a pool of WorkSpaces.</p>"
             }
         },
         "com.amazonaws.workspaces#WorkspacesPoolError": {
@@ -11247,7 +11253,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a WorkSpaces pool error.</p>"
+                "smithy.api#documentation": "<p>Describes a pool error.</p>"
             }
         },
         "com.amazonaws.workspaces#WorkspacesPoolErrorCode": {
@@ -11531,7 +11537,7 @@
                 "AuthenticationType": {
                     "target": "com.amazonaws.workspaces#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication method. The user is authenticated using a WorkSpaces \n         pool URL (API) or SAML 2.0 federation (SAML).</p>"
+                        "smithy.api#documentation": "<p>The authentication method. The user is authenticated using a \n         WorkSpaces Pools URL (API) or SAML 2.0 federation (SAML).</p>"
                     }
                 },
                 "ConnectionState": {
@@ -11587,7 +11593,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a WorkSpaces pool session.</p>"
+                "smithy.api#documentation": "<p>Describes a pool session.</p>"
             }
         },
         "com.amazonaws.workspaces#WorkspacesPoolSessions": {

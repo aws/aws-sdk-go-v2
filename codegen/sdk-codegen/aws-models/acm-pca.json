@@ -3322,6 +3322,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EC_secp384r1"
                     }
+                },
+                "SM2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SM2"
+                    }
                 }
             }
         },
@@ -3338,6 +3344,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FIPS_140_2_LEVEL_3_OR_HIGHER"
+                    }
+                },
+                "CCPC_LEVEL_1_OR_HIGHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CCPC_LEVEL_1_OR_HIGHER"
                     }
                 }
             }
@@ -4310,6 +4322,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SHA512WITHRSA"
+                    }
+                },
+                "SM3WITHSM2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SM3WITHSM2"
                     }
                 }
             }
