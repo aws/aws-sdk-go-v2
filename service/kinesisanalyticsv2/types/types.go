@@ -536,8 +536,8 @@ type CatalogConfigurationUpdate struct {
 // process of persisting application state for fault tolerance. For more
 // information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
 //
-// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
-// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 type CheckpointConfiguration struct {
 
 	// Describes whether the application uses Managed Service for Apache Flink'
@@ -581,8 +581,8 @@ type CheckpointConfiguration struct {
 	// use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
 	//
-	// [Tuning Checkpointing]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/large_state_tuning/#tuning-checkpointing
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+	// [Tuning Checkpointing]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/large_state_tuning/#tuning-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 	MinPauseBetweenCheckpoints *int64
 
 	noSmithyDocumentSerde
@@ -944,8 +944,8 @@ type FlinkApplicationConfiguration struct {
 	// process of persisting application state for fault tolerance. For more
 	// information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
 	//
-	// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+	// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 	CheckpointConfiguration *CheckpointConfiguration
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -971,8 +971,8 @@ type FlinkApplicationConfigurationDescription struct {
 	// in the [Apache Flink Documentation]. To retrieve the job plan for the application, use the DescribeApplicationRequest$IncludeAdditionalDetails parameter of
 	// the DescribeApplicationoperation.
 	//
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
-	// [Jobs and Scheduling]: https://nightlies.apache.org/flink/flink-docs-release-1.18/internals/job_scheduling.html
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
+	// [Jobs and Scheduling]: https://nightlies.apache.org/flink/flink-docs-release-1.19/internals/job_scheduling.html
 	JobPlanDescription *string
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -1020,8 +1020,8 @@ type FlinkRunConfiguration struct {
 	// this parameter, AllowNonRestoredState will be set to false , even if it was
 	// previously set to true .
 	//
-	// [Allowing Non-Restored State]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/savepoints/#allowing-non-restored-state
-	// [Apache Flink documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+	// [Allowing Non-Restored State]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/savepoints/#allowing-non-restored-state
+	// [Apache Flink documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 	AllowNonRestoredState *bool
 
 	noSmithyDocumentSerde
@@ -1811,8 +1811,8 @@ type OutputUpdate struct {
 // executes multiple tasks simultaneously. For more information about parallelism,
 // see [Parallel Execution]in the [Apache Flink Documentation].
 //
-// [Parallel Execution]: https://nightlies.apache.org/flink/flink-docs-release-1.18/dev/parallel.html
-// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+// [Parallel Execution]: https://nightlies.apache.org/flink/flink-docs-release-1.19/dev/parallel.html
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 type ParallelismConfiguration struct {
 
 	// Describes whether the application uses the default parallelism for the Managed

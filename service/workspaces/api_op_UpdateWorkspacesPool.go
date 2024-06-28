@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified WorkSpaces pool.
+// Updates the specified pool.
 func (c *Client) UpdateWorkspacesPool(ctx context.Context, params *UpdateWorkspacesPoolInput, optFns ...func(*Options)) (*UpdateWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspacesPoolInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdateWorkspacesPool(ctx context.Context, params *UpdateWorkspa
 
 type UpdateWorkspacesPoolInput struct {
 
-	// The identifier of the specified WorkSpaces pool to update.
+	// The identifier of the specified pool to update.
 	//
 	// This member is required.
 	PoolId *string
@@ -40,16 +40,16 @@ type UpdateWorkspacesPoolInput struct {
 	// The identifier of the bundle.
 	BundleId *string
 
-	// The desired capacity for the WorkSpaces pool.
+	// The desired capacity for the pool.
 	Capacity *types.Capacity
 
-	// Describes the specified WorkSpaces pool to update.
+	// Describes the specified pool to update.
 	Description *string
 
 	// The identifier of the directory.
 	DirectoryId *string
 
-	// Indicates the timeout settings of the specified WorkSpaces pool.
+	// Indicates the timeout settings of the specified pool.
 	TimeoutSettings *types.TimeoutSettings
 
 	noSmithyDocumentSerde
@@ -57,7 +57,7 @@ type UpdateWorkspacesPoolInput struct {
 
 type UpdateWorkspacesPoolOutput struct {
 
-	// Describes the specified WorkSpaces pool.
+	// Describes the specified pool.
 	WorkspacesPool *types.WorkspacesPool
 
 	// Metadata pertaining to the operation's result.

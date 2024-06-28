@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the streaming sessions for a specified
-// WorkSpaces pool.
+// Retrieves a list that describes the streaming sessions for a specified pool.
 func (c *Client) DescribeWorkspacesPoolSessions(ctx context.Context, params *DescribeWorkspacesPoolSessionsInput, optFns ...func(*Options)) (*DescribeWorkspacesPoolSessionsOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspacesPoolSessionsInput{}
@@ -30,7 +29,7 @@ func (c *Client) DescribeWorkspacesPoolSessions(ctx context.Context, params *Des
 
 type DescribeWorkspacesPoolSessionsInput struct {
 
-	// The identifier of the WorkSpaces pool.
+	// The identifier of the pool.
 	//
 	// This member is required.
 	PoolId *string
@@ -54,7 +53,7 @@ type DescribeWorkspacesPoolSessionsOutput struct {
 	// this token to receive the next set of results.
 	NextToken *string
 
-	// Describes the WorkSpaces pool sessions.
+	// Describes the pool sessions.
 	Sessions []types.WorkspacesPoolSession
 
 	// Metadata pertaining to the operation's result.

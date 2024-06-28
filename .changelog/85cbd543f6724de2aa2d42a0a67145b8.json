@@ -1,0 +1,8 @@
+{
+    "id": "85cbd543-f672-4de2-aa2d-42a0a67145b8",
+    "type": "feature",
+    "description": "Added CCPC_LEVEL_1_OR_HIGHER KeyStorageSecurityStandard and SM2 KeyAlgorithm and SM3WITHSM2 SigningAlgorithm for China regions.",
+    "modules": [
+        "service/acmpca"
+    ]
+}

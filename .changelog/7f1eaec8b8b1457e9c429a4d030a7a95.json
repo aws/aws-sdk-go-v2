@@ -1,0 +1,8 @@
+{
+    "id": "7f1eaec8-b8b1-457e-9c42-9a4d030a7a95",
+    "type": "documentation",
+    "description": "Noting that the filter db.sql.db_id isn't available for RDS for SQL Server DB instances.",
+    "modules": [
+        "service/pi"
+    ]
+}

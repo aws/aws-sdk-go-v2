@@ -1,0 +1,8 @@
+{
+    "id": "25b1c064-9ae4-4226-a5cd-34cfc2a69fe2",
+    "type": "feature",
+    "description": "Support for Flink 1.19 in Managed Service for Apache Flink",
+    "modules": [
+        "service/kinesisanalyticsv2"
+    ]
+}

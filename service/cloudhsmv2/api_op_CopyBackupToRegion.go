@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Copy an AWS CloudHSM cluster backup to a different region.
+// Copy an CloudHSM cluster backup to a different region.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM backup
+// in a different Amazon Web Services account.
 func (c *Client) CopyBackupToRegion(ctx context.Context, params *CopyBackupToRegionInput, optFns ...func(*Options)) (*CopyBackupToRegionOutput, error) {
 	if params == nil {
 		params = &CopyBackupToRegionInput{}

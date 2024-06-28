@@ -112,6 +112,8 @@ type DescribeDimensionKeysInput struct {
 	//   Partition parameters.
 	//
 	//   - A single filter for any other dimension in this dimension group.
+	//
+	// The db.sql.db_id filter isn't available for RDS for SQL Server DB instances.
 	Filter map[string]string
 
 	// The maximum number of items to return in the response. If more items exist than

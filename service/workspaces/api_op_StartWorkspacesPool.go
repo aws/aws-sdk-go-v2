@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the specified WorkSpaces pool.
+// Starts the specified pool.
 //
-// You cannot start a WorkSpace pool unless it has a running mode of AutoStop and
-// a state of STOPPED .
+// You cannot start a pool unless it has a running mode of AutoStop and a state of
+// STOPPED .
 func (c *Client) StartWorkspacesPool(ctx context.Context, params *StartWorkspacesPoolInput, optFns ...func(*Options)) (*StartWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &StartWorkspacesPoolInput{}
@@ -31,7 +31,7 @@ func (c *Client) StartWorkspacesPool(ctx context.Context, params *StartWorkspace
 
 type StartWorkspacesPoolInput struct {
 
-	// The identifier of the WorkSpaces pool.
+	// The identifier of the pool.
 	//
 	// This member is required.
 	PoolId *string

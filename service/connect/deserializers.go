@@ -37101,6 +37101,42 @@ func awsRestjson1_deserializeDocumentAgentHierarchyGroup(v **types.AgentHierarch
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAgentIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AgentId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAgentInfo(v **types.AgentInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -37209,6 +37245,42 @@ func awsRestjson1_deserializeDocumentAgentQualityMetrics(v **types.AgentQualityM
 		switch key {
 		case "Audio":
 			if err := awsRestjson1_deserializeDocumentAudioQualityMetricsInfo(&sv.Audio, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAgentsCriteria(v **types.AgentsCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AgentsCriteria
+	if *v == nil {
+		sv = &types.AgentsCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AgentIds":
+			if err := awsRestjson1_deserializeDocumentAgentIds(&sv.AgentIds, value); err != nil {
 				return err
 			}
 
@@ -38289,6 +38361,11 @@ func awsRestjson1_deserializeDocumentAttributeCondition(v **types.AttributeCondi
 				sv.ComparisonOperator = ptr.String(jtv)
 			}
 
+		case "MatchCriteria":
+			if err := awsRestjson1_deserializeDocumentMatchCriteria(&sv.MatchCriteria, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -38327,7 +38404,7 @@ func awsRestjson1_deserializeDocumentAttributeCondition(v **types.AttributeCondi
 					sv.ProficiencyLevel = ptr.Float32(float32(f64))
 
 				default:
-					return fmt.Errorf("expected ProficiencyLevel to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected NullableProficiencyLevel to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -47066,6 +47143,42 @@ func awsRestjson1_deserializeDocumentListPhoneNumbersSummaryList(v *[]types.List
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMatchCriteria(v **types.MatchCriteria, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MatchCriteria
+	if *v == nil {
+		sv = &types.MatchCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AgentsCriteria":
+			if err := awsRestjson1_deserializeDocumentAgentsCriteria(&sv.AgentsCriteria, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

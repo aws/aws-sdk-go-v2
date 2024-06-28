@@ -14463,6 +14463,17 @@ func awsAwsjson11_serializeDocumentDagNodes(v []types.CodeGenNode, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDatabaseAttributesList(v []types.DatabaseAttributes, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDatabaseIdentifier(v *types.DatabaseIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23357,6 +23368,13 @@ func awsAwsjson11_serializeOpDocumentGetDatabaseInput(v *GetDatabaseInput, value
 func awsAwsjson11_serializeOpDocumentGetDatabasesInput(v *GetDatabasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AttributesToGet != nil {
+		ok := object.Key("AttributesToGet")
+		if err := awsAwsjson11_serializeDocumentDatabaseAttributesList(v.AttributesToGet, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")

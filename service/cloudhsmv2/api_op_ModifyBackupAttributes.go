@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies attributes for AWS CloudHSM backup.
+// Modifies attributes for CloudHSM backup.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM backup
+// in a different Amazon Web Services account.
 func (c *Client) ModifyBackupAttributes(ctx context.Context, params *ModifyBackupAttributesInput, optFns ...func(*Options)) (*ModifyBackupAttributesOutput, error) {
 	if params == nil {
 		params = &ModifyBackupAttributesInput{}
@@ -47,8 +50,8 @@ type ModifyBackupAttributesInput struct {
 
 type ModifyBackupAttributesOutput struct {
 
-	// Contains information about a backup of an AWS CloudHSM cluster. All backup
-	// objects contain the BackupId , BackupState , ClusterId , and CreateTimestamp
+	// Contains information about a backup of an CloudHSM cluster. All backup objects
+	// contain the BackupId , BackupState , ClusterId , and CreateTimestamp
 	// parameters. Backups that were copied into a destination region additionally
 	// contain the CopyTimestamp , SourceBackup , SourceCluster , and SourceRegion
 	// parameters. A backup that is pending deletion will include the DeleteTimestamp

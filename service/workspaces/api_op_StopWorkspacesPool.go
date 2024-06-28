@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops the specifiedWorkSpaces pool.
+// Stops the specified pool.
 //
 // You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a
 // state of AVAILABLE , IMPAIRED , UNHEALTHY , or ERROR .
@@ -31,7 +31,7 @@ func (c *Client) StopWorkspacesPool(ctx context.Context, params *StopWorkspacesP
 
 type StopWorkspacesPoolInput struct {
 
-	// The identifier of the WorkSpaces pool.
+	// The identifier of the pool.
 	//
 	// This member is required.
 	PoolId *string

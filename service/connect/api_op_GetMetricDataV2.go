@@ -427,39 +427,6 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Cases created]
 	//
-	// CONTACTS_ABANDONED Unit: Count
-	//
-	// Metric filter:
-	//
-	//   - Valid values: API | Incoming | Outbound | Transfer | Callback |
-	//   Queue_Transfer | Disconnect
-	//
-	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q
-	// in Connect
-	//
-	// UI name: [Contact abandoned]
-	//
-	// CONTACTS_ABANDONED_IN_X Unit: Count
-	//
-	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype, Q in Connect
-	//
-	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
-	//
-	// UI name: [Contacts abandoned in X seconds]
-	//
-	// CONTACTS_ANSWERED_IN_X Unit: Count
-	//
-	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype, Q in Connect
-	//
-	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
-	//
-	// UI name: [Contacts answered in X seconds]
-	//
 	// CONTACTS_CREATED Unit: Count
 	//
 	// Valid metric filter key: INITIATION_METHOD
@@ -547,6 +514,15 @@ type GetMetricDataV2Input struct {
 	// contact/segmentAttributes/connect:Subtype
 	//
 	// UI name: [Contacts queued (enqueue timestamp)]
+	//
+	// CONTACTS_REMOVED_FROM_QUEUE_IN_X Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: This metric is not available in Amazon Connect admin website.
 	//
 	// CONTACTS_RESOLVED_IN_X Unit: Count
 	//
@@ -643,13 +619,15 @@ type GetMetricDataV2Input struct {
 	//
 	// Valid groupings and filters: Queue, RoutingStepExpression
 	//
-	// UI name: Not available
+	// UI name: This metric is available in Real-time Metrics UI but not on the
+	// Historical Metrics UI.
 	//
 	// PERCENT_CONTACTS_STEP_JOINED Unit: Percent
 	//
 	// Valid groupings and filters: Queue, RoutingStepExpression
 	//
-	// UI name: Not available
+	// UI name: This metric is available in Real-time Metrics UI but not on the
+	// Historical Metrics UI.
 	//
 	// PERCENT_FLOWS_OUTCOME Unit: Percent
 	//
@@ -735,7 +713,8 @@ type GetMetricDataV2Input struct {
 	//
 	// Valid groupings and filters: Queue, RoutingStepExpression
 	//
-	// UI name: Not available
+	// UI name: This metric is available in Real-time Metrics UI but not on the
+	// Historical Metrics UI.
 	//
 	// SUM_AFTER_CONTACT_WORK_TIME Unit: Seconds
 	//
@@ -756,6 +735,39 @@ type GetMetricDataV2Input struct {
 	//
 	// The Negate key in Metric Level Filters is not applicable for this metric.
 	//
+	// SUM_CONTACTS_ABANDONED Unit: Count
+	//
+	// Metric filter:
+	//
+	//   - Valid values: API | Incoming | Outbound | Transfer | Callback |
+	//   Queue_Transfer | Disconnect
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q
+	// in Connect
+	//
+	// UI name: [Contact abandoned]
+	//
+	// SUM_CONTACTS_ABANDONED_IN_X Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: [Contacts abandoned in X seconds]
+	//
+	// SUM_CONTACTS_ANSWERED_IN_X Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: [Contacts answered in X seconds]
+	//
 	// SUM_CONTACT_FLOW_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
@@ -765,8 +777,7 @@ type GetMetricDataV2Input struct {
 	//
 	// SUM_CONTACT_TIME_AGENT Unit: Seconds
 	//
-	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
 	//
 	// UI name: [Agent on contact time]
 	//
@@ -781,8 +792,7 @@ type GetMetricDataV2Input struct {
 	//
 	// SUM_ERROR_STATUS_TIME_AGENT Unit: Seconds
 	//
-	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy
+	// Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
 	//
 	// UI name: [Error status time]
 	//
@@ -862,8 +872,8 @@ type GetMetricDataV2Input struct {
 	// [Occupancy]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#occupancy-historical
 	// [Error status time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical
 	// [Maximum queued time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
-	// [Contacts answered in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
 	// [Minimum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#minimum-flow-time-historical
+	// [Contacts answered in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
 	// [Average active time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-active-time-historical
 	// [Contacts transferred out queue]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
 	// [Cases reopened]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
@@ -883,7 +893,7 @@ type GetMetricDataV2Input struct {
 	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
 	// [Average resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-resolution-time-historical
 	// [Flows outcome percentage]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
-	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historicall
+	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historical
 	// [Contacts queued (enqueue timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical
 	// [Average flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-flow-time-historical
 	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
@@ -899,8 +909,8 @@ type GetMetricDataV2Input struct {
 	// [Contacts handled (connected to agent timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
 	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica
 	// [Contacts resolved in X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
-	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
 	// [Cases resolved on first contact]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
+	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
 	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherent-time-historical
 	// [Abandonment rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#abandonment-rate-historical
 	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-historical

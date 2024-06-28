@@ -29,38 +29,38 @@ func (c *Client) CreateWorkspacesPool(ctx context.Context, params *CreateWorkspa
 
 type CreateWorkspacesPoolInput struct {
 
-	// The identifier of the bundle for the WorkSpaces pool.
+	// The identifier of the bundle for the pool.
 	//
 	// This member is required.
 	BundleId *string
 
-	// The user capacity of the WorkSpaces pool.
+	// The user capacity of the pool.
 	//
 	// This member is required.
 	Capacity *types.Capacity
 
-	// The WorkSpaces pool description.
+	// The pool description.
 	//
 	// This member is required.
 	Description *string
 
-	// The identifier of the directory for the WorkSpaces pool.
+	// The identifier of the directory for the pool.
 	//
 	// This member is required.
 	DirectoryId *string
 
-	// The name of the WorkSpaces pool.
+	// The name of the pool.
 	//
 	// This member is required.
 	PoolName *string
 
-	// Indicates the application settings of the WorkSpaces pool.
+	// Indicates the application settings of the pool.
 	ApplicationSettings *types.ApplicationSettingsRequest
 
-	// The tags for the WorkSpaces pool.
+	// The tags for the pool.
 	Tags []types.Tag
 
-	// Indicates the timeout settings of the WorkSpaces pool.
+	// Indicates the timeout settings of the pool.
 	TimeoutSettings *types.TimeoutSettings
 
 	noSmithyDocumentSerde
@@ -68,7 +68,7 @@ type CreateWorkspacesPoolInput struct {
 
 type CreateWorkspacesPoolOutput struct {
 
-	// Indicates the WorkSpaces pool to create.
+	// Indicates the pool to create.
 	WorkspacesPool *types.WorkspacesPool
 
 	// Metadata pertaining to the operation's result.

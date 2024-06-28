@@ -673,13 +673,6 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		}
 	}
 
-	if v.AIMLOptions != nil {
-		ok := object.Key("AIMLOptions")
-		if err := awsRestjson1_serializeDocumentAIMLOptionsInput(v.AIMLOptions, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.AutoTuneOptions != nil {
 		ok := object.Key("AutoTuneOptions")
 		if err := awsRestjson1_serializeDocumentAutoTuneOptionsInput(v.AutoTuneOptions, ok); err != nil {
@@ -4618,13 +4611,6 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigInput(v *UpdateDomainConf
 		}
 	}
 
-	if v.AIMLOptions != nil {
-		ok := object.Key("AIMLOptions")
-		if err := awsRestjson1_serializeDocumentAIMLOptionsInput(v.AIMLOptions, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.AutoTuneOptions != nil {
 		ok := object.Key("AutoTuneOptions")
 		if err := awsRestjson1_serializeDocumentAutoTuneOptions(v.AutoTuneOptions, ok); err != nil {
@@ -5143,20 +5129,6 @@ func awsRestjson1_serializeDocumentAdvancedSecurityOptionsInput(v *types.Advance
 	if v.SAMLOptions != nil {
 		ok := object.Key("SAMLOptions")
 		if err := awsRestjson1_serializeDocumentSAMLOptionsInput(v.SAMLOptions, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentAIMLOptionsInput(v *types.AIMLOptionsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.NaturalLanguageQueryGenerationOptions != nil {
-		ok := object.Key("NaturalLanguageQueryGenerationOptions")
-		if err := awsRestjson1_serializeDocumentNaturalLanguageQueryGenerationOptionsInput(v.NaturalLanguageQueryGenerationOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -5708,18 +5680,6 @@ func awsRestjson1_serializeDocumentMasterUserOptions(v *types.MasterUserOptions,
 	if v.MasterUserPassword != nil {
 		ok := object.Key("MasterUserPassword")
 		ok.String(*v.MasterUserPassword)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentNaturalLanguageQueryGenerationOptionsInput(v *types.NaturalLanguageQueryGenerationOptionsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if len(v.DesiredState) > 0 {
-		ok := object.Key("DesiredState")
-		ok.String(string(v.DesiredState))
 	}
 
 	return nil

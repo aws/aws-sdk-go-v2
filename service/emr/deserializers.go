@@ -9914,6 +9914,40 @@ func awsAwsjson11_deserializeDocumentInstanceTypeSpecification(v **types.Instanc
 				sv.InstanceType = ptr.String(jtv)
 			}
 
+		case "Priority":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Priority = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Priority = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected NonNegativeDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "WeightedCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)

@@ -34,8 +34,8 @@ func (e *CloudHsmAccessDeniedException) ErrorCode() string {
 }
 func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because of an AWS CloudHSM internal failure. The
-// request can be retried.
+// The request was rejected because of an CloudHSM internal failure. The request
+// can be retried.
 type CloudHsmInternalFailureException struct {
 	Message *string
 

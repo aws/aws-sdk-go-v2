@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tag or tags from the specified AWS CloudHSM cluster.
+// Removes the specified tag or tags from the specified CloudHSM cluster.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM
+// resource in a different Amazon Web Services account.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

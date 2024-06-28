@@ -3897,6 +3897,24 @@ func awsAwsjson11_serializeDocumentInstanceTypeConfig(v *types.InstanceTypeConfi
 		ok.String(*v.InstanceType)
 	}
 
+	if v.Priority != nil {
+		ok := object.Key("Priority")
+		switch {
+		case math.IsNaN(*v.Priority):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Priority, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Priority, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Priority)
+
+		}
+	}
+
 	if v.WeightedCapacity != nil {
 		ok := object.Key("WeightedCapacity")
 		ok.Integer(*v.WeightedCapacity)

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Terminates the specified WorkSpaces pool.
+// Terminates the specified pool.
 func (c *Client) TerminateWorkspacesPool(ctx context.Context, params *TerminateWorkspacesPoolInput, optFns ...func(*Options)) (*TerminateWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &TerminateWorkspacesPoolInput{}
@@ -28,7 +28,7 @@ func (c *Client) TerminateWorkspacesPool(ctx context.Context, params *TerminateW
 
 type TerminateWorkspacesPoolInput struct {
 
-	// The identifier of the WorkSpaces pool.
+	// The identifier of the pool.
 	//
 	// This member is required.
 	PoolId *string

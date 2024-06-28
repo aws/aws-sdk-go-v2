@@ -95,7 +95,7 @@ type ApplicationResourceAssociation struct {
 	noSmithyDocumentSerde
 }
 
-// The persistent application settings for users of a WorkSpaces pool.
+// The persistent application settings for WorkSpaces Pools users.
 type ApplicationSettingsRequest struct {
 
 	// Enables or disables persistent application settings for users during their pool
@@ -112,7 +112,7 @@ type ApplicationSettingsRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the persistent application settings for users of a WorkSpaces pool.
+// Describes the persistent application settings for WorkSpaces Pools users.
 type ApplicationSettingsResponse struct {
 
 	// Specifies whether persistent application settings are enabled for users during
@@ -174,7 +174,7 @@ type BundleResourceAssociation struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the user capacity for a WorkSpaces pool.
+// Describes the user capacity for a pool of WorkSpaces.
 type Capacity struct {
 
 	// The desired number of user sessions for a multi-session pool. This is not
@@ -186,7 +186,7 @@ type Capacity struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the capacity status for a WorkSpaces pool
+// Describes the capacity status for a pool of WorkSpaces.
 type CapacityStatus struct {
 
 	// The number of user sessions currently being used for pool sessions. This only
@@ -195,7 +195,7 @@ type CapacityStatus struct {
 	// This member is required.
 	ActiveUserSessions *int32
 
-	// The total number of session slots that are available for WorkSpaces pools.
+	// The total number of session slots that are available for a pool of WorkSpaces.
 	//
 	// This member is required.
 	ActualUserSessions *int32
@@ -507,7 +507,7 @@ type DefaultWorkspaceCreationProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the filter conditions for the WorkSpaces pool to return.
+// Describes the filter conditions for WorkSpaces Pools to return.
 type DescribeWorkspacesPoolsFilter struct {
 
 	// The name of the pool to filter.
@@ -515,12 +515,12 @@ type DescribeWorkspacesPoolsFilter struct {
 	// This member is required.
 	Name DescribeWorkspacesPoolsFilterName
 
-	// The operator values for filtering WorkSpaces pools.
+	// The operator values for filtering WorkSpaces Pools.
 	//
 	// This member is required.
 	Operator DescribeWorkspacesPoolsFilterOperator
 
-	// The values for filtering WorkSpaces pools.
+	// The values for filtering WorkSpaces Pools.
 	//
 	// This member is required.
 	Values []string
@@ -784,7 +784,7 @@ type ModificationState struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the network details of a WorkSpaces pool.
+// Describes the network details of a WorkSpaces Pool.
 type NetworkAccessConfiguration struct {
 
 	// The resource identifier of the elastic network interface that is attached to
@@ -1075,7 +1075,7 @@ type TerminateRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the timeout settings for a WorkSpaces pool.
+// Describes the timeout settings for a pool of WorkSpaces.
 type TimeoutSettings struct {
 
 	// Specifies the amount of time, in seconds, that a streaming session remains
@@ -1745,7 +1745,7 @@ type WorkspacesIpGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a WorkSpaces pool.
+// Describes a pool of WorkSpaces.
 type WorkspacesPool struct {
 
 	// The identifier of the bundle used by the pool.
@@ -1768,12 +1768,12 @@ type WorkspacesPool struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The Amazon Resource Name (ARN) for the WorkSpaces pool.
+	// The Amazon Resource Name (ARN) for the pool.
 	//
 	// This member is required.
 	PoolArn *string
 
-	// The identifier of a WorkSpaces pool.
+	// The identifier of a pool.
 	//
 	// This member is required.
 	PoolId *string
@@ -1807,7 +1807,7 @@ type WorkspacesPool struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a WorkSpaces pool error.
+// Describes a pool error.
 type WorkspacesPoolError struct {
 
 	// The error code.
@@ -1819,7 +1819,7 @@ type WorkspacesPoolError struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a WorkSpaces pool session.
+// Describes a pool session.
 type WorkspacesPoolSession struct {
 
 	// The identifier of the pool.
@@ -1837,7 +1837,7 @@ type WorkspacesPoolSession struct {
 	// This member is required.
 	UserId *string
 
-	// The authentication method. The user is authenticated using a WorkSpaces pool
+	// The authentication method. The user is authenticated using a WorkSpaces Pools
 	// URL (API) or SAML 2.0 federation (SAML).
 	AuthenticationType AuthenticationType
 

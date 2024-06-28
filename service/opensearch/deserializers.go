@@ -11174,83 +11174,6 @@ func awsRestjson1_deserializeDocumentAdvancedSecurityOptionsStatus(v **types.Adv
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAIMLOptionsOutput(v **types.AIMLOptionsOutput, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.AIMLOptionsOutput
-	if *v == nil {
-		sv = &types.AIMLOptionsOutput{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "NaturalLanguageQueryGenerationOptions":
-			if err := awsRestjson1_deserializeDocumentNaturalLanguageQueryGenerationOptionsOutput(&sv.NaturalLanguageQueryGenerationOptions, value); err != nil {
-				return err
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentAIMLOptionsStatus(v **types.AIMLOptionsStatus, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.AIMLOptionsStatus
-	if *v == nil {
-		sv = &types.AIMLOptionsStatus{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "Options":
-			if err := awsRestjson1_deserializeDocumentAIMLOptionsOutput(&sv.Options, value); err != nil {
-				return err
-			}
-
-		case "Status":
-			if err := awsRestjson1_deserializeDocumentOptionStatus(&sv.Status, value); err != nil {
-				return err
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
 func awsRestjson1_deserializeDocumentAuthorizedPrincipal(v **types.AuthorizedPrincipal, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13278,11 +13201,6 @@ func awsRestjson1_deserializeDocumentDomainConfig(v **types.DomainConfig, value 
 				return err
 			}
 
-		case "AIMLOptions":
-			if err := awsRestjson1_deserializeDocumentAIMLOptionsStatus(&sv.AIMLOptions, value); err != nil {
-				return err
-			}
-
 		case "AutoTuneOptions":
 			if err := awsRestjson1_deserializeDocumentAutoTuneOptionsStatus(&sv.AutoTuneOptions, value); err != nil {
 				return err
@@ -14083,11 +14001,6 @@ func awsRestjson1_deserializeDocumentDomainStatus(v **types.DomainStatus, value 
 
 		case "AdvancedSecurityOptions":
 			if err := awsRestjson1_deserializeDocumentAdvancedSecurityOptions(&sv.AdvancedSecurityOptions, value); err != nil {
-				return err
-			}
-
-		case "AIMLOptions":
-			if err := awsRestjson1_deserializeDocumentAIMLOptionsOutput(&sv.AIMLOptions, value); err != nil {
 				return err
 			}
 
@@ -15968,55 +15881,6 @@ func awsRestjson1_deserializeDocumentModifyingPropertiesList(v *[]types.Modifyin
 
 	}
 	*v = cv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentNaturalLanguageQueryGenerationOptionsOutput(v **types.NaturalLanguageQueryGenerationOptionsOutput, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.NaturalLanguageQueryGenerationOptionsOutput
-	if *v == nil {
-		sv = &types.NaturalLanguageQueryGenerationOptionsOutput{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "CurrentState":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NaturalLanguageQueryGenerationCurrentState to be of type string, got %T instead", value)
-				}
-				sv.CurrentState = types.NaturalLanguageQueryGenerationCurrentState(jtv)
-			}
-
-		case "DesiredState":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NaturalLanguageQueryGenerationDesiredState to be of type string, got %T instead", value)
-				}
-				sv.DesiredState = types.NaturalLanguageQueryGenerationDesiredState(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
 	return nil
 }
 

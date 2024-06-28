@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.22
 )
 
-require github.com/aws/smithy-go v1.20.2 // indirect
+require github.com/aws/smithy-go v1.20.3 // indirect
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 

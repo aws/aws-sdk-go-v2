@@ -132,6 +132,17 @@ type AgentQualityMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// Can be used to define a list of preferred agents to target the contact within
+// the queue. Note that agents must have the queue in their routing profile in
+// order to be offered the contact.
+type AgentsCriteria struct {
+
+	// An object to specify a list of agents, by Agent ID.
+	AgentIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an agent status.
 type AgentStatus struct {
 
@@ -408,6 +419,9 @@ type AttributeCondition struct {
 
 	// The operator of the condition.
 	ComparisonOperator *string
+
+	// An object to define AgentsCriteria .
+	MatchCriteria *MatchCriteria
 
 	// The name of predefined attribute.
 	Name *string
@@ -2294,7 +2308,7 @@ type FieldValueUnion struct {
 	// A Boolean number value type.
 	BooleanValue bool
 
-	// a Double number value type.
+	// A Double number value type.
 	DoubleValue *float64
 
 	// An empty value.
@@ -3079,6 +3093,15 @@ type ListPhoneNumbersSummary struct {
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
 	// distribution groups that phone number inbound traffic is routed through.
 	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object to define AgentsCriteria .
+type MatchCriteria struct {
+
+	// An object to define AgentIds .
+	AgentsCriteria *AgentsCriteria
 
 	noSmithyDocumentSerde
 }
@@ -4971,7 +4994,7 @@ type SearchCriteria struct {
 	QueueIds []string
 
 	// The search criteria based on user-defined contact attributes that have been
-	// configured for contact search. For more information, see [Search by customer contact attributes]in the Amazon Connect
+	// configured for contact search. For more information, see [Search by custom contact attributes]in the Amazon Connect
 	// Administrator Guide.
 	//
 	// To use SearchableContactAttributes in a search request, the GetContactAttributes
@@ -4979,7 +5002,7 @@ type SearchCriteria struct {
 	// defined by Amazon Connect.
 	//
 	// [https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions
-	// [Search by customer contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html
+	// [Search by custom contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html
 	SearchableContactAttributes *SearchableContactAttributes
 
 	noSmithyDocumentSerde
@@ -5227,7 +5250,7 @@ type SingleSelectQuestionRuleCategoryAutomation struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that defineds the field name to sort by and a sort order.
+// A structure that defines the field name to sort by and a sort order.
 type Sort struct {
 
 	// The name of the field on which to sort.

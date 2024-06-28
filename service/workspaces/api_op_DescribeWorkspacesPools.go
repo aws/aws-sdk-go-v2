@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified WorkSpaces pool.
+// Describes the specified WorkSpaces Pools.
 func (c *Client) DescribeWorkspacesPools(ctx context.Context, params *DescribeWorkspacesPoolsInput, optFns ...func(*Options)) (*DescribeWorkspacesPoolsOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspacesPoolsInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeWorkspacesPools(ctx context.Context, params *DescribeWo
 
 type DescribeWorkspacesPoolsInput struct {
 
-	// The filter conditions for the WorkSpaces pool to return.
+	// The filter conditions for the WorkSpaces Pool to return.
 	Filters []types.DescribeWorkspacesPoolsFilter
 
 	// The maximum number of items to return.
@@ -39,7 +39,7 @@ type DescribeWorkspacesPoolsInput struct {
 	// this token to receive the next set of results.
 	NextToken *string
 
-	// The identifier of the WorkSpaces pool.
+	// The identifier of the WorkSpaces Pools.
 	PoolIds []string
 
 	noSmithyDocumentSerde
@@ -51,7 +51,7 @@ type DescribeWorkspacesPoolsOutput struct {
 	// this token to receive the next set of results.
 	NextToken *string
 
-	// Information about the WorkSpaces pools.
+	// Information about the WorkSpaces Pools.
 	WorkspacesPools []types.WorkspacesPool
 
 	// Metadata pertaining to the operation's result.
