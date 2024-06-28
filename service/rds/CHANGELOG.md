@@ -1,3 +1,7 @@
+# v1.81.2 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.1 (2024-06-27)
 
 * **Documentation**: Updates Amazon RDS documentation for TAZ export to S3.

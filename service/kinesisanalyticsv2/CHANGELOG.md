@@ -1,3 +1,8 @@
+# v1.28.0 (2024-06-28)
+
+* **Feature**: Support for Flink 1.19 in Managed Service for Apache Flink
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

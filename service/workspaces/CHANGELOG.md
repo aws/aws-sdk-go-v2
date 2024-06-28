@@ -1,3 +1,8 @@
+# v1.43.0 (2024-06-28)
+
+* **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2024-06-27)
 
 * **Feature**: Added support for WorkSpaces Pools.

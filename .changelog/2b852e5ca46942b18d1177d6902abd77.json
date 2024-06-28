@@ -1,8 +1,0 @@
-{
-    "id": "2b852e5c-a469-42b1-8d11-77d6902abd77",
-    "type": "feature",
-    "description": "Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

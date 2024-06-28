@@ -1,3 +1,7 @@
+# v1.67.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2024-06-27)
 
 * **Feature**: Adding support for Repeating Sections, Nested Filters

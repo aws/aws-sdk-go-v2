@@ -1,3 +1,8 @@
+# v1.89.0 (2024-06-28)
+
+* **Feature**: Added AttributesToGet parameter to Glue GetDatabases, allowing caller to limit output to include only the database name.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.88.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

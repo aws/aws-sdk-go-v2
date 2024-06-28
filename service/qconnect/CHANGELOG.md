@@ -1,3 +1,7 @@
+# v1.9.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2024-06-27)
 
 * **Feature**: Adds CreateContentAssociation, ListContentAssociations, GetContentAssociation, and DeleteContentAssociation APIs.

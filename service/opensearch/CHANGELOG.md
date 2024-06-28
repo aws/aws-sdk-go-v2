@@ -1,3 +1,8 @@
+# v1.38.0 (2024-06-28)
+
+* **Feature**: This release removes support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

@@ -1,3 +1,8 @@
+# v1.103.0 (2024-06-28)
+
+* **Feature**: This release supports showing PreferredAgentRouting step via DescribeContact API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.102.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

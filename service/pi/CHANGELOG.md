@@ -1,3 +1,8 @@
+# v1.27.1 (2024-06-28)
+
+* **Documentation**: Noting that the filter db.sql.db_id isn't available for RDS for SQL Server DB instances.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2024-06-26)
 
 * **Feature**: Support list-of-string endpoint parameter.

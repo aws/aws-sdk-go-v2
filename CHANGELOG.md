@@ -1,3 +1,28 @@
+# Release (2024-06-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.33.0](service/acmpca/CHANGELOG.md#v1330-2024-06-28)
+  * **Feature**: Added CCPC_LEVEL_1_OR_HIGHER KeyStorageSecurityStandard and SM2 KeyAlgorithm and SM3WITHSM2 SigningAlgorithm for China regions.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.25.0](service/cloudhsmv2/CHANGELOG.md#v1250-2024-06-28)
+  * **Feature**: Added 3 new APIs to support backup sharing: GetResourcePolicy, PutResourcePolicy, and DeleteResourcePolicy. Added BackupArn to the output of the DescribeBackups API. Added support for BackupArn in the CreateCluster API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.103.0](service/connect/CHANGELOG.md#v11030-2024-06-28)
+  * **Feature**: This release supports showing PreferredAgentRouting step via DescribeContact API.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.42.0](service/emr/CHANGELOG.md#v1420-2024-06-28)
+  * **Feature**: This release provides the support for new allocation strategies i.e. CAPACITY_OPTIMIZED_PRIORITIZED for Spot and PRIORITIZED for On-Demand by taking input of priority value for each instance type for instance fleet clusters.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.89.0](service/glue/CHANGELOG.md#v1890-2024-06-28)
+  * **Feature**: Added AttributesToGet parameter to Glue GetDatabases, allowing caller to limit output to include only the database name.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.28.0](service/kinesisanalyticsv2/CHANGELOG.md#v1280-2024-06-28)
+  * **Feature**: Support for Flink 1.19 in Managed Service for Apache Flink
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.38.0](service/opensearch/CHANGELOG.md#v1380-2024-06-28)
+  * **Feature**: This release removes support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.27.1](service/pi/CHANGELOG.md#v1271-2024-06-28)
+  * **Documentation**: Noting that the filter db.sql.db_id isn't available for RDS for SQL Server DB instances.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.43.0](service/workspaces/CHANGELOG.md#v1430-2024-06-28)
+  * **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.
+
 # Release (2024-06-27)
 
 ## Module Highlights

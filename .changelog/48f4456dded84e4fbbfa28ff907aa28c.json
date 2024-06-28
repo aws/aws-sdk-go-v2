@@ -1,8 +1,0 @@
-{
-    "id": "48f4456d-ded8-4e4f-bbfa-28ff907aa28c",
-    "type": "feature",
-    "description": "Added AttributesToGet parameter to Glue GetDatabases, allowing caller to limit output to include only the database name.",
-    "modules": [
-        "service/glue"
-    ]
-}

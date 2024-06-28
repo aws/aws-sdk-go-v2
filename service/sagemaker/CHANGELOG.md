@@ -1,3 +1,7 @@
+# v1.149.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.149.0 (2024-06-27)
 
 * **Feature**: Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.

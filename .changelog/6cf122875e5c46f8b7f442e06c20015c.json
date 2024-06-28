@@ -1,8 +1,0 @@
-{
-    "id": "6cf12287-5e5c-46f8-b7f4-42e06c20015c",
-    "type": "feature",
-    "description": "This release supports showing PreferredAgentRouting step via DescribeContact API.",
-    "modules": [
-        "service/connect"
-    ]
-}
