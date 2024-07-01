@@ -117,7 +117,7 @@
                     "sdkId": "Cognito Identity",
                     "arnNamespace": "cognito-identity",
                     "cloudFormationName": "Cognito",
-                    "cloudTrailEventSource": "cognitoidentity.amazonaws.com",
+                    "cloudTrailEventSource": "cognito-identity.amazonaws.com",
                     "endpointPrefix": "cognito-identity"
                 },
                 "aws.auth#sigv4": {
@@ -2484,7 +2484,22 @@
                     "outputToken": "NextToken",
                     "items": "IdentityPools",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListIdentityPoolsSuccess",
+                        "params": {
+                            "MaxResults": 10
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cognitoidentity#ListIdentityPoolsInput": {

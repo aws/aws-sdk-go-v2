@@ -150,7 +150,7 @@
                     "sdkId": "SFN",
                     "arnNamespace": "states",
                     "cloudFormationName": "StepFunctions",
-                    "cloudTrailEventSource": "sfn.amazonaws.com",
+                    "cloudTrailEventSource": "states.amazonaws.com",
                     "docId": "states-2016-11-23",
                     "endpointPrefix": "states"
                 },
@@ -4222,7 +4222,20 @@
                     "outputToken": "nextToken",
                     "items": "activities",
                     "pageSize": "maxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListActivitiesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.sfn#ListActivitiesInput": {

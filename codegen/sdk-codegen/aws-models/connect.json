@@ -52,6 +52,15 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.connect#AccessTokenDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 60
+                }
+            }
+        },
         "com.amazonaws.connect#ActionSummaries": {
             "type": "list",
             "member": {
@@ -375,7 +384,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using agent hierarchy group levels.\n   For more information about agent hierarchies, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html\">Set Up Agent Hierarchies</a> in the\n    <i>Amazon Connect Administrator Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using agent hierarchy group levels.\n   For more information about agent hierarchies, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html\">Set Up Agent Hierarchies</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>"
             }
         },
         "com.amazonaws.connect#AgentId": {
@@ -733,7 +742,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Can be used to define a list of preferred agents to target the contact within the queue.\n   Note that agents must have the queue in their routing profile in order to be offered the\n   contact.</p>"
+                "smithy.api#documentation": "<p>Can be used to define a list of preferred agents to target the contact within the queue.\n    Note that agents must have the queue in their routing profile in order to be offered the\n    contact.</p>"
             }
         },
         "com.amazonaws.connect#AgentsMinOneMaxHundred": {
@@ -1022,6 +1031,9 @@
                     "target": "com.amazonaws.connect#DescribeAgentStatus"
                 },
                 {
+                    "target": "com.amazonaws.connect#DescribeAuthenticationProfile"
+                },
+                {
                     "target": "com.amazonaws.connect#DescribeContact"
                 },
                 {
@@ -1176,6 +1188,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListApprovedOrigins"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListAuthenticationProfiles"
                 },
                 {
                     "target": "com.amazonaws.connect#ListBots"
@@ -1424,6 +1439,9 @@
                     "target": "com.amazonaws.connect#UpdateAgentStatus"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateAuthenticationProfile"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdateContact"
                 },
                 {
@@ -1571,7 +1589,7 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
+                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html\">Amazon Connect\n       actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html\">Amazon Connect\n       data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
                 "smithy.api#title": "Amazon Connect Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3965,6 +3983,165 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.connect#AuthenticationProfile": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the authentication profile. </p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the authentication profile.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the authentication profile.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the authentication profile.</p>"
+                    }
+                },
+                "AllowedIps": {
+                    "target": "com.amazonaws.connect#IpCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IP address range strings that are allowed to access the Amazon Connect\n   instance. For more information about how to configure IP addresses, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac\">Configure\n    IP address based access control</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                    }
+                },
+                "BlockedIps": {
+                    "target": "com.amazonaws.connect#IpCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IP address range strings that are blocked from accessing the Amazon Connect\n   instance. For more information about how to configure IP addresses, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac\">Configure\n    IP address based access control</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                    }
+                },
+                "IsDefault": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Shows whether the authentication profile is the default authentication profile for the\n    Amazon Connect instance. The default authentication profile applies to all agents in an\n    Amazon Connect instance, unless overridden by another authentication profile.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the authentication profile was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the authentication profile was last modified.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the authentication profile was last modified.</p>"
+                    }
+                },
+                "PeriodicSessionDuration": {
+                    "target": "com.amazonaws.connect#AccessTokenDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short lived session duration configuration for users logged in to Amazon Connect, in\n   minutes. This value determines the maximum possible time before an agent is authenticated. For\n   more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts\">Configure the session duration</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                    }
+                },
+                "MaxSessionDuration": {
+                    "target": "com.amazonaws.connect#RefreshTokenDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long lived session duration for users logged in to Amazon Connect, in minutes. After\n   this time period, users must log in again. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts\">Configure the session duration</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Information about an authentication profile. An authentication profile is a resource that\n   stores the authentication settings for users in your contact center. You use authentication\n   profiles to set up IP address range restrictions and session timeouts. For more information, see  \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html\">Set IP address restrictions or session timeouts</a>. \n  </p>"
+            }
+        },
+        "com.amazonaws.connect#AuthenticationProfileDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.connect#AuthenticationProfileId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#AuthenticationProfileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#AuthenticationProfileSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the authentication profile.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the authentication profile summary.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the authentication profile summary.</p>"
+                    }
+                },
+                "IsDefault": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Shows whether the authentication profile is the default authentication profile for the\n    Amazon Connect instance. The default authentication profile applies to all agents in an\n    Amazon Connect instance, unless overridden by another authentication profile.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the authentication profile summary was last modified.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region when the authentication profile summary was last\n   modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>A summary of a given authentication profile.</p>"
+            }
+        },
+        "com.amazonaws.connect#AuthenticationProfileSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AuthenticationProfileSummary"
+            }
+        },
         "com.amazonaws.connect#AutoAccept": {
             "type": "boolean",
             "traits": {
@@ -4945,7 +5122,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Connect instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10895,6 +11072,78 @@
                     "target": "com.amazonaws.connect#AgentStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The agent status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeAuthenticationProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeAuthenticationProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeAuthenticationProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Describes the target authentication profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeAuthenticationProfileRequest": {
+            "type": "structure",
+            "members": {
+                "AuthenticationProfileId": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the authentication profile. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeAuthenticationProfileResponse": {
+            "type": "structure",
+            "members": {
+                "AuthenticationProfile": {
+                    "target": "com.amazonaws.connect#AuthenticationProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication profile object being described.</p>"
                     }
                 }
             },
@@ -18833,6 +19082,22 @@
                 "target": "com.amazonaws.connect#InvisibleFieldInfo"
             }
         },
+        "com.amazonaws.connect#IpCidr": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9:/]*$"
+            }
+        },
+        "com.amazonaws.connect#IpCidrList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#IpCidr"
+            }
+        },
         "com.amazonaws.connect#JoinToken": {
             "type": "string",
             "traits": {
@@ -19293,6 +19558,96 @@
                     "target": "com.amazonaws.connect#OriginsList",
                     "traits": {
                         "smithy.api#documentation": "<p>The approved origins.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListAuthenticationProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListAuthenticationProfilesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListAuthenticationProfilesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/authentication-profiles-summary/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AuthenticationProfileSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListAuthenticationProfilesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListAuthenticationProfilesResponse": {
+            "type": "structure",
+            "members": {
+                "AuthenticationProfileSummaryList": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of a given authentication profile.</p>"
                     }
                 },
                 "NextToken": {
@@ -28305,6 +28660,15 @@
                 }
             }
         },
+        "com.amazonaws.connect#RefreshTokenDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 360,
+                    "max": 720
+                }
+            }
+        },
         "com.amazonaws.connect#RegionName": {
             "type": "string",
             "traits": {
@@ -29886,7 +30250,7 @@
                 "ContactFlows": {
                     "target": "com.amazonaws.connect#ContactFlowSearchSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the contact flows.</p>"
+                        "smithy.api#documentation": "<p>Information about the flows.</p>"
                     }
                 },
                 "NextToken": {
@@ -32056,7 +32420,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>\n         <important>\n            <p>You may only use this API to upload attachments to a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Connect\n    Case</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>\n         <important>\n            <p>You may only use this API to upload attachments to an <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Amazon Connect Case</a>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/attached-files/{InstanceId}",
@@ -32077,7 +32441,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Connect instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -32917,7 +33281,7 @@
                 "ContactFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the flow for the call. To see the ContactFlowId in the Amazon Connect admin website, on the\n   navigation menu go to <b>Routing</b>, <b>Contact\n    Flows</b>. Choose the flow. On the flow page, under the name of the flow, choose\n    <b>Show additional flow information</b>. The ContactFlowId is the last\n   part of the ARN, shown here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier of the flow for the call. To see the ContactFlowId in the Amazon Connect admin website, on the\n   navigation menu go to <b>Routing</b>, <b>Flows</b>. Choose the flow. On the flow page, under the name of the flow, choose\n    <b>Show additional flow information</b>. The ContactFlowId is the last\n   part of the ARN, shown here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -35094,6 +35458,94 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A number indicating the reset order of the agent status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateAuthenticationProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateAuthenticationProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change. To \nrequest access to this API, contact Amazon Web Services Support.</p>\n         <p>Updates the selected authentication profile.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateAuthenticationProfileRequest": {
+            "type": "structure",
+            "members": {
+                "AuthenticationProfileId": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the authentication profile. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the authentication profile.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#AuthenticationProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the authentication profile.</p>"
+                    }
+                },
+                "AllowedIps": {
+                    "target": "com.amazonaws.connect#IpCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IP address range strings that are allowed to access the instance. For more\n   information on how to configure IP addresses, see<a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts\">Configure session timeouts</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>"
+                    }
+                },
+                "BlockedIps": {
+                    "target": "com.amazonaws.connect#IpCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IP address range strings that are blocked from accessing the instance. For more\n   information on how to configure IP addresses, For more information on how to configure IP\n   addresses, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac\">Configure\n    IP-based access control</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>"
+                    }
+                },
+                "PeriodicSessionDuration": {
+                    "target": "com.amazonaws.connect#AccessTokenDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short lived session duration configuration for users logged in to Amazon Connect, in\n   minutes. This value determines the maximum possible time before an agent is authenticated. For\n   more information, For more information on how to configure IP addresses, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts\">Configure session timeouts</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>"
                     }
                 }
             },

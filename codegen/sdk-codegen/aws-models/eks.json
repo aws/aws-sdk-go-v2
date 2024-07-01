@@ -2312,6 +2312,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SPOT"
                     }
+                },
+                "CAPACITY_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAPACITY_BLOCK"
+                    }
                 }
             }
         },

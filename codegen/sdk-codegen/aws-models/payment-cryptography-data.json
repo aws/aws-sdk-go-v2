@@ -123,7 +123,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -327,7 +327,7 @@
                 "KeyIdentifier": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyArnOrKeyAliasType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for ciphertext decryption.</p>",
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for ciphertext decryption.</p>\n         <p>When a WrappedKeyBlock is provided, this value will be the identifier to the key wrapping key. Otherwise, it is the key identifier used to perform the operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -344,6 +344,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption key type and attributes for ciphertext decryption.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "WrappedKey": {
+                    "target": "com.amazonaws.paymentcryptographydata#WrappedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WrappedKeyBlock containing the encryption key for ciphertext decryption.</p>"
                     }
                 }
             },
@@ -569,7 +575,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -598,7 +604,7 @@
             "type": "structure",
             "members": {
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -648,7 +654,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -748,7 +754,7 @@
                 "KeyIdentifier": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyArnOrKeyAliasType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.</p>",
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.</p>\n         <p>When a WrappedKeyBlock is provided, this value will be the identifier to the key wrapping key. Otherwise, it is the key identifier used to perform the operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -765,6 +771,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption key type and attributes for plaintext encryption.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "WrappedKey": {
+                    "target": "com.amazonaws.paymentcryptographydata#WrappedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WrappedKeyBlock containing the encryption key for plaintext encryption.</p>"
                     }
                 }
             },
@@ -1361,16 +1373,6 @@
                 "smithy.api#pattern": "^[0-9a-fA-F]+$"
             }
         },
-        "com.amazonaws.paymentcryptographydata#HexLengthEquals2": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 2,
-                    "max": 2
-                },
-                "smithy.api#pattern": "^[0-9a-fA-F]+$"
-            }
-        },
         "com.amazonaws.paymentcryptographydata#HexLengthEquals4": {
             "type": "string",
             "traits": {
@@ -1557,12 +1559,12 @@
                 "smithy.api#documentation": "<p>Parameters that are required to generate or verify Ibm3624 random PIN.</p>"
             }
         },
-        "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And9": {
+        "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And6": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 9
+                    "max": 6
                 }
             }
         },
@@ -1634,6 +1636,21 @@
                     "max": 16
                 },
                 "smithy.api#pattern": "^[0-9a-fA-F]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#KeyCheckValueAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CMAC",
+                        "name": "CMAC"
+                    },
+                    {
+                        "value": "ANSI_X9_24",
+                        "name": "ANSI_X9_24"
+                    }
+                ]
             }
         },
         "com.amazonaws.paymentcryptographydata#MacAlgorithm": {
@@ -1717,7 +1734,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -1842,6 +1859,16 @@
                 "smithy.api#length": {
                     "min": 16,
                     "max": 16
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#NumberLengthEquals2": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
                 },
                 "smithy.api#pattern": "^[0-9]+$"
             }
@@ -2731,7 +2758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Re-encrypt ciphertext using DUKPT, Symmetric and Asymmetric  Data Encryption Keys. </p>\n         <p>You can either generate an encryption key within Amazon Web Services Payment Cryptography by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a> or import your own encryption key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>. The <code>KeyArn</code> for use with this operation must be in a compatible key state with <code>KeyModesOfUse</code> set to <code>Encrypt</code>. In asymmetric encryption, ciphertext is encrypted using public component (imported by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>) of the asymmetric key pair created outside of Amazon Web Services Payment Cryptography. </p>\n         <p>For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> algorithms. For asymmetric encryption, Amazon Web Services Payment Cryptography supports <code>RSA</code>. To encrypt using DUKPT, a DUKPT key must already exist within your account with <code>KeyModesOfUse</code> set to <code>DeriveKey</code> or a new DUKPT can be generated by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DecryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>EncryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Re-encrypt ciphertext using DUKPT or Symmetric data encryption keys. </p>\n         <p>You can either generate an encryption key within Amazon Web Services Payment Cryptography by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a> or import your own encryption key by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>. The <code>KeyArn</code> for use with this operation must be in a compatible key state with <code>KeyModesOfUse</code> set to <code>Encrypt</code>. </p>\n         <p>For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography supports <code>TDES</code> and <code>AES</code> algorithms. To encrypt using DUKPT, a DUKPT key must already exist within your account with <code>KeyModesOfUse</code> set to <code>DeriveKey</code> or a new DUKPT can be generated by calling <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html\">CreateKey</a>.</p>\n         <p>For information about valid keys for this operation, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> and <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html\">Key types for specific data operations</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DecryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>EncryptData</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html\">GetPublicCertificate</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html\">ImportKey</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/keys/{IncomingKeyIdentifier}/reencrypt",
@@ -2745,7 +2772,7 @@
                 "IncomingKeyIdentifier": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyArnOrKeyAliasType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key of incoming ciphertext data.</p>",
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key of incoming ciphertext data.</p>\n         <p>When a WrappedKeyBlock is provided, this value will be the identifier to the key wrapping key. Otherwise, it is the key identifier used to perform the operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2776,6 +2803,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The attributes and values for outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "IncomingWrappedKey": {
+                    "target": "com.amazonaws.paymentcryptographydata#WrappedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WrappedKeyBlock containing the encryption key of incoming ciphertext data.</p>"
+                    }
+                },
+                "OutgoingWrappedKey": {
+                    "target": "com.amazonaws.paymentcryptographydata#WrappedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WrappedKeyBlock containing the encryption key of outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.</p>"
                     }
                 }
             },
@@ -2856,7 +2895,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -2963,7 +3002,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -2992,7 +3031,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -3021,7 +3060,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -3057,7 +3096,7 @@
                     }
                 },
                 "PanSequenceNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals2",
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
                     "traits": {
                         "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN).</p>",
                         "smithy.api#required": {}
@@ -3108,6 +3147,17 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.paymentcryptographydata#Tr31WrappedKeyBlock": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 56,
+                    "max": 9984
+                },
+                "smithy.api#pattern": "^[0-9A-Z]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.paymentcryptographydata#TranslatePinData": {
             "type": "operation",
             "input": {
@@ -3148,7 +3198,7 @@
                 "IncomingKeyIdentifier": {
                     "target": "com.amazonaws.paymentcryptographydata#KeyArnOrKeyAliasType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key under which incoming PIN block data is encrypted. This key type can be PEK or BDK.</p>",
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> of the encryption key under which incoming PIN block data is encrypted. This key type can be PEK or BDK.</p>\n         <p>When a WrappedKeyBlock is provided, this value will be the identifier to the key wrapping key for PIN block. Otherwise, it is the key identifier used to perform the operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3190,6 +3240,18 @@
                     "target": "com.amazonaws.paymentcryptographydata#DukptDerivationAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>The attributes and values to use for outgoing DUKPT encryption key after PIN block translation.</p>"
+                    }
+                },
+                "IncomingWrappedKey": {
+                    "target": "com.amazonaws.paymentcryptographydata#WrappedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WrappedKeyBlock containing the encryption key under which incoming PIN block data is encrypted.</p>"
+                    }
+                },
+                "OutgoingWrappedKey": {
+                    "target": "com.amazonaws.paymentcryptographydata#WrappedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WrappedKeyBlock containing the encryption key for encrypting outgoing PIN block data.</p>"
                     }
                 }
             },
@@ -3825,7 +3887,7 @@
             "type": "structure",
             "members": {
                 "PinVerificationKeyIndex": {
-                    "target": "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And9",
+                    "target": "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And6",
                     "traits": {
                         "smithy.api#documentation": "<p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>",
                         "smithy.api#required": {}
@@ -3840,7 +3902,7 @@
             "type": "structure",
             "members": {
                 "PinVerificationKeyIndex": {
-                    "target": "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And9",
+                    "target": "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And6",
                     "traits": {
                         "smithy.api#documentation": "<p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>",
                         "smithy.api#required": {}
@@ -3869,7 +3931,7 @@
                     }
                 },
                 "PinVerificationKeyIndex": {
-                    "target": "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And9",
+                    "target": "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And6",
                     "traits": {
                         "smithy.api#documentation": "<p>The value for PIN verification index. It is used in the Visa PIN algorithm to calculate the PVV (PIN Verification Value).</p>",
                         "smithy.api#required": {}
@@ -3878,6 +3940,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters that are required to generate or verify Visa PVV (PIN Verification Value).</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#WrappedKey": {
+            "type": "structure",
+            "members": {
+                "WrappedKeyMaterial": {
+                    "target": "com.amazonaws.paymentcryptographydata#WrappedKeyMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyCheckValueAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptographydata#KeyCheckValueAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p>\n         <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#WrappedKeyMaterial": {
+            "type": "union",
+            "members": {
+                "Tr31KeyBlock": {
+                    "target": "com.amazonaws.paymentcryptographydata#Tr31WrappedKeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TR-31 wrapped key block.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>"
             }
         }
     }
