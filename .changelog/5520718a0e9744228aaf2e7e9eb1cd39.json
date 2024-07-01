@@ -1,8 +1,0 @@
-{
-    "id": "5520718a-0e97-4422-8aaf-2e7e9eb1cd39",
-    "type": "feature",
-    "description": "Added further restrictions on logging of potentially sensitive inputs and outputs.",
-    "modules": [
-        "service/paymentcryptography"
-    ]
-}

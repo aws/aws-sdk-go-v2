@@ -1,3 +1,7 @@
+# v1.33.1 (2024-07-01)
+
+* No change notes available for this release.
+
 # v1.33.0 (2024-06-28)
 
 * **Feature**: Added CCPC_LEVEL_1_OR_HIGHER KeyStorageSecurityStandard and SM2 KeyAlgorithm and SM3WITHSM2 SigningAlgorithm for China regions.

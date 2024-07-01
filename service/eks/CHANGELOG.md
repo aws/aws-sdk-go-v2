@@ -1,3 +1,7 @@
+# v1.46.0 (2024-07-01)
+
+* **Feature**: Updates EKS managed node groups to support EC2 Capacity Blocks for ML
+
 # v1.45.1 (2024-06-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

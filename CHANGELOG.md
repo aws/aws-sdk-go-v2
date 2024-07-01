@@ -1,3 +1,15 @@
+# Release (2024-07-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.104.0](service/connect/CHANGELOG.md#v11040-2024-07-01)
+  * **Feature**: Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.46.0](service/eks/CHANGELOG.md#v1460-2024-07-01)
+  * **Feature**: Updates EKS managed node groups to support EC2 Capacity Blocks for ML
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.11.0](service/paymentcryptographydata/CHANGELOG.md#v1110-2024-07-01)
+  * **Feature**: Adding support for dynamic keys for encrypt, decrypt, re-encrypt and translate pin functions.  With this change, customers can use one-time TR-31 keys directly in dataplane operations without the need to first import them into the service.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.51.2](service/wafv2/CHANGELOG.md#v1512-2024-07-01)
+  * **Documentation**: JSON body inspection: Update documentation to clarify that JSON parsing doesn't include full validation.
+
 # Release (2024-06-28)
 
 ## General Highlights

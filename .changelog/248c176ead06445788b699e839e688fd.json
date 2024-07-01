@@ -1,8 +1,0 @@
-{
-    "id": "248c176e-ad06-4457-88b6-99e839e688fd",
-    "type": "feature",
-    "description": "Updates EKS managed node groups to support EC2 Capacity Blocks for ML",
-    "modules": [
-        "service/eks"
-    ]
-}

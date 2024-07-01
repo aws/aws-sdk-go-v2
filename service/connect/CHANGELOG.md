@@ -1,3 +1,7 @@
+# v1.104.0 (2024-07-01)
+
+* **Feature**: Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs.
+
 # v1.103.0 (2024-06-28)
 
 * **Feature**: This release supports showing PreferredAgentRouting step via DescribeContact API.

@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.23.1
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.51.1
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.51.2
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.43.0
 	github.com/aws/smithy-go v1.20.3
 )
