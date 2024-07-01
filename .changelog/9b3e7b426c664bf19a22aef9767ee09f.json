@@ -1,0 +1,8 @@
+{
+    "id": "9b3e7b42-6c66-4bf1-9a22-aef9767ee09f",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/apigateway"
+    ]
+}

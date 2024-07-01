@@ -1430,6 +1430,26 @@ func (m *validateOpDescribeAgentStatus) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAuthenticationProfile struct {
+}
+
+func (*validateOpDescribeAuthenticationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAuthenticationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAuthenticationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAuthenticationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeContactEvaluation struct {
 }
 
@@ -2465,6 +2485,26 @@ func (m *validateOpListApprovedOrigins) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListApprovedOriginsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAuthenticationProfiles struct {
+}
+
+func (*validateOpListAuthenticationProfiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAuthenticationProfiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAuthenticationProfilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAuthenticationProfilesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4050,6 +4090,26 @@ func (m *validateOpUpdateAgentStatus) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAuthenticationProfile struct {
+}
+
+func (*validateOpUpdateAuthenticationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAuthenticationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAuthenticationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAuthenticationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateContactAttributes struct {
 }
 
@@ -5234,6 +5294,10 @@ func addOpDescribeAgentStatusValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeAgentStatus{}, middleware.After)
 }
 
+func addOpDescribeAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAuthenticationProfile{}, middleware.After)
+}
+
 func addOpDescribeContactEvaluationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContactEvaluation{}, middleware.After)
 }
@@ -5440,6 +5504,10 @@ func addOpListAnalyticsDataAssociationsValidationMiddleware(stack *middleware.St
 
 func addOpListApprovedOriginsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListApprovedOrigins{}, middleware.After)
+}
+
+func addOpListAuthenticationProfilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAuthenticationProfiles{}, middleware.After)
 }
 
 func addOpListBotsValidationMiddleware(stack *middleware.Stack) error {
@@ -5756,6 +5824,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgentStatus{}, middleware.After)
+}
+
+func addOpUpdateAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAuthenticationProfile{}, middleware.After)
 }
 
 func addOpUpdateContactAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -9088,6 +9160,24 @@ func validateOpDescribeAgentStatusInput(v *DescribeAgentStatusInput) error {
 	}
 }
 
+func validateOpDescribeAuthenticationProfileInput(v *DescribeAuthenticationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAuthenticationProfileInput"}
+	if v.AuthenticationProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProfileId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeContactEvaluationInput(v *DescribeContactEvaluationInput) error {
 	if v == nil {
 		return nil
@@ -10051,6 +10141,21 @@ func validateOpListApprovedOriginsInput(v *ListApprovedOriginsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListApprovedOriginsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAuthenticationProfilesInput(v *ListAuthenticationProfilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAuthenticationProfilesInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -11491,6 +11596,24 @@ func validateOpUpdateAgentStatusInput(v *UpdateAgentStatusInput) error {
 	}
 	if v.AgentStatusId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentStatusId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAuthenticationProfileInput(v *UpdateAuthenticationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAuthenticationProfileInput"}
+	if v.AuthenticationProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProfileId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

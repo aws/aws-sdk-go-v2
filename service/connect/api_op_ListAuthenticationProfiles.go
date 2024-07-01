@@ -11,27 +11,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches the contact flows in an Amazon Connect instance, with optional
-// filtering.
-func (c *Client) SearchContactFlows(ctx context.Context, params *SearchContactFlowsInput, optFns ...func(*Options)) (*SearchContactFlowsOutput, error) {
+// This API is in preview release for Amazon Connect and is subject to change. To
+// request access to this API, contact Amazon Web Services Support.
+//
+// Provides summary information about the authentication profiles in a specified
+// Amazon Connect instance.
+func (c *Client) ListAuthenticationProfiles(ctx context.Context, params *ListAuthenticationProfilesInput, optFns ...func(*Options)) (*ListAuthenticationProfilesOutput, error) {
 	if params == nil {
-		params = &SearchContactFlowsInput{}
+		params = &ListAuthenticationProfilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchContactFlows", params, optFns, c.addOperationSearchContactFlowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAuthenticationProfiles", params, optFns, c.addOperationListAuthenticationProfilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*SearchContactFlowsOutput)
+	out := result.(*ListAuthenticationProfilesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type SearchContactFlowsInput struct {
+type ListAuthenticationProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID in
-	// the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -43,26 +48,13 @@ type SearchContactFlowsInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The search criteria to be used to return flows.
-	//
-	// The name and description fields support "contains" queries with a minimum of 2
-	// characters and a maximum of 25 characters. Any queries with character lengths
-	// outside of this range will result in invalid results.
-	SearchCriteria *types.ContactFlowSearchCriteria
-
-	// Filters to be applied to search results.
-	SearchFilter *types.ContactFlowSearchFilter
-
 	noSmithyDocumentSerde
 }
 
-type SearchContactFlowsOutput struct {
+type ListAuthenticationProfilesOutput struct {
 
-	// The total number of contact flows which matched your search query.
-	ApproximateTotalCount *int64
-
-	// Information about the flows.
-	ContactFlows []types.ContactFlow
+	// A summary of a given authentication profile.
+	AuthenticationProfileSummaryList []types.AuthenticationProfileSummary
 
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
@@ -73,19 +65,19 @@ type SearchContactFlowsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationSearchContactFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAuthenticationProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchContactFlows{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAuthenticationProfiles{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchContactFlows{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAuthenticationProfiles{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchContactFlows"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAuthenticationProfiles"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -134,10 +126,10 @@ func (c *Client) addOperationSearchContactFlowsMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpSearchContactFlowsValidationMiddleware(stack); err != nil {
+	if err = addOpListAuthenticationProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchContactFlows(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAuthenticationProfiles(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -158,9 +150,9 @@ func (c *Client) addOperationSearchContactFlowsMiddlewares(stack *middleware.Sta
 	return nil
 }
 
-// SearchContactFlowsPaginatorOptions is the paginator options for
-// SearchContactFlows
-type SearchContactFlowsPaginatorOptions struct {
+// ListAuthenticationProfilesPaginatorOptions is the paginator options for
+// ListAuthenticationProfiles
+type ListAuthenticationProfilesPaginatorOptions struct {
 	// The maximum number of results to return per page.
 	Limit int32
 
@@ -169,22 +161,24 @@ type SearchContactFlowsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// SearchContactFlowsPaginator is a paginator for SearchContactFlows
-type SearchContactFlowsPaginator struct {
-	options   SearchContactFlowsPaginatorOptions
-	client    SearchContactFlowsAPIClient
-	params    *SearchContactFlowsInput
+// ListAuthenticationProfilesPaginator is a paginator for
+// ListAuthenticationProfiles
+type ListAuthenticationProfilesPaginator struct {
+	options   ListAuthenticationProfilesPaginatorOptions
+	client    ListAuthenticationProfilesAPIClient
+	params    *ListAuthenticationProfilesInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewSearchContactFlowsPaginator returns a new SearchContactFlowsPaginator
-func NewSearchContactFlowsPaginator(client SearchContactFlowsAPIClient, params *SearchContactFlowsInput, optFns ...func(*SearchContactFlowsPaginatorOptions)) *SearchContactFlowsPaginator {
+// NewListAuthenticationProfilesPaginator returns a new
+// ListAuthenticationProfilesPaginator
+func NewListAuthenticationProfilesPaginator(client ListAuthenticationProfilesAPIClient, params *ListAuthenticationProfilesInput, optFns ...func(*ListAuthenticationProfilesPaginatorOptions)) *ListAuthenticationProfilesPaginator {
 	if params == nil {
-		params = &SearchContactFlowsInput{}
+		params = &ListAuthenticationProfilesInput{}
 	}
 
-	options := SearchContactFlowsPaginatorOptions{}
+	options := ListAuthenticationProfilesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -193,7 +187,7 @@ func NewSearchContactFlowsPaginator(client SearchContactFlowsAPIClient, params *
 		fn(&options)
 	}
 
-	return &SearchContactFlowsPaginator{
+	return &ListAuthenticationProfilesPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -203,12 +197,12 @@ func NewSearchContactFlowsPaginator(client SearchContactFlowsAPIClient, params *
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *SearchContactFlowsPaginator) HasMorePages() bool {
+func (p *ListAuthenticationProfilesPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next SearchContactFlows page.
-func (p *SearchContactFlowsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchContactFlowsOutput, error) {
+// NextPage retrieves the next ListAuthenticationProfiles page.
+func (p *ListAuthenticationProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAuthenticationProfilesOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -225,7 +219,7 @@ func (p *SearchContactFlowsPaginator) NextPage(ctx context.Context, optFns ...fu
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.SearchContactFlows(ctx, &params, optFns...)
+	result, err := p.client.ListAuthenticationProfiles(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -244,18 +238,18 @@ func (p *SearchContactFlowsPaginator) NextPage(ctx context.Context, optFns ...fu
 	return result, nil
 }
 
-// SearchContactFlowsAPIClient is a client that implements the SearchContactFlows
-// operation.
-type SearchContactFlowsAPIClient interface {
-	SearchContactFlows(context.Context, *SearchContactFlowsInput, ...func(*Options)) (*SearchContactFlowsOutput, error)
+// ListAuthenticationProfilesAPIClient is a client that implements the
+// ListAuthenticationProfiles operation.
+type ListAuthenticationProfilesAPIClient interface {
+	ListAuthenticationProfiles(context.Context, *ListAuthenticationProfilesInput, ...func(*Options)) (*ListAuthenticationProfilesOutput, error)
 }
 
-var _ SearchContactFlowsAPIClient = (*Client)(nil)
+var _ ListAuthenticationProfilesAPIClient = (*Client)(nil)
 
-func newServiceMetadataMiddleware_opSearchContactFlows(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListAuthenticationProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "SearchContactFlows",
+		OperationName: "ListAuthenticationProfiles",
 	}
 }

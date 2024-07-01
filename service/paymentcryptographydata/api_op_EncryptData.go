@@ -84,6 +84,10 @@ type EncryptDataInput struct {
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
 	// uses for plaintext encryption.
 	//
+	// When a WrappedKeyBlock is provided, this value will be the identifier to the
+	// key wrapping key. Otherwise, it is the key identifier used to perform the
+	// operation.
+	//
 	// This member is required.
 	KeyIdentifier *string
 
@@ -98,6 +102,9 @@ type EncryptDataInput struct {
 	//
 	// This member is required.
 	PlainText *string
+
+	// The WrappedKeyBlock containing the encryption key for plaintext encryption.
+	WrappedKey *types.WrappedKey
 
 	noSmithyDocumentSerde
 }

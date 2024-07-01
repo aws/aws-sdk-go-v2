@@ -365,3 +365,21 @@ func ExampleTranslationIsoFormats_outputUsage() {
 
 var _ *types.TranslationPinDataIsoFormat1
 var _ *types.TranslationPinDataIsoFormat034
+
+func ExampleWrappedKeyMaterial_outputUsage() {
+	var union types.WrappedKeyMaterial
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WrappedKeyMaterialMemberTr31KeyBlock:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string

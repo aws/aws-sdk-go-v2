@@ -1,0 +1,8 @@
+{
+    "id": "14ab1a69-9efa-42d8-b85d-b3b648ae2faa",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/swf"
+    ]
+}

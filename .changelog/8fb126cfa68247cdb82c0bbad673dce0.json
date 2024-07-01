@@ -1,0 +1,8 @@
+{
+    "id": "8fb126cf-a682-47cd-b82c-0bbad673dce0",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/docdb"
+    ]
+}

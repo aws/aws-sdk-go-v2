@@ -82,8 +82,15 @@ type DecryptDataInput struct {
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
 	// uses for ciphertext decryption.
 	//
+	// When a WrappedKeyBlock is provided, this value will be the identifier to the
+	// key wrapping key. Otherwise, it is the key identifier used to perform the
+	// operation.
+	//
 	// This member is required.
 	KeyIdentifier *string
+
+	// The WrappedKeyBlock containing the encryption key for ciphertext decryption.
+	WrappedKey *types.WrappedKey
 
 	noSmithyDocumentSerde
 }

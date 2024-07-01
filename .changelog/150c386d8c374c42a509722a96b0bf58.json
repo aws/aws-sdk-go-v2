@@ -1,0 +1,8 @@
+{
+    "id": "150c386d-8c37-4c42-a509-722a96b0bf58",
+    "type": "documentation",
+    "description": "JSON body inspection: Update documentation to clarify that JSON parsing doesn't include full validation.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

@@ -155,8 +155,9 @@ type CapacityTypes string
 
 // Enum values for CapacityTypes
 const (
-	CapacityTypesOnDemand CapacityTypes = "ON_DEMAND"
-	CapacityTypesSpot     CapacityTypes = "SPOT"
+	CapacityTypesOnDemand      CapacityTypes = "ON_DEMAND"
+	CapacityTypesSpot          CapacityTypes = "SPOT"
+	CapacityTypesCapacityBlock CapacityTypes = "CAPACITY_BLOCK"
 )
 
 // Values returns all known values for CapacityTypes. Note that this can be
@@ -167,6 +168,7 @@ func (CapacityTypes) Values() []CapacityTypes {
 	return []CapacityTypes{
 		"ON_DEMAND",
 		"SPOT",
+		"CAPACITY_BLOCK",
 	}
 }
 

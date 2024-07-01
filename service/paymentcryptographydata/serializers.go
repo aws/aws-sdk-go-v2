@@ -106,6 +106,13 @@ func awsRestjson1_serializeOpDocumentDecryptDataInput(v *DecryptDataInput, value
 		}
 	}
 
+	if v.WrappedKey != nil {
+		ok := object.Key("WrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.WrappedKey, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -199,6 +206,13 @@ func awsRestjson1_serializeOpDocumentEncryptDataInput(v *EncryptDataInput, value
 	if v.PlainText != nil {
 		ok := object.Key("PlainText")
 		ok.String(*v.PlainText)
+	}
+
+	if v.WrappedKey != nil {
+		ok := object.Key("WrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.WrappedKey, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -582,6 +596,13 @@ func awsRestjson1_serializeOpDocumentReEncryptDataInput(v *ReEncryptDataInput, v
 		}
 	}
 
+	if v.IncomingWrappedKey != nil {
+		ok := object.Key("IncomingWrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.IncomingWrappedKey, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutgoingEncryptionAttributes != nil {
 		ok := object.Key("OutgoingEncryptionAttributes")
 		if err := awsRestjson1_serializeDocumentReEncryptionAttributes(v.OutgoingEncryptionAttributes, ok); err != nil {
@@ -592,6 +613,13 @@ func awsRestjson1_serializeOpDocumentReEncryptDataInput(v *ReEncryptDataInput, v
 	if v.OutgoingKeyIdentifier != nil {
 		ok := object.Key("OutgoingKeyIdentifier")
 		ok.String(*v.OutgoingKeyIdentifier)
+	}
+
+	if v.OutgoingWrappedKey != nil {
+		ok := object.Key("OutgoingWrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.OutgoingWrappedKey, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -688,6 +716,13 @@ func awsRestjson1_serializeOpDocumentTranslatePinDataInput(v *TranslatePinDataIn
 		}
 	}
 
+	if v.IncomingWrappedKey != nil {
+		ok := object.Key("IncomingWrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.IncomingWrappedKey, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutgoingDukptAttributes != nil {
 		ok := object.Key("OutgoingDukptAttributes")
 		if err := awsRestjson1_serializeDocumentDukptDerivationAttributes(v.OutgoingDukptAttributes, ok); err != nil {
@@ -703,6 +738,13 @@ func awsRestjson1_serializeOpDocumentTranslatePinDataInput(v *TranslatePinDataIn
 	if v.OutgoingTranslationAttributes != nil {
 		ok := object.Key("OutgoingTranslationAttributes")
 		if err := awsRestjson1_serializeDocumentTranslationIsoFormats(v.OutgoingTranslationAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutgoingWrappedKey != nil {
+		ok := object.Key("OutgoingWrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.OutgoingWrappedKey, ok); err != nil {
 			return err
 		}
 	}
@@ -2200,5 +2242,40 @@ func awsRestjson1_serializeDocumentVisaPinVerificationValue(v *types.VisaPinVeri
 		ok.Integer(*v.PinVerificationKeyIndex)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWrappedKey(v *types.WrappedKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.KeyCheckValueAlgorithm) > 0 {
+		ok := object.Key("KeyCheckValueAlgorithm")
+		ok.String(string(v.KeyCheckValueAlgorithm))
+	}
+
+	if v.WrappedKeyMaterial != nil {
+		ok := object.Key("WrappedKeyMaterial")
+		if err := awsRestjson1_serializeDocumentWrappedKeyMaterial(v.WrappedKeyMaterial, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWrappedKeyMaterial(v types.WrappedKeyMaterial, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.WrappedKeyMaterialMemberTr31KeyBlock:
+		av := object.Key("Tr31KeyBlock")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }

@@ -1,0 +1,8 @@
+{
+    "id": "c0cedc76-7460-4773-96c2-c62daace1151",
+    "type": "feature",
+    "description": "Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs.",
+    "modules": [
+        "service/connect"
+    ]
+}

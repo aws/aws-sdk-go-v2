@@ -1364,6 +1364,45 @@ type VisaPinVerificationValue struct {
 	noSmithyDocumentSerde
 }
 
+// Parameter information of a WrappedKeyBlock for encryption key exchange.
+type WrappedKey struct {
+
+	// Parameter information of a WrappedKeyBlock for encryption key exchange.
+	//
+	// This member is required.
+	WrappedKeyMaterial WrappedKeyMaterial
+
+	// The algorithm that Amazon Web Services Payment Cryptography uses to calculate
+	// the key check value (KCV). It is used to validate the key integrity.
+	//
+	// For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of
+	// zero, with the key to be checked and retaining the 3 highest order bytes of the
+	// encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where
+	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
+	// the encrypted result.
+	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
+
+	noSmithyDocumentSerde
+}
+
+// Parameter information of a WrappedKeyBlock for encryption key exchange.
+//
+// The following types satisfy this interface:
+//
+//	WrappedKeyMaterialMemberTr31KeyBlock
+type WrappedKeyMaterial interface {
+	isWrappedKeyMaterial()
+}
+
+// The TR-31 wrapped key block.
+type WrappedKeyMaterialMemberTr31KeyBlock struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*WrappedKeyMaterialMemberTr31KeyBlock) isWrappedKeyMaterial() {}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1387,3 +1426,4 @@ func (*UnknownUnionMember) isReEncryptionAttributes()         {}
 func (*UnknownUnionMember) isSessionKeyDerivation()           {}
 func (*UnknownUnionMember) isSessionKeyDerivationValue()      {}
 func (*UnknownUnionMember) isTranslationIsoFormats()          {}
+func (*UnknownUnionMember) isWrappedKeyMaterial()             {}

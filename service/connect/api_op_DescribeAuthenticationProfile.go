@@ -6,46 +6,41 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to confirm that the attached file has been uploaded using the
-// pre-signed URL provided in the StartAttachedFileUpload API.
-func (c *Client) CompleteAttachedFileUpload(ctx context.Context, params *CompleteAttachedFileUploadInput, optFns ...func(*Options)) (*CompleteAttachedFileUploadOutput, error) {
+// This API is in preview release for Amazon Connect and is subject to change. To
+// request access to this API, contact Amazon Web Services Support.
+//
+// Describes the target authentication profile.
+func (c *Client) DescribeAuthenticationProfile(ctx context.Context, params *DescribeAuthenticationProfileInput, optFns ...func(*Options)) (*DescribeAuthenticationProfileOutput, error) {
 	if params == nil {
-		params = &CompleteAttachedFileUploadInput{}
+		params = &DescribeAuthenticationProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompleteAttachedFileUpload", params, optFns, c.addOperationCompleteAttachedFileUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAuthenticationProfile", params, optFns, c.addOperationDescribeAuthenticationProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CompleteAttachedFileUploadOutput)
+	out := result.(*DescribeAuthenticationProfileOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// Request to CompleteAttachedFileUpload API
-type CompleteAttachedFileUploadInput struct {
+type DescribeAuthenticationProfileInput struct {
 
-	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
-	// current supported resource.
-	//
-	// This value must be a valid ARN.
-	//
-	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+	// A unique identifier for the authentication profile.
 	//
 	// This member is required.
-	AssociatedResourceArn *string
+	AuthenticationProfileId *string
 
-	// The unique identifier of the attached file resource.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
-	// This member is required.
-	FileId *string
-
-	// The unique identifier of the Amazon Connect instance.
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -53,27 +48,30 @@ type CompleteAttachedFileUploadInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response from CompleteAttachedFileUpload API
-type CompleteAttachedFileUploadOutput struct {
+type DescribeAuthenticationProfileOutput struct {
+
+	// The authentication profile object being described.
+	AuthenticationProfile *types.AuthenticationProfile
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCompleteAttachedFileUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAuthenticationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteAttachedFileUpload{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuthenticationProfile{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteAttachedFileUpload{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAuthenticationProfile{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CompleteAttachedFileUpload"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAuthenticationProfile"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -122,10 +120,10 @@ func (c *Client) addOperationCompleteAttachedFileUploadMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCompleteAttachedFileUploadValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeAuthenticationProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteAttachedFileUpload(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAuthenticationProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -146,10 +144,10 @@ func (c *Client) addOperationCompleteAttachedFileUploadMiddlewares(stack *middle
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCompleteAttachedFileUpload(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeAuthenticationProfile(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CompleteAttachedFileUpload",
+		OperationName: "DescribeAuthenticationProfile",
 	}
 }

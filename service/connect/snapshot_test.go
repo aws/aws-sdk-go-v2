@@ -914,6 +914,18 @@ func TestCheckSnapshot_DescribeAgentStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAuthenticationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAuthenticationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAuthenticationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeContact(context.Background(), nil, func(o *Options) {
@@ -1531,6 +1543,18 @@ func TestCheckSnapshot_ListApprovedOrigins(t *testing.T) {
 	_, err := svc.ListApprovedOrigins(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListApprovedOrigins")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAuthenticationProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAuthenticationProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAuthenticationProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2515,6 +2539,18 @@ func TestCheckSnapshot_UpdateAgentStatus(t *testing.T) {
 	_, err := svc.UpdateAgentStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateAgentStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAuthenticationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAuthenticationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAuthenticationProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3913,6 +3949,18 @@ func TestUpdateSnapshot_DescribeAgentStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAuthenticationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAuthenticationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAuthenticationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeContact(context.Background(), nil, func(o *Options) {
@@ -4530,6 +4578,18 @@ func TestUpdateSnapshot_ListApprovedOrigins(t *testing.T) {
 	_, err := svc.ListApprovedOrigins(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListApprovedOrigins")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAuthenticationProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAuthenticationProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAuthenticationProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5514,6 +5574,18 @@ func TestUpdateSnapshot_UpdateAgentStatus(t *testing.T) {
 	_, err := svc.UpdateAgentStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAgentStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAuthenticationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAuthenticationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAuthenticationProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
