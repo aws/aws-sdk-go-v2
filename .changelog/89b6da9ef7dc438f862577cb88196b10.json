@@ -1,0 +1,8 @@
+{
+    "id": "89b6da9e-f7dc-438f-8625-77cb88196b10",
+    "type": "feature",
+    "description": "Added response overrides to Head Object requests.",
+    "modules": [
+        "service/s3"
+    ]
+}
