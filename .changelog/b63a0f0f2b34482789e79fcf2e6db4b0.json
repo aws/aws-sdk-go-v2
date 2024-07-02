@@ -1,8 +1,0 @@
-{
-    "id": "b63a0f0f-2b34-4827-89e7-9fcf2e6db4b0",
-    "type": "feature",
-    "description": "Increases Customer API's ManagedServiceData length",
-    "modules": [
-        "service/fms"
-    ]
-}

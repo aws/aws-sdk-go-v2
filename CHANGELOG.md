@@ -1,3 +1,14 @@
+# Release (2024-07-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.168.0](service/ec2/CHANGELOG.md#v11680-2024-07-02)
+  * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.58.0](service/s3/CHANGELOG.md#v1580-2024-07-02)
+  * **Feature**: Added response overrides to Head Object requests.
+
 # Release (2024-07-01)
 
 ## Module Highlights
