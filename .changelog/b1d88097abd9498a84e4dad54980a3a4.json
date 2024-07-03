@@ -1,0 +1,8 @@
+{
+    "id": "b1d88097-abd9-498a-84e4-dad54980a3a4",
+    "type": "feature",
+    "description": "Fix create workspace bundle RootStorage/UserStorage to accept non null values",
+    "modules": [
+        "service/workspaces"
+    ]
+}

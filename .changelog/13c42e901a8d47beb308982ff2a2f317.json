@@ -1,0 +1,8 @@
+{
+    "id": "13c42e90-1a8d-47be-b308-982ff2a2f317",
+    "type": "documentation",
+    "description": "This update includes documentation for support of new native 400 GBps ports for Direct Connect.",
+    "modules": [
+        "service/directconnect"
+    ]
+}

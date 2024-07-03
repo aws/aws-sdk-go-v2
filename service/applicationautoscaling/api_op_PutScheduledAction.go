@@ -123,7 +123,7 @@ type PutScheduledActionInput struct {
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
 	//
-	//   - Amazon WorkSpaces - The resource type is workspacespool and the unique
+	//   - Pool of WorkSpaces - The resource type is workspacespool and the unique
 	//   identifier is the pool ID. Example: workspacespool/wspool-123456 .
 	//
 	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -198,8 +198,8 @@ type PutScheduledActionInput struct {
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
 	//
-	//   - workspaces:workspacespool:DesiredUserSessions - The capacity of a WorkSpaces
-	//   pool.
+	//   - workspaces:workspacespool:DesiredUserSessions - The number of user sessions
+	//   for the WorkSpaces in the pool.
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension

@@ -1,0 +1,8 @@
+{
+    "id": "24957440-a08c-46b6-badc-760197b52ff9",
+    "type": "documentation",
+    "description": "Doc only update for Application Auto Scaling that fixes resource name.",
+    "modules": [
+        "service/applicationautoscaling"
+    ]
+}

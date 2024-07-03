@@ -458,7 +458,7 @@ type Lag struct {
 	Connections []Connection
 
 	// The individual bandwidth of the physical connections bundled by the LAG. The
-	// possible values are 1Gbps and 10Gbps.
+	// possible values are 1Gbps, 10Gbps, 100Gbps, or 400 Gbps..
 	ConnectionsBandwidth *string
 
 	// The LAG MAC Security (MACsec) encryption mode.
@@ -510,8 +510,9 @@ type Lag struct {
 	// for the LAG itself to be operational.
 	MinimumLinks int32
 
-	// The number of physical dedicated connections bundled by the LAG, up to a
-	// maximum of 10.
+	// The number of physical dedicated connections initially provisioned and bundled
+	// by the LAG. You can have a maximum of four connections when the port speed is 1
+	// Gbps or 10 Gbps, or two when the port speed is 100 Gbps or 400 Gbps.
 	NumberOfConnections int32
 
 	// The ID of the Amazon Web Services account that owns the LAG.
@@ -667,7 +668,7 @@ type NewPrivateVirtualInterface struct {
 	EnableSiteLink *bool
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 9001. The default value is 1500.
+	// and 8500. The default value is 1500.
 	Mtu *int32
 
 	// The tags associated with the private virtual interface.
@@ -716,7 +717,7 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	CustomerAddress *string
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 9001. The default value is 1500.
+	// and 8500. The default value is 1500.
 	Mtu *int32
 
 	// The tags associated with the private virtual interface.
@@ -1099,7 +1100,8 @@ type VirtualInterface struct {
 	//   - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState VirtualInterfaceState
 
-	// The type of virtual interface. The possible values are private and public .
+	// The type of virtual interface. The possible values are private , public and
+	// transit .
 	VirtualInterfaceType *string
 
 	// The ID of the VLAN.

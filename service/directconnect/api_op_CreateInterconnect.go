@@ -51,7 +51,7 @@ func (c *Client) CreateInterconnect(ctx context.Context, params *CreateInterconn
 
 type CreateInterconnectInput struct {
 
-	// The port bandwidth, in Gbps. The possible values are 1 and 10.
+	// The port bandwidth, in Gbps. The possible values are 1, 10, and 100.
 	//
 	// This member is required.
 	Bandwidth *string

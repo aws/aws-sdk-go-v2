@@ -1930,6 +1930,21 @@ func validateRebuildWorkspaceRequests(v []types.RebuildRequest) error {
 	}
 }
 
+func validateRootStorage(v *types.RootStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RootStorage"}
+	if v.Capacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Capacity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStandbyWorkspace(v *types.StandbyWorkspace) error {
 	if v == nil {
 		return nil
@@ -2118,6 +2133,21 @@ func validateUserSettings(v []types.UserSetting) error {
 		if err := validateUserSetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUserStorage(v *types.UserStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserStorage"}
+	if v.Capacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Capacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2447,6 +2477,15 @@ func validateOpCreateWorkspaceBundleInput(v *CreateWorkspaceBundleInput) error {
 	}
 	if v.UserStorage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserStorage"))
+	} else if v.UserStorage != nil {
+		if err := validateUserStorage(v.UserStorage); err != nil {
+			invalidParams.AddNested("UserStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RootStorage != nil {
+		if err := validateRootStorage(v.RootStorage); err != nil {
+			invalidParams.AddNested("RootStorage", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

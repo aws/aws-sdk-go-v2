@@ -877,6 +877,8 @@ type RelatedWorkspaceProperties struct {
 type RootStorage struct {
 
 	// The size of the root volume.
+	//
+	// This member is required.
 	Capacity *string
 
 	noSmithyDocumentSerde
@@ -1138,6 +1140,8 @@ type UserSetting struct {
 type UserStorage struct {
 
 	// The size of the user volume.
+	//
+	// This member is required.
 	Capacity *string
 
 	noSmithyDocumentSerde

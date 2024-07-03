@@ -85,8 +85,8 @@ type DetectModerationLabelsOutput struct {
 	// Shows the results of the human in the loop evaluation.
 	HumanLoopActivationOutput *types.HumanLoopActivationOutput
 
-	// Array of detected Moderation labels and the time, in milliseconds from the
-	// start of the video, they were detected.
+	// Array of detected Moderation labels. For video operations, this includes the
+	// time, in milliseconds from the start of the video, they were detected.
 	ModerationLabels []types.ModerationLabel
 
 	// Version number of the base moderation detection model that was used to detect

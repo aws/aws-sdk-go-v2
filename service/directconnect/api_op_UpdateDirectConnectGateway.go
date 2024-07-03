@@ -44,8 +44,8 @@ type UpdateDirectConnectGatewayInput struct {
 
 type UpdateDirectConnectGatewayOutput struct {
 
-	// Information about a Direct Connect gateway, which enables you to connect
-	// virtual interfaces and virtual private gateway or transit gateways.
+	// Informaiton about a Direct Connect gateway, which enables you to connect
+	// virtual interfaces and virtual private gateways or transit gateways.
 	DirectConnectGateway *types.DirectConnectGateway
 
 	// Metadata pertaining to the operation's result.
