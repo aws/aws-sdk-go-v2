@@ -8012,7 +8012,8 @@
                 "Capacity": {
                     "target": "com.amazonaws.workspaces#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the root volume.</p>"
+                        "smithy.api#documentation": "<p>The size of the root volume.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -9559,7 +9560,8 @@
                 "Capacity": {
                     "target": "com.amazonaws.workspaces#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the user volume.</p>"
+                        "smithy.api#documentation": "<p>The size of the user volume.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
