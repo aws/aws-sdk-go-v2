@@ -1,8 +1,0 @@
-{
-    "id": "a9d32a66-03dd-40cb-97e7-8bf027ca5f72",
-    "type": "feature",
-    "description": "This release adds support for tagging projects and datasets with the CreateProject and CreateDataset APIs.",
-    "modules": [
-        "service/rekognition"
-    ]
-}

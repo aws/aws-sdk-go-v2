@@ -1,8 +1,0 @@
-{
-    "id": "d0096215-db86-42de-999a-38107480d6eb",
-    "type": "feature",
-    "description": "Added a new reason under ConstraintViolationException in RegisterDelegatedAdministrator API to prevent registering suspended accounts as delegated administrator of a service.",
-    "modules": [
-        "service/organizations"
-    ]
-}

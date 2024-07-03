@@ -1,3 +1,7 @@
+# v1.44.0 (2024-07-03)
+
+* **Feature**: Fix create workspace bundle RootStorage/UserStorage to accept non null values
+
 # v1.43.0 (2024-06-28)
 
 * **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.

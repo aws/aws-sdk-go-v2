@@ -1,3 +1,20 @@
+# Release (2024-07-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.30.2](service/applicationautoscaling/CHANGELOG.md#v1302-2024-07-03)
+  * **Documentation**: Doc only update for Application Auto Scaling that fixes resource name.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.27.2](service/directconnect/CHANGELOG.md#v1272-2024-07-03)
+  * **Documentation**: This update includes documentation for support of new native 400 GBps ports for Direct Connect.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.30.0](service/organizations/CHANGELOG.md#v1300-2024-07-03)
+  * **Feature**: Added a new reason under ConstraintViolationException in RegisterDelegatedAdministrator API to prevent registering suspended accounts as delegated administrator of a service.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.43.0](service/rekognition/CHANGELOG.md#v1430-2024-07-03)
+  * **Feature**: This release adds support for tagging projects and datasets with the CreateProject and CreateDataset APIs.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.44.0](service/workspaces/CHANGELOG.md#v1440-2024-07-03)
+  * **Feature**: Fix create workspace bundle RootStorage/UserStorage to accept non null values
+
 # Release (2024-07-02)
 
 ## General Highlights
