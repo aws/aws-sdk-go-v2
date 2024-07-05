@@ -1,8 +1,0 @@
-{
-    "id": "4b402b7a-b78c-4376-9276-1b0112d9b71a",
-    "type": "feature",
-    "description": "Add personalization to Q Applications. Customers can enable or disable personalization when creating or updating a Q application with the personalization configuration.",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

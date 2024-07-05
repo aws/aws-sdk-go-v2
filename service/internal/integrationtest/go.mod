@@ -4,7 +4,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.30.1
 	github.com/aws/aws-sdk-go-v2/config v1.27.24
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.5
-	github.com/aws/aws-sdk-go-v2/service/acm v1.28.1
+	github.com/aws/aws-sdk-go-v2/service/acm v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.26.1
@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.23.1
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.41.1
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.41.2
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.40.1

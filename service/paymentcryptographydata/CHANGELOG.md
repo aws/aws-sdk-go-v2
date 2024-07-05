@@ -1,3 +1,7 @@
+# v1.12.0 (2024-07-05)
+
+* **Feature**: Added further restrictions on logging of potentially sensitive inputs and outputs.
+
 # v1.11.0 (2024-07-01)
 
 * **Feature**: Adding support for dynamic keys for encrypt, decrypt, re-encrypt and translate pin functions.  With this change, customers can use one-time TR-31 keys directly in dataplane operations without the need to first import them into the service.

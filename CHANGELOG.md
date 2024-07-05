@@ -1,3 +1,13 @@
+# Release (2024-07-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.28.2](service/acm/CHANGELOG.md#v1282-2024-07-05)
+  * **Documentation**: Documentation updates, including fixes for xml formatting, broken links, and ListCertificates description.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.12.0](service/paymentcryptographydata/CHANGELOG.md#v1120-2024-07-05)
+  * **Feature**: Added further restrictions on logging of potentially sensitive inputs and outputs.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.10.0](service/qbusiness/CHANGELOG.md#v1100-2024-07-05)
+  * **Feature**: Add personalization to Q Applications. Customers can enable or disable personalization when creating or updating a Q application with the personalization configuration.
+
 # Release (2024-07-03)
 
 ## General Highlights

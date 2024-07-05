@@ -1,8 +1,0 @@
-{
-    "id": "05f07992-0909-4fc6-a9ec-9808e35039ef",
-    "type": "feature",
-    "description": "This release for Amazon ECR makes change to bring the SDK into sync with the API.",
-    "modules": [
-        "service/ecr"
-    ]
-}

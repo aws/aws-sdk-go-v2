@@ -1,3 +1,7 @@
+# v1.10.0 (2024-07-05)
+
+* **Feature**: Add personalization to Q Applications. Customers can enable or disable personalization when creating or updating a Q application with the personalization configuration.
+
 # v1.9.1 (2024-06-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions
