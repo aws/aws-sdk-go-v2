@@ -18,7 +18,7 @@
             "type": "structure",
             "members": {
                 "CardExpiryDate": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals4",
+                    "target": "com.amazonaws.paymentcryptographydata#CardExpiryDateType",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiry date of a payment card.</p>",
                         "smithy.api#required": {}
@@ -33,14 +33,14 @@
             "type": "structure",
             "members": {
                 "CardExpiryDate": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals4",
+                    "target": "com.amazonaws.paymentcryptographydata#CardExpiryDateType",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiry date of a payment card.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServiceCode": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals3",
+                    "target": "com.amazonaws.paymentcryptographydata#ServiceCodeType",
                     "traits": {
                         "smithy.api#documentation": "<p>The service code of the AMEX payment card. This is different from the Card Security Code (CSC).</p>",
                         "smithy.api#required": {}
@@ -49,6 +49,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#ApplicationCryptogramType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#AsymmetricEncryptionAttributes": {
@@ -63,6 +74,39 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters for plaintext encryption using asymmetric keys.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#AuthRequestCryptogramType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#AuthResponseValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#CardExpiryDateType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 4
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#CardGenerationAttributes": {
@@ -198,14 +242,14 @@
             "type": "structure",
             "members": {
                 "CardExpiryDate": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals4",
+                    "target": "com.amazonaws.paymentcryptographydata#CardExpiryDateType",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiry date of a payment card.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServiceCode": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals3",
+                    "target": "com.amazonaws.paymentcryptographydata#ServiceCodeType",
                     "traits": {
                         "smithy.api#documentation": "<p>The service code of the payment card. This is different from Card Security Code (CSC).</p>",
                         "smithy.api#required": {}
@@ -220,7 +264,7 @@
             "type": "structure",
             "members": {
                 "CardExpiryDate": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals4",
+                    "target": "com.amazonaws.paymentcryptographydata#CardExpiryDateType",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiry date of a payment card.</p>",
                         "smithy.api#required": {}
@@ -229,6 +273,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Card data parameters that are required to verify Card Verification Value (CVV2) for the payment card.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#CipherTextType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#CryptogramAuthResponse": {
@@ -277,7 +332,7 @@
                     }
                 },
                 "ProprietaryAuthenticationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween1And16",
+                    "target": "com.amazonaws.paymentcryptographydata#ProprietaryAuthenticationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The proprietary authentication data used by issuer for communication during online transaction using an EMV chip card.</p>"
                     }
@@ -285,6 +340,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters that are required for ARPC response generation using method2 after ARQC verification is successful.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#DecimalizationTableType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#DecryptData": {
@@ -333,7 +399,7 @@
                     }
                 },
                 "CipherText": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4096",
+                    "target": "com.amazonaws.paymentcryptographydata#CipherTextType",
                     "traits": {
                         "smithy.api#documentation": "<p>The ciphertext to decrypt.</p>",
                         "smithy.api#required": {}
@@ -375,7 +441,7 @@
                     }
                 },
                 "PlainText": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4096",
+                    "target": "com.amazonaws.paymentcryptographydata#PlainTextOutputType",
                     "traits": {
                         "smithy.api#documentation": "<p>The decrypted plaintext data in hexBinary format.</p>",
                         "smithy.api#required": {}
@@ -390,7 +456,7 @@
             "type": "structure",
             "members": {
                 "CardExpiryDate": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals4",
+                    "target": "com.amazonaws.paymentcryptographydata#CardExpiryDateType",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiry date of a payment card.</p>",
                         "smithy.api#required": {}
@@ -520,7 +586,7 @@
                     }
                 },
                 "InitializationVector": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLength16Or32",
+                    "target": "com.amazonaws.paymentcryptographydata#InitializationVectorType",
                     "traits": {
                         "smithy.api#documentation": "<p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>"
                     }
@@ -589,7 +655,7 @@
                     }
                 },
                 "TrackData": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween2And160",
+                    "target": "com.amazonaws.paymentcryptographydata#TrackDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The data on the two tracks of magnetic cards used for financial transactions. This includes the cardholder name, PAN, expiration date, bank ID (BIN) and several other numbers the issuing bank uses to validate the data received.</p>",
                         "smithy.api#required": {}
@@ -611,14 +677,14 @@
                     }
                 },
                 "CardExpiryDate": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals4",
+                    "target": "com.amazonaws.paymentcryptographydata#CardExpiryDateType",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiry date of a payment card.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServiceCode": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals3",
+                    "target": "com.amazonaws.paymentcryptographydata#ServiceCodeType",
                     "traits": {
                         "smithy.api#documentation": "<p>The service code of the payment card. This is different from Card Security Code (CSC).</p>",
                         "smithy.api#required": {}
@@ -647,7 +713,7 @@
                     }
                 },
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -661,7 +727,7 @@
                     }
                 },
                 "SessionDerivationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#SessionDerivationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The derivation value used to derive the ICC session key. It is typically the application transaction counter value padded with zeros or previous ARQC value padded with zeros as per EMV version 4.3 book 2.</p>",
                         "smithy.api#required": {}
@@ -674,7 +740,7 @@
                     }
                 },
                 "InitializationVector": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLength16Or32",
+                    "target": "com.amazonaws.paymentcryptographydata#InitializationVectorType",
                     "traits": {
                         "smithy.api#documentation": "<p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>"
                     }
@@ -760,7 +826,7 @@
                     }
                 },
                 "PlainText": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4064",
+                    "target": "com.amazonaws.paymentcryptographydata#PlainTextType",
                     "traits": {
                         "smithy.api#documentation": "<p>The plaintext to be encrypted.</p>\n         <note>\n            <p>For encryption using asymmetric keys, plaintext data length is constrained by encryption key strength that you define in <code>KeyAlgorithm</code> and padding type that you define in <code>AsymmetricEncryptionAttributes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html\">Encrypt data</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         </note>",
                         "smithy.api#required": {}
@@ -801,7 +867,7 @@
                     }
                 },
                 "CipherText": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4096",
+                    "target": "com.amazonaws.paymentcryptographydata#CipherTextType",
                     "traits": {
                         "smithy.api#documentation": "<p>The encrypted ciphertext.</p>",
                         "smithy.api#required": {}
@@ -810,6 +876,17 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#EncryptedPinBlockType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#EncryptionDecryptionAttributes": {
@@ -922,7 +999,7 @@
                     }
                 },
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -964,7 +1041,7 @@
                     }
                 },
                 "ValidationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween3And5",
+                    "target": "com.amazonaws.paymentcryptographydata#ValidationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The CVV or CSC value that Amazon Web Services Payment Cryptography generates for the card.</p>",
                         "smithy.api#required": {}
@@ -1020,7 +1097,7 @@
                     }
                 },
                 "MessageData": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween2And4096",
+                    "target": "com.amazonaws.paymentcryptographydata#MessageDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The data for which a MAC is under generation. This value must be hexBinary.</p>",
                         "smithy.api#required": {}
@@ -1062,7 +1139,7 @@
                     }
                 },
                 "Mac": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween4And128",
+                    "target": "com.amazonaws.paymentcryptographydata#MacOutputType",
                     "traits": {
                         "smithy.api#documentation": "<p>The MAC cryptogram generated within Amazon Web Services Payment Cryptography.</p>",
                         "smithy.api#required": {}
@@ -1139,7 +1216,7 @@
                     }
                 },
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -1189,7 +1266,7 @@
                     }
                 },
                 "EncryptedPinBlock": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween16And32",
+                    "target": "com.amazonaws.paymentcryptographydata#EncryptedPinBlockType",
                     "traits": {
                         "smithy.api#documentation": "<p>The PIN block encrypted under PEK from Amazon Web Services Payment Cryptography. The encrypted PIN block is a composite of PAN (Primary Account Number) and PIN (Personal Identification Number), generated in accordance with ISO 9564 standard.</p>",
                         "smithy.api#required": {}
@@ -1218,107 +1295,12 @@
                 "smithy.api#sensitive": {}
             }
         },
-        "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4064": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 16,
-                    "max": 4064
-                },
-                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
-                "smithy.api#sensitive": {}
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4096": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 16,
-                    "max": 4096
-                },
-                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
-                "smithy.api#sensitive": {}
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween2And4096": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 2,
-                    "max": 4096
-                },
-                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
-                "smithy.api#sensitive": {}
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween4And128": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 4,
-                    "max": 128
-                },
-                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
-                "smithy.api#sensitive": {}
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexLength16Or32": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 16,
-                    "max": 32
-                },
-                "smithy.api#pattern": "^(?:[0-9a-fA-F]{16}|[0-9a-fA-F]{32})$",
-                "smithy.api#sensitive": {}
-            }
-        },
         "com.amazonaws.paymentcryptographydata#HexLengthBetween10And24": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 10,
                     "max": 24
-                },
-                "smithy.api#pattern": "^[0-9a-fA-F]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexLengthBetween16And32": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 16,
-                    "max": 32
-                },
-                "smithy.api#pattern": "^[0-9a-fA-F]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexLengthBetween1And16": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 16
-                },
-                "smithy.api#pattern": "^[0-9a-fA-F]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexLengthBetween2And1024": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 2,
-                    "max": 1024
-                },
-                "smithy.api#pattern": "^[0-9a-fA-F]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexLengthBetween2And160": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 2,
-                    "max": 160
                 },
                 "smithy.api#pattern": "^[0-9a-fA-F]+$"
             }
@@ -1343,16 +1325,6 @@
                 "smithy.api#pattern": "^[0-9a-fA-F]+$"
             }
         },
-        "com.amazonaws.paymentcryptographydata#HexLengthBetween4And128": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 4,
-                    "max": 128
-                },
-                "smithy.api#pattern": "^[0-9a-fA-F]+$"
-            }
-        },
         "com.amazonaws.paymentcryptographydata#HexLengthEquals1": {
             "type": "string",
             "traits": {
@@ -1361,16 +1333,6 @@
                     "max": 1
                 },
                 "smithy.api#pattern": "^[0-9A-F]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#HexLengthEquals16": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 16,
-                    "max": 16
-                },
-                "smithy.api#pattern": "^[0-9a-fA-F]+$"
             }
         },
         "com.amazonaws.paymentcryptographydata#HexLengthEquals4": {
@@ -1397,7 +1359,7 @@
             "type": "structure",
             "members": {
                 "DecimalizationTable": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#DecimalizationTableType",
                     "traits": {
                         "smithy.api#documentation": "<p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>",
                         "smithy.api#required": {}
@@ -1411,7 +1373,7 @@
                     }
                 },
                 "PinValidationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And16",
+                    "target": "com.amazonaws.paymentcryptographydata#PinValidationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique data for cardholder identification.</p>",
                         "smithy.api#required": {}
@@ -1426,7 +1388,7 @@
             "type": "structure",
             "members": {
                 "DecimalizationTable": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#DecimalizationTableType",
                     "traits": {
                         "smithy.api#documentation": "<p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>",
                         "smithy.api#required": {}
@@ -1440,14 +1402,14 @@
                     }
                 },
                 "PinValidationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And16",
+                    "target": "com.amazonaws.paymentcryptographydata#PinValidationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique data for cardholder identification.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PinOffset": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And12",
+                    "target": "com.amazonaws.paymentcryptographydata#PinOffsetType",
                     "traits": {
                         "smithy.api#documentation": "<p>The PIN offset value.</p>",
                         "smithy.api#required": {}
@@ -1462,14 +1424,14 @@
             "type": "structure",
             "members": {
                 "EncryptedPinBlock": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween16And32",
+                    "target": "com.amazonaws.paymentcryptographydata#EncryptedPinBlockType",
                     "traits": {
                         "smithy.api#documentation": "<p>The encrypted PIN block data. According to ISO 9564 standard, a PIN Block is an encoded representation of a payment card Personal Account Number (PAN) and the cardholder Personal Identification Number (PIN).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DecimalizationTable": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#DecimalizationTableType",
                     "traits": {
                         "smithy.api#documentation": "<p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>",
                         "smithy.api#required": {}
@@ -1483,7 +1445,7 @@
                     }
                 },
                 "PinValidationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And16",
+                    "target": "com.amazonaws.paymentcryptographydata#PinValidationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique data for cardholder identification.</p>",
                         "smithy.api#required": {}
@@ -1498,7 +1460,7 @@
             "type": "structure",
             "members": {
                 "DecimalizationTable": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#DecimalizationTableType",
                     "traits": {
                         "smithy.api#documentation": "<p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>",
                         "smithy.api#required": {}
@@ -1512,14 +1474,14 @@
                     }
                 },
                 "PinValidationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And16",
+                    "target": "com.amazonaws.paymentcryptographydata#PinValidationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique data for cardholder identification.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PinOffset": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And12",
+                    "target": "com.amazonaws.paymentcryptographydata#PinOffsetType",
                     "traits": {
                         "smithy.api#documentation": "<p>The PIN offset value.</p>",
                         "smithy.api#required": {}
@@ -1534,7 +1496,7 @@
             "type": "structure",
             "members": {
                 "DecimalizationTable": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#DecimalizationTableType",
                     "traits": {
                         "smithy.api#documentation": "<p>The decimalization table to use for IBM 3624 PIN algorithm. The table is used to convert the algorithm intermediate result from hexadecimal characters to decimal.</p>",
                         "smithy.api#required": {}
@@ -1548,7 +1510,7 @@
                     }
                 },
                 "PinValidationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And16",
+                    "target": "com.amazonaws.paymentcryptographydata#PinValidationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique data for cardholder identification.</p>",
                         "smithy.api#required": {}
@@ -1557,6 +1519,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters that are required to generate or verify Ibm3624 random PIN.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#InitializationVectorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(?:[0-9a-fA-F]{16}|[0-9a-fA-F]{32})$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And6": {
@@ -1727,7 +1700,7 @@
                     }
                 },
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -1797,6 +1770,28 @@
                 "smithy.api#documentation": "<p>Parameters that are required for DUKPT, HMAC, or EMV MAC generation or verification.</p>"
             }
         },
+        "com.amazonaws.paymentcryptographydata#MacOutputType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#MacType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.paymentcryptographydata#MajorKeyDerivationMode": {
             "type": "string",
             "traits": {
@@ -1812,55 +1807,15 @@
                 ]
             }
         },
-        "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19": {
+        "com.amazonaws.paymentcryptographydata#MessageDataType": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 12,
-                    "max": 19
+                    "min": 2,
+                    "max": 4096
                 },
-                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
                 "smithy.api#sensitive": {}
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#NumberLengthBetween3And5": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 3,
-                    "max": 5
-                },
-                "smithy.api#pattern": "^[0-9]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And12": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 4,
-                    "max": 12
-                },
-                "smithy.api#pattern": "^[0-9]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And16": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 4,
-                    "max": 16
-                },
-                "smithy.api#pattern": "^[0-9]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#NumberLengthEquals16": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 16,
-                    "max": 16
-                },
-                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.paymentcryptographydata#NumberLengthEquals2": {
@@ -1869,26 +1824,6 @@
                 "smithy.api#length": {
                     "min": 2,
                     "max": 2
-                },
-                "smithy.api#pattern": "^[0-9]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#NumberLengthEquals3": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 3,
-                    "max": 3
-                },
-                "smithy.api#pattern": "^[0-9]+$"
-            }
-        },
-        "com.amazonaws.paymentcryptographydata#NumberLengthEquals4": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 4,
-                    "max": 4
                 },
                 "smithy.api#pattern": "^[0-9]+$"
             }
@@ -2652,13 +2587,13 @@
             "type": "union",
             "members": {
                 "PinOffset": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And12",
+                    "target": "com.amazonaws.paymentcryptographydata#PinOffsetType",
                     "traits": {
                         "smithy.api#documentation": "<p>The PIN offset value.</p>"
                     }
                 },
                 "VerificationValue": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And12",
+                    "target": "com.amazonaws.paymentcryptographydata#VerificationValueType",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique data to identify a cardholder. In most cases, this is the same as cardholder's Primary Account Number (PAN). If a value is not provided, it defaults to PAN.</p>"
                     }
@@ -2712,6 +2647,28 @@
                 "smithy.api#documentation": "<p>Parameters that are required for PIN data generation.</p>"
             }
         },
+        "com.amazonaws.paymentcryptographydata#PinOffsetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#PinValidationDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.paymentcryptographydata#PinVerificationAttributes": {
             "type": "union",
             "members": {
@@ -2730,6 +2687,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters that are required for PIN data verification.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#PlainTextOutputType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#PlainTextType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 4064
+                },
+                "smithy.api#pattern": "^(?:[0-9a-fA-F][0-9a-fA-F])+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#ProprietaryAuthenticationDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#ReEncryptData": {
@@ -2785,7 +2786,7 @@
                     }
                 },
                 "CipherText": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4096",
+                    "target": "com.amazonaws.paymentcryptographydata#CipherTextType",
                     "traits": {
                         "smithy.api#documentation": "<p>Ciphertext to be encrypted. The minimum allowed length is 16 bytes and maximum allowed length is 4096 bytes.</p>",
                         "smithy.api#required": {}
@@ -2840,7 +2841,7 @@
                     }
                 },
                 "CipherText": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween16And4096",
+                    "target": "com.amazonaws.paymentcryptographydata#CipherTextType",
                     "traits": {
                         "smithy.api#documentation": "<p>The encrypted ciphertext.</p>",
                         "smithy.api#required": {}
@@ -2884,11 +2885,33 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.paymentcryptographydata#ServiceCodeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#SessionDerivationDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.paymentcryptographydata#SessionKeyAmex": {
             "type": "structure",
             "members": {
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -2975,7 +2998,7 @@
             "type": "union",
             "members": {
                 "ApplicationCryptogram": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#ApplicationCryptogramType",
                     "traits": {
                         "smithy.api#documentation": "<p>The cryptogram provided by the terminal during transaction processing.</p>"
                     }
@@ -2995,7 +3018,7 @@
             "type": "structure",
             "members": {
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -3024,7 +3047,7 @@
             "type": "structure",
             "members": {
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -3053,7 +3076,7 @@
             "type": "structure",
             "members": {
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -3089,7 +3112,7 @@
             "type": "structure",
             "members": {
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -3118,7 +3141,7 @@
                     }
                 },
                 "InitializationVector": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLength16Or32",
+                    "target": "com.amazonaws.paymentcryptographydata#InitializationVectorType",
                     "traits": {
                         "smithy.api#documentation": "<p>An input used to provide the intial state. If no value is provided, Amazon Web Services Payment Cryptography defaults it to zero.</p>"
                     }
@@ -3155,6 +3178,28 @@
                     "max": 9984
                 },
                 "smithy.api#pattern": "^[0-9A-Z]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#TrackDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 160
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#TransactionDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3263,7 +3308,7 @@
             "type": "structure",
             "members": {
                 "PinBlock": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween16And32",
+                    "target": "com.amazonaws.paymentcryptographydata#EncryptedPinBlockType",
                     "traits": {
                         "smithy.api#documentation": "<p>The outgoing encrypted PIN block data after translation.</p>",
                         "smithy.api#required": {}
@@ -3324,7 +3369,7 @@
             "type": "structure",
             "members": {
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -3340,6 +3385,17 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>Parameters that are required for ISO9564 PIN format 1 tranlation.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#ValidationDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptographydata#ValidationException": {
@@ -3437,6 +3493,17 @@
                 ]
             }
         },
+        "com.amazonaws.paymentcryptographydata#VerificationValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.paymentcryptographydata#VerifyAuthRequestCryptogram": {
             "type": "operation",
             "input": {
@@ -3485,14 +3552,14 @@
                     }
                 },
                 "TransactionData": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween2And1024",
+                    "target": "com.amazonaws.paymentcryptographydata#TransactionDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The transaction data that Amazon Web Services Payment Cryptography uses for ARQC verification. The same transaction is used for ARQC generation outside of Amazon Web Services Payment Cryptography.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AuthRequestCryptogram": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals16",
+                    "target": "com.amazonaws.paymentcryptographydata#AuthRequestCryptogramType",
                     "traits": {
                         "smithy.api#documentation": "<p>The auth request cryptogram imported into Amazon Web Services Payment Cryptography for ARQC verification using a major encryption key and transaction data.</p>",
                         "smithy.api#required": {}
@@ -3541,7 +3608,7 @@
                     }
                 },
                 "AuthResponseValue": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween1And16",
+                    "target": "com.amazonaws.paymentcryptographydata#AuthResponseValueType",
                     "traits": {
                         "smithy.api#documentation": "<p>The result for ARQC verification or ARPC generation within Amazon Web Services Payment Cryptography.</p>"
                     }
@@ -3599,7 +3666,7 @@
                     }
                 },
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -3613,7 +3680,7 @@
                     }
                 },
                 "ValidationData": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween3And5",
+                    "target": "com.amazonaws.paymentcryptographydata#ValidationDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The CVV or CSC value for use for card data verification within Amazon Web Services Payment Cryptography.</p>",
                         "smithy.api#required": {}
@@ -3694,14 +3761,14 @@
                     }
                 },
                 "MessageData": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween2And4096",
+                    "target": "com.amazonaws.paymentcryptographydata#MessageDataType",
                     "traits": {
                         "smithy.api#documentation": "<p>The data on for which MAC is under verification. This value must be hexBinary.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Mac": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexEvenLengthBetween4And128",
+                    "target": "com.amazonaws.paymentcryptographydata#MacType",
                     "traits": {
                         "smithy.api#documentation": "<p>The MAC being verified.</p>",
                         "smithy.api#required": {}
@@ -3809,14 +3876,14 @@
                     }
                 },
                 "EncryptedPinBlock": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween16And32",
+                    "target": "com.amazonaws.paymentcryptographydata#EncryptedPinBlockType",
                     "traits": {
                         "smithy.api#documentation": "<p>The encrypted PIN block data that Amazon Web Services Payment Cryptography verifies.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PrimaryAccountNumber": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween12And19",
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>",
                         "smithy.api#required": {}
@@ -3909,7 +3976,7 @@
                     }
                 },
                 "VerificationValue": {
-                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthBetween4And12",
+                    "target": "com.amazonaws.paymentcryptographydata#VerificationValueType",
                     "traits": {
                         "smithy.api#documentation": "<p>Parameters that are required to generate or verify Visa PVV (PIN Verification Value).</p>",
                         "smithy.api#required": {}
@@ -3924,7 +3991,7 @@
             "type": "structure",
             "members": {
                 "EncryptedPinBlock": {
-                    "target": "com.amazonaws.paymentcryptographydata#HexLengthBetween16And32",
+                    "target": "com.amazonaws.paymentcryptographydata#EncryptedPinBlockType",
                     "traits": {
                         "smithy.api#documentation": "<p>The encrypted PIN block data to verify.</p>",
                         "smithy.api#required": {}

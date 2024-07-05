@@ -1878,7 +1878,7 @@
                     "kms:DescribeKey",
                     "kms:CreateGrant"
                 ],
-                "smithy.api#documentation": "<p>Creates an Amazon Q Business application.</p>\n         <note>\n            <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are \n                also available in Amazon Q Business Lite. For information on what's included in \n                Amazon Q Business Lite and what's included in \n                Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers\">Amazon Q Business tiers</a>. \n                You must use the Amazon Q Business console to assign subscription tiers to users.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates an Amazon Q Business application.</p>\n         <note>\n            <p>There are new tiers for Amazon Q Business. Not all features in Amazon Q Business Pro are\n                also available in Amazon Q Business Lite. For information on what's included in\n                Amazon Q Business Lite and what's included in Amazon Q Business Pro, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers\">Amazon Q Business tiers</a>. You must use the Amazon Q Business console to assign\n                subscription tiers to users.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/applications",
                     "method": "POST"
@@ -1944,7 +1944,13 @@
                 "qAppsConfiguration": {
                     "target": "com.amazonaws.qbusiness#QAppsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web experience.</p>"
+                        "smithy.api#documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web\n            experience.</p>"
+                    }
+                },
+                "personalizationConfiguration": {
+                    "target": "com.amazonaws.qbusiness#PersonalizationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information about chat response personalization. For more information,\n            see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>\n         </p>"
                     }
                 }
             },
@@ -4691,7 +4697,7 @@
                         "h2"
                     ]
                 },
-                "smithy.api#documentation": "<p>This is the <i>Amazon Q Business</i> API Reference. Amazon Q Business is a fully\n            managed, generative-AI powered enterprise chat assistant that you can deploy within your\n            organization. Amazon Q Business enhances employee productivity by supporting key tasks such\n            as question-answering, knowledge discovery, writing email messages, summarizing text,\n            drafting document outlines, and brainstorming ideas. Users ask questions of\n            Amazon Q Business and get answers that are presented in a conversational manner. For an\n            introduction to the service, see the <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html\">\n               <i>Amazon Q Business User Guide</i>\n            </a>.</p>\n         <p>For an overview of the Amazon Q Business APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview\">Overview of Amazon Q Business API operations</a>.</p>\n         <p>For information about the IAM access control permissions you need to\n            use this API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html\">IAM roles for Amazon Q Business</a> in the\n                <i>Amazon Q Business User Guide</i>.</p>\n         <p>You can use the following AWS SDKs to access Amazon Q Business APIs:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-cpp\">AWS SDK for C++</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-go\">AWS SDK for Go</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-java\">AWS SDK for Java</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-javascript\">AWS SDK for\n                        JavaScript</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-net\">AWS SDK for .NET</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/pythonsdk\">AWS SDK for Python\n                    (Boto3)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-ruby\">AWS SDK for Ruby</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following resources provide additional information about using the Amazon Q Business\n            API:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>\n                     <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html\">Setting up for\n                            Amazon Q Business</a>\n                  </i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html\">Amazon Q Business CLI Reference</a>\n                  </i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <a href=\"https://docs.aws.amazon.com/general/latest/gr/amazonq.html\">Amazon Web Services General Reference</a>\n                  </i>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This is the <i>Amazon Q Business</i> API Reference. Amazon Q Business is a fully\n            managed, generative-AI powered enterprise chat assistant that you can deploy within your\n            organization. Amazon Q Business enhances employee productivity by supporting key tasks such\n            as question-answering, knowledge discovery, writing email messages, summarizing text,\n            drafting document outlines, and brainstorming ideas. Users ask questions of\n            Amazon Q Business and get answers that are presented in a conversational manner. For an\n            introduction to the service, see the <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html\">\n               <i>Amazon Q Business User Guide</i>\n            </a>.</p>\n         <p>For an overview of the Amazon Q Business APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview\">Overview of Amazon Q Business API operations</a>.</p>\n         <p>For information about the IAM access control permissions you need to\n            use this API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html\">IAM roles for Amazon Q Business</a> in the\n                <i>Amazon Q Business User Guide</i>.</p>\n         <p>The following resources provide additional information about using the Amazon Q Business\n            API:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>\n                     <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html\">Setting up for\n                            Amazon Q Business</a>\n                  </i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html\">Amazon Q Business CLI Reference</a>\n                  </i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <a href=\"https://docs.aws.amazon.com/general/latest/gr/amazonq.html\">Amazon Web Services General Reference</a>\n                  </i>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#title": "QBusiness",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -5256,7 +5262,13 @@
                 "qAppsConfiguration": {
                     "target": "com.amazonaws.qbusiness#QAppsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings for whether end users can create and use Amazon Q Apps in the web experience.</p>"
+                        "smithy.api#documentation": "<p>Settings for whether end users can create and use Amazon Q Apps in the web\n            experience.</p>"
+                    }
+                },
+                "personalizationConfiguration": {
+                    "target": "com.amazonaws.qbusiness#PersonalizationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information about chat response personalization. For more information,\n            see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
                     }
                 }
             },
@@ -8525,6 +8537,38 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.qbusiness#PersonalizationConfiguration": {
+            "type": "structure",
+            "members": {
+                "personalizationControlMode": {
+                    "target": "com.amazonaws.qbusiness#PersonalizationControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to allow Amazon Q Business to customize chat responses using user\n            specific metadata—specifically, location and job information—in your\n                IAM Identity Center instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information about chat response personalization. For more information,\n            see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#PersonalizationControlMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.qbusiness#Plugin": {
             "type": "structure",
             "members": {
@@ -10419,7 +10463,13 @@
                 "qAppsConfiguration": {
                     "target": "com.amazonaws.qbusiness#QAppsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web experience.</p>"
+                        "smithy.api#documentation": "<p>An option to allow end users to create and use Amazon Q Apps in the web\n            experience.</p>"
+                    }
+                },
+                "personalizationConfiguration": {
+                    "target": "com.amazonaws.qbusiness#PersonalizationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information about chat response personalization. For more information,\n            see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
                     }
                 }
             },
