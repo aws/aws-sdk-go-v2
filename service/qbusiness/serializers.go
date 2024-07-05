@@ -575,6 +575,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(*v.IdentityCenterInstanceArn)
 	}
 
+	if v.PersonalizationConfiguration != nil {
+		ok := object.Key("personalizationConfiguration")
+		if err := awsRestjson1_serializeDocumentPersonalizationConfiguration(v.PersonalizationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QAppsConfiguration != nil {
 		ok := object.Key("qAppsConfiguration")
 		if err := awsRestjson1_serializeDocumentQAppsConfiguration(v.QAppsConfiguration, ok); err != nil {
@@ -4353,6 +4360,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		ok.String(*v.IdentityCenterInstanceArn)
 	}
 
+	if v.PersonalizationConfiguration != nil {
+		ok := object.Key("personalizationConfiguration")
+		if err := awsRestjson1_serializeDocumentPersonalizationConfiguration(v.PersonalizationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QAppsConfiguration != nil {
 		ok := object.Key("qAppsConfiguration")
 		if err := awsRestjson1_serializeDocumentQAppsConfiguration(v.QAppsConfiguration, ok); err != nil {
@@ -6579,6 +6593,18 @@ func awsRestjson1_serializeDocumentOAuth2ClientCredentialConfiguration(v *types.
 	if v.SecretArn != nil {
 		ok := object.Key("secretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPersonalizationConfiguration(v *types.PersonalizationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PersonalizationControlMode) > 0 {
+		ok := object.Key("personalizationControlMode")
+		ok.String(string(v.PersonalizationControlMode))
 	}
 
 	return nil

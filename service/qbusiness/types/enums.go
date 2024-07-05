@@ -618,6 +618,25 @@ func (NumberAttributeBoostingType) Values() []NumberAttributeBoostingType {
 	}
 }
 
+type PersonalizationControlMode string
+
+// Enum values for PersonalizationControlMode
+const (
+	PersonalizationControlModeEnabled  PersonalizationControlMode = "ENABLED"
+	PersonalizationControlModeDisabled PersonalizationControlMode = "DISABLED"
+)
+
+// Values returns all known values for PersonalizationControlMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PersonalizationControlMode) Values() []PersonalizationControlMode {
+	return []PersonalizationControlMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type PluginBuildStatus string
 
 // Enum values for PluginBuildStatus

@@ -195,7 +195,7 @@ func awsRestjson1_deserializeOpDocumentDecryptDataOutput(v **DecryptDataOutput, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HexEvenLengthBetween16And4096 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PlainTextOutputType to be of type string, got %T instead", value)
 				}
 				sv.PlainText = ptr.String(jtv)
 			}
@@ -358,7 +358,7 @@ func awsRestjson1_deserializeOpDocumentEncryptDataOutput(v **EncryptDataOutput, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HexEvenLengthBetween16And4096 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected CipherTextType to be of type string, got %T instead", value)
 				}
 				sv.CipherText = ptr.String(jtv)
 			}
@@ -557,7 +557,7 @@ func awsRestjson1_deserializeOpDocumentGenerateCardValidationDataOutput(v **Gene
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NumberLengthBetween3And5 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ValidationDataType to be of type string, got %T instead", value)
 				}
 				sv.ValidationData = ptr.String(jtv)
 			}
@@ -738,7 +738,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacOutput(v **GenerateMacOutput, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HexLengthBetween4And128 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected MacOutputType to be of type string, got %T instead", value)
 				}
 				sv.Mac = ptr.String(jtv)
 			}
@@ -901,7 +901,7 @@ func awsRestjson1_deserializeOpDocumentGeneratePinDataOutput(v **GeneratePinData
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HexLengthBetween16And32 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected EncryptedPinBlockType to be of type string, got %T instead", value)
 				}
 				sv.EncryptedPinBlock = ptr.String(jtv)
 			}
@@ -1105,7 +1105,7 @@ func awsRestjson1_deserializeOpDocumentReEncryptDataOutput(v **ReEncryptDataOutp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HexEvenLengthBetween16And4096 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected CipherTextType to be of type string, got %T instead", value)
 				}
 				sv.CipherText = ptr.String(jtv)
 			}
@@ -1304,7 +1304,7 @@ func awsRestjson1_deserializeOpDocumentTranslatePinDataOutput(v **TranslatePinDa
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HexLengthBetween16And32 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected EncryptedPinBlockType to be of type string, got %T instead", value)
 				}
 				sv.PinBlock = ptr.String(jtv)
 			}
@@ -1470,7 +1470,7 @@ func awsRestjson1_deserializeOpDocumentVerifyAuthRequestCryptogramOutput(v **Ver
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected HexLengthBetween1And16 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected AuthResponseValueType to be of type string, got %T instead", value)
 				}
 				sv.AuthResponseValue = ptr.String(jtv)
 			}
@@ -2366,7 +2366,7 @@ loop:
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NumberLengthBetween4And12 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PinOffsetType to be of type string, got %T instead", value)
 				}
 				mv = jtv
 			}
@@ -2378,7 +2378,7 @@ loop:
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NumberLengthBetween4And12 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected VerificationValueType to be of type string, got %T instead", value)
 				}
 				mv = jtv
 			}

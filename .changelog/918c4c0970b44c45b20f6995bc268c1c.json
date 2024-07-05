@@ -1,0 +1,8 @@
+{
+    "id": "918c4c09-70b4-4c45-b20f-6995bc268c1c",
+    "type": "documentation",
+    "description": "Documentation updates, including fixes for xml formatting, broken links, and ListCertificates description.",
+    "modules": [
+        "service/acm"
+    ]
+}

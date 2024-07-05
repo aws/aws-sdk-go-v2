@@ -3053,6 +3053,11 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				sv.IdentityCenterApplicationArn = ptr.String(jtv)
 			}
 
+		case "personalizationConfiguration":
+			if err := awsRestjson1_deserializeDocumentPersonalizationConfiguration(&sv.PersonalizationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "qAppsConfiguration":
 			if err := awsRestjson1_deserializeDocumentQAppsConfiguration(&sv.QAppsConfiguration, value); err != nil {
 				return err
@@ -13211,6 +13216,46 @@ func awsRestjson1_deserializeDocumentOAuth2ClientCredentialConfiguration(v **typ
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPersonalizationConfiguration(v **types.PersonalizationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PersonalizationConfiguration
+	if *v == nil {
+		sv = &types.PersonalizationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "personalizationControlMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PersonalizationControlMode to be of type string, got %T instead", value)
+				}
+				sv.PersonalizationControlMode = types.PersonalizationControlMode(jtv)
 			}
 
 		default:

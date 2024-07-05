@@ -1737,6 +1737,22 @@ type OAuth2ClientCredentialConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information about chat response personalization. For more
+// information, see [Personalizing chat responses].
+//
+// [Personalizing chat responses]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+type PersonalizationConfiguration struct {
+
+	// An option to allow Amazon Q Business to customize chat responses using user
+	// specific metadata—specifically, location and job information—in your IAM
+	// Identity Center instance.
+	//
+	// This member is required.
+	PersonalizationControlMode PersonalizationControlMode
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Amazon Q Business plugin and its configuration.
 type Plugin struct {
 

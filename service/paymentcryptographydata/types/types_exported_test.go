@@ -199,6 +199,7 @@ func ExamplePinData_outputUsage() {
 }
 
 var _ *string
+var _ *string
 
 func ExamplePinGenerationAttributes_outputUsage() {
 	var union types.PinGenerationAttributes

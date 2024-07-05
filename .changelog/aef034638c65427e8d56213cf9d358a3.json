@@ -1,0 +1,8 @@
+{
+    "id": "aef03463-8c65-427e-8d56-213cf9d358a3",
+    "type": "feature",
+    "description": "Added further restrictions on logging of potentially sensitive inputs and outputs.",
+    "modules": [
+        "service/paymentcryptographydata"
+    ]
+}
