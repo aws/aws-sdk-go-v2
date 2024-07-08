@@ -62,7 +62,7 @@ func transformToSharedOptions(options Options) endpoints.Options {
 	}
 }
 
-// Resolver Translate endpoint resolver
+// Resolver QApps endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }
@@ -110,144 +110,34 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "translate.{region}.api.aws",
+				Hostname:          "data.qapps.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.amazonaws.com",
+				Hostname:          "data.qapps-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.api.aws",
+				Hostname:          "data.qapps-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "translate.{region}.amazonaws.com",
+				Hostname:          "data.qapps.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "ap-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ca-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-3",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-east-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "translate-fips.us-east-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-east-1-fips",
-			}: endpoints.Endpoint{
-				Hostname: "translate-fips.us-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "us-east-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-east-2",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "translate-fips.us-east-2.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-east-2-fips",
-			}: endpoints.Endpoint{
-				Hostname: "translate-fips.us-east-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "us-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-west-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "translate-fips.us-west-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-west-1-fips",
-			}: endpoints.Endpoint{
-				Hostname: "translate-fips.us-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "us-west-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-west-2",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "translate-fips.us-west-2.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-west-2-fips",
-			}: endpoints.Endpoint{
-				Hostname: "translate-fips.us-west-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-		},
 	},
 	{
 		ID: "aws-cn",
@@ -255,28 +145,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "translate.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "data.qapps.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.amazonaws.com.cn",
+				Hostname:          "data.qapps-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "data.qapps-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "translate.{region}.amazonaws.com.cn",
+				Hostname:          "data.qapps.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -290,25 +180,20 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.c2s.ic.gov",
+				Hostname:          "data.qapps-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "translate.{region}.c2s.ic.gov",
+				Hostname:          "data.qapps.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "us-iso-east-1",
-			}: endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-iso-b",
@@ -316,14 +201,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.sc2s.sgov.gov",
+				Hostname:          "data.qapps-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "translate.{region}.sc2s.sgov.gov",
+				Hostname:          "data.qapps.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -337,14 +222,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.cloud.adc-e.uk",
+				Hostname:          "data.qapps-fips.{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "translate.{region}.cloud.adc-e.uk",
+				Hostname:          "data.qapps.{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -358,14 +243,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.csp.hci.ic.gov",
+				Hostname:          "data.qapps-fips.{region}.csp.hci.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "translate.{region}.csp.hci.ic.gov",
+				Hostname:          "data.qapps.{region}.csp.hci.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -379,53 +264,33 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "translate.{region}.api.aws",
+				Hostname:          "data.qapps.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.amazonaws.com",
+				Hostname:          "data.qapps-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "translate-fips.{region}.api.aws",
+				Hostname:          "data.qapps-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "translate.{region}.amazonaws.com",
+				Hostname:          "data.qapps.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "us-gov-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-gov-west-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "translate-fips.us-gov-west-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-gov-west-1-fips",
-			}: endpoints.Endpoint{
-				Hostname: "translate-fips.us-gov-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-		},
 	},
 }
