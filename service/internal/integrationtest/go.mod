@@ -27,7 +27,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.40.1
-	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.24.1
+	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.36.1
@@ -37,7 +37,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.44.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.40.1
-	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.25.1
+	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.30.1
@@ -70,7 +70,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.46.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.30.1
-	github.com/aws/aws-sdk-go-v2/service/ses v1.24.1
+	github.com/aws/aws-sdk-go-v2/service/ses v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/shield v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.28.1

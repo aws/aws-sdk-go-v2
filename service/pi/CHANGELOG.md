@@ -1,3 +1,7 @@
+# v1.27.2 (2024-07-08)
+
+* No change notes available for this release.
+
 # v1.27.1 (2024-06-28)
 
 * **Documentation**: Noting that the filter db.sql.db_id isn't available for RDS for SQL Server DB instances.

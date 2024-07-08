@@ -1,8 +1,0 @@
-{
-    "id": "df62d8d4-e462-4449-800f-c0e47efc7546",
-    "type": "feature",
-    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

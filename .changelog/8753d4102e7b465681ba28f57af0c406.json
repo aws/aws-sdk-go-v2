@@ -1,8 +1,0 @@
-{
-    "id": "8753d410-2e7b-4656-81ba-28f57af0c406",
-    "type": "feature",
-    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
-    "modules": [
-        "service/elasticbeanstalk"
-    ]
-}

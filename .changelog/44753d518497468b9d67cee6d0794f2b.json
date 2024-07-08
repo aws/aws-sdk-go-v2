@@ -1,8 +1,0 @@
-{
-    "id": "44753d51-8497-468b-9d67-cee6d0794f2b",
-    "type": "feature",
-    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

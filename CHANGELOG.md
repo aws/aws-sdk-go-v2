@@ -1,3 +1,16 @@
+# Release (2024-07-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.25.0](service/devicefarm/CHANGELOG.md#v1250-2024-07-08)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.26.0](service/elasticbeanstalk/CHANGELOG.md#v1260-2024-07-08)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.0.0](service/qapps/CHANGELOG.md#v100-2024-07-08)
+  * **Release**: New AWS service client module
+  * **Feature**: This is a general availability (GA) release of Amazon Q Apps, a capability of Amazon Q Business. Q Apps leverages data sources your company has provided to enable users to build, share, and customize apps within your organization.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.25.0](service/ses/CHANGELOG.md#v1250-2024-07-08)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
 # Release (2024-07-05)
 
 ## Module Highlights
