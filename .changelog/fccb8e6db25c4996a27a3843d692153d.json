@@ -1,0 +1,8 @@
+{
+    "id": "fccb8e6d-b25c-4996-a27a-3843d692153d",
+    "type": "feature",
+    "description": "This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

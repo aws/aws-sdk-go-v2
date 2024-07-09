@@ -157,6 +157,28 @@ func ExampleMetricSpecification_outputUsage() {
 var _ *types.PredefinedMetricSpecification
 var _ *types.CustomizedMetricSpecification
 
+func ExampleOptimizationConfig_outputUsage() {
+	var union types.OptimizationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OptimizationConfigMemberModelCompilationConfig:
+		_ = v.Value // Value is types.ModelCompilationConfig
+
+	case *types.OptimizationConfigMemberModelQuantizationConfig:
+		_ = v.Value // Value is types.ModelQuantizationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ModelCompilationConfig
+var _ *types.ModelQuantizationConfig
+
 func ExampleScalingPolicy_outputUsage() {
 	var union types.ScalingPolicy
 	// type switches can be used to check the union value

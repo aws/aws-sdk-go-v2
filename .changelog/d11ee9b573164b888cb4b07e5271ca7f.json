@@ -1,0 +1,8 @@
+{
+    "id": "d11ee9b5-7316-4b88-8cb4-b07e5271ca7f",
+    "type": "feature",
+    "description": "This release deprecates dataProductItem field from SearchInventoryResultItem, along with some unused DataProduct shapes",
+    "modules": [
+        "service/datazone"
+    ]
+}

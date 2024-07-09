@@ -43,6 +43,7 @@ const (
 	AdministrativeActionTypeMisconfiguredStateRecovery    AdministrativeActionType = "MISCONFIGURED_STATE_RECOVERY"
 	AdministrativeActionTypeVolumeUpdateWithSnapshot      AdministrativeActionType = "VOLUME_UPDATE_WITH_SNAPSHOT"
 	AdministrativeActionTypeVolumeInitializeWithSnapshot  AdministrativeActionType = "VOLUME_INITIALIZE_WITH_SNAPSHOT"
+	AdministrativeActionTypeDownloadDataFromBackup        AdministrativeActionType = "DOWNLOAD_DATA_FROM_BACKUP"
 )
 
 // Values returns all known values for AdministrativeActionType. Note that this
@@ -65,6 +66,7 @@ func (AdministrativeActionType) Values() []AdministrativeActionType {
 		"MISCONFIGURED_STATE_RECOVERY",
 		"VOLUME_UPDATE_WITH_SNAPSHOT",
 		"VOLUME_INITIALIZE_WITH_SNAPSHOT",
+		"DOWNLOAD_DATA_FROM_BACKUP",
 	}
 }
 
@@ -697,6 +699,7 @@ const (
 	OntapDeploymentTypeMultiAz1  OntapDeploymentType = "MULTI_AZ_1"
 	OntapDeploymentTypeSingleAz1 OntapDeploymentType = "SINGLE_AZ_1"
 	OntapDeploymentTypeSingleAz2 OntapDeploymentType = "SINGLE_AZ_2"
+	OntapDeploymentTypeMultiAz2  OntapDeploymentType = "MULTI_AZ_2"
 )
 
 // Values returns all known values for OntapDeploymentType. Note that this can be
@@ -708,6 +711,7 @@ func (OntapDeploymentType) Values() []OntapDeploymentType {
 		"MULTI_AZ_1",
 		"SINGLE_AZ_1",
 		"SINGLE_AZ_2",
+		"MULTI_AZ_2",
 	}
 }
 
@@ -778,9 +782,11 @@ type OpenZFSDeploymentType string
 
 // Enum values for OpenZFSDeploymentType
 const (
-	OpenZFSDeploymentTypeSingleAz1 OpenZFSDeploymentType = "SINGLE_AZ_1"
-	OpenZFSDeploymentTypeSingleAz2 OpenZFSDeploymentType = "SINGLE_AZ_2"
-	OpenZFSDeploymentTypeMultiAz1  OpenZFSDeploymentType = "MULTI_AZ_1"
+	OpenZFSDeploymentTypeSingleAz1   OpenZFSDeploymentType = "SINGLE_AZ_1"
+	OpenZFSDeploymentTypeSingleAz2   OpenZFSDeploymentType = "SINGLE_AZ_2"
+	OpenZFSDeploymentTypeSingleAzHa1 OpenZFSDeploymentType = "SINGLE_AZ_HA_1"
+	OpenZFSDeploymentTypeSingleAzHa2 OpenZFSDeploymentType = "SINGLE_AZ_HA_2"
+	OpenZFSDeploymentTypeMultiAz1    OpenZFSDeploymentType = "MULTI_AZ_1"
 )
 
 // Values returns all known values for OpenZFSDeploymentType. Note that this can
@@ -791,6 +797,8 @@ func (OpenZFSDeploymentType) Values() []OpenZFSDeploymentType {
 	return []OpenZFSDeploymentType{
 		"SINGLE_AZ_1",
 		"SINGLE_AZ_2",
+		"SINGLE_AZ_HA_1",
+		"SINGLE_AZ_HA_2",
 		"MULTI_AZ_1",
 	}
 }
@@ -1064,6 +1072,7 @@ const (
 	StatusPending           Status = "PENDING"
 	StatusCompleted         Status = "COMPLETED"
 	StatusUpdatedOptimizing Status = "UPDATED_OPTIMIZING"
+	StatusOptimizing        Status = "OPTIMIZING"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -1077,6 +1086,7 @@ func (Status) Values() []Status {
 		"PENDING",
 		"COMPLETED",
 		"UPDATED_OPTIMIZING",
+		"OPTIMIZING",
 	}
 }
 

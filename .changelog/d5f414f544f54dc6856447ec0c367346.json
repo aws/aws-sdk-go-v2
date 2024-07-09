@@ -1,0 +1,8 @@
+{
+    "id": "d5f414f5-44f5-4dc6-8564-47ec0c367346",
+    "type": "feature",
+    "description": "Adds support for FSx for NetApp ONTAP 2nd Generation file systems, and FSx for OpenZFS Single AZ HA file systems.",
+    "modules": [
+        "service/fsx"
+    ]
+}

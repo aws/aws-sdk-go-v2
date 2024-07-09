@@ -466,6 +466,8 @@ type DataProductSummary struct {
 	CreatedBy *string
 
 	//
+	//
+	// Deprecated: This structure is deprecated.
 	DataProductItems []DataProductItem
 
 	//
@@ -2253,6 +2255,8 @@ type SearchInventoryResultItemMemberAssetItem struct {
 func (*SearchInventoryResultItemMemberAssetItem) isSearchInventoryResultItem() {}
 
 // The data product item included in the search results.
+//
+// Deprecated: This field is deprecated.
 type SearchInventoryResultItemMemberDataProductItem struct {
 	Value DataProductSummary
 

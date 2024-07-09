@@ -3752,6 +3752,27 @@ func (ListLabelingJobsForWorkteamSortByOptions) Values() []ListLabelingJobsForWo
 	}
 }
 
+type ListOptimizationJobsSortBy string
+
+// Enum values for ListOptimizationJobsSortBy
+const (
+	ListOptimizationJobsSortByName         ListOptimizationJobsSortBy = "Name"
+	ListOptimizationJobsSortByCreationTime ListOptimizationJobsSortBy = "CreationTime"
+	ListOptimizationJobsSortByStatus       ListOptimizationJobsSortBy = "Status"
+)
+
+// Values returns all known values for ListOptimizationJobsSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListOptimizationJobsSortBy) Values() []ListOptimizationJobsSortBy {
+	return []ListOptimizationJobsSortBy{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
 type ListWorkforcesSortByOptions string
 
 // Enum values for ListWorkforcesSortByOptions
@@ -4690,6 +4711,101 @@ func (Operator) Values() []Operator {
 		"Exists",
 		"NotExists",
 		"In",
+	}
+}
+
+type OptimizationJobDeploymentInstanceType string
+
+// Enum values for OptimizationJobDeploymentInstanceType
+const (
+	OptimizationJobDeploymentInstanceTypeMlP4d24xlarge   OptimizationJobDeploymentInstanceType = "ml.p4d.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP4de24xlarge  OptimizationJobDeploymentInstanceType = "ml.p4de.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP548xlarge    OptimizationJobDeploymentInstanceType = "ml.p5.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG5Xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG52xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG54xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG58xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG512xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG516xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG524xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG548xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6Xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG62xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG64xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG68xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG612xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG616xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG624xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG648xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf2Xlarge    OptimizationJobDeploymentInstanceType = "ml.inf2.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf28xlarge   OptimizationJobDeploymentInstanceType = "ml.inf2.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf224xlarge  OptimizationJobDeploymentInstanceType = "ml.inf2.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf248xlarge  OptimizationJobDeploymentInstanceType = "ml.inf2.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn12xlarge   OptimizationJobDeploymentInstanceType = "ml.trn1.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn132xlarge  OptimizationJobDeploymentInstanceType = "ml.trn1.32xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn1n32xlarge OptimizationJobDeploymentInstanceType = "ml.trn1n.32xlarge"
+)
+
+// Values returns all known values for OptimizationJobDeploymentInstanceType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OptimizationJobDeploymentInstanceType) Values() []OptimizationJobDeploymentInstanceType {
+	return []OptimizationJobDeploymentInstanceType{
+		"ml.p4d.24xlarge",
+		"ml.p4de.24xlarge",
+		"ml.p5.48xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
+		"ml.inf2.xlarge",
+		"ml.inf2.8xlarge",
+		"ml.inf2.24xlarge",
+		"ml.inf2.48xlarge",
+		"ml.trn1.2xlarge",
+		"ml.trn1.32xlarge",
+		"ml.trn1n.32xlarge",
+	}
+}
+
+type OptimizationJobStatus string
+
+// Enum values for OptimizationJobStatus
+const (
+	OptimizationJobStatusInprogress OptimizationJobStatus = "INPROGRESS"
+	OptimizationJobStatusCompleted  OptimizationJobStatus = "COMPLETED"
+	OptimizationJobStatusFailed     OptimizationJobStatus = "FAILED"
+	OptimizationJobStatusStarting   OptimizationJobStatus = "STARTING"
+	OptimizationJobStatusStopping   OptimizationJobStatus = "STOPPING"
+	OptimizationJobStatusStopped    OptimizationJobStatus = "STOPPED"
+)
+
+// Values returns all known values for OptimizationJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OptimizationJobStatus) Values() []OptimizationJobStatus {
+	return []OptimizationJobStatus{
+		"INPROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"STARTING",
+		"STOPPING",
+		"STOPPED",
 	}
 }
 
