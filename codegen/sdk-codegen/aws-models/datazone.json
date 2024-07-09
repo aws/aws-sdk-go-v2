@@ -4932,6 +4932,9 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This structure is deprecated."
+                },
                 "smithy.api#documentation": "<p/>"
             }
         },
@@ -4941,6 +4944,9 @@
                 "target": "com.amazonaws.datazone#DataProductItem"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This structure is deprecated."
+                },
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
@@ -5032,6 +5038,9 @@
                 }
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This structure is deprecated."
+                },
                 "smithy.api#documentation": "<p/>"
             }
         },
@@ -18779,6 +18788,9 @@
                 "dataProductItem": {
                     "target": "com.amazonaws.datazone#DataProductSummary",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This field is deprecated."
+                        },
                         "smithy.api#documentation": "<p>The data product item included in the search results.</p>"
                     }
                 }

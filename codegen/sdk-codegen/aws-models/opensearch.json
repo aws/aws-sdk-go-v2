@@ -29,6 +29,51 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.opensearch#AIMLOptionsInput": {
+            "type": "structure",
+            "members": {
+                "NaturalLanguageQueryGenerationOptions": {
+                    "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for parameters required for natural language query generation on the specified domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for parameters required to enable all machine learning features.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#AIMLOptionsOutput": {
+            "type": "structure",
+            "members": {
+                "NaturalLanguageQueryGenerationOptions": {
+                    "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationOptionsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for parameters required for natural language query generation on the specified domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for parameters representing the state of machine learning features on the specified domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#AIMLOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#AIMLOptionsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Machine learning options on the specified domain.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of machine learning options on the specified domain.</p>"
+            }
+        },
         "com.amazonaws.opensearch#ARN": {
             "type": "string",
             "traits": {
@@ -3318,6 +3363,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Software update options for the domain.</p>"
                     }
+                },
+                "AIMLOptions": {
+                    "target": "com.amazonaws.opensearch#AIMLOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for all machine learning features for the specified domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5710,6 +5761,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the domain properties that are currently being modified.</p>"
                     }
+                },
+                "AIMLOptions": {
+                    "target": "com.amazonaws.opensearch#AIMLOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for parameters required to enable all machine learning features.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6385,6 +6442,12 @@
                     "target": "com.amazonaws.opensearch#ModifyingPropertiesList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the domain properties that are currently being modified.</p>"
+                    }
+                },
+                "AIMLOptions": {
+                    "target": "com.amazonaws.opensearch#AIMLOptionsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for parameters required to enable all machine learning features.</p>"
                     }
                 }
             },
@@ -9034,6 +9097,104 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearch#ModifyingProperties"
+            }
+        },
+        "com.amazonaws.opensearch#NaturalLanguageQueryGenerationCurrentState": {
+            "type": "enum",
+            "members": {
+                "NotEnabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_ENABLED"
+                    }
+                },
+                "EnableComplete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE_COMPLETE"
+                    }
+                },
+                "EnableInProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE_IN_PROGRESS"
+                    }
+                },
+                "EnableFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLE_FAILED"
+                    }
+                },
+                "DisableComplete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE_COMPLETE"
+                    }
+                },
+                "DisableInProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE_IN_PROGRESS"
+                    }
+                },
+                "DisableFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.opensearch#NaturalLanguageQueryGenerationDesiredState": {
+            "type": "enum",
+            "members": {
+                "Enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "Disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.opensearch#NaturalLanguageQueryGenerationOptionsInput": {
+            "type": "structure",
+            "members": {
+                "DesiredState": {
+                    "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationDesiredState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired state of the natural language query generation feature. Valid values are ENABLED and DISABLED.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for parameters required to enable the natural language query generation feature.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#NaturalLanguageQueryGenerationOptionsOutput": {
+            "type": "structure",
+            "members": {
+                "DesiredState": {
+                    "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationDesiredState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired state of the natural language query generation feature. Valid values are ENABLED and DISABLED.</p>"
+                    }
+                },
+                "CurrentState": {
+                    "target": "com.amazonaws.opensearch#NaturalLanguageQueryGenerationCurrentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the natural language query generation feature, indicating completion, in progress, or failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for parameters representing the state of the natural language query generation feature on the specified domain.</p>"
             }
         },
         "com.amazonaws.opensearch#NextToken": {
@@ -12220,6 +12381,12 @@
                     "target": "com.amazonaws.opensearch#SoftwareUpdateOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Service software update options for the domain.</p>"
+                    }
+                },
+                "AIMLOptions": {
+                    "target": "com.amazonaws.opensearch#AIMLOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for all machine learning features for the specified domain.</p>"
                     }
                 }
             },
