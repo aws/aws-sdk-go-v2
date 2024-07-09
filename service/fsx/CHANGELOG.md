@@ -1,3 +1,7 @@
+# v1.47.0 (2024-07-09)
+
+* **Feature**: Adds support for FSx for NetApp ONTAP 2nd Generation file systems, and FSx for OpenZFS Single AZ HA file systems.
+
 # v1.46.1 (2024-06-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.150.0 (2024-07-09)
+
+* **Feature**: This release 1/ enables optimization jobs that allows customers to perform Ahead-of-time compilation and quantization. 2/ allows customers to control access to Amazon Q integration in SageMaker Studio. 3/ enables AdditionalModelDataSources for CreateModel action.
+
 # v1.149.1 (2024-06-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

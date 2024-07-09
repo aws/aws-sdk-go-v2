@@ -1,3 +1,7 @@
+# v1.39.0 (2024-07-09)
+
+* **Feature**: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
+
 # v1.38.0 (2024-06-28)
 
 * **Feature**: This release removes support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains.

@@ -1,3 +1,15 @@
+# Release (2024-07-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.13.0](service/datazone/CHANGELOG.md#v1130-2024-07-09)
+  * **Feature**: This release deprecates dataProductItem field from SearchInventoryResultItem, along with some unused DataProduct shapes
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.47.0](service/fsx/CHANGELOG.md#v1470-2024-07-09)
+  * **Feature**: Adds support for FSx for NetApp ONTAP 2nd Generation file systems, and FSx for OpenZFS Single AZ HA file systems.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.39.0](service/opensearch/CHANGELOG.md#v1390-2024-07-09)
+  * **Feature**: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.150.0](service/sagemaker/CHANGELOG.md#v11500-2024-07-09)
+  * **Feature**: This release 1/ enables optimization jobs that allows customers to perform Ahead-of-time compilation and quantization. 2/ allows customers to control access to Amazon Q integration in SageMaker Studio. 3/ enables AdditionalModelDataSources for CreateModel action.
+
 # Release (2024-07-08)
 
 ## Module Highlights
