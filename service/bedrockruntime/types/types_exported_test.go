@@ -160,6 +160,24 @@ func ExampleDocumentSource_outputUsage() {
 
 var _ []byte
 
+func ExampleGuardrailContentBlock_outputUsage() {
+	var union types.GuardrailContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GuardrailContentBlockMemberText:
+		_ = v.Value // Value is types.GuardrailTextBlock
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GuardrailTextBlock
+
 func ExampleGuardrailConverseContentBlock_outputUsage() {
 	var union types.GuardrailConverseContentBlock
 	// type switches can be used to check the union value

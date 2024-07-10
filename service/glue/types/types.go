@@ -1466,6 +1466,25 @@ type Condition struct {
 	noSmithyDocumentSerde
 }
 
+// Condition expression defined in the Glue Studio data preparation recipe node.
+type ConditionExpression struct {
+
+	// The condition of the condition expression.
+	//
+	// This member is required.
+	Condition *string
+
+	// The target column of the condition expressions.
+	//
+	// This member is required.
+	TargetColumn *string
+
+	// The value of the condition expression.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the values that an admin sets for each job or session parameter
 // configured in a Glue usage profile.
 type ConfigurationObject struct {
@@ -6439,9 +6458,24 @@ type Recipe struct {
 	Name *string
 
 	// A reference to the DataBrew recipe used by the node.
+	RecipeReference *RecipeReference
+
+	// Transform steps used in the recipe node.
+	RecipeSteps []RecipeStep
+
+	noSmithyDocumentSerde
+}
+
+// Actions defined in the Glue Studio data preparation recipe node.
+type RecipeAction struct {
+
+	// The operation of the recipe action.
 	//
 	// This member is required.
-	RecipeReference *RecipeReference
+	Operation *string
+
+	// The parameters of the recipe action.
+	Parameters map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -6458,6 +6492,20 @@ type RecipeReference struct {
 	//
 	// This member is required.
 	RecipeVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// A recipe step used in a Glue Studio data preparation recipe node.
+type RecipeStep struct {
+
+	// The transformation action of the recipe step.
+	//
+	// This member is required.
+	Action *RecipeAction
+
+	// The condition expressions for the recipe step.
+	ConditionExpressions []ConditionExpression
 
 	noSmithyDocumentSerde
 }

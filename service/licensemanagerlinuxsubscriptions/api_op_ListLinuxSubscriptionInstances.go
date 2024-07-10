@@ -32,30 +32,34 @@ func (c *Client) ListLinuxSubscriptionInstances(ctx context.Context, params *Lis
 // parameters in request increases.
 type ListLinuxSubscriptionInstancesInput struct {
 
-	// An array of structures that you can use to filter the results to those that
-	// match one or more sets of key-value pairs that you specify. For example, you can
-	// filter by the name of AmiID with an optional operator to see subscriptions that
-	// match, partially match, or don't match a certain Amazon Machine Image (AMI) ID.
+	// An array of structures that you can use to filter the results by your specified
+	// criteria. For example, you can specify Region in the Name , with the contains
+	// operator to list all subscriptions that match a partial string in the Value ,
+	// such as us-west .
 	//
-	// The valid names for this filter are:
-	//
-	//   - AmiID
-	//
-	//   - InstanceID
+	// For each filter, you can specify one of the following values for the Name key
+	// to streamline results:
 	//
 	//   - AccountID
 	//
-	//   - Status
+	//   - AmiID
 	//
-	//   - Region
+	//   - DualSubscription
 	//
-	//   - UsageOperation
-	//
-	//   - ProductCode
+	//   - InstanceID
 	//
 	//   - InstanceType
 	//
-	// The valid Operators for this filter are:
+	//   - ProductCode
+	//
+	//   - Region
+	//
+	//   - Status
+	//
+	//   - UsageOperation
+	//
+	// For each filter, you can use one of the following Operator values to define the
+	// behavior of the filter:
 	//
 	//   - contains
 	//
@@ -64,10 +68,11 @@ type ListLinuxSubscriptionInstancesInput struct {
 	//   - Notequal
 	Filters []types.Filter
 
-	// Maximum number of results to return in a single call.
+	// The maximum items to return in a request.
 	MaxResults *int32
 
-	// Token for the next set of results.
+	// A token to specify where to start paginating. This is the nextToken from a
+	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -78,7 +83,9 @@ type ListLinuxSubscriptionInstancesOutput struct {
 	// An array that contains instance objects.
 	Instances []types.Instance
 
-	// Token for the next set of results.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service hasn't included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -172,7 +179,7 @@ func (c *Client) addOperationListLinuxSubscriptionInstancesMiddlewares(stack *mi
 // ListLinuxSubscriptionInstancesPaginatorOptions is the paginator options for
 // ListLinuxSubscriptionInstances
 type ListLinuxSubscriptionInstancesPaginatorOptions struct {
-	// Maximum number of results to return in a single call.
+	// The maximum items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

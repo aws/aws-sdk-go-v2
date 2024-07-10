@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Linux subscriptions service settings.
+// Lists the Linux subscriptions service settings for your account.
 func (c *Client) GetServiceSettings(ctx context.Context, params *GetServiceSettingsInput, optFns ...func(*Options)) (*GetServiceSettingsOutput, error) {
 	if params == nil {
 		params = &GetServiceSettingsInput{}

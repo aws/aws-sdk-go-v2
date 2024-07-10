@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates configurations for a data source.
+// Updates the configurations for a data source connector.
 //
-// You can't change the chunkingConfiguration after you create the data source.
-// Specify the existing chunkingConfiguration .
+// You can't change the chunkingConfiguration after you create the data source
+// connector. Specify the existing chunkingConfiguration .
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}
@@ -32,7 +32,7 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 
 type UpdateDataSourceInput struct {
 
-	// Contains details about the storage configuration of the data source.
+	// The connection configuration for the data source that you want to update.
 	//
 	// This member is required.
 	DataSourceConfiguration *types.DataSourceConfiguration
@@ -42,7 +42,7 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the knowledge base to which the data source belongs.
+	// The unique identifier of the knowledge base for the data source.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -52,7 +52,7 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	Name *string
 
-	// The data deletion policy of the updated data source.
+	// The data deletion policy for the data source that you want to update.
 	DataDeletionPolicy types.DataDeletionPolicy
 
 	// Specifies a new description for the data source.

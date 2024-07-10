@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpDeleteAgentMemory struct {
+}
+
+func (*validateOpDeleteAgentMemory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgentMemory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentMemoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentMemoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentMemory struct {
+}
+
+func (*validateOpGetAgentMemory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentMemory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentMemoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentMemoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeAgent struct {
 }
 
@@ -25,6 +65,26 @@ func (m *validateOpInvokeAgent) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpInvokeAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpInvokeFlow struct {
+}
+
+func (*validateOpInvokeFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeFlowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -70,8 +130,20 @@ func (m *validateOpRetrieve) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpDeleteAgentMemoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgentMemory{}, middleware.After)
+}
+
+func addOpGetAgentMemoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentMemory{}, middleware.After)
+}
+
 func addOpInvokeAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeAgent{}, middleware.After)
+}
+
+func addOpInvokeFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeFlow{}, middleware.After)
 }
 
 func addOpRetrieveAndGenerateValidationMiddleware(stack *middleware.Stack) error {
@@ -107,6 +179,24 @@ func validateByteContentDoc(v *types.ByteContentDoc) error {
 	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateByteContentFile(v *types.ByteContentFile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ByteContentFile"}
+	if v.MediaType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaType"))
 	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
@@ -204,6 +294,31 @@ func validateExternalSourcesRetrieveAndGenerateConfiguration(v *types.ExternalSo
 	}
 }
 
+func validateFileSource(v *types.FileSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileSource"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if v.S3Location != nil {
+		if err := validateS3ObjectFile(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ByteContent != nil {
+		if err := validateByteContentFile(v.ByteContent); err != nil {
+			invalidParams.AddNested("ByteContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilterAttribute(v *types.FilterAttribute) error {
 	if v == nil {
 		return nil
@@ -214,6 +329,44 @@ func validateFilterAttribute(v *types.FilterAttribute) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowInput(v *types.FlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowInput"}
+	if v.NodeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeName"))
+	}
+	if v.NodeOutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeOutputName"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowInputs(v []types.FlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowInputs"}
+	for i := range v {
+		if err := validateFlowInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -272,6 +425,48 @@ func validateGuardrailConfiguration(v *types.GuardrailConfiguration) error {
 	}
 }
 
+func validateInputFile(v *types.InputFile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputFile"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateFileSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.UseCase) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UseCase"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputFiles(v []types.InputFile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputFiles"}
+	for i := range v {
+		if err := validateInputFile(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvocationResultMember(v types.InvocationResultMember) error {
 	if v == nil {
 		return nil
@@ -288,6 +483,45 @@ func validateInvocationResultMember(v types.InvocationResultMember) error {
 			invalidParams.AddNested("[functionResult]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseConfiguration"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.RetrievalConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalConfiguration"))
+	} else if v.RetrievalConfiguration != nil {
+		if err := validateKnowledgeBaseRetrievalConfiguration(v.RetrievalConfiguration); err != nil {
+			invalidParams.AddNested("RetrievalConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKnowledgeBaseConfigurations(v []types.KnowledgeBaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseConfigurations"}
+	for i := range v {
+		if err := validateKnowledgeBaseConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -351,6 +585,11 @@ func validateKnowledgeBaseRetrieveAndGenerateConfiguration(v *types.KnowledgeBas
 			invalidParams.AddNested("GenerationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OrchestrationConfiguration != nil {
+		if err := validateOrchestrationConfiguration(v.OrchestrationConfiguration); err != nil {
+			invalidParams.AddNested("OrchestrationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -367,6 +606,40 @@ func validateKnowledgeBaseVectorSearchConfiguration(v *types.KnowledgeBaseVector
 		if err := validateRetrievalFilter(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrchestrationConfiguration(v *types.OrchestrationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrchestrationConfiguration"}
+	if v.QueryTransformationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryTransformationConfiguration"))
+	} else if v.QueryTransformationConfiguration != nil {
+		if err := validateQueryTransformationConfiguration(v.QueryTransformationConfiguration); err != nil {
+			invalidParams.AddNested("QueryTransformationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryTransformationConfiguration(v *types.QueryTransformationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryTransformationConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -558,6 +831,21 @@ func validateS3ObjectDoc(v *types.S3ObjectDoc) error {
 	}
 }
 
+func validateS3ObjectFile(v *types.S3ObjectFile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ObjectFile"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSessionState(v *types.SessionState) error {
 	if v == nil {
 		return nil
@@ -567,6 +855,58 @@ func validateSessionState(v *types.SessionState) error {
 		if err := validateReturnControlInvocationResults(v.ReturnControlInvocationResults); err != nil {
 			invalidParams.AddNested("ReturnControlInvocationResults", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Files != nil {
+		if err := validateInputFiles(v.Files); err != nil {
+			invalidParams.AddNested("Files", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KnowledgeBaseConfigurations != nil {
+		if err := validateKnowledgeBaseConfigurations(v.KnowledgeBaseConfigurations); err != nil {
+			invalidParams.AddNested("KnowledgeBaseConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAgentMemoryInput(v *DeleteAgentMemoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentMemoryInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AgentAliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentMemoryInput(v *GetAgentMemoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentMemoryInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AgentAliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasId"))
+	}
+	if len(v.MemoryType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryType"))
+	}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -593,6 +933,31 @@ func validateOpInvokeAgentInput(v *InvokeAgentInput) error {
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeFlowInput(v *InvokeFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeFlowInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowAliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowAliasIdentifier"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	} else if v.Inputs != nil {
+		if err := validateFlowInputs(v.Inputs); err != nil {
+			invalidParams.AddNested("Inputs", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

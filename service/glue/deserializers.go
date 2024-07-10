@@ -31997,6 +31997,98 @@ func awsAwsjson11_deserializeDocumentConditionCheckFailureException(v **types.Co
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentConditionExpression(v **types.ConditionExpression, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConditionExpression
+	if *v == nil {
+		sv = &types.ConditionExpression{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Condition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabrewCondition to be of type string, got %T instead", value)
+				}
+				sv.Condition = ptr.String(jtv)
+			}
+
+		case "TargetColumn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetColumn to be of type string, got %T instead", value)
+				}
+				sv.TargetColumn = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabrewConditionValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConditionExpressionList(v *[]types.ConditionExpression, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConditionExpression
+	if *v == nil {
+		cv = []types.ConditionExpression{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConditionExpression
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentConditionExpression(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConditionList(v *[]types.Condition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45855,6 +45947,42 @@ func awsAwsjson11_deserializeDocumentOtherMetadataValueListItem(v **types.OtherM
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentParameterMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ParameterValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentParametersMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -47003,6 +47131,56 @@ func awsAwsjson11_deserializeDocumentRecipe(v **types.Recipe, value interface{})
 				return err
 			}
 
+		case "RecipeSteps":
+			if err := awsAwsjson11_deserializeDocumentRecipeSteps(&sv.RecipeSteps, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecipeAction(v **types.RecipeAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecipeAction
+	if *v == nil {
+		sv = &types.RecipeAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Operation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Operation to be of type string, got %T instead", value)
+				}
+				sv.Operation = ptr.String(jtv)
+			}
+
+		case "Parameters":
+			if err := awsAwsjson11_deserializeDocumentParameterMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -47058,6 +47236,81 @@ func awsAwsjson11_deserializeDocumentRecipeReference(v **types.RecipeReference, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecipeStep(v **types.RecipeStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecipeStep
+	if *v == nil {
+		sv = &types.RecipeStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if err := awsAwsjson11_deserializeDocumentRecipeAction(&sv.Action, value); err != nil {
+				return err
+			}
+
+		case "ConditionExpressions":
+			if err := awsAwsjson11_deserializeDocumentConditionExpressionList(&sv.ConditionExpressions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecipeSteps(v *[]types.RecipeStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RecipeStep
+	if *v == nil {
+		cv = []types.RecipeStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RecipeStep
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRecipeStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

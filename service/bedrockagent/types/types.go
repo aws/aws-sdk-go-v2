@@ -159,12 +159,15 @@ type Agent struct {
 	// The foundation model used for orchestration by the agent.
 	FoundationModel *string
 
-	// The guardrails configuration assigned to the agent.
+	// Details about the guardrail associated with the agent.
 	GuardrailConfiguration *GuardrailConfiguration
 
 	// Instructions that tell the agent what it should do and how it should interact
 	// with users.
 	Instruction *string
+
+	// Contains memory configuration for the agent.
+	MemoryConfiguration *MemoryConfiguration
 
 	// The time at which the agent was last prepared.
 	PreparedAt *time.Time
@@ -406,6 +409,20 @@ type AgentAliasSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines an agent node in your flow. You specify the agent to invoke at this
+// point in the flow. For more information, see [Node types in Amazon Bedrock works]in the Amazon Bedrock User Guide.
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type AgentFlowNodeConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the alias of the agent to invoke.
+	//
+	// This member is required.
+	AgentAliasArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a knowledge base that is associated with an agent.
 type AgentKnowledgeBase struct {
 
@@ -505,7 +522,7 @@ type AgentSummary struct {
 	// The description of the agent.
 	Description *string
 
-	// The details of the guardrails configuration in the agent summary.
+	// Details about the guardrail associated with the agent.
 	GuardrailConfiguration *GuardrailConfiguration
 
 	// The latest version of the agent.
@@ -580,11 +597,14 @@ type AgentVersion struct {
 	// The foundation model that the version invokes.
 	FoundationModel *string
 
-	// The guardrails configuration assigned to the agent version.
+	// Details about the guardrail associated with the agent.
 	GuardrailConfiguration *GuardrailConfiguration
 
 	// The instructions provided to the agent.
 	Instruction *string
+
+	//  Contains details of the memory configuration on the version of the agent.
+	MemoryConfiguration *MemoryConfiguration
 
 	// Contains configurations to override prompt templates in different parts of an
 	// agent sequence. For more information, see [Advanced prompts].
@@ -630,7 +650,7 @@ type AgentVersionSummary struct {
 	// The description of the version of the agent.
 	Description *string
 
-	// The details of the guardrails configuration in the agent version summary.
+	// Details about the guardrail associated with the agent.
 	GuardrailConfiguration *GuardrailConfiguration
 
 	noSmithyDocumentSerde
@@ -685,6 +705,20 @@ type BedrockEmbeddingModelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Settings for a foundation model used to parse documents for a data source.
+type BedrockFoundationModelConfiguration struct {
+
+	// The model's ARN.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// Instructions for interpreting the contents of a document.
+	ParsingPrompt *ParsingPrompt
+
+	noSmithyDocumentSerde
+}
+
 // Details about how to chunk the documents in the data source. A chunk refers to
 // an excerpt from a data source that is returned when the knowledge base that it
 // belongs to is queried.
@@ -699,6 +733,13 @@ type ChunkingConfiguration struct {
 	//   - FIXED_SIZE – Amazon Bedrock splits your source data into chunks of the
 	//   approximate size that you set in the fixedSizeChunkingConfiguration .
 	//
+	//   - HIERARCHICAL – Split documents into layers of chunks where the first layer
+	//   contains large chunks, and the second layer contains smaller chunks derived from
+	//   the first layer.
+	//
+	//   - SEMANTIC – Split documents into chunks based on groups of similar content
+	//   derived with natural language processing.
+	//
 	//   - NONE – Amazon Bedrock treats each file as one chunk. If you choose this
 	//   option, you may want to pre-process your documents by splitting them into
 	//   separate files.
@@ -709,6 +750,144 @@ type ChunkingConfiguration struct {
 	// Configurations for when you choose fixed-size chunking. If you set the
 	// chunkingStrategy as NONE , exclude this field.
 	FixedSizeChunkingConfiguration *FixedSizeChunkingConfiguration
+
+	// Settings for hierarchical document chunking for a data source. Hierarchical
+	// chunking splits documents into layers of chunks where the first layer contains
+	// large chunks, and the second layer contains smaller chunks derived from the
+	// first layer.
+	HierarchicalChunkingConfiguration *HierarchicalChunkingConfiguration
+
+	// Settings for semantic document chunking for a data source. Semantic chunking
+	// splits a document into into smaller documents based on groups of similar content
+	// derived from the text with natural language processing.
+	SemanticChunkingConfiguration *SemanticChunkingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Defines a collector node in your flow. This node takes an iteration of inputs
+// and consolidates them into an array in the output. For more information, see [Node types in Amazon Bedrock works]in
+// the Amazon Bedrock User Guide.
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type CollectorFlowNodeConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+// Defines a condition node in your flow. You can specify conditions that
+// determine which node comes next in the flow. For more information, see [Node types in Amazon Bedrock works]in the
+// Amazon Bedrock User Guide.
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type ConditionFlowNodeConfiguration struct {
+
+	// An array of conditions. Each member contains the name of a condition and an
+	// expression that defines the condition.
+	//
+	// This member is required.
+	Conditions []FlowCondition
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the Confluence content. For example, configuring specific
+// types of Confluence content.
+type ConfluenceCrawlerConfiguration struct {
+
+	// The configuration of filtering the Confluence content. For example, configuring
+	// regular expression patterns to include or exclude certain content.
+	FilterConfiguration *CrawlFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration information to connect to Confluence as your data source.
+type ConfluenceDataSourceConfiguration struct {
+
+	// The endpoint information to connect to your Confluence data source.
+	//
+	// This member is required.
+	SourceConfiguration *ConfluenceSourceConfiguration
+
+	// The configuration of the Confluence content. For example, configuring specific
+	// types of Confluence content.
+	CrawlerConfiguration *ConfluenceCrawlerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The endpoint information to connect to your Confluence data source.
+type ConfluenceSourceConfiguration struct {
+
+	// The supported authentication type to authenticate and connect to your
+	// Confluence instance.
+	//
+	// This member is required.
+	AuthType ConfluenceAuthType
+
+	// The Amazon Resource Name of an Secrets Manager secret that stores your
+	// authentication credentials for your SharePoint site/sites. For more information
+	// on the key-value pairs that must be included in your secret, depending on your
+	// authentication type, see [Confluence connection configuration].
+	//
+	// [Confluence connection configuration]: https://docs.aws.amazon.com/bedrock/latest/userguide/confluence-data-source-connector.html#configuration-confluence-connector
+	//
+	// This member is required.
+	CredentialsSecretArn *string
+
+	// The supported host type, whether online/cloud or server/on-premises.
+	//
+	// This member is required.
+	HostType ConfluenceHostType
+
+	// The Confluence host URL or instance URL.
+	//
+	// This member is required.
+	HostUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of filtering the data source content. For example,
+// configuring regular expression patterns to include or exclude certain content.
+type CrawlFilterConfiguration struct {
+
+	// The type of filtering that you want to apply to certain objects or content of
+	// the data source. For example, the PATTERN type is regular expression patterns
+	// you can apply to filter your content.
+	//
+	// This member is required.
+	Type CrawlFilterConfigurationType
+
+	// The configuration of filtering certain objects or content types of the data
+	// source.
+	PatternObjectFilter *PatternObjectFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Settings for customizing steps in the data source content ingestion pipeline.
+//
+// You can configure the data source to process documents with a Lambda function
+// after they are parsed and converted into chunks. When you add a post-chunking
+// transformation, the service stores chunked documents in an S3 bucket and invokes
+// a Lambda function to process them.
+//
+// To process chunked documents with a Lambda function, define an S3 bucket path
+// for input and output objects, and a transformation that specifies the Lambda
+// function to invoke. You can use the Lambda function to customize how chunks are
+// split, and the metadata for each chunk.
+type CustomTransformationConfiguration struct {
+
+	// An S3 bucket path for input and output objects.
+	//
+	// This member is required.
+	IntermediateStorage *IntermediateStorage
+
+	// A Lambda function that processes documents.
+	//
+	// This member is required.
+	Transformations []Transformation
 
 	noSmithyDocumentSerde
 }
@@ -721,7 +900,7 @@ type DataSource struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Contains details about how the data source is stored.
+	// The connection configuration for the data source.
 	//
 	// This member is required.
 	DataSourceConfiguration *DataSourceConfiguration
@@ -756,7 +935,7 @@ type DataSource struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The data deletion policy for a data source.
+	// The data deletion policy for the data source.
 	DataDeletionPolicy DataDeletionPolicy
 
 	// The description of the data source.
@@ -774,17 +953,38 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about how a data source is stored.
+// The connection configuration for the data source.
 type DataSourceConfiguration struct {
 
-	// The type of storage for the data source.
+	// The type of data source.
 	//
 	// This member is required.
 	Type DataSourceType
 
-	// Contains details about the configuration of the S3 object containing the data
-	// source.
+	// The configuration information to connect to Confluence as your data source.
+	//
+	// Confluence data source connector is in preview release and is subject to change.
+	ConfluenceConfiguration *ConfluenceDataSourceConfiguration
+
+	// The configuration information to connect to Amazon S3 as your data source.
 	S3Configuration *S3DataSourceConfiguration
+
+	// The configuration information to connect to Salesforce as your data source.
+	//
+	// Salesforce data source connector is in preview release and is subject to change.
+	SalesforceConfiguration *SalesforceDataSourceConfiguration
+
+	// The configuration information to connect to SharePoint as your data source.
+	//
+	// SharePoint data source connector is in preview release and is subject to change.
+	SharePointConfiguration *SharePointDataSourceConfiguration
+
+	// The configuration of web URLs to crawl for your data source. You should be
+	// authorized to crawl the URLs.
+	//
+	// Crawling web URLs as your data source is in preview release and is subject to
+	// change.
+	WebConfiguration *WebDataSourceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -845,6 +1045,528 @@ type FixedSizeChunkingConfiguration struct {
 	//
 	// This member is required.
 	OverlapPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a version that the alias maps to.
+type FlowAliasRoutingConfigurationListItem struct {
+
+	// The version that the alias maps to.
+	FlowVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an alias of a flow.
+//
+// This data type is used in the following API operations:
+//
+// [ListFlowAliases response]
+//
+// [ListFlowAliases response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowAliases.html#API_agent_ListFlowAliases_ResponseSyntax
+type FlowAliasSummary struct {
+
+	// The Amazon Resource Name (ARN) of the flow alias.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time at which the alias was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the flow.
+	//
+	// This member is required.
+	FlowId *string
+
+	// The unique identifier of the alias of the flow.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the alias.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of configurations about the versions that the alias maps to. Currently,
+	// you can only specify one.
+	//
+	// This member is required.
+	RoutingConfiguration []FlowAliasRoutingConfigurationListItem
+
+	// The time at which the alias was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the alias.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a condition in the condition node.
+type FlowCondition struct {
+
+	// A name for the condition that you can reference.
+	//
+	// This member is required.
+	Name *string
+
+	// Defines the condition. You must refer to at least one of the inputs in the
+	// condition. For more information, expand the Condition node section in [Node types in prompt flows].
+	//
+	// [Node types in prompt flows]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-how-it-works.html#flows-nodes
+	Expression *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of a connection between a condition node and another node.
+type FlowConditionalConnectionConfiguration struct {
+
+	// The condition that triggers this connection. For more information about how to
+	// write conditions, see the Condition node type in the [Node types]topic in the Amazon
+	// Bedrock User Guide.
+	//
+	// [Node types]: https://docs.aws.amazon.com/bedrock/latest/userguide/node-types.html
+	//
+	// This member is required.
+	Condition *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a connection between two nodes in the flow.
+type FlowConnection struct {
+
+	// A name for the connection that you can reference.
+	//
+	// This member is required.
+	Name *string
+
+	// The node that the connection starts at.
+	//
+	// This member is required.
+	Source *string
+
+	// The node that the connection ends at.
+	//
+	// This member is required.
+	Target *string
+
+	// Whether the source node that the connection begins from is a condition node (
+	// Conditional ) or not ( Data ).
+	//
+	// This member is required.
+	Type FlowConnectionType
+
+	// The configuration of the connection.
+	Configuration FlowConnectionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the connection.
+//
+// The following types satisfy this interface:
+//
+//	FlowConnectionConfigurationMemberConditional
+//	FlowConnectionConfigurationMemberData
+type FlowConnectionConfiguration interface {
+	isFlowConnectionConfiguration()
+}
+
+// The configuration of a connection originating from a Condition node.
+type FlowConnectionConfigurationMemberConditional struct {
+	Value FlowConditionalConnectionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowConnectionConfigurationMemberConditional) isFlowConnectionConfiguration() {}
+
+// The configuration of a connection originating from a node that isn't a
+// Condition node.
+type FlowConnectionConfigurationMemberData struct {
+	Value FlowDataConnectionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowConnectionConfigurationMemberData) isFlowConnectionConfiguration() {}
+
+// The configuration of a connection originating from a node that isn't a
+// Condition node.
+type FlowDataConnectionConfiguration struct {
+
+	// The name of the output in the source node that the connection begins from.
+	//
+	// This member is required.
+	SourceOutput *string
+
+	// The name of the input in the target node that the connection ends at.
+	//
+	// This member is required.
+	TargetInput *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition of the nodes and connections between nodes in the flow.
+type FlowDefinition struct {
+
+	// An array of connection definitions in the flow.
+	Connections []FlowConnection
+
+	// An array of node definitions in the flow.
+	Nodes []FlowNode
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations about a node in the flow.
+type FlowNode struct {
+
+	// A name for the node.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of node. This value must match the name of the key that you provide in
+	// the configuration you provide in the FlowNodeConfiguration field.
+	//
+	// This member is required.
+	Type FlowNodeType
+
+	// Contains configurations for the node.
+	Configuration FlowNodeConfiguration
+
+	// An array of objects, each of which contains information about an input into the
+	// node.
+	Inputs []FlowNodeInput
+
+	// A list of objects, each of which contains information about an output from the
+	// node.
+	Outputs []FlowNodeOutput
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a node in your flow. For more information, see [Node types in Amazon Bedrock works] in
+// the Amazon Bedrock User Guide.
+//
+// The following types satisfy this interface:
+//
+//	FlowNodeConfigurationMemberAgent
+//	FlowNodeConfigurationMemberCollector
+//	FlowNodeConfigurationMemberCondition
+//	FlowNodeConfigurationMemberInput
+//	FlowNodeConfigurationMemberIterator
+//	FlowNodeConfigurationMemberKnowledgeBase
+//	FlowNodeConfigurationMemberLambdaFunction
+//	FlowNodeConfigurationMemberLex
+//	FlowNodeConfigurationMemberOutput
+//	FlowNodeConfigurationMemberPrompt
+//	FlowNodeConfigurationMemberRetrieval
+//	FlowNodeConfigurationMemberStorage
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type FlowNodeConfiguration interface {
+	isFlowNodeConfiguration()
+}
+
+// Contains configurations for an agent node in your flow. Invokes an alias of an
+// agent and returns the response.
+type FlowNodeConfigurationMemberAgent struct {
+	Value AgentFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberAgent) isFlowNodeConfiguration() {}
+
+// Contains configurations for a collector node in your flow. Collects an
+// iteration of inputs and consolidates them into an array of outputs.
+type FlowNodeConfigurationMemberCollector struct {
+	Value CollectorFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberCollector) isFlowNodeConfiguration() {}
+
+// Contains configurations for a Condition node in your flow. Defines conditions
+// that lead to different branches of the flow.
+type FlowNodeConfigurationMemberCondition struct {
+	Value ConditionFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberCondition) isFlowNodeConfiguration() {}
+
+// Contains configurations for an input flow node in your flow. The first node in
+// the flow. inputs can't be specified for this node.
+type FlowNodeConfigurationMemberInput struct {
+	Value InputFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberInput) isFlowNodeConfiguration() {}
+
+// Contains configurations for an iterator node in your flow. Takes an input that
+// is an array and iteratively sends each item of the array as an output to the
+// following node. The size of the array is also returned in the output.
+//
+// The output flow node at the end of the flow iteration will return a response
+// for each member of the array. To return only one response, you can include a
+// collector node downstream from the iterator node.
+type FlowNodeConfigurationMemberIterator struct {
+	Value IteratorFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberIterator) isFlowNodeConfiguration() {}
+
+// Contains configurations for a knowledge base node in your flow. Queries a
+// knowledge base and returns the retrieved results or generated response.
+type FlowNodeConfigurationMemberKnowledgeBase struct {
+	Value KnowledgeBaseFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberKnowledgeBase) isFlowNodeConfiguration() {}
+
+// Contains configurations for a Lambda function node in your flow. Invokes an
+// Lambda function.
+type FlowNodeConfigurationMemberLambdaFunction struct {
+	Value LambdaFunctionFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberLambdaFunction) isFlowNodeConfiguration() {}
+
+// Contains configurations for a Lex node in your flow. Invokes an Amazon Lex bot
+// to identify the intent of the input and return the intent as the output.
+type FlowNodeConfigurationMemberLex struct {
+	Value LexFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberLex) isFlowNodeConfiguration() {}
+
+// Contains configurations for an output flow node in your flow. The last node in
+// the flow. outputs can't be specified for this node.
+type FlowNodeConfigurationMemberOutput struct {
+	Value OutputFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberOutput) isFlowNodeConfiguration() {}
+
+// Contains configurations for a prompt node in your flow. Runs a prompt and
+// generates the model response as the output. You can use a prompt from Prompt
+// management or you can configure one in this node.
+type FlowNodeConfigurationMemberPrompt struct {
+	Value PromptFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberPrompt) isFlowNodeConfiguration() {}
+
+// Contains configurations for a Retrieval node in your flow. Retrieves data from
+// an Amazon S3 location and returns it as the output.
+type FlowNodeConfigurationMemberRetrieval struct {
+	Value RetrievalFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberRetrieval) isFlowNodeConfiguration() {}
+
+// Contains configurations for a Storage node in your flow. Stores an input in an
+// Amazon S3 location.
+type FlowNodeConfigurationMemberStorage struct {
+	Value StorageFlowNodeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowNodeConfigurationMemberStorage) isFlowNodeConfiguration() {}
+
+// Contains configurations for an input to a node.
+type FlowNodeInput struct {
+
+	// An expression that formats the input for the node. For an explanation of how to
+	// create expressions, see [Expressions in Prompt flows in Amazon Bedrock].
+	//
+	// [Expressions in Prompt flows in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-expressions.html
+	//
+	// This member is required.
+	Expression *string
+
+	// A name for the input that you can reference.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the input. If the input doesn't match this type at runtime, a
+	// validation error will be thrown.
+	//
+	// This member is required.
+	Type FlowNodeIODataType
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for an output from a node.
+type FlowNodeOutput struct {
+
+	// A name for the output that you can reference.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the output. If the output doesn't match this type at runtime,
+	// a validation error will be thrown.
+	//
+	// This member is required.
+	Type FlowNodeIODataType
+
+	noSmithyDocumentSerde
+}
+
+// Contains the definition of a flow.
+type FlowSummary struct {
+
+	// The Amazon Resource Name (ARN) of the flow.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time at which the flow was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the flow.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the flow.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the flow. The following statuses are possible:
+	//
+	//   - NotPrepared – The flow has been created or updated, but hasn't been
+	//   prepared. If you just created the flow, you can't test it. If you updated the
+	//   flow, the DRAFT version won't contain the latest changes for testing. Send a [PrepareFlow]
+	//   request to package the latest changes into the DRAFT version.
+	//
+	//   - Preparing – The flow is being prepared so that the DRAFT version contains
+	//   the latest changes for testing.
+	//
+	//   - Prepared – The flow is prepared and the DRAFT version contains the latest
+	//   changes for testing.
+	//
+	//   - Failed – The last API operation that you invoked on the flow failed. Send a [GetFlow]
+	//   request and check the error message in the validations field.
+	//
+	// [PrepareFlow]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PrepareFlow.html
+	// [GetFlow]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html
+	//
+	// This member is required.
+	Status FlowStatus
+
+	// The time at which the flow was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The latest version of the flow.
+	//
+	// This member is required.
+	Version *string
+
+	// A description of the flow.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about validation of the flow.
+//
+// This data type is used in the following API operations:
+//
+// [GetFlow response]
+//
+// [GetFlowVersion response]
+//
+// [GetFlow response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html#API_agent_GetFlow_ResponseSyntax
+// [GetFlowVersion response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlowVersion.html#API_agent_GetFlowVersion_ResponseSyntax
+type FlowValidation struct {
+
+	// A message describing the validation error.
+	//
+	// This member is required.
+	Message *string
+
+	// The severity of the issue described in the message.
+	//
+	// This member is required.
+	Severity FlowValidationSeverity
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the flow version.
+//
+// This data type is used in the following API operations:
+//
+// [ListFlowVersions response]
+//
+// [ListFlowVersions response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowVersions.html#API_agent_ListFlowVersions_ResponseSyntax
+type FlowVersionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the flow that the version belongs to.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time at the flow version was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the flow.
+	//
+	// This member is required.
+	Id *string
+
+	// The status of the flow.
+	//
+	// This member is required.
+	Status FlowStatus
+
+	// The version of the flow.
+	//
+	// This member is required.
+	Version *string
 
 	noSmithyDocumentSerde
 }
@@ -922,14 +1644,49 @@ type FunctionSchemaMemberFunctions struct {
 
 func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
 
-// The details of the guardrails configuration.
+// Details about the guardrail associated with an agent.
 type GuardrailConfiguration struct {
 
-	// The guardrails identifier assigned to the guardrails configuration.
+	// The unique identifier of the guardrail.
 	GuardrailIdentifier *string
 
-	// The guardrails version assigned to the guardrails configuration.
+	// The version of the guardrail.
 	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for hierarchical document chunking for a data source. Hierarchical
+// chunking splits documents into layers of chunks where the first layer contains
+// large chunks, and the second layer contains smaller chunks derived from the
+// first layer.
+//
+// You configure the number of tokens to overlap, or repeat across adjacent
+// chunks. For example, if you set overlap tokens to 60, the last 60 tokens in the
+// first chunk are also included at the beginning of the second chunk. For each
+// layer, you must also configure the maximum number of tokens in a chunk.
+type HierarchicalChunkingConfiguration struct {
+
+	// Token settings for each layer.
+	//
+	// This member is required.
+	LevelConfigurations []HierarchicalChunkingLevelConfiguration
+
+	// The number of tokens to repeat across chunks in the same layer.
+	//
+	// This member is required.
+	OverlapTokens *int32
+
+	noSmithyDocumentSerde
+}
+
+// Token settings for a layer in a hierarchical chunking configuration.
+type HierarchicalChunkingLevelConfiguration struct {
+
+	// The maximum number of tokens that a chunk can contain in this layer.
+	//
+	// This member is required.
+	MaxTokens *int32
 
 	noSmithyDocumentSerde
 }
@@ -1141,6 +1898,36 @@ type IngestionJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for the input flow node for a flow. This node takes the
+// input from flow invocation and passes it to the next node in the data type that
+// you specify.
+type InputFlowNodeConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+// A location for storing content from data sources temporarily as it is processed
+// by custom components in the ingestion pipeline.
+type IntermediateStorage struct {
+
+	// An S3 bucket path.
+	//
+	// This member is required.
+	S3Location *S3Location
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for an iterator node in a flow. Takes an input that is
+// an array and iteratively sends each item of the array as an output to the
+// following node. The size of the array is also returned in the output.
+//
+// The output flow node at the end of the flow iteration will return a response
+// for each member of the array. To return only one response, you can include a
+// collector node downstream from the iterator node.
+type IteratorFlowNodeConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // Contains information about a knowledge base.
 type KnowledgeBase struct {
 
@@ -1224,6 +2011,27 @@ type KnowledgeBaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for a knowledge base node in a flow. This node takes a
+// query as the input and returns, as the output, the retrieved responses directly
+// (as an array) or a response generated based on the retrieved responses. For more
+// information, see [Node types in Amazon Bedrock works]in the Amazon Bedrock User Guide.
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type KnowledgeBaseFlowNodeConfiguration struct {
+
+	// The unique identifier of the knowledge base to query.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The unique identifier of the model to use to generate a response from the query
+	// results. Omit this field if you want to return the retrieved results as an
+	// array.
+	ModelId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a knowledge base.
 type KnowledgeBaseSummary struct {
 
@@ -1249,6 +2057,57 @@ type KnowledgeBaseSummary struct {
 
 	// The description of the knowledge base.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a Lambda function node in the flow. You specify the
+// Lambda function to invoke and the inputs into the function. The output is the
+// response that is defined in the Lambda function. For more information, see [Node types in Amazon Bedrock works]in
+// the Amazon Bedrock User Guide.
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type LambdaFunctionFlowNodeConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda function to invoke.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a Lex node in the flow. You specify a Amazon Lex
+// bot to invoke. This node takes an utterance as the input and returns as the
+// output the intent identified by the Amazon Lex bot. For more information, see [Node types in Amazon Bedrock works]
+// in the Amazon Bedrock User Guide.
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type LexFlowNodeConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Lex bot alias to invoke.
+	//
+	// This member is required.
+	BotAliasArn *string
+
+	// The Region to invoke the Amazon Lex bot in.
+	//
+	// This member is required.
+	LocaleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the memory configuration.
+type MemoryConfiguration struct {
+
+	// The type of memory that is stored.
+	//
+	// This member is required.
+	EnabledMemoryTypes []MemoryType
+
+	// The number of days the agent is configured to retain the conversational context.
+	StorageDays *int32
 
 	noSmithyDocumentSerde
 }
@@ -1371,6 +2230,13 @@ type OpenSearchServerlessFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for an output flow node in the flow. You specify the
+// data type expected for the input into the node in the type field and how to
+// return the final output in the expression field.
+type OutputFlowNodeConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // Contains details about a parameter in a function for an action group.
 //
 // This data type is used in the following API operations:
@@ -1404,6 +2270,84 @@ type ParameterDetail struct {
 	// Whether the parameter is required for the agent to complete the function for
 	// action group invocation.
 	Required *bool
+
+	noSmithyDocumentSerde
+}
+
+// Settings for parsing document contents. By default, the service converts the
+// contents of each document into text before splitting it into chunks. To improve
+// processing of PDF files with tables and images, you can configure the data
+// source to convert the pages of text into images and use a model to describe the
+// contents of each page.
+//
+// To use a model to parse PDF documents, set the parsing strategy to
+// BEDROCK_FOUNDATION_MODEL and specify the model to use by ARN. You can also
+// override the default parsing prompt with instructions for how to interpret
+// images and tables in your documents. The following models are supported.
+//
+//   - Anthropic Claude 3 Sonnet - anthropic.claude-3-sonnet-20240229-v1:0
+//
+//   - Anthropic Claude 3 Haiku - anthropic.claude-3-haiku-20240307-v1:0
+//
+// You can get the ARN of a model with the action. Standard model usage charges
+// apply for the foundation model parsing strategy.
+type ParsingConfiguration struct {
+
+	// The parsing strategy for the data source.
+	//
+	// This member is required.
+	ParsingStrategy ParsingStrategy
+
+	// Settings for a foundation model used to parse documents for a data source.
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Instructions for interpreting the contents of a document.
+type ParsingPrompt struct {
+
+	// Instructions for interpreting the contents of a document.
+	//
+	// This member is required.
+	ParsingPromptText *string
+
+	noSmithyDocumentSerde
+}
+
+// The specific filters applied to your data source content. You can filter out or
+// include certain content.
+type PatternObjectFilter struct {
+
+	// The supported object type or content type of the data source.
+	//
+	// This member is required.
+	ObjectType *string
+
+	// A list of one or more exclusion regular expression patterns to exclude certain
+	// object types that adhere to the pattern. If you specify an inclusion and
+	// exclusion filter/pattern and both match a document, the exclusion filter takes
+	// precedence and the document isn’t crawled.
+	ExclusionFilters []string
+
+	// A list of one or more inclusion regular expression patterns to include certain
+	// object types that adhere to the pattern. If you specify an inclusion and
+	// exclusion filter/pattern and both match a document, the exclusion filter takes
+	// precedence and the document isn’t crawled.
+	InclusionFilters []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of filtering certain objects or content types of the data
+// source.
+type PatternObjectFilterConfiguration struct {
+
+	// The configuration of specific filters applied to your data source content. You
+	// can filter out or include certain content.
+	//
+	// This member is required.
+	Filters []PatternObjectFilter
 
 	noSmithyDocumentSerde
 }
@@ -1510,6 +2454,143 @@ type PromptConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for a prompt node in the flow. You can use a prompt
+// from Prompt management or you can define one in this node. If the prompt
+// contains variables, the inputs into this node will fill in the variables. The
+// output from this node is the response generated by the model. For more
+// information, see [Node types in Amazon Bedrock works]in the Amazon Bedrock User Guide.
+//
+// [Node types in Amazon Bedrock works]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
+type PromptFlowNodeConfiguration struct {
+
+	// Specifies whether the prompt is from Prompt management or defined inline.
+	//
+	// This member is required.
+	SourceConfiguration PromptFlowNodeSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a prompt defined inline in the node.
+type PromptFlowNodeInlineConfiguration struct {
+
+	// The unique identifier of the model to run inference with.
+	//
+	// This member is required.
+	ModelId *string
+
+	// Contains a prompt and variables in the prompt that can be replaced with values
+	// at runtime.
+	//
+	// This member is required.
+	TemplateConfiguration PromptTemplateConfiguration
+
+	// The type of prompt template.
+	//
+	// This member is required.
+	TemplateType PromptTemplateType
+
+	// Contains inference configurations for the prompt.
+	InferenceConfiguration PromptInferenceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a prompt from Prompt management to use in a node.
+type PromptFlowNodeResourceConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the prompt from Prompt management.
+	//
+	// This member is required.
+	PromptArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a prompt and whether it is from Prompt management
+// or defined inline.
+//
+// The following types satisfy this interface:
+//
+//	PromptFlowNodeSourceConfigurationMemberInline
+//	PromptFlowNodeSourceConfigurationMemberResource
+type PromptFlowNodeSourceConfiguration interface {
+	isPromptFlowNodeSourceConfiguration()
+}
+
+// Contains configurations for a prompt that is defined inline
+type PromptFlowNodeSourceConfigurationMemberInline struct {
+	Value PromptFlowNodeInlineConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PromptFlowNodeSourceConfigurationMemberInline) isPromptFlowNodeSourceConfiguration() {}
+
+// Contains configurations for a prompt from Prompt management.
+type PromptFlowNodeSourceConfigurationMemberResource struct {
+	Value PromptFlowNodeResourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PromptFlowNodeSourceConfigurationMemberResource) isPromptFlowNodeSourceConfiguration() {}
+
+// Contains inference configurations for the prompt.
+//
+// The following types satisfy this interface:
+//
+//	PromptInferenceConfigurationMemberText
+type PromptInferenceConfiguration interface {
+	isPromptInferenceConfiguration()
+}
+
+// Contains inference configurations for a text prompt.
+type PromptInferenceConfigurationMemberText struct {
+	Value PromptModelInferenceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PromptInferenceConfigurationMemberText) isPromptInferenceConfiguration() {}
+
+// Contains information about a variable in the prompt.
+type PromptInputVariable struct {
+
+	// The name of the variable.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains inference configurations related to model inference for a prompt. For
+// more information, see [Inference parameters].
+//
+// [Inference parameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html
+type PromptModelInferenceConfiguration struct {
+
+	// The maximum number of tokens to return in the response.
+	MaxTokens *int32
+
+	// A list of strings that define sequences after which the model will stop
+	// generating.
+	StopSequences []string
+
+	// Controls the randomness of the response. Choose a lower value for more
+	// predictable outputs and a higher value for more surprising outputs.
+	Temperature *float32
+
+	// The number of most-likely candidates that the model considers for the next
+	// token during generation.
+	TopK *int32
+
+	// The percentage of most-likely candidates that the model considers for the next
+	// token.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 // Contains configurations to override prompts in different parts of an agent
 // sequence. For more information, see [Advanced prompts].
 //
@@ -1531,6 +2612,96 @@ type PromptOverrideConfiguration struct {
 	//
 	// [Parser Lambda function in Agents for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
 	OverrideLambda *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a prompt in your Prompt management tool.
+//
+// This data type is used in the following API operations:
+//
+// [ListPrompts response]
+//
+// [ListPrompts response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListPrompts.html#API_agent_ListPrompts_ResponseSyntax
+type PromptSummary struct {
+
+	// The Amazon Resource Name (ARN) of the prompt.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time at which the prompt was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the prompt.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the prompt.
+	//
+	// This member is required.
+	Name *string
+
+	// The time at which the prompt was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version of the prompt that this summary applies to.
+	//
+	// This member is required.
+	Version *string
+
+	// The description of the prompt.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the message for a prompt. For more information, see [Prompt management in Amazon Bedrock].
+//
+// The following types satisfy this interface:
+//
+//	PromptTemplateConfigurationMemberText
+//
+// [Prompt management in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html
+type PromptTemplateConfiguration interface {
+	isPromptTemplateConfiguration()
+}
+
+// Contains configurations for the text in a message for a prompt.
+type PromptTemplateConfigurationMemberText struct {
+	Value TextPromptTemplateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PromptTemplateConfigurationMemberText) isPromptTemplateConfiguration() {}
+
+// Contains details about a variant of the prompt.
+type PromptVariant struct {
+
+	// The name of the prompt variant.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of prompt template to use.
+	//
+	// This member is required.
+	TemplateType PromptTemplateType
+
+	// Contains inference configurations for the prompt variant.
+	InferenceConfiguration PromptInferenceConfiguration
+
+	// The unique identifier of the model with which to run inference on the prompt.
+	ModelId *string
+
+	// Contains configurations for the prompt template.
+	TemplateConfiguration PromptTemplateConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1657,19 +2828,64 @@ type RedisEnterpriseCloudFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the S3 configuration of the data source.
+// Contains configurations for a Retrieval node in a flow. This node retrieves
+// data from the Amazon S3 location that you specify and returns it as the output.
+type RetrievalFlowNodeConfiguration struct {
+
+	// Contains configurations for the service to use for retrieving data to return as
+	// the output from the node.
+	//
+	// This member is required.
+	ServiceConfiguration RetrievalFlowNodeServiceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the Amazon S3 location from which to retrieve data
+// to return as the output from the node.
+type RetrievalFlowNodeS3Configuration struct {
+
+	// The name of the Amazon S3 bucket from which to retrieve data.
+	//
+	// This member is required.
+	BucketName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the service to use for retrieving data to return as
+// the output from the node.
+//
+// The following types satisfy this interface:
+//
+//	RetrievalFlowNodeServiceConfigurationMemberS3
+type RetrievalFlowNodeServiceConfiguration interface {
+	isRetrievalFlowNodeServiceConfiguration()
+}
+
+// Contains configurations for the Amazon S3 location from which to retrieve data
+// to return as the output from the node.
+type RetrievalFlowNodeServiceConfigurationMemberS3 struct {
+	Value RetrievalFlowNodeS3Configuration
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFlowNodeServiceConfigurationMemberS3) isRetrievalFlowNodeServiceConfiguration() {}
+
+// The configuration information to connect to Amazon S3 as your data source.
 type S3DataSourceConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the bucket that contains the data source.
+	// The Amazon Resource Name (ARN) of the S3 bucket that contains your data.
 	//
 	// This member is required.
 	BucketArn *string
 
-	// The bucket account owner ID for the S3 bucket.
+	// The account ID for the owner of the S3 bucket.
 	BucketOwnerAccountId *string
 
-	// A list of S3 prefixes that define the object containing the data sources. For
-	// more information, see [Organizing objects using prefixes].
+	// A list of S3 prefixes to include certain files or content. For more
+	// information, see [Organizing objects using prefixes].
 	//
 	// [Organizing objects using prefixes]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
 	InclusionPrefixes []string
@@ -1677,14 +2893,124 @@ type S3DataSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the S3 object containing the resource.
+// The identifier information for an Amazon S3 bucket.
 type S3Identifier struct {
 
 	// The name of the S3 bucket.
 	S3BucketName *string
 
-	// The S3 object key containing the resource.
+	// The S3 object key for the S3 resource.
 	S3ObjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon S3 location.
+type S3Location struct {
+
+	// The location's URI. For example, s3://my-bucket/chunk-processor/ .
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the Salesforce content. For example, configuring specific
+// types of Salesforce content.
+type SalesforceCrawlerConfiguration struct {
+
+	// The configuration of filtering the Salesforce content. For example, configuring
+	// regular expression patterns to include or exclude certain content.
+	FilterConfiguration *CrawlFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration information to connect to Salesforce as your data source.
+type SalesforceDataSourceConfiguration struct {
+
+	// The endpoint information to connect to your Salesforce data source.
+	//
+	// This member is required.
+	SourceConfiguration *SalesforceSourceConfiguration
+
+	// The configuration of the Salesforce content. For example, configuring specific
+	// types of Salesforce content.
+	CrawlerConfiguration *SalesforceCrawlerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The endpoint information to connect to your Salesforce data source.
+type SalesforceSourceConfiguration struct {
+
+	// The supported authentication type to authenticate and connect to your
+	// Salesforce instance.
+	//
+	// This member is required.
+	AuthType SalesforceAuthType
+
+	// The Amazon Resource Name of an Secrets Manager secret that stores your
+	// authentication credentials for your SharePoint site/sites. For more information
+	// on the key-value pairs that must be included in your secret, depending on your
+	// authentication type, see [Salesforce connection configuration].
+	//
+	// [Salesforce connection configuration]: https://docs.aws.amazon.com/bedrock/latest/userguide/salesforce-data-source-connector.html#configuration-salesforce-connector
+	//
+	// This member is required.
+	CredentialsSecretArn *string
+
+	// The Salesforce host URL or instance URL.
+	//
+	// This member is required.
+	HostUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The seed or starting point URL. You should be authorized to crawl the URL.
+type SeedUrl struct {
+
+	// A seed or starting point URL.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for semantic document chunking for a data source. Semantic chunking
+// splits a document into into smaller documents based on groups of similar content
+// derived from the text with natural language processing.
+//
+// With semantic chunking, each sentence is compared to the next to determine how
+// similar they are. You specify a threshold in the form of a percentile, where
+// adjacent sentences that are less similar than that percentage of sentence pairs
+// are divided into separate chunks. For example, if you set the threshold to 90,
+// then the 10 percent of sentence pairs that are least similar are split. So if
+// you have 101 sentences, 100 sentence pairs are compared, and the 10 with the
+// least similarity are split, creating 11 chunks. These chunks are further split
+// if they exceed the max token size.
+//
+// You must also specify a buffer size, which determines whether sentences are
+// compared in isolation, or within a moving context window that includes the
+// previous and following sentence. For example, if you set the buffer size to 1 ,
+// the embedding for sentence 10 is derived from sentences 9, 10, and 11 combined.
+type SemanticChunkingConfiguration struct {
+
+	// The dissimilarity threshold for splitting chunks.
+	//
+	// This member is required.
+	BreakpointPercentileThreshold *int32
+
+	// The buffer size.
+	//
+	// This member is required.
+	BufferSize *int32
+
+	// The maximum number of tokens that a chunk can contain.
+	//
+	// This member is required.
+	MaxTokens *int32
 
 	noSmithyDocumentSerde
 }
@@ -1694,6 +3020,72 @@ type ServerSideEncryptionConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the SharePoint content. For example, configuring specific
+// types of SharePoint content.
+type SharePointCrawlerConfiguration struct {
+
+	// The configuration of filtering the SharePoint content. For example, configuring
+	// regular expression patterns to include or exclude certain content.
+	FilterConfiguration *CrawlFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration information to connect to SharePoint as your data source.
+type SharePointDataSourceConfiguration struct {
+
+	// The endpoint information to connect to your SharePoint data source.
+	//
+	// This member is required.
+	SourceConfiguration *SharePointSourceConfiguration
+
+	// The configuration of the SharePoint content. For example, configuring specific
+	// types of SharePoint content.
+	CrawlerConfiguration *SharePointCrawlerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The endpoint information to connect to your SharePoint data source.
+type SharePointSourceConfiguration struct {
+
+	// The supported authentication type to authenticate and connect to your
+	// SharePoint site/sites.
+	//
+	// This member is required.
+	AuthType SharePointAuthType
+
+	// The Amazon Resource Name of an Secrets Manager secret that stores your
+	// authentication credentials for your SharePoint site/sites. For more information
+	// on the key-value pairs that must be included in your secret, depending on your
+	// authentication type, see [SharePoint connection configuration].
+	//
+	// [SharePoint connection configuration]: https://docs.aws.amazon.com/bedrock/latest/userguide/sharepoint-data-source-connector.html#configuration-sharepoint-connector
+	//
+	// This member is required.
+	CredentialsSecretArn *string
+
+	// The domain of your SharePoint instance or site URL/URLs.
+	//
+	// This member is required.
+	Domain *string
+
+	// The supported host type, whether online/cloud or server/on-premises.
+	//
+	// This member is required.
+	HostType SharePointHostType
+
+	// A list of one or more SharePoint site URLs.
+	//
+	// This member is required.
+	SiteUrls []string
+
+	// The identifier of your Microsoft 365 tenant.
+	TenantId *string
 
 	noSmithyDocumentSerde
 }
@@ -1729,6 +3121,116 @@ type StorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configurations for a Storage node in a flow. This node stores the
+// input in an Amazon S3 location that you specify.
+type StorageFlowNodeConfiguration struct {
+
+	// Contains configurations for the service to use for storing the input into the
+	// node.
+	//
+	// This member is required.
+	ServiceConfiguration StorageFlowNodeServiceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the Amazon S3 location in which to store the input
+// into the node.
+type StorageFlowNodeS3Configuration struct {
+
+	// The name of the Amazon S3 bucket in which to store the input into the node.
+	//
+	// This member is required.
+	BucketName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for the service to use for storing the input into the
+// node.
+//
+// The following types satisfy this interface:
+//
+//	StorageFlowNodeServiceConfigurationMemberS3
+type StorageFlowNodeServiceConfiguration interface {
+	isStorageFlowNodeServiceConfiguration()
+}
+
+// Contains configurations for the Amazon S3 location in which to store the input
+// into the node.
+type StorageFlowNodeServiceConfigurationMemberS3 struct {
+	Value StorageFlowNodeS3Configuration
+
+	noSmithyDocumentSerde
+}
+
+func (*StorageFlowNodeServiceConfigurationMemberS3) isStorageFlowNodeServiceConfiguration() {}
+
+// Contains configurations for a text prompt template. To include a variable,
+// enclose a word in double curly braces as in {{variable}} .
+type TextPromptTemplateConfiguration struct {
+
+	// The message for the prompt.
+	//
+	// This member is required.
+	Text *string
+
+	// An array of the variables in the prompt template.
+	InputVariables []PromptInputVariable
+
+	noSmithyDocumentSerde
+}
+
+// A custom processing step for documents moving through a data source ingestion
+// pipeline. To process documents after they have been converted into chunks, set
+// the step to apply to POST_CHUNKING .
+type Transformation struct {
+
+	// When the service applies the transformation.
+	//
+	// This member is required.
+	StepToApply StepType
+
+	// A Lambda function that processes documents.
+	//
+	// This member is required.
+	TransformationFunction *TransformationFunction
+
+	noSmithyDocumentSerde
+}
+
+// A Lambda function that processes documents.
+type TransformationFunction struct {
+
+	// The Lambda function.
+	//
+	// This member is required.
+	TransformationLambdaConfiguration *TransformationLambdaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A Lambda function that processes documents.
+type TransformationLambdaConfiguration struct {
+
+	// The function's ARN identifier.
+	//
+	// This member is required.
+	LambdaArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of web URLs that you want to crawl. You should be authorized
+// to crawl the URLs.
+type UrlConfiguration struct {
+
+	// One or more seed or starting point URLs.
+	SeedUrls []SeedUrl
+
+	noSmithyDocumentSerde
+}
+
 // Stores information about a field passed inside a request that resulted in an
 // validation error.
 type ValidationExceptionField struct {
@@ -1754,6 +3256,12 @@ type VectorIngestionConfiguration struct {
 	// belongs to is queried.
 	ChunkingConfiguration *ChunkingConfiguration
 
+	// A custom document transformer for parsed data source documents.
+	CustomTransformationConfiguration *CustomTransformationConfiguration
+
+	// A custom parser for data source documents.
+	ParsingConfiguration *ParsingConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1774,6 +3282,74 @@ type VectorKnowledgeBaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of web URLs that you want to crawl. You should be authorized
+// to crawl the URLs.
+type WebCrawlerConfiguration struct {
+
+	// The configuration of crawl limits for the web URLs.
+	CrawlerLimits *WebCrawlerLimits
+
+	// A list of one or more exclusion regular expression patterns to exclude certain
+	// URLs. If you specify an inclusion and exclusion filter/pattern and both match a
+	// URL, the exclusion filter takes precedence and the web content of the URL isn’t
+	// crawled.
+	ExclusionFilters []string
+
+	// A list of one or more inclusion regular expression patterns to include certain
+	// URLs. If you specify an inclusion and exclusion filter/pattern and both match a
+	// URL, the exclusion filter takes precedence and the web content of the URL isn’t
+	// crawled.
+	InclusionFilters []string
+
+	// The scope of what is crawled for your URLs.
+	//
+	// You can choose to crawl only web pages that belong to the same host or primary
+	// domain. For example, only web pages that contain the seed URL
+	// "https://docs.aws.amazon.com/bedrock/latest/userguide/" and no other domains.
+	// You can choose to include sub domains in addition to the host or primary domain.
+	// For example, web pages that contain "aws.amazon.com" can also include sub domain
+	// "docs.aws.amazon.com".
+	Scope WebScopeType
+
+	noSmithyDocumentSerde
+}
+
+// The rate limits for the URLs that you want to crawl. You should be authorized
+// to crawl the URLs.
+type WebCrawlerLimits struct {
+
+	// The max rate at which pages are crawled, up to 300 per minute per host.
+	RateLimit *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the web data source.
+type WebDataSourceConfiguration struct {
+
+	// The source configuration details for the web data source.
+	//
+	// This member is required.
+	SourceConfiguration *WebSourceConfiguration
+
+	// The Web Crawler configuration details for the web data source.
+	CrawlerConfiguration *WebCrawlerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the URL/URLs for the web content that you want to crawl.
+// You should be authorized to crawl the URLs.
+type WebSourceConfiguration struct {
+
+	// The configuration of the URL/URLs.
+	//
+	// This member is required.
+	UrlConfiguration *UrlConfiguration
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1785,6 +3361,13 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isActionGroupExecutor() {}
-func (*UnknownUnionMember) isAPISchema()           {}
-func (*UnknownUnionMember) isFunctionSchema()      {}
+func (*UnknownUnionMember) isActionGroupExecutor()                   {}
+func (*UnknownUnionMember) isAPISchema()                             {}
+func (*UnknownUnionMember) isFlowConnectionConfiguration()           {}
+func (*UnknownUnionMember) isFlowNodeConfiguration()                 {}
+func (*UnknownUnionMember) isFunctionSchema()                        {}
+func (*UnknownUnionMember) isPromptFlowNodeSourceConfiguration()     {}
+func (*UnknownUnionMember) isPromptInferenceConfiguration()          {}
+func (*UnknownUnionMember) isPromptTemplateConfiguration()           {}
+func (*UnknownUnionMember) isRetrievalFlowNodeServiceConfiguration() {}
+func (*UnknownUnionMember) isStorageFlowNodeServiceConfiguration()   {}

@@ -806,6 +806,60 @@ func validateGuardrailContentPolicyConfig(v *types.GuardrailContentPolicyConfig)
 	}
 }
 
+func validateGuardrailContextualGroundingFilterConfig(v *types.GuardrailContextualGroundingFilterConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContextualGroundingFilterConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailContextualGroundingFiltersConfig(v []types.GuardrailContextualGroundingFilterConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContextualGroundingFiltersConfig"}
+	for i := range v {
+		if err := validateGuardrailContextualGroundingFilterConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailContextualGroundingPolicyConfig(v *types.GuardrailContextualGroundingPolicyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContextualGroundingPolicyConfig"}
+	if v.FiltersConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FiltersConfig"))
+	} else if v.FiltersConfig != nil {
+		if err := validateGuardrailContextualGroundingFiltersConfig(v.FiltersConfig); err != nil {
+			invalidParams.AddNested("FiltersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGuardrailManagedWordListsConfig(v []types.GuardrailManagedWordsConfig) error {
 	if v == nil {
 		return nil
@@ -1366,6 +1420,11 @@ func validateOpCreateGuardrailInput(v *CreateGuardrailInput) error {
 			invalidParams.AddNested("SensitiveInformationPolicyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ContextualGroundingPolicyConfig != nil {
+		if err := validateGuardrailContextualGroundingPolicyConfig(v.ContextualGroundingPolicyConfig); err != nil {
+			invalidParams.AddNested("ContextualGroundingPolicyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.BlockedInputMessaging == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlockedInputMessaging"))
 	}
@@ -1754,6 +1813,11 @@ func validateOpUpdateGuardrailInput(v *UpdateGuardrailInput) error {
 	if v.SensitiveInformationPolicyConfig != nil {
 		if err := validateGuardrailSensitiveInformationPolicyConfig(v.SensitiveInformationPolicyConfig); err != nil {
 			invalidParams.AddNested("SensitiveInformationPolicyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContextualGroundingPolicyConfig != nil {
+		if err := validateGuardrailContextualGroundingPolicyConfig(v.ContextualGroundingPolicyConfig); err != nil {
+			invalidParams.AddNested("ContextualGroundingPolicyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.BlockedInputMessaging == nil {

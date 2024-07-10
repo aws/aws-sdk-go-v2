@@ -52,10 +52,11 @@ type ListLinuxSubscriptionsInput struct {
 	//   - Notequal
 	Filters []types.Filter
 
-	// Maximum number of results to return in a single call.
+	// The maximum items to return in a request.
 	MaxResults *int32
 
-	// Token for the next set of results.
+	// A token to specify where to start paginating. This is the nextToken from a
+	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -63,7 +64,9 @@ type ListLinuxSubscriptionsInput struct {
 
 type ListLinuxSubscriptionsOutput struct {
 
-	// Token for the next set of results.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service hasn't included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// An array that contains subscription objects.
@@ -160,7 +163,7 @@ func (c *Client) addOperationListLinuxSubscriptionsMiddlewares(stack *middleware
 // ListLinuxSubscriptionsPaginatorOptions is the paginator options for
 // ListLinuxSubscriptions
 type ListLinuxSubscriptionsPaginatorOptions struct {
-	// Maximum number of results to return in a single call.
+	// The maximum items to return in a request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

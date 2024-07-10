@@ -71,6 +71,9 @@ type UpdateAgentInput struct {
 	// should interact with users.
 	Instruction *string
 
+	// Specifies the new memory configuration for the agent.
+	MemoryConfiguration *types.MemoryConfiguration
+
 	// Contains configurations to override prompts in different parts of an agent
 	// sequence. For more information, see [Advanced prompts].
 	//

@@ -42,12 +42,8 @@ import (
 //
 //   - (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.
 //
-//   - (Optional) Attach any tags to the guardrail in the tags object. For more
-//     information, see [Tag resources].
-//
 // [GuardrailContentFilterConfig]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html
-// [Content filters]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters
-// [Tag resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging
+// [Content filters]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-content-filters
 // [GuardrailTopicConfig]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html
 func (c *Client) UpdateGuardrail(ctx context.Context, params *UpdateGuardrailInput, optFns ...func(*Options)) (*UpdateGuardrailOutput, error) {
 	if params == nil {
@@ -76,7 +72,7 @@ type UpdateGuardrailInput struct {
 	// This member is required.
 	BlockedOutputsMessaging *string
 
-	// The unique identifier of the guardrail
+	// The unique identifier of the guardrail. This can be an ID or the ARN.
 	//
 	// This member is required.
 	GuardrailIdentifier *string
@@ -88,6 +84,9 @@ type UpdateGuardrailInput struct {
 
 	// The content policy to configure for the guardrail.
 	ContentPolicyConfig *types.GuardrailContentPolicyConfig
+
+	// The contextual grounding policy configuration used to update a guardrail.
+	ContextualGroundingPolicyConfig *types.GuardrailContextualGroundingPolicyConfig
 
 	// A description of the guardrail.
 	Description *string
@@ -109,7 +108,7 @@ type UpdateGuardrailInput struct {
 
 type UpdateGuardrailOutput struct {
 
-	// The ARN of the guardrail that was created.
+	// The ARN of the guardrail.
 	//
 	// This member is required.
 	GuardrailArn *string

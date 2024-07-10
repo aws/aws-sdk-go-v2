@@ -4050,6 +4050,13 @@ func awsRestjson1_serializeDocumentNodePropertyOverride(v *types.NodePropertyOve
 		}
 	}
 
+	if v.EksPropertiesOverride != nil {
+		ok := object.Key("eksPropertiesOverride")
+		if err := awsRestjson1_serializeDocumentEksPropertiesOverride(v.EksPropertiesOverride, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceTypes != nil {
 		ok := object.Key("instanceTypes")
 		if err := awsRestjson1_serializeDocumentStringList(v.InstanceTypes, ok); err != nil {
@@ -4105,6 +4112,13 @@ func awsRestjson1_serializeDocumentNodeRangeProperty(v *types.NodeRangeProperty,
 	if v.EcsProperties != nil {
 		ok := object.Key("ecsProperties")
 		if err := awsRestjson1_serializeDocumentEcsProperties(v.EcsProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EksProperties != nil {
+		ok := object.Key("eksProperties")
+		if err := awsRestjson1_serializeDocumentEksProperties(v.EksProperties, ok); err != nil {
 			return err
 		}
 	}

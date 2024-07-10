@@ -1,0 +1,8 @@
+{
+    "id": "b30e3470-ce8d-4aa8-a4f3-9363e769de81",
+    "type": "feature",
+    "description": "AWS Elemental MediaConnect introduces the ability to disable outputs. Disabling an output allows you to keep the output attached to the flow, but stop streaming to the output destination. A disabled output does not incur data transfer costs.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

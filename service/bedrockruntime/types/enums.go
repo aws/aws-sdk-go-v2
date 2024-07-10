@@ -54,6 +54,25 @@ func (DocumentFormat) Values() []DocumentFormat {
 	}
 }
 
+type GuardrailAction string
+
+// Enum values for GuardrailAction
+const (
+	GuardrailActionNone                GuardrailAction = "NONE"
+	GuardrailActionGuardrailIntervened GuardrailAction = "GUARDRAIL_INTERVENED"
+)
+
+// Values returns all known values for GuardrailAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailAction) Values() []GuardrailAction {
+	return []GuardrailAction{
+		"NONE",
+		"GUARDRAIL_INTERVENED",
+	}
+}
+
 type GuardrailContentFilterConfidence string
 
 // Enum values for GuardrailContentFilterConfidence
@@ -120,6 +139,108 @@ const (
 func (GuardrailContentPolicyAction) Values() []GuardrailContentPolicyAction {
 	return []GuardrailContentPolicyAction{
 		"BLOCKED",
+	}
+}
+
+type GuardrailContentQualifier string
+
+// Enum values for GuardrailContentQualifier
+const (
+	GuardrailContentQualifierGroundingSource GuardrailContentQualifier = "grounding_source"
+	GuardrailContentQualifierQuery           GuardrailContentQualifier = "query"
+	GuardrailContentQualifierGuardContent    GuardrailContentQualifier = "guard_content"
+)
+
+// Values returns all known values for GuardrailContentQualifier. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentQualifier) Values() []GuardrailContentQualifier {
+	return []GuardrailContentQualifier{
+		"grounding_source",
+		"query",
+		"guard_content",
+	}
+}
+
+type GuardrailContentSource string
+
+// Enum values for GuardrailContentSource
+const (
+	GuardrailContentSourceInput  GuardrailContentSource = "INPUT"
+	GuardrailContentSourceOutput GuardrailContentSource = "OUTPUT"
+)
+
+// Values returns all known values for GuardrailContentSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentSource) Values() []GuardrailContentSource {
+	return []GuardrailContentSource{
+		"INPUT",
+		"OUTPUT",
+	}
+}
+
+type GuardrailContextualGroundingFilterType string
+
+// Enum values for GuardrailContextualGroundingFilterType
+const (
+	GuardrailContextualGroundingFilterTypeGrounding GuardrailContextualGroundingFilterType = "GROUNDING"
+	GuardrailContextualGroundingFilterTypeRelevance GuardrailContextualGroundingFilterType = "RELEVANCE"
+)
+
+// Values returns all known values for GuardrailContextualGroundingFilterType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContextualGroundingFilterType) Values() []GuardrailContextualGroundingFilterType {
+	return []GuardrailContextualGroundingFilterType{
+		"GROUNDING",
+		"RELEVANCE",
+	}
+}
+
+type GuardrailContextualGroundingPolicyAction string
+
+// Enum values for GuardrailContextualGroundingPolicyAction
+const (
+	GuardrailContextualGroundingPolicyActionBlocked GuardrailContextualGroundingPolicyAction = "BLOCKED"
+	GuardrailContextualGroundingPolicyActionNone    GuardrailContextualGroundingPolicyAction = "NONE"
+)
+
+// Values returns all known values for GuardrailContextualGroundingPolicyAction.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContextualGroundingPolicyAction) Values() []GuardrailContextualGroundingPolicyAction {
+	return []GuardrailContextualGroundingPolicyAction{
+		"BLOCKED",
+		"NONE",
+	}
+}
+
+type GuardrailConverseContentQualifier string
+
+// Enum values for GuardrailConverseContentQualifier
+const (
+	GuardrailConverseContentQualifierGroundingSource GuardrailConverseContentQualifier = "grounding_source"
+	GuardrailConverseContentQualifierQuery           GuardrailConverseContentQualifier = "query"
+	GuardrailConverseContentQualifierGuardContent    GuardrailConverseContentQualifier = "guard_content"
+)
+
+// Values returns all known values for GuardrailConverseContentQualifier. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailConverseContentQualifier) Values() []GuardrailConverseContentQualifier {
+	return []GuardrailConverseContentQualifier{
+		"grounding_source",
+		"query",
+		"guard_content",
 	}
 }
 

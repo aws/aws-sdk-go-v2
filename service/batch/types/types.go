@@ -1722,6 +1722,9 @@ type EksAttemptDetail struct {
 	// The details for the final status of the containers for this job attempt.
 	Containers []EksAttemptContainerDetail
 
+	// The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+	EksClusterArn *string
+
 	// The details for the init containers.
 	InitContainers []EksAttemptContainerDetail
 
@@ -3440,6 +3443,10 @@ type NodePropertyOverride struct {
 	// existing Amazon ECS resources of a job.
 	EcsPropertiesOverride *EcsPropertiesOverride
 
+	// An object that contains the properties that you want to replace for the
+	// existing Amazon EKS resources of a job.
+	EksPropertiesOverride *EksPropertiesOverride
+
 	// An object that contains the instance types that you want to replace for the
 	// existing resources of a job.
 	InstanceTypes []string
@@ -3468,6 +3475,10 @@ type NodeRangeProperty struct {
 	// This is an object that represents the properties of the node range for a
 	// multi-node parallel job.
 	EcsProperties *EcsProperties
+
+	// This is an object that represents the properties of the node range for a
+	// multi-node parallel job.
+	EksProperties *EksProperties
 
 	// The instance types of the underlying host infrastructure of a multi-node
 	// parallel job.

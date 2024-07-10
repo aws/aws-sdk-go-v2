@@ -12907,6 +12907,15 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				sv.OutputArn = ptr.String(jtv)
 			}
 
+		case "outputStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutputStatus to be of type string, got %T instead", value)
+				}
+				sv.OutputStatus = types.OutputStatus(jtv)
+			}
+
 		case "port":
 			if value != nil {
 				jtv, ok := value.(json.Number)

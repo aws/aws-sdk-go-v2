@@ -44,8 +44,11 @@ type RetrieveAndGenerateInput struct {
 	// Contains details about the session with the knowledge base.
 	SessionConfiguration *types.RetrieveAndGenerateSessionConfiguration
 
-	// The unique identifier of the session. Reuse the same value to continue the same
-	// session with the knowledge base.
+	// The unique identifier of the session. When you first make a RetrieveAndGenerate
+	// request, Amazon Bedrock automatically generates this value. You must reuse this
+	// value for all subsequent requests in the same conversational session. This value
+	// allows Amazon Bedrock to maintain context and knowledge from previous
+	// interactions. You can't explicitly set the sessionId yourself.
 	SessionId *string
 
 	noSmithyDocumentSerde
@@ -58,8 +61,11 @@ type RetrieveAndGenerateOutput struct {
 	// This member is required.
 	Output *types.RetrieveAndGenerateOutput
 
-	// The unique identifier of the session. Reuse the same value to continue the same
-	// session with the knowledge base.
+	// The unique identifier of the session. When you first make a RetrieveAndGenerate
+	// request, Amazon Bedrock automatically generates this value. You must reuse this
+	// value for all subsequent requests in the same conversational session. This value
+	// allows Amazon Bedrock to maintain context and knowledge from previous
+	// interactions. You can't explicitly set the sessionId yourself.
 	//
 	// This member is required.
 	SessionId *string

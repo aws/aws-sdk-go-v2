@@ -6,7 +6,8 @@ type ActionGroupSignature string
 
 // Enum values for ActionGroupSignature
 const (
-	ActionGroupSignatureAmazonUserinput ActionGroupSignature = "AMAZON.UserInput"
+	ActionGroupSignatureAmazonUserinput       ActionGroupSignature = "AMAZON.UserInput"
+	ActionGroupSignatureAmazonCodeinterpreter ActionGroupSignature = "AMAZON.CodeInterpreter"
 )
 
 // Values returns all known values for ActionGroupSignature. Note that this can be
@@ -16,6 +17,7 @@ const (
 func (ActionGroupSignature) Values() []ActionGroupSignature {
 	return []ActionGroupSignature{
 		"AMAZON.UserInput",
+		"AMAZON.CodeInterpreter",
 	}
 }
 
@@ -98,8 +100,10 @@ type ChunkingStrategy string
 
 // Enum values for ChunkingStrategy
 const (
-	ChunkingStrategyFixedSize ChunkingStrategy = "FIXED_SIZE"
-	ChunkingStrategyNone      ChunkingStrategy = "NONE"
+	ChunkingStrategyFixedSize    ChunkingStrategy = "FIXED_SIZE"
+	ChunkingStrategyNone         ChunkingStrategy = "NONE"
+	ChunkingStrategyHierarchical ChunkingStrategy = "HIERARCHICAL"
+	ChunkingStrategySemantic     ChunkingStrategy = "SEMANTIC"
 )
 
 // Values returns all known values for ChunkingStrategy. Note that this can be
@@ -110,6 +114,62 @@ func (ChunkingStrategy) Values() []ChunkingStrategy {
 	return []ChunkingStrategy{
 		"FIXED_SIZE",
 		"NONE",
+		"HIERARCHICAL",
+		"SEMANTIC",
+	}
+}
+
+type ConfluenceAuthType string
+
+// Enum values for ConfluenceAuthType
+const (
+	ConfluenceAuthTypeBasic                   ConfluenceAuthType = "BASIC"
+	ConfluenceAuthTypeOauth2ClientCredentials ConfluenceAuthType = "OAUTH2_CLIENT_CREDENTIALS"
+)
+
+// Values returns all known values for ConfluenceAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfluenceAuthType) Values() []ConfluenceAuthType {
+	return []ConfluenceAuthType{
+		"BASIC",
+		"OAUTH2_CLIENT_CREDENTIALS",
+	}
+}
+
+type ConfluenceHostType string
+
+// Enum values for ConfluenceHostType
+const (
+	ConfluenceHostTypeSaas ConfluenceHostType = "SAAS"
+)
+
+// Values returns all known values for ConfluenceHostType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfluenceHostType) Values() []ConfluenceHostType {
+	return []ConfluenceHostType{
+		"SAAS",
+	}
+}
+
+type CrawlFilterConfigurationType string
+
+// Enum values for CrawlFilterConfigurationType
+const (
+	CrawlFilterConfigurationTypePattern CrawlFilterConfigurationType = "PATTERN"
+)
+
+// Values returns all known values for CrawlFilterConfigurationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CrawlFilterConfigurationType) Values() []CrawlFilterConfigurationType {
+	return []CrawlFilterConfigurationType{
+		"PATTERN",
 	}
 }
 
@@ -193,7 +253,11 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeS3 DataSourceType = "S3"
+	DataSourceTypeS3         DataSourceType = "S3"
+	DataSourceTypeWeb        DataSourceType = "WEB"
+	DataSourceTypeConfluence DataSourceType = "CONFLUENCE"
+	DataSourceTypeSalesforce DataSourceType = "SALESFORCE"
+	DataSourceTypeSharepoint DataSourceType = "SHAREPOINT"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -203,6 +267,135 @@ const (
 func (DataSourceType) Values() []DataSourceType {
 	return []DataSourceType{
 		"S3",
+		"WEB",
+		"CONFLUENCE",
+		"SALESFORCE",
+		"SHAREPOINT",
+	}
+}
+
+type FlowConnectionType string
+
+// Enum values for FlowConnectionType
+const (
+	FlowConnectionTypeData        FlowConnectionType = "Data"
+	FlowConnectionTypeConditional FlowConnectionType = "Conditional"
+)
+
+// Values returns all known values for FlowConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowConnectionType) Values() []FlowConnectionType {
+	return []FlowConnectionType{
+		"Data",
+		"Conditional",
+	}
+}
+
+type FlowNodeIODataType string
+
+// Enum values for FlowNodeIODataType
+const (
+	FlowNodeIODataTypeString  FlowNodeIODataType = "String"
+	FlowNodeIODataTypeNumber  FlowNodeIODataType = "Number"
+	FlowNodeIODataTypeBoolean FlowNodeIODataType = "Boolean"
+	FlowNodeIODataTypeObject  FlowNodeIODataType = "Object"
+	FlowNodeIODataTypeArray   FlowNodeIODataType = "Array"
+)
+
+// Values returns all known values for FlowNodeIODataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowNodeIODataType) Values() []FlowNodeIODataType {
+	return []FlowNodeIODataType{
+		"String",
+		"Number",
+		"Boolean",
+		"Object",
+		"Array",
+	}
+}
+
+type FlowNodeType string
+
+// Enum values for FlowNodeType
+const (
+	FlowNodeTypeInput          FlowNodeType = "Input"
+	FlowNodeTypeOutput         FlowNodeType = "Output"
+	FlowNodeTypeKnowledgeBase  FlowNodeType = "KnowledgeBase"
+	FlowNodeTypeCondition      FlowNodeType = "Condition"
+	FlowNodeTypeLex            FlowNodeType = "Lex"
+	FlowNodeTypePrompt         FlowNodeType = "Prompt"
+	FlowNodeTypeLambdaFunction FlowNodeType = "LambdaFunction"
+	FlowNodeTypeStorage        FlowNodeType = "Storage"
+	FlowNodeTypeAgent          FlowNodeType = "Agent"
+	FlowNodeTypeRetrieval      FlowNodeType = "Retrieval"
+	FlowNodeTypeIterator       FlowNodeType = "Iterator"
+	FlowNodeTypeCollector      FlowNodeType = "Collector"
+)
+
+// Values returns all known values for FlowNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowNodeType) Values() []FlowNodeType {
+	return []FlowNodeType{
+		"Input",
+		"Output",
+		"KnowledgeBase",
+		"Condition",
+		"Lex",
+		"Prompt",
+		"LambdaFunction",
+		"Storage",
+		"Agent",
+		"Retrieval",
+		"Iterator",
+		"Collector",
+	}
+}
+
+type FlowStatus string
+
+// Enum values for FlowStatus
+const (
+	FlowStatusFailed      FlowStatus = "Failed"
+	FlowStatusPrepared    FlowStatus = "Prepared"
+	FlowStatusPreparing   FlowStatus = "Preparing"
+	FlowStatusNotPrepared FlowStatus = "NotPrepared"
+)
+
+// Values returns all known values for FlowStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowStatus) Values() []FlowStatus {
+	return []FlowStatus{
+		"Failed",
+		"Prepared",
+		"Preparing",
+		"NotPrepared",
+	}
+}
+
+type FlowValidationSeverity string
+
+// Enum values for FlowValidationSeverity
+const (
+	FlowValidationSeverityWarning FlowValidationSeverity = "Warning"
+	FlowValidationSeverityError   FlowValidationSeverity = "Error"
+)
+
+// Values returns all known values for FlowValidationSeverity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowValidationSeverity) Values() []FlowValidationSeverity {
+	return []FlowValidationSeverity{
+		"Warning",
+		"Error",
 	}
 }
 
@@ -370,6 +563,40 @@ func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	}
 }
 
+type MemoryType string
+
+// Enum values for MemoryType
+const (
+	MemoryTypeSessionSummary MemoryType = "SESSION_SUMMARY"
+)
+
+// Values returns all known values for MemoryType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MemoryType) Values() []MemoryType {
+	return []MemoryType{
+		"SESSION_SUMMARY",
+	}
+}
+
+type ParsingStrategy string
+
+// Enum values for ParsingStrategy
+const (
+	ParsingStrategyBedrockFoundationModel ParsingStrategy = "BEDROCK_FOUNDATION_MODEL"
+)
+
+// Values returns all known values for ParsingStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParsingStrategy) Values() []ParsingStrategy {
+	return []ParsingStrategy{
+		"BEDROCK_FOUNDATION_MODEL",
+	}
+}
+
 type PromptState string
 
 // Enum values for PromptState
@@ -386,6 +613,23 @@ func (PromptState) Values() []PromptState {
 	return []PromptState{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type PromptTemplateType string
+
+// Enum values for PromptTemplateType
+const (
+	PromptTemplateTypeText PromptTemplateType = "TEXT"
+)
+
+// Values returns all known values for PromptTemplateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PromptTemplateType) Values() []PromptTemplateType {
+	return []PromptTemplateType{
+		"TEXT",
 	}
 }
 
@@ -412,6 +656,57 @@ func (PromptType) Values() []PromptType {
 	}
 }
 
+type SalesforceAuthType string
+
+// Enum values for SalesforceAuthType
+const (
+	SalesforceAuthTypeOauth2ClientCredentials SalesforceAuthType = "OAUTH2_CLIENT_CREDENTIALS"
+)
+
+// Values returns all known values for SalesforceAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SalesforceAuthType) Values() []SalesforceAuthType {
+	return []SalesforceAuthType{
+		"OAUTH2_CLIENT_CREDENTIALS",
+	}
+}
+
+type SharePointAuthType string
+
+// Enum values for SharePointAuthType
+const (
+	SharePointAuthTypeOauth2ClientCredentials SharePointAuthType = "OAUTH2_CLIENT_CREDENTIALS"
+)
+
+// Values returns all known values for SharePointAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SharePointAuthType) Values() []SharePointAuthType {
+	return []SharePointAuthType{
+		"OAUTH2_CLIENT_CREDENTIALS",
+	}
+}
+
+type SharePointHostType string
+
+// Enum values for SharePointHostType
+const (
+	SharePointHostTypeOnline SharePointHostType = "ONLINE"
+)
+
+// Values returns all known values for SharePointHostType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SharePointHostType) Values() []SharePointHostType {
+	return []SharePointHostType{
+		"ONLINE",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -428,6 +723,23 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type StepType string
+
+// Enum values for StepType
+const (
+	StepTypePostChunking StepType = "POST_CHUNKING"
+)
+
+// Values returns all known values for StepType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StepType) Values() []StepType {
+	return []StepType{
+		"POST_CHUNKING",
 	}
 }
 
@@ -453,5 +765,24 @@ func (Type) Values() []Type {
 		"integer",
 		"boolean",
 		"array",
+	}
+}
+
+type WebScopeType string
+
+// Enum values for WebScopeType
+const (
+	WebScopeTypeHostOnly   WebScopeType = "HOST_ONLY"
+	WebScopeTypeSubdomains WebScopeType = "SUBDOMAINS"
+)
+
+// Values returns all known values for WebScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebScopeType) Values() []WebScopeType {
+	return []WebScopeType{
+		"HOST_ONLY",
+		"SUBDOMAINS",
 	}
 }

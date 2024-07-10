@@ -9,6 +9,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_ApplyGuardrail.go",
         "api_op_Converse.go",
         "api_op_ConverseStream.go",
         "api_op_InvokeModel.go",

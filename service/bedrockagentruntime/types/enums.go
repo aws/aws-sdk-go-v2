@@ -21,6 +21,25 @@ func (CreationMode) Values() []CreationMode {
 	}
 }
 
+type ExecutionType string
+
+// Enum values for ExecutionType
+const (
+	ExecutionTypeLambda        ExecutionType = "LAMBDA"
+	ExecutionTypeReturnControl ExecutionType = "RETURN_CONTROL"
+)
+
+// Values returns all known values for ExecutionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionType) Values() []ExecutionType {
+	return []ExecutionType{
+		"LAMBDA",
+		"RETURN_CONTROL",
+	}
+}
+
 type ExternalSourceType string
 
 // Enum values for ExternalSourceType
@@ -37,6 +56,61 @@ func (ExternalSourceType) Values() []ExternalSourceType {
 	return []ExternalSourceType{
 		"S3",
 		"BYTE_CONTENT",
+	}
+}
+
+type FileSourceType string
+
+// Enum values for FileSourceType
+const (
+	FileSourceTypeS3          FileSourceType = "S3"
+	FileSourceTypeByteContent FileSourceType = "BYTE_CONTENT"
+)
+
+// Values returns all known values for FileSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FileSourceType) Values() []FileSourceType {
+	return []FileSourceType{
+		"S3",
+		"BYTE_CONTENT",
+	}
+}
+
+type FileUseCase string
+
+// Enum values for FileUseCase
+const (
+	FileUseCaseCodeInterpreter FileUseCase = "CODE_INTERPRETER"
+	FileUseCaseChat            FileUseCase = "CHAT"
+)
+
+// Values returns all known values for FileUseCase. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FileUseCase) Values() []FileUseCase {
+	return []FileUseCase{
+		"CODE_INTERPRETER",
+		"CHAT",
+	}
+}
+
+type FlowCompletionReason string
+
+// Enum values for FlowCompletionReason
+const (
+	FlowCompletionReasonSuccess FlowCompletionReason = "SUCCESS"
+)
+
+// Values returns all known values for FlowCompletionReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowCompletionReason) Values() []FlowCompletionReason {
+	return []FlowCompletionReason{
+		"SUCCESS",
 	}
 }
 
@@ -316,9 +390,10 @@ type InvocationType string
 
 // Enum values for InvocationType
 const (
-	InvocationTypeActionGroup   InvocationType = "ACTION_GROUP"
-	InvocationTypeKnowledgeBase InvocationType = "KNOWLEDGE_BASE"
-	InvocationTypeFinish        InvocationType = "FINISH"
+	InvocationTypeActionGroup                InvocationType = "ACTION_GROUP"
+	InvocationTypeKnowledgeBase              InvocationType = "KNOWLEDGE_BASE"
+	InvocationTypeFinish                     InvocationType = "FINISH"
+	InvocationTypeActionGroupCodeInterpreter InvocationType = "ACTION_GROUP_CODE_INTERPRETER"
 )
 
 // Values returns all known values for InvocationType. Note that this can be
@@ -330,6 +405,53 @@ func (InvocationType) Values() []InvocationType {
 		"ACTION_GROUP",
 		"KNOWLEDGE_BASE",
 		"FINISH",
+		"ACTION_GROUP_CODE_INTERPRETER",
+	}
+}
+
+type MemoryType string
+
+// Enum values for MemoryType
+const (
+	MemoryTypeSessionSummary MemoryType = "SESSION_SUMMARY"
+)
+
+// Values returns all known values for MemoryType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MemoryType) Values() []MemoryType {
+	return []MemoryType{
+		"SESSION_SUMMARY",
+	}
+}
+
+type NodeType string
+
+// Enum values for NodeType
+const (
+	NodeTypeFlowInputNode      NodeType = "FlowInputNode"
+	NodeTypeFlowOutputNode     NodeType = "FlowOutputNode"
+	NodeTypeLambdaFunctionNode NodeType = "LambdaFunctionNode"
+	NodeTypeKnowledgeBaseNode  NodeType = "KnowledgeBaseNode"
+	NodeTypePromptNode         NodeType = "PromptNode"
+	NodeTypeConditionNode      NodeType = "ConditionNode"
+	NodeTypeLexNode            NodeType = "LexNode"
+)
+
+// Values returns all known values for NodeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeType) Values() []NodeType {
+	return []NodeType{
+		"FlowInputNode",
+		"FlowOutputNode",
+		"LambdaFunctionNode",
+		"KnowledgeBaseNode",
+		"PromptNode",
+		"ConditionNode",
+		"LexNode",
 	}
 }
 
@@ -356,6 +478,23 @@ func (PromptType) Values() []PromptType {
 	}
 }
 
+type QueryTransformationType string
+
+// Enum values for QueryTransformationType
+const (
+	QueryTransformationTypeQueryDecomposition QueryTransformationType = "QUERY_DECOMPOSITION"
+)
+
+// Values returns all known values for QueryTransformationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryTransformationType) Values() []QueryTransformationType {
+	return []QueryTransformationType{
+		"QUERY_DECOMPOSITION",
+	}
+}
+
 type ResponseState string
 
 // Enum values for ResponseState
@@ -379,7 +518,11 @@ type RetrievalResultLocationType string
 
 // Enum values for RetrievalResultLocationType
 const (
-	RetrievalResultLocationTypeS3 RetrievalResultLocationType = "S3"
+	RetrievalResultLocationTypeS3         RetrievalResultLocationType = "S3"
+	RetrievalResultLocationTypeWeb        RetrievalResultLocationType = "WEB"
+	RetrievalResultLocationTypeConfluence RetrievalResultLocationType = "CONFLUENCE"
+	RetrievalResultLocationTypeSalesforce RetrievalResultLocationType = "SALESFORCE"
+	RetrievalResultLocationTypeSharepoint RetrievalResultLocationType = "SHAREPOINT"
 )
 
 // Values returns all known values for RetrievalResultLocationType. Note that this
@@ -389,6 +532,10 @@ const (
 func (RetrievalResultLocationType) Values() []RetrievalResultLocationType {
 	return []RetrievalResultLocationType{
 		"S3",
+		"WEB",
+		"CONFLUENCE",
+		"SALESFORCE",
+		"SHAREPOINT",
 	}
 }
 

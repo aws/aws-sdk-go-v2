@@ -27,6 +27,9 @@ import (
 //     the agent should maintain session information. After this time expires, the
 //     subsequent InvokeAgent request begins a new session.
 //
+//   - To enable your agent to retain conversational context across multiple
+//     sessions, include a memoryConfiguration object. For more information, see [Configure memory].
+//
 //   - To override the default prompt behavior for agent orchestration and to use
 //     advanced prompts, include a promptOverrideConfiguration object. For more
 //     information, see [Advanced prompts].
@@ -35,6 +38,7 @@ import (
 //     failureReasons alongside a list of recommendedActions for you to troubleshoot.
 //
 // [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+// [Configure memory]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -91,6 +95,9 @@ type CreateAgentInput struct {
 	// Instructions that tell the agent what it should do and how it should interact
 	// with users.
 	Instruction *string
+
+	//  Contains the details of the memory configured for the agent.
+	MemoryConfiguration *types.MemoryConfiguration
 
 	// Contains configurations to override prompts in different parts of an agent
 	// sequence. For more information, see [Advanced prompts].

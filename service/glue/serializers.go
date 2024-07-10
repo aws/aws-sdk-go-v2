@@ -13895,6 +13895,41 @@ func awsAwsjson11_serializeDocumentCondition(v *types.Condition, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentConditionExpression(v *types.ConditionExpression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Condition != nil {
+		ok := object.Key("Condition")
+		ok.String(*v.Condition)
+	}
+
+	if v.TargetColumn != nil {
+		ok := object.Key("TargetColumn")
+		ok.String(*v.TargetColumn)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConditionExpressionList(v []types.ConditionExpression, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentConditionExpression(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentConditionList(v []types.Condition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -17669,6 +17704,17 @@ func awsAwsjson11_serializeDocumentOrderList(v []types.Order, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentParameterMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentParametersMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18126,6 +18172,32 @@ func awsAwsjson11_serializeDocumentRecipe(v *types.Recipe, value smithyjson.Valu
 		}
 	}
 
+	if v.RecipeSteps != nil {
+		ok := object.Key("RecipeSteps")
+		if err := awsAwsjson11_serializeDocumentRecipeSteps(v.RecipeSteps, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecipeAction(v *types.RecipeAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Operation != nil {
+		ok := object.Key("Operation")
+		ok.String(*v.Operation)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsAwsjson11_serializeDocumentParameterMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -18143,6 +18215,40 @@ func awsAwsjson11_serializeDocumentRecipeReference(v *types.RecipeReference, val
 		ok.String(*v.RecipeVersion)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecipeStep(v *types.RecipeStep, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("Action")
+		if err := awsAwsjson11_serializeDocumentRecipeAction(v.Action, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConditionExpressions != nil {
+		ok := object.Key("ConditionExpressions")
+		if err := awsAwsjson11_serializeDocumentConditionExpressionList(v.ConditionExpressions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecipeSteps(v []types.RecipeStep, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRecipeStep(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

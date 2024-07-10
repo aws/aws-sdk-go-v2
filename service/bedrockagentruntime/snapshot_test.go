@@ -62,11 +62,47 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_DeleteAgentMemory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentMemory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentMemory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentMemory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeAgent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "InvokeAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_InvokeFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeFlow")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -97,11 +133,47 @@ func TestCheckSnapshot_RetrieveAndGenerate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_DeleteAgentMemory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentMemory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentMemory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentMemory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_InvokeAgent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeFlow")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

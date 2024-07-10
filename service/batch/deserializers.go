@@ -5651,6 +5651,15 @@ func awsRestjson1_deserializeDocumentEksAttemptDetail(v **types.EksAttemptDetail
 				return err
 			}
 
+		case "eksClusterArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EksClusterArn = ptr.String(jtv)
+			}
+
 		case "initContainers":
 			if err := awsRestjson1_deserializeDocumentEksAttemptContainerDetails(&sv.InitContainers, value); err != nil {
 				return err
@@ -9534,6 +9543,11 @@ func awsRestjson1_deserializeDocumentNodeRangeProperty(v **types.NodeRangeProper
 
 		case "ecsProperties":
 			if err := awsRestjson1_deserializeDocumentEcsProperties(&sv.EcsProperties, value); err != nil {
+				return err
+			}
+
+		case "eksProperties":
+			if err := awsRestjson1_deserializeDocumentEksProperties(&sv.EksProperties, value); err != nil {
 				return err
 			}
 

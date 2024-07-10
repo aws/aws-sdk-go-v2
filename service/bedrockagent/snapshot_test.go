@@ -122,11 +122,71 @@ func TestCheckSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePromptVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePromptVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePromptVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -194,11 +254,59 @@ func TestCheckSnapshot_DeleteDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePrompt")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,6 +398,42 @@ func TestCheckSnapshot_GetDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetIngestionJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIngestionJob(context.Background(), nil, func(o *Options) {
@@ -307,6 +451,18 @@ func TestCheckSnapshot_GetKnowledgeBase(t *testing.T) {
 	_, err := svc.GetKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPrompt")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -386,6 +542,42 @@ func TestCheckSnapshot_ListDataSources(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFlowAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlowAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFlowVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlowVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListIngestionJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListIngestionJobs(context.Background(), nil, func(o *Options) {
@@ -410,6 +602,18 @@ func TestCheckSnapshot_ListKnowledgeBases(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPrompts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrompts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPrompts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -427,6 +631,18 @@ func TestCheckSnapshot_PrepareAgent(t *testing.T) {
 	_, err := svc.PrepareAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PrepareAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PrepareFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PrepareFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PrepareFlow")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -530,11 +746,47 @@ func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePrompt")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -601,11 +853,71 @@ func TestUpdateSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePromptVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePromptVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePromptVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -673,11 +985,59 @@ func TestUpdateSnapshot_DeleteDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePrompt")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -769,6 +1129,42 @@ func TestUpdateSnapshot_GetDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetIngestionJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIngestionJob(context.Background(), nil, func(o *Options) {
@@ -786,6 +1182,18 @@ func TestUpdateSnapshot_GetKnowledgeBase(t *testing.T) {
 	_, err := svc.GetKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPrompt")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -865,6 +1273,42 @@ func TestUpdateSnapshot_ListDataSources(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListFlowAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlowAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFlowVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlowVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlowVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListIngestionJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListIngestionJobs(context.Background(), nil, func(o *Options) {
@@ -889,6 +1333,18 @@ func TestUpdateSnapshot_ListKnowledgeBases(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPrompts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrompts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPrompts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -906,6 +1362,18 @@ func TestUpdateSnapshot_PrepareAgent(t *testing.T) {
 	_, err := svc.PrepareAgent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PrepareAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PrepareFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PrepareFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PrepareFlow")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1009,11 +1477,47 @@ func TestUpdateSnapshot_UpdateDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateFlow(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFlow(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateFlowAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFlowAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFlowAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePrompt")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

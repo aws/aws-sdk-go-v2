@@ -31,7 +31,8 @@ func (c *Client) GetGuardrail(ctx context.Context, params *GetGuardrailInput, op
 
 type GetGuardrailInput struct {
 
-	// The unique identifier of the guardrail for which to get details.
+	// The unique identifier of the guardrail for which to get details. This can be an
+	// ID or the ARN.
 	//
 	// This member is required.
 	GuardrailIdentifier *string
@@ -60,7 +61,7 @@ type GetGuardrailOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ARN of the guardrail that was created.
+	// The ARN of the guardrail.
 	//
 	// This member is required.
 	GuardrailArn *string
@@ -92,6 +93,9 @@ type GetGuardrailOutput struct {
 
 	// The content policy that was configured for the guardrail.
 	ContentPolicy *types.GuardrailContentPolicy
+
+	// The contextual grounding policy used in the guardrail.
+	ContextualGroundingPolicy *types.GuardrailContextualGroundingPolicy
 
 	// The description of the guardrail.
 	Description *string

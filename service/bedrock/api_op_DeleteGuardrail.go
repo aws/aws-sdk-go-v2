@@ -35,7 +35,7 @@ func (c *Client) DeleteGuardrail(ctx context.Context, params *DeleteGuardrailInp
 
 type DeleteGuardrailInput struct {
 
-	// The unique identifier of the guardrail.
+	// The unique identifier of the guardrail. This can be an ID or the ARN.
 	//
 	// This member is required.
 	GuardrailIdentifier *string

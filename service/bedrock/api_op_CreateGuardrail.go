@@ -12,43 +12,34 @@ import (
 	"time"
 )
 
-// Creates a guardrail to block topics and to filter out harmful content.
+// Creates a guardrail to block topics and to implement safeguards for your
+// generative AI applications.
 //
-//   - Specify a name and optional description .
+// You can configure the following policies in a guardrail to avoid undesirable
+// and harmful content, filter out denied topics and words, and remove sensitive
+// information for privacy protection.
 //
-//   - Specify messages for when the guardrail successfully blocks a prompt or a
-//     model response in the blockedInputMessaging and blockedOutputsMessaging fields.
+//   - Content filters - Adjust filter strengths to block input prompts or model
+//     responses containing harmful content.
 //
-//   - Specify topics for the guardrail to deny in the topicPolicyConfig object.
-//     Each [GuardrailTopicConfig]object in the topicsConfig list pertains to one topic.
+//   - Denied topics - Define a set of topics that are undesirable in the context
+//     of your application. These topics will be blocked if detected in user queries or
+//     model responses.
 //
-//   - Give a name and description so that the guardrail can properly identify the
-//     topic.
+//   - Word filters - Configure filters to block undesirable words, phrases, and
+//     profanity. Such words can include offensive terms, competitor names etc.
 //
-//   - Specify DENY in the type field.
+//   - Sensitive information filters - Block or mask sensitive information such as
+//     personally identifiable information (PII) or custom regex in user inputs and
+//     model responses.
 //
-//   - (Optional) Provide up to five prompts that you would categorize as
-//     belonging to the topic in the examples list.
+// In addition to the above policies, you can also configure the messages to be
+// returned to the user if a user input or model response is in violation of the
+// policies defined in the guardrail.
 //
-//   - Specify filter strengths for the harmful categories defined in Amazon
-//     Bedrock in the contentPolicyConfig object. Each [GuardrailContentFilterConfig]object in the filtersConfig
-//     list pertains to a harmful category. For more information, see [Content filters]. For more
-//     information about the fields in a content filter, see [GuardrailContentFilterConfig].
+// For more information, see [Guardrails for Amazon Bedrock] in the Amazon Bedrock User Guide.
 //
-//   - Specify the category in the type field.
-//
-//   - Specify the strength of the filter for prompts in the inputStrength field
-//     and for model responses in the strength field of the [GuardrailContentFilterConfig].
-//
-//   - (Optional) For security, include the ARN of a KMS key in the kmsKeyId field.
-//
-//   - (Optional) Attach any tags to the guardrail in the tags object. For more
-//     information, see [Tag resources].
-//
-// [GuardrailContentFilterConfig]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html
-// [Content filters]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters
-// [Tag resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging
-// [GuardrailTopicConfig]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html
+// [Guardrails for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
 func (c *Client) CreateGuardrail(ctx context.Context, params *CreateGuardrailInput, optFns ...func(*Options)) (*CreateGuardrailOutput, error) {
 	if params == nil {
 		params = &CreateGuardrailInput{}
@@ -92,6 +83,9 @@ type CreateGuardrailInput struct {
 	// The content filter policies to configure for the guardrail.
 	ContentPolicyConfig *types.GuardrailContentPolicyConfig
 
+	// The contextual grounding policy configuration used to create a guardrail.
+	ContextualGroundingPolicyConfig *types.GuardrailContextualGroundingPolicyConfig
+
 	// A description of the guardrail.
 	Description *string
 
@@ -120,7 +114,7 @@ type CreateGuardrailOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ARN of the guardrail that was created.
+	// The ARN of the guardrail.
 	//
 	// This member is required.
 	GuardrailArn *string
@@ -130,7 +124,7 @@ type CreateGuardrailOutput struct {
 	// This member is required.
 	GuardrailId *string
 
-	// The version of the guardrail that was created. This value should be 1.
+	// The version of the guardrail that was created. This value will always be DRAFT .
 	//
 	// This member is required.
 	Version *string

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateEvaluationJob struct {
@@ -223,6 +224,13 @@ func awsRestjson1_serializeOpDocumentCreateGuardrailInput(v *CreateGuardrailInpu
 	if v.ContentPolicyConfig != nil {
 		ok := object.Key("contentPolicyConfig")
 		if err := awsRestjson1_serializeDocumentGuardrailContentPolicyConfig(v.ContentPolicyConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContextualGroundingPolicyConfig != nil {
+		ok := object.Key("contextualGroundingPolicyConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailContextualGroundingPolicyConfig(v.ContextualGroundingPolicyConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -2362,6 +2370,13 @@ func awsRestjson1_serializeOpDocumentUpdateGuardrailInput(v *UpdateGuardrailInpu
 		}
 	}
 
+	if v.ContextualGroundingPolicyConfig != nil {
+		ok := object.Key("contextualGroundingPolicyConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailContextualGroundingPolicyConfig(v.ContextualGroundingPolicyConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -2764,6 +2779,63 @@ func awsRestjson1_serializeDocumentGuardrailContentPolicyConfig(v *types.Guardra
 	if v.FiltersConfig != nil {
 		ok := object.Key("filtersConfig")
 		if err := awsRestjson1_serializeDocumentGuardrailContentFiltersConfig(v.FiltersConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailContextualGroundingFilterConfig(v *types.GuardrailContextualGroundingFilterConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Threshold != nil {
+		ok := object.Key("threshold")
+		switch {
+		case math.IsNaN(*v.Threshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Threshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Threshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Threshold)
+
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailContextualGroundingFiltersConfig(v []types.GuardrailContextualGroundingFilterConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGuardrailContextualGroundingFilterConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailContextualGroundingPolicyConfig(v *types.GuardrailContextualGroundingPolicyConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FiltersConfig != nil {
+		ok := object.Key("filtersConfig")
+		if err := awsRestjson1_serializeDocumentGuardrailContextualGroundingFiltersConfig(v.FiltersConfig, ok); err != nil {
 			return err
 		}
 	}

@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpApplyGuardrail struct {
+}
+
+func (*validateOpApplyGuardrail) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpApplyGuardrail) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ApplyGuardrailInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpApplyGuardrailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpConverse struct {
 }
 
@@ -88,6 +108,10 @@ func (m *validateOpInvokeModelWithResponseStream) HandleInitialize(ctx context.C
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpApplyGuardrailValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpApplyGuardrail{}, middleware.After)
 }
 
 func addOpConverseValidationMiddleware(stack *middleware.Stack) error {
@@ -201,6 +225,42 @@ func validateGuardrailConfiguration(v *types.GuardrailConfiguration) error {
 	}
 }
 
+func validateGuardrailContentBlock(v types.GuardrailContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContentBlock"}
+	switch uv := v.(type) {
+	case *types.GuardrailContentBlockMemberText:
+		if err := validateGuardrailTextBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[text]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailContentBlockList(v []types.GuardrailContentBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailContentBlockList"}
+	for i := range v {
+		if err := validateGuardrailContentBlock(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGuardrailConverseContentBlock(v types.GuardrailConverseContentBlock) error {
 	if v == nil {
 		return nil
@@ -245,6 +305,21 @@ func validateGuardrailStreamConfiguration(v *types.GuardrailStreamConfiguration)
 	}
 	if v.GuardrailVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailTextBlock(v *types.GuardrailTextBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailTextBlock"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -534,6 +609,34 @@ func validateToolUseBlock(v *types.ToolUseBlock) error {
 	}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpApplyGuardrailInput(v *ApplyGuardrailInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplyGuardrailInput"}
+	if v.GuardrailIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailIdentifier"))
+	}
+	if v.GuardrailVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
+	}
+	if len(v.Source) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateGuardrailContentBlockList(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

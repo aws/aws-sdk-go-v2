@@ -72,6 +72,11 @@ type UpdateFlowOutputInput struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
+	// An indication of whether the output should transmit data or not. If you don't
+	// specify the outputStatus field in your request, MediaConnect leaves the value
+	// unchanged.
+	OutputStatus types.OutputStatus
+
 	// The port to use when content is distributed to this output.
 	Port *int32
 

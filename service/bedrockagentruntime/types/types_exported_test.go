@@ -4,8 +4,67 @@ package types_test
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 )
+
+func ExampleFlowInputContent_outputUsage() {
+	var union types.FlowInputContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowInputContentMemberDocument:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
+
+func ExampleFlowOutputContent_outputUsage() {
+	var union types.FlowOutputContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowOutputContentMemberDocument:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
+
+func ExampleFlowResponseStream_outputUsage() {
+	var union types.FlowResponseStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowResponseStreamMemberFlowCompletionEvent:
+		_ = v.Value // Value is types.FlowCompletionEvent
+
+	case *types.FlowResponseStreamMemberFlowOutputEvent:
+		_ = v.Value // Value is types.FlowOutputEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FlowOutputEvent
+var _ *types.FlowCompletionEvent
 
 func ExampleInvocationInputMember_outputUsage() {
 	var union types.InvocationInputMember
@@ -50,6 +109,24 @@ func ExampleInvocationResultMember_outputUsage() {
 
 var _ *types.ApiResult
 var _ *types.FunctionResult
+
+func ExampleMemory_outputUsage() {
+	var union types.Memory
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MemoryMemberSessionSummary:
+		_ = v.Value // Value is types.MemorySessionSummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MemorySessionSummary
 
 func ExampleOrchestrationTrace_outputUsage() {
 	var union types.OrchestrationTrace
@@ -132,6 +209,9 @@ func ExampleResponseStream_outputUsage() {
 	case *types.ResponseStreamMemberChunk:
 		_ = v.Value // Value is types.PayloadPart
 
+	case *types.ResponseStreamMemberFiles:
+		_ = v.Value // Value is types.FilePart
+
 	case *types.ResponseStreamMemberReturnControl:
 		_ = v.Value // Value is types.ReturnControlPayload
 
@@ -150,6 +230,7 @@ func ExampleResponseStream_outputUsage() {
 var _ *types.ReturnControlPayload
 var _ *types.PayloadPart
 var _ *types.TracePart
+var _ *types.FilePart
 
 func ExampleRetrievalFilter_outputUsage() {
 	var union types.RetrievalFilter

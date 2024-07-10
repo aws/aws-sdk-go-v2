@@ -17,6 +17,110 @@ import (
 	"math"
 )
 
+type awsRestjson1_serializeOpApplyGuardrail struct {
+}
+
+func (*awsRestjson1_serializeOpApplyGuardrail) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpApplyGuardrail) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ApplyGuardrailInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsApplyGuardrailInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentApplyGuardrailInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsApplyGuardrailInput(v *ApplyGuardrailInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GuardrailIdentifier == nil || len(*v.GuardrailIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member guardrailIdentifier must not be empty")}
+	}
+	if v.GuardrailIdentifier != nil {
+		if err := encoder.SetURI("guardrailIdentifier").String(*v.GuardrailIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.GuardrailVersion == nil || len(*v.GuardrailVersion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member guardrailVersion must not be empty")}
+	}
+	if v.GuardrailVersion != nil {
+		if err := encoder.SetURI("guardrailVersion").String(*v.GuardrailVersion); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentApplyGuardrailInput(v *ApplyGuardrailInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentGuardrailContentBlockList(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Source) > 0 {
+		ok := object.Key("source")
+		ok.String(string(v.Source))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpConverse struct {
 }
 
@@ -634,6 +738,51 @@ func awsRestjson1_serializeDocumentGuardrailConfiguration(v *types.GuardrailConf
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGuardrailContentBlock(v types.GuardrailContentBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.GuardrailContentBlockMemberText:
+		av := object.Key("text")
+		if err := awsRestjson1_serializeDocumentGuardrailTextBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailContentBlockList(v []types.GuardrailContentBlock, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentGuardrailContentBlock(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailContentQualifierList(v []types.GuardrailContentQualifier, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGuardrailConverseContentBlock(v types.GuardrailConverseContentBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -652,9 +801,27 @@ func awsRestjson1_serializeDocumentGuardrailConverseContentBlock(v types.Guardra
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGuardrailConverseContentQualifierList(v []types.GuardrailConverseContentQualifier, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGuardrailConverseTextBlock(v *types.GuardrailConverseTextBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Qualifiers != nil {
+		ok := object.Key("qualifiers")
+		if err := awsRestjson1_serializeDocumentGuardrailConverseContentQualifierList(v.Qualifiers, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Text != nil {
 		ok := object.Key("text")
@@ -686,6 +853,25 @@ func awsRestjson1_serializeDocumentGuardrailStreamConfiguration(v *types.Guardra
 	if len(v.Trace) > 0 {
 		ok := object.Key("trace")
 		ok.String(string(v.Trace))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailTextBlock(v *types.GuardrailTextBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Qualifiers != nil {
+		ok := object.Key("qualifiers")
+		if err := awsRestjson1_serializeDocumentGuardrailContentQualifierList(v.Qualifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Text != nil {
+		ok := object.Key("text")
+		ok.String(*v.Text)
 	}
 
 	return nil

@@ -37,7 +37,7 @@ func (c *Client) ListGuardrails(ctx context.Context, params *ListGuardrailsInput
 
 type ListGuardrailsInput struct {
 
-	// The unique identifier of the guardrail.
+	// The unique identifier of the guardrail. This can be an ID or the ARN.
 	GuardrailIdentifier *string
 
 	// The maximum number of results to return in the response.

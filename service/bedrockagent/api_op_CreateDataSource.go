@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets up a data source to be added to a knowledge base.
+// Creates a data source connector for a knowledge base.
 //
-// You can't change the chunkingConfiguration after you create the data source.
+// You can't change the chunkingConfiguration after you create the data source
+// connector.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -31,7 +32,7 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// Contains metadata about where the data source is stored.
+	// The connection configuration for the data source.
 	//
 	// This member is required.
 	DataSourceConfiguration *types.DataSourceConfiguration
@@ -53,7 +54,17 @@ type CreateDataSourceInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// The data deletion policy assigned to the data source.
+	// The data deletion policy for the data source.
+	//
+	// You can set the data deletion policy to:
+	//
+	//   - DELETE: Deletes all underlying data belonging to the data source from the
+	//   vector store upon deletion of a knowledge base or data source resource. Note
+	//   that the vector store itself is not deleted, only the underlying data. This flag
+	//   is ignored if an Amazon Web Services account is deleted.
+	//
+	//   - RETAIN: Retains all underlying data in your vector store upon deletion of a
+	//   knowledge base or data source resource.
 	DataDeletionPolicy types.DataDeletionPolicy
 
 	// A description of the data source.

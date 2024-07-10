@@ -30,7 +30,7 @@ func (c *Client) CreateGuardrailVersion(ctx context.Context, params *CreateGuard
 
 type CreateGuardrailVersionInput struct {
 
-	// The unique identifier of the guardrail.
+	// The unique identifier of the guardrail. This can be an ID or the ARN.
 	//
 	// This member is required.
 	GuardrailIdentifier *string

@@ -3986,6 +3986,11 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		ok.Integer(*v.MinLatency)
 	}
 
+	if len(v.OutputStatus) > 0 {
+		ok := object.Key("outputStatus")
+		ok.String(string(v.OutputStatus))
+	}
+
 	if v.Port != nil {
 		ok := object.Key("port")
 		ok.Integer(*v.Port)
@@ -4751,6 +4756,11 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.OutputStatus) > 0 {
+		ok := object.Key("outputStatus")
+		ok.String(string(v.OutputStatus))
 	}
 
 	if v.Port != nil {

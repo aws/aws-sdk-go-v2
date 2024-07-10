@@ -1349,6 +1349,11 @@ func validateNodePropertyOverride(v *types.NodePropertyOverride) error {
 			invalidParams.AddNested("EcsPropertiesOverride", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EksPropertiesOverride != nil {
+		if err := validateEksPropertiesOverride(v.EksPropertiesOverride); err != nil {
+			invalidParams.AddNested("EksPropertiesOverride", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1406,6 +1411,11 @@ func validateNodeRangeProperty(v *types.NodeRangeProperty) error {
 	if v.EcsProperties != nil {
 		if err := validateEcsProperties(v.EcsProperties); err != nil {
 			invalidParams.AddNested("EcsProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EksProperties != nil {
+		if err := validateEksProperties(v.EksProperties); err != nil {
+			invalidParams.AddNested("EksProperties", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

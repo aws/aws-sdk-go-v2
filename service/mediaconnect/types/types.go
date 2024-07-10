@@ -239,6 +239,11 @@ type AddOutputRequest struct {
 	// The name of the output. This value must be unique within the current flow.
 	Name *string
 
+	// An indication of whether the new output should be enabled or disabled as soon
+	// as it is created. If you don't specify the outputStatus field in your request,
+	// MediaConnect sets it to ENABLED.
+	OutputStatus OutputStatus
+
 	// The port to use when content is distributed to this output.
 	Port *int32
 
@@ -1479,6 +1484,9 @@ type Output struct {
 
 	// The configuration for each media stream that is associated with the output.
 	MediaStreamOutputConfigurations []MediaStreamOutputConfiguration
+
+	// An indication of whether the output is transmitting data or not.
+	OutputStatus OutputStatus
 
 	// The port to use when content is distributed to this output.
 	Port *int32

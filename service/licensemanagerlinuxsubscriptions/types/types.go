@@ -32,6 +32,10 @@ type Instance struct {
 	// The AMI ID used to launch the instance.
 	AmiId *string
 
+	// Indicates that you have two different license subscriptions for the same
+	// software on your instance.
+	DualSubscription *string
+
 	// The instance ID of the resource.
 	InstanceID *string
 
@@ -40,6 +44,9 @@ type Instance struct {
 
 	// The time in which the last discovery updated the instance details.
 	LastUpdatedTime *string
+
+	// The operating system software version that runs on your instance.
+	OsVersion *string
 
 	// The product code for the instance. For more information, see [Usage operation values] in the License
 	// Manager User Guide .
@@ -50,11 +57,24 @@ type Instance struct {
 	// The Region the instance is running in.
 	Region *string
 
+	// Indicates that your instance uses a BYOL license subscription from a
+	// third-party Linux subscription provider that you've registered with License
+	// Manager.
+	RegisteredWithSubscriptionProvider *string
+
 	// The status of the instance.
 	Status *string
 
-	// The name of the subscription being used by the instance.
+	// The name of the license subscription that the instance uses.
 	SubscriptionName *string
+
+	// The timestamp when you registered the third-party Linux subscription provider
+	// for the subscription that the instance uses.
+	SubscriptionProviderCreateTime *string
+
+	// The timestamp from the last time that the instance synced with the registered
+	// third-party Linux subscription provider.
+	SubscriptionProviderUpdateTime *string
 
 	// The usage operation of the instance. For more information, see For more
 	// information, see [Usage operation values]in the License Manager User Guide.
@@ -78,6 +98,42 @@ type LinuxSubscriptionsDiscoverySettings struct {
 	//
 	// This member is required.
 	SourceRegions []string
+
+	noSmithyDocumentSerde
+}
+
+// A third-party provider for operating system (OS) platform software and license
+// subscriptions, such as Red Hat. When you register a third-party Linux
+// subscription provider, License Manager can get subscription data from the
+// registered provider.
+type RegisteredSubscriptionProvider struct {
+
+	// The timestamp from the last time that License Manager accessed third-party
+	// subscription data for your account from your registered Linux subscription
+	// provider.
+	LastSuccessfulDataRetrievalTime *string
+
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret that stores your
+	// registered Linux subscription provider access token. For RHEL account
+	// subscriptions, this is the offline token.
+	SecretArn *string
+
+	// The Amazon Resource Name (ARN) of the Linux subscription provider resource that
+	// you registered.
+	SubscriptionProviderArn *string
+
+	// A supported third-party Linux subscription provider. License Manager currently
+	// supports Red Hat subscriptions.
+	SubscriptionProviderSource SubscriptionProviderSource
+
+	// Indicates the status of your registered Linux subscription provider access
+	// token from the last time License Manager retrieved subscription data. For RHEL
+	// account subscriptions, this is the status of the offline token.
+	SubscriptionProviderStatus SubscriptionProviderStatus
+
+	// A detailed message that's associated with your BYOL subscription provider token
+	// status.
+	SubscriptionProviderStatusMessage *string
 
 	noSmithyDocumentSerde
 }

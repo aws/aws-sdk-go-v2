@@ -20,7 +20,7 @@ type AutoToolChoice struct {
 }
 
 // A block of content for a message that you pass to, or receive from, a model
-// with the Converse API (Converse and ConverseStream).
+// with the [Converse]or [ConverseStream] API operations.
 //
 // The following types satisfy this interface:
 //
@@ -30,6 +30,9 @@ type AutoToolChoice struct {
 //	ContentBlockMemberText
 //	ContentBlockMemberToolResult
 //	ContentBlockMemberToolUse
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type ContentBlock interface {
 	isContentBlock()
 }
@@ -230,8 +233,10 @@ type ConverseStreamMetadataEvent struct {
 	// This member is required.
 	Usage *TokenUsage
 
-	// The trace object in the response from ConverseStream that contains information about the
+	// The trace object in the response from [ConverseStream] that contains information about the
 	// guardrail behavior.
+	//
+	// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 	Trace *ConverseStreamTrace
 
 	noSmithyDocumentSerde
@@ -316,7 +321,9 @@ type ConverseStreamOutputMemberMetadata struct {
 
 func (*ConverseStreamOutputMemberMetadata) isConverseStreamOutput() {}
 
-// The trace object in a response from ConverseStream. Currently, you can only trace guardrails.
+// The trace object in a response from [ConverseStream]. Currently, you can only trace guardrails.
+//
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type ConverseStreamTrace struct {
 
 	// The guardrail trace object.
@@ -325,7 +332,9 @@ type ConverseStreamTrace struct {
 	noSmithyDocumentSerde
 }
 
-// The trace object in a response from Converse. Currently, you can only trace guardrails.
+// The trace object in a response from [Converse]. Currently, you can only trace guardrails.
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
 type ConverseTrace struct {
 
 	// The guardrail trace object.
@@ -334,11 +343,7 @@ type ConverseTrace struct {
 	noSmithyDocumentSerde
 }
 
-// A document to include in a message when sending a [Converse] or [ConverseStream] request. You can include
-// up to 5 documents in a request. The maximum document size is 50 MB.
-//
-// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
-// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+// A document to include in a message.
 type DocumentBlock struct {
 
 	// The format of a document, or its extension.
@@ -346,7 +351,21 @@ type DocumentBlock struct {
 	// This member is required.
 	Format DocumentFormat
 
-	// A name for the document.
+	// A name for the document. The name can only contain the following characters:
+	//
+	//   - Alphanumeric characters
+	//
+	//   - Whitespace characters (no more than one in a row)
+	//
+	//   - Hyphens
+	//
+	//   - Parentheses
+	//
+	//   - Square brackets
+	//
+	// This field is vulnerable to prompt injections, because the model might
+	// inadvertently interpret it as instructions. Therefore, we recommend that you
+	// specify a neutral name.
 	//
 	// This member is required.
 	Name *string
@@ -359,21 +378,17 @@ type DocumentBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the content of the document included in a message when sending a [Converse] or [ConverseStream]
-// request or in the response.
+// Contains the content of a document.
 //
 // The following types satisfy this interface:
 //
 //	DocumentSourceMemberBytes
-//
-// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
-// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type DocumentSource interface {
 	isDocumentSource()
 }
 
-// A base64-encoded string of a UTF-8 encoded file, that is the document to
-// include in the message.
+// The raw bytes for the document. If you use an Amazon Web Services SDK, you
+// don't need to encode the bytes in base64.
 type DocumentSourceMemberBytes struct {
 	Value []byte
 
@@ -389,6 +404,9 @@ type GuardrailAssessment struct {
 	// The content policy.
 	ContentPolicy *GuardrailContentPolicyAssessment
 
+	// The contextual grounding policy used for the guardrail assessment.
+	ContextualGroundingPolicy *GuardrailContextualGroundingPolicyAssessment
+
 	// The sensitive information policy.
 	SensitiveInformationPolicy *GuardrailSensitiveInformationPolicyAssessment
 
@@ -401,7 +419,9 @@ type GuardrailAssessment struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for a guardrail that you use with the Converse action.
+// Configuration information for a guardrail that you use with the [Converse] operation.
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
 type GuardrailConfiguration struct {
 
 	// The identifier for the guardrail.
@@ -419,6 +439,24 @@ type GuardrailConfiguration struct {
 
 	noSmithyDocumentSerde
 }
+
+// The content block to be evaluated by the guardrail.
+//
+// The following types satisfy this interface:
+//
+//	GuardrailContentBlockMemberText
+type GuardrailContentBlock interface {
+	isGuardrailContentBlock()
+}
+
+// Text within content block to be evaluated by the guardrail.
+type GuardrailContentBlockMemberText struct {
+	Value GuardrailTextBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailContentBlockMemberText) isGuardrailContentBlock() {}
 
 // The content filter for a guardrail.
 type GuardrailContentFilter struct {
@@ -452,11 +490,50 @@ type GuardrailContentPolicyAssessment struct {
 	noSmithyDocumentSerde
 }
 
-// A content block for selective guarding with the Converse API (Converse and ConverseStream).
+// The details for the guardrails contextual grounding filter.
+type GuardrailContextualGroundingFilter struct {
+
+	// The action performed by the guardrails contextual grounding filter.
+	//
+	// This member is required.
+	Action GuardrailContextualGroundingPolicyAction
+
+	// The score generated by contextual grounding filter.
+	//
+	// This member is required.
+	Score *float64
+
+	// The threshold used by contextual grounding filter to determine whether the
+	// content is grounded or not.
+	//
+	// This member is required.
+	Threshold *float64
+
+	// The contextual grounding filter type.
+	//
+	// This member is required.
+	Type GuardrailContextualGroundingFilterType
+
+	noSmithyDocumentSerde
+}
+
+// The policy assessment details for the guardrails contextual grounding filter.
+type GuardrailContextualGroundingPolicyAssessment struct {
+
+	// The filter details for the guardrails contextual grounding filter.
+	Filters []GuardrailContextualGroundingFilter
+
+	noSmithyDocumentSerde
+}
+
+// A content block for selective guarding with the [Converse] or [ConverseStream] API operations.
 //
 // The following types satisfy this interface:
 //
 //	GuardrailConverseContentBlockMemberText
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type GuardrailConverseContentBlock interface {
 	isGuardrailConverseContentBlock()
 }
@@ -478,6 +555,9 @@ type GuardrailConverseTextBlock struct {
 	//
 	// This member is required.
 	Text *string
+
+	// The qualifier details for the guardrails contextual grounding filter.
+	Qualifiers []GuardrailConverseContentQualifier
 
 	noSmithyDocumentSerde
 }
@@ -515,6 +595,15 @@ type GuardrailManagedWord struct {
 	//
 	// This member is required.
 	Type GuardrailManagedWordType
+
+	noSmithyDocumentSerde
+}
+
+// The output content produced by the guardrail.
+type GuardrailOutputContent struct {
+
+	// The specific text for the output content produced by the guardrail.
+	Text *string
 
 	noSmithyDocumentSerde
 }
@@ -601,6 +690,20 @@ type GuardrailStreamConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The text block to be evaluated by the guardrail.
+type GuardrailTextBlock struct {
+
+	// The input text details to be evaluated by the guardrail.
+	//
+	// This member is required.
+	Text *string
+
+	// The qualifiers describing the text block.
+	Qualifiers []GuardrailContentQualifier
+
+	noSmithyDocumentSerde
+}
+
 // Information about a topic guardrail.
 type GuardrailTopic struct {
 
@@ -649,6 +752,42 @@ type GuardrailTraceAssessment struct {
 	noSmithyDocumentSerde
 }
 
+// The details on the use of the guardrail.
+type GuardrailUsage struct {
+
+	// The content policy units processed by the guardrail.
+	//
+	// This member is required.
+	ContentPolicyUnits *int32
+
+	// The contextual grounding policy units processed by the guardrail.
+	//
+	// This member is required.
+	ContextualGroundingPolicyUnits *int32
+
+	// The sensitive information policy free units processed by the guardrail.
+	//
+	// This member is required.
+	SensitiveInformationPolicyFreeUnits *int32
+
+	// The sensitive information policy units processed by the guardrail.
+	//
+	// This member is required.
+	SensitiveInformationPolicyUnits *int32
+
+	// The topic policy units processed by the guardrail.
+	//
+	// This member is required.
+	TopicPolicyUnits *int32
+
+	// The word policy units processed by the guardrail.
+	//
+	// This member is required.
+	WordPolicyUnits *int32
+
+	noSmithyDocumentSerde
+}
+
 // The word policy assessment.
 type GuardrailWordPolicyAssessment struct {
 
@@ -691,7 +830,7 @@ type ImageSource interface {
 }
 
 // The raw image bytes for the image. If you use an AWS SDK, you don't need to
-// base64 encode the image bytes.
+// encode the image bytes in base64.
 type ImageSourceMemberBytes struct {
 	Value []byte
 
@@ -755,7 +894,18 @@ type InferenceConfiguration struct {
 // [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type Message struct {
 
-	// The message content.
+	// The message content. Note the following restrictions:
+	//
+	//   - You can include up to 20 images. Each image's size, height, and width must
+	//   be no more than 3.75 MB, 8000 px, and 8000 px, respectively.
+	//
+	//   - You can include up to five documents. Each document's size must be no more
+	//   than 4.5 MB.
+	//
+	//   - If you include a ContentBlock with a document field in the array, you must
+	//   also include a ContentBlock with a text field.
+	//
+	//   - You can only include images and documents if the role is user .
 	//
 	// This member is required.
 	Content []ContentBlock
@@ -844,11 +994,13 @@ type SystemContentBlock interface {
 	isSystemContentBlock()
 }
 
-// A content block to assess with the guardrail. Use with the Converse API (Converse and ConverseStream
-// ).
+// A content block to assess with the guardrail. Use with the [Converse] or [ConverseStream] API operations.
 //
 // For more information, see Use a guardrail with the Converse API in the Amazon
 // Bedrock User Guide.
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type SystemContentBlockMemberGuardContent struct {
 	Value GuardrailConverseContentBlock
 
@@ -887,11 +1039,14 @@ type TokenUsage struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a tool that you can use with the Converse API.
+// Information about a tool that you can use with the Converse API. For more
+// information, see [Tool use (function calling)]in the Amazon Bedrock User Guide.
 //
 // The following types satisfy this interface:
 //
 //	ToolMemberToolSpec
+//
+// [Tool use (function calling)]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type Tool interface {
 	isTool()
 }
@@ -947,10 +1102,13 @@ type ToolChoiceMemberTool struct {
 
 func (*ToolChoiceMemberTool) isToolChoice() {}
 
-// Configuration information for the tools that you pass to a model.
+// Configuration information for the tools that you pass to a model. For more
+// information, see [Tool use (function calling)]in the Amazon Bedrock User Guide.
 //
 // This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere
 // Command R+, and Mistral Large models.
+//
+// [Tool use (function calling)]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
 type ToolConfiguration struct {
 
 	// An array of tools that you want to pass to a model.
@@ -1142,6 +1300,7 @@ func (*UnknownUnionMember) isContentBlockStart()             {}
 func (*UnknownUnionMember) isConverseOutput()                {}
 func (*UnknownUnionMember) isConverseStreamOutput()          {}
 func (*UnknownUnionMember) isDocumentSource()                {}
+func (*UnknownUnionMember) isGuardrailContentBlock()         {}
 func (*UnknownUnionMember) isGuardrailConverseContentBlock() {}
 func (*UnknownUnionMember) isImageSource()                   {}
 func (*UnknownUnionMember) isResponseStream()                {}

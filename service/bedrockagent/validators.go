@@ -110,6 +110,66 @@ func (m *validateOpCreateDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFlowAlias struct {
+}
+
+func (*validateOpCreateFlowAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFlowAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFlowAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFlowAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFlow struct {
+}
+
+func (*validateOpCreateFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFlowVersion struct {
+}
+
+func (*validateOpCreateFlowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFlowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFlowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFlowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateKnowledgeBase struct {
 }
 
@@ -125,6 +185,46 @@ func (m *validateOpCreateKnowledgeBase) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePrompt struct {
+}
+
+func (*validateOpCreatePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePromptVersion struct {
+}
+
+func (*validateOpCreatePromptVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePromptVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePromptVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePromptVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +330,66 @@ func (m *validateOpDeleteDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFlowAlias struct {
+}
+
+func (*validateOpDeleteFlowAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFlowAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFlowAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFlowAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFlow struct {
+}
+
+func (*validateOpDeleteFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFlowVersion struct {
+}
+
+func (*validateOpDeleteFlowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFlowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFlowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFlowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKnowledgeBase struct {
 }
 
@@ -245,6 +405,26 @@ func (m *validateOpDeleteKnowledgeBase) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePrompt struct {
+}
+
+func (*validateOpDeletePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePromptInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -390,6 +570,66 @@ func (m *validateOpGetDataSource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFlowAlias struct {
+}
+
+func (*validateOpGetFlowAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFlowAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFlowAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFlowAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFlow struct {
+}
+
+func (*validateOpGetFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFlowVersion struct {
+}
+
+func (*validateOpGetFlowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFlowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFlowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFlowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetIngestionJob struct {
 }
 
@@ -425,6 +665,26 @@ func (m *validateOpGetKnowledgeBase) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPrompt struct {
+}
+
+func (*validateOpGetPrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPromptInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +790,46 @@ func (m *validateOpListDataSources) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFlowAliases struct {
+}
+
+func (*validateOpListFlowAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFlowAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFlowAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFlowAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFlowVersions struct {
+}
+
+func (*validateOpListFlowVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFlowVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFlowVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFlowVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListIngestionJobs struct {
 }
 
@@ -585,6 +885,26 @@ func (m *validateOpPrepareAgent) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPrepareAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPrepareFlow struct {
+}
+
+func (*validateOpPrepareFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPrepareFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PrepareFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPrepareFlowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +1070,46 @@ func (m *validateOpUpdateDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFlowAlias struct {
+}
+
+func (*validateOpUpdateFlowAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFlowAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFlowAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFlowAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFlow struct {
+}
+
+func (*validateOpUpdateFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateKnowledgeBase struct {
 }
 
@@ -765,6 +1125,26 @@ func (m *validateOpUpdateKnowledgeBase) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePrompt struct {
+}
+
+func (*validateOpUpdatePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePromptInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,8 +1170,28 @@ func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
 }
 
+func addOpCreateFlowAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFlowAlias{}, middleware.After)
+}
+
+func addOpCreateFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFlow{}, middleware.After)
+}
+
+func addOpCreateFlowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFlowVersion{}, middleware.After)
+}
+
 func addOpCreateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateKnowledgeBase{}, middleware.After)
+}
+
+func addOpCreatePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePrompt{}, middleware.After)
+}
+
+func addOpCreatePromptVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePromptVersion{}, middleware.After)
 }
 
 func addOpDeleteAgentActionGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -814,8 +1214,24 @@ func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
 }
 
+func addOpDeleteFlowAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFlowAlias{}, middleware.After)
+}
+
+func addOpDeleteFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFlow{}, middleware.After)
+}
+
+func addOpDeleteFlowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFlowVersion{}, middleware.After)
+}
+
 func addOpDeleteKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKnowledgeBase{}, middleware.After)
+}
+
+func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePrompt{}, middleware.After)
 }
 
 func addOpDisassociateAgentKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
@@ -846,12 +1262,28 @@ func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSource{}, middleware.After)
 }
 
+func addOpGetFlowAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFlowAlias{}, middleware.After)
+}
+
+func addOpGetFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFlow{}, middleware.After)
+}
+
+func addOpGetFlowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFlowVersion{}, middleware.After)
+}
+
 func addOpGetIngestionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIngestionJob{}, middleware.After)
 }
 
 func addOpGetKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKnowledgeBase{}, middleware.After)
+}
+
+func addOpGetPromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPrompt{}, middleware.After)
 }
 
 func addOpListAgentActionGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -874,6 +1306,14 @@ func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSources{}, middleware.After)
 }
 
+func addOpListFlowAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFlowAliases{}, middleware.After)
+}
+
+func addOpListFlowVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFlowVersions{}, middleware.After)
+}
+
 func addOpListIngestionJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIngestionJobs{}, middleware.After)
 }
@@ -884,6 +1324,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPrepareAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPrepareAgent{}, middleware.After)
+}
+
+func addOpPrepareFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPrepareFlow{}, middleware.After)
 }
 
 func addOpStartIngestionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -918,8 +1362,55 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSource{}, middleware.After)
 }
 
+func addOpUpdateFlowAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFlowAlias{}, middleware.After)
+}
+
+func addOpUpdateFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFlow{}, middleware.After)
+}
+
 func addOpUpdateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKnowledgeBase{}, middleware.After)
+}
+
+func addOpUpdatePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePrompt{}, middleware.After)
+}
+
+func validateAgentFlowNodeConfiguration(v *types.AgentFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentFlowNodeConfiguration"}
+	if v.AgentAliasArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBedrockFoundationModelConfiguration(v *types.BedrockFoundationModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockFoundationModelConfiguration"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if v.ParsingPrompt != nil {
+		if err := validateParsingPrompt(v.ParsingPrompt); err != nil {
+			invalidParams.AddNested("ParsingPrompt", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateChunkingConfiguration(v *types.ChunkingConfiguration) error {
@@ -933,6 +1424,146 @@ func validateChunkingConfiguration(v *types.ChunkingConfiguration) error {
 	if v.FixedSizeChunkingConfiguration != nil {
 		if err := validateFixedSizeChunkingConfiguration(v.FixedSizeChunkingConfiguration); err != nil {
 			invalidParams.AddNested("FixedSizeChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchicalChunkingConfiguration != nil {
+		if err := validateHierarchicalChunkingConfiguration(v.HierarchicalChunkingConfiguration); err != nil {
+			invalidParams.AddNested("HierarchicalChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SemanticChunkingConfiguration != nil {
+		if err := validateSemanticChunkingConfiguration(v.SemanticChunkingConfiguration); err != nil {
+			invalidParams.AddNested("SemanticChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditionFlowNodeConfiguration(v *types.ConditionFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionFlowNodeConfiguration"}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateFlowConditions(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfluenceCrawlerConfiguration(v *types.ConfluenceCrawlerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfluenceCrawlerConfiguration"}
+	if v.FilterConfiguration != nil {
+		if err := validateCrawlFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfluenceDataSourceConfiguration(v *types.ConfluenceDataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfluenceDataSourceConfiguration"}
+	if v.SourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceConfiguration"))
+	} else if v.SourceConfiguration != nil {
+		if err := validateConfluenceSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CrawlerConfiguration != nil {
+		if err := validateConfluenceCrawlerConfiguration(v.CrawlerConfiguration); err != nil {
+			invalidParams.AddNested("CrawlerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfluenceSourceConfiguration(v *types.ConfluenceSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfluenceSourceConfiguration"}
+	if v.HostUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostUrl"))
+	}
+	if len(v.HostType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HostType"))
+	}
+	if len(v.AuthType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
+	}
+	if v.CredentialsSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsSecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCrawlFilterConfiguration(v *types.CrawlFilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CrawlFilterConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.PatternObjectFilter != nil {
+		if err := validatePatternObjectFilterConfiguration(v.PatternObjectFilter); err != nil {
+			invalidParams.AddNested("PatternObjectFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomTransformationConfiguration(v *types.CustomTransformationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomTransformationConfiguration"}
+	if v.IntermediateStorage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateStorage"))
+	} else if v.IntermediateStorage != nil {
+		if err := validateIntermediateStorage(v.IntermediateStorage); err != nil {
+			invalidParams.AddNested("IntermediateStorage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Transformations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transformations"))
+	} else if v.Transformations != nil {
+		if err := validateTransformations(v.Transformations); err != nil {
+			invalidParams.AddNested("Transformations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -955,6 +1586,26 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.WebConfiguration != nil {
+		if err := validateWebDataSourceConfiguration(v.WebConfiguration); err != nil {
+			invalidParams.AddNested("WebConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConfluenceConfiguration != nil {
+		if err := validateConfluenceDataSourceConfiguration(v.ConfluenceConfiguration); err != nil {
+			invalidParams.AddNested("ConfluenceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SalesforceConfiguration != nil {
+		if err := validateSalesforceDataSourceConfiguration(v.SalesforceConfiguration); err != nil {
+			invalidParams.AddNested("SalesforceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SharePointConfiguration != nil {
+		if err := validateSharePointDataSourceConfiguration(v.SharePointConfiguration); err != nil {
+			invalidParams.AddNested("SharePointConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -972,6 +1623,340 @@ func validateFixedSizeChunkingConfiguration(v *types.FixedSizeChunkingConfigurat
 	}
 	if v.OverlapPercentage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OverlapPercentage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowCondition(v *types.FlowCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowCondition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowConditionalConnectionConfiguration(v *types.FlowConditionalConnectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowConditionalConnectionConfiguration"}
+	if v.Condition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowConditions(v []types.FlowCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowConditions"}
+	for i := range v {
+		if err := validateFlowCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowConnection(v *types.FlowConnection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowConnection"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if v.Configuration != nil {
+		if err := validateFlowConnectionConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowConnectionConfiguration(v types.FlowConnectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowConnectionConfiguration"}
+	switch uv := v.(type) {
+	case *types.FlowConnectionConfigurationMemberConditional:
+		if err := validateFlowConditionalConnectionConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[conditional]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowConnectionConfigurationMemberData:
+		if err := validateFlowDataConnectionConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[data]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowConnections(v []types.FlowConnection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowConnections"}
+	for i := range v {
+		if err := validateFlowConnection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowDataConnectionConfiguration(v *types.FlowDataConnectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowDataConnectionConfiguration"}
+	if v.SourceOutput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceOutput"))
+	}
+	if v.TargetInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetInput"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowDefinition(v *types.FlowDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowDefinition"}
+	if v.Nodes != nil {
+		if err := validateFlowNodes(v.Nodes); err != nil {
+			invalidParams.AddNested("Nodes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Connections != nil {
+		if err := validateFlowConnections(v.Connections); err != nil {
+			invalidParams.AddNested("Connections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowNode(v *types.FlowNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowNode"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Configuration != nil {
+		if err := validateFlowNodeConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Inputs != nil {
+		if err := validateFlowNodeInputs(v.Inputs); err != nil {
+			invalidParams.AddNested("Inputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Outputs != nil {
+		if err := validateFlowNodeOutputs(v.Outputs); err != nil {
+			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowNodeConfiguration(v types.FlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowNodeConfiguration"}
+	switch uv := v.(type) {
+	case *types.FlowNodeConfigurationMemberAgent:
+		if err := validateAgentFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[agent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowNodeConfigurationMemberCondition:
+		if err := validateConditionFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[condition]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowNodeConfigurationMemberKnowledgeBase:
+		if err := validateKnowledgeBaseFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[knowledgeBase]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowNodeConfigurationMemberLambdaFunction:
+		if err := validateLambdaFunctionFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambdaFunction]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowNodeConfigurationMemberLex:
+		if err := validateLexFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[lex]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowNodeConfigurationMemberPrompt:
+		if err := validatePromptFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[prompt]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowNodeConfigurationMemberRetrieval:
+		if err := validateRetrievalFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[retrieval]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowNodeConfigurationMemberStorage:
+		if err := validateStorageFlowNodeConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[storage]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowNodeInput(v *types.FlowNodeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowNodeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowNodeInputs(v []types.FlowNodeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowNodeInputs"}
+	for i := range v {
+		if err := validateFlowNodeInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowNodeOutput(v *types.FlowNodeOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowNodeOutput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowNodeOutputs(v []types.FlowNodeOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowNodeOutputs"}
+	for i := range v {
+		if err := validateFlowNodeOutput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowNodes(v []types.FlowNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowNodes"}
+	for i := range v {
+		if err := validateFlowNode(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1036,6 +2021,60 @@ func validateFunctionSchema(v types.FunctionSchema) error {
 	}
 }
 
+func validateHierarchicalChunkingConfiguration(v *types.HierarchicalChunkingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalChunkingConfiguration"}
+	if v.LevelConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LevelConfigurations"))
+	} else if v.LevelConfigurations != nil {
+		if err := validateHierarchicalChunkingLevelConfigurations(v.LevelConfigurations); err != nil {
+			invalidParams.AddNested("LevelConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OverlapTokens == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OverlapTokens"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchicalChunkingLevelConfiguration(v *types.HierarchicalChunkingLevelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalChunkingLevelConfiguration"}
+	if v.MaxTokens == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTokens"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchicalChunkingLevelConfigurations(v []types.HierarchicalChunkingLevelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalChunkingLevelConfigurations"}
+	for i := range v {
+		if err := validateHierarchicalChunkingLevelConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIngestionJobFilter(v *types.IngestionJobFilter) error {
 	if v == nil {
 		return nil
@@ -1092,6 +2131,25 @@ func validateIngestionJobSortBy(v *types.IngestionJobSortBy) error {
 	}
 }
 
+func validateIntermediateStorage(v *types.IntermediateStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateStorage"}
+	if v.S3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Location"))
+	} else if v.S3Location != nil {
+		if err := validateS3Location(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) error {
 	if v == nil {
 		return nil
@@ -1104,6 +2162,69 @@ func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) err
 		if err := validateVectorKnowledgeBaseConfiguration(v.VectorKnowledgeBaseConfiguration); err != nil {
 			invalidParams.AddNested("VectorKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKnowledgeBaseFlowNodeConfiguration(v *types.KnowledgeBaseFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseFlowNodeConfiguration"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaFunctionFlowNodeConfiguration(v *types.LambdaFunctionFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaFunctionFlowNodeConfiguration"}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLexFlowNodeConfiguration(v *types.LexFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LexFlowNodeConfiguration"}
+	if v.BotAliasArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAliasArn"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemoryConfiguration(v *types.MemoryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryConfiguration"}
+	if v.EnabledMemoryTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledMemoryTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1246,6 +2367,92 @@ func validateParameterMap(v map[string]types.ParameterDetail) error {
 	}
 }
 
+func validateParsingConfiguration(v *types.ParsingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParsingConfiguration"}
+	if len(v.ParsingStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ParsingStrategy"))
+	}
+	if v.BedrockFoundationModelConfiguration != nil {
+		if err := validateBedrockFoundationModelConfiguration(v.BedrockFoundationModelConfiguration); err != nil {
+			invalidParams.AddNested("BedrockFoundationModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParsingPrompt(v *types.ParsingPrompt) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParsingPrompt"}
+	if v.ParsingPromptText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParsingPromptText"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePatternObjectFilter(v *types.PatternObjectFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PatternObjectFilter"}
+	if v.ObjectType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePatternObjectFilterConfiguration(v *types.PatternObjectFilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PatternObjectFilterConfiguration"}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validatePatternObjectFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePatternObjectFilterList(v []types.PatternObjectFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PatternObjectFilterList"}
+	for i := range v {
+		if err := validatePatternObjectFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePineconeConfiguration(v *types.PineconeConfiguration) error {
 	if v == nil {
 		return nil
@@ -1289,6 +2496,89 @@ func validatePineconeFieldMapping(v *types.PineconeFieldMapping) error {
 	}
 }
 
+func validatePromptFlowNodeConfiguration(v *types.PromptFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptFlowNodeConfiguration"}
+	if v.SourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceConfiguration"))
+	} else if v.SourceConfiguration != nil {
+		if err := validatePromptFlowNodeSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptFlowNodeInlineConfiguration(v *types.PromptFlowNodeInlineConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptFlowNodeInlineConfiguration"}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if v.TemplateConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateConfiguration"))
+	} else if v.TemplateConfiguration != nil {
+		if err := validatePromptTemplateConfiguration(v.TemplateConfiguration); err != nil {
+			invalidParams.AddNested("TemplateConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptFlowNodeResourceConfiguration(v *types.PromptFlowNodeResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptFlowNodeResourceConfiguration"}
+	if v.PromptArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptFlowNodeSourceConfiguration(v types.PromptFlowNodeSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptFlowNodeSourceConfiguration"}
+	switch uv := v.(type) {
+	case *types.PromptFlowNodeSourceConfigurationMemberInline:
+		if err := validatePromptFlowNodeInlineConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[inline]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PromptFlowNodeSourceConfigurationMemberResource:
+		if err := validatePromptFlowNodeResourceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[resource]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePromptOverrideConfiguration(v *types.PromptOverrideConfiguration) error {
 	if v == nil {
 		return nil
@@ -1296,6 +2586,65 @@ func validatePromptOverrideConfiguration(v *types.PromptOverrideConfiguration) e
 	invalidParams := smithy.InvalidParamsError{Context: "PromptOverrideConfiguration"}
 	if v.PromptConfigurations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PromptConfigurations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptTemplateConfiguration(v types.PromptTemplateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptTemplateConfiguration"}
+	switch uv := v.(type) {
+	case *types.PromptTemplateConfigurationMemberText:
+		if err := validateTextPromptTemplateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[text]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptVariant(v *types.PromptVariant) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptVariant"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if v.TemplateConfiguration != nil {
+		if err := validatePromptTemplateConfiguration(v.TemplateConfiguration); err != nil {
+			invalidParams.AddNested("TemplateConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptVariantList(v []types.PromptVariant) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptVariantList"}
+	for i := range v {
+		if err := validatePromptVariant(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1408,6 +2757,59 @@ func validateRedisEnterpriseCloudFieldMapping(v *types.RedisEnterpriseCloudField
 	}
 }
 
+func validateRetrievalFlowNodeConfiguration(v *types.RetrievalFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetrievalFlowNodeConfiguration"}
+	if v.ServiceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceConfiguration"))
+	} else if v.ServiceConfiguration != nil {
+		if err := validateRetrievalFlowNodeServiceConfiguration(v.ServiceConfiguration); err != nil {
+			invalidParams.AddNested("ServiceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetrievalFlowNodeS3Configuration(v *types.RetrievalFlowNodeS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetrievalFlowNodeS3Configuration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetrievalFlowNodeServiceConfiguration(v types.RetrievalFlowNodeServiceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetrievalFlowNodeServiceConfiguration"}
+	switch uv := v.(type) {
+	case *types.RetrievalFlowNodeServiceConfigurationMemberS3:
+		if err := validateRetrievalFlowNodeS3Configuration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3DataSourceConfiguration(v *types.S3DataSourceConfiguration) error {
 	if v == nil {
 		return nil
@@ -1415,6 +2817,172 @@ func validateS3DataSourceConfiguration(v *types.S3DataSourceConfiguration) error
 	invalidParams := smithy.InvalidParamsError{Context: "S3DataSourceConfiguration"}
 	if v.BucketArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Location(v *types.S3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSalesforceCrawlerConfiguration(v *types.SalesforceCrawlerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SalesforceCrawlerConfiguration"}
+	if v.FilterConfiguration != nil {
+		if err := validateCrawlFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSalesforceDataSourceConfiguration(v *types.SalesforceDataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SalesforceDataSourceConfiguration"}
+	if v.SourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceConfiguration"))
+	} else if v.SourceConfiguration != nil {
+		if err := validateSalesforceSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CrawlerConfiguration != nil {
+		if err := validateSalesforceCrawlerConfiguration(v.CrawlerConfiguration); err != nil {
+			invalidParams.AddNested("CrawlerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSalesforceSourceConfiguration(v *types.SalesforceSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SalesforceSourceConfiguration"}
+	if v.HostUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostUrl"))
+	}
+	if len(v.AuthType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
+	}
+	if v.CredentialsSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsSecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSemanticChunkingConfiguration(v *types.SemanticChunkingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SemanticChunkingConfiguration"}
+	if v.MaxTokens == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTokens"))
+	}
+	if v.BufferSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BufferSize"))
+	}
+	if v.BreakpointPercentileThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BreakpointPercentileThreshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharePointCrawlerConfiguration(v *types.SharePointCrawlerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharePointCrawlerConfiguration"}
+	if v.FilterConfiguration != nil {
+		if err := validateCrawlFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharePointDataSourceConfiguration(v *types.SharePointDataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharePointDataSourceConfiguration"}
+	if v.SourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceConfiguration"))
+	} else if v.SourceConfiguration != nil {
+		if err := validateSharePointSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CrawlerConfiguration != nil {
+		if err := validateSharePointCrawlerConfiguration(v.CrawlerConfiguration); err != nil {
+			invalidParams.AddNested("CrawlerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharePointSourceConfiguration(v *types.SharePointSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharePointSourceConfiguration"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.SiteUrls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteUrls"))
+	}
+	if len(v.HostType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HostType"))
+	}
+	if len(v.AuthType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
+	}
+	if v.CredentialsSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsSecretArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1463,6 +3031,147 @@ func validateStorageConfiguration(v *types.StorageConfiguration) error {
 	}
 }
 
+func validateStorageFlowNodeConfiguration(v *types.StorageFlowNodeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageFlowNodeConfiguration"}
+	if v.ServiceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceConfiguration"))
+	} else if v.ServiceConfiguration != nil {
+		if err := validateStorageFlowNodeServiceConfiguration(v.ServiceConfiguration); err != nil {
+			invalidParams.AddNested("ServiceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageFlowNodeS3Configuration(v *types.StorageFlowNodeS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageFlowNodeS3Configuration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageFlowNodeServiceConfiguration(v types.StorageFlowNodeServiceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageFlowNodeServiceConfiguration"}
+	switch uv := v.(type) {
+	case *types.StorageFlowNodeServiceConfigurationMemberS3:
+		if err := validateStorageFlowNodeS3Configuration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextPromptTemplateConfiguration(v *types.TextPromptTemplateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextPromptTemplateConfiguration"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformation(v *types.Transformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Transformation"}
+	if v.TransformationFunction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformationFunction"))
+	} else if v.TransformationFunction != nil {
+		if err := validateTransformationFunction(v.TransformationFunction); err != nil {
+			invalidParams.AddNested("TransformationFunction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.StepToApply) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StepToApply"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformationFunction(v *types.TransformationFunction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformationFunction"}
+	if v.TransformationLambdaConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformationLambdaConfiguration"))
+	} else if v.TransformationLambdaConfiguration != nil {
+		if err := validateTransformationLambdaConfiguration(v.TransformationLambdaConfiguration); err != nil {
+			invalidParams.AddNested("TransformationLambdaConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformationLambdaConfiguration(v *types.TransformationLambdaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformationLambdaConfiguration"}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformations(v []types.Transformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Transformations"}
+	for i := range v {
+		if err := validateTransformation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVectorIngestionConfiguration(v *types.VectorIngestionConfiguration) error {
 	if v == nil {
 		return nil
@@ -1471,6 +3180,16 @@ func validateVectorIngestionConfiguration(v *types.VectorIngestionConfiguration)
 	if v.ChunkingConfiguration != nil {
 		if err := validateChunkingConfiguration(v.ChunkingConfiguration); err != nil {
 			invalidParams.AddNested("ChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomTransformationConfiguration != nil {
+		if err := validateCustomTransformationConfiguration(v.CustomTransformationConfiguration); err != nil {
+			invalidParams.AddNested("CustomTransformationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ParsingConfiguration != nil {
+		if err := validateParsingConfiguration(v.ParsingConfiguration); err != nil {
+			invalidParams.AddNested("ParsingConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1487,6 +3206,40 @@ func validateVectorKnowledgeBaseConfiguration(v *types.VectorKnowledgeBaseConfig
 	invalidParams := smithy.InvalidParamsError{Context: "VectorKnowledgeBaseConfiguration"}
 	if v.EmbeddingModelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EmbeddingModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebDataSourceConfiguration(v *types.WebDataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebDataSourceConfiguration"}
+	if v.SourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceConfiguration"))
+	} else if v.SourceConfiguration != nil {
+		if err := validateWebSourceConfiguration(v.SourceConfiguration); err != nil {
+			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebSourceConfiguration(v *types.WebSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebSourceConfiguration"}
+	if v.UrlConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UrlConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1576,6 +3329,11 @@ func validateOpCreateAgentInput(v *CreateAgentInput) error {
 			invalidParams.AddNested("PromptOverrideConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MemoryConfiguration != nil {
+		if err := validateMemoryConfiguration(v.MemoryConfiguration); err != nil {
+			invalidParams.AddNested("MemoryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1613,6 +3371,65 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	}
 }
 
+func validateOpCreateFlowAliasInput(v *CreateFlowAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFlowAliasInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RoutingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingConfiguration"))
+	}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFlowInput(v *CreateFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFlowInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.Definition != nil {
+		if err := validateFlowDefinition(v.Definition); err != nil {
+			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFlowVersionInput(v *CreateFlowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFlowVersionInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -1637,6 +3454,41 @@ func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
 			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePromptInput(v *CreatePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePromptInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Variants != nil {
+		if err := validatePromptVariantList(v.Variants); err != nil {
+			invalidParams.AddNested("Variants", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePromptVersionInput(v *CreatePromptVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePromptVersionInput"}
+	if v.PromptIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1735,6 +3587,57 @@ func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	}
 }
 
+func validateOpDeleteFlowAliasInput(v *DeleteFlowAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFlowAliasInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.AliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFlowInput(v *DeleteFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFlowInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFlowVersionInput(v *DeleteFlowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFlowVersionInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteKnowledgeBaseInput(v *DeleteKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -1742,6 +3645,21 @@ func validateOpDeleteKnowledgeBaseInput(v *DeleteKnowledgeBaseInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteKnowledgeBaseInput"}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePromptInput(v *DeletePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePromptInput"}
+	if v.PromptIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1882,6 +3800,57 @@ func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
 	}
 }
 
+func validateOpGetFlowAliasInput(v *GetFlowAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFlowAliasInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.AliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFlowInput(v *GetFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFlowInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFlowVersionInput(v *GetFlowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFlowVersionInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.FlowVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetIngestionJobInput(v *GetIngestionJobInput) error {
 	if v == nil {
 		return nil
@@ -1910,6 +3879,21 @@ func validateOpGetKnowledgeBaseInput(v *GetKnowledgeBaseInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetKnowledgeBaseInput"}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPromptInput(v *GetPromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPromptInput"}
+	if v.PromptIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1999,6 +3983,36 @@ func validateOpListDataSourcesInput(v *ListDataSourcesInput) error {
 	}
 }
 
+func validateOpListFlowAliasesInput(v *ListFlowAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFlowAliasesInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFlowVersionsInput(v *ListFlowVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFlowVersionsInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListIngestionJobsInput(v *ListIngestionJobsInput) error {
 	if v == nil {
 		return nil
@@ -2049,6 +4063,21 @@ func validateOpPrepareAgentInput(v *PrepareAgentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PrepareAgentInput"}
 	if v.AgentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPrepareFlowInput(v *PrepareFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrepareFlowInput"}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2183,6 +4212,11 @@ func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
 			invalidParams.AddNested("PromptOverrideConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MemoryConfiguration != nil {
+		if err := validateMemoryConfiguration(v.MemoryConfiguration); err != nil {
+			invalidParams.AddNested("MemoryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2244,6 +4278,56 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	}
 }
 
+func validateOpUpdateFlowAliasInput(v *UpdateFlowAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowAliasInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RoutingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingConfiguration"))
+	}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if v.AliasIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFlowInput(v *UpdateFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.Definition != nil {
+		if err := validateFlowDefinition(v.Definition); err != nil {
+			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FlowIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateKnowledgeBaseInput(v *UpdateKnowledgeBaseInput) error {
 	if v == nil {
 		return nil
@@ -2271,6 +4355,29 @@ func validateOpUpdateKnowledgeBaseInput(v *UpdateKnowledgeBaseInput) error {
 		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
 			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePromptInput(v *UpdatePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePromptInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Variants != nil {
+		if err := validatePromptVariantList(v.Variants); err != nil {
+			invalidParams.AddNested("Variants", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PromptIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

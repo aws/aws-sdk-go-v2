@@ -5435,6 +5435,41 @@ func validateColumnStatisticsData(v *types.ColumnStatisticsData) error {
 	}
 }
 
+func validateConditionExpression(v *types.ConditionExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionExpression"}
+	if v.Condition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	}
+	if v.TargetColumn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetColumn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditionExpressionList(v []types.ConditionExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionExpressionList"}
+	for i := range v {
+		if err := validateConditionExpression(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectionInput(v *types.ConnectionInput) error {
 	if v == nil {
 		return nil
@@ -7052,12 +7087,30 @@ func validateRecipe(v *types.Recipe) error {
 	if v.Inputs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
 	}
-	if v.RecipeReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RecipeReference"))
-	} else if v.RecipeReference != nil {
+	if v.RecipeReference != nil {
 		if err := validateRecipeReference(v.RecipeReference); err != nil {
 			invalidParams.AddNested("RecipeReference", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.RecipeSteps != nil {
+		if err := validateRecipeSteps(v.RecipeSteps); err != nil {
+			invalidParams.AddNested("RecipeSteps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecipeAction(v *types.RecipeAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecipeAction"}
+	if v.Operation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7076,6 +7129,47 @@ func validateRecipeReference(v *types.RecipeReference) error {
 	}
 	if v.RecipeVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecipeVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecipeStep(v *types.RecipeStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecipeStep"}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	} else if v.Action != nil {
+		if err := validateRecipeAction(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConditionExpressions != nil {
+		if err := validateConditionExpressionList(v.ConditionExpressions); err != nil {
+			invalidParams.AddNested("ConditionExpressions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecipeSteps(v []types.RecipeStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecipeSteps"}
+	for i := range v {
+		if err := validateRecipeStep(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

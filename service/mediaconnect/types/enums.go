@@ -391,6 +391,25 @@ func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	}
 }
 
+type OutputStatus string
+
+// Enum values for OutputStatus
+const (
+	OutputStatusEnabled  OutputStatus = "ENABLED"
+	OutputStatusDisabled OutputStatus = "DISABLED"
+)
+
+// Values returns all known values for OutputStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputStatus) Values() []OutputStatus {
+	return []OutputStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type PriceUnits string
 
 // Enum values for PriceUnits

@@ -12,7 +12,8 @@ import (
 	"sync"
 )
 
-// The CLI doesn't support InvokeAgent .
+// The CLI doesn't support streaming operations in Amazon Bedrock, including
+// InvokeAgent .
 //
 // Sends a prompt for the agent to process and respond to. Note the following
 // fields for the request:
@@ -93,6 +94,9 @@ type InvokeAgentInput struct {
 	// inputText field will be ignored.
 	InputText *string
 
+	// The unique identifier of the agent memory.
+	MemoryId *string
+
 	// Contains parameters that specify various attributes of the session. For more
 	// information, see [Control session context].
 	//
@@ -117,6 +121,9 @@ type InvokeAgentOutput struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	// The unique identifier of the agent memory.
+	MemoryId *string
 
 	eventStream *InvokeAgentEventStream
 

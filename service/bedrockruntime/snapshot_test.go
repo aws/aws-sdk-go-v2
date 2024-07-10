@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_ApplyGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ApplyGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ApplyGuardrail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_Converse(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Converse(context.Background(), nil, func(o *Options) {
@@ -109,6 +121,18 @@ func TestCheckSnapshot_InvokeModelWithResponseStream(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_ApplyGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ApplyGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ApplyGuardrail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_Converse(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Converse(context.Background(), nil, func(o *Options) {
