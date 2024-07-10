@@ -1,8 +1,0 @@
-{
-    "id": "aac5dad3-4839-48a6-9060-6460eeb1e8d2",
-    "type": "dependency",
-    "description": "Remove unused go-jmespath dependency from main module.",
-    "modules": [
-        "."
-    ]
-}

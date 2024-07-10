@@ -1,8 +1,0 @@
-{
-    "id": "a77dee52-65ad-4241-96b7-adbf16c5c132",
-    "type": "feature",
-    "description": "Add parameters to enable provisioning IPAM BYOIPv4 space at a Local Zone Network Border Group level",
-    "modules": [
-        "service/ec2"
-    ]
-}

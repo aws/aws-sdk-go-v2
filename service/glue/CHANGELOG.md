@@ -1,3 +1,8 @@
+# v1.90.0 (2024-07-10)
+
+* **Feature**: Add recipe step support for recipe node
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.89.0 (2024-06-28)
 
 * **Feature**: Added AttributesToGet parameter to Glue GetDatabases, allowing caller to limit output to include only the database name.

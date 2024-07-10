@@ -1,3 +1,7 @@
+# v1.104.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.104.0 (2024-07-01)
 
 * **Feature**: Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs.

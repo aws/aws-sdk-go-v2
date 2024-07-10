@@ -1,8 +1,0 @@
-{
-    "id": "694943c0-ece4-47a1-906b-df2cba0270a1",
-    "type": "feature",
-    "description": "Add support for contextual grounding check and ApplyGuardrail API for Guardrails for Amazon Bedrock.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.13.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2024-07-09)
 
 * **Feature**: This release deprecates dataProductItem field from SearchInventoryResultItem, along with some unused DataProduct shapes

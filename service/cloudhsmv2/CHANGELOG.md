@@ -1,3 +1,7 @@
+# v1.25.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2024-06-28)
 
 * **Feature**: Added 3 new APIs to support backup sharing: GetResourcePolicy, PutResourcePolicy, and DeleteResourcePolicy. Added BackupArn to the output of the DescribeBackups API. Added support for BackupArn in the CreateCluster API.

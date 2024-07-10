@@ -1,3 +1,7 @@
+# v1.42.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2024-06-28)
 
 * **Feature**: This release provides the support for new allocation strategies i.e. CAPACITY_OPTIMIZED_PRIORITIZED for Spot and PRIORITIZED for On-Demand by taking input of priority value for each instance type for instance fleet clusters.

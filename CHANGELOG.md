@@ -1,3 +1,32 @@
+# Release (2024-07-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.30.2
+  * **Dependency Update**: Remove unused go-jmespath dependency from main module.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.42.0](service/batch/CHANGELOG.md#v1420-2024-07-10)
+  * **Feature**: This feature allows AWS Batch Jobs with EKS container orchestration type to be run as Multi-Node Parallel Jobs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.11.0](service/bedrock/CHANGELOG.md#v1110-2024-07-10)
+  * **Feature**: Add support for contextual grounding check for Guardrails for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.15.0](service/bedrockagent/CHANGELOG.md#v1150-2024-07-10)
+  * **Feature**: Introduces new data sources and chunking strategies for Knowledge bases, advanced parsing logic using FMs, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.14.0](service/bedrockagentruntime/CHANGELOG.md#v1140-2024-07-10)
+  * **Feature**: Introduces query decomposition, enhanced Agents integration with Knowledge bases, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources for end-to-end solutions.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.13.0](service/bedrockruntime/CHANGELOG.md#v1130-2024-07-10)
+  * **Feature**: Add support for contextual grounding check and ApplyGuardrail API for Guardrails for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.169.0](service/ec2/CHANGELOG.md#v11690-2024-07-10)
+  * **Feature**: Add parameters to enable provisioning IPAM BYOIPv4 space at a Local Zone Network Border Group level
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.90.0](service/glue/CHANGELOG.md#v1900-2024-07-10)
+  * **Feature**: Add recipe step support for recipe node
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.29.2](service/groundstation/CHANGELOG.md#v1292-2024-07-10)
+  * **Documentation**: Documentation update specifying OEM ephemeris units of measurement
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.11.0](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v1110-2024-07-10)
+  * **Feature**: Add support for third party subscription providers, starting with RHEL subscriptions through Red Hat Subscription Manager (RHSM). Additionally, add support for tagging subscription provider resources, and detect when an instance has more than one Linux subscription and notify the customer.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.31.0](service/mediaconnect/CHANGELOG.md#v1310-2024-07-10)
+  * **Feature**: AWS Elemental MediaConnect introduces the ability to disable outputs. Disabling an output allows you to keep the output attached to the flow, but stop streaming to the output destination. A disabled output does not incur data transfer costs.
+
 # Release (2024-07-09)
 
 ## Module Highlights

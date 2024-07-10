@@ -1,3 +1,8 @@
+# v1.11.0 (2024-07-10)
+
+* **Feature**: Add support for third party subscription providers, starting with RHEL subscriptions through Red Hat Subscription Manager (RHSM). Additionally, add support for tagging subscription provider resources, and detect when an instance has more than one Linux subscription and notify the customer.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.1 (2024-06-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

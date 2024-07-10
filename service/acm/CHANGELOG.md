@@ -1,3 +1,7 @@
+# v1.28.3 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.2 (2024-07-05)
 
 * **Documentation**: Documentation updates, including fixes for xml formatting, broken links, and ListCertificates description.

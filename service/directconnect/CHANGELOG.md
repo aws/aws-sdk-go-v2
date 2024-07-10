@@ -1,3 +1,7 @@
+# v1.27.3 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.2 (2024-07-03)
 
 * **Documentation**: This update includes documentation for support of new native 400 GBps ports for Direct Connect.

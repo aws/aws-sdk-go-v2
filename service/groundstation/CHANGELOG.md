@@ -1,3 +1,8 @@
+# v1.29.2 (2024-07-10)
+
+* **Documentation**: Documentation update specifying OEM ephemeris units of measurement
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.1 (2024-06-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

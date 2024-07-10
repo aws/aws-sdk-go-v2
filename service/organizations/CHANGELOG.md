@@ -1,3 +1,7 @@
+# v1.30.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2024-07-03)
 
 * **Feature**: Added a new reason under ConstraintViolationException in RegisterDelegatedAdministrator API to prevent registering suspended accounts as delegated administrator of a service.

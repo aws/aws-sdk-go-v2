@@ -1,3 +1,8 @@
+# v1.31.0 (2024-07-10)
+
+* **Feature**: AWS Elemental MediaConnect introduces the ability to disable outputs. Disabling an output allows you to keep the output attached to the flow, but stop streaming to the output destination. A disabled output does not incur data transfer costs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.1 (2024-06-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

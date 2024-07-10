@@ -1,3 +1,7 @@
+# v1.30.3 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.2 (2024-07-03)
 
 * **Documentation**: Doc only update for Application Auto Scaling that fixes resource name.

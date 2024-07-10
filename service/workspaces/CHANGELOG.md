@@ -1,3 +1,7 @@
+# v1.44.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-07-03)
 
 * **Feature**: Fix create workspace bundle RootStorage/UserStorage to accept non null values

@@ -1,3 +1,7 @@
+# v1.58.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2024-07-02)
 
 * **Feature**: Added response overrides to Head Object requests.

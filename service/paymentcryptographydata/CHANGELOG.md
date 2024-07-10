@@ -1,3 +1,7 @@
+# v1.12.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-07-05)
 
 * **Feature**: Added further restrictions on logging of potentially sensitive inputs and outputs.

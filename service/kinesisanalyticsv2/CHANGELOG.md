@@ -1,3 +1,7 @@
+# v1.28.1 (2024-07-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2024-06-28)
 
 * **Feature**: Support for Flink 1.19 in Managed Service for Apache Flink
