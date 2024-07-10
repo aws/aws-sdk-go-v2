@@ -1,0 +1,8 @@
+{
+    "id": "6922c77a-720e-48df-bd57-250fcf7060a3",
+    "type": "feature",
+    "description": "This feature allows AWS Batch Jobs with EKS container orchestration type to be run as Multi-Node Parallel Jobs.",
+    "modules": [
+        "service/batch"
+    ]
+}

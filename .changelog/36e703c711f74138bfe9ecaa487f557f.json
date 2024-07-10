@@ -1,0 +1,8 @@
+{
+    "id": "36e703c7-11f7-4138-bfe9-ecaa487f557f",
+    "type": "feature",
+    "description": "Introduces new data sources and chunking strategies for Knowledge bases, advanced parsing logic using FMs, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}
