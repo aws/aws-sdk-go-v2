@@ -991,6 +991,13 @@
                         "smithy.api#documentation": "The name of the VPC interface attachment to use for this output.",
                         "smithy.api#jsonName": "vpcInterfaceAttachment"
                     }
+                },
+                "OutputStatus": {
+                    "target": "com.amazonaws.mediaconnect#OutputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "An indication of whether the new output should be enabled or disabled as soon as it is created. If you don't specify the outputStatus field in your request, MediaConnect sets it to ENABLED.",
+                        "smithy.api#jsonName": "outputStatus"
+                    }
                 }
             },
             "traits": {
@@ -5326,6 +5333,9 @@
                     "name": "mediaconnect"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "API for AWS Elemental MediaConnect",
                 "smithy.api#title": "AWS MediaConnect",
                 "smithy.rules#endpointRuleSet": {
@@ -6714,10 +6724,34 @@
                         "smithy.api#documentation": "The bridge output ports currently in use.",
                         "smithy.api#jsonName": "bridgePorts"
                     }
+                },
+                "OutputStatus": {
+                    "target": "com.amazonaws.mediaconnect#OutputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "An indication of whether the output is transmitting data or not.",
+                        "smithy.api#jsonName": "outputStatus"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "The settings for an output."
+            }
+        },
+        "com.amazonaws.mediaconnect#OutputStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.mediaconnect#PriceUnits": {
@@ -9718,6 +9752,13 @@
                     "traits": {
                         "smithy.api#documentation": "The name of the VPC interface attachment to use for this output.",
                         "smithy.api#jsonName": "vpcInterfaceAttachment"
+                    }
+                },
+                "OutputStatus": {
+                    "target": "com.amazonaws.mediaconnect#OutputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "An indication of whether the output should transmit data or not. If you don't specify the outputStatus field in your request, MediaConnect leaves the value unchanged.",
+                        "smithy.api#jsonName": "outputStatus"
                     }
                 }
             },

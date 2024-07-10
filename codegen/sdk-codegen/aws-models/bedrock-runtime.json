@@ -36,6 +36,9 @@
             "version": "2023-09-30",
             "resources": [
                 {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailResource"
+                },
+                {
                     "target": "com.amazonaws.bedrockruntime#InferenceResource"
                 }
             ],
@@ -724,6 +727,117 @@
                 "smithy.api#documentation": "<p>The model must request at least one tool (no text is generated). For example, <code>{\"any\" : {}}</code>.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#ApplyGuardrail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockruntime#ApplyGuardrailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockruntime#ApplyGuardrailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The action to apply a guardrail.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply"
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#ApplyGuardrailRequest": {
+            "type": "structure",
+            "members": {
+                "guardrailIdentifier": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The guardrail identifier used in the request to apply the guardrail.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "guardrailVersion": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The guardrail version used in the request to apply the guardrail.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContentSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of data used in the request to apply the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContentBlockList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content details used in the request to apply the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#ApplyGuardrailResponse": {
+            "type": "structure",
+            "members": {
+                "usage": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The usage details in the response from the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action taken in the response from the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputs": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailOutputContentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output details in the response from the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assessments": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailAssessmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assessment details in the response from the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockruntime#AutoToolChoice": {
             "type": "structure",
             "members": {},
@@ -764,7 +878,7 @@
                 "toolUse": {
                     "target": "com.amazonaws.bedrockruntime#ToolUseBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a tool use request from a model. </p>"
+                        "smithy.api#documentation": "<p>Information about a tool use request from a model.</p>"
                     }
                 },
                 "toolResult": {
@@ -781,7 +895,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A block of content for a message that you pass to, or receive from, a model with the Converse API (<a>Converse</a> and <a>ConverseStream</a>).</p>"
+                "smithy.api#documentation": "<p>A block of content for a message that you pass to, or receive from, a model with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ContentBlockDelta": {
@@ -1155,7 +1269,7 @@
                 "trace": {
                     "target": "com.amazonaws.bedrockruntime#ConverseStreamTrace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The trace object in the response from <a>ConverseStream</a> that contains information about the guardrail behavior.</p>"
+                        "smithy.api#documentation": "<p>The trace object in the response from <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> that contains information about the guardrail behavior.</p>"
                     }
                 }
             },
@@ -1335,7 +1449,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The trace object in a response from <a>ConverseStream</a>. Currently, you can only trace guardrails.</p>"
+                "smithy.api#documentation": "<p>The trace object in a response from <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a>. Currently, you can only trace guardrails.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ConverseTrace": {
@@ -1349,7 +1463,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The trace object in a response from <a>Converse</a>. Currently, you can only trace guardrails.</p>"
+                "smithy.api#documentation": "<p>The trace object in a response from <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a>. Currently, you can only trace guardrails.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#DocumentBlock": {
@@ -1365,7 +1479,7 @@
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the document.</p>",
+                        "smithy.api#documentation": "<p>A name for the document. The name can only contain the following characters:</p>\n         <ul>\n            <li>\n               <p>Alphanumeric characters</p>\n            </li>\n            <li>\n               <p>Whitespace characters (no more than one in a row)</p>\n            </li>\n            <li>\n               <p>Hyphens</p>\n            </li>\n            <li>\n               <p>Parentheses</p>\n            </li>\n            <li>\n               <p>Square brackets</p>\n            </li>\n         </ul>\n         <note>\n            <p>This field is vulnerable to prompt injections, because the model might inadvertently interpret it as instructions. Therefore, we recommend that you specify a neutral name.</p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -1382,7 +1496,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A document to include in a message when sending a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> request. You can include up to 5 documents in a request. The maximum document size is 50 MB.</p>"
+                "smithy.api#documentation": "<p>A document to include in a message.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#DocumentFormat": {
@@ -1450,7 +1564,7 @@
                 "bytes": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>A base64-encoded string of a UTF-8 encoded file, that is the document to include in the message.</p>",
+                        "smithy.api#documentation": "<p>The raw bytes for the document. If you use an Amazon Web Services SDK, you don't need to encode the bytes in base64.</p>",
                         "smithy.api#length": {
                             "min": 1
                         }
@@ -1458,7 +1572,24 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the content of the document included in a message when sending a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> request or in the response.</p>"
+                "smithy.api#documentation": "<p>Contains the content of a document.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailAction": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "GUARDRAIL_INTERVENED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GUARDRAIL_INTERVENED"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailAssessment": {
@@ -1486,6 +1617,12 @@
                     "target": "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyAssessment",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitive information policy.</p>"
+                    }
+                },
+                "contextualGroundingPolicy": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyAssessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding policy used for the guardrail assessment.</p>"
                     }
                 }
             },
@@ -1543,7 +1680,27 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for a guardrail that you use with the <a>Converse</a> action.</p>"
+                "smithy.api#documentation": "<p>Configuration information for a guardrail that you use with the  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContentBlock": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailTextBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text within content block to be evaluated by the guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content block to be evaluated by the guardrail.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContentBlockList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#GuardrailContentBlock"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailContentFilter": {
@@ -1677,6 +1834,156 @@
                 "smithy.api#documentation": "<p>An assessment of a content policy for a guardrail.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailContentPolicyUnitsProcessed": {
+            "type": "integer"
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContentQualifier": {
+            "type": "enum",
+            "members": {
+                "GROUNDING_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "grounding_source"
+                    }
+                },
+                "QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "query"
+                    }
+                },
+                "GUARD_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "guard_content"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContentQualifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#GuardrailContentQualifier"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContentSource": {
+            "type": "enum",
+            "members": {
+                "INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPUT"
+                    }
+                },
+                "OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding filter type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "threshold": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold used by contextual grounding filter to determine whether the content is grounded or not.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "score": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The score generated by contextual grounding filter.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action performed by the guardrails contextual grounding filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the guardrails contextual grounding filter.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilterType": {
+            "type": "enum",
+            "members": {
+                "GROUNDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUNDING"
+                    }
+                },
+                "RELEVANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RELEVANCE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilter"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyAction": {
+            "type": "enum",
+            "members": {
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyAssessment": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter details for the guardrails contextual grounding filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy assessment details for the guardrails contextual grounding filter.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyUnitsProcessed": {
+            "type": "integer"
+        },
         "com.amazonaws.bedrockruntime#GuardrailConverseContentBlock": {
             "type": "union",
             "members": {
@@ -1688,7 +1995,36 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p/>\n         <p>A content block for selective guarding with the Converse API (<a>Converse</a> and <a>ConverseStream</a>).\n      </p>"
+                "smithy.api#documentation": "<p/>\n         <p>A content block for selective guarding with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations.\n      </p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailConverseContentQualifier": {
+            "type": "enum",
+            "members": {
+                "GROUNDING_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "grounding_source"
+                    }
+                },
+                "QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "query"
+                    }
+                },
+                "GUARD_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "guard_content"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailConverseContentQualifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#GuardrailConverseContentQualifier"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailConverseTextBlock": {
@@ -1699,6 +2035,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The text that you want to guard.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "qualifiers": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailConverseContentQualifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualifier details for the guardrails contextual grounding filter.</p>"
                     }
                 }
             },
@@ -1787,6 +2129,26 @@
                         "smithy.api#enumValue": "PROFANITY"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailOutputContent": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailOutputText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific text for the output content produced by the guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output content produced by the guardrail.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailOutputContentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockruntime#GuardrailOutputContent"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailOutputText": {
@@ -2057,6 +2419,14 @@
                 "target": "com.amazonaws.bedrockruntime#GuardrailRegexFilter"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockruntime#ApplyGuardrail"
+                }
+            ]
+        },
         "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyAction": {
             "type": "enum",
             "members": {
@@ -2095,6 +2465,12 @@
             "traits": {
                 "smithy.api#documentation": "<p>The assessment for aPersonally Identifiable Information (PII) policy. </p>"
             }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyFreeUnitsProcessed": {
+            "type": "integer"
+        },
+        "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyUnitsProcessed": {
+            "type": "integer"
         },
         "com.amazonaws.bedrockruntime#GuardrailStreamConfiguration": {
             "type": "structure",
@@ -2147,6 +2523,27 @@
                         "smithy.api#enumValue": "async"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailTextBlock": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input text details to be evaluated by the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "qualifiers": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContentQualifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualifiers describing the text block.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The text block to be evaluated by the guardrail.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailTopic": {
@@ -2210,6 +2607,9 @@
                 "smithy.api#documentation": "<p>A behavior assessment of a topic policy.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailTopicPolicyUnitsProcessed": {
+            "type": "integer"
+        },
         "com.amazonaws.bedrockruntime#GuardrailTopicType": {
             "type": "enum",
             "members": {
@@ -2264,6 +2664,56 @@
                 "smithy.api#documentation": "<p>A Top level guardrail trace object. For more information, see <a>ConverseTrace</a>.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailUsage": {
+            "type": "structure",
+            "members": {
+                "topicPolicyUnits": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailTopicPolicyUnitsProcessed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topic policy units processed by the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentPolicyUnits": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContentPolicyUnitsProcessed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content policy units processed by the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "wordPolicyUnits": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailWordPolicyUnitsProcessed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word policy units processed by the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sensitiveInformationPolicyUnits": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyUnitsProcessed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitive information policy units processed by the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sensitiveInformationPolicyFreeUnits": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyFreeUnitsProcessed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitive information policy free units processed by the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contextualGroundingPolicyUnits": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyUnitsProcessed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding policy units processed by the guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details on the use of the guardrail.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#GuardrailVersion": {
             "type": "string",
             "traits": {
@@ -2302,6 +2752,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>The word policy assessment.</p>"
             }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailWordPolicyUnitsProcessed": {
+            "type": "integer"
         },
         "com.amazonaws.bedrockruntime#ImageBlock": {
             "type": "structure",
@@ -2360,7 +2813,7 @@
                 "bytes": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The raw image bytes for the image. If you use an AWS SDK, you don't need to base64 encode the image bytes.</p>",
+                        "smithy.api#documentation": "<p>The raw image bytes for the image. If you use an AWS SDK, you don't need to encode the image bytes in base64.</p>",
                         "smithy.api#length": {
                             "min": 1
                         }
@@ -2731,7 +3184,7 @@
                 "content": {
                     "target": "com.amazonaws.bedrockruntime#ContentBlocks",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message content.</p>",
+                        "smithy.api#documentation": "<p>The message content. Note the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can include up to 20 images. Each image's size, height, and width must be no more than 3.75 MB, 8000 px, and 8000 px, respectively.</p>\n            </li>\n            <li>\n               <p>You can include up to five documents. Each document's size must be no more than 4.5 MB.</p>\n            </li>\n            <li>\n               <p>If you include a <code>ContentBlock</code> with a <code>document</code> field in the array, you must also include a <code>ContentBlock</code> with a <code>text</code> field.</p>\n            </li>\n            <li>\n               <p>You can only include images and documents if the <code>role</code> is <code>user</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3067,7 +3520,7 @@
                 "guardContent": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailConverseContentBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>A content block to assess with the guardrail. Use with the Converse API (<a>Converse</a> and <a>ConverseStream</a>). </p>\n         <p>For more information, see <i>Use a guardrail with the Converse\n            API</i> in the <i>Amazon Bedrock User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A content block to assess with the guardrail. Use with the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html\">Converse</a> or <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html\">ConverseStream</a> API operations. </p>\n         <p>For more information, see <i>Use a guardrail with the Converse\n            API</i> in the <i>Amazon Bedrock User Guide</i>.</p>"
                     }
                 }
             },
@@ -3143,7 +3596,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a tool that you can use with the Converse API.  </p>"
+                "smithy.api#documentation": "<p>Information about a tool that you can use with the Converse API. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Tool use (function calling)</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ToolChoice": {
@@ -3193,7 +3646,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for the tools that you pass to a model.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere Command R+, and Mistral Large models.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configuration information for the tools that you pass to a model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Tool use (function calling)</a> in the Amazon Bedrock User Guide.</p>\n         <note>\n            <p>This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere Command R+, and Mistral Large models.</p>\n         </note>"
             }
         },
         "com.amazonaws.bedrockruntime#ToolInputSchema": {

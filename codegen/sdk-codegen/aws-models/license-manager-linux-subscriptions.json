@@ -7,6 +7,60 @@
         "com.amazonaws.licensemanagerlinuxsubscriptions#BoxLong": {
             "type": "long"
         },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#DeregisterSubscriptionProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#DeregisterSubscriptionProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#DeregisterSubscriptionProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove a third-party subscription provider from the Bring Your Own License (BYOL) subscriptions \n\t\t\tregistered to your account.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/DeregisterSubscriptionProvider"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#DeregisterSubscriptionProviderRequest": {
+            "type": "structure",
+            "members": {
+                "SubscriptionProviderArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the subscription provider resource to deregister.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#DeregisterSubscriptionProviderResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.licensemanagerlinuxsubscriptions#Filter": {
             "type": "structure",
             "members": {
@@ -39,6 +93,97 @@
                 "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Filter"
             }
         },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#GetRegisteredSubscriptionProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#GetRegisteredSubscriptionProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#GetRegisteredSubscriptionProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get details for a Bring Your Own License (BYOL) subscription that's registered to your account.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/GetRegisteredSubscriptionProvider"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#GetRegisteredSubscriptionProviderRequest": {
+            "type": "structure",
+            "members": {
+                "SubscriptionProviderArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the BYOL registration resource to get details for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#GetRegisteredSubscriptionProviderResponse": {
+            "type": "structure",
+            "members": {
+                "SubscriptionProviderArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the BYOL registration resource specified in the request.</p>"
+                    }
+                },
+                "SubscriptionProviderSource": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscription provider for the BYOL registration resource specified \n\t\t\tin the request.</p>"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the third-party access secret stored in Secrets Manager for the BYOL \n\t\t\tregistration resource specified in the request.</p>"
+                    }
+                },
+                "SubscriptionProviderStatus": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Linux subscription provider access token from the last \n\t\t\tsuccessful subscription data request.</p>"
+                    }
+                },
+                "SubscriptionProviderStatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed message from your subscription provider token status.</p>"
+                    }
+                },
+                "LastSuccessfulDataRetrievalTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp from the last time License Manager retrieved subscription details \n\t\t\tfrom your registered third-party Linux subscription provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettings": {
             "type": "operation",
             "input": {
@@ -59,7 +204,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Linux subscriptions service settings.</p>",
+                "smithy.api#documentation": "<p>Lists the Linux subscriptions service settings for your account.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -167,7 +312,37 @@
                 "SubscriptionName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the subscription being used by the instance.</p>"
+                        "smithy.api#documentation": "<p>The name of the license subscription that the instance uses.</p>"
+                    }
+                },
+                "OsVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system software version that runs on your instance.</p>"
+                    }
+                },
+                "SubscriptionProviderCreateTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when you registered the third-party Linux subscription \n\t\t\tprovider for the subscription that the instance uses.</p>"
+                    }
+                },
+                "SubscriptionProviderUpdateTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp from the last time that the instance synced with the registered \n\t\t\tthird-party Linux subscription provider.</p>"
+                    }
+                },
+                "DualSubscription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that you have two different license subscriptions for \n\t\t\tthe same software on your instance.</p>"
+                    }
+                },
+                "RegisteredWithSubscriptionProvider": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that your instance uses a BYOL license subscription from \n\t\t\ta third-party Linux subscription provider that you've registered with License Manager.</p>"
                     }
                 }
             },
@@ -198,6 +373,12 @@
             "version": "2018-05-10",
             "operations": [
                 {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#DeregisterSubscriptionProvider"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#GetRegisteredSubscriptionProvider"
+                },
+                {
                     "target": "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettings"
                 },
                 {
@@ -205,6 +386,21 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptions"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListRegisteredSubscriptionProviders"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#RegisterSubscriptionProvider"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettings"
@@ -227,15 +423,7 @@
                         "x-amz-content-sha256",
                         "x-amz-user-agent",
                         "x-amzn-platform-id",
-                        "x-amzn-trace-id",
-                        "content-length",
-                        "x-api-key",
-                        "authorization",
-                        "x-amz-date",
-                        "x-amz-security-token",
-                        "Access-Control-Allow-Headers",
-                        "Access-Control-Allow-Methods",
-                        "Access-Control-Allow-Origin"
+                        "x-amzn-trace-id"
                     ],
                     "additionalExposedHeaders": [
                         "x-amzn-errortype",
@@ -287,7 +475,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -306,7 +493,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -334,13 +520,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -353,7 +540,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -367,7 +553,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -390,7 +575,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -425,11 +609,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -440,16 +622,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -463,14 +648,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -479,15 +662,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -498,16 +680,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -521,7 +706,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -541,11 +725,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -556,20 +738,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -580,18 +764,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -991,19 +1179,19 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanagerlinuxsubscriptions#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify. For example, you can filter by the name of\n        <code>AmiID</code> with an optional operator to see subscriptions that match, partially\n      match, or don't match a certain Amazon Machine Image (AMI) ID.</p>\n         <p>The valid names for this filter are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmiID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AccountID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageOperation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProductCode</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceType</code>\n               </p>\n            </li>\n         </ul>\n         <p>The valid Operators for this filter are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>contains</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>equals</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Notequal</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results by your specified criteria. \n    \tFor example, you can specify <code>Region</code> in the <code>Name</code>, with the \n    \t<code>contains</code> operator to list all subscriptions that match a partial string in the \n    \t<code>Value</code>, such as <code>us-west</code>.</p>\n         <p>For each filter, you can specify one of the following values for the <code>Name</code> key \n    \tto streamline results:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AccountID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmiID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DualSubscription</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProductCode</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageOperation</code>\n               </p>\n            </li>\n         </ul>\n         <p>For each filter, you can use one of the following <code>Operator</code> values to \n  \t\tdefine the behavior of the filter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>contains</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>equals</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Notequal</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.licensemanagerlinuxsubscriptions#BoxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>",
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This \n\tis the nextToken from a previously truncated response.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 16384
@@ -1027,7 +1215,7 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this \n\tfield isn't empty, there are additional elements that the service hasn't \n\tincluded in this request. Use this token with the next request to retrieve \n\tadditional objects.</p>"
                     }
                 }
             }
@@ -1079,13 +1267,13 @@
                 "MaxResults": {
                     "target": "com.amazonaws.licensemanagerlinuxsubscriptions#BoxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>",
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This \n\tis the nextToken from a previously truncated response.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 16384
@@ -1109,9 +1297,152 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this \n\tfield isn't empty, there are additional elements that the service hasn't \n\tincluded in this request. Use this token with the next request to retrieve \n\tadditional objects.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListRegisteredSubscriptionProviders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListRegisteredSubscriptionProvidersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListRegisteredSubscriptionProvidersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List Bring Your Own License (BYOL) subscription registration resources for your account.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/ListRegisteredSubscriptionProviders"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "RegisteredSubscriptionProviders"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListRegisteredSubscriptionProvidersRequest": {
+            "type": "structure",
+            "members": {
+                "SubscriptionProviderSources": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To filter your results, specify which subscription providers to return \n\t\t\tin the list.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum items to return in a request.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This \n\tis the nextToken from a previously truncated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListRegisteredSubscriptionProvidersResponse": {
+            "type": "structure",
+            "members": {
+                "RegisteredSubscriptionProviders": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#RegisteredSubscriptionProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of BYOL registration resources that fit the criteria \n\t\t\tyou specified in the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this \n\tfield isn't empty, there are additional elements that the service hasn't \n\tincluded in this request. Use this token with the next request to retrieve \n\tadditional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the metadata tags that are assigned to the \n\t\t\tspecified Amazon Web Services resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to list metadata tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata tags for the requested resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerlinuxsubscriptions#Operator": {
@@ -1161,6 +1492,157 @@
             "type": "list",
             "member": {
                 "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#RegisterSubscriptionProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#RegisterSubscriptionProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#RegisterSubscriptionProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Register the supported third-party subscription provider for your Bring Your Own License (BYOL) subscription.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/RegisterSubscriptionProvider"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#RegisterSubscriptionProviderRequest": {
+            "type": "structure",
+            "members": {
+                "SubscriptionProviderSource": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported Linux subscription provider to register.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret where you've stored your subscription provider's access token. For \n\t\t\tRHEL subscriptions managed through the Red Hat Subscription Manager (RHSM), the secret contains \n\t\t\tyour Red Hat Offline token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata tags to assign to your registered Linux subscription provider \n\t\t\tresource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#RegisterSubscriptionProviderResponse": {
+            "type": "structure",
+            "members": {
+                "SubscriptionProviderSource": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Linux subscription provider that you registered.</p>"
+                    }
+                },
+                "SubscriptionProviderArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Linux subscription provider resource that you registered.</p>"
+                    }
+                },
+                "SubscriptionProviderStatus": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the registration action for the Linux subscription provider \n\t\t\tthat you requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#RegisteredSubscriptionProvider": {
+            "type": "structure",
+            "members": {
+                "SubscriptionProviderArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Linux subscription provider resource that you registered.</p>"
+                    }
+                },
+                "SubscriptionProviderSource": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A supported third-party Linux subscription provider. License Manager currently supports \n\t\t\tRed Hat subscriptions.</p>"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret that stores your registered Linux subscription provider \n\t\t\taccess token. For RHEL account subscriptions, this is the offline token.</p>"
+                    }
+                },
+                "SubscriptionProviderStatus": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of your registered Linux subscription provider access token \n\t\t\tfrom the last time License Manager retrieved subscription data. For RHEL account subscriptions, \n\t\t\tthis is the status of the offline token.</p>"
+                    }
+                },
+                "SubscriptionProviderStatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed message that's associated with your BYOL subscription \n\t\t\tprovider token status.</p>"
+                    }
+                },
+                "LastSuccessfulDataRetrievalTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp from the last time that License Manager accessed third-party subscription data \n\t\t\tfor your account from your registered Linux subscription provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A third-party provider for operating system (OS) platform software and license \n\t\t\tsubscriptions, such as Red Hat. When you register a third-party Linux subscription \n\t\t\tprovider, License Manager can get subscription data from the registered provider.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#RegisteredSubscriptionProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#RegisteredSubscriptionProvider"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unable to find the requested Amazon Web Services resource.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#SecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:secretsmanager:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:secret:[^/]{1,1023}$"
             }
         },
         "com.amazonaws.licensemanagerlinuxsubscriptions#Status": {
@@ -1250,6 +1732,139 @@
                 "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Subscription"
             }
         },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,510}/[a-z0-9-\\.]{1,510}$"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "RedHat",
+                        "value": "RedHat",
+                        "documentation": "RedHat subscription provider namespace"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderSource"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE",
+                        "documentation": "ACTIVE status"
+                    },
+                    {
+                        "name": "INVALID",
+                        "value": "INVALID",
+                        "documentation": "INVALID status"
+                    },
+                    {
+                        "name": "PENDING",
+                        "value": "PENDING",
+                        "documentation": "PENDING status"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add metadata tags to the specified Amazon Web Services resource.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to which to add the specified \n\t\t\tmetadata tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata tags to assign to the Amazon Web Services resource. Tags are \n\t\t\tformatted as key value pairs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#Tags": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -1260,6 +1875,62 @@
             "traits": {
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove one or more metadata tag from the specified Amazon Web Services resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to remove the metadata tags from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata tag keys to remove from the requested \n\t\t\tresource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettings": {

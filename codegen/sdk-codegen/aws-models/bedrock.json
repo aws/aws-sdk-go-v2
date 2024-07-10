@@ -990,7 +990,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a guardrail to block topics and to filter out harmful content.</p>\n         <ul>\n            <li>\n               <p>Specify a <code>name</code> and optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Specify messages for when the guardrail successfully blocks a prompt or a model response in the <code>blockedInputMessaging</code> and <code>blockedOutputsMessaging</code> fields.</p>\n            </li>\n            <li>\n               <p>Specify topics for the guardrail to deny in the <code>topicPolicyConfig</code> object. Each <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html\">GuardrailTopicConfig</a> object in the <code>topicsConfig</code> list pertains to one topic.</p>\n               <ul>\n                  <li>\n                     <p>Give a <code>name</code> and <code>description</code> so that the guardrail can properly identify the topic.</p>\n                  </li>\n                  <li>\n                     <p>Specify <code>DENY</code> in the <code>type</code> field.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) Provide up to five prompts that you would categorize as belonging to the topic in the <code>examples</code> list.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Specify filter strengths for the harmful categories defined in Amazon Bedrock in the <code>contentPolicyConfig</code> object. Each <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a> object in the <code>filtersConfig</code> list pertains to a harmful category. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters\">Content filters</a>. For more information about the fields in a content filter, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a>.</p>\n               <ul>\n                  <li>\n                     <p>Specify the category in the <code>type</code> field.</p>\n                  </li>\n                  <li>\n                     <p>Specify the strength of the filter for prompts in the <code>inputStrength</code> field and for model responses in the <code>strength</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>(Optional) For security, include the ARN of a KMS key in the <code>kmsKeyId</code> field.</p>\n            </li>\n            <li>\n               <p>(Optional) Attach any tags to the guardrail in the <code>tags</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tagging\">Tag resources</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a guardrail to block topics and to implement safeguards for your generative AI applications.</p>\n         <p>You can configure the following policies in a guardrail to avoid undesirable and harmful content, filter \n        out denied topics and words, and remove sensitive information for privacy protection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Content filters</b> - Adjust filter strengths\n              to block input prompts or model responses containing harmful content.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Denied topics</b> - Define a set of topics that\n              are undesirable in the context of your application. These topics will be blocked if\n              detected in user queries or model responses.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Word filters</b> - Configure filters to block\n              undesirable words, phrases, and profanity. Such words can include offensive terms, \n              competitor names etc.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Sensitive information filters</b> - Block or\n              mask sensitive information such as personally identifiable information (PII) or custom \n              regex in user inputs and model responses.</p>\n            </li>\n         </ul>\n         <p>In addition to the above policies, you can also configure the messages to be returned to \n        the user if a user input or model response is in violation of the policies defined in the guardrail.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html\">Guardrails for Amazon Bedrock</a> in\n         the <i>Amazon Bedrock User Guide</i>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -1036,6 +1036,12 @@
                     "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationPolicyConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitive information policy to configure for the guardrail.</p>"
+                    }
+                },
+                "contextualGroundingPolicyConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding policy configuration used to create a guardrail.</p>"
                     }
                 },
                 "blockedInputMessaging": {
@@ -1089,14 +1095,14 @@
                 "guardrailArn": {
                     "target": "com.amazonaws.bedrock#GuardrailArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the guardrail that was created.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the guardrail.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.bedrock#GuardrailDraftVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the guardrail that was created. This value should be 1.</p>",
+                        "smithy.api#documentation": "<p>The version of the guardrail that was created. \n         This value will always be <code>DRAFT</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1158,7 +1164,7 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrock#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the guardrail.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail. This can be an ID or the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1663,7 +1669,7 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrock#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the guardrail.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail.  This can be an ID or the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2923,7 +2929,7 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrock#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the guardrail for which to get details.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail for which to get details.  This can be an ID or the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2966,7 +2972,7 @@
                 "guardrailArn": {
                     "target": "com.amazonaws.bedrock#GuardrailArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the guardrail that was created.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the guardrail.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3006,6 +3012,12 @@
                     "target": "com.amazonaws.bedrock#GuardrailSensitiveInformationPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitive information policy that was configured for the guardrail.</p>"
+                    }
+                },
+                "contextualGroundingPolicy": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding policy used in the guardrail.</p>"
                     }
                 },
                 "createdAt": {
@@ -3525,7 +3537,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains filter strengths for harmful content. Guardrails support the following content filters to detect and filter harmful user inputs and FM-generated outputs.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Hate</b> – Describes language or a statement that discriminates, criticizes, insults, denounces, or dehumanizes a person or group on the basis of an identity (such as race, ethnicity, gender, religion, sexual orientation, ability, and national origin).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Insults</b> – Describes language or a statement that includes demeaning, humiliating, mocking, insulting, or belittling language. This type of language is also labeled as bullying.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Sexual</b> – Describes language or a statement that indicates sexual interest, activity, or arousal using direct or indirect references to body parts, physical traits, or sex.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Violence</b> – Describes language or a statement that includes glorification of or threats to inflict physical pain, hurt, or injury toward a person, group or thing.</p>\n            </li>\n         </ul>\n         <p>Content filtering depends on the confidence classification of user inputs and FM\n         responses across each of the four harmful categories. All input and output statements are\n         classified into one of four confidence levels (NONE, LOW, MEDIUM, HIGH) for each\n         harmful category. For example, if a statement is classified as\n         <i>Hate</i> with HIGH confidence, the likelihood of the statement\n         representing hateful content is high. A single statement can be classified across\n         multiple categories with varying confidence levels. For example, a single statement\n         can be classified as <i>Hate</i> with HIGH confidence, <i>Insults</i> with LOW confidence, <i>Sexual</i> with NONE confidence, and <i>Violence</i> with MEDIUM confidence.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html\">Guardrails content filters</a>.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax\">CreateGuardrail request body</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax\">UpdateGuardrail request body</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains filter strengths for harmful content. Guardrails support the following content filters to detect and filter harmful user inputs and FM-generated outputs.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Hate</b> – Describes language or a statement that discriminates, criticizes, insults, denounces, or dehumanizes a person or group on the basis of an identity (such as race, ethnicity, gender, religion, sexual orientation, ability, and national origin).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Insults</b> – Describes language or a statement that includes demeaning, humiliating, mocking, insulting, or belittling language. This type of language is also labeled as bullying.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Sexual</b> – Describes language or a statement that indicates sexual interest, activity, or arousal using direct or indirect references to body parts, physical traits, or sex.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Violence</b> – Describes language or a statement that includes glorification of or threats to inflict physical pain, hurt, or injury toward a person, group or thing.</p>\n            </li>\n         </ul>\n         <p>Content filtering depends on the confidence classification of user inputs and FM\n         responses across each of the four harmful categories. All input and output statements are\n         classified into one of four confidence levels (NONE, LOW, MEDIUM, HIGH) for each\n         harmful category. For example, if a statement is classified as\n         <i>Hate</i> with HIGH confidence, the likelihood of the statement\n         representing hateful content is high. A single statement can be classified across\n         multiple categories with varying confidence levels. For example, a single statement\n         can be classified as <i>Hate</i> with HIGH confidence, <i>Insults</i> with LOW confidence, <i>Sexual</i> with NONE confidence, and <i>Violence</i> with MEDIUM confidence.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html\">Guardrails content filters</a>.</p>"
             }
         },
         "com.amazonaws.bedrock#GuardrailContentFilterType": {
@@ -3619,7 +3631,126 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about how to handle harmful content.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax\">CreateGuardrail request body</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax\">UpdateGuardrail request body</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains details about how to handle harmful content.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingFilter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter type details for the guardrails contextual grounding filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "threshold": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold details for the guardrails contextual grounding filter.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the guardrails contextual grounding filter.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingFilterConfig": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter details for the guardrails contextual grounding filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "threshold": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold details for the guardrails contextual grounding filter.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter configuration details for the guardrails contextual grounding filter.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingFilterType": {
+            "type": "enum",
+            "members": {
+                "GROUNDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUNDING"
+                    }
+                },
+                "RELEVANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RELEVANCE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#GuardrailContextualGroundingFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingFiltersConfig": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#GuardrailContextualGroundingFilterConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingPolicy": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter details for the guardrails contextual grounding policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for the guardrails contextual grounding policy.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GuardrailContextualGroundingPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "filtersConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingFiltersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter configuration details for the guardrails contextual grounding policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy configuration details for the guardrails contextual grounding policy.</p>"
             }
         },
         "com.amazonaws.bedrock#GuardrailDescription": {
@@ -3734,7 +3865,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The managed word list that was configured for the guardrail.\n         (This is a list of words that are pre-defined and managed by Guardrails only.)</p>"
+                "smithy.api#documentation": "<p>The managed word list that was configured for the guardrail.\n         (This is a list of words that are pre-defined and managed by guardrails only.)</p>"
             }
         },
         "com.amazonaws.bedrock#GuardrailManagedWordsConfig": {
@@ -3832,7 +3963,7 @@
                 "type": {
                     "target": "com.amazonaws.bedrock#GuardrailPiiEntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configure guardrail type when the PII entity is detected.</p>",
+                        "smithy.api#documentation": "<p>Configure guardrail type when the PII entity is detected.</p>\n         <p>The following PIIs are used to block or mask sensitive information:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>General</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>ADDRESS</b>\n                     </p>\n                     <p>A physical address, such as \"100 Main Street, Anytown, USA\" \n                     or \"Suite #12, Building 123\". An address can include information \n                     such as the street, building, location, city, state, country, county, \n                     zip code, precinct, and neighborhood. </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AGE</b>\n                     </p>\n                     <p>An individual's age, including the quantity and unit of time. For \n                     example, in the phrase \"I am 40 years old,\" Guarrails recognizes \"40 years\" \n                     as an age.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>NAME</b>\n                     </p>\n                     <p>An individual's name. This entity type does not include titles, such as \n                     Dr., Mr., Mrs., or Miss. guardrails doesn't apply this entity type to names that \n                     are part of organizations or addresses. For example, guardrails recognizes \n                     the \"John Doe Organization\" as an organization, and it recognizes \"Jane Doe \n                     Street\" as an address.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>EMAIL</b>\n                     </p>\n                     <p>An email address, such as <i>marymajor@email.com</i>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>PHONE</b>\n                     </p>\n                     <p>A phone number. This entity type also includes fax and pager numbers.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>USERNAME</b>\n                     </p>\n                     <p>A user name that identifies an account, such as a login name, screen name, \n                     nick name, or handle.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>PASSWORD</b>\n                     </p>\n                     <p>An alphanumeric string that is used as a password, such as \n                     \"*<i>very20special#pass*</i>\".\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>DRIVER_ID</b>\n                     </p>\n                     <p>The number assigned to a driver's license, which is an official \n                     document permitting an individual to operate one or more motorized \n                     vehicles on a public road. A driver's license number consists of \n                     alphanumeric characters.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>LICENSE_PLATE</b>\n                     </p>\n                     <p>A license plate for a vehicle is issued by the state or country where \n                     the vehicle is registered. The format for passenger vehicles is typically \n                     five to eight digits, consisting of upper-case letters and numbers. The \n                     format varies depending on the location of the issuing state or country.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>VEHICLE_IDENTIFICATION_NUMBER</b>\n                     </p>\n                     <p>A Vehicle Identification Number (VIN) uniquely identifies a vehicle. \n                     VIN content and format are defined in the <i>ISO 3779</i> specification. \n                     Each country has specific codes and formats for VINs.\n                  </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Finance</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>REDIT_DEBIT_CARD_CVV</b>\n                     </p>\n                     <p>A three-digit card verification code (CVV) that is present on VISA, \n                  MasterCard, and Discover credit and debit cards. For American Express \n                  credit or debit cards, the CVV is a four-digit numeric code.\n               </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CREDIT_DEBIT_CARD_EXPIRY</b>\n                     </p>\n                     <p>The expiration date for a credit or debit card. This number is usually \n                     four digits long and is often formatted as <i>month/year</i> or \n                     <i>MM/YY</i>. Guardrails recognizes expiration dates such as \n                     <i>01/21</i>, <i>01/2021</i>, and <i>Jan 2021</i>.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CREDIT_DEBIT_CARD_NUMBER</b>\n                     </p>\n                     <p>The number for a credit or debit card. These numbers can vary from 13 to 16 \n                     digits in length. However, Amazon Comprehend also recognizes credit or debit \n                     card numbers when only the last four digits are present.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>PIN</b>\n                     </p>\n                     <p>A four-digit personal identification number (PIN) with which you can \n                     access your bank account.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>INTERNATIONAL_BANK_ACCOUNT_NUMBER</b>\n                     </p>\n                     <p>An International Bank Account Number has specific formats in each country. \n                     For more information, see <a href=\"https://www.iban.com/structure\">www.iban.com/structure</a>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>SWIFT_CODE</b>\n                     </p>\n                     <p>A SWIFT code is a standard format of Bank Identifier Code (BIC) used to specify \n                     a particular bank or branch. Banks use these codes for money transfers such as \n                     international wire transfers.</p>\n                     <p>SWIFT codes consist of eight or 11 characters. The 11-digit codes refer to specific \n                     branches, while eight-digit codes (or 11-digit codes ending in 'XXX') refer to the \n                     head or primary office.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>IT</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>IP_ADDRESS</b>\n                     </p>\n                     <p>An IPv4 address, such as <i>198.51.100.0</i>.\n               </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>MAC_ADDRESS</b>\n                     </p>\n                     <p>A <i>media access control</i> (MAC) address is a unique identifier \n                     assigned to a network interface controller (NIC).\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>URL</b>\n                     </p>\n                     <p>A web address, such as <i>www.example.com</i>.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AWS_ACCESS_KEY</b>\n                     </p>\n                     <p>A unique identifier that's associated with a secret access key; \n                     you use the access key ID and secret access key to sign programmatic \n                     Amazon Web Services requests cryptographically.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>AWS_SECRET_KEY</b>\n                     </p>\n                     <p>A unique identifier that's associated with an access key. You use the \n                     access key ID and secret access key to sign programmatic Amazon Web Services \n                     requests cryptographically.\n                  </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>USA specific</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>US_BANK_ACCOUNT_NUMBER</b>\n                     </p>\n                     <p>A US bank account number, which is typically 10 to 12 digits long.                               \n               </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_BANK_ROUTING_NUMBER</b>\n                     </p>\n                     <p>A US bank account routing number. These are typically nine digits long,                                 \n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER</b>\n                     </p>\n                     <p>A US Individual Taxpayer Identification Number (ITIN) is a nine-digit number \n                     that starts with a \"9\" and contain a \"7\" or \"8\" as the fourth digit. An ITIN \n                     can be formatted with a space or a dash after the third and forth digits.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_PASSPORT_NUMBER</b>\n                     </p>\n                     <p>A US passport number. Passport numbers range from six to nine alphanumeric \n                     characters.\n                  </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>US_SOCIAL_SECURITY_NUMBER</b>\n                     </p>\n                     <p>A US Social Security Number (SSN) is a nine-digit number that is issued to \n                     US citizens, permanent residents, and temporary working residents.                                 \n                  </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Canada specific</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>CA_HEALTH_NUMBER</b>\n                     </p>\n                     <p>A Canadian Health Service Number is a 10-digit unique identifier, \n                  required for individuals to access healthcare benefits.\n               </p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>CA_SOCIAL_INSURANCE_NUMBER</b>\n                     </p>\n                     <p>A Canadian Social Insurance Number (SIN) is a nine-digit unique identifier, \n                     required for individuals to access government programs and benefits.</p>\n                     <p>The SIN is formatted as three groups of three digits, such as \n                     <i>123-456-789</i>. A SIN can be validated through a simple \n                     check-digit process called the <a href=\"https://www.wikipedia.org/wiki/Luhn_algorithm\">Luhn algorithm</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>UK Specific</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>UK_NATIONAL_HEALTH_SERVICE_NUMBER</b>\n                     </p>\n                     <p>A UK National Health Service Number is a 10-17 digit number, \n                  such as <i>485 777 3456</i>. The current system formats the 10-digit \n                  number with spaces after the third and sixth digits. The final digit is an \n                  error-detecting checksum.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>UK_NATIONAL_INSURANCE_NUMBER</b>\n                     </p>\n                     <p>A UK National Insurance Number (NINO) provides individuals with access to National \n                     Insurance (social security) benefits. It is also used for some purposes in the UK \n                     tax system.</p>\n                     <p>The number is nine digits long and starts with two letters, followed by six \n                     numbers and one letter. A NINO can be formatted with a space or a dash after \n                     the two letters and after the second, forth, and sixth digits.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER</b>\n                     </p>\n                     <p>A UK Unique Taxpayer Reference (UTR) is a 10-digit number that identifies a taxpayer or a business.\n                  </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Custom</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <b>Regex filter</b> - You can use\n                  a regular expressions to define patterns for a guardrail to recognize\n                  and act upon such as serial number, booking ID etc..</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4410,7 +4541,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about topics for the guardrail to identify and deny.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax\">CreateGuardrail request body</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax\">UpdateGuardrail request body</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Details about topics for the guardrail to identify and deny.</p>"
             }
         },
         "com.amazonaws.bedrock#GuardrailTopicDefinition": {
@@ -4483,7 +4614,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about topics that the guardrail should identify and deny.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax\">CreateGuardrail request body</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax\">UpdateGuardrail request body</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains details about topics that the guardrail should identify and deny.</p>"
             }
         },
         "com.amazonaws.bedrock#GuardrailTopicType": {
@@ -5225,7 +5356,7 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrock#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the guardrail.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail.  This can be an ID or the ARN.</p>",
                         "smithy.api#httpQuery": "guardrailIdentifier"
                     }
                 },
@@ -6791,7 +6922,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a guardrail with the values you specify.</p>\n         <ul>\n            <li>\n               <p>Specify a <code>name</code> and optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Specify messages for when the guardrail successfully blocks a prompt or a model response in the <code>blockedInputMessaging</code> and <code>blockedOutputsMessaging</code> fields.</p>\n            </li>\n            <li>\n               <p>Specify topics for the guardrail to deny in the <code>topicPolicyConfig</code> object. Each <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html\">GuardrailTopicConfig</a> object in the <code>topicsConfig</code> list pertains to one topic.</p>\n               <ul>\n                  <li>\n                     <p>Give a <code>name</code> and <code>description</code> so that the guardrail can properly identify the topic.</p>\n                  </li>\n                  <li>\n                     <p>Specify <code>DENY</code> in the <code>type</code> field.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) Provide up to five prompts that you would categorize as belonging to the topic in the <code>examples</code> list.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Specify filter strengths for the harmful categories defined in Amazon Bedrock in the <code>contentPolicyConfig</code> object. Each <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a> object in the <code>filtersConfig</code> list pertains to a harmful category. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters\">Content filters</a>. For more information about the fields in a content filter, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a>.</p>\n               <ul>\n                  <li>\n                     <p>Specify the category in the <code>type</code> field.</p>\n                  </li>\n                  <li>\n                     <p>Specify the strength of the filter for prompts in the <code>inputStrength</code> field and for model responses in the <code>strength</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>(Optional) For security, include the ARN of a KMS key in the <code>kmsKeyId</code> field.</p>\n            </li>\n            <li>\n               <p>(Optional) Attach any tags to the guardrail in the <code>tags</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tagging\">Tag resources</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Updates a guardrail with the values you specify.</p>\n         <ul>\n            <li>\n               <p>Specify a <code>name</code> and optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Specify messages for when the guardrail successfully blocks a prompt or a model response in the <code>blockedInputMessaging</code> and <code>blockedOutputsMessaging</code> fields.</p>\n            </li>\n            <li>\n               <p>Specify topics for the guardrail to deny in the <code>topicPolicyConfig</code> object. Each <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html\">GuardrailTopicConfig</a> object in the <code>topicsConfig</code> list pertains to one topic.</p>\n               <ul>\n                  <li>\n                     <p>Give a <code>name</code> and <code>description</code> so that the guardrail can properly identify the topic.</p>\n                  </li>\n                  <li>\n                     <p>Specify <code>DENY</code> in the <code>type</code> field.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) Provide up to five prompts that you would categorize as belonging to the topic in the <code>examples</code> list.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Specify filter strengths for the harmful categories defined in Amazon Bedrock in the <code>contentPolicyConfig</code> object. Each <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a> object in the <code>filtersConfig</code> list pertains to a harmful category. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-content-filters\">Content filters</a>. For more information about the fields in a content filter, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a>.</p>\n               <ul>\n                  <li>\n                     <p>Specify the category in the <code>type</code> field.</p>\n                  </li>\n                  <li>\n                     <p>Specify the strength of the filter for prompts in the <code>inputStrength</code> field and for model responses in the <code>strength</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html\">GuardrailContentFilterConfig</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>(Optional) For security, include the ARN of a KMS key in the <code>kmsKeyId</code> field.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -6806,7 +6937,7 @@
                 "guardrailIdentifier": {
                     "target": "com.amazonaws.bedrock#GuardrailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the guardrail</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail.  This can be an ID or the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6848,6 +6979,12 @@
                         "smithy.api#documentation": "<p>The sensitive information policy to configure for the guardrail.</p>"
                     }
                 },
+                "contextualGroundingPolicyConfig": {
+                    "target": "com.amazonaws.bedrock#GuardrailContextualGroundingPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual grounding policy configuration used to update a guardrail.</p>"
+                    }
+                },
                 "blockedInputMessaging": {
                     "target": "com.amazonaws.bedrock#GuardrailBlockedMessaging",
                     "traits": {
@@ -6886,7 +7023,7 @@
                 "guardrailArn": {
                     "target": "com.amazonaws.bedrock#GuardrailArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the guardrail that was created.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the guardrail.</p>",
                         "smithy.api#required": {}
                     }
                 },

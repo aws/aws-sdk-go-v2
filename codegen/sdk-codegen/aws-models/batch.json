@@ -4024,6 +4024,12 @@
                         "smithy.api#documentation": "<p>The details for the init containers.</p>"
                     }
                 },
+                "eksClusterArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EKS cluster.</p>"
+                    }
+                },
                 "podName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
@@ -6499,6 +6505,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains the instance types that you want to replace for the existing\n   resources of a job.</p>"
                     }
+                },
+                "eksPropertiesOverride": {
+                    "target": "com.amazonaws.batch#EksPropertiesOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the properties that you want to replace for the existing Amazon EKS resources of a job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6544,6 +6556,12 @@
                     "target": "com.amazonaws.batch#EcsProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>This is an object that represents the properties of the node range for a multi-node parallel\n   job.</p>"
+                    }
+                },
+                "eksProperties": {
+                    "target": "com.amazonaws.batch#EksProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is an object that represents the properties of the node range for a multi-node parallel job.</p>"
                     }
                 }
             },
@@ -6629,36 +6647,6 @@
                 "smithy.api#documentation": "<p>Registers an Batch job definition.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To register a job definition",
-                        "documentation": "This example registers a job definition for a simple container job.",
-                        "input": {
-                            "containerProperties": {
-                                "image": "busybox",
-                                "command": [
-                                    "sleep",
-                                    "10"
-                                ],
-                                "resourceRequirements": [
-                                    {
-                                        "type": "MEMORY",
-                                        "value": "128"
-                                    },
-                                    {
-                                        "type": "VCPU",
-                                        "value": "1"
-                                    }
-                                ]
-                            },
-                            "type": "container",
-                            "jobDefinitionName": "sleep10"
-                        },
-                        "output": {
-                            "jobDefinitionName": "sleep10",
-                            "jobDefinitionArn": "arn:aws:batch:us-east-1:012345678910:job-definition/sleep10:1",
-                            "revision": 1
-                        }
-                    },
-                    {
                         "title": "RegisterJobDefinition with tags",
                         "documentation": "This demonstrates calling the RegisterJobDefinition action, including tags.",
                         "input": {
@@ -6689,6 +6677,36 @@
                         "output": {
                             "jobDefinitionName": "sleep30",
                             "jobDefinitionArn": "arn:aws:batch:us-east-1:012345678910:job-definition/sleep30:1",
+                            "revision": 1
+                        }
+                    },
+                    {
+                        "title": "To register a job definition",
+                        "documentation": "This example registers a job definition for a simple container job.",
+                        "input": {
+                            "containerProperties": {
+                                "image": "busybox",
+                                "command": [
+                                    "sleep",
+                                    "10"
+                                ],
+                                "resourceRequirements": [
+                                    {
+                                        "type": "MEMORY",
+                                        "value": "128"
+                                    },
+                                    {
+                                        "type": "VCPU",
+                                        "value": "1"
+                                    }
+                                ]
+                            },
+                            "type": "container",
+                            "jobDefinitionName": "sleep10"
+                        },
+                        "output": {
+                            "jobDefinitionName": "sleep10",
+                            "jobDefinitionArn": "arn:aws:batch:us-east-1:012345678910:job-definition/sleep10:1",
                             "revision": 1
                         }
                     }

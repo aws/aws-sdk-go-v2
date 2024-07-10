@@ -6537,6 +6537,40 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.glue#ConditionExpression": {
+            "type": "structure",
+            "members": {
+                "Condition": {
+                    "target": "com.amazonaws.glue#DatabrewCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition of the condition expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.glue#DatabrewConditionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the condition expression.</p>"
+                    }
+                },
+                "TargetColumn": {
+                    "target": "com.amazonaws.glue#TargetColumn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target column of the condition expressions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Condition expression defined in the Glue Studio data preparation recipe node.</p>"
+            }
+        },
+        "com.amazonaws.glue#ConditionExpressionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ConditionExpression"
+            }
+        },
         "com.amazonaws.glue#ConditionList": {
             "type": "list",
             "member": {
@@ -11873,6 +11907,25 @@
         "com.amazonaws.glue#DatabaseName": {
             "type": "string"
         },
+        "com.amazonaws.glue#DatabrewCondition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Z\\_]+$"
+            }
+        },
+        "com.amazonaws.glue#DatabrewConditionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.glue#Datatype": {
             "type": "structure",
             "members": {
@@ -14385,13 +14438,13 @@
         "com.amazonaws.glue#EnclosedInStringProperty": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF]|[^\\S\\r\\n\"'])*$"
+                "smithy.api#pattern": "^([\\u0009\\u000B\\u000C\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF])*$"
             }
         },
         "com.amazonaws.glue#EnclosedInStringPropertyWithQuote": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF]|[^\\S\\r\\n])*$"
+                "smithy.api#pattern": "^([\\u0009\\u000B\\u000C\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF])*$"
             }
         },
         "com.amazonaws.glue#EncryptionAtRest": {
@@ -26461,7 +26514,7 @@
         "com.amazonaws.glue#NodeName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF]|[^\\r\\n])*$"
+                "smithy.api#pattern": "^([^\\r\\n])*$"
             }
         },
         "com.amazonaws.glue#NodeType": {
@@ -26754,6 +26807,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure representing an open format table.</p>"
+            }
+        },
+        "com.amazonaws.glue#Operation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Z\\_]+$"
             }
         },
         "com.amazonaws.glue#OperationNotSupportedException": {
@@ -27161,6 +27224,34 @@
                     "traits": {
                         "smithy.api#enumValue": "null"
                     }
+                }
+            }
+        },
+        "com.amazonaws.glue#ParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#ParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#ParameterValue"
+            }
+        },
+        "com.amazonaws.glue#ParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.glue#ParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32768
                 }
             }
         },
@@ -28456,13 +28547,39 @@
                 "RecipeReference": {
                     "target": "com.amazonaws.glue#RecipeReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to the DataBrew recipe used by the node.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A reference to the DataBrew recipe used by the node.</p>"
+                    }
+                },
+                "RecipeSteps": {
+                    "target": "com.amazonaws.glue#RecipeSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Transform steps used in the recipe node.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.</p>"
+            }
+        },
+        "com.amazonaws.glue#RecipeAction": {
+            "type": "structure",
+            "members": {
+                "Operation": {
+                    "target": "com.amazonaws.glue#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation of the recipe action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.glue#ParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters of the recipe action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Actions defined in the Glue Studio data preparation recipe node.</p>"
             }
         },
         "com.amazonaws.glue#RecipeReference": {
@@ -28485,6 +28602,33 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A reference to a Glue DataBrew recipe.</p>"
+            }
+        },
+        "com.amazonaws.glue#RecipeStep": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.glue#RecipeAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformation action of the recipe step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConditionExpressions": {
+                    "target": "com.amazonaws.glue#ConditionExpressionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition expressions for the recipe step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recipe step used in a Glue Studio data preparation recipe node.</p>"
+            }
+        },
+        "com.amazonaws.glue#RecipeSteps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#RecipeStep"
             }
         },
         "com.amazonaws.glue#RecipeVersion": {
@@ -34338,6 +34482,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.glue#TargetColumn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
                 }
             }
         },
