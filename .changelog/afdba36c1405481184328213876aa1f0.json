@@ -1,0 +1,8 @@
+{
+    "id": "afdba36c-1405-4811-8432-8213876aa1f0",
+    "type": "dependency",
+    "description": "Temporarily reinstate removed go-jmespath dependency.",
+    "modules": [
+        "."
+    ]
+}
