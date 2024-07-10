@@ -1,8 +1,0 @@
-{
-    "id": "03b242aa-3707-4fa5-af84-4de0978ae449",
-    "type": "feature",
-    "description": "Add support for contextual grounding check for Guardrails for Amazon Bedrock.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

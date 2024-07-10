@@ -1,8 +1,0 @@
-{
-    "id": "b0dea458-bb0e-4c61-b399-a76d2bda178e",
-    "type": "feature",
-    "description": "Add recipe step support for recipe node",
-    "modules": [
-        "service/glue"
-    ]
-}

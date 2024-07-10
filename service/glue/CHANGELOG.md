@@ -1,3 +1,8 @@
+# v1.91.0 (2024-07-10.2)
+
+* **Feature**: Add recipe step support for recipe node
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.90.0 (2024-07-10)
 
 * **Feature**: Add recipe step support for recipe node

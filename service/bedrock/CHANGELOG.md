@@ -1,3 +1,8 @@
+# v1.12.0 (2024-07-10.2)
+
+* **Feature**: Add support for contextual grounding check for Guardrails for Amazon Bedrock.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2024-07-10)
 
 * **Feature**: Add support for contextual grounding check for Guardrails for Amazon Bedrock.

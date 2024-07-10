@@ -1,8 +1,0 @@
-{
-    "id": "19ee02ef-77a8-44e9-9a61-b56abe3d52f4",
-    "type": "dependency",
-    "description": "Temporarily re-add jmespath dependency.",
-    "modules": [
-        "."
-    ]
-}

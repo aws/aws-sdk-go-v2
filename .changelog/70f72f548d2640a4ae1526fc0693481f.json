@@ -1,8 +1,0 @@
-{
-    "id": "70f72f54-8d26-40a4-ae15-26fc0693481f",
-    "type": "feature",
-    "description": "Introduces query decomposition, enhanced Agents integration with Knowledge bases, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources for end-to-end solutions.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

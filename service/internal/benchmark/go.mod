@@ -4,24 +4,24 @@ go 1.20
 
 require (
 	github.com/aws/aws-sdk-go v1.44.28
-	github.com/aws/aws-sdk-go-v2 v1.30.2
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.2
-	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.22.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.58.1
-	github.com/aws/aws-sdk-go-v2/service/schemas v1.26.2
+	github.com/aws/aws-sdk-go-v2 v1.30.3
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.3
+	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.22.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.58.2
+	github.com/aws/aws-sdk-go-v2/service/schemas v1.26.3
 	github.com/aws/smithy-go v1.20.3
 )
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.3 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.14 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.14 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.14 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.15 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.15 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.3 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.3.16 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.15 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.16 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.17.14 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.3.17 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.16 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.17 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.17.15 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

@@ -1,3 +1,8 @@
+# v1.15.0 (2024-07-10.2)
+
+* **Feature**: Introduces query decomposition, enhanced Agents integration with Knowledge bases, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources for end-to-end solutions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2024-07-10)
 
 * **Feature**: Introduces query decomposition, enhanced Agents integration with Knowledge bases, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources for end-to-end solutions.

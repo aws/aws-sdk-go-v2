@@ -1,8 +1,0 @@
-{
-    "id": "e8b91f6f-d541-4a99-ae68-12aec01c17c1",
-    "type": "documentation",
-    "description": "Documentation update specifying OEM ephemeris units of measurement",
-    "modules": [
-        "service/groundstation"
-    ]
-}

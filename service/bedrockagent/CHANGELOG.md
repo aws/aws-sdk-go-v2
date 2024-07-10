@@ -1,3 +1,8 @@
+# v1.16.0 (2024-07-10.2)
+
+* **Feature**: Introduces new data sources and chunking strategies for Knowledge bases, advanced parsing logic using FMs, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2024-07-10)
 
 * **Feature**: Introduces new data sources and chunking strategies for Knowledge bases, advanced parsing logic using FMs, session summary generation, and code interpretation (preview) for Claude V3 Sonnet and Haiku models. Also introduces Prompt Flows (preview) to link prompts, foundational models, and resources.

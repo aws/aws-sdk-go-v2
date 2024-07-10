@@ -3,11 +3,11 @@ module github.com/aws/aws-sdk-go-v2/service/rds
 go 1.20
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.30.2
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.14
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.14
+	github.com/aws/aws-sdk-go-v2 v1.30.3
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.15
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.15
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.3
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.16
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.17
 	github.com/aws/smithy-go v1.20.3
 	github.com/jmespath/go-jmespath v0.4.0
 )
