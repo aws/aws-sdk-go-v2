@@ -1,37 +1,8 @@
 {
     "smithy": "2.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
     "shapes": {
         "com.amazonaws.acmpca#ACMPrivateCA": {
             "type": "service",
-            "version": "2017-08-22",
             "operations": [
                 {
                     "target": "com.amazonaws.acmpca#CreateCertificateAuthority"
@@ -109,6 +80,7 @@
                     "arnNamespace": "acm-pca",
                     "cloudFormationName": "ACMPCA",
                     "cloudTrailEventSource": "acm-pca.amazonaws.com",
+                    "docId": "acm-pca-2017-08-22",
                     "endpointPrefix": "acm-pca"
                 },
                 "aws.auth#sigv4": {
@@ -1223,7 +1195,7 @@
                 "CustomAttributes": {
                     "target": "com.amazonaws.acmpca#CustomAttributeList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n         <p>Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of\n\t\t\twhich consists of an object identifier (OID) and a value. For more information, see\n\t\t\tNIST’s definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier (OID)</a>.</p>\n         <note>\n            <p>Custom attributes cannot be used in combination with standard attributes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p/>\n         <p>Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of\n\t\t\twhich consists of an object identifier (OID) and a value. For more information, see\n\t\t\tNIST’s definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier (OID)</a>.</p>\n         <note>\n            <p>Custom attributes cannot be used in combination with standard attributes.</p>\n         </note>"
                     }
                 }
             },
@@ -2099,7 +2071,7 @@
                 "Value": {
                     "target": "com.amazonaws.acmpca#String1To256",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n         <p>Specifies the attribute value of relative distinguished name (RDN).</p>",
+                        "smithy.api#documentation": "<p/>\n         <p>Specifies the attribute value of relative distinguished name (RDN).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2126,14 +2098,14 @@
                 "ObjectIdentifier": {
                     "target": "com.amazonaws.acmpca#CustomObjectIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n         <p>Specifies the object identifier (OID) of the X.509 extension. For more information,\n\t\t\tsee the <a href=\"https://oidref.com/2.5.29\">Global OID reference database.</a>\n         </p>",
+                        "smithy.api#documentation": "<p/>\n         <p>Specifies the object identifier (OID) of the X.509 extension. For more information,\n\t\t\tsee the <a href=\"https://oidref.com/2.5.29\">Global OID reference database.</a>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.acmpca#Base64String1To4096",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n         <p>Specifies the base64-encoded value of the X.509 extension.</p>",
+                        "smithy.api#documentation": "<p/>\n         <p>Specifies the base64-encoded value of the X.509 extension.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2141,12 +2113,12 @@
                     "target": "com.amazonaws.acmpca#Boolean",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p></p>\n         <p>Specifies the critical flag of the X.509 extension.</p>"
+                        "smithy.api#documentation": "<p/>\n         <p>Specifies the critical flag of the X.509 extension.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>\n         <p>Specifies the X.509 extension information for a certificate.</p>\n         <p>Extensions present in <code>CustomExtensions</code> follow the\n\t\t\t\t<code>ApiPassthrough</code>\n            <a href=\"https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations\">template\n\t\t\t\trules</a>. </p>"
+                "smithy.api#documentation": "<p/>\n         <p>Specifies the X.509 extension information for a certificate.</p>\n         <p>Extensions present in <code>CustomExtensions</code> follow the\n\t\t\t\t<code>ApiPassthrough</code>\n            <a href=\"https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations\">template\n\t\t\t\trules</a>. </p>"
             }
         },
         "com.amazonaws.acmpca#CustomExtensionList": {
@@ -2621,7 +2593,7 @@
                 "CustomExtensions": {
                     "target": "com.amazonaws.acmpca#CustomExtensionList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n         <p>Contains a sequence of one or more X.509 extensions, each of which consists of an\n\t\t\tobject identifier (OID), a base64-encoded value, and the critical flag. For more\n\t\t\tinformation, see the <a href=\"https://oidref.com/2.5.29\">Global OID reference\n\t\t\t\tdatabase.</a>\n         </p>"
+                        "smithy.api#documentation": "<p/>\n         <p>Contains a sequence of one or more X.509 extensions, each of which consists of an\n\t\t\tobject identifier (OID), a base64-encoded value, and the critical flag. For more\n\t\t\tinformation, see the <a href=\"https://oidref.com/2.5.29\">Global OID reference\n\t\t\t\tdatabase.</a>\n         </p>"
                     }
                 }
             },
@@ -3065,7 +3037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a signed private CA certificate into Amazon Web Services Private CA. This action is used when you\n\t\t\tare using a chain of trust whose root is located outside Amazon Web Services Private CA. Before you can call\n\t\t\tthis action, the following preparations must in place:</p>\n         <ol>\n            <li>\n               <p>In Amazon Web Services Private CA, call the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action to create the private CA that you\n\t\t\t\t\tplan to back with the imported certificate.</p>\n            </li>\n            <li>\n               <p>Call the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCsr.html\">GetCertificateAuthorityCsr</a> action to generate a certificate signing\n\t\t\t\t\trequest (CSR).</p>\n            </li>\n            <li>\n               <p>Sign the CSR using a root or intermediate CA hosted by either an on-premises\n\t\t\t\t\tPKI hierarchy or by a commercial CA.</p>\n            </li>\n            <li>\n               <p>Create a certificate chain and copy the signed certificate and the certificate\n\t\t\t\t\tchain to your working directory.</p>\n            </li>\n         </ol>\n         <p>Amazon Web Services Private CA supports three scenarios for installing a CA certificate:</p>\n         <ul>\n            <li>\n               <p>Installing a certificate for a root CA hosted by Amazon Web Services Private CA.</p>\n            </li>\n            <li>\n               <p>Installing a subordinate CA certificate whose parent authority is hosted by\n\t\t\t\t\tAmazon Web Services Private CA.</p>\n            </li>\n            <li>\n               <p>Installing a subordinate CA certificate whose parent authority is externally\n\t\t\t\t\thosted.</p>\n            </li>\n         </ul>\n         <p>The following additional requirements apply when you import a CA certificate.</p>\n         <ul>\n            <li>\n               <p>Only a self-signed certificate can be imported as a root CA.</p>\n            </li>\n            <li>\n               <p>A self-signed certificate cannot be imported as a subordinate CA.</p>\n            </li>\n            <li>\n               <p>Your certificate chain must not include the private CA certificate that you\n\t\t\t\t\tare importing.</p>\n            </li>\n            <li>\n               <p>Your root CA must be the last certificate in your chain. The subordinate\n\t\t\t\t\tcertificate, if any, that your root CA signed must be next to last. The\n\t\t\t\t\tsubordinate certificate signed by the preceding subordinate CA must come next,\n\t\t\t\t\tand so on until your chain is built. </p>\n            </li>\n            <li>\n               <p>The chain must be PEM-encoded.</p>\n            </li>\n            <li>\n               <p>The maximum allowed size of a certificate is 32 KB.</p>\n            </li>\n            <li>\n               <p>The maximum allowed size of a certificate chain is 2 MB.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Enforcement of Critical Constraints</i>\n         </p>\n         <p>Amazon Web Services Private CA allows the following extensions to be marked critical in the imported CA\n\t\t\tcertificate or chain.</p>\n         <ul>\n            <li>\n               <p>Authority key identifier</p>\n            </li>\n            <li>\n               <p>Basic constraints (<i>must</i> be marked critical)</p>\n            </li>\n            <li>\n               <p>Certificate policies</p>\n            </li>\n            <li>\n               <p>Extended key usage</p>\n            </li>\n            <li>\n               <p>Inhibit anyPolicy</p>\n            </li>\n            <li>\n               <p>Issuer alternative name</p>\n            </li>\n            <li>\n               <p>Key usage</p>\n            </li>\n            <li>\n               <p>Name constraints</p>\n            </li>\n            <li>\n               <p>Policy mappings</p>\n            </li>\n            <li>\n               <p>Subject alternative name</p>\n            </li>\n            <li>\n               <p>Subject directory attributes</p>\n            </li>\n            <li>\n               <p>Subject key identifier</p>\n            </li>\n            <li>\n               <p>Subject information access</p>\n            </li>\n         </ul>\n         <p>Amazon Web Services Private CA rejects the following extensions when they are marked critical in an\n\t\t\timported CA certificate or chain.</p>\n         <ul>\n            <li>\n               <p>Authority information access</p>\n            </li>\n            <li>\n               <p>CRL distribution points</p>\n            </li>\n            <li>\n               <p>Freshest CRL</p>\n            </li>\n            <li>\n               <p>Policy constraints</p>\n            </li>\n         </ul>\n         <p>Amazon Web Services Private Certificate Authority will also reject any other extension marked as critical not contained on the preceding list of allowed extensions.</p>"
+                "smithy.api#documentation": "<p>Imports a signed private CA certificate into Amazon Web Services Private CA. This action is used when you\n\t\t\tare using a chain of trust whose root is located outside Amazon Web Services Private CA. Before you can call\n\t\t\tthis action, the following preparations must in place:</p>\n         <ol>\n            <li>\n               <p>In Amazon Web Services Private CA, call the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action to create the private CA that you\n\t\t\t\t\tplan to back with the imported certificate.</p>\n            </li>\n            <li>\n               <p>Call the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCsr.html\">GetCertificateAuthorityCsr</a> action to generate a certificate signing\n\t\t\t\t\trequest (CSR).</p>\n            </li>\n            <li>\n               <p>Sign the CSR using a root or intermediate CA hosted by either an on-premises\n\t\t\t\t\tPKI hierarchy or by a commercial CA.</p>\n            </li>\n            <li>\n               <p>Create a certificate chain and copy the signed certificate and the certificate\n\t\t\t\t\tchain to your working directory.</p>\n            </li>\n         </ol>\n         <p>Amazon Web Services Private CA supports three scenarios for installing a CA certificate:</p>\n         <ul>\n            <li>\n               <p>Installing a certificate for a root CA hosted by Amazon Web Services Private CA.</p>\n            </li>\n            <li>\n               <p>Installing a subordinate CA certificate whose parent authority is hosted by\n\t\t\t\t\tAmazon Web Services Private CA.</p>\n            </li>\n            <li>\n               <p>Installing a subordinate CA certificate whose parent authority is externally\n\t\t\t\t\thosted.</p>\n            </li>\n         </ul>\n         <p>The following additional requirements apply when you import a CA certificate.</p>\n         <ul>\n            <li>\n               <p>Only a self-signed certificate can be imported as a root CA.</p>\n            </li>\n            <li>\n               <p>A self-signed certificate cannot be imported as a subordinate CA.</p>\n            </li>\n            <li>\n               <p>Your certificate chain must not include the private CA certificate that you\n\t\t\t\t\tare importing.</p>\n            </li>\n            <li>\n               <p>Your root CA must be the last certificate in your chain. The subordinate\n\t\t\t\t\tcertificate, if any, that your root CA signed must be next to last. The\n\t\t\t\t\tsubordinate certificate signed by the preceding subordinate CA must come next,\n\t\t\t\t\tand so on until your chain is built. </p>\n            </li>\n            <li>\n               <p>The chain must be PEM-encoded.</p>\n            </li>\n            <li>\n               <p>The maximum allowed size of a certificate is 32 KB.</p>\n            </li>\n            <li>\n               <p>The maximum allowed size of a certificate chain is 2 MB.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Enforcement of Critical Constraints</i>\n         </p>\n         <p>Amazon Web Services Private CA allows the following extensions to be marked critical in the imported CA\n\t\t\tcertificate or chain.</p>\n         <ul>\n            <li>\n               <p>Basic constraints (<i>must</i> be marked critical)</p>\n            </li>\n            <li>\n               <p>Subject alternative names</p>\n            </li>\n            <li>\n               <p>Key usage</p>\n            </li>\n            <li>\n               <p>Extended key usage</p>\n            </li>\n            <li>\n               <p>Authority key identifier</p>\n            </li>\n            <li>\n               <p>Subject key identifier</p>\n            </li>\n            <li>\n               <p>Issuer alternative name</p>\n            </li>\n            <li>\n               <p>Subject directory attributes</p>\n            </li>\n            <li>\n               <p>Subject information access</p>\n            </li>\n            <li>\n               <p>Certificate policies</p>\n            </li>\n            <li>\n               <p>Policy mappings</p>\n            </li>\n            <li>\n               <p>Inhibit anyPolicy</p>\n            </li>\n         </ul>\n         <p>Amazon Web Services Private CA rejects the following extensions when they are marked critical in an\n\t\t\timported CA certificate or chain.</p>\n         <ul>\n            <li>\n               <p>Name constraints</p>\n            </li>\n            <li>\n               <p>Policy constraints</p>\n            </li>\n            <li>\n               <p>CRL distribution points</p>\n            </li>\n            <li>\n               <p>Authority information access</p>\n            </li>\n            <li>\n               <p>Freshest CRL</p>\n            </li>\n            <li>\n               <p>Any other extension</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.acmpca#ImportCertificateAuthorityCertificateRequest": {
@@ -3463,16 +3435,16 @@
         "com.amazonaws.acmpca#ListCertificateAuthoritiesRequest": {
             "type": "structure",
             "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.acmpca#NextToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter when paginating results in a subsequent request after you receive a\n\t\t\tresponse with truncated results. Set it to the value of the <code>NextToken</code>\n\t\t\tparameter from the response you just received.</p>"
-                    }
-                },
                 "MaxResults": {
                     "target": "com.amazonaws.acmpca#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter when paginating results to specify the maximum number of items to\n\t\t\treturn in the response on each page. If additional items exist beyond the number you\n\t\t\tspecify, the <code>NextToken</code> element is sent in the response. Use this\n\t\t\t\t<code>NextToken</code> value in a subsequent request to retrieve additional\n\t\t\titems.</p>\n         <p>Although the maximum value is 1000, the action only returns a maximum of 100 items.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.acmpca#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter when paginating results in a subsequent request after you receive a\n\t\t\tresponse with truncated results. Set it to the value of the <code>NextToken</code>\n\t\t\tparameter from the response you just received.</p>"
                     }
                 },
                 "ResourceOwner": {
@@ -3489,16 +3461,16 @@
         "com.amazonaws.acmpca#ListCertificateAuthoritiesResponse": {
             "type": "structure",
             "members": {
-                "CertificateAuthorities": {
-                    "target": "com.amazonaws.acmpca#CertificateAuthorities",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Summary information about each certificate authority you have created.</p>"
-                    }
-                },
                 "NextToken": {
                     "target": "com.amazonaws.acmpca#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When the list is truncated, this value is present and should be used for the\n\t\t\t\t<code>NextToken</code> parameter in a subsequent pagination request.</p>"
+                    }
+                },
+                "CertificateAuthorities": {
+                    "target": "com.amazonaws.acmpca#CertificateAuthorities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about each certificate authority you have created.</p>"
                     }
                 }
             },
@@ -3544,11 +3516,10 @@
         "com.amazonaws.acmpca#ListPermissionsRequest": {
             "type": "structure",
             "members": {
-                "CertificateAuthorityArn": {
-                    "target": "com.amazonaws.acmpca#Arn",
+                "MaxResults": {
+                    "target": "com.amazonaws.acmpca#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by\n\t\t\tcalling the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html\">ListCertificateAuthorities</a> action. This must be of the form:\n\t\t\t\t<code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n\t\t\tYou can get a private CA's ARN by running the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html\">ListCertificateAuthorities</a> action.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>When paginating results, use this parameter to specify the maximum number of items to\n\t\t\treturn in the response. If additional items exist beyond the number you specify, the\n\t\t\t\t<b>NextToken</b> element is sent in the response. Use this\n\t\t\t\t<b>NextToken</b> value in a subsequent request to retrieve\n\t\t\tadditional items.</p>"
                     }
                 },
                 "NextToken": {
@@ -3557,10 +3528,11 @@
                         "smithy.api#documentation": "<p>When paginating results, use this parameter in a subsequent request after you receive\n\t\t\ta response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.</p>"
                     }
                 },
-                "MaxResults": {
-                    "target": "com.amazonaws.acmpca#MaxResults",
+                "CertificateAuthorityArn": {
+                    "target": "com.amazonaws.acmpca#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>When paginating results, use this parameter to specify the maximum number of items to\n\t\t\treturn in the response. If additional items exist beyond the number you specify, the\n\t\t\t\t<b>NextToken</b> element is sent in the response. Use this\n\t\t\t\t<b>NextToken</b> value in a subsequent request to retrieve\n\t\t\tadditional items.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by\n\t\t\tcalling the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html\">ListCertificateAuthorities</a> action. This must be of the form:\n\t\t\t\t<code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n\t\t\tYou can get a private CA's ARN by running the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html\">ListCertificateAuthorities</a> action.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -3571,16 +3543,16 @@
         "com.amazonaws.acmpca#ListPermissionsResponse": {
             "type": "structure",
             "members": {
-                "Permissions": {
-                    "target": "com.amazonaws.acmpca#PermissionList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Summary information about each permission assigned by the specified private CA,\n\t\t\tincluding the action enabled, the policy provided, and the time of creation.</p>"
-                    }
-                },
                 "NextToken": {
                     "target": "com.amazonaws.acmpca#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request.\n\t\t</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.acmpca#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about each permission assigned by the specified private CA,\n\t\t\tincluding the action enabled, the policy provided, and the time of creation.</p>"
                     }
                 }
             },
@@ -3620,11 +3592,10 @@
         "com.amazonaws.acmpca#ListTagsRequest": {
             "type": "structure",
             "members": {
-                "CertificateAuthorityArn": {
-                    "target": "com.amazonaws.acmpca#Arn",
+                "MaxResults": {
+                    "target": "com.amazonaws.acmpca#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that was returned when you called the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action. This must be of the form: </p>\n         <p>\n            <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>\n            </code>\n         </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Use this parameter when paginating results to specify the maximum number of items to\n\t\t\treturn in the response. If additional items exist beyond the number you specify, the\n\t\t\t\t<b>NextToken</b> element is sent in the response. Use this\n\t\t\t\t<b>NextToken</b> value in a subsequent request to retrieve\n\t\t\tadditional items.</p>"
                     }
                 },
                 "NextToken": {
@@ -3633,10 +3604,11 @@
                         "smithy.api#documentation": "<p>Use this parameter when paginating results in a subsequent request after you receive a\n\t\t\tresponse with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.</p>"
                     }
                 },
-                "MaxResults": {
-                    "target": "com.amazonaws.acmpca#MaxResults",
+                "CertificateAuthorityArn": {
+                    "target": "com.amazonaws.acmpca#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter when paginating results to specify the maximum number of items to\n\t\t\treturn in the response. If additional items exist beyond the number you specify, the\n\t\t\t\t<b>NextToken</b> element is sent in the response. Use this\n\t\t\t\t<b>NextToken</b> value in a subsequent request to retrieve\n\t\t\tadditional items.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that was returned when you called the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action. This must be of the form: </p>\n         <p>\n            <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>\n            </code>\n         </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -3647,16 +3619,16 @@
         "com.amazonaws.acmpca#ListTagsResponse": {
             "type": "structure",
             "members": {
-                "Tags": {
-                    "target": "com.amazonaws.acmpca#TagList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with your private CA.</p>"
-                    }
-                },
                 "NextToken": {
                     "target": "com.amazonaws.acmpca#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request.\n\t\t</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.acmpca#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with your private CA.</p>"
                     }
                 }
             },
@@ -3963,7 +3935,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.acmpca#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the private CA to associate with the policy. The\n\t\t\tARN of the CA can be found by calling the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html\">ListCertificateAuthorities</a> action.</p>\n         <p></p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the private CA to associate with the policy. The\n\t\t\tARN of the CA can be found by calling the <a href=\"https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html\">ListCertificateAuthorities</a> action.</p>\n         <p/>",
                         "smithy.api#required": {}
                     }
                 },

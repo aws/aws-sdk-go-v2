@@ -7720,7 +7720,22 @@
                     "outputToken": "LastEvaluatedTableName",
                     "items": "TableNames",
                     "pageSize": "Limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListTablesSuccess",
+                        "params": {
+                            "Limit": 1
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.dynamodb#ListTablesInput": {

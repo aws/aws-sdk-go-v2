@@ -94,14 +94,14 @@
                 "appliedStatus": {
                     "target": "com.amazonaws.arczonalshift#AutoshiftAppliedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>appliedStatus</code> field specifies which application traffic shift is in effect for a\n\t\t\tresource when there is more than one traffic shift active. There can be more than one application traffic \n\t\t\tshift in progress at the same time - that is, practice run zonal shifts, customer-started zonal shifts, \n\t\t\tor an autoshift. The <code>appliedStatus</code> field for an autoshift for a resource can have one of two \n\t\t\tvalues: <code>APPLIED</code> or <code>NOT_APPLIED</code>. The zonal shift or autoshift \n\t\t\tthat is currently in effect for the resource has an applied status set to <code>APPLIED</code>.</p>\n         <p>The overall principle for precedence is that zonal shifts that you start as a customer take precedence \n\t\t\tautoshifts, which take precedence over practice runs. That is, customer-started zonal shifts &gt; autoshifts &gt; practice run \n\t\t\tzonal shifts.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html\">How zonal autoshift \n\t\t\t\tand practice runs work</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
+                        "smithy.api#documentation": "<p>The <code>appliedStatus</code> field specifies which application traffic shift is in effect for a\n\t\t\tresource when there is more than one active traffic shift. There can be more than one application traffic \n\t\t\tshift in progress at the same time - that is, practice run zonal shifts, customer-initiated zonal shifts, \n\t\t\tor an autoshift. The <code>appliedStatus</code> field for a shift that is in progress for a resource can \n\t\t\thave one of two values: <code>APPLIED</code> or <code>NOT_APPLIED</code>. The zonal shift or autoshift \n\t\t\tthat is currently in effect for the resource has an <code>appliedStatus</code> set to <code>APPLIED</code>.</p>\n         <p>The overall principle for precedence is that zonal shifts that you start as a customer take precedence \n\t\t\tautoshifts, which take precedence over practice runs. That is, customer-initiated zonal shifts &gt; autoshifts &gt; practice run \n\t\t\tzonal shifts.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html\">How zonal autoshift \n\t\t\t\tand practice runs work</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "awayFrom": {
                     "target": "com.amazonaws.arczonalshift#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone that traffic is shifted away from for a resource, when Amazon Web Services starts an autoshift. \n\t\t\tUntil the autoshift ends, traffic for the resource is instead directed to other Availability Zones in the Amazon Web Services Region.\n\t\t\tAn autoshift can end for a resource, for example, when Amazon Web Services ends the autoshift for the Availability Zone or when \n\t\t\tyou disable zonal autoshift for the resource.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone (for example, <code>use1-az1</code>) that traffic is shifted away from for a resource, when Amazon Web Services starts an autoshift. \n\t\t\tUntil the autoshift ends, traffic for the resource is instead directed to other Availability Zones in the Amazon Web Services Region.\n\t\t\tAn autoshift can end for a resource, for example, when Amazon Web Services ends the autoshift for the Availability Zone or when \n\t\t\tyou disable zonal autoshift for the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -117,6 +117,34 @@
                 "smithy.api#documentation": "<p>A complex structure that lists an autoshift that is currently active for a managed resource and information about\n\t\t\tthe autoshift.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html\">How zonal autoshift \n\t\t\tand practice runs work</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>"
             }
         },
+        "com.amazonaws.arczonalshift#AutoshiftObserverNotification": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.arczonalshift#GetAutoshiftObserverNotificationStatus"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#UpdateAutoshiftObserverNotificationStatus"
+                }
+            ]
+        },
+        "com.amazonaws.arczonalshift#AutoshiftObserverNotificationStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.arczonalshift#AutoshiftSummaries": {
             "type": "list",
             "member": {
@@ -129,7 +157,7 @@
                 "awayFrom": {
                     "target": "com.amazonaws.arczonalshift#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone that traffic is shifted away from for a resource when Amazon Web Services starts an autoshift. \n\t\t\tUntil the autoshift ends, traffic for the resource is instead directed to other Availability Zones in the Amazon Web Services Region.\n\t\t\tAn autoshift can end for a resource, for example, when Amazon Web Services ends the autoshift for the Availability Zone or when \n\t\t\tyou disable zonal autoshift for the resource.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone (for example, <code>use1-az1</code>) that traffic is shifted away from for a resource when Amazon Web Services starts an autoshift. \n\t\t\tUntil the autoshift ends, traffic for the resource is instead directed to other Availability Zones in the Amazon Web Services Region.\n\t\t\tAn autoshift can end for a resource, for example, when Amazon Web Services ends the autoshift for the Availability Zone or when \n\t\t\tyou disable zonal autoshift for the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -158,6 +186,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Information about an autoshift. Amazon Web Services starts an autoshift to temporarily move traffic for a resource \n\t\t\taway from an Availability Zone in an Amazon Web Services Region\n\t\t\twhen Amazon Web Services determines that there's an issue in the Availability Zone that could potentially affect customers.\n\t\t\tYou can configure zonal autoshift in Route 53 ARC for managed resources in your Amazon Web Services account in a Region. \n\t\t\tSupported Amazon Web Services resources are automatically registered with Route 53 ARC.</p>\n         <p>Autoshifts are temporary. When the Availability Zone recovers, Amazon Web Services ends the autoshift, and \n\t\t\ttraffic for the resource is no longer directed to the other Availability Zones in the Region.</p>\n         <p>You can stop an autoshift for a resource by disabling zonal autoshift.</p>"
             }
+        },
+        "com.amazonaws.arczonalshift#AutoshiftTriggerResource": {
+            "type": "resource"
         },
         "com.amazonaws.arczonalshift#AutoshiftsInResource": {
             "type": "list",
@@ -311,34 +342,44 @@
             }
         },
         "com.amazonaws.arczonalshift#ConflictExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ZonalShiftAlreadyExists",
-                        "name": "ZONAL_SHIFT_ALREADY_EXISTS"
-                    },
-                    {
-                        "value": "ZonalShiftStatusNotActive",
-                        "name": "ZONAL_SHIFT_STATUS_NOT_ACTIVE"
-                    },
-                    {
-                        "value": "SimultaneousZonalShiftsConflict",
-                        "name": "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT"
-                    },
-                    {
-                        "value": "PracticeConfigurationAlreadyExists",
-                        "name": "PRACTICE_CONFIGURATION_ALREADY_EXISTS"
-                    },
-                    {
-                        "value": "AutoShiftEnabled",
-                        "name": "AUTOSHIFT_ENABLED"
-                    },
-                    {
-                        "value": "PracticeConfigurationDoesNotExist",
-                        "name": "PRACTICE_CONFIGURATION_DOES_NOT_EXIST"
+            "type": "enum",
+            "members": {
+                "ZONAL_SHIFT_ALREADY_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZonalShiftAlreadyExists"
                     }
-                ]
+                },
+                "ZONAL_SHIFT_STATUS_NOT_ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZonalShiftStatusNotActive"
+                    }
+                },
+                "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SimultaneousZonalShiftsConflict"
+                    }
+                },
+                "PRACTICE_CONFIGURATION_ALREADY_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PracticeConfigurationAlreadyExists"
+                    }
+                },
+                "AUTOSHIFT_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoShiftEnabled"
+                    }
+                },
+                "PRACTICE_CONFIGURATION_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PracticeConfigurationDoesNotExist"
+                    }
+                }
             }
         },
         "com.amazonaws.arczonalshift#ControlCondition": {
@@ -347,20 +388,20 @@
                 "type": {
                     "target": "com.amazonaws.arczonalshift#ControlConditionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of alarm specified for a practice run. The only valid value is <code>CLOUDWATCH</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of alarm specified for a practice run. You can only specify Amazon CloudWatch alarms for practice runs, so the \n\t\t\tonly valid value is <code>CLOUDWATCH</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "alarmIdentifier": {
                     "target": "com.amazonaws.arczonalshift#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Amazon CloudWatch alarm that you specify as a control condition for a practice run.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an Amazon CloudWatch alarm that you specify as a control condition for a practice run.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A control condition is an alarm that you specify for a practice run. When you configure practice runs\n\t\t\twith zonal autoshift for a resource, you specify Amazon CloudWatch alarms, which you create in CloudWatch \n\t\t\tto use with the practice run. The alarms that you specify are an \n\t\t\t<i>outcome alarm</i>, to monitor application health during practice runs and, \n\t\t\toptionally, a <i>blocking alarm</i>, to block practice runs from starting.</p>\n         <p>Control condition alarms do not apply for autoshifts.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html\">\n\t\t\t\tConsiderations when you configure zonal autoshift</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>"
+                "smithy.api#documentation": "<p>A control condition is an alarm that you specify for a practice run. When you configure practice runs\n\t\t\twith zonal autoshift for a resource, you specify Amazon CloudWatch alarms, which you create in CloudWatch \n\t\t\tto use with the practice run. The alarms that you specify are an \n\t\t\t<i>outcome alarm</i>, to monitor application health during practice runs and, \n\t\t\toptionally, a <i>blocking alarm</i>, to block practice runs from starting or to interrupt\n\t\t\ta practice run in progress.</p>\n         <p>Control condition alarms do not apply for autoshifts.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html\">\n\t\t\t\tConsiderations when you configure zonal autoshift</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>"
             }
         },
         "com.amazonaws.arczonalshift#ControlConditionType": {
@@ -415,7 +456,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A practice run configuration for zonal autoshift is required when you enable zonal autoshift.\n\t\t\tA practice run configuration includes specifications for blocked dates and blocked time windows,\n\t\tand for Amazon CloudWatch alarms that you create to use with practice runs. The alarms that you specify are an \n\t\t\t<i>outcome alarm</i>, to monitor application health during practice runs and, \n\t\t\toptionally, a <i>blocking alarm</i>, to block practice runs from starting.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html\">\n\t\t\t\tConsiderations when you configure zonal autoshift</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
+                "smithy.api#documentation": "<p>A practice run configuration for zonal autoshift is required when you enable zonal autoshift.\n\t\t\tA practice run configuration includes specifications for blocked dates and blocked time windows,\n\t\tand for Amazon CloudWatch alarms that you create to use with practice runs. The alarms that you specify are an \n\t\t\t<i>outcome alarm</i>, to monitor application health during practice runs and, \n\t\t\toptionally, a <i>blocking alarm</i>, to block practice runs from starting.</p>\n         <p>When a resource has a practice run configuration, Route 53 ARC starts zonal shifts for the resource\n\t\t\tweekly, to shift traffic for practice runs. Practice runs help you to ensure that \n\t\t\tshifting away traffic from an Availability Zone during an autoshift is safe for your application.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html\">\n\t\t\t\tConsiderations when you configure zonal autoshift</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/configuration",
@@ -429,7 +470,7 @@
                 "resourceIdentifier": {
                     "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resource to shift away traffic for when a practice\n\t\t\trun starts a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the resource that Amazon Web Services shifts traffic for with a practice \n\t\t\trun zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -488,7 +529,7 @@
                 "zonalAutoshiftStatus": {
                     "target": "com.amazonaws.arczonalshift#ZonalAutoshiftStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status for zonal autoshift for a resource. When you specify the\n\t\t\tautoshift status as <code>ENABLED</code>, Amazon Web Services shifts traffic \n\t\t\taway from shifts away application resource traffic from an Availability Zone, \n\t\t\ton your behalf, when Amazon Web Services determines that there's an issue in \n\t\t\tthe Availability Zone that could potentially affect customers.</p>\n         <p>When you enable zonal autoshift, you must also configure practice runs for\n\t\t\tthe resource.</p>",
+                        "smithy.api#documentation": "<p>The status for zonal autoshift for a resource. When you specify <code>ENABLED</code>\n\t\t\tfor the autoshift status, Amazon Web Services shifts traffic \n\t\t\taway from shifts away application resource traffic from an Availability Zone, \n\t\t\ton your behalf, when internal telemetry indicates that there is an Availability \n\t\t\tZone impairment that could potentially impact customers.</p>\n         <p>When you enable zonal autoshift, you must also configure practice runs for\n\t\t\tthe resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -605,6 +646,62 @@
         "com.amazonaws.arczonalshift#ExpiryTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.arczonalshift#GetAutoshiftObserverNotificationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#GetAutoshiftObserverNotificationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#GetAutoshiftObserverNotificationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the status of autoshift observer notification. Autoshift observer\n\t\t\tnotification enables you to be notified, through Amazon EventBridge, when\n\t\t\tthere is an autoshift event for zonal autoshift.</p>\n         <p>If the status is <code>ENABLED</code>,\n\t\t\tRoute 53 ARC includes all autoshift events when you use the EventBridge pattern\n\t\t\t<code>Autoshift In Progress</code>. When the status is <code>DISABLED</code>,\n\t\t\tRoute 53 ARC includes only autoshift events for autoshifts when one or more of your\n\t\t\tresources is included in the autoshift.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html#ZAShiftNotification\">\n\t\t\t\tNotifications for practice runs and autoshifts</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/autoshift-observer-notification",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#GetAutoshiftObserverNotificationStatusRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.arczonalshift#AutoshiftObserverNotification"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#GetAutoshiftObserverNotificationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.arczonalshift#AutoshiftObserverNotificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of autoshift observer notification. If the status is <code>ENABLED</code>,\n\t\t\tRoute 53 ARC includes all autoshift events when you use the Amazon EventBridge pattern\n\t\t\t<code>Autoshift In Progress</code>. When the status is <code>DISABLED</code>,\n\t\t\tRoute 53 ARC includes only autoshift events for autoshifts when one or more of your\n\t\t\tresources is included in the autoshift. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.arczonalshift#GetManagedResource": {
             "type": "operation",
             "input": {
@@ -646,7 +743,7 @@
                 "resourceIdentifier": {
                     "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource to shift away traffic for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the resource that Amazon Web Services shifts traffic for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -749,7 +846,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the active autoshifts for a specified resource.</p>",
+                "smithy.api#documentation": "<p>Returns a list of autoshifts for an Amazon Web Services Region. By default, the call returns\n\t\t\tonly <code>ACTIVE</code> autoshifts. Optionally, you can specify the <code>status</code> parameter to return\n\t\t\t<code>COMPLETED</code> autoshifts.\n\t\t</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/autoshifts",
@@ -917,7 +1014,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all active and completed zonal shifts in Amazon Route 53 Application Recovery Controller in your Amazon Web Services account in this Amazon Web Services Region.\n   \t\t<code>ListZonalShifts</code> returns customer-started zonal shifts, as well as practice run zonal shifts that Route 53 ARC started on \n   \t\tyour behalf for zonal autoshift.</p>\n         <p>The <code>ListZonalShifts</code> operation does not list autoshifts. For more information about listing\n   \t\tautoshifts, see <a href=\"https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html\">\"&gt;ListAutoshifts</a>.</p>",
+                "smithy.api#documentation": "<p>Lists all active and completed zonal shifts in Amazon Route 53 Application Recovery Controller in your Amazon Web Services account in this Amazon Web Services Region.\n   \t\t<code>ListZonalShifts</code> returns customer-initiated zonal shifts, as well as practice run zonal shifts that Route 53 ARC started on \n   \t\tyour behalf for zonal autoshift.</p>\n         <p>The <code>ListZonalShifts</code> operation does not list autoshifts. For more information about listing\n   \t\tautoshifts, see <a href=\"https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html\">\"&gt;ListAutoshifts</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/zonalshifts",
@@ -1093,6 +1190,12 @@
                     "target": "com.amazonaws.arczonalshift#Autoshift"
                 },
                 {
+                    "target": "com.amazonaws.arczonalshift#AutoshiftObserverNotification"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#AutoshiftTriggerResource"
+                },
+                {
                     "target": "com.amazonaws.arczonalshift#ManagedResource"
                 },
                 {
@@ -1137,7 +1240,7 @@
                         "Date"
                     ]
                 },
-                "smithy.api#documentation": "<p>Welcome to the Zonal Shift API Reference Guide for Amazon Route 53 Application Recovery Controller (Route 53 ARC).</p>\n         <p>You can start a zonal shift to move traffic for a load balancer resource away from an Availability Zone to\n\t\t\thelp your application recover quickly from an impairment in an Availability Zone. For example, \n\t\t\tyou can recover your application from a developer's bad code deployment or from an \n\t\t\tAmazon Web Services infrastructure failure in a single Availability Zone.</p>\n         <p>You can also configure zonal autoshift for a load balancer resource. Zonal autoshift \n\t\t\tis a capability in Route 53 ARC where Amazon Web Services shifts away application resource \n\t\t\ttraffic from an Availability Zone, on your behalf, to help reduce your time to recovery during events.\n\t\t\tAmazon Web Services shifts away traffic for resources that are enabled for zonal autoshift whenever Amazon Web Services \n\t\t\tdetermines that there's an issue in the Availability Zone that could potentially affect \n\t\t\tcustomers.</p>\n         <p>To ensure that zonal autoshift is safe for your application, you must \n\t\t\talso configure practice runs when you enable zonal autoshift for a resource. Practice runs start \n\t\t\tweekly zonal shifts for a resource, to shift\n\t\t\ttraffic for the resource out of an Availability Zone. Practice runs make sure, on a regular basis, \n\t\t\tthat you have enough capacity in all the Availability Zones in an Amazon Web Services Region \n\t\t\tfor your application to continue to operate normally \n\t\t\twhen traffic for a resource is shifted away from one Availability Zone.</p>\n         <important>\n            <p>You must prescale resource capacity in all Availability Zones in the Region \n\t\t\twhere your application is deployed, before you configure practice runs or enable zonal autoshift\n\t\t\tfor a resource. You should not rely on scaling on demand when an autoshift or practice run \n\t\t\tstarts. </p>\n         </important>\n         <p>For more information about using zonal shift and zonal autoshift, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html\">Amazon Route 53 Application Recovery Controller \n\t\t\t\tDeveloper Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Welcome to the API Reference Guide for zonal shift and zonal autoshift in Amazon Route 53 Application Recovery Controller (Route 53 ARC).</p>\n         <p>You can start a zonal shift to move traffic for a load balancer resource away from an Availability Zone to\n\t\t\thelp your application recover quickly from an impairment in an Availability Zone. For example, \n\t\t\tyou can recover your application from a developer's bad code deployment or from an \n\t\t\tAmazon Web Services infrastructure failure in a single Availability Zone.</p>\n         <p>You can also configure zonal autoshift for supported load balancer resources. Zonal autoshift \n\t\t\tis a capability in Route 53 ARC where you authorize Amazon Web Services to shift away application resource \n\t\t\ttraffic from an Availability Zone during events, on your behalf, to help reduce your time to recovery.\n\t\t\tAmazon Web Services starts an autoshift when internal telemetry indicates that there is an Availability \n\t\t\tZone impairment that could potentially impact customers.</p>\n         <p>To help make sure that zonal autoshift is safe for your application, you must \n\t\t\talso configure practice runs when you enable zonal autoshift for a resource. Practice runs start \n\t\t\tweekly zonal shifts for a resource, to shift traffic for the resource away from an Availability Zone. \n\t\t\tPractice runs help you to make sure, on a regular basis, that you have enough capacity in all the \n\t\t\tAvailability Zones in an Amazon Web Services Region for your application to continue to operate normally \n\t\t\twhen traffic for a resource is shifted away from one Availability Zone.</p>\n         <important>\n            <p>Before you configure practice runs or enable zonal autoshift, we strongly recommend\n\t\t\tthat you prescale your application resource capacity in all Availability Zones in the Region where \n\t\t\tyour application resources are deployed. You should not rely on scaling on demand when an \n\t\t\tautoshift or practice run starts. Zonal autoshift, including practice runs, works independently, \n\t\t\tand does not wait for auto scaling actions to complete. Relying on auto scaling, instead of \n\t\t\tpre-scaling, can result in loss of availability.</p>\n            <p>If you use auto scaling to handle regular cycles of traffic, we strongly recommend that you configure \n\t\t\t\tthe minimum capacity of your auto scaling to continue operating normally with the loss of an \n\t\t\t\tAvailability Zone. </p>\n         </important>\n         <p>Be aware that Route 53 ARC does not inspect the health of individual resources. Amazon Web Services only starts an \n\t\t\tautoshift when Amazon Web Services telemetry detects that there is an Availability Zone impairment that could \n\t\t\tpotentially impact customers. In some cases, resources might be shifted away that are not experiencing \n\t\t\timpact.</p>\n         <p>For more information about using zonal shift and zonal autoshift, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html\">Amazon Route 53 Application Recovery Controller \n\t\t\t\tDeveloper Guide</a>.</p>",
                 "smithy.api#title": "AWS ARC - Zonal Shift",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1836,7 +1939,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A practice run configuration for a resource includes the Amazon CloudWatch alarms that you've specified for a practice\n\t\trun, as well as any blocked dates or blocked windows for the practice run.</p>\n         <p>You can update or delete a practice run configuration. Before you delete a practice run configuration, you\n\t\t\tmust disable zonal autoshift for the resource. A practice run configuration is required when zonal autoshift is enabled.</p>"
+                "smithy.api#documentation": "<p>A practice run configuration for a resource includes the Amazon CloudWatch alarms that you've specified for a practice\n\t\trun, as well as any blocked dates or blocked windows for the practice run. When a resource has a practice run \n\t\tconfiguration, Route 53 ARC shifts traffic for the resource weekly for practice runs.</p>\n         <p>Practice runs are required for zonal autoshift. The zonal shifts that Route 53 ARC starts for practice runs help you to ensure that \n\t\t\tshifting away traffic from an Availability Zone during an autoshift is safe for your application.</p>\n         <p>You can update or delete a practice run configuration. Before you delete a practice run configuration, you\n\t\t\tmust disable zonal autoshift for the resource. A practice run configuration is required when zonal autoshift is enabled.</p>"
             }
         },
         "com.amazonaws.arczonalshift#PracticeRunConfigurationResource": {
@@ -1982,14 +2085,14 @@
                 "resourceIdentifier": {
                     "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource to shift away traffic for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the resource that Amazon Web Services shifts traffic for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "awayFrom": {
                     "target": "com.amazonaws.arczonalshift#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone (for example, <code>use1-az1</code>) that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2028,6 +2131,73 @@
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.arczonalshift#UpdateAutoshiftObserverNotificationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#UpdateAutoshiftObserverNotificationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#UpdateAutoshiftObserverNotificationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the status of autoshift observer notification. Autoshift observer\n\t\t\tnotification enables you to be notified, through Amazon EventBridge, when\n\t\t\tthere is an autoshift event for zonal autoshift.</p>\n         <p>If the status is <code>ENABLED</code>,\n\t\t\tRoute 53 ARC includes all autoshift events when you use the EventBridge pattern\n\t\t\t<code>Autoshift In Progress</code>. When the status is <code>DISABLED</code>,\n\t\t\tRoute 53 ARC includes only autoshift events for autoshifts when one or more of your\n\t\t\tresources is included in the autoshift.</p>\n         <p>For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html#ZAShiftNotification\">\n\t\t\t\tNotifications for practice runs and autoshifts</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/autoshift-observer-notification",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#UpdateAutoshiftObserverNotificationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.arczonalshift#AutoshiftObserverNotificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status to set for autoshift observer notification. If the status is <code>ENABLED</code>,\n\t\t\tRoute 53 ARC includes all autoshift events when you use the Amazon EventBridge pattern\n\t\t\t<code>Autoshift In Progress</code>. When the status is <code>DISABLED</code>,\n\t\t\tRoute 53 ARC includes only autoshift events for autoshifts when one or more of your\n\t\t\tresources is included in the autoshift. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.arczonalshift#AutoshiftObserverNotification"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#UpdateAutoshiftObserverNotificationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.arczonalshift#AutoshiftObserverNotificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status for autoshift observer notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.arczonalshift#UpdatePracticeRunConfiguration": {
@@ -2177,7 +2347,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>You can update the zonal autoshift status for a resource, to enable or disable zonal\n\t\t\tautoshift. When zonal autoshift is <code>ENABLED</code>, Amazon Web Services shifts away \n\t\t\tresource traffic from an Availability Zone, on your behalf, when Amazon Web Services\n\t\t\tdetermines that there's an issue in the Availability Zone that could potentially affect customers.</p>",
+                "smithy.api#documentation": "<p>The zonal autoshift configuration for a resource includes the practice run configuration and the status for\n\t\t\trunning autoshifts, zonal autoshift status. When a resource has a practice run configuation, Route 53 ARC \n\t\t\tstarts weekly zonal shifts for the resource, to shift traffic away from an Availability Zone. Weekly practice\n\t\t\truns help you to make sure that your application can continue to operate normally with the loss of one Availability Zone.</p>\n         <p>You can update the zonal autoshift autoshift status to enable or disable zonal autoshift. When zonal\n\t\t\tautoshift is <code>ENABLED</code>, you authorize Amazon Web Services to shift away resource traffic for \n\t\t\tan application from an Availability Zone during events, on your behalf, to help reduce time to recovery.\n\t\t\tTraffic is also shifted away for the required weekly practice runs.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/managedresources/{resourceIdentifier}",
@@ -2200,7 +2370,7 @@
                 "zonalAutoshiftStatus": {
                     "target": "com.amazonaws.arczonalshift#ZonalAutoshiftStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The zonal autoshift status for the resource that you want to update the zonal\n\t\t\tautoshift configuration for.</p>",
+                        "smithy.api#documentation": "<p>The zonal autoshift status for the resource that you want to update the zonal\n\t\t\tautoshift configuration for. Choose <code>ENABLED</code> to authorize Amazon Web Services \n\t\t\tto shift away resource traffic for an application from an Availability Zone during events, \n\t\t\ton your behalf, to help reduce time to recovery.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2222,7 +2392,7 @@
                 "zonalAutoshiftStatus": {
                     "target": "com.amazonaws.arczonalshift#ZonalAutoshiftStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The zonal autoshift status for the resource that you updated the zonal\n\t\t\tautoshift configuration for.</p>",
+                        "smithy.api#documentation": "<p>The updated zonal autoshift status for the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2410,21 +2580,21 @@
                 "resourceIdentifier": {
                     "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource to shift away traffic for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the resource that Amazon Web Services shifts traffic for. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n         <p>At this time, supported resources are Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "awayFrom": {
                     "target": "com.amazonaws.arczonalshift#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n\t\t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone (for example, <code>use1-az1</code>) that traffic is moved away from for a resource when you start a zonal shift. \n\t\t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "expiryTime": {
                     "target": "com.amazonaws.arczonalshift#ExpiryTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expiry time (expiration time) for a customer-started zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n\t\t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n\t\t\tto set a new expiration at any time. </p>\n         <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n\t\t\tto an expiry time (expiration time). You can cancel a zonal shift when you're ready to restore traffic to the Availability Zone, or\n\t\t\tjust wait for it to expire. Or you can update the zonal shift to specify another length of time to expire in.</p>",
+                        "smithy.api#documentation": "<p>The expiry time (expiration time) for a customer-initiated zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n\t\t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n\t\t\tto set a new expiration at any time. </p>\n         <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n\t\t\tto an expiry time (expiration time). You can cancel a zonal shift when you're ready to restore traffic to the Availability Zone, or\n\t\t\tjust wait for it to expire. Or you can update the zonal shift to specify another length of time to expire in.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2475,7 +2645,7 @@
                 "appliedStatus": {
                     "target": "com.amazonaws.arczonalshift#AppliedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>appliedStatus</code> field specifies which application traffic shift is in effect for a\n   \t\tresource when there is more than one traffic shift active. There can be more than one application traffic \n   \t\tshift in progress at the same time - that is, practice run zonal shifts, customer-started zonal shifts, \n   \t\tor an autoshift. The <code>appliedStatus</code> field for an autoshift for a resource can have one of two \n   \t\tvalues: <code>APPLIED</code> or <code>NOT_APPLIED</code>. The zonal shift or autoshift \n   \t\tthat is currently in effect for the resource has an applied status set to <code>APPLIED</code>.</p>\n         <p>The overall principle for precedence is that zonal shifts that you start as a customer take precedence \n   \t\tautoshifts, which take precedence over practice runs. That is, customer-started zonal shifts &gt; autoshifts &gt; practice run \n   \t\tzonal shifts.</p>\n         <p>For more information, see \n   \t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html\">How zonal autoshift \n   \t\t\tand practice runs work</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
+                        "smithy.api#documentation": "<p>The <code>appliedStatus</code> field specifies which application traffic shift is in effect for a\n   \t\tresource when there is more than one active traffic shift. There can be more than one application traffic \n   \t\tshift in progress at the same time - that is, practice run zonal shifts, customer-initiated zonal shifts, \n   \t\tor an autoshift. The <code>appliedStatus</code> field for a shift that is in progress for a resource can \n   \t\thave one of two values: <code>APPLIED</code> or <code>NOT_APPLIED</code>. The zonal shift or autoshift \n   \t\tthat is currently in effect for the resource has an <code>appliedStatus</code> set to <code>APPLIED</code>.</p>\n         <p>The overall principle for precedence is that zonal shifts that you start as a customer take precedence \n   \t\tautoshifts, which take precedence over practice runs. That is, customer-initiated zonal shifts &gt; autoshifts &gt; practice run \n   \t\tzonal shifts.</p>\n         <p>For more information, see \n   \t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html\">How zonal autoshift \n   \t\t\tand practice runs work</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2496,14 +2666,14 @@
                 "awayFrom": {
                     "target": "com.amazonaws.arczonalshift#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone (for example, <code>use1-az1</code>) that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "expiryTime": {
                     "target": "com.amazonaws.arczonalshift#ExpiryTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expiry time (expiration time) for a customer-started zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n   \t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n   \t\tto set a new expiration at any time. </p>\n         <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n   \t\tto an expiry time (expiration time). You can cancel a zonal shift when you're ready to restore traffic to the Availability Zone, or\n   \t\tjust wait for it to expire. Or you can update the zonal shift to specify another length of time to expire in.</p>",
+                        "smithy.api#documentation": "<p>The expiry time (expiration time) for a customer-initiated zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n   \t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n   \t\tto set a new expiration at any time. </p>\n         <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n   \t\tto an expiry time (expiration time). You can cancel a zonal shift when you're ready to restore traffic to the Availability Zone, or\n   \t\tjust wait for it to expire. Or you can update the zonal shift to specify another length of time to expire in.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2517,7 +2687,7 @@
                 "comment": {
                     "target": "com.amazonaws.arczonalshift#ZonalShiftComment",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment\n   \t\thistory is maintained. That is, a new comment overwrites any existing comment string.</p>",
+                        "smithy.api#documentation": "<p>A comment that you enter for a customer-initiated zonal shift. Only the latest comment is retained; no comment\n   \t\thistory is maintained. That is, a new comment overwrites any existing comment string.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2597,14 +2767,14 @@
                 "awayFrom": {
                     "target": "com.amazonaws.arczonalshift#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone (for example, <code>use1-az1</code>) that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "expiryTime": {
                     "target": "com.amazonaws.arczonalshift#ExpiryTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expiry time (expiration time) for a customer-started zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n   \t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n   \t\tto set a new expiration at any time. </p>\n         <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n   \t\tto an expiry time (expiration time). You can cancel a zonal shift when you're ready to restore traffic to the Availability Zone, or\n   \t\tjust wait for it to expire. Or you can update the zonal shift to specify another length of time to expire in.</p>",
+                        "smithy.api#documentation": "<p>The expiry time (expiration time) for a customer-initiated zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n   \t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n   \t\tto set a new expiration at any time. </p>\n         <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n   \t\tto an expiry time (expiration time). You can cancel a zonal shift when you're ready to restore traffic to the Availability Zone, or\n   \t\tjust wait for it to expire. Or you can update the zonal shift to specify another length of time to expire in.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2637,7 +2807,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists information about zonal shifts in Amazon Route 53 Application Recovery Controller, including zonal shifts that you start yourself and zonal shifts that Route 53 ARC starts\n   \t\ton your behalf for practice runs with zonal autoshift.</p>\n         <p>Zonal shifts are temporary, including customer-started zonal shifts and the zonal autoshift practice run zonal shifts that\n   \t\tRoute 53 ARC starts weekly, on your behalf. A zonal shift that a customer starts can be active for up to three days (72 hours). A\n   \t\tpractice run zonal shift has a 30 minute duration.</p>"
+                "smithy.api#documentation": "<p>Lists information about zonal shifts in Amazon Route 53 Application Recovery Controller, including zonal shifts that you start yourself and zonal shifts that Route 53 ARC starts\n   \t\ton your behalf for practice runs with zonal autoshift.</p>\n         <p>Zonal shifts are temporary, including customer-initiated zonal shifts and the zonal autoshift practice run zonal shifts that\n   \t\tRoute 53 ARC starts weekly, on your behalf. A zonal shift that a customer starts can be active for up to three days (72 hours). A\n   \t\tpractice run zonal shift has a 30 minute duration.</p>"
             }
         },
         "com.amazonaws.arczonalshift#ZonalShifts": {

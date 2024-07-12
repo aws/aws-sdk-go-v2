@@ -4954,6 +4954,19 @@
                             ]
                         }
                     }
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeScalingProcessTypesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
                 ]
             }
         },

@@ -808,6 +808,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.globalaccelerator#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
                 },
                 {
@@ -815,6 +818,9 @@
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {
@@ -986,6 +992,9 @@
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {
@@ -1829,6 +1838,9 @@
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {
@@ -1917,6 +1929,9 @@
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {
@@ -5034,10 +5049,19 @@
                     "target": "com.amazonaws.globalaccelerator#AcceleratorNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.globalaccelerator#AttachmentNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#EndpointGroupNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#ListenerNotFoundException"
                 }
             ],
             "traits": {
@@ -5755,10 +5779,16 @@
                     "target": "com.amazonaws.globalaccelerator#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.globalaccelerator#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {
@@ -5785,6 +5815,9 @@
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {
@@ -5995,10 +6028,16 @@
                     "target": "com.amazonaws.globalaccelerator#AcceleratorNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.globalaccelerator#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {
@@ -6025,6 +6064,9 @@
                 },
                 {
                     "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#TransactionInProgressException"
                 }
             ],
             "traits": {

@@ -14615,7 +14615,20 @@
                     "outputToken": "Marker",
                     "items": "DBEngineVersions",
                     "pageSize": "MaxRecords"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeDBEngineVersionsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.rds#DescribeDBEngineVersionsMessage": {
@@ -14839,6 +14852,21 @@
                 },
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeDBInstancesFailure",
+                        "params": {
+                            "DBInstanceIdentifier": "fake-id"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
                 ],
                 "smithy.waiters#waitable": {
                     "DBInstanceAvailable": {

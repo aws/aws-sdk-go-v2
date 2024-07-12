@@ -8034,7 +8034,22 @@
                     "method": "GET",
                     "uri": "/v1/apps/{ApplicationId}",
                     "code": 200
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetAppFailure",
+                        "params": {
+                            "ApplicationId": "InvalidApplicationId"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.pinpoint#GetAppRequest": {
@@ -8286,7 +8301,20 @@
                     "method": "GET",
                     "uri": "/v1/apps",
                     "code": 200
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetAppsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.pinpoint#GetAppsRequest": {
@@ -15202,6 +15230,9 @@
                     "name": "mobiletargeting"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "<p>Doc Engage API - Amazon Pinpoint API</p>",
                 "smithy.api#title": "Amazon Pinpoint",
                 "smithy.rules#endpointRuleSet": {

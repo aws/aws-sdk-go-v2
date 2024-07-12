@@ -3388,7 +3388,20 @@
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "items": "Topics"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListTopicsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.sns#ListTopicsInput": {

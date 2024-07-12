@@ -232,6 +232,190 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AggFunction": {
+            "type": "structure",
+            "members": {
+                "Aggregation": {
+                    "target": "com.amazonaws.quicksight#AggType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation of an Agg function.</p>"
+                    }
+                },
+                "AggregationFunctionParameters": {
+                    "target": "com.amazonaws.quicksight#AggFunctionParamMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation parameters for an Agg function.</p>"
+                    }
+                },
+                "Period": {
+                    "target": "com.amazonaws.quicksight#TopicTimeGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of an Agg function.</p>"
+                    }
+                },
+                "PeriodField": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period field for an Agg function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of an Agg function.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AggFunctionParamKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AggFunctionParamMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#AggFunctionParamKey"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#AggFunctionParamValue"
+            }
+        },
+        "com.amazonaws.quicksight#AggFunctionParamValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AggType": {
+            "type": "enum",
+            "members": {
+                "SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM"
+                    }
+                },
+                "MIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIN"
+                    }
+                },
+                "MAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX"
+                    }
+                },
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                },
+                "AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVERAGE"
+                    }
+                },
+                "DISTINCT_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTINCT_COUNT"
+                    }
+                },
+                "STDEV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STDEV"
+                    }
+                },
+                "STDEVP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STDEVP"
+                    }
+                },
+                "VAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VAR"
+                    }
+                },
+                "VARP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARP"
+                    }
+                },
+                "PERCENTILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENTILE"
+                    }
+                },
+                "MEDIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIAN"
+                    }
+                },
+                "PTD_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PTD_SUM"
+                    }
+                },
+                "PTD_MIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PTD_MIN"
+                    }
+                },
+                "PTD_MAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PTD_MAX"
+                    }
+                },
+                "PTD_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PTD_COUNT"
+                    }
+                },
+                "PTD_DISTINCT_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PTD_DISTINCT_COUNT"
+                    }
+                },
+                "PTD_AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PTD_AVERAGE"
+                    }
+                },
+                "COLUMN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#AggregationFunction": {
             "type": "structure",
             "members": {
@@ -271,6 +455,38 @@
             },
             "value": {
                 "target": "com.amazonaws.quicksight#LimitedString"
+            }
+        },
+        "com.amazonaws.quicksight#AggregationPartitionBy": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field Name for an <code>AggregationPartitionBy</code>.</p>"
+                    }
+                },
+                "TimeGranularity": {
+                    "target": "com.amazonaws.quicksight#TimeGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>TimeGranularity</code> for an <code>AggregationPartitionBy</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of an <code>AggregationPartitionBy</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AggregationPartitionByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AggregationPartitionBy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.quicksight#AggregationSortConfiguration": {
@@ -785,6 +1001,33 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#Anchor": {
+            "type": "structure",
+            "members": {
+                "AnchorType": {
+                    "target": "com.amazonaws.quicksight#AnchorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AnchorType</code> for the Anchor.</p>"
+                    }
+                },
+                "TimeGranularity": {
+                    "target": "com.amazonaws.quicksight#TimeGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>TimeGranularity</code> of the Anchor.</p>"
+                    }
+                },
+                "Offset": {
+                    "target": "com.amazonaws.quicksight#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The offset of the Anchor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of the Anchor.</p>"
+            }
+        },
         "com.amazonaws.quicksight#AnchorDateConfiguration": {
             "type": "structure",
             "members": {
@@ -812,6 +1055,17 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NOW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AnchorType": {
+            "type": "enum",
+            "members": {
+                "TODAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TODAY"
                     }
                 }
             }
@@ -926,6 +1180,22 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#AnonymousUserSnapshotJobResult"
+            }
+        },
+        "com.amazonaws.quicksight#AnswerId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_.\\\\+]*$"
+            }
+        },
+        "com.amazonaws.quicksight#AnswerIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AnswerId"
             }
         },
         "com.amazonaws.quicksight#ArcAxisConfiguration": {
@@ -3893,6 +4163,230 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#BatchCreateTopicReviewedAnswer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#BatchCreateTopicReviewedAnswerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#BatchCreateTopicReviewedAnswerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates new reviewed answers for a Q Topic.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/topics/{TopicId}/batch-create-reviewed-answers",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BatchCreateTopicReviewedAnswerRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that you want to create a reviewed answer in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicId": {
+                    "target": "com.amazonaws.quicksight#TopicId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the topic reviewed answer that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Answers": {
+                    "target": "com.amazonaws.quicksight#CreateTopicReviewedAnswers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the Answers to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#BatchCreateTopicReviewedAnswerResponse": {
+            "type": "structure",
+            "members": {
+                "TopicId": {
+                    "target": "com.amazonaws.quicksight#TopicId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the topic reviewed answer that you want to create. This ID is unique per Amazon Web Services Region\n         for each Amazon Web Services account.</p>"
+                    }
+                },
+                "TopicArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>"
+                    }
+                },
+                "SucceededAnswers": {
+                    "target": "com.amazonaws.quicksight#SucceededTopicReviewedAnswers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of Answers that are successfully created.</p>"
+                    }
+                },
+                "InvalidAnswers": {
+                    "target": "com.amazonaws.quicksight#InvalidTopicReviewedAnswers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of Answers that are invalid and not created.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes reviewed answers for Q Topic.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/topics/{TopicId}/batch-delete-reviewed-answers",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswerRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that you want to delete a reviewed answers in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicId": {
+                    "target": "com.amazonaws.quicksight#TopicId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the topic reviewed answer that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnswerIds": {
+                    "target": "com.amazonaws.quicksight#AnswerIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Answer IDs of the Answers to be deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswerResponse": {
+            "type": "structure",
+            "members": {
+                "TopicId": {
+                    "target": "com.amazonaws.quicksight#TopicId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the topic reviewed answer that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                    }
+                },
+                "TopicArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>"
+                    }
+                },
+                "SucceededAnswers": {
+                    "target": "com.amazonaws.quicksight#SucceededTopicReviewedAnswers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of Answers that are successfully deleted.</p>"
+                    }
+                },
+                "InvalidAnswers": {
+                    "target": "com.amazonaws.quicksight#InvalidTopicReviewedAnswers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of Answers that are invalid and not deleted.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#BigQueryParameters": {
             "type": "structure",
             "members": {
@@ -4564,6 +5058,18 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.quicksight#CalculatedFieldReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Identifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
         "com.amazonaws.quicksight#CalculatedFields": {
             "type": "list",
             "member": {
@@ -5195,6 +5701,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that represents a collective constant.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CollectiveConstantEntry": {
+            "type": "structure",
+            "members": {
+                "ConstantType": {
+                    "target": "com.amazonaws.quicksight#ConstantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ConstantType</code> of a <code>CollectiveConstantEntry</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#ConstantValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a <code>CollectiveConstantEntry</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>CollectiveConstantEntry</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CollectiveConstantEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#CollectiveConstantEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
             }
         },
         "com.amazonaws.quicksight#ColorFillType": {
@@ -6160,6 +6698,71 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ComparisonMethodType": {
+            "type": "enum",
+            "members": {
+                "DIFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIFF"
+                    }
+                },
+                "PERC_DIFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERC_DIFF"
+                    }
+                },
+                "DIFF_AS_PERC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIFF_AS_PERC"
+                    }
+                },
+                "POP_CURRENT_DIFF_AS_PERC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP_CURRENT_DIFF_AS_PERC"
+                    }
+                },
+                "POP_CURRENT_DIFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP_CURRENT_DIFF"
+                    }
+                },
+                "POP_OVERTIME_DIFF_AS_PERC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP_OVERTIME_DIFF_AS_PERC"
+                    }
+                },
+                "POP_OVERTIME_DIFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POP_OVERTIME_DIFF"
+                    }
+                },
+                "PERCENT_OF_TOTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENT_OF_TOTAL"
+                    }
+                },
+                "RUNNING_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING_SUM"
+                    }
+                },
+                "MOVING_AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MOVING_AVERAGE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#Computation": {
             "type": "structure",
             "members": {
@@ -6552,6 +7155,15 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ConstantValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.quicksight#ContextMenuOption": {
             "type": "structure",
             "members": {
@@ -6598,6 +7210,104 @@
                     "min": 1,
                     "max": 200
                 }
+            }
+        },
+        "com.amazonaws.quicksight#ContributionAnalysisDirection": {
+            "type": "enum",
+            "members": {
+                "INCREASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREASE"
+                    }
+                },
+                "DECREASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECREASE"
+                    }
+                },
+                "NEUTRAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEUTRAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ContributionAnalysisFactor": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field name of the <code>ContributionAnalysisFactor</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for the <code>ContributionAnalysisFactor</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ContributionAnalysisFactorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ContributionAnalysisFactor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ContributionAnalysisSortType": {
+            "type": "enum",
+            "members": {
+                "ABSOLUTE_DIFFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABSOLUTE_DIFFERENCE"
+                    }
+                },
+                "CONTRIBUTION_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTRIBUTION_PERCENTAGE"
+                    }
+                },
+                "DEVIATION_FROM_EXPECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVIATION_FROM_EXPECTED"
+                    }
+                },
+                "PERCENTAGE_DIFFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENTAGE_DIFFERENCE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ContributionAnalysisTimeRanges": {
+            "type": "structure",
+            "members": {
+                "StartRange": {
+                    "target": "com.amazonaws.quicksight#TopicIRFilterOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start range for the <code>ContributionAnalysisTimeRanges</code>.</p>"
+                    }
+                },
+                "EndRange": {
+                    "target": "com.amazonaws.quicksight#TopicIRFilterOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end range for the <code>ContributionAnalysisTimeRanges</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for the <code>ContributionAnalysisTimeRanges</code>.</p>"
             }
         },
         "com.amazonaws.quicksight#ContributorDimensionList": {
@@ -9523,6 +10233,65 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateTopicReviewedAnswer": {
+            "type": "structure",
+            "members": {
+                "AnswerId": {
+                    "target": "com.amazonaws.quicksight#AnswerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The answer ID for the <code>CreateTopicReviewedAnswer</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Dataset arn for the <code>CreateTopicReviewedAnswer</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Question": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Question to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mir": {
+                    "target": "com.amazonaws.quicksight#TopicIR",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Mir for the <code>CreateTopicReviewedAnswer</code>.</p>"
+                    }
+                },
+                "PrimaryVisual": {
+                    "target": "com.amazonaws.quicksight#TopicVisual",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>PrimaryVisual</code> for the <code>CreateTopicReviewedAnswer</code>.</p>"
+                    }
+                },
+                "Template": {
+                    "target": "com.amazonaws.quicksight#TopicTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template for the <code>CreateTopicReviewedAnswer</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>CreateTopicReviewedAnswer</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CreateTopicReviewedAnswers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#CreateTopicReviewedAnswer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.quicksight#CreateVPCConnection": {
@@ -13148,6 +13917,18 @@
                     "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
+                    }
+                },
+                "HelperTextVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The helper text visibility of the <code>DateTimePickerControlDisplayOptions</code>.</p>"
+                    }
+                },
+                "DateIconVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date icon visibility of the <code>DateTimePickerControlDisplayOptions</code>.</p>"
                     }
                 }
             },
@@ -22406,6 +23187,44 @@
                 "smithy.api#documentation": "<p>With a <code>Filter</code>, you can remove portions of data from a particular visual or view.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
             }
         },
+        "com.amazonaws.quicksight#FilterAggMetrics": {
+            "type": "structure",
+            "members": {
+                "MetricOperand": {
+                    "target": "com.amazonaws.quicksight#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric operand of the <code>FilterAggMetrics</code>.</p>"
+                    }
+                },
+                "Function": {
+                    "target": "com.amazonaws.quicksight#AggType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function for the <code>FilterAggMetrics</code>.</p>"
+                    }
+                },
+                "SortDirection": {
+                    "target": "com.amazonaws.quicksight#TopicSortDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort direction for <code>FilterAggMetrics</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for the <code>FilterAggMetrics</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FilterAggMetricsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FilterAggMetrics"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.quicksight#FilterClass": {
             "type": "enum",
             "members": {
@@ -26553,6 +27372,21 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#Identifier": {
+            "type": "structure",
+            "members": {
+                "Identity": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity of the identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for the identifier.</p>"
+            }
+        },
         "com.amazonaws.quicksight#IdentityCenterConfiguration": {
             "type": "structure",
             "members": {
@@ -27597,6 +28431,32 @@
                 "smithy.api#documentation": "<p>You don't have this feature activated for your account. To fix this issue, contact Amazon Web Services support.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.quicksight#InvalidTopicReviewedAnswer": {
+            "type": "structure",
+            "members": {
+                "AnswerId": {
+                    "target": "com.amazonaws.quicksight#AnswerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The answer ID for the <code>InvalidTopicReviewedAnswer</code>.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.quicksight#ReviewedAnswerErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error that is returned for the <code>InvalidTopicReviewedAnswer</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>InvalidTopicReviewedAnswer</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#InvalidTopicReviewedAnswers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#InvalidTopicReviewedAnswer"
             }
         },
         "com.amazonaws.quicksight#IpRestrictionRuleDescription": {
@@ -31864,6 +32724,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListTopicReviewedAnswers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListTopicReviewedAnswersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListTopicReviewedAnswersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all reviewed answers for a Q Topic.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/topics/{TopicId}/reviewed-answers",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListTopicReviewedAnswersRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that containd the reviewed answers that you want listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicId": {
+                    "target": "com.amazonaws.quicksight#TopicId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the topic that contains the reviewed answer that you want to list. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListTopicReviewedAnswersResponse": {
+            "type": "structure",
+            "members": {
+                "TopicId": {
+                    "target": "com.amazonaws.quicksight#TopicId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the topic that contains the reviewed answer that you want to list. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                    }
+                },
+                "TopicArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the topic.</p>"
+                    }
+                },
+                "Answers": {
+                    "target": "com.amazonaws.quicksight#TopicReviewedAnswers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of all Answers in the topic.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListTopics": {
             "type": "operation",
             "input": {
@@ -33118,6 +34076,20 @@
                 "target": "com.amazonaws.quicksight#NamedEntityDefinition"
             }
         },
+        "com.amazonaws.quicksight#NamedEntityRef": {
+            "type": "structure",
+            "members": {
+                "NamedEntityName": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NamedEntityName</code> for the <code>NamedEntityRef</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>NamedEntityRef</code>.</p>"
+            }
+        },
         "com.amazonaws.quicksight#NamedFilterAggType": {
             "type": "enum",
             "members": {
@@ -33626,6 +34598,29 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.quicksight#NullFilterOption": {
+            "type": "enum",
+            "members": {
+                "ALL_VALUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_VALUES"
+                    }
+                },
+                "NON_NULLS_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_NULLS_ONLY"
+                    }
+                },
+                "NULLS_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NULLS_ONLY"
+                    }
                 }
             }
         },
@@ -34157,6 +35152,18 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
+                }
+            }
+        },
+        "com.amazonaws.quicksight#OperandList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Identifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
                 }
             }
         },
@@ -36754,6 +37761,12 @@
             "version": "2018-04-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.quicksight#BatchCreateTopicReviewedAnswer"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswer"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CancelIngestion"
                 },
                 {
@@ -37118,6 +38131,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListTopicRefreshSchedules"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListTopicReviewedAnswers"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListTopics"
@@ -39955,6 +40971,53 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\w\\-]+$"
+            }
+        },
+        "com.amazonaws.quicksight#ReviewedAnswerErrorCode": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "MISSING_ANSWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_ANSWER"
+                    }
+                },
+                "DATASET_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASET_DOES_NOT_EXIST"
+                    }
+                },
+                "INVALID_DATASET_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DATASET_ARN"
+                    }
+                },
+                "DUPLICATED_ANSWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATED_ANSWER"
+                    }
+                },
+                "INVALID_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DATA"
+                    }
+                },
+                "MISSING_REQUIRED_FIELDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_REQUIRED_FIELDS"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#Role": {
@@ -42912,6 +43975,32 @@
                 "smithy.api#documentation": "<p>The display options of a control.</p>"
             }
         },
+        "com.amazonaws.quicksight#Slot": {
+            "type": "structure",
+            "members": {
+                "SlotId": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The slot ID of the slot.</p>"
+                    }
+                },
+                "VisualId": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visual ID for the slot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for the slot.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#Slots": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Slot"
+            }
+        },
         "com.amazonaws.quicksight#SmallMultiplesAxisPlacement": {
             "type": "enum",
             "members": {
@@ -44461,6 +45550,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The subtotal options.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SucceededTopicReviewedAnswer": {
+            "type": "structure",
+            "members": {
+                "AnswerId": {
+                    "target": "com.amazonaws.quicksight#AnswerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The answer ID for the <code>SucceededTopicReviewedAnswer</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>SucceededTopicReviewedAnswer</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SucceededTopicReviewedAnswers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SucceededTopicReviewedAnswer"
             }
         },
         "com.amazonaws.quicksight#SuccessfulKeyRegistrationEntries": {
@@ -47472,6 +48581,44 @@
                 "target": "com.amazonaws.quicksight#TopicColumn"
             }
         },
+        "com.amazonaws.quicksight#TopicConstantValue": {
+            "type": "structure",
+            "members": {
+                "ConstantType": {
+                    "target": "com.amazonaws.quicksight#ConstantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The constant type of a <code>TopicConstantValue</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#ConstantValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>TopicConstantValue</code>.</p>"
+                    }
+                },
+                "Minimum": {
+                    "target": "com.amazonaws.quicksight#ConstantValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum for the <code>TopicConstantValue</code>.</p>"
+                    }
+                },
+                "Maximum": {
+                    "target": "com.amazonaws.quicksight#ConstantValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum for the <code>TopicConstantValue</code>.</p>"
+                    }
+                },
+                "ValueList": {
+                    "target": "com.amazonaws.quicksight#CollectiveConstantEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value list of the <code>TopicConstantValue</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicConstantValue</code>.</p>"
+            }
+        },
         "com.amazonaws.quicksight#TopicDateRangeFilter": {
             "type": "structure",
             "members": {
@@ -47605,6 +48752,499 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#TopicFilter"
+            }
+        },
+        "com.amazonaws.quicksight#TopicIR": {
+            "type": "structure",
+            "members": {
+                "Metrics": {
+                    "target": "com.amazonaws.quicksight#TopicIRMetricList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics for the <code>TopicIR</code>.</p>"
+                    }
+                },
+                "GroupByList": {
+                    "target": "com.amazonaws.quicksight#TopicIRGroupByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GroupBy list for the <code>TopicIR</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#TopicIRFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters for the <code>TopicIR</code>.</p>"
+                    }
+                },
+                "Sort": {
+                    "target": "com.amazonaws.quicksight#TopicSortClause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort for the <code>TopicIR</code>.</p>"
+                    }
+                },
+                "ContributionAnalysis": {
+                    "target": "com.amazonaws.quicksight#TopicIRContributionAnalysis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contribution analysis for the <code>TopicIR</code>.</p>"
+                    }
+                },
+                "Visual": {
+                    "target": "com.amazonaws.quicksight#VisualOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visual for the <code>TopicIR</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicIR</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRComparisonMethod": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.quicksight#ComparisonMethodType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type for the <code>TopicIRComparisonMethod</code>.</p>"
+                    }
+                },
+                "Period": {
+                    "target": "com.amazonaws.quicksight#TopicTimeGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period for the <code>TopicIRComparisonMethod</code>.</p>"
+                    }
+                },
+                "WindowSize": {
+                    "target": "com.amazonaws.quicksight#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The window size for the <code>TopicIRComparisonMethod</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of a <code>TopicIRComparisonMethod</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRContributionAnalysis": {
+            "type": "structure",
+            "members": {
+                "Factors": {
+                    "target": "com.amazonaws.quicksight#ContributionAnalysisFactorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The factors for a <code>TopicIRContributionAnalysis</code>.</p>"
+                    }
+                },
+                "TimeRanges": {
+                    "target": "com.amazonaws.quicksight#ContributionAnalysisTimeRanges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time ranges for the <code>TopicIRContributionAnalysis</code>.</p>"
+                    }
+                },
+                "Direction": {
+                    "target": "com.amazonaws.quicksight#ContributionAnalysisDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The direction for the <code>TopicIRContributionAnalysis</code>.</p>"
+                    }
+                },
+                "SortType": {
+                    "target": "com.amazonaws.quicksight#ContributionAnalysisSortType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort type for the <code>TopicIRContributionAnalysis</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicIRContributionAnalysis</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRFilterEntry": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TopicIRFilterOption"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRFilterFunction": {
+            "type": "enum",
+            "members": {
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "EXACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXACT"
+                    }
+                },
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "CONTAINS_STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS_STRING"
+                    }
+                },
+                "PREVIOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREVIOUS"
+                    }
+                },
+                "THIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIS"
+                    }
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST"
+                    }
+                },
+                "NEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEXT"
+                    }
+                },
+                "NOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TopicIRFilterEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRFilterOption": {
+            "type": "structure",
+            "members": {
+                "FilterType": {
+                    "target": "com.amazonaws.quicksight#TopicIRFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter type for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "FilterClass": {
+                    "target": "com.amazonaws.quicksight#FilterClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter class for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "OperandField": {
+                    "target": "com.amazonaws.quicksight#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operand field for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "Function": {
+                    "target": "com.amazonaws.quicksight#TopicIRFilterFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "Constant": {
+                    "target": "com.amazonaws.quicksight#TopicConstantValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The constant for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "Inverse": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The inverse for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "NullFilter": {
+                    "target": "com.amazonaws.quicksight#NullFilterOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The null filter for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "Aggregation": {
+                    "target": "com.amazonaws.quicksight#AggType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "AggregationFunctionParameters": {
+                    "target": "com.amazonaws.quicksight#AggFunctionParamMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation function parameters for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "AggregationPartitionBy": {
+                    "target": "com.amazonaws.quicksight#AggregationPartitionByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AggregationPartitionBy</code> for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "Range": {
+                    "target": "com.amazonaws.quicksight#TopicConstantValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The range for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "Inclusive": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The inclusive for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "TimeGranularity": {
+                    "target": "com.amazonaws.quicksight#TimeGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time granularity for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "LastNextOffset": {
+                    "target": "com.amazonaws.quicksight#TopicConstantValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last next offset for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "AggMetrics": {
+                    "target": "com.amazonaws.quicksight#FilterAggMetricsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agg metrics for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "TopBottomLimit": {
+                    "target": "com.amazonaws.quicksight#TopicConstantValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>TopBottomLimit</code> for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "SortDirection": {
+                    "target": "com.amazonaws.quicksight#TopicSortDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort direction for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                },
+                "Anchor": {
+                    "target": "com.amazonaws.quicksight#Anchor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The anchor for the <code>TopicIRFilterOption</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicIRFilterOption</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRFilterType": {
+            "type": "enum",
+            "members": {
+                "CATEGORY_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CATEGORY_FILTER"
+                    }
+                },
+                "NUMERIC_EQUALITY_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMERIC_EQUALITY_FILTER"
+                    }
+                },
+                "NUMERIC_RANGE_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMERIC_RANGE_FILTER"
+                    }
+                },
+                "DATE_RANGE_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE_RANGE_FILTER"
+                    }
+                },
+                "RELATIVE_DATE_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RELATIVE_DATE_FILTER"
+                    }
+                },
+                "TOP_BOTTOM_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_BOTTOM_FILTER"
+                    }
+                },
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "RANK_LIMIT_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RANK_LIMIT_FILTER"
+                    }
+                },
+                "ACCEPT_ALL_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPT_ALL_FILTER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRGroupBy": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.quicksight#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field name for the <code>TopicIRGroupBy</code>.</p>"
+                    }
+                },
+                "TimeGranularity": {
+                    "target": "com.amazonaws.quicksight#TopicTimeGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time granularity for the <code>TopicIRGroupBy</code>.</p>"
+                    }
+                },
+                "Sort": {
+                    "target": "com.amazonaws.quicksight#TopicSortClause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort for the <code>TopicIRGroupBy</code>.</p>"
+                    }
+                },
+                "DisplayFormat": {
+                    "target": "com.amazonaws.quicksight#DisplayFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display format for the <code>TopicIRGroupBy</code>.</p>"
+                    }
+                },
+                "DisplayFormatOptions": {
+                    "target": "com.amazonaws.quicksight#DisplayFormatOptions"
+                },
+                "NamedEntity": {
+                    "target": "com.amazonaws.quicksight#NamedEntityRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The named entity for the <code>TopicIRGroupBy</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicIRGroupBy</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRGroupByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TopicIRGroupBy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRMetric": {
+            "type": "structure",
+            "members": {
+                "MetricId": {
+                    "target": "com.amazonaws.quicksight#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric ID for the <code>TopicIRMetric</code>.</p>"
+                    }
+                },
+                "Function": {
+                    "target": "com.amazonaws.quicksight#AggFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function for the <code>TopicIRMetric</code>.</p>"
+                    }
+                },
+                "Operands": {
+                    "target": "com.amazonaws.quicksight#OperandList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operands for the <code>TopicIRMetric</code>.</p>"
+                    }
+                },
+                "ComparisonMethod": {
+                    "target": "com.amazonaws.quicksight#TopicIRComparisonMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison method for the <code>TopicIRMetric</code>.</p>"
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.quicksight#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression for the <code>TopicIRMetric</code>.</p>"
+                    }
+                },
+                "CalculatedFieldReferences": {
+                    "target": "com.amazonaws.quicksight#CalculatedFieldReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calculated field references for the <code>TopicIRMetric</code>.</p>"
+                    }
+                },
+                "DisplayFormat": {
+                    "target": "com.amazonaws.quicksight#DisplayFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display format for the <code>TopicIRMetric</code>.</p>"
+                    }
+                },
+                "DisplayFormatOptions": {
+                    "target": "com.amazonaws.quicksight#DisplayFormatOptions"
+                },
+                "NamedEntity": {
+                    "target": "com.amazonaws.quicksight#NamedEntityRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The named entity for the <code>TopicIRMetric</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicIRMetric</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicIRMetricList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TopicIRMetric"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
             }
         },
         "com.amazonaws.quicksight#TopicId": {
@@ -47954,6 +49594,65 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#TopicReviewedAnswer": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the reviewed answer.</p>"
+                    }
+                },
+                "AnswerId": {
+                    "target": "com.amazonaws.quicksight#AnswerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The answer ID of the reviewed answer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Dataset ARN for the <code>TopicReviewedAnswer</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Question": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The question for the <code>TopicReviewedAnswer</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mir": {
+                    "target": "com.amazonaws.quicksight#TopicIR",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mir for the <code>TopicReviewedAnswer</code>.</p>"
+                    }
+                },
+                "PrimaryVisual": {
+                    "target": "com.amazonaws.quicksight#TopicVisual",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary visual for the <code>TopicReviewedAnswer</code>.</p>"
+                    }
+                },
+                "Template": {
+                    "target": "com.amazonaws.quicksight#TopicTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template for the <code>TopicReviewedAnswer</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deinition for a <code>TopicReviewedAnswer</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicReviewedAnswers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TopicReviewedAnswer"
+            }
+        },
         "com.amazonaws.quicksight#TopicScheduleType": {
             "type": "enum",
             "members": {
@@ -48004,6 +49703,43 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.quicksight#TopicSortClause": {
+            "type": "structure",
+            "members": {
+                "Operand": {
+                    "target": "com.amazonaws.quicksight#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operand for a <code>TopicSortClause</code>.</p>"
+                    }
+                },
+                "SortDirection": {
+                    "target": "com.amazonaws.quicksight#TopicSortDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort direction for the <code>TopicSortClause</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicSortClause</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicSortDirection": {
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
+                    }
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#TopicSummaries": {
             "type": "list",
             "member": {
@@ -48040,6 +49776,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A topic summary.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicTemplate": {
+            "type": "structure",
+            "members": {
+                "TemplateType": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template type for the <code>TopicTemplate</code>.</p>"
+                    }
+                },
+                "Slots": {
+                    "target": "com.amazonaws.quicksight#Slots",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The slots for the <code>TopicTemplate</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicTemplate</code>.</p>"
             }
         },
         "com.amazonaws.quicksight#TopicTimeGranularity": {
@@ -48110,6 +49866,44 @@
                         "smithy.api#enumValue": "NEW_READER_EXPERIENCE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#TopicVisual": {
+            "type": "structure",
+            "members": {
+                "VisualId": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visual ID for the <code>TopicVisual</code>.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.quicksight#VisualRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role for the <code>TopicVisual</code>.</p>"
+                    }
+                },
+                "Ir": {
+                    "target": "com.amazonaws.quicksight#TopicIR",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ir for the <code>TopicVisual</code>.</p>"
+                    }
+                },
+                "SupportingVisuals": {
+                    "target": "com.amazonaws.quicksight#TopicVisuals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supporting visuals for the <code>TopicVisual</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>TopicVisual</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicVisuals": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TopicVisual"
             }
         },
         "com.amazonaws.quicksight#TotalAggregationComputation": {
@@ -53875,6 +55669,20 @@
                 "smithy.api#documentation": "<p>The menu options for a visual.</p>"
             }
         },
+        "com.amazonaws.quicksight#VisualOptions": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.quicksight#LimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type for a <code>VisualOptions</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a <code>VisualOptions</code>.</p>"
+            }
+        },
         "com.amazonaws.quicksight#VisualPalette": {
             "type": "structure",
             "members": {
@@ -53893,6 +55701,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The visual display options for the visual palette.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#VisualRole": {
+            "type": "enum",
+            "members": {
+                "PRIMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY"
+                    }
+                },
+                "COMPLIMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLIMENTARY"
+                    }
+                },
+                "MULTI_INTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_INTENT"
+                    }
+                },
+                "FALLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FALLBACK"
+                    }
+                },
+                "FRAGMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRAGMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#VisualSubtitleLabelOptions": {
