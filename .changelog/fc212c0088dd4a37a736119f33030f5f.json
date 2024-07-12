@@ -1,8 +1,0 @@
-{
-    "id": "fc212c00-88dd-4a37-a736-119f33030f5f",
-    "type": "feature",
-    "description": "Minor refactoring of C2J model for AWS Private CA",
-    "modules": [
-        "service/acmpca"
-    ]
-}

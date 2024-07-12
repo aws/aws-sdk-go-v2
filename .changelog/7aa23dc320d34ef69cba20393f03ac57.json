@@ -1,8 +1,0 @@
-{
-    "id": "7aa23dc3-20d3-4ef6-9cba-20393f03ac57",
-    "type": "feature",
-    "description": "Adds the option to subscribe to get notifications when a zonal autoshift occurs in a region.",
-    "modules": [
-        "service/arczonalshift"
-    ]
-}

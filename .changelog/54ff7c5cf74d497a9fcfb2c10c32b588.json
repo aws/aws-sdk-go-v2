@@ -1,8 +1,0 @@
-{
-    "id": "54ff7c5c-f74d-497a-9fcf-b2c10c32b588",
-    "type": "feature",
-    "description": "Vega ally control options and Support for Reviewed Answers in Topics",
-    "modules": [
-        "service/quicksight"
-    ]
-}

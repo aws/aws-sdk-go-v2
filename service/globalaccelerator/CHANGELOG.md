@@ -1,3 +1,7 @@
+# v1.27.0 (2024-07-12)
+
+* **Feature**: This feature adds exceptions to the Customer API to avoid throwing Internal Service errors
+
 # v1.26.4 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

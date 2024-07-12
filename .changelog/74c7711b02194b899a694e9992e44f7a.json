@@ -1,8 +1,0 @@
-{
-    "id": "74c7711b-0219-4b89-9a69-4e9992e44f7a",
-    "type": "feature",
-    "description": "This feature adds exceptions to the Customer API to avoid throwing Internal Service errors",
-    "modules": [
-        "service/globalaccelerator"
-    ]
-}

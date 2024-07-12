@@ -1,3 +1,15 @@
+# Release (2024-07-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.34.0](service/acmpca/CHANGELOG.md#v1340-2024-07-12)
+  * **Feature**: Minor refactoring of C2J model for AWS Private CA
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.12.0](service/arczonalshift/CHANGELOG.md#v1120-2024-07-12)
+  * **Feature**: Adds the option to subscribe to get notifications when a zonal autoshift occurs in a region.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.27.0](service/globalaccelerator/CHANGELOG.md#v1270-2024-07-12)
+  * **Feature**: This feature adds exceptions to the Customer API to avoid throwing Internal Service errors
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.68.0](service/quicksight/CHANGELOG.md#v1680-2024-07-12)
+  * **Feature**: Vega ally control options and Support for Reviewed Answers in Topics
+
 # Release (2024-07-10.2)
 
 ## General Highlights

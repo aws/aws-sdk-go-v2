@@ -1,3 +1,7 @@
+# v1.34.0 (2024-07-12)
+
+* **Feature**: Minor refactoring of C2J model for AWS Private CA
+
 # v1.33.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

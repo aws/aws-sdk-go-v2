@@ -1,3 +1,7 @@
+# v1.68.0 (2024-07-12)
+
+* **Feature**: Vega ally control options and Support for Reviewed Answers in Topics
+
 # v1.67.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.12.0 (2024-07-12)
+
+* **Feature**: Adds the option to subscribe to get notifications when a zonal autoshift occurs in a region.
+
 # v1.11.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
