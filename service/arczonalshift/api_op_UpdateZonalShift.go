@@ -67,10 +67,10 @@ type UpdateZonalShiftInput struct {
 
 type UpdateZonalShiftOutput struct {
 
-	// The Availability Zone that traffic is moved away from for a resource when you
-	// start a zonal shift. Until the zonal shift expires or you cancel it, traffic for
-	// the resource is instead moved to other Availability Zones in the Amazon Web
-	// Services Region.
+	// The Availability Zone (for example, use1-az1 ) that traffic is moved away from
+	// for a resource when you start a zonal shift. Until the zonal shift expires or
+	// you cancel it, traffic for the resource is instead moved to other Availability
+	// Zones in the Amazon Web Services Region.
 	//
 	// This member is required.
 	AwayFrom *string
@@ -82,7 +82,7 @@ type UpdateZonalShiftOutput struct {
 	// This member is required.
 	Comment *string
 
-	// The expiry time (expiration time) for a customer-started zonal shift. A zonal
+	// The expiry time (expiration time) for a customer-initiated zonal shift. A zonal
 	// shift is temporary and must be set to expire when you start the zonal shift. You
 	// can initially set a zonal shift to expire in a maximum of three days (72 hours).
 	// However, you can update a zonal shift to set a new expiration at any time.
@@ -96,8 +96,8 @@ type UpdateZonalShiftOutput struct {
 	// This member is required.
 	ExpiryTime *time.Time
 
-	// The identifier for the resource to shift away traffic for. The identifier is
-	// the Amazon Resource Name (ARN) for the resource.
+	// The identifier for the resource that Amazon Web Services shifts traffic for.
+	// The identifier is the Amazon Resource Name (ARN) for the resource.
 	//
 	// At this time, supported resources are Network Load Balancers and Application
 	// Load Balancers with cross-zone load balancing turned off.

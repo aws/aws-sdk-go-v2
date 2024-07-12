@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the active autoshifts for a specified resource.
+// Returns a list of autoshifts for an Amazon Web Services Region. By default, the
+// call returns only ACTIVE autoshifts. Optionally, you can specify the status
+// parameter to return COMPLETED autoshifts.
 func (c *Client) ListAutoshifts(ctx context.Context, params *ListAutoshiftsInput, optFns ...func(*Options)) (*ListAutoshiftsOutput, error) {
 	if params == nil {
 		params = &ListAutoshiftsInput{}

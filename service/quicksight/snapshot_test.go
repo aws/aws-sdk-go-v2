@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchCreateTopicReviewedAnswer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchCreateTopicReviewedAnswer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteTopicReviewedAnswer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelIngestion(context.Background(), nil, func(o *Options) {
@@ -1526,6 +1550,18 @@ func TestCheckSnapshot_ListTopicRefreshSchedules(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTopicReviewedAnswers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTopicReviewedAnswers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTopicReviewedAnswers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTopics(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTopics(context.Background(), nil, func(o *Options) {
@@ -2149,6 +2185,30 @@ func TestCheckSnapshot_UpdateVPCConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchCreateTopicReviewedAnswer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchCreateTopicReviewedAnswer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteTopicReviewedAnswer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelIngestion(context.Background(), nil, func(o *Options) {
@@ -3606,6 +3666,18 @@ func TestUpdateSnapshot_ListTopicRefreshSchedules(t *testing.T) {
 	_, err := svc.ListTopicRefreshSchedules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTopicRefreshSchedules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTopicReviewedAnswers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTopicReviewedAnswers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTopicReviewedAnswers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

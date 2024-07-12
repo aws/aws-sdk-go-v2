@@ -581,6 +581,9 @@ func awsAwsjson11_deserializeOpErrorCreateAccelerator(response *smithyhttp.Respo
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -589,6 +592,9 @@ func awsAwsjson11_deserializeOpErrorCreateAccelerator(response *smithyhttp.Respo
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -824,6 +830,9 @@ func awsAwsjson11_deserializeOpErrorCreateCustomRoutingAccelerator(response *smi
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1413,6 +1422,9 @@ func awsAwsjson11_deserializeOpErrorDeleteAccelerator(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1606,6 +1618,9 @@ func awsAwsjson11_deserializeOpErrorDeleteCustomRoutingAccelerator(response *smi
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -4700,11 +4715,20 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	case strings.EqualFold("AcceleratorNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAcceleratorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("AttachmentNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorAttachmentNotFoundException(response, errorBody)
+
+	case strings.EqualFold("EndpointGroupNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEndpointGroupNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("ListenerNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorListenerNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5358,11 +5382,17 @@ func awsAwsjson11_deserializeOpErrorUpdateAccelerator(response *smithyhttp.Respo
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5479,6 +5509,9 @@ func awsAwsjson11_deserializeOpErrorUpdateAcceleratorAttributes(response *smithy
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5709,11 +5742,17 @@ func awsAwsjson11_deserializeOpErrorUpdateCustomRoutingAccelerator(response *smi
 	case strings.EqualFold("AcceleratorNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAcceleratorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5830,6 +5869,9 @@ func awsAwsjson11_deserializeOpErrorUpdateCustomRoutingAcceleratorAttributes(res
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("TransactionInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

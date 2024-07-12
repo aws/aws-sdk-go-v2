@@ -1,0 +1,8 @@
+{
+    "id": "9df0f0ab-2019-4b68-91f7-afd42da50f55",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

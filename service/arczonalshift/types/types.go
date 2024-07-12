@@ -17,16 +17,17 @@ import (
 type AutoshiftInResource struct {
 
 	// The appliedStatus field specifies which application traffic shift is in effect
-	// for a resource when there is more than one traffic shift active. There can be
+	// for a resource when there is more than one active traffic shift. There can be
 	// more than one application traffic shift in progress at the same time - that is,
-	// practice run zonal shifts, customer-started zonal shifts, or an autoshift. The
-	// appliedStatus field for an autoshift for a resource can have one of two values:
-	// APPLIED or NOT_APPLIED . The zonal shift or autoshift that is currently in
-	// effect for the resource has an applied status set to APPLIED .
+	// practice run zonal shifts, customer-initiated zonal shifts, or an autoshift. The
+	// appliedStatus field for a shift that is in progress for a resource can have one
+	// of two values: APPLIED or NOT_APPLIED . The zonal shift or autoshift that is
+	// currently in effect for the resource has an appliedStatus set to APPLIED .
 	//
 	// The overall principle for precedence is that zonal shifts that you start as a
 	// customer take precedence autoshifts, which take precedence over practice runs.
-	// That is, customer-started zonal shifts > autoshifts > practice run zonal shifts.
+	// That is, customer-initiated zonal shifts > autoshifts > practice run zonal
+	// shifts.
 	//
 	// For more information, see [How zonal autoshift and practice runs work] in the Amazon Route 53 Application Recovery
 	// Controller Developer Guide.
@@ -36,12 +37,12 @@ type AutoshiftInResource struct {
 	// This member is required.
 	AppliedStatus AutoshiftAppliedStatus
 
-	// The Availability Zone that traffic is shifted away from for a resource, when
-	// Amazon Web Services starts an autoshift. Until the autoshift ends, traffic for
-	// the resource is instead directed to other Availability Zones in the Amazon Web
-	// Services Region. An autoshift can end for a resource, for example, when Amazon
-	// Web Services ends the autoshift for the Availability Zone or when you disable
-	// zonal autoshift for the resource.
+	// The Availability Zone (for example, use1-az1 ) that traffic is shifted away from
+	// for a resource, when Amazon Web Services starts an autoshift. Until the
+	// autoshift ends, traffic for the resource is instead directed to other
+	// Availability Zones in the Amazon Web Services Region. An autoshift can end for a
+	// resource, for example, when Amazon Web Services ends the autoshift for the
+	// Availability Zone or when you disable zonal autoshift for the resource.
 	//
 	// This member is required.
 	AwayFrom *string
@@ -69,12 +70,12 @@ type AutoshiftInResource struct {
 // You can stop an autoshift for a resource by disabling zonal autoshift.
 type AutoshiftSummary struct {
 
-	// The Availability Zone that traffic is shifted away from for a resource when
-	// Amazon Web Services starts an autoshift. Until the autoshift ends, traffic for
-	// the resource is instead directed to other Availability Zones in the Amazon Web
-	// Services Region. An autoshift can end for a resource, for example, when Amazon
-	// Web Services ends the autoshift for the Availability Zone or when you disable
-	// zonal autoshift for the resource.
+	// The Availability Zone (for example, use1-az1 ) that traffic is shifted away from
+	// for a resource when Amazon Web Services starts an autoshift. Until the autoshift
+	// ends, traffic for the resource is instead directed to other Availability Zones
+	// in the Amazon Web Services Region. An autoshift can end for a resource, for
+	// example, when Amazon Web Services ends the autoshift for the Availability Zone
+	// or when you disable zonal autoshift for the resource.
 	//
 	// This member is required.
 	AwayFrom *string
@@ -102,7 +103,7 @@ type AutoshiftSummary struct {
 // CloudWatch alarms, which you create in CloudWatch to use with the practice run.
 // The alarms that you specify are an outcome alarm, to monitor application health
 // during practice runs and, optionally, a blocking alarm, to block practice runs
-// from starting.
+// from starting or to interrupt a practice run in progress.
 //
 // Control condition alarms do not apply for autoshifts.
 //
@@ -112,14 +113,14 @@ type AutoshiftSummary struct {
 // [Considerations when you configure zonal autoshift]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html
 type ControlCondition struct {
 
-	// The Amazon Resource Name (ARN) for the Amazon CloudWatch alarm that you specify
+	// The Amazon Resource Name (ARN) for an Amazon CloudWatch alarm that you specify
 	// as a control condition for a practice run.
 	//
 	// This member is required.
 	AlarmIdentifier *string
 
-	// The type of alarm specified for a practice run. The only valid value is
-	// CLOUDWATCH .
+	// The type of alarm specified for a practice run. You can only specify Amazon
+	// CloudWatch alarms for practice runs, so the only valid value is CLOUDWATCH .
 	//
 	// This member is required.
 	Type ControlConditionType
@@ -181,7 +182,13 @@ type ManagedResourceSummary struct {
 
 // A practice run configuration for a resource includes the Amazon CloudWatch
 // alarms that you've specified for a practice run, as well as any blocked dates or
-// blocked windows for the practice run.
+// blocked windows for the practice run. When a resource has a practice run
+// configuration, Route 53 ARC shifts traffic for the resource weekly for practice
+// runs.
+//
+// Practice runs are required for zonal autoshift. The zonal shifts that Route 53
+// ARC starts for practice runs help you to ensure that shifting away traffic from
+// an Availability Zone during an autoshift is safe for your application.
 //
 // You can update or delete a practice run configuration. Before you delete a
 // practice run configuration, you must disable zonal autoshift for the resource. A
@@ -219,16 +226,17 @@ type PracticeRunConfiguration struct {
 type ZonalShiftInResource struct {
 
 	// The appliedStatus field specifies which application traffic shift is in effect
-	// for a resource when there is more than one traffic shift active. There can be
+	// for a resource when there is more than one active traffic shift. There can be
 	// more than one application traffic shift in progress at the same time - that is,
-	// practice run zonal shifts, customer-started zonal shifts, or an autoshift. The
-	// appliedStatus field for an autoshift for a resource can have one of two values:
-	// APPLIED or NOT_APPLIED . The zonal shift or autoshift that is currently in
-	// effect for the resource has an applied status set to APPLIED .
+	// practice run zonal shifts, customer-initiated zonal shifts, or an autoshift. The
+	// appliedStatus field for a shift that is in progress for a resource can have one
+	// of two values: APPLIED or NOT_APPLIED . The zonal shift or autoshift that is
+	// currently in effect for the resource has an appliedStatus set to APPLIED .
 	//
 	// The overall principle for precedence is that zonal shifts that you start as a
 	// customer take precedence autoshifts, which take precedence over practice runs.
-	// That is, customer-started zonal shifts > autoshifts > practice run zonal shifts.
+	// That is, customer-initiated zonal shifts > autoshifts > practice run zonal
+	// shifts.
 	//
 	// For more information, see [How zonal autoshift and practice runs work] in the Amazon Route 53 Application Recovery
 	// Controller Developer Guide.
@@ -238,22 +246,22 @@ type ZonalShiftInResource struct {
 	// This member is required.
 	AppliedStatus AppliedStatus
 
-	// The Availability Zone that traffic is moved away from for a resource when you
-	// start a zonal shift. Until the zonal shift expires or you cancel it, traffic for
-	// the resource is instead moved to other Availability Zones in the Amazon Web
-	// Services Region.
+	// The Availability Zone (for example, use1-az1 ) that traffic is moved away from
+	// for a resource when you start a zonal shift. Until the zonal shift expires or
+	// you cancel it, traffic for the resource is instead moved to other Availability
+	// Zones in the Amazon Web Services Region.
 	//
 	// This member is required.
 	AwayFrom *string
 
-	// A comment that you enter about the zonal shift. Only the latest comment is
-	// retained; no comment history is maintained. That is, a new comment overwrites
-	// any existing comment string.
+	// A comment that you enter for a customer-initiated zonal shift. Only the latest
+	// comment is retained; no comment history is maintained. That is, a new comment
+	// overwrites any existing comment string.
 	//
 	// This member is required.
 	Comment *string
 
-	// The expiry time (expiration time) for a customer-started zonal shift. A zonal
+	// The expiry time (expiration time) for a customer-initiated zonal shift. A zonal
 	// shift is temporary and must be set to expire when you start the zonal shift. You
 	// can initially set a zonal shift to expire in a maximum of three days (72 hours).
 	// However, you can update a zonal shift to set a new expiration at any time.
@@ -317,16 +325,16 @@ type ZonalShiftInResource struct {
 // Controller, including zonal shifts that you start yourself and zonal shifts that
 // Route 53 ARC starts on your behalf for practice runs with zonal autoshift.
 //
-// Zonal shifts are temporary, including customer-started zonal shifts and the
+// Zonal shifts are temporary, including customer-initiated zonal shifts and the
 // zonal autoshift practice run zonal shifts that Route 53 ARC starts weekly, on
 // your behalf. A zonal shift that a customer starts can be active for up to three
 // days (72 hours). A practice run zonal shift has a 30 minute duration.
 type ZonalShiftSummary struct {
 
-	// The Availability Zone that traffic is moved away from for a resource when you
-	// start a zonal shift. Until the zonal shift expires or you cancel it, traffic for
-	// the resource is instead moved to other Availability Zones in the Amazon Web
-	// Services Region.
+	// The Availability Zone (for example, use1-az1 ) that traffic is moved away from
+	// for a resource when you start a zonal shift. Until the zonal shift expires or
+	// you cancel it, traffic for the resource is instead moved to other Availability
+	// Zones in the Amazon Web Services Region.
 	//
 	// This member is required.
 	AwayFrom *string
@@ -338,7 +346,7 @@ type ZonalShiftSummary struct {
 	// This member is required.
 	Comment *string
 
-	// The expiry time (expiration time) for a customer-started zonal shift. A zonal
+	// The expiry time (expiration time) for a customer-initiated zonal shift. A zonal
 	// shift is temporary and must be set to expire when you start the zonal shift. You
 	// can initially set a zonal shift to expire in a maximum of three days (72 hours).
 	// However, you can update a zonal shift to set a new expiration at any time.

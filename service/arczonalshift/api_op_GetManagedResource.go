@@ -37,8 +37,8 @@ func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResou
 
 type GetManagedResourceInput struct {
 
-	// The identifier for the resource to shift away traffic for. The identifier is
-	// the Amazon Resource Name (ARN) for the resource.
+	// The identifier for the resource that Amazon Web Services shifts traffic for.
+	// The identifier is the Amazon Resource Name (ARN) for the resource.
 	//
 	// At this time, supported resources are Network Load Balancers and Application
 	// Load Balancers with cross-zone load balancing turned off.

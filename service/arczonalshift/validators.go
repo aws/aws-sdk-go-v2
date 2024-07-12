@@ -110,6 +110,26 @@ func (m *validateOpStartZonalShift) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAutoshiftObserverNotificationStatus struct {
+}
+
+func (*validateOpUpdateAutoshiftObserverNotificationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAutoshiftObserverNotificationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAutoshiftObserverNotificationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAutoshiftObserverNotificationStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePracticeRunConfiguration struct {
 }
 
@@ -188,6 +208,10 @@ func addOpGetManagedResourceValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpStartZonalShiftValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartZonalShift{}, middleware.After)
+}
+
+func addOpUpdateAutoshiftObserverNotificationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAutoshiftObserverNotificationStatus{}, middleware.After)
 }
 
 func addOpUpdatePracticeRunConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -325,6 +349,21 @@ func validateOpStartZonalShiftInput(v *StartZonalShiftInput) error {
 	}
 	if v.Comment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Comment"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAutoshiftObserverNotificationStatusInput(v *UpdateAutoshiftObserverNotificationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutoshiftObserverNotificationStatusInput"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

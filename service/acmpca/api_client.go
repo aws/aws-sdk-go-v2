@@ -28,7 +28,7 @@ import (
 )
 
 const ServiceID = "ACM PCA"
-const ServiceAPIVersion = "2017-08-22"
+const ServiceAPIVersion = ""
 
 // Client provides the API client to make operations call for AWS Certificate
 // Manager Private Certificate Authority.

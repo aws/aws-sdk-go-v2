@@ -8,6 +8,8 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_BatchCreateTopicReviewedAnswer.go",
+        "api_op_BatchDeleteTopicReviewedAnswer.go",
         "api_op_CancelIngestion.go",
         "api_op_CreateAccountCustomization.go",
         "api_op_CreateAccountSubscription.go",
@@ -130,6 +132,7 @@
         "api_op_ListThemeVersions.go",
         "api_op_ListThemes.go",
         "api_op_ListTopicRefreshSchedules.go",
+        "api_op_ListTopicReviewedAnswers.go",
         "api_op_ListTopics.go",
         "api_op_ListUserGroups.go",
         "api_op_ListUsers.go",

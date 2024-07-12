@@ -2,6 +2,61 @@
 
 package types
 
+type AggType string
+
+// Enum values for AggType
+const (
+	AggTypeSum              AggType = "SUM"
+	AggTypeMin              AggType = "MIN"
+	AggTypeMax              AggType = "MAX"
+	AggTypeCount            AggType = "COUNT"
+	AggTypeAverage          AggType = "AVERAGE"
+	AggTypeDistinctCount    AggType = "DISTINCT_COUNT"
+	AggTypeStdev            AggType = "STDEV"
+	AggTypeStdevp           AggType = "STDEVP"
+	AggTypeVar              AggType = "VAR"
+	AggTypeVarp             AggType = "VARP"
+	AggTypePercentile       AggType = "PERCENTILE"
+	AggTypeMedian           AggType = "MEDIAN"
+	AggTypePtdSum           AggType = "PTD_SUM"
+	AggTypePtdMin           AggType = "PTD_MIN"
+	AggTypePtdMax           AggType = "PTD_MAX"
+	AggTypePtdCount         AggType = "PTD_COUNT"
+	AggTypePtdDistinctCount AggType = "PTD_DISTINCT_COUNT"
+	AggTypePtdAverage       AggType = "PTD_AVERAGE"
+	AggTypeColumn           AggType = "COLUMN"
+	AggTypeCustom           AggType = "CUSTOM"
+)
+
+// Values returns all known values for AggType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AggType) Values() []AggType {
+	return []AggType{
+		"SUM",
+		"MIN",
+		"MAX",
+		"COUNT",
+		"AVERAGE",
+		"DISTINCT_COUNT",
+		"STDEV",
+		"STDEVP",
+		"VAR",
+		"VARP",
+		"PERCENTILE",
+		"MEDIAN",
+		"PTD_SUM",
+		"PTD_MIN",
+		"PTD_MAX",
+		"PTD_COUNT",
+		"PTD_DISTINCT_COUNT",
+		"PTD_AVERAGE",
+		"COLUMN",
+		"CUSTOM",
+	}
+}
+
 type AnalysisErrorType string
 
 // Enum values for AnalysisErrorType
@@ -80,6 +135,23 @@ const (
 func (AnchorOption) Values() []AnchorOption {
 	return []AnchorOption{
 		"NOW",
+	}
+}
+
+type AnchorType string
+
+// Enum values for AnchorType
+const (
+	AnchorTypeToday AnchorType = "TODAY"
+)
+
+// Values returns all known values for AnchorType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnchorType) Values() []AnchorType {
+	return []AnchorType{
+		"TODAY",
 	}
 }
 
@@ -831,6 +903,41 @@ func (ComparisonMethod) Values() []ComparisonMethod {
 	}
 }
 
+type ComparisonMethodType string
+
+// Enum values for ComparisonMethodType
+const (
+	ComparisonMethodTypeDiff                  ComparisonMethodType = "DIFF"
+	ComparisonMethodTypePercDiff              ComparisonMethodType = "PERC_DIFF"
+	ComparisonMethodTypeDiffAsPerc            ComparisonMethodType = "DIFF_AS_PERC"
+	ComparisonMethodTypePopCurrentDiffAsPerc  ComparisonMethodType = "POP_CURRENT_DIFF_AS_PERC"
+	ComparisonMethodTypePopCurrentDiff        ComparisonMethodType = "POP_CURRENT_DIFF"
+	ComparisonMethodTypePopOvertimeDiffAsPerc ComparisonMethodType = "POP_OVERTIME_DIFF_AS_PERC"
+	ComparisonMethodTypePopOvertimeDiff       ComparisonMethodType = "POP_OVERTIME_DIFF"
+	ComparisonMethodTypePercentOfTotal        ComparisonMethodType = "PERCENT_OF_TOTAL"
+	ComparisonMethodTypeRunningSum            ComparisonMethodType = "RUNNING_SUM"
+	ComparisonMethodTypeMovingAverage         ComparisonMethodType = "MOVING_AVERAGE"
+)
+
+// Values returns all known values for ComparisonMethodType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonMethodType) Values() []ComparisonMethodType {
+	return []ComparisonMethodType{
+		"DIFF",
+		"PERC_DIFF",
+		"DIFF_AS_PERC",
+		"POP_CURRENT_DIFF_AS_PERC",
+		"POP_CURRENT_DIFF",
+		"POP_OVERTIME_DIFF_AS_PERC",
+		"POP_OVERTIME_DIFF",
+		"PERCENT_OF_TOTAL",
+		"RUNNING_SUM",
+		"MOVING_AVERAGE",
+	}
+}
+
 type ConditionalFormattingIconDisplayOption string
 
 // Enum values for ConditionalFormattingIconDisplayOption
@@ -905,6 +1012,52 @@ func (ConstantType) Values() []ConstantType {
 		"SINGULAR",
 		"RANGE",
 		"COLLECTIVE",
+	}
+}
+
+type ContributionAnalysisDirection string
+
+// Enum values for ContributionAnalysisDirection
+const (
+	ContributionAnalysisDirectionIncrease ContributionAnalysisDirection = "INCREASE"
+	ContributionAnalysisDirectionDecrease ContributionAnalysisDirection = "DECREASE"
+	ContributionAnalysisDirectionNeutral  ContributionAnalysisDirection = "NEUTRAL"
+)
+
+// Values returns all known values for ContributionAnalysisDirection. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContributionAnalysisDirection) Values() []ContributionAnalysisDirection {
+	return []ContributionAnalysisDirection{
+		"INCREASE",
+		"DECREASE",
+		"NEUTRAL",
+	}
+}
+
+type ContributionAnalysisSortType string
+
+// Enum values for ContributionAnalysisSortType
+const (
+	ContributionAnalysisSortTypeAbsoluteDifference     ContributionAnalysisSortType = "ABSOLUTE_DIFFERENCE"
+	ContributionAnalysisSortTypeContributionPercentage ContributionAnalysisSortType = "CONTRIBUTION_PERCENTAGE"
+	ContributionAnalysisSortTypeDeviationFromExpected  ContributionAnalysisSortType = "DEVIATION_FROM_EXPECTED"
+	ContributionAnalysisSortTypePercentageDifference   ContributionAnalysisSortType = "PERCENTAGE_DIFFERENCE"
+)
+
+// Values returns all known values for ContributionAnalysisSortType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContributionAnalysisSortType) Values() []ContributionAnalysisSortType {
+	return []ContributionAnalysisSortType{
+		"ABSOLUTE_DIFFERENCE",
+		"CONTRIBUTION_PERCENTAGE",
+		"DEVIATION_FROM_EXPECTED",
+		"PERCENTAGE_DIFFERENCE",
 	}
 }
 
@@ -2784,6 +2937,27 @@ func (NetworkInterfaceStatus) Values() []NetworkInterfaceStatus {
 	}
 }
 
+type NullFilterOption string
+
+// Enum values for NullFilterOption
+const (
+	NullFilterOptionAllValues    NullFilterOption = "ALL_VALUES"
+	NullFilterOptionNonNullsOnly NullFilterOption = "NON_NULLS_ONLY"
+	NullFilterOptionNullsOnly    NullFilterOption = "NULLS_ONLY"
+)
+
+// Values returns all known values for NullFilterOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NullFilterOption) Values() []NullFilterOption {
+	return []NullFilterOption{
+		"ALL_VALUES",
+		"NON_NULLS_ONLY",
+		"NULLS_ONLY",
+	}
+}
+
 type NumberScale string
 
 // Enum values for NumberScale
@@ -3453,6 +3627,35 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"UPDATE_SUCCESSFUL",
 		"UPDATE_FAILED",
 		"DELETED",
+	}
+}
+
+type ReviewedAnswerErrorCode string
+
+// Enum values for ReviewedAnswerErrorCode
+const (
+	ReviewedAnswerErrorCodeInternalError         ReviewedAnswerErrorCode = "INTERNAL_ERROR"
+	ReviewedAnswerErrorCodeMissingAnswer         ReviewedAnswerErrorCode = "MISSING_ANSWER"
+	ReviewedAnswerErrorCodeDatasetDoesNotExist   ReviewedAnswerErrorCode = "DATASET_DOES_NOT_EXIST"
+	ReviewedAnswerErrorCodeInvalidDatasetArn     ReviewedAnswerErrorCode = "INVALID_DATASET_ARN"
+	ReviewedAnswerErrorCodeDuplicatedAnswer      ReviewedAnswerErrorCode = "DUPLICATED_ANSWER"
+	ReviewedAnswerErrorCodeInvalidData           ReviewedAnswerErrorCode = "INVALID_DATA"
+	ReviewedAnswerErrorCodeMissingRequiredFields ReviewedAnswerErrorCode = "MISSING_REQUIRED_FIELDS"
+)
+
+// Values returns all known values for ReviewedAnswerErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReviewedAnswerErrorCode) Values() []ReviewedAnswerErrorCode {
+	return []ReviewedAnswerErrorCode{
+		"INTERNAL_ERROR",
+		"MISSING_ANSWER",
+		"DATASET_DOES_NOT_EXIST",
+		"INVALID_DATASET_ARN",
+		"DUPLICATED_ANSWER",
+		"INVALID_DATA",
+		"MISSING_REQUIRED_FIELDS",
 	}
 }
 
@@ -4353,6 +4556,74 @@ func (TopBottomSortOrder) Values() []TopBottomSortOrder {
 	}
 }
 
+type TopicIRFilterFunction string
+
+// Enum values for TopicIRFilterFunction
+const (
+	TopicIRFilterFunctionContains       TopicIRFilterFunction = "CONTAINS"
+	TopicIRFilterFunctionExact          TopicIRFilterFunction = "EXACT"
+	TopicIRFilterFunctionStartsWith     TopicIRFilterFunction = "STARTS_WITH"
+	TopicIRFilterFunctionEndsWith       TopicIRFilterFunction = "ENDS_WITH"
+	TopicIRFilterFunctionContainsString TopicIRFilterFunction = "CONTAINS_STRING"
+	TopicIRFilterFunctionPrevious       TopicIRFilterFunction = "PREVIOUS"
+	TopicIRFilterFunctionThis           TopicIRFilterFunction = "THIS"
+	TopicIRFilterFunctionLast           TopicIRFilterFunction = "LAST"
+	TopicIRFilterFunctionNext           TopicIRFilterFunction = "NEXT"
+	TopicIRFilterFunctionNow            TopicIRFilterFunction = "NOW"
+)
+
+// Values returns all known values for TopicIRFilterFunction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicIRFilterFunction) Values() []TopicIRFilterFunction {
+	return []TopicIRFilterFunction{
+		"CONTAINS",
+		"EXACT",
+		"STARTS_WITH",
+		"ENDS_WITH",
+		"CONTAINS_STRING",
+		"PREVIOUS",
+		"THIS",
+		"LAST",
+		"NEXT",
+		"NOW",
+	}
+}
+
+type TopicIRFilterType string
+
+// Enum values for TopicIRFilterType
+const (
+	TopicIRFilterTypeCategoryFilter        TopicIRFilterType = "CATEGORY_FILTER"
+	TopicIRFilterTypeNumericEqualityFilter TopicIRFilterType = "NUMERIC_EQUALITY_FILTER"
+	TopicIRFilterTypeNumericRangeFilter    TopicIRFilterType = "NUMERIC_RANGE_FILTER"
+	TopicIRFilterTypeDateRangeFilter       TopicIRFilterType = "DATE_RANGE_FILTER"
+	TopicIRFilterTypeRelativeDateFilter    TopicIRFilterType = "RELATIVE_DATE_FILTER"
+	TopicIRFilterTypeTopBottomFilter       TopicIRFilterType = "TOP_BOTTOM_FILTER"
+	TopicIRFilterTypeEquals                TopicIRFilterType = "EQUALS"
+	TopicIRFilterTypeRankLimitFilter       TopicIRFilterType = "RANK_LIMIT_FILTER"
+	TopicIRFilterTypeAcceptAllFilter       TopicIRFilterType = "ACCEPT_ALL_FILTER"
+)
+
+// Values returns all known values for TopicIRFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicIRFilterType) Values() []TopicIRFilterType {
+	return []TopicIRFilterType{
+		"CATEGORY_FILTER",
+		"NUMERIC_EQUALITY_FILTER",
+		"NUMERIC_RANGE_FILTER",
+		"DATE_RANGE_FILTER",
+		"RELATIVE_DATE_FILTER",
+		"TOP_BOTTOM_FILTER",
+		"EQUALS",
+		"RANK_LIMIT_FILTER",
+		"ACCEPT_ALL_FILTER",
+	}
+}
+
 type TopicNumericSeparatorSymbol string
 
 // Enum values for TopicNumericSeparatorSymbol
@@ -4443,6 +4714,25 @@ func (TopicScheduleType) Values() []TopicScheduleType {
 		"DAILY",
 		"WEEKLY",
 		"MONTHLY",
+	}
+}
+
+type TopicSortDirection string
+
+// Enum values for TopicSortDirection
+const (
+	TopicSortDirectionAscending  TopicSortDirection = "ASCENDING"
+	TopicSortDirectionDescending TopicSortDirection = "DESCENDING"
+)
+
+// Values returns all known values for TopicSortDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicSortDirection) Values() []TopicSortDirection {
+	return []TopicSortDirection{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 
@@ -4663,6 +4953,31 @@ func (VisualCustomActionTrigger) Values() []VisualCustomActionTrigger {
 	return []VisualCustomActionTrigger{
 		"DATA_POINT_CLICK",
 		"DATA_POINT_MENU",
+	}
+}
+
+type VisualRole string
+
+// Enum values for VisualRole
+const (
+	VisualRolePrimary       VisualRole = "PRIMARY"
+	VisualRoleComplimentary VisualRole = "COMPLIMENTARY"
+	VisualRoleMultiIntent   VisualRole = "MULTI_INTENT"
+	VisualRoleFallback      VisualRole = "FALLBACK"
+	VisualRoleFragment      VisualRole = "FRAGMENT"
+)
+
+// Values returns all known values for VisualRole. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VisualRole) Values() []VisualRole {
+	return []VisualRole{
+		"PRIMARY",
+		"COMPLIMENTARY",
+		"MULTI_INTENT",
+		"FALLBACK",
+		"FRAGMENT",
 	}
 }
 

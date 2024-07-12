@@ -18,6 +18,11 @@ import (
 // alarm, to monitor application health during practice runs and, optionally, a
 // blocking alarm, to block practice runs from starting.
 //
+// When a resource has a practice run configuration, Route 53 ARC starts zonal
+// shifts for the resource weekly, to shift traffic for practice runs. Practice
+// runs help you to ensure that shifting away traffic from an Availability Zone
+// during an autoshift is safe for your application.
+//
 // For more information, see [Considerations when you configure zonal autoshift] in the Amazon Route 53 Application Recovery
 // Controller Developer Guide.
 //
@@ -51,9 +56,9 @@ type CreatePracticeRunConfigurationInput struct {
 	// This member is required.
 	OutcomeAlarms []types.ControlCondition
 
-	// The identifier of the resource to shift away traffic for when a practice run
-	// starts a zonal shift. The identifier is the Amazon Resource Name (ARN) for the
-	// resource.
+	// The identifier of the resource that Amazon Web Services shifts traffic for with
+	// a practice run zonal shift. The identifier is the Amazon Resource Name (ARN) for
+	// the resource.
 	//
 	// At this time, supported resources are Network Load Balancers and Application
 	// Load Balancers with cross-zone load balancing turned off.
@@ -115,11 +120,11 @@ type CreatePracticeRunConfigurationOutput struct {
 	// This member is required.
 	PracticeRunConfiguration *types.PracticeRunConfiguration
 
-	// The status for zonal autoshift for a resource. When you specify the autoshift
-	// status as ENABLED , Amazon Web Services shifts traffic away from shifts away
+	// The status for zonal autoshift for a resource. When you specify ENABLED for the
+	// autoshift status, Amazon Web Services shifts traffic away from shifts away
 	// application resource traffic from an Availability Zone, on your behalf, when
-	// Amazon Web Services determines that there's an issue in the Availability Zone
-	// that could potentially affect customers.
+	// internal telemetry indicates that there is an Availability Zone impairment that
+	// could potentially impact customers.
 	//
 	// When you enable zonal autoshift, you must also configure practice runs for the
 	// resource.

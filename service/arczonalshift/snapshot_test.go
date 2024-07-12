@@ -98,6 +98,18 @@ func TestCheckSnapshot_DeletePracticeRunConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAutoshiftObserverNotificationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAutoshiftObserverNotificationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAutoshiftObserverNotificationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetManagedResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetManagedResource(context.Background(), nil, func(o *Options) {
@@ -151,6 +163,18 @@ func TestCheckSnapshot_StartZonalShift(t *testing.T) {
 	_, err := svc.StartZonalShift(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartZonalShift")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAutoshiftObserverNotificationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAutoshiftObserverNotificationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAutoshiftObserverNotificationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -229,6 +253,18 @@ func TestUpdateSnapshot_DeletePracticeRunConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAutoshiftObserverNotificationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAutoshiftObserverNotificationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAutoshiftObserverNotificationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetManagedResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetManagedResource(context.Background(), nil, func(o *Options) {
@@ -282,6 +318,18 @@ func TestUpdateSnapshot_StartZonalShift(t *testing.T) {
 	_, err := svc.StartZonalShift(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartZonalShift")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAutoshiftObserverNotificationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAutoshiftObserverNotificationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAutoshiftObserverNotificationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

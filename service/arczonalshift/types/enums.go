@@ -59,6 +59,26 @@ func (AutoshiftExecutionStatus) Values() []AutoshiftExecutionStatus {
 	}
 }
 
+type AutoshiftObserverNotificationStatus string
+
+// Enum values for AutoshiftObserverNotificationStatus
+const (
+	AutoshiftObserverNotificationStatusEnabled  AutoshiftObserverNotificationStatus = "ENABLED"
+	AutoshiftObserverNotificationStatusDisabled AutoshiftObserverNotificationStatus = "DISABLED"
+)
+
+// Values returns all known values for AutoshiftObserverNotificationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoshiftObserverNotificationStatus) Values() []AutoshiftObserverNotificationStatus {
+	return []AutoshiftObserverNotificationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ConflictExceptionReason string
 
 // Enum values for ConflictExceptionReason

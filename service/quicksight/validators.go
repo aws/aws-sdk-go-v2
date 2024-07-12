@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchCreateTopicReviewedAnswer struct {
+}
+
+func (*validateOpBatchCreateTopicReviewedAnswer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateTopicReviewedAnswer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateTopicReviewedAnswerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateTopicReviewedAnswerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDeleteTopicReviewedAnswer struct {
+}
+
+func (*validateOpBatchDeleteTopicReviewedAnswer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteTopicReviewedAnswer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteTopicReviewedAnswerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteTopicReviewedAnswerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelIngestion struct {
 }
 
@@ -2450,6 +2490,26 @@ func (m *validateOpListTopicRefreshSchedules) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTopicReviewedAnswers struct {
+}
+
+func (*validateOpListTopicReviewedAnswers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTopicReviewedAnswers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTopicReviewedAnswersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTopicReviewedAnswersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTopics struct {
 }
 
@@ -3490,6 +3550,14 @@ func (m *validateOpUpdateVPCConnection) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchCreateTopicReviewedAnswerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateTopicReviewedAnswer{}, middleware.After)
+}
+
+func addOpBatchDeleteTopicReviewedAnswerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteTopicReviewedAnswer{}, middleware.After)
+}
+
 func addOpCancelIngestionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelIngestion{}, middleware.After)
 }
@@ -3976,6 +4044,10 @@ func addOpListThemeVersionsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTopicRefreshSchedulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTopicRefreshSchedules{}, middleware.After)
+}
+
+func addOpListTopicReviewedAnswersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTopicReviewedAnswers{}, middleware.After)
 }
 
 func addOpListTopicsValidationMiddleware(stack *middleware.Stack) error {
@@ -6336,6 +6408,23 @@ func validateCalculatedField(v *types.CalculatedField) error {
 	}
 }
 
+func validateCalculatedFieldReferenceList(v []types.Identifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CalculatedFieldReferenceList"}
+	for i := range v {
+		if err := validateIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCalculatedFields(v []types.CalculatedField) error {
 	if v == nil {
 		return nil
@@ -7277,6 +7366,28 @@ func validateContributionAnalysisDefaultList(v []types.ContributionAnalysisDefau
 	}
 }
 
+func validateContributionAnalysisTimeRanges(v *types.ContributionAnalysisTimeRanges) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContributionAnalysisTimeRanges"}
+	if v.StartRange != nil {
+		if err := validateTopicIRFilterOption(v.StartRange); err != nil {
+			invalidParams.AddNested("StartRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndRange != nil {
+		if err := validateTopicIRFilterOption(v.EndRange); err != nil {
+			invalidParams.AddNested("EndRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContributorDimensionList(v []types.ColumnIdentifier) error {
 	if v == nil {
 		return nil
@@ -7304,6 +7415,54 @@ func validateCreateColumnsOperation(v *types.CreateColumnsOperation) error {
 	} else if v.Columns != nil {
 		if err := validateCalculatedColumnList(v.Columns); err != nil {
 			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateTopicReviewedAnswer(v *types.CreateTopicReviewedAnswer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTopicReviewedAnswer"}
+	if v.AnswerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnswerId"))
+	}
+	if v.DatasetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
+	}
+	if v.Question == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Question"))
+	}
+	if v.Mir != nil {
+		if err := validateTopicIR(v.Mir); err != nil {
+			invalidParams.AddNested("Mir", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrimaryVisual != nil {
+		if err := validateTopicVisual(v.PrimaryVisual); err != nil {
+			invalidParams.AddNested("PrimaryVisual", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateTopicReviewedAnswers(v []types.CreateTopicReviewedAnswer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTopicReviewedAnswers"}
+	for i := range v {
+		if err := validateCreateTopicReviewedAnswer(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9403,6 +9562,40 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
+func validateFilterAggMetrics(v *types.FilterAggMetrics) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterAggMetrics"}
+	if v.MetricOperand != nil {
+		if err := validateIdentifier(v.MetricOperand); err != nil {
+			invalidParams.AddNested("MetricOperand", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterAggMetricsList(v []types.FilterAggMetrics) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterAggMetricsList"}
+	for i := range v {
+		if err := validateFilterAggMetrics(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilterControl(v *types.FilterControl) error {
 	if v == nil {
 		return nil
@@ -11153,6 +11346,21 @@ func validateHistogramVisual(v *types.HistogramVisual) error {
 	}
 }
 
+func validateIdentifier(v *types.Identifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Identifier"}
+	if v.Identity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIncrementalRefresh(v *types.IncrementalRefresh) error {
 	if v == nil {
 		return nil
@@ -12553,6 +12761,23 @@ func validateNumericRangeFilter(v *types.NumericRangeFilter) error {
 	if v.DefaultFilterControlConfiguration != nil {
 		if err := validateDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration); err != nil {
 			invalidParams.AddNested("DefaultFilterControlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOperandList(v []types.Identifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OperandList"}
+	for i := range v {
+		if err := validateIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16860,6 +17085,199 @@ func validateTopicFilters(v []types.TopicFilter) error {
 	}
 }
 
+func validateTopicIR(v *types.TopicIR) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIR"}
+	if v.Metrics != nil {
+		if err := validateTopicIRMetricList(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GroupByList != nil {
+		if err := validateTopicIRGroupByList(v.GroupByList); err != nil {
+			invalidParams.AddNested("GroupByList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateTopicIRFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sort != nil {
+		if err := validateTopicSortClause(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContributionAnalysis != nil {
+		if err := validateTopicIRContributionAnalysis(v.ContributionAnalysis); err != nil {
+			invalidParams.AddNested("ContributionAnalysis", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRContributionAnalysis(v *types.TopicIRContributionAnalysis) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRContributionAnalysis"}
+	if v.TimeRanges != nil {
+		if err := validateContributionAnalysisTimeRanges(v.TimeRanges); err != nil {
+			invalidParams.AddNested("TimeRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRFilterEntry(v []types.TopicIRFilterOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRFilterEntry"}
+	for i := range v {
+		if err := validateTopicIRFilterOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRFilterList(v [][]types.TopicIRFilterOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRFilterList"}
+	for i := range v {
+		if err := validateTopicIRFilterEntry(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRFilterOption(v *types.TopicIRFilterOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRFilterOption"}
+	if v.OperandField != nil {
+		if err := validateIdentifier(v.OperandField); err != nil {
+			invalidParams.AddNested("OperandField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggMetrics != nil {
+		if err := validateFilterAggMetricsList(v.AggMetrics); err != nil {
+			invalidParams.AddNested("AggMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRGroupBy(v *types.TopicIRGroupBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRGroupBy"}
+	if v.FieldName != nil {
+		if err := validateIdentifier(v.FieldName); err != nil {
+			invalidParams.AddNested("FieldName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sort != nil {
+		if err := validateTopicSortClause(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRGroupByList(v []types.TopicIRGroupBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRGroupByList"}
+	for i := range v {
+		if err := validateTopicIRGroupBy(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRMetric(v *types.TopicIRMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRMetric"}
+	if v.MetricId != nil {
+		if err := validateIdentifier(v.MetricId); err != nil {
+			invalidParams.AddNested("MetricId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Operands != nil {
+		if err := validateOperandList(v.Operands); err != nil {
+			invalidParams.AddNested("Operands", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CalculatedFieldReferences != nil {
+		if err := validateCalculatedFieldReferenceList(v.CalculatedFieldReferences); err != nil {
+			invalidParams.AddNested("CalculatedFieldReferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIRMetricList(v []types.TopicIRMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIRMetricList"}
+	for i := range v {
+		if err := validateTopicIRMetric(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTopicNamedEntities(v []types.TopicNamedEntity) error {
 	if v == nil {
 		return nil
@@ -16899,6 +17317,62 @@ func validateTopicRefreshSchedule(v *types.TopicRefreshSchedule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TopicRefreshSchedule"}
 	if v.IsEnabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IsEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicSortClause(v *types.TopicSortClause) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicSortClause"}
+	if v.Operand != nil {
+		if err := validateIdentifier(v.Operand); err != nil {
+			invalidParams.AddNested("Operand", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicVisual(v *types.TopicVisual) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicVisual"}
+	if v.Ir != nil {
+		if err := validateTopicIR(v.Ir); err != nil {
+			invalidParams.AddNested("Ir", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SupportingVisuals != nil {
+		if err := validateTopicVisuals(v.SupportingVisuals); err != nil {
+			invalidParams.AddNested("SupportingVisuals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicVisuals(v []types.TopicVisual) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicVisuals"}
+	for i := range v {
+		if err := validateTopicVisual(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17977,6 +18451,49 @@ func validateYAxisOptions(v *types.YAxisOptions) error {
 	invalidParams := smithy.InvalidParamsError{Context: "YAxisOptions"}
 	if len(v.YAxis) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("YAxis"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchCreateTopicReviewedAnswerInput(v *BatchCreateTopicReviewedAnswerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateTopicReviewedAnswerInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
+	}
+	if v.Answers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Answers"))
+	} else if v.Answers != nil {
+		if err := validateCreateTopicReviewedAnswers(v.Answers); err != nil {
+			invalidParams.AddNested("Answers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteTopicReviewedAnswerInput(v *BatchDeleteTopicReviewedAnswerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteTopicReviewedAnswerInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20543,6 +21060,24 @@ func validateOpListTopicRefreshSchedulesInput(v *ListTopicRefreshSchedulesInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTopicRefreshSchedulesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTopicReviewedAnswersInput(v *ListTopicReviewedAnswersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTopicReviewedAnswersInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}

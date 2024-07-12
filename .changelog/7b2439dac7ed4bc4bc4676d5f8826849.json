@@ -1,0 +1,8 @@
+{
+    "id": "7b2439da-c7ed-4bc4-bc46-76d5f8826849",
+    "type": "feature",
+    "description": "Update path for CreateDBCluster resource identifier, and Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/rds"
+    ]
+}

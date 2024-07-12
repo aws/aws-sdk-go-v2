@@ -115,6 +115,24 @@ type AdHocFilteringOption struct {
 	noSmithyDocumentSerde
 }
 
+// The definition of an Agg function.
+type AggFunction struct {
+
+	// The aggregation of an Agg function.
+	Aggregation AggType
+
+	// The aggregation parameters for an Agg function.
+	AggregationFunctionParameters map[string]string
+
+	// The period of an Agg function.
+	Period TopicTimeGranularity
+
+	// The period field for an Agg function.
+	PeriodField *string
+
+	noSmithyDocumentSerde
+}
+
 // An aggregation function aggregates values from a dimension or measure.
 //
 // This is a union type structure. For this structure to be valid, only one of the
@@ -144,6 +162,18 @@ type AggregationFunction struct {
 
 	// Aggregation for numerical values.
 	NumericalAggregationFunction *NumericalAggregationFunction
+
+	noSmithyDocumentSerde
+}
+
+// The definition of an AggregationPartitionBy .
+type AggregationPartitionBy struct {
+
+	// The field Name for an AggregationPartitionBy .
+	FieldName *string
+
+	// The TimeGranularity for an AggregationPartitionBy .
+	TimeGranularity TimeGranularity
 
 	noSmithyDocumentSerde
 }
@@ -414,6 +444,21 @@ type AnalysisSummary struct {
 
 	// The last known status for the analysis.
 	Status ResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// The definition of the Anchor.
+type Anchor struct {
+
+	// The AnchorType for the Anchor.
+	AnchorType AnchorType
+
+	// The offset of the Anchor.
+	Offset int32
+
+	// The TimeGranularity of the Anchor.
+	TimeGranularity TimeGranularity
 
 	noSmithyDocumentSerde
 }
@@ -2492,6 +2537,18 @@ type CollectiveConstant struct {
 	noSmithyDocumentSerde
 }
 
+// The definition for a CollectiveConstantEntry .
+type CollectiveConstantEntry struct {
+
+	// The ConstantType of a CollectiveConstantEntry .
+	ConstantType ConstantType
+
+	// The value of a CollectiveConstantEntry .
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Determines the color scale that is applied to the visual.
 type ColorScale struct {
 
@@ -3093,6 +3150,27 @@ type ContributionAnalysisDefault struct {
 	noSmithyDocumentSerde
 }
 
+// The definition for the ContributionAnalysisFactor .
+type ContributionAnalysisFactor struct {
+
+	// The field name of the ContributionAnalysisFactor .
+	FieldName *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition for the ContributionAnalysisTimeRanges .
+type ContributionAnalysisTimeRanges struct {
+
+	// The end range for the ContributionAnalysisTimeRanges .
+	EndRange *TopicIRFilterOption
+
+	// The start range for the ContributionAnalysisTimeRanges .
+	StartRange *TopicIRFilterOption
+
+	noSmithyDocumentSerde
+}
+
 // A transform operation that creates calculated columns. Columns created in one
 // such operation form a lexical closure.
 type CreateColumnsOperation struct {
@@ -3101,6 +3179,36 @@ type CreateColumnsOperation struct {
 	//
 	// This member is required.
 	Columns []CalculatedColumn
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a CreateTopicReviewedAnswer .
+type CreateTopicReviewedAnswer struct {
+
+	// The answer ID for the CreateTopicReviewedAnswer .
+	//
+	// This member is required.
+	AnswerId *string
+
+	// The Dataset arn for the CreateTopicReviewedAnswer .
+	//
+	// This member is required.
+	DatasetArn *string
+
+	// The Question to be created.
+	//
+	// This member is required.
+	Question *string
+
+	// The Mir for the CreateTopicReviewedAnswer .
+	Mir *TopicIR
+
+	// The PrimaryVisual for the CreateTopicReviewedAnswer .
+	PrimaryVisual *TopicVisual
+
+	// The template for the CreateTopicReviewedAnswer .
+	Template *TopicTemplate
 
 	noSmithyDocumentSerde
 }
@@ -5011,8 +5119,14 @@ type DateTimeParameterDeclaration struct {
 // The display options of a control.
 type DateTimePickerControlDisplayOptions struct {
 
+	// The date icon visibility of the DateTimePickerControlDisplayOptions .
+	DateIconVisibility Visibility
+
 	// Customize how dates are formatted in controls.
 	DateTimeFormat *string
+
+	// The helper text visibility of the DateTimePickerControlDisplayOptions .
+	HelperTextVisibility Visibility
 
 	// The configuration of info icon label options.
 	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
@@ -6031,6 +6145,21 @@ type Filter struct {
 
 	// A TopBottomFilter filters data to the top or bottom values for a given column.
 	TopBottomFilter *TopBottomFilter
+
+	noSmithyDocumentSerde
+}
+
+// The definition for the FilterAggMetrics .
+type FilterAggMetrics struct {
+
+	// The function for the FilterAggMetrics .
+	Function AggType
+
+	// The metric operand of the FilterAggMetrics .
+	MetricOperand *Identifier
+
+	// The sort direction for FilterAggMetrics .
+	SortDirection TopicSortDirection
 
 	noSmithyDocumentSerde
 }
@@ -7804,6 +7933,17 @@ type IAMPolicyAssignmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The definition for the identifier.
+type Identifier struct {
+
+	// The identity of the identifier.
+	//
+	// This member is required.
+	Identity *string
+
+	noSmithyDocumentSerde
+}
+
 // The parameters for an IAM Identity Center configuration.
 type IdentityCenterConfiguration struct {
 
@@ -8054,6 +8194,18 @@ type IntegerValueWhenUnsetConfiguration struct {
 	//
 	//   - NULL : The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a InvalidTopicReviewedAnswer .
+type InvalidTopicReviewedAnswer struct {
+
+	// The answer ID for the InvalidTopicReviewedAnswer .
+	AnswerId *string
+
+	// The error that is returned for the InvalidTopicReviewedAnswer .
+	Error ReviewedAnswerErrorCode
 
 	noSmithyDocumentSerde
 }
@@ -9069,6 +9221,15 @@ type NamedEntityDefinitionMetric struct {
 
 	// The additional parameters for an aggregation function.
 	AggregationFunctionParameters map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a NamedEntityRef .
+type NamedEntityRef struct {
+
+	// The NamedEntityName for the NamedEntityRef .
+	NamedEntityName *string
 
 	noSmithyDocumentSerde
 }
@@ -12514,6 +12675,18 @@ type SliderControlDisplayOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The definition for the slot.
+type Slot struct {
+
+	// The slot ID of the slot.
+	SlotId *string
+
+	// The visual ID for the slot.
+	VisualId *string
+
+	noSmithyDocumentSerde
+}
+
 // Configures the properties of a chart's axes that are used by small multiples
 // panels.
 type SmallMultiplesAxisProperties struct {
@@ -13058,6 +13231,15 @@ type SubtotalOptions struct {
 
 	// The cell styling options for the subtotals of value cells.
 	ValueCellStyle *TableCellStyle
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a SucceededTopicReviewedAnswer .
+type SucceededTopicReviewedAnswer struct {
+
+	// The answer ID for the SucceededTopicReviewedAnswer .
+	AnswerId *string
 
 	noSmithyDocumentSerde
 }
@@ -14514,6 +14696,27 @@ type TopicColumn struct {
 	noSmithyDocumentSerde
 }
 
+// The definition for a TopicConstantValue .
+type TopicConstantValue struct {
+
+	// The constant type of a TopicConstantValue .
+	ConstantType ConstantType
+
+	// The maximum for the TopicConstantValue .
+	Maximum *string
+
+	// The minimum for the TopicConstantValue .
+	Minimum *string
+
+	// The value of the TopicConstantValue .
+	Value *string
+
+	// The value list of the TopicConstantValue .
+	ValueList []CollectiveConstantEntry
+
+	noSmithyDocumentSerde
+}
+
 // A filter used to restrict data based on a range of dates or times.
 type TopicDateRangeFilter struct {
 
@@ -14589,6 +14792,180 @@ type TopicFilter struct {
 
 	// The relative date filter.
 	RelativeDateFilter *TopicRelativeDateFilter
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicIR .
+type TopicIR struct {
+
+	// The contribution analysis for the TopicIR .
+	ContributionAnalysis *TopicIRContributionAnalysis
+
+	// The filters for the TopicIR .
+	Filters [][]TopicIRFilterOption
+
+	// The GroupBy list for the TopicIR .
+	GroupByList []TopicIRGroupBy
+
+	// The metrics for the TopicIR .
+	Metrics []TopicIRMetric
+
+	// The sort for the TopicIR .
+	Sort *TopicSortClause
+
+	// The visual for the TopicIR .
+	Visual *VisualOptions
+
+	noSmithyDocumentSerde
+}
+
+// The definition of a TopicIRComparisonMethod .
+type TopicIRComparisonMethod struct {
+
+	// The period for the TopicIRComparisonMethod .
+	Period TopicTimeGranularity
+
+	// The type for the TopicIRComparisonMethod .
+	Type ComparisonMethodType
+
+	// The window size for the TopicIRComparisonMethod .
+	WindowSize int32
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicIRContributionAnalysis .
+type TopicIRContributionAnalysis struct {
+
+	// The direction for the TopicIRContributionAnalysis .
+	Direction ContributionAnalysisDirection
+
+	// The factors for a TopicIRContributionAnalysis .
+	Factors []ContributionAnalysisFactor
+
+	// The sort type for the TopicIRContributionAnalysis .
+	SortType ContributionAnalysisSortType
+
+	// The time ranges for the TopicIRContributionAnalysis .
+	TimeRanges *ContributionAnalysisTimeRanges
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicIRFilterOption .
+type TopicIRFilterOption struct {
+
+	// The agg metrics for the TopicIRFilterOption .
+	AggMetrics []FilterAggMetrics
+
+	// The aggregation for the TopicIRFilterOption .
+	Aggregation AggType
+
+	// The aggregation function parameters for the TopicIRFilterOption .
+	AggregationFunctionParameters map[string]string
+
+	// The AggregationPartitionBy for the TopicIRFilterOption .
+	AggregationPartitionBy []AggregationPartitionBy
+
+	// The anchor for the TopicIRFilterOption .
+	Anchor *Anchor
+
+	// The constant for the TopicIRFilterOption .
+	Constant *TopicConstantValue
+
+	// The filter class for the TopicIRFilterOption .
+	FilterClass FilterClass
+
+	// The filter type for the TopicIRFilterOption .
+	FilterType TopicIRFilterType
+
+	// The function for the TopicIRFilterOption .
+	Function TopicIRFilterFunction
+
+	// The inclusive for the TopicIRFilterOption .
+	Inclusive bool
+
+	// The inverse for the TopicIRFilterOption .
+	Inverse bool
+
+	// The last next offset for the TopicIRFilterOption .
+	LastNextOffset *TopicConstantValue
+
+	// The null filter for the TopicIRFilterOption .
+	NullFilter NullFilterOption
+
+	// The operand field for the TopicIRFilterOption .
+	OperandField *Identifier
+
+	// The range for the TopicIRFilterOption .
+	Range *TopicConstantValue
+
+	// The sort direction for the TopicIRFilterOption .
+	SortDirection TopicSortDirection
+
+	// The time granularity for the TopicIRFilterOption .
+	TimeGranularity TimeGranularity
+
+	// The TopBottomLimit for the TopicIRFilterOption .
+	TopBottomLimit *TopicConstantValue
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicIRGroupBy .
+type TopicIRGroupBy struct {
+
+	// The display format for the TopicIRGroupBy .
+	DisplayFormat DisplayFormat
+
+	// A structure that represents additional options for display formatting.
+	DisplayFormatOptions *DisplayFormatOptions
+
+	// The field name for the TopicIRGroupBy .
+	FieldName *Identifier
+
+	// The named entity for the TopicIRGroupBy .
+	NamedEntity *NamedEntityRef
+
+	// The sort for the TopicIRGroupBy .
+	Sort *TopicSortClause
+
+	// The time granularity for the TopicIRGroupBy .
+	TimeGranularity TopicTimeGranularity
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicIRMetric .
+type TopicIRMetric struct {
+
+	// The calculated field references for the TopicIRMetric .
+	CalculatedFieldReferences []Identifier
+
+	// The comparison method for the TopicIRMetric .
+	ComparisonMethod *TopicIRComparisonMethod
+
+	// The display format for the TopicIRMetric .
+	DisplayFormat DisplayFormat
+
+	// A structure that represents additional options for display formatting.
+	DisplayFormatOptions *DisplayFormatOptions
+
+	// The expression for the TopicIRMetric .
+	Expression *string
+
+	// The function for the TopicIRMetric .
+	Function *AggFunction
+
+	// The metric ID for the TopicIRMetric .
+	MetricId *Identifier
+
+	// The named entity for the TopicIRMetric .
+	NamedEntity *NamedEntityRef
+
+	// The operands for the TopicIRMetric .
+	Operands []Identifier
 
 	noSmithyDocumentSerde
 }
@@ -14752,6 +15129,39 @@ type TopicRelativeDateFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The deinition for a TopicReviewedAnswer .
+type TopicReviewedAnswer struct {
+
+	// The answer ID of the reviewed answer.
+	//
+	// This member is required.
+	AnswerId *string
+
+	// The Dataset ARN for the TopicReviewedAnswer .
+	//
+	// This member is required.
+	DatasetArn *string
+
+	// The question for the TopicReviewedAnswer .
+	//
+	// This member is required.
+	Question *string
+
+	// The Amazon Resource Name (ARN) of the reviewed answer.
+	Arn *string
+
+	// The mir for the TopicReviewedAnswer .
+	Mir *TopicIR
+
+	// The primary visual for the TopicReviewedAnswer .
+	PrimaryVisual *TopicVisual
+
+	// The template for the TopicReviewedAnswer .
+	Template *TopicTemplate
+
+	noSmithyDocumentSerde
+}
+
 // A structure that represents a singular filter constant, used in filters to
 // specify a single value to match against.
 type TopicSingularFilterConstant struct {
@@ -14762,6 +15172,18 @@ type TopicSingularFilterConstant struct {
 
 	// The value of the singular filter constant.
 	SingularConstant *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicSortClause .
+type TopicSortClause struct {
+
+	// The operand for a TopicSortClause .
+	Operand *Identifier
+
+	// The sort direction for the TopicSortClause .
+	SortDirection TopicSortDirection
 
 	noSmithyDocumentSerde
 }
@@ -14781,6 +15203,36 @@ type TopicSummary struct {
 
 	// The user experience version of the topic.
 	UserExperienceVersion TopicUserExperienceVersion
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicTemplate .
+type TopicTemplate struct {
+
+	// The slots for the TopicTemplate .
+	Slots []Slot
+
+	// The template type for the TopicTemplate .
+	TemplateType *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a TopicVisual .
+type TopicVisual struct {
+
+	// The ir for the TopicVisual .
+	Ir *TopicIR
+
+	// The role for the TopicVisual .
+	Role VisualRole
+
+	// The supporting visuals for the TopicVisual .
+	SupportingVisuals []TopicVisual
+
+	// The visual ID for the TopicVisual .
+	VisualId *string
 
 	noSmithyDocumentSerde
 }
@@ -15607,6 +16059,15 @@ type VisualMenuOption struct {
 
 	// The availaiblity status of a visual's menu options.
 	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a VisualOptions .
+type VisualOptions struct {
+
+	// The type for a VisualOptions .
+	Type *string
 
 	noSmithyDocumentSerde
 }

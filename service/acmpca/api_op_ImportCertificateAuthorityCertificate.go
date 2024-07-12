@@ -63,46 +63,44 @@ import (
 // Amazon Web Services Private CA allows the following extensions to be marked
 // critical in the imported CA certificate or chain.
 //
-//   - Authority key identifier
-//
 //   - Basic constraints (must be marked critical)
 //
-//   - Certificate policies
-//
-//   - Extended key usage
-//
-//   - Inhibit anyPolicy
-//
-//   - Issuer alternative name
+//   - Subject alternative names
 //
 //   - Key usage
 //
-//   - Name constraints
+//   - Extended key usage
 //
-//   - Policy mappings
-//
-//   - Subject alternative name
-//
-//   - Subject directory attributes
+//   - Authority key identifier
 //
 //   - Subject key identifier
 //
+//   - Issuer alternative name
+//
+//   - Subject directory attributes
+//
 //   - Subject information access
+//
+//   - Certificate policies
+//
+//   - Policy mappings
+//
+//   - Inhibit anyPolicy
 //
 // Amazon Web Services Private CA rejects the following extensions when they are
 // marked critical in an imported CA certificate or chain.
 //
-//   - Authority information access
-//
-//   - CRL distribution points
-//
-//   - Freshest CRL
+//   - Name constraints
 //
 //   - Policy constraints
 //
-// Amazon Web Services Private Certificate Authority will also reject any other
-// extension marked as critical not contained on the preceding list of allowed
-// extensions.
+//   - CRL distribution points
+//
+//   - Authority information access
+//
+//   - Freshest CRL
+//
+//   - Any other extension
 //
 // [GetCertificateAuthorityCsr]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCsr.html
 // [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
