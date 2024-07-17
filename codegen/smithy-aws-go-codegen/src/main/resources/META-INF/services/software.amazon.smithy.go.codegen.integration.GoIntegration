@@ -1,4 +1,5 @@
 software.amazon.smithy.aws.go.codegen.customization.AwsWaiters
+software.amazon.smithy.aws.go.codegen.customization.AwsWaiters2
 software.amazon.smithy.aws.go.codegen.customization.AwsPaginators
 software.amazon.smithy.aws.go.codegen.customization.auth.BackfillSigV4ATrait
 software.amazon.smithy.aws.go.codegen.AddProtocols

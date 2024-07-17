@@ -9,7 +9,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.3
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.17
 	github.com/aws/smithy-go v1.20.3
-	github.com/jmespath/go-jmespath v0.4.0
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
