@@ -109,7 +109,7 @@ func TestSSOTokenProvider(t *testing.T) {
 					},
 				}
 
-				if diff := cmpDiff(expect, actual); diff != "" {
+				if diff := cmpDiffToken(expect, actual); diff != "" {
 					return fmt.Errorf("expect token file match\n%s", diff)
 				}
 				return nil
@@ -229,6 +229,22 @@ func (c *mockCreateTokenAPIClient) CreateToken(
 
 func cmpDiff(e, a interface{}) string {
 	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
+}
+
+func cmpDiffToken(e token, a token) string {
+	if !reflect.DeepEqual(e.UnknownFields, a.UnknownFields) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	// treats token times as the same if they are the same in UTC
+	if time.Time(*e.ExpiresAt).UTC() != time.Time(*a.ExpiresAt).UTC() {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	eTokenKnownFields := e.tokenKnownFields
+	eTokenKnownFields.ExpiresAt = a.tokenKnownFields.ExpiresAt
+	if !reflect.DeepEqual(eTokenKnownFields, a.tokenKnownFields) {
 		return fmt.Sprintf("%v != %v", e, a)
 	}
 	return ""
