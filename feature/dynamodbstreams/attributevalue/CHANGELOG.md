@@ -1,3 +1,47 @@
+# v1.13.44 (2024-07-09)
+
+* No change notes available for this release.
+
+# v1.13.43 (2024-07-08)
+
+* No change notes available for this release.
+
+# v1.13.42 (2024-07-05)
+
+* No change notes available for this release.
+
+# v1.13.41 (2024-07-03)
+
+* No change notes available for this release.
+
+# v1.13.40 (2024-07-02)
+
+* No change notes available for this release.
+
+# v1.13.39 (2024-07-01)
+
+* No change notes available for this release.
+
+# v1.13.38 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.37 (2024-06-27)
+
+* No change notes available for this release.
+
+# v1.13.36 (2024-06-26)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.35 (2024-06-25)
+
+* No change notes available for this release.
+
+# v1.13.34 (2024-06-24)
+
+* No change notes available for this release.
+
 # v1.13.33 (2024-06-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

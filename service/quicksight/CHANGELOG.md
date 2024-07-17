@@ -1,3 +1,15 @@
+# v1.67.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.67.0 (2024-06-27)
+
+* **Feature**: Adding support for Repeating Sections, Nested Filters
+
+# v1.66.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.65.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

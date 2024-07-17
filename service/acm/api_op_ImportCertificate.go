@@ -30,12 +30,6 @@ import (
 //
 //   - The private key must be no larger than 5 KB (5,120 bytes).
 //
-//   - If the certificate you are importing is not self-signed, you must enter its
-//     certificate chain.
-//
-//   - If a certificate chain is included, the issuer must be the subject of one
-//     of the certificates in the chain.
-//
 //   - The certificate, private key, and certificate chain must be PEM-encoded.
 //
 //   - The current time must be between the Not Before and Not After certificate

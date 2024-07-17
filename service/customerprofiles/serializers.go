@@ -4118,6 +4118,11 @@ func awsRestjson1_serializeOpDocumentPutProfileObjectTypeInput(v *PutProfileObje
 		}
 	}
 
+	if v.MaxProfileObjectCount != nil {
+		ok := object.Key("MaxProfileObjectCount")
+		ok.Integer(*v.MaxProfileObjectCount)
+	}
+
 	if v.SourceLastUpdatedTimestampFormat != nil {
 		ok := object.Key("SourceLastUpdatedTimestampFormat")
 		ok.String(*v.SourceLastUpdatedTimestampFormat)

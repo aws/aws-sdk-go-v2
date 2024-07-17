@@ -1,3 +1,15 @@
+# v1.8.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.8.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
+# v1.7.0 (2024-06-25)
+
+* **Feature**: This release adds the deviceCreationTags field to CreateEnvironment API input, UpdateEnvironment API input and GetEnvironment API output.
+
 # v1.6.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -14,6 +14,20 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.qconnect#AmazonConnectGuideAssociationData": {
+            "type": "structure",
+            "members": {
+                "flowId": {
+                    "target": "com.amazonaws.qconnect#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of an Amazon Connect flow. Step-by-step guides are a type of flow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Content association data for a <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html\">step-by-step\n        guide</a>.</p>"
+            }
+        },
         "com.amazonaws.qconnect#AndConditions": {
             "type": "list",
             "member": {
@@ -44,7 +58,7 @@
         "com.amazonaws.qconnect#Arn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$"
+                "smithy.api#pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
             }
         },
         "com.amazonaws.qconnect#Assistant": {
@@ -660,11 +674,229 @@
                     "target": "com.amazonaws.qconnect#GetContentSummary"
                 }
             ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.qconnect#ContentAssociation"
+                }
+            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "content/{knowledgeBaseId}/{contentId}"
                 },
                 "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.qconnect#ContentAssociation": {
+            "type": "resource",
+            "identifiers": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn"
+                },
+                "contentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn"
+                },
+                "contentAssociationId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.qconnect#CreateContentAssociation"
+            },
+            "read": {
+                "target": "com.amazonaws.qconnect#GetContentAssociation"
+            },
+            "delete": {
+                "target": "com.amazonaws.qconnect#DeleteContentAssociation"
+            },
+            "list": {
+                "target": "com.amazonaws.qconnect#ListContentAssociations"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "content-association/{knowledgeBaseId}/{contentId}/{contentAssociationId}"
+                },
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.qconnect#ContentAssociationContents": {
+            "type": "union",
+            "members": {
+                "amazonConnectGuideAssociation": {
+                    "target": "com.amazonaws.qconnect#AmazonConnectGuideAssociationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the step-by-step guide association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contents of a content association.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ContentAssociationData": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentAssociationId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentAssociationArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the content association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationType": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationData": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the content association.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#ContentAssociation"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#ContentAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentAssociationId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentAssociationArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the content association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationType": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationData": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a content association.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#ContentAssociation"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#ContentAssociationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#ContentAssociationSummary"
+            }
+        },
+        "com.amazonaws.qconnect#ContentAssociationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AMAZON_CONNECT_GUIDE",
+                        "name": "AMAZON_CONNECT_GUIDE"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#ContentData": {
@@ -1214,6 +1446,107 @@
                     "method": "POST"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateContentAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateContentAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateContentAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an association between a content resource in a knowledge base and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html\">step-by-step\n        guides</a>. Step-by-step guides offer instructions to agents for resolving common\n      customer issues. You create a content association to integrate Amazon Q in Connect and step-by-step\n      guides. </p>\n         <p>After you integrate Amazon Q and step-by-step guides, when Amazon Q provides a\n      recommendation to an agent based on the intent that it's detected, it also provides them with\n      the option to start the step-by-step guide that you have associated with the content.</p>\n         <p>Note the following limitations:</p>\n         <ul>\n            <li>\n               <p>You can create only one content association for each\n        content resource in a knowledge base.</p>\n            </li>\n            <li>\n               <p>You can associate a step-by-step guide with multiple content resources.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html\">Integrate Amazon Q in Connect with\n        step-by-step guides</a> in the <i>Amazon Connect Administrator\n        Guide</i>. </p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#CreateContentAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationType": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "association": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the associated resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateContentAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "contentAssociation": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association between Amazon Q in Connect content and another resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#CreateContentRequest": {
@@ -1803,6 +2136,74 @@
                 "smithy.api#idempotent": {}
             }
         },
+        "com.amazonaws.qconnect#DeleteContentAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteContentAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteContentAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the content association. </p>\n         <p>For more information about content associations--what they are and when they are used--see\n        <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html\">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Amazon Connect\n        Administrator Guide</i>. </p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations/{contentAssociationId}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteContentAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentAssociationId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteContentAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#DeleteContentRequest": {
             "type": "structure",
             "members": {
@@ -2359,6 +2760,80 @@
                     "method": "GET"
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetContentAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#GetContentAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#GetContentAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the content association.</p>\n         <p>For more information about content associations--what they are and when they are used--see\n        <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html\">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations/{contentAssociationId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetContentAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentAssociationId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content association. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetContentAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "contentAssociation": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association between Amazon Q in Connect content and another resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#GetContentRequest": {
@@ -2929,7 +3404,7 @@
                 "failedRecordReport": {
                     "target": "com.amazonaws.qconnect#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The link to donwload the information of resource data that failed to be imported.</p>"
+                        "smithy.api#documentation": "<p>The link to download the information of resource data that failed to be imported.</p>"
                     }
                 },
                 "urlExpiry": {
@@ -3555,6 +4030,99 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#ListContentAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListContentAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListContentAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the content associations.</p>\n         <p>For more information about content associations--what they are and when they are used--see\n        <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html\">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "contentAssociationSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListContentAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the content.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListContentAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "contentAssociationSummaries": {
+                    "target": "com.amazonaws.qconnect#ContentAssociationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about content associations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#ListContents": {
             "type": "operation",
             "input": {
@@ -4081,7 +4649,7 @@
                 "andConditions": {
                     "target": "com.amazonaws.qconnect#AndConditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code>\n      condition.</p>"
                     }
                 },
                 "tagCondition": {
@@ -4092,7 +4660,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>"
+                "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code>\n      condition.</p>"
             }
         },
         "com.amazonaws.qconnect#OrConditions": {
@@ -6369,7 +6937,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition.\n  </p>"
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition. </p>"
             }
         },
         "com.amazonaws.qconnect#TagFilter": {
@@ -6384,13 +6952,13 @@
                 "andConditions": {
                     "target": "com.amazonaws.qconnect#AndConditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code>\n      condition.</p>"
                     }
                 },
                 "orConditions": {
                     "target": "com.amazonaws.qconnect#OrConditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code>\n      condition.</p>"
                     }
                 }
             },
@@ -6514,6 +7082,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about the source content text data.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The throttling limit has been exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.qconnect#TimeToLive": {
@@ -6911,7 +7493,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a session. A session is a contextual container used for generating recommendations.\n        Amazon Connect updates the existing Amazon Q in Connect session for each contact on which Amazon Q in Connect\n      is enabled.</p>",
+                "smithy.api#documentation": "<p>Updates a session. A session is a contextual container used for generating\n      recommendations. Amazon Connect updates the existing Amazon Q in Connect session for each contact on\n      which Amazon Q in Connect is enabled.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/sessions/{sessionId}",
                     "method": "POST"
@@ -7002,7 +7584,7 @@
         "com.amazonaws.qconnect#UuidOrArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$"
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
             }
         },
         "com.amazonaws.qconnect#ValidationException": {

@@ -81,6 +81,10 @@ type CreateUserSettingsInput struct {
 	// settings.
 	CustomerManagedKey *string
 
+	// Specifies whether the user can use deep links that open automatically when
+	// connecting to a session.
+	DeepLinkAllowed types.EnabledType
+
 	// The amount of time that a streaming session remains active after users
 	// disconnect.
 	DisconnectTimeoutInMinutes *int32

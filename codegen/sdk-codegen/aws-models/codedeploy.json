@@ -7283,7 +7283,20 @@
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
                     "items": "applications"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListApplicationsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.codedeploy#ListApplicationsInput": {

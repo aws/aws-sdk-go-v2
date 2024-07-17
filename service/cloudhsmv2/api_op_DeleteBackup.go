@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days
+// Deletes a specified CloudHSM backup. A backup can be restored up to 7 days
 // after the DeleteBackup request is made. For more information on restoring a
 // backup, see RestoreBackup.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM backup
+// in a different Amazon Web Services account.
 func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, optFns ...func(*Options)) (*DeleteBackupOutput, error) {
 	if params == nil {
 		params = &DeleteBackupInput{}

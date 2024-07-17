@@ -98,6 +98,18 @@ func TestCheckSnapshot_ConstantQueryString(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ContentTypeParameters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ContentTypeParameters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ContentTypeParameters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DatetimeOffsets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DatetimeOffsets(context.Background(), nil, func(o *Options) {
@@ -974,6 +986,30 @@ func TestCheckSnapshot_OmitsSerializingEmptyLists(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_OperationWithDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "OperationWithDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_OperationWithNestedStructure(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithNestedStructure(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "OperationWithNestedStructure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PostPlayerAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PostPlayerAction(context.Background(), nil, func(o *Options) {
@@ -1142,6 +1178,18 @@ func TestCheckSnapshot_TestBodyStructure(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_TestNoInputNoPayload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestNoInputNoPayload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TestNoInputNoPayload")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TestNoPayload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TestNoPayload(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1278,18 @@ func TestUpdateSnapshot_ConstantQueryString(t *testing.T) {
 	_, err := svc.ConstantQueryString(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ConstantQueryString")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ContentTypeParameters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ContentTypeParameters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ContentTypeParameters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2113,6 +2173,30 @@ func TestUpdateSnapshot_OmitsSerializingEmptyLists(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_OperationWithDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "OperationWithDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_OperationWithNestedStructure(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithNestedStructure(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "OperationWithNestedStructure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PostPlayerAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PostPlayerAction(context.Background(), nil, func(o *Options) {
@@ -2274,6 +2358,18 @@ func TestUpdateSnapshot_TestBodyStructure(t *testing.T) {
 	_, err := svc.TestBodyStructure(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TestBodyStructure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TestNoInputNoPayload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestNoInputNoPayload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TestNoInputNoPayload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -68,6 +68,7 @@ type DeleteStreamInput struct {
 }
 
 func (in *DeleteStreamInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

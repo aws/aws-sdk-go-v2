@@ -17,22 +17,6 @@
 // For information about the IAM access control permissions you need to use this
 // API, see [IAM roles for Amazon Q Business]in the Amazon Q Business User Guide.
 //
-// You can use the following AWS SDKs to access Amazon Q Business APIs:
-//
-// [AWS SDK for C++]
-//
-// [AWS SDK for Go]
-//
-// [AWS SDK for Java]
-//
-// [AWS SDK for JavaScript]
-//
-// [AWS SDK for .NET]
-//
-// [AWS SDK for Python (Boto3)]
-//
-// [AWS SDK for Ruby]
-//
 // The following resources provide additional information about using the Amazon Q
 // Business API:
 //
@@ -42,17 +26,10 @@
 //
 // [Amazon Web Services General Reference]
 //
+// [Amazon Web Services General Reference]: https://docs.aws.amazon.com/general/latest/gr/amazonq.html
 // [Overview of Amazon Q Business API operations]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview
 // [IAM roles for Amazon Q Business]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html
-// [AWS SDK for Java]: https://docs.aws.amazon.com/sdk-for-java
-// [AWS SDK for Go]: https://docs.aws.amazon.com/sdk-for-go
-// [Amazon Q Business CLI Reference]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html
-// [AWS SDK for JavaScript]: https://docs.aws.amazon.com/sdk-for-javascript
-// [AWS SDK for Ruby]: https://docs.aws.amazon.com/sdk-for-ruby
-// [Amazon Web Services General Reference]: https://docs.aws.amazon.com/general/latest/gr/amazonq.html
-// [AWS SDK for .NET]: https://docs.aws.amazon.com/sdk-for-net
 // [Setting up for Amazon Q Business]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html
 // [Amazon Q Business User Guide]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html
-// [AWS SDK for C++]: https://docs.aws.amazon.com/sdk-for-cpp
-// [AWS SDK for Python (Boto3)]: https://docs.aws.amazon.com/pythonsdk
+// [Amazon Q Business CLI Reference]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html
 package qbusiness

@@ -215,6 +215,21 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "translate-fips.us-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "translate-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

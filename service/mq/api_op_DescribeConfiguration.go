@@ -57,10 +57,12 @@ type DescribeConfigurationOutput struct {
 	// RABBITMQ.
 	EngineType types.EngineType
 
-	// Required. The broker engine's version. For a list of supported engine versions,
-	// see, [Supported engines].
+	// The broker engine version. Defaults to the latest available version for the
+	// specified broker engine type. For a list of supported engine versions, see the [ActiveMQ version management]
+	// and the [RabbitMQ version management]sections in the Amazon MQ Developer Guide.
 	//
-	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+	// [RabbitMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
+	// [ActiveMQ version management]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
 	EngineVersion *string
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.

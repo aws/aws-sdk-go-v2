@@ -5145,7 +5145,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10000
+                    "max": 30000
                 },
                 "smithy.api#pattern": "^((?!\\\\[nr]).)+$"
             }

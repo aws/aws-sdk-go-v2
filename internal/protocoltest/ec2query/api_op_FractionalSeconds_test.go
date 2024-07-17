@@ -35,7 +35,7 @@ func TestClient_FractionalSeconds_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<FractionalSecondsResponse xmlns="https://example.com/">
 			    <datetime>2000-01-02T20:34:56.123Z</datetime>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</FractionalSecondsResponse>
 			`),
 			ExpectResult: &FractionalSecondsOutput{

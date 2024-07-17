@@ -136,6 +136,25 @@ func (EncryptionMode) Values() []EncryptionMode {
 	}
 }
 
+type KeyCheckValueAlgorithm string
+
+// Enum values for KeyCheckValueAlgorithm
+const (
+	KeyCheckValueAlgorithmCmac     KeyCheckValueAlgorithm = "CMAC"
+	KeyCheckValueAlgorithmAnsiX924 KeyCheckValueAlgorithm = "ANSI_X9_24"
+)
+
+// Values returns all known values for KeyCheckValueAlgorithm. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyCheckValueAlgorithm) Values() []KeyCheckValueAlgorithm {
+	return []KeyCheckValueAlgorithm{
+		"CMAC",
+		"ANSI_X9_24",
+	}
+}
+
 type MacAlgorithm string
 
 // Enum values for MacAlgorithm

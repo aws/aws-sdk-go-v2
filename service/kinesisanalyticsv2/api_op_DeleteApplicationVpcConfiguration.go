@@ -62,6 +62,9 @@ type DeleteApplicationVpcConfigurationOutput struct {
 	// The updated version ID of the application.
 	ApplicationVersionId *int64
 
+	// Operation ID for tracking DeleteApplicationVpcConfiguration request
+	OperationId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

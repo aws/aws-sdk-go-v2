@@ -1,3 +1,11 @@
+# v1.12.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.11.0 (2024-06-20)
 
 * **Feature**: This release adds document support to Converse and ConverseStream APIs

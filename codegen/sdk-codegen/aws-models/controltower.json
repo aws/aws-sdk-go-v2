@@ -11,6 +11,9 @@
             ],
             "resources": [
                 {
+                    "target": "com.amazonaws.controltower#BaselineOperationResource"
+                },
+                {
                     "target": "com.amazonaws.controltower#BaselineResource"
                 },
                 {
@@ -21,6 +24,9 @@
                 },
                 {
                     "target": "com.amazonaws.controltower#EnabledControlResource"
+                },
+                {
+                    "target": "com.amazonaws.controltower#LandingZoneOperationResource"
                 },
                 {
                     "target": "com.amazonaws.controltower#LandingZoneResource"
@@ -61,7 +67,7 @@
                         "x-amzn-trace-id"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Web Services Control Tower offers application programming interface (API) operations that support programmatic interaction with these types of resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls.html\">\n                     <i>controls</i>\n                  </a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch.html\">\n                     <i>landing zones</i>\n                  </a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html\">\n                     <i>baselines</i>\n                  </a>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about these types of resources, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html\">\n               <i>Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>\n         <p>\n            <b>About control APIs</b>\n         </p>\n         <p>These interfaces allow you to apply the Amazon Web Services library of pre-defined\n         <i>controls</i> to your organizational units, programmatically. In Amazon Web Services Control Tower, the terms \"control\" and \"guardrail\" are synonyms.</p>\n         <p>To call these APIs, you'll need to know:</p>\n         <ul>\n            <li>\n               <p>the <code>controlIdentifier</code> for the control--or guardrail--you are targeting.</p>\n            </li>\n            <li>\n               <p>the ARN associated with the target organizational unit (OU), which we call the <code>targetIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>the ARN associated with a resource that you wish to tag or untag.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To get the <code>controlIdentifier</code> for your Amazon Web Services Control Tower\n         control:</b>\n         </p>\n         <p>The <code>controlIdentifier</code> is an ARN that is specified for each\n         control. You can view the <code>controlIdentifier</code> in the console on the <b>Control details</b> page, as well as in the documentation.</p>\n         <p>The <code>controlIdentifier</code> is unique in each Amazon Web Services Region for each control. You can\n         find the <code>controlIdentifier</code> for each Region and control in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Tables of control metadata</a> or the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-region-tables.html\">Control availability by Region tables</a> in the <i>Amazon Web Services Control Tower User Guide.</i>\n         </p>\n         <p>A quick-reference list of control identifers for the Amazon Web Services Control Tower legacy <i>Strongly recommended</i> and\n         <i>Elective</i> controls is given in <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html\">Resource identifiers for\n            APIs and controls</a> in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">Controls reference guide section</a>\n         of the <i>Amazon Web Services Control Tower User Guide</i>. Remember that <i>Mandatory</i> controls\n         cannot be added or removed.</p>\n         <note>\n            <p>\n               <b>ARN format:</b>\n               <code>arn:aws:controltower:{REGION}::control/{CONTROL_NAME}</code>\n            </p>\n            <p>\n               <b>Example:</b>\n            </p>\n            <p>\n               <code>arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED</code>\n            </p>\n         </note>\n         <p>\n            <b>To get the <code>targetIdentifier</code>:</b>\n         </p>\n         <p>The <code>targetIdentifier</code> is the ARN for an OU.</p>\n         <p>In the Amazon Web Services Organizations console, you can find the ARN for the OU on the <b>Organizational unit details</b> page associated with that OU.</p>\n         <note>\n            <p>\n               <b>OU ARN format:</b>\n            </p>\n            <p>\n               <code>arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}</code>\n            </p>\n         </note>\n         <p>\n            <b> About landing zone APIs</b>\n         </p>\n         <p>You can configure and launch an Amazon Web Services Control Tower landing zone with APIs. For an introduction and steps, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/getting-started-apis.html\">Getting started with Amazon Web Services Control Tower using APIs</a>.</p>\n         <p>For an overview of landing zone API operations, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/2023-all.html#landing-zone-apis\"> Amazon Web Services Control Tower supports landing zone APIs</a>. The individual API operations for landing zones are detailed in this document, the <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_Operations.html\">API reference manual</a>, in the \"Actions\" section.</p>\n         <p>\n            <b>About baseline APIs</b>\n         </p>\n         <p>You can apply the <code>AWSControlTowerBaseline</code> baseline to an organizational unit (OU) as a way to register the OU with Amazon Web Services Control Tower, programmatically. For a general overview of this capability, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/2024-all.html#baseline-apis\">Amazon Web Services Control Tower supports APIs for OU registration and configuration with baselines</a>.</p>\n         <p>You can call the baseline API operations to view the baselines that Amazon Web Services Control Tower enables for your landing zone, on your behalf, when setting up the landing zone. These baselines are read-only baselines.</p>\n         <p>The individual API operations for baselines are detailed in this document, the <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_Operations.html\">API reference manual</a>, in the \"Actions\" section. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html\">Baseline API input and output examples with CLI</a>.</p>\n         <p class=\"title\">\n            <b>Details and examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">Control API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html\">Baseline API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html\">Enable controls with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-apis-cfn-setup.html\">Launch a landing zone with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-metadata-tables.html\">Control metadata tables (large page)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-region-tables.html\">Control availability by Region tables (large page)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">List of identifiers for legacy controls</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls.html\">Controls reference guide</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls-reference.html\">Controls library groupings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html\">Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation</a>\n               </p>\n            </li>\n         </ul>\n         <p>To view the open source resource repository on GitHub, see <a href=\"https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower\">aws-cloudformation/aws-cloudformation-resource-providers-controltower</a>\n         </p>\n         <p>\n            <b>Recording API Requests</b>\n         </p>\n         <p>Amazon Web Services Control Tower supports Amazon Web Services CloudTrail, a service that records Amazon Web Services API calls for your\n         Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected by\n         CloudTrail, you can determine which requests the Amazon Web Services Control Tower service received, who made\n         the request and when, and so on. For more about Amazon Web Services Control Tower and its support for\n         CloudTrail, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html\">Logging Amazon Web Services Control Tower\n            Actions with Amazon Web Services CloudTrail</a> in the Amazon Web Services Control Tower User Guide. To learn more about\n         CloudTrail, including how to turn it on and find your log files, see the Amazon Web Services CloudTrail User\n         Guide.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Control Tower offers application programming interface (API) operations that support programmatic interaction with these types of resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/controls.html\">\n                     <i>Controls</i>\n                  </a>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_DisableControl.html\">DisableControl</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html\">EnableControl</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetEnabledControl.html\">GetEnabledControl</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListControlOperations.html\">ListControlOperations</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListEnabledControls.html\">ListEnabledControls</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html\">UpdateEnabledControl</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch.html\">\n                     <i>Landing zones</i>\n                  </a>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_CreateLandingZone.html\">CreateLandingZone</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_DeleteLandingZone.html\">DeleteLandingZone</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetLandingZone.html\">GetLandingZone</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetLandingZoneOperation.html\">GetLandingZoneOperation</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListLandingZones.html\">ListLandingZones</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ResetLandingZone.html\">ResetLandingZone</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateLandingZone.html\">UpdateLandingZone</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html\">\n                     <i>Baselines</i>\n                  </a>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_DisableBaseline.html\">DisableBaseline</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableBaseline.html\">EnableBaseline</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetBaseline.html\">GetBaseline</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetBaselineOperation.html\">GetBaselineOperation</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetEnabledBaseline.html\">GetEnabledBaseline</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListBaselines.html\">ListBaselines</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListEnabledBaselines.html\">ListEnabledBaselines</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ResetEnabledBaseline.html\">ResetEnabledBaseline</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledBaseline.html\">UpdateEnabledBaseline</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/tagging.html\">Tagging</a>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_TagResource.html\">TagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UntagResource.html\">UntagResource</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about these types of resources, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html\">\n               <i>Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>\n         <p>\n            <b>About control APIs</b>\n         </p>\n         <p>These interfaces allow you to apply the Amazon Web Services library of pre-defined\n         <i>controls</i> to your organizational units, programmatically. In Amazon Web Services Control Tower, the terms \"control\" and \"guardrail\" are synonyms.</p>\n         <p>To call these APIs, you'll need to know:</p>\n         <ul>\n            <li>\n               <p>the <code>controlIdentifier</code> for the control--or guardrail--you are targeting.</p>\n            </li>\n            <li>\n               <p>the ARN associated with the target organizational unit (OU), which we call the <code>targetIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>the ARN associated with a resource that you wish to tag or untag.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To get the <code>controlIdentifier</code> for your Amazon Web Services Control Tower\n         control:</b>\n         </p>\n         <p>The <code>controlIdentifier</code> is an ARN that is specified for each\n         control. You can view the <code>controlIdentifier</code> in the console on the <b>Control details</b> page, as well as in the documentation.</p>\n         <p>The <code>controlIdentifier</code> is unique in each Amazon Web Services Region for each control. You can\n         find the <code>controlIdentifier</code> for each Region and control in the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-metadata-tables.html\">Tables of control metadata</a> or the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-region-tables.html\">Control availability by Region tables</a> in the <i>Amazon Web Services Control Tower Controls Reference Guide</i>.</p>\n         <p>A quick-reference list of control identifers for the Amazon Web Services Control Tower legacy <i>Strongly recommended</i> and\n         <i>Elective</i> controls is given in <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html.html\">Resource identifiers for\n            APIs and controls</a> in the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html\">\n               <i>Amazon Web Services Control Tower Controls Reference Guide</i>\n            </a>. Remember that <i>Mandatory</i> controls cannot be added or removed.</p>\n         <note>\n            <p>\n               <b>ARN format:</b>\n               <code>arn:aws:controltower:{REGION}::control/{CONTROL_NAME}</code>\n            </p>\n            <p>\n               <b>Example:</b>\n            </p>\n            <p>\n               <code>arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED</code>\n            </p>\n         </note>\n         <p>\n            <b>To get the <code>targetIdentifier</code>:</b>\n         </p>\n         <p>The <code>targetIdentifier</code> is the ARN for an OU.</p>\n         <p>In the Amazon Web Services Organizations console, you can find the ARN for the OU on the <b>Organizational unit details</b> page associated with that OU.</p>\n         <note>\n            <p>\n               <b>OU ARN format:</b>\n            </p>\n            <p>\n               <code>arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}</code>\n            </p>\n         </note>\n         <p>\n            <b> About landing zone APIs</b>\n         </p>\n         <p>You can configure and launch an Amazon Web Services Control Tower landing zone with APIs. For an introduction and steps, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/getting-started-apis.html\">Getting started with Amazon Web Services Control Tower using APIs</a>.</p>\n         <p>For an overview of landing zone API operations, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/2023-all.html#landing-zone-apis\"> Amazon Web Services Control Tower supports landing zone APIs</a>. The individual API operations for landing zones are detailed in this document, the <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_Operations.html\">API reference manual</a>, in the \"Actions\" section.</p>\n         <p>\n            <b>About baseline APIs</b>\n         </p>\n         <p>You can apply the <code>AWSControlTowerBaseline</code> baseline to an organizational unit (OU) as a way to register the OU with Amazon Web Services Control Tower, programmatically. For a general overview of this capability, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/2024-all.html#baseline-apis\">Amazon Web Services Control Tower supports APIs for OU registration and configuration with baselines</a>.</p>\n         <p>You can call the baseline API operations to view the baselines that Amazon Web Services Control Tower enables for your landing zone, on your behalf, when setting up the landing zone. These baselines are read-only baselines.</p>\n         <p>The individual API operations for baselines are detailed in this document, the <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_Operations.html\">API reference manual</a>, in the \"Actions\" section. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html\">Baseline API input and output examples with CLI</a>.</p>\n         <p class=\"title\">\n            <b>Details and examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">Control API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/baseline-api-examples.html\">Baseline API input and output examples with CLI</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/enable-controls.html\">Enable controls with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-apis-cfn-setup.html\">Launch a landing zone with CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-metadata-tables.html\">Control metadata tables (large page)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-region-tables.html\">Control availability by Region tables (large page)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html\">List of identifiers for legacy controls</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/controls.html\">Controls reference guide</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/controls-reference.html\">Controls library groupings</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html\">Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation</a>\n               </p>\n            </li>\n         </ul>\n         <p>To view the open source resource repository on GitHub, see <a href=\"https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower\">aws-cloudformation/aws-cloudformation-resource-providers-controltower</a>\n         </p>\n         <p>\n            <b>Recording API Requests</b>\n         </p>\n         <p>Amazon Web Services Control Tower supports Amazon Web Services CloudTrail, a service that records Amazon Web Services API calls for your\n         Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected by\n         CloudTrail, you can determine which requests the Amazon Web Services Control Tower service received, who made\n         the request and when, and so on. For more about Amazon Web Services Control Tower and its support for\n         CloudTrail, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html\">Logging Amazon Web Services Control Tower\n            Actions with Amazon Web Services CloudTrail</a> in the Amazon Web Services Control Tower User Guide. To learn more about\n         CloudTrail, including how to turn it on and find your log files, see the Amazon Web Services CloudTrail User\n         Guide.</p>",
                 "smithy.api#title": "AWS Control Tower",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -990,6 +996,17 @@
                 "smithy.api#documentation": "<p>An object of shape <code>BaselineOperation</code>, returning details about the specified <code>Baseline</code> operation ID.</p>"
             }
         },
+        "com.amazonaws.controltower#BaselineOperationResource": {
+            "type": "resource",
+            "identifiers": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.controltower#GetBaselineOperation"
+            }
+        },
         "com.amazonaws.controltower#BaselineOperationStatus": {
             "type": "enum",
             "members": {
@@ -1237,7 +1254,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter object that lets you call <code>ListCOntrolOperations</code> with a specific filter.</p>"
+                "smithy.api#documentation": "<p>A filter object that lets you call <code>ListControlOperations</code> with a specific filter.</p>"
             }
         },
         "com.amazonaws.controltower#ControlOperationResource": {
@@ -1650,7 +1667,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API call turns off a control. It starts an asynchronous operation that deletes AWS\n         resources on the specified organizational unit and the accounts it contains. The resources\n         will vary according to the control that you specify. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>This API call turns off a control. It starts an asynchronous operation that deletes Amazon Web Services\n         resources on the specified organizational unit and the accounts it contains. The resources\n         will vary according to the control that you specify. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1885,7 +1902,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API call activates a control. It starts an asynchronous operation that creates Amazon Web Services\n         resources on the specified organizational unit and the accounts it contains. The resources\n         created will vary according to the control that you specify. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>This API call activates a control. It starts an asynchronous operation that creates Amazon Web Services\n         resources on the specified organizational unit and the accounts it contains. The resources\n         created will vary according to the control that you specify. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2111,11 +2128,6 @@
             "operations": [
                 {
                     "target": "com.amazonaws.controltower#ResetEnabledBaseline"
-                }
-            ],
-            "collectionOperations": [
-                {
-                    "target": "com.amazonaws.controltower#GetBaselineOperation"
                 }
             ],
             "traits": {
@@ -2420,18 +2432,18 @@
                 "status": {
                     "target": "com.amazonaws.controltower#EnablementStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> The deployment status of the enabled control.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The <code>enabledControl</code> configuration was deployed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNDER_CHANGE</code>: The <code>enabledControl</code> configuration is changing. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The <code>enabledControl</code> configuration failed to deploy.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The deployment status of the enabled resource.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The <code>EnabledControl</code> or <code>EnabledBaseline</code> configuration was deployed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNDER_CHANGE</code>: The <code>EnabledControl</code> or <code>EnabledBaseline</code> configuration is changing. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The <code>EnabledControl</code> or <code>EnabledBaseline</code> configuration failed to deploy.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "lastOperationIdentifier": {
                     "target": "com.amazonaws.controltower#OperationIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last operation identifier for the enabled control.</p>"
+                        "smithy.api#documentation": "<p>The last operation identifier for the enabled resource.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The deployment summary of the enabled control.</p>"
+                "smithy.api#documentation": "<p>The deployment summary of an <code>EnabledControl</code> or <code>EnabledBaseline</code> resource.</p>"
             }
         },
         "com.amazonaws.controltower#EnablementStatuses": {
@@ -2527,7 +2539,8 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/get-baseline-operation"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.controltower#GetBaselineOperationInput": {
@@ -2614,7 +2627,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the status of a particular <code>EnableControl</code> or\n         <code>DisableControl</code> operation. Displays a message in case of error. Details for an\n         operation are available for 90 days. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>Returns the status of a particular <code>EnableControl</code> or\n         <code>DisableControl</code> operation. Displays a message in case of error. Details for an\n         operation are available for 90 days. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2743,7 +2756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about an enabled control. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves details about an enabled control. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3015,6 +3028,18 @@
                         "smithy.api#documentation": "<p>The landing zone operation type. </p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code>: The <code>DeleteLandingZone</code> operation.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE</code>: The <code>CreateLandingZone</code> operation. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE</code>: The <code>UpdateLandingZone</code> operation. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESET</code>: The <code>ResetLandingZone</code> operation. </p>\n            </li>\n         </ul>"
                     }
                 },
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>operationIdentifier</code> of the landing zone operation.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.controltower#LandingZoneOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The landing zone operation succeeded.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The landing zone operation is in progress. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The landing zone operation failed. </p>\n            </li>\n         </ul>"
+                    }
+                },
                 "startTime": {
                     "target": "com.amazonaws.controltower#Timestamp",
                     "traits": {
@@ -3027,12 +3052,6 @@
                         "smithy.api#documentation": "<p>The landing zone operation end time.</p>"
                     }
                 },
-                "status": {
-                    "target": "com.amazonaws.controltower#LandingZoneOperationStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The landing zone operation succeeded.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The landing zone operation is in progress. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The landing zone operation failed. </p>\n            </li>\n         </ul>"
-                    }
-                },
                 "statusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -3042,6 +3061,40 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a landing zone operation.</p>"
+            }
+        },
+        "com.amazonaws.controltower#LandingZoneOperationFilter": {
+            "type": "structure",
+            "members": {
+                "types": {
+                    "target": "com.amazonaws.controltower#LandingZoneOperationTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of landing zone operation types selected by the filter.</p>"
+                    }
+                },
+                "statuses": {
+                    "target": "com.amazonaws.controltower#LandingZoneOperationStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statuses of the set of landing zone operations selected by the filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter object that lets you call <code>ListLandingZoneOperations</code> with a specific filter.</p>"
+            }
+        },
+        "com.amazonaws.controltower#LandingZoneOperationResource": {
+            "type": "resource",
+            "identifiers": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.controltower#GetLandingZoneOperation"
+            },
+            "list": {
+                "target": "com.amazonaws.controltower#ListLandingZoneOperations"
             }
         },
         "com.amazonaws.controltower#LandingZoneOperationStatus": {
@@ -3065,6 +3118,44 @@
                         "smithy.api#enumValue": "IN_PROGRESS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.controltower#LandingZoneOperationStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#LandingZoneOperationStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.controltower#LandingZoneOperationSummary": {
+            "type": "structure",
+            "members": {
+                "operationType": {
+                    "target": "com.amazonaws.controltower#LandingZoneOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the landing zone operation.</p>"
+                    }
+                },
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>operationIdentifier</code> of the landing zone operation.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.controltower#LandingZoneOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the landing zone operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a summary of information about a landing zone operation.</p>"
             }
         },
         "com.amazonaws.controltower#LandingZoneOperationType": {
@@ -3096,6 +3187,24 @@
                 }
             }
         },
+        "com.amazonaws.controltower#LandingZoneOperationTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#LandingZoneOperationType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.controltower#LandingZoneOperations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#LandingZoneOperationSummary"
+            }
+        },
         "com.amazonaws.controltower#LandingZoneResource": {
             "type": "resource",
             "identifiers": {
@@ -3121,11 +3230,6 @@
             "operations": [
                 {
                     "target": "com.amazonaws.controltower#ResetLandingZone"
-                }
-            ],
-            "collectionOperations": [
-                {
-                    "target": "com.amazonaws.controltower#GetLandingZoneOperation"
                 }
             ],
             "traits": {
@@ -3298,7 +3402,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of operations in progress or queued.</p>",
+                "smithy.api#documentation": "<p>Provides a list of operations in progress or queued. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html#list-control-operations-api-examples\">ListControlOperation examples</a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3360,7 +3464,7 @@
                 "controlOperations": {
                     "target": "com.amazonaws.controltower#ControlOperations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns a list of output from control operations. PLACEHOLDER </p>",
+                        "smithy.api#documentation": "<p>Returns a list of output from control operations. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3501,7 +3605,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and\n         the accounts it contains. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and\n         the accounts it contains. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3541,7 +3645,7 @@
                 "filter": {
                     "target": "com.amazonaws.controltower#EnabledControlFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>An input filter for the <code>ListCEnabledControls</code> API that lets you select the types of control operations to view.</p>"
+                        "smithy.api#documentation": "<p>An input filter for the <code>ListEnabledControls</code> API that lets you select the types of control operations to view.</p>"
                     }
                 }
             },
@@ -3563,6 +3667,100 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Retrieves the next page of results. If the string is empty, the response is the\n         end of the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controltower#ListLandingZoneOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#ListLandingZoneOperationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#ListLandingZoneOperationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all landing zone operations from the past 90 days. Results are sorted by time, with the most recent operation first.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-landingzone-operations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "landingZoneOperations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controltower#ListLandingZoneOperationsInput": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.controltower#LandingZoneOperationFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An input filter for the <code>ListLandingZoneOperations</code> API that lets you select the types of landing zone operations to view.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to continue the list from a previous API call with the same parameters.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.controltower#ListLandingZoneOperationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How many results to return per API call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#ListLandingZoneOperationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controltower#ListLandingZoneOperationsOutput": {
+            "type": "structure",
+            "members": {
+                "landingZoneOperations": {
+                    "target": "com.amazonaws.controltower#LandingZoneOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists landing zone operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the next page of results. If the string is empty, the response is the end of the results.</p>"
                     }
                 }
             },
@@ -3682,7 +3880,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tags associated with the resource. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of tags associated with the resource. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -3866,7 +4064,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API call resets a landing zone. It starts an asynchronous operation that resets the \n         landing zone to the parameters specified in its original configuration.</p>",
+                "smithy.api#documentation": "<p>This API call resets a landing zone. It starts an asynchronous operation that resets the\n         landing zone to the parameters specified in the original configuration, which you specified\n         in the manifest file. Nothing in the manifest file's original landing zone configuration is changed\n         during the reset process, by default. This API is not the same as a rollback of a landing\n         zone version, which is not a supported operation.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3992,7 +4190,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies tags to a resource. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>Applies tags to a resource. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "POST",
@@ -4150,7 +4348,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from a resource. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>.</p>",
+                "smithy.api#documentation": "<p>Removes tags from a resource. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -4304,7 +4502,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Updates the configuration of an already enabled control.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of FAILED, Amazon Web Services Control Tower will update the control to match any valid parameters that you supply.</p>\n         <p>If the <code>DriftSummary</code> status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling <code>DisableControl</code> and again calling <code>EnableControl</code>, or you can run an extending governance operation. For usage examples, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html\">\n               <i>the Amazon Web Services Control Tower User Guide</i>\n            </a>\n         </p>",
+                "smithy.api#documentation": "<p>\n         Updates the configuration of an already enabled control.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of FAILED, Amazon Web Services Control Tower updates the control to match any valid parameters that you supply.</p>\n         <p>If the <code>DriftSummary</code> status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling <code>DisableControl</code> and again calling <code>EnableControl</code>, or you can run an extending governance operation. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.\n      </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4399,7 +4597,7 @@
                 "manifest": {
                     "target": "com.amazonaws.controltower#Manifest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch\">Launch your landing zone</a>. </p>",
+                        "smithy.api#documentation": "<p>The manifest file (JSON) is a text file that describes your Amazon Web Services resources. For an example, review \n         <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch\">Launch your landing zone</a>. The example manifest file contains each of the available parameters. The schema for the landing zone's JSON manifest file is not published, by design.</p>",
                         "smithy.api#required": {}
                     }
                 },

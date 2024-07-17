@@ -18,15 +18,14 @@ import (
 // Otherwise, Amazon Web Services Control Tower will not accept the request.
 //
 // If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services
-// Control Tower will update the control to match any valid parameters that you
-// supply.
+// Control Tower updates the control to match any valid parameters that you supply.
 //
 // If the DriftSummary status for the control shows as DRIFTED, you cannot call
 // this API. Instead, you can update the control by calling DisableControl and
 // again calling EnableControl , or you can run an extending governance operation.
-// For usage examples, see [the Amazon Web Services Control Tower User Guide]
+// For usage examples, see the [Controls Reference Guide].
 //
-// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+// [Controls Reference Guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
 func (c *Client) UpdateEnabledControl(ctx context.Context, params *UpdateEnabledControlInput, optFns ...func(*Options)) (*UpdateEnabledControlOutput, error) {
 	if params == nil {
 		params = &UpdateEnabledControlInput{}

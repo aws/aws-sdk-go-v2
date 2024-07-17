@@ -1,3 +1,11 @@
+# v1.51.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.50.2 (2024-06-20)
 
 * **Documentation**: Documentation updates for Security Hub

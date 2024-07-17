@@ -16,7 +16,16 @@ import (
 // For more information about message streaming, see [Enable real-time chat message streaming] in the Amazon Connect
 // Administrator Guide.
 //
+// For more information about chat, see the following topics in the Amazon Connect
+// Administrator Guide:
+//
+// [Concepts: Web and mobile messaging capabilities in Amazon Connect]
+//
+// [Amazon Connect Chat security best practices]
+//
 // [Enable real-time chat message streaming]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
+// [Concepts: Web and mobile messaging capabilities in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
+// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) StartContactStreaming(ctx context.Context, params *StartContactStreamingInput, optFns ...func(*Options)) (*StartContactStreamingOutput, error) {
 	if params == nil {
 		params = &StartContactStreamingInput{}

@@ -59,7 +59,7 @@ type AllocateTransitVirtualInterfaceInput struct {
 
 type AllocateTransitVirtualInterfaceOutput struct {
 
-	// Information about a virtual interface.
+	// Information about the transit virtual interface.
 	VirtualInterface *types.VirtualInterface
 
 	// Metadata pertaining to the operation's result.

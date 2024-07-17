@@ -17,12 +17,12 @@ import (
 // Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling
 // you to treat them as a single interface.
 //
-// All connections in a LAG must use the same bandwidth (either 1Gbps or 10Gbps)
-// and must terminate at the same Direct Connect endpoint.
+// All connections in a LAG must use the same bandwidth (either 1Gbps, 10Gbps,
+// 100Gbps, or 400Gbps) and must terminate at the same Direct Connect endpoint.
 //
-// You can have up to 10 dedicated connections per LAG. Regardless of this limit,
-// if you request more connections for the LAG than Direct Connect can allocate on
-// a single endpoint, no LAG is created.
+// You can have up to 10 dedicated connections per location. Regardless of this
+// limit, if you request more connections for the LAG than Direct Connect can
+// allocate on a single endpoint, no LAG is created..
 //
 // You can specify an existing physical dedicated connection or interconnect to
 // include in the LAG (which counts towards the total number of connections). Doing
@@ -54,7 +54,7 @@ func (c *Client) CreateLag(ctx context.Context, params *CreateLagInput, optFns .
 type CreateLagInput struct {
 
 	// The bandwidth of the individual physical dedicated connections bundled by the
-	// LAG. The possible values are 1Gbps and 10Gbps.
+	// LAG. The possible values are 1Gbps,10Gbps, 100Gbps, and 400Gbps.
 	//
 	// This member is required.
 	ConnectionsBandwidth *string
@@ -70,8 +70,8 @@ type CreateLagInput struct {
 	Location *string
 
 	// The number of physical dedicated connections initially provisioned and bundled
-	// by the LAG. You can have a maximum of four connections when the port speed is 1G
-	// or 10G, or two when the port speed is 100G.
+	// by the LAG. You can have a maximum of four connections when the port speed is
+	// 1Gbps or 10Gbps, or two when the port speed is 100Gbps or 400Gbps.
 	//
 	// This member is required.
 	NumberOfConnections int32
@@ -122,7 +122,7 @@ type CreateLagOutput struct {
 	Connections []types.Connection
 
 	// The individual bandwidth of the physical connections bundled by the LAG. The
-	// possible values are 1Gbps and 10Gbps.
+	// possible values are 1Gbps, 10Gbps, 100Gbps, or 400 Gbps..
 	ConnectionsBandwidth *string
 
 	// The LAG MAC Security (MACsec) encryption mode.
@@ -174,8 +174,9 @@ type CreateLagOutput struct {
 	// for the LAG itself to be operational.
 	MinimumLinks int32
 
-	// The number of physical dedicated connections bundled by the LAG, up to a
-	// maximum of 10.
+	// The number of physical dedicated connections initially provisioned and bundled
+	// by the LAG. You can have a maximum of four connections when the port speed is 1
+	// Gbps or 10 Gbps, or two when the port speed is 100 Gbps or 400 Gbps.
 	NumberOfConnections int32
 
 	// The ID of the Amazon Web Services account that owns the LAG.

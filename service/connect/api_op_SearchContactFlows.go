@@ -61,7 +61,7 @@ type SearchContactFlowsOutput struct {
 	// The total number of contact flows which matched your search query.
 	ApproximateTotalCount *int64
 
-	// Information about the contact flows.
+	// Information about the flows.
 	ContactFlows []types.ContactFlow
 
 	// If there are additional results, this is the token for the next set of results.

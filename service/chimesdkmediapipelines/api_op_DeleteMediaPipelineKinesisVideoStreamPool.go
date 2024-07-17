@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Kinesis video stream pool.
+// Deletes an Amazon Kinesis Video Stream pool.
 func (c *Client) DeleteMediaPipelineKinesisVideoStreamPool(ctx context.Context, params *DeleteMediaPipelineKinesisVideoStreamPoolInput, optFns ...func(*Options)) (*DeleteMediaPipelineKinesisVideoStreamPoolOutput, error) {
 	if params == nil {
 		params = &DeleteMediaPipelineKinesisVideoStreamPoolInput{}
@@ -28,7 +28,8 @@ func (c *Client) DeleteMediaPipelineKinesisVideoStreamPool(ctx context.Context, 
 
 type DeleteMediaPipelineKinesisVideoStreamPoolInput struct {
 
-	// The ID of the pool being deleted.
+	// The unique identifier of the requested resource. Valid values include the name
+	// and ARN of the media pipeline Kinesis Video Stream pool.
 	//
 	// This member is required.
 	Identifier *string

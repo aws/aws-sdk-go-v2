@@ -68,6 +68,7 @@ type DescribeJobInput struct {
 }
 
 func (in *DescribeJobInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

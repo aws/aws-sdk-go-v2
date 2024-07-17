@@ -3761,7 +3761,22 @@
                     "outputToken": "nextPageToken",
                     "items": "domainInfos",
                     "pageSize": "maximumPageSize"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListDomainsSuccess",
+                        "params": {
+                            "registrationStatus": "REGISTERED"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.swf#ListDomainsInput": {

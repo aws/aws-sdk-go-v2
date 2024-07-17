@@ -13,7 +13,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	"github.com/jmespath/go-jmespath"
+	jmespath "github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -115,7 +115,7 @@ type DescribeVolumesInput struct {
 	// the end of the items returned by the previous request.
 	NextToken *string
 
-	// The volume IDs.
+	// The volume IDs. If not specified, then all volumes are included in the response.
 	VolumeIds []string
 
 	noSmithyDocumentSerde

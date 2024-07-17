@@ -25,6 +25,7 @@
         "api_op_ListControlOperations.go",
         "api_op_ListEnabledBaselines.go",
         "api_op_ListEnabledControls.go",
+        "api_op_ListLandingZoneOperations.go",
         "api_op_ListLandingZones.go",
         "api_op_ListTagsForResource.go",
         "api_op_ResetEnabledBaseline.go",

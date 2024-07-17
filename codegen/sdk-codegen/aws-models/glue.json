@@ -11770,6 +11770,23 @@
                 "smithy.api#documentation": "<p>The <code>Database</code> object represents a logical grouping of tables that might reside\n      in a Hive metastore or an RDBMS.</p>"
             }
         },
+        "com.amazonaws.glue#DatabaseAttributes": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#DatabaseAttributesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#DatabaseAttributes"
+            }
+        },
         "com.amazonaws.glue#DatabaseIdentifier": {
             "type": "structure",
             "members": {
@@ -17144,6 +17161,12 @@
                     "target": "com.amazonaws.glue#ResourceShareType",
                     "traits": {
                         "smithy.api#documentation": "<p>Allows you to specify that you want to list the databases shared with your account. The allowable values are <code>FEDERATED</code>, <code>FOREIGN</code> or <code>ALL</code>. </p>\n         <ul>\n            <li>\n               <p>If set to <code>FEDERATED</code>, will list the federated databases (referencing an external entity) shared with your account.</p>\n            </li>\n            <li>\n               <p>If set to <code>FOREIGN</code>, will list the databases shared with your account. </p>\n            </li>\n            <li>\n               <p>If set to <code>ALL</code>, will list the databases shared with your account, as well as the databases in yor local account. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "AttributesToGet": {
+                    "target": "com.amazonaws.glue#DatabaseAttributesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the database fields returned by the <code>GetDatabases</code> call. This parameter doesn’t accept an empty list. The request must include the <code>NAME</code>.</p>"
                     }
                 }
             },

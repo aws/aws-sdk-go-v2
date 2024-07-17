@@ -3053,6 +3053,16 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				sv.IdentityCenterApplicationArn = ptr.String(jtv)
 			}
 
+		case "personalizationConfiguration":
+			if err := awsRestjson1_deserializeDocumentPersonalizationConfiguration(&sv.PersonalizationConfiguration, value); err != nil {
+				return err
+			}
+
+		case "qAppsConfiguration":
+			if err := awsRestjson1_deserializeDocumentQAppsConfiguration(&sv.QAppsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13217,6 +13227,46 @@ func awsRestjson1_deserializeDocumentOAuth2ClientCredentialConfiguration(v **typ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPersonalizationConfiguration(v **types.PersonalizationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PersonalizationConfiguration
+	if *v == nil {
+		sv = &types.PersonalizationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "personalizationControlMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PersonalizationControlMode to be of type string, got %T instead", value)
+				}
+				sv.PersonalizationControlMode = types.PersonalizationControlMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPlugin(v **types.Plugin, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13425,6 +13475,46 @@ func awsRestjson1_deserializeDocumentPlugins(v *[]types.Plugin, value interface{
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQAppsConfiguration(v **types.QAppsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QAppsConfiguration
+	if *v == nil {
+		sv = &types.QAppsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "qAppsControlMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QAppsControlMode to be of type string, got %T instead", value)
+				}
+				sv.QAppsControlMode = types.QAppsControlMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

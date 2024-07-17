@@ -49,6 +49,7 @@ type UpdateStreamModeInput struct {
 }
 
 func (in *UpdateStreamModeInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

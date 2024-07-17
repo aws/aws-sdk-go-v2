@@ -57,6 +57,7 @@ type DeregisterStreamConsumerInput struct {
 }
 
 func (in *DeregisterStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.ConsumerARN = in.ConsumerARN
 	p.OperationType = ptr.String("control")

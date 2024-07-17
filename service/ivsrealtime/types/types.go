@@ -7,13 +7,13 @@ import (
 	"time"
 )
 
-// Object specifying an auto-participant-recording configuration.
+// Object specifying a configuration for individual participant recording.
 type AutoParticipantRecordingConfiguration struct {
 
-	// ARN of the StorageConfiguration resource to use for auto participant recording. Default: "" (empty
-	// string, no storage configuration is specified). Individual participant recording
-	// cannot be started unless a storage configuration is specified, when a Stageis
-	// created or updated.
+	// ARN of the StorageConfiguration resource to use for individual participant recording. Default: ""
+	// (empty string, no storage configuration is specified). Individual participant
+	// recording cannot be started unless a storage configuration is specified, when a Stage
+	// is created or updated.
 	//
 	// This member is required.
 	StorageConfigurationArn *string
@@ -303,6 +303,7 @@ type GridConfiguration struct {
 
 	// This attribute name identifies the featured slot. A participant with this
 	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
+	// Default: "" (no featured participant).
 	FeaturedParticipantAttribute *string
 
 	// Specifies the spacing between participant tiles in pixels. Default: 2 .
@@ -312,12 +313,14 @@ type GridConfiguration struct {
 	// Default: false .
 	OmitStoppedVideo bool
 
-	// Sets the non-featured participant display mode. Default: VIDEO .
+	// Sets the non-featured participant display mode, to control the aspect ratio of
+	// video tiles. VIDEO is 16:9, SQUARE is 1:1, and PORTRAIT is 3:4. Default: VIDEO .
 	VideoAspectRatio VideoAspectRatio
 
-	// Defines how video fits within the participant tile. When not set, videoFillMode
-	// defaults to COVER fill mode for participants in the grid and to CONTAIN fill
-	// mode for featured participants.
+	// Defines how video content fits within the participant tile: FILL (stretched),
+	// COVER (cropped), or CONTAIN (letterboxed). When not set, videoFillMode defaults
+	// to COVER fill mode for participants in the grid and to CONTAIN fill mode for
+	// featured participants.
 	VideoFillMode VideoFillMode
 
 	noSmithyDocumentSerde
@@ -374,12 +377,12 @@ type Participant struct {
 	// enabled.
 	RecordingS3BucketName *string
 
-	// S3 prefix of the S3 bucket to where the participant is being recorded, if
+	// S3 prefix of the S3 bucket where the participant is being recorded, if
 	// individual participant recording is enabled, or "" (empty string), if recording
 	// is not enabled.
 	RecordingS3Prefix *string
 
-	// Participant’s recording state.
+	// The participant’s recording state.
 	RecordingState ParticipantRecordingState
 
 	// The participant’s SDK version.
@@ -410,7 +413,7 @@ type ParticipantSummary struct {
 	// Whether the participant ever published to the stage session.
 	Published bool
 
-	// Participant’s recording state.
+	// The participant’s recording state.
 	RecordingState ParticipantRecordingState
 
 	// Whether the participant is connected to or disconnected from the stage.
@@ -494,6 +497,7 @@ type PipConfiguration struct {
 
 	// This attribute name identifies the featured slot. A participant with this
 	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
+	// Default: "" (no featured participant).
 	FeaturedParticipantAttribute *string
 
 	// Specifies the spacing between participant tiles in pixels. Default: 0 .
@@ -503,7 +507,9 @@ type PipConfiguration struct {
 	// Default: false .
 	OmitStoppedVideo bool
 
-	// Defines PiP behavior when all participants have left. Default: STATIC .
+	// Defines PiP behavior when all participants have left: STATIC (maintains
+	// original position/size) or DYNAMIC (expands to full composition). Default:
+	// STATIC .
 	PipBehavior PipBehavior
 
 	// Specifies the height of the PiP window in pixels. When this is not set
@@ -515,8 +521,9 @@ type PipConfiguration struct {
 	// determined by PipPosition . Default: 0 .
 	PipOffset int32
 
-	// Identifies the PiP slot. A participant with this attribute set to "true" (as a
-	// string value) in ParticipantTokenConfigurationis placed in the PiP slot.
+	// Specifies the participant for the PiP window. A participant with this attribute
+	// set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the PiP slot. Default: ""
+	// (no PiP participant).
 	PipParticipantAttribute *string
 
 	// Determines the corner position of the PiP window. Default: BOTTOM_RIGHT .
@@ -527,8 +534,56 @@ type PipConfiguration struct {
 	// the aspect ratio of the participant’s video.
 	PipWidth *int32
 
-	// Defines how video fits within the participant tile. Default: COVER .
+	// Defines how video content fits within the participant tile: FILL (stretched),
+	// COVER (cropped), or CONTAIN (letterboxed). Default: COVER .
 	VideoFillMode VideoFillMode
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying a public key used to sign stage participant tokens.
+type PublicKey struct {
+
+	// Public key ARN.
+	Arn *string
+
+	// The public key fingerprint, a short string used to identify or verify the full
+	// public key.
+	Fingerprint *string
+
+	// Public key name.
+	Name *string
+
+	// Public key material.
+	PublicKeyMaterial *string
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a public key.
+type PublicKeySummary struct {
+
+	// Public key ARN.
+	Arn *string
+
+	// Public key name.
+	Name *string
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -601,8 +656,12 @@ type Stage struct {
 	// ID of the active session within the stage.
 	ActiveSessionId *string
 
-	// Auto-participant-recording configuration object attached to the stage.
+	// Configuration object for individual participant recording, attached to the
+	// stage.
 	AutoParticipantRecordingConfiguration *AutoParticipantRecordingConfiguration
+
+	// Summary information about various endpoints for a stage.
+	Endpoints *StageEndpoints
 
 	// Stage name.
 	Name *string
@@ -614,6 +673,18 @@ type Stage struct {
 	//
 	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about various endpoints for a stage.
+type StageEndpoints struct {
+
+	// Events endpoint.
+	Events *string
+
+	// WHIP endpoint.
+	Whip *string
 
 	noSmithyDocumentSerde
 }

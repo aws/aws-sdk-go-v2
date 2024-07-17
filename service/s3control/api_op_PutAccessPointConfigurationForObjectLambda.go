@@ -62,6 +62,7 @@ type PutAccessPointConfigurationForObjectLambdaInput struct {
 }
 
 func (in *PutAccessPointConfigurationForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

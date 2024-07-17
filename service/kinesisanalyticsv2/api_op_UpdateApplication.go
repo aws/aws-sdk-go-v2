@@ -86,6 +86,9 @@ type UpdateApplicationOutput struct {
 	// This member is required.
 	ApplicationDetail *types.ApplicationDetail
 
+	// Operation ID for tracking UpdateApplication request
+	OperationId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

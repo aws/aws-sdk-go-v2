@@ -73,6 +73,7 @@ type EnableEnhancedMonitoringInput struct {
 }
 
 func (in *EnableEnhancedMonitoringInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

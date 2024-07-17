@@ -61,6 +61,10 @@ type ApplicationConfiguration struct {
 	// application.
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfiguration
 
+	// Describes system rollback configuration for a Managed Service for Apache Flink
+	// application
+	ApplicationSystemRollbackConfiguration *ApplicationSystemRollbackConfiguration
+
 	// Describes execution properties for a Managed Service for Apache Flink
 	// application.
 	EnvironmentProperties *EnvironmentProperties
@@ -94,6 +98,10 @@ type ApplicationConfigurationDescription struct {
 	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
 	// application.
 	ApplicationSnapshotConfigurationDescription *ApplicationSnapshotConfigurationDescription
+
+	// Describes system rollback configuration for a Managed Service for Apache Flink
+	// application
+	ApplicationSystemRollbackConfigurationDescription *ApplicationSystemRollbackConfigurationDescription
 
 	// Describes execution properties for a Managed Service for Apache Flink
 	// application.
@@ -129,6 +137,10 @@ type ApplicationConfigurationUpdate struct {
 	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
 	// application.
 	ApplicationSnapshotConfigurationUpdate *ApplicationSnapshotConfigurationUpdate
+
+	// Describes system rollback configuration for a Managed Service for Apache Flink
+	// application
+	ApplicationSystemRollbackConfigurationUpdate *ApplicationSystemRollbackConfigurationUpdate
 
 	// Describes updates to the environment properties for a Managed Service for
 	// Apache Flink application.
@@ -198,6 +210,9 @@ type ApplicationDetail struct {
 	// application, the mode is optional.
 	ApplicationMode ApplicationMode
 
+	// The current timestamp when the application version was created.
+	ApplicationVersionCreateTimestamp *time.Time
+
 	// If you reverted the application using RollbackApplication, the application version when
 	// RollbackApplication was called.
 	ApplicationVersionRolledBackFrom *int64
@@ -250,6 +265,60 @@ type ApplicationMaintenanceConfigurationUpdate struct {
 	//
 	// This member is required.
 	ApplicationMaintenanceWindowStartTimeUpdate *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a description of the operation, such as the type and status of
+// operation
+type ApplicationOperationInfo struct {
+
+	// The timestamp at which the operation finished for the application
+	EndTime *time.Time
+
+	// Type of operation performed on an application
+	Operation *string
+
+	// Identifier of the Operation
+	OperationId *string
+
+	// Status of the operation performed on an application
+	OperationStatus OperationStatus
+
+	// The timestamp at which the operation was created
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Provides a description of the operation, such as the operation-type and status
+type ApplicationOperationInfoDetails struct {
+
+	// The timestamp at which the operation finished for the application
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// Type of operation performed on an application
+	//
+	// This member is required.
+	Operation *string
+
+	// Status of the operation performed on an application
+	//
+	// This member is required.
+	OperationStatus OperationStatus
+
+	// The timestamp at which the operation was created
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Contains information about the application version changes due to an operation
+	ApplicationVersionChangeDetails *ApplicationVersionChangeDetails
+
+	// Provides a description of the operation failure
+	OperationFailureDetails *OperationFailureDetails
 
 	noSmithyDocumentSerde
 }
@@ -345,6 +414,62 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Describes system rollback configuration for a Managed Service for Apache Flink
+// application
+type ApplicationSystemRollbackConfiguration struct {
+
+	// Describes whether system rollbacks are enabled for a Managed Service for Apache
+	// Flink application
+	//
+	// This member is required.
+	RollbackEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes system rollback configuration for a Managed Service for Apache Flink
+// application
+type ApplicationSystemRollbackConfigurationDescription struct {
+
+	// Describes whether system rollbacks are enabled for a Managed Service for Apache
+	// Flink application
+	//
+	// This member is required.
+	RollbackEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes system rollback configuration for a Managed Service for Apache Flink
+// application
+type ApplicationSystemRollbackConfigurationUpdate struct {
+
+	// Describes whether system rollbacks are enabled for a Managed Service for Apache
+	// Flink application
+	//
+	// This member is required.
+	RollbackEnabledUpdate *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the application version changes due to an operation
+type ApplicationVersionChangeDetails struct {
+
+	// The operation was performed on this version of the application
+	//
+	// This member is required.
+	ApplicationVersionUpdatedFrom *int64
+
+	// The operation execution resulted in the transition to the following version of
+	// the application
+	//
+	// This member is required.
+	ApplicationVersionUpdatedTo *int64
+
+	noSmithyDocumentSerde
+}
+
 // The summary of the application version.
 type ApplicationVersionSummary struct {
 
@@ -411,8 +536,8 @@ type CatalogConfigurationUpdate struct {
 // process of persisting application state for fault tolerance. For more
 // information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
 //
-// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
-// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 type CheckpointConfiguration struct {
 
 	// Describes whether the application uses Managed Service for Apache Flink'
@@ -456,8 +581,8 @@ type CheckpointConfiguration struct {
 	// use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
 	//
-	// [Tuning Checkpointing]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/large_state_tuning/#tuning-checkpointing
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+	// [Tuning Checkpointing]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/large_state_tuning/#tuning-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 	MinPauseBetweenCheckpoints *int64
 
 	noSmithyDocumentSerde
@@ -802,6 +927,15 @@ type EnvironmentPropertyUpdates struct {
 	noSmithyDocumentSerde
 }
 
+// Provides a description of the operation failure error
+type ErrorInfo struct {
+
+	// Error message resulting in failure of the operation
+	ErrorString *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes configuration parameters for a Managed Service for Apache Flink
 // application or a Studio notebook.
 type FlinkApplicationConfiguration struct {
@@ -810,8 +944,8 @@ type FlinkApplicationConfiguration struct {
 	// process of persisting application state for fault tolerance. For more
 	// information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
 	//
-	// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+	// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 	CheckpointConfiguration *CheckpointConfiguration
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -837,8 +971,8 @@ type FlinkApplicationConfigurationDescription struct {
 	// in the [Apache Flink Documentation]. To retrieve the job plan for the application, use the DescribeApplicationRequest$IncludeAdditionalDetails parameter of
 	// the DescribeApplicationoperation.
 	//
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
-	// [Jobs and Scheduling]: https://nightlies.apache.org/flink/flink-docs-release-1.18/internals/job_scheduling.html
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
+	// [Jobs and Scheduling]: https://nightlies.apache.org/flink/flink-docs-release-1.19/internals/job_scheduling.html
 	JobPlanDescription *string
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -886,8 +1020,8 @@ type FlinkRunConfiguration struct {
 	// this parameter, AllowNonRestoredState will be set to false , even if it was
 	// previously set to true .
 	//
-	// [Allowing Non-Restored State]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/savepoints/#allowing-non-restored-state
-	// [Apache Flink documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+	// [Allowing Non-Restored State]: https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/savepoints/#allowing-non-restored-state
+	// [Apache Flink documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 	AllowNonRestoredState *bool
 
 	noSmithyDocumentSerde
@@ -1571,6 +1705,19 @@ type MonitoringConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Provides a description of the operation failure
+type OperationFailureDetails struct {
+
+	// Provides a description of the operation failure error
+	ErrorInfo *ErrorInfo
+
+	// Provides the operation ID of a system-rollback operation executed due to
+	// failure in the current operation
+	RollbackOperationId *string
+
+	noSmithyDocumentSerde
+}
+
 //	Describes a SQL-based Kinesis Data Analytics application's output
 //
 // configuration, in which you identify an in-application stream and a destination
@@ -1664,8 +1811,8 @@ type OutputUpdate struct {
 // executes multiple tasks simultaneously. For more information about parallelism,
 // see [Parallel Execution]in the [Apache Flink Documentation].
 //
-// [Parallel Execution]: https://nightlies.apache.org/flink/flink-docs-release-1.18/dev/parallel.html
-// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+// [Parallel Execution]: https://nightlies.apache.org/flink/flink-docs-release-1.19/dev/parallel.html
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.19/
 type ParallelismConfiguration struct {
 
 	// Describes whether the application uses the default parallelism for the Managed

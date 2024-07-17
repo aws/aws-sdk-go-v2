@@ -34,7 +34,8 @@ type DeleteHubContentReferenceInput struct {
 	// This member is required.
 	HubContentName *string
 
-	// The type of hub content to delete.
+	// The type of hub content reference to delete. The only supported type of hub
+	// content reference to delete is ModelReference .
 	//
 	// This member is required.
 	HubContentType types.HubContentType

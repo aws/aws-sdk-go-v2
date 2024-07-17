@@ -165,6 +165,39 @@ type AdvancedSecurityOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Container for parameters required to enable all machine learning features.
+type AIMLOptionsInput struct {
+
+	// Container for parameters required for natural language query generation on the
+	// specified domain.
+	NaturalLanguageQueryGenerationOptions *NaturalLanguageQueryGenerationOptionsInput
+
+	noSmithyDocumentSerde
+}
+
+// Container for parameters representing the state of machine learning features on
+// the specified domain.
+type AIMLOptionsOutput struct {
+
+	// Container for parameters required for natural language query generation on the
+	// specified domain.
+	NaturalLanguageQueryGenerationOptions *NaturalLanguageQueryGenerationOptionsOutput
+
+	noSmithyDocumentSerde
+}
+
+// The status of machine learning options on the specified domain.
+type AIMLOptionsStatus struct {
+
+	// Machine learning options on the specified domain.
+	Options *AIMLOptionsOutput
+
+	// Provides the current status of an entity.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Amazon Web Services account or service that has access to
 // an Amazon OpenSearch Service domain through the use of an interface VPC
 // endpoint.
@@ -707,6 +740,9 @@ type DescribePackagesFilter struct {
 // Container for the configuration of an OpenSearch Service domain.
 type DomainConfig struct {
 
+	// Container for parameters required to enable all machine learning features.
+	AIMLOptions *AIMLOptionsStatus
+
 	// Specifies the access policies for the domain.
 	AccessPolicies *AccessPoliciesStatus
 
@@ -971,6 +1007,9 @@ type DomainStatus struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// Container for parameters required to enable all machine learning features.
+	AIMLOptions *AIMLOptionsOutput
 
 	// Identity and Access Management (IAM) policy document specifying the access
 	// policies for the domain.
@@ -1504,6 +1543,32 @@ type ModifyingProperties struct {
 	//   - STRINGIFIED_JSON : Contain content in JSON format, such as
 	//   {"Enabled":"True"}".
 	ValueType PropertyValueType
+
+	noSmithyDocumentSerde
+}
+
+// Container for parameters required to enable the natural language query
+// generation feature.
+type NaturalLanguageQueryGenerationOptionsInput struct {
+
+	// The desired state of the natural language query generation feature. Valid
+	// values are ENABLED and DISABLED.
+	DesiredState NaturalLanguageQueryGenerationDesiredState
+
+	noSmithyDocumentSerde
+}
+
+// Container for parameters representing the state of the natural language query
+// generation feature on the specified domain.
+type NaturalLanguageQueryGenerationOptionsOutput struct {
+
+	// The current state of the natural language query generation feature, indicating
+	// completion, in progress, or failure.
+	CurrentState NaturalLanguageQueryGenerationCurrentState
+
+	// The desired state of the natural language query generation feature. Valid
+	// values are ENABLED and DISABLED.
+	DesiredState NaturalLanguageQueryGenerationDesiredState
 
 	noSmithyDocumentSerde
 }

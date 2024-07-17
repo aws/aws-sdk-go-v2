@@ -256,6 +256,13 @@
                         "smithy.api#documentation": "<p>Turns language identification on or off.</p>"
                     }
                 },
+                "IdentifyMultipleLanguages": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Turns language identification on or off for multiple languages.</p>"
+                    }
+                },
                 "LanguageOptions": {
                     "target": "com.amazonaws.chimesdkmediapipelines#LanguageOptions",
                     "traits": {
@@ -282,7 +289,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the configuration settings for an Amazon Transcribe processor.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the configuration settings for an Amazon Transcribe processor.</p>\n         <note>\n            <p>Calls to this API must include a <code>LanguageCode</code>, <code>IdentifyLanguage</code>, or <code>IdentifyMultipleLanguages</code> parameter. \n         If you include more than one of those parameters, your transcription job fails.</p>\n         </note>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#Arn": {
@@ -2428,7 +2435,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Kinesis video stream pool for the media pipeline.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Kinesis Video Stream pool for use with media stream\n         pipelines.</p>\n         <note>\n            <p>If a meeting uses an opt-in Region as its  \n         <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html#chimesdk-meeting-chime_CreateMeeting-request-MediaRegion\">MediaRegion</a>, \n         the KVS stream must be in that same Region. For example, if a meeting uses the <code>af-south-1</code> Region, the KVS stream must also be in <code>af-south-1</code>. However, if the meeting uses a \n         Region that AWS turns on by default, the KVS stream can be in any available Region, including an opt-in Region. For example, if the meeting uses <code>ca-central-1</code>, the KVS stream can be in \n         <code>eu-west-2</code>, <code>us-east-1</code>, <code>af-south-1</code>, or any other Region that the Amazon Chime SDK supports.</p>\n            <p>To learn  which AWS Region a meeting uses, call the <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetMeeting.html\">GetMeeting</a> API and \n            use the <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html#chimesdk-meeting-chime_CreateMeeting-request-MediaRegion\">MediaRegion</a> \n            parameter from the response.</p>\n            <p>For more information about opt-in Regions, refer to <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions.html\">Available Regions</a> in the \n            <i>Amazon Chime SDK Developer Guide</i>, and \n            <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#rande-manage-enable.html\">Specify which AWS Regions your account can use</a>, \n            in the <i>AWS Account Management Reference Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/media-pipeline-kinesis-video-stream-pools",
@@ -2442,14 +2449,14 @@
                 "StreamConfiguration": {
                     "target": "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for the video stream.</p>",
+                        "smithy.api#documentation": "<p>The configuration settings for the stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PoolName": {
                     "target": "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamPoolName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the video stream pool.</p>",
+                        "smithy.api#documentation": "<p>The name of the pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2463,7 +2470,7 @@
                 "Tags": {
                     "target": "com.amazonaws.chimesdkmediapipelines#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags assigned to the video stream pool.</p>"
+                        "smithy.api#documentation": "<p>The tags assigned to the stream pool.</p>"
                     }
                 }
             },
@@ -2477,7 +2484,7 @@
                 "KinesisVideoStreamPoolConfiguration": {
                     "target": "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamPoolConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the Kinesis video stream pool.</p>"
+                        "smithy.api#documentation": "<p>The configuration for applying the streams to the pool.</p>\n         <note>\n            <p></p>\n         </note>"
                     }
                 }
             },
@@ -2801,7 +2808,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Kinesis video stream pool.</p>",
+                "smithy.api#documentation": "<p>Deletes an Amazon Kinesis Video Stream pool.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/media-pipeline-kinesis-video-stream-pools/{Identifier}",
@@ -2815,7 +2822,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the pool being deleted.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3206,7 +3213,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the video stream pool.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3681,7 +3688,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of an Kinesis video stream.</p>"
+                "smithy.api#documentation": "<p>The configuration of an Kinesis video stream.</p>\n         <note>\n            <p>If a meeting uses an opt-in Region as its  \n         <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html#chimesdk-meeting-chime_CreateMeeting-request-MediaRegion\">MediaRegion</a>, \n         the KVS stream must be in that same Region. For example, if a meeting uses the <code>af-south-1</code> Region, the KVS stream must also be in <code>af-south-1</code>. However, if the meeting uses a \n         Region that AWS turns on by default, the KVS stream can be in any available Region, including an opt-in Region. For example, if the meeting uses <code>ca-central-1</code>, the KVS stream can be in \n         <code>eu-west-2</code>, <code>us-east-1</code>, <code>af-south-1</code>, or any other Region that the Amazon Chime SDK supports.</p>\n            <p>To learn  which AWS Region a meeting uses, call the <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetMeeting.html\">GetMeeting</a> API and \n            use the <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html#chimesdk-meeting-chime_CreateMeeting-request-MediaRegion\">MediaRegion</a> \n            parameter from the response.</p>\n            <p>For more information about opt-in Regions, refer to <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions.html\">Available Regions</a> in the \n            <i>Amazon Chime SDK Developer Guide</i>, and \n            <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#rande-manage-enable.html\">Specify which AWS Regions your account can use</a>, \n            in the <i>AWS Account Management Reference Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#KinesisVideoStreamConfigurationUpdate": {
@@ -5401,7 +5408,7 @@
                 "SinkArn": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the media stream sink.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Kinesis Video Stream pool returned by the <a>CreateMediaPipelineKinesisVideoStreamPool</a> API.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5456,7 +5463,7 @@
                 "SourceArn": {
                     "target": "com.amazonaws.chimesdkmediapipelines#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the media stream source. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the meeting.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5813,7 +5820,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 2,
+                    "min": 1,
                     "max": 2
                 }
             }
@@ -7042,7 +7049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Kinesis video stream pool in a media pipeline.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon Kinesis Video Stream pool in a media pipeline.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/media-pipeline-kinesis-video-stream-pools/{Identifier}",
@@ -7056,7 +7063,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.chimesdkmediapipelines#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the video stream pool.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the requested resource. Valid values include the name and ARN of the media pipeline Kinesis Video Stream pool.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

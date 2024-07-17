@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new AWS CloudHSM cluster.
+// Creates a new CloudHSM cluster.
+//
+// Cross-account use: Yes. To perform this operation with an CloudHSM backup in a
+// different AWS account, specify the full backup ARN in the value of the
+// SourceBackupId parameter.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -52,9 +56,10 @@ type CreateClusterInput struct {
 	// The mode to use in the cluster. The allowed values are FIPS and NON_FIPS .
 	Mode types.ClusterMode
 
-	// The identifier (ID) of the cluster backup to restore. Use this value to restore
-	// the cluster from a backup instead of creating a new cluster. To find the backup
-	// ID, use DescribeBackups.
+	// The identifier (ID) or the Amazon Resource Name (ARN) of the cluster backup to
+	// restore. Use this value to restore the cluster from a backup instead of creating
+	// a new cluster. To find the backup ID or ARN, use DescribeBackups. If using a backup in another
+	// account, the full ARN must be supplied.
 	SourceBackupId *string
 
 	// Tags to apply to the CloudHSM cluster during creation.

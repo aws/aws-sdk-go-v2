@@ -101,6 +101,13 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 		ok.String(*v.DesktopEndpoint)
 	}
 
+	if v.DeviceCreationTags != nil {
+		ok := object.Key("deviceCreationTags")
+		if err := awsRestjson1_serializeDocumentDeviceCreationTagsMap(v.DeviceCreationTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
@@ -1175,6 +1182,13 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 		ok.String(*v.DesktopEndpoint)
 	}
 
+	if v.DeviceCreationTags != nil {
+		ok := object.Key("deviceCreationTags")
+		if err := awsRestjson1_serializeDocumentDeviceCreationTagsMap(v.DeviceCreationTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaintenanceWindow != nil {
 		ok := object.Key("maintenanceWindow")
 		if err := awsRestjson1_serializeDocumentMaintenanceWindow(v.MaintenanceWindow, ok); err != nil {
@@ -1295,6 +1309,17 @@ func awsRestjson1_serializeDocumentDayOfWeekList(v []types.DayOfWeek, value smit
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeviceCreationTagsMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

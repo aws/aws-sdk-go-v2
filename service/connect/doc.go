@@ -3,6 +3,10 @@
 // Package connect provides the API client, operations, and parameter types for
 // Amazon Connect Service.
 //
+// [Amazon Connect actions]
+//
+// [Amazon Connect data types]
+//
 // Amazon Connect is a cloud-based contact center solution that you use to set up
 // and manage a customer contact center and provide reliable customer engagement at
 // any scale.
@@ -20,4 +24,6 @@
 //
 // [Amazon Connect Endpoints]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 // [Amazon Connect Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+// [Amazon Connect data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html
+// [Amazon Connect actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html
 package connect

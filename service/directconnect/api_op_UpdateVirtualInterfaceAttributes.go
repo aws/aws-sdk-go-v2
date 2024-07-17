@@ -13,7 +13,7 @@ import (
 
 // Updates the specified attributes of the specified virtual private interface.
 //
-// Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an
+// Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an
 // update to the underlying physical connection if it wasn't updated to support
 // jumbo frames. Updating the connection disrupts network connectivity for all
 // virtual interfaces associated with the connection for up to 30 seconds. To check
@@ -45,7 +45,7 @@ type UpdateVirtualInterfaceAttributesInput struct {
 	EnableSiteLink *bool
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 9001. The default value is 1500.
+	// and 8500. The default value is 1500.
 	Mtu *int32
 
 	// The name of the virtual private interface.
@@ -167,7 +167,8 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	//   - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
-	// The type of virtual interface. The possible values are private and public .
+	// The type of virtual interface. The possible values are private , public and
+	// transit .
 	VirtualInterfaceType *string
 
 	// The ID of the VLAN.

@@ -54,6 +54,7 @@ type GetAccessGrantsInstanceForPrefixInput struct {
 }
 
 func (in *GetAccessGrantsInstanceForPrefixInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

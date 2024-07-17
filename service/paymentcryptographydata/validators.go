@@ -1224,6 +1224,21 @@ func validateVisaPinVerificationValue(v *types.VisaPinVerificationValue) error {
 	}
 }
 
+func validateWrappedKey(v *types.WrappedKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WrappedKey"}
+	if v.WrappedKeyMaterial == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyMaterial"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDecryptDataInput(v *DecryptDataInput) error {
 	if v == nil {
 		return nil
@@ -1240,6 +1255,11 @@ func validateOpDecryptDataInput(v *DecryptDataInput) error {
 	} else if v.DecryptionAttributes != nil {
 		if err := validateEncryptionDecryptionAttributes(v.DecryptionAttributes); err != nil {
 			invalidParams.AddNested("DecryptionAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WrappedKey != nil {
+		if err := validateWrappedKey(v.WrappedKey); err != nil {
+			invalidParams.AddNested("WrappedKey", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1265,6 +1285,11 @@ func validateOpEncryptDataInput(v *EncryptDataInput) error {
 	} else if v.EncryptionAttributes != nil {
 		if err := validateEncryptionDecryptionAttributes(v.EncryptionAttributes); err != nil {
 			invalidParams.AddNested("EncryptionAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WrappedKey != nil {
+		if err := validateWrappedKey(v.WrappedKey); err != nil {
+			invalidParams.AddNested("WrappedKey", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1383,6 +1408,16 @@ func validateOpReEncryptDataInput(v *ReEncryptDataInput) error {
 			invalidParams.AddNested("OutgoingEncryptionAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.IncomingWrappedKey != nil {
+		if err := validateWrappedKey(v.IncomingWrappedKey); err != nil {
+			invalidParams.AddNested("IncomingWrappedKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutgoingWrappedKey != nil {
+		if err := validateWrappedKey(v.OutgoingWrappedKey); err != nil {
+			invalidParams.AddNested("OutgoingWrappedKey", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1426,6 +1461,16 @@ func validateOpTranslatePinDataInput(v *TranslatePinDataInput) error {
 	if v.OutgoingDukptAttributes != nil {
 		if err := validateDukptDerivationAttributes(v.OutgoingDukptAttributes); err != nil {
 			invalidParams.AddNested("OutgoingDukptAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IncomingWrappedKey != nil {
+		if err := validateWrappedKey(v.IncomingWrappedKey); err != nil {
+			invalidParams.AddNested("IncomingWrappedKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutgoingWrappedKey != nil {
+		if err := validateWrappedKey(v.OutgoingWrappedKey); err != nil {
+			invalidParams.AddNested("OutgoingWrappedKey", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

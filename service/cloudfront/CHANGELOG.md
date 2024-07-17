@@ -1,3 +1,15 @@
+# v1.38.2 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.1 (2024-06-27)
+
+* **Documentation**: Doc only update for CloudFront that fixes customer-reported issue
+
+# v1.38.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.37.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -57,6 +57,7 @@ type DeleteStorageLensConfigurationTaggingInput struct {
 }
 
 func (in *DeleteStorageLensConfigurationTaggingInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

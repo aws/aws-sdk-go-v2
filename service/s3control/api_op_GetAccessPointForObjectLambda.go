@@ -64,6 +64,7 @@ type GetAccessPointForObjectLambdaInput struct {
 }
 
 func (in *GetAccessPointForObjectLambdaInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

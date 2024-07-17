@@ -30,11 +30,17 @@ import (
 // account may not support the ability to configure custom chat durations. For more
 // information, contact Amazon Web Services Support.
 //
-// For more information about chat, see [Chat] in the Amazon Connect Administrator Guide.
+// For more information about chat, see the following topics in the Amazon Connect
+// Administrator Guide:
+//
+// [Concepts: Web and mobile messaging capabilities in Amazon Connect]
+//
+// [Amazon Connect Chat security best practices]
 //
 // [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
-// [Chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat.html
+// [Concepts: Web and mobile messaging capabilities in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
 // [quota for concurrent active chats]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactInput, optFns ...func(*Options)) (*StartChatContactOutput, error) {
 	if params == nil {
 		params = &StartChatContactInput{}

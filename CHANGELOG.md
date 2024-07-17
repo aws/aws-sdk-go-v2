@@ -1,3 +1,167 @@
+# Release (2024-07-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.13.0](service/datazone/CHANGELOG.md#v1130-2024-07-09)
+  * **Feature**: This release deprecates dataProductItem field from SearchInventoryResultItem, along with some unused DataProduct shapes
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.47.0](service/fsx/CHANGELOG.md#v1470-2024-07-09)
+  * **Feature**: Adds support for FSx for NetApp ONTAP 2nd Generation file systems, and FSx for OpenZFS Single AZ HA file systems.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.39.0](service/opensearch/CHANGELOG.md#v1390-2024-07-09)
+  * **Feature**: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.150.0](service/sagemaker/CHANGELOG.md#v11500-2024-07-09)
+  * **Feature**: This release 1/ enables optimization jobs that allows customers to perform Ahead-of-time compilation and quantization. 2/ allows customers to control access to Amazon Q integration in SageMaker Studio. 3/ enables AdditionalModelDataSources for CreateModel action.
+
+# Release (2024-07-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.25.0](service/devicefarm/CHANGELOG.md#v1250-2024-07-08)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.26.0](service/elasticbeanstalk/CHANGELOG.md#v1260-2024-07-08)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.0.0](service/qapps/CHANGELOG.md#v100-2024-07-08)
+  * **Release**: New AWS service client module
+  * **Feature**: This is a general availability (GA) release of Amazon Q Apps, a capability of Amazon Q Business. Q Apps leverages data sources your company has provided to enable users to build, share, and customize apps within your organization.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.25.0](service/ses/CHANGELOG.md#v1250-2024-07-08)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+# Release (2024-07-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.28.2](service/acm/CHANGELOG.md#v1282-2024-07-05)
+  * **Documentation**: Documentation updates, including fixes for xml formatting, broken links, and ListCertificates description.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.12.0](service/paymentcryptographydata/CHANGELOG.md#v1120-2024-07-05)
+  * **Feature**: Added further restrictions on logging of potentially sensitive inputs and outputs.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.10.0](service/qbusiness/CHANGELOG.md#v1100-2024-07-05)
+  * **Feature**: Add personalization to Q Applications. Customers can enable or disable personalization when creating or updating a Q application with the personalization configuration.
+
+# Release (2024-07-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.30.2](service/applicationautoscaling/CHANGELOG.md#v1302-2024-07-03)
+  * **Documentation**: Doc only update for Application Auto Scaling that fixes resource name.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.27.2](service/directconnect/CHANGELOG.md#v1272-2024-07-03)
+  * **Documentation**: This update includes documentation for support of new native 400 GBps ports for Direct Connect.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.30.0](service/organizations/CHANGELOG.md#v1300-2024-07-03)
+  * **Feature**: Added a new reason under ConstraintViolationException in RegisterDelegatedAdministrator API to prevent registering suspended accounts as delegated administrator of a service.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.43.0](service/rekognition/CHANGELOG.md#v1430-2024-07-03)
+  * **Feature**: This release adds support for tagging projects and datasets with the CreateProject and CreateDataset APIs.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.44.0](service/workspaces/CHANGELOG.md#v1440-2024-07-03)
+  * **Feature**: Fix create workspace bundle RootStorage/UserStorage to accept non null values
+
+# Release (2024-07-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.168.0](service/ec2/CHANGELOG.md#v11680-2024-07-02)
+  * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.58.0](service/s3/CHANGELOG.md#v1580-2024-07-02)
+  * **Feature**: Added response overrides to Head Object requests.
+
+# Release (2024-07-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.104.0](service/connect/CHANGELOG.md#v11040-2024-07-01)
+  * **Feature**: Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.46.0](service/eks/CHANGELOG.md#v1460-2024-07-01)
+  * **Feature**: Updates EKS managed node groups to support EC2 Capacity Blocks for ML
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.11.0](service/paymentcryptographydata/CHANGELOG.md#v1110-2024-07-01)
+  * **Feature**: Adding support for dynamic keys for encrypt, decrypt, re-encrypt and translate pin functions.  With this change, customers can use one-time TR-31 keys directly in dataplane operations without the need to first import them into the service.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.51.2](service/wafv2/CHANGELOG.md#v1512-2024-07-01)
+  * **Documentation**: JSON body inspection: Update documentation to clarify that JSON parsing doesn't include full validation.
+
+# Release (2024-06-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.33.0](service/acmpca/CHANGELOG.md#v1330-2024-06-28)
+  * **Feature**: Added CCPC_LEVEL_1_OR_HIGHER KeyStorageSecurityStandard and SM2 KeyAlgorithm and SM3WITHSM2 SigningAlgorithm for China regions.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.25.0](service/cloudhsmv2/CHANGELOG.md#v1250-2024-06-28)
+  * **Feature**: Added 3 new APIs to support backup sharing: GetResourcePolicy, PutResourcePolicy, and DeleteResourcePolicy. Added BackupArn to the output of the DescribeBackups API. Added support for BackupArn in the CreateCluster API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.103.0](service/connect/CHANGELOG.md#v11030-2024-06-28)
+  * **Feature**: This release supports showing PreferredAgentRouting step via DescribeContact API.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.42.0](service/emr/CHANGELOG.md#v1420-2024-06-28)
+  * **Feature**: This release provides the support for new allocation strategies i.e. CAPACITY_OPTIMIZED_PRIORITIZED for Spot and PRIORITIZED for On-Demand by taking input of priority value for each instance type for instance fleet clusters.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.89.0](service/glue/CHANGELOG.md#v1890-2024-06-28)
+  * **Feature**: Added AttributesToGet parameter to Glue GetDatabases, allowing caller to limit output to include only the database name.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.28.0](service/kinesisanalyticsv2/CHANGELOG.md#v1280-2024-06-28)
+  * **Feature**: Support for Flink 1.19 in Managed Service for Apache Flink
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.38.0](service/opensearch/CHANGELOG.md#v1380-2024-06-28)
+  * **Feature**: This release removes support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.27.1](service/pi/CHANGELOG.md#v1271-2024-06-28)
+  * **Documentation**: Noting that the filter db.sql.db_id isn't available for RDS for SQL Server DB instances.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.43.0](service/workspaces/CHANGELOG.md#v1430-2024-06-28)
+  * **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.
+
+# Release (2024-06-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.30.0](service/applicationautoscaling/CHANGELOG.md#v1300-2024-06-27)
+  * **Feature**: Amazon WorkSpaces customers can now use Application Auto Scaling to automatically scale the number of virtual desktops in a WorkSpaces pool.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.18.0](service/chimesdkmediapipelines/CHANGELOG.md#v1180-2024-06-27)
+  * **Feature**: Added Amazon Transcribe multi language identification to Chime SDK call analytics. Enabling customers sending single stream audio to generate call recordings using Chime SDK call analytics
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.38.1](service/cloudfront/CHANGELOG.md#v1381-2024-06-27)
+  * **Documentation**: Doc only update for CloudFront that fixes customer-reported issue
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.12.0](service/datazone/CHANGELOG.md#v1120-2024-06-27)
+  * **Feature**: This release supports the data lineage feature of business data catalog in Amazon DataZone.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.25.0](service/mq/CHANGELOG.md#v1250-2024-06-27)
+  * **Feature**: This release makes the EngineVersion field optional for both broker and configuration and uses the latest available version by default. The AutoMinorVersionUpgrade field is also now optional for broker creation and defaults to 'true'.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.9.0](service/qconnect/CHANGELOG.md#v190-2024-06-27)
+  * **Feature**: Adds CreateContentAssociation, ListContentAssociations, GetContentAssociation, and DeleteContentAssociation APIs.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.67.0](service/quicksight/CHANGELOG.md#v1670-2024-06-27)
+  * **Feature**: Adding support for Repeating Sections, Nested Filters
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.81.1](service/rds/CHANGELOG.md#v1811-2024-06-27)
+  * **Documentation**: Updates Amazon RDS documentation for TAZ export to S3.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.149.0](service/sagemaker/CHANGELOG.md#v11490-2024-06-27)
+  * **Feature**: Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.42.0](service/workspaces/CHANGELOG.md#v1420-2024-06-27)
+  * **Feature**: Added support for WorkSpaces Pools.
+
+# Release (2024-06-26)
+
+## General Highlights
+* **Feature**: Support list-of-string endpoint parameter.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.16.0](service/controltower/CHANGELOG.md#v1160-2024-06-26)
+  * **Feature**: Added ListLandingZoneOperations API.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.45.0](service/eks/CHANGELOG.md#v1450-2024-06-26)
+  * **Feature**: Added support for disabling unmanaged addons during cluster creation.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.16.0](service/ivsrealtime/CHANGELOG.md#v1160-2024-06-26)
+  * **Feature**: IVS Real-Time now offers customers the ability to upload public keys for customer vended participant tokens.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.27.0](service/kinesisanalyticsv2/CHANGELOG.md#v1270-2024-06-26)
+  * **Feature**: This release adds support for new ListApplicationOperations and DescribeApplicationOperation APIs. It adds a new configuration to enable system rollbacks, adds field ApplicationVersionCreateTimestamp for clarity and improves support for pagination for APIs.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.37.0](service/opensearch/CHANGELOG.md#v1370-2024-06-26)
+  * **Feature**: This release adds support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains, and provides visibility into the current state of the setup or tear-down.
+
+# Release (2024-06-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.42.0](service/autoscaling/CHANGELOG.md#v1420-2024-06-25)
+  * **Feature**: Doc only update for Auto Scaling's TargetTrackingMetricDataQuery
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.166.0](service/ec2/CHANGELOG.md#v11660-2024-06-25)
+  * **Feature**: This release is for the launch of the new u7ib-12tb.224xlarge, R8g, c7gn.metal and mac2-m1ultra.metal instance types
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.28.0](service/networkmanager/CHANGELOG.md#v1280-2024-06-25)
+  * **Feature**: This is model changes & documentation update for the Asynchronous Error Reporting feature for AWS Cloud WAN. This feature allows customers to view errors that occur while their resources are being provisioned, enabling customers to fix their resources without needing external support.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.7.0](service/workspacesthinclient/CHANGELOG.md#v170-2024-06-25)
+  * **Feature**: This release adds the deviceCreationTags field to CreateEnvironment API input, UpdateEnvironment API input and GetEnvironment API output.
+
+# Release (2024-06-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.38.0](service/customerprofiles/CHANGELOG.md#v1380-2024-06-24)
+  * **Feature**: This release includes changes to ProfileObjectType APIs, adds functionality top set and get capacity for profile object types.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.8.0](service/qbusiness/CHANGELOG.md#v180-2024-06-24)
+  * **Feature**: Allow enable/disable Q Apps when creating/updating a Q application; Return the Q Apps enablement information when getting a Q application.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.20.0](service/workspacesweb/CHANGELOG.md#v1200-2024-06-24)
+  * **Feature**: Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.
+
 # Release (2024-06-20)
 
 ## General Highlights

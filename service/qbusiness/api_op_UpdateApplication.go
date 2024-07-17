@@ -47,6 +47,16 @@ type UpdateApplicationInput struct {
 	// either creating for—or connecting to—your Amazon Q Business application.
 	IdentityCenterInstanceArn *string
 
+	// Configuration information about chat response personalization. For more
+	// information, see [Personalizing chat responses].
+	//
+	// [Personalizing chat responses]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+	PersonalizationConfiguration *types.PersonalizationConfiguration
+
+	// An option to allow end users to create and use Amazon Q Apps in the web
+	// experience.
+	QAppsConfiguration *types.QAppsConfiguration
+
 	// An Amazon Web Services Identity and Access Management (IAM) role that gives
 	// Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
 	RoleArn *string

@@ -13,9 +13,9 @@ import (
 
 // Provides a pre-signed Amazon S3 URL in response for uploading your content.
 //
-// You may only use this API to upload attachments to a [Connect Case].
+// You may only use this API to upload attachments to an [Amazon Connect Case].
 //
-// [Connect Case]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+// [Amazon Connect Case]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 func (c *Client) StartAttachedFileUpload(ctx context.Context, params *StartAttachedFileUploadInput, optFns ...func(*Options)) (*StartAttachedFileUploadOutput, error) {
 	if params == nil {
 		params = &StartAttachedFileUploadInput{}
@@ -58,7 +58,7 @@ type StartAttachedFileUploadInput struct {
 	// This member is required.
 	FileUseCaseType types.FileUseCaseType
 
-	// The unique identifier of the Connect instance.
+	// The unique identifier of the Amazon Connect instance.
 	//
 	// This member is required.
 	InstanceId *string

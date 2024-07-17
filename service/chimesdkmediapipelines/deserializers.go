@@ -5259,6 +5259,15 @@ func awsRestjson1_deserializeDocumentAmazonTranscribeProcessorConfiguration(v **
 				sv.IdentifyLanguage = jtv
 			}
 
+		case "IdentifyMultipleLanguages":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IdentifyMultipleLanguages = jtv
+			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)

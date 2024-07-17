@@ -73,6 +73,10 @@ type TranslatePinDataInput struct {
 	// The keyARN of the encryption key under which incoming PIN block data is
 	// encrypted. This key type can be PEK or BDK.
 	//
+	// When a WrappedKeyBlock is provided, this value will be the identifier to the
+	// key wrapping key for PIN block. Otherwise, it is the key identifier used to
+	// perform the operation.
+	//
 	// This member is required.
 	IncomingKeyIdentifier *string
 
@@ -98,9 +102,17 @@ type TranslatePinDataInput struct {
 	// block translation.
 	IncomingDukptAttributes *types.DukptDerivationAttributes
 
+	// The WrappedKeyBlock containing the encryption key under which incoming PIN
+	// block data is encrypted.
+	IncomingWrappedKey *types.WrappedKey
+
 	// The attributes and values to use for outgoing DUKPT encryption key after PIN
 	// block translation.
 	OutgoingDukptAttributes *types.DukptDerivationAttributes
+
+	// The WrappedKeyBlock containing the encryption key for encrypting outgoing PIN
+	// block data.
+	OutgoingWrappedKey *types.WrappedKey
 
 	noSmithyDocumentSerde
 }

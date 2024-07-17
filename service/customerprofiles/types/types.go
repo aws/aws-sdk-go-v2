@@ -903,6 +903,12 @@ type ListProfileObjectTypeItem struct {
 	// The timestamp of when the domain was most recently edited.
 	LastUpdatedAt *time.Time
 
+	// The amount of provisioned profile object max count available.
+	MaxAvailableProfileObjectCount *int32
+
+	// The amount of profile object max count assigned to the object type.
+	MaxProfileObjectCount *int32
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -1145,7 +1151,7 @@ type ObjectTypeKey struct {
 // The standard profile of a customer.
 type Profile struct {
 
-	// A unique account number that you have given to the customer.
+	// An account number that you have given to the customer.
 	AccountNumber *string
 
 	// Any additional information relevant to the customer’s profile.

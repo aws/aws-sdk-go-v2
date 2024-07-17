@@ -42322,6 +42322,11 @@ func awsRestjson1_deserializeDocumentBodySectionConfiguration(v **types.BodySect
 				return err
 			}
 
+		case "RepeatConfiguration":
+			if err := awsRestjson1_deserializeDocumentBodySectionRepeatConfiguration(&sv.RepeatConfiguration, value); err != nil {
+				return err
+			}
+
 		case "SectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -42403,6 +42408,305 @@ func awsRestjson1_deserializeDocumentBodySectionContent(v **types.BodySectionCon
 		switch key {
 		case "Layout":
 			if err := awsRestjson1_deserializeDocumentSectionLayoutConfiguration(&sv.Layout, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBodySectionDynamicCategoryDimensionConfiguration(v **types.BodySectionDynamicCategoryDimensionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BodySectionDynamicCategoryDimensionConfiguration
+	if *v == nil {
+		sv = &types.BodySectionDynamicCategoryDimensionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Column":
+			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "Limit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BodySectionDynamicDimensionLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Limit = ptr.Int32(int32(i64))
+			}
+
+		case "SortByMetrics":
+			if err := awsRestjson1_deserializeDocumentBodySectionDynamicDimensionSortConfigurationList(&sv.SortByMetrics, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBodySectionDynamicDimensionSortConfigurationList(v *[]types.ColumnSort, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ColumnSort
+	if *v == nil {
+		cv = []types.ColumnSort{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ColumnSort
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentColumnSort(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBodySectionDynamicNumericDimensionConfiguration(v **types.BodySectionDynamicNumericDimensionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BodySectionDynamicNumericDimensionConfiguration
+	if *v == nil {
+		sv = &types.BodySectionDynamicNumericDimensionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Column":
+			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "Limit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BodySectionDynamicDimensionLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Limit = ptr.Int32(int32(i64))
+			}
+
+		case "SortByMetrics":
+			if err := awsRestjson1_deserializeDocumentBodySectionDynamicDimensionSortConfigurationList(&sv.SortByMetrics, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBodySectionRepeatConfiguration(v **types.BodySectionRepeatConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BodySectionRepeatConfiguration
+	if *v == nil {
+		sv = &types.BodySectionRepeatConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DimensionConfigurations":
+			if err := awsRestjson1_deserializeDocumentBodySectionRepeatDimensionConfigurationList(&sv.DimensionConfigurations, value); err != nil {
+				return err
+			}
+
+		case "NonRepeatingVisuals":
+			if err := awsRestjson1_deserializeDocumentNonRepeatingVisualsList(&sv.NonRepeatingVisuals, value); err != nil {
+				return err
+			}
+
+		case "PageBreakConfiguration":
+			if err := awsRestjson1_deserializeDocumentBodySectionRepeatPageBreakConfiguration(&sv.PageBreakConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBodySectionRepeatDimensionConfiguration(v **types.BodySectionRepeatDimensionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BodySectionRepeatDimensionConfiguration
+	if *v == nil {
+		sv = &types.BodySectionRepeatDimensionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DynamicCategoryDimensionConfiguration":
+			if err := awsRestjson1_deserializeDocumentBodySectionDynamicCategoryDimensionConfiguration(&sv.DynamicCategoryDimensionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "DynamicNumericDimensionConfiguration":
+			if err := awsRestjson1_deserializeDocumentBodySectionDynamicNumericDimensionConfiguration(&sv.DynamicNumericDimensionConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBodySectionRepeatDimensionConfigurationList(v *[]types.BodySectionRepeatDimensionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BodySectionRepeatDimensionConfiguration
+	if *v == nil {
+		cv = []types.BodySectionRepeatDimensionConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BodySectionRepeatDimensionConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBodySectionRepeatDimensionConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBodySectionRepeatPageBreakConfiguration(v **types.BodySectionRepeatPageBreakConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BodySectionRepeatPageBreakConfiguration
+	if *v == nil {
+		sv = &types.BodySectionRepeatPageBreakConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "After":
+			if err := awsRestjson1_deserializeDocumentSectionAfterPageBreak(&sv.After, value); err != nil {
 				return err
 			}
 
@@ -43554,6 +43858,52 @@ func awsRestjson1_deserializeDocumentCategoryFilterConfiguration(v **types.Categ
 
 		case "FilterListConfiguration":
 			if err := awsRestjson1_deserializeDocumentFilterListConfiguration(&sv.FilterListConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCategoryInnerFilter(v **types.CategoryInnerFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CategoryInnerFilter
+	if *v == nil {
+		sv = &types.CategoryInnerFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Column":
+			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "Configuration":
+			if err := awsRestjson1_deserializeDocumentCategoryFilterConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
 				return err
 			}
 
@@ -54657,6 +55007,11 @@ func awsRestjson1_deserializeDocumentFilter(v **types.Filter, value interface{})
 				return err
 			}
 
+		case "NestedFilter":
+			if err := awsRestjson1_deserializeDocumentNestedFilter(&sv.NestedFilter, value); err != nil {
+				return err
+			}
+
 		case "NumericEqualityFilter":
 			if err := awsRestjson1_deserializeDocumentNumericEqualityFilter(&sv.NumericEqualityFilter, value); err != nil {
 				return err
@@ -60942,6 +61297,42 @@ func awsRestjson1_deserializeDocumentIngestions(v *[]types.Ingestion, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInnerFilter(v **types.InnerFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InnerFilter
+	if *v == nil {
+		sv = &types.InnerFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CategoryInnerFilter":
+			if err := awsRestjson1_deserializeDocumentCategoryInnerFilter(&sv.CategoryInnerFilter, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInputColumn(v **types.InputColumn, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -65314,6 +65705,65 @@ func awsRestjson1_deserializeDocumentNegativeValueConfiguration(v **types.Negati
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNestedFilter(v **types.NestedFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NestedFilter
+	if *v == nil {
+		sv = &types.NestedFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Column":
+			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "FilterId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.FilterId = ptr.String(jtv)
+			}
+
+		case "IncludeInnerSet":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeInnerSet = jtv
+			}
+
+		case "InnerFilter":
+			if err := awsRestjson1_deserializeDocumentInnerFilter(&sv.InnerFilter, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNetworkInterface(v **types.NetworkInterface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -65472,6 +65922,42 @@ func awsRestjson1_deserializeDocumentNewDefaultValues(v **types.NewDefaultValues
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNonRepeatingVisualsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

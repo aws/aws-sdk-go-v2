@@ -54,6 +54,7 @@ type PutAccessGrantsInstanceResourcePolicyInput struct {
 }
 
 func (in *PutAccessGrantsInstanceResourcePolicyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

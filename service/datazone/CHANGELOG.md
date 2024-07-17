@@ -1,3 +1,19 @@
+# v1.13.0 (2024-07-09)
+
+* **Feature**: This release deprecates dataProductItem field from SearchInventoryResultItem, along with some unused DataProduct shapes
+
+# v1.12.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.0 (2024-06-27)
+
+* **Feature**: This release supports the data lineage feature of business data catalog in Amazon DataZone.
+
+# v1.11.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.10.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

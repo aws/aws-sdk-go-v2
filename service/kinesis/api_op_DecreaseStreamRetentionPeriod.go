@@ -56,6 +56,7 @@ type DecreaseStreamRetentionPeriodInput struct {
 }
 
 func (in *DecreaseStreamRetentionPeriodInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

@@ -6560,7 +6560,20 @@
                     "method": "GET",
                     "uri": "/2015-01-01/domain",
                     "code": 200
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListDomainNamesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticsearchservice#ListDomainNamesRequest": {

@@ -5926,6 +5926,11 @@ func validateBodySectionConfiguration(v *types.BodySectionConfiguration) error {
 			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RepeatConfiguration != nil {
+		if err := validateBodySectionRepeatConfiguration(v.RepeatConfiguration); err != nil {
+			invalidParams.AddNested("RepeatConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5958,6 +5963,127 @@ func validateBodySectionContent(v *types.BodySectionContent) error {
 	if v.Layout != nil {
 		if err := validateSectionLayoutConfiguration(v.Layout); err != nil {
 			invalidParams.AddNested("Layout", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBodySectionDynamicCategoryDimensionConfiguration(v *types.BodySectionDynamicCategoryDimensionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BodySectionDynamicCategoryDimensionConfiguration"}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	} else if v.Column != nil {
+		if err := validateColumnIdentifier(v.Column); err != nil {
+			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortByMetrics != nil {
+		if err := validateBodySectionDynamicDimensionSortConfigurationList(v.SortByMetrics); err != nil {
+			invalidParams.AddNested("SortByMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBodySectionDynamicDimensionSortConfigurationList(v []types.ColumnSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BodySectionDynamicDimensionSortConfigurationList"}
+	for i := range v {
+		if err := validateColumnSort(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBodySectionDynamicNumericDimensionConfiguration(v *types.BodySectionDynamicNumericDimensionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BodySectionDynamicNumericDimensionConfiguration"}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	} else if v.Column != nil {
+		if err := validateColumnIdentifier(v.Column); err != nil {
+			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortByMetrics != nil {
+		if err := validateBodySectionDynamicDimensionSortConfigurationList(v.SortByMetrics); err != nil {
+			invalidParams.AddNested("SortByMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBodySectionRepeatConfiguration(v *types.BodySectionRepeatConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BodySectionRepeatConfiguration"}
+	if v.DimensionConfigurations != nil {
+		if err := validateBodySectionRepeatDimensionConfigurationList(v.DimensionConfigurations); err != nil {
+			invalidParams.AddNested("DimensionConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBodySectionRepeatDimensionConfiguration(v *types.BodySectionRepeatDimensionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BodySectionRepeatDimensionConfiguration"}
+	if v.DynamicCategoryDimensionConfiguration != nil {
+		if err := validateBodySectionDynamicCategoryDimensionConfiguration(v.DynamicCategoryDimensionConfiguration); err != nil {
+			invalidParams.AddNested("DynamicCategoryDimensionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DynamicNumericDimensionConfiguration != nil {
+		if err := validateBodySectionDynamicNumericDimensionConfiguration(v.DynamicNumericDimensionConfiguration); err != nil {
+			invalidParams.AddNested("DynamicNumericDimensionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBodySectionRepeatDimensionConfigurationList(v []types.BodySectionRepeatDimensionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BodySectionRepeatDimensionConfigurationList"}
+	for i := range v {
+		if err := validateBodySectionRepeatDimensionConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6442,6 +6568,37 @@ func validateCategoryFilterConfiguration(v *types.CategoryFilterConfiguration) e
 	if v.CustomFilterConfiguration != nil {
 		if err := validateCustomFilterConfiguration(v.CustomFilterConfiguration); err != nil {
 			invalidParams.AddNested("CustomFilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCategoryInnerFilter(v *types.CategoryInnerFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CategoryInnerFilter"}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	} else if v.Column != nil {
+		if err := validateColumnIdentifier(v.Column); err != nil {
+			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateCategoryFilterConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultFilterControlConfiguration != nil {
+		if err := validateDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration); err != nil {
+			invalidParams.AddNested("DefaultFilterControlConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9234,6 +9391,11 @@ func validateFilter(v *types.Filter) error {
 			invalidParams.AddNested("TopBottomFilter", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.NestedFilter != nil {
+		if err := validateNestedFilter(v.NestedFilter); err != nil {
+			invalidParams.AddNested("NestedFilter", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11010,6 +11172,23 @@ func validateIncrementalRefresh(v *types.IncrementalRefresh) error {
 	}
 }
 
+func validateInnerFilter(v *types.InnerFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InnerFilter"}
+	if v.CategoryInnerFilter != nil {
+		if err := validateCategoryInnerFilter(v.CategoryInnerFilter); err != nil {
+			invalidParams.AddNested("CategoryInnerFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputColumn(v *types.InputColumn) error {
 	if v == nil {
 		return nil
@@ -12124,6 +12303,35 @@ func validateNegativeValueConfiguration(v *types.NegativeValueConfiguration) err
 	invalidParams := smithy.InvalidParamsError{Context: "NegativeValueConfiguration"}
 	if len(v.DisplayMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNestedFilter(v *types.NestedFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NestedFilter"}
+	if v.FilterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterId"))
+	}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	} else if v.Column != nil {
+		if err := validateColumnIdentifier(v.Column); err != nil {
+			invalidParams.AddNested("Column", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InnerFilter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InnerFilter"))
+	} else if v.InnerFilter != nil {
+		if err := validateInnerFilter(v.InnerFilter); err != nil {
+			invalidParams.AddNested("InnerFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

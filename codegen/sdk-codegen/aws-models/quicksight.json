@@ -4001,6 +4001,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of a page break for a section.</p>"
                     }
+                },
+                "RepeatConfiguration": {
+                    "target": "com.amazonaws.quicksight#BodySectionRepeatConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configurations that are required to declare a section as repeating.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4031,6 +4037,148 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of content in a body section.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionDynamicCategoryDimensionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Column": {
+                    "target": "com.amazonaws.quicksight#ColumnIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.quicksight#BodySectionDynamicDimensionLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of values to use from the column for repetition.</p>"
+                    }
+                },
+                "SortByMetrics": {
+                    "target": "com.amazonaws.quicksight#BodySectionDynamicDimensionSortConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sort criteria on the column values that you use for repetition. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the <b>Category</b> dataset column and constraints for the dynamic values used to repeat the contents of a section.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionDynamicDimensionLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionDynamicDimensionSortConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ColumnSort"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionDynamicNumericDimensionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Column": {
+                    "target": "com.amazonaws.quicksight#ColumnIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.quicksight#BodySectionDynamicDimensionLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of values to use from the column for repetition.</p>"
+                    }
+                },
+                "SortByMetrics": {
+                    "target": "com.amazonaws.quicksight#BodySectionDynamicDimensionSortConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sort criteria on the column values that you use for repetition. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the <b>Numeric</b> dataset column and constraints for the dynamic values used to repeat the  contents of a section.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionRepeatConfiguration": {
+            "type": "structure",
+            "members": {
+                "DimensionConfigurations": {
+                    "target": "com.amazonaws.quicksight#BodySectionRepeatDimensionConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of <code>BodySectionRepeatDimensionConfiguration</code> values that describe the dataset column and constraints for the column used to repeat the contents of a section.</p>"
+                    }
+                },
+                "PageBreakConfiguration": {
+                    "target": "com.amazonaws.quicksight#BodySectionRepeatPageBreakConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page break configuration to apply for each repeating instance.</p>"
+                    }
+                },
+                "NonRepeatingVisuals": {
+                    "target": "com.amazonaws.quicksight#NonRepeatingVisualsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of visuals to exclude from repetition in repeating sections. The visuals will render identically, and ignore the repeating configurations in all repeating instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configurations that are required to declare a section as repeating.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionRepeatDimensionConfiguration": {
+            "type": "structure",
+            "members": {
+                "DynamicCategoryDimensionConfiguration": {
+                    "target": "com.amazonaws.quicksight#BodySectionDynamicCategoryDimensionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the <b>Category</b> dataset column and constraints around the dynamic values that will be used in repeating the section contents.</p>"
+                    }
+                },
+                "DynamicNumericDimensionConfiguration": {
+                    "target": "com.amazonaws.quicksight#BodySectionDynamicNumericDimensionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the <b>Numeric</b> dataset column and constraints around the dynamic values used to repeat the  contents of a section.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the dataset column and constraints for the dynamic values used to repeat the contents of a section. The dataset column is either <b>Category</b> or <b>Numeric</b> column configuration</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionRepeatDimensionConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#BodySectionRepeatDimensionConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BodySectionRepeatPageBreakConfiguration": {
+            "type": "structure",
+            "members": {
+                "After": {
+                    "target": "com.amazonaws.quicksight#SectionAfterPageBreak"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The page break configuration to apply for each repeating instance.</p>"
             }
         },
         "com.amazonaws.quicksight#BookmarksConfigurations": {
@@ -4900,6 +5048,29 @@
                         "smithy.api#enumValue": "FILTER_LIST"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#CategoryInnerFilter": {
+            "type": "structure",
+            "members": {
+                "Column": {
+                    "target": "com.amazonaws.quicksight#ColumnIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.quicksight#CategoryFilterConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>CategoryInnerFilter</code> filters text values for the <code>NestedFilter</code>.</p>"
             }
         },
         "com.amazonaws.quicksight#CategoryValue": {
@@ -22223,6 +22394,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A <code>TopBottomFilter</code> filters data to the top or bottom values for a given column.</p>"
                     }
+                },
+                "NestedFilter": {
+                    "target": "com.amazonaws.quicksight#NestedFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>NestedFilter</code> filters data with a subset of data that is defined by the nested inner filter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26964,6 +27141,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#Ingestion"
+            }
+        },
+        "com.amazonaws.quicksight#InnerFilter": {
+            "type": "structure",
+            "members": {
+                "CategoryInnerFilter": {
+                    "target": "com.amazonaws.quicksight#CategoryInnerFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>CategoryInnerFilter</code> filters text values for the <code>NestedFilter</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>InnerFilter</code> defines the subset of data to be used with the <code>NestedFilter</code>.</p>"
             }
         },
         "com.amazonaws.quicksight#InputColumn": {
@@ -33232,6 +33423,43 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#NestedFilter": {
+            "type": "structure",
+            "members": {
+                "FilterId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Column": {
+                    "target": "com.amazonaws.quicksight#ColumnIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column that the filter is applied to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeInnerSet": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean condition to include or exclude the subset that is defined by the values of the nested inner filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InnerFilter": {
+                    "target": "com.amazonaws.quicksight#InnerFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>InnerFilter</code> defines the subset of data to be used with the <code>NestedFilter</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>NestedFilter</code> filters data with a subset of data that is defined by the nested inner filter.</p>"
+            }
+        },
         "com.amazonaws.quicksight#NetworkInterface": {
             "type": "structure",
             "members": {
@@ -33387,6 +33615,18 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.quicksight#NonRepeatingVisualsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.quicksight#NullString": {

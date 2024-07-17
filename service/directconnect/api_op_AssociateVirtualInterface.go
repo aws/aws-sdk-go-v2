@@ -168,7 +168,8 @@ type AssociateVirtualInterfaceOutput struct {
 	//   - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
-	// The type of virtual interface. The possible values are private and public .
+	// The type of virtual interface. The possible values are private , public and
+	// transit .
 	VirtualInterfaceType *string
 
 	// The ID of the VLAN.

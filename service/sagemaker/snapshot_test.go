@@ -638,6 +638,18 @@ func TestCheckSnapshot_CreateNotebookInstanceLifecycleConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateOptimizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreatePipeline(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePipeline(context.Background(), nil, func(o *Options) {
@@ -1303,6 +1315,18 @@ func TestCheckSnapshot_DeleteNotebookInstanceLifecycleConfig(t *testing.T) {
 	_, err := svc.DeleteNotebookInstanceLifecycleConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteNotebookInstanceLifecycleConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1999,6 +2023,18 @@ func TestCheckSnapshot_DescribeNotebookInstanceLifecycleConfig(t *testing.T) {
 	_, err := svc.DescribeNotebookInstanceLifecycleConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeNotebookInstanceLifecycleConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2978,6 +3014,18 @@ func TestCheckSnapshot_ListNotebookInstances(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListOptimizationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOptimizationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOptimizationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPipelineExecutions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPipelineExecutions(context.Background(), nil, func(o *Options) {
@@ -3511,6 +3559,18 @@ func TestCheckSnapshot_StopNotebookInstance(t *testing.T) {
 	_, err := svc.StopNotebookInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopNotebookInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4597,6 +4657,18 @@ func TestUpdateSnapshot_CreateNotebookInstanceLifecycleConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateOptimizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreatePipeline(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePipeline(context.Background(), nil, func(o *Options) {
@@ -5262,6 +5334,18 @@ func TestUpdateSnapshot_DeleteNotebookInstanceLifecycleConfig(t *testing.T) {
 	_, err := svc.DeleteNotebookInstanceLifecycleConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteNotebookInstanceLifecycleConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5958,6 +6042,18 @@ func TestUpdateSnapshot_DescribeNotebookInstanceLifecycleConfig(t *testing.T) {
 	_, err := svc.DescribeNotebookInstanceLifecycleConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeNotebookInstanceLifecycleConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6937,6 +7033,18 @@ func TestUpdateSnapshot_ListNotebookInstances(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListOptimizationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOptimizationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOptimizationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPipelineExecutions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPipelineExecutions(context.Background(), nil, func(o *Options) {
@@ -7470,6 +7578,18 @@ func TestUpdateSnapshot_StopNotebookInstance(t *testing.T) {
 	_, err := svc.StopNotebookInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopNotebookInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

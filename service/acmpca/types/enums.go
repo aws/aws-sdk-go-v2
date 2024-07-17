@@ -214,6 +214,7 @@ const (
 	KeyAlgorithmRsa4096      KeyAlgorithm = "RSA_4096"
 	KeyAlgorithmEcPrime256v1 KeyAlgorithm = "EC_prime256v1"
 	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
+	KeyAlgorithmSm2          KeyAlgorithm = "SM2"
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be
@@ -226,6 +227,7 @@ func (KeyAlgorithm) Values() []KeyAlgorithm {
 		"RSA_4096",
 		"EC_prime256v1",
 		"EC_secp384r1",
+		"SM2",
 	}
 }
 
@@ -235,6 +237,7 @@ type KeyStorageSecurityStandard string
 const (
 	KeyStorageSecurityStandardFips1402Level2OrHigher KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_2_OR_HIGHER"
 	KeyStorageSecurityStandardFips1402Level3OrHigher KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_3_OR_HIGHER"
+	KeyStorageSecurityStandardCcpcLevel1OrHigher     KeyStorageSecurityStandard = "CCPC_LEVEL_1_OR_HIGHER"
 )
 
 // Values returns all known values for KeyStorageSecurityStandard. Note that this
@@ -245,6 +248,7 @@ func (KeyStorageSecurityStandard) Values() []KeyStorageSecurityStandard {
 	return []KeyStorageSecurityStandard{
 		"FIPS_140_2_LEVEL_2_OR_HIGHER",
 		"FIPS_140_2_LEVEL_3_OR_HIGHER",
+		"CCPC_LEVEL_1_OR_HIGHER",
 	}
 }
 
@@ -344,6 +348,7 @@ const (
 	SigningAlgorithmSha256withrsa   SigningAlgorithm = "SHA256WITHRSA"
 	SigningAlgorithmSha384withrsa   SigningAlgorithm = "SHA384WITHRSA"
 	SigningAlgorithmSha512withrsa   SigningAlgorithm = "SHA512WITHRSA"
+	SigningAlgorithmSm3withsm2      SigningAlgorithm = "SM3WITHSM2"
 )
 
 // Values returns all known values for SigningAlgorithm. Note that this can be
@@ -358,6 +363,7 @@ func (SigningAlgorithm) Values() []SigningAlgorithm {
 		"SHA256WITHRSA",
 		"SHA384WITHRSA",
 		"SHA512WITHRSA",
+		"SM3WITHSM2",
 	}
 }
 

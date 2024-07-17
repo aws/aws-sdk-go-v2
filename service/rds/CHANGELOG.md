@@ -1,3 +1,15 @@
+# v1.81.2 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.81.1 (2024-06-27)
+
+* **Documentation**: Updates Amazon RDS documentation for TAZ export to S3.
+
+# v1.81.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.80.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

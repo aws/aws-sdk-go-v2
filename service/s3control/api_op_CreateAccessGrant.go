@@ -117,6 +117,7 @@ type CreateAccessGrantInput struct {
 }
 
 func (in *CreateAccessGrantInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

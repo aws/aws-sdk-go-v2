@@ -69,6 +69,7 @@ type GetAccessPointPolicyInput struct {
 }
 
 func (in *GetAccessPointPolicyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.AccessPointName = in.Name
 	p.RequiresAccountId = ptr.Bool(true)

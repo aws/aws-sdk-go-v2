@@ -19,7 +19,7 @@ import (
 // Web Services Regions. Connecting the private virtual interface to a VGW only
 // provides access to a single VPC within the same Region.
 //
-// Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an
+// Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an
 // update to the underlying physical connection if it wasn't updated to support
 // jumbo frames. Updating the connection disrupts network connectivity for all
 // virtual interfaces associated with the connection for up to 30 seconds. To check
@@ -168,7 +168,8 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	//   - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
-	// The type of virtual interface. The possible values are private and public .
+	// The type of virtual interface. The possible values are private , public and
+	// transit .
 	VirtualInterfaceType *string
 
 	// The ID of the VLAN.

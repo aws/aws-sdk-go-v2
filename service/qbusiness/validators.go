@@ -2311,6 +2311,21 @@ func validateOAuth2ClientCredentialConfiguration(v *types.OAuth2ClientCredential
 	}
 }
 
+func validatePersonalizationConfiguration(v *types.PersonalizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PersonalizationConfiguration"}
+	if len(v.PersonalizationControlMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PersonalizationControlMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePluginAuthConfiguration(v types.PluginAuthConfiguration) error {
 	if v == nil {
 		return nil
@@ -2413,6 +2428,21 @@ func validatePrincipalUser(v *types.PrincipalUser) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PrincipalUser"}
 	if len(v.Access) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Access"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQAppsConfiguration(v *types.QAppsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QAppsConfiguration"}
+	if len(v.QAppsControlMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("QAppsControlMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2807,6 +2837,16 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 	if v.AttachmentsConfiguration != nil {
 		if err := validateAttachmentsConfiguration(v.AttachmentsConfiguration); err != nil {
 			invalidParams.AddNested("AttachmentsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QAppsConfiguration != nil {
+		if err := validateQAppsConfiguration(v.QAppsConfiguration); err != nil {
+			invalidParams.AddNested("QAppsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PersonalizationConfiguration != nil {
+		if err := validatePersonalizationConfiguration(v.PersonalizationConfiguration); err != nil {
+			invalidParams.AddNested("PersonalizationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3670,6 +3710,16 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	if v.AttachmentsConfiguration != nil {
 		if err := validateAttachmentsConfiguration(v.AttachmentsConfiguration); err != nil {
 			invalidParams.AddNested("AttachmentsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QAppsConfiguration != nil {
+		if err := validateQAppsConfiguration(v.QAppsConfiguration); err != nil {
+			invalidParams.AddNested("QAppsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PersonalizationConfiguration != nil {
+		if err := validatePersonalizationConfiguration(v.PersonalizationConfiguration); err != nil {
+			invalidParams.AddNested("PersonalizationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

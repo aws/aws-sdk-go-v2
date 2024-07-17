@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about backups of AWS CloudHSM clusters.
+// Gets information about backups of CloudHSM clusters. Lists either the backups
+// you own or the backups shared with you when the Shared parameter is true.
 //
 // This is a paginated operation, which means that each response might contain
 // only a subset of all the backups. When the response contains only a subset of
@@ -19,6 +20,9 @@ import (
 // DescribeBackups request to get more backups. When you receive a response with no
 // NextToken (or an empty or null value), that means there are no more backups to
 // get.
+//
+// Cross-account use: Yes. Customers can describe backups in other Amazon Web
+// Services accounts that are shared with them.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}
@@ -62,6 +66,20 @@ type DescribeBackupsInput struct {
 	// The NextToken value that you received in the previous response. Use this value
 	// to get more backups.
 	NextToken *string
+
+	// Describe backups that are shared with you.
+	//
+	// By default when using this option, the command returns backups that have been
+	// shared using a standard Resource Access Manager resource share. In order for a
+	// backup that was shared using the PutResourcePolicy command to be returned, the
+	// share must be promoted to a standard resource share using the RAM [PromoteResourceShareCreatedFromPolicy]API
+	// operation.
+	//
+	// For more information about sharing backups, see [Working with shared backups] in the CloudHSM User Guide.
+	//
+	// [Working with shared backups]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/sharing.html
+	// [PromoteResourceShareCreatedFromPolicy]: https://docs.aws.amazon.com/cli/latest/reference/ram/promote-resource-share-created-from-policy.html
+	Shared *bool
 
 	// Designates whether or not to sort the return backups by ascending chronological
 	// order of generation.

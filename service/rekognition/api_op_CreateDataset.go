@@ -73,6 +73,9 @@ type CreateDatasetInput struct {
 	// To add labeled images to the dataset, You can use the console or call UpdateDatasetEntries.
 	DatasetSource *types.DatasetSource
 
+	// A set of tags (key-value pairs) that you want to attach to the dataset.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

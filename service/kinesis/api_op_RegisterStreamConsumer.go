@@ -63,6 +63,7 @@ type RegisterStreamConsumerInput struct {
 }
 
 func (in *RegisterStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

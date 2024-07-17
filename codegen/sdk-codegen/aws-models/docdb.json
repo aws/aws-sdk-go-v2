@@ -4675,7 +4675,20 @@
                     "outputToken": "Marker",
                     "items": "DBEngineVersions",
                     "pageSize": "MaxRecords"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeDBEngineVersionsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.docdb#DescribeDBEngineVersionsMessage": {

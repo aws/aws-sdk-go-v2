@@ -36,7 +36,7 @@ func TestClient_GreetingWithErrors_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<GreetingWithErrorsResponse xmlns="https://example.com/">
 			    <greeting>Hello</greeting>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</GreetingWithErrorsResponse>
 			`),
 			ExpectResult: &GreetingWithErrorsOutput{
@@ -124,7 +124,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsEc2queryDeserialize(t *tes
 			            <Message>Hi</Message>
 			        </Error>
 			    </Errors>
-			    <RequestId>foo-id</RequestId>
+			    <RequestID>foo-id</RequestID>
 			</Response>
 			`),
 			ExpectError: &types.InvalidGreeting{
@@ -232,7 +232,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsEc2queryDeserialize(t *testin
 			            </Nested>
 			        </Error>
 			    </Errors>
-			    <RequestId>foo-id</RequestId>
+			    <RequestID>foo-id</RequestID>
 			</Response>
 			`),
 			ExpectError: &types.ComplexError{

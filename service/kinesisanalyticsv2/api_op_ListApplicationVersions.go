@@ -162,6 +162,101 @@ func (c *Client) addOperationListApplicationVersionsMiddlewares(stack *middlewar
 	return nil
 }
 
+// ListApplicationVersionsPaginatorOptions is the paginator options for
+// ListApplicationVersions
+type ListApplicationVersionsPaginatorOptions struct {
+	// The maximum number of versions to list in this invocation of the operation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListApplicationVersionsPaginator is a paginator for ListApplicationVersions
+type ListApplicationVersionsPaginator struct {
+	options   ListApplicationVersionsPaginatorOptions
+	client    ListApplicationVersionsAPIClient
+	params    *ListApplicationVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListApplicationVersionsPaginator returns a new
+// ListApplicationVersionsPaginator
+func NewListApplicationVersionsPaginator(client ListApplicationVersionsAPIClient, params *ListApplicationVersionsInput, optFns ...func(*ListApplicationVersionsPaginatorOptions)) *ListApplicationVersionsPaginator {
+	if params == nil {
+		params = &ListApplicationVersionsInput{}
+	}
+
+	options := ListApplicationVersionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListApplicationVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListApplicationVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListApplicationVersions page.
+func (p *ListApplicationVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListApplicationVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListApplicationVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListApplicationVersionsAPIClient is a client that implements the
+// ListApplicationVersions operation.
+type ListApplicationVersionsAPIClient interface {
+	ListApplicationVersions(context.Context, *ListApplicationVersionsInput, ...func(*Options)) (*ListApplicationVersionsOutput, error)
+}
+
+var _ ListApplicationVersionsAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListApplicationVersions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

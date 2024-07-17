@@ -74,6 +74,18 @@ func TestCheckSnapshot_EmptyInputOutput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_Float16(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Float16(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Float16")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_FractionalSeconds(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.FractionalSeconds(context.Background(), nil, func(o *Options) {
@@ -210,6 +222,18 @@ func TestUpdateSnapshot_EmptyInputOutput(t *testing.T) {
 	_, err := svc.EmptyInputOutput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EmptyInputOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_Float16(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Float16(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Float16")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

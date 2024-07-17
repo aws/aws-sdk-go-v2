@@ -115,6 +115,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The descriptions of the current CloudWatch logging options for the SQL-based Kinesis Data Analytics application.</p>"
                     }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking AddApplicationCloudWatchLoggingOption request"
+                    }
                 }
             },
             "traits": {
@@ -415,7 +421,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a reference data source to an existing SQL-based Kinesis Data Analytics application.</p> \n         <p>Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an\n      in-application table within your application. In the request, you provide the source (S3\n      bucket name and object key name), name of the in-application table to create, and the\n      necessary mapping information that describes how data in an Amazon S3 object maps to columns\n      in the resulting in-application table.</p>"
+                "smithy.api#documentation": "<p>Adds a reference data source to an existing SQL-based Kinesis Data Analytics application.</p>\n         <p>Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an\n      in-application table within your application. In the request, you provide the source (S3\n      bucket name and object key name), name of the in-application table to create, and the\n      necessary mapping information that describes how data in an Amazon S3 object maps to columns\n      in the resulting in-application table.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationReferenceDataSourceRequest": {
@@ -556,6 +562,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters of the new VPC configuration.</p>"
                     }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking AddApplicationVpcConfiguration request"
+                    }
                 }
             },
             "traits": {
@@ -657,6 +669,9 @@
                         "smithy.api#documentation": "<p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>"
                     }
                 },
+                "ApplicationSystemRollbackConfiguration": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationSystemRollbackConfiguration"
+                },
                 "VpcConfigurations": {
                     "target": "com.amazonaws.kinesisanalyticsv2#VpcConfigurations",
                     "traits": {
@@ -713,6 +728,9 @@
                         "smithy.api#documentation": "<p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>"
                     }
                 },
+                "ApplicationSystemRollbackConfigurationDescription": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationSystemRollbackConfigurationDescription"
+                },
                 "VpcConfigurationDescriptions": {
                     "target": "com.amazonaws.kinesisanalyticsv2#VpcConfigurationDescriptions",
                     "traits": {
@@ -762,6 +780,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>"
                     }
+                },
+                "ApplicationSystemRollbackConfigurationUpdate": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationSystemRollbackConfigurationUpdate"
                 },
                 "VpcConfigurationUpdates": {
                     "target": "com.amazonaws.kinesisanalyticsv2#VpcConfigurationUpdates",
@@ -881,6 +902,12 @@
                         "smithy.api#documentation": "<p>If you reverted the application using <a>RollbackApplication</a>,\n        the application version when <code>RollbackApplication</code> was called.</p>"
                     }
                 },
+                "ApplicationVersionCreateTimestamp": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The current timestamp when the application version was created."
+                    }
+                },
                 "ConditionalToken": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ConditionalToken",
                     "traits": {
@@ -981,11 +1008,90 @@
         "com.amazonaws.kinesisanalyticsv2#ApplicationName": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "The name of the application",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationOperationInfo": {
+            "type": "structure",
+            "members": {
+                "Operation": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Operation"
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId"
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp at which the operation was created"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp at which the operation finished for the application"
+                    }
+                },
+                "OperationStatus": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Provides a description of the operation, such as the type and status of operation"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationOperationInfoDetails": {
+            "type": "structure",
+            "members": {
+                "Operation": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Operation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp at which the operation was created",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp at which the operation finished for the application",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationStatus": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationVersionChangeDetails": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionChangeDetails"
+                },
+                "OperationFailureDetails": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationFailureDetails"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Provides a description of the operation, such as the operation-type and status"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationOperationInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kinesisanalyticsv2#ApplicationOperationInfo"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of ApplicationOperationInfo for an application"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ApplicationRestoreConfiguration": {
@@ -1203,6 +1309,73 @@
                 "smithy.api#documentation": "<p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>"
             }
         },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationSystemRollbackConfiguration": {
+            "type": "structure",
+            "members": {
+                "RollbackEnabled": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Describes system rollback configuration for a Managed Service for Apache Flink application"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationSystemRollbackConfigurationDescription": {
+            "type": "structure",
+            "members": {
+                "RollbackEnabled": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Describes system rollback configuration for a Managed Service for Apache Flink application"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationSystemRollbackConfigurationUpdate": {
+            "type": "structure",
+            "members": {
+                "RollbackEnabledUpdate": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Describes system rollback configuration for a Managed Service for Apache Flink application"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationVersionChangeDetails": {
+            "type": "structure",
+            "members": {
+                "ApplicationVersionUpdatedFrom": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "The operation was performed on this version of the application",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationVersionUpdatedTo": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "The operation execution resulted in the transition to the following version of the application",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Contains information about the application version changes due to an operation"
+            }
+        },
         "com.amazonaws.kinesisanalyticsv2#ApplicationVersionId": {
             "type": "long",
             "traits": {
@@ -1308,7 +1481,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides additional mapping information when the record\n      format uses delimiters, such as CSV. For example, the following sample records use CSV format,\n      where the records use the <i>'\\n'</i> as the row delimiter and a comma (\",\") as\n      the column delimiter: </p>\n      \n         <p>\n            <code>\"name1\", \"address1\"</code>\n         </p>\n         <p>\n            <code>\"name2\", \"address2\"</code>\n         </p>"
+                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides additional mapping information when the record\n      format uses delimiters, such as CSV. For example, the following sample records use CSV format,\n      where the records use the <i>'\\n'</i> as the row delimiter and a comma (\",\") as\n      the column delimiter: </p>\n         <p>\n            <code>\"name1\", \"address1\"</code>\n         </p>\n         <p>\n            <code>\"name2\", \"address2\"</code>\n         </p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CatalogConfiguration": {
@@ -1381,12 +1554,12 @@
                 "MinPauseBetweenCheckpoints": {
                     "target": "com.amazonaws.kinesisanalyticsv2#MinPauseBetweenCheckpoints",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the minimum time in milliseconds after a checkpoint operation completes that a\n      new checkpoint operation can start. If a checkpoint operation takes longer than the\n        <code>CheckpointInterval</code>, the application otherwise performs continual checkpoint\n      operations. For more information, see <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/large_state_tuning/#tuning-checkpointing\"> Tuning Checkpointing</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/\">Apache Flink\n        Documentation</a>.</p>\n         <note>\n            <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,\n    the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this \n      API or in application code.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Describes the minimum time in milliseconds after a checkpoint operation completes that a\n      new checkpoint operation can start. If a checkpoint operation takes longer than the\n        <code>CheckpointInterval</code>, the application otherwise performs continual checkpoint\n      operations. For more information, see <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/large_state_tuning/#tuning-checkpointing\"> Tuning Checkpointing</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/\">Apache Flink\n        Documentation</a>.</p>\n         <note>\n            <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,\n    the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this \n      API or in application code.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault \n      tolerance.\n      For more information, see \n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing\">\n        Checkpoints for Fault Tolerance</a> in the\n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/\">Apache Flink Documentation</a>.</p>"
+                "smithy.api#documentation": "<p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault \n      tolerance.\n      For more information, see \n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing\">\n        Checkpoints for Fault Tolerance</a> in the\n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/\">Apache Flink Documentation</a>.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CheckpointConfigurationDescription": {
@@ -1771,7 +1944,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and returns a URL that you can use to connect to \n            an application's extension.</p>\n        <p>The IAM role or user used to call this API defines the permissions to access the\n      extension. After the presigned URL is created, no additional permission is required to access\n      this URL. IAM authorization policies for this API are also enforced for every HTTP request\n      that attempts to connect to the extension. </p>\n        <p>You    control the amount of time that the URL will be valid using the <code>SessionExpirationDurationInSeconds</code>\n        parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.</p>\n        <note>\n            <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes\n            to be valid. \n            If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates and returns a URL that you can use to connect to \n            an application's extension.</p>\n         <p>The IAM role or user used to call this API defines the permissions to access the\n      extension. After the presigned URL is created, no additional permission is required to access\n      this URL. IAM authorization policies for this API are also enforced for every HTTP request\n      that attempts to connect to the extension. </p>\n         <p>You    control the amount of time that the URL will be valid using the <code>SessionExpirationDurationInSeconds</code>\n        parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.</p>\n         <note>\n            <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes\n            to be valid. \n            If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p>\n         </note>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CreateApplicationPresignedUrlRequest": {
@@ -2152,6 +2325,12 @@
                     "target": "com.amazonaws.kinesisanalyticsv2#CloudWatchLoggingOptionDescriptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The descriptions of the remaining CloudWatch logging options for the application.</p>"
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking DeleteApplicationCloudWatchLoggingOption request"
                     }
                 }
             },
@@ -2567,6 +2746,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated version ID of the application.</p>"
                     }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking DeleteApplicationVpcConfiguration request"
+                    }
                 }
             },
             "traits": {
@@ -2638,6 +2823,62 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about a specific Managed Service for Apache Flink application.</p>\n         <p>If you want to retrieve a list of all applications in your account,\n      use the <a>ListApplications</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#DescribeApplicationOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationOperationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationOperationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Returns information about a specific operation performed on a Managed Service for Apache Flink application"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#DescribeApplicationOperationRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request for information about a specific operation performed on a Managed Service for Apache Flink application",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#DescribeApplicationOperationResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationOperationInfoDetails": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationOperationInfoDetails"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Provides details of the operation corresponding to the operation-ID on a Managed Service for Apache Flink application",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DescribeApplicationRequest": {
@@ -2954,8 +3195,29 @@
                 "smithy.api#documentation": "<p>Describes updates to the execution property groups for a Managed Service for Apache Flink application or a Studio notebook.</p>"
             }
         },
+        "com.amazonaws.kinesisanalyticsv2#ErrorInfo": {
+            "type": "structure",
+            "members": {
+                "ErrorString": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ErrorString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Provides a description of the operation failure error"
+            }
+        },
         "com.amazonaws.kinesisanalyticsv2#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.kinesisanalyticsv2#ErrorString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Error message resulting in failure of the operation",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#FileKey": {
             "type": "string",
@@ -2972,7 +3234,7 @@
                 "CheckpointConfiguration": {
                     "target": "com.amazonaws.kinesisanalyticsv2#CheckpointConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes an application's checkpointing configuration. Checkpointing is the \n      process of persisting application state for fault tolerance.\n      For more information, see \n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing\">\n        Checkpoints for Fault Tolerance</a> in the \n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/\">Apache Flink Documentation</a>. </p>"
+                        "smithy.api#documentation": "<p>Describes an application's checkpointing configuration. Checkpointing is the \n      process of persisting application state for fault tolerance.\n      For more information, see \n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing\">\n        Checkpoints for Fault Tolerance</a> in the \n      <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/\">Apache Flink Documentation</a>. </p>"
                     }
                 },
                 "MonitoringConfiguration": {
@@ -3016,7 +3278,7 @@
                 "JobPlanDescription": {
                     "target": "com.amazonaws.kinesisanalyticsv2#JobPlanDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job plan for an application. For more information about the job plan, see <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/internals/job_scheduling.html\">Jobs and Scheduling</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/\">Apache Flink\n        Documentation</a>. To retrieve the job plan for the application, use the <a>DescribeApplicationRequest$IncludeAdditionalDetails</a> parameter of the <a>DescribeApplication</a> operation.</p>"
+                        "smithy.api#documentation": "<p>The job plan for an application. For more information about the job plan, see <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/internals/job_scheduling.html\">Jobs and Scheduling</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/\">Apache Flink\n        Documentation</a>. To retrieve the job plan for the application, use the <a>DescribeApplicationRequest$IncludeAdditionalDetails</a> parameter of the <a>DescribeApplication</a> operation.</p>"
                     }
                 }
             },
@@ -3056,7 +3318,7 @@
                 "AllowNonRestoredState": {
                     "target": "com.amazonaws.kinesisanalyticsv2#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot \n       be mapped to the new program.\n     This will happen if the program is updated between snapshots to remove stateful parameters, and \n     state data in the snapshot no longer \n     corresponds to valid application data. For more information, see \n     <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/savepoints/#allowing-non-restored-state\">\n       Allowing Non-Restored State</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/\">Apache Flink\n         documentation</a>.</p>\n         <note>\n            <p>This value defaults to <code>false</code>. If you update your application without\n     specifying this parameter, <code>AllowNonRestoredState</code> will be set to <code>false</code>,\n     even if it was previously set to <code>true</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot \n       be mapped to the new program.\n     This will happen if the program is updated between snapshots to remove stateful parameters, and \n     state data in the snapshot no longer \n     corresponds to valid application data. For more information, see \n     <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/savepoints/#allowing-non-restored-state\">\n       Allowing Non-Restored State</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/\">Apache Flink\n         documentation</a>.</p>\n         <note>\n            <p>This value defaults to <code>false</code>. If you update your application without\n     specifying this parameter, <code>AllowNonRestoredState</code> will be set to <code>false</code>,\n     even if it was previously set to <code>true</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -3446,7 +3708,7 @@
                 "InputStartingPosition": {
                     "target": "com.amazonaws.kinesisanalyticsv2#InputStartingPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The starting position on the stream.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOW</code> - Start reading just after the most recent record in the stream, and\n          start at the request timestamp that the customer issued.</p>\n        \n        \n            </li>\n            <li>\n               <p>\n                  <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream, \n          which is the oldest record available in the stream. This option is not available \n          for an Amazon Kinesis Data Firehose delivery stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAST_STOPPED_POINT</code> - Resume reading from where the application last stopped reading.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The starting position on the stream.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOW</code> - Start reading just after the most recent record in the stream, and\n          start at the request timestamp that the customer issued.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream, \n          which is the oldest record available in the stream. This option is not available \n          for an Amazon Kinesis Data Firehose delivery stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LAST_STOPPED_POINT</code> - Resume reading from where the application last stopped reading.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3637,6 +3899,9 @@
                     "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplication"
                 },
                 {
+                    "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationOperation"
+                },
+                {
                     "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationSnapshot"
                 },
                 {
@@ -3644,6 +3909,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisanalyticsv2#DiscoverInputSchema"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationOperations"
                 },
                 {
                     "target": "com.amazonaws.kinesisanalyticsv2#ListApplications"
@@ -3684,7 +3952,7 @@
                     "sdkId": "Kinesis Analytics V2",
                     "arnNamespace": "kinesisanalytics",
                     "cloudFormationName": "KinesisAnalyticsV2",
-                    "cloudTrailEventSource": "kinesisanalyticsv2.amazonaws.com",
+                    "cloudTrailEventSource": "kinesisanalytics.amazonaws.com",
                     "docId": "kinesisanalyticsv2-2018-05-23",
                     "endpointPrefix": "kinesisanalytics"
                 },
@@ -4880,6 +5148,87 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationOperationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationOperationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists information about operations performed on a Managed Service for Apache Flink application",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ApplicationOperationInfoList",
+                    "pageSize": "Limit"
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationOperationsInputLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Limit on the number of records returned in the response",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationOperationsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationOperationsInputLimit"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#NextToken"
+                },
+                "Operation": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#Operation"
+                },
+                "OperationStatus": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request to list operations performed on an application",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationOperationsResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationOperationInfoList": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationOperationInfoList"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response with the list of operations for an application",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationSnapshots": {
             "type": "operation",
             "input": {
@@ -4897,7 +5246,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists information about the current application snapshots.</p>"
+                "smithy.api#documentation": "<p>Lists information about the current application snapshots.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SnapshotSummaries",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationSnapshotsRequest": {
@@ -4967,7 +5322,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration \n      associated with each version.</p>\n    \n         <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>\n         <note>\n            <p>This operation is supported only for Managed Service for Apache Flink.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration \n      associated with each version.</p>\n         <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>\n         <note>\n            <p>This operation is supported only for Managed Service for Apache Flink.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ApplicationVersionSummaries",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsInputLimit": {
@@ -5040,7 +5401,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Managed Service for Apache Flink applications in your account. For each\n      application, the response includes the application name, Amazon Resource Name (ARN), and\n      status. </p>\n         <p>If you want detailed information about a specific application, use \n      <a>DescribeApplication</a>.</p>"
+                "smithy.api#documentation": "<p>Returns a list of Managed Service for Apache Flink applications in your account. For each\n      application, the response includes the application name, Amazon Resource Name (ARN), and\n      status. </p>\n         <p>If you want detailed information about a specific application, use \n      <a>DescribeApplication</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ApplicationSummaries",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationsInputLimit": {
@@ -5391,6 +5758,7 @@
         "com.amazonaws.kinesisanalyticsv2#NextToken": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "If a previous command returned a pagination token, pass it into this value to retrieve the next set of results",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
@@ -5404,6 +5772,75 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#Operation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Type of operation performed on an application",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#OperationFailureDetails": {
+            "type": "structure",
+            "members": {
+                "RollbackOperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Provides the operation ID of a system-rollback operation executed due to failure in the current operation"
+                    }
+                },
+                "ErrorInfo": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ErrorInfo"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Provides a description of the operation failure"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#OperationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier of the Operation",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#OperationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of the operation performed on an application"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#Output": {
@@ -5443,7 +5880,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes a SQL-based Kinesis Data Analytics application's output configuration,\n      in which you identify an in-application stream and a destination where you want the\n      in-application stream data to be written. The destination can be a Kinesis data stream or a\n      Kinesis Data Firehose delivery stream. </p>\n    \n         <p></p>"
+                "smithy.api#documentation": "<p> Describes a SQL-based Kinesis Data Analytics application's output configuration,\n      in which you identify an in-application stream and a destination where you want the\n      in-application stream data to be written. The destination can be a Kinesis data stream or a\n      Kinesis Data Firehose delivery stream. </p>\n         <p></p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#OutputDescription": {
@@ -5591,7 +6028,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes parameters for how a Managed Service for Apache Flink application\n      executes multiple tasks simultaneously. For more information about parallelism,\n      see <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/dev/parallel.html\">Parallel Execution</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.18/\">Apache Flink\n        Documentation</a>.</p>"
+                "smithy.api#documentation": "<p>Describes parameters for how a Managed Service for Apache Flink application\n      executes multiple tasks simultaneously. For more information about parallelism,\n      see <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/dev/parallel.html\">Parallel Execution</a> in the <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/\">Apache Flink\n        Documentation</a>.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ParallelismConfigurationDescription": {
@@ -6115,7 +6552,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Reverts the application to the previous running version. You can\n            roll back an application if you suspect it is stuck in a transient status. </p>\n        <p>You can roll back an application only if it is in the <code>UPDATING</code> \n            or <code>AUTOSCALING</code> status.</p>\n        <p>When you rollback an application, it loads state data from the last successful snapshot.\n        If the application has no snapshots, Managed Service for Apache Flink rejects the rollback request.</p>\n        <p>This action is not supported for Managed Service for Apache Flink for SQL applications.</p>"
+                "smithy.api#documentation": "<p>Reverts the application to the previous running version. You can roll back an\n      application if you suspect it is stuck in a transient status or in the running status. </p>\n         <p>You can roll back an application only if it is in the <code>UPDATING</code>,\n        <code>AUTOSCALING</code>, or  <code>RUNNING</code> statuses.</p>\n         <p>When you rollback an application, it loads state data from the last successful snapshot.\n        If the application has no snapshots, Managed Service for Apache Flink rejects the rollback request.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#RollbackApplicationRequest": {
@@ -6147,6 +6584,12 @@
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationDetail",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking RollbackApplication request"
                     }
                 }
             },
@@ -6278,6 +6721,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FLINK-1_18"
+                    }
+                },
+                "FLINK_1_19": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLINK-1_19"
                     }
                 }
             }
@@ -6465,7 +6914,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3\n      bucket and object that contains the reference data.</p>\n      \n         <p>A SQL-based Kinesis Data Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a>\n        operation to trigger reloading of data into your application. </p>"
+                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3\n      bucket and object that contains the reference data.</p>\n         <p>A SQL-based Kinesis Data Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a>\n        operation to trigger reloading of data into your application. </p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#S3ReferenceDataSourceDescription": {
@@ -6825,7 +7274,14 @@
         },
         "com.amazonaws.kinesisanalyticsv2#StartApplicationResponse": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking StartApplication request"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -6859,7 +7315,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops the application from processing data. You can stop\n      an application only if it is in the running status, unless you set the <code>Force</code> \n        parameter to <code>true</code>.</p> \n         <p>You can use the <a>DescribeApplication</a> operation to find the application status.\n       </p>\n         <p>Managed Service for Apache Flink takes a snapshot when the application is stopped, unless <code>Force</code> is set \n          to <code>true</code>.</p>"
+                "smithy.api#documentation": "<p>Stops the application from processing data. You can stop\n      an application only if it is in the running status, unless you set the <code>Force</code> \n        parameter to <code>true</code>.</p>\n         <p>You can use the <a>DescribeApplication</a> operation to find the application status.\n       </p>\n         <p>Managed Service for Apache Flink takes a snapshot when the application is stopped, unless <code>Force</code> is set \n          to <code>true</code>.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#StopApplicationRequest": {
@@ -6875,7 +7331,7 @@
                 "Force": {
                     "target": "com.amazonaws.kinesisanalyticsv2#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code>\n          to <code>true</code>, Managed Service for Apache Flink stops the application without taking a snapshot. \n      </p>\n          <note>\n            <p>Force-stopping your application may lead to data loss or duplication.\n              To prevent data loss or duplicate processing of data during application restarts, \n              we recommend you to take frequent snapshots of your application.</p>\n         </note>\n         <p>You can only force stop a Managed Service for Apache Flink application. You can't force stop a SQL-based Kinesis Data Analytics application.</p>\n         <p>The application must be in the\n          <code>STARTING</code>, <code>UPDATING</code>, <code>STOPPING</code>, <code>AUTOSCALING</code>, or\n          <code>RUNNING</code> status. </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code>\n          to <code>true</code>, Managed Service for Apache Flink stops the application without taking a snapshot. \n      </p>\n         <note>\n            <p>Force-stopping your application may lead to data loss or duplication.\n              To prevent data loss or duplicate processing of data during application restarts, \n              we recommend you to take frequent snapshots of your application.</p>\n         </note>\n         <p>You can only force stop a Managed Service for Apache Flink application. You can't force stop a SQL-based Kinesis Data Analytics application.</p>\n         <p>The application must be in the\n          <code>STARTING</code>, <code>UPDATING</code>, <code>STOPPING</code>, <code>AUTOSCALING</code>, or\n          <code>RUNNING</code> status. </p>"
                     }
                 }
             },
@@ -6885,7 +7341,14 @@
         },
         "com.amazonaws.kinesisanalyticsv2#StopApplicationResponse": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking StopApplication request"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -7302,7 +7765,7 @@
                 "RuntimeEnvironmentUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#RuntimeEnvironment",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the Managed Service for Apache Flink runtime environment used to run your code. To avoid issues you must:</p>\n        <ul>\n            <li>\n               <p>Ensure your new jar and dependencies are compatible with the new runtime selected.</p>\n            </li>\n            <li>\n               <p>Ensure your new code's state is compatible with the snapshot from which your application will start</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Updates the Managed Service for Apache Flink runtime environment used to run your code. To avoid issues you must:</p>\n         <ul>\n            <li>\n               <p>Ensure your new jar and dependencies are compatible with the new runtime selected.</p>\n            </li>\n            <li>\n               <p>Ensure your new code's state is compatible with the snapshot from which your application will start</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7318,6 +7781,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes application updates.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "Operation ID for tracking UpdateApplication request"
                     }
                 }
             },

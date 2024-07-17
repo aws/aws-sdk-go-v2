@@ -1553,6 +1553,11 @@ type InstanceTypeConfig struct {
 	// instance as defined by InstanceType .
 	EbsConfiguration *EbsConfiguration
 
+	// The priority at which Amazon EMR launches the Amazon EC2 instances with this
+	// instance type. Priority starts at 0, which is the highest priority. Amazon EMR
+	// considers the highest priority first.
+	Priority *float64
+
 	// The number of units that a provisioned instance of this type provides toward
 	// fulfilling the target capacities defined in InstanceFleetConfig. This value is 1 for a master
 	// instance fleet, and must be 1 or greater for core and task instance fleets.
@@ -1594,6 +1599,11 @@ type InstanceTypeSpecification struct {
 
 	// The Amazon EC2 instance type, for example m3.xlarge .
 	InstanceType *string
+
+	// The priority at which Amazon EMR launches the Amazon EC2 instances with this
+	// instance type. Priority starts at 0, which is the highest priority. Amazon EMR
+	// considers the highest priority first.
+	Priority *float64
 
 	// The number of units that a provisioned instance of this type provides toward
 	// fulfilling the target capacities defined in InstanceFleetConfig. Capacity values represent
@@ -2183,9 +2193,11 @@ type OnDemandCapacityReservationOptions struct {
 // available in Amazon EMR releases 5.12.1 and later.
 type OnDemandProvisioningSpecification struct {
 
-	// Specifies the strategy to use in launching On-Demand instance fleets.
-	// Currently, the only option is lowest-price (the default), which launches the
-	// lowest price first.
+	// Specifies the strategy to use in launching On-Demand instance fleets. Available
+	// options are lowest-price and prioritized . lowest-price specifies to launch the
+	// instances with the lowest price first, and prioritized specifies that Amazon
+	// EMR should launch the instances with the highest priority first. The default is
+	// lowest-price .
 	//
 	// This member is required.
 	AllocationStrategy OnDemandProvisioningAllocationStrategy
@@ -2592,9 +2604,9 @@ type SpotProvisioningSpecification struct {
 	TimeoutDurationMinutes *int32
 
 	// Specifies one of the following strategies to launch Spot Instance fleets:
-	// price-capacity-optimized , capacity-optimized , lowest-price , or diversified .
-	// For more information on the provisioning strategies, see [Allocation strategies for Spot Instances]in the Amazon EC2 User
-	// Guide for Linux Instances.
+	// capacity-optimized , price-capacity-optimized , lowest-price , or diversified ,
+	// and capacity-optimized-prioritized . For more information on the provisioning
+	// strategies, see [Allocation strategies for Spot Instances]in the Amazon EC2 User Guide for Linux Instances.
 	//
 	// When you launch a Spot Instance fleet with the old console, it automatically
 	// launches with the capacity-optimized strategy. You can't change the allocation

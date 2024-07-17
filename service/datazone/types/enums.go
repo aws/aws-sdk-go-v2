@@ -285,6 +285,25 @@ func (DomainStatus) Values() []DomainStatus {
 	}
 }
 
+type EdgeDirection string
+
+// Enum values for EdgeDirection
+const (
+	EdgeDirectionUpstream   EdgeDirection = "UPSTREAM"
+	EdgeDirectionDownstream EdgeDirection = "DOWNSTREAM"
+)
+
+// Values returns all known values for EdgeDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EdgeDirection) Values() []EdgeDirection {
+	return []EdgeDirection{
+		"UPSTREAM",
+		"DOWNSTREAM",
+	}
+}
+
 type EnableSetting string
 
 // Enum values for EnableSetting
@@ -1071,8 +1090,9 @@ type TypesSearchScope string
 
 // Enum values for TypesSearchScope
 const (
-	TypesSearchScopeAssetType TypesSearchScope = "ASSET_TYPE"
-	TypesSearchScopeFormType  TypesSearchScope = "FORM_TYPE"
+	TypesSearchScopeAssetType       TypesSearchScope = "ASSET_TYPE"
+	TypesSearchScopeFormType        TypesSearchScope = "FORM_TYPE"
+	TypesSearchScopeLineageNodeType TypesSearchScope = "LINEAGE_NODE_TYPE"
 )
 
 // Values returns all known values for TypesSearchScope. Note that this can be
@@ -1083,6 +1103,7 @@ func (TypesSearchScope) Values() []TypesSearchScope {
 	return []TypesSearchScope{
 		"ASSET_TYPE",
 		"FORM_TYPE",
+		"LINEAGE_NODE_TYPE",
 	}
 }
 

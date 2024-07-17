@@ -758,6 +758,18 @@ func TestCheckSnapshot_GetIamPortalLoginUrl(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetLineageNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLineageNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLineageNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetListing(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetListing(context.Background(), nil, func(o *Options) {
@@ -986,6 +998,18 @@ func TestCheckSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListLineageNodeHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLineageNodeHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLineageNodeHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListMetadataGenerationRuns(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMetadataGenerationRuns(context.Background(), nil, func(o *Options) {
@@ -1099,6 +1123,18 @@ func TestCheckSnapshot_ListTimeSeriesDataPoints(t *testing.T) {
 	_, err := svc.ListTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PostLineageEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PostLineageEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PostLineageEvent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2125,6 +2161,18 @@ func TestUpdateSnapshot_GetIamPortalLoginUrl(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetLineageNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLineageNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLineageNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetListing(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetListing(context.Background(), nil, func(o *Options) {
@@ -2353,6 +2401,18 @@ func TestUpdateSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListLineageNodeHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLineageNodeHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLineageNodeHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListMetadataGenerationRuns(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMetadataGenerationRuns(context.Background(), nil, func(o *Options) {
@@ -2466,6 +2526,18 @@ func TestUpdateSnapshot_ListTimeSeriesDataPoints(t *testing.T) {
 	_, err := svc.ListTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PostLineageEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PostLineageEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PostLineageEvent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

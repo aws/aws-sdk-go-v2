@@ -97,6 +97,7 @@ type GetDataAccessInput struct {
 }
 
 func (in *GetDataAccessInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.ivsrealtime#DeleteEncoderConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.ivsrealtime#DeletePublicKey"
+                },
+                {
                     "target": "com.amazonaws.ivsrealtime#DeleteStage"
                 },
                 {
@@ -55,6 +58,9 @@
                     "target": "com.amazonaws.ivsrealtime#GetParticipant"
                 },
                 {
+                    "target": "com.amazonaws.ivsrealtime#GetPublicKey"
+                },
+                {
                     "target": "com.amazonaws.ivsrealtime#GetStage"
                 },
                 {
@@ -62,6 +68,9 @@
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#GetStorageConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ImportPublicKey"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#ListCompositions"
@@ -74,6 +83,9 @@
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#ListParticipants"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ListPublicKeys"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#ListStages"
@@ -134,7 +146,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n         <p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP \n\t  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, \n\t  including errors.\n    </p>\n         <p>Terminology:</p>\n         <ul>\n            <li>\n               <p>A <i>stage</i>  is a virtual space where participants can exchange video in real time.</p>\n            </li>\n            <li>\n               <p>A <i>participant token</i> is a token that authenticates a participant when they join a stage.</p>\n            </li>\n            <li>\n               <p>A <i>participant object</i> represents participants (people) in the stage and\n          contains information about them. When a token is created, it includes a participant ID;\n          when a participant uses that token to join a stage, the participant is associated with\n          that participant ID. There is a 1:1 mapping between participant tokens and\n          participants.</p>\n            </li>\n            <li>\n               <p>Server-side composition: The <i>composition</i> process composites participants\n          of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels).\n          Composition endpoints support this process.</p>\n            </li>\n            <li>\n               <p>Server-side composition: A <i>composition</i> controls the look of the outputs,\n          including how participants are positioned in the video.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resources contain information about your IVS live stream (see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html\">Getting Started with Amazon IVS Real-Time Streaming</a>):</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Stage</b> — A stage is a virtual space where participants can exchange video in real time.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a> for more information, including restrictions that apply to\n      tags and \"Tag naming limits and requirements\"; Amazon IVS stages has no service-specific\n      constraints beyond what is documented there.</p>\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Access Tags</a>).</p>\n         <p>The Amazon IVS real-time API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and\n      <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p>\n         <p>At most 50 tags can be applied to a resource.</p>\n         <p>\n            <b>Stages Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateParticipantToken</a> — Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateStage</a> — Creates a new stage (and optionally participant tokens).</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStage</a> — Shuts down and deletes the specified stage (disconnecting all participants).</p>\n            </li>\n            <li>\n               <p>\n                  <a>DisconnectParticipant</a> — Disconnects a specified participant and revokes the participant permanently from a specified stage.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetParticipant</a> — Gets information about the specified\n          participant token.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStage</a> — Gets information for the specified stage.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStageSession</a> — Gets information for the specified stage\n          session.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListParticipantEvents</a> — Lists events for a specified\n          participant that occurred during a specified stage session.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListParticipants</a> — Lists all participants in a specified stage\n          session.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStages</a> — Gets summary information about all stages in your account, in the AWS region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStageSessions</a> — Gets all sessions for a specified stage.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateStage</a> — Updates a stage’s configuration.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Composition Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetComposition</a> — Gets information about the specified\n          Composition resource.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListCompositions</a> — Gets summary information about all\n          Compositions in your account, in the AWS region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartComposition</a> — Starts a Composition from a stage based on\n          the configuration provided in the request.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopComposition</a> — Stops and deletes a Composition resource.\n          Any broadcast from the Composition resource is stopped.</p>\n            </li>\n         </ul>\n         <p>\n            <b>EncoderConfiguration Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateEncoderConfiguration</a> — Creates an EncoderConfiguration object.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteEncoderConfiguration</a> — Deletes an EncoderConfiguration\n          resource. Ensures that no Compositions are using this template; otherwise, returns an\n          error.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetEncoderConfiguration</a> — Gets information about the specified\n          EncoderConfiguration resource.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListEncoderConfigurations</a> — Gets summary information about all\n          EncoderConfigurations in your account, in the AWS region where the API request is\n          processed.</p>\n            </li>\n         </ul>\n         <p>\n            <b>StorageConfiguration Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStorageConfiguration</a> — Creates a new storage configuration, used to enable \n\t\trecording to Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStorageConfiguration</a> — Deletes the storage configuration for the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStorageConfiguration</a> — Gets the storage configuration for the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStorageConfigurations</a> — Gets summary information about all storage configurations in your \n\t\taccount, in the AWS region where the API request is processed.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the\n          specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with\n          the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the\n          specified ARN.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP \n\t  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, \n\t  including errors.\n    </p>\n         <p>\n            <b>Key Concepts</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Stage</b> — A virtual space where participants can exchange video in real time.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant token</b> — A token that authenticates a participant when they join a stage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant object</b> — Represents participants (people) in the stage and\n            contains information about them. When a token is created, it includes a participant ID;\n            when a participant uses that token to join a stage, the participant is associated with\n            that participant ID. There is a 1:1 mapping between participant tokens and\n            participants.</p>\n            </li>\n         </ul>\n         <p>For server-side composition:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Composition process</b> — Composites participants\n            of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels).\n            Composition endpoints support this process.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Composition</b> — Controls the look of the outputs,\n            including how participants are positioned in the video.</p>\n            </li>\n         </ul>\n         <p>For more information about your IVS live stream, also see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html\">Getting Started with Amazon IVS Real-Time Streaming</a>.</p>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a> for more information, including restrictions that apply to\n      tags and \"Tag naming limits and requirements\"; Amazon IVS stages has no service-specific\n      constraints beyond what is documented there.</p>\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Access Tags</a>).</p>\n         <p>The Amazon IVS real-time API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and\n      <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p>\n         <p>At most 50 tags can be applied to a resource.</p>",
                 "smithy.api#title": "Amazon Interactive Video Service RealTime",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -818,7 +830,7 @@
                 "storageConfigurationArn": {
                     "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingStorageConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of the <a>StorageConfiguration</a> resource to use for auto participant recording. Default: \"\" (empty string, no storage configuration is specified).  Individual participant recording cannot be started unless a storage configuration is specified, when a  <a>Stage</a> is created or updated.</p>",
+                        "smithy.api#documentation": "<p>ARN of the <a>StorageConfiguration</a> resource to use for individual participant recording. Default: <code>\"\"</code> (empty string, no storage configuration is specified). Individual participant recording cannot be started unless a storage configuration is specified, when a  <a>Stage</a> is created or updated.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -830,7 +842,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object specifying an auto-participant-recording configuration.</p>"
+                "smithy.api#documentation": "<p>Object specifying a configuration for individual participant recording.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#AutoParticipantRecordingStorageConfigurationArn": {
@@ -1280,7 +1292,7 @@
                 "autoParticipantRecordingConfiguration": {
                     "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Auto participant recording configuration object attached to the stage.</p>"
+                        "smithy.api#documentation": "<p>Configuration object for individual participant recording, to attach to the new stage.</p>"
                     }
                 }
             }
@@ -1434,6 +1446,61 @@
             }
         },
         "com.amazonaws.ivsrealtime#DeleteEncoderConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeletePublicKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#DeletePublicKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#DeletePublicKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified public key used to sign stage participant tokens. \n\t  This invalidates future participant tokens generated using the key pair’s private key.\n</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeletePublicKey"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeletePublicKeyRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the public key to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeletePublicKeyResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -2232,6 +2299,63 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ivsrealtime#GetPublicKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#GetPublicKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#GetPublicKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information for the specified public key.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetPublicKey"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#GetPublicKeyRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the public key for which the information is to be retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#GetPublicKeyResponse": {
+            "type": "structure",
+            "members": {
+                "publicKey": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key that is returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ivsrealtime#GetStage": {
             "type": "operation",
             "input": {
@@ -2419,7 +2543,7 @@
                 "featuredParticipantAttribute": {
                     "target": "com.amazonaws.ivsrealtime#AttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured\n         slot.</p>"
+                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured\n         slot. Default: <code>\"\"</code> (no featured participant).</p>"
                     }
                 },
                 "omitStoppedVideo": {
@@ -2432,13 +2556,13 @@
                 "videoAspectRatio": {
                     "target": "com.amazonaws.ivsrealtime#VideoAspectRatio",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the non-featured participant display mode. Default: <code>VIDEO</code>.</p>"
+                        "smithy.api#documentation": "<p>Sets the non-featured participant display mode, to control the aspect ratio of video tiles. <code>VIDEO</code> is 16:9, <code>SQUARE</code> is 1:1, and <code>PORTRAIT</code> is 3:4. Default: <code>VIDEO</code>.</p>"
                     }
                 },
                 "videoFillMode": {
                     "target": "com.amazonaws.ivsrealtime#VideoFillMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines how video fits within the participant tile. When not set, \n\t  <code>videoFillMode</code> defaults to <code>COVER</code> fill mode for participants in the grid \n\t  and to <code>CONTAIN</code> fill mode for featured participants.</p>"
+                        "smithy.api#documentation": "<p>Defines how video content fits within the participant tile: <code>FILL</code> (stretched), <code>COVER</code> (cropped),\n      or <code>CONTAIN</code> (letterboxed). When not set, \n      <code>videoFillMode</code> defaults to <code>COVER</code> fill mode for participants in the grid \n      and to <code>CONTAIN</code> fill mode for featured participants.</p>"
                     }
                 },
                 "gridGap": {
@@ -2469,6 +2593,81 @@
                     "min": 1,
                     "max": 1920
                 }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ImportPublicKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#ImportPublicKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#ImportPublicKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Import a public key to be used for signing stage participant tokens.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ImportPublicKey"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ImportPublicKeyRequest": {
+            "type": "structure",
+            "members": {
+                "publicKeyMaterial": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the public key to be imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the public key to be imported.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ImportPublicKeyResponse": {
+            "type": "structure",
+            "members": {
+                "publicKey": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key that was imported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ivsrealtime#InternalServerException": {
@@ -2881,6 +3080,78 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ivsrealtime#ListPublicKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#ListPublicKeysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#ListPublicKeysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets summary information about all public keys in your account, in the AWS region where the API request is processed.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListPublicKeys"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "publicKeys"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListPublicKeysRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first public key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ivsrealtime#MaxPublicKeyResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return. Default: 50.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListPublicKeysResponse": {
+            "type": "structure",
+            "members": {
+                "publicKeys": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the matching public keys (summary information only).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more public keys than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ivsrealtime#ListStageSessions": {
             "type": "operation",
             "input": {
@@ -3196,6 +3467,15 @@
                 }
             }
         },
+        "com.amazonaws.ivsrealtime#MaxPublicKeyResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.ivsrealtime#MaxStageResults": {
             "type": "integer",
             "traits": {
@@ -3318,19 +3598,19 @@
                 "recordingS3BucketName": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or \"\" (empty string), if recording is not enabled.</p>"
+                        "smithy.api#documentation": "<p>Name of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not enabled.</p>"
                     }
                 },
                 "recordingS3Prefix": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingS3Prefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or \"\" (empty string), if recording is not enabled.</p>"
+                        "smithy.api#documentation": "<p>S3 prefix of the S3 bucket where the participant is being recorded, if individual participant recording is enabled, or <code>\"\"</code> (empty string), if recording is not enabled.</p>"
                     }
                 },
                 "recordingState": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Participant’s recording state.</p>"
+                        "smithy.api#documentation": "<p>The participant’s recording state.</p>"
                     }
                 }
             },
@@ -3530,7 +3810,7 @@
                 "recordingState": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantRecordingState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Participant’s recording state.</p>"
+                        "smithy.api#documentation": "<p>The participant’s recording state.</p>"
                     }
                 }
             },
@@ -3746,7 +4026,7 @@
                 "featuredParticipantAttribute": {
                     "target": "com.amazonaws.ivsrealtime#AttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured\n         slot.</p>"
+                        "smithy.api#documentation": "<p>This attribute name identifies the featured slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured\n         slot. Default: <code>\"\"</code> (no featured participant).</p>"
                     }
                 },
                 "omitStoppedVideo": {
@@ -3759,7 +4039,7 @@
                 "videoFillMode": {
                     "target": "com.amazonaws.ivsrealtime#VideoFillMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines how video fits within the participant tile. Default: <code>COVER</code>.\n</p>"
+                        "smithy.api#documentation": "<p>Defines how video content fits within the participant tile: <code>FILL</code> (stretched), \n\t  <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). Default: <code>COVER</code>.</p>"
                     }
                 },
                 "gridGap": {
@@ -3772,13 +4052,13 @@
                 "pipParticipantAttribute": {
                     "target": "com.amazonaws.ivsrealtime#AttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the PiP slot. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> \n\t\t is placed in the PiP slot.</p>"
+                        "smithy.api#documentation": "<p>Specifies the participant for the PiP window. A participant with this attribute set\n         to <code>\"true\"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> \n\t is placed in the PiP slot. Default: <code>\"\"</code> (no PiP participant).</p>"
                     }
                 },
                 "pipBehavior": {
                     "target": "com.amazonaws.ivsrealtime#PipBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines PiP behavior when all participants have left. Default: <code>STATIC</code>.</p>"
+                        "smithy.api#documentation": "<p>Defines PiP behavior when all participants have left: <code>STATIC</code> (maintains original position/size) or <code>DYNAMIC</code> (expands to full composition). Default: <code>STATIC</code>.</p>"
                     }
                 },
                 "pipOffset": {
@@ -3863,6 +4143,105 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.ivsrealtime#PublicKey": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Public key ARN.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Public key name.</p>"
+                    }
+                },
+                "publicKeyMaterial": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Public key material.</p>"
+                    }
+                },
+                "fingerprint": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyFingerprint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key fingerprint, a short string used to identify or verify the full public key.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying a public key used to sign stage participant tokens.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#PublicKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:public-key/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#PublicKeyFingerprint": {
+            "type": "string"
+        },
+        "com.amazonaws.ivsrealtime#PublicKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#PublicKeySummary"
+            }
+        },
+        "com.amazonaws.ivsrealtime#PublicKeyMaterial": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "-----BEGIN PUBLIC KEY-----\\r?\\n([a-zA-Z0-9+/=\\r\\n]+)\\r?\\n-----END PUBLIC KEY-----(\\r?\\n)?"
+            }
+        },
+        "com.amazonaws.ivsrealtime#PublicKeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#PublicKeySummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Public key ARN.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#PublicKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Public key name.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a public key.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#Published": {
@@ -4037,7 +4416,13 @@
                 "autoParticipantRecordingConfiguration": {
                     "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Auto-participant-recording configuration object attached to the stage.</p>"
+                        "smithy.api#documentation": "<p>Configuration object for individual participant recording, attached to the stage.</p>"
+                    }
+                },
+                "endpoints": {
+                    "target": "com.amazonaws.ivsrealtime#StageEndpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about various endpoints for a stage.</p>"
                     }
                 }
             },
@@ -4053,6 +4438,35 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#StageEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#StageEndpoints": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.ivsrealtime#StageEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Events endpoint.</p>"
+                    }
+                },
+                "whip": {
+                    "target": "com.amazonaws.ivsrealtime#StageEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>WHIP endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about various endpoints for a stage.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#StageName": {
@@ -4628,7 +5042,7 @@
                 "autoParticipantRecordingConfiguration": {
                     "target": "com.amazonaws.ivsrealtime#AutoParticipantRecordingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Auto-participant-recording configuration object to attach to the stage.\n      Auto-participant-recording configuration cannot be updated while recording is active.</p>"
+                        "smithy.api#documentation": "<p>Configuration object for individual participant recording, to attach to the stage. Note that this cannot be updated while recording is active.</p>"
                     }
                 }
             }

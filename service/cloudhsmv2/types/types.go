@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// Contains information about a backup of an AWS CloudHSM cluster. All backup
-// objects contain the BackupId , BackupState , ClusterId , and CreateTimestamp
+// Contains information about a backup of an CloudHSM cluster. All backup objects
+// contain the BackupId , BackupState , ClusterId , and CreateTimestamp
 // parameters. Backups that were copied into a destination region additionally
 // contain the CopyTimestamp , SourceBackup , SourceCluster , and SourceRegion
 // parameters. A backup that is pending deletion will include the DeleteTimestamp
@@ -19,6 +19,9 @@ type Backup struct {
 	//
 	// This member is required.
 	BackupId *string
+
+	// The Amazon Resource Name (ARN) of the backup.
+	BackupArn *string
 
 	// The state of the backup.
 	BackupState BackupState
@@ -35,7 +38,7 @@ type Backup struct {
 	// The date and time when the backup will be permanently deleted.
 	DeleteTimestamp *time.Time
 
-	// The HSM type of the cluster that was backed up.
+	// The HSM type used to create the backup.
 	HsmType *string
 
 	// The mode of the cluster that was backed up.
@@ -79,7 +82,7 @@ type BackupRetentionPolicy struct {
 // Contains one or more certificates or a certificate signing request (CSR).
 type Certificates struct {
 
-	// The HSM hardware certificate issued (signed) by AWS CloudHSM.
+	// The HSM hardware certificate issued (signed) by CloudHSM.
 	AwsHardwareCertificate *string
 
 	// The cluster certificate issued (signed) by the issuing certificate authority
@@ -99,7 +102,7 @@ type Certificates struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an AWS CloudHSM cluster.
+// Contains information about an CloudHSM cluster.
 type Cluster struct {
 
 	// The cluster's backup policy.
@@ -176,7 +179,7 @@ type DestinationBackup struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a hardware security module (HSM) in an AWS CloudHSM
+// Contains information about a hardware security module (HSM) in an CloudHSM
 // cluster.
 type Hsm struct {
 

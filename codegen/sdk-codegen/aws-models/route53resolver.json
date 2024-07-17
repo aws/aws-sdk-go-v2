@@ -4788,7 +4788,20 @@
                     "outputToken": "NextToken",
                     "items": "ResolverEndpoints",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListResolverEndpointsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.route53resolver#ListResolverEndpointsRequest": {

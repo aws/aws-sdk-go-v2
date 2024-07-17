@@ -101,6 +101,7 @@ type PutJobTaggingInput struct {
 }
 
 func (in *PutJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

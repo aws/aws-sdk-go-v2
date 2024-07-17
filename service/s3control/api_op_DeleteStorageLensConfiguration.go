@@ -57,6 +57,7 @@ type DeleteStorageLensConfigurationInput struct {
 }
 
 func (in *DeleteStorageLensConfigurationInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

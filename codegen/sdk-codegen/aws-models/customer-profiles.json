@@ -89,7 +89,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use\n         include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone,\n         _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId,\n         _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId,\n         _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId,\n         _shopifyOrderId.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use include: _account, _profileId, _assetId,\n         _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId,\n         _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId,\n         _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId,\n         _segmentUserId, _shopifyCustomerId, _shopifyOrderId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -152,7 +152,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list that is\n         used in conjunction with the\n         <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName\">KeyName</a>\n         and\n         <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values\">Values</a>\n         parameters to search for profiles using the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> API.</p>"
+                "smithy.api#documentation": "<p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list\n         that is used in conjunction with the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName\">KeyName</a> and <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values\">Values</a> parameters to search for profiles using the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a>\n         API.</p>"
             }
         },
         "com.amazonaws.customerprofiles#Address": {
@@ -262,7 +262,7 @@
                 "SourceConnectorType": {
                     "target": "com.amazonaws.customerprofiles#SourceConnectorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the source connector type, such as Salesforce, ServiceNow, and Marketo. Indicates source of ingestion.</p>",
+                        "smithy.api#documentation": "<p>Specifies the source connector type, such as Salesforce, ServiceNow, and Marketo.\n         Indicates source of ingestion.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -281,7 +281,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Structure holding all <code>APPFLOW_INTEGRATION</code> specific workflow attributes.</p>"
+                "smithy.api#documentation": "<p>Structure holding all <code>APPFLOW_INTEGRATION</code> specific workflow\n         attributes.</p>"
             }
         },
         "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowMetrics": {
@@ -313,7 +313,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Workflow specific execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+                "smithy.api#documentation": "<p>Workflow specific execution metrics for <code>APPFLOW_INTEGRATION</code>\n         workflow.</p>"
             }
         },
         "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowStep": {
@@ -322,7 +322,7 @@
                 "FlowName": {
                     "target": "com.amazonaws.customerprofiles#FlowName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the flow created during execution of workflow step. <code>APPFLOW_INTEGRATION</code> workflow type creates an appflow flow during workflow step execution on the customers behalf.</p>",
+                        "smithy.api#documentation": "<p>Name of the flow created during execution of workflow step.\n            <code>APPFLOW_INTEGRATION</code> workflow type creates an appflow flow during workflow\n         step execution on the customers behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -336,7 +336,7 @@
                 "ExecutionMessage": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Message indicating execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#documentation": "<p>Message indicating execution of workflow step for <code>APPFLOW_INTEGRATION</code>\n         workflow.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -344,35 +344,35 @@
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Total number of records processed during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#documentation": "<p>Total number of records processed during execution of workflow step for\n            <code>APPFLOW_INTEGRATION</code> workflow.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "BatchRecordsStartTime": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Start datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#documentation": "<p>Start datetime of records pulled in batch during execution of workflow step for\n            <code>APPFLOW_INTEGRATION</code> workflow.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "BatchRecordsEndTime": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>End datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#documentation": "<p>End datetime of records pulled in batch during execution of workflow step for\n            <code>APPFLOW_INTEGRATION</code> workflow.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CreatedAt": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creation timestamp of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#documentation": "<p>Creation timestamp of workflow step for <code>APPFLOW_INTEGRATION</code>\n         workflow.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LastUpdatedAt": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Last updated timestamp for workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
+                        "smithy.api#documentation": "<p>Last updated timestamp for workflow step for <code>APPFLOW_INTEGRATION</code>\n         workflow.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -394,13 +394,13 @@
                 "Expression": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \\\"{ObjectTypeName.AttributeName}\\\".</p>",
+                        "smithy.api#documentation": "<p>Mathematical expression that is performed on attribute items provided in the attribute\n         list. Each element in the expression should follow the structure of\n         \\\"{ObjectTypeName.AttributeName}\\\".</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>",
+                "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that\n         expression.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -463,7 +463,7 @@
                 "AttributeMatchingModel": {
                     "target": "com.amazonaws.customerprofiles#AttributeMatchingModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the <code>AttributeMatchingModel</code>, you can either choose <code>ONE_TO_ONE</code> or \n         <code>MANY_TO_MANY</code>.</p>",
+                        "smithy.api#documentation": "<p>Configures the <code>AttributeMatchingModel</code>, you can either choose\n            <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -527,7 +527,7 @@
                 "MinAllowedConfidenceScoreForMerging": {
                     "target": "com.amazonaws.customerprofiles#Double0To1",
                     "traits": {
-                        "smithy.api#documentation": "<p>A number between 0 and 1 that represents the minimum confidence score required for\n         profiles within a matching group to be merged during the auto-merge process. A higher\n         score means higher similarity required to merge profiles. </p>"
+                        "smithy.api#documentation": "<p>A number between 0 and 1 that represents the minimum confidence score required for\n         profiles within a matching group to be merged during the auto-merge process. A higher score\n         means higher similarity required to merge profiles. </p>"
                     }
                 }
             },
@@ -567,7 +567,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Batch defines the boundaries for ingestion for each step in <code>APPFLOW_INTEGRATION</code> workflow. <code>APPFLOW_INTEGRATION</code> workflow splits ingestion based on these boundaries.</p>"
+                "smithy.api#documentation": "<p>Batch defines the boundaries for ingestion for each step in\n            <code>APPFLOW_INTEGRATION</code> workflow. <code>APPFLOW_INTEGRATION</code> workflow\n         splits ingestion based on these boundaries.</p>"
             }
         },
         "com.amazonaws.customerprofiles#Batches": {
@@ -634,7 +634,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>",
+                "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -765,7 +765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new calculated attribute definition. After creation, new object data ingested \n         into Customer Profiles will be included in the calculated attribute, which can be retrieved \n         for a profile using the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetCalculatedAttributeForProfile.html\">GetCalculatedAttributeForProfile</a> API. \n         Defining a calculated attribute makes it available for all profiles within a domain. Each \n         calculated attribute can only reference one <code>ObjectType</code> and at most, two fields \n         from that <code>ObjectType</code>.</p>",
+                "smithy.api#documentation": "<p>Creates a new calculated attribute definition. After creation, new object data ingested\n         into Customer Profiles will be included in the calculated attribute, which can be retrieved\n         for a profile using the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetCalculatedAttributeForProfile.html\">GetCalculatedAttributeForProfile</a> API. Defining a calculated attribute makes it\n         available for all profiles within a domain. Each calculated attribute can only reference\n         one <code>ObjectType</code> and at most, two fields from that\n         <code>ObjectType</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
@@ -807,14 +807,14 @@
                 "AttributeDetails": {
                     "target": "com.amazonaws.customerprofiles#AttributeDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>",
+                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that\n         expression.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Conditions": {
                     "target": "com.amazonaws.customerprofiles#Conditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>"
                     }
                 },
                 "Statistic": {
@@ -859,13 +859,13 @@
                 "AttributeDetails": {
                     "target": "com.amazonaws.customerprofiles#AttributeDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>"
+                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that\n         expression.</p>"
                     }
                 },
                 "Conditions": {
                     "target": "com.amazonaws.customerprofiles#Conditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>"
                     }
                 },
                 "Statistic": {
@@ -883,7 +883,7 @@
                 "LastUpdatedAt": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently\n         edited.</p>"
                     }
                 },
                 "Tags": {
@@ -923,7 +923,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can\n         be associated with one domain.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true.</p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>",
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple\n            Amazon Connect instances can be associated with one domain.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true.</p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>\n         <note>\n            <p>It is not possible to associate a Customer Profiles domain with an Amazon Connect Instance directly from\n            the API. If you would like to create a domain and associate a Customer Profiles domain, use the Amazon Connect\n            admin website. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-customer-profiles.html#enable-customer-profiles-step1\">Enable Customer Profiles</a>.</p>\n            <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances\n            can be associated with one domain.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}",
@@ -970,7 +970,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If <code>RuleBasedMatching</code> = true, \n         Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration \n         in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and \n         review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can \n         download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "Tags": {
@@ -1022,7 +1022,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If <code>RuleBasedMatching</code> = true, \n         Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration \n         in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and \n         review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can \n         download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -1076,7 +1076,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an event stream, which is a subscription to real-time events, such as when profiles are created and \n         updated through Amazon Connect Customer Profiles.</p>\n         <p>Each event stream can be associated with only one Kinesis Data Stream destination in the same region and \n         Amazon Web Services account as the customer profiles domain</p>",
+                "smithy.api#documentation": "<p>Creates an event stream, which is a subscription to real-time events, such as when\n         profiles are created and updated through Amazon Connect Customer Profiles.</p>\n         <p>Each event stream can be associated with only one Kinesis Data Stream destination in the\n         same region and Amazon Web Services account as the customer profiles domain</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/event-streams/{EventStreamName}",
@@ -1098,7 +1098,7 @@
                 "Uri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example, \n         arn:aws:kinesis:region:account-id:stream/stream-name</p>",
+                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example,\n         arn:aws:kinesis:region:account-id:stream/stream-name</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1168,7 +1168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n\tCreates an integration workflow. An integration workflow is an async process which ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo.\n\t</p>",
+                "smithy.api#documentation": "<p> Creates an integration workflow. An integration workflow is an async process which\n         ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/workflows/integrations",
@@ -1296,7 +1296,7 @@
                 "AccountNumber": {
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
+                        "smithy.api#documentation": "<p>An account number that you have given to the customer.</p>"
                     }
                 },
                 "AdditionalInformation": {
@@ -1617,14 +1617,14 @@
                     "sdkId": "Customer Profiles",
                     "arnNamespace": "profile",
                     "cloudFormationName": "CustomerProfiles",
-                    "cloudTrailEventSource": "customerprofiles.amazonaws.com",
+                    "cloudTrailEventSource": "profile.amazonaws.com",
                     "endpointPrefix": "profile"
                 },
                 "aws.auth#sigv4": {
                     "name": "profile"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has\n         pre-built connectors powered by AppFlow that make it easy to combine customer information\n         from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your\n         enterprise resource planning (ERP), with contact history from your Amazon Connect contact center.\n         If you're new to Amazon Connect, you might find it helpful to review the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/\">Amazon Connect Administrator Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact\n         center that has pre-built connectors powered by AppFlow that make it easy to combine\n         customer information from third party applications, such as Salesforce (CRM), ServiceNow\n         (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center. </p>\n         <p>For more information about the Amazon Connect Customer Profiles feature, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html\">Use Customer\n            Profiles</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>",
                 "smithy.api#title": "Amazon Connect Customer Profiles",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2429,7 +2429,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing calculated attribute definition. Note that deleting a default calculated attribute \n         is possible, however once deleted, you will be unable to undo that action and will need to recreate it on \n         your own using the CreateCalculatedAttributeDefinition API if you want it back.</p>",
+                "smithy.api#documentation": "<p>Deletes an existing calculated attribute definition. Note that deleting a default\n         calculated attribute is possible, however once deleted, you will be unable to undo that\n         action and will need to recreate it on your own using the\n         CreateCalculatedAttributeDefinition API if you want it back.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
@@ -3011,7 +3011,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified workflow and all its corresponding resources. This is an async process.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified workflow and all its corresponding resources. This is an async\n         process.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/domains/{DomainName}/workflows/{WorkflowId}",
@@ -3066,7 +3066,7 @@
                 "Uri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example, \n         arn:aws:kinesis:region:account-id:stream/stream-name.</p>",
+                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example,\n         arn:aws:kinesis:region:account-id:stream/stream-name.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3151,7 +3151,7 @@
                 "DetectedProfileObjectTypes": {
                     "target": "com.amazonaws.customerprofiles#DetectedProfileObjectTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Detected <code>ProfileObjectType</code> mappings from given objects. A maximum of one mapping is supported.</p>"
+                        "smithy.api#documentation": "<p>Detected <code>ProfileObjectType</code> mappings from given objects. A maximum of one\n         mapping is supported.</p>"
                     }
                 }
             },
@@ -3165,7 +3165,7 @@
                 "SourceLastUpdatedTimestampFormat": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of <code>sourceLastUpdatedTimestamp</code> that was detected in fields.</p>"
+                        "smithy.api#documentation": "<p>The format of <code>sourceLastUpdatedTimestamp</code> that was detected in\n         fields.</p>"
                     }
                 },
                 "Fields": {
@@ -3263,7 +3263,7 @@
                 "Uri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example, \n         arn:aws:kinesis:region:account-id:stream/stream-name.</p>",
+                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example,\n         arn:aws:kinesis:region:account-id:stream/stream-name.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3283,7 +3283,7 @@
                 "Message": {
                     "target": "com.amazonaws.customerprofiles#string1To1000",
                     "traits": {
-                        "smithy.api#documentation": "<p>The human-readable string that corresponds to the error or success while enabling the streaming destination.</p>"
+                        "smithy.api#documentation": "<p>The human-readable string that corresponds to the error or success while enabling the\n         streaming destination.</p>"
                     }
                 }
             },
@@ -3687,7 +3687,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list that were used\n         to find a profile returned in response to a <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request. </p>"
+                "smithy.api#documentation": "<p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list\n         that were used to find a profile returned in response to a <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request.\n      </p>"
             }
         },
         "com.amazonaws.customerprofiles#Gender": {
@@ -3779,7 +3779,7 @@
                 "MinAllowedConfidenceScoreForMerging": {
                     "target": "com.amazonaws.customerprofiles#Double0To1",
                     "traits": {
-                        "smithy.api#documentation": "<p>Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.</p>"
+                        "smithy.api#documentation": "<p>Minimum confidence score required for profiles within a matching group to be merged\n         during the auto-merge process.</p>"
                     }
                 }
             },
@@ -3849,7 +3849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides more information on a calculated attribute definition for Customer Profiles.</p>",
+                "smithy.api#documentation": "<p>Provides more information on a calculated attribute definition for Customer\n         Profiles.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
@@ -3911,7 +3911,7 @@
                 "LastUpdatedAt": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently\n         edited.</p>"
                     }
                 },
                 "Statistic": {
@@ -3923,13 +3923,13 @@
                 "Conditions": {
                     "target": "com.amazonaws.customerprofiles#Conditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>"
                     }
                 },
                 "AttributeDetails": {
                     "target": "com.amazonaws.customerprofiles#AttributeDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>"
+                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that\n         expression.</p>"
                     }
                 },
                 "Tags": {
@@ -4027,7 +4027,7 @@
                 "IsDataPartial": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute’s value is based on partial data. If data is\n         partial, it is set to true.</p>"
                     }
                 },
                 "Value": {
@@ -4134,7 +4134,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If <code>RuleBasedMatching</code> = true, \n         Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration \n         in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and \n         review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can \n         download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -4522,7 +4522,7 @@
                 "IsUnstructured": {
                     "target": "com.amazonaws.customerprofiles#optionalBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in Amazon \n         Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.</p>"
+                        "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in\n         Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in\n         flowDefinition.</p>"
                     }
                 }
             },
@@ -4732,6 +4732,18 @@
                         "smithy.api#documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set\n         up.</p>"
                     }
                 },
+                "MaxAvailableProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize0",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of provisioned profile object max count available.</p>"
+                    }
+                },
+                "MaxProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of profile object max count assigned to the object type.</p>"
+                    }
+                },
                 "Fields": {
                     "target": "com.amazonaws.customerprofiles#FieldMap",
                     "traits": {
@@ -4894,7 +4906,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a set of profiles that belong to the same matching group using the <code>matchId</code> or \n         <code>profileId</code>. You can also specify the type of matching that you want for finding similar profiles using \n         either <code>RULE_BASED_MATCHING</code> or <code>ML_BASED_MATCHING</code>.</p>",
+                "smithy.api#documentation": "<p>Returns a set of profiles that belong to the same matching group using the\n            <code>matchId</code> or <code>profileId</code>. You can also specify the type of\n         matching that you want for finding similar profiles using either\n            <code>RULE_BASED_MATCHING</code> or <code>ML_BASED_MATCHING</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/matches",
@@ -5621,7 +5633,7 @@
                 "LastUpdatedAt": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently\n         edited.</p>"
                     }
                 },
                 "Tags": {
@@ -5683,7 +5695,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributeDefinitions.</p>",
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to\n         ListCalculatedAttributeDefinitions.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 },
@@ -5711,7 +5723,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributeDefinitions.</p>"
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to\n         ListCalculatedAttributeDefinitions.</p>"
                     }
                 }
             },
@@ -5737,7 +5749,7 @@
                 "IsDataPartial": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute’s value is based on partial data. If data is\n         partial, it is set to true.</p>"
                     }
                 },
                 "Value": {
@@ -5791,7 +5803,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributesForProfile.</p>",
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to\n         ListCalculatedAttributesForProfile.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 },
@@ -5835,7 +5847,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributesForProfile.</p>"
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to\n         ListCalculatedAttributesForProfile.</p>"
                     }
                 }
             },
@@ -6186,7 +6198,7 @@
                 "IsUnstructured": {
                     "target": "com.amazonaws.customerprofiles#optionalBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in Amazon \n         Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.</p>"
+                        "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in\n         Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in\n         flowDefinition.</p>"
                     }
                 }
             },
@@ -6312,6 +6324,18 @@
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>"
+                    }
+                },
+                "MaxProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of profile object max count assigned to the object type.</p>"
+                    }
+                },
+                "MaxAvailableProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize0",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of provisioned profile object max count available.</p>"
                     }
                 },
                 "Tags": {
@@ -7081,7 +7105,7 @@
                 "ConfidenceScore": {
                     "target": "com.amazonaws.customerprofiles#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>A number between 0 and 1, where a higher score means higher similarity.\n         Examining match confidence scores lets you distinguish between groups of similar records in which\n         the system is highly confident (which you may decide to merge), groups of similar records about\n         which the system is uncertain (which you may decide to have reviewed by a human),\n         and groups of similar records that the system deems to be unlikely (which you may decide to reject).\n         Given confidence scores vary as per the data input, it should not be used an absolute\n         measure of matching quality.</p>"
+                        "smithy.api#documentation": "<p>A number between 0 and 1, where a higher score means higher similarity. Examining match\n         confidence scores lets you distinguish between groups of similar records in which the\n         system is highly confident (which you may decide to merge), groups of similar records about\n         which the system is uncertain (which you may decide to have reviewed by a human), and\n         groups of similar records that the system deems to be unlikely (which you may decide to\n         reject). Given confidence scores vary as per the data input, it should not be used an\n         absolute measure of matching quality.</p>"
                     }
                 }
             },
@@ -7213,7 +7237,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies how does the rule-based matching process should match profiles. You can choose\n         from the following attributes to build the matching Rule:</p>\n         <ul>\n            <li>\n               <p>AccountNumber</p>\n            </li>\n            <li>\n               <p>Address.Address</p>\n            </li>\n            <li>\n               <p>Address.City</p>\n            </li>\n            <li>\n               <p>Address.Country</p>\n            </li>\n            <li>\n               <p>Address.County</p>\n            </li>\n            <li>\n               <p>Address.PostalCode</p>\n            </li>\n            <li>\n               <p>Address.State</p>\n            </li>\n            <li>\n               <p>Address.Province</p>\n            </li>\n            <li>\n               <p>BirthDate</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>FirstName</p>\n            </li>\n            <li>\n               <p>Gender</p>\n            </li>\n            <li>\n               <p>LastName</p>\n            </li>\n            <li>\n               <p>MiddleName</p>\n            </li>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>Any customized profile attributes that start with the <code>Attributes</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Specifies how does the rule-based matching process should match profiles. You can choose\n         from the following attributes to build the matching Rule:</p>\n         <ul>\n            <li>\n               <p>AccountNumber</p>\n            </li>\n            <li>\n               <p>Address.Address</p>\n            </li>\n            <li>\n               <p>Address.City</p>\n            </li>\n            <li>\n               <p>Address.Country</p>\n            </li>\n            <li>\n               <p>Address.County</p>\n            </li>\n            <li>\n               <p>Address.PostalCode</p>\n            </li>\n            <li>\n               <p>Address.State</p>\n            </li>\n            <li>\n               <p>Address.Province</p>\n            </li>\n            <li>\n               <p>BirthDate</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>FirstName</p>\n            </li>\n            <li>\n               <p>Gender</p>\n            </li>\n            <li>\n               <p>LastName</p>\n            </li>\n            <li>\n               <p>MiddleName</p>\n            </li>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>Any customized profile attributes that start with the\n               <code>Attributes</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.customerprofiles#MatchingRuleAttributeList": {
@@ -7364,7 +7388,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a profile object. The predefined keys you can use to\n         search for <code>_asset</code> include: <code>_assetId</code>, <code>_assetName</code>, \n         and <code>_serialNumber</code>. The predefined keys you can use to search for <code>_case</code> \n         include: <code>_caseId</code>. The predefined keys you can use to search for\n         <code>_order</code> include: <code>_orderId</code>.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a profile object. The predefined keys you can use to search\n         for <code>_asset</code> include: <code>_assetId</code>, <code>_assetName</code>, and\n            <code>_serialNumber</code>. The predefined keys you can use to search for\n            <code>_case</code> include: <code>_caseId</code>. The predefined keys you can use to\n         search for <code>_order</code> include: <code>_orderId</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7377,7 +7401,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter applied to <code>ListProfileObjects</code> response to include profile objects with the\n         specified index values.</p>"
+                "smithy.api#documentation": "<p>The filter applied to <code>ListProfileObjects</code> response to include profile\n         objects with the specified index values.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ObjectTypeField": {
@@ -7412,7 +7436,7 @@
                 "StandardIdentifiers": {
                     "target": "com.amazonaws.customerprofiles#StandardIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1\n         UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER  means that this key can be\n         used to tie an object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE means that it can be\n         used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to\n         search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is\n         only used to match a profile but is not persisted to be used for searching of the profile.\n         A NEW_ONLY key is only used if the profile does not already exist before the object is\n         ingested, otherwise it is only used for matching objects to profiles.</p>"
+                        "smithy.api#documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1\n         UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER means that this key\n         can be used to tie an object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE means\n         that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it\n         will be used to search for profiles after all other PROFILE keys have been searched. A\n         LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for\n         searching of the profile. A NEW_ONLY key is only used if the profile does not already exist\n         before the object is ingested, otherwise it is only used for matching objects to\n         profiles.</p>"
                     }
                 },
                 "FieldNames": {
@@ -7623,7 +7647,7 @@
                 "AccountNumber": {
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
+                        "smithy.api#documentation": "<p>An account number that you have given to the customer.</p>"
                     }
                 },
                 "AdditionalInformation": {
@@ -7749,7 +7773,7 @@
                 "FoundByItems": {
                     "target": "com.amazonaws.customerprofiles#foundByList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of items used to find a profile returned in a <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> response.\n         An item is a key-value(s) pair that matches an attribute in the profile.</p>\n         <p>If the optional <code>AdditionalSearchKeys</code> parameter was included in the\n         <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request, the <code>FoundByItems</code> list should be\n         interpreted based on the <code>LogicalOperator</code> used in the request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AND</code> - The profile included in the response matched all of the search keys\n            specified in the request. The <code>FoundByItems</code> will include all of the key-value(s)\n            pairs that were specified in the request (as this is a requirement of <code>AND</code> search logic).</p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> - The profile included in the response matched at least one of the\n            search keys specified in the request. The <code>FoundByItems</code> will\n            include each of the key-value(s) pairs that the profile was found by.</p>\n            </li>\n         </ul>\n         <p>The <code>OR</code> relationship is the default behavior if the <code>LogicalOperator</code> parameter is\n         not included in the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request.</p>"
+                        "smithy.api#documentation": "<p>A list of items used to find a profile returned in a <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> response.\n         An item is a key-value(s) pair that matches an attribute in the profile.</p>\n         <p>If the optional <code>AdditionalSearchKeys</code> parameter was included in the\n         <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request, the <code>FoundByItems</code> list should be interpreted\n         based on the <code>LogicalOperator</code> used in the request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AND</code> - The profile included in the response matched all of the search\n               keys specified in the request. The <code>FoundByItems</code> will include all of the\n               key-value(s) pairs that were specified in the request (as this is a requirement of\n                  <code>AND</code> search logic).</p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> - The profile included in the response matched at least one of the\n               search keys specified in the request. The <code>FoundByItems</code> will include each\n               of the key-value(s) pairs that the profile was found by.</p>\n            </li>\n         </ul>\n         <p>The <code>OR</code> relationship is the default behavior if the\n            <code>LogicalOperator</code> parameter is not included in the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a>\n         request.</p>"
                     }
                 },
                 "PartyTypeString": {
@@ -7850,7 +7874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an integration between the service and a third-party service, which includes\n         Amazon AppFlow and Amazon Connect.</p>\n         <p>An integration can belong to only one domain.</p>\n         <p>To add or remove tags on an existing Integration, see <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html\"> TagResource\n      </a>/<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html\">\n         UntagResource</a>.</p>",
+                "smithy.api#documentation": "<p>Adds an integration between the service and a third-party service, which includes\n         Amazon AppFlow and Amazon Connect.</p>\n         <p>An integration can belong to only one domain.</p>\n         <p>To add or remove tags on an existing Integration, see <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html\"> TagResource\n            </a>/<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html\">\n         UntagResource</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}/integrations",
@@ -7962,7 +7986,7 @@
                 "IsUnstructured": {
                     "target": "com.amazonaws.customerprofiles#optionalBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in Amazon \n         Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.</p>"
+                        "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in\n         Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in\n         flowDefinition.</p>"
                     }
                 }
             },
@@ -8074,7 +8098,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Defines a ProfileObjectType.</p>\n         <p>To add or remove tags on an existing ObjectType, see <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html\">\n         TagResource</a>/<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>",
+                "smithy.api#documentation": "<p>Defines a ProfileObjectType.</p>\n         <p>To add or remove tags on an existing ObjectType, see <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html\">\n            TagResource</a>/<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}/object-types/{ObjectTypeName}",
@@ -8111,7 +8135,7 @@
                 "TemplateId": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the object template. For some attributes in the request, the\n         service will use the default value from the object template when TemplateId is present. If\n         these attributes are present in the request, the service may return a <code>BadRequestException</code>. \n         These attributes include: AllowProfileCreation, SourceLastUpdatedTimestampFormat, \n         Fields, and Keys. For example, if AllowProfileCreation is set to true when TemplateId is set, the service\n         may return a <code>BadRequestException</code>.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the object template. For some attributes in the request, the\n         service will use the default value from the object template when TemplateId is present. If\n         these attributes are present in the request, the service may return a\n            <code>BadRequestException</code>. These attributes include: AllowProfileCreation,\n         SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if AllowProfileCreation is\n         set to true when TemplateId is set, the service may return a\n            <code>BadRequestException</code>.</p>"
                     }
                 },
                 "ExpirationDays": {
@@ -8137,6 +8161,12 @@
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.\n      </p>"
+                    }
+                },
+                "MaxProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of profile object max count assigned to the object type</p>"
                     }
                 },
                 "Fields": {
@@ -8208,6 +8238,18 @@
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up in\n         fields that were parsed using <a href=\"https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html\">SimpleDateFormat</a>. If you have <code>sourceLastUpdatedTimestamp</code> in your\n         field, you must set up <code>sourceLastUpdatedTimestampFormat</code>.</p>"
+                    }
+                },
+                "MaxProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of profile object max count assigned to the object type.</p>"
+                    }
+                },
+                "MaxAvailableProfileObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#minSize0",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of provisioned profile object max count available.</p>"
                     }
                 },
                 "Fields": {
@@ -8303,7 +8345,7 @@
                 "MatchingRules": {
                     "target": "com.amazonaws.customerprofiles#MatchingRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures how the rule-based matching process should match profiles. You can have up to 15 \n         <code>MatchingRule</code> in the <code>MatchingRules</code>.</p>"
+                        "smithy.api#documentation": "<p>Configures how the rule-based matching process should match profiles. You can have up to\n         15 <code>MatchingRule</code> in the <code>MatchingRules</code>.</p>"
                     }
                 },
                 "MaxAllowedRuleLevelForMerging": {
@@ -8347,7 +8389,7 @@
                 "MatchingRules": {
                     "target": "com.amazonaws.customerprofiles#MatchingRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures how the rule-based matching process should match profiles. You can have up to 15 \n         <code>MatchingRule</code> in the <code>MatchingRules</code>.</p>"
+                        "smithy.api#documentation": "<p>Configures how the rule-based matching process should match profiles. You can have up to\n         15 <code>MatchingRule</code> in the <code>MatchingRules</code>.</p>"
                     }
                 },
                 "Status": {
@@ -8862,7 +8904,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for profiles within a specific domain using one or more predefined search keys\n         (e.g., _fullName, _phone, _email, _account, etc.) and/or custom-defined search keys. A search key\n         is a data type pair that consists of a <code>KeyName</code> and <code>Values</code> list.</p>\n         <p>This operation supports searching for profiles with a minimum of 1 key-value(s) pair and up to\n         5 key-value(s) pairs using either <code>AND</code> or <code>OR</code> logic.</p>",
+                "smithy.api#documentation": "<p>Searches for profiles within a specific domain using one or more predefined search keys\n         (e.g., _fullName, _phone, _email, _account, etc.) and/or custom-defined search keys. A\n         search key is a data type pair that consists of a <code>KeyName</code> and\n            <code>Values</code> list.</p>\n         <p>This operation supports searching for profiles with a minimum of 1 key-value(s) pair and\n         up to 5 key-value(s) pairs using either <code>AND</code> or <code>OR</code> logic.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/profiles/search",
@@ -8898,7 +8940,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use\n         to search include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone,\n         _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId,\n         _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId,\n         _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId,\n         _shopifyOrderId.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId,\n         _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId,\n         _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId,\n         _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId,\n         _segmentUserId, _shopifyCustomerId, _shopifyOrderId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8912,13 +8954,13 @@
                 "AdditionalSearchKeys": {
                     "target": "com.amazonaws.customerprofiles#additionalSearchKeysList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>AdditionalSearchKey</code> objects that are each searchable identifiers of a\n         profile. Each <code>AdditionalSearchKey</code> object contains a <code>KeyName</code> and a\n         list of <code>Values</code> associated with that specific key (i.e., a key-value(s) pair).\n         These additional search keys will be used in conjunction with the <code>LogicalOperator</code> and the\n         required <code>KeyName</code> and <code>Values</code> parameters to search for profiles\n         that satisfy the search criteria. </p>"
+                        "smithy.api#documentation": "<p>A list of <code>AdditionalSearchKey</code> objects that are each searchable identifiers\n         of a profile. Each <code>AdditionalSearchKey</code> object contains a <code>KeyName</code>\n         and a list of <code>Values</code> associated with that specific key (i.e., a key-value(s)\n         pair). These additional search keys will be used in conjunction with the\n            <code>LogicalOperator</code> and the required <code>KeyName</code> and\n            <code>Values</code> parameters to search for profiles that satisfy the search criteria.\n      </p>"
                     }
                 },
                 "LogicalOperator": {
                     "target": "com.amazonaws.customerprofiles#logicalOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>Relationship between all specified search keys that will be used to search for\n         profiles. This includes the required <code>KeyName</code> and <code>Values</code> parameters\n         as well as any key-value(s) pairs specified in the <code>AdditionalSearchKeys</code> list.</p>\n         <p>This parameter influences which profiles will be returned in the response in the following manner:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AND</code> - The response only includes profiles that match all of the search keys.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> - The response includes profiles that match at least one of the search keys.</p>\n            </li>\n         </ul>\n         <p>The <code>OR</code> relationship is the default behavior if this parameter is not included in the request.</p>"
+                        "smithy.api#documentation": "<p>Relationship between all specified search keys that will be used to search for profiles.\n         This includes the required <code>KeyName</code> and <code>Values</code> parameters as well\n         as any key-value(s) pairs specified in the <code>AdditionalSearchKeys</code> list.</p>\n         <p>This parameter influences which profiles will be returned in the response in the\n         following manner:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AND</code> - The response only includes profiles that match all of the\n               search keys.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> - The response includes profiles that match at least one of the\n               search keys.</p>\n            </li>\n         </ul>\n         <p>The <code>OR</code> relationship is the default behavior if this parameter is not\n         included in the request.</p>"
                     }
                 }
             },
@@ -9863,7 +9905,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing calculated attribute definition. When updating the Conditions, note that increasing \n         the date range of a calculated attribute will not trigger inclusion of historical data greater than the \n         current date range.</p>",
+                "smithy.api#documentation": "<p>Updates an existing calculated attribute definition. When updating the Conditions, note\n         that increasing the date range of a calculated attribute will not trigger inclusion of\n         historical data greater than the current date range.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
@@ -9905,7 +9947,7 @@
                 "Conditions": {
                     "target": "com.amazonaws.customerprofiles#Conditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>"
                     }
                 }
             },
@@ -9943,7 +9985,7 @@
                 "LastUpdatedAt": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently\n         edited.</p>"
                     }
                 },
                 "Statistic": {
@@ -9955,13 +9997,13 @@
                 "Conditions": {
                     "target": "com.amazonaws.customerprofiles#Conditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>"
                     }
                 },
                 "AttributeDetails": {
                     "target": "com.amazonaws.customerprofiles#AttributeDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mathematical expression and a list of attribute items specified in that expression.</p>"
+                        "smithy.api#documentation": "<p>The mathematical expression and a list of attribute items specified in that\n         expression.</p>"
                     }
                 },
                 "Tags": {
@@ -10187,7 +10229,7 @@
                 "AccountNumber": {
                     "target": "com.amazonaws.customerprofiles#sensitiveString0To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
+                        "smithy.api#documentation": "<p>An account number that you have given to the customer.</p>"
                     }
                 },
                 "PartyType": {
@@ -10624,6 +10666,22 @@
         },
         "com.amazonaws.customerprofiles#message": {
             "type": "string"
+        },
+        "com.amazonaws.customerprofiles#minSize0": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#minSize1": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
         },
         "com.amazonaws.customerprofiles#name": {
             "type": "string",

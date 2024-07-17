@@ -49,6 +49,9 @@ type CreateProjectInput struct {
 	// CUSTOM_LABELS is used as a default.
 	Feature types.CustomizationFeature
 
+	// A set of tags (key-value pairs) that you want to attach to the project.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

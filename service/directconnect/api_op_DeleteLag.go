@@ -60,7 +60,7 @@ type DeleteLagOutput struct {
 	Connections []types.Connection
 
 	// The individual bandwidth of the physical connections bundled by the LAG. The
-	// possible values are 1Gbps and 10Gbps.
+	// possible values are 1Gbps, 10Gbps, 100Gbps, or 400 Gbps..
 	ConnectionsBandwidth *string
 
 	// The LAG MAC Security (MACsec) encryption mode.
@@ -112,8 +112,9 @@ type DeleteLagOutput struct {
 	// for the LAG itself to be operational.
 	MinimumLinks int32
 
-	// The number of physical dedicated connections bundled by the LAG, up to a
-	// maximum of 10.
+	// The number of physical dedicated connections initially provisioned and bundled
+	// by the LAG. You can have a maximum of four connections when the port speed is 1
+	// Gbps or 10 Gbps, or two when the port speed is 100 Gbps or 400 Gbps.
 	NumberOfConnections int32
 
 	// The ID of the Amazon Web Services account that owns the LAG.

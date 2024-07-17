@@ -90,6 +90,23 @@ type AdditionalInferenceSpecificationDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Data sources that are available to your model in addition to the one that you
+// specify for ModelDataSource when you use the CreateModel action.
+type AdditionalModelDataSource struct {
+
+	// A custom name for this AdditionalModelDataSource object.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// Specifies the S3 location of ML model data to deploy.
+	//
+	// This member is required.
+	S3DataSource *S3ModelDataSource
+
+	noSmithyDocumentSerde
+}
+
 // A data source used for training or inference that is in addition to the input
 // dataset or model data.
 type AdditionalS3DataSource struct {
@@ -367,6 +384,19 @@ type AlgorithmValidationSpecification struct {
 	//
 	// This member is required.
 	ValidationRole *string
+
+	noSmithyDocumentSerde
+}
+
+// A collection of settings that configure the Amazon Q experience within the
+// domain.
+type AmazonQSettings struct {
+
+	// The ARN of the Amazon Q profile used within the domain.
+	QProfileArn *string
+
+	// Whether Amazon Q has been enabled within the domain.
+	Status FeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -3134,7 +3164,9 @@ type ClarifyTextConfig struct {
 
 // Defines the configuration for attaching an additional Amazon Elastic Block
 // Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance
-// group.
+// group. To learn more, see [SageMaker HyperPod release notes: June 20, 2024].
+//
+// [SageMaker HyperPod release notes: June 20, 2024]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
 type ClusterEbsVolumeConfig struct {
 
 	// The size in gigabytes (GB) of the additional EBS volume to be attached to the
@@ -3263,11 +3295,13 @@ type ClusterInstanceStatusDetails struct {
 }
 
 // Defines the configuration for attaching additional storage to the instances in
-// the SageMaker HyperPod cluster instance group.
+// the SageMaker HyperPod cluster instance group. To learn more, see [SageMaker HyperPod release notes: June 20, 2024].
 //
 // The following types satisfy this interface:
 //
 //	ClusterInstanceStorageConfigMemberEbsVolumeConfig
+//
+// [SageMaker HyperPod release notes: June 20, 2024]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
 type ClusterInstanceStorageConfig interface {
 	isClusterInstanceStorageConfig()
 }
@@ -3646,6 +3680,10 @@ type ContainerConfig struct {
 
 // Describes the container, as part of model definition.
 type ContainerDefinition struct {
+
+	// Data sources that are available to your model in addition to the one that you
+	// specify for ModelDataSource when you use the CreateModel action.
+	AdditionalModelDataSources []AdditionalModelDataSource
 
 	// This parameter is ignored for models that contain only a PrimaryContainer .
 	//
@@ -4720,6 +4758,10 @@ type DomainDetails struct {
 // specified through the CreateDomain API call.
 type DomainSettings struct {
 
+	// A collection of settings that configure the Amazon Q experience within the
+	// domain. The AuthMode that you use to create the domain must be SSO .
+	AmazonQSettings *AmazonQSettings
+
 	// A collection of settings that configure the domain's Docker interaction.
 	DockerSettings *DockerSettings
 
@@ -4741,6 +4783,10 @@ type DomainSettings struct {
 
 // A collection of Domain configuration settings to update.
 type DomainSettingsForUpdate struct {
+
+	// A collection of settings that configure the Amazon Q experience within the
+	// domain.
+	AmazonQSettings *AmazonQSettings
 
 	// A collection of settings that configure the domain's Docker interaction.
 	DockerSettings *DockerSettings
@@ -10419,6 +10465,20 @@ type ModelClientConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Settings for the model compilation technique that's applied by a model
+// optimization job.
+type ModelCompilationConfig struct {
+
+	// The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to run the
+	// optimization.
+	Image *string
+
+	// Environment variables that override the default ones in the model container.
+	OverrideEnvironment map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the model configuration. Includes the specification name and
 // environment parameters.
 type ModelConfiguration struct {
@@ -11323,6 +11383,20 @@ type ModelQualityJobInput struct {
 
 	// Input object for the endpoint
 	EndpointInput *EndpointInput
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the model quantization technique that's applied by a model
+// optimization job.
+type ModelQuantizationConfig struct {
+
+	// The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to run the
+	// optimization.
+	Image *string
+
+	// Environment variables that override the default ones in the model container.
+	OverrideEnvironment map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -12471,6 +12545,172 @@ type OnlineStoreSecurityConfig struct {
 	//
 	//   - "kms:Decrypt"
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for an optimization technique that you apply with a model optimization
+// job.
+//
+// The following types satisfy this interface:
+//
+//	OptimizationConfigMemberModelCompilationConfig
+//	OptimizationConfigMemberModelQuantizationConfig
+type OptimizationConfig interface {
+	isOptimizationConfig()
+}
+
+// Settings for the model compilation technique that's applied by a model
+// optimization job.
+type OptimizationConfigMemberModelCompilationConfig struct {
+	Value ModelCompilationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizationConfigMemberModelCompilationConfig) isOptimizationConfig() {}
+
+// Settings for the model quantization technique that's applied by a model
+// optimization job.
+type OptimizationConfigMemberModelQuantizationConfig struct {
+	Value ModelQuantizationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizationConfigMemberModelQuantizationConfig) isOptimizationConfig() {}
+
+// The location of the source model to optimize with an optimization job.
+type OptimizationJobModelSource struct {
+
+	// The Amazon S3 location of a source model to optimize with an optimization job.
+	S3 *OptimizationJobModelSourceS3
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 location of a source model to optimize with an optimization job.
+type OptimizationJobModelSourceS3 struct {
+
+	// The access configuration settings for the source ML model for an optimization
+	// job, where you can accept the model end-user license agreement (EULA).
+	ModelAccessConfig *OptimizationModelAccessConfig
+
+	// An Amazon S3 URI that locates a source model to optimize with an optimization
+	// job.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for where to store the optimized model that you create with the
+// optimization job.
+type OptimizationJobOutputConfig struct {
+
+	// The Amazon S3 URI for where to store the optimized model that you create with
+	// an optimization job.
+	//
+	// This member is required.
+	S3OutputLocation *string
+
+	// The Amazon Resource Name (ARN) of a key in Amazon Web Services KMS. SageMaker
+	// uses they key to encrypt the artifacts of the optimized model when SageMaker
+	// uploads the model to Amazon S3.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summarizes an optimization job by providing some of its key properties.
+type OptimizationJobSummary struct {
+
+	// The time when you created the optimization job.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The type of instance that hosts the optimized model that you create with the
+	// optimization job.
+	//
+	// This member is required.
+	DeploymentInstanceType OptimizationJobDeploymentInstanceType
+
+	// The Amazon Resource Name (ARN) of the optimization job.
+	//
+	// This member is required.
+	OptimizationJobArn *string
+
+	// The name that you assigned to the optimization job.
+	//
+	// This member is required.
+	OptimizationJobName *string
+
+	// The current status of the optimization job.
+	//
+	// This member is required.
+	OptimizationJobStatus OptimizationJobStatus
+
+	// The optimization techniques that are applied by the optimization job.
+	//
+	// This member is required.
+	OptimizationTypes []string
+
+	// The time when the optimization job was last updated.
+	LastModifiedTime *time.Time
+
+	// The time when the optimization job finished processing.
+	OptimizationEndTime *time.Time
+
+	// The time when the optimization job started.
+	OptimizationStartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The access configuration settings for the source ML model for an optimization
+// job, where you can accept the model end-user license agreement (EULA).
+type OptimizationModelAccessConfig struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The
+	// AcceptEula value must be explicitly defined as True in order to accept the EULA
+	// that this model requires. You are responsible for reviewing and complying with
+	// any applicable license terms and making sure they are acceptable for your use
+	// case before downloading or using a model.
+	//
+	// This member is required.
+	AcceptEula *bool
+
+	noSmithyDocumentSerde
+}
+
+// Output values produced by an optimization job.
+type OptimizationOutput struct {
+
+	// The image that SageMaker recommends that you use to host the optimized model
+	// that you created with an optimization job.
+	RecommendedInferenceImage *string
+
+	noSmithyDocumentSerde
+}
+
+// A VPC in Amazon VPC that's accessible to an optimized that you create with an
+// optimization job. You can control access to and from your resources by
+// configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+//
+// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+type OptimizationVpcConfig struct {
+
+	// The VPC security group IDs, in the form sg-xxxxxxxx . Specify the security
+	// groups for the VPC that is specified in the Subnets field.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The ID of the subnets in the VPC to which you want to connect your optimized
+	// model.
+	//
+	// This member is required.
+	Subnets []string
 
 	noSmithyDocumentSerde
 }
@@ -16307,10 +16547,8 @@ type Stairs struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a limit to how long a model training job or model compilation job can
-// run. It also specifies how long a managed spot training job has to complete.
-// When the job reaches the time limit, SageMaker ends the training or compilation
-// job. Use this API to cap model training costs.
+// Specifies a limit to how long a job can run. When the job reaches the time
+// limit, SageMaker ends the job. Use this API to cap costs.
 //
 // To stop a training job, SageMaker sends the algorithm the SIGTERM signal, which
 // delays job termination for 120 seconds. Algorithms can use this 120-second
@@ -16382,6 +16620,21 @@ type StudioLifecycleConfigDetails struct {
 
 	// The name of the Amazon SageMaker Studio Lifecycle Configuration.
 	StudioLifecycleConfigName *string
+
+	noSmithyDocumentSerde
+}
+
+// Studio settings. If these settings are applied on a user level, they take
+// priority over the settings applied on a domain level.
+type StudioWebPortalSettings struct {
+
+	// The [Applications supported in Studio] that are hidden from the Studio left navigation pane.
+	//
+	// [Applications supported in Studio]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-apps.html
+	HiddenAppTypes []AppType
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	HiddenMlTools []MlTools
 
 	noSmithyDocumentSerde
 }
@@ -18678,6 +18931,10 @@ type UserSettings struct {
 	// cannot access Studio, even if that is the default experience for the domain.
 	StudioWebPortal StudioWebPortal
 
+	// Studio settings. If these settings are applied on a user level, they take
+	// priority over the settings applied on a domain level.
+	StudioWebPortalSettings *StudioWebPortalSettings
+
 	// The TensorBoard app settings.
 	TensorBoardAppSettings *TensorBoardAppSettings
 
@@ -19016,5 +19273,6 @@ func (*UnknownUnionMember) isCollectionConfig()                    {}
 func (*UnknownUnionMember) isCustomFileSystem()                    {}
 func (*UnknownUnionMember) isCustomFileSystemConfig()              {}
 func (*UnknownUnionMember) isMetricSpecification()                 {}
+func (*UnknownUnionMember) isOptimizationConfig()                  {}
 func (*UnknownUnionMember) isScalingPolicy()                       {}
 func (*UnknownUnionMember) isTrialComponentParameterValue()        {}

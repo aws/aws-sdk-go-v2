@@ -273,7 +273,7 @@ type Certificate struct {
 	noSmithyDocumentSerde
 }
 
-// Returns the details of the DB instance’s server certificate.
+// The details of the DB instance’s server certificate.
 //
 // For more information, see [Using SSL/TLS to encrypt a connection to a DB instance] in the Amazon RDS User Guide and [Using SSL/TLS to encrypt a connection to a DB cluster] in the Amazon
 // Aurora User Guide.
@@ -342,7 +342,7 @@ type ClusterPendingModifiedValues struct {
 	// The number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int32
 
-	// Returns the details of the DB instance’s server certificate.
+	// The details of the DB instance’s server certificate.
 	//
 	// For more information, see [Using SSL/TLS to encrypt a connection to a DB instance] in the Amazon RDS User Guide and [Using SSL/TLS to encrypt a connection to a DB cluster] in the Amazon
 	// Aurora User Guide.
@@ -606,7 +606,7 @@ type DBCluster struct {
 	// [Using Amazon Aurora Serverless v1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
 	Capacity *int32
 
-	// Returns the details of the DB instance’s server certificate.
+	// The details of the DB instance’s server certificate.
 	//
 	// For more information, see [Using SSL/TLS to encrypt a connection to a DB instance] in the Amazon RDS User Guide and [Using SSL/TLS to encrypt a connection to a DB cluster] in the Amazon
 	// Aurora User Guide.
@@ -4386,15 +4386,15 @@ type PerformanceIssueDetails struct {
 //
 //   - The current number CPU cores and threads is set to a non-default value.
 //
-// For more information, see [Configuring the Processor of the DB Instance Class] in the Amazon RDS User Guide.
+// For more information, see [Configuring the processor for a DB instance class in RDS for Oracle] in the Amazon RDS User Guide.
 //
-// [Configuring the Processor of the DB Instance Class]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
+// [Configuring the processor for a DB instance class in RDS for Oracle]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
 type ProcessorFeature struct {
 
 	// The name of the processor feature. Valid names are coreCount and threadsPerCore .
 	Name *string
 
-	// The value of a processor feature name.
+	// The value of a processor feature.
 	Value *string
 
 	noSmithyDocumentSerde

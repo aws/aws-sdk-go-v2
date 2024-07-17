@@ -82,6 +82,23 @@ func (AssociationType) Values() []AssociationType {
 	}
 }
 
+type ContentAssociationType string
+
+// Enum values for ContentAssociationType
+const (
+	ContentAssociationTypeAmazonConnectGuide ContentAssociationType = "AMAZON_CONNECT_GUIDE"
+)
+
+// Values returns all known values for ContentAssociationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentAssociationType) Values() []ContentAssociationType {
+	return []ContentAssociationType{
+		"AMAZON_CONNECT_GUIDE",
+	}
+}
+
 type ContentStatus string
 
 // Enum values for ContentStatus

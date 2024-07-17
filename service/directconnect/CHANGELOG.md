@@ -1,3 +1,15 @@
+# v1.27.2 (2024-07-03)
+
+* **Documentation**: This update includes documentation for support of new native 400 GBps ports for Direct Connect.
+
+# v1.27.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.26.0 (2024-06-19)
 
 * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.

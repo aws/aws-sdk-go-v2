@@ -66,6 +66,7 @@ type GetMultiRegionAccessPointRoutesInput struct {
 }
 
 func (in *GetMultiRegionAccessPointRoutesInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

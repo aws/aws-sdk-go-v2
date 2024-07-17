@@ -203,6 +203,29 @@ func (MetricsLevel) Values() []MetricsLevel {
 	}
 }
 
+type OperationStatus string
+
+// Enum values for OperationStatus
+const (
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusCancelled  OperationStatus = "CANCELLED"
+	OperationStatusSuccessful OperationStatus = "SUCCESSFUL"
+	OperationStatusFailed     OperationStatus = "FAILED"
+)
+
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"IN_PROGRESS",
+		"CANCELLED",
+		"SUCCESSFUL",
+		"FAILED",
+	}
+}
+
 type RecordFormatType string
 
 // Enum values for RecordFormatType
@@ -236,6 +259,7 @@ const (
 	RuntimeEnvironmentFlink115        RuntimeEnvironment = "FLINK-1_15"
 	RuntimeEnvironmentZeppelinFlink30 RuntimeEnvironment = "ZEPPELIN-FLINK-3_0"
 	RuntimeEnvironmentFlink118        RuntimeEnvironment = "FLINK-1_18"
+	RuntimeEnvironmentFlink119        RuntimeEnvironment = "FLINK-1_19"
 )
 
 // Values returns all known values for RuntimeEnvironment. Note that this can be
@@ -254,6 +278,7 @@ func (RuntimeEnvironment) Values() []RuntimeEnvironment {
 		"FLINK-1_15",
 		"ZEPPELIN-FLINK-3_0",
 		"FLINK-1_18",
+		"FLINK-1_19",
 	}
 }
 

@@ -14,9 +14,9 @@ import (
 // This API call activates a control. It starts an asynchronous operation that
 // creates Amazon Web Services resources on the specified organizational unit and
 // the accounts it contains. The resources created will vary according to the
-// control that you specify. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+// control that you specify. For usage examples, see the [Controls Reference Guide].
 //
-// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+// [Controls Reference Guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
 func (c *Client) EnableControl(ctx context.Context, params *EnableControlInput, optFns ...func(*Options)) (*EnableControlOutput, error) {
 	if params == nil {
 		params = &EnableControlInput{}

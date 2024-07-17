@@ -1931,6 +1931,10 @@ type BodySectionConfiguration struct {
 	// The configuration of a page break for a section.
 	PageBreakConfiguration *SectionPageBreakConfiguration
 
+	// Describes the configurations that are required to declare a section as
+	// repeating.
+	RepeatConfiguration *BodySectionRepeatConfiguration
+
 	// The style options of a body section.
 	Style *SectionStyle
 
@@ -1942,6 +1946,87 @@ type BodySectionContent struct {
 
 	// The layout configuration of a body section.
 	Layout *SectionLayoutConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Category dataset column and constraints for the dynamic values
+// used to repeat the contents of a section.
+type BodySectionDynamicCategoryDimensionConfiguration struct {
+
+	// A column of a data set.
+	//
+	// This member is required.
+	Column *ColumnIdentifier
+
+	// Number of values to use from the column for repetition.
+	Limit *int32
+
+	// Sort criteria on the column values that you use for repetition.
+	SortByMetrics []ColumnSort
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Numeric dataset column and constraints for the dynamic values
+// used to repeat the contents of a section.
+type BodySectionDynamicNumericDimensionConfiguration struct {
+
+	// A column of a data set.
+	//
+	// This member is required.
+	Column *ColumnIdentifier
+
+	// Number of values to use from the column for repetition.
+	Limit *int32
+
+	// Sort criteria on the column values that you use for repetition.
+	SortByMetrics []ColumnSort
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configurations that are required to declare a section as
+// repeating.
+type BodySectionRepeatConfiguration struct {
+
+	// List of BodySectionRepeatDimensionConfiguration values that describe the
+	// dataset column and constraints for the column used to repeat the contents of a
+	// section.
+	DimensionConfigurations []BodySectionRepeatDimensionConfiguration
+
+	// List of visuals to exclude from repetition in repeating sections. The visuals
+	// will render identically, and ignore the repeating configurations in all
+	// repeating instances.
+	NonRepeatingVisuals []string
+
+	// Page break configuration to apply for each repeating instance.
+	PageBreakConfiguration *BodySectionRepeatPageBreakConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the dataset column and constraints for the dynamic values used to
+// repeat the contents of a section. The dataset column is either Category or
+// Numeric column configuration
+type BodySectionRepeatDimensionConfiguration struct {
+
+	// Describes the Category dataset column and constraints around the dynamic values
+	// that will be used in repeating the section contents.
+	DynamicCategoryDimensionConfiguration *BodySectionDynamicCategoryDimensionConfiguration
+
+	// Describes the Numeric dataset column and constraints around the dynamic values
+	// used to repeat the contents of a section.
+	DynamicNumericDimensionConfiguration *BodySectionDynamicNumericDimensionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The page break configuration to apply for each repeating instance.
+type BodySectionRepeatPageBreakConfiguration struct {
+
+	// The configuration of a page break after a section.
+	After *SectionAfterPageBreak
 
 	noSmithyDocumentSerde
 }
@@ -2323,6 +2408,28 @@ type CategoryFilterConfiguration struct {
 	// A list of filter configurations. In the Amazon QuickSight console, this filter
 	// type is called a filter list.
 	FilterListConfiguration *FilterListConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A CategoryInnerFilter filters text values for the NestedFilter .
+type CategoryInnerFilter struct {
+
+	// A column of a data set.
+	//
+	// This member is required.
+	Column *ColumnIdentifier
+
+	// The configuration for a CategoryFilter .
+	//
+	// This is a union type structure. For this structure to be valid, only one of the
+	// attributes can be defined.
+	//
+	// This member is required.
+	Configuration *CategoryFilterConfiguration
+
+	// The default configuration for all dependent controls of the filter.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -5899,6 +6006,10 @@ type Filter struct {
 	// [Adding text filters]: https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html
 	CategoryFilter *CategoryFilter
 
+	// A NestedFilter filters data with a subset of data that is defined by the nested
+	// inner filter.
+	NestedFilter *NestedFilter
+
 	// A NumericEqualityFilter filters numeric values that equal or do not equal a
 	// given numeric value.
 	NumericEqualityFilter *NumericEqualityFilter
@@ -7759,6 +7870,15 @@ type Ingestion struct {
 	noSmithyDocumentSerde
 }
 
+// The InnerFilter defines the subset of data to be used with the NestedFilter .
+type InnerFilter struct {
+
+	// A CategoryInnerFilter filters text values for the NestedFilter .
+	CategoryInnerFilter *CategoryInnerFilter
+
+	noSmithyDocumentSerde
+}
+
 // Metadata for a column that is used as the input of a transform operation.
 type InputColumn struct {
 
@@ -9008,6 +9128,35 @@ type NegativeValueConfiguration struct {
 	//
 	// This member is required.
 	DisplayMode NegativeValueDisplayMode
+
+	noSmithyDocumentSerde
+}
+
+// A NestedFilter filters data with a subset of data that is defined by the nested
+// inner filter.
+type NestedFilter struct {
+
+	// The column that the filter is applied to.
+	//
+	// This member is required.
+	Column *ColumnIdentifier
+
+	// An identifier that uniquely identifies a filter within a dashboard, analysis,
+	// or template.
+	//
+	// This member is required.
+	FilterId *string
+
+	// A boolean condition to include or exclude the subset that is defined by the
+	// values of the nested inner filter.
+	//
+	// This member is required.
+	IncludeInnerSet bool
+
+	// The InnerFilter defines the subset of data to be used with the NestedFilter .
+	//
+	// This member is required.
+	InnerFilter *InnerFilter
 
 	noSmithyDocumentSerde
 }

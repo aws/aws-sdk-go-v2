@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies AWS CloudHSM cluster.
+// Modifies CloudHSM cluster.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM cluster
+// in a different Amazon Web Services account.
 func (c *Client) ModifyCluster(ctx context.Context, params *ModifyClusterInput, optFns ...func(*Options)) (*ModifyClusterOutput, error) {
 	if params == nil {
 		params = &ModifyClusterInput{}
@@ -45,7 +48,7 @@ type ModifyClusterInput struct {
 
 type ModifyClusterOutput struct {
 
-	// Contains information about an AWS CloudHSM cluster.
+	// Contains information about an CloudHSM cluster.
 	Cluster *types.Cluster
 
 	// Metadata pertaining to the operation's result.

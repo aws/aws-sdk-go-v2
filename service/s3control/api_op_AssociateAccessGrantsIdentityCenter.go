@@ -65,6 +65,7 @@ type AssociateAccessGrantsIdentityCenterInput struct {
 }
 
 func (in *AssociateAccessGrantsIdentityCenterInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

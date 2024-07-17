@@ -6478,7 +6478,20 @@
                     "outputToken": "position",
                     "items": "items",
                     "pageSize": "limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetDomainNamesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.apigateway#GetDomainNamesRequest": {

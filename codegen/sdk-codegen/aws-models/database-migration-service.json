@@ -473,7 +473,7 @@
                     "sdkId": "Database Migration Service",
                     "arnNamespace": "dms",
                     "cloudFormationName": "DMS",
-                    "cloudTrailEventSource": "databasemigrationservice.amazonaws.com",
+                    "cloudTrailEventSource": "dms.amazonaws.com",
                     "docId": "dms-2016-01-01",
                     "endpointPrefix": "dms"
                 },
@@ -6044,6 +6044,19 @@
                     "outputToken": "Marker",
                     "pageSize": "MaxRecords"
                 },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeEndpointsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "EndpointDeleted": {
                         "documentation": "Wait until testing endpoint is deleted.",

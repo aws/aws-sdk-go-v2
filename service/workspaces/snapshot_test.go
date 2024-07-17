@@ -254,6 +254,18 @@ func TestCheckSnapshot_CreateWorkspaces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateWorkspacesPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAccountLinkInvitation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAccountLinkInvitation(context.Background(), nil, func(o *Options) {
@@ -626,6 +638,30 @@ func TestCheckSnapshot_DescribeWorkspaceSnapshots(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeWorkspacesPools(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeWorkspacesPools(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeWorkspacesPools")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeWorkspacesPoolSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeWorkspacesPoolSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeWorkspacesPoolSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateConnectionAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateConnectionAlias(context.Background(), nil, func(o *Options) {
@@ -794,6 +830,18 @@ func TestCheckSnapshot_ModifySelfservicePermissions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyStreamingProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyStreamingProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyStreamingProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyWorkspaceAccessProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyWorkspaceAccessProperties(context.Background(), nil, func(o *Options) {
@@ -926,6 +974,18 @@ func TestCheckSnapshot_StartWorkspaces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartWorkspacesPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopWorkspaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopWorkspaces(context.Background(), nil, func(o *Options) {
@@ -938,11 +998,47 @@ func TestCheckSnapshot_StopWorkspaces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopWorkspacesPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TerminateWorkspaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TerminateWorkspaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TerminateWorkspaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TerminateWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TerminateWorkspacesPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TerminateWorkspacesPoolSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateWorkspacesPoolSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TerminateWorkspacesPoolSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1003,6 +1099,18 @@ func TestCheckSnapshot_UpdateWorkspaceImagePermission(t *testing.T) {
 	_, err := svc.UpdateWorkspaceImagePermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateWorkspaceImagePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateWorkspacesPool")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1194,6 +1302,18 @@ func TestUpdateSnapshot_CreateWorkspaces(t *testing.T) {
 	_, err := svc.CreateWorkspaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateWorkspaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateWorkspacesPool")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1573,6 +1693,30 @@ func TestUpdateSnapshot_DescribeWorkspaceSnapshots(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeWorkspacesPools(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeWorkspacesPools(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeWorkspacesPools")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeWorkspacesPoolSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeWorkspacesPoolSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeWorkspacesPoolSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateConnectionAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateConnectionAlias(context.Background(), nil, func(o *Options) {
@@ -1741,6 +1885,18 @@ func TestUpdateSnapshot_ModifySelfservicePermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyStreamingProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyStreamingProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyStreamingProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyWorkspaceAccessProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyWorkspaceAccessProperties(context.Background(), nil, func(o *Options) {
@@ -1873,6 +2029,18 @@ func TestUpdateSnapshot_StartWorkspaces(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartWorkspacesPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopWorkspaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopWorkspaces(context.Background(), nil, func(o *Options) {
@@ -1885,11 +2053,47 @@ func TestUpdateSnapshot_StopWorkspaces(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StopWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopWorkspacesPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TerminateWorkspaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TerminateWorkspaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TerminateWorkspaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TerminateWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TerminateWorkspacesPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TerminateWorkspacesPoolSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateWorkspacesPoolSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TerminateWorkspacesPoolSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1950,6 +2154,18 @@ func TestUpdateSnapshot_UpdateWorkspaceImagePermission(t *testing.T) {
 	_, err := svc.UpdateWorkspaceImagePermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateWorkspaceImagePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateWorkspacesPool(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateWorkspacesPool(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateWorkspacesPool")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

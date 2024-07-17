@@ -29,6 +29,10 @@ func (c *Client) GetDatabases(ctx context.Context, params *GetDatabasesInput, op
 
 type GetDatabasesInput struct {
 
+	// Specifies the database fields returned by the GetDatabases call. This parameter
+	// doesn’t accept an empty list. The request must include the NAME .
+	AttributesToGet []types.DatabaseAttributes
+
 	// The ID of the Data Catalog from which to retrieve Databases . If none is
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string

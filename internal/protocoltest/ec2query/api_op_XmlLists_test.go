@@ -95,7 +95,7 @@ func TestClient_XmlLists_awsEc2queryDeserialize(t *testing.T) {
 			            <other>4</other>
 			        </item>
 			    </myStructureList>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlListsResponse>
 			`),
 			ExpectResult: &XmlListsOutput{

@@ -2898,6 +2898,42 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDeviceCreationTagsMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DeviceCreationTagValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDeviceList(v *[]types.DeviceSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3216,6 +3252,11 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 					return fmt.Errorf("expected DesktopType to be of type string, got %T instead", value)
 				}
 				sv.DesktopType = types.DesktopType(jtv)
+			}
+
+		case "deviceCreationTags":
+			if err := awsRestjson1_deserializeDocumentDeviceCreationTagsMap(&sv.DeviceCreationTags, value); err != nil {
+				return err
 			}
 
 		case "id":

@@ -44,6 +44,10 @@ type StartApplicationInput struct {
 }
 
 type StartApplicationOutput struct {
+
+	// Operation ID for tracking StartApplication request
+	OperationId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -1,3 +1,15 @@
+# v1.28.2 (2024-07-05)
+
+* **Documentation**: Documentation updates, including fixes for xml formatting, broken links, and ListCertificates description.
+
+# v1.28.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.27.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

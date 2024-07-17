@@ -4283,6 +4283,11 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v *types.U
 		ok.String(*v.FsxAdminPassword)
 	}
 
+	if v.HAPairs != nil {
+		ok := object.Key("HAPairs")
+		ok.Integer(*v.HAPairs)
+	}
+
 	if v.RemoveRouteTableIds != nil {
 		ok := object.Key("RemoveRouteTableIds")
 		if err := awsAwsjson11_serializeDocumentRouteTableIds(v.RemoveRouteTableIds, ok); err != nil {

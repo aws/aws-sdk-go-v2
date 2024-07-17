@@ -4762,21 +4762,21 @@
                 "smithy.api#documentation": "<p>Creates a copy of an entire cluster or replication group at a specific moment in\n            time.</p>\n         <note>\n            <p>This operation is valid for Redis only.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
-                        "title": "CreateSnapshot - NonClustered Redis, no read-replicas",
-                        "documentation": "Creates a snapshot of a non-clustered Redis cluster that has only one node.",
+                        "title": "CreateSnapshot - NonClustered Redis, 2 read-replicas",
+                        "documentation": "Creates a snapshot of a non-clustered Redis cluster that has only three nodes, primary and two read-replicas. CacheClusterId must be a specific node in the cluster.",
                         "input": {
-                            "CacheClusterId": "onenoderedis",
-                            "SnapshotName": "snapshot-1"
+                            "CacheClusterId": "threenoderedis-001",
+                            "SnapshotName": "snapshot-2"
                         },
                         "output": {
                             "Snapshot": {
                                 "Engine": "redis",
                                 "CacheParameterGroupName": "default.redis3.2",
                                 "VpcId": "vpc-73c3cd17",
-                                "CacheClusterId": "onenoderedis",
+                                "CacheClusterId": "threenoderedis-001",
                                 "SnapshotRetentionLimit": 1,
                                 "NumCacheNodes": 1,
-                                "SnapshotName": "snapshot-1",
+                                "SnapshotName": "snapshot-2",
                                 "CacheClusterCreateTime": "2017-02-03T15:43:36.278Z",
                                 "AutoMinorVersionUpgrade": true,
                                 "PreferredAvailabilityZone": "us-west-2c",
@@ -4799,21 +4799,21 @@
                         }
                     },
                     {
-                        "title": "CreateSnapshot - NonClustered Redis, 2 read-replicas",
-                        "documentation": "Creates a snapshot of a non-clustered Redis cluster that has only three nodes, primary and two read-replicas. CacheClusterId must be a specific node in the cluster.",
+                        "title": "CreateSnapshot - NonClustered Redis, no read-replicas",
+                        "documentation": "Creates a snapshot of a non-clustered Redis cluster that has only one node.",
                         "input": {
-                            "CacheClusterId": "threenoderedis-001",
-                            "SnapshotName": "snapshot-2"
+                            "CacheClusterId": "onenoderedis",
+                            "SnapshotName": "snapshot-1"
                         },
                         "output": {
                             "Snapshot": {
                                 "Engine": "redis",
                                 "CacheParameterGroupName": "default.redis3.2",
                                 "VpcId": "vpc-73c3cd17",
-                                "CacheClusterId": "threenoderedis-001",
+                                "CacheClusterId": "onenoderedis",
                                 "SnapshotRetentionLimit": 1,
                                 "NumCacheNodes": 1,
-                                "SnapshotName": "snapshot-2",
+                                "SnapshotName": "snapshot-1",
                                 "CacheClusterCreateTime": "2017-02-03T15:43:36.278Z",
                                 "AutoMinorVersionUpgrade": true,
                                 "PreferredAvailabilityZone": "us-west-2c",
@@ -6141,42 +6141,6 @@
                 "smithy.api#examples": [
                     {
                         "title": "DescribeCacheClusters",
-                        "documentation": "Lists the details for up to 50 cache clusters.",
-                        "input": {
-                            "CacheClusterId": "my-mem-cluster"
-                        },
-                        "output": {
-                            "CacheClusters": [
-                                {
-                                    "Engine": "memcached",
-                                    "CacheParameterGroup": {
-                                        "CacheNodeIdsToReboot": [],
-                                        "CacheParameterGroupName": "default.memcached1.4",
-                                        "ParameterApplyStatus": "in-sync"
-                                    },
-                                    "CacheClusterId": "my-mem-cluster",
-                                    "PreferredAvailabilityZone": "Multiple",
-                                    "ConfigurationEndpoint": {
-                                        "Port": 11211,
-                                        "Address": "my-mem-cluster.abcdef.cfg.use1.cache.amazonaws.com"
-                                    },
-                                    "CacheSecurityGroups": [],
-                                    "CacheClusterCreateTime": "2016-12-21T21:59:43.794Z",
-                                    "AutoMinorVersionUpgrade": true,
-                                    "CacheClusterStatus": "available",
-                                    "NumCacheNodes": 2,
-                                    "ClientDownloadLandingPage": "https://console.aws.amazon.com/elasticache/home#client-download:",
-                                    "CacheSubnetGroupName": "default",
-                                    "EngineVersion": "1.4.24",
-                                    "PendingModifiedValues": {},
-                                    "PreferredMaintenanceWindow": "wed:06:00-wed:07:00",
-                                    "CacheNodeType": "cache.t2.medium"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "title": "DescribeCacheClusters",
                         "documentation": "Lists the details for the cache cluster my-mem-cluster.",
                         "input": {
                             "CacheClusterId": "my-mem-cluster",
@@ -6220,6 +6184,42 @@
                                     "ConfigurationEndpoint": {
                                         "Port": 11211,
                                         "Address": "my-mem-cluster.ameaqx.cfg.use1.cache.amazonaws.com"
+                                    },
+                                    "CacheSecurityGroups": [],
+                                    "CacheClusterCreateTime": "2016-12-21T21:59:43.794Z",
+                                    "AutoMinorVersionUpgrade": true,
+                                    "CacheClusterStatus": "available",
+                                    "NumCacheNodes": 2,
+                                    "ClientDownloadLandingPage": "https://console.aws.amazon.com/elasticache/home#client-download:",
+                                    "CacheSubnetGroupName": "default",
+                                    "EngineVersion": "1.4.24",
+                                    "PendingModifiedValues": {},
+                                    "PreferredMaintenanceWindow": "wed:06:00-wed:07:00",
+                                    "CacheNodeType": "cache.t2.medium"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "DescribeCacheClusters",
+                        "documentation": "Lists the details for up to 50 cache clusters.",
+                        "input": {
+                            "CacheClusterId": "my-mem-cluster"
+                        },
+                        "output": {
+                            "CacheClusters": [
+                                {
+                                    "Engine": "memcached",
+                                    "CacheParameterGroup": {
+                                        "CacheNodeIdsToReboot": [],
+                                        "CacheParameterGroupName": "default.memcached1.4",
+                                        "ParameterApplyStatus": "in-sync"
+                                    },
+                                    "CacheClusterId": "my-mem-cluster",
+                                    "PreferredAvailabilityZone": "Multiple",
+                                    "ConfigurationEndpoint": {
+                                        "Port": 11211,
+                                        "Address": "my-mem-cluster.abcdef.cfg.use1.cache.amazonaws.com"
                                     },
                                     "CacheSecurityGroups": [],
                                     "CacheClusterCreateTime": "2016-12-21T21:59:43.794Z",
@@ -8143,7 +8143,20 @@
                     "outputToken": "Marker",
                     "items": "Events",
                     "pageSize": "MaxRecords"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeEventsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticache#DescribeEventsMessage": {
@@ -8571,6 +8584,21 @@
                 "smithy.api#examples": [
                     {
                         "title": "DescribeReseredCacheNodeOfferings",
+                        "documentation": "Lists available reserved cache node offerings for cache.r3.large nodes with a 3 year commitment.",
+                        "input": {
+                            "ReservedCacheNodesOfferingId": "",
+                            "CacheNodeType": "cache.r3.large",
+                            "Duration": "3",
+                            "OfferingType": "Light Utilization",
+                            "MaxRecords": 25
+                        },
+                        "output": {
+                            "Marker": "",
+                            "ReservedCacheNodesOfferings": []
+                        }
+                    },
+                    {
+                        "title": "DescribeReseredCacheNodeOfferings",
                         "documentation": "Lists available reserved cache node offerings.",
                         "input": {
                             "MaxRecords": 20
@@ -8834,21 +8862,6 @@
                                     "CacheNodeType": "cache.t1.micro"
                                 }
                             ]
-                        }
-                    },
-                    {
-                        "title": "DescribeReseredCacheNodeOfferings",
-                        "documentation": "Lists available reserved cache node offerings for cache.r3.large nodes with a 3 year commitment.",
-                        "input": {
-                            "ReservedCacheNodesOfferingId": "",
-                            "CacheNodeType": "cache.r3.large",
-                            "Duration": "3",
-                            "OfferingType": "Light Utilization",
-                            "MaxRecords": 25
-                        },
-                        "output": {
-                            "Marker": "",
-                            "ReservedCacheNodesOfferings": []
                         }
                     },
                     {
@@ -10856,6 +10869,16 @@
                         "title": "ListAllowedNodeTypeModifications",
                         "documentation": "Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to.",
                         "input": {
+                            "CacheClusterId": "mycluster"
+                        },
+                        "output": {
+                            "ScaleUpModifications": []
+                        }
+                    },
+                    {
+                        "title": "ListAllowedNodeTypeModifications",
+                        "documentation": "Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to.",
+                        "input": {
                             "ReplicationGroupId": "myreplgroup"
                         },
                         "output": {
@@ -10869,16 +10892,6 @@
                                 "cache.r3.8xlarge",
                                 "cache.r3.xlarge"
                             ]
-                        }
-                    },
-                    {
-                        "title": "ListAllowedNodeTypeModifications",
-                        "documentation": "Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to.",
-                        "input": {
-                            "CacheClusterId": "mycluster"
-                        },
-                        "output": {
-                            "ScaleUpModifications": []
                         }
                     }
                 ]

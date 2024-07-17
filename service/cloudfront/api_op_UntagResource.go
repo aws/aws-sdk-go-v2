@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove tags from a CloudFront resource.
+// Remove tags from a CloudFront resource. For more information, see [Tagging a distribution] in the
+// Amazon CloudFront Developer Guide.
+//
+// [Tagging a distribution]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

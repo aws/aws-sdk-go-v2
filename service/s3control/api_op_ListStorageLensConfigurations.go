@@ -56,6 +56,7 @@ type ListStorageLensConfigurationsInput struct {
 }
 
 func (in *ListStorageLensConfigurationsInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

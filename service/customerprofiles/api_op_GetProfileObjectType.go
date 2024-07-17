@@ -81,6 +81,12 @@ type GetProfileObjectTypeOutput struct {
 	// The timestamp of when the domain was most recently edited.
 	LastUpdatedAt *time.Time
 
+	// The amount of provisioned profile object max count available.
+	MaxAvailableProfileObjectCount *int32
+
+	// The amount of profile object max count assigned to the object type.
+	MaxProfileObjectCount *int32
+
 	// The format of your sourceLastUpdatedTimestamp that was previously set up.
 	SourceLastUpdatedTimestampFormat *string
 

@@ -356,8 +356,7 @@ type AttributeFilter struct {
 	ContainsAll *DocumentAttribute
 
 	// Returns true when a document contains any of the specified document attributes
-	// or metadata fields. Supported for the following [document attribute value types]: dateValue , longValue ,
-	// stringListValue and stringValue .
+	// or metadata fields. Supported for the following [document attribute value types]: stringListValue .
 	//
 	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	ContainsAny *DocumentAttribute
@@ -1738,6 +1737,22 @@ type OAuth2ClientCredentialConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information about chat response personalization. For more
+// information, see [Personalizing chat responses].
+//
+// [Personalizing chat responses]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+type PersonalizationConfiguration struct {
+
+	// An option to allow Amazon Q Business to customize chat responses using user
+	// specific metadata—specifically, location and job information—in your IAM
+	// Identity Center instance.
+	//
+	// This member is required.
+	PersonalizationControlMode PersonalizationControlMode
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Amazon Q Business plugin and its configuration.
 type Plugin struct {
 
@@ -1885,6 +1900,18 @@ type PrincipalUser struct {
 
 	// The type of group.
 	MembershipType MembershipType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information about Amazon Q Apps. (preview feature)
+type QAppsConfiguration struct {
+
+	// Status information about whether end users can create and use Amazon Q Apps in
+	// the web experience.
+	//
+	// This member is required.
+	QAppsControlMode QAppsControlMode
 
 	noSmithyDocumentSerde
 }

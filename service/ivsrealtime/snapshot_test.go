@@ -122,6 +122,18 @@ func TestCheckSnapshot_DeleteEncoderConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeletePublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePublicKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteStage(context.Background(), nil, func(o *Options) {
@@ -194,6 +206,18 @@ func TestCheckSnapshot_GetParticipant(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPublicKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStage(context.Background(), nil, func(o *Options) {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_GetStorageConfiguration(t *testing.T) {
 	_, err := svc.GetStorageConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetStorageConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ImportPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ImportPublicKey")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -271,6 +307,18 @@ func TestCheckSnapshot_ListParticipants(t *testing.T) {
 	_, err := svc.ListParticipants(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListParticipants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPublicKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPublicKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPublicKeys")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -445,6 +493,18 @@ func TestUpdateSnapshot_DeleteEncoderConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeletePublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePublicKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteStage(context.Background(), nil, func(o *Options) {
@@ -517,6 +577,18 @@ func TestUpdateSnapshot_GetParticipant(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPublicKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStage(context.Background(), nil, func(o *Options) {
@@ -546,6 +618,18 @@ func TestUpdateSnapshot_GetStorageConfiguration(t *testing.T) {
 	_, err := svc.GetStorageConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetStorageConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ImportPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ImportPublicKey")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -594,6 +678,18 @@ func TestUpdateSnapshot_ListParticipants(t *testing.T) {
 	_, err := svc.ListParticipants(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListParticipants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPublicKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPublicKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPublicKeys")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_ContentTypeParameters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ContentTypeParameters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ContentTypeParameters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DatetimeOffsets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DatetimeOffsets(context.Background(), nil, func(o *Options) {
@@ -253,6 +265,18 @@ func TestCheckSnapshot_SparseNullsOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_ContentTypeParameters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ContentTypeParameters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ContentTypeParameters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DatetimeOffsets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DatetimeOffsets(context.Background(), nil, func(o *Options) {

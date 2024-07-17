@@ -76,6 +76,7 @@ type TagResourceInput struct {
 }
 
 func (in *TagResourceInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

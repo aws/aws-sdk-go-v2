@@ -1,3 +1,19 @@
+# v1.30.2 (2024-07-03)
+
+* **Documentation**: Doc only update for Application Auto Scaling that fixes resource name.
+
+# v1.30.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.30.0 (2024-06-27)
+
+* **Feature**: Amazon WorkSpaces customers can now use Application Auto Scaling to automatically scale the number of virtual desktops in a WorkSpaces pool.
+
+# v1.29.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.28.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

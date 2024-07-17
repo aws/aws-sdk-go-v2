@@ -32,7 +32,7 @@ func TestClient_XmlEmptyBlobs_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlEmptyBlobsResponse xmlns="https://example.com/">
 			    <data></data>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlEmptyBlobsResponse>
 			`),
 			ExpectResult: &XmlEmptyBlobsOutput{
@@ -48,7 +48,7 @@ func TestClient_XmlEmptyBlobs_awsEc2queryDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<XmlEmptyBlobsResponse xmlns="https://example.com/">
 			    <data/>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</XmlEmptyBlobsResponse>
 			`),
 			ExpectResult: &XmlEmptyBlobsOutput{

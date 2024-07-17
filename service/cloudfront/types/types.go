@@ -172,8 +172,8 @@ type AllowedMethods struct {
 // Developer Guide.
 //
 // If you don't want to specify any cache behaviors, include only an empty
-// CacheBehaviors element. For more information, see [CacheBehaviors]. Don't include an empty
-// CacheBehavior element because this is invalid.
+// CacheBehaviors element. Don't specify an empty individual CacheBehavior
+// element, because this is invalid. For more information, see [CacheBehaviors].
 //
 // To delete all cache behaviors in an existing distribution, update the
 // distribution configuration and include only an empty CacheBehaviors element.
@@ -461,7 +461,9 @@ type CacheBehaviors struct {
 type CachedMethods struct {
 
 	// A complex type that contains the HTTP methods that you want CloudFront to cache
-	// responses to.
+	// responses to. Valid values for CachedMethods include GET , HEAD , and OPTIONS ,
+	// depending on which caching option you choose. For more information, see the
+	// preceding section.
 	//
 	// This member is required.
 	Items []Method

@@ -44,6 +44,7 @@ type GetResourcePolicyInput struct {
 }
 
 func (in *GetResourcePolicyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.ResourceARN = in.ResourceARN
 	p.OperationType = ptr.String("control")
 }

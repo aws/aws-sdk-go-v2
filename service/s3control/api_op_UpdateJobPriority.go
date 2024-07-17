@@ -72,6 +72,7 @@ type UpdateJobPriorityInput struct {
 }
 
 func (in *UpdateJobPriorityInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

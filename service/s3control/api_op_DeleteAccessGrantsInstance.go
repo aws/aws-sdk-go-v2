@@ -55,6 +55,7 @@ type DeleteAccessGrantsInstanceInput struct {
 }
 
 func (in *DeleteAccessGrantsInstanceInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

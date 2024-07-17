@@ -60,7 +60,7 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 type AcceptDirectConnectGatewayAssociationProposalOutput struct {
 
 	// Information about an association between a Direct Connect gateway and a virtual
-	// private gateway or transit gateway.
+	// gateway or transit gateway.
 	DirectConnectGatewayAssociation *types.DirectConnectGatewayAssociation
 
 	// Metadata pertaining to the operation's result.

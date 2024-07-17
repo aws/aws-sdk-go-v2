@@ -50,6 +50,26 @@ func (m *validateOpCreateAssistant) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContentAssociation struct {
+}
+
+func (*validateOpCreateContentAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContentAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContentAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContentAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateContent struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpDeleteAssistant) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteContentAssociation struct {
+}
+
+func (*validateOpDeleteContentAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContentAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContentAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContentAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteContent struct {
 }
 
@@ -285,6 +325,26 @@ func (m *validateOpGetAssistant) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAssistantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContentAssociation struct {
+}
+
+func (*validateOpGetContentAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContentAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContentAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContentAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -445,6 +505,26 @@ func (m *validateOpListAssistantAssociations) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssistantAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContentAssociations struct {
+}
+
+func (*validateOpListContentAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContentAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContentAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContentAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -838,6 +918,10 @@ func addOpCreateAssistantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAssistant{}, middleware.After)
 }
 
+func addOpCreateContentAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContentAssociation{}, middleware.After)
+}
+
 func addOpCreateContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateContent{}, middleware.After)
 }
@@ -862,6 +946,10 @@ func addOpDeleteAssistantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAssistant{}, middleware.After)
 }
 
+func addOpDeleteContentAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContentAssociation{}, middleware.After)
+}
+
 func addOpDeleteContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContent{}, middleware.After)
 }
@@ -884,6 +972,10 @@ func addOpGetAssistantAssociationValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetAssistantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAssistant{}, middleware.After)
+}
+
+func addOpGetContentAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContentAssociation{}, middleware.After)
 }
 
 func addOpGetContentValidationMiddleware(stack *middleware.Stack) error {
@@ -916,6 +1008,10 @@ func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAssistantAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssistantAssociations{}, middleware.After)
+}
+
+func addOpListContentAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContentAssociations{}, middleware.After)
 }
 
 func addOpListContentsValidationMiddleware(stack *middleware.Stack) error {
@@ -1450,6 +1546,30 @@ func validateOpCreateAssistantInput(v *CreateAssistantInput) error {
 	}
 }
 
+func validateOpCreateContentAssociationInput(v *CreateContentAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContentAssociationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.ContentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentId"))
+	}
+	if len(v.AssociationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationType"))
+	}
+	if v.Association == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Association"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateContentInput(v *CreateContentInput) error {
 	if v == nil {
 		return nil
@@ -1571,6 +1691,27 @@ func validateOpDeleteAssistantInput(v *DeleteAssistantInput) error {
 	}
 }
 
+func validateOpDeleteContentAssociationInput(v *DeleteContentAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContentAssociationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.ContentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentId"))
+	}
+	if v.ContentAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteContentInput(v *DeleteContentInput) error {
 	if v == nil {
 		return nil
@@ -1665,6 +1806,27 @@ func validateOpGetAssistantInput(v *GetAssistantInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAssistantInput"}
 	if v.AssistantId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContentAssociationInput(v *GetContentAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContentAssociationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.ContentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentId"))
+	}
+	if v.ContentAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentAssociationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1803,6 +1965,24 @@ func validateOpListAssistantAssociationsInput(v *ListAssistantAssociationsInput)
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssistantAssociationsInput"}
 	if v.AssistantId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContentAssociationsInput(v *ListContentAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContentAssociationsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.ContentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

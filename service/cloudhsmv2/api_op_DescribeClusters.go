@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about AWS CloudHSM clusters.
+// Gets information about CloudHSM clusters.
 //
 // This is a paginated operation, which means that each response might contain
 // only a subset of all the clusters. When the response contains only a subset of
@@ -19,6 +19,9 @@ import (
 // DescribeClusters request to get more clusters. When you receive a response with
 // no NextToken (or an empty or null value), that means there are no more clusters
 // to get.
+//
+// Cross-account use: No. You cannot perform this operation on CloudHSM clusters
+// in a different Amazon Web Services account.
 func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersInput, optFns ...func(*Options)) (*DescribeClustersOutput, error) {
 	if params == nil {
 		params = &DescribeClustersInput{}

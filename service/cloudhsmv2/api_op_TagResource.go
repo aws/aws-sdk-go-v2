@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
+// Adds or overwrites one or more tags for the specified CloudHSM cluster.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM
+// resource in a different Amazon Web Services account.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

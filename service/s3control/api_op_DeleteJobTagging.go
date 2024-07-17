@@ -64,6 +64,7 @@ type DeleteJobTaggingInput struct {
 }
 
 func (in *DeleteJobTaggingInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

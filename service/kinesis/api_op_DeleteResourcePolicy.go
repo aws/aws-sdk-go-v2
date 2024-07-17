@@ -44,6 +44,7 @@ type DeleteResourcePolicyInput struct {
 }
 
 func (in *DeleteResourcePolicyInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.ResourceARN = in.ResourceARN
 	p.OperationType = ptr.String("control")
 }

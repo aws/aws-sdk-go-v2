@@ -587,9 +587,6 @@ func validateOpCreateBrokerInput(v *CreateBrokerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBrokerInput"}
-	if v.AutoMinorVersionUpgrade == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoMinorVersionUpgrade"))
-	}
 	if v.BrokerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerName"))
 	}
@@ -608,9 +605,6 @@ func validateOpCreateBrokerInput(v *CreateBrokerInput) error {
 	}
 	if len(v.EngineType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineType"))
-	}
-	if v.EngineVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
 	}
 	if v.HostInstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HostInstanceType"))
@@ -649,9 +643,6 @@ func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationInput"}
 	if len(v.EngineType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineType"))
-	}
-	if v.EngineVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))

@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new hardware security module (HSM) in the specified AWS CloudHSM
-// cluster.
+// Creates a new hardware security module (HSM) in the specified CloudHSM cluster.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM cluster
+// in a different Amazon Web Service account.
 func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns ...func(*Options)) (*CreateHsmOutput, error) {
 	if params == nil {
 		params = &CreateHsmInput{}

@@ -1,3 +1,13 @@
+# v1.28.0 (2024-06-28)
+
+* **Feature**: Support for Flink 1.19 in Managed Service for Apache Flink
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+* **Feature**: This release adds support for new ListApplicationOperations and DescribeApplicationOperation APIs. It adds a new configuration to enable system rollbacks, adds field ApplicationVersionCreateTimestamp for clarity and improves support for pagination for APIs.
+
 # v1.26.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

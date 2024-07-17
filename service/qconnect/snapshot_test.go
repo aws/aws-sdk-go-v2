@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateContent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateContentAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContentAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContentAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,18 @@ func TestCheckSnapshot_DeleteContent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteContentAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContentAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContentAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteImportJob(context.Background(), nil, func(o *Options) {
@@ -235,6 +259,18 @@ func TestCheckSnapshot_GetContent(t *testing.T) {
 	_, err := svc.GetContent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetContentAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContentAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetContentAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -331,6 +367,18 @@ func TestCheckSnapshot_ListAssistants(t *testing.T) {
 	_, err := svc.ListAssistants(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssistants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContentAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContentAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContentAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,6 +661,18 @@ func TestUpdateSnapshot_CreateContent(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateContentAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContentAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContentAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
@@ -685,6 +745,18 @@ func TestUpdateSnapshot_DeleteContent(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteContentAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContentAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContentAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteImportJob(context.Background(), nil, func(o *Options) {
@@ -750,6 +822,18 @@ func TestUpdateSnapshot_GetContent(t *testing.T) {
 	_, err := svc.GetContent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetContentAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContentAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetContentAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -846,6 +930,18 @@ func TestUpdateSnapshot_ListAssistants(t *testing.T) {
 	_, err := svc.ListAssistants(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssistants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContentAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContentAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContentAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

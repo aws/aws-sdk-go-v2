@@ -668,6 +668,7 @@ type OnDemandProvisioningAllocationStrategy string
 // Enum values for OnDemandProvisioningAllocationStrategy
 const (
 	OnDemandProvisioningAllocationStrategyLowestPrice OnDemandProvisioningAllocationStrategy = "lowest-price"
+	OnDemandProvisioningAllocationStrategyPrioritized OnDemandProvisioningAllocationStrategy = "prioritized"
 )
 
 // Values returns all known values for OnDemandProvisioningAllocationStrategy.
@@ -678,6 +679,7 @@ const (
 func (OnDemandProvisioningAllocationStrategy) Values() []OnDemandProvisioningAllocationStrategy {
 	return []OnDemandProvisioningAllocationStrategy{
 		"lowest-price",
+		"prioritized",
 	}
 }
 
@@ -782,10 +784,11 @@ type SpotProvisioningAllocationStrategy string
 
 // Enum values for SpotProvisioningAllocationStrategy
 const (
-	SpotProvisioningAllocationStrategyCapacityOptimized      SpotProvisioningAllocationStrategy = "capacity-optimized"
-	SpotProvisioningAllocationStrategyPriceCapacityOptimized SpotProvisioningAllocationStrategy = "price-capacity-optimized"
-	SpotProvisioningAllocationStrategyLowestPrice            SpotProvisioningAllocationStrategy = "lowest-price"
-	SpotProvisioningAllocationStrategyDiversified            SpotProvisioningAllocationStrategy = "diversified"
+	SpotProvisioningAllocationStrategyCapacityOptimized            SpotProvisioningAllocationStrategy = "capacity-optimized"
+	SpotProvisioningAllocationStrategyPriceCapacityOptimized       SpotProvisioningAllocationStrategy = "price-capacity-optimized"
+	SpotProvisioningAllocationStrategyLowestPrice                  SpotProvisioningAllocationStrategy = "lowest-price"
+	SpotProvisioningAllocationStrategyDiversified                  SpotProvisioningAllocationStrategy = "diversified"
+	SpotProvisioningAllocationStrategyCapacityOptimizedPrioritized SpotProvisioningAllocationStrategy = "capacity-optimized-prioritized"
 )
 
 // Values returns all known values for SpotProvisioningAllocationStrategy. Note
@@ -799,6 +802,7 @@ func (SpotProvisioningAllocationStrategy) Values() []SpotProvisioningAllocationS
 		"price-capacity-optimized",
 		"lowest-price",
 		"diversified",
+		"capacity-optimized-prioritized",
 	}
 }
 

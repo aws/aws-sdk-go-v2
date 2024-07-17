@@ -12,10 +12,10 @@ import (
 
 // Returns all the tags on the specified Application Auto Scaling scalable target.
 //
-// For general information about tags, including the format and syntax, see [Tagging Amazon Web Services resources] in
+// For general information about tags, including the format and syntax, see [Tagging your Amazon Web Services resources] in
 // the Amazon Web Services General Reference.
 //
-// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+// [Tagging your Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

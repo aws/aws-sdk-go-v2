@@ -970,6 +970,26 @@ func (m *validateOpCreateNotebookInstanceLifecycleConfig) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateOptimizationJob struct {
+}
+
+func (*validateOpCreateOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateOptimizationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePipeline struct {
 }
 
@@ -2085,6 +2105,26 @@ func (m *validateOpDeleteNotebookInstanceLifecycleConfig) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNotebookInstanceLifecycleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteOptimizationJob struct {
+}
+
+func (*validateOpDeleteOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOptimizationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3245,6 +3285,26 @@ func (m *validateOpDescribeNotebookInstanceLifecycleConfig) HandleInitialize(ctx
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeNotebookInstanceLifecycleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeOptimizationJob struct {
+}
+
+func (*validateOpDescribeOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeOptimizationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4510,6 +4570,26 @@ func (m *validateOpStopNotebookInstance) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopOptimizationJob struct {
+}
+
+func (*validateOpStopOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopOptimizationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopPipelineExecution struct {
 }
 
@@ -5542,6 +5622,10 @@ func addOpCreateNotebookInstanceLifecycleConfigValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpCreateNotebookInstanceLifecycleConfig{}, middleware.After)
 }
 
+func addOpCreateOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateOptimizationJob{}, middleware.After)
+}
+
 func addOpCreatePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePipeline{}, middleware.After)
 }
@@ -5764,6 +5848,10 @@ func addOpDeleteNotebookInstanceValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteNotebookInstanceLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNotebookInstanceLifecycleConfig{}, middleware.After)
+}
+
+func addOpDeleteOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOptimizationJob{}, middleware.After)
 }
 
 func addOpDeletePipelineValidationMiddleware(stack *middleware.Stack) error {
@@ -5996,6 +6084,10 @@ func addOpDescribeNotebookInstanceValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDescribeNotebookInstanceLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNotebookInstanceLifecycleConfig{}, middleware.After)
+}
+
+func addOpDescribeOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeOptimizationJob{}, middleware.After)
 }
 
 func addOpDescribePipelineDefinitionForExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -6250,6 +6342,10 @@ func addOpStopNotebookInstanceValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpStopNotebookInstance{}, middleware.After)
 }
 
+func addOpStopOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopOptimizationJob{}, middleware.After)
+}
+
 func addOpStopPipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopPipelineExecution{}, middleware.After)
 }
@@ -6462,6 +6558,45 @@ func validateAdditionalInferenceSpecifications(v []types.AdditionalInferenceSpec
 	invalidParams := smithy.InvalidParamsError{Context: "AdditionalInferenceSpecifications"}
 	for i := range v {
 		if err := validateAdditionalInferenceSpecificationDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalModelDataSource(v *types.AdditionalModelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalModelDataSource"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.S3DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataSource"))
+	} else if v.S3DataSource != nil {
+		if err := validateS3ModelDataSource(v.S3DataSource); err != nil {
+			invalidParams.AddNested("S3DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalModelDataSources(v []types.AdditionalModelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalModelDataSources"}
+	for i := range v {
+		if err := validateAdditionalModelDataSource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -7631,6 +7766,11 @@ func validateContainerDefinition(v *types.ContainerDefinition) error {
 	if v.ModelDataSource != nil {
 		if err := validateModelDataSource(v.ModelDataSource); err != nil {
 			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalModelDataSources != nil {
+		if err := validateAdditionalModelDataSources(v.AdditionalModelDataSources); err != nil {
+			invalidParams.AddNested("AdditionalModelDataSources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10686,6 +10826,88 @@ func validateOidcConfig(v *types.OidcConfig) error {
 	}
 	if v.JwksUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JwksUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptimizationJobModelSource(v *types.OptimizationJobModelSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizationJobModelSource"}
+	if v.S3 != nil {
+		if err := validateOptimizationJobModelSourceS3(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptimizationJobModelSourceS3(v *types.OptimizationJobModelSourceS3) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizationJobModelSourceS3"}
+	if v.ModelAccessConfig != nil {
+		if err := validateOptimizationModelAccessConfig(v.ModelAccessConfig); err != nil {
+			invalidParams.AddNested("ModelAccessConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptimizationJobOutputConfig(v *types.OptimizationJobOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizationJobOutputConfig"}
+	if v.S3OutputLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptimizationModelAccessConfig(v *types.OptimizationModelAccessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizationModelAccessConfig"}
+	if v.AcceptEula == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcceptEula"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOptimizationVpcConfig(v *types.OptimizationVpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizationVpcConfig"}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14232,6 +14454,57 @@ func validateOpCreateNotebookInstanceLifecycleConfigInput(v *CreateNotebookInsta
 	}
 }
 
+func validateOpCreateOptimizationJobInput(v *CreateOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOptimizationJobInput"}
+	if v.OptimizationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptimizationJobName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.ModelSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelSource"))
+	} else if v.ModelSource != nil {
+		if err := validateOptimizationJobModelSource(v.ModelSource); err != nil {
+			invalidParams.AddNested("ModelSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.DeploymentInstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentInstanceType"))
+	}
+	if v.OptimizationConfigs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptimizationConfigs"))
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateOptimizationJobOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StoppingCondition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StoppingCondition"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfig != nil {
+		if err := validateOptimizationVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
 	if v == nil {
 		return nil
@@ -15390,6 +15663,21 @@ func validateOpDeleteNotebookInstanceLifecycleConfigInput(v *DeleteNotebookInsta
 	}
 }
 
+func validateOpDeleteOptimizationJobInput(v *DeleteOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOptimizationJobInput"}
+	if v.OptimizationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptimizationJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePipelineInput(v *DeletePipelineInput) error {
 	if v == nil {
 		return nil
@@ -16288,6 +16576,21 @@ func validateOpDescribeNotebookInstanceLifecycleConfigInput(v *DescribeNotebookI
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeNotebookInstanceLifecycleConfigInput"}
 	if v.NotebookInstanceLifecycleConfigName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeOptimizationJobInput(v *DescribeOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeOptimizationJobInput"}
+	if v.OptimizationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptimizationJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17355,6 +17658,21 @@ func validateOpStopNotebookInstanceInput(v *StopNotebookInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopNotebookInstanceInput"}
 	if v.NotebookInstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookInstanceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopOptimizationJobInput(v *StopOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopOptimizationJobInput"}
+	if v.OptimizationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptimizationJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

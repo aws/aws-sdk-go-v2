@@ -57,6 +57,7 @@ type DescribeStreamConsumerInput struct {
 }
 
 func (in *DescribeStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.ConsumerARN = in.ConsumerARN
 	p.OperationType = ptr.String("control")

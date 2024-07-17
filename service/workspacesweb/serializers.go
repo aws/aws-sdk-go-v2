@@ -621,6 +621,13 @@ func awsRestjson1_serializeOpDocumentCreateIdentityProviderInput(v *CreateIdenti
 		ok.String(*v.PortalArn)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1220,6 +1227,11 @@ func awsRestjson1_serializeOpDocumentCreateUserSettingsInput(v *CreateUserSettin
 	if v.CustomerManagedKey != nil {
 		ok := object.Key("customerManagedKey")
 		ok.String(*v.CustomerManagedKey)
+	}
+
+	if len(v.DeepLinkAllowed) > 0 {
+		ok := object.Key("deepLinkAllowed")
+		ok.String(string(v.DeepLinkAllowed))
 	}
 
 	if v.DisconnectTimeoutInMinutes != nil {
@@ -4454,6 +4466,11 @@ func awsRestjson1_serializeOpDocumentUpdateUserSettingsInput(v *UpdateUserSettin
 	if len(v.CopyAllowed) > 0 {
 		ok := object.Key("copyAllowed")
 		ok.String(string(v.CopyAllowed))
+	}
+
+	if len(v.DeepLinkAllowed) > 0 {
+		ok := object.Key("deepLinkAllowed")
+		ok.String(string(v.DeepLinkAllowed))
 	}
 
 	if v.DisconnectTimeoutInMinutes != nil {

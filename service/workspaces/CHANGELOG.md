@@ -1,3 +1,20 @@
+# v1.44.0 (2024-07-03)
+
+* **Feature**: Fix create workspace bundle RootStorage/UserStorage to accept non null values
+
+# v1.43.0 (2024-06-28)
+
+* **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.0 (2024-06-27)
+
+* **Feature**: Added support for WorkSpaces Pools.
+
+# v1.41.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.40.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

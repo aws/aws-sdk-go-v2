@@ -307,6 +307,9 @@ func ExampleSearchTypesResultItem_outputUsage() {
 	case *types.SearchTypesResultItemMemberFormTypeItem:
 		_ = v.Value // Value is types.FormTypeData
 
+	case *types.SearchTypesResultItemMemberLineageNodeTypeItem:
+		_ = v.Value // Value is types.LineageNodeTypeItem
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -316,6 +319,7 @@ func ExampleSearchTypesResultItem_outputUsage() {
 	}
 }
 
+var _ *types.LineageNodeTypeItem
 var _ *types.FormTypeData
 var _ *types.AssetTypeItem
 

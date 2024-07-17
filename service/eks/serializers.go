@@ -633,6 +633,11 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.BootstrapSelfManagedAddons != nil {
+		ok := object.Key("bootstrapSelfManagedAddons")
+		ok.Boolean(*v.BootstrapSelfManagedAddons)
+	}
+
 	if v.ClientRequestToken != nil {
 		ok := object.Key("clientRequestToken")
 		ok.String(*v.ClientRequestToken)

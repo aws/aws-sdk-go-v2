@@ -4256,7 +4256,20 @@
                 "target": "com.amazonaws.firehose#ListDeliveryStreamsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists your delivery streams in alphabetical order of their names.</p>\n         <p>The number of delivery streams might be too large to return using a single call to\n            <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned,\n         using the <code>Limit</code> parameter. To determine whether there are more delivery\n         streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If\n         there are more delivery streams to list, you can request them by calling this operation\n         again and setting the <code>ExclusiveStartDeliveryStreamName</code> parameter to the name\n         of the last delivery stream returned in the last call.</p>"
+                "smithy.api#documentation": "<p>Lists your delivery streams in alphabetical order of their names.</p>\n         <p>The number of delivery streams might be too large to return using a single call to\n            <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned,\n         using the <code>Limit</code> parameter. To determine whether there are more delivery\n         streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If\n         there are more delivery streams to list, you can request them by calling this operation\n         again and setting the <code>ExclusiveStartDeliveryStreamName</code> parameter to the name\n         of the last delivery stream returned in the last call.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListDeliveryStreamsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.firehose#ListDeliveryStreamsInput": {

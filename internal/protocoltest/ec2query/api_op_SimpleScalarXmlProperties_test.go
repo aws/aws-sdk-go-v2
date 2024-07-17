@@ -43,7 +43,7 @@ func TestClient_SimpleScalarXmlProperties_awsEc2queryDeserialize(t *testing.T) {
 			    <longValue>4</longValue>
 			    <floatValue>5.5</floatValue>
 			    <DoubleDribble>6.5</DoubleDribble>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</SimpleScalarXmlPropertiesResponse>
 			`),
 			ExpectResult: &SimpleScalarXmlPropertiesOutput{

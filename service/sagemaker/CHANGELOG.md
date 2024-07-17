@@ -1,3 +1,19 @@
+# v1.150.0 (2024-07-09)
+
+* **Feature**: This release 1/ enables optimization jobs that allows customers to perform Ahead-of-time compilation and quantization. 2/ allows customers to control access to Amazon Q integration in SageMaker Studio. 3/ enables AdditionalModelDataSources for CreateModel action.
+
+# v1.149.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.149.0 (2024-06-27)
+
+* **Feature**: Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.
+
+# v1.148.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.147.0 (2024-06-20)
 
 * **Feature**: Adds support for model references in Hub service, and adds support for cross-account access of Hubs

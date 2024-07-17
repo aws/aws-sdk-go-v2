@@ -97,6 +97,7 @@ const (
 	MetricTypeSageMakerVariantProvisionedConcurrencyUtilization         MetricType = "SageMakerVariantProvisionedConcurrencyUtilization"
 	MetricTypeElastiCacheDatabaseCapacityUsageCountedForEvictPercentage MetricType = "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage"
 	MetricTypeSageMakerInferenceComponentInvocationsPerCopy             MetricType = "SageMakerInferenceComponentInvocationsPerCopy"
+	MetricTypeWorkSpacesAverageUserSessionsCapacityUtilization          MetricType = "WorkSpacesAverageUserSessionsCapacityUtilization"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -129,6 +130,7 @@ func (MetricType) Values() []MetricType {
 		"SageMakerVariantProvisionedConcurrencyUtilization",
 		"ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage",
 		"SageMakerInferenceComponentInvocationsPerCopy",
+		"WorkSpacesAverageUserSessionsCapacityUtilization",
 	}
 }
 
@@ -177,6 +179,7 @@ const (
 	ScalableDimensionNeptuneClusterReadReplicaCount                   ScalableDimension = "neptune:cluster:ReadReplicaCount"
 	ScalableDimensionSageMakerVariantDesiredProvisionedConcurrency    ScalableDimension = "sagemaker:variant:DesiredProvisionedConcurrency"
 	ScalableDimensionSageMakerInferenceComponentDesiredCopyCount      ScalableDimension = "sagemaker:inference-component:DesiredCopyCount"
+	ScalableDimensionWorkSpacesWorkSpacesPoolDesiredUserSessions      ScalableDimension = "workspaces:workspacespool:DesiredUserSessions"
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
@@ -207,6 +210,7 @@ func (ScalableDimension) Values() []ScalableDimension {
 		"neptune:cluster:ReadReplicaCount",
 		"sagemaker:variant:DesiredProvisionedConcurrency",
 		"sagemaker:inference-component:DesiredCopyCount",
+		"workspaces:workspacespool:DesiredUserSessions",
 	}
 }
 
@@ -255,6 +259,7 @@ const (
 	ServiceNamespaceKafka          ServiceNamespace = "kafka"
 	ServiceNamespaceElasticache    ServiceNamespace = "elasticache"
 	ServiceNamespaceNeptune        ServiceNamespace = "neptune"
+	ServiceNamespaceWorkspaces     ServiceNamespace = "workspaces"
 )
 
 // Values returns all known values for ServiceNamespace. Note that this can be
@@ -277,5 +282,6 @@ func (ServiceNamespace) Values() []ServiceNamespace {
 		"kafka",
 		"elasticache",
 		"neptune",
+		"workspaces",
 	}
 }

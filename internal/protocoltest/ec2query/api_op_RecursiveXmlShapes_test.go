@@ -45,7 +45,7 @@ func TestClient_RecursiveXmlShapes_awsEc2queryDeserialize(t *testing.T) {
 			            </recursiveMember>
 			        </nested>
 			    </nested>
-			    <RequestId>requestid</RequestId>
+			    <requestId>requestid</requestId>
 			</RecursiveXmlShapesResponse>
 			`),
 			ExpectResult: &RecursiveXmlShapesOutput{

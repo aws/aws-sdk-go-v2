@@ -61,6 +61,24 @@ func ExampleConfiguration_outputUsage() {
 
 var _ *types.ConnectConfiguration
 
+func ExampleContentAssociationContents_outputUsage() {
+	var union types.ContentAssociationContents
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentAssociationContentsMemberAmazonConnectGuideAssociation:
+		_ = v.Value // Value is types.AmazonConnectGuideAssociationData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AmazonConnectGuideAssociationData
+
 func ExampleContentFeedbackData_outputUsage() {
 	var union types.ContentFeedbackData
 	// type switches can be used to check the union value

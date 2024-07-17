@@ -57,6 +57,7 @@ type GetPublicAccessBlockInput struct {
 }
 
 func (in *GetPublicAccessBlockInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

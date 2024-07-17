@@ -1,3 +1,15 @@
+# v1.21.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
+# v1.20.0 (2024-06-24)
+
+* **Feature**: Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.
+
 # v1.19.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

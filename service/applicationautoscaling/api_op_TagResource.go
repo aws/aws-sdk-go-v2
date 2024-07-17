@@ -22,14 +22,14 @@ import (
 // You can also add tags to an Application Auto Scaling scalable target while
 // creating it ( RegisterScalableTarget ).
 //
-// For general information about tags, including the format and syntax, see [Tagging Amazon Web Services resources] in
+// For general information about tags, including the format and syntax, see [Tagging your Amazon Web Services resources] in
 // the Amazon Web Services General Reference.
 //
 // Use tags to control access to a scalable target. For more information, see [Tagging support for Application Auto Scaling] in
 // the Application Auto Scaling User Guide.
 //
+// [Tagging your Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 // [Tagging support for Application Auto Scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/resource-tagging-support.html
-// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -69,7 +69,7 @@ type TagResourceInput struct {
 	// with the specified one.
 	//
 	// For information about the rules that apply to tag keys and tag values, see [User-defined tag restrictions] in
-	// the Amazon Web Services Billing and Cost Management User Guide.
+	// the Amazon Web Services Billing User Guide.
 	//
 	// [User-defined tag restrictions]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
 	//

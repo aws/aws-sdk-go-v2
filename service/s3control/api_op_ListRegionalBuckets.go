@@ -65,6 +65,7 @@ type ListRegionalBucketsInput struct {
 }
 
 func (in *ListRegionalBucketsInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.OutpostId = in.OutpostId
 	p.RequiresAccountId = ptr.Bool(true)

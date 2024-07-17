@@ -90,6 +90,26 @@ func (m *validateOpDeleteEncoderConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePublicKey struct {
+}
+
+func (*validateOpDeletePublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteStage struct {
 }
 
@@ -210,6 +230,26 @@ func (m *validateOpGetParticipant) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPublicKey struct {
+}
+
+func (*validateOpGetPublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetStage struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpGetStorageConfiguration) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetStorageConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportPublicKey struct {
+}
+
+func (*validateOpImportPublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportPublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportPublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportPublicKeyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -466,6 +526,10 @@ func addOpDeleteEncoderConfigurationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDeleteEncoderConfiguration{}, middleware.After)
 }
 
+func addOpDeletePublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePublicKey{}, middleware.After)
+}
+
 func addOpDeleteStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStage{}, middleware.After)
 }
@@ -490,6 +554,10 @@ func addOpGetParticipantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetParticipant{}, middleware.After)
 }
 
+func addOpGetPublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPublicKey{}, middleware.After)
+}
+
 func addOpGetStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStage{}, middleware.After)
 }
@@ -500,6 +568,10 @@ func addOpGetStageSessionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStorageConfiguration{}, middleware.After)
+}
+
+func addOpImportPublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportPublicKey{}, middleware.After)
 }
 
 func addOpListParticipantEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -706,6 +778,21 @@ func validateOpDeleteEncoderConfigurationInput(v *DeleteEncoderConfigurationInpu
 	}
 }
 
+func validateOpDeletePublicKeyInput(v *DeletePublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePublicKeyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteStageInput(v *DeleteStageInput) error {
 	if v == nil {
 		return nil
@@ -805,6 +892,21 @@ func validateOpGetParticipantInput(v *GetParticipantInput) error {
 	}
 }
 
+func validateOpGetPublicKeyInput(v *GetPublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPublicKeyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetStageInput(v *GetStageInput) error {
 	if v == nil {
 		return nil
@@ -845,6 +947,21 @@ func validateOpGetStorageConfigurationInput(v *GetStorageConfigurationInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetStorageConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportPublicKeyInput(v *ImportPublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportPublicKeyInput"}
+	if v.PublicKeyMaterial == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyMaterial"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

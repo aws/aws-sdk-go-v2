@@ -83,6 +83,7 @@ type ListStreamConsumersInput struct {
 }
 
 func (in *ListStreamConsumersInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.StreamARN = in.StreamARN
 	p.OperationType = ptr.String("control")
 }

@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// Content association data for a [step-by-step guide].
+//
+// [step-by-step guide]: https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html
+type AmazonConnectGuideAssociationData struct {
+
+	//  The Amazon Resource Name (ARN) of an Amazon Connect flow. Step-by-step guides
+	// are a type of flow.
+	FlowId *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information for Amazon AppIntegrations to automatically ingest
 // content.
 type AppIntegrationsConfiguration struct {
@@ -344,6 +356,125 @@ type ConnectConfiguration struct {
 	// The identifier of the Amazon Connect instance. You can find the instanceId in
 	// the ARN of the instance.
 	InstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+// The contents of a content association.
+//
+// The following types satisfy this interface:
+//
+//	ContentAssociationContentsMemberAmazonConnectGuideAssociation
+type ContentAssociationContents interface {
+	isContentAssociationContents()
+}
+
+// The data of the step-by-step guide association.
+type ContentAssociationContentsMemberAmazonConnectGuideAssociation struct {
+	Value AmazonConnectGuideAssociationData
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentAssociationContentsMemberAmazonConnectGuideAssociation) isContentAssociationContents() {
+}
+
+// Information about the content association.
+type ContentAssociationData struct {
+
+	// The content association.
+	//
+	// This member is required.
+	AssociationData ContentAssociationContents
+
+	// The type of association.
+	//
+	// This member is required.
+	AssociationType ContentAssociationType
+
+	// The Amazon Resource Name (ARN) of the content.
+	//
+	// This member is required.
+	ContentArn *string
+
+	// The Amazon Resource Name (ARN) of the content association.
+	//
+	// This member is required.
+	ContentAssociationArn *string
+
+	// The identifier of the content association. Can be either the ID or the ARN.
+	// URLs cannot contain the ARN.
+	//
+	// This member is required.
+	ContentAssociationId *string
+
+	// The identifier of the content.
+	//
+	// This member is required.
+	ContentId *string
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a content association.
+type ContentAssociationSummary struct {
+
+	// The content association.
+	//
+	// This member is required.
+	AssociationData ContentAssociationContents
+
+	// The type of association.
+	//
+	// This member is required.
+	AssociationType ContentAssociationType
+
+	// The Amazon Resource Name (ARN) of the content.
+	//
+	// This member is required.
+	ContentArn *string
+
+	// The Amazon Resource Name (ARN) of the content association.
+	//
+	// This member is required.
+	ContentAssociationArn *string
+
+	// The identifier of the content association. Can be either the ID or the ARN.
+	// URLs cannot contain the ARN.
+	//
+	// This member is required.
+	ContentAssociationId *string
+
+	// The identifier of the content.
+	//
+	// This member is required.
+	ContentId *string
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -828,7 +959,7 @@ type ImportJobData struct {
 	// The configuration information of the external data source.
 	ExternalSourceConfiguration *ExternalSourceConfiguration
 
-	// The link to donwload the information of resource data that failed to be
+	// The link to download the information of resource data that failed to be
 	// imported.
 	FailedRecordReport *string
 
@@ -1921,6 +2052,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAssistantAssociationInputData()  {}
 func (*UnknownUnionMember) isAssistantAssociationOutputData() {}
 func (*UnknownUnionMember) isConfiguration()                  {}
+func (*UnknownUnionMember) isContentAssociationContents()     {}
 func (*UnknownUnionMember) isContentFeedbackData()            {}
 func (*UnknownUnionMember) isDataDetails()                    {}
 func (*UnknownUnionMember) isDataReference()                  {}

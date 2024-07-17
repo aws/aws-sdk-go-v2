@@ -46,6 +46,7 @@ type ListKeysInput struct {
 }
 
 func (in *ListKeysInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.KvsARN = in.KvsARN
 
 }

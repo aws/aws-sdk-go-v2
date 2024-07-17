@@ -196,6 +196,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of the key-value pairs of the tag or tags to assign to the resource.</p>"
                     }
+                },
+                "deviceCreationTags": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceCreationTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs of the tag or tags to assign to the newly created devices for this environment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -665,6 +671,42 @@
                 "smithy.api#documentation": "<p>Describes a thin client device.</p>"
             }
         },
+        "com.amazonaws.workspacesthinclient#DeviceCreationTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[A-Za-z0-9 _=@:.+-/]+$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceCreationTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+            }
+        },
+        "com.amazonaws.workspacesthinclient#DeviceCreationTagsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.workspacesthinclient#DeviceCreationTagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.workspacesthinclient#DeviceCreationTagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.workspacesthinclient#DeviceId": {
             "type": "string",
             "traits": {
@@ -949,6 +991,12 @@
                     "target": "com.amazonaws.workspacesthinclient#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
+                    }
+                },
+                "deviceCreationTags": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceCreationTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\"The tag keys and optional values for the newly created devices for this environment.\"</p>"
                     }
                 }
             },
@@ -3166,6 +3214,12 @@
                     "target": "com.amazonaws.workspacesthinclient#SoftwareSetIdOrEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the software set to apply.</p>"
+                    }
+                },
+                "deviceCreationTags": {
+                    "target": "com.amazonaws.workspacesthinclient#DeviceCreationTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs of the tag or tags to assign to the newly created devices for this environment.</p>"
                     }
                 }
             },

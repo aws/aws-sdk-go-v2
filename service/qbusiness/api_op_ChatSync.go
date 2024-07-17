@@ -79,7 +79,7 @@ type ChatSyncInput struct {
 	// The identifier of the Amazon Q Business conversation.
 	ConversationId *string
 
-	// The identifier of the previous end user text input message in a conversation.
+	// The identifier of the previous system message in a conversation.
 	ParentMessageId *string
 
 	// The groups that a user associated with the chat input belongs to.

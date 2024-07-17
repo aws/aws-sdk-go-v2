@@ -266,6 +266,18 @@ func TestCheckSnapshot_DescribeApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeApplicationOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApplicationOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeApplicationSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeApplicationSnapshot(context.Background(), nil, func(o *Options) {
@@ -295,6 +307,18 @@ func TestCheckSnapshot_DiscoverInputSchema(t *testing.T) {
 	_, err := svc.DiscoverInputSchema(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DiscoverInputSchema")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListApplicationOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApplicationOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListApplicationOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -637,6 +661,18 @@ func TestUpdateSnapshot_DescribeApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeApplicationOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApplicationOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeApplicationSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeApplicationSnapshot(context.Background(), nil, func(o *Options) {
@@ -666,6 +702,18 @@ func TestUpdateSnapshot_DiscoverInputSchema(t *testing.T) {
 	_, err := svc.DiscoverInputSchema(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DiscoverInputSchema")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListApplicationOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApplicationOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListApplicationOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

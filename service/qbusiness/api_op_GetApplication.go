@@ -70,6 +70,16 @@ type GetApplicationOutput struct {
 	// to your Amazon Q Business application.
 	IdentityCenterApplicationArn *string
 
+	// Configuration information about chat response personalization. For more
+	// information, see [Personalizing chat responses].
+	//
+	// [Personalizing chat responses]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+	PersonalizationConfiguration *types.PersonalizationConfiguration
+
+	// Settings for whether end users can create and use Amazon Q Apps in the web
+	// experience.
+	QAppsConfiguration *types.QAppsConfiguration
+
 	// The Amazon Resource Name (ARN) of the IAM with permissions to access your
 	// CloudWatch logs and metrics.
 	RoleArn *string

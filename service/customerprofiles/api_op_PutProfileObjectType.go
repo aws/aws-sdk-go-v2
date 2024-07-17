@@ -70,6 +70,9 @@ type PutProfileObjectTypeInput struct {
 	// A list of unique keys that can be used to map data to the profile.
 	Keys map[string][]types.ObjectTypeKey
 
+	// The amount of profile object max count assigned to the object type
+	MaxProfileObjectCount *int32
+
 	// The format of your sourceLastUpdatedTimestamp that was previously set up.
 	SourceLastUpdatedTimestampFormat *string
 
@@ -125,6 +128,12 @@ type PutProfileObjectTypeOutput struct {
 
 	// The timestamp of when the domain was most recently edited.
 	LastUpdatedAt *time.Time
+
+	// The amount of provisioned profile object max count available.
+	MaxAvailableProfileObjectCount *int32
+
+	// The amount of profile object max count assigned to the object type.
+	MaxProfileObjectCount *int32
 
 	// The format of your sourceLastUpdatedTimestamp that was previously set up in
 	// fields that were parsed using [SimpleDateFormat]. If you have sourceLastUpdatedTimestamp in your

@@ -49,6 +49,7 @@ type DissociateAccessGrantsIdentityCenterInput struct {
 }
 
 func (in *DissociateAccessGrantsIdentityCenterInput) bindEndpointParams(p *EndpointParameters) {
+
 	p.AccountId = in.AccountId
 	p.RequiresAccountId = ptr.Bool(true)
 }

@@ -656,6 +656,9 @@ func awsRestjson1_deserializeOpErrorAssociateTrustStore(response *smithyhttp.Res
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -3256,6 +3259,9 @@ func awsRestjson1_deserializeOpErrorDisassociateBrowserSettings(response *smithy
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -3350,6 +3356,9 @@ func awsRestjson1_deserializeOpErrorDisassociateIpAccessSettings(response *smith
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
@@ -3446,6 +3455,9 @@ func awsRestjson1_deserializeOpErrorDisassociateNetworkSettings(response *smithy
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -3540,6 +3552,9 @@ func awsRestjson1_deserializeOpErrorDisassociateTrustStore(response *smithyhttp.
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
@@ -3636,6 +3651,9 @@ func awsRestjson1_deserializeOpErrorDisassociateUserAccessLoggingSettings(respon
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -3730,6 +3748,9 @@ func awsRestjson1_deserializeOpErrorDisassociateUserSettings(response *smithyhtt
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
@@ -11328,6 +11349,15 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 				sv.CustomerManagedKey = ptr.String(jtv)
 			}
 
+		case "deepLinkAllowed":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
+				}
+				sv.DeepLinkAllowed = types.EnabledType(jtv)
+			}
+
 		case "disconnectTimeoutInMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11476,6 +11506,15 @@ func awsRestjson1_deserializeDocumentUserSettingsSummary(v **types.UserSettingsS
 					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
 				}
 				sv.CopyAllowed = types.EnabledType(jtv)
+			}
+
+		case "deepLinkAllowed":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
+				}
+				sv.DeepLinkAllowed = types.EnabledType(jtv)
 			}
 
 		case "disconnectTimeoutInMinutes":

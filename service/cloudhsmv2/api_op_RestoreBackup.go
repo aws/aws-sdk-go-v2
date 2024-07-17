@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state.
-// For mor information on deleting a backup, see DeleteBackup.
+// Restores a specified CloudHSM backup that is in the PENDING_DELETION state. For
+// more information on deleting a backup, see DeleteBackup.
+//
+// Cross-account use: No. You cannot perform this operation on an CloudHSM backup
+// in a different Amazon Web Services account.
 func (c *Client) RestoreBackup(ctx context.Context, params *RestoreBackupInput, optFns ...func(*Options)) (*RestoreBackupOutput, error) {
 	if params == nil {
 		params = &RestoreBackupInput{}

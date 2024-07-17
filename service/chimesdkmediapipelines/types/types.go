@@ -152,6 +152,10 @@ type AmazonTranscribeCallAnalyticsProcessorConfiguration struct {
 
 // A structure that contains the configuration settings for an Amazon Transcribe
 // processor.
+//
+// Calls to this API must include a LanguageCode , IdentifyLanguage , or
+// IdentifyMultipleLanguages parameter. If you include more than one of those
+// parameters, your transcription job fails.
 type AmazonTranscribeProcessorConfiguration struct {
 
 	// Labels all personally identifiable information (PII) identified in your
@@ -196,6 +200,9 @@ type AmazonTranscribeProcessorConfiguration struct {
 
 	// Turns language identification on or off.
 	IdentifyLanguage bool
+
+	// Turns language identification on or off for multiple languages.
+	IdentifyMultipleLanguages bool
 
 	// The language code that represents the language spoken in your audio.
 	//
@@ -658,6 +665,25 @@ type KinesisDataStreamSinkConfiguration struct {
 }
 
 // The configuration of an Kinesis video stream.
+//
+// If a meeting uses an opt-in Region as its [MediaRegion], the KVS stream must be in that same
+// Region. For example, if a meeting uses the af-south-1 Region, the KVS stream
+// must also be in af-south-1 . However, if the meeting uses a Region that AWS
+// turns on by default, the KVS stream can be in any available Region, including an
+// opt-in Region. For example, if the meeting uses ca-central-1 , the KVS stream
+// can be in eu-west-2 , us-east-1 , af-south-1 , or any other Region that the
+// Amazon Chime SDK supports.
+//
+// To learn which AWS Region a meeting uses, call the [GetMeeting] API and use the [MediaRegion] parameter
+// from the response.
+//
+// For more information about opt-in Regions, refer to [Available Regions] in the Amazon Chime SDK
+// Developer Guide, and [Specify which AWS Regions your account can use], in the AWS Account Management Reference Guide.
+//
+// [GetMeeting]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetMeeting.html
+// [Specify which AWS Regions your account can use]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#rande-manage-enable.html
+// [Available Regions]: https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions.html
+// [MediaRegion]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html#chimesdk-meeting-chime_CreateMeeting-request-MediaRegion
 type KinesisVideoStreamConfiguration struct {
 
 	// The Amazon Web Services Region of the video stream.
@@ -1194,7 +1220,7 @@ type MediaStreamSink struct {
 	// This member is required.
 	ReservedStreamCapacity *int32
 
-	// The ARN of the media stream sink.
+	// The ARN of the Kinesis Video Stream pool returned by the CreateMediaPipelineKinesisVideoStreamPool API.
 	//
 	// This member is required.
 	SinkArn *string
@@ -1210,7 +1236,7 @@ type MediaStreamSink struct {
 // Structure that contains the settings for media stream sources.
 type MediaStreamSource struct {
 
-	// The ARN of the media stream source.
+	// The ARN of the meeting.
 	//
 	// This member is required.
 	SourceArn *string

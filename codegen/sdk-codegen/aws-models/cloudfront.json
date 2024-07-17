@@ -434,7 +434,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that describes how CloudFront processes requests.</p>\n         <p>You must create at least as many cache behaviors (including the default cache\n\t\t\tbehavior) as you have origins if you want CloudFront to serve objects from all of the origins.\n\t\t\tEach cache behavior specifies the one origin from which you want CloudFront to get objects. If\n\t\t\tyou have two origins and only the default cache behavior, the default cache behavior\n\t\t\twill cause CloudFront to get objects from one of the origins, but the other origin is never\n\t\t\tused.</p>\n         <p>For the current quota (formerly known as limit) on the number of cache behaviors that\n\t\t\tyou can add to a distribution, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n         <p>If you don't want to specify any cache behaviors, include only an empty\n\t\t\t<code>CacheBehaviors</code> element. For more information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CacheBehaviors.html\">CacheBehaviors</a>. Don't include an empty\n\t\t\t\t<code>CacheBehavior</code> element because this is invalid.</p>\n         <p>To delete all cache behaviors in an existing distribution, update the distribution\n\t\t\tconfiguration and include only an empty <code>CacheBehaviors</code> element.</p>\n         <p>To add, change, or remove one or more cache behaviors, update the distribution\n\t\t\tconfiguration and specify all of the cache behaviors that you want to include in the\n\t\t\tupdated distribution.</p>\n         <p>For more information about cache behaviors, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior\">Cache Behavior Settings</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A complex type that describes how CloudFront processes requests.</p>\n         <p>You must create at least as many cache behaviors (including the default cache\n\t\t\tbehavior) as you have origins if you want CloudFront to serve objects from all of the origins.\n\t\t\tEach cache behavior specifies the one origin from which you want CloudFront to get objects. If\n\t\t\tyou have two origins and only the default cache behavior, the default cache behavior\n\t\t\twill cause CloudFront to get objects from one of the origins, but the other origin is never\n\t\t\tused.</p>\n         <p>For the current quota (formerly known as limit) on the number of cache behaviors that\n\t\t\tyou can add to a distribution, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n         <p>If you don't want to specify any cache behaviors, include only an empty\n\t\t\t\t<code>CacheBehaviors</code> element. Don't specify an empty individual\n\t\t\t\t<code>CacheBehavior</code> element, because this is invalid. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CacheBehaviors.html\">CacheBehaviors</a>. </p>\n         <p>To delete all cache behaviors in an existing distribution, update the distribution\n\t\t\tconfiguration and include only an empty <code>CacheBehaviors</code> element.</p>\n         <p>To add, change, or remove one or more cache behaviors, update the distribution\n\t\t\tconfiguration and specify all of the cache behaviors that you want to include in the\n\t\t\tupdated distribution.</p>\n         <p>For more information about cache behaviors, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior\">Cache Behavior Settings</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.cloudfront#CacheBehaviorList": {
@@ -795,7 +795,7 @@
                 "Items": {
                     "target": "com.amazonaws.cloudfront#MethodsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A complex type that contains the HTTP methods that you want CloudFront to cache responses\n\t\t\tto.</p>",
+                        "smithy.api#documentation": "<p>A complex type that contains the HTTP methods that you want CloudFront to cache responses\n\t\t\tto. Valid values for <code>CachedMethods</code> include <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code>, depending on which caching option you choose. For more information, see the preceding section.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12307,7 +12307,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List tags for a CloudFront resource.</p>",
+                "smithy.api#documentation": "<p>List tags for a CloudFront resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html\">Tagging a distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-05-31/tagging",
@@ -15810,7 +15810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Add tags to a CloudFront resource.</p>",
+                "smithy.api#documentation": "<p>Add tags to a CloudFront resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html\">Tagging a distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/tagging?Operation=Tag",
@@ -16835,7 +16835,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove tags from a CloudFront resource.</p>",
+                "smithy.api#documentation": "<p>Remove tags from a CloudFront resource. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html\">Tagging a distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/tagging?Operation=Untag",

@@ -12112,7 +12112,20 @@
                     "outputToken": "NextToken",
                     "items": "Builds",
                     "pageSize": "Limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListBuildsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.gamelift#ListBuildsInput": {

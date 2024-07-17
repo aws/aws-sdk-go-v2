@@ -588,6 +588,10 @@ type UserSettings struct {
 	// settings.
 	CustomerManagedKey *string
 
+	// Specifies whether the user can use deep links that open automatically when
+	// connecting to a session.
+	DeepLinkAllowed EnabledType
+
 	// The amount of time that a streaming session remains active after users
 	// disconnect.
 	DisconnectTimeoutInMinutes *int32
@@ -630,6 +634,10 @@ type UserSettingsSummary struct {
 	// Specifies whether the user can copy text from the streaming session to the
 	// local device.
 	CopyAllowed EnabledType
+
+	// Specifies whether the user can use deep links that open automatically when
+	// connecting to a session.
+	DeepLinkAllowed EnabledType
 
 	// The amount of time that a streaming session remains active after users
 	// disconnect.

@@ -1,3 +1,15 @@
+# v1.25.1 (2024-06-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2024-06-27)
+
+* **Feature**: This release makes the EngineVersion field optional for both broker and configuration and uses the latest available version by default. The AutoMinorVersionUpgrade field is also now optional for broker creation and defaults to 'true'.
+
+# v1.24.0 (2024-06-26)
+
+* **Feature**: Support list-of-string endpoint parameter.
+
 # v1.23.1 (2024-06-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

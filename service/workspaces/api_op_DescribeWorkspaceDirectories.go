@@ -40,6 +40,9 @@ type DescribeWorkspaceDirectoriesInput struct {
 	// this token to receive the next set of results.
 	NextToken *string
 
+	// The names of the WorkSpace directories.
+	WorkspaceDirectoryNames []string
+
 	noSmithyDocumentSerde
 }
 
