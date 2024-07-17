@@ -25,7 +25,7 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // For example to get the region of a bucket which exists in "eu-central-1"
 // you could provide a region hint of "us-west-2".
 //
-//	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"), config.WithCredentialsProvider(aws.AnonymousCredentials{}))
+//	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"))
 //	if err != nil {
 //		log.Println("error:", err)
 //		return
