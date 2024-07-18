@@ -45,7 +45,7 @@
     <lastmod>2021-01-14T12:54:53-08:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/migrating/</loc>
-    <lastmod>2024-03-15T02:35:33+09:00</lastmod>
+    <lastmod>2024-06-13T15:21:46+01:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/making-requests/</loc>
     <lastmod>2023-12-21T16:57:52-05:00</lastmod>
@@ -312,7 +312,7 @@
     <lastmod>2022-08-10T20:22:46+00:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/</loc>
-    <lastmod>2022-03-07T15:24:12-08:00</lastmod>
+    <lastmod>2024-03-19T10:56:16-04:00</lastmod>
   </url><url>
     <loc>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/</loc>
     <lastmod>2022-08-10T20:22:46+00:00</lastmod>

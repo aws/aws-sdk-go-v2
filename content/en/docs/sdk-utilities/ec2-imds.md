@@ -50,24 +50,6 @@ fmt.Printf("local-ip: %v\n", localip)
 ```
 
 For a list of all metadata categories, see
-[Instance Metadata Categories](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html#dynamic-data-categories)
+[Instance Metadata Categories](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html)
 in the {{% alias service="EC2" %}} User Guide.
-
-### Retrieving an Instance's Region
-
-There's no instance metadata category that returns only the Region of an
-instance. Instead, use the included `Region` method to easily return
-an instance's Region.
-
-```go
-response, err := client.GetRegion(context.TODO(), &imds.GetRegionInput{})
-if err != nil {
-    log.Printf("Unable to retrieve the region from the EC2 instance %v\n", err)
-}
-
-fmt.Printf("region: %v\n", response.Region)
-```
-
-For more information about the EC2 metadata utility, see the [feature/ec2/imds]({{% apiref "feature/ec2/imds" %}}) package in the
-{{% alias sdk-api %}}.
 
