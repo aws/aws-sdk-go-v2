@@ -29,7 +29,7 @@
 <meta itemprop="name" content="Amazon EC2 Instance Metadata Service">
 <meta itemprop="description" content="Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service Client">
 <meta itemprop="dateModified" content="2023-02-01T05:55:09-08:00" />
-<meta itemprop="wordCount" content="310">
+<meta itemprop="wordCount" content="235">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Amazon EC2 Instance Metadata Service"/>
 <meta name="twitter:description" content="Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service Client"/>
@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.d8f87655e0fa72213f78a940133fec6c.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.d8f87655e0fa72213f78a940133fec6c.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -426,20 +426,6 @@
             
 
 
-<div class="td-toc"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#retrieving-an-instances-region">Retrieving an Instance&rsquo;s Region</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-
 
 
             
@@ -536,20 +522,8 @@ like other AWS Services.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;local-ip: %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">localip</span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div><p>For a list of all metadata categories, see
-<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html#dynamic-data-categories">Instance Metadata Categories</a>
+<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html">Instance Metadata Categories</a>
 in the Amazon EC2 User Guide.</p>
-<h3 id="retrieving-an-instances-region">Retrieving an Instance&rsquo;s Region</h3>
-<p>There&rsquo;s no instance metadata category that returns only the Region of an
-instance. Instead, use the included <code>Region</code> method to easily return
-an instance&rsquo;s Region.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">response</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRegion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">imds</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetRegionInput</span><span style="color:#000;font-weight:bold">{})</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Unable to retrieve the region from the EC2 instance %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;region: %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">response</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Region</span><span style="color:#000;font-weight:bold">)</span>
-</span></span></code></pre></div><p>For more information about the EC2 metadata utility, see the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/imds">feature/ec2/imds</a> package in the
-AWS SDK for Go V2 API Reference.</p>
 
 	
 	

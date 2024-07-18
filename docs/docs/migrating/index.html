@@ -100,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.d8f87655e0fa72213f78a940133fec6c.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.d8f87655e0fa72213f78a940133fec6c.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -727,7 +727,7 @@ the service operations being used:</p>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">GetObjectBytes</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">client</span> <span style="color:#000">GetObjectAPIClient</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">key</span> <span style="color:#204a87;font-weight:bold">string</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">([]</span><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">object</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">api</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">object</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetObjectInput</span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">key</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
@@ -1839,7 +1839,7 @@ APIs are replaced by
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified March 15, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/7a709fbd3914e993be9646ffea47d494bbfb0b17">Update _index.md (#2550) (7a709fbd39)</a>
+  Last modified June 13, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/f460186b4ea38843d0b2e0a774ba1abaae63a4b8">Update _index.md (#2677) (f460186b4e)</a>
 </div>
 
 </div>
