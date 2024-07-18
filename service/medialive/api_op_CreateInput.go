@@ -61,6 +61,9 @@ type CreateInputInput struct {
 	// Destinations empty.
 	Sources []types.InputSourceRequest
 
+	// The settings associated with an SRT input.
+	SrtSettings *types.SrtSettingsRequest
+
 	// A collection of key-value pairs.
 	Tags map[string]string
 

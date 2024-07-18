@@ -55,6 +55,11 @@ type DeleteDBClusterInput struct {
 	// Specifies whether to remove automated backups immediately after the DB cluster
 	// is deleted. This parameter isn't case-sensitive. The default is to remove
 	// automated backups immediately after the DB cluster is deleted.
+	//
+	// You must delete automated backups for Amazon RDS Multi-AZ DB clusters. For more
+	// information about managing automated backups for RDS Multi-AZ DB clusters, see [Managing automated backups].
+	//
+	// [Managing automated backups]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ManagingAutomatedBackups.html
 	DeleteAutomatedBackups *bool
 
 	// The DB cluster snapshot identifier of the new DB cluster snapshot created when

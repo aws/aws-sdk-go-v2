@@ -446,6 +446,41 @@ func validateDeliveryStreamEncryptionConfigurationInput(v *types.DeliveryStreamE
 	}
 }
 
+func validateDestinationTableConfiguration(v *types.DestinationTableConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationTableConfiguration"}
+	if v.DestinationTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationTableName"))
+	}
+	if v.DestinationDatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationDatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationTableConfigurationList(v []types.DestinationTableConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationTableConfigurationList"}
+	for i := range v {
+		if err := validateDestinationTableConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDocumentIdOptions(v *types.DocumentIdOptions) error {
 	if v == nil {
 		return nil
@@ -741,6 +776,68 @@ func validateHttpEndpointRequestConfiguration(v *types.HttpEndpointRequestConfig
 	if v.CommonAttributes != nil {
 		if err := validateHttpEndpointCommonAttributesList(v.CommonAttributes); err != nil {
 			invalidParams.AddNested("CommonAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergDestinationConfiguration(v *types.IcebergDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergDestinationConfiguration"}
+	if v.DestinationTableConfigurationList != nil {
+		if err := validateDestinationTableConfigurationList(v.DestinationTableConfigurationList); err != nil {
+			invalidParams.AddNested("DestinationTableConfigurationList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProcessingConfiguration != nil {
+		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	}
+	if v.CatalogConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogConfiguration"))
+	}
+	if v.S3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Configuration"))
+	} else if v.S3Configuration != nil {
+		if err := validateS3DestinationConfiguration(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIcebergDestinationUpdate(v *types.IcebergDestinationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergDestinationUpdate"}
+	if v.DestinationTableConfigurationList != nil {
+		if err := validateDestinationTableConfigurationList(v.DestinationTableConfigurationList); err != nil {
+			invalidParams.AddNested("DestinationTableConfigurationList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProcessingConfiguration != nil {
+		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3Configuration != nil {
+		if err := validateS3DestinationConfiguration(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1347,6 +1444,11 @@ func validateOpCreateDeliveryStreamInput(v *CreateDeliveryStreamInput) error {
 			invalidParams.AddNested("SnowflakeDestinationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.IcebergDestinationConfiguration != nil {
+		if err := validateIcebergDestinationConfiguration(v.IcebergDestinationConfiguration); err != nil {
+			invalidParams.AddNested("IcebergDestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1575,6 +1677,11 @@ func validateOpUpdateDestinationInput(v *UpdateDestinationInput) error {
 	if v.SnowflakeDestinationUpdate != nil {
 		if err := validateSnowflakeDestinationUpdate(v.SnowflakeDestinationUpdate); err != nil {
 			invalidParams.AddNested("SnowflakeDestinationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IcebergDestinationUpdate != nil {
+		if err := validateIcebergDestinationUpdate(v.IcebergDestinationUpdate); err != nil {
+			invalidParams.AddNested("IcebergDestinationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

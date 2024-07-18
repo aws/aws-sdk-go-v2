@@ -352,6 +352,25 @@ func (HttpEndpointS3BackupMode) Values() []HttpEndpointS3BackupMode {
 	}
 }
 
+type IcebergS3BackupMode string
+
+// Enum values for IcebergS3BackupMode
+const (
+	IcebergS3BackupModeFailedDataOnly IcebergS3BackupMode = "FailedDataOnly"
+	IcebergS3BackupModeAllData        IcebergS3BackupMode = "AllData"
+)
+
+// Values returns all known values for IcebergS3BackupMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IcebergS3BackupMode) Values() []IcebergS3BackupMode {
+	return []IcebergS3BackupMode{
+		"FailedDataOnly",
+		"AllData",
+	}
+}
+
 type KeyType string
 
 // Enum values for KeyType

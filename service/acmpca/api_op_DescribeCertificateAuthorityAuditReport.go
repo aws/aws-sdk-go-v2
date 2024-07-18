@@ -187,7 +187,7 @@ type AuditReportCreatedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, AuditReportCreatedWaiter will use default max delay of 120 seconds.
+	// set to zero, AuditReportCreatedWaiter will use default max delay of 180 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -217,7 +217,7 @@ type AuditReportCreatedWaiter struct {
 func NewAuditReportCreatedWaiter(client DescribeCertificateAuthorityAuditReportAPIClient, optFns ...func(*AuditReportCreatedWaiterOptions)) *AuditReportCreatedWaiter {
 	options := AuditReportCreatedWaiterOptions{}
 	options.MinDelay = 3 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 180 * time.Second
 	options.Retryable = auditReportCreatedStateRetryable
 
 	for _, fn := range optFns {
@@ -252,7 +252,7 @@ func (w *AuditReportCreatedWaiter) WaitForOutput(ctx context.Context, params *De
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 180 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

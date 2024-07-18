@@ -95,6 +95,9 @@ type DescribeInputOutput struct {
 	// A list of the sources of the input (PULL-type).
 	Sources []types.InputSource
 
+	// The settings associated with an SRT input.
+	SrtSettings *types.SrtSettings
+
 	// Placeholder documentation for InputState
 	State types.InputState
 

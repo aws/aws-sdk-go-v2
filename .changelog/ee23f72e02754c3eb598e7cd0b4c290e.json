@@ -1,0 +1,8 @@
+{
+    "id": "ee23f72e-0275-4c3e-b598-e7cd0b4c290e",
+    "type": "feature",
+    "description": "This release 1) Add configurable buffering hints for Snowflake as destination. 2) Add ReadFromTimestamp for MSK As Source. Firehose will start reading data from MSK Cluster using offset associated with this timestamp. 3) Gated public beta release to add Apache Iceberg tables as destination.",
+    "modules": [
+        "service/firehose"
+    ]
+}

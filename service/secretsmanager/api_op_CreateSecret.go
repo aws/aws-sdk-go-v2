@@ -55,9 +55,14 @@ import (
 // To encrypt the secret with a KMS key other than aws/secretsmanager , you need
 // kms:GenerateDataKey and kms:Decrypt permission to the key.
 //
+// When you enter commands in a command shell, there is a risk of the command
+// history being accessed or utilities having access to your command parameters.
+// This is a concern if the command includes the value of a secret. Learn how to [Mitigate the risks of using command-line tools to store Secrets Manager secrets].
+//
 // [Authentication and access control in Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
 // [Logging Secrets Manager events with CloudTrail]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
 // [Secrets Manager secrets managed by other Amazon Web Services services]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
+// [Mitigate the risks of using command-line tools to store Secrets Manager secrets]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html
 // [Create a secret]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html
 // [IAM policy actions for Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
 // [JSON structure of a database secret]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_secret_json_structure.html

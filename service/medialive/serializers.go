@@ -1284,6 +1284,13 @@ func awsRestjson1_serializeOpDocumentCreateInputInput(v *CreateInputInput, value
 		}
 	}
 
+	if v.SrtSettings != nil {
+		ok := object.Key("srtSettings")
+		if err := awsRestjson1_serializeDocumentSrtSettingsRequest(v.SrtSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -7012,6 +7019,13 @@ func awsRestjson1_serializeOpDocumentUpdateInputInput(v *UpdateInputInput, value
 		}
 	}
 
+	if v.SrtSettings != nil {
+		ok := object.Key("srtSettings")
+		if err := awsRestjson1_serializeDocumentSrtSettingsRequest(v.SrtSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7930,6 +7944,19 @@ func awsRestjson1_serializeDocument__listOfScte35Descriptor(v []types.Scte35Desc
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentScte35Descriptor(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfSrtCallerSourceRequest(v []types.SrtCallerSourceRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSrtCallerSourceRequest(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -13885,6 +13912,71 @@ func awsRestjson1_serializeDocumentScte35TimeSignalScheduleActionSettings(v *typ
 func awsRestjson1_serializeDocumentSmpteTtDestinationSettings(v *types.SmpteTtDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSrtCallerDecryptionRequest(v *types.SrtCallerDecryptionRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Algorithm) > 0 {
+		ok := object.Key("algorithm")
+		ok.String(string(v.Algorithm))
+	}
+
+	if v.PassphraseSecretArn != nil {
+		ok := object.Key("passphraseSecretArn")
+		ok.String(*v.PassphraseSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSrtCallerSourceRequest(v *types.SrtCallerSourceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Decryption != nil {
+		ok := object.Key("decryption")
+		if err := awsRestjson1_serializeDocumentSrtCallerDecryptionRequest(v.Decryption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinimumLatency != nil {
+		ok := object.Key("minimumLatency")
+		ok.Integer(*v.MinimumLatency)
+	}
+
+	if v.SrtListenerAddress != nil {
+		ok := object.Key("srtListenerAddress")
+		ok.String(*v.SrtListenerAddress)
+	}
+
+	if v.SrtListenerPort != nil {
+		ok := object.Key("srtListenerPort")
+		ok.String(*v.SrtListenerPort)
+	}
+
+	if v.StreamId != nil {
+		ok := object.Key("streamId")
+		ok.String(*v.StreamId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSrtSettingsRequest(v *types.SrtSettingsRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SrtCallerSources != nil {
+		ok := object.Key("srtCallerSources")
+		if err := awsRestjson1_serializeDocument__listOfSrtCallerSourceRequest(v.SrtCallerSources, ok); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }

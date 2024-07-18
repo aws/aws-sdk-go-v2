@@ -44,13 +44,18 @@ import (
 // and [Authentication and access control in Secrets Manager]. If you use a customer managed key, you must also have kms:GenerateDataKey
 // , kms:Encrypt , and kms:Decrypt permissions on the key. If you change the KMS
 // key and you don't have kms:Encrypt permission to the new key, Secrets Manager
-// does not re-ecrypt existing secret versions with the new key. For more
+// does not re-encrypt existing secret versions with the new key. For more
 // information, see [Secret encryption and decryption].
+//
+// When you enter commands in a command shell, there is a risk of the command
+// history being accessed or utilities having access to your command parameters.
+// This is a concern if the command includes the value of a secret. Learn how to [Mitigate the risks of using command-line tools to store Secrets Manager secrets].
 //
 // [Authentication and access control in Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
 // [Logging Secrets Manager events with CloudTrail]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
 // [Secret encryption and decryption]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html
 // [Secrets Manager secrets managed by other Amazon Web Services services]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
+// [Mitigate the risks of using command-line tools to store Secrets Manager secrets]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html
 // [IAM policy actions for Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
 func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, optFns ...func(*Options)) (*UpdateSecretOutput, error) {
 	if params == nil {
@@ -105,7 +110,7 @@ type UpdateSecretInput struct {
 	// The ARN, key ID, or alias of the KMS key that Secrets Manager uses to encrypt
 	// new secret versions as well as any existing versions with the staging labels
 	// AWSCURRENT , AWSPENDING , or AWSPREVIOUS . If you don't have kms:Encrypt
-	// permission to the new key, Secrets Manager does not re-ecrypt existing secret
+	// permission to the new key, Secrets Manager does not re-encrypt existing secret
 	// versions with the new key. For more information about versions and staging
 	// labels, see [Concepts: Version].
 	//

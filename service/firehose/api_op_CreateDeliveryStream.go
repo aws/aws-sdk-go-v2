@@ -135,6 +135,11 @@ type CreateDeliveryStreamInput struct {
 	// destination. You can specify only one destination.
 	HttpEndpointDestinationConfiguration *types.HttpEndpointDestinationConfiguration
 
+	//  Configure Apache Iceberg Tables destination.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	IcebergDestinationConfiguration *types.IcebergDestinationConfiguration
+
 	// When a Kinesis data stream is used as the source for the delivery stream, a KinesisStreamSourceConfiguration
 	// containing the Kinesis data stream Amazon Resource Name (ARN) and the role ARN
 	// for the source stream.

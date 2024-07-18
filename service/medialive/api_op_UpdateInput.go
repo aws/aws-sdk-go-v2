@@ -63,6 +63,9 @@ type UpdateInputInput struct {
 	// Destinations empty.
 	Sources []types.InputSourceRequest
 
+	// The settings associated with an SRT input.
+	SrtSettings *types.SrtSettingsRequest
+
 	noSmithyDocumentSerde
 }
 

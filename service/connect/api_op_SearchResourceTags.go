@@ -45,6 +45,24 @@ type SearchResourceTagsInput struct {
 	// The list of resource types to be used to search tags from. If not provided or
 	// if any empty list is provided, this API will search from all supported resource
 	// types.
+	//
+	// Supported resource types
+	//
+	//   - AGENT
+	//
+	//   - ROUTING_PROFILE
+	//
+	//   - STANDARD_QUEUE
+	//
+	//   - SECURITY_PROFILE
+	//
+	//   - OPERATING_HOURS
+	//
+	//   - PROMPT
+	//
+	//   - CONTACT_FLOW
+	//
+	//   - FLOW_MODULE
 	ResourceTypes []string
 
 	// The search criteria to be used to return tags.

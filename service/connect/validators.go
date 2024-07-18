@@ -3410,6 +3410,26 @@ func (m *validateOpResumeContactRecording) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchAgentStatuses struct {
+}
+
+func (*validateOpSearchAgentStatuses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchAgentStatuses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchAgentStatusesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchAgentStatusesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchAvailablePhoneNumbers struct {
 }
 
@@ -3645,6 +3665,26 @@ func (m *validateOpSearchSecurityProfiles) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchSecurityProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchUserHierarchyGroups struct {
+}
+
+func (*validateOpSearchUserHierarchyGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchUserHierarchyGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchUserHierarchyGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchUserHierarchyGroupsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5690,6 +5730,10 @@ func addOpResumeContactRecordingValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpResumeContactRecording{}, middleware.After)
 }
 
+func addOpSearchAgentStatusesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchAgentStatuses{}, middleware.After)
+}
+
 func addOpSearchAvailablePhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchAvailablePhoneNumbers{}, middleware.After)
 }
@@ -5736,6 +5780,10 @@ func addOpSearchRoutingProfilesValidationMiddleware(stack *middleware.Stack) err
 
 func addOpSearchSecurityProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchSecurityProfiles{}, middleware.After)
+}
+
+func addOpSearchUserHierarchyGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchUserHierarchyGroups{}, middleware.After)
 }
 
 func addOpSearchUsersValidationMiddleware(stack *middleware.Stack) error {
@@ -10919,6 +10967,21 @@ func validateOpResumeContactRecordingInput(v *ResumeContactRecordingInput) error
 	}
 }
 
+func validateOpSearchAgentStatusesInput(v *SearchAgentStatusesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAgentStatusesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersInput) error {
 	if v == nil {
 		return nil
@@ -11109,6 +11172,21 @@ func validateOpSearchSecurityProfilesInput(v *SearchSecurityProfilesInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchSecurityProfilesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchUserHierarchyGroupsInput(v *SearchUserHierarchyGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchUserHierarchyGroupsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}

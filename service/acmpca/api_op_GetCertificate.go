@@ -188,7 +188,7 @@ type CertificateIssuedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, CertificateIssuedWaiter will use default max delay of 120 seconds.
+	// set to zero, CertificateIssuedWaiter will use default max delay of 60 seconds.
 	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
 	MaxDelay time.Duration
 
@@ -218,7 +218,7 @@ type CertificateIssuedWaiter struct {
 func NewCertificateIssuedWaiter(client GetCertificateAPIClient, optFns ...func(*CertificateIssuedWaiterOptions)) *CertificateIssuedWaiter {
 	options := CertificateIssuedWaiterOptions{}
 	options.MinDelay = 1 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 60 * time.Second
 	options.Retryable = certificateIssuedStateRetryable
 
 	for _, fn := range optFns {
@@ -253,7 +253,7 @@ func (w *CertificateIssuedWaiter) WaitForOutput(ctx context.Context, params *Get
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 60 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

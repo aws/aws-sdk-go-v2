@@ -1558,8 +1558,7 @@ type DvbTdtSettings struct {
 // Eac3 Atmos Settings
 type Eac3AtmosSettings struct {
 
-	// Average bitrate in bits/second. Valid bitrates depend on the coding mode. // *
-	// @affectsRightSizing true
+	// Average bitrate in bits/second. Valid bitrates depend on the coding mode.
 	Bitrate *float64
 
 	// Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.
@@ -2249,7 +2248,18 @@ type H264Settings struct {
 	// Entropy encoding mode. Use cabac (must be in Main or High profile) or cavlc.
 	EntropyEncoding H264EntropyEncoding
 
-	// Optional filters that you can apply to an encode.
+	// Optional. Both filters reduce bandwidth by removing imperceptible details. You
+	// can enable one of the filters. We recommend that you try both filters and
+	// observe the results to decide which one to use.
+	//
+	// The Temporal Filter reduces bandwidth by removing imperceptible details in the
+	// content. It combines perceptual filtering and motion compensated temporal
+	// filtering (MCTF). It operates independently of the compression level.
+	//
+	// The Bandwidth Reduction filter is a perceptual filter located within the
+	// encoding loop. It adapts to the current compression level to filter
+	// imperceptible signals. This filter works only when the resolution is 1080p or
+	// lower.
 	FilterSettings *H264FilterSettings
 
 	// Four bit AFD value to write on all frames of video in the output stream. Only
@@ -2530,7 +2540,18 @@ type H265Settings struct {
 	// Color Space settings
 	ColorSpaceSettings *H265ColorSpaceSettings
 
-	// Optional filters that you can apply to an encode.
+	// Optional. Both filters reduce bandwidth by removing imperceptible details. You
+	// can enable one of the filters. We recommend that you try both filters and
+	// observe the results to decide which one to use.
+	//
+	// The Temporal Filter reduces bandwidth by removing imperceptible details in the
+	// content. It combines perceptual filtering and motion compensated temporal
+	// filtering (MCTF). It operates independently of the compression level.
+	//
+	// The Bandwidth Reduction filter is a perceptual filter located within the
+	// encoding loop. It adapts to the current compression level to filter
+	// imperceptible signals. This filter works only when the resolution is 1080p or
+	// lower.
 	FilterSettings *H265FilterSettings
 
 	// Four bit AFD value to write on all frames of video in the output stream. Only
@@ -3236,6 +3257,9 @@ type Input struct {
 
 	// A list of the sources of the input (PULL-type).
 	Sources []InputSource
+
+	// The settings associated with an SRT input.
+	SrtSettings *SrtSettings
 
 	// Placeholder documentation for InputState
 	State InputState
@@ -5956,6 +5980,115 @@ type SignalMapSummary struct {
 
 // Smpte Tt Destination Settings
 type SmpteTtDestinationSettings struct {
+	noSmithyDocumentSerde
+}
+
+// The decryption settings for the SRT caller source. Present only if the source
+// has decryption enabled.
+type SrtCallerDecryption struct {
+
+	// The algorithm used to encrypt content.
+	Algorithm Algorithm
+
+	// The ARN for the secret in Secrets Manager. Someone in your organization must
+	// create a secret and provide you with its ARN. The secret holds the passphrase
+	// that MediaLive uses to decrypt the source content.
+	PassphraseSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Complete these parameters only if the content is encrypted.
+type SrtCallerDecryptionRequest struct {
+
+	// The algorithm used to encrypt content.
+	Algorithm Algorithm
+
+	// The ARN for the secret in Secrets Manager. Someone in your organization must
+	// create a secret and provide you with its ARN. This secret holds the passphrase
+	// that MediaLive will use to decrypt the source content.
+	PassphraseSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a source that uses SRT as the connection protocol. In
+// terms of establishing the connection, MediaLive is always caller and the
+// upstream system is always the listener. In terms of transmission of the source
+// content, MediaLive is always the receiver and the upstream system is always the
+// sender.
+type SrtCallerSource struct {
+
+	// The decryption settings for the SRT caller source. Present only if the source
+	// has decryption enabled.
+	Decryption *SrtCallerDecryption
+
+	// The preferred latency (in milliseconds) for implementing packet loss and
+	// recovery. Packet recovery is a key feature of SRT.
+	MinimumLatency *int32
+
+	// The IP address at the upstream system (the listener) that MediaLive (the
+	// caller) connects to.
+	SrtListenerAddress *string
+
+	// The port at the upstream system (the listener) that MediaLive (the caller)
+	// connects to.
+	SrtListenerPort *string
+
+	// The stream ID, if the upstream system uses this identifier.
+	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configures the connection for a source that uses SRT as the connection
+// protocol. In terms of establishing the connection, MediaLive is always the
+// caller and the upstream system is always the listener. In terms of transmission
+// of the source content, MediaLive is always the receiver and the upstream system
+// is always the sender.
+type SrtCallerSourceRequest struct {
+
+	// Complete these parameters only if the content is encrypted.
+	Decryption *SrtCallerDecryptionRequest
+
+	// The preferred latency (in milliseconds) for implementing packet loss and
+	// recovery. Packet recovery is a key feature of SRT. Obtain this value from the
+	// operator at the upstream system.
+	MinimumLatency *int32
+
+	// The IP address at the upstream system (the listener) that MediaLive (the
+	// caller) will connect to.
+	SrtListenerAddress *string
+
+	// The port at the upstream system (the listener) that MediaLive (the caller) will
+	// connect to.
+	SrtListenerPort *string
+
+	// This value is required if the upstream system uses this identifier because
+	// without it, the SRT handshake between MediaLive (the caller) and the upstream
+	// system (the listener) might fail.
+	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configured sources for this SRT input.
+type SrtSettings struct {
+
+	// Placeholder documentation for __listOfSrtCallerSource
+	SrtCallerSources []SrtCallerSource
+
+	noSmithyDocumentSerde
+}
+
+// Configures the sources for this SRT input. For a single-pipeline input, include
+// one srtCallerSource in the array. For a standard-pipeline input, include two
+// srtCallerSource.
+type SrtSettingsRequest struct {
+
+	// Placeholder documentation for __listOfSrtCallerSourceRequest
+	SrtCallerSources []SrtCallerSourceRequest
+
 	noSmithyDocumentSerde
 }
 

@@ -4983,6 +4983,22 @@ const (
 	ProcessingInstanceTypeMlG4dn8xlarge  ProcessingInstanceType = "ml.g4dn.8xlarge"
 	ProcessingInstanceTypeMlG4dn12xlarge ProcessingInstanceType = "ml.g4dn.12xlarge"
 	ProcessingInstanceTypeMlG4dn16xlarge ProcessingInstanceType = "ml.g4dn.16xlarge"
+	ProcessingInstanceTypeMlG5Xlarge     ProcessingInstanceType = "ml.g5.xlarge"
+	ProcessingInstanceTypeMlG52xlarge    ProcessingInstanceType = "ml.g5.2xlarge"
+	ProcessingInstanceTypeMlG54xlarge    ProcessingInstanceType = "ml.g5.4xlarge"
+	ProcessingInstanceTypeMlG58xlarge    ProcessingInstanceType = "ml.g5.8xlarge"
+	ProcessingInstanceTypeMlG516xlarge   ProcessingInstanceType = "ml.g5.16xlarge"
+	ProcessingInstanceTypeMlG512xlarge   ProcessingInstanceType = "ml.g5.12xlarge"
+	ProcessingInstanceTypeMlG524xlarge   ProcessingInstanceType = "ml.g5.24xlarge"
+	ProcessingInstanceTypeMlG548xlarge   ProcessingInstanceType = "ml.g5.48xlarge"
+	ProcessingInstanceTypeMlR5dLarge     ProcessingInstanceType = "ml.r5d.large"
+	ProcessingInstanceTypeMlR5dXlarge    ProcessingInstanceType = "ml.r5d.xlarge"
+	ProcessingInstanceTypeMlR5d2xlarge   ProcessingInstanceType = "ml.r5d.2xlarge"
+	ProcessingInstanceTypeMlR5d4xlarge   ProcessingInstanceType = "ml.r5d.4xlarge"
+	ProcessingInstanceTypeMlR5d8xlarge   ProcessingInstanceType = "ml.r5d.8xlarge"
+	ProcessingInstanceTypeMlR5d12xlarge  ProcessingInstanceType = "ml.r5d.12xlarge"
+	ProcessingInstanceTypeMlR5d16xlarge  ProcessingInstanceType = "ml.r5d.16xlarge"
+	ProcessingInstanceTypeMlR5d24xlarge  ProcessingInstanceType = "ml.r5d.24xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -5035,6 +5051,22 @@ func (ProcessingInstanceType) Values() []ProcessingInstanceType {
 		"ml.g4dn.8xlarge",
 		"ml.g4dn.12xlarge",
 		"ml.g4dn.16xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
+		"ml.r5d.large",
+		"ml.r5d.xlarge",
+		"ml.r5d.2xlarge",
+		"ml.r5d.4xlarge",
+		"ml.r5d.8xlarge",
+		"ml.r5d.12xlarge",
+		"ml.r5d.16xlarge",
+		"ml.r5d.24xlarge",
 	}
 }
 
@@ -7225,6 +7257,26 @@ const (
 	TrainingInstanceTypeMlC6i16xlarge   TrainingInstanceType = "ml.c6i.16xlarge"
 	TrainingInstanceTypeMlC6i24xlarge   TrainingInstanceType = "ml.c6i.24xlarge"
 	TrainingInstanceTypeMlC6i32xlarge   TrainingInstanceType = "ml.c6i.32xlarge"
+	TrainingInstanceTypeMlR5dLarge      TrainingInstanceType = "ml.r5d.large"
+	TrainingInstanceTypeMlR5dXlarge     TrainingInstanceType = "ml.r5d.xlarge"
+	TrainingInstanceTypeMlR5d2xlarge    TrainingInstanceType = "ml.r5d.2xlarge"
+	TrainingInstanceTypeMlR5d4xlarge    TrainingInstanceType = "ml.r5d.4xlarge"
+	TrainingInstanceTypeMlR5d8xlarge    TrainingInstanceType = "ml.r5d.8xlarge"
+	TrainingInstanceTypeMlR5d12xlarge   TrainingInstanceType = "ml.r5d.12xlarge"
+	TrainingInstanceTypeMlR5d16xlarge   TrainingInstanceType = "ml.r5d.16xlarge"
+	TrainingInstanceTypeMlR5d24xlarge   TrainingInstanceType = "ml.r5d.24xlarge"
+	TrainingInstanceTypeMlT3Medium      TrainingInstanceType = "ml.t3.medium"
+	TrainingInstanceTypeMlT3Large       TrainingInstanceType = "ml.t3.large"
+	TrainingInstanceTypeMlT3Xlarge      TrainingInstanceType = "ml.t3.xlarge"
+	TrainingInstanceTypeMlT32xlarge     TrainingInstanceType = "ml.t3.2xlarge"
+	TrainingInstanceTypeMlR5Large       TrainingInstanceType = "ml.r5.large"
+	TrainingInstanceTypeMlR5Xlarge      TrainingInstanceType = "ml.r5.xlarge"
+	TrainingInstanceTypeMlR52xlarge     TrainingInstanceType = "ml.r5.2xlarge"
+	TrainingInstanceTypeMlR54xlarge     TrainingInstanceType = "ml.r5.4xlarge"
+	TrainingInstanceTypeMlR58xlarge     TrainingInstanceType = "ml.r5.8xlarge"
+	TrainingInstanceTypeMlR512xlarge    TrainingInstanceType = "ml.r5.12xlarge"
+	TrainingInstanceTypeMlR516xlarge    TrainingInstanceType = "ml.r5.16xlarge"
+	TrainingInstanceTypeMlR524xlarge    TrainingInstanceType = "ml.r5.24xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -7302,6 +7354,26 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.c6i.16xlarge",
 		"ml.c6i.24xlarge",
 		"ml.c6i.32xlarge",
+		"ml.r5d.large",
+		"ml.r5d.xlarge",
+		"ml.r5d.2xlarge",
+		"ml.r5d.4xlarge",
+		"ml.r5d.8xlarge",
+		"ml.r5d.12xlarge",
+		"ml.r5d.16xlarge",
+		"ml.r5d.24xlarge",
+		"ml.t3.medium",
+		"ml.t3.large",
+		"ml.t3.xlarge",
+		"ml.t3.2xlarge",
+		"ml.r5.large",
+		"ml.r5.xlarge",
+		"ml.r5.2xlarge",
+		"ml.r5.4xlarge",
+		"ml.r5.8xlarge",
+		"ml.r5.12xlarge",
+		"ml.r5.16xlarge",
+		"ml.r5.24xlarge",
 	}
 }
 

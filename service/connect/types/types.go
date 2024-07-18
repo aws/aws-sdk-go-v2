@@ -195,6 +195,43 @@ type AgentStatusReference struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to return agent statuses.
+type AgentStatusSearchCriteria struct {
+
+	// A leaf node condition which can be used to specify a string condition.
+	//
+	// The currently supported values for FieldName are name ,   description , state ,
+	// type , displayOrder ,  and resourceID .
+	AndConditions []AgentStatusSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []AgentStatusSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	//
+	// The currently supported values for FieldName are name ,   description , state ,
+	// type , displayOrder ,  and resourceID .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type AgentStatusSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
 // Summary information for an agent status.
 type AgentStatusSummary struct {
 
@@ -751,6 +788,30 @@ type ClaimedPhoneNumberSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A list of conditions which would be applied together with an AND condition.
+type CommonAttributeAndCondition struct {
+
+	// A leaf node condition which can be used to specify a tag condition.
+	TagConditions []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// A leaf node condition which can be used to specify a ProficiencyName,
+// ProficiencyValue and ProficiencyLimit.
+type Condition struct {
+
+	// A leaf node condition which can be used to specify a numeric condition.
+	NumberCondition *NumberCondition
+
+	// A leaf node condition which can be used to specify a string condition.
+	//
+	// The currently supported values for FieldName are name and  value .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
 // Information required to join the call.
 type ConnectionData struct {
 
@@ -1024,8 +1085,6 @@ type ContactFlowModuleSearchCriteria struct {
 	OrConditions []ContactFlowModuleSearchCriteria
 
 	// A leaf node condition which can be used to specify a string condition.
-	//
-	// The currently supported values for FieldName are name and description .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -1079,8 +1138,6 @@ type ContactFlowSearchCriteria struct {
 	StatusCondition ContactFlowStatus
 
 	// A leaf node condition which can be used to specify a string condition.
-	//
-	// The currently supported values for FieldName are name and description .
 	StringCondition *StringCondition
 
 	// The type of flow.
@@ -1199,6 +1256,29 @@ type ContactSearchSummaryQueueInfo struct {
 
 	// The unique identifier for the queue.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that can be used to specify Tag conditions inside the SearchFilter .
+// This accepts an OR or AND (List of List) input where:
+//
+//   - The top level list specifies conditions that need to be applied with OR
+//     operator.
+//
+//   - The inner list specifies conditions that need to be applied with AND
+//     operator.
+type ControlPlaneAttributeFilter struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndCondition *CommonAttributeAndCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []CommonAttributeAndCondition
+
+	// A leaf node condition which can be used to specify a tag condition, for
+	// example, HAVE BPO = 123 .
+	TagCondition *TagCondition
 
 	noSmithyDocumentSerde
 }
@@ -3158,6 +3238,20 @@ type LexV2Bot struct {
 	noSmithyDocumentSerde
 }
 
+// A leaf node condition which can be used to specify a List condition to search
+// users with attributes included in Lists like Proficiencies.
+type ListCondition struct {
+
+	// A list of Condition objects which would be applied together with an AND
+	// condition.
+	Conditions []Condition
+
+	// The type of target list that will be used to filter the users.
+	TargetListType TargetListType
+
+	noSmithyDocumentSerde
+}
+
 // Information about phone numbers that have been claimed to your Amazon Connect
 // instance or traffic distribution group.
 type ListPhoneNumbersSummary struct {
@@ -3424,6 +3518,26 @@ type NotificationRecipientType struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
 	// with the specified tags will be notified.
 	UserTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A leaf node condition which can be used to specify a numeric condition.
+//
+// The currently supported value for FieldName is limit .
+type NumberCondition struct {
+
+	// The type of comparison to be made when evaluating the number condition.
+	ComparisonType NumberComparisonType
+
+	// The name of the field in the number condition.
+	FieldName *string
+
+	// The maxValue to be used while evaluating the number condition.
+	MaxValue *int32
+
+	// The minValue to be used while evaluating the number condition.
+	MinValue *int32
 
 	noSmithyDocumentSerde
 }
@@ -3712,8 +3826,6 @@ type PredefinedAttributeSearchCriteria struct {
 	OrConditions []PredefinedAttributeSearchCriteria
 
 	// A leaf node condition which can be used to specify a string condition.
-	//
-	// The currently supported values for FieldName are name and description .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -5187,8 +5299,6 @@ type SecurityProfileSearchCriteria struct {
 	OrConditions []SecurityProfileSearchCriteria
 
 	// A leaf node condition which can be used to specify a string condition.
-	//
-	// The currently supported values for FieldName are name and description .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -5384,8 +5494,6 @@ type Step struct {
 }
 
 // A leaf node condition which can be used to specify a string condition.
-//
-// The currently supported values for FieldName are name and description .
 type StringCondition struct {
 
 	// The type of comparison to be made when evaluating the string condition.
@@ -5977,6 +6085,40 @@ type UserDataFilters struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to return userHierarchyGroup.
+type UserHierarchyGroupSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []UserHierarchyGroupSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []UserHierarchyGroupSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	//
+	// The currently supported values for FieldName are name ,   parentId , levelId ,
+	// and resourceID .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type UserHierarchyGroupSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter.
+	// This accepts an OR or AND (List of List) input where:
+	//
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	AttributeFilter *ControlPlaneAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the identity of a user.
 //
 // For Amazon Connect instances that are created with the EXISTING_DIRECTORY
@@ -6128,6 +6270,10 @@ type UserSearchCriteria struct {
 
 	// A leaf node condition which can be used to specify a hierarchy group condition.
 	HierarchyGroupCondition *HierarchyGroupCondition
+
+	// A leaf node condition which can be used to specify a List condition to search
+	// users with attributes included in Lists like Proficiencies.
+	ListCondition *ListCondition
 
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []UserSearchCriteria

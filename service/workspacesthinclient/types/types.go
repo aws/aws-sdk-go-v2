@@ -157,8 +157,8 @@ type Environment struct {
 	// The type of streaming desktop for the environment.
 	DesktopType DesktopType
 
-	// "The tag keys and optional values for the newly created devices for this
-	// environment."
+	// The tag keys and optional values for the newly created devices for this
+	// environment.
 	DeviceCreationTags map[string]string
 
 	// The ID of the environment.

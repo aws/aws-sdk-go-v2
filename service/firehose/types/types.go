@@ -427,6 +427,23 @@ type BufferingHints struct {
 	noSmithyDocumentSerde
 }
 
+//	Describes the containers where the destination Apache Iceberg Tables are
+//
+// persisted.
+//
+// Amazon Data Firehose is in preview release and is subject to change.
+type CatalogConfiguration struct {
+
+	//  Specifies the Glue catalog ARN indentifier of the destination Apache Iceberg
+	// Tables. You must specify the ARN in the format
+	// arn:aws:glue:region:account-id:catalog .
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	CatalogARN *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the Amazon CloudWatch logging options for your delivery stream.
 type CloudWatchLoggingOptions struct {
 
@@ -701,6 +718,11 @@ type DestinationDescription struct {
 	// Describes the specified HTTP endpoint destination.
 	HttpEndpointDestinationDescription *HttpEndpointDestinationDescription
 
+	//  Describes a destination in Apache Iceberg Tables.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	IcebergDestinationDescription *IcebergDestinationDescription
+
 	// The destination in Amazon Redshift.
 	RedshiftDestinationDescription *RedshiftDestinationDescription
 
@@ -712,6 +734,40 @@ type DestinationDescription struct {
 
 	// The destination in Splunk.
 	SplunkDestinationDescription *SplunkDestinationDescription
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the configuration of a destination in Apache Iceberg Tables.
+//
+// Amazon Data Firehose is in preview release and is subject to change.
+type DestinationTableConfiguration struct {
+
+	//  The name of the Apache Iceberg database.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	DestinationDatabaseName *string
+
+	//  Specifies the name of the Apache Iceberg Table.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	DestinationTableName *string
+
+	//  The table specific S3 error output prefix. All the errors that occurred while
+	// delivering to this table will be prefixed with this value in S3 destination.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	S3ErrorOutputPrefix *string
+
+	//  A list of unique keys for a given Apache Iceberg table. Firehose will use
+	// these for running Create/Update/Delete operations on the given Iceberg table.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	UniqueKeys []string
 
 	noSmithyDocumentSerde
 }
@@ -1524,6 +1580,163 @@ type HttpEndpointRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
+//	Specifies the destination configure settings for Apache Iceberg Table.
+//
+// Amazon Data Firehose is in preview release and is subject to change.
+type IcebergDestinationConfiguration struct {
+
+	//  Configuration describing where the destination Apache Iceberg Tables are
+	// persisted.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	CatalogConfiguration *CatalogConfiguration
+
+	//  The Amazon Resource Name (ARN) of the Apache Iceberg tables role.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	RoleARN *string
+
+	// Describes the configuration of a destination in Amazon S3.
+	//
+	// This member is required.
+	S3Configuration *S3DestinationConfiguration
+
+	// Describes hints for the buffering to perform before delivering data to the
+	// destination. These options are treated as hints, and therefore Firehose might
+	// choose to use different values when it is optimal. The SizeInMBs and
+	// IntervalInSeconds parameters are optional. However, if specify a value for one
+	// of them, you must also provide a value for the other.
+	BufferingHints *BufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	//  Provides a list of DestinationTableConfigurations which Firehose uses to
+	// deliver data to Apache Iceberg tables.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	DestinationTableConfigurationList []DestinationTableConfiguration
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	//  The retry behavior in case Firehose is unable to deliver data to an Amazon S3
+	// prefix.
+	RetryOptions *RetryOptions
+
+	//  Describes how Firehose will backup records. Currently,Firehose only supports
+	// FailedDataOnly for preview.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	S3BackupMode IcebergS3BackupMode
+
+	noSmithyDocumentSerde
+}
+
+//	Describes a destination in Apache Iceberg Tables.
+//
+// Amazon Data Firehose is in preview release and is subject to change.
+type IcebergDestinationDescription struct {
+
+	// Describes hints for the buffering to perform before delivering data to the
+	// destination. These options are treated as hints, and therefore Firehose might
+	// choose to use different values when it is optimal. The SizeInMBs and
+	// IntervalInSeconds parameters are optional. However, if specify a value for one
+	// of them, you must also provide a value for the other.
+	BufferingHints *BufferingHints
+
+	//  Configuration describing where the destination Iceberg tables are persisted.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	CatalogConfiguration *CatalogConfiguration
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	//  Provides a list of DestinationTableConfigurations which Firehose uses to
+	// deliver data to Apache Iceberg tables.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	DestinationTableConfigurationList []DestinationTableConfiguration
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	//  The retry behavior in case Firehose is unable to deliver data to an Amazon S3
+	// prefix.
+	RetryOptions *RetryOptions
+
+	//  The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	RoleARN *string
+
+	//  Describes how Firehose will backup records. Currently,Firehose only supports
+	// FailedDataOnly for preview.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	S3BackupMode IcebergS3BackupMode
+
+	// Describes a destination in Amazon S3.
+	S3DestinationDescription *S3DestinationDescription
+
+	noSmithyDocumentSerde
+}
+
+//	Describes an update for a destination in Apache Iceberg Tables.
+//
+// Amazon Data Firehose is in preview release and is subject to change.
+type IcebergDestinationUpdate struct {
+
+	// Describes hints for the buffering to perform before delivering data to the
+	// destination. These options are treated as hints, and therefore Firehose might
+	// choose to use different values when it is optimal. The SizeInMBs and
+	// IntervalInSeconds parameters are optional. However, if specify a value for one
+	// of them, you must also provide a value for the other.
+	BufferingHints *BufferingHints
+
+	//  Configuration describing where the destination Iceberg tables are persisted.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	CatalogConfiguration *CatalogConfiguration
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	//  Provides a list of DestinationTableConfigurations which Firehose uses to
+	// deliver data to Apache Iceberg tables.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	DestinationTableConfigurationList []DestinationTableConfiguration
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	//  The retry behavior in case Firehose is unable to deliver data to an Amazon S3
+	// prefix.
+	RetryOptions *RetryOptions
+
+	//  The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	RoleARN *string
+
+	//  Describes how Firehose will backup records. Currently,Firehose only supports
+	// FailedDataOnly for preview.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	S3BackupMode IcebergS3BackupMode
+
+	// Describes the configuration of a destination in Amazon S3.
+	S3Configuration *S3DestinationConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the deserializer you want to use to convert the format of the input
 // data. This parameter is required if Enabled is set to true.
 type InputFormatConfiguration struct {
@@ -1615,6 +1828,15 @@ type MSKSourceConfiguration struct {
 	// This member is required.
 	TopicName *string
 
+	// The start date and time in UTC for the offset position within your MSK topic
+	// from where Firehose begins to read. By default, this is set to timestamp when
+	// Firehose becomes Active.
+	//
+	// If you want to create a Firehose stream with Earliest start position from SDK
+	// or CLI, you need to set the ReadFromTimestamp parameter to Epoch
+	// (1970-01-01T00:00:00Z).
+	ReadFromTimestamp *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -1631,6 +1853,15 @@ type MSKSourceDescription struct {
 
 	// The ARN of the Amazon MSK cluster.
 	MSKClusterARN *string
+
+	// The start date and time in UTC for the offset position within your MSK topic
+	// from where Firehose begins to read. By default, this is set to timestamp when
+	// Firehose becomes Active.
+	//
+	// If you want to create a Firehose stream with Earliest start position from SDK
+	// or CLI, you need to set the ReadFromTimestampUTC parameter to Epoch
+	// (1970-01-01T00:00:00Z).
+	ReadFromTimestamp *time.Time
 
 	// The topic name within the Amazon MSK cluster.
 	TopicName *string
@@ -2300,6 +2531,22 @@ type Serializer struct {
 	noSmithyDocumentSerde
 }
 
+//	Describes the buffering to perform before delivering data to the Snowflake
+//
+// destination. If you do not specify any value, Firehose uses the default values.
+type SnowflakeBufferingHints struct {
+
+	//  Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 0.
+	IntervalInSeconds *int32
+
+	//  Buffer incoming data to the specified size, in MBs, before delivering it to
+	// the destination. The default value is 1.
+	SizeInMBs *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configure Snowflake destination
 type SnowflakeDestinationConfiguration struct {
 
@@ -2337,6 +2584,10 @@ type SnowflakeDestinationConfiguration struct {
 	//
 	// This member is required.
 	Table *string
+
+	//  Describes the buffering to perform before delivering data to the Snowflake
+	// destination. If you do not specify any value, Firehose uses the default values.
+	BufferingHints *SnowflakeBufferingHints
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
@@ -2400,6 +2651,10 @@ type SnowflakeDestinationDescription struct {
 	//
 	// [account identifier]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
 	AccountUrl *string
+
+	//  Describes the buffering to perform before delivering data to the Snowflake
+	// destination. If you do not specify any value, Firehose uses the default values.
+	BufferingHints *SnowflakeBufferingHints
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
@@ -2469,6 +2724,10 @@ type SnowflakeDestinationUpdate struct {
 	//
 	// [account identifier]: https://docs.snowflake.com/en/user-guide/admin-account-identifier
 	AccountUrl *string
+
+	//  Describes the buffering to perform before delivering data to the Snowflake
+	// destination.
+	BufferingHints *SnowflakeBufferingHints
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions

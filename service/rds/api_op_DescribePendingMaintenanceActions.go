@@ -13,6 +13,12 @@ import (
 
 // Returns a list of resources (for example, DB instances) that have at least one
 // pending maintenance action.
+//
+// This API follows an eventual consistency model. This means that the result of
+// the DescribePendingMaintenanceActions command might not be immediately visible
+// to all subsequent RDS commands. Keep this in mind when you use
+// DescribePendingMaintenanceActions immediately after using a previous API command
+// such as ApplyPendingMaintenanceActions .
 func (c *Client) DescribePendingMaintenanceActions(ctx context.Context, params *DescribePendingMaintenanceActionsInput, optFns ...func(*Options)) (*DescribePendingMaintenanceActionsOutput, error) {
 	if params == nil {
 		params = &DescribePendingMaintenanceActionsInput{}

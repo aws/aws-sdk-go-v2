@@ -94,6 +94,11 @@ type UpdateDestinationInput struct {
 	// Describes an update to the specified HTTP endpoint destination.
 	HttpEndpointDestinationUpdate *types.HttpEndpointDestinationUpdate
 
+	//  Describes an update for a destination in Apache Iceberg Tables.
+	//
+	// Amazon Data Firehose is in preview release and is subject to change.
+	IcebergDestinationUpdate *types.IcebergDestinationUpdate
+
 	// Describes an update for a destination in Amazon Redshift.
 	RedshiftDestinationUpdate *types.RedshiftDestinationUpdate
 

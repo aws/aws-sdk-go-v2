@@ -1,0 +1,8 @@
+{
+    "id": "d5b0206b-977d-4e49-b7a4-37bc49c5b2c2",
+    "type": "documentation",
+    "description": "Updates Amazon RDS documentation to specify an eventual consistency model for DescribePendingMaintenanceActions.",
+    "modules": [
+        "service/rds"
+    ]
+}

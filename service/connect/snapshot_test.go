@@ -2138,6 +2138,18 @@ func TestCheckSnapshot_ResumeContactRecording(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchAgentStatuses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchAgentStatuses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchAgentStatuses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchAvailablePhoneNumbers(context.Background(), nil, func(o *Options) {
@@ -2275,6 +2287,18 @@ func TestCheckSnapshot_SearchSecurityProfiles(t *testing.T) {
 	_, err := svc.SearchSecurityProfiles(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchSecurityProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchUserHierarchyGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchUserHierarchyGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchUserHierarchyGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5173,6 +5197,18 @@ func TestUpdateSnapshot_ResumeContactRecording(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchAgentStatuses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchAgentStatuses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchAgentStatuses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SearchAvailablePhoneNumbers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchAvailablePhoneNumbers(context.Background(), nil, func(o *Options) {
@@ -5310,6 +5346,18 @@ func TestUpdateSnapshot_SearchSecurityProfiles(t *testing.T) {
 	_, err := svc.SearchSecurityProfiles(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchSecurityProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchUserHierarchyGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchUserHierarchyGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchUserHierarchyGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

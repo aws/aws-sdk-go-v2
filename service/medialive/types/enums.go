@@ -334,6 +334,27 @@ func (AfdSignaling) Values() []AfdSignaling {
 	}
 }
 
+type Algorithm string
+
+// Enum values for Algorithm
+const (
+	AlgorithmAes128 Algorithm = "AES128"
+	AlgorithmAes192 Algorithm = "AES192"
+	AlgorithmAes256 Algorithm = "AES256"
+)
+
+// Values returns all known values for Algorithm. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Algorithm) Values() []Algorithm {
+	return []Algorithm{
+		"AES128",
+		"AES192",
+		"AES256",
+	}
+}
+
 type AudioDescriptionAudioTypeControl string
 
 // Enum values for AudioDescriptionAudioTypeControl
@@ -4114,6 +4135,7 @@ const (
 	InputTypeInputDevice  InputType = "INPUT_DEVICE"
 	InputTypeAwsCdi       InputType = "AWS_CDI"
 	InputTypeTsFile       InputType = "TS_FILE"
+	InputTypeSrtCaller    InputType = "SRT_CALLER"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
@@ -4132,6 +4154,7 @@ func (InputType) Values() []InputType {
 		"INPUT_DEVICE",
 		"AWS_CDI",
 		"TS_FILE",
+		"SRT_CALLER",
 	}
 }
 

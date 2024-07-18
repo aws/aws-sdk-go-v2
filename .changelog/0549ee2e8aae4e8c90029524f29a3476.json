@@ -1,0 +1,8 @@
+{
+    "id": "0549ee2e-8aae-4e8c-9002-9524f29a3476",
+    "type": "feature",
+    "description": "Amazon VPC IP Address Manager (IPAM) now supports Bring-Your-Own-IP (BYOIP) for IP addresses registered with any Internet Registry. This feature uses DNS TXT records to validate ownership of a public IP address range.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -6200,6 +6200,11 @@ func awsRestjson1_deserializeOpDocumentDescribeInputOutput(v **DescribeInputOutp
 				return err
 			}
 
+		case "srtSettings":
+			if err := awsRestjson1_deserializeDocumentSrtSettings(&sv.SrtSettings, value); err != nil {
+				return err
+			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20096,6 +20101,40 @@ func awsRestjson1_deserializeDocument__listOfSignalMapSummary(v *[]types.SignalM
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfSrtCallerSource(v *[]types.SrtCallerSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SrtCallerSource
+	if *v == nil {
+		cv = []types.SrtCallerSource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SrtCallerSource
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSrtCallerSource(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfThumbnail(v *[]types.Thumbnail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29106,6 +29145,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				return err
 			}
 
+		case "srtSettings":
+			if err := awsRestjson1_deserializeDocumentSrtSettings(&sv.SrtSettings, value); err != nil {
+				return err
+			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -37039,6 +37083,167 @@ func awsRestjson1_deserializeDocumentSmpteTtDestinationSettings(v **types.SmpteT
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSrtCallerDecryption(v **types.SrtCallerDecryption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SrtCallerDecryption
+	if *v == nil {
+		sv = &types.SrtCallerDecryption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "algorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Algorithm to be of type string, got %T instead", value)
+				}
+				sv.Algorithm = types.Algorithm(jtv)
+			}
+
+		case "passphraseSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.PassphraseSecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSrtCallerSource(v **types.SrtCallerSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SrtCallerSource
+	if *v == nil {
+		sv = &types.SrtCallerSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "decryption":
+			if err := awsRestjson1_deserializeDocumentSrtCallerDecryption(&sv.Decryption, value); err != nil {
+				return err
+			}
+
+		case "minimumLatency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumLatency = ptr.Int32(int32(i64))
+			}
+
+		case "srtListenerAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SrtListenerAddress = ptr.String(jtv)
+			}
+
+		case "srtListenerPort":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SrtListenerPort = ptr.String(jtv)
+			}
+
+		case "streamId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.StreamId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSrtSettings(v **types.SrtSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SrtSettings
+	if *v == nil {
+		sv = &types.SrtSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "srtCallerSources":
+			if err := awsRestjson1_deserializeDocument__listOfSrtCallerSource(&sv.SrtCallerSources, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

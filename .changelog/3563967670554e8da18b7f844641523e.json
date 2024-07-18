@@ -1,0 +1,8 @@
+{
+    "id": "35639676-7055-4e8d-a18b-7f844641523e",
+    "type": "documentation",
+    "description": "Doc-only update for TimestreamQuery. Added guidance about the accepted valid value for the QueryPricingModel parameter.",
+    "modules": [
+        "service/timestreamquery"
+    ]
+}

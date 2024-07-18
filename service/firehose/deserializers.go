@@ -2214,6 +2214,46 @@ func awsAwsjson11_deserializeDocumentBufferingHints(v **types.BufferingHints, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCatalogConfiguration(v **types.CatalogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CatalogConfiguration
+	if *v == nil {
+		sv = &types.CatalogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CatalogARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlueDataCatalogARN to be of type string, got %T instead", value)
+				}
+				sv.CatalogARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(v **types.CloudWatchLoggingOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2794,6 +2834,11 @@ func awsAwsjson11_deserializeDocumentDestinationDescription(v **types.Destinatio
 				return err
 			}
 
+		case "IcebergDestinationDescription":
+			if err := awsAwsjson11_deserializeDocumentIcebergDestinationDescription(&sv.IcebergDestinationDescription, value); err != nil {
+				return err
+			}
+
 		case "RedshiftDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(&sv.RedshiftDestinationDescription, value); err != nil {
 				return err
@@ -2847,6 +2892,103 @@ func awsAwsjson11_deserializeDocumentDestinationDescriptionList(v *[]types.Desti
 		var col types.DestinationDescription
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentDestinationDescription(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDestinationTableConfiguration(v **types.DestinationTableConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DestinationTableConfiguration
+	if *v == nil {
+		sv = &types.DestinationTableConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationDatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyStringWithoutWhitespace to be of type string, got %T instead", value)
+				}
+				sv.DestinationDatabaseName = ptr.String(jtv)
+			}
+
+		case "DestinationTableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyStringWithoutWhitespace to be of type string, got %T instead", value)
+				}
+				sv.DestinationTableName = ptr.String(jtv)
+			}
+
+		case "S3ErrorOutputPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorOutputPrefix to be of type string, got %T instead", value)
+				}
+				sv.S3ErrorOutputPrefix = ptr.String(jtv)
+			}
+
+		case "UniqueKeys":
+			if err := awsAwsjson11_deserializeDocumentListOfNonEmptyStringsWithoutWhitespace(&sv.UniqueKeys, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDestinationTableConfigurationList(v *[]types.DestinationTableConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DestinationTableConfiguration
+	if *v == nil {
+		cv = []types.DestinationTableConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DestinationTableConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDestinationTableConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -3807,6 +3949,90 @@ func awsAwsjson11_deserializeDocumentHttpEndpointRetryOptions(v **types.HttpEndp
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIcebergDestinationDescription(v **types.IcebergDestinationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergDestinationDescription
+	if *v == nil {
+		sv = &types.IcebergDestinationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BufferingHints":
+			if err := awsAwsjson11_deserializeDocumentBufferingHints(&sv.BufferingHints, value); err != nil {
+				return err
+			}
+
+		case "CatalogConfiguration":
+			if err := awsAwsjson11_deserializeDocumentCatalogConfiguration(&sv.CatalogConfiguration, value); err != nil {
+				return err
+			}
+
+		case "CloudWatchLoggingOptions":
+			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
+				return err
+			}
+
+		case "DestinationTableConfigurationList":
+			if err := awsAwsjson11_deserializeDocumentDestinationTableConfigurationList(&sv.DestinationTableConfigurationList, value); err != nil {
+				return err
+			}
+
+		case "ProcessingConfiguration":
+			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "RetryOptions":
+			if err := awsAwsjson11_deserializeDocumentRetryOptions(&sv.RetryOptions, value); err != nil {
+				return err
+			}
+
+		case "RoleARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleARN to be of type string, got %T instead", value)
+				}
+				sv.RoleARN = ptr.String(jtv)
+			}
+
+		case "S3BackupMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergS3BackupMode to be of type string, got %T instead", value)
+				}
+				sv.S3BackupMode = types.IcebergS3BackupMode(jtv)
+			}
+
+		case "S3DestinationDescription":
+			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInputFormatConfiguration(v **types.InputFormatConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4282,6 +4508,22 @@ func awsAwsjson11_deserializeDocumentMSKSourceDescription(v **types.MSKSourceDes
 					return fmt.Errorf("expected MSKClusterARN to be of type string, got %T instead", value)
 				}
 				sv.MSKClusterARN = ptr.String(jtv)
+			}
+
+		case "ReadFromTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ReadFromTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ReadFromTimestamp to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "TopicName":
@@ -5613,6 +5855,63 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableException(v **types.Servi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSnowflakeBufferingHints(v **types.SnowflakeBufferingHints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakeBufferingHints
+	if *v == nil {
+		sv = &types.SnowflakeBufferingHints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IntervalInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeBufferingIntervalInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IntervalInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "SizeInMBs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeBufferingSizeInMBs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInMBs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.SnowflakeDestinationDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5642,6 +5941,11 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 					return fmt.Errorf("expected SnowflakeAccountUrl to be of type string, got %T instead", value)
 				}
 				sv.AccountUrl = ptr.String(jtv)
+			}
+
+		case "BufferingHints":
+			if err := awsAwsjson11_deserializeDocumentSnowflakeBufferingHints(&sv.BufferingHints, value); err != nil {
+				return err
 			}
 
 		case "CloudWatchLoggingOptions":

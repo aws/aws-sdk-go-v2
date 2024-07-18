@@ -974,6 +974,18 @@ func TestCheckSnapshot_CreateIpam(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateIpamExternalResourceVerificationToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamExternalResourceVerificationToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIpamExternalResourceVerificationToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIpamPool(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamPool(context.Background(), nil, func(o *Options) {
@@ -1879,6 +1891,18 @@ func TestCheckSnapshot_DeleteIpam(t *testing.T) {
 	_, err := svc.DeleteIpam(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteIpam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIpamExternalResourceVerificationToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamExternalResourceVerificationToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIpamExternalResourceVerificationToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3367,6 +3391,18 @@ func TestCheckSnapshot_DescribeIpamByoasn(t *testing.T) {
 	_, err := svc.DescribeIpamByoasn(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeIpamByoasn")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeIpamExternalResourceVerificationTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamExternalResourceVerificationTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamExternalResourceVerificationTokens")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8437,6 +8473,18 @@ func TestUpdateSnapshot_CreateIpam(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateIpamExternalResourceVerificationToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamExternalResourceVerificationToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIpamExternalResourceVerificationToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIpamPool(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamPool(context.Background(), nil, func(o *Options) {
@@ -9342,6 +9390,18 @@ func TestUpdateSnapshot_DeleteIpam(t *testing.T) {
 	_, err := svc.DeleteIpam(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteIpam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIpamExternalResourceVerificationToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamExternalResourceVerificationToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIpamExternalResourceVerificationToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10830,6 +10890,18 @@ func TestUpdateSnapshot_DescribeIpamByoasn(t *testing.T) {
 	_, err := svc.DescribeIpamByoasn(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeIpamByoasn")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeIpamExternalResourceVerificationTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamExternalResourceVerificationTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamExternalResourceVerificationTokens")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

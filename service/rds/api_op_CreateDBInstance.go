@@ -1051,12 +1051,13 @@ type CreateDBInstanceInput struct {
 
 	// Specifies whether the DB instance is publicly accessible.
 	//
-	// When the DB instance is publicly accessible, its Domain Name System (DNS)
-	// endpoint resolves to the private IP address from within the DB instance's
-	// virtual private cloud (VPC). It resolves to the public IP address from outside
-	// of the DB instance's VPC. Access to the DB instance is ultimately controlled by
-	// the security group it uses. That public access is not permitted if the security
-	// group assigned to the DB instance doesn't permit it.
+	// When the DB instance is publicly accessible and you connect from outside of the
+	// DB instance's virtual private cloud (VPC), its Domain Name System (DNS) endpoint
+	// resolves to the public IP address. When you connect from within the same VPC as
+	// the DB instance, the endpoint resolves to the private IP address. Access to the
+	// DB instance is ultimately controlled by the security group it uses. That public
+	// access is not permitted if the security group assigned to the DB instance
+	// doesn't permit it.
 	//
 	// When the DB instance isn't publicly accessible, it is an internal DB instance
 	// with a DNS name that resolves to a private IP address.

@@ -136,8 +136,19 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.Aws,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.Aws,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-global",
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-global",
+			}: endpoints.Endpoint{
+				Hostname: "tax.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-cn",

@@ -177,7 +177,7 @@ type CertificateAuthorityCSRCreatedWaiterOptions struct {
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
 	// set to zero, CertificateAuthorityCSRCreatedWaiter will use default max delay of
-	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// 180 seconds. Note that MaxDelay must resolve to value greater than or equal to
 	// the MinDelay.
 	MaxDelay time.Duration
 
@@ -209,7 +209,7 @@ type CertificateAuthorityCSRCreatedWaiter struct {
 func NewCertificateAuthorityCSRCreatedWaiter(client GetCertificateAuthorityCsrAPIClient, optFns ...func(*CertificateAuthorityCSRCreatedWaiterOptions)) *CertificateAuthorityCSRCreatedWaiter {
 	options := CertificateAuthorityCSRCreatedWaiterOptions{}
 	options.MinDelay = 3 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 180 * time.Second
 	options.Retryable = certificateAuthorityCSRCreatedStateRetryable
 
 	for _, fn := range optFns {
@@ -244,7 +244,7 @@ func (w *CertificateAuthorityCSRCreatedWaiter) WaitForOutput(ctx context.Context
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 180 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

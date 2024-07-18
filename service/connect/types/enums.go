@@ -1180,6 +1180,35 @@ func (NotificationDeliveryType) Values() []NotificationDeliveryType {
 	}
 }
 
+type NumberComparisonType string
+
+// Enum values for NumberComparisonType
+const (
+	NumberComparisonTypeGreaterOrEqual NumberComparisonType = "GREATER_OR_EQUAL"
+	NumberComparisonTypeGreater        NumberComparisonType = "GREATER"
+	NumberComparisonTypeLesserOrEqual  NumberComparisonType = "LESSER_OR_EQUAL"
+	NumberComparisonTypeLesser         NumberComparisonType = "LESSER"
+	NumberComparisonTypeEqual          NumberComparisonType = "EQUAL"
+	NumberComparisonTypeNotEqual       NumberComparisonType = "NOT_EQUAL"
+	NumberComparisonTypeRange          NumberComparisonType = "RANGE"
+)
+
+// Values returns all known values for NumberComparisonType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NumberComparisonType) Values() []NumberComparisonType {
+	return []NumberComparisonType{
+		"GREATER_OR_EQUAL",
+		"GREATER",
+		"LESSER_OR_EQUAL",
+		"LESSER",
+		"EQUAL",
+		"NOT_EQUAL",
+		"RANGE",
+	}
+}
+
 type NumericQuestionPropertyAutomationLabel string
 
 // Enum values for NumericQuestionPropertyAutomationLabel
@@ -2374,6 +2403,23 @@ func (StringComparisonType) Values() []StringComparisonType {
 		"STARTS_WITH",
 		"CONTAINS",
 		"EXACT",
+	}
+}
+
+type TargetListType string
+
+// Enum values for TargetListType
+const (
+	TargetListTypeProficiencies TargetListType = "PROFICIENCIES"
+)
+
+// Values returns all known values for TargetListType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetListType) Values() []TargetListType {
+	return []TargetListType{
+		"PROFICIENCIES",
 	}
 }
 
