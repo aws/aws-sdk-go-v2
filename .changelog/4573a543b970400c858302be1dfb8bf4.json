@@ -1,8 +1,0 @@
-{
-    "id": "4573a543-b970-400c-8583-02be1dfb8bf4",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive now supports the SRT protocol via the new SRT Caller input type.",
-    "modules": [
-        "service/medialive"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.81.5 (2024-07-18)
+
+* **Documentation**: Updates Amazon RDS documentation to specify an eventual consistency model for DescribePendingMaintenanceActions.
+
 # v1.81.4 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

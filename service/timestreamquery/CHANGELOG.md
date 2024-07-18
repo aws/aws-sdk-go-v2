@@ -1,3 +1,7 @@
+# v1.25.4 (2024-07-18)
+
+* **Documentation**: Doc-only update for TimestreamQuery. Added guidance about the accepted valid value for the QueryPricingModel parameter.
+
 # v1.25.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

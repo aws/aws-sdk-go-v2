@@ -1,3 +1,7 @@
+# v1.151.0 (2024-07-18)
+
+* **Feature**: SageMaker Training supports R5, T3 and R5D instances family. And SageMaker Processing supports G5 and R5D instances family.
+
 # v1.150.2 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

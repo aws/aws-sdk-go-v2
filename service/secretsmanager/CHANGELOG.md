@@ -1,3 +1,7 @@
+# v1.32.4 (2024-07-18)
+
+* **Documentation**: Doc only update for Secrets Manager
+
 # v1.32.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.35.0 (2024-07-18)
+
+* **Feature**: Fix broken waiters for the acm-pca client.  Waiters broke in version 1.13.144 of the Boto3 SDK.
+
 # v1.34.0 (2024-07-12)
 
 * **Feature**: Minor refactoring of C2J model for AWS Private CA

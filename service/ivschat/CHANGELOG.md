@@ -1,3 +1,7 @@
+# v1.14.4 (2024-07-18)
+
+* **Documentation**: Documentation update for IVS Chat API Reference.
+
 # v1.14.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

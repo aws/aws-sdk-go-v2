@@ -1,8 +1,0 @@
-{
-    "id": "4e4640d9-9f28-45c2-ac07-6051f17ff17b",
-    "type": "feature",
-    "description": "Set default endpoint for aws partition. Requests from all regions in aws partition will be forward to us-east-1 endpoint.",
-    "modules": [
-        "service/taxsettings"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.55.0 (2024-07-18)
+
+* **Feature**: AWS Elemental MediaLive now supports the SRT protocol via the new SRT Caller input type.
+
 # v1.54.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

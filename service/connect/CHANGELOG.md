@@ -1,3 +1,7 @@
+# v1.105.0 (2024-07-18)
+
+* **Feature**: Amazon Connect expands search API coverage for additional resources.  Search for hierarchy groups by name, ID, tag, or other criteria (new endpoint). Search for agent statuses by name, ID, tag, or other criteria (new endpoint). Search for users by their assigned proficiencies (enhanced endpoint)
+
 # v1.104.2 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

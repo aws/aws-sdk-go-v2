@@ -1,3 +1,34 @@
+# Release (2024-07-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.35.0](service/acmpca/CHANGELOG.md#v1350-2024-07-18)
+  * **Feature**: Fix broken waiters for the acm-pca client.  Waiters broke in version 1.13.144 of the Boto3 SDK.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.105.0](service/connect/CHANGELOG.md#v11050-2024-07-18)
+  * **Feature**: Amazon Connect expands search API coverage for additional resources.  Search for hierarchy groups by name, ID, tag, or other criteria (new endpoint). Search for agent statuses by name, ID, tag, or other criteria (new endpoint). Search for users by their assigned proficiencies (enhanced endpoint)
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.171.0](service/ec2/CHANGELOG.md#v11710-2024-07-18)
+  * **Feature**: Amazon VPC IP Address Manager (IPAM) now supports Bring-Your-Own-IP (BYOIP) for IP addresses registered with any Internet Registry. This feature uses DNS TXT records to validate ownership of a public IP address range.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.32.0](service/firehose/CHANGELOG.md#v1320-2024-07-18)
+  * **Feature**: This release 1) Add configurable buffering hints for Snowflake as destination. 2) Add ReadFromTimestamp for MSK As Source. Firehose will start reading data from MSK Cluster using offset associated with this timestamp. 3) Gated public beta release to add Apache Iceberg tables as destination.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.14.4](service/ivschat/CHANGELOG.md#v1144-2024-07-18)
+  * **Documentation**: Documentation update for IVS Chat API Reference.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.55.0](service/medialive/CHANGELOG.md#v1550-2024-07-18)
+  * **Feature**: AWS Elemental MediaLive now supports the SRT protocol via the new SRT Caller input type.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.81.5](service/rds/CHANGELOG.md#v1815-2024-07-18)
+  * **Documentation**: Updates Amazon RDS documentation to specify an eventual consistency model for DescribePendingMaintenanceActions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.151.0](service/sagemaker/CHANGELOG.md#v11510-2024-07-18)
+  * **Feature**: SageMaker Training supports R5, T3 and R5D instances family. And SageMaker Processing supports G5 and R5D instances family.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.32.4](service/secretsmanager/CHANGELOG.md#v1324-2024-07-18)
+  * **Documentation**: Doc only update for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.3.0](service/taxsettings/CHANGELOG.md#v130-2024-07-18)
+  * **Feature**: Set default endpoint for aws partition. Requests from all regions in aws partition will be forward to us-east-1 endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.25.4](service/timestreamquery/CHANGELOG.md#v1254-2024-07-18)
+  * **Documentation**: Doc-only update for TimestreamQuery. Added guidance about the accepted valid value for the QueryPricingModel parameter.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.8.4](service/workspacesthinclient/CHANGELOG.md#v184-2024-07-18)
+  * **Documentation**: Documentation update for WorkSpaces Thin Client.
+
 # Release (2024-07-12)
 
 ## Module Highlights

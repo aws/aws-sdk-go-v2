@@ -1,3 +1,7 @@
+# v1.8.4 (2024-07-18)
+
+* **Documentation**: Documentation update for WorkSpaces Thin Client.
+
 # v1.8.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "12f7542d-99a5-4b54-ac78-b02b38d6e855",
-    "type": "documentation",
-    "description": "Documentation update for IVS Chat API Reference.",
-    "modules": [
-        "service/ivschat"
-    ]
-}
