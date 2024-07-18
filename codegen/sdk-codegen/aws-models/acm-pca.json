@@ -2366,7 +2366,8 @@
                                 }
                             }
                         ],
-                        "minDelay": 3
+                        "minDelay": 3,
+                        "maxDelay": 180
                     }
                 }
             }
@@ -2742,7 +2743,8 @@
                                 }
                             }
                         ],
-                        "minDelay": 1
+                        "minDelay": 1,
+                        "maxDelay": 60
                     }
                 }
             }
@@ -2858,7 +2860,8 @@
                                 }
                             }
                         ],
-                        "minDelay": 3
+                        "minDelay": 3,
+                        "maxDelay": 180
                     }
                 }
             }

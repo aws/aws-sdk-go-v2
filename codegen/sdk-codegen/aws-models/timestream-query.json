@@ -3238,7 +3238,7 @@
                 "QueryPricingModel": {
                     "target": "com.amazonaws.timestreamquery#QueryPricingModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing model for queries in an account.</p>"
+                        "smithy.api#documentation": "<p>The pricing model for queries in an account.</p>\n         <note>\n            <p>The <code>QueryPricingModel</code> parameter is used by several Timestream operations; however, the <code>UpdateAccountSettings</code> API operation doesn't recognize any values other than <code>COMPUTE_UNITS</code>.</p>\n         </note>"
                     }
                 }
             },

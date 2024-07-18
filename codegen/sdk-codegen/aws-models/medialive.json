@@ -654,6 +654,32 @@
                 "smithy.api#documentation": "Afd Signaling"
             }
         },
+        "com.amazonaws.medialive#Algorithm": {
+            "type": "enum",
+            "members": {
+                "AES128": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES128"
+                    }
+                },
+                "AES192": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES192"
+                    }
+                },
+                "AES256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES256"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for Algorithm"
+            }
+        },
         "com.amazonaws.medialive#AncillarySourceSettings": {
             "type": "structure",
             "members": {
@@ -4969,6 +4995,13 @@
                     "traits": {
                         "smithy.api#jsonName": "vpc"
                     }
+                },
+                "SrtSettings": {
+                    "target": "com.amazonaws.medialive#SrtSettingsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "The settings associated with an SRT input.",
+                        "smithy.api#jsonName": "srtSettings"
+                    }
                 }
             },
             "traits": {
@@ -7907,6 +7940,13 @@
                     "traits": {
                         "smithy.api#jsonName": "type"
                     }
+                },
+                "SrtSettings": {
+                    "target": "com.amazonaws.medialive#SrtSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The settings associated with an SRT input.",
+                        "smithy.api#jsonName": "srtSettings"
+                    }
                 }
             },
             "traits": {
@@ -9720,7 +9760,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
-                        "smithy.api#documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode.\n//  * @affectsRightSizing true",
+                        "smithy.api#documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode.",
                         "smithy.api#jsonName": "bitrate"
                     }
                 },
@@ -13030,7 +13070,7 @@
                 "FilterSettings": {
                     "target": "com.amazonaws.medialive#H264FilterSettings",
                     "traits": {
-                        "smithy.api#documentation": "Optional filters that you can apply to an encode.",
+                        "smithy.api#documentation": "Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We\nrecommend that you try both filters and observe the results to decide which one to use.\n\nThe Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual\nfiltering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.\n\nThe Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current\ncompression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.",
                         "smithy.api#jsonName": "filterSettings"
                     }
                 },
@@ -13851,7 +13891,7 @@
                 "FilterSettings": {
                     "target": "com.amazonaws.medialive#H265FilterSettings",
                     "traits": {
-                        "smithy.api#documentation": "Optional filters that you can apply to an encode.",
+                        "smithy.api#documentation": "Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We\nrecommend that you try both filters and observe the results to decide which one to use.\n\nThe Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual\nfiltering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.\n\nThe Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current\ncompression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.",
                         "smithy.api#jsonName": "filterSettings"
                     }
                 },
@@ -15586,6 +15626,13 @@
                     "target": "com.amazonaws.medialive#InputType",
                     "traits": {
                         "smithy.api#jsonName": "type"
+                    }
+                },
+                "SrtSettings": {
+                    "target": "com.amazonaws.medialive#SrtSettings",
+                    "traits": {
+                        "smithy.api#documentation": "The settings associated with an SRT input.",
+                        "smithy.api#jsonName": "srtSettings"
                     }
                 }
             },
@@ -17463,6 +17510,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TS_FILE"
+                    }
+                },
+                "SRT_CALLER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SRT_CALLER"
                     }
                 }
             },
@@ -20553,6 +20606,9 @@
                     "name": "medialive"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "API for AWS Elemental MediaLive",
                 "smithy.api#title": "AWS Elemental MediaLive",
                 "smithy.rules#endpointRuleSet": {
@@ -26180,6 +26236,162 @@
                 "smithy.api#documentation": "Smpte Tt Destination Settings"
             }
         },
+        "com.amazonaws.medialive#SrtCallerDecryption": {
+            "type": "structure",
+            "members": {
+                "Algorithm": {
+                    "target": "com.amazonaws.medialive#Algorithm",
+                    "traits": {
+                        "smithy.api#documentation": "The algorithm used to encrypt content.",
+                        "smithy.api#jsonName": "algorithm"
+                    }
+                },
+                "PassphraseSecretArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. The secret holds the passphrase that MediaLive uses to decrypt the source content.",
+                        "smithy.api#jsonName": "passphraseSecretArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The decryption settings for the SRT caller source. Present only if the source has decryption enabled."
+            }
+        },
+        "com.amazonaws.medialive#SrtCallerDecryptionRequest": {
+            "type": "structure",
+            "members": {
+                "Algorithm": {
+                    "target": "com.amazonaws.medialive#Algorithm",
+                    "traits": {
+                        "smithy.api#documentation": "The algorithm used to encrypt content.",
+                        "smithy.api#jsonName": "algorithm"
+                    }
+                },
+                "PassphraseSecretArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN for the secret in Secrets Manager. Someone in your organization must create a secret and provide you with its ARN. This secret holds the passphrase that MediaLive will use to decrypt the source content.",
+                        "smithy.api#jsonName": "passphraseSecretArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Complete these parameters only if the content is encrypted."
+            }
+        },
+        "com.amazonaws.medialive#SrtCallerSource": {
+            "type": "structure",
+            "members": {
+                "Decryption": {
+                    "target": "com.amazonaws.medialive#SrtCallerDecryption",
+                    "traits": {
+                        "smithy.api#jsonName": "decryption"
+                    }
+                },
+                "MinimumLatency": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT.",
+                        "smithy.api#jsonName": "minimumLatency"
+                    }
+                },
+                "SrtListenerAddress": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The IP address at the upstream system (the listener) that MediaLive (the caller) connects to.",
+                        "smithy.api#jsonName": "srtListenerAddress"
+                    }
+                },
+                "SrtListenerPort": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The port at the upstream system (the listener) that MediaLive (the caller) connects to.",
+                        "smithy.api#jsonName": "srtListenerPort"
+                    }
+                },
+                "StreamId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The stream ID, if the upstream system uses this identifier.",
+                        "smithy.api#jsonName": "streamId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The configuration for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender."
+            }
+        },
+        "com.amazonaws.medialive#SrtCallerSourceRequest": {
+            "type": "structure",
+            "members": {
+                "Decryption": {
+                    "target": "com.amazonaws.medialive#SrtCallerDecryptionRequest",
+                    "traits": {
+                        "smithy.api#jsonName": "decryption"
+                    }
+                },
+                "MinimumLatency": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The preferred latency (in milliseconds) for implementing packet loss and recovery. Packet recovery is a key feature of SRT. Obtain this value from the operator at the upstream system.",
+                        "smithy.api#jsonName": "minimumLatency"
+                    }
+                },
+                "SrtListenerAddress": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The IP address at the upstream system (the listener) that MediaLive (the caller) will connect to.",
+                        "smithy.api#jsonName": "srtListenerAddress"
+                    }
+                },
+                "SrtListenerPort": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The port at the upstream system (the listener) that MediaLive (the caller) will connect to.",
+                        "smithy.api#jsonName": "srtListenerPort"
+                    }
+                },
+                "StreamId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "This value is required if the upstream system uses this identifier because without it, the SRT handshake between MediaLive (the caller) and the upstream system (the listener) might fail.",
+                        "smithy.api#jsonName": "streamId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures the connection for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always the caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender."
+            }
+        },
+        "com.amazonaws.medialive#SrtSettings": {
+            "type": "structure",
+            "members": {
+                "SrtCallerSources": {
+                    "target": "com.amazonaws.medialive#__listOfSrtCallerSource",
+                    "traits": {
+                        "smithy.api#jsonName": "srtCallerSources"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The configured sources for this SRT input."
+            }
+        },
+        "com.amazonaws.medialive#SrtSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "SrtCallerSources": {
+                    "target": "com.amazonaws.medialive#__listOfSrtCallerSourceRequest",
+                    "traits": {
+                        "smithy.api#jsonName": "srtCallerSources"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configures the sources for this SRT input. For a single-pipeline input, include one srtCallerSource in the array. For a standard-pipeline input, include two srtCallerSource."
+            }
+        },
         "com.amazonaws.medialive#StandardHlsSettings": {
             "type": "structure",
             "members": {
@@ -30027,6 +30239,13 @@
                         "smithy.api#documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.",
                         "smithy.api#jsonName": "sources"
                     }
+                },
+                "SrtSettings": {
+                    "target": "com.amazonaws.medialive#SrtSettingsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "The settings associated with an SRT input.",
+                        "smithy.api#jsonName": "srtSettings"
+                    }
                 }
             },
             "traits": {
@@ -32031,6 +32250,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfSignalMapSummary"
+            }
+        },
+        "com.amazonaws.medialive#__listOfSrtCallerSource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#SrtCallerSource"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfSrtCallerSource"
+            }
+        },
+        "com.amazonaws.medialive#__listOfSrtCallerSourceRequest": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#SrtCallerSourceRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfSrtCallerSourceRequest"
             }
         },
         "com.amazonaws.medialive#__listOfThumbnail": {

@@ -753,6 +753,20 @@
                 "smithy.api#documentation": "<p>Describes hints for the buffering to perform before delivering data to the\n         destination. These options are treated as hints, and therefore Firehose might\n         choose to use different values when it is optimal. The <code>SizeInMBs</code> and\n            <code>IntervalInSeconds</code> parameters are optional. However, if specify a value for\n         one of them, you must also provide a value for the other.</p>"
             }
         },
+        "com.amazonaws.firehose#CatalogConfiguration": {
+            "type": "structure",
+            "members": {
+                "CatalogARN": {
+                    "target": "com.amazonaws.firehose#GlueDataCatalogARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies the Glue catalog ARN indentifier of the destination Apache Iceberg Tables. You must specify the ARN in the format <code>arn:aws:glue:region:account-id:catalog</code>.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes the containers where the destination Apache Iceberg Tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
         "com.amazonaws.firehose#CloudWatchLoggingOptions": {
             "type": "structure",
             "members": {
@@ -1035,6 +1049,12 @@
                     "target": "com.amazonaws.firehose#SnowflakeDestinationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configure Snowflake destination</p>"
+                    }
+                },
+                "IcebergDestinationConfiguration": {
+                    "target": "com.amazonaws.firehose#IcebergDestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Configure Apache Iceberg Tables destination.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
@@ -1715,6 +1735,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The destination in the Serverless offering for Amazon OpenSearch Service.</p>"
                     }
+                },
+                "IcebergDestinationDescription": {
+                    "target": "com.amazonaws.firehose#IcebergDestinationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1735,6 +1761,46 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.firehose#DestinationTableConfiguration": {
+            "type": "structure",
+            "members": {
+                "DestinationTableName": {
+                    "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        Specifies the name of the Apache Iceberg Table.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationDatabaseName": {
+                    "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the Apache Iceberg database.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UniqueKeys": {
+                    "target": "com.amazonaws.firehose#ListOfNonEmptyStringsWithoutWhitespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create/Update/Delete operations on the given Iceberg table. \n         \n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "S3ErrorOutputPrefix": {
+                    "target": "com.amazonaws.firehose#ErrorOutputPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination. \n       </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes the configuration of a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DestinationTableConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.firehose#DestinationTableConfiguration"
             }
         },
         "com.amazonaws.firehose#DocumentIdOptions": {
@@ -3600,6 +3666,16 @@
                 }
             }
         },
+        "com.amazonaws.firehose#GlueDataCatalogARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:"
+            }
+        },
         "com.amazonaws.firehose#HECAcknowledgmentTimeoutInSeconds": {
             "type": "integer",
             "traits": {
@@ -4074,6 +4150,169 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.firehose#IcebergDestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "DestinationTableConfigurationList": {
+                    "target": "com.amazonaws.firehose#DestinationTableConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg tables. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#BufferingHints"
+                },
+                "CloudWatchLoggingOptions": {
+                    "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+                },
+                "ProcessingConfiguration": {
+                    "target": "com.amazonaws.firehose#ProcessingConfiguration"
+                },
+                "S3BackupMode": {
+                    "target": "com.amazonaws.firehose#IcebergS3BackupMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n            <code>FailedDataOnly</code> for preview. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "RetryOptions": {
+                    "target": "com.amazonaws.firehose#RetryOptions"
+                },
+                "RoleARN": {
+                    "target": "com.amazonaws.firehose#RoleARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the Apache Iceberg tables role.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CatalogConfiguration": {
+                    "target": "com.amazonaws.firehose#CatalogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Apache Iceberg Tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Configuration": {
+                    "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Specifies the destination configure settings for  Apache Iceberg Table.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#IcebergDestinationDescription": {
+            "type": "structure",
+            "members": {
+                "DestinationTableConfigurationList": {
+                    "target": "com.amazonaws.firehose#DestinationTableConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg tables. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#BufferingHints"
+                },
+                "CloudWatchLoggingOptions": {
+                    "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+                },
+                "ProcessingConfiguration": {
+                    "target": "com.amazonaws.firehose#ProcessingConfiguration"
+                },
+                "S3BackupMode": {
+                    "target": "com.amazonaws.firehose#IcebergS3BackupMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n         <code>FailedDataOnly</code> for preview. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "RetryOptions": {
+                    "target": "com.amazonaws.firehose#RetryOptions"
+                },
+                "RoleARN": {
+                    "target": "com.amazonaws.firehose#RoleARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "CatalogConfiguration": {
+                    "target": "com.amazonaws.firehose#CatalogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Iceberg tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "S3DestinationDescription": {
+                    "target": "com.amazonaws.firehose#S3DestinationDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#IcebergDestinationUpdate": {
+            "type": "structure",
+            "members": {
+                "DestinationTableConfigurationList": {
+                    "target": "com.amazonaws.firehose#DestinationTableConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg tables. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#BufferingHints"
+                },
+                "CloudWatchLoggingOptions": {
+                    "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+                },
+                "ProcessingConfiguration": {
+                    "target": "com.amazonaws.firehose#ProcessingConfiguration"
+                },
+                "S3BackupMode": {
+                    "target": "com.amazonaws.firehose#IcebergS3BackupMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n         <code>FailedDataOnly</code> for preview. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "RetryOptions": {
+                    "target": "com.amazonaws.firehose#RetryOptions"
+                },
+                "RoleARN": {
+                    "target": "com.amazonaws.firehose#RoleARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "CatalogConfiguration": {
+                    "target": "com.amazonaws.firehose#CatalogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Iceberg tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "S3Configuration": {
+                    "target": "com.amazonaws.firehose#S3DestinationConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes an update for a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#IcebergS3BackupMode": {
+            "type": "enum",
+            "members": {
+                "FailedDataOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FailedDataOnly"
+                    }
+                },
+                "AllData": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AllData"
+                    }
+                }
+            }
+        },
         "com.amazonaws.firehose#InputFormatConfiguration": {
             "type": "structure",
             "members": {
@@ -4256,20 +4495,7 @@
                 "target": "com.amazonaws.firehose#ListDeliveryStreamsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists your delivery streams in alphabetical order of their names.</p>\n         <p>The number of delivery streams might be too large to return using a single call to\n            <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned,\n         using the <code>Limit</code> parameter. To determine whether there are more delivery\n         streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If\n         there are more delivery streams to list, you can request them by calling this operation\n         again and setting the <code>ExclusiveStartDeliveryStreamName</code> parameter to the name\n         of the last delivery stream returned in the last call.</p>",
-                "smithy.test#smokeTests": [
-                    {
-                        "id": "ListDeliveryStreamsSuccess",
-                        "params": {},
-                        "vendorParams": {
-                            "region": "us-west-2"
-                        },
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "expect": {
-                            "success": {}
-                        }
-                    }
-                ]
+                "smithy.api#documentation": "<p>Lists your delivery streams in alphabetical order of their names.</p>\n         <p>The number of delivery streams might be too large to return using a single call to\n            <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned,\n         using the <code>Limit</code> parameter. To determine whether there are more delivery\n         streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If\n         there are more delivery streams to list, you can request them by calling this operation\n         again and setting the <code>ExclusiveStartDeliveryStreamName</code> parameter to the name\n         of the last delivery stream returned in the last call.</p>"
             }
         },
         "com.amazonaws.firehose#ListDeliveryStreamsInput": {
@@ -4487,6 +4713,12 @@
                         "smithy.api#documentation": "<p>The authentication configuration of the Amazon MSK cluster.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ReadFromTimestamp": {
+                    "target": "com.amazonaws.firehose#ReadFromTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date and time in UTC for the offset position within your MSK topic from where\n         Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. </p>\n         <p>If you want to create a Firehose stream with Earliest start position from SDK or CLI,\n         you need to set the <code>ReadFromTimestamp</code> parameter to Epoch\n         (1970-01-01T00:00:00Z). </p>"
+                    }
                 }
             },
             "traits": {
@@ -4518,6 +4750,12 @@
                     "target": "com.amazonaws.firehose#DeliveryStartTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>Firehose starts retrieving records from the topic within the Amazon MSK\n         cluster starting with this timestamp.</p>"
+                    }
+                },
+                "ReadFromTimestamp": {
+                    "target": "com.amazonaws.firehose#ReadFromTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date and time in UTC for the offset position within your MSK topic from where\n         Firehose begins to read. By default, this is set to timestamp when Firehose becomes Active. </p>\n         <p>If you want to create a Firehose stream with Earliest start position from SDK or CLI,\n         you need to set the <code>ReadFromTimestampUTC</code> parameter to Epoch\n         (1970-01-01T00:00:00Z). </p>"
                     }
                 }
             },
@@ -5256,6 +5494,9 @@
                 }
             }
         },
+        "com.amazonaws.firehose#ReadFromTimestamp": {
+            "type": "timestamp"
+        },
         "com.amazonaws.firehose#Record": {
             "type": "structure",
             "members": {
@@ -5957,6 +6198,44 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.firehose#SnowflakeBufferingHints": {
+            "type": "structure",
+            "members": {
+                "SizeInMBs": {
+                    "target": "com.amazonaws.firehose#SnowflakeBufferingSizeInMBs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 1.\n      </p>"
+                    }
+                },
+                "IntervalInSeconds": {
+                    "target": "com.amazonaws.firehose#SnowflakeBufferingIntervalInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 0.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes the buffering to perform before delivering data to the Snowflake destination. If you do not specify any value, Firehose uses the default values.\n      </p>"
+            }
+        },
+        "com.amazonaws.firehose#SnowflakeBufferingIntervalInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 900
+                }
+            }
+        },
+        "com.amazonaws.firehose#SnowflakeBufferingSizeInMBs": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.firehose#SnowflakeContentColumnName": {
             "type": "string",
             "traits": {
@@ -6115,6 +6394,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Snowflake.\n      </p>"
                     }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#SnowflakeBufferingHints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the buffering to perform before delivering data to the Snowflake destination. If you do not specify any value, Firehose uses the default values.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -6215,6 +6500,12 @@
                     "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The configuration that defines how you access secrets for Snowflake.\n      </p>"
+                    }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#SnowflakeBufferingHints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the buffering to perform before delivering data to the Snowflake destination. If you do not specify any value, Firehose uses the default values.\n      </p>"
                     }
                 }
             },
@@ -6322,6 +6613,12 @@
                     "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         Describes the Secrets Manager configuration in Snowflake.\n      </p>"
+                    }
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#SnowflakeBufferingHints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the buffering to perform before delivering data to the Snowflake destination. \n      </p>"
                     }
                 }
             },
@@ -7217,6 +7514,12 @@
                     "target": "com.amazonaws.firehose#SnowflakeDestinationUpdate",
                     "traits": {
                         "smithy.api#documentation": "<p>Update to the Snowflake destination configuration settings.</p>"
+                    }
+                },
+                "IcebergDestinationUpdate": {
+                    "target": "com.amazonaws.firehose#IcebergDestinationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes an update for a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },

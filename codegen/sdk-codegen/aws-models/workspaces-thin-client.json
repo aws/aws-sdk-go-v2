@@ -996,7 +996,7 @@
                 "deviceCreationTags": {
                     "target": "com.amazonaws.workspacesthinclient#DeviceCreationTagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\"The tag keys and optional values for the newly created devices for this environment.\"</p>"
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the newly created devices for this environment.</p>"
                     }
                 }
             },
