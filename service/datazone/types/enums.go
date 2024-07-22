@@ -400,6 +400,25 @@ func (FilterExpressionType) Values() []FilterExpressionType {
 	}
 }
 
+type FilterStatus string
+
+// Enum values for FilterStatus
+const (
+	FilterStatusValid   FilterStatus = "VALID"
+	FilterStatusInvalid FilterStatus = "INVALID"
+)
+
+// Values returns all known values for FilterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterStatus) Values() []FilterStatus {
+	return []FilterStatus{
+		"VALID",
+		"INVALID",
+	}
+}
+
 type FormTypeStatus string
 
 // Enum values for FormTypeStatus

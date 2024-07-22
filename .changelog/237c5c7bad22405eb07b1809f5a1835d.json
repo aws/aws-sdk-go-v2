@@ -1,0 +1,8 @@
+{
+    "id": "237c5c7b-ad22-405e-b07b-1809f5a1835d",
+    "type": "feature",
+    "description": "Documentation update for IVS Low Latency API Reference.",
+    "modules": [
+        "service/ivs"
+    ]
+}

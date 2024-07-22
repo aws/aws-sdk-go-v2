@@ -1,0 +1,8 @@
+{
+    "id": "7ae209a7-3b14-4bb4-b05a-d5694e19093a",
+    "type": "feature",
+    "description": "Amazon Neptune Analytics provides new options for customers to start with smaller graphs at a lower cost. CreateGraph, CreaateGraphImportTask, UpdateGraph and StartImportTask APIs will now allow 32 and 64 for `provisioned-memory`",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

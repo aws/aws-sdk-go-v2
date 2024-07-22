@@ -46,8 +46,8 @@ type UpdateScheduledActionInput struct {
 	// scheduled action. This IAM role must allow the Amazon Redshift scheduler to
 	// schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to
 	// assume permissions on your behalf. For more information about the IAM role to
-	// use with the Amazon Redshift scheduler, see [Using Identity-Based Policies for Amazon Redshift]in the Amazon Redshift Cluster
-	// Management Guide
+	// use with the Amazon Redshift scheduler, see [Using Identity-Based Policies for Amazon Redshift]in the Amazon Redshift Management
+	// Guide
 	//
 	// [Using Identity-Based Policies for Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
 	RoleArn *string

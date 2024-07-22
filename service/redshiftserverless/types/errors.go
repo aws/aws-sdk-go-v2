@@ -140,6 +140,33 @@ func (e *InvalidPaginationException) ErrorCode() string {
 }
 func (e *InvalidPaginationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// There are no subnets in your VPC with associated IPv6 CIDR blocks. To use
+// dual-stack mode, associate an IPv6 CIDR block with each subnet in your VPC.
+type Ipv6CidrBlockNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *Ipv6CidrBlockNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *Ipv6CidrBlockNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *Ipv6CidrBlockNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "Ipv6CidrBlockNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *Ipv6CidrBlockNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string

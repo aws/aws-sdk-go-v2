@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,6 +49,9 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	// The ARN of the manage access role.
 	ManageAccessRoleArn *string
 
+	// The provisioning configuration of a blueprint.
+	ProvisioningConfigurations []types.ProvisioningConfiguration
+
 	// The ARN of the provisioning role.
 	ProvisioningRoleArn *string
 
@@ -77,6 +81,9 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 
 	// The ARN of the manage access role.
 	ManageAccessRoleArn *string
+
+	// The provisioning configuration of a blueprint.
+	ProvisioningConfigurations []types.ProvisioningConfiguration
 
 	// The ARN of the provisioning role.
 	ProvisioningRoleArn *string

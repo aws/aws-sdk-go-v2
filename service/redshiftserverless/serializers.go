@@ -3558,6 +3558,11 @@ func awsAwsjson11_serializeOpDocumentCreateWorkgroupInput(v *CreateWorkgroupInpu
 		ok.Boolean(*v.EnhancedVpcRouting)
 	}
 
+	if v.IpAddressType != nil {
+		ok := object.Key("ipAddressType")
+		ok.String(*v.IpAddressType)
+	}
+
 	if v.MaxCapacity != nil {
 		ok := object.Key("maxCapacity")
 		ok.Integer(*v.MaxCapacity)
@@ -4635,6 +4640,11 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkgroupInput(v *UpdateWorkgroupInpu
 	if v.EnhancedVpcRouting != nil {
 		ok := object.Key("enhancedVpcRouting")
 		ok.Boolean(*v.EnhancedVpcRouting)
+	}
+
+	if v.IpAddressType != nil {
+		ok := object.Key("ipAddressType")
+		ok.String(*v.IpAddressType)
 	}
 
 	if v.MaxCapacity != nil {

@@ -25,6 +25,28 @@ func ExampleActionParameters_outputUsage() {
 
 var _ *types.AwsConsoleLinkParameters
 
+func ExampleAssetFilterConfiguration_outputUsage() {
+	var union types.AssetFilterConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AssetFilterConfigurationMemberColumnConfiguration:
+		_ = v.Value // Value is types.ColumnFilterConfiguration
+
+	case *types.AssetFilterConfigurationMemberRowConfiguration:
+		_ = v.Value // Value is types.RowFilterConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ColumnFilterConfiguration
+var _ *types.RowFilterConfiguration
+
 func ExampleDataSourceConfigurationInput_outputUsage() {
 	var union types.DataSourceConfigurationInput
 	// type switches can be used to check the union value
@@ -209,6 +231,24 @@ func ExampleModel_outputUsage() {
 
 var _ *string
 
+func ExampleProvisioningConfiguration_outputUsage() {
+	var union types.ProvisioningConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProvisioningConfigurationMemberLakeFormationConfiguration:
+		_ = v.Value // Value is types.LakeFormationConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LakeFormationConfiguration
+
 func ExampleProvisioningProperties_outputUsage() {
 	var union types.ProvisioningProperties
 	// type switches can be used to check the union value
@@ -248,6 +288,93 @@ func ExampleRedshiftStorage_outputUsage() {
 
 var _ *types.RedshiftClusterStorage
 var _ *types.RedshiftServerlessStorage
+
+func ExampleRowFilter_outputUsage() {
+	var union types.RowFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RowFilterMemberAnd:
+		_ = v.Value // Value is []types.RowFilter
+
+	case *types.RowFilterMemberExpression:
+		_ = v.Value // Value is types.RowFilterExpression
+
+	case *types.RowFilterMemberOr:
+		_ = v.Value // Value is []types.RowFilter
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.RowFilterExpression
+var _ []types.RowFilter
+
+func ExampleRowFilterExpression_outputUsage() {
+	var union types.RowFilterExpression
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RowFilterExpressionMemberEqualTo:
+		_ = v.Value // Value is types.EqualToExpression
+
+	case *types.RowFilterExpressionMemberGreaterThan:
+		_ = v.Value // Value is types.GreaterThanExpression
+
+	case *types.RowFilterExpressionMemberGreaterThanOrEqualTo:
+		_ = v.Value // Value is types.GreaterThanOrEqualToExpression
+
+	case *types.RowFilterExpressionMemberIn:
+		_ = v.Value // Value is types.InExpression
+
+	case *types.RowFilterExpressionMemberIsNotNull:
+		_ = v.Value // Value is types.IsNotNullExpression
+
+	case *types.RowFilterExpressionMemberIsNull:
+		_ = v.Value // Value is types.IsNullExpression
+
+	case *types.RowFilterExpressionMemberLessThan:
+		_ = v.Value // Value is types.LessThanExpression
+
+	case *types.RowFilterExpressionMemberLessThanOrEqualTo:
+		_ = v.Value // Value is types.LessThanOrEqualToExpression
+
+	case *types.RowFilterExpressionMemberLike:
+		_ = v.Value // Value is types.LikeExpression
+
+	case *types.RowFilterExpressionMemberNotEqualTo:
+		_ = v.Value // Value is types.NotEqualToExpression
+
+	case *types.RowFilterExpressionMemberNotIn:
+		_ = v.Value // Value is types.NotInExpression
+
+	case *types.RowFilterExpressionMemberNotLike:
+		_ = v.Value // Value is types.NotLikeExpression
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.NotLikeExpression
+var _ *types.GreaterThanExpression
+var _ *types.LessThanExpression
+var _ *types.IsNotNullExpression
+var _ *types.NotEqualToExpression
+var _ *types.GreaterThanOrEqualToExpression
+var _ *types.IsNullExpression
+var _ *types.LessThanOrEqualToExpression
+var _ *types.LikeExpression
+var _ *types.NotInExpression
+var _ *types.InExpression
+var _ *types.EqualToExpression
 
 func ExampleSearchInventoryResultItem_outputUsage() {
 	var union types.SearchInventoryResultItem

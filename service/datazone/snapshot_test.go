@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateAsset(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAssetFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAssetRevision(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAssetRevision(context.Background(), nil, func(o *Options) {
@@ -362,6 +374,18 @@ func TestCheckSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAssetFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAssetType(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
@@ -583,6 +607,18 @@ func TestCheckSnapshot_GetAsset(t *testing.T) {
 	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAssetFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -871,6 +907,18 @@ func TestCheckSnapshot_GetUserProfile(t *testing.T) {
 	_, err := svc.GetUserProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetUserProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssetFilters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetFilters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssetFilters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1310,6 +1358,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAssetFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
@@ -1530,6 +1590,18 @@ func TestUpdateSnapshot_CreateAsset(t *testing.T) {
 	_, err := svc.CreateAsset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAssetFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1765,6 +1837,18 @@ func TestUpdateSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAssetFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAssetType(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
@@ -1986,6 +2070,18 @@ func TestUpdateSnapshot_GetAsset(t *testing.T) {
 	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAssetFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2274,6 +2370,18 @@ func TestUpdateSnapshot_GetUserProfile(t *testing.T) {
 	_, err := svc.GetUserProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetUserProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssetFilters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetFilters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssetFilters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2706,6 +2814,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAssetFilter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAssetFilter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAssetFilter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

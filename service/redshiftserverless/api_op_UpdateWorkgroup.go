@@ -55,6 +55,10 @@ type UpdateWorkgroupInput struct {
 	// your VPC.
 	EnhancedVpcRouting *bool
 
+	// The IP address type that the workgroup supports. Possible values are ipv4 and
+	// dualstack .
+	IpAddressType *string
+
 	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve
 	// queries. The max capacity is specified in RPUs.
 	MaxCapacity *int32

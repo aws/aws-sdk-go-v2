@@ -190,6 +190,9 @@ type NetworkInterface struct {
 	// The availability Zone.
 	AvailabilityZone *string
 
+	// The IPv6 address of the network interface within the subnet.
+	Ipv6Address *string
+
 	// The unique identifier of the network interface.
 	NetworkInterfaceId *string
 
@@ -308,8 +311,8 @@ type ScheduledActionResponse struct {
 	// scheduled action. This IAM role must allow the Amazon Redshift scheduler to
 	// schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to
 	// assume permissions on your behalf. For more information about the IAM role to
-	// use with the Amazon Redshift scheduler, see [Using Identity-Based Policies for Amazon Redshift]in the Amazon Redshift Cluster
-	// Management Guide
+	// use with the Amazon Redshift scheduler, see [Using Identity-Based Policies for Amazon Redshift]in the Amazon Redshift Management
+	// Guide
 	//
 	// [Using Identity-Based Policies for Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
 	RoleArn *string
@@ -658,6 +661,10 @@ type Workgroup struct {
 	// routing, which forces Amazon Redshift Serverless to route traffic through your
 	// VPC.
 	EnhancedVpcRouting *bool
+
+	// The IP address type that the workgroup supports. Possible values are ipv4 and
+	// dualstack .
+	IpAddressType *string
 
 	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve
 	// queries. The max capacity is specified in RPUs.

@@ -88,9 +88,9 @@ type RenditionConfigurationRendition string
 
 // Enum values for RenditionConfigurationRendition
 const (
-	RenditionConfigurationRenditionFullHd           RenditionConfigurationRendition = "FULL_HD"
-	RenditionConfigurationRenditionHd               RenditionConfigurationRendition = "HD"
 	RenditionConfigurationRenditionSd               RenditionConfigurationRendition = "SD"
+	RenditionConfigurationRenditionHd               RenditionConfigurationRendition = "HD"
+	RenditionConfigurationRenditionFullHd           RenditionConfigurationRendition = "FULL_HD"
 	RenditionConfigurationRenditionLowestResolution RenditionConfigurationRendition = "LOWEST_RESOLUTION"
 )
 
@@ -101,9 +101,9 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RenditionConfigurationRendition) Values() []RenditionConfigurationRendition {
 	return []RenditionConfigurationRendition{
-		"FULL_HD",
-		"HD",
 		"SD",
+		"HD",
+		"FULL_HD",
 		"LOWEST_RESOLUTION",
 	}
 }
@@ -174,9 +174,9 @@ type ThumbnailConfigurationResolution string
 
 // Enum values for ThumbnailConfigurationResolution
 const (
-	ThumbnailConfigurationResolutionFullHd           ThumbnailConfigurationResolution = "FULL_HD"
-	ThumbnailConfigurationResolutionHd               ThumbnailConfigurationResolution = "HD"
 	ThumbnailConfigurationResolutionSd               ThumbnailConfigurationResolution = "SD"
+	ThumbnailConfigurationResolutionHd               ThumbnailConfigurationResolution = "HD"
+	ThumbnailConfigurationResolutionFullHd           ThumbnailConfigurationResolution = "FULL_HD"
 	ThumbnailConfigurationResolutionLowestResolution ThumbnailConfigurationResolution = "LOWEST_RESOLUTION"
 )
 
@@ -187,9 +187,9 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ThumbnailConfigurationResolution) Values() []ThumbnailConfigurationResolution {
 	return []ThumbnailConfigurationResolution{
-		"FULL_HD",
-		"HD",
 		"SD",
+		"HD",
+		"FULL_HD",
 		"LOWEST_RESOLUTION",
 	}
 }

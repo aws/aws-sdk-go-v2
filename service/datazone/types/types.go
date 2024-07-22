@@ -58,6 +58,78 @@ type ActionParametersMemberAwsConsoleLink struct {
 
 func (*ActionParametersMemberAwsConsoleLink) isActionParameters() {}
 
+// The configuration details of the asset filter.
+//
+// The following types satisfy this interface:
+//
+//	AssetFilterConfigurationMemberColumnConfiguration
+//	AssetFilterConfigurationMemberRowConfiguration
+type AssetFilterConfiguration interface {
+	isAssetFilterConfiguration()
+}
+
+// The column configuration of the asset filter.
+type AssetFilterConfigurationMemberColumnConfiguration struct {
+	Value ColumnFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetFilterConfigurationMemberColumnConfiguration) isAssetFilterConfiguration() {}
+
+// The row configuration of the asset filter.
+type AssetFilterConfigurationMemberRowConfiguration struct {
+	Value RowFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetFilterConfigurationMemberRowConfiguration) isAssetFilterConfiguration() {}
+
+// The summary of the asset filter.
+type AssetFilterSummary struct {
+
+	// The ID of the data asset.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The ID of the domain where the asset filter lives.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The ID of the asset filter.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the asset filter.
+	//
+	// This member is required.
+	Name *string
+
+	// The timestamp at which the asset filter was created.
+	CreatedAt *time.Time
+
+	// The description of the asset filter.
+	Description *string
+
+	// The effective column names of the asset filter.
+	EffectiveColumnNames []string
+
+	// The effective row filter of the asset filter.
+	EffectiveRowFilter *string
+
+	// The error message that is displayed if the action does not succeed.
+	ErrorMessage *string
+
+	// The status of the asset filter.
+	Status FilterStatus
+
+	noSmithyDocumentSerde
+}
+
 // A Amazon DataZone inventory asset.
 type AssetItem struct {
 
@@ -362,6 +434,15 @@ type CloudFormationProperties struct {
 	//
 	// This member is required.
 	TemplateUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The column configuration of the asset filter.
+type ColumnFilterConfiguration struct {
+
+	// Specifies whether to include column names.
+	IncludedColumnNames []string
 
 	noSmithyDocumentSerde
 }
@@ -878,6 +959,9 @@ type EnvironmentBlueprintConfigurationItem struct {
 	// configuration.
 	ManageAccessRoleArn *string
 
+	// The provisioning configuration of a blueprint.
+	ProvisioningConfigurations []ProvisioningConfiguration
+
 	// The ARN of the provisioning role specified in the environment blueprint
 	// configuration.
 	ProvisioningRoleArn *string
@@ -1056,6 +1140,22 @@ type EnvironmentSummary struct {
 
 	// The timestamp of when the environment was updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether the value is equal to an expression.
+type EqualToExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might be equal to an expression.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1462,6 +1562,38 @@ type GrantedEntityInputMemberListing struct {
 
 func (*GrantedEntityInputMemberListing) isGrantedEntityInput() {}
 
+// Specifies whether the value is greater than an expression.
+type GreaterThanExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might be greater than an expression.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether the value is greater than or equal to an expression.
+type GreaterThanOrEqualToExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might be greater than or equal to an expression.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a group in Amazon DataZone.
 type GroupDetails struct {
 
@@ -1512,6 +1644,106 @@ type Import struct {
 	//
 	// This member is required.
 	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether values are in the expression.
+type InExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The values that might be in the expression.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that the expression is not null.
+type IsNotNullExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that the expression is null.
+type IsNullExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	noSmithyDocumentSerde
+}
+
+// The Lake Formation configuration of the Data Lake blueprint.
+type LakeFormationConfiguration struct {
+
+	// Specifies certain Amazon S3 locations if you do not want Amazon DataZone to
+	// automatically register them in hybrid mode.
+	LocationRegistrationExcludeS3Locations []string
+
+	// The role that is used to manage read/write access to the chosen Amazon S3
+	// bucket(s) for Data Lake using AWS Lake Formation hybrid access mode.
+	LocationRegistrationRole *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that a value is less than an expression.
+type LessThanExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might be less than the expression.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that a value is less than or equal to an expression.
+type LessThanOrEqualToExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might be less than or equal to an expression.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that a value is like the expression.
+type LikeExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might be like the expression.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1798,6 +2030,22 @@ type ModelMemberSmithy struct {
 
 func (*ModelMemberSmithy) isModel() {}
 
+// Specifies that a value is not equal to the expression.
+type NotEqualToExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might not be equal to the expression.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a notification generated in Amazon DataZone.
 type NotificationOutput struct {
 
@@ -1870,6 +2118,38 @@ type NotificationResource struct {
 
 	// The name of the resource mentioned in a notification.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that a value is not in the expression.
+type NotInExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might not be in the expression.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that a value might be not like the expression.
+type NotLikeExpression struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The value that might not be like the expression.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1953,6 +2233,24 @@ type ProjectSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// The provisioning configuration of the blueprint.
+//
+// The following types satisfy this interface:
+//
+//	ProvisioningConfigurationMemberLakeFormationConfiguration
+type ProvisioningConfiguration interface {
+	isProvisioningConfiguration()
+}
+
+// The Lake Formation configuration of the Data Lake blueprint.
+type ProvisioningConfigurationMemberLakeFormationConfiguration struct {
+	Value LakeFormationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProvisioningConfigurationMemberLakeFormationConfiguration) isProvisioningConfiguration() {}
 
 // The provisioning properties of an environment blueprint.
 //
@@ -2188,6 +2486,186 @@ type Resource struct {
 
 	noSmithyDocumentSerde
 }
+
+// The row filter.
+//
+// The following types satisfy this interface:
+//
+//	RowFilterMemberAnd
+//	RowFilterMemberExpression
+//	RowFilterMemberOr
+type RowFilter interface {
+	isRowFilter()
+}
+
+// The 'and' clause of the row filter.
+type RowFilterMemberAnd struct {
+	Value []RowFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterMemberAnd) isRowFilter() {}
+
+// The expression of the row filter.
+type RowFilterMemberExpression struct {
+	Value RowFilterExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterMemberExpression) isRowFilter() {}
+
+// The 'or' clause of the row filter.
+type RowFilterMemberOr struct {
+	Value []RowFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterMemberOr) isRowFilter() {}
+
+// The row filter configuration details.
+type RowFilterConfiguration struct {
+
+	// The row filter.
+	//
+	// This member is required.
+	RowFilter RowFilter
+
+	// Specifies whether the row filter is sensitive.
+	Sensitive *bool
+
+	noSmithyDocumentSerde
+}
+
+// The row filter expression.
+//
+// The following types satisfy this interface:
+//
+//	RowFilterExpressionMemberEqualTo
+//	RowFilterExpressionMemberGreaterThan
+//	RowFilterExpressionMemberGreaterThanOrEqualTo
+//	RowFilterExpressionMemberIn
+//	RowFilterExpressionMemberIsNotNull
+//	RowFilterExpressionMemberIsNull
+//	RowFilterExpressionMemberLessThan
+//	RowFilterExpressionMemberLessThanOrEqualTo
+//	RowFilterExpressionMemberLike
+//	RowFilterExpressionMemberNotEqualTo
+//	RowFilterExpressionMemberNotIn
+//	RowFilterExpressionMemberNotLike
+type RowFilterExpression interface {
+	isRowFilterExpression()
+}
+
+// The 'equal to' clause of the row filter expression.
+type RowFilterExpressionMemberEqualTo struct {
+	Value EqualToExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberEqualTo) isRowFilterExpression() {}
+
+// The 'greater than' clause of the row filter expression.
+type RowFilterExpressionMemberGreaterThan struct {
+	Value GreaterThanExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberGreaterThan) isRowFilterExpression() {}
+
+// The 'greater than or equal to' clause of the filter expression.
+type RowFilterExpressionMemberGreaterThanOrEqualTo struct {
+	Value GreaterThanOrEqualToExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberGreaterThanOrEqualTo) isRowFilterExpression() {}
+
+// The 'in' clause of the row filter expression.
+type RowFilterExpressionMemberIn struct {
+	Value InExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberIn) isRowFilterExpression() {}
+
+// The 'is not null' clause of the row filter expression.
+type RowFilterExpressionMemberIsNotNull struct {
+	Value IsNotNullExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberIsNotNull) isRowFilterExpression() {}
+
+// The 'is null' clause of the row filter expression.
+type RowFilterExpressionMemberIsNull struct {
+	Value IsNullExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberIsNull) isRowFilterExpression() {}
+
+// The 'less than' clause of the row filter expression.
+type RowFilterExpressionMemberLessThan struct {
+	Value LessThanExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberLessThan) isRowFilterExpression() {}
+
+// The 'less than or equal to' clause of the row filter expression.
+type RowFilterExpressionMemberLessThanOrEqualTo struct {
+	Value LessThanOrEqualToExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberLessThanOrEqualTo) isRowFilterExpression() {}
+
+// The 'like' clause of the row filter expression.
+type RowFilterExpressionMemberLike struct {
+	Value LikeExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberLike) isRowFilterExpression() {}
+
+// The 'no equal to' clause of the row filter expression.
+type RowFilterExpressionMemberNotEqualTo struct {
+	Value NotEqualToExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberNotEqualTo) isRowFilterExpression() {}
+
+// The 'not in' clause of the row filter expression.
+type RowFilterExpressionMemberNotIn struct {
+	Value NotInExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberNotIn) isRowFilterExpression() {}
+
+// The 'not like' clause of the row filter expression.
+type RowFilterExpressionMemberNotLike struct {
+	Value NotLikeExpression
+
+	noSmithyDocumentSerde
+}
+
+func (*RowFilterExpressionMemberNotLike) isRowFilterExpression() {}
 
 // The asset statistics from the data source run.
 type RunStatisticsForAssets struct {
@@ -3075,6 +3553,7 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isActionParameters()              {}
+func (*UnknownUnionMember) isAssetFilterConfiguration()      {}
 func (*UnknownUnionMember) isDataSourceConfigurationInput()  {}
 func (*UnknownUnionMember) isDataSourceConfigurationOutput() {}
 func (*UnknownUnionMember) isFilterClause()                  {}
@@ -3084,8 +3563,11 @@ func (*UnknownUnionMember) isListingItem()                   {}
 func (*UnknownUnionMember) isMember()                        {}
 func (*UnknownUnionMember) isMemberDetails()                 {}
 func (*UnknownUnionMember) isModel()                         {}
+func (*UnknownUnionMember) isProvisioningConfiguration()     {}
 func (*UnknownUnionMember) isProvisioningProperties()        {}
 func (*UnknownUnionMember) isRedshiftStorage()               {}
+func (*UnknownUnionMember) isRowFilter()                     {}
+func (*UnknownUnionMember) isRowFilterExpression()           {}
 func (*UnknownUnionMember) isSearchInventoryResultItem()     {}
 func (*UnknownUnionMember) isSearchResultItem()              {}
 func (*UnknownUnionMember) isSearchTypesResultItem()         {}

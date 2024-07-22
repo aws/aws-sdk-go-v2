@@ -110,6 +110,26 @@ func (m *validateOpCancelSubscription) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAssetFilter struct {
+}
+
+func (*validateOpCreateAssetFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAssetFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAssetFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAssetFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAsset struct {
 }
 
@@ -490,6 +510,26 @@ func (m *validateOpCreateUserProfile) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAssetFilter struct {
+}
+
+func (*validateOpDeleteAssetFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssetFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssetFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssetFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAsset struct {
 }
 
@@ -865,6 +905,26 @@ func (m *validateOpDisassociateEnvironmentRole) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateEnvironmentRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAssetFilter struct {
+}
+
+func (*validateOpGetAssetFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAssetFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssetFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssetFilterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1365,6 +1425,26 @@ func (m *validateOpGetUserProfile) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetUserProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetFilters struct {
+}
+
+func (*validateOpListAssetFilters) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetFilters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetFiltersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetFiltersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2070,6 +2150,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAssetFilter struct {
+}
+
+func (*validateOpUpdateAssetFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAssetFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssetFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssetFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataSource struct {
 }
 
@@ -2350,6 +2450,10 @@ func addOpCancelSubscriptionValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCancelSubscription{}, middleware.After)
 }
 
+func addOpCreateAssetFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAssetFilter{}, middleware.After)
+}
+
 func addOpCreateAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAsset{}, middleware.After)
 }
@@ -2426,6 +2530,10 @@ func addOpCreateUserProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUserProfile{}, middleware.After)
 }
 
+func addOpDeleteAssetFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssetFilter{}, middleware.After)
+}
+
 func addOpDeleteAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAsset{}, middleware.After)
 }
@@ -2500,6 +2608,10 @@ func addOpDeleteTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateEnvironmentRoleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateEnvironmentRole{}, middleware.After)
+}
+
+func addOpGetAssetFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAssetFilter{}, middleware.After)
 }
 
 func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
@@ -2600,6 +2712,10 @@ func addOpGetTimeSeriesDataPointValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetUserProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUserProfile{}, middleware.After)
+}
+
+func addOpListAssetFiltersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetFilters{}, middleware.After)
 }
 
 func addOpListAssetRevisionsValidationMiddleware(stack *middleware.Stack) error {
@@ -2742,6 +2858,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAssetFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAssetFilter{}, middleware.After)
+}
+
 func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSource{}, middleware.After)
 }
@@ -2826,6 +2946,25 @@ func validateAcceptChoices(v []types.AcceptChoice) error {
 	}
 }
 
+func validateAssetFilterConfiguration(v types.AssetFilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetFilterConfiguration"}
+	switch uv := v.(type) {
+	case *types.AssetFilterConfigurationMemberRowConfiguration:
+		if err := validateRowFilterConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[rowConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetTargetNameMap(v *types.AssetTargetNameMap) error {
 	if v == nil {
 		return nil
@@ -2877,6 +3016,24 @@ func validateDataSourceConfigurationInput(v types.DataSourceConfigurationInput) 
 			invalidParams.AddNested("[redshiftRunConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEqualToExpression(v *types.EqualToExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EqualToExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3090,6 +3247,144 @@ func validateGrantedEntityInput(v types.GrantedEntityInput) error {
 	}
 }
 
+func validateGreaterThanExpression(v *types.GreaterThanExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GreaterThanExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGreaterThanOrEqualToExpression(v *types.GreaterThanOrEqualToExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GreaterThanOrEqualToExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInExpression(v *types.InExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIsNotNullExpression(v *types.IsNotNullExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IsNotNullExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIsNullExpression(v *types.IsNullExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IsNullExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLessThanExpression(v *types.LessThanExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LessThanExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLessThanOrEqualToExpression(v *types.LessThanOrEqualToExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LessThanOrEqualToExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLikeExpression(v *types.LikeExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LikeExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateListingRevisionInput(v *types.ListingRevisionInput) error {
 	if v == nil {
 		return nil
@@ -3118,6 +3413,60 @@ func validateMetadataGenerationRunTarget(v *types.MetadataGenerationRunTarget) e
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotEqualToExpression(v *types.NotEqualToExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotEqualToExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotInExpression(v *types.NotInExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotInExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotLikeExpression(v *types.NotLikeExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotLikeExpression"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3287,6 +3636,145 @@ func validateRelationalFilterConfigurations(v []types.RelationalFilterConfigurat
 	invalidParams := smithy.InvalidParamsError{Context: "RelationalFilterConfigurations"}
 	for i := range v {
 		if err := validateRelationalFilterConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRowFilter(v types.RowFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RowFilter"}
+	switch uv := v.(type) {
+	case *types.RowFilterMemberAnd:
+		if err := validateRowFilterList(uv.Value); err != nil {
+			invalidParams.AddNested("[and]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterMemberExpression:
+		if err := validateRowFilterExpression(uv.Value); err != nil {
+			invalidParams.AddNested("[expression]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterMemberOr:
+		if err := validateRowFilterList(uv.Value); err != nil {
+			invalidParams.AddNested("[or]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRowFilterConfiguration(v *types.RowFilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RowFilterConfiguration"}
+	if v.RowFilter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RowFilter"))
+	} else if v.RowFilter != nil {
+		if err := validateRowFilter(v.RowFilter); err != nil {
+			invalidParams.AddNested("RowFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRowFilterExpression(v types.RowFilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RowFilterExpression"}
+	switch uv := v.(type) {
+	case *types.RowFilterExpressionMemberEqualTo:
+		if err := validateEqualToExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[equalTo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberGreaterThan:
+		if err := validateGreaterThanExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[greaterThan]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberGreaterThanOrEqualTo:
+		if err := validateGreaterThanOrEqualToExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[greaterThanOrEqualTo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberIn:
+		if err := validateInExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[in]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberIsNotNull:
+		if err := validateIsNotNullExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[isNotNull]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberIsNull:
+		if err := validateIsNullExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[isNull]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberLessThan:
+		if err := validateLessThanExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[lessThan]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberLessThanOrEqualTo:
+		if err := validateLessThanOrEqualToExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[lessThanOrEqualTo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberLike:
+		if err := validateLikeExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[like]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberNotEqualTo:
+		if err := validateNotEqualToExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[notEqualTo]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberNotIn:
+		if err := validateNotInExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[notIn]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RowFilterExpressionMemberNotLike:
+		if err := validateNotLikeExpression(&uv.Value); err != nil {
+			invalidParams.AddNested("[notLike]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRowFilterList(v []types.RowFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RowFilterList"}
+	for i := range v {
+		if err := validateRowFilter(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3539,6 +4027,34 @@ func validateOpCancelSubscriptionInput(v *CancelSubscriptionInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAssetFilterInput(v *CreateAssetFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssetFilterInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateAssetFilterConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4026,6 +4542,27 @@ func validateOpCreateUserProfileInput(v *CreateUserProfileInput) error {
 	}
 }
 
+func validateOpDeleteAssetFilterInput(v *DeleteAssetFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetFilterInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAssetInput(v *DeleteAssetInput) error {
 	if v == nil {
 		return nil
@@ -4375,6 +4912,27 @@ func validateOpDisassociateEnvironmentRoleInput(v *DisassociateEnvironmentRoleIn
 	}
 	if v.EnvironmentRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAssetFilterInput(v *GetAssetFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssetFilterInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4834,6 +5392,24 @@ func validateOpGetUserProfileInput(v *GetUserProfileInput) error {
 	}
 	if v.UserIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetFiltersInput(v *ListAssetFiltersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetFiltersInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5516,6 +6092,32 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAssetFilterInput(v *UpdateAssetFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssetFilterInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Configuration != nil {
+		if err := validateAssetFilterConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

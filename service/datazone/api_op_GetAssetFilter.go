@@ -12,69 +12,87 @@ import (
 	"time"
 )
 
-// Gets the blueprint configuration in Amazon DataZone.
-func (c *Client) GetEnvironmentBlueprintConfiguration(ctx context.Context, params *GetEnvironmentBlueprintConfigurationInput, optFns ...func(*Options)) (*GetEnvironmentBlueprintConfigurationOutput, error) {
+// Gets an asset filter.
+func (c *Client) GetAssetFilter(ctx context.Context, params *GetAssetFilterInput, optFns ...func(*Options)) (*GetAssetFilterOutput, error) {
 	if params == nil {
-		params = &GetEnvironmentBlueprintConfigurationInput{}
+		params = &GetAssetFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEnvironmentBlueprintConfiguration", params, optFns, c.addOperationGetEnvironmentBlueprintConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssetFilter", params, optFns, c.addOperationGetAssetFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEnvironmentBlueprintConfigurationOutput)
+	out := result.(*GetAssetFilterOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEnvironmentBlueprintConfigurationInput struct {
+type GetAssetFilterInput struct {
 
-	// The ID of the Amazon DataZone domain where this blueprint exists.
+	// The ID of the data asset.
+	//
+	// This member is required.
+	AssetIdentifier *string
+
+	// The ID of the domain where you want to get an asset filter.
 	//
 	// This member is required.
 	DomainIdentifier *string
 
-	// He ID of the blueprint.
+	// The ID of the asset filter.
 	//
 	// This member is required.
-	EnvironmentBlueprintIdentifier *string
+	Identifier *string
 
 	noSmithyDocumentSerde
 }
 
-type GetEnvironmentBlueprintConfigurationOutput struct {
+type GetAssetFilterOutput struct {
 
-	// The ID of the Amazon DataZone domain where this blueprint exists.
+	// The ID of the data asset.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The configuration of the asset filter.
+	//
+	// This member is required.
+	Configuration types.AssetFilterConfiguration
+
+	// The ID of the domain where you want to get an asset filter.
 	//
 	// This member is required.
 	DomainId *string
 
-	// The ID of the blueprint.
+	// The ID of the asset filter.
 	//
 	// This member is required.
-	EnvironmentBlueprintId *string
+	Id *string
 
-	// The timestamp of when this blueprint was created.
+	// The name of the asset filter.
+	//
+	// This member is required.
+	Name *string
+
+	// The timestamp at which the asset filter was created.
 	CreatedAt *time.Time
 
-	// The Amazon Web Services regions in which this blueprint is enabled.
-	EnabledRegions []string
+	// The description of the asset filter.
+	Description *string
 
-	// The ARN of the manage access role with which this blueprint is created.
-	ManageAccessRoleArn *string
+	// The column names of the asset filter.
+	EffectiveColumnNames []string
 
-	// The provisioning configuration of a blueprint.
-	ProvisioningConfigurations []types.ProvisioningConfiguration
+	// The row filter of the asset filter.
+	EffectiveRowFilter *string
 
-	// The ARN of the provisioning role with which this blueprint is created.
-	ProvisioningRoleArn *string
+	// The error message that is displayed if the action does not complete
+	// successfully.
+	ErrorMessage *string
 
-	// The regional parameters of the blueprint.
-	RegionalParameters map[string]map[string]string
-
-	// The timestamp of when this blueprint was upated.
-	UpdatedAt *time.Time
+	// The status of the asset filter.
+	Status types.FilterStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -82,19 +100,19 @@ type GetEnvironmentBlueprintConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEnvironmentBlueprintConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironmentBlueprintConfiguration{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetFilter{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironmentBlueprintConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetFilter{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironmentBlueprintConfiguration"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssetFilter"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -143,10 +161,10 @@ func (c *Client) addOperationGetEnvironmentBlueprintConfigurationMiddlewares(sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetEnvironmentBlueprintConfigurationValidationMiddleware(stack); err != nil {
+	if err = addOpGetAssetFilterValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironmentBlueprintConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssetFilter(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -167,10 +185,10 @@ func (c *Client) addOperationGetEnvironmentBlueprintConfigurationMiddlewares(sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetEnvironmentBlueprintConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetAssetFilter(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetEnvironmentBlueprintConfiguration",
+		OperationName: "GetAssetFilter",
 	}
 }
