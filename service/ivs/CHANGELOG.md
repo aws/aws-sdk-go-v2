@@ -1,3 +1,7 @@
+# v1.38.0 (2024-07-22)
+
+* **Feature**: Documentation update for IVS Low Latency API Reference.
+
 # v1.37.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

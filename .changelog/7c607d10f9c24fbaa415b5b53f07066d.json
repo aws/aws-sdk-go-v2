@@ -1,8 +1,0 @@
-{
-    "id": "7c607d10-f9c2-4fba-a415-b5b53f07066d",
-    "type": "feature",
-    "description": "Remove deprecated `mobile` service.",
-    "modules": [
-        "."
-    ]
-}

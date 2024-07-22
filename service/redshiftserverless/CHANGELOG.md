@@ -1,3 +1,7 @@
+# v1.21.0 (2024-07-22)
+
+* **Feature**: Adds dualstack support for Redshift Serverless workgroup.
+
 # v1.20.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

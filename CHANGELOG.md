@@ -1,3 +1,13 @@
+# Release (2024-07-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.14.0](service/datazone/CHANGELOG.md#v1140-2024-07-22)
+  * **Feature**: This release adds 1/ support of register S3 locations of assets in AWS Lake Formation hybrid access mode for DefaultDataLake blueprint. 2/ support of CRUD operations for Asset Filters.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.38.0](service/ivs/CHANGELOG.md#v1380-2024-07-22)
+  * **Feature**: Documentation update for IVS Low Latency API Reference.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.21.0](service/redshiftserverless/CHANGELOG.md#v1210-2024-07-22)
+  * **Feature**: Adds dualstack support for Redshift Serverless workgroup.
+
 # Release (2024-07-18)
 
 ## General Highlights

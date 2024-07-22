@@ -1,8 +1,0 @@
-{
-    "id": "4e8d0d7b-bcf8-4cee-a756-958ca936fcf5",
-    "type": "feature",
-    "description": "Adds dualstack support for Redshift Serverless workgroup.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

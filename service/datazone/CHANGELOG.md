@@ -1,3 +1,7 @@
+# v1.14.0 (2024-07-22)
+
+* **Feature**: This release adds 1/ support of register S3 locations of assets in AWS Lake Formation hybrid access mode for DefaultDataLake blueprint. 2/ support of CRUD operations for Asset Filters.
+
 # v1.13.2 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
