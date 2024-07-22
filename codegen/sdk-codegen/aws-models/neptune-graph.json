@@ -5215,7 +5215,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 128,
+                    "min": 32,
                     "max": 24576
                 }
             }

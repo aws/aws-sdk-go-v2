@@ -550,7 +550,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.redshiftserverless#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Cluster Management Guide</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Management Guide</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -905,6 +905,9 @@
                     "target": "com.amazonaws.redshiftserverless#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftserverless#Ipv6CidrBlockNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
                 },
                 {
@@ -988,6 +991,12 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.redshiftserverless#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that the workgroup supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
                 }
             },
@@ -2407,6 +2416,28 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshiftserverless#IpAddressType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(ipv4|dualstack)$"
+            }
+        },
+        "com.amazonaws.redshiftserverless#Ipv6CidrBlockNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There are no subnets in your VPC with associated IPv6 CIDR blocks. To use dual-stack mode, associate an IPv6 CIDR block with each subnet in your VPC.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.redshiftserverless#KmsKeyId": {
             "type": "string"
         },
@@ -3588,6 +3619,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The availability Zone.</p>"
+                    }
+                },
+                "ipv6Address": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address of the network interface within the subnet.</p>"
                     }
                 }
             },
@@ -5166,7 +5203,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.redshiftserverless#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Cluster Management Guide</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Management Guide</p>"
                     }
                 },
                 "state": {
@@ -6195,7 +6232,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.redshiftserverless#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Cluster Management Guide</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. \n         This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. \n         For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using Identity-Based Policies for \n            Amazon Redshift</a> in the Amazon Redshift Management Guide</p>"
                     }
                 },
                 "enabled": {
@@ -6453,6 +6490,9 @@
                     "target": "com.amazonaws.redshiftserverless#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.redshiftserverless#Ipv6CidrBlockNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
                 },
                 {
@@ -6519,6 +6559,12 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.redshiftserverless#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that the workgroup supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
                 }
             },
@@ -6894,6 +6940,12 @@
                     "target": "com.amazonaws.redshiftserverless#VpcIds",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of VPCs. Each entry is the unique identifier of a virtual private cloud with access to Amazon Redshift Serverless. If all of the VPCs for the grantee are allowed, it shows an asterisk.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.redshiftserverless#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that the workgroup supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
                 }
             },

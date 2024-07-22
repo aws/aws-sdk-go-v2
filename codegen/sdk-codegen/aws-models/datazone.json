@@ -483,6 +483,104 @@
                 }
             ]
         },
+        "com.amazonaws.datazone#AssetFilterConfiguration": {
+            "type": "union",
+            "members": {
+                "columnConfiguration": {
+                    "target": "com.amazonaws.datazone#ColumnFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column configuration of the asset filter.</p>"
+                    }
+                },
+                "rowConfiguration": {
+                    "target": "com.amazonaws.datazone#RowFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The row configuration of the asset filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details of the asset filter.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AssetFilterSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#FilterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the asset filter lives.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset filter.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#FilterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the asset filter.</p>"
+                    }
+                },
+                "effectiveColumnNames": {
+                    "target": "com.amazonaws.datazone#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective column names of the asset filter.</p>"
+                    }
+                },
+                "effectiveRowFilter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective row filter of the asset filter.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset filter was created.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that is displayed if the action does not succeed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the asset filter.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AssetFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AssetFilterSummary"
+            }
+        },
         "com.amazonaws.datazone#AssetId": {
             "type": "string",
             "traits": {
@@ -1462,6 +1560,26 @@
                 "smithy.api#documentation": "<p>Part of the provisioning properties of the environment blueprint.</p>"
             }
         },
+        "com.amazonaws.datazone#ColumnFilterConfiguration": {
+            "type": "structure",
+            "members": {
+                "includedColumnNames": {
+                    "target": "com.amazonaws.datazone#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include column names.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The column configuration of the asset filter.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ColumnNameList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.datazone#ConfigurableActionParameter": {
             "type": "structure",
             "members": {
@@ -1588,6 +1706,177 @@
                     "uri": "/v2/domains/{domainIdentifier}/assets"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateAssetFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateAssetFilterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateAssetFilterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a data asset filter.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateAssetFilterInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which you want to create an asset filter.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetIdentifier": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset filter.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.datazone#AssetFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateAssetFilterOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#FilterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the asset filter is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset filter.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#FilterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the asset filter.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.datazone#AssetFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset filter was created.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that is displayed if the asset filter is not created\n         successfully.</p>"
+                    }
+                },
+                "effectiveColumnNames": {
+                    "target": "com.amazonaws.datazone#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column names in the asset filter.</p>"
+                    }
+                },
+                "effectiveRowFilter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The row filter in the asset filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#CreateAssetInput": {
@@ -5716,6 +6005,9 @@
                     "target": "com.amazonaws.datazone#CancelSubscription"
                 },
                 {
+                    "target": "com.amazonaws.datazone#CreateAssetFilter"
+                },
+                {
                     "target": "com.amazonaws.datazone#CreateEnvironment"
                 },
                 {
@@ -5749,6 +6041,9 @@
                     "target": "com.amazonaws.datazone#CreateUserProfile"
                 },
                 {
+                    "target": "com.amazonaws.datazone#DeleteAssetFilter"
+                },
+                {
                     "target": "com.amazonaws.datazone#DeleteEnvironment"
                 },
                 {
@@ -5777,6 +6072,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#DisassociateEnvironmentRole"
+                },
+                {
+                    "target": "com.amazonaws.datazone#GetAssetFilter"
                 },
                 {
                     "target": "com.amazonaws.datazone#GetEnvironment"
@@ -5819,6 +6117,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#GetUserProfile"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ListAssetFilters"
                 },
                 {
                     "target": "com.amazonaws.datazone#ListAssetRevisions"
@@ -5903,6 +6204,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.datazone#UpdateAssetFilter"
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateEnvironment"
@@ -6440,6 +6744,76 @@
                     "uri": "/v2/domains/{domainIdentifier}/assets/{identifier}"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteAssetFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteAssetFilterInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an asset filter.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteAssetFilterInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to delete an asset filter.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetIdentifier": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#FilterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset filter that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.datazone#DeleteAssetInput": {
@@ -8569,6 +8943,12 @@
                         "smithy.api#documentation": "<p>The timestamp of when the environment blueprint was updated.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "provisioningConfigurations": {
+                    "target": "com.amazonaws.datazone#ProvisioningConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning configuration of a blueprint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9011,6 +9391,28 @@
                 "smithy.api#documentation": "<p>The details of an environment.</p>"
             }
         },
+        "com.amazonaws.datazone#EqualToExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might be equal to an expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the value is equal to an expression.</p>"
+            }
+        },
         "com.amazonaws.datazone#ErrorMessage": {
             "type": "string"
         },
@@ -9145,6 +9547,12 @@
                 "target": "com.amazonaws.datazone#FilterExpression"
             }
         },
+        "com.amazonaws.datazone#FilterId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
         "com.amazonaws.datazone#FilterList": {
             "type": "list",
             "member": {
@@ -9154,6 +9562,34 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.datazone#FilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\w -]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#FilterStatus": {
+            "type": "enum",
+            "members": {
+                "VALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALID"
+                    }
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
                 }
             }
         },
@@ -9565,6 +10001,152 @@
                     "uri": "/v2/domains/{domainIdentifier}/assets/{identifier}"
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetAssetFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetAssetFilterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetAssetFilterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets an asset filter.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters/{identifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetAssetFilterInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to get an asset filter.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetIdentifier": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#FilterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset filter.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetAssetFilterOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#FilterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to get an asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset filter.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#FilterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the asset filter.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.datazone#AssetFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset filter was created.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that is displayed if the action does not complete successfully.</p>"
+                    }
+                },
+                "effectiveColumnNames": {
+                    "target": "com.amazonaws.datazone#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column names of the asset filter.</p>"
+                    }
+                },
+                "effectiveRowFilter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The row filter of the asset filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#GetAssetInput": {
@@ -10682,6 +11264,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when this blueprint was upated.</p>",
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "provisioningConfigurations": {
+                    "target": "com.amazonaws.datazone#ProvisioningConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning configuration of a blueprint.</p>",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },
@@ -13579,6 +14168,50 @@
                 "smithy.api#documentation": "<p>The details of a listing for which a subscription is to be granted.</p>"
             }
         },
+        "com.amazonaws.datazone#GreaterThanExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might be greater than an expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the value is greater than an expression.</p>"
+            }
+        },
+        "com.amazonaws.datazone#GreaterThanOrEqualToExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might be greater than or equal to an expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the value is greater than or equal to an expression.</p>"
+            }
+        },
         "com.amazonaws.datazone#GroupDetails": {
             "type": "structure",
             "members": {
@@ -13747,6 +14380,28 @@
                 }
             }
         },
+        "com.amazonaws.datazone#InExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.datazone#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values that might be in the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether values are in the expression.</p>"
+            }
+        },
         "com.amazonaws.datazone#InternalServerException": {
             "type": "structure",
             "members": {
@@ -13787,6 +14442,36 @@
                 }
             }
         },
+        "com.amazonaws.datazone#IsNotNullExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that the expression is not null.</p>"
+            }
+        },
+        "com.amazonaws.datazone#IsNullExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that the expression is null.</p>"
+            }
+        },
         "com.amazonaws.datazone#KmsKeyArn": {
             "type": "string",
             "traits": {
@@ -13797,10 +14482,96 @@
                 "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
             }
         },
+        "com.amazonaws.datazone#LakeFormationConfiguration": {
+            "type": "structure",
+            "members": {
+                "locationRegistrationRole": {
+                    "target": "com.amazonaws.datazone#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role that is used to manage read/write access to the chosen Amazon S3 bucket(s) for\n         Data Lake using AWS Lake Formation hybrid access mode.</p>"
+                    }
+                },
+                "locationRegistrationExcludeS3Locations": {
+                    "target": "com.amazonaws.datazone#S3LocationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies certain Amazon S3 locations if you do not want Amazon DataZone to\n         automatically register them in hybrid mode. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Lake Formation configuration of the Data Lake blueprint.</p>"
+            }
+        },
         "com.amazonaws.datazone#LastName": {
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#LessThanExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might be less than the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that a value is less than an expression.</p>"
+            }
+        },
+        "com.amazonaws.datazone#LessThanOrEqualToExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might be less than or equal to an expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that a value is less than or equal to an expression.</p>"
+            }
+        },
+        "com.amazonaws.datazone#LikeExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might be like the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that a value is like the expression.</p>"
             }
         },
         "com.amazonaws.datazone#LineageEvent": {
@@ -14010,6 +14781,113 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of a data lineage node type.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ListAssetFilters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListAssetFiltersInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListAssetFiltersOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists asset filters.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListAssetFiltersInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to list asset filters.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetIdentifier": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#FilterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the asset filter.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of asset filters is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of asset filters, the response\n         includes a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to\n         list the next set of asset filters.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of asset filters to return in a single call to\n            <code>ListAssetFilters</code>. When the number of asset filters to be listed is greater\n         than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>\n         value that you can use in a subsequent call to <code>ListAssetFilters</code> to list the\n         next set of asset filters.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListAssetFiltersOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#AssetFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the <code>ListAssetFilters</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of asset filters is greater than the default value for the\n         <code>MaxResults</code> parameter, or if you explicitly specify a value for\n         <code>MaxResults</code> that is less than the number of asset filters, the response\n         includes a pagination token named <code>NextToken</code>. You can specify this\n         <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to\n         list the next set of asset filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#ListAssetRevisions": {
@@ -16887,6 +17765,72 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.datazone#NotEqualToExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might not be equal to the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that a value is not equal to the expression.</p>"
+            }
+        },
+        "com.amazonaws.datazone#NotInExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.datazone#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might not be in the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that a value is not in the expression.</p>"
+            }
+        },
+        "com.amazonaws.datazone#NotLikeExpression": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that might not be like the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that a value might be not like the expression.</p>"
+            }
+        },
         "com.amazonaws.datazone#NotificationOutput": {
             "type": "structure",
             "members": {
@@ -17463,6 +18407,26 @@
                 "smithy.api#documentation": "<p>The details of a Amazon DataZone project.</p>"
             }
         },
+        "com.amazonaws.datazone#ProvisioningConfiguration": {
+            "type": "union",
+            "members": {
+                "lakeFormationConfiguration": {
+                    "target": "com.amazonaws.datazone#LakeFormationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Lake Formation configuration of the Data Lake blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The provisioning configuration of the blueprint.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ProvisioningConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ProvisioningConfiguration"
+            }
+        },
         "com.amazonaws.datazone#ProvisioningProperties": {
             "type": "union",
             "members": {
@@ -17558,6 +18522,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The regional parameters in the environment blueprint.</p>"
                     }
+                },
+                "provisioningConfigurations": {
+                    "target": "com.amazonaws.datazone#ProvisioningConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning configuration of a blueprint.</p>",
+                        "smithy.api#notProperty": {}
+                    }
                 }
             },
             "traits": {
@@ -17617,6 +18588,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the environment blueprint was updated.</p>",
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "provisioningConfigurations": {
+                    "target": "com.amazonaws.datazone#ProvisioningConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioning configuration of a blueprint.</p>",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },
@@ -18469,6 +19447,140 @@
                 "smithy.api#pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"
             }
         },
+        "com.amazonaws.datazone#RowFilter": {
+            "type": "union",
+            "members": {
+                "expression": {
+                    "target": "com.amazonaws.datazone#RowFilterExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression of the row filter.</p>"
+                    }
+                },
+                "and": {
+                    "target": "com.amazonaws.datazone#RowFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'and' clause of the row filter.</p>"
+                    }
+                },
+                "or": {
+                    "target": "com.amazonaws.datazone#RowFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'or' clause of the row filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The row filter.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RowFilterConfiguration": {
+            "type": "structure",
+            "members": {
+                "rowFilter": {
+                    "target": "com.amazonaws.datazone#RowFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The row filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sensitive": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "<p>Specifies whether the row filter is sensitive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The row filter configuration details.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RowFilterExpression": {
+            "type": "union",
+            "members": {
+                "equalTo": {
+                    "target": "com.amazonaws.datazone#EqualToExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'equal to' clause of the row filter expression.</p>"
+                    }
+                },
+                "notEqualTo": {
+                    "target": "com.amazonaws.datazone#NotEqualToExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'no equal to' clause of the row filter expression.</p>"
+                    }
+                },
+                "greaterThan": {
+                    "target": "com.amazonaws.datazone#GreaterThanExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'greater than' clause of the row filter expression.</p>"
+                    }
+                },
+                "lessThan": {
+                    "target": "com.amazonaws.datazone#LessThanExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'less than' clause of the row filter expression.</p>"
+                    }
+                },
+                "greaterThanOrEqualTo": {
+                    "target": "com.amazonaws.datazone#GreaterThanOrEqualToExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'greater than or equal to' clause of the filter expression.</p>"
+                    }
+                },
+                "lessThanOrEqualTo": {
+                    "target": "com.amazonaws.datazone#LessThanOrEqualToExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'less than or equal to' clause of the row filter expression.</p>"
+                    }
+                },
+                "isNull": {
+                    "target": "com.amazonaws.datazone#IsNullExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'is null' clause of the row filter expression.</p>"
+                    }
+                },
+                "isNotNull": {
+                    "target": "com.amazonaws.datazone#IsNotNullExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'is not null' clause of the row filter expression.</p>"
+                    }
+                },
+                "in": {
+                    "target": "com.amazonaws.datazone#InExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'in' clause of the row filter expression.</p>"
+                    }
+                },
+                "notIn": {
+                    "target": "com.amazonaws.datazone#NotInExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'not in' clause of the row filter expression.</p>"
+                    }
+                },
+                "like": {
+                    "target": "com.amazonaws.datazone#LikeExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'like' clause of the row filter expression.</p>"
+                    }
+                },
+                "notLike": {
+                    "target": "com.amazonaws.datazone#NotLikeExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 'not like' clause of the row filter expression.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The row filter expression.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RowFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#RowFilter"
+            }
+        },
         "com.amazonaws.datazone#RunStatisticsForAssets": {
             "type": "structure",
             "members": {
@@ -18505,6 +19617,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The asset statistics from the data source run.</p>"
+            }
+        },
+        "com.amazonaws.datazone#S3Location": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://.+$"
+            }
+        },
+        "com.amazonaws.datazone#S3LocationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#S3Location"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.datazone#ScheduleConfiguration": {
@@ -19831,6 +20965,12 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.datazone#SubscribedAsset": {
@@ -21596,6 +22736,173 @@
         "com.amazonaws.datazone#UntagResourceResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateAssetFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#UpdateAssetFilterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#UpdateAssetFilterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an asset filter.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateAssetFilterInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to update an asset filter.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetIdentifier": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#FilterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset filter.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset filter.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset filter.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.datazone#AssetFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the asset filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateAssetFilterOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#FilterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the asset filter was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset filter.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#FilterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the asset filter.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.datazone#AssetFilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the asset filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset filter was created.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that is displayed if the action is not completed successfully.</p>"
+                    }
+                },
+                "effectiveColumnNames": {
+                    "target": "com.amazonaws.datazone#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column names of the asset filter.</p>"
+                    }
+                },
+                "effectiveRowFilter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The row filter of the asset filter.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
