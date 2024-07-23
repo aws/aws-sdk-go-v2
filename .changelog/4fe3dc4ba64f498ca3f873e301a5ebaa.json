@@ -1,8 +1,0 @@
-{
-    "id": "4fe3dc4b-a64f-498c-a3f8-73e301a5ebaa",
-    "type": "feature",
-    "description": "Support First Party ID Mapping",
-    "modules": [
-        "service/entityresolution"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.13.50 (2024-07-23)
+
+* No change notes available for this release.
+
 # v1.13.49 (2024-07-22)
 
 * No change notes available for this release.

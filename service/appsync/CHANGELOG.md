@@ -1,3 +1,7 @@
+# v1.35.0 (2024-07-23)
+
+* **Feature**: Adding support for paginators in AppSync list APIs
+
 # v1.34.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

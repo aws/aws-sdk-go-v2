@@ -1,3 +1,7 @@
+# v1.15.0 (2024-07-23)
+
+* **Feature**: This release adds AWS Entity Resolution integration to associate ID namespaces & ID mapping workflow resources as part of ID namespace association and  ID mapping table  in AWS Clean Rooms. It also introduces a new ID_MAPPING_TABLE analysis rule to manage the protection on ID mapping table.
+
 # v1.14.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

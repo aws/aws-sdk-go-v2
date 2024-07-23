@@ -1,3 +1,23 @@
+# Release (2024-07-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.35.0](service/appsync/CHANGELOG.md#v1350-2024-07-23)
+  * **Feature**: Adding support for paginators in AppSync list APIs
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.15.0](service/cleanrooms/CHANGELOG.md#v1150-2024-07-23)
+  * **Feature**: This release adds AWS Entity Resolution integration to associate ID namespaces & ID mapping workflow resources as part of ID namespace association and  ID mapping table  in AWS Clean Rooms. It also introduces a new ID_MAPPING_TABLE analysis rule to manage the protection on ID mapping table.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.7.0](service/cleanroomsml/CHANGELOG.md#v170-2024-07-23)
+  * **Feature**: Adds SQL query as the source of seed audience for audience generation job.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.106.0](service/connect/CHANGELOG.md#v11060-2024-07-23)
+  * **Feature**: Added PostContactSummary segment type on ListRealTimeContactAnalysisSegmentsV2 API
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.24.0](service/connectcontactlens/CHANGELOG.md#v1240-2024-07-23)
+  * **Feature**: Added PostContactSummary segment type on ListRealTimeContactAnalysisSegments API
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.15.0](service/datazone/CHANGELOG.md#v1150-2024-07-23)
+  * **Feature**: This release removes the deprecated dataProductItem field from Search API output.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.172.0](service/ec2/CHANGELOG.md#v11720-2024-07-23)
+  * **Feature**: Switch to new waiter matching implementation, which conveys a slight performance boost and removes the need for the go-jmespath runtime dependency.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.13.0](service/entityresolution/CHANGELOG.md#v1130-2024-07-23)
+  * **Feature**: Support First Party ID Mapping
+
 # Release (2024-07-22)
 
 ## Module Highlights

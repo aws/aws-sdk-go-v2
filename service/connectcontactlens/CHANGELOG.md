@@ -1,3 +1,7 @@
+# v1.24.0 (2024-07-23)
+
+* **Feature**: Added PostContactSummary segment type on ListRealTimeContactAnalysisSegments API
+
 # v1.23.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

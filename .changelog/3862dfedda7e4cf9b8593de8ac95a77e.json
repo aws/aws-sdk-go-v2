@@ -1,8 +1,0 @@
-{
-    "id": "3862dfed-da7e-4cf9-b859-3de8ac95a77e",
-    "type": "feature",
-    "description": "Switch to new waiter matching implementation, which conveys a slight performance boost and removes the need for the go-jmespath runtime dependency.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.7.0 (2024-07-23)
+
+* **Feature**: Adds SQL query as the source of seed audience for audience generation job.
+
 # v1.6.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

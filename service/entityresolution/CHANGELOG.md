@@ -1,3 +1,7 @@
+# v1.13.0 (2024-07-23)
+
+* **Feature**: Support First Party ID Mapping
+
 # v1.12.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

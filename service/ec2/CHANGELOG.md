@@ -1,3 +1,7 @@
+# v1.172.0 (2024-07-23)
+
+* **Feature**: Switch to new waiter matching implementation, which conveys a slight performance boost and removes the need for the go-jmespath runtime dependency.
+
 # v1.171.0 (2024-07-18)
 
 * **Feature**: Amazon VPC IP Address Manager (IPAM) now supports Bring-Your-Own-IP (BYOIP) for IP addresses registered with any Internet Registry. This feature uses DNS TXT records to validate ownership of a public IP address range.

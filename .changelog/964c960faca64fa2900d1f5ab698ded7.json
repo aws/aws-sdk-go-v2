@@ -1,8 +1,0 @@
-{
-    "id": "964c960f-aca6-4fa2-900d-1f5ab698ded7",
-    "type": "feature",
-    "description": "Adds SQL query as the source of seed audience for audience generation job.",
-    "modules": [
-        "service/cleanroomsml"
-    ]
-}
