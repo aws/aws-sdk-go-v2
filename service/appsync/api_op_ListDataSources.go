@@ -144,6 +144,95 @@ func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
+// ListDataSourcesPaginatorOptions is the paginator options for ListDataSources
+type ListDataSourcesPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDataSourcesPaginator is a paginator for ListDataSources
+type ListDataSourcesPaginator struct {
+	options   ListDataSourcesPaginatorOptions
+	client    ListDataSourcesAPIClient
+	params    *ListDataSourcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDataSourcesPaginator returns a new ListDataSourcesPaginator
+func NewListDataSourcesPaginator(client ListDataSourcesAPIClient, params *ListDataSourcesInput, optFns ...func(*ListDataSourcesPaginatorOptions)) *ListDataSourcesPaginator {
+	if params == nil {
+		params = &ListDataSourcesInput{}
+	}
+
+	options := ListDataSourcesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListDataSourcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDataSourcesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListDataSources page.
+func (p *ListDataSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListDataSources(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListDataSourcesAPIClient is a client that implements the ListDataSources
+// operation.
+type ListDataSourcesAPIClient interface {
+	ListDataSources(context.Context, *ListDataSourcesInput, ...func(*Options)) (*ListDataSourcesOutput, error)
+}
+
+var _ ListDataSourcesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListDataSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -514,9 +514,7 @@ func validateAudienceGenerationJobDataSource(v *types.AudienceGenerationJobDataS
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AudienceGenerationJobDataSource"}
-	if v.DataSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
-	} else if v.DataSource != nil {
+	if v.DataSource != nil {
 		if err := validateS3ConfigMap(v.DataSource); err != nil {
 			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
 		}

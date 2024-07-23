@@ -562,7 +562,7 @@ func awsRestjson1_deserializeOpDocumentCreateIdMappingWorkflowOutput(v **CreateI
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected IdMappingRoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
@@ -2486,7 +2486,7 @@ func awsRestjson1_deserializeOpDocumentGetIdMappingWorkflowOutput(v **GetIdMappi
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected IdMappingRoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
@@ -6268,7 +6268,7 @@ func awsRestjson1_deserializeOpDocumentUpdateIdMappingWorkflowOutput(v **UpdateI
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected IdMappingRoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
@@ -7642,6 +7642,45 @@ func awsRestjson1_deserializeDocumentIdMappingJobMetrics(v **types.IdMappingJobM
 				sv.RecordsNotProcessed = ptr.Int32(int32(i64))
 			}
 
+		case "totalMappedRecords":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalMappedRecords = ptr.Int32(int32(i64))
+			}
+
+		case "totalMappedSourceRecords":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalMappedSourceRecords = ptr.Int32(int32(i64))
+			}
+
+		case "totalMappedTargetRecords":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalMappedTargetRecords = ptr.Int32(int32(i64))
+			}
+
 		case "totalRecordsProcessed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7756,6 +7795,69 @@ func awsRestjson1_deserializeDocumentIdMappingJobOutputSourceConfig(v *[]types.I
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIdMappingRuleBasedProperties(v **types.IdMappingRuleBasedProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdMappingRuleBasedProperties
+	if *v == nil {
+		sv = &types.IdMappingRuleBasedProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attributeMatchingModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeMatchingModel to be of type string, got %T instead", value)
+				}
+				sv.AttributeMatchingModel = types.AttributeMatchingModel(jtv)
+			}
+
+		case "recordMatchingModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordMatchingModel to be of type string, got %T instead", value)
+				}
+				sv.RecordMatchingModel = types.RecordMatchingModel(jtv)
+			}
+
+		case "ruleDefinitionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdMappingWorkflowRuleDefinitionType to be of type string, got %T instead", value)
+				}
+				sv.RuleDefinitionType = types.IdMappingWorkflowRuleDefinitionType(jtv)
+			}
+
+		case "rules":
+			if err := awsRestjson1_deserializeDocumentRuleList(&sv.Rules, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdMappingTechniques(v **types.IdMappingTechniques, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7789,6 +7891,11 @@ func awsRestjson1_deserializeDocumentIdMappingTechniques(v **types.IdMappingTech
 
 		case "providerProperties":
 			if err := awsRestjson1_deserializeDocumentProviderProperties(&sv.ProviderProperties, value); err != nil {
+				return err
+			}
+
+		case "ruleBasedProperties":
+			if err := awsRestjson1_deserializeDocumentIdMappingRuleBasedProperties(&sv.RuleBasedProperties, value); err != nil {
 				return err
 			}
 
@@ -8010,6 +8117,42 @@ func awsRestjson1_deserializeDocumentIdMappingWorkflowOutputSourceConfig(v *[]ty
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIdMappingWorkflowRuleDefinitionTypeList(v *[]types.IdMappingWorkflowRuleDefinitionType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IdMappingWorkflowRuleDefinitionType
+	if *v == nil {
+		cv = []types.IdMappingWorkflowRuleDefinitionType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IdMappingWorkflowRuleDefinitionType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IdMappingWorkflowRuleDefinitionType to be of type string, got %T instead", value)
+			}
+			col = types.IdMappingWorkflowRuleDefinitionType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdMappingWorkflowSummary(v **types.IdMappingWorkflowSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8091,6 +8234,80 @@ func awsRestjson1_deserializeDocumentIdMappingWorkflowSummary(v **types.IdMappin
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIdNamespaceIdMappingWorkflowMetadata(v **types.IdNamespaceIdMappingWorkflowMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdNamespaceIdMappingWorkflowMetadata
+	if *v == nil {
+		sv = &types.IdNamespaceIdMappingWorkflowMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "idMappingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdMappingType to be of type string, got %T instead", value)
+				}
+				sv.IdMappingType = types.IdMappingType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIdNamespaceIdMappingWorkflowMetadataList(v *[]types.IdNamespaceIdMappingWorkflowMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IdNamespaceIdMappingWorkflowMetadata
+	if *v == nil {
+		cv = []types.IdNamespaceIdMappingWorkflowMetadata{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IdNamespaceIdMappingWorkflowMetadata
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentIdNamespaceIdMappingWorkflowMetadata(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdNamespaceIdMappingWorkflowProperties(v **types.IdNamespaceIdMappingWorkflowProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8124,6 +8341,11 @@ func awsRestjson1_deserializeDocumentIdNamespaceIdMappingWorkflowProperties(v **
 
 		case "providerProperties":
 			if err := awsRestjson1_deserializeDocumentNamespaceProviderProperties(&sv.ProviderProperties, value); err != nil {
+				return err
+			}
+
+		case "ruleBasedProperties":
+			if err := awsRestjson1_deserializeDocumentNamespaceRuleBasedProperties(&sv.RuleBasedProperties, value); err != nil {
 				return err
 			}
 
@@ -8332,6 +8554,11 @@ func awsRestjson1_deserializeDocumentIdNamespaceSummary(v **types.IdNamespaceSum
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "idMappingWorkflowProperties":
+			if err := awsRestjson1_deserializeDocumentIdNamespaceIdMappingWorkflowMetadataList(&sv.IdMappingWorkflowProperties, value); err != nil {
+				return err
 			}
 
 		case "idNamespaceArn":
@@ -9093,6 +9320,61 @@ func awsRestjson1_deserializeDocumentNamespaceProviderProperties(v **types.Names
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNamespaceRuleBasedProperties(v **types.NamespaceRuleBasedProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NamespaceRuleBasedProperties
+	if *v == nil {
+		sv = &types.NamespaceRuleBasedProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attributeMatchingModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeMatchingModel to be of type string, got %T instead", value)
+				}
+				sv.AttributeMatchingModel = types.AttributeMatchingModel(jtv)
+			}
+
+		case "recordMatchingModels":
+			if err := awsRestjson1_deserializeDocumentRecordMatchingModelList(&sv.RecordMatchingModels, value); err != nil {
+				return err
+			}
+
+		case "ruleDefinitionTypes":
+			if err := awsRestjson1_deserializeDocumentIdMappingWorkflowRuleDefinitionTypeList(&sv.RuleDefinitionTypes, value); err != nil {
+				return err
+			}
+
+		case "rules":
+			if err := awsRestjson1_deserializeDocumentRuleList(&sv.Rules, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOutputAttribute(v **types.OutputAttribute, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9773,6 +10055,42 @@ func awsRestjson1_deserializeDocumentProviderServiceSummary(v **types.ProviderSe
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRecordMatchingModelList(v *[]types.RecordMatchingModel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RecordMatchingModel
+	if *v == nil {
+		cv = []types.RecordMatchingModel{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RecordMatchingModel
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RecordMatchingModel to be of type string, got %T instead", value)
+			}
+			col = types.RecordMatchingModel(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRequiredBucketActionsList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9975,6 +10293,15 @@ func awsRestjson1_deserializeDocumentRuleBasedProperties(v **types.RuleBasedProp
 				sv.AttributeMatchingModel = types.AttributeMatchingModel(jtv)
 			}
 
+		case "matchPurpose":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MatchPurpose to be of type string, got %T instead", value)
+				}
+				sv.MatchPurpose = types.MatchPurpose(jtv)
+			}
+
 		case "rules":
 			if err := awsRestjson1_deserializeDocumentRuleList(&sv.Rules, value); err != nil {
 				return err
@@ -10061,6 +10388,15 @@ func awsRestjson1_deserializeDocumentSchemaInputAttribute(v **types.SchemaInputA
 					return fmt.Errorf("expected AttributeName to be of type string, got %T instead", value)
 				}
 				sv.GroupName = ptr.String(jtv)
+			}
+
+		case "hashed":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Hashed = ptr.Bool(jtv)
 			}
 
 		case "matchKey":

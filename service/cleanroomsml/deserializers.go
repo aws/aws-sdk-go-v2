@@ -1211,6 +1211,15 @@ func awsRestjson1_deserializeOpDocumentGetAudienceGenerationJobOutput(v **GetAud
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "protectedQueryIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProtectedQueryIdentifier = ptr.String(jtv)
+			}
+
 		case "seedAudience":
 			if err := awsRestjson1_deserializeDocumentAudienceGenerationJobDataSource(&sv.SeedAudience, value); err != nil {
 				return err
@@ -4349,6 +4358,11 @@ func awsRestjson1_deserializeDocumentAudienceGenerationJobDataSource(v **types.A
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "sqlParameters":
+			if err := awsRestjson1_deserializeDocumentProtectedQuerySQLParameters(&sv.SqlParameters, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5444,6 +5458,96 @@ func awsRestjson1_deserializeDocumentMetricsList(v *[]types.SharedAudienceMetric
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParameterMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ParameterValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtectedQuerySQLParameters(v **types.ProtectedQuerySQLParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProtectedQuerySQLParameters
+	if *v == nil {
+		sv = &types.ProtectedQuerySQLParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "analysisTemplateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalysisTemplateArn to be of type string, got %T instead", value)
+				}
+				sv.AnalysisTemplateArn = ptr.String(jtv)
+			}
+
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentParameterMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		case "queryString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QueryString = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

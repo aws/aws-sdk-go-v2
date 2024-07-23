@@ -45,7 +45,8 @@ type GetIdMappingWorkflowOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// An object which defines the idMappingType and the providerProperties .
+	// An object which defines the ID mapping technique and any additional
+	// configurations.
 	//
 	// This member is required.
 	IdMappingTechniques *types.IdMappingTechniques
@@ -55,12 +56,6 @@ type GetIdMappingWorkflowOutput struct {
 	//
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
-
-	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to access Amazon Web Services resources on your behalf.
-	//
-	// This member is required.
-	RoleArn *string
 
 	// The timestamp of when the workflow was last updated.
 	//
@@ -84,6 +79,10 @@ type GetIdMappingWorkflowOutput struct {
 	// A list of OutputSource objects, each of which contains fields OutputS3Path and
 	// KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
+
+	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
+	// role to access Amazon Web Services resources on your behalf.
+	RoleArn *string
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

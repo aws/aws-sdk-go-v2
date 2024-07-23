@@ -36,6 +36,10 @@ type PutPolicyInput struct {
 
 	// The resource-based policy.
 	//
+	// If you set the value of the effect parameter in the policy to Deny for the
+	// PutPolicy operation, you must also set the value of the effect parameter to Deny
+	// for the AddPolicyStatement operation.
+	//
 	// This member is required.
 	Policy *string
 

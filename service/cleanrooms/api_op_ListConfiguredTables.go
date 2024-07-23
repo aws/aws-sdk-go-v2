@@ -29,11 +29,12 @@ func (c *Client) ListConfiguredTables(ctx context.Context, params *ListConfigure
 
 type ListConfiguredTablesInput struct {
 
-	// The maximum size of the results that is returned per call.
+	// The maximum number of results that are returned for an API request call. The
+	// service chooses a default number if you don't set one. The service might return
+	// a `nextToken` even if the `maxResults` value has not been met.
 	MaxResults *int32
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,8 +47,7 @@ type ListConfiguredTablesOutput struct {
 	// This member is required.
 	ConfiguredTableSummaries []types.ConfiguredTableSummary
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,7 +141,9 @@ func (c *Client) addOperationListConfiguredTablesMiddlewares(stack *middleware.S
 // ListConfiguredTablesPaginatorOptions is the paginator options for
 // ListConfiguredTables
 type ListConfiguredTablesPaginatorOptions struct {
-	// The maximum size of the results that is returned per call.
+	// The maximum number of results that are returned for an API request call. The
+	// service chooses a default number if you don't set one. The service might return
+	// a `nextToken` even if the `maxResults` value has not been met.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

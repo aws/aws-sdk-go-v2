@@ -148,6 +148,97 @@ func (c *Client) addOperationListResolversByFunctionMiddlewares(stack *middlewar
 	return nil
 }
 
+// ListResolversByFunctionPaginatorOptions is the paginator options for
+// ListResolversByFunction
+type ListResolversByFunctionPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListResolversByFunctionPaginator is a paginator for ListResolversByFunction
+type ListResolversByFunctionPaginator struct {
+	options   ListResolversByFunctionPaginatorOptions
+	client    ListResolversByFunctionAPIClient
+	params    *ListResolversByFunctionInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListResolversByFunctionPaginator returns a new
+// ListResolversByFunctionPaginator
+func NewListResolversByFunctionPaginator(client ListResolversByFunctionAPIClient, params *ListResolversByFunctionInput, optFns ...func(*ListResolversByFunctionPaginatorOptions)) *ListResolversByFunctionPaginator {
+	if params == nil {
+		params = &ListResolversByFunctionInput{}
+	}
+
+	options := ListResolversByFunctionPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListResolversByFunctionPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListResolversByFunctionPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListResolversByFunction page.
+func (p *ListResolversByFunctionPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListResolversByFunctionOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListResolversByFunction(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListResolversByFunctionAPIClient is a client that implements the
+// ListResolversByFunction operation.
+type ListResolversByFunctionAPIClient interface {
+	ListResolversByFunction(context.Context, *ListResolversByFunctionInput, ...func(*Options)) (*ListResolversByFunctionOutput, error)
+}
+
+var _ ListResolversByFunctionAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListResolversByFunction(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

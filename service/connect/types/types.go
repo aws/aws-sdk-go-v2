@@ -4335,6 +4335,7 @@ type RealTimeContactAnalysisPointOfInterest struct {
 //	RealtimeContactAnalysisSegmentMemberCategories
 //	RealtimeContactAnalysisSegmentMemberEvent
 //	RealtimeContactAnalysisSegmentMemberIssues
+//	RealtimeContactAnalysisSegmentMemberPostContactSummary
 //	RealtimeContactAnalysisSegmentMemberTranscript
 type RealtimeContactAnalysisSegment interface {
 	isRealtimeContactAnalysisSegment()
@@ -4375,6 +4376,15 @@ type RealtimeContactAnalysisSegmentMemberIssues struct {
 }
 
 func (*RealtimeContactAnalysisSegmentMemberIssues) isRealtimeContactAnalysisSegment() {}
+
+// Information about the post-contact summary.
+type RealtimeContactAnalysisSegmentMemberPostContactSummary struct {
+	Value RealTimeContactAnalysisSegmentPostContactSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*RealtimeContactAnalysisSegmentMemberPostContactSummary) isRealtimeContactAnalysisSegment() {}
 
 // The analyzed transcript segment.
 type RealtimeContactAnalysisSegmentMemberTranscript struct {
@@ -4471,6 +4481,40 @@ type RealTimeContactAnalysisSegmentIssues struct {
 	//
 	// This member is required.
 	IssuesDetected []RealTimeContactAnalysisIssueDetected
+
+	noSmithyDocumentSerde
+}
+
+// Information about the post-contact summary for a real-time contact segment.
+type RealTimeContactAnalysisSegmentPostContactSummary struct {
+
+	// Whether the summary was successfully COMPLETED or FAILED to be generated.
+	//
+	// This member is required.
+	Status RealTimeContactAnalysisPostContactSummaryStatus
+
+	// The content of the summary.
+	Content *string
+
+	// If the summary failed to be generated, one of the following failure codes
+	// occurs:
+	//
+	//   - QUOTA_EXCEEDED : The number of concurrent analytics jobs reached your
+	//   service quota.
+	//
+	//   - INSUFFICIENT_CONVERSATION_CONTENT : The conversation needs to have at least
+	//   one turn from both the participants in order to generate the summary.
+	//
+	//   - FAILED_SAFETY_GUIDELINES : The generated summary cannot be provided because
+	//   it failed to meet system safety guidelines.
+	//
+	//   - INVALID_ANALYSIS_CONFIGURATION : This code occurs when, for example, you're
+	//   using a [language]that isn't supported by generative AI-powered post-contact summaries.
+	//
+	//   - INTERNAL_ERROR : Internal system error.
+	//
+	// [language]: https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens
+	FailureCode RealTimeContactAnalysisPostContactSummaryFailureCode
 
 	noSmithyDocumentSerde
 }
@@ -5738,7 +5782,8 @@ type Threshold struct {
 // Contains information about the threshold for service level metrics.
 type ThresholdV2 struct {
 
-	// The type of comparison. Only "less than" (LT) comparisons are supported.
+	// The type of comparison. Only "less than" (LT) and "greater than" (GT)
+	// comparisons are supported.
 	Comparison *string
 
 	// The threshold value to compare.

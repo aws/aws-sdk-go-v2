@@ -99,9 +99,10 @@ type AnalysisRuleType string
 
 // Enum values for AnalysisRuleType
 const (
-	AnalysisRuleTypeAggregation AnalysisRuleType = "AGGREGATION"
-	AnalysisRuleTypeList        AnalysisRuleType = "LIST"
-	AnalysisRuleTypeCustom      AnalysisRuleType = "CUSTOM"
+	AnalysisRuleTypeAggregation    AnalysisRuleType = "AGGREGATION"
+	AnalysisRuleTypeList           AnalysisRuleType = "LIST"
+	AnalysisRuleTypeCustom         AnalysisRuleType = "CUSTOM"
+	AnalysisRuleTypeIdMappingTable AnalysisRuleType = "ID_MAPPING_TABLE"
 )
 
 // Values returns all known values for AnalysisRuleType. Note that this can be
@@ -113,6 +114,7 @@ func (AnalysisRuleType) Values() []AnalysisRuleType {
 		"AGGREGATION",
 		"LIST",
 		"CUSTOM",
+		"ID_MAPPING_TABLE",
 	}
 }
 
@@ -260,6 +262,25 @@ func (FilterableMemberStatus) Values() []FilterableMemberStatus {
 	return []FilterableMemberStatus{
 		"INVITED",
 		"ACTIVE",
+	}
+}
+
+type IdNamespaceType string
+
+// Enum values for IdNamespaceType
+const (
+	IdNamespaceTypeSource IdNamespaceType = "SOURCE"
+	IdNamespaceTypeTarget IdNamespaceType = "TARGET"
+)
+
+// Values returns all known values for IdNamespaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdNamespaceType) Values() []IdNamespaceType {
+	return []IdNamespaceType{
+		"SOURCE",
+		"TARGET",
 	}
 }
 
@@ -618,7 +639,11 @@ type SchemaConfiguration string
 
 // Enum values for SchemaConfiguration
 const (
-	SchemaConfigurationDifferentialPrivacy SchemaConfiguration = "DIFFERENTIAL_PRIVACY"
+	SchemaConfigurationDifferentialPrivacy                     SchemaConfiguration = "DIFFERENTIAL_PRIVACY"
+	SchemaConfigurationCustomAnalysisNotAllowed                SchemaConfiguration = "CUSTOM_ANALYSIS_NOT_ALLOWED"
+	SchemaConfigurationNoMemberAccountAllowedToProvideAnalysis SchemaConfiguration = "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS"
+	SchemaConfigurationDifferentialPrivacyBudgetNotConfigured  SchemaConfiguration = "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED"
+	SchemaConfigurationIdMappingTableNotPopulated              SchemaConfiguration = "ID_MAPPING_TABLE_NOT_POPULATED"
 )
 
 // Values returns all known values for SchemaConfiguration. Note that this can be
@@ -628,6 +653,10 @@ const (
 func (SchemaConfiguration) Values() []SchemaConfiguration {
 	return []SchemaConfiguration{
 		"DIFFERENTIAL_PRIVACY",
+		"CUSTOM_ANALYSIS_NOT_ALLOWED",
+		"NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS",
+		"DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED",
+		"ID_MAPPING_TABLE_NOT_POPULATED",
 	}
 }
 
@@ -658,6 +687,7 @@ const (
 	SchemaStatusReasonCodeAnalysisTemplatesNotConfigured         SchemaStatusReasonCode = "ANALYSIS_TEMPLATES_NOT_CONFIGURED"
 	SchemaStatusReasonCodeAnalysisProvidersNotConfigured         SchemaStatusReasonCode = "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
 	SchemaStatusReasonCodeDifferentialPrivacyPolicyNotConfigured SchemaStatusReasonCode = "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+	SchemaStatusReasonCodeIdMappingTableNotPopulated             SchemaStatusReasonCode = "ID_MAPPING_TABLE_NOT_POPULATED"
 )
 
 // Values returns all known values for SchemaStatusReasonCode. Note that this can
@@ -670,6 +700,7 @@ func (SchemaStatusReasonCode) Values() []SchemaStatusReasonCode {
 		"ANALYSIS_TEMPLATES_NOT_CONFIGURED",
 		"ANALYSIS_PROVIDERS_NOT_CONFIGURED",
 		"DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED",
+		"ID_MAPPING_TABLE_NOT_POPULATED",
 	}
 }
 
@@ -677,7 +708,8 @@ type SchemaType string
 
 // Enum values for SchemaType
 const (
-	SchemaTypeTable SchemaType = "TABLE"
+	SchemaTypeTable          SchemaType = "TABLE"
+	SchemaTypeIdMappingTable SchemaType = "ID_MAPPING_TABLE"
 )
 
 // Values returns all known values for SchemaType. Note that this can be expanded
@@ -687,6 +719,7 @@ const (
 func (SchemaType) Values() []SchemaType {
 	return []SchemaType{
 		"TABLE",
+		"ID_MAPPING_TABLE",
 	}
 }
 

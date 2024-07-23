@@ -136,6 +136,95 @@ func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
+// ListDomainNamesPaginatorOptions is the paginator options for ListDomainNames
+type ListDomainNamesPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDomainNamesPaginator is a paginator for ListDomainNames
+type ListDomainNamesPaginator struct {
+	options   ListDomainNamesPaginatorOptions
+	client    ListDomainNamesAPIClient
+	params    *ListDomainNamesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDomainNamesPaginator returns a new ListDomainNamesPaginator
+func NewListDomainNamesPaginator(client ListDomainNamesAPIClient, params *ListDomainNamesInput, optFns ...func(*ListDomainNamesPaginatorOptions)) *ListDomainNamesPaginator {
+	if params == nil {
+		params = &ListDomainNamesInput{}
+	}
+
+	options := ListDomainNamesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListDomainNamesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDomainNamesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListDomainNames page.
+func (p *ListDomainNamesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDomainNamesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListDomainNames(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListDomainNamesAPIClient is a client that implements the ListDomainNames
+// operation.
+type ListDomainNamesAPIClient interface {
+	ListDomainNames(context.Context, *ListDomainNamesInput, ...func(*Options)) (*ListDomainNamesOutput, error)
+}
+
+var _ ListDomainNamesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListDomainNames(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

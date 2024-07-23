@@ -862,6 +862,64 @@ func awsRestjson1_deserializeDocumentPointsOfInterest(v *[]types.PointOfInterest
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPostContactSummary(v **types.PostContactSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PostContactSummary
+	if *v == nil {
+		sv = &types.PostContactSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Content":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PostContactSummaryContent to be of type string, got %T instead", value)
+				}
+				sv.Content = ptr.String(jtv)
+			}
+
+		case "FailureCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PostContactSummaryFailureCode to be of type string, got %T instead", value)
+				}
+				sv.FailureCode = types.PostContactSummaryFailureCode(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PostContactSummaryStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.PostContactSummaryStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRealtimeContactAnalysisSegment(v **types.RealtimeContactAnalysisSegment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -886,6 +944,11 @@ func awsRestjson1_deserializeDocumentRealtimeContactAnalysisSegment(v **types.Re
 		switch key {
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategories(&sv.Categories, value); err != nil {
+				return err
+			}
+
+		case "PostContactSummary":
+			if err := awsRestjson1_deserializeDocumentPostContactSummary(&sv.PostContactSummary, value); err != nil {
 				return err
 			}
 

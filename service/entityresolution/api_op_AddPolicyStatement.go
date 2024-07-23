@@ -46,6 +46,10 @@ type AddPolicyStatementInput struct {
 	// Determines whether the permissions specified in the policy are to be allowed (
 	// Allow ) or denied ( Deny ).
 	//
+	// If you set the value of the effect parameter to Deny for the AddPolicyStatement
+	// operation, you must also set the value of the effect parameter in the policy to
+	// Deny for the PutPolicy operation.
+	//
 	// This member is required.
 	Effect types.StatementEffect
 

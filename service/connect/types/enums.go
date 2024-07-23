@@ -1967,15 +1967,62 @@ func (RealTimeContactAnalysisOutputType) Values() []RealTimeContactAnalysisOutpu
 	}
 }
 
+type RealTimeContactAnalysisPostContactSummaryFailureCode string
+
+// Enum values for RealTimeContactAnalysisPostContactSummaryFailureCode
+const (
+	RealTimeContactAnalysisPostContactSummaryFailureCodeQuotaExceeded                   RealTimeContactAnalysisPostContactSummaryFailureCode = "QUOTA_EXCEEDED"
+	RealTimeContactAnalysisPostContactSummaryFailureCodeInsufficientConversationContent RealTimeContactAnalysisPostContactSummaryFailureCode = "INSUFFICIENT_CONVERSATION_CONTENT"
+	RealTimeContactAnalysisPostContactSummaryFailureCodeFailedSafetyGuidelines          RealTimeContactAnalysisPostContactSummaryFailureCode = "FAILED_SAFETY_GUIDELINES"
+	RealTimeContactAnalysisPostContactSummaryFailureCodeInvalidAnalysisConfiguration    RealTimeContactAnalysisPostContactSummaryFailureCode = "INVALID_ANALYSIS_CONFIGURATION"
+	RealTimeContactAnalysisPostContactSummaryFailureCodeInternalError                   RealTimeContactAnalysisPostContactSummaryFailureCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for
+// RealTimeContactAnalysisPostContactSummaryFailureCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RealTimeContactAnalysisPostContactSummaryFailureCode) Values() []RealTimeContactAnalysisPostContactSummaryFailureCode {
+	return []RealTimeContactAnalysisPostContactSummaryFailureCode{
+		"QUOTA_EXCEEDED",
+		"INSUFFICIENT_CONVERSATION_CONTENT",
+		"FAILED_SAFETY_GUIDELINES",
+		"INVALID_ANALYSIS_CONFIGURATION",
+		"INTERNAL_ERROR",
+	}
+}
+
+type RealTimeContactAnalysisPostContactSummaryStatus string
+
+// Enum values for RealTimeContactAnalysisPostContactSummaryStatus
+const (
+	RealTimeContactAnalysisPostContactSummaryStatusFailed    RealTimeContactAnalysisPostContactSummaryStatus = "FAILED"
+	RealTimeContactAnalysisPostContactSummaryStatusCompleted RealTimeContactAnalysisPostContactSummaryStatus = "COMPLETED"
+)
+
+// Values returns all known values for
+// RealTimeContactAnalysisPostContactSummaryStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RealTimeContactAnalysisPostContactSummaryStatus) Values() []RealTimeContactAnalysisPostContactSummaryStatus {
+	return []RealTimeContactAnalysisPostContactSummaryStatus{
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
 type RealTimeContactAnalysisSegmentType string
 
 // Enum values for RealTimeContactAnalysisSegmentType
 const (
-	RealTimeContactAnalysisSegmentTypeTranscript  RealTimeContactAnalysisSegmentType = "Transcript"
-	RealTimeContactAnalysisSegmentTypeCategories  RealTimeContactAnalysisSegmentType = "Categories"
-	RealTimeContactAnalysisSegmentTypeIssues      RealTimeContactAnalysisSegmentType = "Issues"
-	RealTimeContactAnalysisSegmentTypeEvent       RealTimeContactAnalysisSegmentType = "Event"
-	RealTimeContactAnalysisSegmentTypeAttachments RealTimeContactAnalysisSegmentType = "Attachments"
+	RealTimeContactAnalysisSegmentTypeTranscript         RealTimeContactAnalysisSegmentType = "Transcript"
+	RealTimeContactAnalysisSegmentTypeCategories         RealTimeContactAnalysisSegmentType = "Categories"
+	RealTimeContactAnalysisSegmentTypeIssues             RealTimeContactAnalysisSegmentType = "Issues"
+	RealTimeContactAnalysisSegmentTypeEvent              RealTimeContactAnalysisSegmentType = "Event"
+	RealTimeContactAnalysisSegmentTypeAttachments        RealTimeContactAnalysisSegmentType = "Attachments"
+	RealTimeContactAnalysisSegmentTypePostContactSummary RealTimeContactAnalysisSegmentType = "PostContactSummary"
 )
 
 // Values returns all known values for RealTimeContactAnalysisSegmentType. Note
@@ -1990,6 +2037,7 @@ func (RealTimeContactAnalysisSegmentType) Values() []RealTimeContactAnalysisSegm
 		"Issues",
 		"Event",
 		"Attachments",
+		"PostContactSummary",
 	}
 }
 

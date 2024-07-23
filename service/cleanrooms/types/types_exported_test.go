@@ -35,6 +35,9 @@ func ExampleAnalysisRulePolicyV1_outputUsage() {
 	case *types.AnalysisRulePolicyV1MemberCustom:
 		_ = v.Value // Value is types.AnalysisRuleCustom
 
+	case *types.AnalysisRulePolicyV1MemberIdMappingTable:
+		_ = v.Value // Value is types.AnalysisRuleIdMappingTable
+
 	case *types.AnalysisRulePolicyV1MemberList:
 		_ = v.Value // Value is types.AnalysisRuleList
 
@@ -50,6 +53,7 @@ func ExampleAnalysisRulePolicyV1_outputUsage() {
 var _ *types.AnalysisRuleAggregation
 var _ *types.AnalysisRuleCustom
 var _ *types.AnalysisRuleList
+var _ *types.AnalysisRuleIdMappingTable
 
 func ExampleAnalysisSource_outputUsage() {
 	var union types.AnalysisSource
@@ -278,6 +282,42 @@ func ExampleProtectedQueryOutputConfiguration_outputUsage() {
 }
 
 var _ *types.ProtectedQueryS3OutputConfiguration
+
+func ExampleQueryConstraint_outputUsage() {
+	var union types.QueryConstraint
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QueryConstraintMemberRequireOverlap:
+		_ = v.Value // Value is types.QueryConstraintRequireOverlap
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.QueryConstraintRequireOverlap
+
+func ExampleSchemaTypeProperties_outputUsage() {
+	var union types.SchemaTypeProperties
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SchemaTypePropertiesMemberIdMappingTable:
+		_ = v.Value // Value is types.IdMappingTableSchemaTypeProperties
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.IdMappingTableSchemaTypeProperties
 
 func ExampleTableReference_outputUsage() {
 	var union types.TableReference

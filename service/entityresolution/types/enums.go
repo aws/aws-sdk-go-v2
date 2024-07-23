@@ -63,7 +63,8 @@ type IdMappingType string
 
 // Enum values for IdMappingType
 const (
-	IdMappingTypeProvider IdMappingType = "PROVIDER"
+	IdMappingTypeProvider  IdMappingType = "PROVIDER"
+	IdMappingTypeRuleBased IdMappingType = "RULE_BASED"
 )
 
 // Values returns all known values for IdMappingType. Note that this can be
@@ -73,6 +74,27 @@ const (
 func (IdMappingType) Values() []IdMappingType {
 	return []IdMappingType{
 		"PROVIDER",
+		"RULE_BASED",
+	}
+}
+
+type IdMappingWorkflowRuleDefinitionType string
+
+// Enum values for IdMappingWorkflowRuleDefinitionType
+const (
+	IdMappingWorkflowRuleDefinitionTypeSource IdMappingWorkflowRuleDefinitionType = "SOURCE"
+	IdMappingWorkflowRuleDefinitionTypeTarget IdMappingWorkflowRuleDefinitionType = "TARGET"
+)
+
+// Values returns all known values for IdMappingWorkflowRuleDefinitionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdMappingWorkflowRuleDefinitionType) Values() []IdMappingWorkflowRuleDefinitionType {
+	return []IdMappingWorkflowRuleDefinitionType{
+		"SOURCE",
+		"TARGET",
 	}
 }
 
@@ -132,6 +154,44 @@ func (JobStatus) Values() []JobStatus {
 		"SUCCEEDED",
 		"FAILED",
 		"QUEUED",
+	}
+}
+
+type MatchPurpose string
+
+// Enum values for MatchPurpose
+const (
+	MatchPurposeIdentifierGeneration MatchPurpose = "IDENTIFIER_GENERATION"
+	MatchPurposeIndexing             MatchPurpose = "INDEXING"
+)
+
+// Values returns all known values for MatchPurpose. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MatchPurpose) Values() []MatchPurpose {
+	return []MatchPurpose{
+		"IDENTIFIER_GENERATION",
+		"INDEXING",
+	}
+}
+
+type RecordMatchingModel string
+
+// Enum values for RecordMatchingModel
+const (
+	RecordMatchingModelOneSourceToOneTarget  RecordMatchingModel = "ONE_SOURCE_TO_ONE_TARGET"
+	RecordMatchingModelManySourceToOneTarget RecordMatchingModel = "MANY_SOURCE_TO_ONE_TARGET"
+)
+
+// Values returns all known values for RecordMatchingModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordMatchingModel) Values() []RecordMatchingModel {
+	return []RecordMatchingModel{
+		"ONE_SOURCE_TO_ONE_TARGET",
+		"MANY_SOURCE_TO_ONE_TARGET",
 	}
 }
 

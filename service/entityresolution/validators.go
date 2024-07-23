@@ -813,6 +813,32 @@ func validateIdMappingJobOutputSourceConfig(v []types.IdMappingJobOutputSource) 
 	}
 }
 
+func validateIdMappingRuleBasedProperties(v *types.IdMappingRuleBasedProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdMappingRuleBasedProperties"}
+	if v.Rules != nil {
+		if err := validateRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.RuleDefinitionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleDefinitionType"))
+	}
+	if len(v.AttributeMatchingModel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeMatchingModel"))
+	}
+	if len(v.RecordMatchingModel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordMatchingModel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIdMappingTechniques(v *types.IdMappingTechniques) error {
 	if v == nil {
 		return nil
@@ -820,6 +846,11 @@ func validateIdMappingTechniques(v *types.IdMappingTechniques) error {
 	invalidParams := smithy.InvalidParamsError{Context: "IdMappingTechniques"}
 	if len(v.IdMappingType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IdMappingType"))
+	}
+	if v.RuleBasedProperties != nil {
+		if err := validateIdMappingRuleBasedProperties(v.RuleBasedProperties); err != nil {
+			invalidParams.AddNested("RuleBasedProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ProviderProperties != nil {
 		if err := validateProviderProperties(v.ProviderProperties); err != nil {
@@ -904,6 +935,11 @@ func validateIdNamespaceIdMappingWorkflowProperties(v *types.IdNamespaceIdMappin
 	invalidParams := smithy.InvalidParamsError{Context: "IdNamespaceIdMappingWorkflowProperties"}
 	if len(v.IdMappingType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IdMappingType"))
+	}
+	if v.RuleBasedProperties != nil {
+		if err := validateNamespaceRuleBasedProperties(v.RuleBasedProperties); err != nil {
+			invalidParams.AddNested("RuleBasedProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ProviderProperties != nil {
 		if err := validateNamespaceProviderProperties(v.ProviderProperties); err != nil {
@@ -1023,6 +1059,23 @@ func validateNamespaceProviderProperties(v *types.NamespaceProviderProperties) e
 	invalidParams := smithy.InvalidParamsError{Context: "NamespaceProviderProperties"}
 	if v.ProviderServiceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProviderServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNamespaceRuleBasedProperties(v *types.NamespaceRuleBasedProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NamespaceRuleBasedProperties"}
+	if v.Rules != nil {
+		if err := validateRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1310,9 +1363,6 @@ func validateOpCreateIdMappingWorkflowInput(v *CreateIdMappingWorkflowInput) err
 		if err := validateIdMappingTechniques(v.IdMappingTechniques); err != nil {
 			invalidParams.AddNested("IdMappingTechniques", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1795,9 +1845,6 @@ func validateOpUpdateIdMappingWorkflowInput(v *UpdateIdMappingWorkflowInput) err
 		if err := validateIdMappingTechniques(v.IdMappingTechniques); err != nil {
 			invalidParams.AddNested("IdMappingTechniques", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

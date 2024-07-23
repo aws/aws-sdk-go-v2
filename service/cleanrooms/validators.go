@@ -190,6 +190,46 @@ func (m *validateOpCreateConfiguredTable) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIdMappingTable struct {
+}
+
+func (*validateOpCreateIdMappingTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIdMappingTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIdMappingTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIdMappingTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateIdNamespaceAssociation struct {
+}
+
+func (*validateOpCreateIdNamespaceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIdNamespaceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIdNamespaceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIdNamespaceAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMembership struct {
 }
 
@@ -350,6 +390,46 @@ func (m *validateOpDeleteConfiguredTable) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIdMappingTable struct {
+}
+
+func (*validateOpDeleteIdMappingTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIdMappingTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIdMappingTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIdMappingTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteIdNamespaceAssociation struct {
+}
+
+func (*validateOpDeleteIdNamespaceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIdNamespaceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIdNamespaceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIdNamespaceAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMember struct {
 }
 
@@ -470,6 +550,26 @@ func (m *validateOpGetCollaborationConfiguredAudienceModelAssociation) HandleIni
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCollaborationIdNamespaceAssociation struct {
+}
+
+func (*validateOpGetCollaborationIdNamespaceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCollaborationIdNamespaceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCollaborationIdNamespaceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCollaborationIdNamespaceAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCollaboration struct {
 }
 
@@ -585,6 +685,46 @@ func (m *validateOpGetConfiguredTable) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetConfiguredTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIdMappingTable struct {
+}
+
+func (*validateOpGetIdMappingTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIdMappingTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIdMappingTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIdMappingTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIdNamespaceAssociation struct {
+}
+
+func (*validateOpGetIdNamespaceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIdNamespaceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIdNamespaceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIdNamespaceAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +890,26 @@ func (m *validateOpListCollaborationConfiguredAudienceModelAssociations) HandleI
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCollaborationIdNamespaceAssociations struct {
+}
+
+func (*validateOpListCollaborationIdNamespaceAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationIdNamespaceAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationIdNamespaceAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationIdNamespaceAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListCollaborationPrivacyBudgets struct {
 }
 
@@ -825,6 +985,46 @@ func (m *validateOpListConfiguredTableAssociations) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListConfiguredTableAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIdMappingTables struct {
+}
+
+func (*validateOpListIdMappingTables) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIdMappingTables) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIdMappingTablesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIdMappingTablesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIdNamespaceAssociations struct {
+}
+
+func (*validateOpListIdNamespaceAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIdNamespaceAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIdNamespaceAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIdNamespaceAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -945,6 +1145,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPopulateIdMappingTable struct {
+}
+
+func (*validateOpPopulateIdMappingTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPopulateIdMappingTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PopulateIdMappingTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPopulateIdMappingTableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1150,6 +1370,46 @@ func (m *validateOpUpdateConfiguredTable) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIdMappingTable struct {
+}
+
+func (*validateOpUpdateIdMappingTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIdMappingTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIdMappingTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIdMappingTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateIdNamespaceAssociation struct {
+}
+
+func (*validateOpUpdateIdNamespaceAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIdNamespaceAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIdNamespaceAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIdNamespaceAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMembership struct {
 }
 
@@ -1246,6 +1506,14 @@ func addOpCreateConfiguredTableValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateConfiguredTable{}, middleware.After)
 }
 
+func addOpCreateIdMappingTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIdMappingTable{}, middleware.After)
+}
+
+func addOpCreateIdNamespaceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIdNamespaceAssociation{}, middleware.After)
+}
+
 func addOpCreateMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMembership{}, middleware.After)
 }
@@ -1278,6 +1546,14 @@ func addOpDeleteConfiguredTableValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteConfiguredTable{}, middleware.After)
 }
 
+func addOpDeleteIdMappingTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIdMappingTable{}, middleware.After)
+}
+
+func addOpDeleteIdNamespaceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIdNamespaceAssociation{}, middleware.After)
+}
+
 func addOpDeleteMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMember{}, middleware.After)
 }
@@ -1302,6 +1578,10 @@ func addOpGetCollaborationConfiguredAudienceModelAssociationValidationMiddleware
 	return stack.Initialize.Add(&validateOpGetCollaborationConfiguredAudienceModelAssociation{}, middleware.After)
 }
 
+func addOpGetCollaborationIdNamespaceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCollaborationIdNamespaceAssociation{}, middleware.After)
+}
+
 func addOpGetCollaborationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCollaboration{}, middleware.After)
 }
@@ -1324,6 +1604,14 @@ func addOpGetConfiguredTableAssociationValidationMiddleware(stack *middleware.St
 
 func addOpGetConfiguredTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConfiguredTable{}, middleware.After)
+}
+
+func addOpGetIdMappingTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIdMappingTable{}, middleware.After)
+}
+
+func addOpGetIdNamespaceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIdNamespaceAssociation{}, middleware.After)
 }
 
 func addOpGetMembershipValidationMiddleware(stack *middleware.Stack) error {
@@ -1358,6 +1646,10 @@ func addOpListCollaborationConfiguredAudienceModelAssociationsValidationMiddlewa
 	return stack.Initialize.Add(&validateOpListCollaborationConfiguredAudienceModelAssociations{}, middleware.After)
 }
 
+func addOpListCollaborationIdNamespaceAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationIdNamespaceAssociations{}, middleware.After)
+}
+
 func addOpListCollaborationPrivacyBudgetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCollaborationPrivacyBudgets{}, middleware.After)
 }
@@ -1372,6 +1664,14 @@ func addOpListConfiguredAudienceModelAssociationsValidationMiddleware(stack *mid
 
 func addOpListConfiguredTableAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListConfiguredTableAssociations{}, middleware.After)
+}
+
+func addOpListIdMappingTablesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIdMappingTables{}, middleware.After)
+}
+
+func addOpListIdNamespaceAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIdNamespaceAssociations{}, middleware.After)
 }
 
 func addOpListMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -1396,6 +1696,10 @@ func addOpListSchemasValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPopulateIdMappingTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPopulateIdMappingTable{}, middleware.After)
 }
 
 func addOpPreviewPrivacyImpactValidationMiddleware(stack *middleware.Stack) error {
@@ -1436,6 +1740,14 @@ func addOpUpdateConfiguredTableAssociationValidationMiddleware(stack *middleware
 
 func addOpUpdateConfiguredTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfiguredTable{}, middleware.After)
+}
+
+func addOpUpdateIdMappingTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIdMappingTable{}, middleware.After)
+}
+
+func addOpUpdateIdNamespaceAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIdNamespaceAssociation{}, middleware.After)
 }
 
 func addOpUpdateMembershipValidationMiddleware(stack *middleware.Stack) error {
@@ -1800,6 +2112,54 @@ func validateGlueTableReference(v *types.GlueTableReference) error {
 	}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdMappingConfig(v *types.IdMappingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdMappingConfig"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdMappingTableInputReferenceConfig(v *types.IdMappingTableInputReferenceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdMappingTableInputReferenceConfig"}
+	if v.InputReferenceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputReferenceArn"))
+	}
+	if v.ManageResourcePolicies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManageResourcePolicies"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdNamespaceAssociationInputReferenceConfig(v *types.IdNamespaceAssociationInputReferenceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdNamespaceAssociationInputReferenceConfig"}
+	if v.InputReferenceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputReferenceArn"))
+	}
+	if v.ManageResourcePolicies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManageResourcePolicies"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2337,6 +2697,61 @@ func validateOpCreateConfiguredTableInput(v *CreateConfiguredTableInput) error {
 	}
 }
 
+func validateOpCreateIdMappingTableInput(v *CreateIdMappingTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIdMappingTableInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.InputReferenceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputReferenceConfig"))
+	} else if v.InputReferenceConfig != nil {
+		if err := validateIdMappingTableInputReferenceConfig(v.InputReferenceConfig); err != nil {
+			invalidParams.AddNested("InputReferenceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateIdNamespaceAssociationInput(v *CreateIdNamespaceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIdNamespaceAssociationInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.InputReferenceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputReferenceConfig"))
+	} else if v.InputReferenceConfig != nil {
+		if err := validateIdNamespaceAssociationInputReferenceConfig(v.InputReferenceConfig); err != nil {
+			invalidParams.AddNested("InputReferenceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IdMappingConfig != nil {
+		if err := validateIdMappingConfig(v.IdMappingConfig); err != nil {
+			invalidParams.AddNested("IdMappingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMembershipInput(v *CreateMembershipInput) error {
 	if v == nil {
 		return nil
@@ -2495,6 +2910,42 @@ func validateOpDeleteConfiguredTableInput(v *DeleteConfiguredTableInput) error {
 	}
 }
 
+func validateOpDeleteIdMappingTableInput(v *DeleteIdMappingTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIdMappingTableInput"}
+	if v.IdMappingTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdMappingTableIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIdNamespaceAssociationInput(v *DeleteIdNamespaceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIdNamespaceAssociationInput"}
+	if v.IdNamespaceAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceAssociationIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMemberInput(v *DeleteMemberInput) error {
 	if v == nil {
 		return nil
@@ -2600,6 +3051,24 @@ func validateOpGetCollaborationConfiguredAudienceModelAssociationInput(v *GetCol
 	}
 }
 
+func validateOpGetCollaborationIdNamespaceAssociationInput(v *GetCollaborationIdNamespaceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationIdNamespaceAssociationInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.IdNamespaceAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceAssociationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCollaborationInput(v *GetCollaborationInput) error {
 	if v == nil {
 		return nil
@@ -2694,6 +3163,42 @@ func validateOpGetConfiguredTableInput(v *GetConfiguredTableInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetConfiguredTableInput"}
 	if v.ConfiguredTableIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIdMappingTableInput(v *GetIdMappingTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIdMappingTableInput"}
+	if v.IdMappingTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdMappingTableIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIdNamespaceAssociationInput(v *GetIdNamespaceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIdNamespaceAssociationInput"}
+	if v.IdNamespaceAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceAssociationIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2837,6 +3342,21 @@ func validateOpListCollaborationConfiguredAudienceModelAssociationsInput(v *List
 	}
 }
 
+func validateOpListCollaborationIdNamespaceAssociationsInput(v *ListCollaborationIdNamespaceAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationIdNamespaceAssociationsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListCollaborationPrivacyBudgetsInput(v *ListCollaborationPrivacyBudgetsInput) error {
 	if v == nil {
 		return nil
@@ -2890,6 +3410,36 @@ func validateOpListConfiguredTableAssociationsInput(v *ListConfiguredTableAssoci
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListConfiguredTableAssociationsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIdMappingTablesInput(v *ListIdMappingTablesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIdMappingTablesInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIdNamespaceAssociationsInput(v *ListIdNamespaceAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIdNamespaceAssociationsInput"}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
 	}
@@ -2985,6 +3535,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPopulateIdMappingTableInput(v *PopulateIdMappingTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PopulateIdMappingTableInput"}
+	if v.IdMappingTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdMappingTableIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3178,6 +3746,47 @@ func validateOpUpdateConfiguredTableInput(v *UpdateConfiguredTableInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfiguredTableInput"}
 	if v.ConfiguredTableIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIdMappingTableInput(v *UpdateIdMappingTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdMappingTableInput"}
+	if v.IdMappingTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdMappingTableIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIdNamespaceAssociationInput(v *UpdateIdNamespaceAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdNamespaceAssociationInput"}
+	if v.IdNamespaceAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceAssociationIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IdMappingConfig != nil {
+		if err := validateIdMappingConfig(v.IdMappingConfig); err != nil {
+			invalidParams.AddNested("IdMappingConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action. HTTP Status Code: 403
+// You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -35,7 +35,7 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // The request could not be processed because of conflict in the current state of
 // the resource. Example: Workflow already exists, Schema already exists, Workflow
-// is currently running, etc. HTTP Status Code: 400
+// is currently running, etc.
 type ConflictException struct {
 	Message *string
 
@@ -63,7 +63,7 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // The request was rejected because it attempted to create resources beyond the
 // current Entity Resolution account limits. The error message describes the limit
-// exceeded. HTTP Status Code: 402
+// exceeded.
 type ExceedsLimitException struct {
 	Message *string
 
@@ -93,7 +93,7 @@ func (e *ExceedsLimitException) ErrorCode() string {
 func (e *ExceedsLimitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception occurs when there is an internal failure in the Entity
-// Resolution service. HTTP Status Code: 500
+// Resolution service.
 type InternalServerException struct {
 	Message *string
 
@@ -119,7 +119,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resource could not be found. HTTP Status Code: 404
+// The resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -145,7 +145,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was denied due to request throttling. HTTP Status Code: 429
+// The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
 
@@ -171,8 +171,7 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy the constraints specified by Entity Resolution. HTTP
-// Status Code: 400
+// The input fails to satisfy the constraints specified by Entity Resolution.
 type ValidationException struct {
 	Message *string
 

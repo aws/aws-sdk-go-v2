@@ -1,0 +1,8 @@
+{
+    "id": "c7370bfc-868a-448d-b489-a59099acf4a0",
+    "type": "feature",
+    "description": "Adding support for paginators in AppSync list APIs",
+    "modules": [
+        "service/appsync"
+    ]
+}

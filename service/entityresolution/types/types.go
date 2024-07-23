@@ -44,17 +44,26 @@ type ErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing InputRecords , TotalRecordsProcessed , MatchIDs , and
-// RecordsNotProcessed .
+// An object containing InputRecords , RecordsNotProcessed , TotalRecordsProcessed
+// , TotalMappedRecords , TotalMappedSourceRecords , and TotalMappedTargetRecords .
 type IdMappingJobMetrics struct {
 
-	// The total number of input records.
+	// The total number of records that were input for processing.
 	InputRecords *int32
 
 	// The total number of records that did not get processed.
 	RecordsNotProcessed *int32
 
-	// The total number of records processed.
+	//  The total number of records that were mapped.
+	TotalMappedRecords *int32
+
+	//  The total number of mapped source records.
+	TotalMappedSourceRecords *int32
+
+	//  The total number of distinct mapped target records.
+	TotalMappedTargetRecords *int32
+
+	// The total number of records that were processed.
 	TotalRecordsProcessed *int32
 
 	noSmithyDocumentSerde
@@ -82,7 +91,53 @@ type IdMappingJobOutputSource struct {
 	noSmithyDocumentSerde
 }
 
-// An object which defines the ID mapping techniques and provider configurations.
+//	An object that defines the list of matching rules to run in an ID mapping
+//
+// workflow.
+type IdMappingRuleBasedProperties struct {
+
+	// The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the
+	// attributeMatchingModel .
+	//
+	// If you choose MANY_TO_MANY , the system can match attributes across the
+	// sub-types of an attribute type. For example, if the value of the Email field of
+	// Profile A matches the value of the BusinessEmail field of Profile B, the two
+	// profiles are matched on the Email attribute type.
+	//
+	// If you choose ONE_TO_ONE , the system can only match attributes if the sub-types
+	// are an exact match. For example, for the Email attribute type, the system will
+	// only consider it a match if the value of the Email field of Profile A matches
+	// the value of the Email field of Profile B.
+	//
+	// This member is required.
+	AttributeMatchingModel AttributeMatchingModel
+
+	//  The type of matching record that is allowed to be used in an ID mapping
+	// workflow.
+	//
+	// If the value is set to ONE_SOURCE_TO_ONE_TARGET , only one record in the source
+	// can be matched to the same record in the target.
+	//
+	// If the value is set to MANY_SOURCE_TO_ONE_TARGET , multiple records in the
+	// source can be matched to one record in the target.
+	//
+	// This member is required.
+	RecordMatchingModel RecordMatchingModel
+
+	//  The set of rules you can use in an ID mapping workflow. The limitations
+	// specified for the source or target to define the match rules must be compatible.
+	//
+	// This member is required.
+	RuleDefinitionType IdMappingWorkflowRuleDefinitionType
+
+	//  The rules that can be used for ID mapping.
+	Rules []Rule
+
+	noSmithyDocumentSerde
+}
+
+// An object which defines the ID mapping technique and any additional
+// configurations.
 type IdMappingTechniques struct {
 
 	// The type of ID mapping.
@@ -94,13 +149,18 @@ type IdMappingTechniques struct {
 	// service.
 	ProviderProperties *ProviderProperties
 
+	//  An object which defines any additional configurations required by rule-based
+	// matching.
+	RuleBasedProperties *IdMappingRuleBasedProperties
+
 	noSmithyDocumentSerde
 }
 
 // An object containing InputSourceARN , SchemaName , and Type .
 type IdMappingWorkflowInputSource struct {
 
-	// An Glue table ARN for the input source table.
+	// An Glue table Amazon Resource Name (ARN) or a matching workflow ARN for the
+	// input source table.
 	//
 	// This member is required.
 	InputSourceARN *string
@@ -113,7 +173,7 @@ type IdMappingWorkflowInputSource struct {
 	// The SOURCE contains configurations for sourceId data that will be processed in
 	// an ID mapping workflow.
 	//
-	// The TARGET contains a configuration of targetId to which all sourceIds will
+	// The TARGET contains a configuration of targetId which all sourceIds will
 	// resolve to.
 	Type IdNamespaceType
 
@@ -163,7 +223,19 @@ type IdMappingWorkflowSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing IdMappingType and ProviderProperties .
+// The settings for the ID namespace for the ID mapping workflow job.
+type IdNamespaceIdMappingWorkflowMetadata struct {
+
+	// The type of ID mapping.
+	//
+	// This member is required.
+	IdMappingType IdMappingType
+
+	noSmithyDocumentSerde
+}
+
+// An object containing IdMappingType , ProviderProperties , and
+// RuleBasedProperties .
 type IdNamespaceIdMappingWorkflowProperties struct {
 
 	// The type of ID mapping.
@@ -175,13 +247,18 @@ type IdNamespaceIdMappingWorkflowProperties struct {
 	// service.
 	ProviderProperties *NamespaceProviderProperties
 
+	//  An object which defines any additional configurations required by rule-based
+	// matching.
+	RuleBasedProperties *NamespaceRuleBasedProperties
+
 	noSmithyDocumentSerde
 }
 
 // An object containing InputSourceARN and SchemaName .
 type IdNamespaceInputSource struct {
 
-	// An Glue table ARN for the input source table.
+	// An Glue table Amazon Resource Name (ARN) or a matching workflow ARN for the
+	// input source table.
 	//
 	// This member is required.
 	InputSourceARN *string
@@ -215,7 +292,7 @@ type IdNamespaceSummary struct {
 	// The SOURCE contains configurations for sourceId data that will be processed in
 	// an ID mapping workflow.
 	//
-	// The TARGET contains a configuration of targetId to which all sourceIds will
+	// The TARGET contains a configuration of targetId which all sourceIds will
 	// resolve to.
 	//
 	// This member is required.
@@ -228,6 +305,10 @@ type IdNamespaceSummary struct {
 
 	// The description of the ID namespace.
 	Description *string
+
+	// An object which defines any additional configurations required by the ID
+	// mapping workflow.
+	IdMappingWorkflowProperties []IdNamespaceIdMappingWorkflowMetadata
 
 	noSmithyDocumentSerde
 }
@@ -245,7 +326,7 @@ type IncrementalRunConfig struct {
 // An object containing InputSourceARN , SchemaName , and ApplyNormalization .
 type InputSource struct {
 
-	// An Glue table ARN for the input source table.
+	// An Glue table Amazon Resource Name (ARN) for the input source table.
 	//
 	// This member is required.
 	InputSourceARN *string
@@ -387,6 +468,45 @@ type NamespaceProviderProperties struct {
 	// An object which defines any additional configurations required by the provider
 	// service.
 	ProviderConfiguration document.Interface
+
+	noSmithyDocumentSerde
+}
+
+//	The rule-based properties of an ID namespace. These properties define how the
+//
+// ID namespace can be used in an ID mapping workflow.
+type NamespaceRuleBasedProperties struct {
+
+	// The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the
+	// attributeMatchingModel .
+	//
+	// If you choose MANY_TO_MANY , the system can match attributes across the
+	// sub-types of an attribute type. For example, if the value of the Email field of
+	// Profile A matches the value of BusinessEmail field of Profile B, the two
+	// profiles are matched on the Email attribute type.
+	//
+	// If you choose ONE_TO_ONE , the system can only match attributes if the sub-types
+	// are an exact match. For example, for the Email attribute type, the system will
+	// only consider it a match if the value of the Email field of Profile A matches
+	// the value of the Email field of Profile B.
+	AttributeMatchingModel AttributeMatchingModel
+
+	//  The type of matching record that is allowed to be used in an ID mapping
+	// workflow.
+	//
+	// If the value is set to ONE_SOURCE_TO_ONE_TARGET , only one record in the source
+	// is matched to one record in the target.
+	//
+	// If the value is set to MANY_SOURCE_TO_ONE_TARGET , all matching records in the
+	// source are matched to one record in the target.
+	RecordMatchingModels []RecordMatchingModel
+
+	//  The sets of rules you can use in an ID mapping workflow. The limitations
+	// specified for the source and target must be compatible.
+	RuleDefinitionTypes []IdMappingWorkflowRuleDefinitionType
+
+	//  The rules for the ID namespace.
+	Rules []Rule
 
 	noSmithyDocumentSerde
 }
@@ -635,19 +755,23 @@ type Rule struct {
 	noSmithyDocumentSerde
 }
 
-// An object which defines the list of matching rules to run and has a field Rules
-// , which is a list of rule objects.
+// An object which defines the list of matching rules to run in a matching
+// workflow. RuleBasedProperties contain a Rules field, which is a list of rule
+// objects.
 type RuleBasedProperties struct {
 
 	// The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the
-	// AttributeMatchingModel. When choosing MANY_TO_MANY , the system can match
-	// attributes across the sub-types of an attribute type. For example, if the value
-	// of the Email field of Profile A and the value of BusinessEmail field of Profile
-	// B matches, the two profiles are matched on the Email type. When choosing
-	// ONE_TO_ONE ,the system can only match if the sub-types are exact matches. For
-	// example, only when the value of the Email field of Profile A and the value of
-	// the Email field of Profile B matches, the two profiles are matched on the Email
-	// type.
+	// attributeMatchingModel .
+	//
+	// If you choose MANY_TO_MANY , the system can match attributes across the
+	// sub-types of an attribute type. For example, if the value of the Email field of
+	// Profile A and the value of BusinessEmail field of Profile B matches, the two
+	// profiles are matched on the Email attribute type.
+	//
+	// If you choose ONE_TO_ONE , the system can only match attributes if the sub-types
+	// are an exact match. For example, for the Email attribute type, the system will
+	// only consider it a match if the value of the Email field of Profile A matches
+	// the value of the Email field of Profile B.
 	//
 	// This member is required.
 	AttributeMatchingModel AttributeMatchingModel
@@ -657,10 +781,19 @@ type RuleBasedProperties struct {
 	// This member is required.
 	Rules []Rule
 
+	//  An indicator of whether to generate IDs and index the data or not.
+	//
+	// If you choose IDENTIFIER_GENERATION , the process generates IDs and indexes the
+	// data.
+	//
+	// If you choose INDEXING , the process indexes the data without generating IDs.
+	MatchPurpose MatchPurpose
+
 	noSmithyDocumentSerde
 }
 
-// An object containing FieldName , Type , GroupName , MatchKey , and SubType .
+// An object containing FieldName , Type , GroupName , MatchKey , Hashing , and
+// SubType .
 type SchemaInputAttribute struct {
 
 	// A string containing the field name.
@@ -681,13 +814,21 @@ type SchemaInputAttribute struct {
 	// concatenate them into a single value.
 	GroupName *string
 
+	//  Indicates if the column values are hashed in the schema input. If the value is
+	// set to TRUE , the column values are hashed. If the value is set to FALSE , the
+	// column values are cleartext.
+	Hashed *bool
+
 	// A key that allows grouping of multiple input attributes into a unified matching
-	// group. For example, consider a scenario where the source table contains various
+	// group.
+	//
+	// For example, consider a scenario where the source table contains various
 	// addresses, such as business_address and shipping_address . By assigning a
 	// matchKey called address to both attributes, Entity Resolution will match
-	// records across these fields to create a consolidated matching group. If no
-	// matchKey is specified for a column, it won't be utilized for matching purposes
-	// but will still be included in the output table.
+	// records across these fields to create a consolidated matching group.
+	//
+	// If no matchKey is specified for a column, it won't be utilized for matching
+	// purposes but will still be included in the output table.
 	MatchKey *string
 
 	// The subtype of the attribute, selected from a list of values.

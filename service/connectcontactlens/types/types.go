@@ -78,11 +78,48 @@ type PointOfInterest struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the post-contact summary.
+type PostContactSummary struct {
+
+	// Whether the summary was successfully COMPLETED or FAILED to be generated.
+	//
+	// This member is required.
+	Status PostContactSummaryStatus
+
+	// The content of the summary.
+	Content *string
+
+	// If the summary failed to be generated, one of the following failure codes
+	// occurs:
+	//
+	//   - QUOTA_EXCEEDED : The number of concurrent analytics jobs reached your
+	//   service quota.
+	//
+	//   - INSUFFICIENT_CONVERSATION_CONTENT : The conversation needs to have at least
+	//   one turn from both the participants in order to generate the summary.
+	//
+	//   - FAILED_SAFETY_GUIDELINES : The generated summary cannot be provided because
+	//   it failed to meet system safety guidelines.
+	//
+	//   - INVALID_ANALYSIS_CONFIGURATION : This code occurs when, for example, you're
+	//   using a [language]that isn't supported by generative AI-powered post-contact summaries.
+	//
+	//   - INTERNAL_ERROR : Internal system error.
+	//
+	// [language]: https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens
+	FailureCode PostContactSummaryFailureCode
+
+	noSmithyDocumentSerde
+}
+
 // An analyzed segment for a real-time analysis session.
 type RealtimeContactAnalysisSegment struct {
 
 	// The matched category rules.
 	Categories *Categories
+
+	// Information about the post-contact summary.
+	PostContactSummary *PostContactSummary
 
 	// The analyzed transcript.
 	Transcript *Transcript
@@ -113,7 +150,7 @@ type Transcript struct {
 	// This member is required.
 	Id *string
 
-	// The identifier of the participant.
+	// The identifier of the participant. Valid values are CUSTOMER or AGENT.
 	//
 	// This member is required.
 	ParticipantId *string
@@ -123,7 +160,7 @@ type Transcript struct {
 	// This member is required.
 	ParticipantRole *string
 
-	// The sentiment of the detected for this piece of transcript.
+	// The sentiment detected for this piece of transcript.
 	//
 	// This member is required.
 	Sentiment SentimentValue

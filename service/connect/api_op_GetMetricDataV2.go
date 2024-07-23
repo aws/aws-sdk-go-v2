@@ -55,6 +55,8 @@ type GetMetricDataV2Input struct {
 	//
 	//   - Agents
 	//
+	//   - Campaigns
+	//
 	//   - Channels
 	//
 	//   - Feature
@@ -70,6 +72,9 @@ type GetMetricDataV2Input struct {
 	// At least one filter must be passed from queues, routing profiles, agents, or
 	// user hierarchy groups.
 	//
+	// For metrics for outbound campaigns analytics, you can also use campaigns to
+	// satisfy at least one filter requirement.
+	//
 	// To filter by phone number, see [Create a historical metrics report] in the Amazon Connect Administrator Guide.
 	//
 	// Note the following limits:
@@ -77,12 +82,13 @@ type GetMetricDataV2Input struct {
 	//   - Filter keys: A maximum of 5 filter keys are supported in a single request.
 	//   Valid filter keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
 	//   AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
-	//   AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE | CASE_TEMPLATE_ARN |
-	//   CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype | FEATURE |
-	//   FLOW_TYPE | FLOWS_NEXT_RESOURCE_ID | FLOWS_NEXT_RESOURCE_QUEUE_ID |
-	//   FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID | INITIATION_METHOD |
-	//   RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
-	//   QUEUE | Q_CONNECT_ENABLED |
+	//   AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
+	//   ANSWERING_MACHINE_DETECTION_STATUS | CAMPAIGN | CASE_TEMPLATE_ARN |
+	//   CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype |
+	//   DISCONNECT_REASON | FEATURE | FLOW_TYPE | FLOWS_NEXT_RESOURCE_ID |
+	//   FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID |
+	//   INITIATION_METHOD | RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE |
+	//   ROUTING_STEP_EXPRESSION | QUEUE | Q_CONNECT_ENABLED |
 	//
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
@@ -113,7 +119,10 @@ type GetMetricDataV2Input struct {
 	//
 	// This filter is available only for contact record-driven metrics.
 	//
+	// [Campaign]ARNs are valid filterValues for the CAMPAIGN filter key.
+	//
 	// [Create a historical metrics report]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
+	// [Campaign]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-outbound-campaigns_Campaign.html
 	//
 	// This member is required.
 	Filters []types.FilterV2
@@ -271,6 +280,15 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average conversation duration]
 	//
+	// AVG_DIALS_PER_MINUTE This metric is available only for contacts analyzed by
+	// outbound campaigns analytics.
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Agent, Queue, Routing Profile
+	//
+	// UI name: [Average dials per minute]
+	//
 	// AVG_FLOW_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Channel,
@@ -419,6 +437,39 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average customer talk time]
 	//
+	// AVG_WAIT_TIME_AFTER_CUSTOMER_CONNECTION This metric is available only for
+	// contacts analyzed by outbound campaigns analytics.
+	//
+	// Unit: Seconds
+	//
+	// Valid groupings and filters: Campaign
+	//
+	// UI name: [Average wait time after customer connection]
+	//
+	// CAMPAIGN_CONTACTS_ABANDONED_AFTER_X This metric is available only for contacts
+	// analyzed by outbound campaigns analytics.
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Agent
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter GT (for Greater than).
+	//
+	// UI name: [Campaign contacts abandoned after X]
+	//
+	// CAMPAIGN_CONTACTS_ABANDONED_AFTER_X_RATE This metric is available only for
+	// contacts analyzed by outbound campaigns analytics.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Campaign, Agent
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter GT (for Greater than).
+	//
+	// UI name: [Campaign contacts abandoned after X rate]
+	//
 	// CASES_CREATED Unit: Count
 	//
 	// Required filter key: CASE_TEMPLATE_ARN
@@ -565,6 +616,34 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Current cases]
 	//
+	// DELIVERY_ATTEMPTS This metric is available only for contacts analyzed by
+	// outbound campaigns analytics.
+	//
+	// Unit: Count
+	//
+	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS , DISCONNECT_REASON
+	//
+	// Valid groupings and filters: Campaign, Agent, Queue, Routing Profile, Answering
+	// Machine Detection Status, Disconnect Reason
+	//
+	// UI name: [Delivery attempts]
+	//
+	// DELIVERY_ATTEMPT_DISPOSITION_RATE This metric is available only for contacts
+	// analyzed by outbound campaigns analytics, and with the answering machine
+	// detection enabled.
+	//
+	// Unit: Percent
+	//
+	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS , DISCONNECT_REASON
+	//
+	// Valid groupings and filters: Campaign, Agent, Answering Machine Detection
+	// Status, Disconnect Reason
+	//
+	// Answering Machine Detection Status and Disconnect Reason are valid filters but
+	// not valid groupings.
+	//
+	// UI name: [Delivery attempt disposition rate]
+	//
 	// FLOWS_OUTCOME Unit: Count
 	//
 	// Valid groupings and filters: Channel,
@@ -581,6 +660,15 @@ type GetMetricDataV2Input struct {
 	// Flows resource ID, Initiation method, Resource published timestamp
 	//
 	// UI name: [Flows started]
+	//
+	// HUMAN_ANSWERED_CALLS This metric is available only for contacts analyzed by
+	// outbound campaigns analytics, and with the answering machine detection enabled.
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Agent
+	//
+	// UI name: [Human answered]
 	//
 	// MAX_FLOW_TIME Unit: Seconds
 	//
@@ -854,6 +942,7 @@ type GetMetricDataV2Input struct {
 	// [Average agent greeting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical
 	// [Non-talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
 	// [Average agent pause time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-pause-time-historical
+	// [Campaign contacts abandoned after X rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-contacts-abandoned-rate-historical
 	// [Average queue abandon time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-abandon-time-historical
 	// [Contacts transferred out by agent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
 	// [Average agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-avg-agent-api-connecting-time
@@ -868,6 +957,7 @@ type GetMetricDataV2Input struct {
 	// [After contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
 	// [Average customer talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical
 	// [Flows outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
+	// [Campaign contacts abandoned after X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-contacts-abandoned-historical
 	// [Contacts queued]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical
 	// [Occupancy]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#occupancy-historical
 	// [Error status time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical
@@ -905,6 +995,8 @@ type GetMetricDataV2Input struct {
 	// [Average agent interruptions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical
 	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
 	// [Contact handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical
+	// [Average dials per minute]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-dials-historical
+	// [Delivery attempt disposition rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#delivery-attempt-disposition-rate-historical
 	// [Contact disconnected]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
 	// [Contacts handled (connected to agent timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
 	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica
@@ -918,7 +1010,8 @@ type GetMetricDataV2Input struct {
 	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-acw-time-historical
 	// [Contacts abandoned in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
 	// [Non-Productive Time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical
-	// [Cases created]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##cases-created-historical
+	// [Average wait time after customer connection]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-wait-time-historical
+	// [Cases created]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-created-historical
 	// [Current cases]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
 	// [Average queue answer time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-answer-time-historical
 	// [Customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical
@@ -926,7 +1019,9 @@ type GetMetricDataV2Input struct {
 	// [Average customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-customer-hold-time-historical
 	// [Agent interaction and hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical
 	// [Contacts hold customer disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
+	// [Human answered]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#human-answered-historical
 	// [Contacts removed from queue in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-removed-historical
+	// [Delivery attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#delivery-attempts-historical
 	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
 	// [Contacts hold agent disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical
 	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
@@ -962,8 +1057,9 @@ type GetMetricDataV2Input struct {
 	//
 	// Valid grouping keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
 	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
-	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE | CASE_TEMPLATE_ARN |
-	// CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype |
+	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
+	// ANSWERING_MACHINE_DETECTION_STATUS | CAMPAIGN | CASE_TEMPLATE_ARN | CASE_STATUS
+	// | CHANNEL | contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
 	// FLOWS_RESOURCE_ID | FLOWS_MODULE_RESOURCE_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
 	// INITIATION_METHOD | Q_CONNECT_ENABLED | QUEUE | RESOURCE_PUBLISHED_TIMESTAMP |
 	// ROUTING_PROFILE | ROUTING_STEP_EXPRESSION

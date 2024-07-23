@@ -3048,6 +3048,35 @@ func awsRestjson1_serializeDocumentIdMappingJobOutputSourceConfig(v []types.IdMa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIdMappingRuleBasedProperties(v *types.IdMappingRuleBasedProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AttributeMatchingModel) > 0 {
+		ok := object.Key("attributeMatchingModel")
+		ok.String(string(v.AttributeMatchingModel))
+	}
+
+	if len(v.RecordMatchingModel) > 0 {
+		ok := object.Key("recordMatchingModel")
+		ok.String(string(v.RecordMatchingModel))
+	}
+
+	if len(v.RuleDefinitionType) > 0 {
+		ok := object.Key("ruleDefinitionType")
+		ok.String(string(v.RuleDefinitionType))
+	}
+
+	if v.Rules != nil {
+		ok := object.Key("rules")
+		if err := awsRestjson1_serializeDocumentRuleList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdMappingTechniques(v *types.IdMappingTechniques, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3060,6 +3089,13 @@ func awsRestjson1_serializeDocumentIdMappingTechniques(v *types.IdMappingTechniq
 	if v.ProviderProperties != nil {
 		ok := object.Key("providerProperties")
 		if err := awsRestjson1_serializeDocumentProviderProperties(v.ProviderProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleBasedProperties != nil {
+		ok := object.Key("ruleBasedProperties")
+		if err := awsRestjson1_serializeDocumentIdMappingRuleBasedProperties(v.RuleBasedProperties, ok); err != nil {
 			return err
 		}
 	}
@@ -3132,6 +3168,17 @@ func awsRestjson1_serializeDocumentIdMappingWorkflowOutputSourceConfig(v []types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIdMappingWorkflowRuleDefinitionTypeList(v []types.IdMappingWorkflowRuleDefinitionType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdNamespaceIdMappingWorkflowProperties(v *types.IdNamespaceIdMappingWorkflowProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3144,6 +3191,13 @@ func awsRestjson1_serializeDocumentIdNamespaceIdMappingWorkflowProperties(v *typ
 	if v.ProviderProperties != nil {
 		ok := object.Key("providerProperties")
 		if err := awsRestjson1_serializeDocumentNamespaceProviderProperties(v.ProviderProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleBasedProperties != nil {
+		ok := object.Key("ruleBasedProperties")
+		if err := awsRestjson1_serializeDocumentNamespaceRuleBasedProperties(v.RuleBasedProperties, ok); err != nil {
 			return err
 		}
 	}
@@ -3283,6 +3337,39 @@ func awsRestjson1_serializeDocumentNamespaceProviderProperties(v *types.Namespac
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNamespaceRuleBasedProperties(v *types.NamespaceRuleBasedProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AttributeMatchingModel) > 0 {
+		ok := object.Key("attributeMatchingModel")
+		ok.String(string(v.AttributeMatchingModel))
+	}
+
+	if v.RecordMatchingModels != nil {
+		ok := object.Key("recordMatchingModels")
+		if err := awsRestjson1_serializeDocumentRecordMatchingModelList(v.RecordMatchingModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleDefinitionTypes != nil {
+		ok := object.Key("ruleDefinitionTypes")
+		if err := awsRestjson1_serializeDocumentIdMappingWorkflowRuleDefinitionTypeList(v.RuleDefinitionTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Rules != nil {
+		ok := object.Key("rules")
+		if err := awsRestjson1_serializeDocumentRuleList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOutputAttribute(v *types.OutputAttribute, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3392,6 +3479,17 @@ func awsRestjson1_serializeDocumentRecordAttributeMap(v map[string]string, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRecordMatchingModelList(v []types.RecordMatchingModel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentResolutionTechniques(v *types.ResolutionTechniques, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3446,6 +3544,11 @@ func awsRestjson1_serializeDocumentRuleBasedProperties(v *types.RuleBasedPropert
 		ok.String(string(v.AttributeMatchingModel))
 	}
 
+	if len(v.MatchPurpose) > 0 {
+		ok := object.Key("matchPurpose")
+		ok.String(string(v.MatchPurpose))
+	}
+
 	if v.Rules != nil {
 		ok := object.Key("rules")
 		if err := awsRestjson1_serializeDocumentRuleList(v.Rules, ok); err != nil {
@@ -3481,6 +3584,11 @@ func awsRestjson1_serializeDocumentSchemaInputAttribute(v *types.SchemaInputAttr
 	if v.GroupName != nil {
 		ok := object.Key("groupName")
 		ok.String(*v.GroupName)
+	}
+
+	if v.Hashed != nil {
+		ok := object.Key("hashed")
+		ok.Boolean(*v.Hashed)
 	}
 
 	if v.MatchKey != nil {

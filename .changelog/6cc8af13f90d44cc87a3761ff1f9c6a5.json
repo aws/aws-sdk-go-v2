@@ -1,0 +1,8 @@
+{
+    "id": "6cc8af13-f90d-44cc-87a3-761ff1f9c6a5",
+    "type": "feature",
+    "description": "Added PostContactSummary segment type on ListRealTimeContactAnalysisSegmentsV2 API",
+    "modules": [
+        "service/connect"
+    ]
+}

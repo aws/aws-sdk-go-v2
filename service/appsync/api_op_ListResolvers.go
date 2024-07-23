@@ -149,6 +149,94 @@ func (c *Client) addOperationListResolversMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
+// ListResolversPaginatorOptions is the paginator options for ListResolvers
+type ListResolversPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListResolversPaginator is a paginator for ListResolvers
+type ListResolversPaginator struct {
+	options   ListResolversPaginatorOptions
+	client    ListResolversAPIClient
+	params    *ListResolversInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListResolversPaginator returns a new ListResolversPaginator
+func NewListResolversPaginator(client ListResolversAPIClient, params *ListResolversInput, optFns ...func(*ListResolversPaginatorOptions)) *ListResolversPaginator {
+	if params == nil {
+		params = &ListResolversInput{}
+	}
+
+	options := ListResolversPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListResolversPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListResolversPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListResolvers page.
+func (p *ListResolversPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListResolversOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListResolvers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListResolversAPIClient is a client that implements the ListResolvers operation.
+type ListResolversAPIClient interface {
+	ListResolvers(context.Context, *ListResolversInput, ...func(*Options)) (*ListResolversOutput, error)
+}
+
+var _ ListResolversAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListResolvers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

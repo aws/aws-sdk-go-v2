@@ -1,0 +1,8 @@
+{
+    "id": "ea981f5b-0fb5-491e-91d4-ba98461dc55d",
+    "type": "feature",
+    "description": "This release removes the deprecated dataProductItem field from Search API output.",
+    "modules": [
+        "service/datazone"
+    ]
+}

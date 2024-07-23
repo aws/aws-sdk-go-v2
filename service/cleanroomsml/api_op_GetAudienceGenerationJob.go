@@ -91,6 +91,9 @@ type GetAudienceGenerationJobOutput struct {
 	// generated audience.
 	Metrics *types.AudienceQualityMetrics
 
+	// The unique identifier of the protected query for this audience generation job.
+	ProtectedQueryIdentifier *string
+
 	// The seed audience that was used for this audience generation job. This field
 	// will be null if the account calling the API is the account that started this
 	// audience generation job.

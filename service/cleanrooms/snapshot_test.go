@@ -170,6 +170,30 @@ func TestCheckSnapshot_CreateConfiguredTableAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateMembership(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMembership(context.Background(), nil, func(o *Options) {
@@ -266,6 +290,30 @@ func TestCheckSnapshot_DeleteConfiguredTableAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteMember(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMember(context.Background(), nil, func(o *Options) {
@@ -350,6 +398,18 @@ func TestCheckSnapshot_GetCollaborationConfiguredAudienceModelAssociation(t *tes
 	}
 }
 
+func TestCheckSnapshot_GetCollaborationIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCollaborationIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCollaborationPrivacyBudgetTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCollaborationPrivacyBudgetTemplate(context.Background(), nil, func(o *Options) {
@@ -403,6 +463,30 @@ func TestCheckSnapshot_GetConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.GetConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIdNamespaceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -506,6 +590,18 @@ func TestCheckSnapshot_ListCollaborationConfiguredAudienceModelAssociations(t *t
 	}
 }
 
+func TestCheckSnapshot_ListCollaborationIdNamespaceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationIdNamespaceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollaborationIdNamespaceAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCollaborationPrivacyBudgets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCollaborationPrivacyBudgets(context.Background(), nil, func(o *Options) {
@@ -571,6 +667,30 @@ func TestCheckSnapshot_ListConfiguredTables(t *testing.T) {
 	_, err := svc.ListConfiguredTables(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListConfiguredTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIdMappingTables(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdMappingTables(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIdMappingTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIdNamespaceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdNamespaceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIdNamespaceAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -655,6 +775,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PopulateIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PopulateIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PopulateIdMappingTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -775,6 +907,30 @@ func TestCheckSnapshot_UpdateConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.UpdateConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIdNamespaceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -925,6 +1081,30 @@ func TestUpdateSnapshot_CreateConfiguredTableAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateMembership(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMembership(context.Background(), nil, func(o *Options) {
@@ -1021,6 +1201,30 @@ func TestUpdateSnapshot_DeleteConfiguredTableAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteMember(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMember(context.Background(), nil, func(o *Options) {
@@ -1105,6 +1309,18 @@ func TestUpdateSnapshot_GetCollaborationConfiguredAudienceModelAssociation(t *te
 	}
 }
 
+func TestUpdateSnapshot_GetCollaborationIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCollaborationIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCollaborationPrivacyBudgetTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCollaborationPrivacyBudgetTemplate(context.Background(), nil, func(o *Options) {
@@ -1158,6 +1374,30 @@ func TestUpdateSnapshot_GetConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.GetConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIdNamespaceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1261,6 +1501,18 @@ func TestUpdateSnapshot_ListCollaborationConfiguredAudienceModelAssociations(t *
 	}
 }
 
+func TestUpdateSnapshot_ListCollaborationIdNamespaceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationIdNamespaceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollaborationIdNamespaceAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCollaborationPrivacyBudgets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCollaborationPrivacyBudgets(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1578,30 @@ func TestUpdateSnapshot_ListConfiguredTables(t *testing.T) {
 	_, err := svc.ListConfiguredTables(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListConfiguredTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIdMappingTables(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdMappingTables(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIdMappingTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIdNamespaceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdNamespaceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIdNamespaceAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1410,6 +1686,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PopulateIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PopulateIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PopulateIdMappingTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1530,6 +1818,30 @@ func TestUpdateSnapshot_UpdateConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.UpdateConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIdMappingTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdMappingTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIdMappingTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIdNamespaceAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

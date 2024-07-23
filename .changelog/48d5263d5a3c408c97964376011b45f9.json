@@ -1,0 +1,8 @@
+{
+    "id": "48d5263d-5a3c-408c-9796-4376011b45f9",
+    "type": "feature",
+    "description": "Added PostContactSummary segment type on ListRealTimeContactAnalysisSegments API",
+    "modules": [
+        "service/connectcontactlens"
+    ]
+}

@@ -29,11 +29,12 @@ func (c *Client) ListMemberships(ctx context.Context, params *ListMembershipsInp
 
 type ListMembershipsInput struct {
 
-	// The maximum size of the results that is returned per call.
+	// The maximum number of results that are returned for an API request call. The
+	// service chooses a default number if you don't set one. The service might return
+	// a `nextToken` even if the `maxResults` value has not been met.
 	MaxResults *int32
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// A filter which will return only memberships in the specified status.
@@ -49,8 +50,7 @@ type ListMembershipsOutput struct {
 	// This member is required.
 	MembershipSummaries []types.MembershipSummary
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,7 +143,9 @@ func (c *Client) addOperationListMembershipsMiddlewares(stack *middleware.Stack,
 
 // ListMembershipsPaginatorOptions is the paginator options for ListMemberships
 type ListMembershipsPaginatorOptions struct {
-	// The maximum size of the results that is returned per call.
+	// The maximum number of results that are returned for an API request call. The
+	// service chooses a default number if you don't set one. The service might return
+	// a `nextToken` even if the `maxResults` value has not been met.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

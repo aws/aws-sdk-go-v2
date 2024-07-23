@@ -31,7 +31,8 @@ func (c *Client) CreateIdMappingWorkflow(ctx context.Context, params *CreateIdMa
 
 type CreateIdMappingWorkflowInput struct {
 
-	// An object which defines the idMappingType and the providerProperties .
+	// An object which defines the ID mapping technique and any additional
+	// configurations.
 	//
 	// This member is required.
 	IdMappingTechniques *types.IdMappingTechniques
@@ -41,12 +42,6 @@ type CreateIdMappingWorkflowInput struct {
 	//
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
-
-	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to create resources on your behalf as part of workflow execution.
-	//
-	// This member is required.
-	RoleArn *string
 
 	// The name of the workflow. There can't be multiple IdMappingWorkflows with the
 	// same name.
@@ -61,6 +56,10 @@ type CreateIdMappingWorkflowInput struct {
 	// OutputS3Path and Output .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
+	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
+	// role to create resources on your behalf as part of workflow execution.
+	RoleArn *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -69,7 +68,8 @@ type CreateIdMappingWorkflowInput struct {
 
 type CreateIdMappingWorkflowOutput struct {
 
-	// An object which defines the idMappingType and the providerProperties .
+	// An object which defines the ID mapping technique and any additional
+	// configurations.
 	//
 	// This member is required.
 	IdMappingTechniques *types.IdMappingTechniques
@@ -79,12 +79,6 @@ type CreateIdMappingWorkflowOutput struct {
 	//
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
-
-	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to create resources on your behalf as part of workflow execution.
-	//
-	// This member is required.
-	RoleArn *string
 
 	// The ARN (Amazon Resource Name) that Entity Resolution generated for the
 	// IDMappingWorkflow .
@@ -103,6 +97,10 @@ type CreateIdMappingWorkflowOutput struct {
 	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
 	// OutputS3Path and Output .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
+
+	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
+	// role to create resources on your behalf as part of workflow execution.
+	RoleArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

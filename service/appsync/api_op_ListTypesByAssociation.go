@@ -158,6 +158,96 @@ func (c *Client) addOperationListTypesByAssociationMiddlewares(stack *middleware
 	return nil
 }
 
+// ListTypesByAssociationPaginatorOptions is the paginator options for
+// ListTypesByAssociation
+type ListTypesByAssociationPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTypesByAssociationPaginator is a paginator for ListTypesByAssociation
+type ListTypesByAssociationPaginator struct {
+	options   ListTypesByAssociationPaginatorOptions
+	client    ListTypesByAssociationAPIClient
+	params    *ListTypesByAssociationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTypesByAssociationPaginator returns a new ListTypesByAssociationPaginator
+func NewListTypesByAssociationPaginator(client ListTypesByAssociationAPIClient, params *ListTypesByAssociationInput, optFns ...func(*ListTypesByAssociationPaginatorOptions)) *ListTypesByAssociationPaginator {
+	if params == nil {
+		params = &ListTypesByAssociationInput{}
+	}
+
+	options := ListTypesByAssociationPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListTypesByAssociationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTypesByAssociationPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListTypesByAssociation page.
+func (p *ListTypesByAssociationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTypesByAssociationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListTypesByAssociation(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListTypesByAssociationAPIClient is a client that implements the
+// ListTypesByAssociation operation.
+type ListTypesByAssociationAPIClient interface {
+	ListTypesByAssociation(context.Context, *ListTypesByAssociationInput, ...func(*Options)) (*ListTypesByAssociationOutput, error)
+}
+
+var _ ListTypesByAssociationAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListTypesByAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

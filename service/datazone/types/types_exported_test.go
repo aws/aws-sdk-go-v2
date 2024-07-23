@@ -383,9 +383,6 @@ func ExampleSearchInventoryResultItem_outputUsage() {
 	case *types.SearchInventoryResultItemMemberAssetItem:
 		_ = v.Value // Value is types.AssetItem
 
-	case *types.SearchInventoryResultItemMemberDataProductItem:
-		_ = v.Value // Value is types.DataProductSummary
-
 	case *types.SearchInventoryResultItemMemberGlossaryItem:
 		_ = v.Value // Value is types.GlossaryItem
 
@@ -401,7 +398,6 @@ func ExampleSearchInventoryResultItem_outputUsage() {
 	}
 }
 
-var _ *types.DataProductSummary
 var _ *types.GlossaryItem
 var _ *types.AssetItem
 var _ *types.GlossaryTermItem

@@ -144,6 +144,97 @@ func (c *Client) addOperationListSourceApiAssociationsMiddlewares(stack *middlew
 	return nil
 }
 
+// ListSourceApiAssociationsPaginatorOptions is the paginator options for
+// ListSourceApiAssociations
+type ListSourceApiAssociationsPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSourceApiAssociationsPaginator is a paginator for ListSourceApiAssociations
+type ListSourceApiAssociationsPaginator struct {
+	options   ListSourceApiAssociationsPaginatorOptions
+	client    ListSourceApiAssociationsAPIClient
+	params    *ListSourceApiAssociationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSourceApiAssociationsPaginator returns a new
+// ListSourceApiAssociationsPaginator
+func NewListSourceApiAssociationsPaginator(client ListSourceApiAssociationsAPIClient, params *ListSourceApiAssociationsInput, optFns ...func(*ListSourceApiAssociationsPaginatorOptions)) *ListSourceApiAssociationsPaginator {
+	if params == nil {
+		params = &ListSourceApiAssociationsInput{}
+	}
+
+	options := ListSourceApiAssociationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListSourceApiAssociationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSourceApiAssociationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListSourceApiAssociations page.
+func (p *ListSourceApiAssociationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSourceApiAssociationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListSourceApiAssociations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListSourceApiAssociationsAPIClient is a client that implements the
+// ListSourceApiAssociations operation.
+type ListSourceApiAssociationsAPIClient interface {
+	ListSourceApiAssociations(context.Context, *ListSourceApiAssociationsInput, ...func(*Options)) (*ListSourceApiAssociationsOutput, error)
+}
+
+var _ ListSourceApiAssociationsAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListSourceApiAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -169,6 +170,25 @@ type AnalysisRuleCustom struct {
 	noSmithyDocumentSerde
 }
 
+// Defines details for the analysis rule ID mapping table.
+type AnalysisRuleIdMappingTable struct {
+
+	// The columns that query runners are allowed to use in an INNER JOIN statement.
+	//
+	// This member is required.
+	JoinColumns []string
+
+	// The query constraints of the analysis rule ID mapping table.
+	//
+	// This member is required.
+	QueryConstraints []QueryConstraint
+
+	// The columns that query runners are allowed to select, group by, or filter by.
+	DimensionColumns []string
+
+	noSmithyDocumentSerde
+}
+
 // A type of analysis rule that enables row-level analysis.
 type AnalysisRuleList struct {
 
@@ -214,6 +234,7 @@ func (*AnalysisRulePolicyMemberV1) isAnalysisRulePolicy() {}
 //
 //	AnalysisRulePolicyV1MemberAggregation
 //	AnalysisRulePolicyV1MemberCustom
+//	AnalysisRulePolicyV1MemberIdMappingTable
 //	AnalysisRulePolicyV1MemberList
 type AnalysisRulePolicyV1 interface {
 	isAnalysisRulePolicyV1()
@@ -236,6 +257,15 @@ type AnalysisRulePolicyV1MemberCustom struct {
 }
 
 func (*AnalysisRulePolicyV1MemberCustom) isAnalysisRulePolicyV1() {}
+
+// The ID mapping table.
+type AnalysisRulePolicyV1MemberIdMappingTable struct {
+	Value AnalysisRuleIdMappingTable
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalysisRulePolicyV1MemberIdMappingTable) isAnalysisRulePolicyV1() {}
 
 // Analysis rule type that enables only list queries on a configured table.
 type AnalysisRulePolicyV1MemberList struct {
@@ -734,7 +764,7 @@ type CollaborationConfiguredAudienceModelAssociation struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// AWS account ID.
+	// Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -786,7 +816,7 @@ type CollaborationConfiguredAudienceModelAssociationSummary struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// AWS account ID.
+	// Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -808,6 +838,138 @@ type CollaborationConfiguredAudienceModelAssociationSummary struct {
 	UpdateTime *time.Time
 
 	// The description of the configured audience model association.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines details for the collaboration ID namespace association.
+type CollaborationIdNamespaceAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the collaboration ID namespace association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains the
+	// collaboration ID namespace association.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains the collaboration ID
+	// namespace association.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the collaboration ID namespace association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the Amazon Web Services account that created the
+	// collaboration ID namespace association.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The unique identifier of the collaboration ID namespace association.
+	//
+	// This member is required.
+	Id *string
+
+	// The input reference configuration that's necessary to create the collaboration
+	// ID namespace association.
+	//
+	// This member is required.
+	InputReferenceConfig *IdNamespaceAssociationInputReferenceConfig
+
+	// The input reference properties that are needed to create the collaboration ID
+	// namespace association.
+	//
+	// This member is required.
+	InputReferenceProperties *IdNamespaceAssociationInputReferenceProperties
+
+	// The name of the collaboration ID namespace association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the collaboration ID namespace was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the collaboration ID namespace association.
+	Description *string
+
+	// The configuration settings for the ID mapping table.
+	IdMappingConfig *IdMappingConfig
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about the collaboration ID namespace association.
+type CollaborationIdNamespaceAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the collaboration ID namespace association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains this
+	// collaboration ID namespace association.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains this collaboration ID
+	// namespace association.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the collaboration ID namespace association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The Amazon Web Services account that created this collaboration ID namespace
+	// association.
+	//
+	// This member is required.
+	CreatorAccountId *string
+
+	// The unique identifier of the collaboration ID namespace association.
+	//
+	// This member is required.
+	Id *string
+
+	// The input reference configuration that's used to create the collaboration ID
+	// namespace association.
+	//
+	// This member is required.
+	InputReferenceConfig *IdNamespaceAssociationInputReferenceConfig
+
+	// The input reference properties that are used to create the collaboration ID
+	// namespace association.
+	//
+	// This member is required.
+	InputReferenceProperties *IdNamespaceAssociationInputReferencePropertiesSummary
+
+	// The name of the collaboration ID namespace association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the collaboration ID namespace association was
+	// updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the collaboration ID namepsace association.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -1763,6 +1925,400 @@ type GlueTableReference struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration settings for the ID mapping table.
+type IdMappingConfig struct {
+
+	// An indicator as to whether you can use your column as a dimension column in the
+	// ID mapping table ( TRUE ) or not ( FALSE ).
+	//
+	// Default is FALSE .
+	//
+	// This member is required.
+	AllowUseAsDimensionColumn bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes information about the ID mapping table.
+type IdMappingTable struct {
+
+	// The Amazon Resource Name (ARN) of the ID mapping table.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains this ID
+	// mapping table.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains this ID mapping table.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the ID mapping table was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of the ID mapping table.
+	//
+	// This member is required.
+	Id *string
+
+	// The input reference configuration for the ID mapping table.
+	//
+	// This member is required.
+	InputReferenceConfig *IdMappingTableInputReferenceConfig
+
+	// The input reference properties for the ID mapping table.
+	//
+	// This member is required.
+	InputReferenceProperties *IdMappingTableInputReferenceProperties
+
+	// The Amazon Resource Name (ARN) of the membership resource for the ID mapping
+	// table.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The unique identifier of the membership resource for the ID mapping table.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the ID mapping table.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the ID mapping table was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the ID mapping table.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the input reference configuration for the ID mapping table.
+type IdMappingTableInputReferenceConfig struct {
+
+	// The Amazon Resource Name (ARN) of the referenced resource in Entity Resolution.
+	// Valid values are ID mapping workflow ARNs.
+	//
+	// This member is required.
+	InputReferenceArn *string
+
+	// When TRUE , Clean Rooms manages permissions for the ID mapping table resource.
+	//
+	// When FALSE , the resource owner manages permissions for the ID mapping table
+	// resource.
+	//
+	// This member is required.
+	ManageResourcePolicies *bool
+
+	noSmithyDocumentSerde
+}
+
+// The input reference properties for the ID mapping table.
+type IdMappingTableInputReferenceProperties struct {
+
+	// The input source of the ID mapping table.
+	//
+	// This member is required.
+	IdMappingTableInputSource []IdMappingTableInputSource
+
+	noSmithyDocumentSerde
+}
+
+// The input source of the ID mapping table.
+type IdMappingTableInputSource struct {
+
+	// The unique identifier of the ID namespace association.
+	//
+	// This member is required.
+	IdNamespaceAssociationId *string
+
+	// The type of the input source of the ID mapping table.
+	//
+	// This member is required.
+	Type IdNamespaceType
+
+	noSmithyDocumentSerde
+}
+
+// Additional properties that are specific to the type of the associated schema.
+type IdMappingTableSchemaTypeProperties struct {
+
+	// Defines which ID namespace associations are used to create the ID mapping table.
+	//
+	// This member is required.
+	IdMappingTableInputSource []IdMappingTableInputSource
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about the ID mapping table.
+type IdMappingTableSummary struct {
+
+	// The Amazon Resource Name (ARN) of this ID mapping table.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains this ID
+	// mapping table.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains this ID mapping table.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which this ID mapping table was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of this ID mapping table.
+	//
+	// This member is required.
+	Id *string
+
+	// The input reference configuration for the ID mapping table.
+	//
+	// This member is required.
+	InputReferenceConfig *IdMappingTableInputReferenceConfig
+
+	// The Amazon Resource Name (ARN) of the membership resource for this ID mapping
+	// table.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The unique identifier of the membership resource for this ID mapping table.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of this ID mapping table.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which this ID mapping table was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of this ID mapping table.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information to create the ID namespace association.
+type IdNamespaceAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the ID namespace association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains this ID
+	// namespace association.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains this ID namespace
+	// association.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which the ID namespace association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier for this ID namespace association.
+	//
+	// This member is required.
+	Id *string
+
+	// The input reference configuration for the ID namespace association.
+	//
+	// This member is required.
+	InputReferenceConfig *IdNamespaceAssociationInputReferenceConfig
+
+	// The input reference properties for the ID namespace association.
+	//
+	// This member is required.
+	InputReferenceProperties *IdNamespaceAssociationInputReferenceProperties
+
+	// The Amazon Resource Name (ARN) of the membership resource for this ID namespace
+	// association.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The unique identifier of the membership resource for this ID namespace
+	// association.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of this ID namespace association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which the ID namespace association was updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the ID namespace association.
+	Description *string
+
+	// The configuration settings for the ID mapping table.
+	IdMappingConfig *IdMappingConfig
+
+	noSmithyDocumentSerde
+}
+
+// Provides the information for the ID namespace association input reference
+// configuration.
+type IdNamespaceAssociationInputReferenceConfig struct {
+
+	// The Amazon Resource Name (ARN) of the Entity Resolution resource that is being
+	// associated to the collaboration. Valid resource ARNs are from the ID namespaces
+	// that you own.
+	//
+	// This member is required.
+	InputReferenceArn *string
+
+	// When TRUE , Clean Rooms manages permissions for the ID namespace association
+	// resource.
+	//
+	// When FALSE , the resource owner manages permissions for the ID namespace
+	// association resource.
+	//
+	// This member is required.
+	ManageResourcePolicies *bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides the information for the ID namespace association input reference
+// properties.
+type IdNamespaceAssociationInputReferenceProperties struct {
+
+	// Defines how ID mapping workflows are supported for this ID namespace
+	// association.
+	//
+	// This member is required.
+	IdMappingWorkflowsSupported []document.Interface
+
+	// The ID namespace type for this ID namespace association.
+	//
+	// This member is required.
+	IdNamespaceType IdNamespaceType
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about the ID namespace association input reference
+// properties.
+type IdNamespaceAssociationInputReferencePropertiesSummary struct {
+
+	// The ID namespace type for this ID namespace association.
+	//
+	// This member is required.
+	IdNamespaceType IdNamespaceType
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about the ID namespace association.
+type IdNamespaceAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of this ID namespace association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Resource Name (ARN) of the collaboration that contains this ID
+	// namespace association.
+	//
+	// This member is required.
+	CollaborationArn *string
+
+	// The unique identifier of the collaboration that contains this ID namespace
+	// association.
+	//
+	// This member is required.
+	CollaborationId *string
+
+	// The time at which this ID namespace association was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The unique identifier of this ID namespace association.
+	//
+	// This member is required.
+	Id *string
+
+	// The input reference configuration details for this ID namespace association.
+	//
+	// This member is required.
+	InputReferenceConfig *IdNamespaceAssociationInputReferenceConfig
+
+	// The input reference properties for this ID namespace association.
+	//
+	// This member is required.
+	InputReferenceProperties *IdNamespaceAssociationInputReferencePropertiesSummary
+
+	// The Amazon Resource Name (ARN) of the membership resource for this ID namespace
+	// association.
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The unique identifier of the membership resource for this ID namespace
+	// association.
+	//
+	// This member is required.
+	MembershipId *string
+
+	// The name of the ID namespace association.
+	//
+	// This member is required.
+	Name *string
+
+	// The most recent time at which this ID namespace association has been updated.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	// The description of the ID namespace association.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The membership object.
 type Membership struct {
 
@@ -2227,7 +2783,7 @@ type PrivacyBudgetTemplate struct {
 	// This member is required.
 	MembershipId *string
 
-	// Specifies the epislon and noise parameters for the privacy budget template.
+	// Specifies the epsilon and noise parameters for the privacy budget template.
 	//
 	// This member is required.
 	Parameters PrivacyBudgetTemplateParametersOutput
@@ -2634,16 +3190,45 @@ type QueryComputePaymentConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Provides any necessary query constraint information.
+//
+// The following types satisfy this interface:
+//
+//	QueryConstraintMemberRequireOverlap
+type QueryConstraint interface {
+	isQueryConstraint()
+}
+
+// An array of column names that specifies which columns are required in the JOIN
+// statement.
+type QueryConstraintMemberRequireOverlap struct {
+	Value QueryConstraintRequireOverlap
+
+	noSmithyDocumentSerde
+}
+
+func (*QueryConstraintMemberRequireOverlap) isQueryConstraint() {}
+
+// Provides the name of the columns that are required to overlap.
+type QueryConstraintRequireOverlap struct {
+
+	// The columns that are required to overlap.
+	Columns []string
+
+	noSmithyDocumentSerde
+}
+
 // A schema is a relation within a collaboration.
 type Schema struct {
 
-	// The analysis rule types associated with the schema. Currently, only one entry
-	// is present.
+	// The analysis rule types that are associated with the schema. Currently, only
+	// one entry is present.
 	//
 	// This member is required.
 	AnalysisRuleTypes []AnalysisRuleType
 
-	// The unique ARN for the collaboration that the schema belongs to.
+	// The unique Amazon Resource Name (ARN) for the collaboration that the schema
+	// belongs to.
 	//
 	// This member is required.
 	CollaborationArn *string
@@ -2653,12 +3238,12 @@ type Schema struct {
 	// This member is required.
 	CollaborationId *string
 
-	// The columns for the relation this schema represents.
+	// The columns for the relation that this schema represents.
 	//
 	// This member is required.
 	Columns []Column
 
-	// The time the schema was created.
+	// The time at which the schema was created.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -2689,19 +3274,22 @@ type Schema struct {
 	// This member is required.
 	SchemaStatusDetails []SchemaStatusDetail
 
-	// The type of schema. The only valid value is currently `TABLE`.
+	// The type of schema.
 	//
 	// This member is required.
 	Type SchemaType
 
-	// The time the schema was last updated.
+	// The most recent time at which the schema was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
 	// The analysis method for the schema. The only valid value is currently
-	// DIRECT_QUERY.
+	// DIRECT_QUERY .
 	AnalysisMethod AnalysisMethod
+
+	// The schema type properties.
+	SchemaTypeProperties SchemaTypeProperties
 
 	noSmithyDocumentSerde
 }
@@ -2796,7 +3384,7 @@ type SchemaSummary struct {
 	// This member is required.
 	Name *string
 
-	// The type of schema object. The only valid schema type is currently `TABLE`.
+	// The type of schema object.
 	//
 	// This member is required.
 	Type SchemaType
@@ -2812,6 +3400,24 @@ type SchemaSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Information about the schema type properties.
+//
+// The following types satisfy this interface:
+//
+//	SchemaTypePropertiesMemberIdMappingTable
+type SchemaTypeProperties interface {
+	isSchemaTypeProperties()
+}
+
+// The ID mapping table for the schema type properties.
+type SchemaTypePropertiesMemberIdMappingTable struct {
+	Value IdMappingTableSchemaTypeProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*SchemaTypePropertiesMemberIdMappingTable) isSchemaTypeProperties() {}
 
 // A pointer to the dataset that underlies this table. Currently, this can only be
 // an Glue table.
@@ -2873,4 +3479,6 @@ func (*UnknownUnionMember) isPrivacyBudgetTemplateUpdateParameters()       {}
 func (*UnknownUnionMember) isPrivacyImpact()                               {}
 func (*UnknownUnionMember) isProtectedQueryOutput()                        {}
 func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()           {}
+func (*UnknownUnionMember) isQueryConstraint()                             {}
+func (*UnknownUnionMember) isSchemaTypeProperties()                        {}
 func (*UnknownUnionMember) isTableReference()                              {}

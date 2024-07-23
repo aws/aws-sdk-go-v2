@@ -2000,6 +2000,13 @@ func awsRestjson1_serializeDocumentAudienceGenerationJobDataSource(v *types.Audi
 		ok.String(*v.RoleArn)
 	}
 
+	if v.SqlParameters != nil {
+		ok := object.Key("sqlParameters")
+		if err := awsRestjson1_serializeDocumentProtectedQuerySQLParameters(v.SqlParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2209,6 +2216,41 @@ func awsRestjson1_serializeDocumentMetricsList(v []types.SharedAudienceMetrics, 
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParameterMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProtectedQuerySQLParameters(v *types.ProtectedQuerySQLParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisTemplateArn != nil {
+		ok := object.Key("analysisTemplateArn")
+		ok.String(*v.AnalysisTemplateArn)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentParameterMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryString != nil {
+		ok := object.Key("queryString")
+		ok.String(*v.QueryString)
+	}
+
 	return nil
 }
 

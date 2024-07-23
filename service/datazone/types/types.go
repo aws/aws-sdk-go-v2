@@ -507,65 +507,6 @@ type CustomParameter struct {
 	noSmithyDocumentSerde
 }
 
-type DataProductItem struct {
-
-	//
-	DomainId *string
-
-	//
-	ItemId *string
-
-	noSmithyDocumentSerde
-}
-
-type DataProductSummary struct {
-
-	//
-	//
-	// This member is required.
-	DomainId *string
-
-	//
-	//
-	// This member is required.
-	Id *string
-
-	//
-	//
-	// This member is required.
-	Name *string
-
-	//
-	//
-	// This member is required.
-	OwningProjectId *string
-
-	//
-	CreatedAt *time.Time
-
-	//
-	CreatedBy *string
-
-	//
-	//
-	// Deprecated: This structure is deprecated.
-	DataProductItems []DataProductItem
-
-	//
-	Description *string
-
-	//
-	GlossaryTerms []string
-
-	//
-	UpdatedAt *time.Time
-
-	//
-	UpdatedBy *string
-
-	noSmithyDocumentSerde
-}
-
 // The configuration of the data source.
 //
 // The following types satisfy this interface:
@@ -2716,7 +2657,6 @@ type SearchInItem struct {
 // The following types satisfy this interface:
 //
 //	SearchInventoryResultItemMemberAssetItem
-//	SearchInventoryResultItemMemberDataProductItem
 //	SearchInventoryResultItemMemberGlossaryItem
 //	SearchInventoryResultItemMemberGlossaryTermItem
 type SearchInventoryResultItem interface {
@@ -2731,17 +2671,6 @@ type SearchInventoryResultItemMemberAssetItem struct {
 }
 
 func (*SearchInventoryResultItemMemberAssetItem) isSearchInventoryResultItem() {}
-
-// The data product item included in the search results.
-//
-// Deprecated: This field is deprecated.
-type SearchInventoryResultItemMemberDataProductItem struct {
-	Value DataProductSummary
-
-	noSmithyDocumentSerde
-}
-
-func (*SearchInventoryResultItemMemberDataProductItem) isSearchInventoryResultItem() {}
 
 // The glossary item included in the search results.
 type SearchInventoryResultItemMemberGlossaryItem struct {

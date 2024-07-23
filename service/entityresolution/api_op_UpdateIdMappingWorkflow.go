@@ -31,7 +31,8 @@ func (c *Client) UpdateIdMappingWorkflow(ctx context.Context, params *UpdateIdMa
 
 type UpdateIdMappingWorkflowInput struct {
 
-	// An object which defines the idMappingType and the providerProperties .
+	// An object which defines the ID mapping technique and any additional
+	// configurations.
 	//
 	// This member is required.
 	IdMappingTechniques *types.IdMappingTechniques
@@ -41,12 +42,6 @@ type UpdateIdMappingWorkflowInput struct {
 	//
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
-
-	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to access Amazon Web Services resources on your behalf.
-	//
-	// This member is required.
-	RoleArn *string
 
 	// The name of the workflow.
 	//
@@ -60,12 +55,17 @@ type UpdateIdMappingWorkflowInput struct {
 	// KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
+	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
+	// role to access Amazon Web Services resources on your behalf.
+	RoleArn *string
+
 	noSmithyDocumentSerde
 }
 
 type UpdateIdMappingWorkflowOutput struct {
 
-	// An object which defines the idMappingType and the providerProperties .
+	// An object which defines the ID mapping technique and any additional
+	// configurations.
 	//
 	// This member is required.
 	IdMappingTechniques *types.IdMappingTechniques
@@ -75,12 +75,6 @@ type UpdateIdMappingWorkflowOutput struct {
 	//
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
-
-	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to access Amazon Web Services resources on your behalf.
-	//
-	// This member is required.
-	RoleArn *string
 
 	// The Amazon Resource Name (ARN) of the workflow role. Entity Resolution assumes
 	// this role to access Amazon Web Services resources on your behalf.
@@ -99,6 +93,10 @@ type UpdateIdMappingWorkflowOutput struct {
 	// A list of OutputSource objects, each of which contains fields OutputS3Path and
 	// KMSArn .
 	OutputSourceConfig []types.IdMappingWorkflowOutputSource
+
+	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
+	// role to access Amazon Web Services resources on your behalf.
+	RoleArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

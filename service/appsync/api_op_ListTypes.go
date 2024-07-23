@@ -149,6 +149,94 @@ func (c *Client) addOperationListTypesMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
+// ListTypesPaginatorOptions is the paginator options for ListTypes
+type ListTypesPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTypesPaginator is a paginator for ListTypes
+type ListTypesPaginator struct {
+	options   ListTypesPaginatorOptions
+	client    ListTypesAPIClient
+	params    *ListTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTypesPaginator returns a new ListTypesPaginator
+func NewListTypesPaginator(client ListTypesAPIClient, params *ListTypesInput, optFns ...func(*ListTypesPaginatorOptions)) *ListTypesPaginator {
+	if params == nil {
+		params = &ListTypesInput{}
+	}
+
+	options := ListTypesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTypesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListTypes page.
+func (p *ListTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListTypesAPIClient is a client that implements the ListTypes operation.
+type ListTypesAPIClient interface {
+	ListTypes(context.Context, *ListTypesInput, ...func(*Options)) (*ListTypesOutput, error)
+}
+
+var _ ListTypesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListTypes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

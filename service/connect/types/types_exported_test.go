@@ -209,6 +209,9 @@ func ExampleRealtimeContactAnalysisSegment_outputUsage() {
 	case *types.RealtimeContactAnalysisSegmentMemberIssues:
 		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentIssues
 
+	case *types.RealtimeContactAnalysisSegmentMemberPostContactSummary:
+		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentPostContactSummary
+
 	case *types.RealtimeContactAnalysisSegmentMemberTranscript:
 		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentTranscript
 
@@ -224,6 +227,7 @@ func ExampleRealtimeContactAnalysisSegment_outputUsage() {
 var _ *types.RealTimeContactAnalysisSegmentEvent
 var _ *types.RealTimeContactAnalysisSegmentIssues
 var _ *types.RealTimeContactAnalysisSegmentCategories
+var _ *types.RealTimeContactAnalysisSegmentPostContactSummary
 var _ *types.RealTimeContactAnalysisSegmentAttachments
 var _ *types.RealTimeContactAnalysisSegmentTranscript
 

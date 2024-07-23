@@ -144,6 +144,94 @@ func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
+// ListFunctionsPaginatorOptions is the paginator options for ListFunctions
+type ListFunctionsPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFunctionsPaginator is a paginator for ListFunctions
+type ListFunctionsPaginator struct {
+	options   ListFunctionsPaginatorOptions
+	client    ListFunctionsAPIClient
+	params    *ListFunctionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFunctionsPaginator returns a new ListFunctionsPaginator
+func NewListFunctionsPaginator(client ListFunctionsAPIClient, params *ListFunctionsInput, optFns ...func(*ListFunctionsPaginatorOptions)) *ListFunctionsPaginator {
+	if params == nil {
+		params = &ListFunctionsInput{}
+	}
+
+	options := ListFunctionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListFunctionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFunctionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListFunctions page.
+func (p *ListFunctionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFunctionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListFunctions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListFunctionsAPIClient is a client that implements the ListFunctions operation.
+type ListFunctionsAPIClient interface {
+	ListFunctions(context.Context, *ListFunctionsInput, ...func(*Options)) (*ListFunctionsOutput, error)
+}
+
+var _ ListFunctionsAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListFunctions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

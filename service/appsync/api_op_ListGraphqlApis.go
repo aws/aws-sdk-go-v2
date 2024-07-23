@@ -143,6 +143,95 @@ func (c *Client) addOperationListGraphqlApisMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
+// ListGraphqlApisPaginatorOptions is the paginator options for ListGraphqlApis
+type ListGraphqlApisPaginatorOptions struct {
+	// The maximum number of results that you want the request to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListGraphqlApisPaginator is a paginator for ListGraphqlApis
+type ListGraphqlApisPaginator struct {
+	options   ListGraphqlApisPaginatorOptions
+	client    ListGraphqlApisAPIClient
+	params    *ListGraphqlApisInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListGraphqlApisPaginator returns a new ListGraphqlApisPaginator
+func NewListGraphqlApisPaginator(client ListGraphqlApisAPIClient, params *ListGraphqlApisInput, optFns ...func(*ListGraphqlApisPaginatorOptions)) *ListGraphqlApisPaginator {
+	if params == nil {
+		params = &ListGraphqlApisInput{}
+	}
+
+	options := ListGraphqlApisPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListGraphqlApisPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListGraphqlApisPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListGraphqlApis page.
+func (p *ListGraphqlApisPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListGraphqlApisOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListGraphqlApis(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListGraphqlApisAPIClient is a client that implements the ListGraphqlApis
+// operation.
+type ListGraphqlApisAPIClient interface {
+	ListGraphqlApis(context.Context, *ListGraphqlApisInput, ...func(*Options)) (*ListGraphqlApisOutput, error)
+}
+
+var _ ListGraphqlApisAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListGraphqlApis(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

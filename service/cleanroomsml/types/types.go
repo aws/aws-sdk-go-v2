@@ -68,6 +68,12 @@ type AudienceExportJobSummary struct {
 // audience is stored.
 type AudienceGenerationJobDataSource struct {
 
+	// The ARN of the IAM role that can read the Amazon S3 bucket where the seed
+	// audience is stored.
+	//
+	// This member is required.
+	RoleArn *string
+
 	// Defines the Amazon S3 bucket where the seed audience for the generating
 	// audience is stored. A valid data source is a JSON line file in the following
 	// format:
@@ -77,15 +83,10 @@ type AudienceGenerationJobDataSource struct {
 	//     {"user_id": "222222"}
 	//
 	//     ...
-	//
-	// This member is required.
 	DataSource *S3ConfigMap
 
-	// The ARN of the IAM role that can read the Amazon S3 bucket where the training
-	// data is stored.
-	//
-	// This member is required.
-	RoleArn *string
+	// The protected SQL query parameters.
+	SqlParameters *ProtectedQuerySQLParameters
 
 	noSmithyDocumentSerde
 }
@@ -215,11 +216,13 @@ type AudienceSize struct {
 	noSmithyDocumentSerde
 }
 
-// Configure the list of audience output sizes that can be created. A request to StartAudienceGenerationJob
-// that uses this configured audience model must have an audienceSize selected
-// from this list. You can use the ABSOLUTEAudienceSize to configure out audience sizes using
-// the count of identifiers in the output. You can use the PercentageAudienceSize to configure
-// sizes in the range 1-100 percent.
+// Returns the relevance scores at these audience sizes when used in the GetAudienceGenerationJob for a
+// specified audience generation job and configured audience model.
+//
+// Specifies the list of allowed audienceSize values when used in the StartAudienceExportJob for an
+// audience generation job. You can use the ABSOLUTEAudienceSize to configure out audience
+// sizes using the count of identifiers in the output. You can use the PercentageAudienceSize
+// to configure sizes in the range 1-100 percent.
 type AudienceSizeConfig struct {
 
 	// An array of the different audience output sizes.
@@ -374,6 +377,22 @@ type GlueDataSource struct {
 
 	// The Glue catalog that contains the training data.
 	CatalogId *string
+
+	noSmithyDocumentSerde
+}
+
+// The parameters for the SQL type Protected Query.
+type ProtectedQuerySQLParameters struct {
+
+	// The Amazon Resource Name (ARN) associated with the analysis template within a
+	// collaboration.
+	AnalysisTemplateArn *string
+
+	// The protected query SQL parameters.
+	Parameters map[string]string
+
+	// The query string to be submitted.
+	QueryString *string
 
 	noSmithyDocumentSerde
 }
