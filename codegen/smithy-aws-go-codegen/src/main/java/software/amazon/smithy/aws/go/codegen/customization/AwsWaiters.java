@@ -20,12 +20,11 @@ import java.util.Set;
 
 import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.codegen.core.Symbol;
-import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.GoDelegator;
-import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoCodegenContext;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.Waiters;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.shapes.ShapeId;
 
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
@@ -40,10 +39,16 @@ public class AwsWaiters extends Waiters {
     }
 
     @Override
-    public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
-        super.writeAdditionalFiles(settings, model, symbolProvider, goDelegator);
+    public boolean enabledForService(Model model, ShapeId service) {
+        return !AwsWaiters2.PHASED_ROLLOUT_SERVICES.contains(service);
+    }
 
-        goDelegator.useFileWriter("api_client.go", settings.getModuleName(), goTemplate("""
+    @Override
+    public void writeAdditionalFiles(GoCodegenContext ctx) {
+        super.writeAdditionalFiles(ctx);
+
+        // happens regardless of enabledForService() == true - so AwsWaiters2 can use it
+        ctx.writerDelegator().useFileWriter("api_client.go", ctx.settings().getModuleName(), goTemplate("""
                 func addIsWaiterUserAgent(o *Options) {
                     o.APIOptions = append(o.APIOptions, func(stack $stack:P) error {
                         ua, err := getOrAddRequestUserAgent(stack)
