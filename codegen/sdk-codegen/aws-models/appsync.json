@@ -6054,6 +6054,12 @@
                     "method": "GET",
                     "uri": "/v1/apis/{apiId}/apikeys",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "apiKeys",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6136,6 +6142,12 @@
                     "method": "GET",
                     "uri": "/v1/apis/{apiId}/datasources",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "dataSources",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6215,6 +6227,12 @@
                     "method": "GET",
                     "uri": "/v1/domainnames",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "domainNameConfigs",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6289,6 +6307,12 @@
                     "method": "GET",
                     "uri": "/v1/apis/{apiId}/functions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "functions",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6368,6 +6392,12 @@
                     "method": "GET",
                     "uri": "/v1/apis",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "graphqlApis",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6456,6 +6486,12 @@
                     "method": "GET",
                     "uri": "/v1/apis/{apiId}/types/{typeName}/resolvers",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "resolvers",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6487,6 +6523,12 @@
                     "method": "GET",
                     "uri": "/v1/apis/{apiId}/functions/{functionId}/resolvers",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "resolvers",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6636,6 +6678,12 @@
                     "method": "GET",
                     "uri": "/v1/apis/{apiId}/sourceApiAssociations",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "sourceApiAssociationSummaries",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6788,6 +6836,12 @@
                     "method": "GET",
                     "uri": "/v1/apis/{apiId}/types",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "types",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -6822,6 +6876,12 @@
                     "method": "GET",
                     "uri": "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/types",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "types",
+                    "pageSize": "maxResults"
                 }
             }
         },

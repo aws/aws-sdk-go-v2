@@ -755,6 +755,16 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.cleanroomsml#AnalysisTemplateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+$"
+            }
+        },
         "com.amazonaws.cleanroomsml#AudienceDestination": {
             "type": "structure",
             "members": {
@@ -951,15 +961,20 @@
                 "dataSource": {
                     "target": "com.amazonaws.cleanroomsml#S3ConfigMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the Amazon S3 bucket where the seed audience for the generating audience is stored. A valid data source is a JSON line file in the following format:</p>\n         <p>\n            <code>{\"user_id\": \"111111\"}</code>\n         </p>\n         <p>\n            <code>{\"user_id\": \"222222\"}</code>\n         </p>\n         <p>\n            <code>...</code>\n         </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Defines the Amazon S3 bucket where the seed audience for the generating audience is stored. A valid data source is a JSON line file in the following format:</p>\n         <p>\n            <code>{\"user_id\": \"111111\"}</code>\n         </p>\n         <p>\n            <code>{\"user_id\": \"222222\"}</code>\n         </p>\n         <p>\n            <code>...</code>\n         </p>"
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.cleanroomsml#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that can read the Amazon S3 bucket where the training data is stored.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that can read the Amazon S3 bucket where the seed audience is stored.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "sqlParameters": {
+                    "target": "com.amazonaws.cleanroomsml#ProtectedQuerySQLParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protected SQL query parameters.</p>"
                     }
                 }
             },
@@ -1316,7 +1331,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configure the list of audience output sizes that can be created. A request to <a>StartAudienceGenerationJob</a> that uses this configured audience model must have an <code>audienceSize</code> selected from this list. You can use the <code>ABSOLUTE</code>\n            <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code>\n            <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
+                "smithy.api#documentation": "<p>Returns the relevance scores at these audience sizes when used in the <a>GetAudienceGenerationJob</a> for a specified audience generation job and configured audience model.</p>\n         <p>Specifies the list of allowed <code>audienceSize</code> values when used in the <a>StartAudienceExportJob</a> for an audience generation job. You can use the <code>ABSOLUTE</code>\n            <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code>\n            <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#AudienceSizeType": {
@@ -2380,6 +2395,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags that are associated to this audience generation job.</p>"
                     }
+                },
+                "protectedQueryIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the protected query for this audience generation job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3440,6 +3461,34 @@
                 }
             }
         },
+        "com.amazonaws.cleanroomsml#ParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_]+$"
+            }
+        },
+        "com.amazonaws.cleanroomsml#ParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cleanroomsml#ParameterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.cleanroomsml#ParameterValue"
+            }
+        },
+        "com.amazonaws.cleanroomsml#ParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
         "com.amazonaws.cleanroomsml#PolicyExistenceCondition": {
             "type": "enum",
             "members": {
@@ -3455,6 +3504,36 @@
                         "smithy.api#enumValue": "POLICY_MUST_NOT_EXIST"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cleanroomsml#ProtectedQuerySQLParameters": {
+            "type": "structure",
+            "members": {
+                "queryString": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query string to be submitted.</p>",
+                        "smithy.api#length": {
+                            "max": 90000
+                        }
+                    }
+                },
+                "analysisTemplateArn": {
+                    "target": "com.amazonaws.cleanroomsml#AnalysisTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the analysis template within a\n         collaboration.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.cleanroomsml#ParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protected query SQL parameters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters for the SQL type Protected Query.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cleanroomsml#PutConfiguredAudienceModelPolicy": {

@@ -66,7 +66,7 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Contact Lens for Amazon Connect enables you to analyze conversations between customer and agents,\n      by using speech transcription, natural language processing, and intelligent search\n      capabilities. It performs sentiment analysis, detects issues, and enables you to automatically\n      categorize contacts.</p>\n         <p>Contact Lens for Amazon Connect provides both real-time and post-call analytics of customer-agent\n      conversations. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html\">Analyze conversations using\n        Contact Lens</a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Contact_Lens.html\">Contact Lens actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Contact_Lens.html\">Contact Lens data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect Contact Lens enables you to analyze conversations between customer and agents, by using\n            speech transcription, natural language processing, and intelligent search capabilities.\n            It performs sentiment analysis, detects issues, and enables you to automatically\n            categorize contacts.</p>\n         <p>Amazon Connect Contact Lens provides both real-time and post-call analytics of customer-agent\n            conversations. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html\">Analyze conversations\n                using speech analytics</a> in the <i>Amazon Connect Administrator\n            Guide</i>. </p>",
                 "smithy.api#title": "Amazon Connect Contact Lens",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -810,7 +810,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the category rules that are used to automatically categorize contacts based on\n      uttered keywords and phrases.</p>"
+                "smithy.api#documentation": "<p>Provides the category rules that are used to automatically categorize contacts based\n            on uttered keywords and phrases.</p>"
             }
         },
         "com.amazonaws.connectcontactlens#CategoryDetails": {
@@ -868,7 +868,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For characters that were detected as issues, where they occur in the transcript.</p>"
+                "smithy.api#documentation": "<p>For characters that were detected as issues, where they occur in the\n            transcript.</p>"
             }
         },
         "com.amazonaws.connectcontactlens#ContactId": {
@@ -930,7 +930,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Potential issues that are detected based on an artificial intelligence analysis of each\n      turn in the conversation.</p>"
+                "smithy.api#documentation": "<p>Potential issues that are detected based on an artificial intelligence analysis of\n            each turn in the conversation.</p>"
             }
         },
         "com.amazonaws.connectcontactlens#IssuesDetected": {
@@ -1006,7 +1006,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connectcontactlens#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximimum number of results to return per page.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
                 "NextToken": {
@@ -1034,7 +1034,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.connectcontactlens#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results. If response includes <code>nextToken</code> there are two possible scenarios:</p>\n         <ul>\n            <li>\n               <p>There are more segments so another call is required to get them.</p>\n            </li>\n            <li>\n               <p>There are no more segments at this time, but more may be available later (real-time\n          analysis is in progress) so the client should call the operation again to get new\n          segments.</p>\n            </li>\n         </ul>\n         <p>If response does not include <code>nextToken</code>, the analysis is completed (successfully or failed) and there are no more segments to retrieve.</p>"
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results. If response includes <code>nextToken</code> there are two possible\n            scenarios:</p>\n         <ul>\n            <li>\n               <p>There are more segments so another call is required to get them.</p>\n            </li>\n            <li>\n               <p>There are no more segments at this time, but more may be available later\n                    (real-time analysis is in progress) so the client should call the operation\n                    again to get new segments.</p>\n            </li>\n         </ul>\n         <p>If response does not include <code>nextToken</code>, the analysis is completed\n            (successfully or failed) and there are no more segments to retrieve.</p>"
                     }
                 }
             },
@@ -1155,6 +1155,95 @@
                 }
             }
         },
+        "com.amazonaws.connectcontactlens#PostContactSummary": {
+            "type": "structure",
+            "members": {
+                "Content": {
+                    "target": "com.amazonaws.connectcontactlens#PostContactSummaryContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the summary.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connectcontactlens#PostContactSummaryStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Whether the summary was successfully COMPLETED or FAILED to be generated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureCode": {
+                    "target": "com.amazonaws.connectcontactlens#PostContactSummaryFailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the summary failed to be generated, one of the following failure codes\n            occurs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached\n                    your service quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: The conversation needs to have\n                    at least one turn from both the participants in order to generate the\n                    summary.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_SAFETY_GUIDELINES</code>: The generated summary cannot be\n                    provided because it failed to meet system safety guidelines.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_ANALYSIS_CONFIGURATION</code>: This code occurs when, for\n                    example, you're using a \n                    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens\">language</a> \n                     that isn't supported by generative AI-powered post-contact summaries.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: Internal system error.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the post-contact summary.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#PostContactSummaryContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1762
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#PostContactSummaryFailureCode": {
+            "type": "enum",
+            "members": {
+                "QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA_EXCEEDED"
+                    }
+                },
+                "INSUFFICIENT_CONVERSATION_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_CONVERSATION_CONTENT"
+                    }
+                },
+                "FAILED_SAFETY_GUIDELINES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_SAFETY_GUIDELINES"
+                    }
+                },
+                "INVALID_ANALYSIS_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ANALYSIS_CONFIGURATION"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#PostContactSummaryStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connectcontactlens#RealtimeContactAnalysisSegment": {
             "type": "structure",
             "members": {
@@ -1168,6 +1257,12 @@
                     "target": "com.amazonaws.connectcontactlens#Categories",
                     "traits": {
                         "smithy.api#documentation": "<p>The matched category rules.</p>"
+                    }
+                },
+                "PostContactSummary": {
+                    "target": "com.amazonaws.connectcontactlens#PostContactSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the post-contact summary.</p>"
                     }
                 }
             },
@@ -1255,7 +1350,7 @@
                     "target": "com.amazonaws.connectcontactlens#ParticipantId",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The identifier of the participant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the participant. Valid values are CUSTOMER or AGENT.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1295,7 +1390,7 @@
                     "target": "com.amazonaws.connectcontactlens#SentimentValue",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The sentiment of the detected for this piece of transcript.</p>",
+                        "smithy.api#documentation": "<p>The sentiment detected for this piece of transcript.</p>",
                         "smithy.api#required": {}
                     }
                 },
