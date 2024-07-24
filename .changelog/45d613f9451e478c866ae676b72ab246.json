@@ -1,8 +1,0 @@
-{
-    "id": "45d613f9-451e-478c-866a-e676b72ab246",
-    "type": "documentation",
-    "description": "Clarify region hint and credential usage in HeadBucketRegion.",
-    "modules": [
-        "feature/s3/manager"
-    ]
-}

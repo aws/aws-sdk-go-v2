@@ -1,3 +1,7 @@
+# v1.12.5 (2024-07-24)
+
+* **Documentation**: Update for rebrand to AWS End User Messaging SMS and Voice.
+
 # v1.12.4 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

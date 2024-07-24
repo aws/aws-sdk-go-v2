@@ -1,3 +1,24 @@
+# Release (2024-07-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.17.9](feature/s3/manager/CHANGELOG.md#v1179-2024-07-24)
+  * **Documentation**: Clarify region hint and credential usage in HeadBucketRegion.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.16.0](service/cleanrooms/CHANGELOG.md#v1160-2024-07-24)
+  * **Feature**: Three enhancements to the AWS Clean Rooms: Disallowed Output Columns, Flexible Result Receivers, SQL as a Seed
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.34.4](service/dynamodb/CHANGELOG.md#v1344-2024-07-24)
+  * **Documentation**: DynamoDB doc only update for July
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.40.0](service/iotsitewise/CHANGELOG.md#v1400-2024-07-24)
+  * **Feature**: Adds support for creating SiteWise Edge gateways that run on a Siemens Industrial Edge Device.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.15.0](service/mediapackagev2/CHANGELOG.md#v1150-2024-07-24)
+  * **Feature**: This release adds support for Irdeto DRM encryption in DASH manifests.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.12.0](service/medicalimaging/CHANGELOG.md#v1120-2024-07-24)
+  * **Feature**: CopyImageSet API adds copying selected instances between image sets, and overriding inconsistent metadata with a force parameter. UpdateImageSetMetadata API enables reverting to prior versions; updates to Study, Series, and SOP Instance UIDs; and updates to private elements, with a force parameter.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.12.5](service/pinpointsmsvoicev2/CHANGELOG.md#v1125-2024-07-24)
+  * **Documentation**: Update for rebrand to AWS End User Messaging SMS and Voice.
+
 # Release (2024-07-23)
 
 ## Module Highlights

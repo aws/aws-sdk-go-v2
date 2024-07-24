@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.3
 	github.com/aws/aws-sdk-go-v2/config v1.27.27
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.8
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/acm v1.28.4
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.3
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.36.3
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.36.3
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.3
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.4
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.172.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.44.3

@@ -1,3 +1,7 @@
+# v1.16.0 (2024-07-24)
+
+* **Feature**: Three enhancements to the AWS Clean Rooms: Disallowed Output Columns, Flexible Result Receivers, SQL as a Seed
+
 # v1.15.0 (2024-07-23)
 
 * **Feature**: This release adds AWS Entity Resolution integration to associate ID namespaces & ID mapping workflow resources as part of ID namespace association and  ID mapping table  in AWS Clean Rooms. It also introduces a new ID_MAPPING_TABLE analysis rule to manage the protection on ID mapping table.

@@ -1,8 +1,0 @@
-{
-    "id": "db39f903-fbc0-4370-b058-212f3a532752",
-    "type": "documentation",
-    "description": "Update for rebrand to AWS End User Messaging SMS and Voice.",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

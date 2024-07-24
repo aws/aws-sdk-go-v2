@@ -1,3 +1,7 @@
+# v1.40.0 (2024-07-24)
+
+* **Feature**: Adds support for creating SiteWise Edge gateways that run on a Siemens Industrial Edge Device.
+
 # v1.39.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "6439b576-c3f0-4731-92f2-a6fd1762b01c",
-    "type": "feature",
-    "description": "Three enhancements to the AWS Clean Rooms: Disallowed Output Columns, Flexible Result Receivers, SQL as a Seed",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

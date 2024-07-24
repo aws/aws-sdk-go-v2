@@ -1,3 +1,7 @@
+# v1.15.0 (2024-07-24)
+
+* **Feature**: This release adds support for Irdeto DRM encryption in DASH manifests.
+
 # v1.14.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
