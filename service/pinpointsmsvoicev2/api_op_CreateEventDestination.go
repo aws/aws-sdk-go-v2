@@ -14,14 +14,14 @@ import (
 // Creates a new event destination in a configuration set.
 //
 // An event destination is a location where you send message events. The event
-// options are Amazon CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For
-// example, when a message is delivered successfully, you can send information
-// about that event to an event destination, or send notifications to endpoints
-// that are subscribed to an Amazon SNS topic.
+// options are Amazon CloudWatch, Amazon Data Firehose, or Amazon SNS. For example,
+// when a message is delivered successfully, you can send information about that
+// event to an event destination, or send notifications to endpoints that are
+// subscribed to an Amazon SNS topic.
 //
 // Each configuration set can contain between 0 and 5 event destinations. Each
 // event destination can contain a reference to a single destination, such as a
-// CloudWatch or Kinesis Data Firehose destination.
+// CloudWatch or Firehose destination.
 func (c *Client) CreateEventDestination(ctx context.Context, params *CreateEventDestinationInput, optFns ...func(*Options)) (*CreateEventDestinationOutput, error) {
 	if params == nil {
 		params = &CreateEventDestinationInput{}
@@ -52,7 +52,7 @@ type CreateEventDestinationInput struct {
 	EventDestinationName *string
 
 	// An array of event types that determine which events to log. If "ALL" is used,
-	// then Amazon Pinpoint logs every event type.
+	// then AWS End User Messaging SMS and Voice logs every event type.
 	//
 	// The TEXT_SENT event type is not supported.
 	//
@@ -69,7 +69,7 @@ type CreateEventDestinationInput struct {
 	CloudWatchLogsDestination *types.CloudWatchLogsDestination
 
 	// An object that contains information about an event destination for logging to
-	// Amazon Kinesis Data Firehose.
+	// Amazon Data Firehose.
 	KinesisFirehoseDestination *types.KinesisFirehoseDestination
 
 	// An object that contains information about an event destination for logging to

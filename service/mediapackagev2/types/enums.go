@@ -191,6 +191,7 @@ const (
 	DrmSystemFairplay       DrmSystem = "FAIRPLAY"
 	DrmSystemPlayready      DrmSystem = "PLAYREADY"
 	DrmSystemWidevine       DrmSystem = "WIDEVINE"
+	DrmSystemIrdeto         DrmSystem = "IRDETO"
 )
 
 // Values returns all known values for DrmSystem. Note that this can be expanded
@@ -203,6 +204,7 @@ func (DrmSystem) Values() []DrmSystem {
 		"FAIRPLAY",
 		"PLAYREADY",
 		"WIDEVINE",
+		"IRDETO",
 	}
 }
 

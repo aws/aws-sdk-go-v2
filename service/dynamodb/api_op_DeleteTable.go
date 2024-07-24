@@ -25,7 +25,7 @@ import (
 //
 // DynamoDB might continue to accept data read and write operations, such as
 // GetItem and PutItem , on a table in the DELETING state until the table deletion
-// is complete.
+// is complete. For the full list of table states, see [TableStatus].
 //
 // When you delete a table, any indexes on that table are also deleted.
 //
@@ -34,6 +34,8 @@ import (
 // automatically deleted after 24 hours.
 //
 // Use the DescribeTable action to check the status of the table.
+//
+// [TableStatus]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html#DDB-Type-TableDescription-TableStatus
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {
 		params = &DeleteTableInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "05f01cff-cb75-42b3-87a7-cc014ffde7a4",
+    "type": "feature",
+    "description": "Adds support for creating SiteWise Edge gateways that run on a Siemens Industrial Edge Device.",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}

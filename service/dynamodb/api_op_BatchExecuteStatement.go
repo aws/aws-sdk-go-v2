@@ -14,7 +14,8 @@ import (
 // This operation allows you to perform batch reads or writes on data stored in
 // DynamoDB, using PartiQL. Each read statement in a BatchExecuteStatement must
 // specify an equality condition on all key attributes. This enforces that each
-// SELECT statement in a batch returns at most a single item.
+// SELECT statement in a batch returns at most a single item. For more information,
+// see [Running batch operations with PartiQL for DynamoDB].
 //
 // The entire batch must consist of either read statements or write statements,
 // you cannot mix both in one batch.
@@ -24,6 +25,7 @@ import (
 // found under the [Error]field of the BatchStatementResponse for each statement.
 //
 // [Error]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchStatementResponse.html#DDB-Type-BatchStatementResponse-Error
+// [Running batch operations with PartiQL for DynamoDB]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-reference.multiplestatements.batching.html
 func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecuteStatementInput, optFns ...func(*Options)) (*BatchExecuteStatementOutput, error) {
 	if params == nil {
 		params = &BatchExecuteStatementInput{}

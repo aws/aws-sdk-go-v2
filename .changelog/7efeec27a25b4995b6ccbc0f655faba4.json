@@ -1,0 +1,8 @@
+{
+    "id": "7efeec27-a25b-4995-b6cc-bc0f655faba4",
+    "type": "feature",
+    "description": "This release adds support for Irdeto DRM encryption in DASH manifests.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

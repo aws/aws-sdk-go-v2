@@ -49,7 +49,7 @@ type CreatePoolInput struct {
 
 	// The type of message. Valid values are TRANSACTIONAL for messages that are
 	// critical or time-sensitive and PROMOTIONAL for messages that aren't critical or
-	// time-sensitive.
+	// time-sensitive. After the pool is created the MessageType can't be changed.
 	//
 	// This member is required.
 	MessageType types.MessageType
@@ -57,6 +57,11 @@ type CreatePoolInput struct {
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
 	// PhoneNumberArn while DescribeSenderIdscan be used to get the values for SenderId and SenderIdArn.
+	//
+	// After the pool is created you can add more origination identities to the pool
+	// by using [AssociateOriginationIdentity].
+	//
+	// [AssociateOriginationIdentity]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -100,14 +105,15 @@ type CreatePoolOutput struct {
 	PoolId *string
 
 	// By default this is set to false. When an end recipient sends a message that
-	// begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
-	// automatically replies with a customizable message and adds the end recipient to
-	// the OptOutList. When set to true you're responsible for responding to HELP and
-	// STOP requests. You're also responsible for tracking and honoring opt-out
-	// requests.
+	// begins with HELP or STOP to one of your dedicated numbers, AWS End User
+	// Messaging SMS and Voice automatically replies with a customizable message and
+	// adds the end recipient to the OptOutList. When set to true you're responsible
+	// for responding to HELP and STOP requests. You're also responsible for tracking
+	// and honoring opt-out requests.
 	SelfManagedOptOutsEnabled bool
 
-	// Indicates whether shared routes are enabled for the pool.
+	// Indicates whether shared routes are enabled for the pool. Set to false and only
+	// origination identities in this pool are used to send messages.
 	SharedRoutesEnabled bool
 
 	// The current status of the pool.

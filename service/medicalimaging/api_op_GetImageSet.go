@@ -83,6 +83,11 @@ type GetImageSetOutput struct {
 	// The error message thrown if an image set action fails.
 	Message *string
 
+	// This object contains the details of any overrides used while creating a
+	// specific image set version. If an image set was copied or updated using the
+	// force flag, this object will contain the forced flag.
+	Overrides *types.Overrides
+
 	// The timestamp when image set properties were updated.
 	UpdatedAt *time.Time
 

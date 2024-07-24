@@ -12,13 +12,15 @@ import (
 )
 
 // Creates a new text message and sends it to a recipient's phone number.
+// SendTextMessage only sends an SMS message to one recipient each time it is
+// invoked.
 //
 // SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS
 // limit depends on the destination country of your messages, as well as the type
 // of phone number (origination number) that you use to send the message. For more
-// information, see [Message Parts per Second (MPS) limits]in the Amazon Pinpoint User Guide.
+// information about MPS, see [Message Parts per Second (MPS) limits]in the AWS End User Messaging SMS User Guide.
 //
-// [Message Parts per Second (MPS) limits]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-limitations-mps.html
+// [Message Parts per Second (MPS) limits]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html
 func (c *Client) SendTextMessage(ctx context.Context, params *SendTextMessageInput, optFns ...func(*Options)) (*SendTextMessageOutput, error) {
 	if params == nil {
 		params = &SendTextMessageInput{}
@@ -53,19 +55,37 @@ type SendTextMessageInput struct {
 	// Currently, this setting is only used when you send messages to recipients in
 	// India using a sender ID. For more information see [Special requirements for sending SMS messages to recipients in India].
 	//
+	//   - IN_ENTITY_ID The entity ID or Principal Entity (PE) ID that you received
+	//   after completing the sender ID registration process.
+	//
+	//   - IN_TEMPLATE_ID The template ID that you received after completing the sender
+	//   ID registration process.
+	//
+	// Make sure that the Template ID that you specify matches your message template
+	//   exactly. If your message doesn't match the template that you provided during the
+	//   registration process, the mobile carriers might reject your message.
+	//
 	// [Special requirements for sending SMS messages to recipients in India]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
 	DestinationCountryParameters map[string]string
 
 	// When set to true, the message is checked and validated, but isn't sent to the
-	// end recipient.
+	// end recipient. You are not charged for using DryRun .
+	//
+	// The Message Parts per Second (MPS) limit when using DryRun is five. If your
+	// origination identity has a lower MPS limit then the lower MPS limit is used. For
+	// more information about MPS limits, see [Message Parts per Second (MPS) limits]in the AWS End User Messaging SMS User
+	// Guide..
+	//
+	// [Message Parts per Second (MPS) limits]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html
 	DryRun bool
 
 	// When you register a short code in the US, you must specify a program name. If
 	// you don’t have a US short code, omit this attribute.
 	Keyword *string
 
-	// The maximum amount that you want to spend, in US dollars, per each text message
-	// part. A text message can contain multiple parts.
+	// The maximum amount that you want to spend, in US dollars, per each text
+	// message. If the calculated amount to send the text message is greater than
+	// MaxPrice , the message is not sent and an error is returned.
 	MaxPrice *string
 
 	// The body of the text message.
@@ -83,7 +103,9 @@ type SendTextMessageInput struct {
 	// The unique identifier for the protect configuration.
 	ProtectConfigurationId *string
 
-	// How long the text message is valid for. By default this is 72 hours.
+	// How long the text message is valid for, in seconds. By default this is 72
+	// hours. If the messages isn't handed off before the TTL expires we stop
+	// attempting to hand off the message and return TTL_EXPIRED event.
 	TimeToLive *int32
 
 	noSmithyDocumentSerde

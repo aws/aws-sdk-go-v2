@@ -11,14 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current Amazon Pinpoint monthly spend limits for sending voice
-// and text messages.
+// Describes the current monthly spend limits for sending voice and text messages.
 //
 // When you establish an Amazon Web Services account, the account has initial
 // monthly spend limit in a given Region. For more information on increasing your
-// monthly spend limit, see [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]in the Amazon Pinpoint User Guide.
+// monthly spend limit, see [Requesting increases to your monthly SMS, MMS, or Voice spending quota]in the AWS End User Messaging SMS User Guide.
 //
-// [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html
+// [Requesting increases to your monthly SMS, MMS, or Voice spending quota]: https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html
 func (c *Client) DescribeSpendLimits(ctx context.Context, params *DescribeSpendLimitsInput, optFns ...func(*Options)) (*DescribeSpendLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeSpendLimitsInput{}

@@ -140,6 +140,13 @@ type AnalysisRuleAggregation struct {
 	// This member is required.
 	ScalarFunctions []ScalarFunctions
 
+	//  An indicator as to whether additional analyses (such as Clean Rooms ML) can be
+	// applied to the output of the direct query.
+	//
+	// The additionalAnalyses parameter is currently supported for the list analysis
+	// rule ( AnalysisRuleList ) and the custom analysis rule ( AnalysisRuleCustom ).
+	AdditionalAnalyses AdditionalAnalyses
+
 	// Which logical operators (if any) are to be used in an INNER JOIN match
 	// condition. Default is AND .
 	AllowedJoinOperators []JoinOperator
@@ -160,12 +167,19 @@ type AnalysisRuleCustom struct {
 	// This member is required.
 	AllowedAnalyses []string
 
+	//  An indicator as to whether additional analyses (such as Clean Rooms ML) can be
+	// applied to the output of the direct query.
+	AdditionalAnalyses AdditionalAnalyses
+
 	// The IDs of the Amazon Web Services accounts that are allowed to query by the
 	// custom analysis rule. Required when allowedAnalyses is ANY_QUERY .
 	AllowedAnalysisProviders []string
 
 	// The differential privacy configuration.
 	DifferentialPrivacy *DifferentialPrivacyConfiguration
+
+	//  A list of columns that aren't allowed to be shown in the query output.
+	DisallowedOutputColumns []string
 
 	noSmithyDocumentSerde
 }
@@ -202,6 +216,10 @@ type AnalysisRuleList struct {
 	//
 	// This member is required.
 	ListColumns []string
+
+	//  An indicator as to whether additional analyses (such as Clean Rooms ML) can be
+	// applied to the output of the direct query.
+	AdditionalAnalyses AdditionalAnalyses
 
 	// The logical operators (if any) that are to be used in an INNER JOIN match
 	// condition. Default is AND .
@@ -764,7 +782,7 @@ type CollaborationConfiguredAudienceModelAssociation struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// Amazon Web Services account ID.
+	// AWS account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -816,7 +834,7 @@ type CollaborationConfiguredAudienceModelAssociationSummary struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// Amazon Web Services account ID.
+	// AWS account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -1223,6 +1241,24 @@ type Column struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration details.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationDetailsMemberDirectAnalysisConfigurationDetails
+type ConfigurationDetails interface {
+	isConfigurationDetails()
+}
+
+// The direct analysis configuration details.
+type ConfigurationDetailsMemberDirectAnalysisConfigurationDetails struct {
+	Value DirectAnalysisConfigurationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationDetailsMemberDirectAnalysisConfigurationDetails) isConfigurationDetails() {}
+
 // Details about the configured audience model association.
 type ConfiguredAudienceModelAssociation struct {
 
@@ -1570,10 +1606,175 @@ type ConfiguredTableAssociation struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	//  The analysis rule types for the configured table association.
+	AnalysisRuleTypes []ConfiguredTableAssociationAnalysisRuleType
+
 	// A description of the configured table association.
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+// An analysis rule for a configured table association. This analysis rule
+// specifies how data from the table can be used within its associated
+// collaboration. In the console, the ConfiguredTableAssociationAnalysisRule is
+// referred to as the collaboration analysis rule.
+type ConfiguredTableAssociationAnalysisRule struct {
+
+	//  The Amazon Resource Name (ARN) of the configured table association.
+	//
+	// This member is required.
+	ConfiguredTableAssociationArn *string
+
+	//  The unique identifier for the configured table association.
+	//
+	// This member is required.
+	ConfiguredTableAssociationId *string
+
+	//  The creation time of the configured table association analysis rule.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	//  The membership identifier for the configured table association analysis rule.
+	//
+	// This member is required.
+	MembershipIdentifier *string
+
+	//  The policy of the configured table association analysis rule.
+	//
+	// This member is required.
+	Policy ConfiguredTableAssociationAnalysisRulePolicy
+
+	//  The type of the configured table association analysis rule.
+	//
+	// This member is required.
+	Type ConfiguredTableAssociationAnalysisRuleType
+
+	//  The update time of the configured table association analysis rule.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+//	The configured table association analysis rule applied to a configured table
+//
+// with the aggregation analysis rule.
+type ConfiguredTableAssociationAnalysisRuleAggregation struct {
+
+	//  The list of resources or wildcards (ARNs) that are allowed to perform
+	// additional analysis on query output.
+	//
+	// The allowedAdditionalAnalyses parameter is currently supported for the list
+	// analysis rule ( AnalysisRuleList ) and the custom analysis rule (
+	// AnalysisRuleCustom ).
+	AllowedAdditionalAnalyses []string
+
+	//  The list of collaboration members who are allowed to receive results of
+	// queries run with this configured table.
+	AllowedResultReceivers []string
+
+	noSmithyDocumentSerde
+}
+
+//	The configured table association analysis rule applied to a configured table
+//
+// with the custom analysis rule.
+type ConfiguredTableAssociationAnalysisRuleCustom struct {
+
+	//  The list of resources or wildcards (ARNs) that are allowed to perform
+	// additional analysis on query output.
+	AllowedAdditionalAnalyses []string
+
+	//  The list of collaboration members who are allowed to receive results of
+	// queries run with this configured table.
+	AllowedResultReceivers []string
+
+	noSmithyDocumentSerde
+}
+
+//	The configured table association analysis rule applied to a configured table
+//
+// with the list analysis rule.
+type ConfiguredTableAssociationAnalysisRuleList struct {
+
+	//  The list of resources or wildcards (ARNs) that are allowed to perform
+	// additional analysis on query output.
+	AllowedAdditionalAnalyses []string
+
+	//  The list of collaboration members who are allowed to receive results of
+	// queries run with this configured table.
+	AllowedResultReceivers []string
+
+	noSmithyDocumentSerde
+}
+
+//	Controls on the query specifications that can be run on an associated
+//
+// configured table.
+//
+// The following types satisfy this interface:
+//
+//	ConfiguredTableAssociationAnalysisRulePolicyMemberV1
+type ConfiguredTableAssociationAnalysisRulePolicy interface {
+	isConfiguredTableAssociationAnalysisRulePolicy()
+}
+
+// The policy for the configured table association analysis rule.
+type ConfiguredTableAssociationAnalysisRulePolicyMemberV1 struct {
+	Value ConfiguredTableAssociationAnalysisRulePolicyV1
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfiguredTableAssociationAnalysisRulePolicyMemberV1) isConfiguredTableAssociationAnalysisRulePolicy() {
+}
+
+//	Controls on the query specifications that can be run on an associated
+//
+// configured table.
+//
+// The following types satisfy this interface:
+//
+//	ConfiguredTableAssociationAnalysisRulePolicyV1MemberAggregation
+//	ConfiguredTableAssociationAnalysisRulePolicyV1MemberCustom
+//	ConfiguredTableAssociationAnalysisRulePolicyV1MemberList
+type ConfiguredTableAssociationAnalysisRulePolicyV1 interface {
+	isConfiguredTableAssociationAnalysisRulePolicyV1()
+}
+
+// Analysis rule type that enables only aggregation queries on a configured table.
+type ConfiguredTableAssociationAnalysisRulePolicyV1MemberAggregation struct {
+	Value ConfiguredTableAssociationAnalysisRuleAggregation
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfiguredTableAssociationAnalysisRulePolicyV1MemberAggregation) isConfiguredTableAssociationAnalysisRulePolicyV1() {
+}
+
+//	Analysis rule type that enables the table owner to approve custom SQL queries
+//
+// on their configured tables. It supports differential privacy.
+type ConfiguredTableAssociationAnalysisRulePolicyV1MemberCustom struct {
+	Value ConfiguredTableAssociationAnalysisRuleCustom
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfiguredTableAssociationAnalysisRulePolicyV1MemberCustom) isConfiguredTableAssociationAnalysisRulePolicyV1() {
+}
+
+// Analysis rule type that enables only list queries on a configured table.
+type ConfiguredTableAssociationAnalysisRulePolicyV1MemberList struct {
+	Value ConfiguredTableAssociationAnalysisRuleList
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfiguredTableAssociationAnalysisRulePolicyV1MemberList) isConfiguredTableAssociationAnalysisRulePolicyV1() {
 }
 
 // The configured table association summary for the objects listed by the request.
@@ -1905,6 +2106,15 @@ type DifferentialPrivacyTemplateUpdateParameters struct {
 	// number of users whose contributions you want to obscure. This value governs the
 	// rate at which the privacy budget is depleted.
 	UsersNoisePerQuery *int32
+
+	noSmithyDocumentSerde
+}
+
+// The direct analysis configuration details.
+type DirectAnalysisConfigurationDetails struct {
+
+	//  The account IDs for the member who received the results of a protected query.
+	ReceiverAccountIds []string
 
 	noSmithyDocumentSerde
 }
@@ -2999,6 +3209,17 @@ type ProtectedQueryError struct {
 	noSmithyDocumentSerde
 }
 
+// Contains configuration details for the protected query member output.
+type ProtectedQueryMemberOutputConfiguration struct {
+
+	// The unique identifier for the account.
+	//
+	// This member is required.
+	AccountId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the protected query output.
 //
 // The following types satisfy this interface:
@@ -3032,12 +3253,22 @@ func (*ProtectedQueryOutputMemberS3) isProtectedQueryOutput() {}
 //
 // The following types satisfy this interface:
 //
+//	ProtectedQueryOutputConfigurationMemberMember
 //	ProtectedQueryOutputConfigurationMemberS3
 type ProtectedQueryOutputConfiguration interface {
 	isProtectedQueryOutputConfiguration()
 }
 
-// Required configuration for a protected query with an `S3` output type.
+// Required configuration for a protected query with a member output type.
+type ProtectedQueryOutputConfigurationMemberMember struct {
+	Value ProtectedQueryMemberOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedQueryOutputConfigurationMemberMember) isProtectedQueryOutputConfiguration() {}
+
+// Required configuration for a protected query with an s3 output type.
 type ProtectedQueryOutputConfigurationMemberS3 struct {
 	Value ProtectedQueryS3OutputConfiguration
 
@@ -3129,7 +3360,7 @@ type ProtectedQuerySQLParameters struct {
 // Contains statistics about the execution of the protected query.
 type ProtectedQueryStatistics struct {
 
-	// The duration of the Protected Query, from creation until query completion.
+	// The duration of the protected query, from creation until query completion.
 	TotalDurationInMillis *int64
 
 	noSmithyDocumentSerde
@@ -3157,6 +3388,11 @@ type ProtectedQuerySummary struct {
 	//
 	// This member is required.
 	MembershipId *string
+
+	//  The receiver configuration.
+	//
+	// This member is required.
+	ReceiverConfigurations []ReceiverConfiguration
 
 	// The status of the protected query. Value values are `SUBMITTED`, `STARTED`,
 	// `CANCELLED`, `CANCELLING`, `FAILED`, `SUCCESS`, `TIMED_OUT`.
@@ -3218,17 +3454,32 @@ type QueryConstraintRequireOverlap struct {
 	noSmithyDocumentSerde
 }
 
+// The receiver configuration for a protected query.
+type ReceiverConfiguration struct {
+
+	//  The type of analysis for the protected query. The results of the query can be
+	// analyzed directly ( DIRECT_ANALYSIS ) or used as input into additional analyses (
+	// ADDITIONAL_ANALYSIS ), such as a query that is a seed for a lookalike ML model.
+	//
+	// This member is required.
+	AnalysisType AnalysisType
+
+	//  The configuration details of the receiver configuration.
+	ConfigurationDetails ConfigurationDetails
+
+	noSmithyDocumentSerde
+}
+
 // A schema is a relation within a collaboration.
 type Schema struct {
 
-	// The analysis rule types that are associated with the schema. Currently, only
-	// one entry is present.
+	// The analysis rule types associated with the schema. Currently, only one entry
+	// is present.
 	//
 	// This member is required.
 	AnalysisRuleTypes []AnalysisRuleType
 
-	// The unique Amazon Resource Name (ARN) for the collaboration that the schema
-	// belongs to.
+	// The unique ARN for the collaboration that the schema belongs to.
 	//
 	// This member is required.
 	CollaborationArn *string
@@ -3238,12 +3489,12 @@ type Schema struct {
 	// This member is required.
 	CollaborationId *string
 
-	// The columns for the relation that this schema represents.
+	// The columns for the relation this schema represents.
 	//
 	// This member is required.
 	Columns []Column
 
-	// The time at which the schema was created.
+	// The time the schema was created.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -3274,18 +3525,18 @@ type Schema struct {
 	// This member is required.
 	SchemaStatusDetails []SchemaStatusDetail
 
-	// The type of schema.
+	// The type of schema. The only valid value is currently `TABLE`.
 	//
 	// This member is required.
 	Type SchemaType
 
-	// The most recent time at which the schema was updated.
+	// The time the schema was last updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
 	// The analysis method for the schema. The only valid value is currently
-	// DIRECT_QUERY .
+	// DIRECT_QUERY.
 	AnalysisMethod AnalysisMethod
 
 	// The schema type properties.
@@ -3318,7 +3569,15 @@ type SchemaAnalysisRuleRequest struct {
 // given analysis rule type are properly configured to run queries on this schema.
 type SchemaStatusDetail struct {
 
-	// The status of the schema.
+	// The type of analysis that can be performed on the schema.
+	//
+	// A schema can have an analysisType of DIRECT_ANALYSIS ,
+	// ADDITIONAL_ANALYSIS_FOR_AUDIENCE_GENERATION , or both.
+	//
+	// This member is required.
+	AnalysisType AnalysisType
+
+	// The status of the schema, indicating if it is ready to query.
 	//
 	// This member is required.
 	Status SchemaStatus
@@ -3384,7 +3643,7 @@ type SchemaSummary struct {
 	// This member is required.
 	Name *string
 
-	// The type of schema object.
+	// The type of schema object. The only valid schema type is currently `TABLE`.
 	//
 	// This member is required.
 	Type SchemaType
@@ -3465,20 +3724,23 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAnalysisRulePolicy()                          {}
-func (*UnknownUnionMember) isAnalysisRulePolicyV1()                        {}
-func (*UnknownUnionMember) isAnalysisSource()                              {}
-func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()           {}
-func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()         {}
-func (*UnknownUnionMember) isMembershipProtectedQueryOutputConfiguration() {}
-func (*UnknownUnionMember) isPreviewPrivacyImpactParametersInput()         {}
-func (*UnknownUnionMember) isPrivacyBudget()                               {}
-func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersInput()        {}
-func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersOutput()       {}
-func (*UnknownUnionMember) isPrivacyBudgetTemplateUpdateParameters()       {}
-func (*UnknownUnionMember) isPrivacyImpact()                               {}
-func (*UnknownUnionMember) isProtectedQueryOutput()                        {}
-func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()           {}
-func (*UnknownUnionMember) isQueryConstraint()                             {}
-func (*UnknownUnionMember) isSchemaTypeProperties()                        {}
-func (*UnknownUnionMember) isTableReference()                              {}
+func (*UnknownUnionMember) isAnalysisRulePolicy()                             {}
+func (*UnknownUnionMember) isAnalysisRulePolicyV1()                           {}
+func (*UnknownUnionMember) isAnalysisSource()                                 {}
+func (*UnknownUnionMember) isConfigurationDetails()                           {}
+func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()              {}
+func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()            {}
+func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicy()   {}
+func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicyV1() {}
+func (*UnknownUnionMember) isMembershipProtectedQueryOutputConfiguration()    {}
+func (*UnknownUnionMember) isPreviewPrivacyImpactParametersInput()            {}
+func (*UnknownUnionMember) isPrivacyBudget()                                  {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersInput()           {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateParametersOutput()          {}
+func (*UnknownUnionMember) isPrivacyBudgetTemplateUpdateParameters()          {}
+func (*UnknownUnionMember) isPrivacyImpact()                                  {}
+func (*UnknownUnionMember) isProtectedQueryOutput()                           {}
+func (*UnknownUnionMember) isProtectedQueryOutputConfiguration()              {}
+func (*UnknownUnionMember) isQueryConstraint()                                {}
+func (*UnknownUnionMember) isSchemaTypeProperties()                           {}
+func (*UnknownUnionMember) isTableReference()                                 {}

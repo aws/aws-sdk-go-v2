@@ -50,6 +50,15 @@ type UpdateImageSetMetadataInput struct {
 	// This member is required.
 	UpdateImageSetMetadataUpdates types.MetadataUpdates
 
+	// Setting this flag will force the UpdateImageSetMetadata operation for the
+	// following attributes:
+	//
+	//   - Tag.StudyInstanceUID , Tag.SeriesInstanceUID , Tag.SOPInstanceUID , and
+	//   Tag.StudyID
+	//
+	//   - Adding, removing, or updating private tags for an individual SOP Instance
+	Force *bool
+
 	noSmithyDocumentSerde
 }
 

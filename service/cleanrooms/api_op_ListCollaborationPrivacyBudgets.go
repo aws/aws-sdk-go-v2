@@ -41,12 +41,13 @@ type ListCollaborationPrivacyBudgetsInput struct {
 	// This member is required.
 	PrivacyBudgetType types.PrivacyBudgetType
 
-	// The maximum number of results that are returned for an API request call. The
-	// service chooses a default number if you don't set one. The service might return
-	// a `nextToken` even if the `maxResults` value has not been met.
+	// The maximum size of the results that is returned per call. Service chooses a
+	// default if it has not been set. Service may return a nextToken even if the
+	// maximum results has not been met.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	// The token value retrieved from a previous call to access the next page of
+	// results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,7 +60,8 @@ type ListCollaborationPrivacyBudgetsOutput struct {
 	// This member is required.
 	CollaborationPrivacyBudgetSummaries []types.CollaborationPrivacyBudgetSummary
 
-	// The pagination token that's used to fetch the next set of results.
+	// The token value retrieved from a previous call to access the next page of
+	// results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -156,9 +158,9 @@ func (c *Client) addOperationListCollaborationPrivacyBudgetsMiddlewares(stack *m
 // ListCollaborationPrivacyBudgetsPaginatorOptions is the paginator options for
 // ListCollaborationPrivacyBudgets
 type ListCollaborationPrivacyBudgetsPaginatorOptions struct {
-	// The maximum number of results that are returned for an API request call. The
-	// service chooses a default number if you don't set one. The service might return
-	// a `nextToken` even if the `maxResults` value has not been met.
+	// The maximum size of the results that is returned per call. Service chooses a
+	// default if it has not been set. Service may return a nextToken even if the
+	// maximum results has not been met.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

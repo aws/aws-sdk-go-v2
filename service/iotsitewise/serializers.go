@@ -7786,6 +7786,13 @@ func awsRestjson1_serializeDocumentGatewayPlatform(v *types.GatewayPlatform, val
 		}
 	}
 
+	if v.SiemensIE != nil {
+		ok := object.Key("siemensIE")
+		if err := awsRestjson1_serializeDocumentSiemensIE(v.SiemensIE, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8215,6 +8222,18 @@ func awsRestjson1_serializeDocumentRetentionPeriod(v *types.RetentionPeriod, val
 	if v.Unlimited != nil {
 		ok := object.Key("unlimited")
 		ok.Boolean(*v.Unlimited)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSiemensIE(v *types.SiemensIE, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IotCoreThingName != nil {
+		ok := object.Key("iotCoreThingName")
+		ok.String(*v.IotCoreThingName)
 	}
 
 	return nil

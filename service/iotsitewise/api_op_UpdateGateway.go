@@ -33,7 +33,7 @@ type UpdateGatewayInput struct {
 	// This member is required.
 	GatewayId *string
 
-	// A unique, friendly name for the gateway.
+	// A unique name for the gateway.
 	//
 	// This member is required.
 	GatewayName *string

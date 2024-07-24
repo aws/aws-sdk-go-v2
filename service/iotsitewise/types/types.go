@@ -396,29 +396,23 @@ type AssetModelCompositeModelPathSegment struct {
 // Contains a summary of the composite model.
 type AssetModelCompositeModelSummary struct {
 
-	// The ID of the the composite model that this summary describes..
+	// The ID of the composite model that this summary describes..
 	//
 	// This member is required.
 	Id *string
 
-	// The name of the the composite model that this summary describes..
+	// The name of the composite model that this summary describes..
 	//
 	// This member is required.
 	Name *string
 
-	// The type of asset model.
-	//
-	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
-	//   Can't be included as a component in another asset model.
-	//
-	//   - COMPONENT_MODEL – A reusable component that you can include in the
-	//   composite models of other asset models. You can't create assets directly from
-	//   this type of asset model.
+	// The composite model type. Valid values are AWS/ALARM , CUSTOM , or
+	// AWS/L4E_ANOMALY .
 	//
 	// This member is required.
 	Type *string
 
-	// The description of the the composite model that this summary describes..
+	// The description of the composite model that this summary describes..
 	Description *string
 
 	// The external ID of a composite model on this asset model. For more information,
@@ -1860,6 +1854,9 @@ type GatewayPlatform struct {
 	// A gateway that runs on IoT Greengrass V2.
 	GreengrassV2 *GreengrassV2
 
+	// A SiteWise Edge gateway that runs on a Siemens Industrial Edge Device.
+	SiemensIE *SiemensIE
+
 	noSmithyDocumentSerde
 }
 
@@ -1876,7 +1873,7 @@ type GatewaySummary struct {
 	// This member is required.
 	GatewayId *string
 
-	// The name of the asset.
+	// The name of the gateway.
 	//
 	// This member is required.
 	GatewayName *string
@@ -1909,10 +1906,10 @@ type GatewaySummary struct {
 type Greengrass struct {
 
 	// The [ARN] of the Greengrass group. For more information about how to find a group's
-	// ARN, see [ListGroups]and [GetGroup] in the IoT Greengrass API Reference.
+	// ARN, see [ListGroups]and [GetGroup] in the IoT Greengrass V1 API Reference.
 	//
-	// [GetGroup]: https://docs.aws.amazon.com/greengrass/latest/apireference/getgroup-get.html
-	// [ListGroups]: https://docs.aws.amazon.com/greengrass/latest/apireference/listgroups-get.html
+	// [GetGroup]: https://docs.aws.amazon.com/greengrass/v1/apireference/getgroup-get.html
+	// [ListGroups]: https://docs.aws.amazon.com/greengrass/v1/apireference/listgroups-get.html
 	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
@@ -2537,6 +2534,18 @@ type Row struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details for a SiteWise Edge gateway that runs on a Siemens Industrial
+// Edge Device.
+type SiemensIE struct {
+
+	// The name of the IoT Thing for your SiteWise Edge gateway.
+	//
+	// This member is required.
+	IotCoreThingName *string
+
+	noSmithyDocumentSerde
+}
+
 // The resource the action will be taken on.
 type TargetResource struct {
 
@@ -2796,8 +2805,7 @@ type Variant struct {
 	// Asset property data of type double (floating point number).
 	DoubleValue *float64
 
-	// Asset property data of type integer (number that's greater than or equal to
-	// zero).
+	// Asset property data of type integer (whole number).
 	IntegerValue *int32
 
 	// Asset property data of type string (sequence of characters).

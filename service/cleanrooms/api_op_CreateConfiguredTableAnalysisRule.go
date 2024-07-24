@@ -30,7 +30,7 @@ func (c *Client) CreateConfiguredTableAnalysisRule(ctx context.Context, params *
 
 type CreateConfiguredTableAnalysisRuleInput struct {
 
-	// The entire created configured table analysis rule object.
+	// The analysis rule policy that was created for the configured table.
 	//
 	// This member is required.
 	AnalysisRulePolicy types.ConfiguredTableAnalysisRulePolicy
@@ -51,7 +51,7 @@ type CreateConfiguredTableAnalysisRuleInput struct {
 
 type CreateConfiguredTableAnalysisRuleOutput struct {
 
-	// The entire created analysis rule.
+	// The analysis rule that was created for the configured table.
 	//
 	// This member is required.
 	AnalysisRule *types.ConfiguredTableAnalysisRule

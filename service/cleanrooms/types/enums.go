@@ -19,6 +19,27 @@ func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
 	}
 }
 
+type AdditionalAnalyses string
+
+// Enum values for AdditionalAnalyses
+const (
+	AdditionalAnalysesAllowed    AdditionalAnalyses = "ALLOWED"
+	AdditionalAnalysesRequired   AdditionalAnalyses = "REQUIRED"
+	AdditionalAnalysesNotAllowed AdditionalAnalyses = "NOT_ALLOWED"
+)
+
+// Values returns all known values for AdditionalAnalyses. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdditionalAnalyses) Values() []AdditionalAnalyses {
+	return []AdditionalAnalyses{
+		"ALLOWED",
+		"REQUIRED",
+		"NOT_ALLOWED",
+	}
+}
+
 type AggregateFunctionName string
 
 // Enum values for AggregateFunctionName
@@ -158,6 +179,25 @@ func (AnalysisTemplateValidationType) Values() []AnalysisTemplateValidationType 
 	}
 }
 
+type AnalysisType string
+
+// Enum values for AnalysisType
+const (
+	AnalysisTypeDirectAnalysis     AnalysisType = "DIRECT_ANALYSIS"
+	AnalysisTypeAdditionalAnalysis AnalysisType = "ADDITIONAL_ANALYSIS"
+)
+
+// Values returns all known values for AnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisType) Values() []AnalysisType {
+	return []AnalysisType{
+		"DIRECT_ANALYSIS",
+		"ADDITIONAL_ANALYSIS",
+	}
+}
+
 type CollaborationQueryLogStatus string
 
 // Enum values for CollaborationQueryLogStatus
@@ -193,6 +233,28 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfiguredTableAnalysisRuleType) Values() []ConfiguredTableAnalysisRuleType {
 	return []ConfiguredTableAnalysisRuleType{
+		"AGGREGATION",
+		"LIST",
+		"CUSTOM",
+	}
+}
+
+type ConfiguredTableAssociationAnalysisRuleType string
+
+// Enum values for ConfiguredTableAssociationAnalysisRuleType
+const (
+	ConfiguredTableAssociationAnalysisRuleTypeAggregation ConfiguredTableAssociationAnalysisRuleType = "AGGREGATION"
+	ConfiguredTableAssociationAnalysisRuleTypeList        ConfiguredTableAssociationAnalysisRuleType = "LIST"
+	ConfiguredTableAssociationAnalysisRuleTypeCustom      ConfiguredTableAssociationAnalysisRuleType = "CUSTOM"
+)
+
+// Values returns all known values for ConfiguredTableAssociationAnalysisRuleType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfiguredTableAssociationAnalysisRuleType) Values() []ConfiguredTableAssociationAnalysisRuleType {
+	return []ConfiguredTableAssociationAnalysisRuleType{
 		"AGGREGATION",
 		"LIST",
 		"CUSTOM",
@@ -639,11 +701,7 @@ type SchemaConfiguration string
 
 // Enum values for SchemaConfiguration
 const (
-	SchemaConfigurationDifferentialPrivacy                     SchemaConfiguration = "DIFFERENTIAL_PRIVACY"
-	SchemaConfigurationCustomAnalysisNotAllowed                SchemaConfiguration = "CUSTOM_ANALYSIS_NOT_ALLOWED"
-	SchemaConfigurationNoMemberAccountAllowedToProvideAnalysis SchemaConfiguration = "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS"
-	SchemaConfigurationDifferentialPrivacyBudgetNotConfigured  SchemaConfiguration = "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED"
-	SchemaConfigurationIdMappingTableNotPopulated              SchemaConfiguration = "ID_MAPPING_TABLE_NOT_POPULATED"
+	SchemaConfigurationDifferentialPrivacy SchemaConfiguration = "DIFFERENTIAL_PRIVACY"
 )
 
 // Values returns all known values for SchemaConfiguration. Note that this can be
@@ -653,10 +711,6 @@ const (
 func (SchemaConfiguration) Values() []SchemaConfiguration {
 	return []SchemaConfiguration{
 		"DIFFERENTIAL_PRIVACY",
-		"CUSTOM_ANALYSIS_NOT_ALLOWED",
-		"NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS",
-		"DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED",
-		"ID_MAPPING_TABLE_NOT_POPULATED",
 	}
 }
 
@@ -688,6 +742,12 @@ const (
 	SchemaStatusReasonCodeAnalysisProvidersNotConfigured         SchemaStatusReasonCode = "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
 	SchemaStatusReasonCodeDifferentialPrivacyPolicyNotConfigured SchemaStatusReasonCode = "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
 	SchemaStatusReasonCodeIdMappingTableNotPopulated             SchemaStatusReasonCode = "ID_MAPPING_TABLE_NOT_POPULATED"
+	SchemaStatusReasonCodeCollaborationAnalysisRuleNotConfigured SchemaStatusReasonCode = "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAdditionalAnalysesNotConfigured        SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_CONFIGURED"
+	SchemaStatusReasonCodeResultReceiversNotConfigured           SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAdditionalAnalysesNotAllowed           SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_ALLOWED"
+	SchemaStatusReasonCodeResultReceiversNotAllowed              SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_ALLOWED"
+	SchemaStatusReasonCodeAnalysisRuleTypesNotCompatible         SchemaStatusReasonCode = "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"
 )
 
 // Values returns all known values for SchemaStatusReasonCode. Note that this can
@@ -701,6 +761,12 @@ func (SchemaStatusReasonCode) Values() []SchemaStatusReasonCode {
 		"ANALYSIS_PROVIDERS_NOT_CONFIGURED",
 		"DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED",
 		"ID_MAPPING_TABLE_NOT_POPULATED",
+		"COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED",
+		"ADDITIONAL_ANALYSES_NOT_CONFIGURED",
+		"RESULT_RECEIVERS_NOT_CONFIGURED",
+		"ADDITIONAL_ANALYSES_NOT_ALLOWED",
+		"RESULT_RECEIVERS_NOT_ALLOWED",
+		"ANALYSIS_RULE_TYPES_NOT_COMPATIBLE",
 	}
 }
 

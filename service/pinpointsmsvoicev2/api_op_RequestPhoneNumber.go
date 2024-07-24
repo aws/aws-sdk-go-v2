@@ -13,9 +13,10 @@ import (
 )
 
 // Request an origination phone number for use in your account. For more
-// information on phone number request see [Requesting a number]in the Amazon Pinpoint User Guide.
+// information on phone number request see [Request a phone number]in the AWS End User Messaging SMS User
+// Guide.
 //
-// [Requesting a number]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html
+// [Request a phone number]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-request.html
 func (c *Client) RequestPhoneNumber(ctx context.Context, params *RequestPhoneNumberInput, optFns ...func(*Options)) (*RequestPhoneNumberOutput, error) {
 	if params == nil {
 		params = &RequestPhoneNumberInput{}
@@ -133,11 +134,11 @@ type RequestPhoneNumberOutput struct {
 	RegistrationId *string
 
 	// By default this is set to false. When an end recipient sends a message that
-	// begins with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
-	// automatically replies with a customizable message and adds the end recipient to
-	// the OptOutList. When set to true you're responsible for responding to HELP and
-	// STOP requests. You're also responsible for tracking and honoring opt-out
-	// requests.
+	// begins with HELP or STOP to one of your dedicated numbers, AWS End User
+	// Messaging SMS and Voice automatically replies with a customizable message and
+	// adds the end recipient to the OptOutList. When set to true you're responsible
+	// for responding to HELP and STOP requests. You're also responsible for tracking
+	// and honoring opt-out requests.
 	SelfManagedOptOutsEnabled bool
 
 	// The current status of the request.

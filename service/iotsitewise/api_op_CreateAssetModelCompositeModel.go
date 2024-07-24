@@ -50,7 +50,7 @@ func (c *Client) CreateAssetModelCompositeModel(ctx context.Context, params *Cre
 
 type CreateAssetModelCompositeModelInput struct {
 
-	// A unique, friendly name for the composite model.
+	// A unique name for the composite model.
 	//
 	// This member is required.
 	AssetModelCompositeModelName *string
@@ -83,11 +83,13 @@ type CreateAssetModelCompositeModelInput struct {
 	// own ID, it must be globally unique.
 	AssetModelCompositeModelId *string
 
-	// The property definitions of the composite model. For more information, see .
+	// The property definitions of the composite model. For more information, see [Inline custom composite models] in
+	// the IoT SiteWise User Guide.
 	//
 	// You can specify up to 200 properties per composite model. For more information,
 	// see [Quotas]in the IoT SiteWise User Guide.
 	//
+	// [Inline custom composite models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html#inline-composite-models
 	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelCompositeModelProperties []types.AssetModelPropertyDefinition
 
@@ -96,7 +98,7 @@ type CreateAssetModelCompositeModelInput struct {
 	// request is required.
 	ClientToken *string
 
-	// The ID of a composite model on this asset.
+	// The ID of a component model which is reused to create this composite model.
 	ComposedAssetModelId *string
 
 	// The ID of the parent composite model in this asset model relationship.

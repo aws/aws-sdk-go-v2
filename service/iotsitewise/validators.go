@@ -2269,6 +2269,11 @@ func validateGatewayPlatform(v *types.GatewayPlatform) error {
 			invalidParams.AddNested("GreengrassV2", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SiemensIE != nil {
+		if err := validateSiemensIE(v.SiemensIE); err != nil {
+			invalidParams.AddNested("SiemensIE", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2683,6 +2688,21 @@ func validateResource(v *types.Resource) error {
 		if err := validateProjectResource(v.Project); err != nil {
 			invalidParams.AddNested("Project", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSiemensIE(v *types.SiemensIE) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SiemensIE"}
+	if v.IotCoreThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IotCoreThingName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

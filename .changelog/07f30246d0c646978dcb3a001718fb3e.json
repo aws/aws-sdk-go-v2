@@ -1,0 +1,8 @@
+{
+    "id": "07f30246-d0c6-4697-8dcb-3a001718fb3e",
+    "type": "documentation",
+    "description": "DynamoDB doc only update for July",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

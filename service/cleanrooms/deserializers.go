@@ -1504,6 +1504,168 @@ func awsRestjson1_deserializeOpDocumentCreateConfiguredTableAssociationOutput(v 
 	return nil
 }
 
+type awsRestjson1_deserializeOpCreateConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_deserializeOpCreateConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreateConfiguredTableAssociationAnalysisRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateConfiguredTableAssociationAnalysisRule(response, &metadata)
+	}
+	output := &CreateConfiguredTableAssociationAnalysisRuleOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateConfiguredTableAssociationAnalysisRuleOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreateConfiguredTableAssociationAnalysisRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreateConfiguredTableAssociationAnalysisRuleOutput(v **CreateConfiguredTableAssociationAnalysisRuleOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateConfiguredTableAssociationAnalysisRuleOutput
+	if *v == nil {
+		sv = &CreateConfiguredTableAssociationAnalysisRuleOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "analysisRule":
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRule(&sv.AnalysisRule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpCreateIdMappingTable struct {
 }
 
@@ -2669,6 +2831,104 @@ func (m *awsRestjson1_deserializeOpDeleteConfiguredTableAssociation) HandleDeser
 }
 
 func awsRestjson1_deserializeOpErrorDeleteConfiguredTableAssociation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpDeleteConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteConfiguredTableAssociationAnalysisRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteConfiguredTableAssociationAnalysisRule(response, &metadata)
+	}
+	output := &DeleteConfiguredTableAssociationAnalysisRuleOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteConfiguredTableAssociationAnalysisRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4793,6 +5053,165 @@ func awsRestjson1_deserializeOpDocumentGetConfiguredTableAssociationOutput(v **G
 		switch key {
 		case "configuredTableAssociation":
 			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociation(&sv.ConfiguredTableAssociation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpGetConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_deserializeOpGetConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetConfiguredTableAssociationAnalysisRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetConfiguredTableAssociationAnalysisRule(response, &metadata)
+	}
+	output := &GetConfiguredTableAssociationAnalysisRuleOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetConfiguredTableAssociationAnalysisRuleOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetConfiguredTableAssociationAnalysisRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetConfiguredTableAssociationAnalysisRuleOutput(v **GetConfiguredTableAssociationAnalysisRuleOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetConfiguredTableAssociationAnalysisRuleOutput
+	if *v == nil {
+		sv = &GetConfiguredTableAssociationAnalysisRuleOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "analysisRule":
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRule(&sv.AnalysisRule, value); err != nil {
 				return err
 			}
 
@@ -10702,6 +11121,168 @@ func awsRestjson1_deserializeOpDocumentUpdateConfiguredTableAssociationOutput(v 
 	return nil
 }
 
+type awsRestjson1_deserializeOpUpdateConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateConfiguredTableAssociationAnalysisRule) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateConfiguredTableAssociationAnalysisRule(response, &metadata)
+	}
+	output := &UpdateConfiguredTableAssociationAnalysisRuleOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateConfiguredTableAssociationAnalysisRuleOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateConfiguredTableAssociationAnalysisRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateConfiguredTableAssociationAnalysisRuleOutput(v **UpdateConfiguredTableAssociationAnalysisRuleOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateConfiguredTableAssociationAnalysisRuleOutput
+	if *v == nil {
+		sv = &UpdateConfiguredTableAssociationAnalysisRuleOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "analysisRule":
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRule(&sv.AnalysisRule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpUpdateIdMappingTable struct {
 }
 
@@ -11982,6 +12563,42 @@ func awsRestjson1_deserializeDocumentAggregationConstraints(v *[]types.Aggregati
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AdditionalAnalysesResourceArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAllowedAnalysesList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12080,6 +12697,42 @@ func awsRestjson1_deserializeDocumentAllowedColumnList(v *[]string, value interf
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAllowedResultReceivers(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -12299,6 +12952,15 @@ func awsRestjson1_deserializeDocumentAnalysisRuleAggregation(v **types.AnalysisR
 
 	for key, value := range shape {
 		switch key {
+		case "additionalAnalyses":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdditionalAnalyses to be of type string, got %T instead", value)
+				}
+				sv.AdditionalAnalyses = types.AdditionalAnalyses(jtv)
+			}
+
 		case "aggregateColumns":
 			if err := awsRestjson1_deserializeDocumentAggregateColumnList(&sv.AggregateColumns, value); err != nil {
 				return err
@@ -12441,6 +13103,15 @@ func awsRestjson1_deserializeDocumentAnalysisRuleCustom(v **types.AnalysisRuleCu
 
 	for key, value := range shape {
 		switch key {
+		case "additionalAnalyses":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdditionalAnalyses to be of type string, got %T instead", value)
+				}
+				sv.AdditionalAnalyses = types.AdditionalAnalyses(jtv)
+			}
+
 		case "allowedAnalyses":
 			if err := awsRestjson1_deserializeDocumentAllowedAnalysesList(&sv.AllowedAnalyses, value); err != nil {
 				return err
@@ -12453,6 +13124,11 @@ func awsRestjson1_deserializeDocumentAnalysisRuleCustom(v **types.AnalysisRuleCu
 
 		case "differentialPrivacy":
 			if err := awsRestjson1_deserializeDocumentDifferentialPrivacyConfiguration(&sv.DifferentialPrivacy, value); err != nil {
+				return err
+			}
+
+		case "disallowedOutputColumns":
+			if err := awsRestjson1_deserializeDocumentAnalysisRuleColumnList(&sv.DisallowedOutputColumns, value); err != nil {
 				return err
 			}
 
@@ -12533,6 +13209,15 @@ func awsRestjson1_deserializeDocumentAnalysisRuleList(v **types.AnalysisRuleList
 
 	for key, value := range shape {
 		switch key {
+		case "additionalAnalyses":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdditionalAnalyses to be of type string, got %T instead", value)
+				}
+				sv.AdditionalAnalyses = types.AdditionalAnalyses(jtv)
+			}
+
 		case "allowedJoinOperators":
 			if err := awsRestjson1_deserializeDocumentJoinOperatorsList(&sv.AllowedJoinOperators, value); err != nil {
 				return err
@@ -15371,6 +16056,46 @@ func awsRestjson1_deserializeDocumentColumnList(v *[]types.Column, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConfigurationDetails(v *types.ConfigurationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfigurationDetails
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "directAnalysisConfigurationDetails":
+			var mv types.DirectAnalysisConfigurationDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDirectAnalysisConfigurationDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationDetailsMemberDirectAnalysisConfigurationDetails{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConfiguredAudienceModelAssociation(v **types.ConfiguredAudienceModelAssociation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16076,6 +16801,11 @@ func awsRestjson1_deserializeDocumentConfiguredTableAssociation(v **types.Config
 
 	for key, value := range shape {
 		switch key {
+		case "analysisRuleTypes":
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleTypeList(&sv.AnalysisRuleTypes, value); err != nil {
+				return err
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16195,6 +16925,367 @@ func awsRestjson1_deserializeDocumentConfiguredTableAssociation(v **types.Config
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRule(v **types.ConfiguredTableAssociationAnalysisRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfiguredTableAssociationAnalysisRule
+	if *v == nil {
+		sv = &types.ConfiguredTableAssociationAnalysisRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuredTableAssociationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfiguredTableAssociationArn to be of type string, got %T instead", value)
+				}
+				sv.ConfiguredTableAssociationArn = ptr.String(jtv)
+			}
+
+		case "configuredTableAssociationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfiguredTableAssociationIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ConfiguredTableAssociationId = ptr.String(jtv)
+			}
+
+		case "createTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "membershipIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MembershipIdentifier to be of type string, got %T instead", value)
+				}
+				sv.MembershipIdentifier = ptr.String(jtv)
+			}
+
+		case "policy":
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRulePolicy(&sv.Policy, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfiguredTableAssociationAnalysisRuleType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ConfiguredTableAssociationAnalysisRuleType(jtv)
+			}
+
+		case "updateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleAggregation(v **types.ConfiguredTableAssociationAnalysisRuleAggregation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfiguredTableAssociationAnalysisRuleAggregation
+	if *v == nil {
+		sv = &types.ConfiguredTableAssociationAnalysisRuleAggregation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedAdditionalAnalyses":
+			if err := awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(&sv.AllowedAdditionalAnalyses, value); err != nil {
+				return err
+			}
+
+		case "allowedResultReceivers":
+			if err := awsRestjson1_deserializeDocumentAllowedResultReceivers(&sv.AllowedResultReceivers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleCustom(v **types.ConfiguredTableAssociationAnalysisRuleCustom, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfiguredTableAssociationAnalysisRuleCustom
+	if *v == nil {
+		sv = &types.ConfiguredTableAssociationAnalysisRuleCustom{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedAdditionalAnalyses":
+			if err := awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(&sv.AllowedAdditionalAnalyses, value); err != nil {
+				return err
+			}
+
+		case "allowedResultReceivers":
+			if err := awsRestjson1_deserializeDocumentAllowedResultReceivers(&sv.AllowedResultReceivers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleList(v **types.ConfiguredTableAssociationAnalysisRuleList, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfiguredTableAssociationAnalysisRuleList
+	if *v == nil {
+		sv = &types.ConfiguredTableAssociationAnalysisRuleList{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedAdditionalAnalyses":
+			if err := awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(&sv.AllowedAdditionalAnalyses, value); err != nil {
+				return err
+			}
+
+		case "allowedResultReceivers":
+			if err := awsRestjson1_deserializeDocumentAllowedResultReceivers(&sv.AllowedResultReceivers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRulePolicy(v *types.ConfiguredTableAssociationAnalysisRulePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfiguredTableAssociationAnalysisRulePolicy
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "v1":
+			var mv types.ConfiguredTableAssociationAnalysisRulePolicyV1
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRulePolicyV1(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.ConfiguredTableAssociationAnalysisRulePolicyMemberV1{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRulePolicyV1(v *types.ConfiguredTableAssociationAnalysisRulePolicyV1, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfiguredTableAssociationAnalysisRulePolicyV1
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "aggregation":
+			var mv types.ConfiguredTableAssociationAnalysisRuleAggregation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleAggregation(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberAggregation{Value: mv}
+			break loop
+
+		case "custom":
+			var mv types.ConfiguredTableAssociationAnalysisRuleCustom
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleCustom(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberCustom{Value: mv}
+			break loop
+
+		case "list":
+			var mv types.ConfiguredTableAssociationAnalysisRuleList
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleList(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberList{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfiguredTableAssociationAnalysisRuleTypeList(v *[]types.ConfiguredTableAssociationAnalysisRuleType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConfiguredTableAssociationAnalysisRuleType
+	if *v == nil {
+		cv = []types.ConfiguredTableAssociationAnalysisRuleType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConfiguredTableAssociationAnalysisRuleType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConfiguredTableAssociationAnalysisRuleType to be of type string, got %T instead", value)
+			}
+			col = types.ConfiguredTableAssociationAnalysisRuleType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -17249,6 +18340,42 @@ func awsRestjson1_deserializeDocumentDifferentialPrivacyTemplateParametersOutput
 					return err
 				}
 				sv.UsersNoisePerQuery = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDirectAnalysisConfigurationDetails(v **types.DirectAnalysisConfigurationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DirectAnalysisConfigurationDetails
+	if *v == nil {
+		sv = &types.DirectAnalysisConfigurationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "receiverAccountIds":
+			if err := awsRestjson1_deserializeDocumentReceiverAccountIds(&sv.ReceiverAccountIds, value); err != nil {
+				return err
 			}
 
 		default:
@@ -19967,6 +21094,46 @@ func awsRestjson1_deserializeDocumentProtectedQueryError(v **types.ProtectedQuer
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProtectedQueryMemberOutputConfiguration(v **types.ProtectedQueryMemberOutputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProtectedQueryMemberOutputConfiguration
+	if *v == nil {
+		sv = &types.ProtectedQueryMemberOutputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentProtectedQueryMemberOutputList(v *[]types.ProtectedQuerySingleMemberOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20069,6 +21236,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "member":
+			var mv types.ProtectedQueryMemberOutputConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProtectedQueryMemberOutputConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ProtectedQueryOutputConfigurationMemberMember{Value: mv}
+			break loop
+
 		case "s3":
 			var mv types.ProtectedQueryS3OutputConfiguration
 			destAddr := &mv
@@ -20462,6 +21639,11 @@ func awsRestjson1_deserializeDocumentProtectedQuerySummary(v **types.ProtectedQu
 				sv.MembershipId = ptr.String(jtv)
 			}
 
+		case "receiverConfigurations":
+			if err := awsRestjson1_deserializeDocumentReceiverConfigurationsList(&sv.ReceiverConfigurations, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20691,6 +21873,121 @@ func awsRestjson1_deserializeDocumentQueryTables(v *[]string, value interface{})
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReceiverAccountIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReceiverConfiguration(v **types.ReceiverConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReceiverConfiguration
+	if *v == nil {
+		sv = &types.ReceiverConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "analysisType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalysisType to be of type string, got %T instead", value)
+				}
+				sv.AnalysisType = types.AnalysisType(jtv)
+			}
+
+		case "configurationDetails":
+			if err := awsRestjson1_deserializeDocumentConfigurationDetails(&sv.ConfigurationDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReceiverConfigurationsList(v *[]types.ReceiverConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ReceiverConfiguration
+	if *v == nil {
+		cv = []types.ReceiverConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ReceiverConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentReceiverConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -21076,6 +22373,15 @@ func awsRestjson1_deserializeDocumentSchemaStatusDetail(v **types.SchemaStatusDe
 					return fmt.Errorf("expected AnalysisRuleType to be of type string, got %T instead", value)
 				}
 				sv.AnalysisRuleType = types.AnalysisRuleType(jtv)
+			}
+
+		case "analysisType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalysisType to be of type string, got %T instead", value)
+				}
+				sv.AnalysisType = types.AnalysisType(jtv)
 			}
 
 		case "configurations":

@@ -69,7 +69,7 @@ type CreateConfiguredTableAssociationInput struct {
 
 type CreateConfiguredTableAssociationOutput struct {
 
-	// The entire configured table association object.
+	// The configured table association.
 	//
 	// This member is required.
 	ConfiguredTableAssociation *types.ConfiguredTableAssociation

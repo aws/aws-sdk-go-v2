@@ -440,7 +440,7 @@ type QueryOutput struct {
 	// If you did not use a filter in the request, then ScannedCount is the same as
 	// Count .
 	//
-	// [Count and ScannedCount]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count
+	// [Count and ScannedCount]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Count
 	ScannedCount int32
 
 	// Metadata pertaining to the operation's result.

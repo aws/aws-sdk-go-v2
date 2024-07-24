@@ -53,7 +53,7 @@ type UpdateAssetModelCompositeModelInput struct {
 	// This member is required.
 	AssetModelCompositeModelId *string
 
-	// A unique, friendly name for the composite model.
+	// A unique name for the composite model.
 	//
 	// This member is required.
 	AssetModelCompositeModelName *string
@@ -71,11 +71,13 @@ type UpdateAssetModelCompositeModelInput struct {
 	// the exact same thing as when it was created.
 	AssetModelCompositeModelExternalId *string
 
-	// The property definitions of the composite model. For more information, see .
+	// The property definitions of the composite model. For more information, see [Inline custom composite models] in
+	// the IoT SiteWise User Guide.
 	//
 	// You can specify up to 200 properties per composite model. For more information,
 	// see [Quotas]in the IoT SiteWise User Guide.
 	//
+	// [Inline custom composite models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html#inline-composite-models
 	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelCompositeModelProperties []types.AssetModelProperty
 

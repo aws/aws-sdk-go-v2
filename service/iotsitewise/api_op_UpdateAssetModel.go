@@ -16,17 +16,19 @@ import (
 // and hierarchy definitions. For more information, see [Updating assets and models]in the IoT SiteWise User
 // Guide.
 //
-// This operation overwrites the existing model with the provided model. To avoid
-// deleting your asset model's properties or hierarchies, you must include their
-// IDs and definitions in the updated asset model payload. For more information,
-// see [DescribeAssetModel].
-//
 // If you remove a property from an asset model, IoT SiteWise deletes all previous
-// data for that property. If you remove a hierarchy definition from an asset
-// model, IoT SiteWise disassociates every asset associated with that hierarchy.
-// You can't change the type or data type of an existing property.
+// data for that property. You can’t change the type or data type of an existing
+// property.
 //
-// [DescribeAssetModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
+// To replace an existing asset model property with a new one with the same name ,
+// do the following:
+//
+//   - Submit an UpdateAssetModel request with the entire existing property removed.
+//
+//   - Submit a second UpdateAssetModel request that includes the new property. The
+//     new asset property will have the same name as the previous one and IoT
+//     SiteWise will generate a new unique id .
+//
 // [Updating assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
 func (c *Client) UpdateAssetModel(ctx context.Context, params *UpdateAssetModelInput, optFns ...func(*Options)) (*UpdateAssetModelOutput, error) {
 	if params == nil {
@@ -54,7 +56,7 @@ type UpdateAssetModelInput struct {
 	// This member is required.
 	AssetModelId *string
 
-	// A unique, friendly name for the asset model.
+	// A unique name for the asset model.
 	//
 	// This member is required.
 	AssetModelName *string
@@ -66,9 +68,10 @@ type UpdateAssetModelInput struct {
 	// composite models to define alarms on this asset model.
 	//
 	// When creating custom composite models, you need to use [CreateAssetModelCompositeModel]. For more information,
-	// see .
+	// see [Creating custom composite models (Components)]in the IoT SiteWise User Guide.
 	//
 	// [CreateAssetModelCompositeModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
+	// [Creating custom composite models (Components)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-custom-composite-models.html
 	AssetModelCompositeModels []types.AssetModelCompositeModel
 
 	// A description for the asset model.

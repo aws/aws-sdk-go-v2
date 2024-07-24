@@ -101,6 +101,10 @@ func awsRestjson1_serializeOpHttpBindingsCopyImageSetInput(v *CopyImageSetInput,
 		}
 	}
 
+	if v.Force != nil {
+		encoder.SetQuery("force").Boolean(*v.Force)
+	}
+
 	if v.SourceImageSetId == nil || len(*v.SourceImageSetId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member sourceImageSetId must not be empty")}
 	}
@@ -1478,6 +1482,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateImageSetMetadataInput(v *UpdateIm
 		}
 	}
 
+	if v.Force != nil {
+		encoder.SetQuery("force").Boolean(*v.Force)
+	}
+
 	if v.ImageSetId == nil || len(*v.ImageSetId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member imageSetId must not be empty")}
 	}
@@ -1536,6 +1544,13 @@ func awsRestjson1_serializeDocumentCopySourceImageSetInformation(v *types.CopySo
 	object := value.Object()
 	defer object.Close()
 
+	if v.DICOMCopies != nil {
+		ok := object.Key("DICOMCopies")
+		if err := awsRestjson1_serializeDocumentMetadataCopies(v.DICOMCopies, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LatestVersionId != nil {
 		ok := object.Key("latestVersionId")
 		ok.String(*v.LatestVersionId)
@@ -1590,6 +1605,18 @@ func awsRestjson1_serializeDocumentImageFrameInformation(v *types.ImageFrameInfo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMetadataCopies(v *types.MetadataCopies, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CopiableAttributes != nil {
+		ok := object.Key("copiableAttributes")
+		ok.String(*v.CopiableAttributes)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMetadataUpdates(v types.MetadataUpdates, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1600,6 +1627,10 @@ func awsRestjson1_serializeDocumentMetadataUpdates(v types.MetadataUpdates, valu
 		if err := awsRestjson1_serializeDocumentDICOMUpdates(&uv.Value, av); err != nil {
 			return err
 		}
+
+	case *types.MetadataUpdatesMemberRevertToVersionId:
+		av := object.Key("revertToVersionId")
+		av.String(uv.Value)
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)

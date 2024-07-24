@@ -58,13 +58,15 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 //	if err != nil {
 //		panic(err)
 //	}
-// 
+//
 // If buckets are public, you may use anonymous credential like so.
-// 	manager.GetBucketRegion(ctx, s3.NewFromConfig(cfg), bucket, func(o *s3.Options) {
+//
+//	manager.GetBucketRegion(ctx, s3.NewFromConfig(cfg), bucket, func(o *s3.Options) {
 //	     o.Credentials = nil
 //	     // Or
 //	     o.Credentials = aws.AnonymousCredentials{}
 //	})
+//
 // The request with anonymous credentials will not be signed.
 // Otherwise credentials would be required for private buckets.
 func GetBucketRegion(ctx context.Context, client HeadBucketAPIClient, bucket string, optFns ...func(*s3.Options)) (string, error) {

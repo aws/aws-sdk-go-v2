@@ -15,6 +15,9 @@ func ExampleMetadataUpdates_outputUsage() {
 	case *types.MetadataUpdatesMemberDICOMUpdates:
 		_ = v.Value // Value is types.DICOMUpdates
 
+	case *types.MetadataUpdatesMemberRevertToVersionId:
+		_ = v.Value // Value is string
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -25,6 +28,7 @@ func ExampleMetadataUpdates_outputUsage() {
 }
 
 var _ *types.DICOMUpdates
+var _ *string
 
 func ExampleSearchByAttributeValue_outputUsage() {
 	var union types.SearchByAttributeValue

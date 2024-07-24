@@ -35,12 +35,11 @@ type ListCollaborationConfiguredAudienceModelAssociationsInput struct {
 	// This member is required.
 	CollaborationIdentifier *string
 
-	// The maximum number of results that are returned for an API request call. The
-	// service chooses a default number if you don't set one. The service might return
-	// a `nextToken` even if the `maxResults` value has not been met.
+	// The maximum size of the results that is returned per call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	// The token value retrieved from a previous call to access the next page of
+	// results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,7 +53,8 @@ type ListCollaborationConfiguredAudienceModelAssociationsOutput struct {
 	// This member is required.
 	CollaborationConfiguredAudienceModelAssociationSummaries []types.CollaborationConfiguredAudienceModelAssociationSummary
 
-	// The pagination token that's used to fetch the next set of results.
+	// The token value retrieved from a previous call to access the next page of
+	// results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -151,9 +151,7 @@ func (c *Client) addOperationListCollaborationConfiguredAudienceModelAssociation
 // ListCollaborationConfiguredAudienceModelAssociationsPaginatorOptions is the
 // paginator options for ListCollaborationConfiguredAudienceModelAssociations
 type ListCollaborationConfiguredAudienceModelAssociationsPaginatorOptions struct {
-	// The maximum number of results that are returned for an API request call. The
-	// service chooses a default number if you don't set one. The service might return
-	// a `nextToken` even if the `maxResults` value has not been met.
+	// The maximum size of the results that is returned per call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

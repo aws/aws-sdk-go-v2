@@ -82,7 +82,7 @@ type CreateCollaborationInput struct {
 
 type CreateCollaborationOutput struct {
 
-	// The entire created collaboration object.
+	// The collaboration.
 	//
 	// This member is required.
 	Collaboration *types.Collaboration

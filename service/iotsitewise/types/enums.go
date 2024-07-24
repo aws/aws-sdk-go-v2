@@ -276,10 +276,11 @@ type CapabilitySyncStatus string
 
 // Enum values for CapabilitySyncStatus
 const (
-	CapabilitySyncStatusInSync     CapabilitySyncStatus = "IN_SYNC"
-	CapabilitySyncStatusOutOfSync  CapabilitySyncStatus = "OUT_OF_SYNC"
-	CapabilitySyncStatusSyncFailed CapabilitySyncStatus = "SYNC_FAILED"
-	CapabilitySyncStatusUnknown    CapabilitySyncStatus = "UNKNOWN"
+	CapabilitySyncStatusInSync        CapabilitySyncStatus = "IN_SYNC"
+	CapabilitySyncStatusOutOfSync     CapabilitySyncStatus = "OUT_OF_SYNC"
+	CapabilitySyncStatusSyncFailed    CapabilitySyncStatus = "SYNC_FAILED"
+	CapabilitySyncStatusUnknown       CapabilitySyncStatus = "UNKNOWN"
+	CapabilitySyncStatusNotApplicable CapabilitySyncStatus = "NOT_APPLICABLE"
 )
 
 // Values returns all known values for CapabilitySyncStatus. Note that this can be
@@ -292,6 +293,7 @@ func (CapabilitySyncStatus) Values() []CapabilitySyncStatus {
 		"OUT_OF_SYNC",
 		"SYNC_FAILED",
 		"UNKNOWN",
+		"NOT_APPLICABLE",
 	}
 }
 

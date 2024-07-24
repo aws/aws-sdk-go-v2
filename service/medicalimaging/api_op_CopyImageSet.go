@@ -44,6 +44,11 @@ type CopyImageSetInput struct {
 	// This member is required.
 	SourceImageSetId *string
 
+	// Setting this flag will force the CopyImageSet operation, even if Patient,
+	// Study, or Series level metadata are mismatched across the sourceImageSet and
+	// destinationImageSet .
+	Force *bool
+
 	noSmithyDocumentSerde
 }
 

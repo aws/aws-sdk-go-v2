@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to send a request that sends a voice message through Amazon
-// Pinpoint. This operation uses [Amazon Polly]to convert a text script into a voice message.
+// Allows you to send a request that sends a voice message. This operation uses [Amazon Polly]
+// to convert a text script into a voice message.
 //
 // [Amazon Polly]: http://aws.amazon.com/polly/
 func (c *Client) SendVoiceMessage(ctx context.Context, params *SendVoiceMessageInput, optFns ...func(*Options)) (*SendVoiceMessageOutput, error) {

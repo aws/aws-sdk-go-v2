@@ -1434,6 +1434,11 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "overrides":
+			if err := awsRestjson1_deserializeDocumentOverrides(&sv.Overrides, value); err != nil {
+				return err
+			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4435,6 +4440,11 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "overrides":
+			if err := awsRestjson1_deserializeDocumentOverrides(&sv.Overrides, value); err != nil {
+				return err
+			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4656,6 +4666,46 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOverrides(v **types.Overrides, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Overrides
+	if *v == nil {
+		sv = &types.Overrides{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "forced":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Forced = ptr.Bool(jtv)
 			}
 
 		default:

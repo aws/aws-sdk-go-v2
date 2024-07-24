@@ -17,9 +17,9 @@ import (
 // the sandbox, create an Amazon Web Services Support case for a service limit
 // increase request.
 //
-// New Amazon Pinpoint accounts are placed into an SMS or voice sandbox. The
-// sandbox protects both Amazon Web Services end recipients and SMS or voice
-// recipients from fraud and abuse.
+// New accounts are placed into an SMS or voice sandbox. The sandbox protects both
+// Amazon Web Services end recipients and SMS or voice recipients from fraud and
+// abuse.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAttributesInput{}

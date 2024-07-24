@@ -468,6 +468,11 @@ func validateCopySourceImageSetInformation(v *types.CopySourceImageSetInformatio
 	if v.LatestVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LatestVersionId"))
 	}
+	if v.DICOMCopies != nil {
+		if err := validateMetadataCopies(v.DICOMCopies); err != nil {
+			invalidParams.AddNested("DICOMCopies", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -497,6 +502,21 @@ func validateImageFrameInformation(v *types.ImageFrameInformation) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ImageFrameInformation"}
 	if v.ImageFrameId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageFrameId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataCopies(v *types.MetadataCopies) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataCopies"}
+	if v.CopiableAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CopiableAttributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

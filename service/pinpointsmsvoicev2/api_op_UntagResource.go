@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the association of the specified tags from an Amazon Pinpoint SMS Voice
-// V2 resource. For more information on tags see [Tagging Amazon Pinpoint resources]in the Amazon Pinpoint Developer
-// Guide.
+// Removes the association of the specified tags from a resource. For more
+// information on tags see [Tags]in the AWS End User Messaging SMS User Guide.
 //
-// [Tagging Amazon Pinpoint resources]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html
+// [Tags]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

@@ -150,6 +150,26 @@ func (m *validateOpCreateConfiguredTableAnalysisRule) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*validateOpCreateConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfiguredTableAssociationAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfiguredTableAssociationAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfiguredTableAssociationAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConfiguredTableAssociation struct {
 }
 
@@ -345,6 +365,26 @@ func (m *validateOpDeleteConfiguredTableAnalysisRule) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteConfiguredTableAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*validateOpDeleteConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguredTableAssociationAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfiguredTableAssociationAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfiguredTableAssociationAnalysisRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -645,6 +685,26 @@ func (m *validateOpGetConfiguredTableAnalysisRule) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetConfiguredTableAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*validateOpGetConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfiguredTableAssociationAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfiguredTableAssociationAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfiguredTableAssociationAnalysisRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1330,6 +1390,26 @@ func (m *validateOpUpdateConfiguredTableAnalysisRule) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*validateOpUpdateConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConfiguredTableAssociationAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConfiguredTableAssociationAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConfiguredTableAssociationAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateConfiguredTableAssociation struct {
 }
 
@@ -1498,6 +1578,10 @@ func addOpCreateConfiguredTableAnalysisRuleValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpCreateConfiguredTableAnalysisRule{}, middleware.After)
 }
 
+func addOpCreateConfiguredTableAssociationAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfiguredTableAssociationAnalysisRule{}, middleware.After)
+}
+
 func addOpCreateConfiguredTableAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfiguredTableAssociation{}, middleware.After)
 }
@@ -1536,6 +1620,10 @@ func addOpDeleteConfiguredAudienceModelAssociationValidationMiddleware(stack *mi
 
 func addOpDeleteConfiguredTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConfiguredTableAnalysisRule{}, middleware.After)
+}
+
+func addOpDeleteConfiguredTableAssociationAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguredTableAssociationAnalysisRule{}, middleware.After)
 }
 
 func addOpDeleteConfiguredTableAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1596,6 +1684,10 @@ func addOpGetConfiguredAudienceModelAssociationValidationMiddleware(stack *middl
 
 func addOpGetConfiguredTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConfiguredTableAnalysisRule{}, middleware.After)
+}
+
+func addOpGetConfiguredTableAssociationAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfiguredTableAssociationAnalysisRule{}, middleware.After)
 }
 
 func addOpGetConfiguredTableAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1732,6 +1824,10 @@ func addOpUpdateConfiguredAudienceModelAssociationValidationMiddleware(stack *mi
 
 func addOpUpdateConfiguredTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfiguredTableAnalysisRule{}, middleware.After)
+}
+
+func addOpUpdateConfiguredTableAssociationAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConfiguredTableAssociationAnalysisRule{}, middleware.After)
 }
 
 func addOpUpdateConfiguredTableAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -2340,12 +2436,32 @@ func validatePrivacyBudgetTemplateParametersInput(v types.PrivacyBudgetTemplateP
 	}
 }
 
+func validateProtectedQueryMemberOutputConfiguration(v *types.ProtectedQueryMemberOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQueryMemberOutputConfiguration"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProtectedQueryOutputConfiguration(v types.ProtectedQueryOutputConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQueryOutputConfiguration"}
 	switch uv := v.(type) {
+	case *types.ProtectedQueryOutputConfigurationMemberMember:
+		if err := validateProtectedQueryMemberOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[member]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProtectedQueryOutputConfigurationMemberS3:
 		if err := validateProtectedQueryS3OutputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
@@ -2645,6 +2761,30 @@ func validateOpCreateConfiguredTableAnalysisRuleInput(v *CreateConfiguredTableAn
 	}
 }
 
+func validateOpCreateConfiguredTableAssociationAnalysisRuleInput(v *CreateConfiguredTableAssociationAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfiguredTableAssociationAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ConfiguredTableAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableAssociationIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if v.AnalysisRulePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRulePolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConfiguredTableAssociationInput(v *CreateConfiguredTableAssociationInput) error {
 	if v == nil {
 		return nil
@@ -2866,6 +3006,27 @@ func validateOpDeleteConfiguredTableAnalysisRuleInput(v *DeleteConfiguredTableAn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfiguredTableAnalysisRuleInput"}
 	if v.ConfiguredTableIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfiguredTableAssociationAnalysisRuleInput(v *DeleteConfiguredTableAssociationAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfiguredTableAssociationAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ConfiguredTableAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableAssociationIdentifier"))
 	}
 	if len(v.AnalysisRuleType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
@@ -3127,6 +3288,27 @@ func validateOpGetConfiguredTableAnalysisRuleInput(v *GetConfiguredTableAnalysis
 	invalidParams := smithy.InvalidParamsError{Context: "GetConfiguredTableAnalysisRuleInput"}
 	if v.ConfiguredTableIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConfiguredTableAssociationAnalysisRuleInput(v *GetConfiguredTableAssociationAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfiguredTableAssociationAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ConfiguredTableAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableAssociationIdentifier"))
 	}
 	if len(v.AnalysisRuleType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
@@ -3713,6 +3895,30 @@ func validateOpUpdateConfiguredTableAnalysisRuleInput(v *UpdateConfiguredTableAn
 		if err := validateConfiguredTableAnalysisRulePolicy(v.AnalysisRulePolicy); err != nil {
 			invalidParams.AddNested("AnalysisRulePolicy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConfiguredTableAssociationAnalysisRuleInput(v *UpdateConfiguredTableAssociationAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfiguredTableAssociationAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ConfiguredTableAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredTableAssociationIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if v.AnalysisRulePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRulePolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

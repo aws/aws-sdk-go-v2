@@ -33,7 +33,7 @@ func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, 
 
 type CreateGatewayInput struct {
 
-	// A unique, friendly name for the gateway.
+	// A unique name for the gateway.
 	//
 	// This member is required.
 	GatewayName *string

@@ -949,6 +949,110 @@ func awsRestjson1_serializeOpDocumentCreateConfiguredTableAssociationInput(v *Cr
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpCreateConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateConfiguredTableAssociationAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateConfiguredTableAssociationAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateConfiguredTableAssociationAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateConfiguredTableAssociationAnalysisRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateConfiguredTableAssociationAnalysisRuleInput(v *CreateConfiguredTableAssociationAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ConfiguredTableAssociationIdentifier == nil || len(*v.ConfiguredTableAssociationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configuredTableAssociationIdentifier must not be empty")}
+	}
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		if err := encoder.SetURI("configuredTableAssociationIdentifier").String(*v.ConfiguredTableAssociationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateConfiguredTableAssociationAnalysisRuleInput(v *CreateConfiguredTableAssociationAnalysisRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisRulePolicy != nil {
+		ok := object.Key("analysisRulePolicy")
+		if err := awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRulePolicy(v.AnalysisRulePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AnalysisRuleType) > 0 {
+		ok := object.Key("analysisRuleType")
+		ok.String(string(v.AnalysisRuleType))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateIdMappingTable struct {
 }
 
@@ -1786,6 +1890,89 @@ func (m *awsRestjson1_serializeOpDeleteConfiguredTableAssociation) HandleSeriali
 func awsRestjson1_serializeOpHttpBindingsDeleteConfiguredTableAssociationInput(v *DeleteConfiguredTableAssociationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ConfiguredTableAssociationIdentifier == nil || len(*v.ConfiguredTableAssociationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configuredTableAssociationIdentifier must not be empty")}
+	}
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		if err := encoder.SetURI("configuredTableAssociationIdentifier").String(*v.ConfiguredTableAssociationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteConfiguredTableAssociationAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteConfiguredTableAssociationAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteConfiguredTableAssociationAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteConfiguredTableAssociationAnalysisRuleInput(v *DeleteConfiguredTableAssociationAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.AnalysisRuleType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member analysisRuleType must not be empty")}
+	}
+	if len(v.AnalysisRuleType) > 0 {
+		if err := encoder.SetURI("analysisRuleType").String(string(v.AnalysisRuleType)); err != nil {
+			return err
+		}
 	}
 
 	if v.ConfiguredTableAssociationIdentifier == nil || len(*v.ConfiguredTableAssociationIdentifier) == 0 {
@@ -2869,6 +3056,89 @@ func (m *awsRestjson1_serializeOpGetConfiguredTableAssociation) HandleSerialize(
 func awsRestjson1_serializeOpHttpBindingsGetConfiguredTableAssociationInput(v *GetConfiguredTableAssociationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ConfiguredTableAssociationIdentifier == nil || len(*v.ConfiguredTableAssociationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configuredTableAssociationIdentifier must not be empty")}
+	}
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		if err := encoder.SetURI("configuredTableAssociationIdentifier").String(*v.ConfiguredTableAssociationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpGetConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetConfiguredTableAssociationAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetConfiguredTableAssociationAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetConfiguredTableAssociationAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetConfiguredTableAssociationAnalysisRuleInput(v *GetConfiguredTableAssociationAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.AnalysisRuleType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member analysisRuleType must not be empty")}
+	}
+	if len(v.AnalysisRuleType) > 0 {
+		if err := encoder.SetURI("analysisRuleType").String(string(v.AnalysisRuleType)); err != nil {
+			return err
+		}
 	}
 
 	if v.ConfiguredTableAssociationIdentifier == nil || len(*v.ConfiguredTableAssociationIdentifier) == 0 {
@@ -5799,6 +6069,114 @@ func awsRestjson1_serializeOpDocumentUpdateConfiguredTableAssociationInput(v *Up
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateConfiguredTableAssociationAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateConfiguredTableAssociationAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateConfiguredTableAssociationAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateConfiguredTableAssociationAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateConfiguredTableAssociationAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateConfiguredTableAssociationAnalysisRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateConfiguredTableAssociationAnalysisRuleInput(v *UpdateConfiguredTableAssociationAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.AnalysisRuleType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member analysisRuleType must not be empty")}
+	}
+	if len(v.AnalysisRuleType) > 0 {
+		if err := encoder.SetURI("analysisRuleType").String(string(v.AnalysisRuleType)); err != nil {
+			return err
+		}
+	}
+
+	if v.ConfiguredTableAssociationIdentifier == nil || len(*v.ConfiguredTableAssociationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configuredTableAssociationIdentifier must not be empty")}
+	}
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		if err := encoder.SetURI("configuredTableAssociationIdentifier").String(*v.ConfiguredTableAssociationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateConfiguredTableAssociationAnalysisRuleInput(v *UpdateConfiguredTableAssociationAnalysisRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisRulePolicy != nil {
+		ok := object.Key("analysisRulePolicy")
+		if err := awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRulePolicy(v.AnalysisRulePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateIdMappingTable struct {
 }
 
@@ -6373,6 +6751,17 @@ func awsRestjson1_serializeDocumentAggregationConstraints(v []types.AggregationC
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAllowedAnalysesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6396,6 +6785,17 @@ func awsRestjson1_serializeDocumentAllowedAnalysisProviderList(v []string, value
 }
 
 func awsRestjson1_serializeDocumentAllowedColumnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAllowedResultReceivers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -6444,6 +6844,11 @@ func awsRestjson1_serializeDocumentAnalysisParameterList(v []types.AnalysisParam
 func awsRestjson1_serializeDocumentAnalysisRuleAggregation(v *types.AnalysisRuleAggregation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AdditionalAnalyses) > 0 {
+		ok := object.Key("additionalAnalyses")
+		ok.String(string(v.AdditionalAnalyses))
+	}
 
 	if v.AggregateColumns != nil {
 		ok := object.Key("aggregateColumns")
@@ -6521,6 +6926,11 @@ func awsRestjson1_serializeDocumentAnalysisRuleCustom(v *types.AnalysisRuleCusto
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AdditionalAnalyses) > 0 {
+		ok := object.Key("additionalAnalyses")
+		ok.String(string(v.AdditionalAnalyses))
+	}
+
 	if v.AllowedAnalyses != nil {
 		ok := object.Key("allowedAnalyses")
 		if err := awsRestjson1_serializeDocumentAllowedAnalysesList(v.AllowedAnalyses, ok); err != nil {
@@ -6542,12 +6952,24 @@ func awsRestjson1_serializeDocumentAnalysisRuleCustom(v *types.AnalysisRuleCusto
 		}
 	}
 
+	if v.DisallowedOutputColumns != nil {
+		ok := object.Key("disallowedOutputColumns")
+		if err := awsRestjson1_serializeDocumentAnalysisRuleColumnList(v.DisallowedOutputColumns, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
 func awsRestjson1_serializeDocumentAnalysisRuleList(v *types.AnalysisRuleList, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AdditionalAnalyses) > 0 {
+		ok := object.Key("additionalAnalyses")
+		ok.String(string(v.AdditionalAnalyses))
+	}
 
 	if v.AllowedJoinOperators != nil {
 		ok := object.Key("allowedJoinOperators")
@@ -6638,6 +7060,117 @@ func awsRestjson1_serializeDocumentConfiguredTableAnalysisRulePolicyV1(v types.C
 	case *types.ConfiguredTableAnalysisRulePolicyV1MemberList:
 		av := object.Key("list")
 		if err := awsRestjson1_serializeDocumentAnalysisRuleList(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRuleAggregation(v *types.ConfiguredTableAssociationAnalysisRuleAggregation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedAdditionalAnalyses != nil {
+		ok := object.Key("allowedAdditionalAnalyses")
+		if err := awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v.AllowedAdditionalAnalyses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedResultReceivers != nil {
+		ok := object.Key("allowedResultReceivers")
+		if err := awsRestjson1_serializeDocumentAllowedResultReceivers(v.AllowedResultReceivers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRuleCustom(v *types.ConfiguredTableAssociationAnalysisRuleCustom, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedAdditionalAnalyses != nil {
+		ok := object.Key("allowedAdditionalAnalyses")
+		if err := awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v.AllowedAdditionalAnalyses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedResultReceivers != nil {
+		ok := object.Key("allowedResultReceivers")
+		if err := awsRestjson1_serializeDocumentAllowedResultReceivers(v.AllowedResultReceivers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRuleList(v *types.ConfiguredTableAssociationAnalysisRuleList, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedAdditionalAnalyses != nil {
+		ok := object.Key("allowedAdditionalAnalyses")
+		if err := awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v.AllowedAdditionalAnalyses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedResultReceivers != nil {
+		ok := object.Key("allowedResultReceivers")
+		if err := awsRestjson1_serializeDocumentAllowedResultReceivers(v.AllowedResultReceivers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRulePolicy(v types.ConfiguredTableAssociationAnalysisRulePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyMemberV1:
+		av := object.Key("v1")
+		if err := awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRulePolicyV1(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRulePolicyV1(v types.ConfiguredTableAssociationAnalysisRulePolicyV1, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberAggregation:
+		av := object.Key("aggregation")
+		if err := awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRuleAggregation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberCustom:
+		av := object.Key("custom")
+		if err := awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRuleCustom(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberList:
+		av := object.Key("list")
+		if err := awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRuleList(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -7036,11 +7569,29 @@ func awsRestjson1_serializeDocumentPrivacyBudgetTemplateUpdateParameters(v types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentProtectedQueryMemberOutputConfiguration(v *types.ProtectedQueryMemberOutputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("accountId")
+		ok.String(*v.AccountId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentProtectedQueryOutputConfiguration(v types.ProtectedQueryOutputConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ProtectedQueryOutputConfigurationMemberMember:
+		av := object.Key("member")
+		if err := awsRestjson1_serializeDocumentProtectedQueryMemberOutputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ProtectedQueryOutputConfigurationMemberS3:
 		av := object.Key("s3")
 		if err := awsRestjson1_serializeDocumentProtectedQueryS3OutputConfiguration(&uv.Value, av); err != nil {

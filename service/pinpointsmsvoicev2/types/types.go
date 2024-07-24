@@ -122,8 +122,7 @@ type ConfigurationSetInformation struct {
 // Contains information about an event destination.
 //
 // Event destinations are associated with configuration sets, which enable you to
-// publish message sending events to CloudWatch, Kinesis Data Firehose, or Amazon
-// SNS.
+// publish message sending events to CloudWatch, Firehose, or Amazon SNS.
 type EventDestination struct {
 
 	// When set to true events will be logged.
@@ -148,7 +147,7 @@ type EventDestination struct {
 	CloudWatchLogsDestination *CloudWatchLogsDestination
 
 	// An object that contains information about an event destination for logging to
-	// Amazon Kinesis Data Firehose.
+	// Amazon Data Firehose.
 	KinesisFirehoseDestination *KinesisFirehoseDestination
 
 	// An object that contains information about an event destination that sends
@@ -196,11 +195,11 @@ type KeywordInformation struct {
 }
 
 // Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the
-// Identity and Access Management (IAM) role associated with a Kinesis Data
-// Firehose event destination.
+// Identity and Access Management (IAM) role associated with a Firehose event
+// destination.
 //
-// Event destinations, such as Kinesis Data Firehose, are associated with
-// configuration sets, which enable you to publish message sending events.
+// Event destinations, such as Firehose, are associated with configuration sets,
+// which enable you to publish message sending events.
 type KinesisFirehoseDestination struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream.
@@ -209,7 +208,7 @@ type KinesisFirehoseDestination struct {
 	DeliveryStreamArn *string
 
 	// The ARN of an Identity and Access Management role that is able to write event
-	// data to an Amazon Kinesis Data Firehose destination.
+	// data to an Amazon Data Firehose destination.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -387,11 +386,11 @@ type PhoneNumberInformation struct {
 	PhoneNumberArn *string
 
 	// When set to false an end recipient sends a message that begins with HELP or
-	// STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies
-	// with a customizable message and adds the end recipient to the OptOutList. When
-	// set to true you're responsible for responding to HELP and STOP requests. You're
-	// also responsible for tracking and honoring opt-out request. For more information
-	// see [Self-managed opt-outs]
+	// STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice
+	// automatically replies with a customizable message and adds the end recipient to
+	// the OptOutList. When set to true you're responsible for responding to HELP and
+	// STOP requests. You're also responsible for tracking and honoring opt-out
+	// request. For more information see [Self-managed opt-outs]
 	//
 	// [Self-managed opt-outs]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out
 	//
@@ -482,11 +481,11 @@ type PoolInformation struct {
 	PoolId *string
 
 	// When set to false, an end recipient sends a message that begins with HELP or
-	// STOP to one of your dedicated numbers, Amazon Pinpoint automatically replies
-	// with a customizable message and adds the end recipient to the OptOutList. When
-	// set to true you're responsible for responding to HELP and STOP requests. You're
-	// also responsible for tracking and honoring opt-out requests. For more
-	// information see [Self-managed opt-outs]
+	// STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice
+	// automatically replies with a customizable message and adds the end recipient to
+	// the OptOutList. When set to true you're responsible for responding to HELP and
+	// STOP requests. You're also responsible for tracking and honoring opt-out
+	// requests. For more information see [Self-managed opt-outs]
 	//
 	// [Self-managed opt-outs]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out
 	//
@@ -497,9 +496,9 @@ type PoolInformation struct {
 	//
 	// By default, this is set to False . If you set this value to True , your messages
 	// are sent using phone numbers or sender IDs (depending on the country) that are
-	// shared with other Amazon Pinpoint users. In some countries, such as the United
-	// States, senders aren't allowed to use shared routes and must use a dedicated
-	// phone number or short code.
+	// shared with other users. In some countries, such as the United States, senders
+	// aren't allowed to use shared routes and must use a dedicated phone number or
+	// short code.
 	//
 	// This member is required.
 	SharedRoutesEnabled bool
@@ -1161,9 +1160,10 @@ type SelectValidation struct {
 
 //	The alphanumeric sender ID in a specific country that you want to describe.
 //
-// For more information on sender IDs see [Requesting sender IDs for SMS messaging with Amazon Pinpoint]in the Amazon Pinpoint User Guide.
+// For more information on sender IDs see [Requesting sender IDs]in the AWS End User Messaging SMS User
+// Guide.
 //
-// [Requesting sender IDs for SMS messaging with Amazon Pinpoint]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html
+// [Requesting sender IDs]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sender-id-request.html
 type SenderIdAndCountry struct {
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
@@ -1257,11 +1257,11 @@ type SnsDestination struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the current Amazon Pinpoint monthly spend limits for sending voice
-// and text messages. For more information on increasing your monthly spend limit,
-// see [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]in the Amazon Pinpoint User Guide.
+// Describes the current monthly spend limits for sending voice and text messages.
+// For more information on increasing your monthly spend limit, see [Requesting a spending quota increase]in the AWS End
+// User Messaging SMS User Guide.
 //
-// [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html
+// [Requesting a spending quota increase]: https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html
 type SpendLimit struct {
 
 	// The maximum amount of money, in US dollars, that you want to be able to spend

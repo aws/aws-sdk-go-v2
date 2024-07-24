@@ -73,6 +73,24 @@ func ExampleAnalysisSource_outputUsage() {
 
 var _ *string
 
+func ExampleConfigurationDetails_outputUsage() {
+	var union types.ConfigurationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfigurationDetailsMemberDirectAnalysisConfigurationDetails:
+		_ = v.Value // Value is types.DirectAnalysisConfigurationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DirectAnalysisConfigurationDetails
+
 func ExampleConfiguredTableAnalysisRulePolicy_outputUsage() {
 	var union types.ConfiguredTableAnalysisRulePolicy
 	// type switches can be used to check the union value
@@ -116,6 +134,50 @@ func ExampleConfiguredTableAnalysisRulePolicyV1_outputUsage() {
 var _ *types.AnalysisRuleAggregation
 var _ *types.AnalysisRuleCustom
 var _ *types.AnalysisRuleList
+
+func ExampleConfiguredTableAssociationAnalysisRulePolicy_outputUsage() {
+	var union types.ConfiguredTableAssociationAnalysisRulePolicy
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyMemberV1:
+		_ = v.Value // Value is types.ConfiguredTableAssociationAnalysisRulePolicyV1
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.ConfiguredTableAssociationAnalysisRulePolicyV1
+
+func ExampleConfiguredTableAssociationAnalysisRulePolicyV1_outputUsage() {
+	var union types.ConfiguredTableAssociationAnalysisRulePolicyV1
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberAggregation:
+		_ = v.Value // Value is types.ConfiguredTableAssociationAnalysisRuleAggregation
+
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberCustom:
+		_ = v.Value // Value is types.ConfiguredTableAssociationAnalysisRuleCustom
+
+	case *types.ConfiguredTableAssociationAnalysisRulePolicyV1MemberList:
+		_ = v.Value // Value is types.ConfiguredTableAssociationAnalysisRuleList
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ConfiguredTableAssociationAnalysisRuleCustom
+var _ *types.ConfiguredTableAssociationAnalysisRuleAggregation
+var _ *types.ConfiguredTableAssociationAnalysisRuleList
 
 func ExampleMembershipProtectedQueryOutputConfiguration_outputUsage() {
 	var union types.MembershipProtectedQueryOutputConfiguration
@@ -269,6 +331,9 @@ func ExampleProtectedQueryOutputConfiguration_outputUsage() {
 	var union types.ProtectedQueryOutputConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProtectedQueryOutputConfigurationMemberMember:
+		_ = v.Value // Value is types.ProtectedQueryMemberOutputConfiguration
+
 	case *types.ProtectedQueryOutputConfigurationMemberS3:
 		_ = v.Value // Value is types.ProtectedQueryS3OutputConfiguration
 
@@ -281,6 +346,7 @@ func ExampleProtectedQueryOutputConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.ProtectedQueryMemberOutputConfiguration
 var _ *types.ProtectedQueryS3OutputConfiguration
 
 func ExampleQueryConstraint_outputUsage() {

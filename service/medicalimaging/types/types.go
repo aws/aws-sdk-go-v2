@@ -76,6 +76,10 @@ type CopySourceImageSetInformation struct {
 	// This member is required.
 	LatestVersionId *string
 
+	// Contains MetadataCopies structure and wraps information related to specific
+	// copy use cases. For example, when copying subsets.
+	DICOMCopies *MetadataCopies
+
 	noSmithyDocumentSerde
 }
 
@@ -389,6 +393,11 @@ type ImageSetProperties struct {
 	// The error message thrown if an image set action fails.
 	Message *string
 
+	// Contains details on overrides used when creating the returned version of an
+	// image set. For example, if forced exists, the forced flag was used when
+	// creating the image set.
+	Overrides *Overrides
+
 	// The timestamp when the image set properties were updated.
 	UpdatedAt *time.Time
 
@@ -419,11 +428,25 @@ type ImageSetsMetadataSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains copiable Attributes structure and wraps information related to
+// specific copy use cases. For example, when copying subsets.
+type MetadataCopies struct {
+
+	// The JSON string used to specify a subset of SOP Instances to copy from source
+	// to destination image set.
+	//
+	// This member is required.
+	CopiableAttributes *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains DICOMUpdates.
 //
 // The following types satisfy this interface:
 //
 //	MetadataUpdatesMemberDICOMUpdates
+//	MetadataUpdatesMemberRevertToVersionId
 type MetadataUpdates interface {
 	isMetadataUpdates()
 }
@@ -436,6 +459,31 @@ type MetadataUpdatesMemberDICOMUpdates struct {
 }
 
 func (*MetadataUpdatesMemberDICOMUpdates) isMetadataUpdates() {}
+
+// Specifies the previous image set version ID to revert the current image set
+// back to.
+//
+// You must provide either revertToVersionId or DICOMUpdates in your request. A
+// ValidationException error is thrown if both parameters are provided at the same
+// time.
+type MetadataUpdatesMemberRevertToVersionId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MetadataUpdatesMemberRevertToVersionId) isMetadataUpdates() {}
+
+// Specifies the overrides used in image set modification calls to CopyImageSet
+// and UpdateImageSetMetadata .
+type Overrides struct {
+
+	// Setting this flag will force the CopyImageSet and UpdateImageSetMetadata
+	// operations, even if Patient, Study, or Series level metadata are mismatched.
+	Forced *bool
+
+	noSmithyDocumentSerde
+}
 
 // The search input attribute value.
 //

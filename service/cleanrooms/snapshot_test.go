@@ -170,6 +170,18 @@ func TestCheckSnapshot_CreateConfiguredTableAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConfiguredTableAssociationAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIdMappingTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIdMappingTable(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,18 @@ func TestCheckSnapshot_DeleteConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.DeleteConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConfiguredTableAssociationAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -463,6 +487,18 @@ func TestCheckSnapshot_GetConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.GetConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfiguredTableAssociationAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -914,6 +950,18 @@ func TestCheckSnapshot_UpdateConfiguredTableAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConfiguredTableAssociationAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateIdMappingTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateIdMappingTable(context.Background(), nil, func(o *Options) {
@@ -1081,6 +1129,18 @@ func TestUpdateSnapshot_CreateConfiguredTableAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConfiguredTableAssociationAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIdMappingTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIdMappingTable(context.Background(), nil, func(o *Options) {
@@ -1194,6 +1254,18 @@ func TestUpdateSnapshot_DeleteConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.DeleteConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConfiguredTableAssociationAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1374,6 +1446,18 @@ func TestUpdateSnapshot_GetConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.GetConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfiguredTableAssociationAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1818,6 +1902,18 @@ func TestUpdateSnapshot_UpdateConfiguredTableAssociation(t *testing.T) {
 	_, err := svc.UpdateConfiguredTableAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfiguredTableAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConfiguredTableAssociationAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfiguredTableAssociationAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConfiguredTableAssociationAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

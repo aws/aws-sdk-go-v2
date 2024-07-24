@@ -44,7 +44,7 @@ func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelI
 
 type CreateAssetModelInput struct {
 
-	// A unique, friendly name for the asset model.
+	// A unique name for the asset model.
 	//
 	// This member is required.
 	AssetModelName *string
@@ -56,9 +56,10 @@ type CreateAssetModelInput struct {
 	// composite models to define alarms on this asset model.
 	//
 	// When creating custom composite models, you need to use [CreateAssetModelCompositeModel]. For more information,
-	// see .
+	// see [Creating custom composite models (Components)]in the IoT SiteWise User Guide.
 	//
 	// [CreateAssetModelCompositeModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
+	// [Creating custom composite models (Components)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-custom-composite-models.html
 	AssetModelCompositeModels []types.AssetModelCompositeModelDefinition
 
 	// A description for the asset model.

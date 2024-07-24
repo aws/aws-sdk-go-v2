@@ -3595,6 +3595,9 @@ func awsRestjson1_deserializeOpErrorDeleteGateway(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("ConflictingOperationException", errorCode):
+		return awsRestjson1_deserializeErrorConflictingOperationException(response, errorBody)
+
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
@@ -6405,7 +6408,7 @@ func awsRestjson1_deserializeOpDocumentDescribeGatewayOutput(v **DescribeGateway
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GatewayName to be of type string, got %T instead", value)
 				}
 				sv.GatewayName = ptr.String(jtv)
 			}
@@ -20189,6 +20192,11 @@ func awsRestjson1_deserializeDocumentGatewayPlatform(v **types.GatewayPlatform, 
 				return err
 			}
 
+		case "siemensIE":
+			if err := awsRestjson1_deserializeDocumentSiemensIE(&sv.SiemensIE, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -20288,7 +20296,7 @@ func awsRestjson1_deserializeDocumentGatewaySummary(v **types.GatewaySummary, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GatewayName to be of type string, got %T instead", value)
 				}
 				sv.GatewayName = ptr.String(jtv)
 			}
@@ -22232,6 +22240,46 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSiemensIE(v **types.SiemensIE, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SiemensIE
+	if *v == nil {
+		sv = &types.SiemensIE{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "iotCoreThingName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IotCoreThingName to be of type string, got %T instead", value)
+				}
+				sv.IotCoreThingName = ptr.String(jtv)
 			}
 
 		default:
