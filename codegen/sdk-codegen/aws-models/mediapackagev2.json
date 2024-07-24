@@ -2191,6 +2191,12 @@
                     "traits": {
                         "smithy.api#enumValue": "WIDEVINE"
                     }
+                },
+                "IRDETO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IRDETO"
+                    }
                 }
             }
         },

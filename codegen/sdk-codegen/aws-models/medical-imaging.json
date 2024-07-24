@@ -806,6 +806,16 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.medicalimaging#CopiableAttributes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 260000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.medicalimaging#CopyDestinationImageSet": {
             "type": "structure",
             "members": {
@@ -969,6 +979,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
+                },
+                "force": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Setting this flag will force the <code>CopyImageSet</code> operation, even if Patient, Study, or Series level\n            metadata are mismatched across the <code>sourceImageSet</code> and <code>destinationImageSet</code>.</p>",
+                        "smithy.api#httpQuery": "force"
+                    }
                 }
             },
             "traits": {
@@ -1012,6 +1029,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The latest version identifier for the source image set.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DICOMCopies": {
+                    "target": "com.amazonaws.medicalimaging#MetadataCopies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains <code>MetadataCopies</code> structure and wraps information related to specific copy use cases.\n            For example, when copying subsets.</p>"
                     }
                 }
             },
@@ -1173,7 +1196,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 16
+                    "max": 256
                 },
                 "smithy.api#sensitive": {}
             }
@@ -1345,7 +1368,7 @@
                 "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 10000
+                    "max": 1000000
                 }
             }
         },
@@ -1364,7 +1387,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 64
+                    "max": 256
                 },
                 "smithy.api#sensitive": {}
             }
@@ -1404,9 +1427,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 64
+                    "max": 256
                 },
-                "smithy.api#pattern": "^(?:[1-9][0-9]*|0)(\\.(?:[1-9][0-9]*|0))*$",
+                "smithy.api#pattern": "^(?:[0-9][0-9]*|0)(\\.(?:[1-9][0-9]*|0))*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1486,9 +1509,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 64
+                    "max": 256
                 },
-                "smithy.api#pattern": "^(?:[1-9][0-9]*|0)(\\.(?:[1-9][0-9]*|0))*$",
+                "smithy.api#pattern": "^(?:[0-9][0-9]*|0)(\\.(?:[1-9][0-9]*|0))*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2466,6 +2489,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) assigned to the image set.</p>"
                     }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.medicalimaging#Overrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This object contains the details of any overrides used while creating a specific image set version.\n            If an image set was copied or updated using the <code>force</code> flag, this object will contain the\n            <code>forced</code> flag.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2563,6 +2592,12 @@
                     "target": "com.amazonaws.medicalimaging#Message",
                     "traits": {
                         "smithy.api#documentation": "<p>The error message thrown if an image set action fails.</p>"
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.medicalimaging#Overrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details on overrides used when creating the returned version of an image set.\n            For example, if <code>forced</code> exists, the <code>forced</code> flag was used when \n            creating the image set.</p>"
                     }
                 }
             },
@@ -3185,6 +3220,21 @@
                 "smithy.api#pattern": "^[\\w -:]+$"
             }
         },
+        "com.amazonaws.medicalimaging#MetadataCopies": {
+            "type": "structure",
+            "members": {
+                "copiableAttributes": {
+                    "target": "com.amazonaws.medicalimaging#CopiableAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON string used to specify a subset of SOP Instances to copy from source to destination image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains copiable <code>Attributes</code> structure and wraps information related to specific copy use cases.\n            For example, when copying subsets.</p>"
+            }
+        },
         "com.amazonaws.medicalimaging#MetadataUpdates": {
             "type": "union",
             "members": {
@@ -3192,6 +3242,12 @@
                     "target": "com.amazonaws.medicalimaging#DICOMUpdates",
                     "traits": {
                         "smithy.api#documentation": "<p>The object containing <code>removableAttributes</code> and <code>updatableAttributes</code>.</p>"
+                    }
+                },
+                "revertToVersionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the previous image set version ID to revert the current image set back to.</p>\n         <note>\n            <p>You must provide either <code>revertToVersionId</code> or <code>DICOMUpdates</code> in your request. A \n                <code>ValidationException</code> error is thrown if both parameters are provided at the same time.</p>\n         </note>"
                     }
                 }
             },
@@ -3224,6 +3280,20 @@
                         "smithy.api#enumValue": "BETWEEN"
                     }
                 }
+            }
+        },
+        "com.amazonaws.medicalimaging#Overrides": {
+            "type": "structure",
+            "members": {
+                "forced": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Setting this flag will force the <code>CopyImageSet</code> and <code>UpdateImageSetMetadata</code>\n            operations, even if Patient, Study, or Series level metadata are mismatched.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the overrides used in image set modification calls to <code>CopyImageSet</code> and \n                <code>UpdateImageSetMetadata</code>.</p>"
             }
         },
         "com.amazonaws.medicalimaging#PayloadBlob": {
@@ -4003,6 +4073,13 @@
                         "smithy.api#documentation": "<p>The latest image set version identifier.</p>",
                         "smithy.api#httpQuery": "latestVersion",
                         "smithy.api#required": {}
+                    }
+                },
+                "force": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Setting this flag will force the <code>UpdateImageSetMetadata</code> operation for the following attributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Tag.StudyInstanceUID</code>, <code>Tag.SeriesInstanceUID</code>, <code>Tag.SOPInstanceUID</code>, and <code>Tag.StudyID</code>\n               </p>\n            </li>\n            <li>\n               <p>Adding, removing, or updating private tags for an individual SOP Instance</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "force"
                     }
                 },
                 "updateImageSetMetadataUpdates": {

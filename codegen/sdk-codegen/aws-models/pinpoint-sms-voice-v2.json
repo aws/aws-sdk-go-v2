@@ -933,7 +933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new event destination in a configuration set.</p>\n         <p>An event destination is a location where you send message events. The event options\n            are Amazon CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For example,\n            when a message is delivered successfully, you can send information about that event to\n            an event destination, or send notifications to endpoints that are subscribed to an\n                Amazon SNS topic.</p>\n         <p>Each configuration set can contain between 0 and 5 event destinations. Each event\n            destination can contain a reference to a single destination, such as a CloudWatch\n            or Kinesis Data Firehose destination.</p>"
+                "smithy.api#documentation": "<p>Creates a new event destination in a configuration set.</p>\n         <p>An event destination is a location where you send message events. The event options\n            are Amazon CloudWatch, Amazon Data Firehose, or Amazon SNS. For example,\n            when a message is delivered successfully, you can send information about that event to\n            an event destination, or send notifications to endpoints that are subscribed to an\n                Amazon SNS topic.</p>\n         <p>Each configuration set can contain between 0 and 5 event destinations. Each event\n            destination can contain a reference to a single destination, such as a CloudWatch\n            or Firehose destination.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#CreateEventDestinationRequest": {
@@ -956,7 +956,7 @@
                 "MatchingEventTypes": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#EventTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of event types that determine which events to log. If \"ALL\" is used, then\n                Amazon Pinpoint logs every event type.</p>\n         <note>\n            <p>The <code>TEXT_SENT</code> event type is not supported.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An array of event types that determine which events to log. If \"ALL\" is used, then\n            AWS End User Messaging SMS and Voice logs every event type.</p>\n         <note>\n            <p>The <code>TEXT_SENT</code> event type is not supported.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -969,7 +969,7 @@
                 "KinesisFirehoseDestination": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#KinesisFirehoseDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon Kinesis Data Firehose.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon Data Firehose.</p>"
                     }
                 },
                 "SnsDestination": {
@@ -1045,7 +1045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new opt-out list.</p>\n         <p>If the opt-out list name already exists, an error is returned.</p>\n         <p>An opt-out list is a list of phone numbers that are opted out, meaning you can't send\n            SMS or voice messages to them. If end user replies with the keyword \"STOP,\" an entry for\n            the phone number is added to the opt-out list. In addition to STOP, your recipients can\n            use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported\n            opt-out keywords, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-manage.html#channels-sms-manage-optout\">\n                SMS opt out </a> in the <i>Amazon Pinpoint User\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a new opt-out list.</p>\n         <p>If the opt-out list name already exists, an error is returned.</p>\n         <p>An opt-out list is a list of phone numbers that are opted out, meaning you can't send\n            SMS or voice messages to them. If end user replies with the keyword \"STOP,\" an entry for\n            the phone number is added to the opt-out list. In addition to STOP, your recipients can\n            use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported\n            opt-out keywords, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-manage.html#channels-sms-manage-optout\">\n                SMS opt out </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#CreateOptOutListRequest": {
@@ -1149,7 +1149,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneOrSenderIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>\n         <p>After the pool is created you can add more origination identities to the pool by using <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html\">AssociateOriginationIdentity</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1163,7 +1163,7 @@
                 "MessageType": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#MessageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of message. Valid values are TRANSACTIONAL for messages that are critical or\n            time-sensitive and PROMOTIONAL for messages that aren't critical or\n            time-sensitive.</p>",
+                        "smithy.api#documentation": "<p>The type of message. Valid values are TRANSACTIONAL for messages that are critical or\n            time-sensitive and PROMOTIONAL for messages that aren't critical or\n            time-sensitive. After the pool is created the MessageType can't be changed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1241,7 +1241,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
+                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
                 "OptOutListName": {
@@ -1254,7 +1254,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether shared routes are enabled for the pool.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether shared routes are enabled for the pool. Set to false and only origination identities in this pool are used to send messages. </p>"
                     }
                 },
                 "DeletionProtectionEnabled": {
@@ -2330,7 +2330,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing keyword from an origination phone number or pool.</p>\n         <p>A keyword is a word that you can search for on a particular phone number or pool. It\n            is also a specific word or phrase that an end user can send to your number to elicit a\n            response, such as an informational message or a special offer. When your number receives\n            a message that begins with a keyword, Amazon Pinpoint responds with a customizable\n            message.</p>\n         <p>Keywords \"HELP\" and \"STOP\" can't be deleted or modified.</p>"
+                "smithy.api#documentation": "<p>Deletes an existing keyword from an origination phone number or pool.</p>\n         <p>A keyword is a word that you can search for on a particular phone number or pool. It\n            is also a specific word or phrase that an end user can send to your number to elicit a\n            response, such as an informational message or a special offer. When your number receives\n            a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable\n            message.</p>\n         <p>Keywords \"HELP\" and \"STOP\" can't be deleted or modified.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#DeleteKeywordRequest": {
@@ -2703,7 +2703,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
+                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
                 "OptOutListName": {
@@ -3157,7 +3157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an account-level monthly spending limit override for sending text messages.\n            Deleting a spend limit override will set the <code>EnforcedLimit</code> to equal the\n                <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more\n            information on spend limits (quotas) see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html\">Amazon Pinpoint quotas </a>\n            in the <i>Amazon Pinpoint Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deletes an account-level monthly spending limit override for sending text messages.\n            Deleting a spend limit override will set the <code>EnforcedLimit</code> to equal the\n                <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more\n            information on spend limits (quotas) see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html\">Quotas </a>\n            in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#DeleteTextMessageSpendLimitOverrideRequest": {
@@ -3287,7 +3287,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an account level monthly spend limit override for sending voice messages.\n            Deleting a spend limit override sets the <code>EnforcedLimit</code> equal to the\n                <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more\n            information on spending limits (quotas) see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html\">Amazon Pinpoint quotas</a>\n            in the <i>Amazon Pinpoint Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deletes an account level monthly spend limit override for sending voice messages.\n            Deleting a spend limit override sets the <code>EnforcedLimit</code> equal to the\n                <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more\n            information on spending limits (quotas) see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html\">Quotas </a>\n            in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#DeleteVoiceMessageSpendLimitOverrideRequest": {
@@ -3344,7 +3344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes attributes of your Amazon Web Services account. The supported account\n            attributes include account tier, which indicates whether your account is in the sandbox\n            or production environment. When you're ready to move your account out of the sandbox,\n            create an Amazon Web Services Support case for a service limit increase request.</p>\n         <p>New Amazon Pinpoint accounts are placed into an SMS or voice sandbox. The sandbox\n            protects both Amazon Web Services end recipients and SMS or voice recipients from fraud\n            and abuse. </p>",
+                "smithy.api#documentation": "<p>Describes attributes of your Amazon Web Services account. The supported account\n            attributes include account tier, which indicates whether your account is in the sandbox\n            or production environment. When you're ready to move your account out of the sandbox,\n            create an Amazon Web Services Support case for a service limit increase request.</p>\n         <p>New accounts are placed into an SMS or voice sandbox. The sandbox\n            protects both Amazon Web Services end recipients and SMS or voice recipients from fraud\n            and abuse. </p>",
                 "smithy.api#paginated": {
                     "items": "AccountAttributes"
                 }
@@ -3413,7 +3413,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the current Amazon Pinpoint SMS Voice V2 resource quotas for your\n            account. The description for a quota includes the quota name, current usage toward that\n            quota, and the quota's maximum value.</p>\n         <p>When you establish an Amazon Web Services account, the account has initial quotas on\n            the maximum number of configuration sets, opt-out lists, phone numbers, and pools that\n            you can create in a given Region. For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html\">\n                Amazon Pinpoint quotas </a> in the <i>Amazon Pinpoint Developer\n                Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the current AWS End User Messaging SMS and Voice SMS Voice V2 resource quotas for your\n            account. The description for a quota includes the quota name, current usage toward that\n            quota, and the quota's maximum value.</p>\n         <p>When you establish an Amazon Web Services account, the account has initial quotas on\n            the maximum number of configuration sets, opt-out lists, phone numbers, and pools that\n            you can create in a given Region. For more information see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html\">Quotas </a>\n            in the <i>AWS End User Messaging SMS User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "items": "AccountLimits"
                 }
@@ -3569,7 +3569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified keywords or all keywords on your origination phone number or\n            pool.</p>\n         <p>A keyword is a word that you can search for on a particular phone number or pool. It\n            is also a specific word or phrase that an end user can send to your number to elicit a\n            response, such as an informational message or a special offer. When your number receives\n            a message that begins with a keyword, Amazon Pinpoint responds with a customizable\n            message.</p>\n         <p>If you specify a keyword that isn't valid, an error is returned.</p>",
+                "smithy.api#documentation": "<p>Describes the specified keywords or all keywords on your origination phone number or\n            pool.</p>\n         <p>A keyword is a word that you can search for on a particular phone number or pool. It\n            is also a specific word or phrase that an end user can send to your number to elicit a\n            response, such as an informational message or a special offer. When your number receives\n            a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable\n            message.</p>\n         <p>If you specify a keyword that isn't valid, an error is returned.</p>",
                 "smithy.api#paginated": {
                     "items": "Keywords"
                 }
@@ -4849,7 +4849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the current Amazon Pinpoint monthly spend limits for sending voice and\n            text messages.</p>\n         <p>When you establish an Amazon Web Services account, the account has initial monthly\n            spend limit in a given Region. For more information on increasing your monthly spend\n            limit, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html\">\n                Requesting increases to your monthly SMS spending quota for Amazon Pinpoint\n            </a> in the <i>Amazon Pinpoint User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the current monthly spend limits for sending voice and\n            text messages.</p>\n         <p>When you establish an Amazon Web Services account, the account has initial monthly\n            spend limit in a given Region. For more information on increasing your monthly spend\n            limit, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html\">\n                Requesting increases to your monthly SMS, MMS, or Voice spending quota\n            </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "items": "SpendLimits"
                 }
@@ -5355,7 +5355,7 @@
                 "KinesisFirehoseDestination": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#KinesisFirehoseDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon Kinesis Data Firehose.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon Data Firehose.</p>"
                     }
                 },
                 "SnsDestination": {
@@ -5366,7 +5366,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an event destination.</p>\n         <p>Event destinations are associated with configuration sets, which enable you to publish\n            message sending events to CloudWatch, Kinesis Data Firehose, or Amazon SNS.</p>"
+                "smithy.api#documentation": "<p>Contains information about an event destination.</p>\n         <p>Event destinations are associated with configuration sets, which enable you to publish\n            message sending events to CloudWatch, Firehose, or Amazon SNS.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#EventDestinationList": {
@@ -5731,7 +5731,7 @@
                 "CountryRuleSet": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the\n            details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html\">Supported countries and regions (SMS channel)</a> in the Amazon Pinpoint SMS user guide.</p>",
+                        "smithy.api#documentation": "<p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the\n            details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html\">Supported countries and regions (SMS channel)</a> in the AWS End User Messaging SMS User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5914,7 +5914,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an Identity and Access Management role that is able to write\n            event data to an Amazon Kinesis Data Firehose destination.</p>",
+                        "smithy.api#documentation": "<p>The ARN of an Identity and Access Management role that is able to write\n            event data to an Amazon Data Firehose destination.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5927,7 +5927,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the Identity and Access Management (IAM) role associated with a Kinesis Data Firehose event\n            destination.</p>\n         <p>Event destinations, such as Kinesis Data Firehose, are associated with configuration\n            sets, which enable you to publish message sending events.</p>"
+                "smithy.api#documentation": "<p>Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the Identity and Access Management (IAM) role associated with a Firehose event\n            destination.</p>\n         <p>Event destinations, such as Firehose, are associated with configuration\n            sets, which enable you to publish message sending events.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#LanguageCode": {
@@ -6865,7 +6865,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When set to false an end recipient sends a message that begins with HELP or STOP to\n            one of your dedicated numbers, Amazon Pinpoint automatically replies with a\n            customizable message and adds the end recipient to the OptOutList. When set to true\n            you're responsible for responding to HELP and STOP requests. You're also responsible for\n            tracking and honoring opt-out request. For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out\">Self-managed opt-outs</a>\n         </p>",
+                        "smithy.api#documentation": "<p>When set to false an end recipient sends a message that begins with HELP or STOP to\n            one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a\n            customizable message and adds the end recipient to the OptOutList. When set to true\n            you're responsible for responding to HELP and STOP requests. You're also responsible for\n            tracking and honoring opt-out request. For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out\">Self-managed opt-outs</a>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7195,7 +7195,7 @@
                     "name": "sms-voice"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i>.\n            This guide provides information about Amazon Pinpoint SMS and Voice, version 2 API\n            resources, including supported HTTP methods, parameters, and schemas.</p>\n         <p>Amazon Pinpoint is an Amazon Web Services service that you can use to engage with\n            your recipients across multiple messaging channels. The Amazon Pinpoint SMS and\n            Voice, version 2 API provides programmatic access to options that are unique to the SMS\n            and voice channels. Amazon Pinpoint SMS and Voice, version 2 resources such as phone numbers, sender IDs, and opt-out lists can be used by the Amazon Pinpoint API.</p>\n         <p>If you're new to Amazon Pinpoint SMS, it's also helpful to review the <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html\">\n                Amazon Pinpoint SMS User Guide</a>. The <i>Amazon Pinpoint\n                Developer Guide</i> provides tutorials, code samples, and procedures that\n            demonstrate how to use Amazon Pinpoint SMS features programmatically and how to integrate\n                Amazon Pinpoint functionality into mobile apps and other types of applications.\n            The guide also provides key information, such as Amazon Pinpoint integration with\n            other Amazon Web Services services, and the quotas that apply to use of the\n            service.</p>\n         <p>\n            <b>Regional availability</b>\n         </p>\n         <p>The <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i> is\n            available in several Amazon Web Services Regions and it provides an endpoint for each of\n            these Regions. For a list of all the Regions and endpoints where the API is currently\n            available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region\">Amazon Web Services Service Endpoints</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/pinpoint.html\">Amazon Pinpoint\n                endpoints and quotas</a> in the Amazon Web Services General Reference. To\n            learn more about Amazon Web Services Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing\n                    Amazon Web Services Regions</a> in the Amazon Web Services General\n            Reference.</p>\n         <p>In each Region, Amazon Web Services maintains multiple Availability Zones. These\n            Availability Zones are physically isolated from each other, but are united by private,\n            low-latency, high-throughput, and highly redundant network connections. These\n            Availability Zones enable us to provide very high levels of availability and redundancy,\n            while also minimizing latency. To learn more about the number of Availability Zones that\n            are available in each Region, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/\">Amazon Web Services\n                Global Infrastructure.</a>\n         </p>",
+                "smithy.api#documentation": "<p>Welcome to the <i>AWS End User Messaging SMS and Voice, version 2 API Reference</i>.\n            This guide provides information about AWS End User Messaging SMS and Voice, version 2 API\n            resources, including supported HTTP methods, parameters, and schemas.</p>\n         <p>Amazon Pinpoint is an Amazon Web Services service that you can use to engage with\n            your recipients across multiple messaging channels. The AWS End User Messaging SMS and Voice, version 2 API provides programmatic access to options that are unique to the SMS\n            and voice channels. AWS End User Messaging SMS and Voice, version 2 resources such as phone numbers, sender IDs, and opt-out lists can be used by the Amazon Pinpoint API.</p>\n         <p>If you're new to AWS End User Messaging SMS and Voice, it's also helpful to review the <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html\">\n            AWS End User Messaging SMS User Guide</a>. The <i>AWS End User Messaging SMS User Guide\n                </i> provides tutorials, code samples, and procedures that\n            demonstrate how to use AWS End User Messaging SMS and Voice features programmatically and how to integrate\n                functionality into mobile apps and other types of applications.\n                The guide also provides key information, such as AWS End User Messaging SMS and Voice integration with\n            other Amazon Web Services services, and the quotas that apply to use of the\n            service.</p>\n         <p>\n            <b>Regional availability</b>\n         </p>\n         <p>The <i>AWS End User Messaging SMS and Voice version 2 API Reference</i> is\n            available in several Amazon Web Services Regions and it provides an endpoint for each of\n            these Regions. For a list of all the Regions and endpoints where the API is currently\n            available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region\">Amazon Web Services Service Endpoints</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/pinpoint.html\">Amazon Pinpoint\n                endpoints and quotas</a> in the Amazon Web Services General Reference. To\n            learn more about Amazon Web Services Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing\n                    Amazon Web Services Regions</a> in the Amazon Web Services General\n            Reference.</p>\n         <p>In each Region, Amazon Web Services maintains multiple Availability Zones. These\n            Availability Zones are physically isolated from each other, but are united by private,\n            low-latency, high-throughput, and highly redundant network connections. These\n            Availability Zones enable us to provide very high levels of availability and redundancy,\n            while also minimizing latency. To learn more about the number of Availability Zones that\n            are available in each Region, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/\">Amazon Web Services\n                Global Infrastructure.</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -8110,7 +8110,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When set to false, an end recipient sends a message that begins with HELP or STOP to\n            one of your dedicated numbers, Amazon Pinpoint automatically replies with a\n            customizable message and adds the end recipient to the OptOutList. When set to true\n            you're responsible for responding to HELP and STOP requests. You're also responsible for\n            tracking and honoring opt-out requests. For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out\">Self-managed opt-outs</a>\n         </p>",
+                        "smithy.api#documentation": "<p>When set to false, an end recipient sends a message that begins with HELP or STOP to\n            one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a\n            customizable message and adds the end recipient to the OptOutList. When set to true\n            you're responsible for responding to HELP and STOP requests. You're also responsible for\n            tracking and honoring opt-out requests. For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out\">Self-managed opt-outs</a>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8125,7 +8125,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Allows you to enable shared routes on your pool.</p>\n         <p>By default, this is set to <code>False</code>. If you set this value to\n                <code>True</code>, your messages are sent using phone numbers or sender IDs\n            (depending on the country) that are shared with other Amazon Pinpoint users. In some\n            countries, such as the United States, senders aren't allowed to use shared routes and\n            must use a dedicated phone number or short code.</p>",
+                        "smithy.api#documentation": "<p>Allows you to enable shared routes on your pool.</p>\n         <p>By default, this is set to <code>False</code>. If you set this value to\n                <code>True</code>, your messages are sent using phone numbers or sender IDs\n            (depending on the country) that are shared with other users. In some\n            countries, such as the United States, senders aren't allowed to use shared routes and\n            must use a dedicated phone number or short code.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8445,7 +8445,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a keyword configuration on an origination phone number or\n            pool.</p>\n         <p> A keyword is a word that you can search for on a particular phone number or pool. It\n            is also a specific word or phrase that an end user can send to your number to elicit a\n            response, such as an informational message or a special offer. When your number receives\n            a message that begins with a keyword, Amazon Pinpoint responds with a customizable\n            message.</p>\n         <p>If you specify a keyword that isn't valid, an error is returned.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a keyword configuration on an origination phone number or\n            pool.</p>\n         <p> A keyword is a word that you can search for on a particular phone number or pool. It\n            is also a specific word or phrase that an end user can send to your number to elicit a\n            response, such as an informational message or a special offer. When your number receives\n            a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable\n            message.</p>\n         <p>If you specify a keyword that isn't valid, an error is returned.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#PutKeywordRequest": {
@@ -9913,7 +9913,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
+                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
                 "OptOutListName": {
@@ -10082,7 +10082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Request an origination phone number for use in your account. For more information on\n            phone number request see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html\"> Requesting a\n                number </a> in the <i>Amazon Pinpoint User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Request an origination phone number for use in your account. For more information on\n            phone number request see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-request.html\">Request a phone number</a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#RequestPhoneNumberRequest": {
@@ -10238,7 +10238,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
+                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
                 "OptOutListName": {
@@ -10900,7 +10900,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new text message and sends it to a recipient's phone number.</p>\n         <p>SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit\n            depends on the destination country of your messages, as well as the type of phone number\n            (origination number) that you use to send the message. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-limitations-mps.html\">Message Parts per\n                Second (MPS) limits</a> in the <i>Amazon Pinpoint User\n                Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a new text message and sends it to a recipient's phone number. SendTextMessage only sends an SMS message to one recipient each time it is invoked.</p>\n         <p>SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit\n            depends on the destination country of your messages, as well as the type of phone number\n            (origination number) that you use to send the message. For more information about MPS, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html\">Message Parts per\n                Second (MPS) limits</a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#SendTextMessageRequest": {
@@ -10946,13 +10946,13 @@
                 "MaxPrice": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#MaxPrice",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount that you want to spend, in US dollars, per each text message part.\n            A text message can contain multiple parts.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount that you want to spend, in US dollars, per each text message. If the calculated amount to send the text message is greater than <code>MaxPrice</code>, the message is not sent and an error is returned.</p>"
                     }
                 },
                 "TimeToLive": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#TimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long the text message is valid for. By default this is 72 hours.</p>"
+                        "smithy.api#documentation": "<p>How long the text message is valid for, in seconds. By default this is 72 hours. If the messages isn't handed off before the TTL expires we stop attempting to hand off the message and return <code>TTL_EXPIRED</code> event.</p>"
                     }
                 },
                 "Context": {
@@ -10964,14 +10964,14 @@
                 "DestinationCountryParameters": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DestinationCountryParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>This field is used for any country-specific registration requirements. Currently, this\n            setting is only used when you send messages to recipients in India using a sender ID.\n            For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html\">Special requirements for sending SMS messages to recipients in India</a>.\n        </p>"
+                        "smithy.api#documentation": "<p>This field is used for any country-specific registration requirements. Currently, this\n            setting is only used when you send messages to recipients in India using a sender ID.\n            For more information see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html\">Special requirements for sending SMS messages to recipients in India</a>.\n        </p>\n         <ul>\n            <li>\n               <p>\n                  <code>IN_ENTITY_ID</code> The entity ID or Principal\n                    Entity (PE) ID that you received after completing the sender ID\n                    registration process.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_TEMPLATE_ID</code> The template ID that you\n                    received after completing the sender ID registration\n                    process.</p>\n               <important>\n                  <p>Make sure that the Template ID that you specify matches\n                        your message template exactly. If your message doesn't match\n                        the template that you provided during the registration\n                        process, the mobile carriers might reject your\n                        message.</p>\n               </important>\n            </li>\n         </ul>"
                     }
                 },
                 "DryRun": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end\n            recipient.</p>"
+                        "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end\n            recipient. You are not charged for using <code>DryRun</code>.</p>\n         <p>The Message Parts per Second (MPS) limit when using <code>DryRun</code> is five. If\n            your origination identity has a lower MPS limit then the lower MPS limit is used. For\n            more information about MPS limits, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html\">Message Parts per\n                Second (MPS) limits</a> in the <i>AWS End User Messaging SMS User Guide</i>..</p>"
                     }
                 },
                 "ProtectConfigurationId": {
@@ -11031,7 +11031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to send a request that sends a voice message through Amazon Pinpoint.\n            This operation uses <a href=\"http://aws.amazon.com/polly/\">Amazon Polly</a> to\n            convert a text script into a voice message.</p>"
+                "smithy.api#documentation": "<p>Allows you to send a request that sends a voice message.\n            This operation uses <a href=\"http://aws.amazon.com/polly/\">Amazon Polly</a> to\n            convert a text script into a voice message.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#SendVoiceMessageRequest": {
@@ -11154,7 +11154,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The alphanumeric sender ID in a specific country that you want to describe. For more\n            information on sender IDs see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html\">Requesting\n                sender IDs for SMS messaging with Amazon Pinpoint\n            </a> in the <i>Amazon Pinpoint User Guide</i>.</p>"
+                "smithy.api#documentation": "<p> The alphanumeric sender ID in a specific country that you want to describe. For more\n            information on sender IDs see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/sender-id-request.html\">Requesting\n                sender IDs </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#SenderIdFilter": {
@@ -11872,7 +11872,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the current Amazon Pinpoint monthly spend limits for sending voice and\n            text messages. For more information on increasing your monthly spend limit, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html\">\n                Requesting increases to your monthly SMS spending quota for Amazon Pinpoint\n            </a> in the <i>Amazon Pinpoint User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Describes the current monthly spend limits for sending voice and\n            text messages. For more information on increasing your monthly spend limit, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html\">\n                Requesting a spending quota increase\n            </a> in the <i>AWS End User Messaging SMS User Guide</i>. </p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#SpendLimitList": {
@@ -12130,7 +12130,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or overwrites only the specified tags for the specified Amazon Pinpoint SMS\n            Voice, version 2 resource. When you specify an existing tag key, the value is\n            overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag\n            consists of a key and an optional value. Tag keys must be unique per resource. For more\n            information about tags, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html\"> Tagging Amazon Pinpoint resources</a> in the <i>Amazon Pinpoint Developer\n                Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds or overwrites only the specified tags for the specified resource. When you specify an existing tag key, the value is\n            overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag\n            consists of a key and an optional value. Tag keys must be unique per resource. For more\n            information about tags, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html\">Tags </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#TagResourceRequest": {
@@ -12289,7 +12289,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the association of the specified tags from an Amazon Pinpoint SMS Voice V2\n            resource. For more information on tags see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html\"> Tagging Amazon Pinpoint resources</a> in the <i>Amazon Pinpoint Developer\n                Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Removes the association of the specified tags from a\n            resource. For more information on tags see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html\">Tags </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#UntagResourceRequest": {
@@ -12350,7 +12350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing event destination in a configuration set. You can update the\n                IAM role ARN for CloudWatch Logs and Kinesis Data Firehose. You can\n            also enable or disable the event destination.</p>\n         <p>You may want to update an event destination to change its matching event types or\n            updating the destination resource ARN. You can't change an event destination's type\n            between CloudWatch Logs, Kinesis Data Firehose, and Amazon SNS.</p>"
+                "smithy.api#documentation": "<p>Updates an existing event destination in a configuration set. You can update the\n                IAM role ARN for CloudWatch Logs and Firehose. You can\n            also enable or disable the event destination.</p>\n         <p>You may want to update an event destination to change its matching event types or\n            updating the destination resource ARN. You can't change an event destination's type\n            between CloudWatch Logs, Firehose, and Amazon SNS.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#UpdateEventDestinationRequest": {
@@ -12391,7 +12391,7 @@
                 "KinesisFirehoseDestination": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#KinesisFirehoseDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Kinesis Data Firehose.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Firehose.</p>"
                     }
                 },
                 "SnsDestination": {
@@ -12494,7 +12494,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
+                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
                 "OptOutListName": {
@@ -12690,7 +12690,7 @@
                 "SelfManagedOptOutsEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, Amazon Pinpoint automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
+                        "smithy.api#documentation": "<p>By default this is set to false. When an end recipient sends a message that begins\n            with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically\n            replies with a customizable message and adds the end recipient to the OptOutList. When\n            set to true you're responsible for responding to HELP and STOP requests. You're also\n            responsible for tracking and honoring opt-out requests.</p>"
                     }
                 },
                 "OptOutListName": {
@@ -12766,7 +12766,7 @@
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When an end recipient sends a message that begins with HELP or STOP to one of your\n            dedicated numbers, Amazon Pinpoint automatically replies with a customizable message\n            and adds the end recipient to the OptOutList. When set to true you're responsible for\n            responding to HELP and STOP requests. You're also responsible for tracking and honoring\n            opt-out requests.</p>"
+                        "smithy.api#documentation": "<p>When an end recipient sends a message that begins with HELP or STOP to one of your\n            dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message\n            and adds the end recipient to the OptOutList. When set to true you're responsible for\n            responding to HELP and STOP requests. You're also responsible for tracking and honoring\n            opt-out requests.</p>"
                     }
                 },
                 "OptOutListName": {
@@ -12878,7 +12878,7 @@
                 "CountryRuleSetUpdates": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the\n           details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html\">Supported countries and regions (SMS channel)</a> in the Amazon Pinpoint SMS user guide.</p>",
+                        "smithy.api#documentation": "<p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the\n           details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html\">Supported countries and regions (SMS channel)</a> in the AWS End User Messaging SMS User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
