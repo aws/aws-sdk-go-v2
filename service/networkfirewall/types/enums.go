@@ -176,6 +176,7 @@ type LogType string
 const (
 	LogTypeAlert LogType = "ALERT"
 	LogTypeFlow  LogType = "FLOW"
+	LogTypeTls   LogType = "TLS"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -186,6 +187,7 @@ func (LogType) Values() []LogType {
 	return []LogType{
 		"ALERT",
 		"FLOW",
+		"TLS",
 	}
 }
 

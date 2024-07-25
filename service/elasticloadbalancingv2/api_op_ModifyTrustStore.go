@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the ca certificate bundle for a given trust store.
+// Update the ca certificate bundle for the specified trust store.
 func (c *Client) ModifyTrustStore(ctx context.Context, params *ModifyTrustStoreInput, optFns ...func(*Options)) (*ModifyTrustStoreOutput, error) {
 	if params == nil {
 		params = &ModifyTrustStoreInput{}

@@ -2,6 +2,25 @@
 
 package types
 
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypeAwsOwnedKey           EncryptionType = "AWS_OWNED_KEY"
+	EncryptionTypeCustomerManagedKmsKey EncryptionType = "CUSTOMER_MANAGED_KMS_KEY"
+)
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"AWS_OWNED_KEY",
+		"CUSTOMER_MANAGED_KMS_KEY",
+	}
+}
+
 type ExecutionRedriveFilter string
 
 // Enum values for ExecutionRedriveFilter
@@ -206,6 +225,25 @@ func (HistoryEventType) Values() []HistoryEventType {
 	}
 }
 
+type IncludedData string
+
+// Enum values for IncludedData
+const (
+	IncludedDataAllData      IncludedData = "ALL_DATA"
+	IncludedDataMetadataOnly IncludedData = "METADATA_ONLY"
+)
+
+// Values returns all known values for IncludedData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludedData) Values() []IncludedData {
+	return []IncludedData{
+		"ALL_DATA",
+		"METADATA_ONLY",
+	}
+}
+
 type InspectionLevel string
 
 // Enum values for InspectionLevel
@@ -224,6 +262,31 @@ func (InspectionLevel) Values() []InspectionLevel {
 		"INFO",
 		"DEBUG",
 		"TRACE",
+	}
+}
+
+type KmsKeyState string
+
+// Enum values for KmsKeyState
+const (
+	KmsKeyStateDisabled        KmsKeyState = "DISABLED"
+	KmsKeyStatePendingDeletion KmsKeyState = "PENDING_DELETION"
+	KmsKeyStatePendingImport   KmsKeyState = "PENDING_IMPORT"
+	KmsKeyStateUnavailable     KmsKeyState = "UNAVAILABLE"
+	KmsKeyStateCreating        KmsKeyState = "CREATING"
+)
+
+// Values returns all known values for KmsKeyState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KmsKeyState) Values() []KmsKeyState {
+	return []KmsKeyState{
+		"DISABLED",
+		"PENDING_DELETION",
+		"PENDING_IMPORT",
+		"UNAVAILABLE",
+		"CREATING",
 	}
 }
 

@@ -12,10 +12,11 @@ import (
 	"time"
 )
 
-// Updates an existing state machine by modifying its definition , roleArn , or
-// loggingConfiguration . Running executions will continue to use the previous
-// definition and roleArn . You must include at least one of definition or roleArn
-// or you will receive a MissingRequiredParameter error.
+// Updates an existing state machine by modifying its definition , roleArn ,
+// loggingConfiguration , or EncryptionConfiguration . Running executions will
+// continue to use the previous definition and roleArn . You must include at least
+// one of definition or roleArn or you will receive a MissingRequiredParameter
+// error.
 //
 // A qualified state machine ARN refers to a Distributed Map state defined within
 // a state machine. For example, the qualified state machine ARN
@@ -88,6 +89,9 @@ type UpdateStateMachineInput struct {
 	//
 	// [Amazon States Language]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
 	Definition *string
+
+	// Settings to configure server-side encryption.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Use the LoggingConfiguration data type to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration

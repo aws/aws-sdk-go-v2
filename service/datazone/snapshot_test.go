@@ -722,6 +722,18 @@ func TestCheckSnapshot_GetEnvironmentBlueprintConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEnvironmentCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnvironmentCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEnvironmentCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEnvironmentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEnvironmentProfile(context.Background(), nil, func(o *Options) {
@@ -2178,6 +2190,18 @@ func TestUpdateSnapshot_GetEnvironmentBlueprintConfiguration(t *testing.T) {
 	_, err := svc.GetEnvironmentBlueprintConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEnvironmentBlueprintConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEnvironmentCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEnvironmentCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEnvironmentCredentials")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

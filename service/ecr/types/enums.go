@@ -181,6 +181,25 @@ func (LifecyclePolicyPreviewStatus) Values() []LifecyclePolicyPreviewStatus {
 	}
 }
 
+type RCTAppliedFor string
+
+// Enum values for RCTAppliedFor
+const (
+	RCTAppliedForReplication      RCTAppliedFor = "REPLICATION"
+	RCTAppliedForPullThroughCache RCTAppliedFor = "PULL_THROUGH_CACHE"
+)
+
+// Values returns all known values for RCTAppliedFor. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RCTAppliedFor) Values() []RCTAppliedFor {
+	return []RCTAppliedFor{
+		"REPLICATION",
+		"PULL_THROUGH_CACHE",
+	}
+}
+
 type ReplicationStatus string
 
 // Enum values for ReplicationStatus

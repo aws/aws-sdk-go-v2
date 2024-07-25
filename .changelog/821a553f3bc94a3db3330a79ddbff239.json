@@ -1,0 +1,8 @@
+{
+    "id": "821a553f-3bc9-4a3d-b333-0a79ddbff239",
+    "type": "feature",
+    "description": "CreateRepository API now throws OperationNotAllowedException when the account has been restricted from creating a repository.",
+    "modules": [
+        "service/codecommit"
+    ]
+}

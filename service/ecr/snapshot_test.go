@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreateRepository(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRepositoryCreationTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRepositoryCreationTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRepositoryCreationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_DeleteRepository(t *testing.T) {
 	_, err := svc.DeleteRepository(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRepository")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRepositoryCreationTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRepositoryCreationTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRepositoryCreationTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -271,6 +295,18 @@ func TestCheckSnapshot_DescribeRepositories(t *testing.T) {
 	_, err := svc.DescribeRepositories(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeRepositories")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeRepositoryCreationTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRepositoryCreationTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeRepositoryCreationTemplates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -554,6 +590,18 @@ func TestCheckSnapshot_UpdatePullThroughCacheRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRepositoryCreationTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRepositoryCreationTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRepositoryCreationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UploadLayerPart(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UploadLayerPart(context.Background(), nil, func(o *Options) {
@@ -661,6 +709,18 @@ func TestUpdateSnapshot_CreateRepository(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRepositoryCreationTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRepositoryCreationTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRepositoryCreationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLifecyclePolicy(context.Background(), nil, func(o *Options) {
@@ -702,6 +762,18 @@ func TestUpdateSnapshot_DeleteRepository(t *testing.T) {
 	_, err := svc.DeleteRepository(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRepository")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRepositoryCreationTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRepositoryCreationTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRepositoryCreationTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -786,6 +858,18 @@ func TestUpdateSnapshot_DescribeRepositories(t *testing.T) {
 	_, err := svc.DescribeRepositories(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeRepositories")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeRepositoryCreationTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeRepositoryCreationTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeRepositoryCreationTemplates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1062,6 +1146,18 @@ func TestUpdateSnapshot_UpdatePullThroughCacheRule(t *testing.T) {
 	_, err := svc.UpdatePullThroughCacheRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePullThroughCacheRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRepositoryCreationTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRepositoryCreationTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRepositoryCreationTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -410,6 +410,13 @@ type Cluster struct {
 	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
+	// This value indicates if extended support is enabled or disabled for the cluster.
+	//
+	// [Learn more about EKS Extended Support in the EKS User Guide.]
+	//
+	// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+	UpgradePolicy *UpgradePolicyResponse
+
 	// The Kubernetes server version for the cluster.
 	Version *string
 
@@ -1753,6 +1760,47 @@ type UpdateTaintsPayload struct {
 
 	// Kubernetes taints to remove.
 	RemoveTaints []Taint
+
+	noSmithyDocumentSerde
+}
+
+// The support policy to use for the cluster. Extended support allows you to
+// remain on specific Kubernetes versions for longer. Clusters in extended support
+// have higher costs. The default value is EXTENDED . Use STANDARD to disable
+// extended support.
+//
+// [Learn more about EKS Extended Support in the EKS User Guide.]
+//
+// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+type UpgradePolicyRequest struct {
+
+	// If the cluster is set to EXTENDED , it will enter extended support at the end of
+	// standard support. If the cluster is set to STANDARD , it will be automatically
+	// upgraded at the end of standard support.
+	//
+	// [Learn more about EKS Extended Support in the EKS User Guide.]
+	//
+	// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+	SupportType SupportType
+
+	noSmithyDocumentSerde
+}
+
+// This value indicates if extended support is enabled or disabled for the cluster.
+//
+// [Learn more about EKS Extended Support in the EKS User Guide.]
+//
+// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+type UpgradePolicyResponse struct {
+
+	// If the cluster is set to EXTENDED , it will enter extended support at the end of
+	// standard support. If the cluster is set to STANDARD , it will be automatically
+	// upgraded at the end of standard support.
+	//
+	// [Learn more about EKS Extended Support in the EKS User Guide.]
+	//
+	// [Learn more about EKS Extended Support in the EKS User Guide.]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+	SupportType SupportType
 
 	noSmithyDocumentSerde
 }

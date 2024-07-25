@@ -194,6 +194,18 @@ func TestCheckSnapshot_DeleteRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSharedTrustStoreAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSharedTrustStoreAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSharedTrustStoreAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTargetGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTargetGroup(context.Background(), nil, func(o *Options) {
@@ -391,6 +403,18 @@ func TestCheckSnapshot_DescribeTrustStores(t *testing.T) {
 	_, err := svc.DescribeTrustStores(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeTrustStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -721,6 +745,18 @@ func TestUpdateSnapshot_DeleteRule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteSharedTrustStoreAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSharedTrustStoreAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSharedTrustStoreAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTargetGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTargetGroup(context.Background(), nil, func(o *Options) {
@@ -918,6 +954,18 @@ func TestUpdateSnapshot_DescribeTrustStores(t *testing.T) {
 	_, err := svc.DescribeTrustStores(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTrustStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

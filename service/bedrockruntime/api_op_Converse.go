@@ -14,9 +14,12 @@ import (
 
 // Sends messages to the specified Amazon Bedrock model. Converse provides a
 // consistent interface that works with all models that support messages. This
-// allows you to write code once and use it with different models. Should a model
-// have unique inference parameters, you can also pass those unique parameters to
-// the model.
+// allows you to write code once and use it with different models. If a model has
+// unique inference parameters, you can also pass those unique parameters to the
+// model.
+//
+// Amazon Bedrock doesn't store any text, images, or documents that you provide as
+// content. The data is only used to generate the response.
 //
 // For information about the Converse API, see Use the Converse API in the Amazon
 // Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse

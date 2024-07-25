@@ -1090,6 +1090,26 @@ func (m *validateOpGetEnvironmentBlueprint) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEnvironmentCredentials struct {
+}
+
+func (*validateOpGetEnvironmentCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEnvironmentCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEnvironmentCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEnvironmentCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEnvironment struct {
 }
 
@@ -2644,6 +2664,10 @@ func addOpGetEnvironmentBlueprintConfigurationValidationMiddleware(stack *middle
 
 func addOpGetEnvironmentBlueprintValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEnvironmentBlueprint{}, middleware.After)
+}
+
+func addOpGetEnvironmentCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEnvironmentCredentials{}, middleware.After)
 }
 
 func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -5077,6 +5101,24 @@ func validateOpGetEnvironmentBlueprintInput(v *GetEnvironmentBlueprintInput) err
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEnvironmentCredentialsInput(v *GetEnvironmentCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEnvironmentCredentialsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

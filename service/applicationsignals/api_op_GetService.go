@@ -34,6 +34,8 @@ type GetServiceInput struct {
 	// HTTP Query API, it is formatted as be epoch time in seconds. For example:
 	// 1698778057
 	//
+	// Your requested start time will be rounded to the nearest hour.
+	//
 	// This member is required.
 	EndTime *time.Time
 
@@ -63,6 +65,8 @@ type GetServiceInput struct {
 	// HTTP Query API, it is formatted as be epoch time in seconds. For example:
 	// 1698778057
 	//
+	// Your requested start time will be rounded to the nearest hour.
+	//
 	// This member is required.
 	StartTime *time.Time
 
@@ -73,6 +77,9 @@ type GetServiceOutput struct {
 
 	// The end time of the data included in the response. In a raw HTTP Query API, it
 	// is formatted as be epoch time in seconds. For example: 1698778057 .
+	//
+	// This displays the time that Application Signals used for the request. It might
+	// not match your request exactly, because it was rounded to the nearest hour.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -85,8 +92,22 @@ type GetServiceOutput struct {
 	// The start time of the data included in the response. In a raw HTTP Query API,
 	// it is formatted as be epoch time in seconds. For example: 1698778057 .
 	//
+	// This displays the time that Application Signals used for the request. It might
+	// not match your request exactly, because it was rounded to the nearest hour.
+	//
 	// This member is required.
 	StartTime *time.Time
+
+	// An array of string-to-string maps that each contain information about one log
+	// group associated with this service. Each string-to-string map includes the
+	// following fields:
+	//
+	//   - "Type": "AWS::Resource"
+	//
+	//   - "ResourceType": "AWS::Logs::LogGroup"
+	//
+	//   - "Identifier": "name-of-log-group"
+	LogGroupReferences []map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -51,6 +51,12 @@ type DescribeExecutionInput struct {
 	// This member is required.
 	ExecutionArn *string
 
+	// If your state machine definition is encrypted with a KMS key, callers must have
+	// kms:Decrypt permission to decrypt the definition. Alternatively, you can call
+	// DescribeStateMachine API with includedData = METADATA_ONLY to get a successful
+	// response without the encrypted definition.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
 }
 

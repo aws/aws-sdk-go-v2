@@ -3867,6 +3867,32 @@ func (e *NumberOfRuleTemplatesExceededException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
+// The requested action is not allowed.
+type OperationNotAllowedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OperationNotAllowedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OperationNotAllowedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OperationNotAllowedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "OperationNotAllowedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *OperationNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The pull request has already had its approval rules set to override.
 type OverrideAlreadySetException struct {
 	Message *string

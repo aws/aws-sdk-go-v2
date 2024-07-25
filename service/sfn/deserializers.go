@@ -123,11 +123,23 @@ func awsAwsjson10_deserializeOpErrorCreateActivity(response *smithyhttp.Response
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("ActivityAlreadyExists", errorCode):
+		return awsAwsjson10_deserializeErrorActivityAlreadyExists(response, errorBody)
+
 	case strings.EqualFold("ActivityLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorActivityLimitExceeded(response, errorBody)
 
+	case strings.EqualFold("InvalidEncryptionConfiguration", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidEncryptionConfiguration(response, errorBody)
+
 	case strings.EqualFold("InvalidName", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidName(response, errorBody)
+
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
 
 	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsjson10_deserializeErrorTooManyTags(response, errorBody)
@@ -245,6 +257,9 @@ func awsAwsjson10_deserializeOpErrorCreateStateMachine(response *smithyhttp.Resp
 	case strings.EqualFold("InvalidDefinition", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidDefinition(response, errorBody)
 
+	case strings.EqualFold("InvalidEncryptionConfiguration", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidEncryptionConfiguration(response, errorBody)
+
 	case strings.EqualFold("InvalidLoggingConfiguration", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidLoggingConfiguration(response, errorBody)
 
@@ -253,6 +268,12 @@ func awsAwsjson10_deserializeOpErrorCreateStateMachine(response *smithyhttp.Resp
 
 	case strings.EqualFold("InvalidTracingConfiguration", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidTracingConfiguration(response, errorBody)
+
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
 
 	case strings.EqualFold("StateMachineAlreadyExists", errorCode):
 		return awsAwsjson10_deserializeErrorStateMachineAlreadyExists(response, errorBody)
@@ -1063,6 +1084,15 @@ func awsAwsjson10_deserializeOpErrorDescribeExecution(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidArn", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidArn(response, errorBody)
 
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1279,6 +1309,15 @@ func awsAwsjson10_deserializeOpErrorDescribeStateMachine(response *smithyhttp.Re
 	switch {
 	case strings.EqualFold("InvalidArn", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidArn(response, errorBody)
+
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
 
 	case strings.EqualFold("StateMachineDoesNotExist", errorCode):
 		return awsAwsjson10_deserializeErrorStateMachineDoesNotExist(response, errorBody)
@@ -1506,6 +1545,15 @@ func awsAwsjson10_deserializeOpErrorDescribeStateMachineForExecution(response *s
 	case strings.EqualFold("InvalidArn", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidArn(response, errorBody)
 
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1619,6 +1667,15 @@ func awsAwsjson10_deserializeOpErrorGetActivityTask(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidArn", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidArn(response, errorBody)
 
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1731,6 +1788,15 @@ func awsAwsjson10_deserializeOpErrorGetExecutionHistory(response *smithyhttp.Res
 
 	case strings.EqualFold("InvalidToken", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidToken(response, errorBody)
+
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2871,6 +2937,15 @@ func awsAwsjson10_deserializeOpErrorSendTaskFailure(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidToken", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidToken(response, errorBody)
 
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
+
 	case strings.EqualFold("TaskDoesNotExist", errorCode):
 		return awsAwsjson10_deserializeErrorTaskDoesNotExist(response, errorBody)
 
@@ -3100,6 +3175,15 @@ func awsAwsjson10_deserializeOpErrorSendTaskSuccess(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidToken", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidToken(response, errorBody)
 
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
+
 	case strings.EqualFold("TaskDoesNotExist", errorCode):
 		return awsAwsjson10_deserializeErrorTaskDoesNotExist(response, errorBody)
 
@@ -3225,6 +3309,15 @@ func awsAwsjson10_deserializeOpErrorStartExecution(response *smithyhttp.Response
 	case strings.EqualFold("InvalidName", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidName(response, errorBody)
 
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
+
 	case strings.EqualFold("StateMachineDeleting", errorCode):
 		return awsAwsjson10_deserializeErrorStateMachineDeleting(response, errorBody)
 
@@ -3347,6 +3440,15 @@ func awsAwsjson10_deserializeOpErrorStartSyncExecution(response *smithyhttp.Resp
 	case strings.EqualFold("InvalidName", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidName(response, errorBody)
 
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
+
 	case strings.EqualFold("StateMachineDeleting", errorCode):
 		return awsAwsjson10_deserializeErrorStateMachineDeleting(response, errorBody)
 
@@ -3465,6 +3567,15 @@ func awsAwsjson10_deserializeOpErrorStopExecution(response *smithyhttp.Response,
 
 	case strings.EqualFold("InvalidArn", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidArn(response, errorBody)
+
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsInvalidStateException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -4034,11 +4145,20 @@ func awsAwsjson10_deserializeOpErrorUpdateStateMachine(response *smithyhttp.Resp
 	case strings.EqualFold("InvalidDefinition", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidDefinition(response, errorBody)
 
+	case strings.EqualFold("InvalidEncryptionConfiguration", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidEncryptionConfiguration(response, errorBody)
+
 	case strings.EqualFold("InvalidLoggingConfiguration", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidLoggingConfiguration(response, errorBody)
 
 	case strings.EqualFold("InvalidTracingConfiguration", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidTracingConfiguration(response, errorBody)
+
+	case strings.EqualFold("KmsAccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("KmsThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorKmsThrottlingException(response, errorBody)
 
 	case strings.EqualFold("MissingRequiredParameter", errorCode):
 		return awsAwsjson10_deserializeErrorMissingRequiredParameter(response, errorBody)
@@ -4289,6 +4409,41 @@ func awsAwsjson10_deserializeOpErrorValidateStateMachineDefinition(response *smi
 		return genericError
 
 	}
+}
+
+func awsAwsjson10_deserializeErrorActivityAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ActivityAlreadyExists{}
+	err := awsAwsjson10_deserializeDocumentActivityAlreadyExists(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
 }
 
 func awsAwsjson10_deserializeErrorActivityDoesNotExist(response *smithyhttp.Response, errorBody *bytes.Reader) error {
@@ -4641,6 +4796,41 @@ func awsAwsjson10_deserializeErrorInvalidDefinition(response *smithyhttp.Respons
 	return output
 }
 
+func awsAwsjson10_deserializeErrorInvalidEncryptionConfiguration(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidEncryptionConfiguration{}
+	err := awsAwsjson10_deserializeDocumentInvalidEncryptionConfiguration(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson10_deserializeErrorInvalidExecutionInput(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -4836,6 +5026,111 @@ func awsAwsjson10_deserializeErrorInvalidTracingConfiguration(response *smithyht
 
 	output := &types.InvalidTracingConfiguration{}
 	err := awsAwsjson10_deserializeDocumentInvalidTracingConfiguration(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson10_deserializeErrorKmsAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.KmsAccessDeniedException{}
+	err := awsAwsjson10_deserializeDocumentKmsAccessDeniedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson10_deserializeErrorKmsInvalidStateException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.KmsInvalidStateException{}
+	err := awsAwsjson10_deserializeDocumentKmsInvalidStateException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson10_deserializeErrorKmsThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.KmsThrottlingException{}
+	err := awsAwsjson10_deserializeDocumentKmsThrottlingException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -5269,6 +5564,46 @@ func awsAwsjson10_deserializeErrorValidationException(response *smithyhttp.Respo
 
 	errorBody.Seek(0, io.SeekStart)
 	return output
+}
+
+func awsAwsjson10_deserializeDocumentActivityAlreadyExists(v **types.ActivityAlreadyExists, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActivityAlreadyExists
+	if *v == nil {
+		sv = &types.ActivityAlreadyExists{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsAwsjson10_deserializeDocumentActivityDoesNotExist(v **types.ActivityDoesNotExist, value interface{}) error {
@@ -5968,6 +6303,68 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEncryptionConfiguration(v **types.EncryptionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncryptionConfiguration
+	if *v == nil {
+		sv = &types.EncryptionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kmsDataKeyReusePeriodSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected KmsDataKeyReusePeriodSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.KmsDataKeyReusePeriodSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.EncryptionType(jtv)
 			}
 
 		default:
@@ -7312,6 +7709,46 @@ func awsAwsjson10_deserializeDocumentInvalidDefinition(v **types.InvalidDefiniti
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInvalidEncryptionConfiguration(v **types.InvalidEncryptionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidEncryptionConfiguration
+	if *v == nil {
+		sv = &types.InvalidEncryptionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInvalidExecutionInput(v **types.InvalidExecutionInput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7528,6 +7965,135 @@ func awsAwsjson10_deserializeDocumentInvalidTracingConfiguration(v **types.Inval
 	var sv *types.InvalidTracingConfiguration
 	if *v == nil {
 		sv = &types.InvalidTracingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentKmsAccessDeniedException(v **types.KmsAccessDeniedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KmsAccessDeniedException
+	if *v == nil {
+		sv = &types.KmsAccessDeniedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentKmsInvalidStateException(v **types.KmsInvalidStateException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KmsInvalidStateException
+	if *v == nil {
+		sv = &types.KmsInvalidStateException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "kmsKeyState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyState to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyState = types.KmsKeyState(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentKmsThrottlingException(v **types.KmsThrottlingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KmsThrottlingException
+	if *v == nil {
+		sv = &types.KmsThrottlingException{}
 	} else {
 		sv = *v
 	}
@@ -10817,6 +11383,11 @@ func awsAwsjson10_deserializeOpDocumentDescribeActivityOutput(v **DescribeActivi
 				}
 			}
 
+		case "encryptionConfiguration":
+			if err := awsAwsjson10_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11378,6 +11949,11 @@ func awsAwsjson10_deserializeOpDocumentDescribeStateMachineForExecutionOutput(v 
 				sv.Definition = ptr.String(jtv)
 			}
 
+		case "encryptionConfiguration":
+			if err := awsAwsjson10_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11521,6 +12097,11 @@ func awsAwsjson10_deserializeOpDocumentDescribeStateMachineOutput(v **DescribeSt
 					return fmt.Errorf("expected VersionDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "encryptionConfiguration":
+			if err := awsAwsjson10_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
+				return err
 			}
 
 		case "label":

@@ -407,6 +407,17 @@ type Service struct {
 	//   collected or specifies what was used for the source of telemetry data.
 	AttributeMaps []map[string]string
 
+	// An array of string-to-string maps that each contain information about one log
+	// group associated with this service. Each string-to-string map includes the
+	// following fields:
+	//
+	//   - "Type": "AWS::Resource"
+	//
+	//   - "ResourceType": "AWS::Logs::LogGroup"
+	//
+	//   - "Identifier": "name-of-log-group"
+	LogGroupReferences []map[string]string
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "833f26a7-29da-4e94-a884-8701aa262048",
+    "type": "feature",
+    "description": "You can now log events that are related to TLS inspection, in addition to the existing alert and flow logging.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

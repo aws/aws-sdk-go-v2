@@ -10820,6 +10820,11 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				return err
 			}
 
+		case "upgradePolicy":
+			if err := awsRestjson1_deserializeDocumentUpgradePolicyResponse(&sv.UpgradePolicy, value); err != nil {
+				return err
+			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15063,6 +15068,46 @@ func awsRestjson1_deserializeDocumentUpdateParams(v *[]types.UpdateParam, value 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpgradePolicyResponse(v **types.UpgradePolicyResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpgradePolicyResponse
+	if *v == nil {
+		sv = &types.UpgradePolicyResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "supportType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SupportType to be of type string, got %T instead", value)
+				}
+				sv.SupportType = types.SupportType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -7,6 +7,32 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// Activity already exists. EncryptionConfiguration may not be updated.
+type ActivityAlreadyExists struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ActivityAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ActivityAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ActivityAlreadyExists) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ActivityAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ActivityAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified activity does not exist.
 type ActivityDoesNotExist struct {
 	Message *string
@@ -277,6 +303,35 @@ func (e *InvalidDefinition) ErrorCode() string {
 }
 func (e *InvalidDefinition) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Received when encryptionConfiguration is specified but various conditions exist
+// which make the configuration invalid. For example, if type is set to
+// CUSTOMER_MANAGED_KMS_KEY , but kmsKeyId is null, or kmsDataKeyReusePeriodSeconds
+// is not between 60 and 900, or the KMS key is not symmetric or inactive.
+type InvalidEncryptionConfiguration struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidEncryptionConfiguration) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidEncryptionConfiguration) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidEncryptionConfiguration) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidEncryptionConfiguration"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidEncryptionConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The provided JSON input data is not valid.
 type InvalidExecutionInput struct {
 	Message *string
@@ -303,6 +358,7 @@ func (e *InvalidExecutionInput) ErrorCode() string {
 }
 func (e *InvalidExecutionInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Configuration is not valid.
 type InvalidLoggingConfiguration struct {
 	Message *string
 
@@ -432,6 +488,87 @@ func (e *InvalidTracingConfiguration) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTracingConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Either your KMS key policy or API caller does not have the required permissions.
+type KmsAccessDeniedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *KmsAccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *KmsAccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *KmsAccessDeniedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "KmsAccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *KmsAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The KMS key is not in valid state, for example: Disabled or Deleted.
+type KmsInvalidStateException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	KmsKeyState KmsKeyState
+
+	noSmithyDocumentSerde
+}
+
+func (e *KmsInvalidStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *KmsInvalidStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *KmsInvalidStateException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "KmsInvalidStateException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *KmsInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Received when KMS returns ThrottlingException for a KMS call that Step
+// Functions makes on behalf of the caller.
+type KmsThrottlingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *KmsThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *KmsThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *KmsThrottlingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "KmsThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *KmsThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request is missing a required parameter. This error occurs if both definition
 // and roleArn are not specified.
@@ -622,6 +759,7 @@ func (e *StateMachineLimitExceeded) ErrorCode() string {
 }
 func (e *StateMachineLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// State machine type is not supported.
 type StateMachineTypeNotSupported struct {
 	Message *string
 

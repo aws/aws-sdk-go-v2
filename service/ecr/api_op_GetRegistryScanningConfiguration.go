@@ -33,7 +33,7 @@ type GetRegistryScanningConfigurationInput struct {
 
 type GetRegistryScanningConfigurationOutput struct {
 
-	// The ID of the registry.
+	// The registry ID associated with the request.
 	RegistryId *string
 
 	// The scanning configuration for the registry.

@@ -44,6 +44,12 @@ type DescribeStateMachineForExecutionInput struct {
 	// This member is required.
 	ExecutionArn *string
 
+	// If your state machine definition is encrypted with a KMS key, callers must have
+	// kms:Decrypt permission to decrypt the definition. Alternatively, you can call
+	// the API with includedData = METADATA_ONLY to get a successful response without
+	// the encrypted definition.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
 }
 
@@ -78,6 +84,9 @@ type DescribeStateMachineForExecutionOutput struct {
 	//
 	// This member is required.
 	UpdateDate *time.Time
+
+	// Settings to configure server-side encryption.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// A user-defined or an auto-generated string that identifies a Map state. This
 	// ﬁeld is returned only if the executionArn is a child workflow execution that

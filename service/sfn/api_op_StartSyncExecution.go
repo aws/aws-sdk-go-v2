@@ -44,6 +44,12 @@ type StartSyncExecutionInput struct {
 	// This member is required.
 	StateMachineArn *string
 
+	// If your state machine definition is encrypted with a KMS key, callers must have
+	// kms:Decrypt permission to decrypt the definition. Alternatively, you can call
+	// the API with includedData = METADATA_ONLY to get a successful response without
+	// the encrypted definition.
+	IncludedData types.IncludedData
+
 	// The string that contains the JSON input data for the execution, for example:
 	//
 	//     "input": "{\"first_name\" : \"test\"}"

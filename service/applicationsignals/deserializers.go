@@ -600,6 +600,11 @@ func awsRestjson1_deserializeOpDocumentGetServiceOutput(v **GetServiceOutput, va
 				}
 			}
 
+		case "LogGroupReferences":
+			if err := awsRestjson1_deserializeDocumentLogGroupReferences(&sv.LogGroupReferences, value); err != nil {
+				return err
+			}
+
 		case "Service":
 			if err := awsRestjson1_deserializeDocumentService(&sv.Service, value); err != nil {
 				return err
@@ -2979,6 +2984,38 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLogGroupReferences(v *[]map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []map[string]string
+	if *v == nil {
+		cv = []map[string]string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col map[string]string
+		if err := awsRestjson1_deserializeDocumentAttributes(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMetric(v **types.Metric, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3465,6 +3502,11 @@ func awsRestjson1_deserializeDocumentService(v **types.Service, value interface{
 
 		case "KeyAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.KeyAttributes, value); err != nil {
+				return err
+			}
+
+		case "LogGroupReferences":
+			if err := awsRestjson1_deserializeDocumentLogGroupReferences(&sv.LogGroupReferences, value); err != nil {
 				return err
 			}
 

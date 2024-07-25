@@ -686,6 +686,25 @@ func (ResolveConflicts) Values() []ResolveConflicts {
 	}
 }
 
+type SupportType string
+
+// Enum values for SupportType
+const (
+	SupportTypeStandard SupportType = "STANDARD"
+	SupportTypeExtended SupportType = "EXTENDED"
+)
+
+// Values returns all known values for SupportType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupportType) Values() []SupportType {
+	return []SupportType{
+		"STANDARD",
+		"EXTENDED",
+	}
+}
+
 type TaintEffect string
 
 // Enum values for TaintEffect
@@ -739,6 +758,7 @@ const (
 	UpdateParamTypeSubnets                  UpdateParamType = "Subnets"
 	UpdateParamTypeAuthenticationMode       UpdateParamType = "AuthenticationMode"
 	UpdateParamTypePodIdentityAssociations  UpdateParamType = "PodIdentityAssociations"
+	UpdateParamTypeUpgradePolicy            UpdateParamType = "UpgradePolicy"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -775,6 +795,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"Subnets",
 		"AuthenticationMode",
 		"PodIdentityAssociations",
+		"UpgradePolicy",
 	}
 }
 
@@ -815,6 +836,7 @@ const (
 	UpdateTypeAddonUpdate                        UpdateType = "AddonUpdate"
 	UpdateTypeVpcConfigUpdate                    UpdateType = "VpcConfigUpdate"
 	UpdateTypeAccessConfigUpdate                 UpdateType = "AccessConfigUpdate"
+	UpdateTypeUpgradePolicyUpdate                UpdateType = "UpgradePolicyUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -833,5 +855,6 @@ func (UpdateType) Values() []UpdateType {
 		"AddonUpdate",
 		"VpcConfigUpdate",
 		"AccessConfigUpdate",
+		"UpgradePolicyUpdate",
 	}
 }

@@ -799,6 +799,60 @@ func (e *ServerException) ErrorCode() string {
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The repository creation template already exists. Specify a unique prefix and
+// try again.
+type TemplateAlreadyExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TemplateAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TemplateAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TemplateAlreadyExistsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TemplateAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TemplateAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified repository creation template can't be found. Verify the registry
+// ID and prefix and try again.
+type TemplateNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TemplateNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TemplateNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TemplateNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TemplateNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TemplateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The list of tags on the repository is over the limit. The maximum number of
 // tags that can be applied to a repository is 50.
 type TooManyTagsException struct {

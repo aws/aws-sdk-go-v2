@@ -74,6 +74,17 @@ type DescribeStateMachineInput struct {
 	// This member is required.
 	StateMachineArn *string
 
+	// If your state machine definition is encrypted with a KMS key, callers must have
+	// kms:Decrypt permission to decrypt the definition. Alternatively, you can call
+	// the API with includedData = METADATA_ONLY to get a successful response without
+	// the encrypted definition.
+	//
+	// When calling a labelled ARN for an encrypted state machine, the includedData =
+	// METADATA_ONLY parameter will not apply because Step Functions needs to decrypt
+	// the entire state machine definition to get the Distributed Map state’s
+	// definition. In this case, the API caller needs to have kms:Decrypt permission.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
 }
 
@@ -87,6 +98,9 @@ type DescribeStateMachineOutput struct {
 	CreationDate *time.Time
 
 	// The Amazon States Language definition of the state machine. See [Amazon States Language].
+	//
+	// If called with includedData = METADATA_ONLY , the returned definition will be {}
+	// .
 	//
 	// [Amazon States Language]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
 	//
@@ -136,6 +150,9 @@ type DescribeStateMachineOutput struct {
 
 	// The description of the state machine version.
 	Description *string
+
+	// Settings to configure server-side encryption.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// A user-defined or an auto-generated string that identifies a Map state. This
 	// parameter is present only if the stateMachineArn specified in input is a

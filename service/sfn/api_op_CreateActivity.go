@@ -69,6 +69,9 @@ type CreateActivityInput struct {
 	// This member is required.
 	Name *string
 
+	// Settings to configure server-side encryption.
+	EncryptionConfiguration *types.EncryptionConfiguration
+
 	// The list of tags to add to a resource.
 	//
 	// An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the Amazon Web

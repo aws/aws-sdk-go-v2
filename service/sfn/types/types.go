@@ -159,6 +159,43 @@ type CloudWatchLogsLogGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Settings to configure server-side encryption.
+//
+// For additional control over security, you can encrypt your data using a
+// customer-managed key for Step Functions state machines and activities. You can
+// configure a symmetric KMS key and data key reuse period when creating or
+// updating a State Machine, and when creating an Activity. The execution history
+// and state machine definition will be encrypted with the key applied to the State
+// Machine. Activity inputs will be encrypted with the key applied to the Activity.
+//
+// Step Functions automatically enables encryption at rest using Amazon Web
+// Services owned keys at no charge. However, KMS charges apply when using a
+// customer managed key. For more information about pricing, see [Key Management Service pricing].
+//
+// For more information on KMS, see [What is Key Management Service?]
+//
+// [Key Management Service pricing]: https://aws.amazon.com/kms/pricing/
+// [What is Key Management Service?]: https://docs.aws.amazon.com/kms/latest/developerguide/overview.html
+type EncryptionConfiguration struct {
+
+	// Encryption type
+	//
+	// This member is required.
+	Type EncryptionType
+
+	// Maximum duration that Step Functions will reuse data keys. When the period
+	// expires, Step Functions will call GenerateDataKey . Only applies to customer
+	// managed keys.
+	KmsDataKeyReusePeriodSeconds *int32
+
+	// An alias, alias ARN, key ID, or key ARN of a symmetric encryption KMS key to
+	// encrypt data. To specify a KMS key in a different Amazon Web Services account,
+	// you must use the key ARN or alias ARN.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about an abort of an execution.
 type ExecutionAbortedEventDetails struct {
 

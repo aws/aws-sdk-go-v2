@@ -139,7 +139,7 @@ type DescribeImagesFilter struct {
 //
 // By default, when no encryption configuration is set or the AES256 encryption
 // type is used, Amazon ECR uses server-side encryption with Amazon S3-managed
-// encryption keys which encrypts your data at rest using an AES-256 encryption
+// encryption keys which encrypts your data at rest using an AES256 encryption
 // algorithm. This does not require any action on your part.
 //
 // For more control over the encryption of the contents of your repository, you
@@ -161,7 +161,7 @@ type EncryptionConfiguration struct {
 	//
 	// If you use the AES256 encryption type, Amazon ECR uses server-side encryption
 	// with Amazon S3-managed encryption keys which encrypts the images in the
-	// repository using an AES-256 encryption algorithm. For more information, see [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]in
+	// repository using an AES256 encryption algorithm. For more information, see [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]in
 	// the Amazon Simple Storage Service Console Developer Guide.
 	//
 	// [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
@@ -174,6 +174,38 @@ type EncryptionConfiguration struct {
 	// The alias, key ID, or full ARN of the KMS key can be specified. The key must
 	// exist in the same Region as the repository. If no key is specified, the default
 	// Amazon Web Services managed KMS key for Amazon ECR will be used.
+	KmsKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The encryption configuration to associate with the repository creation template.
+type EncryptionConfigurationForRepositoryCreationTemplate struct {
+
+	// The encryption type to use.
+	//
+	// If you use the KMS encryption type, the contents of the repository will be
+	// encrypted using server-side encryption with Key Management Service key stored in
+	// KMS. When you use KMS to encrypt your data, you can either use the default
+	// Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS key,
+	// which you already created. For more information, see [Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS)]in the Amazon Simple
+	// Storage Service Console Developer Guide.
+	//
+	// If you use the AES256 encryption type, Amazon ECR uses server-side encryption
+	// with Amazon S3-managed encryption keys which encrypts the images in the
+	// repository using an AES256 encryption algorithm. For more information, see [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]in
+	// the Amazon Simple Storage Service Console Developer Guide.
+	//
+	// [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+	// [Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+	//
+	// This member is required.
+	EncryptionType EncryptionType
+
+	// If you use the KMS encryption type, specify the KMS key to use for encryption.
+	// The full ARN of the KMS key must be specified. The key must exist in the same
+	// Region as the repository. If no key is specified, the default Amazon Web
+	// Services managed KMS key for Amazon ECR will be used.
 	KmsKey *string
 
 	noSmithyDocumentSerde
@@ -736,6 +768,58 @@ type Repository struct {
 	// The URI for the repository. You can use this URI for container image push and
 	// pull operations.
 	RepositoryUri *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the repository creation template associated with the request.
+type RepositoryCreationTemplate struct {
+
+	// A list of enumerable Strings representing the repository creation scenarios
+	// that this template will apply towards. The two supported scenarios are
+	// PULL_THROUGH_CACHE and REPLICATION
+	AppliedFor []RCTAppliedFor
+
+	// The date and time, in JavaScript date format, when the repository creation
+	// template was created.
+	CreatedAt *time.Time
+
+	// The ARN of the role to be assumed by Amazon ECR.
+	CustomRoleArn *string
+
+	// The description associated with the repository creation template.
+	Description *string
+
+	// The encryption configuration associated with the repository creation template.
+	EncryptionConfiguration *EncryptionConfigurationForRepositoryCreationTemplate
+
+	// The tag mutability setting for the repository. If this parameter is omitted,
+	// the default setting of MUTABLE will be used which will allow image tags to be
+	// overwritten. If IMMUTABLE is specified, all image tags within the repository
+	// will be immutable which will prevent them from being overwritten.
+	ImageTagMutability ImageTagMutability
+
+	// The lifecycle policy to use for repositories created using the template.
+	LifecyclePolicy *string
+
+	// The repository namespace prefix associated with the repository creation
+	// template.
+	Prefix *string
+
+	// he repository policy to apply to repositories created using the template. A
+	// repository policy is a permissions policy associated with a repository to
+	// control access permissions.
+	RepositoryPolicy *string
+
+	// The metadata to apply to the repository to help you categorize and organize.
+	// Each tag consists of a key and an optional value, both of which you define. Tag
+	// keys can have a maximum character length of 128 characters, and tag values can
+	// have a maximum length of 256 characters.
+	ResourceTags []Tag
+
+	// The date and time, in JavaScript date format, when the repository creation
+	// template was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }

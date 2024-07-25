@@ -244,6 +244,9 @@ type InstanceTypeItem struct {
 	// The instance type.
 	InstanceType *string
 
+	// The number of default VCPUs in an instance type.
+	VCPUs *int32
+
 	noSmithyDocumentSerde
 }
 

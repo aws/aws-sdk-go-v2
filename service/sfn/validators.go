@@ -826,6 +826,21 @@ func addOpValidateStateMachineDefinitionValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpValidateStateMachineDefinition{}, middleware.After)
 }
 
+func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRoutingConfigurationList(v []types.RoutingConfigurationListItem) error {
 	if v == nil {
 		return nil
@@ -865,6 +880,11 @@ func validateOpCreateActivityInput(v *CreateActivityInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateActivityInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -908,6 +928,11 @@ func validateOpCreateStateMachineInput(v *CreateStateMachineInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1375,6 +1400,11 @@ func validateOpUpdateStateMachineInput(v *UpdateStateMachineInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStateMachineInput"}
 	if v.StateMachineArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

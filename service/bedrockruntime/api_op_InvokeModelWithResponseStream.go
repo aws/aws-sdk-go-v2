@@ -19,7 +19,8 @@ import (
 // To see if a model supports streaming, call [GetFoundationModel] and check the
 // responseStreamingSupported field in the response.
 //
-// The CLI doesn't support InvokeModelWithResponseStream .
+// The CLI doesn't support streaming operations in Amazon Bedrock, including
+// InvokeModelWithResponseStream .
 //
 // For example code, see Invoke model with streaming code example in the Amazon
 // Bedrock User Guide.

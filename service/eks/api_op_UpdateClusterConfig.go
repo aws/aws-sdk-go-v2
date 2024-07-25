@@ -87,6 +87,11 @@ type UpdateClusterConfigInput struct {
 	// An object representing the VPC configuration to use for an Amazon EKS cluster.
 	ResourcesVpcConfig *types.VpcConfigRequest
 
+	// You can enable or disable extended support for clusters currently on standard
+	// support. You cannot disable extended support once it starts. You must enable
+	// extended support before your cluster exits standard support.
+	UpgradePolicy *types.UpgradePolicyRequest
+
 	noSmithyDocumentSerde
 }
 

@@ -51,7 +51,7 @@ type CreateRepositoryInput struct {
 	// If no key is specified, the default aws/codecommit Amazon Web Services managed
 	// key is used.
 	//
-	// [KeyId]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+	// [KeyId]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
 	KmsKeyId *string
 
 	// A comment or description about the new repository.

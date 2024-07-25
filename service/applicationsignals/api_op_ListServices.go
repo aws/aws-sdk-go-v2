@@ -37,12 +37,16 @@ type ListServicesInput struct {
 	// HTTP Query API, it is formatted as be epoch time in seconds. For example:
 	// 1698778057
 	//
+	// Your requested start time will be rounded to the nearest hour.
+	//
 	// This member is required.
 	EndTime *time.Time
 
 	// The start of the time period to retrieve information about. When used in a raw
 	// HTTP Query API, it is formatted as be epoch time in seconds. For example:
 	// 1698778057
+	//
+	// Your requested start time will be rounded to the nearest hour.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -64,6 +68,9 @@ type ListServicesOutput struct {
 	// in a raw HTTP Query API, it is formatted as be epoch time in seconds. For
 	// example: 1698778057
 	//
+	// This displays the time that Application Signals used for the request. It might
+	// not match your request exactly, because it was rounded to the nearest hour.
+	//
 	// This member is required.
 	EndTime *time.Time
 
@@ -78,6 +85,9 @@ type ListServicesOutput struct {
 	// The start of the time period that the returned information applies to. When
 	// used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For
 	// example: 1698778057
+	//
+	// This displays the time that Application Signals used for the request. It might
+	// not match your request exactly, because it was rounded to the nearest hour.
 	//
 	// This member is required.
 	StartTime *time.Time

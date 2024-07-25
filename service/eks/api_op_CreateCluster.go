@@ -141,6 +141,10 @@ type CreateClusterInput struct {
 	// other cluster or Amazon Web Services resources.
 	Tags map[string]string
 
+	// New clusters, by default, have extended support enabled. You can disable
+	// extended support when creating a cluster by setting this value to STANDARD .
+	UpgradePolicy *types.UpgradePolicyRequest
+
 	// The desired Kubernetes version for your cluster. If you don't specify a value
 	// here, the default version available in Amazon EKS is used.
 	//

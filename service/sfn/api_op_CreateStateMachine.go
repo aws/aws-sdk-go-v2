@@ -21,17 +21,23 @@ import (
 // If you set the publish parameter of this API action to true , it publishes
 // version 1 as the first revision of the state machine.
 //
+// For additional control over security, you can encrypt your data using a
+// customer-managed key for Step Functions state machines. You can configure a
+// symmetric KMS key and data key reuse period when creating or updating a State
+// Machine. The execution history and state machine definition will be encrypted
+// with the key applied to the State Machine.
+//
 // This operation is eventually consistent. The results are best effort and may
 // not reflect very recent updates and changes.
 //
 // CreateStateMachine is an idempotent API. Subsequent requests won’t create a
 // duplicate resource if it was already created. CreateStateMachine 's idempotency
 // check is based on the state machine name , definition , type ,
-// LoggingConfiguration , and TracingConfiguration . The check is also based on the
-// publish and versionDescription parameters. If a following request has a
-// different roleArn or tags , Step Functions will ignore these differences and
-// treat it as an idempotent request of the previous. In this case, roleArn and
-// tags will not be updated, even if they are different.
+// LoggingConfiguration , TracingConfiguration , and EncryptionConfiguration The
+// check is also based on the publish and versionDescription parameters. If a
+// following request has a different roleArn or tags , Step Functions will ignore
+// these differences and treat it as an idempotent request of the previous. In this
+// case, roleArn and tags will not be updated, even if they are different.
 //
 // [Amazon States Language]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
 func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMachineInput, optFns ...func(*Options)) (*CreateStateMachineOutput, error) {
@@ -82,6 +88,9 @@ type CreateStateMachineInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// Settings to configure server-side encryption.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Defines what execution history events are logged and where they are logged.
 	//

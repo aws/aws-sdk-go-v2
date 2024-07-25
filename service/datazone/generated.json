@@ -63,6 +63,7 @@
         "api_op_GetEnvironmentAction.go",
         "api_op_GetEnvironmentBlueprint.go",
         "api_op_GetEnvironmentBlueprintConfiguration.go",
+        "api_op_GetEnvironmentCredentials.go",
         "api_op_GetEnvironmentProfile.go",
         "api_op_GetFormType.go",
         "api_op_GetGlossary.go",

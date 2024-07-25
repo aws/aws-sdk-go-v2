@@ -34,7 +34,7 @@ type UpdateRepositoryEncryptionKeyInput struct {
 	// information about acceptable values for keyID, see [KeyId]in the Decrypt API
 	// description in the Key Management Service API Reference.
 	//
-	// [KeyId]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+	// [KeyId]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
 	//
 	// This member is required.
 	KmsKeyId *string

@@ -197,7 +197,10 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of requests exceeds the service quota. Resubmit your request later.
+// Your request exceeds the service quota for your account. You can view your
+// quotas at [Viewing service quotas]. You can resubmit your request later.
+//
+// [Viewing service quotas]: https://docs.aws.amazon.com/servicequotas/latest/userguide/gs-request-quota.html
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -223,7 +226,37 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of requests exceeds the limit. Resubmit your request later.
+// The service isn't currently available. Try again later.
+type ServiceUnavailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// Your request was throttled because of service-wide limitations. Resubmit your
+// request later or in a different region. You can also purchase [Provisioned Throughput]to increase the
+// rate or number of tokens you can process.
+//
+// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 type ThrottlingException struct {
 	Message *string
 

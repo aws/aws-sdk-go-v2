@@ -1,0 +1,8 @@
+{
+    "id": "fa67fec4-70f5-412f-873f-1ca3ec5f3d19",
+    "type": "feature",
+    "description": "This release adds support to customer managed KMS key encryption in AWS Step Functions.",
+    "modules": [
+        "service/sfn"
+    ]
+}

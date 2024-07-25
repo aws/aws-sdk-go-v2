@@ -1,0 +1,8 @@
+{
+    "id": "dab1c158-06a0-4eab-ac31-0c73752441ad",
+    "type": "feature",
+    "description": "Introduces GetEnvironmentCredentials operation to SDK",
+    "modules": [
+        "service/datazone"
+    ]
+}

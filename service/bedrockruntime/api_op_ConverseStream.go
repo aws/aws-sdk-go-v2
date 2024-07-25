@@ -22,6 +22,12 @@ import (
 // To find out if a model supports streaming, call [GetFoundationModel] and check the
 // responseStreamingSupported field in the response.
 //
+// The CLI doesn't support streaming operations in Amazon Bedrock, including
+// ConverseStream .
+//
+// Amazon Bedrock doesn't store any text, images, or documents that you provide as
+// content. The data is only used to generate the response.
+//
 // For information about the Converse API, see Use the Converse API in the Amazon
 // Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse
 // API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use

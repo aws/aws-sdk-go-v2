@@ -1767,6 +1767,9 @@ func awsAwsjson11_deserializeOpErrorCreateRepository(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidTagsMapException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTagsMapException(response, errorBody)
 
+	case strings.EqualFold("OperationNotAllowedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotAllowedException(response, errorBody)
+
 	case strings.EqualFold("RepositoryLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorRepositoryLimitExceededException(response, errorBody)
 
@@ -16160,6 +16163,41 @@ func awsAwsjson11_deserializeErrorNumberOfRuleTemplatesExceededException(respons
 	return output
 }
 
+func awsAwsjson11_deserializeErrorOperationNotAllowedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.OperationNotAllowedException{}
+	err := awsAwsjson11_deserializeDocumentOperationNotAllowedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorOverrideAlreadySetException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -26523,6 +26561,46 @@ func awsAwsjson11_deserializeDocumentObjectTypes(v **types.ObjectTypes, value in
 					return fmt.Errorf("expected ObjectTypeEnum to be of type string, got %T instead", value)
 				}
 				sv.Source = types.ObjectTypeEnum(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOperationNotAllowedException(v **types.OperationNotAllowedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OperationNotAllowedException
+	if *v == nil {
+		sv = &types.OperationNotAllowedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

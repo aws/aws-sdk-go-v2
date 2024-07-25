@@ -2062,6 +2062,28 @@ func awsAwsjson10_serializeDocumentCloudWatchLogsLogGroup(v *types.CloudWatchLog
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsDataKeyReusePeriodSeconds != nil {
+		ok := object.Key("kmsDataKeyReusePeriodSeconds")
+		ok.Integer(*v.KmsDataKeyReusePeriodSeconds)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentLogDestination(v *types.LogDestination, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2200,6 +2222,13 @@ func awsAwsjson10_serializeOpDocumentCreateActivityInput(v *CreateActivityInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2246,6 +2275,13 @@ func awsAwsjson10_serializeOpDocumentCreateStateMachineInput(v *CreateStateMachi
 	if v.Definition != nil {
 		ok := object.Key("definition")
 		ok.String(*v.Definition)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LoggingConfiguration != nil {
@@ -2366,6 +2402,11 @@ func awsAwsjson10_serializeOpDocumentDescribeExecutionInput(v *DescribeExecution
 		ok.String(*v.ExecutionArn)
 	}
 
+	if len(v.IncludedData) > 0 {
+		ok := object.Key("includedData")
+		ok.String(string(v.IncludedData))
+	}
+
 	return nil
 }
 
@@ -2402,12 +2443,22 @@ func awsAwsjson10_serializeOpDocumentDescribeStateMachineForExecutionInput(v *De
 		ok.String(*v.ExecutionArn)
 	}
 
+	if len(v.IncludedData) > 0 {
+		ok := object.Key("includedData")
+		ok.String(string(v.IncludedData))
+	}
+
 	return nil
 }
 
 func awsAwsjson10_serializeOpDocumentDescribeStateMachineInput(v *DescribeStateMachineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.IncludedData) > 0 {
+		ok := object.Key("includedData")
+		ok.String(string(v.IncludedData))
+	}
 
 	if v.StateMachineArn != nil {
 		ok := object.Key("stateMachineArn")
@@ -2736,6 +2787,11 @@ func awsAwsjson10_serializeOpDocumentStartSyncExecutionInput(v *StartSyncExecuti
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IncludedData) > 0 {
+		ok := object.Key("includedData")
+		ok.String(string(v.IncludedData))
+	}
+
 	if v.Input != nil {
 		ok := object.Key("input")
 		ok.String(*v.Input)
@@ -2922,6 +2978,13 @@ func awsAwsjson10_serializeOpDocumentUpdateStateMachineInput(v *UpdateStateMachi
 	if v.Definition != nil {
 		ok := object.Key("definition")
 		ok.String(*v.Definition)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsAwsjson10_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LoggingConfiguration != nil {

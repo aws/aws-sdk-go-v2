@@ -57,9 +57,6 @@ type CreatePullThroughCacheRuleInput struct {
 	//   - Microsoft Azure Container Registry ( azure-container-registry ) -
 	//   .azurecr.io
 	//
-	//   - GitLab Container Registry ( gitlab-container-registry ) -
-	//   registry.gitlab.com
-	//
 	// This member is required.
 	UpstreamRegistryUrl *string
 
