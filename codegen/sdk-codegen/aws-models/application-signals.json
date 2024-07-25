@@ -88,7 +88,7 @@
                 "aws.endpoints#dualStackOnlyEndpoints": {},
                 "aws.endpoints#standardRegionalEndpoints": {},
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<important>\n            <p>This is a Preview release of the Application Signals API Reference. Operations and parameters are subject to change before the general availability\n     release.</p>\n         </important>\n         <p>Use CloudWatch Application Signals for comprehensive observability of your cloud-based applications. \n        It enables real-time service health dashboards and helps you track long-term performance trends against your business goals. \n        The application-centric view provides you with unified visibility across your applications, services, and \n        dependencies, so you can proactively monitor and efficiently triage any issues that may arise, \n        ensuring optimal customer experience.</p>\n         <p>Application Signals provides the following benefits:</p>\n         <ul>\n            <li>\n               <p>Automatically collect metrics and traces from your applications, and display key metrics such as call volume, availability, latency, faults, and errors. </p>\n            </li>\n            <li>\n               <p>Create and monitor service level objectives (SLOs). </p>\n            </li>\n            <li>\n               <p>See a map of your application topology that Application Signals automatically discovers, that gives you a visual representation of your applications, dependencies, and their connectivity.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Use CloudWatch Application Signals for comprehensive observability of your cloud-based applications. \n        It enables real-time service health dashboards and helps you track long-term performance trends against your business goals. \n        The application-centric view provides you with unified visibility across your applications, services, and \n        dependencies, so you can proactively monitor and efficiently triage any issues that may arise, \n        ensuring optimal customer experience.</p>\n         <p>Application Signals provides the following benefits:</p>\n         <ul>\n            <li>\n               <p>Automatically collect metrics and traces from your applications, and display key metrics such as call volume, availability, latency, faults, and errors. </p>\n            </li>\n            <li>\n               <p>Create and monitor service level objectives (SLOs). </p>\n            </li>\n            <li>\n               <p>See a map of your application topology that Application Signals automatically discovers, that gives you a visual representation of your applications, dependencies, and their connectivity.</p>\n            </li>\n         </ul>\n         <p>Application Signals works with CloudWatch RUM, CloudWatch Synthetics canaries, and Amazon Web Services Service Catalog AppRegistry, to display your client pages, Synthetics canaries, \n        and application names within dashboards and maps.</p>",
                 "smithy.api#title": "Amazon CloudWatch Application Signals",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -842,7 +842,7 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "StartTime",
                         "smithy.api#required": {}
                     }
@@ -850,7 +850,7 @@
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "EndTime",
                         "smithy.api#required": {}
                     }
@@ -940,15 +940,21 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time of the data included in the response. In a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>.</p>",
+                        "smithy.api#documentation": "<p>The start time of the data included in the response. In a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>.</p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time of the data included in the response. In a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>.</p>",
+                        "smithy.api#documentation": "<p>The end time of the data included in the response. In a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>.</p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LogGroupReferences": {
+                    "target": "com.amazonaws.applicationsignals#LogGroupReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of string-to-string maps that each contain information about one log group associated with this service. Each \n         string-to-string map includes the following fields:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"Type\": \"AWS::Resource\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"ResourceType\": \"AWS::Logs::LogGroup\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Identifier\": \"<i>name-of-log-group</i>\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1056,7 +1062,7 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "StartTime",
                         "smithy.api#required": {}
                     }
@@ -1064,7 +1070,7 @@
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested end time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "EndTime",
                         "smithy.api#required": {}
                     }
@@ -1111,14 +1117,14 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1178,7 +1184,7 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "StartTime",
                         "smithy.api#required": {}
                     }
@@ -1186,7 +1192,7 @@
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "EndTime",
                         "smithy.api#required": {}
                     }
@@ -1233,14 +1239,14 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1406,7 +1412,7 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "StartTime",
                         "smithy.api#required": {}
                     }
@@ -1414,7 +1420,7 @@
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested end time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "EndTime",
                         "smithy.api#required": {}
                     }
@@ -1452,14 +1458,14 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1519,7 +1525,7 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "StartTime",
                         "smithy.api#required": {}
                     }
@@ -1527,7 +1533,7 @@
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>Your requested start time will be rounded to the nearest hour.</p>",
                         "smithy.api#httpQuery": "EndTime",
                         "smithy.api#required": {}
                     }
@@ -1567,14 +1573,14 @@
                 "StartTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The end of the time period that the returned information applies to. When used in a raw HTTP Query API, it is formatted as \n         be epoch time in seconds. For example: <code>1698778057</code>\n         </p>\n         <p>This displays the time that Application Signals used for the request. It might not match your request exactly, because \n         it was rounded to the nearest hour.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1650,6 +1656,12 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationsignals#LogGroupReferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#Attributes"
             }
         },
         "com.amazonaws.applicationsignals#Metric": {
@@ -1895,7 +1907,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.applicationsignals#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Cannot find the resource id.</p>",
+                        "smithy.api#documentation": "<p>Can't find the resource id.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1978,6 +1990,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of structures that each contain information about one metric associated with this service.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LogGroupReferences": {
+                    "target": "com.amazonaws.applicationsignals#LogGroupReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of string-to-string maps that each contain information about one log group associated with this service. Each \n         string-to-string map includes the following fields:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"Type\": \"AWS::Resource\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"ResourceType\": \"AWS::Logs::LogGroup\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Identifier\": \"<i>name-of-log-group</i>\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },

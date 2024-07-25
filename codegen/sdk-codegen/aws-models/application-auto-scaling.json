@@ -2379,6 +2379,18 @@
                     "traits": {
                         "smithy.api#enumValue": "WorkSpacesAverageUserSessionsCapacityUtilization"
                     }
+                },
+                "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution"
+                    }
+                },
+                "SageMakerVariantConcurrentRequestsPerModelHighResolution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SageMakerVariantConcurrentRequestsPerModelHighResolution"
+                    }
                 }
             }
         },

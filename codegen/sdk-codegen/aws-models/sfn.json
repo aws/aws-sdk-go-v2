@@ -158,7 +158,7 @@
                     "name": "states"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>Step Functions</fullname>\n         <p>Step Functions is a service that lets you coordinate the components of distributed applications\n      and microservices using visual workflows.</p>\n         <p>You can use Step Functions to build applications from individual components, each of which performs\n      a discrete function, or <i>task</i>, allowing you to scale and change\n      applications quickly. Step Functions provides a console that helps visualize the components of your\n      application as a series of steps. Step Functions automatically triggers and tracks each step, and\n      retries steps when there are errors, so your application executes predictably and in the right\n      order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any\n      issues.</p>\n         <p>Step Functions manages operations and underlying infrastructure to ensure your application is\n      available at any scale. You can run tasks on Amazon Web Services, your own servers, or any system that has\n      access to Amazon Web Services. You can access and use Step Functions using the console, the Amazon Web Services SDKs, or an HTTP API.\n      For more information about Step Functions, see the <i>\n               <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html\">Step Functions Developer Guide</a>\n            </i>.</p>\n         <important>\n            <p>If you use the Step Functions API actions using Amazon Web Services SDK integrations, make sure the API actions are in camel case and parameter names are in Pascal case. For example, you could use Step Functions API action <code>startSyncExecution</code> and specify its parameter as <code>StateMachineArn</code>.</p>\n         </important>",
+                "smithy.api#documentation": "<fullname>Step Functions</fullname>\n         <p>Step Functions coordinates the components of distributed applications\n      and microservices using visual workflows.</p>\n         <p>You can use Step Functions to build applications from individual components, each of which performs\n      a discrete function, or <i>task</i>, allowing you to scale and change\n      applications quickly. Step Functions provides a console that helps visualize the components of your\n      application as a series of steps. Step Functions automatically triggers and tracks each step, and\n      retries steps when there are errors, so your application executes predictably and in the right\n      order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any\n      issues.</p>\n         <p>Step Functions manages operations and underlying infrastructure to ensure your application is\n      available at any scale. You can run tasks on Amazon Web Services, your own servers, or any system that has\n      access to Amazon Web Services. You can access and use Step Functions using the console, the Amazon Web Services SDKs, or an HTTP API.\n      For more information about Step Functions, see the <i>\n               <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html\">Step Functions Developer Guide</a>\n            </i>.</p>\n         <important>\n            <p>If you use the Step Functions API actions using Amazon Web Services SDK integrations, make sure the API actions are in camel case and parameter names are in Pascal case. For example, you could use Step Functions API action <code>startSyncExecution</code> and specify its parameter as <code>StateMachineArn</code>.</p>\n         </important>",
                 "smithy.api#title": "AWS Step Functions",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://swf.amazonaws.com/doc/2015-07-20/"
@@ -1176,6 +1176,18 @@
                 }
             }
         },
+        "com.amazonaws.sfn#ActivityAlreadyExists": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Activity already exists. <code>EncryptionConfiguration</code> may not be updated.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.sfn#ActivityDoesNotExist": {
             "type": "structure",
             "members": {
@@ -1523,10 +1535,22 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.sfn#ActivityAlreadyExists"
+                },
+                {
                     "target": "com.amazonaws.sfn#ActivityLimitExceeded"
                 },
                 {
+                    "target": "com.amazonaws.sfn#InvalidEncryptionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.sfn#InvalidName"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.sfn#TooManyTags"
@@ -1551,6 +1575,12 @@
                     "target": "com.amazonaws.sfn#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of tags to add to a resource.</p>\n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.sfn#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure server-side encryption.</p>"
                     }
                 }
             },
@@ -1599,6 +1629,9 @@
                     "target": "com.amazonaws.sfn#InvalidDefinition"
                 },
                 {
+                    "target": "com.amazonaws.sfn#InvalidEncryptionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.sfn#InvalidLoggingConfiguration"
                 },
                 {
@@ -1606,6 +1639,12 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidTracingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.sfn#StateMachineAlreadyExists"
@@ -1627,7 +1666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do\n      work (<code>Task</code> states), determine to which states to transition next\n        (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states),\n      and so on. State machines are specified using a JSON-based, structured language. For more\n      information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States\n        Language</a> in the Step Functions User Guide.</p>\n         <p>If you set the <code>publish</code> parameter of this API action to <code>true</code>, it\n      publishes version <code>1</code> as the first revision of the state machine.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <note>\n            <p>\n               <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency\n        check is based on the state machine <code>name</code>, <code>definition</code>,\n          <code>type</code>, <code>LoggingConfiguration</code>, and\n        <code>TracingConfiguration</code>. The check is also based on the <code>publish</code> and <code>versionDescription</code> parameters. If a following request has a different\n          <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat\n        it as an idempotent request of the previous. In this case, <code>roleArn</code> and\n          <code>tags</code> will not be updated, even if they are different.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do\n      work (<code>Task</code> states), determine to which states to transition next\n        (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states),\n      and so on. State machines are specified using a JSON-based, structured language. For more\n      information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States\n        Language</a> in the Step Functions User Guide.</p>\n         <p>If you set the <code>publish</code> parameter of this API action to <code>true</code>, it\n      publishes version <code>1</code> as the first revision of the state machine.</p>\n         <p>\n        For additional control over security, you can encrypt your data using a <b>customer-managed key</b> for Step Functions state machines. You can configure a symmetric KMS key and data key reuse period when creating or updating a <b>State Machine</b>. The execution history and state machine definition will be encrypted with the key applied to the State Machine.\n    </p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <note>\n            <p>\n               <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency\n        check is based on the state machine <code>name</code>, <code>definition</code>,\n          <code>type</code>, <code>LoggingConfiguration</code>,\n        <code>TracingConfiguration</code>, and <code>EncryptionConfiguration</code> The check is also based on the <code>publish</code> and <code>versionDescription</code> parameters. If a following request has a different\n          <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat\n        it as an idempotent request of the previous. In this case, <code>roleArn</code> and\n          <code>tags</code> will not be updated, even if they are different.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1775,6 +1814,12 @@
                     "target": "com.amazonaws.sfn#VersionDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets description about the state machine version. You can only set the description if the <code>publish</code> parameter is set to <code>true</code>. Otherwise, if you set <code>versionDescription</code>, but <code>publish</code> to <code>false</code>, this API action throws <code>ValidationException</code>.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.sfn#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure server-side encryption.</p>"
                     }
                 }
             },
@@ -1969,7 +2014,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>. After\n      you delete a version, you can't call <a>StartExecution</a> using that version's ARN\n      or use\n      the\n      version with a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a>.</p>\n         <note>\n            <p>Deleting a state machine version won't terminate its in-progress executions.</p>\n         </note>\n         <note>\n            <p>You can't delete a state machine version currently referenced by one or more aliases. Before you delete a version, you must either delete the aliases or update them to point to another state machine version.</p>\n         </note>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>PublishStateMachineVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineVersions</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Deletes a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>. After\n      you delete a version, you can't call <a>StartExecution</a> using that version's ARN\n      or use the version with a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a>.</p>\n         <note>\n            <p>Deleting a state machine version won't terminate its in-progress executions.</p>\n         </note>\n         <note>\n            <p>You can't delete a state machine version currently referenced by one or more aliases. Before you delete a version, you must either delete the aliases or update them to point to another state machine version.</p>\n         </note>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>PublishStateMachineVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineVersions</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sfn#DeleteStateMachineVersionInput": {
@@ -2052,6 +2097,12 @@
                         "smithy.api#documentation": "<p>The date the activity is created.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.sfn#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for configured server-side encryption.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2072,6 +2123,15 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 }
             ],
             "traits": {
@@ -2086,6 +2146,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution to describe.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.sfn#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your state machine definition is encrypted with a KMS key, callers must have <code>kms:Decrypt</code> permission to decrypt the definition. Alternatively, you can call DescribeStateMachine API with <code>includedData = METADATA_ONLY</code> to get a successful response without the encrypted definition.</p>"
                     }
                 }
             },
@@ -2359,6 +2425,15 @@
                     "target": "com.amazonaws.sfn#InvalidArn"
                 },
                 {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
                 }
             ],
@@ -2462,10 +2537,19 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its execution role ARN, and\n      configuration. If a Map Run dispatched the execution, this action returns the Map Run\n      Amazon Resource Name (ARN) in the response.\n      The\n      state machine returned is the state machine associated with the\n      Map Run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its execution role ARN, and\n      configuration. If a Map Run dispatched the execution, this action returns the Map Run\n      Amazon Resource Name (ARN) in the response. The state machine returned is the state machine associated with the\n      Map Run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineForExecutionInput": {
@@ -2476,6 +2560,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution you want state machine information for.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.sfn#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your state machine definition is encrypted with a KMS key, callers must have <code>kms:Decrypt</code> permission to decrypt the definition. Alternatively, you can call the API with <code>includedData = METADATA_ONLY</code> to get a successful response without the encrypted definition.</p>"
                     }
                 }
             },
@@ -2547,6 +2637,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The revision identifier for the state machine. The first revision ID when you create the state machine is null.</p>\n         <p>Use the state machine <code>revisionId</code> parameter to compare the revision of a state machine with the configuration of the state machine used for executions without performing a diff of the properties, such as <code>definition</code> and <code>roleArn</code>.</p>"
                     }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.sfn#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure server-side encryption. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2561,6 +2657,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine for which you want the information.</p>\n         <p>If you specify a state machine version ARN, this API returns details about that version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.sfn#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your state machine definition is encrypted with a KMS key, callers must have <code>kms:Decrypt</code> permission to decrypt the definition. Alternatively, you can call the API with <code>includedData = METADATA_ONLY</code> to get a successful response without the encrypted definition.</p>\n         <note>\n            <p>\n            When calling a labelled ARN for an encrypted state machine, the <code>includedData = METADATA_ONLY</code> parameter will not apply because Step Functions needs to decrypt the entire state machine definition to get the Distributed Map state’s definition. In this case, the API caller needs to have <code>kms:Decrypt</code> permission.\n        </p>\n         </note>"
                     }
                 }
             },
@@ -2594,7 +2696,7 @@
                 "definition": {
                     "target": "com.amazonaws.sfn#Definition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>.</p>\n         <p>If called with <code>includedData = METADATA_ONLY</code>, the returned definition will be <code>{}</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2645,6 +2747,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the state machine version.</p>"
                     }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.sfn#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure server-side encryption. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2655,6 +2763,50 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.sfn#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "com.amazonaws.sfn#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alias, alias ARN, key ID, or key ARN of a symmetric encryption KMS key to encrypt data. To specify a KMS key in a different Amazon Web Services  account, you must use the key ARN or alias ARN.</p>"
+                    }
+                },
+                "kmsDataKeyReusePeriodSeconds": {
+                    "target": "com.amazonaws.sfn#KmsDataKeyReusePeriodSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum duration that Step Functions will reuse data keys. When the period expires, Step Functions will call <code>GenerateDataKey</code>. Only applies to customer managed keys.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.sfn#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption type</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings to configure server-side encryption. </p>\n         <p>\n        For additional control over security, you can encrypt your data using a <b>customer-managed key</b> for  Step Functions state machines and activities. You can configure a symmetric KMS key and data key reuse period when creating or updating a <b>State Machine</b>, and when creating an <b>Activity</b>. The execution history and state machine definition will be encrypted with the key applied to the State Machine. Activity inputs will be encrypted with the key applied to the Activity.\n    </p>\n         <note>\n            <p> Step Functions automatically enables encryption at rest using  Amazon Web Services owned keys at no charge. However, KMS charges apply when using a customer managed key. For more information about pricing, see <a href=\"https://aws.amazon.com/kms/pricing/\">Key Management Service pricing</a>.</p>\n         </note>\n         <p>For more information on KMS, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/overview.html\">What is  Key Management Service?</a>\n         </p>"
+            }
+        },
+        "com.amazonaws.sfn#EncryptionType": {
+            "type": "enum",
+            "members": {
+                "AWS_OWNED_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED_KEY"
+                    }
+                },
+                "CUSTOMER_MANAGED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_KMS_KEY"
+                    }
+                }
             }
         },
         "com.amazonaws.sfn#ErrorMessage": {
@@ -3036,6 +3188,15 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 }
             ],
             "traits": {
@@ -3100,6 +3261,15 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidToken"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 }
             ],
             "traits": {
@@ -3810,6 +3980,23 @@
         "com.amazonaws.sfn#IncludeExecutionDataGetExecutionHistory": {
             "type": "boolean"
         },
+        "com.amazonaws.sfn#IncludedData": {
+            "type": "enum",
+            "members": {
+                "ALL_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_DATA"
+                    }
+                },
+                "METADATA_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_ONLY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sfn#InspectionData": {
             "type": "structure",
             "members": {
@@ -3990,6 +4177,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.sfn#InvalidEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Received when <code>encryptionConfiguration</code> is specified but various conditions exist which make the configuration invalid. For example, if <code>type</code> is set to <code>CUSTOMER_MANAGED_KMS_KEY</code>, but <code>kmsKeyId</code> is null, or <code>kmsDataKeyReusePeriodSeconds</code> is not between 60 and 900, or the KMS key is not symmetric or inactive.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.sfn#InvalidExecutionInput": {
             "type": "structure",
             "members": {
@@ -4010,7 +4209,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Configuration is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4059,6 +4258,101 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Your <code>tracingConfiguration</code> key does not match, or <code>enabled</code> has not\n      been set to <code>true</code> or <code>false</code>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.sfn#KmsAccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Either your KMS key policy or API caller does not have the required permissions.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.sfn#KmsDataKeyReusePeriodSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 900
+                }
+            }
+        },
+        "com.amazonaws.sfn#KmsInvalidStateException": {
+            "type": "structure",
+            "members": {
+                "kmsKeyState": {
+                    "target": "com.amazonaws.sfn#KmsKeyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current status of the KMS; key. For example: <code>DISABLED</code>, <code>PENDING_DELETION</code>, <code>PENDING_IMPORT</code>, <code>UNAVAILABLE</code>, <code>CREATING</code>.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The KMS key is not in valid state, for example: Disabled or Deleted.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.sfn#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.sfn#KmsKeyState": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                },
+                "PENDING_IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_IMPORT"
+                    }
+                },
+                "UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#KmsThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Received when KMS returns <code>ThrottlingException</code> for a KMS call that Step Functions makes on behalf of the caller.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5424,7 +5718,7 @@
                     "target": "com.amazonaws.sfn#VersionWeight",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The percentage of traffic you want to route to a state machine\n      version. The sum of the weights in the routing\n      configuration must be equal to 100.</p>",
+                        "smithy.api#documentation": "<p>The percentage of traffic you want to route to a state machine version. The sum of the\n      weights in the routing configuration must be equal to 100.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5446,6 +5740,15 @@
                     "target": "com.amazonaws.sfn#InvalidToken"
                 },
                 {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.sfn#TaskDoesNotExist"
                 },
                 {
@@ -5453,7 +5756,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by activity workers, Task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a>\n      pattern, and optionally Task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync\">job run</a> pattern to report that the task identified by the <code>taskToken</code> failed.</p>"
+                "smithy.api#documentation": "<p>Used by activity workers, Task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a>\n      pattern, and optionally Task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync\">job run</a> pattern to report that the task identified by the <code>taskToken</code> failed.</p>\n         <p>For an execution with encryption enabled, Step Functions will encrypt the error and cause fields using the KMS key for the execution role.</p>\n         <p>A caller can mark a task as fail without using any KMS permissions in the execution role if the caller provides a null value for both <code>error</code> and <code>cause</code> fields because no data needs to be encrypted.</p>"
             }
         },
         "com.amazonaws.sfn#SendTaskFailureInput": {
@@ -5549,6 +5852,15 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidToken"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.sfn#TaskDoesNotExist"
@@ -5668,6 +5980,15 @@
                     "target": "com.amazonaws.sfn#InvalidName"
                 },
                 {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.sfn#StateMachineDeleting"
                 },
                 {
@@ -5695,7 +6016,7 @@
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional name of the execution.\n      This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information,\n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>\n         <p>If you don't provide a name for the execution, Step Functions automatically generates a universally unique identifier (UUID) as the execution name.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
+                        "smithy.api#documentation": "<p>Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information,\n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>\n         <p>If you don't provide a name for the execution, Step Functions automatically generates a universally unique identifier (UUID) as the execution name.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
                     }
                 },
                 "input": {
@@ -5756,6 +6077,15 @@
                     "target": "com.amazonaws.sfn#InvalidName"
                 },
                 {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.sfn#StateMachineDeleting"
                 },
                 {
@@ -5798,6 +6128,12 @@
                     "target": "com.amazonaws.sfn#TraceHeader",
                     "traits": {
                         "smithy.api#documentation": "<p>Passes the X-Ray trace header. The trace header can also be passed in the request\n      payload.</p>"
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.sfn#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your state machine definition is encrypted with a KMS key, callers must have <code>kms:Decrypt</code> permission to decrypt the definition. Alternatively, you can call the API with <code>includedData = METADATA_ONLY</code> to get a successful response without the encrypted definition.</p>"
                     }
                 }
             },
@@ -6109,7 +6445,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>State machine type is not supported.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -6166,11 +6502,20 @@
                     "target": "com.amazonaws.sfn#InvalidArn"
                 },
                 {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an execution.</p>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+                "smithy.api#documentation": "<p>Stops an execution.</p>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>\n         <p>For an execution with encryption enabled, Step Functions will encrypt the error and cause fields using the KMS key for the execution role.</p>\n         <p>A caller can stop an execution without using any KMS permissions in the execution role if the caller provides a null value for both <code>error</code> and <code>cause</code> fields because no data needs to be encrypted.</p>"
             }
         },
         "com.amazonaws.sfn#StopExecutionInput": {
@@ -6665,7 +7010,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 2048
                 }
             }
         },
@@ -7036,10 +7381,19 @@
                     "target": "com.amazonaws.sfn#InvalidDefinition"
                 },
                 {
+                    "target": "com.amazonaws.sfn#InvalidEncryptionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.sfn#InvalidLoggingConfiguration"
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidTracingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#KmsThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.sfn#MissingRequiredParameter"
@@ -7058,7 +7412,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing state machine by modifying its <code>definition</code>,\n        <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue\n      to use the previous <code>definition</code> and <code>roleArn</code>. You must include at\n      least one of <code>definition</code> or <code>roleArn</code> or you will receive a\n        <code>MissingRequiredParameter</code> error.</p>\n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n         <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p>\n         <p>The following are some examples of qualified and unqualified state machine ARNs:</p>\n         <ul>\n            <li>\n               <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following qualified state machine ARN refers to an alias named <code>PROD</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD></code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine></code>\n               </p>\n            </li>\n         </ul>\n         <p>After you update your state machine, you can set the <code>publish</code> parameter to\n        <code>true</code> in the same action to publish a new <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>. This\n      way, you can opt-in to strict versioning of your state machine.</p>\n         <note>\n            <p>Step Functions assigns monotonically increasing integers for state machine versions, starting at version number 1.</p>\n         </note>\n         <note>\n            <p>All <code>StartExecution</code> calls within a few seconds use the updated\n          <code>definition</code> and <code>roleArn</code>. Executions started immediately after you\n        call <code>UpdateStateMachine</code> may use the previous state machine\n          <code>definition</code> and <code>roleArn</code>. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an existing state machine by modifying its <code>definition</code>,\n        <code>roleArn</code>, <code>loggingConfiguration</code>, or <code>EncryptionConfiguration</code>. Running executions will continue\n      to use the previous <code>definition</code> and <code>roleArn</code>. You must include at\n      least one of <code>definition</code> or <code>roleArn</code> or you will receive a\n        <code>MissingRequiredParameter</code> error.</p>\n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n         <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p>\n         <p>The following are some examples of qualified and unqualified state machine ARNs:</p>\n         <ul>\n            <li>\n               <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following qualified state machine ARN refers to an alias named <code>PROD</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD></code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine></code>\n               </p>\n            </li>\n         </ul>\n         <p>After you update your state machine, you can set the <code>publish</code> parameter to\n        <code>true</code> in the same action to publish a new <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>. This\n      way, you can opt-in to strict versioning of your state machine.</p>\n         <note>\n            <p>Step Functions assigns monotonically increasing integers for state machine versions, starting at version number 1.</p>\n         </note>\n         <note>\n            <p>All <code>StartExecution</code> calls within a few seconds use the updated\n          <code>definition</code> and <code>roleArn</code>. Executions started immediately after you\n        call <code>UpdateStateMachine</code> may use the previous state machine\n          <code>definition</code> and <code>roleArn</code>. </p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -7178,6 +7532,12 @@
                     "target": "com.amazonaws.sfn#VersionDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional description of the state machine version to publish.</p>\n         <p>You can only specify the <code>versionDescription</code> parameter if you've set <code>publish</code> to <code>true</code>.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.sfn#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure server-side encryption. </p>"
                     }
                 }
             },

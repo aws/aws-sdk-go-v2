@@ -55,6 +55,9 @@
                     "target": "com.amazonaws.ecr#CreateRepository"
                 },
                 {
+                    "target": "com.amazonaws.ecr#CreateRepositoryCreationTemplate"
+                },
+                {
                     "target": "com.amazonaws.ecr#DeleteLifecyclePolicy"
                 },
                 {
@@ -65,6 +68,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#DeleteRepository"
+                },
+                {
+                    "target": "com.amazonaws.ecr#DeleteRepositoryCreationTemplate"
                 },
                 {
                     "target": "com.amazonaws.ecr#DeleteRepositoryPolicy"
@@ -86,6 +92,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#DescribeRepositories"
+                },
+                {
+                    "target": "com.amazonaws.ecr#DescribeRepositoryCreationTemplates"
                 },
                 {
                     "target": "com.amazonaws.ecr#GetAuthorizationToken"
@@ -155,6 +164,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#UpdatePullThroughCacheRule"
+                },
+                {
+                    "target": "com.amazonaws.ecr#UpdateRepositoryCreationTemplate"
                 },
                 {
                     "target": "com.amazonaws.ecr#UploadLayerPart"
@@ -1905,7 +1917,7 @@
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.ecr#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) - <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) -\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) - <code>quay.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) - <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) -\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) -\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitLab Container Registry (<code>gitlab-container-registry</code>) -\n                        <code>registry.gitlab.com</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) - <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) -\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) - <code>quay.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) - <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) -\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) -\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2027,6 +2039,119 @@
                 ]
             }
         },
+        "com.amazonaws.ecr#CreateRepositoryCreationTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#CreateRepositoryCreationTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#CreateRepositoryCreationTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#TemplateAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a repository creation template. This template is used to define the settings\n            for repositories created by Amazon ECR on your behalf. For example, repositories created\n            through pull through cache actions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-creation-templates.html\">Private\n                repository creation templates</a> in the\n            <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecr#CreateRepositoryCreationTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "prefix": {
+                    "target": "com.amazonaws.ecr#Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository namespace prefix to associate with the template. All repositories\n            created using this namespace prefix will have the settings defined in this template\n            applied. For example, a prefix of <code>prod</code> would apply to all repositories\n            beginning with <code>prod/</code>. Similarly, a prefix of <code>prod/team</code> would\n            apply to all repositories beginning with <code>prod/team/</code>.</p>\n         <p>To apply a template to all repositories in your registry that don't have an associated\n            creation template, you can use <code>ROOT</code> as the prefix.</p>\n         <important>\n            <p>There is always an assumed <code>/</code> applied to the end of the prefix. If you\n                specify <code>ecr-public</code> as the prefix, Amazon ECR treats that as\n                    <code>ecr-public/</code>. When using a pull through cache rule, the repository\n                prefix you specify during rule creation is what you should specify as your\n                repository creation template prefix as well.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.ecr#RepositoryTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the repository creation template.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.ecr#EncryptionConfigurationForRepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration to use for repositories created using the\n            template.</p>"
+                    }
+                },
+                "resourceTags": {
+                    "target": "com.amazonaws.ecr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata to apply to the repository to help you categorize and organize. Each tag\n            consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+                    }
+                },
+                "imageTagMutability": {
+                    "target": "com.amazonaws.ecr#ImageTagMutability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of <code>MUTABLE</code> will be used which will allow image tags to be\n            overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the\n            repository will be immutable which will prevent them from being overwritten.</p>"
+                    }
+                },
+                "repositoryPolicy": {
+                    "target": "com.amazonaws.ecr#RepositoryPolicyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository policy to apply to repositories created using the template. A\n            repository policy is a permissions policy associated with a repository to control access\n            permissions. </p>"
+                    }
+                },
+                "lifecyclePolicy": {
+                    "target": "com.amazonaws.ecr#LifecyclePolicyTextForRepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle policy to use for repositories created using the template.</p>"
+                    }
+                },
+                "appliedFor": {
+                    "target": "com.amazonaws.ecr#RCTAppliedForList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of enumerable strings representing the Amazon ECR repository creation scenarios that\n            this template will apply towards. The two supported scenarios are\n                <code>PULL_THROUGH_CACHE</code> and <code>REPLICATION</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#CreateRepositoryCreationTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "repositoryCreationTemplate": {
+                    "target": "com.amazonaws.ecr#RepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the repository creation template associated with the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#CreateRepositoryRequest": {
             "type": "structure",
             "members": {
@@ -2097,6 +2222,15 @@
                     "max": 612
                 },
                 "smithy.api#pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"
+            }
+        },
+        "com.amazonaws.ecr#CustomRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.ecr#CvssScore": {
@@ -2470,6 +2604,67 @@
                         }
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ecr#DeleteRepositoryCreationTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#DeleteRepositoryCreationTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#DeleteRepositoryCreationTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#TemplateNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a repository creation template.</p>"
+            }
+        },
+        "com.amazonaws.ecr#DeleteRepositoryCreationTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "prefix": {
+                    "target": "com.amazonaws.ecr#Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository namespace prefix associated with the repository creation\n            template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#DeleteRepositoryCreationTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "repositoryCreationTemplate": {
+                    "target": "com.amazonaws.ecr#RepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the repository creation template that was deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ecr#DeleteRepositoryPolicy": {
@@ -3056,7 +3251,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the registry.</p>"
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
                     }
                 },
                 "replicationConfiguration": {
@@ -3171,6 +3366,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecr#DescribeRepositoryCreationTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#DescribeRepositoryCreationTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#DescribeRepositoryCreationTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about the repository creation templates in a registry. The\n                <code>prefixes</code> request parameter can be used to return the details for a\n            specific repository creation template.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "repositoryCreationTemplates",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.ecr#DescribeRepositoryCreationTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "prefixes": {
+                    "target": "com.amazonaws.ecr#PrefixList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository namespace prefixes associated with the repository creation templates to\n            describe. If this value is not specified, all repository creation templates are\n            returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeRepositoryCreationTemplates</code> request where\n                <code>maxResults</code> was used and the results exceeded the value of that\n            parameter. Pagination continues from the end of the previous results that returned the\n                <code>nextToken</code> value. This value is <code>null</code> when there are no more\n            results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecr#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of repository results returned by\n                <code>DescribeRepositoryCreationTemplatesRequest</code> in paginated output. When\n            this parameter is used, <code>DescribeRepositoryCreationTemplatesRequest</code> only\n            returns <code>maxResults</code> results in a single page along with a\n                <code>nextToken</code> response element. The remaining results of the initial\n            request can be seen by sending another\n                <code>DescribeRepositoryCreationTemplatesRequest</code> request with the returned\n                <code>nextToken</code> value. This value can be between 1 and\n            1000. If this parameter is not used, then\n                <code>DescribeRepositoryCreationTemplatesRequest</code> returns up to\n            100 results and a <code>nextToken</code> value, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#DescribeRepositoryCreationTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "repositoryCreationTemplates": {
+                    "target": "com.amazonaws.ecr#RepositoryCreationTemplateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the repository creation templates.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecr#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>DescribeRepositoryCreationTemplates</code> request. When the results of a\n                <code>DescribeRepositoryCreationTemplates</code> request exceed\n                <code>maxResults</code>, this value can be used to retrieve the next page of\n            results. This value is <code>null</code> when there are no more results to\n            return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#EmptyUploadException": {
             "type": "structure",
             "members": {
@@ -3192,7 +3468,7 @@
                 "encryptionType": {
                     "target": "com.amazonaws.ecr#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption type to use.</p>\n         <p>If you use the <code>KMS</code> encryption type, the contents of the repository will\n            be encrypted using server-side encryption with Key Management Service key stored in KMS. When you\n            use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key\n            for Amazon ECR, or specify your own KMS key, which you already created. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting data using server-side\n                encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>\n         <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption\n            with Amazon S3-managed encryption keys which encrypts the images in the repository using an\n            AES-256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting data using\n                server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The encryption type to use.</p>\n         <p>If you use the <code>KMS</code> encryption type, the contents of the repository will\n            be encrypted using server-side encryption with Key Management Service key stored in KMS. When you\n            use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key\n            for Amazon ECR, or specify your own KMS key, which you already created. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting data using server-side\n                encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>\n         <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption\n            with Amazon S3-managed encryption keys which encrypts the images in the repository using an\n            AES256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting data using\n                server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3204,7 +3480,28 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The encryption configuration for the repository. This determines how the contents of\n            your repository are encrypted at rest.</p>\n         <p>By default, when no encryption configuration is set or the <code>AES256</code>\n            encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption\n            keys which encrypts your data at rest using an AES-256 encryption algorithm. This does\n            not require any action on your part.</p>\n         <p>For more control over the encryption of the contents of your repository, you can use\n            server-side encryption with Key Management Service key stored in Key Management Service (KMS) to encrypt your\n            images. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html\">Amazon ECR encryption at\n                rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The encryption configuration for the repository. This determines how the contents of\n            your repository are encrypted at rest.</p>\n         <p>By default, when no encryption configuration is set or the <code>AES256</code>\n            encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption\n            keys which encrypts your data at rest using an AES256 encryption algorithm. This does\n            not require any action on your part.</p>\n         <p>For more control over the encryption of the contents of your repository, you can use\n            server-side encryption with Key Management Service key stored in Key Management Service (KMS) to encrypt your\n            images. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html\">Amazon ECR encryption at\n                rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecr#EncryptionConfigurationForRepositoryCreationTemplate": {
+            "type": "structure",
+            "members": {
+                "encryptionType": {
+                    "target": "com.amazonaws.ecr#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption type to use.</p>\n         <p>If you use the <code>KMS</code> encryption type, the contents of the repository will\n            be encrypted using server-side encryption with Key Management Service key stored in KMS. When you\n            use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key\n            for Amazon ECR, or specify your own KMS key, which you already created. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting data using server-side\n                encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>\n         <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption\n            with Amazon S3-managed encryption keys which encrypts the images in the repository using an\n            AES256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting data using\n                server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKey": {
+                    "target": "com.amazonaws.ecr#KmsKeyForRepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you use the <code>KMS</code> encryption type, specify the KMS key to use for\n            encryption. The full ARN of the KMS key must be specified. The key must exist in the\n            same Region as the repository. If no key is specified, the default Amazon Web Services managed KMS\n            key for Amazon ECR will be used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The encryption configuration to associate with the repository creation\n            template.</p>"
             }
         },
         "com.amazonaws.ecr#EncryptionType": {
@@ -3831,7 +4128,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the registry.</p>"
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
                     }
                 },
                 "policyText": {
@@ -3881,7 +4178,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the registry.</p>"
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
                     }
                 },
                 "scanningConfiguration": {
@@ -4726,6 +5023,16 @@
                 }
             }
         },
+        "com.amazonaws.ecr#KmsKeyForRepositoryCreationTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^$|arn:aws:kms:[a-z0-9-]+:[0-9]{12}:key\\/[a-z0-9-]+$"
+            }
+        },
         "com.amazonaws.ecr#Layer": {
             "type": "structure",
             "members": {
@@ -5091,6 +5398,15 @@
                 }
             }
         },
+        "com.amazonaws.ecr#LifecyclePolicyTextForRepositoryCreationTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30720
+                }
+            }
+        },
         "com.amazonaws.ecr#LifecyclePreviewMaxResults": {
             "type": "integer",
             "traits": {
@@ -5400,6 +5716,22 @@
         },
         "com.amazonaws.ecr#Platform": {
             "type": "string"
+        },
+        "com.amazonaws.ecr#Prefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
+            }
+        },
+        "com.amazonaws.ecr#PrefixList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#Prefix"
+            }
         },
         "com.amazonaws.ecr#ProxyEndpoint": {
             "type": "string"
@@ -5894,7 +6226,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry ID.</p>"
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
                     }
                 },
                 "policyText": {
@@ -5985,7 +6317,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the replication configuration for a registry. The existing\n            replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the\n            PutReplicationConfiguration API is called, a service-linked IAM role is created in\n            your account for the replication process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html\">Using\n                service-linked roles for Amazon ECR</a> in the\n            <i>Amazon Elastic Container Registry User Guide</i>.</p>\n         <note>\n            <p>When configuring cross-account replication, the destination account must grant the\n                source account permission to replicate. This permission is controlled using a\n                registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates the replication configuration for a registry. The existing\n            replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the\n            PutReplicationConfiguration API is called, a service-linked IAM role is created in\n            your account for the replication process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html\">Using\n                service-linked roles for Amazon ECR</a> in the <i>Amazon Elastic Container Registry User Guide</i>.\n            For more information on the custom role for replication, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/replication-creation-templates.html#roles-creatingrole-user-console\">Creating an IAM role for replication</a>.</p>\n         <note>\n            <p>When configuring cross-account replication, the destination account must grant the\n                source account permission to replicate. This permission is controlled using a\n                registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecr#PutReplicationConfigurationRequest": {
@@ -6015,6 +6347,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecr#RCTAppliedFor": {
+            "type": "enum",
+            "members": {
+                "REPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICATION"
+                    }
+                },
+                "PULL_THROUGH_CACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PULL_THROUGH_CACHE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#RCTAppliedForList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#RCTAppliedFor"
             }
         },
         "com.amazonaws.ecr#Reason": {
@@ -6357,6 +6712,86 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecr#RepositoryCreationTemplate": {
+            "type": "structure",
+            "members": {
+                "prefix": {
+                    "target": "com.amazonaws.ecr#Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository namespace prefix associated with the repository creation\n            template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.ecr#RepositoryTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description associated with the repository creation template.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.ecr#EncryptionConfigurationForRepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration associated with the repository creation template.</p>"
+                    }
+                },
+                "resourceTags": {
+                    "target": "com.amazonaws.ecr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata to apply to the repository to help you categorize and organize. Each tag\n            consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+                    }
+                },
+                "imageTagMutability": {
+                    "target": "com.amazonaws.ecr#ImageTagMutability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag mutability setting for the repository. If this parameter is omitted, the\n            default setting of MUTABLE will be used which will allow image tags to be overwritten.\n            If IMMUTABLE is specified, all image tags within the repository will be immutable which\n            will prevent them from being overwritten.</p>"
+                    }
+                },
+                "repositoryPolicy": {
+                    "target": "com.amazonaws.ecr#RepositoryPolicyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>he repository policy to apply to repositories created using the template. A repository\n            policy is a permissions policy associated with a repository to control access\n            permissions. </p>"
+                    }
+                },
+                "lifecyclePolicy": {
+                    "target": "com.amazonaws.ecr#LifecyclePolicyTextForRepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle policy to use for repositories created using the template.</p>"
+                    }
+                },
+                "appliedFor": {
+                    "target": "com.amazonaws.ecr#RCTAppliedForList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of enumerable Strings representing the repository creation scenarios that this\n            template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and\n            REPLICATION</p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the repository creation template\n            was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in JavaScript date format, when the repository creation template\n            was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the repository creation template associated with the request.</p>"
+            }
+        },
+        "com.amazonaws.ecr#RepositoryCreationTemplateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#RepositoryCreationTemplate"
+            }
+        },
         "com.amazonaws.ecr#RepositoryFilter": {
             "type": "structure",
             "members": {
@@ -6569,6 +7004,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecr#RepositoryScanningConfiguration"
+            }
+        },
+        "com.amazonaws.ecr#RepositoryTemplateDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.ecr#Resource": {
@@ -7290,6 +7734,30 @@
                 "target": "com.amazonaws.ecr#TagValue"
             }
         },
+        "com.amazonaws.ecr#TemplateAlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The repository creation template already exists. Specify a unique prefix and try\n            again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#TemplateNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified repository creation template can't be found. Verify the registry ID and\n            prefix and try again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecr#Title": {
             "type": "string"
         },
@@ -7526,6 +7994,112 @@
                     "target": "com.amazonaws.ecr#CredentialArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret associated with the pull through cache\n            rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecr#UpdateRepositoryCreationTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#UpdateRepositoryCreationTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#UpdateRepositoryCreationTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#TemplateNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing repository creation template.</p>"
+            }
+        },
+        "com.amazonaws.ecr#UpdateRepositoryCreationTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "prefix": {
+                    "target": "com.amazonaws.ecr#Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository namespace prefix that matches an existing repository creation template\n            in the registry. All repositories created using this namespace prefix will have the\n            settings defined in this template applied. For example, a prefix of <code>prod</code>\n            would apply to all repositories beginning with <code>prod/</code>. This includes a\n            repository named <code>prod/team1</code> as well as a repository named\n                <code>prod/repository1</code>.</p>\n         <p>To apply a template to all repositories in your registry that don't have an associated\n            creation template, you can use <code>ROOT</code> as the prefix.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.ecr#RepositoryTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the repository creation template.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.ecr#EncryptionConfigurationForRepositoryCreationTemplate"
+                },
+                "resourceTags": {
+                    "target": "com.amazonaws.ecr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata to apply to the repository to help you categorize and organize. Each tag\n            consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+                    }
+                },
+                "imageTagMutability": {
+                    "target": "com.amazonaws.ecr#ImageTagMutability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the tag mutability setting for the repository. If this parameter is omitted,\n            the default setting of <code>MUTABLE</code> will be used which will allow image tags to\n            be overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the\n            repository will be immutable which will prevent them from being overwritten.</p>"
+                    }
+                },
+                "repositoryPolicy": {
+                    "target": "com.amazonaws.ecr#RepositoryPolicyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the repository policy created using the template. A repository policy is a\n            permissions policy associated with a repository to control access permissions. </p>"
+                    }
+                },
+                "lifecyclePolicy": {
+                    "target": "com.amazonaws.ecr#LifecyclePolicyTextForRepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the lifecycle policy associated with the specified repository creation\n            template.</p>"
+                    }
+                },
+                "appliedFor": {
+                    "target": "com.amazonaws.ecr#RCTAppliedForList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the list of enumerable strings representing the Amazon ECR repository creation\n            scenarios that this template will apply towards. The two supported scenarios are\n                <code>PULL_THROUGH_CACHE</code> and <code>REPLICATION</code>\n         </p>"
+                    }
+                },
+                "customRoleArn": {
+                    "target": "com.amazonaws.ecr#CustomRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#UpdateRepositoryCreationTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry ID associated with the request.</p>"
+                    }
+                },
+                "repositoryCreationTemplate": {
+                    "target": "com.amazonaws.ecr#RepositoryCreationTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the repository creation template associated with the request.</p>"
                     }
                 }
             },

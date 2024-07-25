@@ -4175,6 +4175,9 @@
                     "target": "com.amazonaws.codecommit#InvalidTagsMapException"
                 },
                 {
+                    "target": "com.amazonaws.codecommit#OperationNotAllowedException"
+                },
+                {
                     "target": "com.amazonaws.codecommit#RepositoryLimitExceededException"
                 },
                 {
@@ -4219,7 +4222,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.codecommit#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to\n            programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see \n            <a href=\"https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId\">KeyId</a> in the Decrypt API description in \n            the <i>Key Management Service API Reference</i>.</p>\n         <p>If no key is specified, the default <code>aws/codecommit</code> Amazon Web Services managed key is used.</p>"
+                        "smithy.api#documentation": "<p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to\n            programmatically retrieve a key ID. For more information about acceptable values for kmsKeyID, see \n            <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId\">KeyId</a> in the Decrypt API description in \n            the <i>Key Management Service API Reference</i>.</p>\n         <p>If no key is specified, the default <code>aws/codecommit</code> Amazon Web Services managed key is used.</p>"
                     }
                 }
             },
@@ -11528,6 +11531,21 @@
                 "smithy.api#documentation": "<p>Information about the type of an object in a merge operation.</p>"
             }
         },
+        "com.amazonaws.codecommit#OperationNotAllowedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.codecommit#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any message associated with the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested action is not allowed.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.codecommit#OrderEnum": {
             "type": "enum",
             "members": {
@@ -15511,7 +15529,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.codecommit#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to\n            programmatically retrieve a key ID. For more information about acceptable values for keyID, see \n            <a href=\"https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId\">KeyId</a> in the Decrypt API description in \n        the <i>Key Management Service API Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the encryption key. You can view the ID of an encryption key in the KMS console, or use the KMS APIs to\n            programmatically retrieve a key ID. For more information about acceptable values for keyID, see \n            <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId\">KeyId</a> in the Decrypt API description in \n        the <i>Key Management Service API Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }

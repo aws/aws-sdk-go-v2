@@ -1052,6 +1052,9 @@
                     "target": "com.amazonaws.bedrockruntime#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException"
                 },
                 {
@@ -1059,7 +1062,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model. <code>Converse</code> provides\n         a consistent interface that works with all models that\n         support messages. This allows you to write code once and use it with different models.\n         Should a model have unique inference parameters, you can also pass those unique parameters\n         to the model.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Converse API examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action. </p>",
+                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model. <code>Converse</code> provides\n         a consistent interface that works with all models that\n         support messages. This allows you to write code once and use it with different models.\n         If a model has unique inference parameters, you can also pass those unique parameters\n         to the model.</p>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n            To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Converse API examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1234,6 +1237,9 @@
                     "target": "com.amazonaws.bedrockruntime#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException"
                 },
                 {
@@ -1241,7 +1247,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model and returns\n         the response in a stream. <code>ConverseStream</code> provides a consistent API\n         that works with all Amazon Bedrock models that support messages.\n         This allows you to write code once and use it with different models. Should a\n         model have unique inference parameters, you can also pass those unique parameters to the\n         model. </p>\n         <p>To find out if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Conversation streaming example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModelWithResponseStream</code> action.</p>",
+                "smithy.api#documentation": "<p>Sends messages to the specified Amazon Bedrock model and returns\n         the response in a stream. <code>ConverseStream</code> provides a consistent API\n         that works with all Amazon Bedrock models that support messages.\n         This allows you to write code once and use it with different models. Should a\n         model have unique inference parameters, you can also pass those unique parameters to the\n         model. </p>\n         <p>To find out if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>ConverseStream</code>.</p>\n         </note>\n         <p>Amazon Bedrock doesn't store any text, images, or documents that you provide as content. The data is only used to generate the response.</p>\n         <p>For information about the Converse API, see <i>Use the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a guardrail, see  <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.\n         To use a tool with a model, see <i>Tool use (Function calling)</i> in the <i>Amazon Bedrock User Guide</i>\n         </p>\n         <p>For example code, see <i>Conversation streaming example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModelWithResponseStream</code> action.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1353,6 +1359,12 @@
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of requests exceeds the limit. Resubmit your request later.</p>"
+                    }
+                },
+                "serviceUnavailableException": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service isn't currently available. Try again later.</p>"
                     }
                 }
             },
@@ -2931,6 +2943,9 @@
                     "target": "com.amazonaws.bedrockruntime#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException"
                 },
                 {
@@ -3073,6 +3088,9 @@
                     "target": "com.amazonaws.bedrockruntime#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException"
                 },
                 {
@@ -3080,7 +3098,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. The response is returned in a stream.</p>\n         <p>To see if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support <code>InvokeModelWithResponseStream</code>.</p>\n         </note>\n         <p>For example code, see <i>Invoke model with streaming code\n         example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action. </p>",
+                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. The response is returned in a stream.</p>\n         <p>To see if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeModelWithResponseStream</code>.</p>\n         </note>\n         <p>For example code, see <i>Invoke model with streaming code\n         example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3415,7 +3433,7 @@
                 "throttlingException": {
                     "target": "com.amazonaws.bedrockruntime#ThrottlingException",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number or frequency of requests exceeds the limit. Resubmit your request later.</p>"
+                        "smithy.api#documentation": "<p>Your request was throttled because of service-wide limitations. Resubmit your request later or in a different region. You can also purchase <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html\">Provisioned Throughput</a> to increase the rate or number of tokens you can process.</p>"
                     }
                 },
                 "modelTimeoutException": {
@@ -3423,6 +3441,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The request took too long to process. Processing time exceeded the model timeout length.</p>"
                     }
+                },
+                "serviceUnavailableException": {
+                    "target": "com.amazonaws.bedrockruntime#ServiceUnavailableException"
                 }
             },
             "traits": {
@@ -3438,9 +3459,22 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The number of requests exceeds the service quota. Resubmit your request later.</p>",
+                "smithy.api#documentation": "<p>Your request exceeds the service quota for your account. You can view your quotas at <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/gs-request-quota.html\">Viewing service quotas</a>. You can resubmit your request later.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.bedrockruntime#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.bedrockruntime#NonBlankString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service isn't currently available. Try again later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
             }
         },
         "com.amazonaws.bedrockruntime#SpecificToolChoice": {
@@ -3542,7 +3576,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The number of requests exceeds the limit. Resubmit your request later.</p>",
+                "smithy.api#documentation": "<p>Your request was throttled because of service-wide limitations. Resubmit your request later or in a different region. You can also purchase <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html\">Provisioned Throughput</a> to increase the rate or number of tokens you can process.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }

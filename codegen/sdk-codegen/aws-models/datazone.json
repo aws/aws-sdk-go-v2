@@ -5941,6 +5941,9 @@
                     "target": "com.amazonaws.datazone#GetEnvironmentBlueprint"
                 },
                 {
+                    "target": "com.amazonaws.datazone#GetEnvironmentCredentials"
+                },
+                {
                     "target": "com.amazonaws.datazone#GetEnvironmentProfile"
                 },
                 {
@@ -11229,6 +11232,99 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#GetEnvironmentCredentials": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetEnvironmentCredentialsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetEnvironmentCredentialsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the credentials of an environment in Amazon DataZone.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/credentials"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetEnvironmentCredentialsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which this environment and its credentials\n         exist.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentIdentifier": {
+                    "target": "com.amazonaws.datazone#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment whose credentials this operation gets.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetEnvironmentCredentialsOutput": {
+            "type": "structure",
+            "members": {
+                "accessKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access key ID of the environment.</p>"
+                    }
+                },
+                "secretAccessKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret access key of the environment credentials.</p>"
+                    }
+                },
+                "sessionToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session token of the environment credentials.</p>"
+                    }
+                },
+                "expiration": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration timestamp of the environment credentials.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.datazone#GetEnvironmentInput": {

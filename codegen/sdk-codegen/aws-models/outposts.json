@@ -2140,6 +2140,12 @@
             "members": {
                 "InstanceType": {
                     "target": "com.amazonaws.outposts#InstanceType"
+                },
+                "VCPUs": {
+                    "target": "com.amazonaws.outposts#VCPUCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of default VCPUs in an instance type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6018,6 +6024,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.outposts#VCPUCount": {
+            "type": "integer"
         },
         "com.amazonaws.outposts#ValidationException": {
             "type": "structure",

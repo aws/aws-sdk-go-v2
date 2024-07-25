@@ -2553,6 +2553,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The access configuration for the cluster.</p>"
                     }
+                },
+                "upgradePolicy": {
+                    "target": "com.amazonaws.eks#UpgradePolicyResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This value indicates if extended support is enabled or disabled for the cluster.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html\">Learn more about EKS Extended Support in the EKS User Guide.</a>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -3330,6 +3336,12 @@
                     "target": "com.amazonaws.eks#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>If you set this value to <code>False</code> when creating a cluster, the default networking add-ons will not be installed.</p>\n         <p>The default networking addons include vpc-cni, coredns, and kube-proxy.</p>\n         <p>Use this option when you plan to install third-party alternative add-ons or self-manage the default networking add-ons.</p>"
+                    }
+                },
+                "upgradePolicy": {
+                    "target": "com.amazonaws.eks#UpgradePolicyRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>New clusters, by default, have extended support enabled. You can disable extended support when creating a cluster by setting this value to <code>STANDARD</code>.</p>"
                     }
                 }
             },
@@ -9428,6 +9440,23 @@
                 "target": "com.amazonaws.eks#String"
             }
         },
+        "com.amazonaws.eks#SupportType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "EXTENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTENDED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.eks#TagKey": {
             "type": "string",
             "traits": {
@@ -9996,6 +10025,12 @@
                     "target": "com.amazonaws.eks#UpdateAccessConfigRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>The access configuration for the cluster.</p>"
+                    }
+                },
+                "upgradePolicy": {
+                    "target": "com.amazonaws.eks#UpgradePolicyRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can enable or disable extended support for clusters currently on standard support. You cannot disable extended support once it starts. You must enable extended support before your cluster exits standard support.</p>"
                     }
                 }
             },
@@ -10591,6 +10626,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PodIdentityAssociations"
                     }
+                },
+                "UPGRADE_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpgradePolicy"
+                    }
                 }
             }
         },
@@ -10793,7 +10834,41 @@
                     "traits": {
                         "smithy.api#enumValue": "AccessConfigUpdate"
                     }
+                },
+                "UPGRADE_POLICY_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpgradePolicyUpdate"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.eks#UpgradePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "supportType": {
+                    "target": "com.amazonaws.eks#SupportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the cluster is set to <code>EXTENDED</code>, it will enter extended support at the end of standard support. If the cluster is set to <code>STANDARD</code>, it will be automatically upgraded at the end of standard support.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html\">Learn more about EKS Extended Support in the EKS User Guide.</a>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The support policy to use for the cluster. Extended support allows you to remain on specific Kubernetes versions for longer. Clusters in extended support have higher costs. The default value is <code>EXTENDED</code>. Use <code>STANDARD</code> to disable extended support.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html\">Learn more about EKS Extended Support in the EKS User Guide.</a>\n         </p>"
+            }
+        },
+        "com.amazonaws.eks#UpgradePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "supportType": {
+                    "target": "com.amazonaws.eks#SupportType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the cluster is set to <code>EXTENDED</code>, it will enter extended support at the end of standard support. If the cluster is set to <code>STANDARD</code>, it will be automatically upgraded at the end of standard support.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html\">Learn more about EKS Extended Support in the EKS User Guide.</a>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This value indicates if extended support is enabled or disabled for the cluster.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html\">Learn more about EKS Extended Support in the EKS User Guide.</a>\n         </p>"
             }
         },
         "com.amazonaws.eks#VpcConfigRequest": {
