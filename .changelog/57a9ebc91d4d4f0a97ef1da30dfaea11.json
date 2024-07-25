@@ -1,0 +1,8 @@
+{
+    "id": "57a9ebc9-1d4d-4f0a-97ef-1da30dfaea11",
+    "type": "bugfix",
+    "description": "Remove integration test broken by cloudsearch service.",
+    "modules": [
+        "service/internal/integrationtest"
+    ]
+}
