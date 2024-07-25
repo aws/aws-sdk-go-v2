@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/acm v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.4
-	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.30.4
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/athena v1.44.3
@@ -18,7 +18,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.42.3
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.40.3
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.40.3
-	github.com/aws/aws-sdk-go-v2/service/codecommit v1.24.3
+	github.com/aws/aws-sdk-go-v2/service/codecommit v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.23.3
@@ -31,14 +31,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.172.0
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.30.3
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.173.0
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.40.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.26.3
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.33.3
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/emr v1.42.2
@@ -70,7 +70,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.4
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/ses v1.25.2
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.29.3
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/shield v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/sns v1.31.3

@@ -1,8 +1,0 @@
-{
-    "id": "6d8d8397-5c33-415e-9e32-d8193316fff0",
-    "type": "feature",
-    "description": "Provides ServiceUnavailableException error message",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

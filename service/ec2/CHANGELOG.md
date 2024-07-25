@@ -1,3 +1,7 @@
+# v1.173.0 (2024-07-25)
+
+* **Feature**: EC2 Fleet now supports using custom identifiers to reference Amazon Machine Images (AMI) in launch requests that are configured to choose from a diversified list of instance types.
+
 # v1.172.0 (2024-07-23)
 
 * **Feature**: Switch to new waiter matching implementation, which conveys a slight performance boost and removes the need for the go-jmespath runtime dependency.

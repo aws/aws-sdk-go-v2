@@ -1,8 +1,0 @@
-{
-    "id": "cbecf8c2-ee7a-4873-81d8-cb2df3ea8858",
-    "type": "feature",
-    "description": "CloudWatch Application Signals now supports application logs correlation with traces and operational health metrics of applications running on EC2 instances. Users can view the most relevant telemetry to troubleshoot application health anomalies such as spikes in latency, errors, and availability.",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.3.0 (2024-07-25)
+
+* **Feature**: CloudWatch Application Signals now supports application logs correlation with traces and operational health metrics of applications running on EC2 instances. Users can view the most relevant telemetry to troubleshoot application health anomalies such as spikes in latency, errors, and availability.
+
 # v1.2.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

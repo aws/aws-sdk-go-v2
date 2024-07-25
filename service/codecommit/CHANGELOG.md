@@ -1,3 +1,7 @@
+# v1.25.0 (2024-07-25)
+
+* **Feature**: CreateRepository API now throws OperationNotAllowedException when the account has been restricted from creating a repository.
+
 # v1.24.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

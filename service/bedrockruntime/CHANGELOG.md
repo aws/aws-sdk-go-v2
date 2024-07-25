@@ -1,3 +1,7 @@
+# v1.15.0 (2024-07-25)
+
+* **Feature**: Provides ServiceUnavailableException error message
+
 # v1.14.0 (2024-07-10.2)
 
 * **Feature**: Add support for contextual grounding check and ApplyGuardrail API for Guardrails for Amazon Bedrock.

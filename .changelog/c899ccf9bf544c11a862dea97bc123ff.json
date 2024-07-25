@@ -1,8 +1,0 @@
-{
-    "id": "c899ccf9-bf54-4c11-a862-dea97bc123ff",
-    "type": "feature",
-    "description": "This release adds support for EKS cluster to manage extended support.",
-    "modules": [
-        "service/eks"
-    ]
-}

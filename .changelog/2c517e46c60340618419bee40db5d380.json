@@ -1,8 +1,0 @@
-{
-    "id": "2c517e46-c603-4061-8419-bee40db5d380",
-    "type": "feature",
-    "description": "EC2 Fleet now supports using custom identifiers to reference Amazon Machine Images (AMI) in launch requests that are configured to choose from a diversified list of instance types.",
-    "modules": [
-        "service/ec2"
-    ]
-}

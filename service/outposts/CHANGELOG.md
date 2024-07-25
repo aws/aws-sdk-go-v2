@@ -1,3 +1,7 @@
+# v1.42.0 (2024-07-25)
+
+* **Feature**: Adding default vCPU information to GetOutpostSupportedInstanceTypes and GetOutpostInstanceTypes responses
+
 # v1.41.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.41.0 (2024-07-25)
+
+* **Feature**: You can now log events that are related to TLS inspection, in addition to the existing alert and flow logging.
+
 # v1.40.4 (2024-07-18)
 
 * No change notes available for this release.

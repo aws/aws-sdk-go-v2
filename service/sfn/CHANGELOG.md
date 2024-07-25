@@ -1,3 +1,7 @@
+# v1.30.0 (2024-07-25)
+
+* **Feature**: This release adds support to customer managed KMS key encryption in AWS Step Functions.
+
 # v1.29.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

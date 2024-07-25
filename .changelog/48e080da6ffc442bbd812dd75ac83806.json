@@ -1,8 +1,0 @@
-{
-    "id": "48e080da-6ffc-442b-bd81-2dd75ac83806",
-    "type": "feature",
-    "description": "API and documentation updates for Amazon ECR, adding support for creating, updating, describing and deleting ECR Repository Creation Template.",
-    "modules": [
-        "service/ecr"
-    ]
-}

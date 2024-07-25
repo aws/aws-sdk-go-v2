@@ -1,3 +1,31 @@
+# Release (2024-07-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.31.0](service/applicationautoscaling/CHANGELOG.md#v1310-2024-07-25)
+  * **Feature**: Application Auto Scaling is now more responsive to the changes in demand of your SageMaker Inference endpoints. To get started, create or update a Target Tracking policy based on High Resolution CloudWatch metrics.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.3.0](service/applicationsignals/CHANGELOG.md#v130-2024-07-25)
+  * **Feature**: CloudWatch Application Signals now supports application logs correlation with traces and operational health metrics of applications running on EC2 instances. Users can view the most relevant telemetry to troubleshoot application health anomalies such as spikes in latency, errors, and availability.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.15.0](service/bedrockruntime/CHANGELOG.md#v1150-2024-07-25)
+  * **Feature**: Provides ServiceUnavailableException error message
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.25.0](service/codecommit/CHANGELOG.md#v1250-2024-07-25)
+  * **Feature**: CreateRepository API now throws OperationNotAllowedException when the account has been restricted from creating a repository.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.16.0](service/datazone/CHANGELOG.md#v1160-2024-07-25)
+  * **Feature**: Introduces GetEnvironmentCredentials operation to SDK
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.173.0](service/ec2/CHANGELOG.md#v11730-2024-07-25)
+  * **Feature**: EC2 Fleet now supports using custom identifiers to reference Amazon Machine Images (AMI) in launch requests that are configured to choose from a diversified list of instance types.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.31.0](service/ecr/CHANGELOG.md#v1310-2024-07-25)
+  * **Feature**: API and documentation updates for Amazon ECR, adding support for creating, updating, describing and deleting ECR Repository Creation Template.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.47.0](service/eks/CHANGELOG.md#v1470-2024-07-25)
+  * **Feature**: This release adds support for EKS cluster to manage extended support.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.34.0](service/elasticloadbalancingv2/CHANGELOG.md#v1340-2024-07-25)
+  * **Feature**: This release adds support for sharing trust stores across accounts and organizations through integration with AWS Resource Access Manager.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.41.0](service/networkfirewall/CHANGELOG.md#v1410-2024-07-25)
+  * **Feature**: You can now log events that are related to TLS inspection, in addition to the existing alert and flow logging.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.42.0](service/outposts/CHANGELOG.md#v1420-2024-07-25)
+  * **Feature**: Adding default vCPU information to GetOutpostSupportedInstanceTypes and GetOutpostInstanceTypes responses
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.30.0](service/sfn/CHANGELOG.md#v1300-2024-07-25)
+  * **Feature**: This release adds support to customer managed KMS key encryption in AWS Step Functions.
+
 # Release (2024-07-24)
 
 ## General Highlights

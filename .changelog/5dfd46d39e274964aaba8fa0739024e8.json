@@ -1,8 +1,0 @@
-{
-    "id": "5dfd46d3-9e27-4964-aaba-8fa0739024e8",
-    "type": "feature",
-    "description": "Adding default vCPU information to GetOutpostSupportedInstanceTypes and GetOutpostInstanceTypes responses",
-    "modules": [
-        "service/outposts"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.31.0 (2024-07-25)
+
+* **Feature**: API and documentation updates for Amazon ECR, adding support for creating, updating, describing and deleting ECR Repository Creation Template.
+
 # v1.30.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

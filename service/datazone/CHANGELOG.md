@@ -1,3 +1,7 @@
+# v1.16.0 (2024-07-25)
+
+* **Feature**: Introduces GetEnvironmentCredentials operation to SDK
+
 # v1.15.0 (2024-07-23)
 
 * **Feature**: This release removes the deprecated dataProductItem field from Search API output.

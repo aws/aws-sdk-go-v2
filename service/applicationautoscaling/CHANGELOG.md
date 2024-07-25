@@ -1,3 +1,7 @@
+# v1.31.0 (2024-07-25)
+
+* **Feature**: Application Auto Scaling is now more responsive to the changes in demand of your SageMaker Inference endpoints. To get started, create or update a Target Tracking policy based on High Resolution CloudWatch metrics.
+
 # v1.30.4 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

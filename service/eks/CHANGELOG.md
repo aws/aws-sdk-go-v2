@@ -1,3 +1,7 @@
+# v1.47.0 (2024-07-25)
+
+* **Feature**: This release adds support for EKS cluster to manage extended support.
+
 # v1.46.2 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
