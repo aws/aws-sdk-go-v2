@@ -362,7 +362,7 @@
                     "name": "memorydb"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis, a popular open source data store, enabling you to leverage Redis’ flexible and friendly data structures, APIs, and commands.</p>",
+                "smithy.api#documentation": "<p>MemoryDB is a fully managed, Redis OSS-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis OSS, a popular open source data store, enabling you to leverage Redis OSS’ flexible and friendly data structures, APIs, and commands.</p>",
                 "smithy.api#title": "Amazon MemoryDB",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://memorydb.amazonaws.com/doc/2021-01-01/"
@@ -409,7 +409,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -452,7 +451,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -465,7 +465,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -479,7 +478,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -502,7 +500,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -537,7 +534,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -548,14 +544,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -569,14 +567,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -585,11 +581,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -600,14 +596,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -621,7 +619,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -641,7 +638,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -652,14 +648,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -697,9 +695,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1464,13 +1464,13 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis engine version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine version used by the cluster</p>"
                     }
                 },
                 "EnginePatchVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis engine patch version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine patch version used by the cluster</p>"
                     }
                 },
                 "ParameterGroupName": {
@@ -1609,7 +1609,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis engine version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine version used by the cluster</p>"
                     }
                 },
                 "MaintenanceWindow": {
@@ -2111,7 +2111,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the Redis engine to be used for the cluster.</p>"
+                        "smithy.api#documentation": "<p>The version number of the Redis OSS engine to be used for the cluster.</p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -3027,7 +3027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the available Redis engine versions.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the available Redis OSS engine versions.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3042,7 +3042,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis engine version</p>"
+                        "smithy.api#documentation": "<p>The Redis OSS engine version</p>"
                     }
                 },
                 "ParameterGroupFamily": {
@@ -3946,7 +3946,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides details of the Redis engine version</p>"
+                "smithy.api#documentation": "<p>Provides details of the Redis OSS engine version</p>"
             }
         },
         "com.amazonaws.memorydb#EngineVersionInfoList": {
