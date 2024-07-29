@@ -1,3 +1,11 @@
+# Release (2024-07-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.40.4](service/elasticache/CHANGELOG.md#v1404-2024-07-29)
+  * **Documentation**: Renaming full service name as it appears in developer documentation.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.21.4](service/memorydb/CHANGELOG.md#v1214-2024-07-29)
+  * **Documentation**: Renaming full service name as it appears in developer documentation.
+
 # Release (2024-07-25)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "fed68df4-438c-4c68-b98d-7d42e8770ba1",
-    "type": "documentation",
-    "description": "Renaming full service name as it appears in developer documentation.",
-    "modules": [
-        "service/memorydb"
-    ]
-}

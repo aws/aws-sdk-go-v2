@@ -1,3 +1,7 @@
+# v1.21.4 (2024-07-29)
+
+* **Documentation**: Renaming full service name as it appears in developer documentation.
+
 # v1.21.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
