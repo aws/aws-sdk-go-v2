@@ -18,9 +18,9 @@ import (
 //
 // This operation is not valid for:
 //
-//   - Redis (cluster mode enabled) clusters
+//   - Redis OSS (cluster mode enabled) clusters
 //
-//   - Redis (cluster mode disabled) clusters
+//   - Redis OSS (cluster mode disabled) clusters
 //
 //   - A cluster that is the last read replica of a replication group
 //
@@ -28,7 +28,7 @@ import (
 //
 //   - A node group (shard) that has Multi-AZ mode enabled
 //
-//   - A cluster from a Redis (cluster mode enabled) replication group
+//   - A cluster from a Redis OSS (cluster mode enabled) replication group
 //
 //   - A cluster that is not in the available state
 func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClusterInput, optFns ...func(*Options)) (*DeleteCacheClusterOutput, error) {

@@ -21,7 +21,7 @@ import (
 // immediately begins deleting the selected resources; you cannot cancel or revert
 // this operation.
 //
-// This operation is valid for Redis only.
+// This operation is valid for Redis OSS only.
 func (c *Client) DeleteReplicationGroup(ctx context.Context, params *DeleteReplicationGroupInput, optFns ...func(*Options)) (*DeleteReplicationGroupOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationGroupInput{}
@@ -61,7 +61,7 @@ type DeleteReplicationGroupInput struct {
 
 type DeleteReplicationGroupOutput struct {
 
-	// Contains all of the attributes of a specific Redis replication group.
+	// Contains all of the attributes of a specific Redis OSS replication group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.

@@ -11,19 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the settings for a replication group. This is limited to Redis 7 and
-// newer.
+// Modifies the settings for a replication group. This is limited to Redis OSS 7
+// and newer.
 //
-// [Scaling for Amazon ElastiCache for Redis (cluster mode enabled)]
+// [Scaling for Amazon ElastiCache (Redis OSS) (cluster mode enabled)]
 //   - in the ElastiCache User Guide
 //
 // [ModifyReplicationGroupShardConfiguration]
 //   - in the ElastiCache API Reference
 //
-// This operation is valid for Redis only.
+// This operation is valid for Redis OSS only.
 //
-// [Scaling for Amazon ElastiCache for Redis (cluster mode enabled)]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html
 // [ModifyReplicationGroupShardConfiguration]: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html
+// [Scaling for Amazon ElastiCache (Redis OSS) (cluster mode enabled)]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html
 func (c *Client) ModifyReplicationGroup(ctx context.Context, params *ModifyReplicationGroupInput, optFns ...func(*Options)) (*ModifyReplicationGroupOutput, error) {
 	if params == nil {
 		params = &ModifyReplicationGroupInput{}
@@ -83,14 +83,14 @@ type ModifyReplicationGroupInput struct {
 	//
 	//   - DELETE - allowed only when transitioning to RBAC
 	//
-	// For more information, see [Authenticating Users with Redis AUTH]
+	// For more information, see [Authenticating Users with Redis OSS AUTH]
 	//
-	// [Authenticating Users with Redis AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+	// [Authenticating Users with Redis OSS AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
-	//  If you are running Redis engine version 6.0 or later, set this parameter to
-	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
-	// parameter is disabled for previous versions.
+	//  If you are running Redis OSS engine version 6.0 or later, set this parameter
+	// to yes if you want to opt-in to the next auto minor version upgrade campaign.
+	// This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// Determines whether a read replica is automatically promoted to read/write
@@ -119,10 +119,10 @@ type ModifyReplicationGroupInput struct {
 	CacheSecurityGroupNames []string
 
 	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
-	// first set the cluster mode to Compatible. Compatible mode allows your Redis
+	// first set the cluster mode to Compatible. Compatible mode allows your Redis OSS
 	// clients to connect using both cluster mode enabled and cluster mode disabled.
-	// After you migrate all Redis clients to use cluster mode enabled, you can then
-	// complete cluster mode configuration and set the cluster mode to Enabled.
+	// After you migrate all Redis OSS clients to use cluster mode enabled, you can
+	// then complete cluster mode configuration and set the cluster mode to Enabled.
 	ClusterMode types.ClusterMode
 
 	// The upgraded version of the cache engine to be run on the clusters in the
@@ -137,8 +137,8 @@ type ModifyReplicationGroupInput struct {
 	EngineVersion *string
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
-	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the [Nitro system].
+	// is supported for workloads using Redis OSS engine version 6.2 onward or
+	// Memcached engine version 1.6.6 on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery types.IpDiscovery
@@ -227,8 +227,8 @@ type ModifyReplicationGroupInput struct {
 	SnapshotWindow *string
 
 	// The cluster ID that is used as the daily snapshot source for the replication
-	// group. This parameter cannot be set for Redis (cluster mode enabled) replication
-	// groups.
+	// group. This parameter cannot be set for Redis OSS (cluster mode enabled)
+	// replication groups.
 	SnapshottingClusterId *string
 
 	// A flag that enables in-transit encryption when set to true. If you are enabling
@@ -242,7 +242,7 @@ type ModifyReplicationGroupInput struct {
 	// You must set TransitEncryptionEnabled to true , for your existing cluster, and
 	// set TransitEncryptionMode to preferred in the same request to allow both
 	// encrypted and unencrypted connections at the same time. Once you migrate all
-	// your Redis clients to use encrypted connections you can set the value to
+	// your Redis OSS clients to use encrypted connections you can set the value to
 	// required to allow encrypted connections only.
 	//
 	// Setting TransitEncryptionMode to required is a two-step process that requires
@@ -262,7 +262,7 @@ type ModifyReplicationGroupInput struct {
 
 type ModifyReplicationGroupOutput struct {
 
-	// Contains all of the attributes of a specific Redis replication group.
+	// Contains all of the attributes of a specific Redis OSS replication group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.

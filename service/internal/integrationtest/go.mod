@@ -149,8 +149,6 @@ replace github.com/aws/aws-sdk-go-v2/service/cloudfront => ../../../service/clou
 
 replace github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 => ../../../service/cloudhsmv2/
 
-replace github.com/aws/aws-sdk-go-v2/service/cloudsearch => ../../../service/cloudsearch/
-
 replace github.com/aws/aws-sdk-go-v2/service/cloudtrail => ../../../service/cloudtrail/
 
 replace github.com/aws/aws-sdk-go-v2/service/cloudwatch => ../../../service/cloudwatch/

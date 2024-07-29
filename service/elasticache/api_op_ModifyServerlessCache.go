@@ -38,8 +38,9 @@ type ModifyServerlessCacheInput struct {
 	CacheUsageLimits *types.CacheUsageLimits
 
 	// The daily time during which Elasticache begins taking a daily snapshot of the
-	// serverless cache. Available for Redis only. The default is NULL, i.e. the
-	// existing snapshot time configured for the cluster is not removed.
+	// serverless cache. Available for Redis OSS and Serverless Memcached only. The
+	// default is NULL, i.e. the existing snapshot time configured for the cluster is
+	// not removed.
 	DailySnapshotTime *string
 
 	// User provided description for the serverless cache. Default = NULL, i.e. the
@@ -48,7 +49,7 @@ type ModifyServerlessCacheInput struct {
 	Description *string
 
 	// The identifier of the UserGroup to be removed from association with the Redis
-	// serverless cache. Available for Redis only. Default is NULL.
+	// OSS serverless cache. Available for Redis OSS only. Default is NULL.
 	RemoveUserGroup *bool
 
 	// The new list of VPC security groups to be associated with the serverless cache.
@@ -59,13 +60,13 @@ type ModifyServerlessCacheInput struct {
 	SecurityGroupIds []string
 
 	// The number of days for which Elasticache retains automatic snapshots before
-	// deleting them. Available for Redis only. Default = NULL, i.e. the existing
-	// snapshot-retention-limit will not be removed or modified. The maximum value
-	// allowed is 35 days.
+	// deleting them. Available for Redis OSS and Serverless Memcached only. Default =
+	// NULL, i.e. the existing snapshot-retention-limit will not be removed or
+	// modified. The maximum value allowed is 35 days.
 	SnapshotRetentionLimit *int32
 
 	// The identifier of the UserGroup to be associated with the serverless cache.
-	// Available for Redis only. Default is NULL - the existing UserGroup is not
+	// Available for Redis OSS only. Default is NULL - the existing UserGroup is not
 	// removed.
 	UserGroupId *string
 

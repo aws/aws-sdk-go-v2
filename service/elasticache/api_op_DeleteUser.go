@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Redis engine version 6.0 onwards: Deletes a user. The user will be removed
-// from all user groups and in turn removed from all replication groups. For more
-// information, see [Using Role Based Access Control (RBAC)].
+// For Redis OSS engine version 6.0 onwards: Deletes a user. The user will be
+// removed from all user groups and in turn removed from all replication groups.
+// For more information, see [Using Role Based Access Control (RBAC)].
 //
 // [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
@@ -55,7 +55,7 @@ type DeleteUserOutput struct {
 	// The current supported value is Redis.
 	Engine *string
 
-	// The minimum engine version required, which is Redis 6.0
+	// The minimum engine version required, which is Redis OSS 6.0
 	MinimumEngineVersion *string
 
 	// Indicates the user status. Can be "active", "modifying" or "deleting".

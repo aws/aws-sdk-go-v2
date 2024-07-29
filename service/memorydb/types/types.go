@@ -125,10 +125,10 @@ type Cluster struct {
 	// A description of the cluster
 	Description *string
 
-	// The Redis engine patch version used by the cluster
+	// The Redis OSS engine patch version used by the cluster
 	EnginePatchVersion *string
 
-	// The Redis engine version used by the cluster
+	// The Redis OSS engine version used by the cluster
 	EngineVersion *string
 
 	// The ID of the KMS key used to encrypt the cluster
@@ -203,7 +203,7 @@ type ClusterConfiguration struct {
 	// The description of the cluster configuration
 	Description *string
 
-	// The Redis engine version used by the cluster
+	// The Redis OSS engine version used by the cluster
 	EngineVersion *string
 
 	// The specified maintenance window for the cluster
@@ -273,7 +273,7 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details of the Redis engine version
+// Provides details of the Redis OSS engine version
 type EngineVersionInfo struct {
 
 	// The patched engine version

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Global Datastore for Redis offers fully managed, fast, reliable and secure
-// cross-region replication. Using Global Datastore for Redis, you can create
-// cross-region read replica clusters for ElastiCache for Redis to enable
+// Global Datastore for Redis OSS offers fully managed, fast, reliable and secure
+// cross-region replication. Using Global Datastore for Redis OSS, you can create
+// cross-region read replica clusters for ElastiCache (Redis OSS) to enable
 // low-latency reads and disaster recovery across regions. For more information,
 // see [Replication Across Regions Using Global Datastore].
 //

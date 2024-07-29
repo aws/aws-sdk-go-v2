@@ -48,8 +48,8 @@ type DescribeReservedCacheNodesInput struct {
 	//
 	// For region availability, see [Supported Node Types]
 	//
-	// M6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward):
+	// M6g node types (available only for Redis OSS engine version 5.0.6 onward and
+	//   for Memcached engine version 1.5.16 onward):
 	//
 	// cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge ,
 	//   cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge
@@ -60,7 +60,7 @@ type DescribeReservedCacheNodesInput struct {
 	// M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
 	//   cache.m4.4xlarge , cache.m4.10xlarge
 	//
-	// T4g node types (available only for Redis engine version 5.0.6 onward and
+	// T4g node types (available only for Redis OSS engine version 5.0.6 onward and
 	//   Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small ,
 	//   cache.t4g.medium
 	//
@@ -96,10 +96,10 @@ type DescribeReservedCacheNodesInput struct {
 	//
 	// For region availability, see [Supported Node Types]
 	//
-	// R6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
-	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
-	//   , cache.r6g.16xlarge
+	// R6g node types (available only for Redis OSS engine version 5.0.6 onward and
+	//   for Memcached engine version 1.5.16 onward): cache.r6g.large ,
+	//   cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge ,
+	//   cache.r6g.12xlarge , cache.r6g.16xlarge
 	//
 	// R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
 	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge
@@ -120,12 +120,12 @@ type DescribeReservedCacheNodesInput struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
 	//
-	//   - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
 	//
-	//   - Redis configuration variables appendonly and appendfsync are not supported
-	//   on Redis version 2.8.22 and later.
+	//   - Redis OSS configuration variables appendonly and appendfsync are not
+	//   supported on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string

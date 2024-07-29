@@ -12,7 +12,7 @@ import (
 )
 
 // Provides the functionality to export the serverless cache snapshot data to
-// Amazon S3. Available for Redis only.
+// Amazon S3. Available for Redis OSS only.
 func (c *Client) ExportServerlessCacheSnapshot(ctx context.Context, params *ExportServerlessCacheSnapshotInput, optFns ...func(*Options)) (*ExportServerlessCacheSnapshotOutput, error) {
 	if params == nil {
 		params = &ExportServerlessCacheSnapshotInput{}
@@ -31,13 +31,13 @@ func (c *Client) ExportServerlessCacheSnapshot(ctx context.Context, params *Expo
 type ExportServerlessCacheSnapshotInput struct {
 
 	// Name of the Amazon S3 bucket to export the snapshot to. The Amazon S3 bucket
-	// must also be in same region as the snapshot. Available for Redis only.
+	// must also be in same region as the snapshot. Available for Redis OSS only.
 	//
 	// This member is required.
 	S3BucketName *string
 
 	// The identifier of the serverless cache snapshot to be exported to S3. Available
-	// for Redis only.
+	// for Redis OSS only.
 	//
 	// This member is required.
 	ServerlessCacheSnapshotName *string
@@ -48,7 +48,7 @@ type ExportServerlessCacheSnapshotInput struct {
 type ExportServerlessCacheSnapshotOutput struct {
 
 	// The state of a serverless cache at a specific point in time, to the
-	// millisecond. Available for Redis only.
+	// millisecond. Available for Redis OSS and Serverless Memcached only.
 	ServerlessCacheSnapshot *types.ServerlessCacheSnapshot
 
 	// Metadata pertaining to the operation's result.

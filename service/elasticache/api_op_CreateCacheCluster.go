@@ -12,9 +12,9 @@ import (
 )
 
 // Creates a cluster. All nodes in the cluster run the same protocol-compliant
-// cache engine software, either Memcached or Redis.
+// cache engine software, either Memcached or Redis OSS.
 //
-// This operation is not supported for Redis (cluster mode enabled) clusters.
+// This operation is not supported for Redis OSS (cluster mode enabled) clusters.
 func (c *Client) CreateCacheCluster(ctx context.Context, params *CreateCacheClusterInput, optFns ...func(*Options)) (*CreateCacheClusterOutput, error) {
 	if params == nil {
 		params = &CreateCacheClusterInput{}
@@ -73,9 +73,9 @@ type CreateCacheClusterInput struct {
 	// [AUTH password]: http://redis.io/commands/AUTH
 	AuthToken *string
 
-	//  If you are running Redis engine version 6.0 or later, set this parameter to
-	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
-	// parameter is disabled for previous versions.
+	//  If you are running Redis OSS engine version 6.0 or later, set this parameter
+	// to yes if you want to opt-in to the next auto minor version upgrade campaign.
+	// This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// The compute and memory capacity of the nodes in the node group (shard).
@@ -94,8 +94,8 @@ type CreateCacheClusterInput struct {
 	//
 	// For region availability, see [Supported Node Types]
 	//
-	// M6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward):
+	// M6g node types (available only for Redis OSS engine version 5.0.6 onward and
+	//   for Memcached engine version 1.5.16 onward):
 	//
 	// cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge ,
 	//   cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge
@@ -106,7 +106,7 @@ type CreateCacheClusterInput struct {
 	// M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
 	//   cache.m4.4xlarge , cache.m4.10xlarge
 	//
-	// T4g node types (available only for Redis engine version 5.0.6 onward and
+	// T4g node types (available only for Redis OSS engine version 5.0.6 onward and
 	//   Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small ,
 	//   cache.t4g.medium
 	//
@@ -142,10 +142,10 @@ type CreateCacheClusterInput struct {
 	//
 	// For region availability, see [Supported Node Types]
 	//
-	// R6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
-	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
-	//   , cache.r6g.16xlarge
+	// R6g node types (available only for Redis OSS engine version 5.0.6 onward and
+	//   for Memcached engine version 1.5.16 onward): cache.r6g.large ,
+	//   cache.r6g.xlarge , cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge ,
+	//   cache.r6g.12xlarge , cache.r6g.16xlarge
 	//
 	// R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
 	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge
@@ -166,12 +166,12 @@ type CreateCacheClusterInput struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
 	//
-	//   - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
 	//
-	//   - Redis configuration variables appendonly and appendfsync are not supported
-	//   on Redis version 2.8.22 and later.
+	//   - Redis OSS configuration variables appendonly and appendfsync are not
+	//   supported on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
@@ -216,8 +216,8 @@ type CreateCacheClusterInput struct {
 	EngineVersion *string
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
-	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the [Nitro system].
+	// is supported for workloads using Redis OSS engine version 6.2 onward or
+	// Memcached engine version 1.6.6 on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery types.IpDiscovery
@@ -226,7 +226,7 @@ type CreateCacheClusterInput struct {
 	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
+	// Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all
 	// instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
@@ -240,7 +240,7 @@ type CreateCacheClusterInput struct {
 
 	// The initial number of cache nodes that the cluster has.
 	//
-	// For clusters running Redis, this value must be 1. For clusters running
+	// For clusters running Redis OSS, this value must be 1. For clusters running
 	// Memcached, this value must be between 1 and 40.
 	//
 	// If you need more than 40 nodes for your Memcached cluster, please fill out the
@@ -313,18 +313,18 @@ type CreateCacheClusterInput struct {
 	SecurityGroupIds []string
 
 	// A single-element string list containing an Amazon Resource Name (ARN) that
-	// uniquely identifies a Redis RDB snapshot file stored in Amazon S3. The snapshot
-	// file is used to populate the node group (shard). The Amazon S3 object name in
-	// the ARN cannot contain any commas.
+	// uniquely identifies a Redis OSS RDB snapshot file stored in Amazon S3. The
+	// snapshot file is used to populate the node group (shard). The Amazon S3 object
+	// name in the ARN cannot contain any commas.
 	//
 	// This parameter is only valid if the Engine parameter is redis .
 	//
 	// Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb
 	SnapshotArns []string
 
-	// The name of a Redis snapshot from which to restore data into the new node group
-	// (shard). The snapshot status changes to restoring while the new node group
-	// (shard) is being created.
+	// The name of a Redis OSS snapshot from which to restore data into the new node
+	// group (shard). The snapshot status changes to restoring while the new node
+	// group (shard) is being created.
 	//
 	// This parameter is only valid if the Engine parameter is redis .
 	SnapshotName *string

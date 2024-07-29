@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the available Redis engine versions.
+// Returns a list of the available Redis OSS engine versions.
 func (c *Client) DescribeEngineVersions(ctx context.Context, params *DescribeEngineVersionsInput, optFns ...func(*Options)) (*DescribeEngineVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeEngineVersionsInput{}
@@ -33,7 +33,7 @@ type DescribeEngineVersionsInput struct {
 	// engine and major version combination is to be returned.
 	DefaultOnly bool
 
-	// The Redis engine version
+	// The Redis OSS engine version
 	EngineVersion *string
 
 	// The maximum number of records to include in the response. If more records exist

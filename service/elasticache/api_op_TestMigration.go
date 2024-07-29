@@ -45,7 +45,7 @@ type TestMigrationInput struct {
 
 type TestMigrationOutput struct {
 
-	// Contains all of the attributes of a specific Redis replication group.
+	// Contains all of the attributes of a specific Redis OSS replication group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.

@@ -90,14 +90,14 @@ type ModifyCacheClusterInput struct {
 	//
 	//   - DELETE - allowed only when transitioning to RBAC
 	//
-	// For more information, see [Authenticating Users with Redis AUTH]
+	// For more information, see [Authenticating Users with Redis OSS AUTH]
 	//
-	// [Authenticating Users with Redis AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+	// [Authenticating Users with Redis OSS AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
-	//  If you are running Redis engine version 6.0 or later, set this parameter to
-	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
-	// parameter is disabled for previous versions.
+	//  If you are running Redis OSS engine version 6.0 or later, set this parameter
+	// to yes if you want to opt-in to the next auto minor version upgrade campaign.
+	// This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// A list of cache node IDs to be removed. A node ID is a numeric identifier
@@ -141,8 +141,8 @@ type ModifyCacheClusterInput struct {
 	EngineVersion *string
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
-	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the [Nitro system].
+	// is supported for workloads using Redis OSS engine version 6.2 onward or
+	// Memcached engine version 1.6.6 on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery types.IpDiscovery
@@ -245,7 +245,7 @@ type ModifyCacheClusterInput struct {
 	// If you are removing cache nodes, you must use the CacheNodeIdsToRemove
 	// parameter to provide the IDs of the specific cache nodes to remove.
 	//
-	// For clusters running Redis, this value must be 1. For clusters running
+	// For clusters running Redis OSS, this value must be 1. For clusters running
 	// Memcached, this value must be between 1 and 40.
 	//
 	// Adding or removing Memcached cache nodes can be applied immediately or as a

@@ -20,7 +20,7 @@ import (
 // specified, DescribeReplicationGroups returns information about all replication
 // groups.
 //
-// This operation is valid for Redis only.
+// This operation is valid for Redis OSS only.
 func (c *Client) DescribeReplicationGroups(ctx context.Context, params *DescribeReplicationGroupsInput, optFns ...func(*Options)) (*DescribeReplicationGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationGroupsInput{}

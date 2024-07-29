@@ -1,0 +1,8 @@
+{
+    "id": "3a8e5f52-be63-40ab-8eaa-fc13be0d3f85",
+    "type": "documentation",
+    "description": "Renaming full service name as it appears in developer documentation.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

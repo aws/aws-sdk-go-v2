@@ -66,7 +66,7 @@ type ModifyUserOutput struct {
 	// The current supported value is Redis.
 	Engine *string
 
-	// The minimum engine version required, which is Redis 6.0
+	// The minimum engine version required, which is Redis OSS 6.0
 	MinimumEngineVersion *string
 
 	// Indicates the user status. Can be "active", "modifying" or "deleting".

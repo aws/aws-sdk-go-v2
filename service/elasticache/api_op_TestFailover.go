@@ -31,8 +31,8 @@ import (
 //     replication groups in the API and CLI), the calls can be made concurrently.
 //
 //   - If calling this operation multiple times on different shards in the same
-//     Redis (cluster mode enabled) replication group, the first node replacement must
-//     complete before a subsequent call can be made.
+//     Redis OSS (cluster mode enabled) replication group, the first node replacement
+//     must complete before a subsequent call can be made.
 //
 //   - To determine whether the node replacement is complete you can check Events
 //     using the Amazon ElastiCache console, the Amazon CLI, or the ElastiCache API.
@@ -98,7 +98,7 @@ type TestFailoverInput struct {
 
 type TestFailoverOutput struct {
 
-	// Contains all of the attributes of a specific Redis replication group.
+	// Contains all of the attributes of a specific Redis OSS replication group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.

@@ -913,7 +913,7 @@ func (e *InvalidReplicationGroupStateFault) ErrorCode() string {
 func (e *InvalidReplicationGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The state of the serverless cache snapshot was not received. Available for
-// Redis only.
+// Redis OSS and Serverless Memcached only.
 type InvalidServerlessCacheSnapshotStateFault struct {
 	Message *string
 
@@ -1538,7 +1538,7 @@ func (e *ServerlessCacheQuotaForCustomerExceededFault) ErrorFault() smithy.Error
 }
 
 // A serverless cache snapshot with this name already exists. Available for Redis
-// only.
+// OSS and Serverless Memcached only.
 type ServerlessCacheSnapshotAlreadyExistsFault struct {
 	Message *string
 
@@ -1567,7 +1567,7 @@ func (e *ServerlessCacheSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFau
 }
 
 // This serverless cache snapshot could not be found or does not exist. Available
-// for Redis only.
+// for Redis OSS and Serverless Memcached only.
 type ServerlessCacheSnapshotNotFoundFault struct {
 	Message *string
 
@@ -1596,7 +1596,7 @@ func (e *ServerlessCacheSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault {
 }
 
 // The number of serverless cache snapshots exceeds the customer snapshot quota.
-// Available for Redis only.
+// Available for Redis OSS and Serverless Memcached only.
 type ServerlessCacheSnapshotQuotaExceededFault struct {
 	Message *string
 
@@ -1704,11 +1704,11 @@ func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smi
 
 // You attempted one of the following operations:
 //
-//   - Creating a snapshot of a Redis cluster running on a cache.t1.micro cache
+//   - Creating a snapshot of a Redis OSS cluster running on a cache.t1.micro cache
 //     node.
 //
 //   - Creating a snapshot of a cluster that is running Memcached rather than
-//     Redis.
+//     Redis OSS.
 //
 // Neither of these are supported by ElastiCache.
 type SnapshotFeatureNotSupportedFault struct {
