@@ -14,6 +14,9 @@ import (
 // statement from a policy, the policy is deleted. If you specify a statement ID
 // that doesn't exist in the policy, or if the bot or bot alias doesn't have a
 // policy attached, Amazon Lex returns an exception.
+//
+// You need to add the DeleteResourcePolicy or UpdateResourcePolicy action to the
+// bot role in order to call the API.
 func (c *Client) DeleteResourcePolicyStatement(ctx context.Context, params *DeleteResourcePolicyStatementInput, optFns ...func(*Options)) (*DeleteResourcePolicyStatementOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyStatementInput{}

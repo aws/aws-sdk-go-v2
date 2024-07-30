@@ -123,6 +123,20 @@ type GetSolNetworkOperationMetadata struct {
 	// This member is required.
 	LastModified *time.Time
 
+	// Metadata related to the network operation occurrence for network instantiation.
+	// This is populated only if the lcmOperationType is INSTANTIATE .
+	InstantiateMetadata *InstantiateMetadata
+
+	// Metadata related to the network operation occurrence for network function
+	// updates in a network instance. This is populated only if the lcmOperationType is
+	// UPDATE and the updateType is MODIFY_VNF_INFORMATION .
+	ModifyVnfInfoMetadata *ModifyVnfInfoMetadata
+
+	// Metadata related to the network operation occurrence for network instance
+	// updates. This is populated only if the lcmOperationType is UPDATE and the
+	// updateType is UPDATE_NS .
+	UpdateNsMetadata *UpdateNsMetadata
+
 	noSmithyDocumentSerde
 }
 
@@ -219,6 +233,21 @@ type GetSolVnfInfo struct {
 
 	// Compute info used by the network function instance.
 	VnfcResourceInfo []GetSolVnfcResourceInfo
+
+	noSmithyDocumentSerde
+}
+
+// Metadata related to the configuration properties used during instantiation of
+// the network instance.
+type InstantiateMetadata struct {
+
+	// The network service descriptor used for instantiating the network instance.
+	//
+	// This member is required.
+	NsdInfoId *string
+
+	// The configurable properties used during instantiation.
+	AdditionalParamsForNs document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -478,6 +507,10 @@ type ListSolNetworkOperationsInfo struct {
 	// Metadata related to this network operation.
 	Metadata *ListSolNetworkOperationsMetadata
 
+	// Type of the update. Only present if the network operation lcmOperationType is
+	// UPDATE .
+	UpdateType UpdateSolNetworkType
+
 	noSmithyDocumentSerde
 }
 
@@ -496,6 +529,16 @@ type ListSolNetworkOperationsMetadata struct {
 	//
 	// This member is required.
 	LastModified *time.Time
+
+	// The network service descriptor id used for the operation.
+	//
+	// Only present if the updateType is UPDATE_NS .
+	NsdInfoId *string
+
+	// The network function id used for the operation.
+	//
+	// Only present if the updateType is MODIFY_VNF_INFO .
+	VnfInstanceId *string
 
 	noSmithyDocumentSerde
 }
@@ -579,6 +622,23 @@ type ListSolNetworkPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata related to the configuration properties used during update of a
+// specific network function in a network instance.
+type ModifyVnfInfoMetadata struct {
+
+	// The configurable properties used during update of the network function instance.
+	//
+	// This member is required.
+	VnfConfigurableProperties document.Interface
+
+	// The network function instance that was updated in the network instance.
+	//
+	// This member is required.
+	VnfInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Metadata for network package artifacts.
 //
 // Artifacts are the contents of the package descriptor file and the state of the
@@ -650,6 +710,21 @@ type ToscaOverride struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata related to the configuration properties used during update of a
+// network instance.
+type UpdateNsMetadata struct {
+
+	// The network service descriptor used for updating the network instance.
+	//
+	// This member is required.
+	NsdInfoId *string
+
+	// The configurable properties used during update.
+	AdditionalParamsForNs document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // Information parameters and/or the configurable properties for a network
 // function.
 //
@@ -668,6 +743,22 @@ type UpdateSolNetworkModify struct {
 	//
 	// This member is required.
 	VnfInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information parameters and/or the configurable properties for a network
+// descriptor used for update.
+type UpdateSolNetworkServiceData struct {
+
+	// ID of the network service descriptor.
+	//
+	// This member is required.
+	NsdInfoId *string
+
+	// Values for the configurable properties declared in the network service
+	// descriptor.
+	AdditionalParamsForNs document.Interface
 
 	noSmithyDocumentSerde
 }

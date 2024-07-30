@@ -2210,6 +2210,232 @@ func awsAwsjson11_deserializeOpErrorListPipelines(response *smithyhttp.Response,
 	}
 }
 
+type awsAwsjson11_deserializeOpListRuleExecutions struct {
+}
+
+func (*awsAwsjson11_deserializeOpListRuleExecutions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListRuleExecutions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListRuleExecutions(response, &metadata)
+	}
+	output := &ListRuleExecutionsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListRuleExecutionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListRuleExecutions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("PipelineExecutionNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineExecutionNotFoundException(response, errorBody)
+
+	case strings.EqualFold("PipelineNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpListRuleTypes struct {
+}
+
+func (*awsAwsjson11_deserializeOpListRuleTypes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListRuleTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListRuleTypes(response, &metadata)
+	}
+	output := &ListRuleTypesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListRuleTypesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListRuleTypes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListTagsForResource struct {
 }
 
@@ -2422,6 +2648,109 @@ func awsAwsjson11_deserializeOpErrorListWebhooks(response *smithyhttp.Response, 
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpOverrideStageCondition struct {
+}
+
+func (*awsAwsjson11_deserializeOpOverrideStageCondition) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpOverrideStageCondition) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorOverrideStageCondition(response, &metadata)
+	}
+	output := &OverrideStageConditionOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorOverrideStageCondition(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ConcurrentPipelineExecutionsLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentPipelineExecutionsLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ConditionNotOverridableException", errorCode):
+		return awsAwsjson11_deserializeErrorConditionNotOverridableException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("NotLatestPipelineExecutionException", errorCode):
+		return awsAwsjson11_deserializeErrorNotLatestPipelineExecutionException(response, errorBody)
+
+	case strings.EqualFold("PipelineNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
+
+	case strings.EqualFold("StageNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorStageNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -2752,6 +3081,9 @@ func awsAwsjson11_deserializeOpErrorPutActionRevision(response *smithyhttp.Respo
 	switch {
 	case strings.EqualFold("ActionNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorActionNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ConcurrentPipelineExecutionsLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentPipelineExecutionsLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("PipelineNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
@@ -3599,6 +3931,9 @@ func awsAwsjson11_deserializeOpErrorRetryStageExecution(response *smithyhttp.Res
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("ConcurrentPipelineExecutionsLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentPipelineExecutionsLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
 
@@ -4601,6 +4936,41 @@ func awsAwsjson11_deserializeErrorConcurrentPipelineExecutionsLimitExceededExcep
 
 	output := &types.ConcurrentPipelineExecutionsLimitExceededException{}
 	err := awsAwsjson11_deserializeDocumentConcurrentPipelineExecutionsLimitExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorConditionNotOverridableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ConditionNotOverridableException{}
+	err := awsAwsjson11_deserializeDocumentConditionNotOverridableException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -8234,6 +8604,42 @@ func awsAwsjson11_deserializeDocumentAWSSessionCredentials(v **types.AWSSessionC
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBeforeEntryConditions(v **types.BeforeEntryConditions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BeforeEntryConditions
+	if *v == nil {
+		sv = &types.BeforeEntryConditions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "conditions":
+			if err := awsAwsjson11_deserializeDocumentConditionList(&sv.Conditions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBlockerDeclaration(v **types.BlockerDeclaration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8360,6 +8766,265 @@ func awsAwsjson11_deserializeDocumentConcurrentPipelineExecutionsLimitExceededEx
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCondition(v **types.Condition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Condition
+	if *v == nil {
+		sv = &types.Condition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "result":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Result to be of type string, got %T instead", value)
+				}
+				sv.Result = types.Result(jtv)
+			}
+
+		case "rules":
+			if err := awsAwsjson11_deserializeDocumentRuleDeclarationList(&sv.Rules, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConditionExecution(v **types.ConditionExecution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConditionExecution
+	if *v == nil {
+		sv = &types.ConditionExecution{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lastStatusChange":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastStatusChange = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConditionExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConditionExecutionStatus(jtv)
+			}
+
+		case "summary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionSummary to be of type string, got %T instead", value)
+				}
+				sv.Summary = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConditionList(v *[]types.Condition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Condition
+	if *v == nil {
+		cv = []types.Condition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Condition
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCondition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConditionNotOverridableException(v **types.ConditionNotOverridableException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConditionNotOverridableException
+	if *v == nil {
+		sv = &types.ConditionNotOverridableException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConditionState(v **types.ConditionState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConditionState
+	if *v == nil {
+		sv = &types.ConditionState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "latestExecution":
+			if err := awsAwsjson11_deserializeDocumentConditionExecution(&sv.LatestExecution, value); err != nil {
+				return err
+			}
+
+		case "ruleStates":
+			if err := awsAwsjson11_deserializeDocumentRuleStateList(&sv.RuleStates, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConditionStateList(v *[]types.ConditionState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConditionState
+	if *v == nil {
+		cv = []types.ConditionState{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConditionState
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentConditionState(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8653,6 +9318,11 @@ func awsAwsjson11_deserializeDocumentFailureConditions(v **types.FailureConditio
 
 	for key, value := range shape {
 		switch key {
+		case "conditions":
+			if err := awsAwsjson11_deserializeDocumentConditionList(&sv.Conditions, value); err != nil {
+				return err
+			}
+
 		case "result":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11846,6 +12516,42 @@ func awsAwsjson11_deserializeDocumentResolvedPipelineVariableList(v *[]types.Res
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentResolvedRuleConfigurationMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11875,6 +12581,1133 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleConfigurationMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RuleConfigurationValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleConfigurationProperty(v **types.RuleConfigurationProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleConfigurationProperty
+	if *v == nil {
+		sv = &types.RuleConfigurationProperty{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "key":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Key = jtv
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleConfigurationKey to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "queryable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Queryable = jtv
+			}
+
+		case "required":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Required = jtv
+			}
+
+		case "secret":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Secret = jtv
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleConfigurationPropertyType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RuleConfigurationPropertyType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleConfigurationPropertyList(v *[]types.RuleConfigurationProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuleConfigurationProperty
+	if *v == nil {
+		cv = []types.RuleConfigurationProperty{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuleConfigurationProperty
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRuleConfigurationProperty(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleDeclaration(v **types.RuleDeclaration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleDeclaration
+	if *v == nil {
+		sv = &types.RuleDeclaration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson11_deserializeDocumentRuleConfigurationMap(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "inputArtifacts":
+			if err := awsAwsjson11_deserializeDocumentInputArtifactList(&sv.InputArtifacts, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSRegionName to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "ruleTypeId":
+			if err := awsAwsjson11_deserializeDocumentRuleTypeId(&sv.RuleTypeId, value); err != nil {
+				return err
+			}
+
+		case "timeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RuleTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleDeclarationList(v *[]types.RuleDeclaration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuleDeclaration
+	if *v == nil {
+		cv = []types.RuleDeclaration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuleDeclaration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRuleDeclaration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleExecution(v **types.RuleExecution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleExecution
+	if *v == nil {
+		sv = &types.RuleExecution{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorDetails":
+			if err := awsAwsjson11_deserializeDocumentErrorDetails(&sv.ErrorDetails, value); err != nil {
+				return err
+			}
+
+		case "externalExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionId to be of type string, got %T instead", value)
+				}
+				sv.ExternalExecutionId = ptr.String(jtv)
+			}
+
+		case "externalExecutionUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.ExternalExecutionUrl = ptr.String(jtv)
+			}
+
+		case "lastStatusChange":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastStatusChange = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "lastUpdatedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastUpdatedBy to be of type string, got %T instead", value)
+				}
+				sv.LastUpdatedBy = ptr.String(jtv)
+			}
+
+		case "ruleExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleExecutionId to be of type string, got %T instead", value)
+				}
+				sv.RuleExecutionId = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.RuleExecutionStatus(jtv)
+			}
+
+		case "summary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionSummary to be of type string, got %T instead", value)
+				}
+				sv.Summary = ptr.String(jtv)
+			}
+
+		case "token":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleExecutionToken to be of type string, got %T instead", value)
+				}
+				sv.Token = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleExecutionDetail(v **types.RuleExecutionDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleExecutionDetail
+	if *v == nil {
+		sv = &types.RuleExecutionDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "input":
+			if err := awsAwsjson11_deserializeDocumentRuleExecutionInput(&sv.Input, value); err != nil {
+				return err
+			}
+
+		case "lastUpdateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "output":
+			if err := awsAwsjson11_deserializeDocumentRuleExecutionOutput(&sv.Output, value); err != nil {
+				return err
+			}
+
+		case "pipelineExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionId to be of type string, got %T instead", value)
+				}
+				sv.PipelineExecutionId = ptr.String(jtv)
+			}
+
+		case "pipelineVersion":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PipelineVersion to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PipelineVersion = ptr.Int32(int32(i64))
+			}
+
+		case "ruleExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleExecutionId to be of type string, got %T instead", value)
+				}
+				sv.RuleExecutionId = ptr.String(jtv)
+			}
+
+		case "ruleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleName to be of type string, got %T instead", value)
+				}
+				sv.RuleName = ptr.String(jtv)
+			}
+
+		case "stageName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StageName to be of type string, got %T instead", value)
+				}
+				sv.StageName = ptr.String(jtv)
+			}
+
+		case "startTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.RuleExecutionStatus(jtv)
+			}
+
+		case "updatedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastUpdatedBy to be of type string, got %T instead", value)
+				}
+				sv.UpdatedBy = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleExecutionDetailList(v *[]types.RuleExecutionDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuleExecutionDetail
+	if *v == nil {
+		cv = []types.RuleExecutionDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuleExecutionDetail
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRuleExecutionDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleExecutionInput(v **types.RuleExecutionInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleExecutionInput
+	if *v == nil {
+		sv = &types.RuleExecutionInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configuration":
+			if err := awsAwsjson11_deserializeDocumentRuleConfigurationMap(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "inputArtifacts":
+			if err := awsAwsjson11_deserializeDocumentArtifactDetailList(&sv.InputArtifacts, value); err != nil {
+				return err
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AWSRegionName to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "resolvedConfiguration":
+			if err := awsAwsjson11_deserializeDocumentResolvedRuleConfigurationMap(&sv.ResolvedConfiguration, value); err != nil {
+				return err
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "ruleTypeId":
+			if err := awsAwsjson11_deserializeDocumentRuleTypeId(&sv.RuleTypeId, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleExecutionOutput(v **types.RuleExecutionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleExecutionOutput
+	if *v == nil {
+		sv = &types.RuleExecutionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "executionResult":
+			if err := awsAwsjson11_deserializeDocumentRuleExecutionResult(&sv.ExecutionResult, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleExecutionResult(v **types.RuleExecutionResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleExecutionResult
+	if *v == nil {
+		sv = &types.RuleExecutionResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorDetails":
+			if err := awsAwsjson11_deserializeDocumentErrorDetails(&sv.ErrorDetails, value); err != nil {
+				return err
+			}
+
+		case "externalExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalExecutionId to be of type string, got %T instead", value)
+				}
+				sv.ExternalExecutionId = ptr.String(jtv)
+			}
+
+		case "externalExecutionSummary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalExecutionSummary to be of type string, got %T instead", value)
+				}
+				sv.ExternalExecutionSummary = ptr.String(jtv)
+			}
+
+		case "externalExecutionUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.ExternalExecutionUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleRevision(v **types.RuleRevision, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleRevision
+	if *v == nil {
+		sv = &types.RuleRevision{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "created":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Created = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "revisionChangeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RevisionChangeIdentifier to be of type string, got %T instead", value)
+				}
+				sv.RevisionChangeId = ptr.String(jtv)
+			}
+
+		case "revisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Revision to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleState(v **types.RuleState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleState
+	if *v == nil {
+		sv = &types.RuleState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currentRevision":
+			if err := awsAwsjson11_deserializeDocumentRuleRevision(&sv.CurrentRevision, value); err != nil {
+				return err
+			}
+
+		case "entityUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.EntityUrl = ptr.String(jtv)
+			}
+
+		case "latestExecution":
+			if err := awsAwsjson11_deserializeDocumentRuleExecution(&sv.LatestExecution, value); err != nil {
+				return err
+			}
+
+		case "revisionUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.RevisionUrl = ptr.String(jtv)
+			}
+
+		case "ruleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleName to be of type string, got %T instead", value)
+				}
+				sv.RuleName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleStateList(v *[]types.RuleState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuleState
+	if *v == nil {
+		cv = []types.RuleState{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuleState
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRuleState(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleType(v **types.RuleType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleType
+	if *v == nil {
+		sv = &types.RuleType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if err := awsAwsjson11_deserializeDocumentRuleTypeId(&sv.Id, value); err != nil {
+				return err
+			}
+
+		case "inputArtifactDetails":
+			if err := awsAwsjson11_deserializeDocumentArtifactDetails(&sv.InputArtifactDetails, value); err != nil {
+				return err
+			}
+
+		case "ruleConfigurationProperties":
+			if err := awsAwsjson11_deserializeDocumentRuleConfigurationPropertyList(&sv.RuleConfigurationProperties, value); err != nil {
+				return err
+			}
+
+		case "settings":
+			if err := awsAwsjson11_deserializeDocumentRuleTypeSettings(&sv.Settings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleTypeId(v **types.RuleTypeId, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleTypeId
+	if *v == nil {
+		sv = &types.RuleTypeId{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleCategory to be of type string, got %T instead", value)
+				}
+				sv.Category = types.RuleCategory(jtv)
+			}
+
+		case "owner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleOwner to be of type string, got %T instead", value)
+				}
+				sv.Owner = types.RuleOwner(jtv)
+			}
+
+		case "provider":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleProvider to be of type string, got %T instead", value)
+				}
+				sv.Provider = ptr.String(jtv)
+			}
+
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleTypeList(v *[]types.RuleType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuleType
+	if *v == nil {
+		cv = []types.RuleType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuleType
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRuleType(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleTypeSettings(v **types.RuleTypeSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleTypeSettings
+	if *v == nil {
+		sv = &types.RuleTypeSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entityUrlTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UrlTemplate to be of type string, got %T instead", value)
+				}
+				sv.EntityUrlTemplate = ptr.String(jtv)
+			}
+
+		case "executionUrlTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UrlTemplate to be of type string, got %T instead", value)
+				}
+				sv.ExecutionUrlTemplate = ptr.String(jtv)
+			}
+
+		case "revisionUrlTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UrlTemplate to be of type string, got %T instead", value)
+				}
+				sv.RevisionUrlTemplate = ptr.String(jtv)
+			}
+
+		case "thirdPartyConfigurationUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.ThirdPartyConfigurationUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -12153,6 +13986,96 @@ func awsAwsjson11_deserializeDocumentStageBlockerDeclarationList(v *[]types.Bloc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStageConditionsExecution(v **types.StageConditionsExecution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StageConditionsExecution
+	if *v == nil {
+		sv = &types.StageConditionsExecution{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConditionExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConditionExecutionStatus(jtv)
+			}
+
+		case "summary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionSummary to be of type string, got %T instead", value)
+				}
+				sv.Summary = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStageConditionState(v **types.StageConditionState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StageConditionState
+	if *v == nil {
+		sv = &types.StageConditionState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "conditionStates":
+			if err := awsAwsjson11_deserializeDocumentConditionStateList(&sv.ConditionStates, value); err != nil {
+				return err
+			}
+
+		case "latestExecution":
+			if err := awsAwsjson11_deserializeDocumentStageConditionsExecution(&sv.LatestExecution, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStageContext(v **types.StageContext, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12220,6 +14143,11 @@ func awsAwsjson11_deserializeDocumentStageDeclaration(v **types.StageDeclaration
 				return err
 			}
 
+		case "beforeEntry":
+			if err := awsAwsjson11_deserializeDocumentBeforeEntryConditions(&sv.BeforeEntry, value); err != nil {
+				return err
+			}
+
 		case "blockers":
 			if err := awsAwsjson11_deserializeDocumentStageBlockerDeclarationList(&sv.Blockers, value); err != nil {
 				return err
@@ -12236,6 +14164,11 @@ func awsAwsjson11_deserializeDocumentStageDeclaration(v **types.StageDeclaration
 
 		case "onFailure":
 			if err := awsAwsjson11_deserializeDocumentFailureConditions(&sv.OnFailure, value); err != nil {
+				return err
+			}
+
+		case "onSuccess":
+			if err := awsAwsjson11_deserializeDocumentSuccessConditions(&sv.OnSuccess, value); err != nil {
 				return err
 			}
 
@@ -12447,6 +14380,11 @@ func awsAwsjson11_deserializeDocumentStageState(v **types.StageState, value inte
 				return err
 			}
 
+		case "beforeEntryConditionState":
+			if err := awsAwsjson11_deserializeDocumentStageConditionState(&sv.BeforeEntryConditionState, value); err != nil {
+				return err
+			}
+
 		case "inboundExecution":
 			if err := awsAwsjson11_deserializeDocumentStageExecution(&sv.InboundExecution, value); err != nil {
 				return err
@@ -12464,6 +14402,16 @@ func awsAwsjson11_deserializeDocumentStageState(v **types.StageState, value inte
 
 		case "latestExecution":
 			if err := awsAwsjson11_deserializeDocumentStageExecution(&sv.LatestExecution, value); err != nil {
+				return err
+			}
+
+		case "onFailureConditionState":
+			if err := awsAwsjson11_deserializeDocumentStageConditionState(&sv.OnFailureConditionState, value); err != nil {
+				return err
+			}
+
+		case "onSuccessConditionState":
+			if err := awsAwsjson11_deserializeDocumentStageConditionState(&sv.OnSuccessConditionState, value); err != nil {
 				return err
 			}
 
@@ -12548,6 +14496,42 @@ func awsAwsjson11_deserializeDocumentStopExecutionTrigger(v **types.StopExecutio
 					return fmt.Errorf("expected StopPipelineExecutionReason to be of type string, got %T instead", value)
 				}
 				sv.Reason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSuccessConditions(v **types.SuccessConditions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SuccessConditions
+	if *v == nil {
+		sv = &types.SuccessConditions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "conditions":
+			if err := awsAwsjson11_deserializeDocumentConditionList(&sv.Conditions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13989,6 +15973,87 @@ func awsAwsjson11_deserializeOpDocumentListPipelinesOutput(v **ListPipelinesOutp
 
 		case "pipelines":
 			if err := awsAwsjson11_deserializeDocumentPipelineList(&sv.Pipelines, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListRuleExecutionsOutput(v **ListRuleExecutionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListRuleExecutionsOutput
+	if *v == nil {
+		sv = &ListRuleExecutionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "ruleExecutionDetails":
+			if err := awsAwsjson11_deserializeDocumentRuleExecutionDetailList(&sv.RuleExecutionDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListRuleTypesOutput(v **ListRuleTypesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListRuleTypesOutput
+	if *v == nil {
+		sv = &ListRuleTypesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ruleTypes":
+			if err := awsAwsjson11_deserializeDocumentRuleTypeList(&sv.RuleTypes, value); err != nil {
 				return err
 			}
 

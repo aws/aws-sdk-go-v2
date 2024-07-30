@@ -302,6 +302,30 @@ func TestCheckSnapshot_ListPipelines(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRuleExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuleExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRuleExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRuleTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuleTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRuleTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -319,6 +343,18 @@ func TestCheckSnapshot_ListWebhooks(t *testing.T) {
 	_, err := svc.ListWebhooks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListWebhooks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_OverrideStageCondition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OverrideStageCondition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "OverrideStageCondition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,6 +817,30 @@ func TestUpdateSnapshot_ListPipelines(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListRuleExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuleExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRuleExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRuleTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuleTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRuleTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -798,6 +858,18 @@ func TestUpdateSnapshot_ListWebhooks(t *testing.T) {
 	_, err := svc.ListWebhooks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListWebhooks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_OverrideStageCondition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OverrideStageCondition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "OverrideStageCondition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

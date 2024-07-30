@@ -5379,6 +5379,15 @@ func awsRestjson1_deserializeDocumentProfileDetail(v **types.ProfileDetail, valu
 
 	for key, value := range shape {
 		switch key {
+		case "acceptRoleSessionName":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AcceptRoleSessionName = ptr.Bool(jtv)
+			}
+
 		case "attributeMappings":
 			if err := awsRestjson1_deserializeDocumentAttributeMappings(&sv.AttributeMappings, value); err != nil {
 				return err

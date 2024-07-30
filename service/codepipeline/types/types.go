@@ -833,6 +833,17 @@ type AWSSessionCredentials struct {
 	noSmithyDocumentSerde
 }
 
+// The conditions for making checks for entry to a stage.
+type BeforeEntryConditions struct {
+
+	// The conditions that are configured as entry conditions.
+	//
+	// This member is required.
+	Conditions []Condition
+
+	noSmithyDocumentSerde
+}
+
 // Reserved for future use.
 type BlockerDeclaration struct {
 
@@ -845,6 +856,47 @@ type BlockerDeclaration struct {
 	//
 	// This member is required.
 	Type BlockerType
+
+	noSmithyDocumentSerde
+}
+
+// The condition for the stage. A condition is made up of the rules and the result
+// for the condition.
+type Condition struct {
+
+	// The action to be done when the condition is met. For example, rolling back an
+	// execution for a failure condition.
+	Result Result
+
+	// The rules that make up the condition.
+	Rules []RuleDeclaration
+
+	noSmithyDocumentSerde
+}
+
+// The run of a condition.
+type ConditionExecution struct {
+
+	// The last status change of the condition.
+	LastStatusChange *time.Time
+
+	// The status of the run for a condition.
+	Status ConditionExecutionStatus
+
+	// The summary of information about a run for a condition.
+	Summary *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the state of the condition.
+type ConditionState struct {
+
+	// The state of the latest run of the rule.
+	LatestExecution *ConditionExecution
+
+	// The state of the rules for the condition.
+	RuleStates []RuleState
 
 	noSmithyDocumentSerde
 }
@@ -960,6 +1012,9 @@ type ExecutorConfiguration struct {
 // The configuration that specifies the result, such as rollback, to occur upon
 // stage failure.
 type FailureConditions struct {
+
+	// The conditions that are configured as failure conditions.
+	Conditions []Condition
 
 	// The specified result for when the failure conditions are met, such as rolling
 	// back the stage.
@@ -1689,6 +1744,368 @@ type ResolvedPipelineVariable struct {
 	noSmithyDocumentSerde
 }
 
+// Represents information about a rule configuration property.
+type RuleConfigurationProperty struct {
+
+	// Whether the configuration property is a key.
+	//
+	// This member is required.
+	Key bool
+
+	// The name of the rule configuration property.
+	//
+	// This member is required.
+	Name *string
+
+	// Whether the configuration property is a required value.
+	//
+	// This member is required.
+	Required bool
+
+	// Whether the configuration property is secret.
+	//
+	// When updating a pipeline, passing * * * * * without changing any other values
+	// of the action preserves the previous value of the secret.
+	//
+	// This member is required.
+	Secret bool
+
+	// The description of the action configuration property that is displayed to users.
+	Description *string
+
+	// Indicates whether the property can be queried.
+	//
+	// If you create a pipeline with a condition and rule, and that rule contains a
+	// queryable property, the value for that configuration property is subject to
+	// other restrictions. The value must be less than or equal to twenty (20)
+	// characters. The value can contain only alphanumeric characters, underscores, and
+	// hyphens.
+	Queryable bool
+
+	// The type of the configuration property.
+	Type RuleConfigurationPropertyType
+
+	noSmithyDocumentSerde
+}
+
+// Represents information about the rule to be created for an associated
+// condition. An example would be creating a new rule for an entry condition, such
+// as a rule that checks for a test result before allowing the run to enter the
+// deployment stage.
+type RuleDeclaration struct {
+
+	// The name of the rule that is created for the condition, such as CheckAllResults.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID for the rule type, which is made up of the combined values for category,
+	// owner, provider, and version.
+	//
+	// This member is required.
+	RuleTypeId *RuleTypeId
+
+	// The action configuration fields for the rule.
+	Configuration map[string]string
+
+	// The input artifacts fields for the rule, such as specifying an input file for
+	// the rule.
+	InputArtifacts []InputArtifact
+
+	// The Region for the condition associated with the rule.
+	Region *string
+
+	// The pipeline role ARN associated with the rule.
+	RoleArn *string
+
+	// The action timeout for the rule.
+	TimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents information about each time a rule is run as part of the pipeline
+// execution for a pipeline configured with conditions.
+type RuleExecution struct {
+
+	// Represents information about an error in CodePipeline.
+	ErrorDetails *ErrorDetails
+
+	// The external ID of the run of the rule.
+	ExternalExecutionId *string
+
+	// The URL of a resource external to Amazon Web Services that is used when running
+	// the rule (for example, an external repository URL).
+	ExternalExecutionUrl *string
+
+	// The last status change of the rule.
+	LastStatusChange *time.Time
+
+	// The ARN of the user who last changed the rule.
+	LastUpdatedBy *string
+
+	// The execution ID for the run of the rule.
+	RuleExecutionId *string
+
+	// The status of the run of the rule, such as FAILED.
+	Status RuleExecutionStatus
+
+	// A summary of the run of the rule.
+	Summary *string
+
+	// The system-generated token used to identify a unique request.
+	Token *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the runs for a rule and the results produced on an artifact as
+// it passes through stages in the pipeline.
+type RuleExecutionDetail struct {
+
+	// Input details for the rule execution, such as role ARN, Region, and input
+	// artifacts.
+	Input *RuleExecutionInput
+
+	// The date and time of the last change to the rule execution, in timestamp format.
+	LastUpdateTime *time.Time
+
+	// Output details for the rule execution, such as the rule execution result.
+	Output *RuleExecutionOutput
+
+	// The ID of the pipeline execution in the stage where the rule was run. Use the GetPipelineState
+	// action to retrieve the current pipelineExecutionId of the stage.
+	PipelineExecutionId *string
+
+	// The version number of the pipeline with the stage where the rule was run.
+	PipelineVersion *int32
+
+	// The ID of the run for the rule.
+	RuleExecutionId *string
+
+	// The name of the rule that was run in the stage.
+	RuleName *string
+
+	// The name of the stage where the rule was run.
+	StageName *string
+
+	// The start time of the rule execution.
+	StartTime *time.Time
+
+	// The status of the rule execution. Status categories are InProgress , Succeeded ,
+	// and Failed .
+	Status RuleExecutionStatus
+
+	// The ARN of the user who changed the rule execution details.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter values for the rule execution.
+type RuleExecutionFilter struct {
+
+	// The field that specifies to filter on the latest execution in the pipeline.
+	//
+	// Filtering on the latest execution is available for executions run on or after
+	// February 08, 2024.
+	LatestInPipelineExecution *LatestInPipelineExecutionFilter
+
+	// The pipeline execution ID used to filter rule execution history.
+	PipelineExecutionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Input information used for a rule execution.
+type RuleExecutionInput struct {
+
+	// Configuration data for a rule execution, such as the resolved values for that
+	// run.
+	Configuration map[string]string
+
+	// Details of input artifacts of the rule that correspond to the rule execution.
+	InputArtifacts []ArtifactDetail
+
+	// The Amazon Web Services Region for the rule, such as us-east-1.
+	Region *string
+
+	// Configuration data for a rule execution with all variable references replaced
+	// with their real values for the execution.
+	ResolvedConfiguration map[string]string
+
+	// The ARN of the IAM service role that performs the declared rule. This is
+	// assumed through the roleArn for the pipeline.
+	RoleArn *string
+
+	// The ID for the rule type, which is made up of the combined values for category,
+	// owner, provider, and version.
+	RuleTypeId *RuleTypeId
+
+	noSmithyDocumentSerde
+}
+
+// Output details listed for a rule execution, such as the rule execution result.
+type RuleExecutionOutput struct {
+
+	// Execution result information listed in the output details for a rule execution.
+	ExecutionResult *RuleExecutionResult
+
+	noSmithyDocumentSerde
+}
+
+// Execution result information, such as the external execution ID.
+type RuleExecutionResult struct {
+
+	// Represents information about an error in CodePipeline.
+	ErrorDetails *ErrorDetails
+
+	// The external ID for the rule execution.
+	ExternalExecutionId *string
+
+	// The external provider summary for the rule execution.
+	ExternalExecutionSummary *string
+
+	// The deepest external link to the external resource (for example, a repository
+	// URL or deployment endpoint) that is used when running the rule.
+	ExternalExecutionUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The change to a rule that creates a revision of the rule.
+type RuleRevision struct {
+
+	// The date and time when the most recent version of the rule was created, in
+	// timestamp format.
+	//
+	// This member is required.
+	Created *time.Time
+
+	// The unique identifier of the change that set the state to this revision (for
+	// example, a deployment ID or timestamp).
+	//
+	// This member is required.
+	RevisionChangeId *string
+
+	// The system-generated unique ID that identifies the revision number of the rule.
+	//
+	// This member is required.
+	RevisionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about the state of a rule.
+//
+// Values returned in the revisionId field indicate the rule revision information,
+// such as the commit ID, for the current state.
+type RuleState struct {
+
+	// The ID of the current revision of the artifact successfully worked on by the
+	// job.
+	CurrentRevision *RuleRevision
+
+	// A URL link for more information about the state of the action, such as a
+	// details page.
+	EntityUrl *string
+
+	// Represents information about the latest run of an rule.
+	LatestExecution *RuleExecution
+
+	// A URL link for more information about the revision, such as a commit details
+	// page.
+	RevisionUrl *string
+
+	// The name of the rule.
+	RuleName *string
+
+	noSmithyDocumentSerde
+}
+
+// The rule type, which is made up of the combined values for category, owner,
+// provider, and version.
+type RuleType struct {
+
+	// Represents information about a rule type.
+	//
+	// This member is required.
+	Id *RuleTypeId
+
+	// Returns information about the details of an artifact.
+	//
+	// This member is required.
+	InputArtifactDetails *ArtifactDetails
+
+	// The configuration properties for the rule type.
+	RuleConfigurationProperties []RuleConfigurationProperty
+
+	// Returns information about the settings for a rule type.
+	Settings *RuleTypeSettings
+
+	noSmithyDocumentSerde
+}
+
+// The ID for the rule type, which is made up of the combined values for category,
+// owner, provider, and version.
+type RuleTypeId struct {
+
+	// A category defines what kind of rule can be run in the stage, and constrains
+	// the provider type for the rule. Valid categories are limited to one of the
+	// following values.
+	//
+	//   - INVOKE
+	//
+	//   - Approval
+	//
+	//   - Rule
+	//
+	// This member is required.
+	Category RuleCategory
+
+	// The provider of the service being called by the rule. Valid providers are
+	// determined by the rulecategory. For example, a managed rule in the Rule category
+	// type has an owner of AWS, which would be specified as AWS .
+	//
+	// This member is required.
+	Provider *string
+
+	// The creator of the rule being called. The valid value for the Owner field in
+	// the rule category is AWS .
+	Owner RuleOwner
+
+	// A string that describes the rule version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about the settings for a rule type.
+type RuleTypeSettings struct {
+
+	// The URL returned to the CodePipeline console that provides a deep link to the
+	// resources of the external system, such as the configuration page for a
+	// CodeDeploy deployment group. This link is provided as part of the action display
+	// in the pipeline.
+	EntityUrlTemplate *string
+
+	// The URL returned to the CodePipeline console that contains a link to the
+	// top-level landing page for the external system, such as the console page for
+	// CodeDeploy. This link is shown on the pipeline view page in the CodePipeline
+	// console and provides a link to the execution entity of the external action.
+	ExecutionUrlTemplate *string
+
+	// The URL returned to the CodePipeline console that contains a link to the page
+	// where customers can update or change the configuration of the external action.
+	RevisionUrlTemplate *string
+
+	// The URL of a sign-up page where users can sign up for an external service and
+	// perform initial configuration of the action provided by that service.
+	ThirdPartyConfigurationUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // The location of the S3 bucket that contains a revision.
 type S3ArtifactLocation struct {
 
@@ -1774,6 +2191,30 @@ type SourceRevisionOverride struct {
 	noSmithyDocumentSerde
 }
 
+// Represents information about the run of a condition for a stage.
+type StageConditionsExecution struct {
+
+	// The status of a run of a condition for a stage.
+	Status ConditionExecutionStatus
+
+	// A summary of the run of the condition for a stage.
+	Summary *string
+
+	noSmithyDocumentSerde
+}
+
+// The state of a run of a condition for a stage.
+type StageConditionState struct {
+
+	// The states of the conditions for a run of a condition for a stage.
+	ConditionStates []ConditionState
+
+	// Represents information about the latest run of a condition for a stage.
+	LatestExecution *StageConditionsExecution
+
+	noSmithyDocumentSerde
+}
+
 // Represents information about a stage to a job worker.
 type StageContext struct {
 
@@ -1796,6 +2237,10 @@ type StageDeclaration struct {
 	// This member is required.
 	Name *string
 
+	// The method to use when a stage allows entry. For example, configuring this
+	// field for conditions will allow entry to the stage when the conditions are met.
+	BeforeEntry *BeforeEntryConditions
+
 	// Reserved for future use.
 	Blockers []BlockerDeclaration
 
@@ -1803,6 +2248,11 @@ type StageDeclaration struct {
 	// configuring this field for rollback will roll back a failed stage automatically
 	// to the last successful pipeline execution in the stage.
 	OnFailure *FailureConditions
+
+	// The method to use when a stage has succeeded. For example, configuring this
+	// field for conditions will allow the stage to succeed when the conditions are
+	// met.
+	OnSuccess *SuccessConditions
 
 	noSmithyDocumentSerde
 }
@@ -1836,6 +2286,9 @@ type StageState struct {
 	// The state of the stage.
 	ActionStates []ActionState
 
+	// The state of the entry conditions for a stage.
+	BeforeEntryConditionState *StageConditionState
+
 	// Represents information about the run of a stage.
 	InboundExecution *StageExecution
 
@@ -1848,6 +2301,12 @@ type StageState struct {
 	// Information about the latest execution in the stage, including its ID and
 	// status.
 	LatestExecution *StageExecution
+
+	// The state of the failure conditions for a stage.
+	OnFailureConditionState *StageConditionState
+
+	// The state of the success conditions for a stage.
+	OnSuccessConditionState *StageConditionState
 
 	// The name of the stage.
 	StageName *string
@@ -1871,6 +2330,17 @@ type SucceededInStageFilter struct {
 	// The name of the stage for filtering for pipeline executions where the stage was
 	// successful in the current pipeline version.
 	StageName *string
+
+	noSmithyDocumentSerde
+}
+
+// The conditions for making checks that, if met, succeed a stage.
+type SuccessConditions struct {
+
+	// The conditions that are success conditions.
+	//
+	// This member is required.
+	Conditions []Condition
 
 	noSmithyDocumentSerde
 }

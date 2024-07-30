@@ -177,8 +177,7 @@ type BundleResourceAssociation struct {
 // Describes the user capacity for a pool of WorkSpaces.
 type Capacity struct {
 
-	// The desired number of user sessions for a multi-session pool. This is not
-	// allowed for single-session pools.
+	// The desired number of user sessions for the WorkSpaces in the pool.
 	//
 	// This member is required.
 	DesiredUserSessions *int32
@@ -189,19 +188,22 @@ type Capacity struct {
 // Describes the capacity status for a pool of WorkSpaces.
 type CapacityStatus struct {
 
-	// The number of user sessions currently being used for pool sessions. This only
-	// applies to multi-session pools.
+	// The number of user sessions currently being used for your pool.
 	//
 	// This member is required.
 	ActiveUserSessions *int32
 
-	// The total number of session slots that are available for a pool of WorkSpaces.
+	// The total number of user sessions that are available for streaming or are
+	// currently streaming in your pool.
+	//
+	// ActualUserSessions = AvailableUserSessions + ActiveUserSessions
 	//
 	// This member is required.
 	ActualUserSessions *int32
 
-	// The number of user sessions currently being used for pool sessions. This only
-	// applies to multi-session pools.
+	// The number of user sessions currently available for streaming from your pool.
+	//
+	// AvailableUserSessions = ActualUserSessions - ActiveUserSessions
 	//
 	// This member is required.
 	AvailableUserSessions *int32
@@ -1641,7 +1643,11 @@ type WorkspaceProperties struct {
 	// The MANUAL value is only supported by Amazon WorkSpaces Core. Contact your
 	// account team to be allow-listed to use this value. For more information, see [Amazon WorkSpaces Core].
 	//
+	// Review your running mode to ensure you are using one that is optimal for your
+	// needs and budget. For more information on switching running modes, see [Can I switch between hourly and monthly billing?]
+	//
 	// [Manage the WorkSpace Running Mode]: https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
+	// [Can I switch between hourly and monthly billing?]: http://aws.amazon.com/workspaces-family/workspaces/faqs/#:~:text=Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%20on%20WorkSpaces%20Personal%3F
 	// [Amazon WorkSpaces Core]: http://aws.amazon.com/workspaces/core/
 	RunningMode RunningMode
 

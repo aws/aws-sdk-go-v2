@@ -1,0 +1,8 @@
+{
+    "id": "61735058-385a-47a9-992c-5499839b8e9d",
+    "type": "feature",
+    "description": "This release adds new capabilities to the AMAZON.QnAIntent: Custom prompting, Guardrails integration and ExactResponse support for Bedrock Knowledge Base.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

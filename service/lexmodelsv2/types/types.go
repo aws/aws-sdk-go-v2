@@ -1304,13 +1304,45 @@ type AudioSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// The details on the Bedrock guardrail configuration.
+type BedrockGuardrailConfiguration struct {
+
+	// The unique guardrail id for the Bedrock guardrail configuration.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The guardrail version for the Bedrock guardrail configuration.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the configuration of a Amazon Bedrock knowledge base.
 type BedrockKnowledgeStoreConfiguration struct {
 
-	// The ARN of the knowledge base used.
+	// The base ARN of the knowledge base used.
 	//
 	// This member is required.
 	BedrockKnowledgeBaseArn *string
+
+	// Specifies whether to return an exact response, or to return an answer generated
+	// by the model, using the fields you specify from the database.
+	ExactResponse bool
+
+	// Contains the names of the fields used for an exact response to the user.
+	ExactResponseFields *BedrockKnowledgeStoreExactResponseFields
+
+	noSmithyDocumentSerde
+}
+
+// The exact response fields given by the Bedrock knowledge store.
+type BedrockKnowledgeStoreExactResponseFields struct {
+
+	// The answer field used for an exact response from Bedrock Knowledge Store.
+	AnswerField *string
 
 	noSmithyDocumentSerde
 }
@@ -1323,6 +1355,15 @@ type BedrockModelSpecification struct {
 	//
 	// This member is required.
 	ModelArn *string
+
+	// The custom prompt used in the Bedrock model specification details.
+	CustomPrompt *string
+
+	// The guardrail configuration in the Bedrock model specification details.
+	Guardrail *BedrockGuardrailConfiguration
+
+	// The Bedrock trace status in the Bedrock model specification details.
+	TraceStatus BedrockTraceStatus
 
 	noSmithyDocumentSerde
 }

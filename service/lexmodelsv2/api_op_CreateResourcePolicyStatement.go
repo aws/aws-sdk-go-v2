@@ -16,6 +16,9 @@ import (
 // policy doesn't exist, a new policy is created.
 //
 // You can't create a resource policy statement that allows cross-account access.
+//
+// You need to add the CreateResourcePolicy or UpdateResourcePolicy action to the
+// bot role in order to call the API.
 func (c *Client) CreateResourcePolicyStatement(ctx context.Context, params *CreateResourcePolicyStatementInput, optFns ...func(*Options)) (*CreateResourcePolicyStatementOutput, error) {
 	if params == nil {
 		params = &CreateResourcePolicyStatementInput{}

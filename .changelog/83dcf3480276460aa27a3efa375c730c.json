@@ -1,0 +1,8 @@
+{
+    "id": "83dcf348-0276-460a-a27a-3efa375c730c",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

@@ -652,6 +652,21 @@ func validateUpdateSolNetworkModify(v *types.UpdateSolNetworkModify) error {
 	}
 }
 
+func validateUpdateSolNetworkServiceData(v *types.UpdateSolNetworkServiceData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSolNetworkServiceData"}
+	if v.NsdInfoId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NsdInfoId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelSolNetworkOperationInput(v *CancelSolNetworkOperationInput) error {
 	if v == nil {
 		return nil
@@ -1023,6 +1038,11 @@ func validateOpUpdateSolNetworkInstanceInput(v *UpdateSolNetworkInstanceInput) e
 	if v.ModifyVnfInfoData != nil {
 		if err := validateUpdateSolNetworkModify(v.ModifyVnfInfoData); err != nil {
 			invalidParams.AddNested("ModifyVnfInfoData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateNs != nil {
+		if err := validateUpdateSolNetworkServiceData(v.UpdateNs); err != nil {
+			invalidParams.AddNested("UpdateNs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

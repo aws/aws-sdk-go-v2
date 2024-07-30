@@ -139,6 +139,32 @@ func (e *ConcurrentPipelineExecutionsLimitExceededException) ErrorFault() smithy
 	return smithy.FaultClient
 }
 
+// Unable to override because the condition does not allow overrides.
+type ConditionNotOverridableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConditionNotOverridableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConditionNotOverridableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConditionNotOverridableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConditionNotOverridableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConditionNotOverridableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Your request cannot be handled because the pipeline is busy handling ongoing
 // activities. Try again later.
 type ConflictException struct {

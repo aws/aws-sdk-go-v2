@@ -128,14 +128,17 @@ type NsState string
 
 // Enum values for NsState
 const (
-	NsStateInstantiated          NsState = "INSTANTIATED"
-	NsStateNotInstantiated       NsState = "NOT_INSTANTIATED"
-	NsStateImpaired              NsState = "IMPAIRED"
-	NsStateStopped               NsState = "STOPPED"
-	NsStateDeleted               NsState = "DELETED"
-	NsStateInstantiateInProgress NsState = "INSTANTIATE_IN_PROGRESS"
-	NsStateUpdateInProgress      NsState = "UPDATE_IN_PROGRESS"
-	NsStateTerminateInProgress   NsState = "TERMINATE_IN_PROGRESS"
+	NsStateInstantiated             NsState = "INSTANTIATED"
+	NsStateNotInstantiated          NsState = "NOT_INSTANTIATED"
+	NsStateUpdated                  NsState = "UPDATED"
+	NsStateImpaired                 NsState = "IMPAIRED"
+	NsStateUpdateFailed             NsState = "UPDATE_FAILED"
+	NsStateStopped                  NsState = "STOPPED"
+	NsStateDeleted                  NsState = "DELETED"
+	NsStateInstantiateInProgress    NsState = "INSTANTIATE_IN_PROGRESS"
+	NsStateIntentToUpdateInProgress NsState = "INTENT_TO_UPDATE_IN_PROGRESS"
+	NsStateUpdateInProgress         NsState = "UPDATE_IN_PROGRESS"
+	NsStateTerminateInProgress      NsState = "TERMINATE_IN_PROGRESS"
 )
 
 // Values returns all known values for NsState. Note that this can be expanded in
@@ -146,10 +149,13 @@ func (NsState) Values() []NsState {
 	return []NsState{
 		"INSTANTIATED",
 		"NOT_INSTANTIATED",
+		"UPDATED",
 		"IMPAIRED",
+		"UPDATE_FAILED",
 		"STOPPED",
 		"DELETED",
 		"INSTANTIATE_IN_PROGRESS",
+		"INTENT_TO_UPDATE_IN_PROGRESS",
 		"UPDATE_IN_PROGRESS",
 		"TERMINATE_IN_PROGRESS",
 	}
@@ -246,6 +252,7 @@ type UpdateSolNetworkType string
 // Enum values for UpdateSolNetworkType
 const (
 	UpdateSolNetworkTypeModifyVnfInformation UpdateSolNetworkType = "MODIFY_VNF_INFORMATION"
+	UpdateSolNetworkTypeUpdateNs             UpdateSolNetworkType = "UPDATE_NS"
 )
 
 // Values returns all known values for UpdateSolNetworkType. Note that this can be
@@ -255,6 +262,7 @@ const (
 func (UpdateSolNetworkType) Values() []UpdateSolNetworkType {
 	return []UpdateSolNetworkType{
 		"MODIFY_VNF_INFORMATION",
+		"UPDATE_NS",
 	}
 }
 

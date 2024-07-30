@@ -1476,6 +1476,10 @@ func awsRestjson1_serializeOpHttpBindingsListSolNetworkOperationsInput(v *ListSo
 		encoder.SetQuery("nextpage_opaque_marker").String(*v.NextToken)
 	}
 
+	if v.NsInstanceId != nil {
+		encoder.SetQuery("nsInstanceId").String(*v.NsInstanceId)
+	}
+
 	return nil
 }
 
@@ -2205,6 +2209,13 @@ func awsRestjson1_serializeOpDocumentUpdateSolNetworkInstanceInput(v *UpdateSolN
 		}
 	}
 
+	if v.UpdateNs != nil {
+		ok := object.Key("updateNs")
+		if err := awsRestjson1_serializeDocumentUpdateSolNetworkServiceData(v.UpdateNs, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.UpdateType) > 0 {
 		ok := object.Key("updateType")
 		ok.String(string(v.UpdateType))
@@ -2490,6 +2501,25 @@ func awsRestjson1_serializeDocumentUpdateSolNetworkModify(v *types.UpdateSolNetw
 	if v.VnfInstanceId != nil {
 		ok := object.Key("vnfInstanceId")
 		ok.String(*v.VnfInstanceId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateSolNetworkServiceData(v *types.UpdateSolNetworkServiceData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalParamsForNs != nil {
+		ok := object.Key("additionalParamsForNs")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalParamsForNs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NsdInfoId != nil {
+		ok := object.Key("nsdInfoId")
+		ok.String(*v.NsdInfoId)
 	}
 
 	return nil

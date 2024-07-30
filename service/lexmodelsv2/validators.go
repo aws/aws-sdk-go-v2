@@ -3166,6 +3166,24 @@ func validateAudioSpecification(v *types.AudioSpecification) error {
 	}
 }
 
+func validateBedrockGuardrailConfiguration(v *types.BedrockGuardrailConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockGuardrailConfiguration"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBedrockKnowledgeStoreConfiguration(v *types.BedrockKnowledgeStoreConfiguration) error {
 	if v == nil {
 		return nil
@@ -3188,6 +3206,11 @@ func validateBedrockModelSpecification(v *types.BedrockModelSpecification) error
 	invalidParams := smithy.InvalidParamsError{Context: "BedrockModelSpecification"}
 	if v.ModelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if v.Guardrail != nil {
+		if err := validateBedrockGuardrailConfiguration(v.Guardrail); err != nil {
+			invalidParams.AddNested("Guardrail", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

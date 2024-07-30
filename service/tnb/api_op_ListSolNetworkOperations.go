@@ -39,6 +39,10 @@ type ListSolNetworkOperationsInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
+	// Network instance id filter, to retrieve network operations associated to a
+	// network instance.
+	NsInstanceId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "f517b20e-bfbb-4dd0-8fd5-c448deea587d",
+    "type": "feature",
+    "description": "Increase the length limit for VPCZoneIdentifier from 2047 to 5000",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

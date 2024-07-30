@@ -165,6 +165,54 @@ func (BlockerType) Values() []BlockerType {
 	}
 }
 
+type ConditionExecutionStatus string
+
+// Enum values for ConditionExecutionStatus
+const (
+	ConditionExecutionStatusInProgress ConditionExecutionStatus = "InProgress"
+	ConditionExecutionStatusFailed     ConditionExecutionStatus = "Failed"
+	ConditionExecutionStatusErrored    ConditionExecutionStatus = "Errored"
+	ConditionExecutionStatusSucceeded  ConditionExecutionStatus = "Succeeded"
+	ConditionExecutionStatusCancelled  ConditionExecutionStatus = "Cancelled"
+	ConditionExecutionStatusAbandoned  ConditionExecutionStatus = "Abandoned"
+	ConditionExecutionStatusOverridden ConditionExecutionStatus = "Overridden"
+)
+
+// Values returns all known values for ConditionExecutionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConditionExecutionStatus) Values() []ConditionExecutionStatus {
+	return []ConditionExecutionStatus{
+		"InProgress",
+		"Failed",
+		"Errored",
+		"Succeeded",
+		"Cancelled",
+		"Abandoned",
+		"Overridden",
+	}
+}
+
+type ConditionType string
+
+// Enum values for ConditionType
+const (
+	ConditionTypeBeforeEntry ConditionType = "BEFORE_ENTRY"
+	ConditionTypeOnSuccess   ConditionType = "ON_SUCCESS"
+)
+
+// Values returns all known values for ConditionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConditionType) Values() []ConditionType {
+	return []ConditionType{
+		"BEFORE_ENTRY",
+		"ON_SUCCESS",
+	}
+}
+
 type EncryptionKeyType string
 
 // Enum values for EncryptionKeyType
@@ -388,6 +436,7 @@ type Result string
 // Enum values for Result
 const (
 	ResultRollback Result = "ROLLBACK"
+	ResultFail     Result = "FAIL"
 )
 
 // Values returns all known values for Result. Note that this can be expanded in
@@ -397,6 +446,86 @@ const (
 func (Result) Values() []Result {
 	return []Result{
 		"ROLLBACK",
+		"FAIL",
+	}
+}
+
+type RuleCategory string
+
+// Enum values for RuleCategory
+const (
+	RuleCategoryRule RuleCategory = "Rule"
+)
+
+// Values returns all known values for RuleCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleCategory) Values() []RuleCategory {
+	return []RuleCategory{
+		"Rule",
+	}
+}
+
+type RuleConfigurationPropertyType string
+
+// Enum values for RuleConfigurationPropertyType
+const (
+	RuleConfigurationPropertyTypeString  RuleConfigurationPropertyType = "String"
+	RuleConfigurationPropertyTypeNumber  RuleConfigurationPropertyType = "Number"
+	RuleConfigurationPropertyTypeBoolean RuleConfigurationPropertyType = "Boolean"
+)
+
+// Values returns all known values for RuleConfigurationPropertyType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleConfigurationPropertyType) Values() []RuleConfigurationPropertyType {
+	return []RuleConfigurationPropertyType{
+		"String",
+		"Number",
+		"Boolean",
+	}
+}
+
+type RuleExecutionStatus string
+
+// Enum values for RuleExecutionStatus
+const (
+	RuleExecutionStatusInProgress RuleExecutionStatus = "InProgress"
+	RuleExecutionStatusAbandoned  RuleExecutionStatus = "Abandoned"
+	RuleExecutionStatusSucceeded  RuleExecutionStatus = "Succeeded"
+	RuleExecutionStatusFailed     RuleExecutionStatus = "Failed"
+)
+
+// Values returns all known values for RuleExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleExecutionStatus) Values() []RuleExecutionStatus {
+	return []RuleExecutionStatus{
+		"InProgress",
+		"Abandoned",
+		"Succeeded",
+		"Failed",
+	}
+}
+
+type RuleOwner string
+
+// Enum values for RuleOwner
+const (
+	RuleOwnerAws RuleOwner = "AWS"
+)
+
+// Values returns all known values for RuleOwner. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleOwner) Values() []RuleOwner {
+	return []RuleOwner{
+		"AWS",
 	}
 }
 

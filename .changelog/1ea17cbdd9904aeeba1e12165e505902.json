@@ -1,0 +1,8 @@
+{
+    "id": "1ea17cbd-d990-4aee-ba1e-12165e505902",
+    "type": "documentation",
+    "description": "Removing multi-session as it isn't supported for pools",
+    "modules": [
+        "service/workspaces"
+    ]
+}

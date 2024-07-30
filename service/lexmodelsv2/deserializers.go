@@ -23345,6 +23345,55 @@ func awsRestjson1_deserializeDocumentAudioSpecification(v **types.AudioSpecifica
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBedrockGuardrailConfiguration(v **types.BedrockGuardrailConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BedrockGuardrailConfiguration
+	if *v == nil {
+		sv = &types.BedrockGuardrailConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockGuardrailIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockGuardrailVersion to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBedrockKnowledgeStoreConfiguration(v **types.BedrockKnowledgeStoreConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23374,6 +23423,60 @@ func awsRestjson1_deserializeDocumentBedrockKnowledgeStoreConfiguration(v **type
 					return fmt.Errorf("expected BedrockKnowledgeBaseArn to be of type string, got %T instead", value)
 				}
 				sv.BedrockKnowledgeBaseArn = ptr.String(jtv)
+			}
+
+		case "exactResponse":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ExactResponse = jtv
+			}
+
+		case "exactResponseFields":
+			if err := awsRestjson1_deserializeDocumentBedrockKnowledgeStoreExactResponseFields(&sv.ExactResponseFields, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBedrockKnowledgeStoreExactResponseFields(v **types.BedrockKnowledgeStoreExactResponseFields, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BedrockKnowledgeStoreExactResponseFields
+	if *v == nil {
+		sv = &types.BedrockKnowledgeStoreExactResponseFields{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "answerField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnswerField to be of type string, got %T instead", value)
+				}
+				sv.AnswerField = ptr.String(jtv)
 			}
 
 		default:
@@ -23407,6 +23510,20 @@ func awsRestjson1_deserializeDocumentBedrockModelSpecification(v **types.Bedrock
 
 	for key, value := range shape {
 		switch key {
+		case "customPrompt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockModelCustomPrompt to be of type string, got %T instead", value)
+				}
+				sv.CustomPrompt = ptr.String(jtv)
+			}
+
+		case "guardrail":
+			if err := awsRestjson1_deserializeDocumentBedrockGuardrailConfiguration(&sv.Guardrail, value); err != nil {
+				return err
+			}
+
 		case "modelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23414,6 +23531,15 @@ func awsRestjson1_deserializeDocumentBedrockModelSpecification(v **types.Bedrock
 					return fmt.Errorf("expected BedrockModelArn to be of type string, got %T instead", value)
 				}
 				sv.ModelArn = ptr.String(jtv)
+			}
+
+		case "traceStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BedrockTraceStatus to be of type string, got %T instead", value)
+				}
+				sv.TraceStatus = types.BedrockTraceStatus(jtv)
 			}
 
 		default:

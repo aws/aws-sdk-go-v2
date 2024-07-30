@@ -21,7 +21,10 @@ import (
 // immediately begins deleting the selected resources; you cannot cancel or revert
 // this operation.
 //
-// This operation is valid for Redis OSS only.
+//   - CreateSnapshot permission is required to create a final snapshot. Without
+//     this permission, the API call will fail with an Access Denied exception.
+//
+//   - This operation is valid for Redis OSS only.
 func (c *Client) DeleteReplicationGroup(ctx context.Context, params *DeleteReplicationGroupInput, optFns ...func(*Options)) (*DeleteReplicationGroupOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationGroupInput{}

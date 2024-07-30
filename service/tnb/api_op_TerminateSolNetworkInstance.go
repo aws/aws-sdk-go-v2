@@ -41,8 +41,9 @@ type TerminateSolNetworkInstanceInput struct {
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. When you use this API, the tags are
-	// transferred to the network operation that is created. Use tags to search and
-	// filter your resources or track your Amazon Web Services costs.
+	// only applied to the network operation that is created. These tags are not
+	// applied to the network instance. Use tags to search and filter your resources or
+	// track your Amazon Web Services costs.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -55,8 +56,9 @@ type TerminateSolNetworkInstanceOutput struct {
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. When you use this API, the tags are
-	// transferred to the network operation that is created. Use tags to search and
-	// filter your resources or track your Amazon Web Services costs.
+	// only applied to the network operation that is created. These tags are not
+	// applied to the network instance. Use tags to search and filter your resources or
+	// track your Amazon Web Services costs.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

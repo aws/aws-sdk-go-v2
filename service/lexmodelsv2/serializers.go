@@ -10900,6 +10900,23 @@ func awsRestjson1_serializeDocumentAudioSpecification(v *types.AudioSpecificatio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBedrockGuardrailConfiguration(v *types.BedrockGuardrailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	if v.Version != nil {
+		ok := object.Key("version")
+		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBedrockKnowledgeStoreConfiguration(v *types.BedrockKnowledgeStoreConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10909,6 +10926,30 @@ func awsRestjson1_serializeDocumentBedrockKnowledgeStoreConfiguration(v *types.B
 		ok.String(*v.BedrockKnowledgeBaseArn)
 	}
 
+	if v.ExactResponse {
+		ok := object.Key("exactResponse")
+		ok.Boolean(v.ExactResponse)
+	}
+
+	if v.ExactResponseFields != nil {
+		ok := object.Key("exactResponseFields")
+		if err := awsRestjson1_serializeDocumentBedrockKnowledgeStoreExactResponseFields(v.ExactResponseFields, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBedrockKnowledgeStoreExactResponseFields(v *types.BedrockKnowledgeStoreExactResponseFields, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnswerField != nil {
+		ok := object.Key("answerField")
+		ok.String(*v.AnswerField)
+	}
+
 	return nil
 }
 
@@ -10916,9 +10957,26 @@ func awsRestjson1_serializeDocumentBedrockModelSpecification(v *types.BedrockMod
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomPrompt != nil {
+		ok := object.Key("customPrompt")
+		ok.String(*v.CustomPrompt)
+	}
+
+	if v.Guardrail != nil {
+		ok := object.Key("guardrail")
+		if err := awsRestjson1_serializeDocumentBedrockGuardrailConfiguration(v.Guardrail, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelArn != nil {
 		ok := object.Key("modelArn")
 		ok.String(*v.ModelArn)
+	}
+
+	if len(v.TraceStatus) > 0 {
+		ok := object.Key("traceStatus")
+		ok.String(string(v.TraceStatus))
 	}
 
 	return nil

@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/tnb/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -2252,6 +2254,15 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkOperationOutput(v **GetSolNe
 		case "tasks":
 			if err := awsRestjson1_deserializeDocumentGetSolNetworkOperationTasksList(&sv.Tasks, value); err != nil {
 				return err
+			}
+
+		case "updateType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateSolNetworkType to be of type string, got %T instead", value)
+				}
+				sv.UpdateType = types.UpdateSolNetworkType(jtv)
 			}
 
 		default:
@@ -6213,6 +6224,11 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationMetadata(v **types.Ge
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case "instantiateMetadata":
+			if err := awsRestjson1_deserializeDocumentInstantiateMetadata(&sv.InstantiateMetadata, value); err != nil {
+				return err
+			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6224,6 +6240,16 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationMetadata(v **types.Ge
 					return err
 				}
 				sv.LastModified = ptr.Time(t)
+			}
+
+		case "modifyVnfInfoMetadata":
+			if err := awsRestjson1_deserializeDocumentModifyVnfInfoMetadata(&sv.ModifyVnfInfoMetadata, value); err != nil {
+				return err
+			}
+
+		case "updateNsMetadata":
+			if err := awsRestjson1_deserializeDocumentUpdateNsMetadata(&sv.UpdateNsMetadata, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6578,6 +6604,51 @@ func awsRestjson1_deserializeDocumentGetSolVnfInfo(v **types.GetSolVnfInfo, valu
 					return fmt.Errorf("expected VnfOperationalState to be of type string, got %T instead", value)
 				}
 				sv.VnfState = types.VnfOperationalState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInstantiateMetadata(v **types.InstantiateMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstantiateMetadata
+	if *v == nil {
+		sv = &types.InstantiateMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "additionalParamsForNs":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalParamsForNs, value); err != nil {
+				return err
+			}
+
+		case "nsdInfoId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NsdInfoId to be of type string, got %T instead", value)
+				}
+				sv.NsdInfoId = ptr.String(jtv)
 			}
 
 		default:
@@ -7330,6 +7401,15 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsInfo(v **types.List
 				sv.OperationState = types.NsLcmOperationState(jtv)
 			}
 
+		case "updateType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateSolNetworkType to be of type string, got %T instead", value)
+				}
+				sv.UpdateType = types.UpdateSolNetworkType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7385,6 +7465,24 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsMetadata(v **types.
 					return err
 				}
 				sv.LastModified = ptr.Time(t)
+			}
+
+		case "nsdInfoId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NsdInfoId to be of type string, got %T instead", value)
+				}
+				sv.NsdInfoId = ptr.String(jtv)
+			}
+
+		case "vnfInstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VnfInstanceId to be of type string, got %T instead", value)
+				}
+				sv.VnfInstanceId = ptr.String(jtv)
 			}
 
 		default:
@@ -7649,6 +7747,51 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageResources(v *[]types.L
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModifyVnfInfoMetadata(v **types.ModifyVnfInfoMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModifyVnfInfoMetadata
+	if *v == nil {
+		sv = &types.ModifyVnfInfoMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "vnfConfigurableProperties":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.VnfConfigurableProperties, value); err != nil {
+				return err
+			}
+
+		case "vnfInstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VnfInstanceId to be of type string, got %T instead", value)
+				}
+				sv.VnfInstanceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8084,6 +8227,51 @@ func awsRestjson1_deserializeDocumentToscaOverride(v **types.ToscaOverride, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentUpdateNsMetadata(v **types.UpdateNsMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpdateNsMetadata
+	if *v == nil {
+		sv = &types.UpdateNsMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "additionalParamsForNs":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalParamsForNs, value); err != nil {
+				return err
+			}
+
+		case "nsdInfoId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NsdInfoId to be of type string, got %T instead", value)
+				}
+				sv.NsdInfoId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentValidateSolFunctionPackageContentMetadata(v **types.ValidateSolFunctionPackageContentMetadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8229,5 +8417,13 @@ func awsRestjson1_deserializeDocumentVnfPkgIdList(v *[]string, value interface{}
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDocument(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
 	return nil
 }

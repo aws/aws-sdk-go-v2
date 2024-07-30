@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details of a network function instance, including the instantation
+// Gets the details of a network function instance, including the instantiation
 // state and metadata from the function package descriptor in the network function
 // package.
 //

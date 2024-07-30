@@ -16,6 +16,9 @@ import (
 // A network instance is a single network created in Amazon Web Services TNB that
 // can be deployed and on which life-cycle operations (like terminate, update, and
 // delete) can be performed.
+//
+// Choose the updateType parameter to target the necessary update of the network
+// instance.
 func (c *Client) UpdateSolNetworkInstance(ctx context.Context, params *UpdateSolNetworkInstanceInput, optFns ...func(*Options)) (*UpdateSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateSolNetworkInstanceInput{}
@@ -40,18 +43,33 @@ type UpdateSolNetworkInstanceInput struct {
 
 	// The type of update.
 	//
+	//   - Use the MODIFY_VNF_INFORMATION update type, to update a specific network
+	//   function configuration, in the network instance.
+	//
+	//   - Use the UPDATE_NS update type, to update the network instance to a new
+	//   network service descriptor.
+	//
 	// This member is required.
 	UpdateType types.UpdateSolNetworkType
 
 	// Identifies the network function information parameters and/or the configurable
 	// properties of the network function to be modified.
+	//
+	// Include this property only if the update type is MODIFY_VNF_INFORMATION .
 	ModifyVnfInfoData *types.UpdateSolNetworkModify
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. When you use this API, the tags are
-	// transferred to the network operation that is created. Use tags to search and
-	// filter your resources or track your Amazon Web Services costs.
+	// only applied to the network operation that is created. These tags are not
+	// applied to the network instance. Use tags to search and filter your resources or
+	// track your Amazon Web Services costs.
 	Tags map[string]string
+
+	// Identifies the network service descriptor and the configurable properties of
+	// the descriptor, to be used for the update.
+	//
+	// Include this property only if the update type is UPDATE_NS .
+	UpdateNs *types.UpdateSolNetworkServiceData
 
 	noSmithyDocumentSerde
 }
@@ -63,8 +81,9 @@ type UpdateSolNetworkInstanceOutput struct {
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. When you use this API, the tags are
-	// transferred to the network operation that is created. Use tags to search and
-	// filter your resources or track your Amazon Web Services costs.
+	// only applied to the network operation that is created. These tags are not
+	// applied to the network instance. Use tags to search and filter your resources or
+	// track your Amazon Web Services costs.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

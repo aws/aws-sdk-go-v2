@@ -1,0 +1,8 @@
+{
+    "id": "5bda3012-aaef-4d01-87d6-88eae3c596cf",
+    "type": "documentation",
+    "description": "Doc only update for changes to deletion API.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

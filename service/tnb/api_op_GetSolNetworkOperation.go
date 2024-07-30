@@ -74,6 +74,10 @@ type GetSolNetworkOperationOutput struct {
 	// All tasks associated with this operation occurrence.
 	Tasks []types.GetSolNetworkOperationTaskDetails
 
+	// Type of the update. Only present if the network operation lcmOperationType is
+	// UPDATE .
+	UpdateType types.UpdateSolNetworkType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

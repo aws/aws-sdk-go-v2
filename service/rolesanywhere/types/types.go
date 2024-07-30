@@ -190,6 +190,10 @@ type NotificationSettingKey struct {
 // The state of the profile after a read or write operation.
 type ProfileDetail struct {
 
+	// Used to determine if a custom role session name will be accepted in a temporary
+	// credential request.
+	AcceptRoleSessionName *bool
+
 	// A mapping applied to the authenticating end-entity certificate.
 	AttributeMappings []AttributeMapping
 

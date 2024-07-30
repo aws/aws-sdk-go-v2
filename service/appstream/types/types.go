@@ -623,7 +623,7 @@ type Fleet struct {
 	// connected to their previous session. Otherwise, they are connected to a new
 	// session with a new streaming instance.
 	//
-	// Specify a value between 60 and 360000.
+	// Specify a value between 60 and 36000.
 	DisconnectTimeoutInSeconds *int32
 
 	// The fleet name to display.
@@ -673,7 +673,7 @@ type Fleet struct {
 	// IdleDisconnectTimeoutInSeconds elapses, they are disconnected.
 	//
 	// To prevent users from being disconnected due to inactivity, specify a value of
-	// 0. Otherwise, specify a value between 60 and 3600. The default value is 0.
+	// 0. Otherwise, specify a value between 60 and 36000. The default value is 0.
 	//
 	// If you enable this feature, we recommend that you specify a value that
 	// corresponds exactly to a whole number of minutes (for example, 60, 120, and
@@ -1361,9 +1361,6 @@ type UserSetting struct {
 	//
 	// This defaults to 20,971,520 (20 MB) when unspecified and the permission is
 	// ENABLED . This can't be specified when the permission is DISABLED .
-	//
-	// This can only be specified for AlwaysOn and OnDemand fleets. The attribute is
-	// not supported on Elastic fleets.
 	//
 	// The value can be between 1 and 20,971,520 (20 MB).
 	MaximumLength *int32

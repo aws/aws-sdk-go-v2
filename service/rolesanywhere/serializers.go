@@ -81,6 +81,11 @@ func awsRestjson1_serializeOpDocumentCreateProfileInput(v *CreateProfileInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AcceptRoleSessionName != nil {
+		ok := object.Key("acceptRoleSessionName")
+		ok.Boolean(*v.AcceptRoleSessionName)
+	}
+
 	if v.DurationSeconds != nil {
 		ok := object.Key("durationSeconds")
 		ok.Integer(*v.DurationSeconds)
@@ -2159,6 +2164,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateProfileInput(v *UpdateProfileInpu
 func awsRestjson1_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AcceptRoleSessionName != nil {
+		ok := object.Key("acceptRoleSessionName")
+		ok.Boolean(*v.AcceptRoleSessionName)
+	}
 
 	if v.DurationSeconds != nil {
 		ok := object.Key("durationSeconds")

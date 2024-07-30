@@ -638,6 +638,25 @@ func (AudioRecognitionStrategy) Values() []AudioRecognitionStrategy {
 	}
 }
 
+type BedrockTraceStatus string
+
+// Enum values for BedrockTraceStatus
+const (
+	BedrockTraceStatusEnabled  BedrockTraceStatus = "ENABLED"
+	BedrockTraceStatusDisabled BedrockTraceStatus = "DISABLED"
+)
+
+// Values returns all known values for BedrockTraceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BedrockTraceStatus) Values() []BedrockTraceStatus {
+	return []BedrockTraceStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type BotAliasReplicationStatus string
 
 // Enum values for BotAliasReplicationStatus

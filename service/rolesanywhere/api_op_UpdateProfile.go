@@ -38,6 +38,10 @@ type UpdateProfileInput struct {
 	// This member is required.
 	ProfileId *string
 
+	// Used to determine if a custom role session name will be accepted in a temporary
+	// credential request.
+	AcceptRoleSessionName *bool
+
 	//  Used to determine how long sessions vended using this profile are valid for.
 	// See the Expiration section of the [CreateSession API documentation] page for more details. In requests, if this
 	// value is not provided, the default value will be 3600.
