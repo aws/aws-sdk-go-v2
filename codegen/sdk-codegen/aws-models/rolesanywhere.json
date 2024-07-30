@@ -149,6 +149,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to attach to the profile.</p>"
                     }
+                },
+                "acceptRoleSessionName": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>"
+                    }
                 }
             }
         },
@@ -405,6 +411,7 @@
                         },
                         "output": {
                             "profile": {
+                                "acceptRoleSessionName": false,
                                 "attributeMappings": [
                                     {
                                         "mappingRules": [
@@ -1533,6 +1540,12 @@
                         "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the \n<a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a>\npage for more details. In requests, if this value is not provided, the default value will be 3600. </p>"
                     }
                 },
+                "acceptRoleSessionName": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>"
+                    }
+                },
                 "attributeMappings": {
                     "target": "com.amazonaws.rolesanywhere#AttributeMappings",
                     "traits": {
@@ -1596,6 +1609,7 @@
                         },
                         "output": {
                             "profile": {
+                                "acceptRoleSessionName": false,
                                 "attributeMappings": [
                                     {
                                         "mappingRules": [
@@ -3559,6 +3573,12 @@
                             "min": 900,
                             "max": 43200
                         }
+                    }
+                },
+                "acceptRoleSessionName": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>"
                     }
                 }
             }

@@ -5748,7 +5748,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing replication group. By default, this operation deletes the entire\n            replication group, including the primary/primaries and all of the read replicas. If the\n            replication group has only one primary, you can optionally delete only the read\n            replicas, while retaining the primary by setting\n            <code>RetainPrimaryCluster=true</code>.</p>\n         <p>When you receive a successful response from this operation, Amazon ElastiCache\n            immediately begins deleting the selected resources; you cannot cancel or revert this\n            operation.</p>\n         <note>\n            <p>This operation is valid for Redis OSS only.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes an existing replication group. By default, this operation deletes the entire\n            replication group, including the primary/primaries and all of the read replicas. If the\n            replication group has only one primary, you can optionally delete only the read\n            replicas, while retaining the primary by setting\n            <code>RetainPrimaryCluster=true</code>.</p>\n         <p>When you receive a successful response from this operation, Amazon ElastiCache\n            immediately begins deleting the selected resources; you cannot cancel or revert this\n            operation.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n                     <code>CreateSnapshot</code> permission is required to create a final snapshot. \n                    Without this permission, the API call will fail with an <code>Access Denied</code> exception.</p>\n               </li>\n               <li>\n                  <p>This operation is valid for Redis OSS only.</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "DeleteReplicationGroup",
@@ -5842,7 +5842,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specified existing serverless cache.</p>"
+                "smithy.api#documentation": "<p>Deletes a specified existing serverless cache.</p>\n         <note>\n            <p>\n               <code>CreateServerlessCacheSnapshot</code> permission is required to create a final snapshot. \n           Without this permission, the API call will fail with an <code>Access Denied</code> exception.</p>\n         </note>"
             }
         },
         "com.amazonaws.elasticache#DeleteServerlessCacheRequest": {

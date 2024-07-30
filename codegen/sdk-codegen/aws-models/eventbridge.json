@@ -4801,7 +4801,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified rule.</p>\n         <p>DescribeRule does not list the targets of a rule. To see the targets associated with a\n      rule, use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html\">ListTargetsByRule</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the specified rule.</p>\n         <p>DescribeRule does not list the targets of a rule. To see the targets associated with a\n      rule, use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html\">ListTargetsByRule</a>.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeRuleFailure",
+                        "params": {
+                            "Name": "fake-rule"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.eventbridge#DescribeRuleRequest": {
@@ -6537,7 +6552,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists your Amazon EventBridge rules. You can either list all the rules or you can\n      provide a prefix to match to the rule names.</p>\n         <p>The maximum number of results per page for requests is 100.</p>\n         <p>ListRules does not list the targets of a rule. To see the targets associated with a rule,\n      use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html\">ListTargetsByRule</a>.</p>"
+                "smithy.api#documentation": "<p>Lists your Amazon EventBridge rules. You can either list all the rules or you can\n      provide a prefix to match to the rule names.</p>\n         <p>The maximum number of results per page for requests is 100.</p>\n         <p>ListRules does not list the targets of a rule. To see the targets associated with a rule,\n      use <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ListTargetsByRule.html\">ListTargetsByRule</a>.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListRulesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.eventbridge#ListRulesRequest": {

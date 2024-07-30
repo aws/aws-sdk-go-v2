@@ -101,7 +101,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html\">Function packages</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. \n      </p>\n         <p>Creating a function package is the first step for creating a network in AWS TNB. This request creates an empty container with an ID. The next step is to upload the actual CSAR zip file into that empty container. To upload function package content, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html\">Function packages</a> in the\n               <i>Amazon Web Services Telco Network Builder User Guide</i>. </p>\n         <p>Creating a function package is the first step for creating a network in AWS TNB. This\n         request creates an empty container with an ID. The next step is to upload the actual CSAR\n         zip file into that empty container. To upload function package content, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Create a Sol function package",
@@ -221,7 +221,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Creating a network instance is the third step after creating a network package. For more information about network instances, <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>.</p>\n         <p>Once you create a network instance, you can instantiate it. To instantiate a network, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html\">InstantiateSolNetworkInstance</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Creating a network instance is the third step after creating a network\n         package. For more information about network instances, <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the\n               <i>Amazon Web Services Telco Network Builder User Guide</i>.</p>\n         <p>Once you create a network instance, you can instantiate it. To instantiate a network,\n         see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html\">InstantiateSolNetworkInstance</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Create a Sol Network Instance",
@@ -361,7 +361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. \n      </p>\n         <p>A network package consists of a network service descriptor (NSD) file (required) and any additional files (optional), such as scripts specific to your needs. For example, if you have multiple function packages in your network package, you can use the NSD to define which network functions should run in certain VPCs, subnets, or EKS clusters.</p>\n         <p>This request creates an empty network package container with an ID. Once you create a network package, you can upload the network package content using <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html\">Network instances</a> in the\n               <i>Amazon Web Services Telco Network Builder User Guide</i>. </p>\n         <p>A network package consists of a network service descriptor (NSD) file (required) and any\n         additional files (optional), such as scripts specific to your needs. For example, if you\n         have multiple function packages in your network package, you can use the NSD to define\n         which network functions should run in certain VPCs, subnets, or EKS clusters.</p>\n         <p>This request creates an empty network package container with an ID. Once you create a\n         network package, you can upload the network package content using <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Create a Sol network package",
@@ -478,7 +478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>\n         <p>To delete a function package, the package must be in a disabled state. To disable a function package, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html\">UpdateSolFunctionPackage</a>.\n      </p>",
+                "smithy.api#documentation": "<p>Deletes a function package.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>\n         <p>To delete a function package, the package must be in a disabled state. To disable a\n         function package, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html\">UpdateSolFunctionPackage</a>. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Delete a function package",
@@ -537,7 +537,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>To delete a network instance, the instance must be in a stopped or terminated state. To terminate a network instance, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html\">TerminateSolNetworkInstance</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>To delete a network instance, the instance must be in a stopped or terminated state. To\n         terminate a network instance, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html\">TerminateSolNetworkInstance</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Delete a Sol Network Instance.",
@@ -596,7 +596,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>\n         <p>To delete a network package, the package must be in a disable state. To disable a network package, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html\">UpdateSolNetworkPackage</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes network package.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>\n         <p>To delete a network package, the package must be in a disable state. To disable a\n         network package, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html\">UpdateSolNetworkPackage</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Delete a Sol network package",
@@ -717,7 +717,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the details of a network function instance, including the instantation state and metadata from the function package descriptor in the network function package.</p>\n         <p>A network function instance is a function in a function package .</p>",
+                "smithy.api#documentation": "<p>Gets the details of a network function instance, including the instantiation state and\n         metadata from the function package descriptor in the network function package.</p>\n         <p>A network function instance is a function in a function package .</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Get a Sol Network Function Instance details",
@@ -910,7 +910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the details of an individual function package, such as the operational state and whether the package is in use.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network..</p>",
+                "smithy.api#documentation": "<p>Gets the details of an individual function package, such as the operational state and\n         whether the package is in use.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network..</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Describe a function package with correct vnfPkgId",
@@ -1098,7 +1098,7 @@
                 "accept": {
                     "target": "com.amazonaws.tnb#DescriptorContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates which content types, expressed as MIME types, the client is able to understand.</p>",
+                        "smithy.api#documentation": "<p>Indicates which content types, expressed as MIME types, the client is able to\n         understand.</p>",
                         "smithy.api#httpHeader": "Accept",
                         "smithy.api#required": {}
                     }
@@ -1217,7 +1217,7 @@
                 "vnfdId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Function package descriptor  ID.</p>"
+                        "smithy.api#documentation": "<p>Function package descriptor ID.</p>"
                     }
                 },
                 "vnfProvider": {
@@ -1462,7 +1462,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the details of a network operation, including the tasks involved in the network operation and the status of the tasks.</p>\n         <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>",
+                "smithy.api#documentation": "<p>Gets the details of a network operation, including the tasks involved in the network\n         operation and the status of the tasks.</p>\n         <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Get Sol Network Instantiate operation",
@@ -1476,6 +1476,85 @@
                             "operationState": "COMPLETED",
                             "lcmOperationType": "INSTANTIATE",
                             "metadata": {
+                                "instantiateMetadata": {
+                                    "nsdInfoId": "np-0d0f3e2eae4fc1ac1",
+                                    "additionalParamsForNs": {
+                                        "cidr_block": "10.0.0.0/16",
+                                        "availability_zone": "us-west-2a"
+                                    }
+                                },
+                                "createdAt": "2022-06-10T19:48:34Z",
+                                "lastModified": "2022-06-10T21:48:33Z"
+                            },
+                            "tasks": [
+                                {
+                                    "taskName": "HookExecution",
+                                    "taskContext": {
+                                        "cloudWatchLogsARN": "arn:aws:logs:us-east-1:123456789000:log-group:/aws/codebuild/TestProject:log-stream:a4dc6b0b-2ea3-48c5-bb30-636c4f376b81"
+                                    },
+                                    "taskStatus": "IN_PROGRESS",
+                                    "taskStartTime": "2022-06-10T19:48:34Z",
+                                    "taskEndTime": "2022-06-10T21:48:33Z"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Get Sol Network Update operation",
+                        "input": {
+                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241"
+                        },
+                        "output": {
+                            "id": "no-0d5b823eb5c2a9241",
+                            "arn": "arn:aws:tnb:us-west-2:123456789000:network-operation/no-0d5b823eb5c2a9241",
+                            "nsInstanceId": "ni-0d5b823eb5c2a9241",
+                            "operationState": "COMPLETED",
+                            "lcmOperationType": "UPDATE",
+                            "updateType": "UPDATE_NS",
+                            "metadata": {
+                                "updateNsMetadata": {
+                                    "nsdInfoId": "np-0d0f3e2eae4fc1ac1",
+                                    "additionalParamsForNs": {
+                                        "cidr_block": "10.0.0.0/16",
+                                        "availability_zone": "us-west-2a"
+                                    }
+                                },
+                                "createdAt": "2022-06-10T19:48:34Z",
+                                "lastModified": "2022-06-10T21:48:33Z"
+                            },
+                            "tasks": [
+                                {
+                                    "taskName": "HookExecution",
+                                    "taskContext": {
+                                        "cloudWatchLogsARN": "arn:aws:logs:us-east-1:123456789000:log-group:/aws/codebuild/TestProject:log-stream:a4dc6b0b-2ea3-48c5-bb30-636c4f376b81"
+                                    },
+                                    "taskStatus": "IN_PROGRESS",
+                                    "taskStartTime": "2022-06-10T19:48:34Z",
+                                    "taskEndTime": "2022-06-10T21:48:33Z"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Get Sol Network Update operation",
+                        "input": {
+                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241"
+                        },
+                        "output": {
+                            "id": "no-0d5b823eb5c2a9241",
+                            "arn": "arn:aws:tnb:us-west-2:123456789000:network-operation/no-0d5b823eb5c2a9241",
+                            "nsInstanceId": "ni-0d5b823eb5c2a9241",
+                            "operationState": "COMPLETED",
+                            "lcmOperationType": "UPDATE",
+                            "updateType": "MODIFY_VNF_INFORMATION",
+                            "metadata": {
+                                "modifyVnfInfoMetadata": {
+                                    "vnfInstanceId": "fi-0d5b823eb5c2a9241",
+                                    "vnfConfigurableProperties": {
+                                        "pcf.port": "8080",
+                                        "pcf.pods": "10"
+                                    }
+                                },
                                 "createdAt": "2022-06-10T19:48:34Z",
                                 "lastModified": "2022-06-10T21:48:33Z"
                             },
@@ -1561,6 +1640,24 @@
         "com.amazonaws.tnb#GetSolNetworkOperationMetadata": {
             "type": "structure",
             "members": {
+                "updateNsMetadata": {
+                    "target": "com.amazonaws.tnb#UpdateNsMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata related to the network operation occurrence for network instance updates.\n         This is populated only if the lcmOperationType is <code>UPDATE</code> and the\n         updateType is <code>UPDATE_NS</code>.</p>"
+                    }
+                },
+                "modifyVnfInfoMetadata": {
+                    "target": "com.amazonaws.tnb#ModifyVnfInfoMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata related to the network operation occurrence for network function updates in a network instance.\n         This is populated only if the lcmOperationType is <code>UPDATE</code> and the\n         updateType is <code>MODIFY_VNF_INFORMATION</code>.</p>"
+                    }
+                },
+                "instantiateMetadata": {
+                    "target": "com.amazonaws.tnb#InstantiateMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata related to the network operation occurrence for network instantiation.\n         This is populated only if the lcmOperationType is <code>INSTANTIATE</code>.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -1614,6 +1711,12 @@
                     "target": "com.amazonaws.tnb#LcmOperationType",
                     "traits": {
                         "smithy.api#documentation": "<p>Type of the operation represented by this occurrence.</p>"
+                    }
+                },
+                "updateType": {
+                    "target": "com.amazonaws.tnb#UpdateSolNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the update. Only present if the network operation\n         lcmOperationType is <code>UPDATE</code>.</p>"
                     }
                 },
                 "error": {
@@ -1967,7 +2070,7 @@
                 "nsd": {
                     "target": "com.amazonaws.tnb#NetworkArtifactMeta",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata related to the onboarded network service descriptor in the network package.</p>"
+                        "smithy.api#documentation": "<p>Metadata related to the onboarded network service descriptor in the network\n         package.</p>"
                     }
                 },
                 "createdAt": {
@@ -2053,7 +2156,7 @@
                 "vnfPkgIds": {
                     "target": "com.amazonaws.tnb#VnfPkgIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the function package for the function package descriptor referenced by the onboarded network package.</p>",
+                        "smithy.api#documentation": "<p>Identifies the function package for the function package descriptor referenced by the\n         onboarded network package.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2140,6 +2243,27 @@
                 "smithy.api#documentation": "<p>The metadata of a network function.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>"
             }
         },
+        "com.amazonaws.tnb#InstantiateMetadata": {
+            "type": "structure",
+            "members": {
+                "nsdInfoId": {
+                    "target": "com.amazonaws.tnb#NsdInfoId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network service descriptor used for instantiating the network instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalParamsForNs": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurable properties used during instantiation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata related to the configuration properties used during instantiation of the network instance.</p>"
+            }
+        },
         "com.amazonaws.tnb#InstantiateSolNetworkInstance": {
             "type": "operation",
             "input": {
@@ -2169,7 +2293,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Instantiates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>Before you can instantiate a network instance, you have to create a network instance. For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_CreateSolNetworkInstance.html\">CreateSolNetworkInstance</a>.</p>",
+                "smithy.api#documentation": "<p>Instantiates a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>Before you can instantiate a network instance, you have to create a network instance.\n         For more information, see <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_CreateSolNetworkInstance.html\">CreateSolNetworkInstance</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Instantiate a Sol Network Instance",
@@ -2234,7 +2358,7 @@
                 "tags": {
                     "target": "com.amazonaws.tnb#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -2255,7 +2379,7 @@
                 "tags": {
                     "target": "com.amazonaws.tnb#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -3052,7 +3176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists details for a network operation, including when the operation started and the status of the operation.</p>\n         <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>",
+                "smithy.api#documentation": "<p>Lists details for a network operation, including when the operation started and the\n         status of the operation.</p>\n         <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "List Sol Network Instantiate operations",
@@ -3066,6 +3190,7 @@
                                     "operationState": "COMPLETED",
                                     "lcmOperationType": "INSTANTIATE",
                                     "metadata": {
+                                        "nsdInfoId": "np-0d0f3e2eae4fc1ac1",
                                         "createdAt": "2022-06-10T19:48:34Z",
                                         "lastModified": "2022-06-10T21:48:33Z"
                                     }
@@ -3092,8 +3217,55 @@
                                         "detail": "An error occurred (InsufficientInstanceCapacity) when calling the RunInstances operation (reached max retries: 4). We currently do not have sufficient capacity in the Availability Zone you requested"
                                     },
                                     "metadata": {
+                                        "nsdInfoId": "np-0d0f3e2eae4fc1ac1",
                                         "createdAt": "2022-06-10T19:48:33Z",
                                         "lastModified": "2022-06-10T19:48:33Z"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List Sol Network Update operations",
+                        "input": {
+                            "nsInstanceId": "ni-0d5b823eb5c2a9241"
+                        },
+                        "output": {
+                            "networkOperations": [
+                                {
+                                    "id": "no-0d5b823eb5c2a9241",
+                                    "arn": "arn:aws:tnb:us-west-2:123456789000:network-operation/no-0d5b823eb5c2a9241",
+                                    "nsInstanceId": "ni-0d5b823eb5c2a9241",
+                                    "operationState": "COMPLETED",
+                                    "lcmOperationType": "UPDATE",
+                                    "updateType": "MODIFY_VNF_INFORMATION",
+                                    "metadata": {
+                                        "vnfInstanceId": "fi-0d5b823eb5c2a9241",
+                                        "createdAt": "2022-06-10T19:48:34Z",
+                                        "lastModified": "2022-06-10T21:48:33Z"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List Sol Network Update operations",
+                        "input": {
+                            "nsInstanceId": "ni-0d5b823eb5c2a9241"
+                        },
+                        "output": {
+                            "networkOperations": [
+                                {
+                                    "id": "no-0d5b823eb5c2a9241",
+                                    "arn": "arn:aws:tnb:us-west-2:123456789000:network-operation/no-0d5b823eb5c2a9241",
+                                    "nsInstanceId": "ni-0d5b823eb5c2a9241",
+                                    "operationState": "COMPLETED",
+                                    "lcmOperationType": "UPDATE",
+                                    "updateType": "UPDATE_NS",
+                                    "metadata": {
+                                        "nsdInfoId": "np-0d0f3e2eae4fc1ac1",
+                                        "createdAt": "2022-06-10T19:48:34Z",
+                                        "lastModified": "2022-06-10T21:48:33Z"
                                     }
                                 }
                             ]
@@ -3151,6 +3323,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "updateType": {
+                    "target": "com.amazonaws.tnb#UpdateSolNetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the update. Only present if the network operation lcmOperationType is <code>UPDATE</code>.</p>"
+                    }
+                },
                 "error": {
                     "target": "com.amazonaws.tnb#ProblemDetails",
                     "traits": {
@@ -3171,6 +3349,13 @@
         "com.amazonaws.tnb#ListSolNetworkOperationsInput": {
             "type": "structure",
             "members": {
+                "nsInstanceId": {
+                    "target": "com.amazonaws.tnb#NsInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Network instance id filter, to retrieve network operations associated to a network instance.</p>",
+                        "smithy.api#httpQuery": "nsInstanceId"
+                    }
+                },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
@@ -3197,6 +3382,18 @@
         "com.amazonaws.tnb#ListSolNetworkOperationsMetadata": {
             "type": "structure",
             "members": {
+                "nsdInfoId": {
+                    "target": "com.amazonaws.tnb#NsdInfoId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network service descriptor id used for the operation.</p>\n         <p>Only present if the updateType is <code>UPDATE_NS</code>.</p>"
+                    }
+                },
+                "vnfInstanceId": {
+                    "target": "com.amazonaws.tnb#VnfInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network function id used for the operation.</p>\n         <p>Only present if the updateType is <code>MODIFY_VNF_INFO</code>.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -3315,7 +3512,7 @@
                 "vnfPkgIds": {
                     "target": "com.amazonaws.tnb#VnfPkgIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the function package for the function package descriptor referenced by the onboarded network package.</p>"
+                        "smithy.api#documentation": "<p>Identifies the function package for the function package descriptor referenced by the\n         onboarded network package.</p>"
                     }
                 },
                 "metadata": {
@@ -3593,6 +3790,28 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.tnb#ModifyVnfInfoMetadata": {
+            "type": "structure",
+            "members": {
+                "vnfInstanceId": {
+                    "target": "com.amazonaws.tnb#VnfInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network function instance that was updated in the network instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vnfConfigurableProperties": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurable properties used during update of the network function instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata related to the configuration properties used during update of a specific\n         network function in a network instance.</p>"
+            }
+        },
         "com.amazonaws.tnb#NetworkArtifactMeta": {
             "type": "structure",
             "members": {
@@ -3681,10 +3900,22 @@
                         "smithy.api#enumValue": "NOT_INSTANTIATED"
                     }
                 },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
+                    }
+                },
                 "IMPAIRED": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IMPAIRED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
                     }
                 },
                 "STOPPED": {
@@ -3703,6 +3934,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INSTANTIATE_IN_PROGRESS"
+                    }
+                },
+                "INTENT_TO_UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTENT_TO_UPDATE_IN_PROGRESS"
                     }
                 },
                 "UPDATE_IN_PROGRESS": {
@@ -3951,7 +4188,7 @@
                     }
                 },
                 "file": {
-                    "target": "smithy.api#Blob",
+                    "target": "com.amazonaws.tnb#SensitiveBlob",
                     "traits": {
                         "smithy.api#documentation": "<p>Function package file.</p>",
                         "smithy.api#httpPayload": {},
@@ -4112,7 +4349,7 @@
                     }
                 },
                 "file": {
-                    "target": "smithy.api#Blob",
+                    "target": "com.amazonaws.tnb#SensitiveBlob",
                     "traits": {
                         "smithy.api#documentation": "<p>Network package file.</p>",
                         "smithy.api#httpPayload": {},
@@ -4206,6 +4443,12 @@
                 "smithy.api#documentation": "<p>Request references a resource that doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.tnb#SensitiveBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.tnb#ServiceQuotaExceededException": {
@@ -4363,7 +4606,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p> Amazon Web Services Telco Network Builder (TNB) is a network automation service that helps you deploy and manage telecom networks. AWS TNB helps you with the lifecycle management of your telecommunication network functions throughout planning, deployment, and post-deployment activities.</p>",
+                "smithy.api#documentation": "<p>\n         Amazon Web Services Telco Network Builder (TNB) is a network automation service that helps\n         you deploy and manage telecom networks. AWS TNB helps you with the lifecycle management of\n         your telecommunication network functions throughout planning, deployment, and\n         post-deployment activities.</p>",
                 "smithy.api#title": "AWS Telco Network Builder",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -4407,7 +4650,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4426,7 +4668,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -4454,13 +4695,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -4473,7 +4715,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -4487,7 +4728,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -4510,7 +4750,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -4545,11 +4784,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -4560,16 +4797,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -4583,14 +4823,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -4599,15 +4837,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -4618,16 +4855,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -4641,7 +4881,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -4661,11 +4900,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -4676,20 +4913,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -4700,18 +4939,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -5259,7 +5502,7 @@
                 "tags": {
                     "target": "com.amazonaws.tnb#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -5279,7 +5522,7 @@
                 "tags": {
                     "target": "com.amazonaws.tnb#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -5386,6 +5629,27 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.tnb#UpdateNsMetadata": {
+            "type": "structure",
+            "members": {
+                "nsdInfoId": {
+                    "target": "com.amazonaws.tnb#NsdInfoId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network service descriptor used for updating the network instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalParamsForNs": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurable properties used during update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata related to the configuration properties used during update of a network instance.</p>"
             }
         },
         "com.amazonaws.tnb#UpdateSolFunctionPackage": {
@@ -5510,7 +5774,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>",
+                "smithy.api#documentation": "<p>Update a network instance.</p>\n         <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>\n         <p>Choose the <i>updateType</i> parameter to target the necessary update of the network instance.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Update a Sol Network Instance",
@@ -5522,6 +5786,29 @@
                                 "vnfConfigurableProperties": {
                                     "pcf.port": "8080",
                                     "pcf.pods": "10"
+                                }
+                            },
+                            "tags": {
+                                "Name": "Resource"
+                            }
+                        },
+                        "output": {
+                            "nsLcmOpOccId": "no-0d5b823eb5c2a9241",
+                            "tags": {
+                                "Name": "Resource"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Update a Sol Network Instance",
+                        "input": {
+                            "nsInstanceId": "ni-0d5b823eb5c2a9241",
+                            "updateType": "UPDATE_NS",
+                            "updateNs": {
+                                "nsdInfoId": "np-0d5b823eb5c2a9241",
+                                "additionalParamsForNs": {
+                                    "cidr_block": "10.0.0.0/16",
+                                    "availability_zone": "us-west-2a"
                                 }
                             },
                             "tags": {
@@ -5557,20 +5844,26 @@
                 "updateType": {
                     "target": "com.amazonaws.tnb#UpdateSolNetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of update.</p>",
+                        "smithy.api#documentation": "<p>The type of update.</p>\n         <ul>\n            <li>\n               <p>Use the <code>MODIFY_VNF_INFORMATION</code> update type, to update a specific network function\n               configuration, in the network instance.</p>\n            </li>\n            <li>\n               <p>Use the <code>UPDATE_NS</code> update type, to update the network instance to a\n               new network service descriptor.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "modifyVnfInfoData": {
                     "target": "com.amazonaws.tnb#UpdateSolNetworkModify",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the network function information parameters and/or the configurable properties of the network function to be modified.</p>"
+                        "smithy.api#documentation": "<p>Identifies the network function information parameters and/or the configurable\n         properties of the network function to be modified.</p>\n         <p>Include this property only if the update type is <code>MODIFY_VNF_INFORMATION</code>.</p>"
+                    }
+                },
+                "updateNs": {
+                    "target": "com.amazonaws.tnb#UpdateSolNetworkServiceData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the network service descriptor and the configurable\n         properties of the descriptor, to be used for the update.</p>\n         <p>Include this property only if the update type is <code>UPDATE_NS</code>.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.tnb#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -5590,7 +5883,7 @@
                 "tags": {
                     "target": "com.amazonaws.tnb#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
+                        "smithy.api#documentation": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are only applied to the network operation that is created. These tags are not applied to the network instance. Use tags to search and filter your resources or track your Amazon Web Services costs.</p>"
                     }
                 }
             },
@@ -5611,7 +5904,7 @@
                 "vnfConfigurableProperties": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides values for the configurable properties declared in the function package descriptor.</p>",
+                        "smithy.api#documentation": "<p>Provides values for the configurable properties declared in the function package\n         descriptor.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5713,6 +6006,27 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.tnb#UpdateSolNetworkServiceData": {
+            "type": "structure",
+            "members": {
+                "nsdInfoId": {
+                    "target": "com.amazonaws.tnb#NsdInfoId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the network service descriptor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalParamsForNs": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values for the configurable properties declared in the network service descriptor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information parameters and/or the configurable properties for a network descriptor used for update.</p>"
+            }
+        },
         "com.amazonaws.tnb#UpdateSolNetworkType": {
             "type": "enum",
             "members": {
@@ -5720,6 +6034,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MODIFY_VNF_INFORMATION"
+                    }
+                },
+                "UPDATE_NS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_NS"
                     }
                 }
             }
@@ -5767,7 +6087,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Validates function package content. This can be used as a dry run before uploading function package content with <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>",
+                "smithy.api#documentation": "<p>Validates function package content. This can be used as a dry run before uploading\n         function package content with <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html\">PutSolFunctionPackageContent</a>.</p>\n         <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Validate a Function Package content",
@@ -5817,7 +6137,7 @@
                     }
                 },
                 "file": {
-                    "target": "smithy.api#Blob",
+                    "target": "com.amazonaws.tnb#SensitiveBlob",
                     "traits": {
                         "smithy.api#documentation": "<p>Function package file.</p>",
                         "smithy.api#httpPayload": {},
@@ -5916,7 +6236,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Validates network package content. This can be used as a dry run before uploading network package content with <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>",
+                "smithy.api#documentation": "<p>Validates network package content. This can be used as a dry run before uploading\n         network package content with <a href=\"https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html\">PutSolNetworkPackageContent</a>.</p>\n         <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Validate the network package content of a NSD archive",
@@ -5978,7 +6298,7 @@
                     }
                 },
                 "file": {
-                    "target": "smithy.api#Blob",
+                    "target": "com.amazonaws.tnb#SensitiveBlob",
                     "traits": {
                         "smithy.api#documentation": "<p>Network package file.</p>",
                         "smithy.api#httpPayload": {},
@@ -6069,7 +6389,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Unable to process the request because the client provided input failed to satisfy request constraints.</p>",
+                "smithy.api#documentation": "<p>Unable to process the request because the client provided input failed to satisfy\n         request constraints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

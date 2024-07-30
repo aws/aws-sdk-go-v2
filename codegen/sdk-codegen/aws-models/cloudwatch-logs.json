@@ -2325,7 +2325,20 @@
                     "outputToken": "nextToken",
                     "items": "logGroups",
                     "pageSize": "limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeLogGroupsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeLogGroupsRequest": {
@@ -3946,7 +3959,23 @@
                     "outputToken": "nextForwardToken",
                     "items": "events",
                     "pageSize": "limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetLogEventsFailure",
+                        "params": {
+                            "logGroupName": "fakegroup",
+                            "logStreamName": "fakestream"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogEventsRequest": {
@@ -5328,7 +5357,7 @@
                     "sdkId": "CloudWatch Logs",
                     "arnNamespace": "logs",
                     "cloudFormationName": "Logs",
-                    "cloudTrailEventSource": "cloudwatchlogs.amazonaws.com",
+                    "cloudTrailEventSource": "logs.amazonaws.com",
                     "docId": "logs-2014-03-28",
                     "endpointPrefix": "logs"
                 },

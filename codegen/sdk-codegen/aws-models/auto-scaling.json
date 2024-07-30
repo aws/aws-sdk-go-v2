@@ -828,7 +828,7 @@
                     }
                 },
                 "VPCZoneIdentifier": {
-                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen2047",
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen5000",
                     "traits": {
                         "smithy.api#documentation": "<p>One or more subnet IDs, if applicable, separated by commas.</p>"
                     }
@@ -3019,7 +3019,7 @@
                     }
                 },
                 "VPCZoneIdentifier": {
-                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen2047",
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen5000",
                     "traits": {
                         "smithy.api#documentation": "<p>A comma-separated list of subnet IDs for a virtual private cloud (VPC) where instances\n            in the Auto Scaling group can be created. If you specify <code>VPCZoneIdentifier</code> with\n                <code>AvailabilityZones</code>, the subnets that you specify must reside in those\n            Availability Zones.</p>"
                     }
@@ -10884,7 +10884,7 @@
                     }
                 },
                 "VPCZoneIdentifier": {
-                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen2047",
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen5000",
                     "traits": {
                         "smithy.api#documentation": "<p>A comma-separated list of subnet IDs for a virtual private cloud (VPC). If you specify\n                <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, the subnets that\n            you specify must reside in those Availability Zones.</p>"
                     }
@@ -11118,6 +11118,16 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 32
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.autoscaling#XmlStringMaxLen5000": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }

@@ -937,6 +937,111 @@
                         "output": {
                             "DNSName": "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com"
                         }
+                    },
+                    {
+                        "title": "To create an HTTP load balancer in EC2-Classic",
+                        "documentation": "This example creates a load balancer with an HTTP listener in EC2-Classic.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTP",
+                                    "LoadBalancerPort": 80,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80
+                                }
+                            ],
+                            "AvailabilityZones": [
+                                "us-west-2a"
+                            ]
+                        },
+                        "output": {
+                            "DNSName": "my-load-balancer-123456789.us-west-2.elb.amazonaws.com"
+                        }
+                    },
+                    {
+                        "title": "To create an HTTPS load balancer in a VPC",
+                        "documentation": "This example creates a load balancer with an HTTPS listener in a VPC.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTP",
+                                    "LoadBalancerPort": 80,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80
+                                },
+                                {
+                                    "Protocol": "HTTPS",
+                                    "LoadBalancerPort": 443,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80,
+                                    "SSLCertificateId": "arn:aws:iam::123456789012:server-certificate/my-server-cert"
+                                }
+                            ],
+                            "Subnets": [
+                                "subnet-15aaab61"
+                            ],
+                            "SecurityGroups": [
+                                "sg-a61988c3"
+                            ]
+                        },
+                        "output": {
+                            "DNSName": "my-load-balancer-1234567890.us-west-2.elb.amazonaws.com"
+                        }
+                    },
+                    {
+                        "title": "To create an HTTPS load balancer in EC2-Classic",
+                        "documentation": "This example creates a load balancer with an HTTPS listener in EC2-Classic.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTP",
+                                    "LoadBalancerPort": 80,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80
+                                },
+                                {
+                                    "Protocol": "HTTPS",
+                                    "LoadBalancerPort": 443,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80,
+                                    "SSLCertificateId": "arn:aws:iam::123456789012:server-certificate/my-server-cert"
+                                }
+                            ],
+                            "AvailabilityZones": [
+                                "us-west-2a"
+                            ]
+                        },
+                        "output": {
+                            "DNSName": "my-load-balancer-123456789.us-west-2.elb.amazonaws.com"
+                        }
+                    },
+                    {
+                        "title": "To create an internal load balancer",
+                        "documentation": "This example creates an internal load balancer with an HTTP listener in a VPC.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTP",
+                                    "LoadBalancerPort": 80,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80
+                                }
+                            ],
+                            "Subnets": [
+                                "subnet-15aaab61"
+                            ],
+                            "SecurityGroups": [
+                                "sg-a61988c3"
+                            ],
+                            "Scheme": "internal"
+                        },
+                        "output": {
+                            "DNSName": "internal-my-load-balancer-123456789.us-west-2.elb.amazonaws.com"
+                        }
                     }
                 ]
             }
@@ -1014,6 +1119,22 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "To create an HTTPS listener for a load balancer",
+                        "documentation": "This example creates a listener for your load balancer at port 443 using the HTTPS protocol.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "Listeners": [
+                                {
+                                    "Protocol": "HTTPS",
+                                    "LoadBalancerPort": 443,
+                                    "InstanceProtocol": "HTTP",
+                                    "InstancePort": 80,
+                                    "SSLCertificateId": "arn:aws:iam::123456789012:server-certificate/my-server-cert"
+                                }
+                            ]
+                        }
                     }
                 ]
             }
@@ -1057,6 +1178,36 @@
                                 {
                                     "AttributeName": "ProxyProtocol",
                                     "AttributeValue": "true"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To create a public key policy",
+                        "documentation": "This example creates a public key policy.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "PolicyName": "my-PublicKey-policy",
+                            "PolicyTypeName": "PublicKeyPolicyType",
+                            "PolicyAttributes": [
+                                {
+                                    "AttributeName": "PublicKey",
+                                    "AttributeValue": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwAYUjnfyEyXr1pxjhFWBpMlggUcqoi3kl+dS74kj//c6x7ROtusUaeQCTgIUkayttRDWchuqo1pHC1u+n5xxXnBBe2ejbb2WRsKIQ5rXEeixsjFpFsojpSQKkzhVGI6mJVZBJDVKSHmswnwLBdofLhzvllpovBPTHe+o4haAWvDBALJU0pkSI1FecPHcs2hwxf14zHoXy1e2k36A64nXW43wtfx5qcVSIxtCEOjnYRg7RPvybaGfQ+v6Iaxb/+7J5kEvZhTFQId+bSiJImF1FSUT1W1xwzBZPUbcUkkXDj45vC2s3Z8E+Lk7a3uZhvsQHLZnrfuWjBWGWvZ/MhZYgEXAMPLE"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To create a backend server authentication policy",
+                        "documentation": "This example creates a backend server authentication policy that enables authentication on your backend instance using a public key policy.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "PolicyName": "my-authentication-policy",
+                            "PolicyTypeName": "BackendServerAuthenticationPolicyType",
+                            "PolicyAttributes": [
+                                {
+                                    "AttributeName": "PublicKeyPolicyName",
+                                    "AttributeValue": "my-PublicKey-policy"
                                 }
                             ]
                         }
@@ -2001,7 +2152,35 @@
                     "inputToken": "Marker",
                     "outputToken": "NextMarker",
                     "items": "LoadBalancerDescriptions"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeLoadBalancersSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    },
+                    {
+                        "id": "DescribeLoadBalancersFailure",
+                        "params": {
+                            "LoadBalancerNames": [
+                                "fake_load_balancer"
+                            ]
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticloadbalancing#DescribeTags": {
@@ -4043,6 +4222,28 @@
                             "LoadBalancerAttributes": {
                                 "CrossZoneLoadBalancing": {
                                     "Enabled": true
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "To enable connection draining",
+                        "documentation": "This example enables connection draining for the specified load balancer.",
+                        "input": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "LoadBalancerAttributes": {
+                                "ConnectionDraining": {
+                                    "Enabled": true,
+                                    "Timeout": 300
+                                }
+                            }
+                        },
+                        "output": {
+                            "LoadBalancerName": "my-load-balancer",
+                            "LoadBalancerAttributes": {
+                                "ConnectionDraining": {
+                                    "Enabled": true,
+                                    "Timeout": 300
                                 }
                             }
                         }
