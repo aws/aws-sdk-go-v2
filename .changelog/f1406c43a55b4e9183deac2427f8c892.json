@@ -1,8 +1,0 @@
-{
-    "id": "f1406c43-a55b-4e91-83de-ac2427f8c892",
-    "type": "feature",
-    "description": "This release adds Network Service Update, through which customers will be able to update their instantiated networks to a new network package. See the documentation for limitations. The release also enhances the Get network operation API to return parameter overrides used during the operation.",
-    "modules": [
-        "service/tnb"
-    ]
-}

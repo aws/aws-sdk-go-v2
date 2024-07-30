@@ -1,3 +1,7 @@
+# v1.40.5 (2024-07-30)
+
+* **Documentation**: Doc only update for changes to deletion API.
+
 # v1.40.4 (2024-07-29)
 
 * **Documentation**: Renaming full service name as it appears in developer documentation.

@@ -1,3 +1,7 @@
+# v1.11.0 (2024-07-30)
+
+* **Feature**: This release adds Network Service Update, through which customers will be able to update their instantiated networks to a new network package. See the documentation for limitations. The release also enhances the Get network operation API to return parameter overrides used during the operation.
+
 # v1.10.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

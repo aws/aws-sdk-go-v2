@@ -1,8 +1,0 @@
-{
-    "id": "aaa7fd2e-0c63-4e59-a521-e125169862ce",
-    "type": "feature",
-    "description": "IAM RolesAnywhere now supports custom role session name on the CreateSession. This release adds the acceptRoleSessionName option to a profile to control whether a role session name will be accepted in a session request with a given profile.",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.37.0 (2024-07-30)
+
+* **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon AppStream 2.0
+
 # v1.36.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

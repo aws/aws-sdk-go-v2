@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.26.3
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.36.3
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/batch v1.43.0
@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.40.3
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.27.3
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.30.3
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.41.4
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.48.3
@@ -35,7 +35,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.3
-	github.com/aws/aws-sdk-go-v2/service/elasticache v1.40.4
+	github.com/aws/aws-sdk-go-v2/service/elasticache v1.40.5
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.34.0
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.51.4
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.44.2
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.44.3
 	github.com/aws/smithy-go v1.20.3
 )
 

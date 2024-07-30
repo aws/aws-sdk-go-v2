@@ -1,3 +1,7 @@
+# v1.46.0 (2024-07-30)
+
+* **Feature**: This release adds new capabilities to the AMAZON.QnAIntent: Custom prompting, Guardrails integration and ExactResponse support for Bedrock Knowledge Base.
+
 # v1.45.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

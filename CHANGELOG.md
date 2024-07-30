@@ -1,3 +1,21 @@
+# Release (2024-07-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.37.0](service/appstream/CHANGELOG.md#v1370-2024-07-30)
+  * **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon AppStream 2.0
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.31.0](service/codepipeline/CHANGELOG.md#v1310-2024-07-30)
+  * **Feature**: AWS CodePipeline V2 type pipelines now support stage level conditions to enable development teams to safely release changes that meet quality and compliance requirements.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.40.5](service/elasticache/CHANGELOG.md#v1405-2024-07-30)
+  * **Documentation**: Doc only update for changes to deletion API.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.46.0](service/lexmodelsv2/CHANGELOG.md#v1460-2024-07-30)
+  * **Feature**: This release adds new capabilities to the AMAZON.QnAIntent: Custom prompting, Guardrails integration and ExactResponse support for Bedrock Knowledge Base.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.14.0](service/rolesanywhere/CHANGELOG.md#v1140-2024-07-30)
+  * **Feature**: IAM RolesAnywhere now supports custom role session name on the CreateSession. This release adds the acceptRoleSessionName option to a profile to control whether a role session name will be accepted in a session request with a given profile.
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.11.0](service/tnb/CHANGELOG.md#v1110-2024-07-30)
+  * **Feature**: This release adds Network Service Update, through which customers will be able to update their instantiated networks to a new network package. See the documentation for limitations. The release also enhances the Get network operation API to return parameter overrides used during the operation.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.44.3](service/workspaces/CHANGELOG.md#v1443-2024-07-30)
+  * **Documentation**: Removing multi-session as it isn't supported for pools
+
 # Release (2024-07-29)
 
 ## Module Highlights

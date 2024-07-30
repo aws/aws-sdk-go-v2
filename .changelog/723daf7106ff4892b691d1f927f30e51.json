@@ -1,8 +1,0 @@
-{
-    "id": "723daf71-06ff-4892-b691-d1f927f30e51",
-    "type": "feature",
-    "description": "Added support for Red Hat Enterprise Linux 8 on Amazon AppStream 2.0",
-    "modules": [
-        "service/appstream"
-    ]
-}

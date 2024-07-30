@@ -1,3 +1,7 @@
+# v1.31.0 (2024-07-30)
+
+* **Feature**: AWS CodePipeline V2 type pipelines now support stage level conditions to enable development teams to safely release changes that meet quality and compliance requirements.
+
 # v1.30.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
