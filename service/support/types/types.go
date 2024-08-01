@@ -7,7 +7,8 @@ import (
 )
 
 // An attachment to a case communication. The attachment consists of the file name
-// and the content of the file.
+// and the content of the file. Each attachment file size should not exceed 5 MB.
+// File types that are supported include the following: pdf, jpeg,.doc, .log, .text
 type Attachment struct {
 
 	// The content of the attachment file.
@@ -66,6 +67,10 @@ type AttachmentDetails struct {
 //   - status - The status of the case in the Amazon Web Services Support Center.
 //     Valid values:
 //
+//   - all-open
+//
+//   - customer-action-completed
+//
 //   - opened
 //
 //   - pending-customer-action
@@ -121,6 +126,10 @@ type CaseDetails struct {
 	// The status of the case.
 	//
 	// Valid values:
+	//
+	//   - all-open
+	//
+	//   - customer-action-completed
 	//
 	//   - opened
 	//

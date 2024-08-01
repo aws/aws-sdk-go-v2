@@ -13,9 +13,10 @@ import (
 )
 
 // Get the properties associated with a Amazon Bedrock custom model that you have
-// created.For more information, see [Custom models]in the Amazon Bedrock User Guide.
+// created.For more information, see [Custom models]in the [Amazon Bedrock User Guide].
 //
 // [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) GetCustomModel(ctx context.Context, params *GetCustomModelInput, optFns ...func(*Options)) (*GetCustomModelOutput, error) {
 	if params == nil {
 		params = &GetCustomModelInput{}

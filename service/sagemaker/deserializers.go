@@ -36703,6 +36703,42 @@ func awsAwsjson11_deserializeDocumentAssociationSummary(v **types.AssociationSum
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAssumableRoleArns(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAsyncInferenceClientConfig(v **types.AsyncInferenceClientConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -47718,6 +47754,47 @@ func awsAwsjson11_deserializeDocumentEFSFileSystemConfig(v **types.EFSFileSystem
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEmrSettings(v **types.EmrSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmrSettings
+	if *v == nil {
+		sv = &types.EmrSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssumableRoleArns":
+			if err := awsAwsjson11_deserializeDocumentAssumableRoleArns(&sv.AssumableRoleArns, value); err != nil {
+				return err
+			}
+
+		case "ExecutionRoleArns":
+			if err := awsAwsjson11_deserializeDocumentExecutionRoleArns(&sv.ExecutionRoleArns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEMRStepMetadata(v **types.EMRStepMetadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48838,6 +48915,42 @@ func awsAwsjson11_deserializeDocumentEnvironmentParameters(v *[]types.Environmen
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExecutionRoleArns(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}
@@ -56096,6 +56209,11 @@ func awsAwsjson11_deserializeDocumentJupyterLabAppSettings(v **types.JupyterLabA
 
 		case "DefaultResourceSpec":
 			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
+				return err
+			}
+
+		case "EmrSettings":
+			if err := awsAwsjson11_deserializeDocumentEmrSettings(&sv.EmrSettings, value); err != nil {
 				return err
 			}
 

@@ -13,9 +13,10 @@ import (
 )
 
 // Lists the Provisioned Throughputs in the account. For more information, see [Provisioned Throughput] in
-// the Amazon Bedrock User Guide.
+// the [Amazon Bedrock User Guide].
 //
 // [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) ListProvisionedModelThroughputs(ctx context.Context, params *ListProvisionedModelThroughputsInput, optFns ...func(*Options)) (*ListProvisionedModelThroughputsOutput, error) {
 	if params == nil {
 		params = &ListProvisionedModelThroughputsInput{}

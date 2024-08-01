@@ -374,6 +374,103 @@ func awsRestjson1_serializeOpDocumentCreateGuardrailVersionInput(v *CreateGuardr
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateModelCopyJob struct {
+}
+
+func (*awsRestjson1_serializeOpCreateModelCopyJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateModelCopyJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateModelCopyJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/model-copy-jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateModelCopyJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateModelCopyJobInput(v *CreateModelCopyJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateModelCopyJobInput(v *CreateModelCopyJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("clientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.ModelKmsKeyId != nil {
+		ok := object.Key("modelKmsKeyId")
+		ok.String(*v.ModelKmsKeyId)
+	}
+
+	if v.SourceModelArn != nil {
+		ok := object.Key("sourceModelArn")
+		ok.String(*v.SourceModelArn)
+	}
+
+	if v.TargetModelName != nil {
+		ok := object.Key("targetModelName")
+		ok.String(*v.TargetModelName)
+	}
+
+	if v.TargetModelTags != nil {
+		ok := object.Key("targetModelTags")
+		if err := awsRestjson1_serializeDocumentTagList(v.TargetModelTags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateModelCustomizationJob struct {
 }
 
@@ -1145,6 +1242,71 @@ func awsRestjson1_serializeOpHttpBindingsGetGuardrailInput(v *GetGuardrailInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpGetModelCopyJob struct {
+}
+
+func (*awsRestjson1_serializeOpGetModelCopyJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetModelCopyJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetModelCopyJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/model-copy-jobs/{jobArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetModelCopyJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetModelCopyJobInput(v *GetModelCopyJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.JobArn == nil || len(*v.JobArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobArn must not be empty")}
+	}
+	if v.JobArn != nil {
+		if err := encoder.SetURI("jobArn").String(*v.JobArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetModelCustomizationJob struct {
 }
 
@@ -1396,6 +1558,10 @@ func awsRestjson1_serializeOpHttpBindingsListCustomModelsInput(v *ListCustomMode
 		encoder.SetQuery("foundationModelArnEquals").String(*v.FoundationModelArnEquals)
 	}
 
+	if v.IsOwned != nil {
+		encoder.SetQuery("isOwned").Boolean(*v.IsOwned)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -1642,6 +1808,102 @@ func awsRestjson1_serializeOpHttpBindingsListGuardrailsInput(v *ListGuardrailsIn
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListModelCopyJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListModelCopyJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListModelCopyJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListModelCopyJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/model-copy-jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListModelCopyJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListModelCopyJobsInput(v *ListModelCopyJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CreationTimeAfter != nil {
+		encoder.SetQuery("creationTimeAfter").String(smithytime.FormatDateTime(*v.CreationTimeAfter))
+	}
+
+	if v.CreationTimeBefore != nil {
+		encoder.SetQuery("creationTimeBefore").String(smithytime.FormatDateTime(*v.CreationTimeBefore))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.SortBy) > 0 {
+		encoder.SetQuery("sortBy").String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		encoder.SetQuery("sortOrder").String(string(v.SortOrder))
+	}
+
+	if v.SourceAccountEquals != nil {
+		encoder.SetQuery("sourceAccountEquals").String(*v.SourceAccountEquals)
+	}
+
+	if v.SourceModelArnEquals != nil {
+		encoder.SetQuery("sourceModelArnEquals").String(*v.SourceModelArnEquals)
+	}
+
+	if len(v.StatusEquals) > 0 {
+		encoder.SetQuery("statusEquals").String(string(v.StatusEquals))
+	}
+
+	if v.TargetModelNameContains != nil {
+		encoder.SetQuery("outputModelNameContains").String(*v.TargetModelNameContains)
 	}
 
 	return nil

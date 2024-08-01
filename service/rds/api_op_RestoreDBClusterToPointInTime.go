@@ -412,9 +412,13 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	StorageType *string
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	// Specifies whether to restore the DB cluster to the latest restorable backup

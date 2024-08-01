@@ -55,18 +55,13 @@ type DeleteDBClusterInput struct {
 	// Specifies whether to remove automated backups immediately after the DB cluster
 	// is deleted. This parameter isn't case-sensitive. The default is to remove
 	// automated backups immediately after the DB cluster is deleted.
-	//
-	// You must delete automated backups for Amazon RDS Multi-AZ DB clusters. For more
-	// information about managing automated backups for RDS Multi-AZ DB clusters, see [Managing automated backups].
-	//
-	// [Managing automated backups]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ManagingAutomatedBackups.html
 	DeleteAutomatedBackups *bool
 
 	// The DB cluster snapshot identifier of the new DB cluster snapshot created when
 	// SkipFinalSnapshot is disabled.
 	//
-	// Specifying this parameter and also skipping the creation of a final DB cluster
-	// snapshot with the SkipFinalShapshot parameter results in an error.
+	// If you specify this parameter and also skip the creation of a final DB cluster
+	// snapshot with the SkipFinalShapshot parameter, the request results in an error.
 	//
 	// Constraints:
 	//
@@ -78,13 +73,13 @@ type DeleteDBClusterInput struct {
 	FinalDBSnapshotIdentifier *string
 
 	// Specifies whether to skip the creation of a final DB cluster snapshot before
-	// the DB cluster is deleted. If skip is specified, no DB cluster snapshot is
-	// created. If skip isn't specified, a DB cluster snapshot is created before the DB
-	// cluster is deleted. By default, skip isn't specified, and the DB cluster
-	// snapshot is created. By default, this parameter is disabled.
+	// RDS deletes the DB cluster. If you set this value to true , RDS doesn't create a
+	// final DB cluster snapshot. If you set this value to false or don't specify it,
+	// RDS creates a DB cluster snapshot before it deletes the DB cluster. By default,
+	// this parameter is disabled, so RDS creates a final DB cluster snapshot.
 	//
-	// You must specify a FinalDBSnapshotIdentifier parameter if SkipFinalSnapshot is
-	// disabled.
+	// If SkipFinalSnapshot is disabled, you must specify a value for the
+	// FinalDBSnapshotIdentifier parameter.
 	SkipFinalSnapshot *bool
 
 	noSmithyDocumentSerde

@@ -62,11 +62,35 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_GetControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCommonControls(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCommonControls(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCommonControls")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListControls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListControls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListControls")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -97,11 +121,35 @@ func TestCheckSnapshot_ListObjectives(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_GetControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCommonControls(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCommonControls(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCommonControls")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListControls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListControls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListControls")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -12696,6 +12696,24 @@ func awsAwsquery_serializeOpDocumentCreateDBShardGroupInput(v *CreateDBShardGrou
 		}
 	}
 
+	if v.MinACU != nil {
+		objectKey := object.Key("MinACU")
+		switch {
+		case math.IsNaN(*v.MinACU):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.MinACU, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.MinACU, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.MinACU)
+
+		}
+	}
+
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
@@ -15880,6 +15898,24 @@ func awsAwsquery_serializeOpDocumentModifyDBShardGroupInput(v *ModifyDBShardGrou
 
 		default:
 			objectKey.Double(*v.MaxACU)
+
+		}
+	}
+
+	if v.MinACU != nil {
+		objectKey := object.Key("MinACU")
+		switch {
+		case math.IsNaN(*v.MinACU):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.MinACU, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.MinACU, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.MinACU)
 
 		}
 	}

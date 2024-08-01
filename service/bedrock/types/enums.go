@@ -401,6 +401,27 @@ func (InferenceType) Values() []InferenceType {
 	}
 }
 
+type ModelCopyJobStatus string
+
+// Enum values for ModelCopyJobStatus
+const (
+	ModelCopyJobStatusInProgress ModelCopyJobStatus = "InProgress"
+	ModelCopyJobStatusCompleted  ModelCopyJobStatus = "Completed"
+	ModelCopyJobStatusFailed     ModelCopyJobStatus = "Failed"
+)
+
+// Values returns all known values for ModelCopyJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCopyJobStatus) Values() []ModelCopyJobStatus {
+	return []ModelCopyJobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+	}
+}
+
 type ModelCustomization string
 
 // Enum values for ModelCustomization

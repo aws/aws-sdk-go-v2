@@ -70,6 +70,26 @@ func (m *validateOpCreateGuardrailVersion) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateModelCopyJob struct {
+}
+
+func (*validateOpCreateModelCopyJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateModelCopyJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateModelCopyJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateModelCopyJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModelCustomizationJob struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpGetGuardrail) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetGuardrailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetModelCopyJob struct {
+}
+
+func (*validateOpGetModelCopyJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetModelCopyJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetModelCopyJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetModelCopyJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -462,6 +502,10 @@ func addOpCreateGuardrailVersionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateGuardrailVersion{}, middleware.After)
 }
 
+func addOpCreateModelCopyJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateModelCopyJob{}, middleware.After)
+}
+
 func addOpCreateModelCustomizationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModelCustomizationJob{}, middleware.After)
 }
@@ -496,6 +540,10 @@ func addOpGetFoundationModelValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetGuardrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGuardrail{}, middleware.After)
+}
+
+func addOpGetModelCopyJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetModelCopyJob{}, middleware.After)
 }
 
 func addOpGetModelCustomizationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1458,6 +1506,29 @@ func validateOpCreateGuardrailVersionInput(v *CreateGuardrailVersionInput) error
 	}
 }
 
+func validateOpCreateModelCopyJobInput(v *CreateModelCopyJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateModelCopyJobInput"}
+	if v.SourceModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceModelArn"))
+	}
+	if v.TargetModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetModelName"))
+	}
+	if v.TargetModelTags != nil {
+		if err := validateTagList(v.TargetModelTags); err != nil {
+			invalidParams.AddNested("TargetModelTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelCustomizationJobInput(v *CreateModelCustomizationJobInput) error {
 	if v == nil {
 		return nil
@@ -1642,6 +1713,21 @@ func validateOpGetGuardrailInput(v *GetGuardrailInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetGuardrailInput"}
 	if v.GuardrailIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GuardrailIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetModelCopyJobInput(v *GetModelCopyJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetModelCopyJobInput"}
+	if v.JobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

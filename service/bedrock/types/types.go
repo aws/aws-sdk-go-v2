@@ -73,6 +73,9 @@ type CustomModelSummary struct {
 	// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 	CustomizationType CustomizationType
 
+	// The unique identifier of the account that owns the model.
+	OwnerAccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -615,7 +618,7 @@ type GuardrailPiiEntity struct {
 	// This member is required.
 	Action GuardrailSensitiveInformationAction
 
-	// The type of PII entity. For example, Social Security Number.
+	// The type of PII entity. For exampvle, Social Security Number.
 	//
 	// This member is required.
 	Type GuardrailPiiEntityType
@@ -1180,6 +1183,65 @@ type LoggingConfig struct {
 
 	// Set to include text data in the log delivery.
 	TextDataDeliveryEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about each model copy job.
+//
+// This data type is used in the following API operations:
+//
+// [ListModelCopyJobs response]
+//
+// [ListModelCopyJobs response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListModelCopyJobs.html#API_ListModelCopyJobs_ResponseSyntax
+type ModelCopyJobSummary struct {
+
+	// The time that the model copy job was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resoource Name (ARN) of the model copy job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The unique identifier of the account that the model being copied originated
+	// from.
+	//
+	// This member is required.
+	SourceAccountId *string
+
+	// The Amazon Resource Name (ARN) of the original model being copied.
+	//
+	// This member is required.
+	SourceModelArn *string
+
+	// The status of the model copy job.
+	//
+	// This member is required.
+	Status ModelCopyJobStatus
+
+	// The Amazon Resource Name (ARN) of the copied model.
+	//
+	// This member is required.
+	TargetModelArn *string
+
+	// If a model fails to be copied, a message describing why the job failed is
+	// included here.
+	FailureMessage *string
+
+	// The name of the original model being copied.
+	SourceModelName *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the copied model.
+	TargetModelKmsKeyArn *string
+
+	// The name of the copied model.
+	TargetModelName *string
+
+	// Tags associated with the copied model.
+	TargetModelTags []Tag
 
 	noSmithyDocumentSerde
 }

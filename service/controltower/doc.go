@@ -33,6 +33,8 @@
 //
 // [ListLandingZones]
 //
+// [ListLandingZoneOperations]
+//
 // [ResetLandingZone]
 //
 // [UpdateLandingZone]
@@ -89,19 +91,35 @@
 // view the controlIdentifier in the console on the Control details page, as well
 // as in the documentation.
 //
-// The controlIdentifier is unique in each Amazon Web Services Region for each
-// control. You can find the controlIdentifier for each Region and control in the [Tables of control metadata]
-// or the [Control availability by Region tables]in the Amazon Web Services Control Tower Controls Reference Guide.
+// # About identifiers for Amazon Web Services Control Tower
+//
+// The Amazon Web Services Control Tower controlIdentifier is unique in each
+// Amazon Web Services Region for each control. You can find the controlIdentifier
+// for each Region and control in the [Tables of control metadata]or the [Control availability by Region tables] in the Amazon Web Services Control
+// Tower Controls Reference Guide.
 //
 // A quick-reference list of control identifers for the Amazon Web Services
 // Control Tower legacy Strongly recommended and Elective controls is given in [Resource identifiers for APIs and controls]in
 // the [Amazon Web Services Control Tower Controls Reference Guide]. Remember that Mandatory controls cannot be added or removed.
 //
-// ARN format: arn:aws:controltower:{REGION}::control/{CONTROL_NAME}
+// Some controls have two identifiers
+//
+//   - ARN format for Amazon Web Services Control Tower:
+//     arn:aws:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}
 //
 // Example:
 //
 //	arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED
+//
+//	- ARN format for Amazon Web Services Control Catalog:
+//	arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}
+//
+// You can find the {CONTROL_CATALOG_OPAQUE_ID} in the [Amazon Web Services Control Tower Controls Reference Guide], or in the Amazon Web
+// Services Control Tower console, on the Control details page.
+//
+// The Amazon Web Services Control Tower APIs for enabled controls, such as
+// GetEnabledControl and ListEnabledControls always return an ARN of the same type
+// given when the control was enabled.
 //
 // To get the targetIdentifier :
 //
@@ -135,6 +153,22 @@
 //
 // The individual API operations for baselines are detailed in this document, the [API reference manual]
 // , in the "Actions" section. For usage examples, see [Baseline API input and output examples with CLI].
+//
+// About Amazon Web Services Control Catalog identifiers
+//
+//   - The EnableControl and DisableControl API operations can be called by
+//     specifying either the Amazon Web Services Control Tower identifer or the Amazon
+//     Web Services Control Catalog identifier. The API response returns the same type
+//     of identifier that you specified when calling the API.
+//
+//   - If you use an Amazon Web Services Control Tower identifier to call the
+//     EnableControl API, and then call EnableControl again with an Amazon Web
+//     Services Control Catalog identifier, Amazon Web Services Control Tower returns
+//     an error message stating that the control is already enabled. Similar behavior
+//     applies to the DisableControl API operation.
+//
+//   - Mandatory controls and the landing-zone-level Region deny control have
+//     Amazon Web Services Control Tower identifiers only.
 //
 // # Details and examples
 //
@@ -180,7 +214,7 @@
 // [ListBaselines]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListBaselines.html
 // [ListEnabledBaselines]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListEnabledBaselines.html
 // [ResetLandingZone]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ResetLandingZone.html
-// [Amazon Web Services Control Tower Controls Reference Guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-identifiers.html
+// [Amazon Web Services Control Tower Controls Reference Guide]: https://docs.aws.amazon.com/controltower/latest/controlreference/all-global-identifiers.html
 // [GetLandingZoneOperation]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetLandingZoneOperation.html
 // [GetBaseline]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_GetBaseline.html
 // [Control API input and output examples with CLI]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
@@ -201,6 +235,7 @@
 // [UpdateEnabledControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html
 // [ListTagsForResource]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListTagsForResource.html
 // [UpdateLandingZone]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateLandingZone.html
+// [ListLandingZoneOperations]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_ListLandingZoneOperations.html
 // [Creating Amazon Web Services Control Tower resources with Amazon Web Services CloudFormation]: https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html
 // [TagResource]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_TagResource.html
 // [Amazon Web Services Control Tower supports APIs for OU registration and configuration with baselines]: https://docs.aws.amazon.com/controltower/latest/userguide/2024-all.html#baseline-apis

@@ -13,10 +13,10 @@ import (
 )
 
 // Retrieves the properties associated with a model-customization job, including
-// the status of the job. For more information, see [Custom models]in the Amazon Bedrock User
-// Guide.
+// the status of the job. For more information, see [Custom models]in the [Amazon Bedrock User Guide].
 //
 // [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) GetModelCustomizationJob(ctx context.Context, params *GetModelCustomizationJobInput, optFns ...func(*Options)) (*GetModelCustomizationJobOutput, error) {
 	if params == nil {
 		params = &GetModelCustomizationJobInput{}

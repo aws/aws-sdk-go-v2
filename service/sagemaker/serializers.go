@@ -18857,6 +18857,17 @@ func awsAwsjson11_serializeDocumentArtifactSourceTypes(v []types.ArtifactSourceT
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAssumableRoleArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAsyncInferenceClientConfig(v *types.AsyncInferenceClientConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21873,6 +21884,27 @@ func awsAwsjson11_serializeDocumentEFSFileSystemConfig(v *types.EFSFileSystemCon
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEmrSettings(v *types.EmrSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssumableRoleArns != nil {
+		ok := object.Key("AssumableRoleArns")
+		if err := awsAwsjson11_serializeDocumentAssumableRoleArns(v.AssumableRoleArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExecutionRoleArns != nil {
+		ok := object.Key("ExecutionRoleArns")
+		if err := awsAwsjson11_serializeDocumentExecutionRoleArns(v.ExecutionRoleArns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEndpointInfo(v *types.EndpointInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22039,6 +22071,17 @@ func awsAwsjson11_serializeDocumentEnvironmentParameterRanges(v *types.Environme
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExecutionRoleArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -23722,6 +23765,13 @@ func awsAwsjson11_serializeDocumentJupyterLabAppSettings(v *types.JupyterLabAppS
 	if v.DefaultResourceSpec != nil {
 		ok := object.Key("DefaultResourceSpec")
 		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EmrSettings != nil {
+		ok := object.Key("EmrSettings")
+		if err := awsAwsjson11_serializeDocumentEmrSettings(v.EmrSettings, ok); err != nil {
 			return err
 		}
 	}

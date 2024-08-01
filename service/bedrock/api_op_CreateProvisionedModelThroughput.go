@@ -13,10 +13,11 @@ import (
 
 // Creates dedicated throughput for a base or custom model with the model units
 // and for the duration that you specify. For pricing details, see [Amazon Bedrock Pricing]. For more
-// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+// information, see [Provisioned Throughput]in the [Amazon Bedrock User Guide].
 //
 // [Amazon Bedrock Pricing]: http://aws.amazon.com/bedrock/pricing/
 // [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) CreateProvisionedModelThroughput(ctx context.Context, params *CreateProvisionedModelThroughputInput, optFns ...func(*Options)) (*CreateProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &CreateProvisionedModelThroughputInput{}
@@ -36,9 +37,10 @@ type CreateProvisionedModelThroughputInput struct {
 
 	// The Amazon Resource Name (ARN) or name of the model to associate with this
 	// Provisioned Throughput. For a list of models for which you can purchase
-	// Provisioned Throughput, see [Amazon Bedrock model IDs for purchasing Provisioned Throughput]in the Amazon Bedrock User Guide.
+	// Provisioned Throughput, see [Amazon Bedrock model IDs for purchasing Provisioned Throughput]in the [Amazon Bedrock User Guide].
 	//
 	// [Amazon Bedrock model IDs for purchasing Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#prov-throughput-models
+	// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 	//
 	// This member is required.
 	ModelId *string
@@ -50,13 +52,14 @@ type CreateProvisionedModelThroughputInput struct {
 	// purchasing Provisioned Throughputs with commitment. You must first visit the [Amazon Web Services support center]to
 	// request MUs.
 	//
-	// For model unit quotas, see [Provisioned Throughput quotas] in the Amazon Bedrock User Guide.
+	// For model unit quotas, see [Provisioned Throughput quotas] in the [Amazon Bedrock User Guide].
 	//
 	// For more information about what an MU specifies, contact your Amazon Web
 	// Services account manager.
 	//
 	// [Amazon Web Services support center]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase
 	// [Provisioned Throughput quotas]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html#prov-thru-quotas
+	// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 	//
 	// This member is required.
 	ModelUnits *int32
@@ -79,8 +82,9 @@ type CreateProvisionedModelThroughputInput struct {
 	// no-commit Provisioned Throughput, omit this field.
 	//
 	// Custom models support all levels of commitment. To see which base models
-	// support no commitment, see [Supported regions and models for Provisioned Throughput]in the Amazon Bedrock User Guide
+	// support no commitment, see [Supported regions and models for Provisioned Throughput]in the [Amazon Bedrock User Guide]
 	//
+	// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 	// [Supported regions and models for Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/pt-supported.html
 	CommitmentDuration types.CommitmentDuration
 

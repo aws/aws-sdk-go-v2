@@ -15,9 +15,10 @@ import (
 // Returns a list of the custom models that you have created with the
 // CreateModelCustomizationJob operation.
 //
-// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+// For more information, see [Custom models] in the [Amazon Bedrock User Guide].
 //
 // [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) ListCustomModels(ctx context.Context, params *ListCustomModelsInput, optFns ...func(*Options)) (*ListCustomModelsOutput, error) {
 	if params == nil {
 		params = &ListCustomModelsInput{}
@@ -49,14 +50,22 @@ type ListCustomModelsInput struct {
 	// matches this parameter.
 	FoundationModelArnEquals *string
 
-	// Maximum number of results to return in the response.
+	// Return custom models depending on if the current account owns them ( true ) or
+	// if they were shared with the current account ( false ).
+	IsOwned *bool
+
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
 	// Return custom models only if the job name contains these characters.
 	NameContains *string
 
-	// Continuation token from the previous response, for Amazon Bedrock to list the
-	// next set of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	// The field to sort by in the returned list of models.
@@ -73,7 +82,9 @@ type ListCustomModelsOutput struct {
 	// Model summaries.
 	ModelSummaries []types.CustomModelSummary
 
-	// Continuation token for the next request to list the next set of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -166,7 +177,10 @@ func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack
 
 // ListCustomModelsPaginatorOptions is the paginator options for ListCustomModels
 type ListCustomModelsPaginatorOptions struct {
-	// Maximum number of results to return in the response.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

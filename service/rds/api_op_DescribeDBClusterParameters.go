@@ -67,7 +67,7 @@ type DescribeDBClusterParametersInput struct {
 	//
 	// Valid Values:
 	//
-	//   - user
+	//   - customer
 	//
 	//   - engine
 	//

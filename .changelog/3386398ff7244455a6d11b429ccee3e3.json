@@ -1,0 +1,8 @@
+{
+    "id": "3386398f-f724-4455-a6d1-1b429ccee3e3",
+    "type": "feature",
+    "description": "AWS Control Tower provides two new public APIs controlcatalog:ListControls and controlcatalog:GetControl under controlcatalog service namespace, which enable customers to programmatically retrieve control metadata of available controls.",
+    "modules": [
+        "service/controlcatalog"
+    ]
+}

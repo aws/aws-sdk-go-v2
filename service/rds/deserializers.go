@@ -37277,6 +37277,23 @@ func awsAwsquery_deserializeDocumentDBShardGroup(v **types.DBShardGroup, decoder
 				sv.MaxACU = ptr.Float64(f64)
 			}
 
+		case strings.EqualFold("MinACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinACU = ptr.Float64(f64)
+			}
+
 		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -56693,6 +56710,23 @@ func awsAwsquery_deserializeOpDocumentCreateDBShardGroupOutput(v **CreateDBShard
 				sv.MaxACU = ptr.Float64(f64)
 			}
 
+		case strings.EqualFold("MinACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinACU = ptr.Float64(f64)
+			}
+
 		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -58189,6 +58223,23 @@ func awsAwsquery_deserializeOpDocumentDeleteDBShardGroupOutput(v **DeleteDBShard
 					return err
 				}
 				sv.MaxACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("MinACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinACU = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
@@ -62700,6 +62751,23 @@ func awsAwsquery_deserializeOpDocumentModifyDBShardGroupOutput(v **ModifyDBShard
 				sv.MaxACU = ptr.Float64(f64)
 			}
 
+		case strings.EqualFold("MinACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinACU = ptr.Float64(f64)
+			}
+
 		case strings.EqualFold("PubliclyAccessible", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -63528,6 +63596,23 @@ func awsAwsquery_deserializeOpDocumentRebootDBShardGroupOutput(v **RebootDBShard
 					return err
 				}
 				sv.MaxACU = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("MinACU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinACU = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("PubliclyAccessible", t.Name.Local):

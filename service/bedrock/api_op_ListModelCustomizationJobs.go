@@ -15,9 +15,10 @@ import (
 // Returns a list of model customization jobs that you have submitted. You can
 // filter the jobs to return based on one or more criteria.
 //
-// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+// For more information, see [Custom models] in the [Amazon Bedrock User Guide].
 //
 // [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) ListModelCustomizationJobs(ctx context.Context, params *ListModelCustomizationJobsInput, optFns ...func(*Options)) (*ListModelCustomizationJobsOutput, error) {
 	if params == nil {
 		params = &ListModelCustomizationJobsInput{}
@@ -41,14 +42,18 @@ type ListModelCustomizationJobsInput struct {
 	// Return customization jobs created before the specified time.
 	CreationTimeBefore *time.Time
 
-	// Maximum number of results to return in the response.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
 	// Return customization jobs only if the job name contains these characters.
 	NameContains *string
 
-	// Continuation token from the previous response, for Amazon Bedrock to list the
-	// next set of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	// The field to sort by in the returned list of jobs.
@@ -68,7 +73,9 @@ type ListModelCustomizationJobsOutput struct {
 	// Job summaries.
 	ModelCustomizationJobSummaries []types.ModelCustomizationJobSummary
 
-	// Page continuation token to use in the next request.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,7 +169,10 @@ func (c *Client) addOperationListModelCustomizationJobsMiddlewares(stack *middle
 // ListModelCustomizationJobsPaginatorOptions is the paginator options for
 // ListModelCustomizationJobs
 type ListModelCustomizationJobsPaginatorOptions struct {
-	// Maximum number of results to return in the response.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

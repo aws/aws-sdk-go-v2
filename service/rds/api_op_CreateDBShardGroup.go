@@ -59,6 +59,9 @@ type CreateDBShardGroupInput struct {
 	//   AZs for each physical shard.
 	ComputeRedundancy *int32
 
+	// The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
+	MinACU *float64
+
 	// Specifies whether the DB shard group is publicly accessible.
 	//
 	// When the DB shard group is publicly accessible, its Domain Name System (DNS)
@@ -126,6 +129,9 @@ type CreateDBShardGroupOutput struct {
 
 	// The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
 	MaxACU *float64
+
+	// The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
+	MinACU *float64
 
 	// Indicates whether the DB shard group is publicly accessible.
 	//

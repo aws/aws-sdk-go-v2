@@ -45,7 +45,7 @@
 // For more information about this service and the endpoints to use, see [About the Amazon Web Services Support API] in the
 // Amazon Web Services Support User Guide.
 //
-// [Trusted Advisor]: https://docs.aws.amazon.com/
+// [Trusted Advisor]: https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html
 // [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 // [About the Amazon Web Services Support API]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html
 // [Signature Version 4 Signing Process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html

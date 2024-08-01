@@ -1,0 +1,8 @@
+{
+    "id": "d2609ceb-d1b8-430b-83c0-2e4ba43429cd",
+    "type": "feature",
+    "description": "This release adds API support for the QuickSetup feature of AWS Systems Manager",
+    "modules": [
+        "service/ssmquicksetup"
+    ]
+}

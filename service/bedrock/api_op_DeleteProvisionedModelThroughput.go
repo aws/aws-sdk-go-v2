@@ -11,10 +11,10 @@ import (
 )
 
 // Deletes a Provisioned Throughput. You can't delete a Provisioned Throughput
-// before the commitment term is over. For more information, see [Provisioned Throughput]in the Amazon
-// Bedrock User Guide.
+// before the commitment term is over. For more information, see [Provisioned Throughput]in the [Amazon Bedrock User Guide].
 //
 // [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) DeleteProvisionedModelThroughput(ctx context.Context, params *DeleteProvisionedModelThroughputInput, optFns ...func(*Options)) (*DeleteProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &DeleteProvisionedModelThroughputInput{}

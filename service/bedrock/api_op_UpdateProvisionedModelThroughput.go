@@ -11,9 +11,10 @@ import (
 )
 
 // Updates the name or associated model for a Provisioned Throughput. For more
-// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+// information, see [Provisioned Throughput]in the [Amazon Bedrock User Guide].
 //
 // [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) UpdateProvisionedModelThroughput(ctx context.Context, params *UpdateProvisionedModelThroughputInput, optFns ...func(*Options)) (*UpdateProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &UpdateProvisionedModelThroughputInput{}

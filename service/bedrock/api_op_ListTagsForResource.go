@@ -13,8 +13,9 @@ import (
 
 // List the tags associated with the specified resource.
 //
-// For more information, see [Tagging resources] in the Amazon Bedrock User Guide.
+// For more information, see [Tagging resources] in the [Amazon Bedrock User Guide].
 //
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 // [Tagging resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

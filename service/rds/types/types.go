@@ -191,9 +191,13 @@ type BlueGreenDeployment struct {
 	// The details about each source and target resource in the blue/green deployment.
 	SwitchoverDetails []SwitchoverDetail
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// The target database for the blue/green deployment.
@@ -938,9 +942,13 @@ type DBCluster struct {
 	// The storage type associated with the DB cluster.
 	StorageType *string
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// The list of VPC security groups that the DB cluster belongs to.
@@ -1339,9 +1347,13 @@ type DBClusterSnapshot struct {
 	// This setting is only for Aurora DB clusters.
 	StorageType *string
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// The VPC ID associated with the DB cluster snapshot.
@@ -1554,9 +1566,13 @@ type DBEngineVersion struct {
 	// Indicates whether the database engine version supports read replicas.
 	SupportsReadReplica *bool
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// A list of engine versions that this database engine version can be upgraded to.
@@ -1998,9 +2014,13 @@ type DBInstance struct {
 	// The storage type associated with the DB instance.
 	StorageType *string
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// The ARN from the key store with which the instance is associated for TDE
@@ -2666,6 +2686,9 @@ type DBShardGroup struct {
 	// The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
 	MaxACU *float64
 
+	// The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
+	MinACU *float64
+
 	// Indicates whether the DB shard group is publicly accessible.
 	//
 	// When the DB shard group is publicly accessible, its Domain Name System (DNS)
@@ -2819,9 +2842,13 @@ type DBSnapshot struct {
 	// Specifies the storage type associated with DB snapshot.
 	StorageType *string
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// The ARN from the key store with which to associate the instance for TDE
@@ -2913,9 +2940,13 @@ type DBSnapshotTenantDatabase struct {
 	// The type of DB snapshot.
 	SnapshotType *string
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// The name of the tenant database.
@@ -3481,9 +3512,13 @@ type Integration struct {
 	// The current status of the integration.
 	Status IntegrationStatus
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	Tags []Tag
 
 	// The ARN of the Redshift data warehouse used as the target for replication.
@@ -3672,7 +3707,7 @@ type Option struct {
 	noSmithyDocumentSerde
 }
 
-// A list of all available options
+// A list of all available options for an option group.
 type OptionConfiguration struct {
 
 	// The configuration of options to include in a group.
@@ -3680,7 +3715,7 @@ type OptionConfiguration struct {
 	// This member is required.
 	OptionName *string
 
-	// A list of DBSecurityGroupMembership name strings used for this option.
+	// A list of DB security groups used for this option.
 	DBSecurityGroupMemberships []string
 
 	// The option settings to include in an option group.
@@ -3692,7 +3727,7 @@ type OptionConfiguration struct {
 	// The optional port for the option.
 	Port *int32
 
-	// A list of VpcSecurityGroupMembership name strings used for this option.
+	// A list of VPC security group names used for this option.
 	VpcSecurityGroupMemberships []string
 
 	noSmithyDocumentSerde
@@ -4911,11 +4946,11 @@ type SwitchoverDetail struct {
 
 // Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
 //
-// For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS Resources] in the Amazon
+// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
 // Aurora User Guide.
 //
-// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
-// [Tagging Amazon Aurora and Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be from 1 to 128
@@ -4983,9 +5018,13 @@ type TenantDatabase struct {
 	// The status of the tenant database.
 	Status *string
 
-	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	// A list of tags.
 	//
-	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 	TagList []Tag
 
 	// The database name of the tenant database.

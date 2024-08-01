@@ -13,9 +13,9 @@ import (
 
 // API operation for creating and managing Amazon Bedrock automatic model
 // evaluation jobs and model evaluation jobs that use human workers. To learn more
-// about the requirements for creating a model evaluation job see, [Model evaluations].
+// about the requirements for creating a model evaluation job see, [Model evaluation].
 //
-// [Model evaluations]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
+// [Model evaluation]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
 func (c *Client) CreateEvaluationJob(ctx context.Context, params *CreateEvaluationJobInput, optFns ...func(*Options)) (*CreateEvaluationJobOutput, error) {
 	if params == nil {
 		params = &CreateEvaluationJobInput{}

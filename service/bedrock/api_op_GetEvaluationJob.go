@@ -13,9 +13,9 @@ import (
 )
 
 // Retrieves the properties associated with a model evaluation job, including the
-// status of the job. For more information, see [Model evaluations].
+// status of the job. For more information, see [Model evaluation].
 //
-// [Model evaluations]: https://docs.aws.amazon.com/bedrock/latest/userguide/latest/userguide/model-evaluation.html
+// [Model evaluation]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
 func (c *Client) GetEvaluationJob(ctx context.Context, params *GetEvaluationJobInput, optFns ...func(*Options)) (*GetEvaluationJobOutput, error) {
 	if params == nil {
 		params = &GetEvaluationJobInput{}

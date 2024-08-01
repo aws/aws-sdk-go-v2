@@ -24,9 +24,10 @@ import (
 // the base model and the training/validation data size. To monitor a job, use the
 // GetModelCustomizationJob operation to retrieve the job status.
 //
-// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+// For more information, see [Custom models] in the [Amazon Bedrock User Guide].
 //
 // [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 // [Prepare the datasets]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html
 func (c *Client) CreateModelCustomizationJob(ctx context.Context, params *CreateModelCustomizationJobInput, optFns ...func(*Options)) (*CreateModelCustomizationJobOutput, error) {
 	if params == nil {

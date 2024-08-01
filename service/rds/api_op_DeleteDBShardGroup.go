@@ -67,6 +67,9 @@ type DeleteDBShardGroupOutput struct {
 	// The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
 	MaxACU *float64
 
+	// The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
+	MinACU *float64
+
 	// Indicates whether the DB shard group is publicly accessible.
 	//
 	// When the DB shard group is publicly accessible, its Domain Name System (DNS)

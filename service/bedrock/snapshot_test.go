@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateGuardrailVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateModelCopyJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateModelCopyJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateModelCopyJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -218,6 +230,18 @@ func TestCheckSnapshot_GetGuardrail(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetModelCopyJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetModelCopyJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetModelCopyJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -295,6 +319,18 @@ func TestCheckSnapshot_ListGuardrails(t *testing.T) {
 	_, err := svc.ListGuardrails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListGuardrails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListModelCopyJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListModelCopyJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListModelCopyJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -457,6 +493,18 @@ func TestUpdateSnapshot_CreateGuardrailVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateModelCopyJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateModelCopyJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateModelCopyJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -577,6 +625,18 @@ func TestUpdateSnapshot_GetGuardrail(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetModelCopyJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetModelCopyJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetModelCopyJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -654,6 +714,18 @@ func TestUpdateSnapshot_ListGuardrails(t *testing.T) {
 	_, err := svc.ListGuardrails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListGuardrails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListModelCopyJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListModelCopyJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListModelCopyJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

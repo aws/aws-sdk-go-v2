@@ -8,7 +8,9 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_GetControl.go",
         "api_op_ListCommonControls.go",
+        "api_op_ListControls.go",
         "api_op_ListDomains.go",
         "api_op_ListObjectives.go",
         "auth.go",
@@ -24,6 +26,7 @@
         "protocol_test.go",
         "serializers.go",
         "snapshot_test.go",
+        "types/enums.go",
         "types/errors.go",
         "types/types.go",
         "validators.go"

@@ -84,6 +84,28 @@ type CommonControlSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Overview of information about a control.
+type ControlSummary struct {
+
+	// The Amazon Resource Name (ARN) of the control.
+	//
+	// This member is required.
+	Arn *string
+
+	// A description of the control, as it may appear in the console. Describes the
+	// functionality of the control.
+	//
+	// This member is required.
+	Description *string
+
+	// The display name of the control.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The domain resource that's being used as a filter.
 type DomainResourceFilter struct {
 
@@ -177,6 +199,38 @@ type ObjectiveSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about the control, including the scope of the control, if
+// enabled, and the Regions in which the control currently is available for
+// deployment.
+//
+// If you are applying controls through an Amazon Web Services Control Tower
+// landing zone environment, remember that the values returned in the
+// RegionConfiguration API operation are not related to the governed Regions in
+// your landing zone. For example, if you are governing Regions A , B ,and C while
+// the control is available in Regions A , B , C , and D , you'd see a response
+// with DeployableRegions of A , B , C , and D for a control with REGIONAL scope,
+// even though you may not intend to deploy the control in Region D , because you
+// do not govern it through your landing zone.
+type RegionConfiguration struct {
+
+	// The coverage of the control, if deployed. Scope is an enumerated type, with
+	// value Regional , or Global . A control with Global scope is effective in all
+	// Amazon Web Services Regions, regardless of the Region from which it is enabled,
+	// or to which it is deployed. A control implemented by an SCP is usually Global in
+	// scope. A control with Regional scope has operations that are restricted
+	// specifically to the Region from which it is enabled and to which it is deployed.
+	// Controls implemented by Config rules and CloudFormation hooks usually are
+	// Regional in scope. Security Hub controls usually are Regional in scope.
+	//
+	// This member is required.
+	Scope ControlScope
+
+	// Regions in which the control is available to be deployed.
+	DeployableRegions []string
 
 	noSmithyDocumentSerde
 }
