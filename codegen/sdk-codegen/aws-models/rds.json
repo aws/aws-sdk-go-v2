@@ -6134,6 +6134,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "MinACU": {
+                    "target": "com.amazonaws.rds#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum capacity of the DB shard group in Aurora capacity units (ACUs).</p>"
+                    }
+                },
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
@@ -11096,6 +11102,12 @@
                         "smithy.api#documentation": "<p>The maximum capacity of the DB shard group in Aurora capacity units (ACUs).</p>"
                     }
                 },
+                "MinACU": {
+                    "target": "com.amazonaws.rds#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum capacity of the DB shard group in Aurora capacity units (ACUs).</p>"
+                    }
+                },
                 "ComputeRedundancy": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
@@ -12137,19 +12149,19 @@
                 "SkipFinalSnapshot": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to skip the creation of a final DB cluster snapshot before the DB cluster is deleted.\n          If skip is specified, no DB cluster snapshot is created. If skip isn't specified, a DB cluster snapshot \n          is created before the DB cluster is deleted. By default, skip isn't specified, and the DB cluster snapshot is created. \n          By default, this parameter is disabled.</p>\n         <note>\n            <p>You must specify a <code>FinalDBSnapshotIdentifier</code> parameter if <code>SkipFinalSnapshot</code> is disabled.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether to skip the creation of a final DB cluster snapshot before RDS\n            deletes the DB cluster. If you set this value to <code>true</code>, RDS doesn't create a\n            final DB cluster snapshot. If you set this value to <code>false</code> or don't specify\n            it, RDS creates a DB cluster snapshot before it deletes the DB cluster. By default, this\n            parameter is disabled, so RDS creates a final DB cluster snapshot.</p>\n         <note>\n            <p>If <code>SkipFinalSnapshot</code> is disabled, you must specify a value for the\n                    <code>FinalDBSnapshotIdentifier</code> parameter.</p>\n         </note>"
                     }
                 },
                 "FinalDBSnapshotIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB cluster snapshot identifier of the new DB cluster snapshot created when <code>SkipFinalSnapshot</code>\n      is disabled.</p>\n         <note>\n            <p>Specifying this parameter and also skipping the creation of a final DB cluster snapshot \n          with the <code>SkipFinalShapshot</code> parameter results in an error.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The DB cluster snapshot identifier of the new DB cluster snapshot created when <code>SkipFinalSnapshot</code>\n      is disabled.</p>\n         <note>\n            <p>If you specify this parameter and also skip the creation of a final DB cluster\n                snapshot with the <code>SkipFinalShapshot</code> parameter, the request results in\n                an error.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DeleteAutomatedBackups": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to remove automated backups immediately after the DB\n            cluster is deleted. This parameter isn't case-sensitive. The default is to remove \n            automated backups immediately after the DB cluster is deleted.\n        </p>\n         <note>\n            <p>You must delete automated backups for Amazon RDS Multi-AZ DB clusters. For more information about managing automated backups for RDS Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ManagingAutomatedBackups.html\">Managing automated backups</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether to remove automated backups immediately after the DB\n            cluster is deleted. This parameter isn't case-sensitive. The default is to remove \n            automated backups immediately after the DB cluster is deleted.</p>"
                     }
                 }
             },
@@ -13909,7 +13921,7 @@
                 "Source": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A specific source to return parameters for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>user</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>engine</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>service</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A specific source to return parameters for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>customer</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>engine</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>service</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filters": {
@@ -22882,6 +22894,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum capacity of the DB shard group in Aurora capacity units (ACUs).</p>"
                     }
+                },
+                "MinACU": {
+                    "target": "com.amazonaws.rds#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum capacity of the DB shard group in Aurora capacity units (ACUs).</p>"
+                    }
                 }
             },
             "traits": {
@@ -23780,13 +23798,13 @@
                 "DBSecurityGroupMemberships": {
                     "target": "com.amazonaws.rds#DBSecurityGroupNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DBSecurityGroupMembership name strings used for this option.</p>"
+                        "smithy.api#documentation": "<p>A list of DB security groups used for this option.</p>"
                     }
                 },
                 "VpcSecurityGroupMemberships": {
                     "target": "com.amazonaws.rds#VpcSecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of VpcSecurityGroupMembership name strings used for this option.</p>"
+                        "smithy.api#documentation": "<p>A list of VPC security group names used for this option.</p>"
                     }
                 },
                 "OptionSettings": {
@@ -23797,7 +23815,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of all available options</p>"
+                "smithy.api#documentation": "<p>A list of all available options for an option group.</p>"
             }
         },
         "com.amazonaws.rds#OptionConfigurationList": {
@@ -30782,7 +30800,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide</i>\n            or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html\">Tagging Amazon Aurora and Amazon RDS Resources</a> in the <i>Amazon Aurora User Guide</i>.\n            </p>"
+                "smithy.api#documentation": "<p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html\">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.\n            </p>"
             }
         },
         "com.amazonaws.rds#TagList": {
@@ -30794,7 +30812,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of tags.\n          For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
+                "smithy.api#documentation": "<p>A list of tags.</p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html\">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.\n            </p>"
             }
         },
         "com.amazonaws.rds#TagListMessage": {

@@ -2593,7 +2593,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a cluster. It also deletes all associated nodes and node endpoints</p>"
+                "smithy.api#documentation": "<p>Deletes a cluster. It also deletes all associated nodes and node endpoints</p>\n         <note>\n            <p>\n               <code>CreateSnapshot</code> permission is required to create a final snapshot. \n         Without this permission, the API call will fail with an <code>Access Denied</code> exception.</p>\n         </note>"
             }
         },
         "com.amazonaws.memorydb#DeleteClusterRequest": {

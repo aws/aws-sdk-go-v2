@@ -7696,6 +7696,21 @@
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
                 ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetUserFailure",
+                        "params": {
+                            "UserName": "fake_user"
+                        },
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "UserExists": {
                         "acceptors": [
@@ -10918,7 +10933,20 @@
                     "outputToken": "Marker",
                     "items": "Users",
                     "pageSize": "MaxItems"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListUsersSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.iam#ListUsersRequest": {

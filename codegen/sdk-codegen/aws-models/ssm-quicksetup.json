@@ -1,0 +1,2223 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.ssmquicksetup#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requester has insufficient permissions to perform the operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationDefinition": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Quick Setup configuration.</p>",
+                        "smithy.api#pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs containing the required parameters for the configuration\n                  type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Quick Setup type used.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "LocalDeploymentExecutionRoleName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM role used to deploy local\n                  configurations.</p>",
+                        "smithy.api#pattern": "^[\\w+=,.@-]{1,64}$"
+                    }
+                },
+                "LocalDeploymentAdministrationRoleArn": {
+                    "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role used to administrate local configuration\n                  deployments.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the configuration definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of a Quick Setup configuration.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationDefinitionInput": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Quick Setup configuration.</p>",
+                        "smithy.api#pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for the configuration definition type. Parameters for configuration\n                  definitions vary based the configuration type. The following tables outline the\n                  parameters for each configuration type.</p>\n         <dl>\n            <dt>OpsCenter (Type: Amazon Web ServicesQuickSetupType-SSMOpsCenter)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>DelegatedAccountId</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The ID of the\n                                                  delegated administrator account.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Resource Scheduler (Type: Amazon Web ServicesQuickSetupType-Scheduler)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>TargetTagKey</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The tag key assigned\n                                                  to the instances you want to target.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetTagValue</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The value of the tag\n                                                  key assigned to the instances you want to\n                                                  target.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ICalendarString</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) An iCalendar\n                                                  formatted string containing the schedule you want\n                                                  Change Manager to use.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetAccounts</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account initiating the\n                                                  configuration deployment. You only need to provide\n                                                  a value for this parameter if you want to deploy\n                                                  the configuration locally. A value must be\n                                                  provided for either <code>TargetAccounts</code> or\n                                                  <code>TargetOrganizationalUnits</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Default Host Management Configuration (Type: Amazon Web ServicesQuickSetupType-DHMC)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>UpdateSSMAgent</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the SSM Agent is updated on the\n                                                  target instances every 2 weeks. The default value\n                                                  is \"<code>true</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Resource Explorer (Type: Amazon Web ServicesQuickSetupType-ResourceExplorer)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>SelectedAggregatorRegion</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The Amazon Web Services Region where you want to create the\n                                                  aggregator index.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ReplaceExistingAggregator</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A boolean value that\n                                                  determines whether to demote an existing\n                                                  aggregator if it is in a Region that differs from\n                                                  the value you specify for the\n                                                  <code>SelectedAggregatorRegion</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Change Manager (Type: Amazon Web ServicesQuickSetupType-SSMChangeMgr)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>DelegatedAccountId</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The ID of the\n                                                  delegated administrator account.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>JobFunction</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The name for the\n                                                  Change Manager job function.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>PermissionType</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) Specifies whether\n                                                  you want to use default administrator permissions\n                                                  for the job function role, or provide a custom\n                                                  IAM policy. The valid values are\n                                                  <code>CustomPermissions</code> and\n                                                  <code>AdminPermissions</code>. The default value\n                                                  for the parameter is\n                                                  <code>CustomerPermissions</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CustomPermissions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A JSON string\n                                                  containing the IAM policy you want\n                                                  your job function to use. You must provide a value\n                                                  for this parameter if you specify\n                                                  <code>CustomPermissions</code> for the\n                                                  <code>PermissionType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>DevOps Guru (Type: Amazon Web ServicesQuickSetupType-DevOpsGuru)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AnalyseAllResources</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether DevOps Guru analyzes all\n                                                  CloudFormation stacks in the account. The\n                                                  default value is \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EnableSnsNotifications</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether DevOps Guru sends\n                                                  notifications when an insight is created. The\n                                                  default value is \"<code>true</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EnableSsmOpsItems</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether DevOps Guru creates an\n                                                  OpsCenter OpsItem when an insight is created. The\n                                                  default value is \"<code>true</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EnableDriftRemediation</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether a drift remediation schedule is\n                                                  used. The default value is\n                                                  \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RemediationSchedule</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A rate expression\n                                                  that defines the schedule for drift remediation.\n                                                  The valid values are <code>rate(30 days)</code>,\n                                                  <code>rate(14 days)</code>, <code>rate(1\n                                                  days)</code>, and <code>none</code>. The default\n                                                  value is \"<code>none</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetAccounts</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account initiating the\n                                                  configuration deployment. You only need to provide\n                                                  a value for this parameter if you want to deploy\n                                                  the configuration locally. A value must be\n                                                  provided for either <code>TargetAccounts</code> or\n                                                  <code>TargetOrganizationalUnits</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Conformance Packs (Type: Amazon Web ServicesQuickSetupType-CFGCPacks)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>DelegatedAccountId</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  delegated administrator account. This parameter is\n                                                  required for Organization deployments.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RemediationSchedule</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A rate expression\n                                                  that defines the schedule for drift remediation.\n                                                  The valid values are <code>rate(30 days)</code>,\n                                                  <code>rate(14 days)</code>, <code>rate(2\n                                                  days)</code>, and <code>none</code>. The default\n                                                  value is \"<code>none</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CPackNames</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Config conformance\n                                                  packs.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetAccounts</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account initiating the\n                                                  configuration deployment. You only need to provide\n                                                  a value for this parameter if you want to deploy\n                                                  the configuration locally. A value must be\n                                                  provided for either <code>TargetAccounts</code> or\n                                                  <code>TargetOrganizationalUnits</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the root\n                                                  of your Organization. This configuration type\n                                                  doesn't currently support choosing specific OUs.\n                                                  The configuration will be deployed to all the OUs\n                                                  in the Organization.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Config Recording (Type: Amazon Web ServicesQuickSetupType-CFGRecording)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>RecordAllResources</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether all supported resources are\n                                                  recorded. The default value is\n                                                  \"<code>true</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ResourceTypesToRecord</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of resource types you want to record.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RecordGlobalResourceTypes</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether global resources are recorded\n                                                  with all resource configurations. The default\n                                                  value is \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>GlobalResourceTypesRegion</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) Determines the\n                                                  Amazon Web Services Region where global resources\n                                                  are recorded.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UseCustomBucket</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether a custom Amazon S3\n                                                  bucket is used for delivery. The default value is\n                                                  \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryBucketName</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The name of the\n                                                  Amazon S3 bucket you want Config to deliver configuration snapshots and\n                                                  configuration history files to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryBucketPrefix</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The key prefix you\n                                                  want to use in the custom Amazon S3\n                                                  bucket.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NotificationOptions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) Determines the\n                                                  notification configuration for the recorder. The\n                                                  valid values are <code>NoStreaming</code>,\n                                                  <code>UseExistingTopic</code>, and\n                                                  <code>CreateTopic</code>. The default value is\n                                                  <code>NoStreaming</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CustomDeliveryTopicAccountId</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account where the Amazon SNS topic you want to use for notifications\n                                                  resides. You must specify a value for this\n                                                  parameter if you use the\n                                                  <code>UseExistingTopic</code> notification\n                                                  option.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CustomDeliveryTopicName</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The name of the\n                                                  Amazon SNS topic you want to use for\n                                                  notifications. You must specify a value for this\n                                                  parameter if you use the\n                                                  <code>UseExistingTopic</code> notification\n                                                  option.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RemediationSchedule</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A rate expression\n                                                  that defines the schedule for drift remediation.\n                                                  The valid values are <code>rate(30 days)</code>,\n                                                  <code>rate(7 days)</code>, <code>rate(1\n                                                  days)</code>, and <code>none</code>. The default\n                                                  value is \"<code>none</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetAccounts</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account initiating the\n                                                  configuration deployment. You only need to provide\n                                                  a value for this parameter if you want to deploy\n                                                  the configuration locally. A value must be\n                                                  provided for either <code>TargetAccounts</code> or\n                                                  <code>TargetOrganizationalUnits</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the root\n                                                  of your Organization. This configuration type\n                                                  doesn't currently support choosing specific OUs.\n                                                  The configuration will be deployed to all the OUs\n                                                  in the Organization.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Host Management (Type: Amazon Web ServicesQuickSetupType-SSMHostMgmt)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>UpdateSSMAgent</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the SSM Agent is updated on the\n                                                  target instances every 2 weeks. The default value\n                                                  is \"<code>true</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UpdateEc2LaunchAgent</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the EC2 Launch agent is updated\n                                                  on the target instances every month. The default\n                                                  value is \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CollectInventory</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the EC2 Launch agent is updated\n                                                  on the target instances every month. The default\n                                                  value is \"<code>true</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ScanInstances</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the target instances are\n                                                  scanned daily for available patches. The default\n                                                  value is \"<code>true</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InstallCloudWatchAgent</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the Amazon CloudWatch agent\n                                                  is installed on the target instances. The default\n                                                  value is \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UpdateCloudWatchAgent</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the Amazon CloudWatch agent\n                                                  is updated on the target instances every month.\n                                                  The default value is \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IsPolicyAttachAllowed</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether Quick Setup attaches policies\n                                                  to instances profiles already associated with the\n                                                  target instances. The default value is\n                                                  \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetType</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) Determines how\n                                                  instances are targeted for local account\n                                                  deployments. Don't specify a value for this\n                                                  parameter if you're deploying to OUs. The valid\n                                                  values are <code>*</code>,\n                                                  <code>InstanceIds</code>,\n                                                  <code>ResourceGroups</code>, and\n                                                  <code>Tags</code>. Use <code>*</code> to target\n                                                  all instances in the account.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetInstances</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of instance IDs. You must provide a value for\n                                                  this parameter if you specify\n                                                  <code>InstanceIds</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetTagKey</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The tag key assigned\n                                                  to the instances you want to target. You must\n                                                  provide a value for this parameter if you specify\n                                                  <code>Tags</code> for the <code>TargetType</code>\n                                                  parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetTagValue</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The value of the tag\n                                                  key assigned to the instances you want to target.\n                                                  You must provide a value for this parameter if you\n                                                  specify <code>Tags</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ResourceGroupName</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The name of the\n                                                  resource group associated with the instances you\n                                                  want to target. You must provide a value for this\n                                                  parameter if you specify\n                                                  <code>ResourceGroups</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetAccounts</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account initiating the\n                                                  configuration deployment. You only need to provide\n                                                  a value for this parameter if you want to deploy\n                                                  the configuration locally. A value must be\n                                                  provided for either <code>TargetAccounts</code> or\n                                                  <code>TargetOrganizationalUnits</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Distributor (Type: Amazon Web ServicesQuickSetupType-Distributor)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>PackagesToInstall</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of packages you want to install on the target\n                                                  instances. The valid values are\n                                                  <code>AWSEFSTools</code>, <code>AWSCWAgent</code>,\n                                                  and <code>AWSEC2LaunchAgent</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RemediationSchedule</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A rate expression\n                                                  that defines the schedule for drift remediation.\n                                                  The valid values are <code>rate(30 days)</code>,\n                                                  <code>rate(14 days)</code>, <code>rate(2\n                                                  days)</code>, and <code>none</code>. The default\n                                                  value is \"<code>rate(30 days)</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IsPolicyAttachAllowed</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether Quick Setup attaches policies\n                                                  to instances profiles already associated with the\n                                                  target instances. The default value is\n                                                  \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetType</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) Determines how\n                                                  instances are targeted for local account\n                                                  deployments. Don't specify a value for this\n                                                  parameter if you're deploying to OUs. The valid\n                                                  values are <code>*</code>,\n                                                  <code>InstanceIds</code>,\n                                                  <code>ResourceGroups</code>, and\n                                                  <code>Tags</code>. Use <code>*</code> to target\n                                                  all instances in the account.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetInstances</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of instance IDs. You must provide a value for\n                                                  this parameter if you specify\n                                                  <code>InstanceIds</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetTagKey</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The tag key assigned\n                                                  to the instances you want to target. You must\n                                                  provide a value for this parameter if you specify\n                                                  <code>Tags</code> for the <code>TargetType</code>\n                                                  parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetTagValue</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The value of the tag\n                                                  key assigned to the instances you want to target.\n                                                  You must provide a value for this parameter if you\n                                                  specify <code>Tags</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ResourceGroupName</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The name of the\n                                                  resource group associated with the instances you\n                                                  want to target. You must provide a value for this\n                                                  parameter if you specify\n                                                  <code>ResourceGroups</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetAccounts</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account initiating the\n                                                  configuration deployment. You only need to provide\n                                                  a value for this parameter if you want to deploy\n                                                  the configuration locally. A value must be\n                                                  provided for either <code>TargetAccounts</code> or\n                                                  <code>TargetOrganizationalUnits</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Patch Policy (Type: Amazon Web ServicesQuickSetupType-PatchPolicy)</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>PatchPolicyName</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A name for the patch\n                                                  policy. The value you provide is applied to target\n                                                  Amazon EC2 instances as a tag.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SelectedPatchBaselines</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) An array of JSON\n                                                  objects containing the information for the patch\n                                                  baselines to include in your patch policy.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>PatchBaselineUseDefault</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether the selected patch baselines\n                                                  are all Amazon Web Services provided.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ConfigurationOptionsPatchOperation</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) Determines whether\n                                                  target instances scan for available patches, or\n                                                  scan and install available patches. The valid\n                                                  values are <code>Scan</code> and\n                                                  <code>ScanAndInstall</code>. The default value for\n                                                  the parameter is <code>Scan</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ConfigurationOptionsScanValue</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A cron expression\n                                                  that is used as the schedule for when instances\n                                                  scan for available patches.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ConfigurationOptionsInstallValue</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A cron expression\n                                                  that is used as the schedule for when instances\n                                                  install available patches.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ConfigurationOptionsScanNextInterval</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether instances should scan for\n                                                  available patches at the next cron interval. The\n                                                  default value is \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ConfigurationOptionsInstallNextInterval</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether instances should scan for\n                                                  available patches at the next cron interval. The\n                                                  default value is \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RebootOption</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether instances are rebooted after\n                                                  patches are installed. The default value is\n                                                  \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IsPolicyAttachAllowed</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether Quick Setup attaches policies\n                                                  to instances profiles already associated with the\n                                                  target instances. The default value is\n                                                  \"<code>false</code>\".</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>OutputLogEnableS3</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A boolean value that\n                                                  determines whether command output logs are sent to\n                                                  Amazon S3.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>OutputS3Location</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A JSON string\n                                                  containing information about the Amazon S3\n                                                  bucket where you want to store the output details\n                                                  of the request.</p>\n                           <ul>\n                              <li>\n                                 <p>\n                                    <code>OutputS3BucketRegion</code>\n                                 </p>\n                                 <ul>\n                                    <li>\n                                       <p>Description: (Optional) The Amazon Web Services Region where the Amazon S3\n                                                  bucket you want Config to deliver\n                                                  command output to is located.</p>\n                                    </li>\n                                 </ul>\n                              </li>\n                              <li>\n                                 <p>\n                                    <code>OutputS3BucketName</code>\n                                 </p>\n                                 <ul>\n                                    <li>\n                                       <p>Description: (Optional) The name of the\n                                                  Amazon S3 bucket you want Config to deliver command output to.</p>\n                                    </li>\n                                 </ul>\n                              </li>\n                              <li>\n                                 <p>\n                                    <code>OutputS3KeyPrefix</code>\n                                 </p>\n                                 <ul>\n                                    <li>\n                                       <p>Description: (Optional) The key prefix you\n                                                  want to use in the custom Amazon S3\n                                                  bucket.</p>\n                                    </li>\n                                 </ul>\n                              </li>\n                           </ul>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetType</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) Determines how\n                                                  instances are targeted for local account\n                                                  deployments. Don't specify a value for this\n                                                  parameter if you're deploying to OUs. The valid\n                                                  values are <code>*</code>,\n                                                  <code>InstanceIds</code>,\n                                                  <code>ResourceGroups</code>, and\n                                                  <code>Tags</code>. Use <code>*</code> to target\n                                                  all instances in the account.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetInstances</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of instance IDs. You must provide a value for\n                                                  this parameter if you specify\n                                                  <code>InstanceIds</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetTagKey</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The tag key assigned\n                                                  to the instances you want to target. You must\n                                                  provide a value for this parameter if you specify\n                                                  <code>Tags</code> for the <code>TargetType</code>\n                                                  parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetTagValue</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The value of the tag\n                                                  key assigned to the instances you want to target.\n                                                  You must provide a value for this parameter if you\n                                                  specify <code>Tags</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ResourceGroupName</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) The name of the\n                                                  resource group associated with the instances you\n                                                  want to target. You must provide a value for this\n                                                  parameter if you specify\n                                                  <code>ResourceGroups</code> for the\n                                                  <code>TargetType</code> parameter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetAccounts</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) The ID of the\n                                                  Amazon Web Services account initiating the\n                                                  configuration deployment. You only need to provide\n                                                  a value for this parameter if you want to deploy\n                                                  the configuration locally. A value must be\n                                                  provided for either <code>TargetAccounts</code> or\n                                                  <code>TargetOrganizationalUnits</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetOrganizationalUnits</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Optional) A comma separated\n                                                  list of organizational units (OUs) you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TargetRegions</code>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Description: (Required) A comma separated\n                                                  list of Amazon Web Services Regions you want to\n                                                  deploy the configuration to.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Quick Setup type to use.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "LocalDeploymentExecutionRoleName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM role used to deploy local\n                  configurations.</p>",
+                        "smithy.api#pattern": "^[\\w+=,.@-]{1,64}$"
+                    }
+                },
+                "LocalDeploymentAdministrationRoleArn": {
+                    "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role used to administrate local configuration\n                  deployments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the preferences and options for a configuration definition.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationDefinitionSummariesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#ConfigurationDefinitionSummary"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationDefinitionSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the configuration definition.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Quick Setup configuration used by the configuration\n                  definition.</p>"
+                    }
+                },
+                "TypeVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Quick Setup type used by the configuration definition.</p>"
+                    }
+                },
+                "FirstClassParameters": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The common parameters and values for the configuration definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summarized definition of a Quick Setup configuration definition.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationDefinitionsInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#ConfigurationDefinitionInput"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationDefinitionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#ConfigurationDefinition"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationManagerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#ConfigurationManagerSummary"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationManagerSummary": {
+            "type": "structure",
+            "members": {
+                "ManagerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Quick Setup configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the configuration.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration</p>"
+                    }
+                },
+                "StatusSummaries": {
+                    "target": "com.amazonaws.ssmquicksetup#StatusSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summaries of the state of the configuration manager. These summaries include an\n                  aggregate of the statuses from the configuration definition associated with the\n                  configuration manager. This includes deployment statuses, association statuses,\n                  drift statuses, health checks, and more.</p>"
+                    }
+                },
+                "ConfigurationDefinitionSummaries": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationDefinitionSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the Quick Setup configuration definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a Quick Setup configuration manager.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConfigurationParametersMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[A-Za-z0-9+=@_\\/\\s-]+$"
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 40960
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Another request is being processed. Wait a few minutes and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.ssmquicksetup#CreateConfigurationManager": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#CreateConfigurationManagerInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmquicksetup#CreateConfigurationManagerOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Quick Setup configuration manager resource. This object is a collection\n                  of desired state configurations for multiple configuration definitions and\n                  summaries describing the deployments of those definitions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/configurationManager"
+                }
+            }
+        },
+        "com.amazonaws.ssmquicksetup#CreateConfigurationManagerInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the configuration manager.</p>",
+                        "smithy.api#pattern": "^[ A-Za-z0-9._-]{0,120}$"
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the configuration manager.</p>",
+                        "smithy.api#pattern": "^.{0,512}$"
+                    }
+                },
+                "ConfigurationDefinitions": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationDefinitionsInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the Quick Setup configuration that the configuration manager\n                  deploys.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmquicksetup#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs of metadata to assign to the configuration manager.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#CreateConfigurationManagerOutput": {
+            "type": "structure",
+            "members": {
+                "ManagerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the newly created configuration manager.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#DeleteConfigurationManager": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#DeleteConfigurationManagerInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a configuration manager.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/configurationManager/{ManagerArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#DeleteConfigurationManagerInput": {
+            "type": "structure",
+            "members": {
+                "ManagerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the configuration manager.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#Filter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the filter.</p>",
+                        "smithy.api#length": {
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9+=@_\\/\\s-]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.ssmquicksetup#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values for the filter keys.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key-value pair to filter results.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#FilterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[A-Za-z0-9+=@_\\/\\s-]*$"
+                }
+            }
+        },
+        "com.amazonaws.ssmquicksetup#FiltersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#Filter"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#GetConfigurationManager": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#GetConfigurationManagerInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmquicksetup#GetConfigurationManagerOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a configuration manager.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/configurationManager/{ManagerArn}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetConfigurationManagerFailure",
+                        "params": {
+                            "ManagerArn": "arn:aws:ssm-quicksetup:us-east-1:602768233532:configuration-manager/7cac1a1b-64a9-4c9a-97e8-8c68928b8f13"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmquicksetup#GetConfigurationManagerInput": {
+            "type": "structure",
+            "members": {
+                "ManagerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the configuration manager.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#GetConfigurationManagerOutput": {
+            "type": "structure",
+            "members": {
+                "ManagerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the configuration manager.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the configuration manager.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration manager.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datetime stamp when the configuration manager was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "LastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datetime stamp when the configuration manager was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "StatusSummaries": {
+                    "target": "com.amazonaws.ssmquicksetup#StatusSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the state of the configuration manager. This includes deployment\n                  statuses, association statuses, drift statuses, health checks, and more.</p>"
+                    }
+                },
+                "ConfigurationDefinitions": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationDefinitionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration definitions association with the configuration manager.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmquicksetup#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs of metadata to assign to the configuration manager.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#GetServiceSettings": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmquicksetup#GetServiceSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns settings configured for Quick Setup in the requesting Amazon Web Services account and Amazon Web Services Region.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/serviceSettings"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#GetServiceSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "ServiceSettings": {
+                    "target": "com.amazonaws.ssmquicksetup#ServiceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns details about the settings for Quick Setup in the requesting Amazon Web Services account and Amazon Web Services Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#IAMRoleArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::IAM::Role"
+                }
+            }
+        },
+        "com.amazonaws.ssmquicksetup#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error occurred on the server side.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListConfigurationManagers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#ListConfigurationManagersInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmquicksetup#ListConfigurationManagersOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns Quick Setup configuration managers.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listConfigurationManagers"
+                },
+                "smithy.api#paginated": {
+                    "items": "ConfigurationManagersList",
+                    "inputToken": "StartingToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxItems"
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListConfigurationManagersSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListConfigurationManagersInput": {
+            "type": "structure",
+            "members": {
+                "StartingToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting a specific set of items from a list.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9+=@_\\/\\s-]*$"
+                    }
+                },
+                "MaxItems": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of configuration managers that are returned by the\n                  request.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ssmquicksetup#FiltersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListConfigurationManagersOutput": {
+            "type": "structure",
+            "members": {
+                "ConfigurationManagersList": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationManagerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration managers returned by the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of configuration managers. If there\n                  are no additional operations to return, the string is empty.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListQuickSetupTypes": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmquicksetup#ListQuickSetupTypesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the available Quick Setup types.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/listQuickSetupTypes"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListQuickSetupTypesSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListQuickSetupTypesOutput": {
+            "type": "structure",
+            "members": {
+                "QuickSetupTypeList": {
+                    "target": "com.amazonaws.ssmquicksetup#QuickSetupTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Quick Setup types.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmquicksetup#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns tags assigned to the resource.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource the tag is assigned to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.ssmquicksetup#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs of metadata assigned to the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#QuickSetup": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#CreateConfigurationManager"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#DeleteConfigurationManager"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#GetConfigurationManager"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#GetServiceSettings"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ListConfigurationManagers"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ListQuickSetupTypes"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinition"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationManager"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#UpdateServiceSettings"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM QuickSetup",
+                    "arnNamespace": "ssm-quicksetup",
+                    "cloudTrailEventSource": "ssm-quicksetup.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-quicksetup"
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Authorization",
+                        "Content-Type",
+                        "Credentials",
+                        "X-Amz-Date",
+                        "X-Api-Key",
+                        "X-Amz-Security-Token",
+                        "x-amz-content-sha256",
+                        "X-Amz-User-Agent"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Quick Setup helps you quickly configure frequently used services and features with\n                  recommended best practices. Quick Setup simplifies setting up services, including\n                        Systems Manager, by automating common or recommended tasks.</p>",
+                "smithy.api#title": "AWS Systems Manager QuickSetup",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ssm-quicksetup-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ssm-quicksetup-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ssm-quicksetup.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ssm-quicksetup.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-quicksetup.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.ssmquicksetup#QuickSetupTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#QuickSetupTypeOutput"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#QuickSetupTypeOutput": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the Quick Setup configuration.</p>"
+                    }
+                },
+                "LatestVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version number of the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Quick Setup type.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource couldn't be found. Check the ID or name and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ServiceSettings": {
+            "type": "structure",
+            "members": {
+                "ExplorerEnablingRoleArn": {
+                    "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role used to enable Explorer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings configured for Quick Setup.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#Status": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "DEPLOYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPLOYING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "STOP_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_FAILED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmquicksetup#StatusDetails": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#StatusSummariesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#StatusSummary"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#StatusSummary": {
+            "type": "structure",
+            "members": {
+                "StatusType": {
+                    "target": "com.amazonaws.ssmquicksetup#StatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of a status summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssmquicksetup#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When applicable, returns an informational message relevant to the current status and status type of the status summary object. We don't recommend implementing parsing logic around this value since the messages returned can vary in format.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datetime stamp when the status was last updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "StatusDetails": {
+                    "target": "com.amazonaws.ssmquicksetup#StatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summarized description of the status.</p>"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#StatusType": {
+            "type": "enum",
+            "members": {
+                "DEPLOYMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deployment"
+                    }
+                },
+                "ASYNC_EXECUTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AsyncExecutions"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmquicksetup#TagEntry": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the tag.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the tag.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Key-value pairs of metadata.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.ssmquicksetup#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#TagResourceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns key-value pairs of metadata to Amazon Web Services resources.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to tag.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmquicksetup#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs of metadata to assign to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#Tags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmquicksetup#TagEntry"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#TagsMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 128
+                    },
+                    "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 256
+                    },
+                    "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request or operation exceeds the maximum allowed request rate per Amazon Web Services account and Amazon Web Services Region.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#UntagResourceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from the specified resource.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to remove tags from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.ssmquicksetup#TagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of the tags to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinitionInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Quick Setup configuration definition.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/configurationDefinition/{ManagerArn}/{Id}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinitionInput": {
+            "type": "structure",
+            "members": {
+                "ManagerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the configuration manager associated with the definition to\n                  update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the configuration definition you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^[a-z0-9-]{1,20}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Quick Setup type to use.</p>",
+                        "smithy.api#pattern": "^\\d{1,3}(\\.\\d{1,3})?$|^LATEST$"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.ssmquicksetup#ConfigurationParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for the configuration definition type.</p>"
+                    }
+                },
+                "LocalDeploymentExecutionRoleName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM role used to deploy local\n                  configurations.</p>",
+                        "smithy.api#pattern": "^[\\w+=,.@-]{1,64}$"
+                    }
+                },
+                "LocalDeploymentAdministrationRoleArn": {
+                    "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role used to administrate local configuration\n                  deployments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UpdateConfigurationManager": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationManagerInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Quick Setup configuration manager.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/configurationManager/{ManagerArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UpdateConfigurationManagerInput": {
+            "type": "structure",
+            "members": {
+                "ManagerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the configuration manager.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the configuration manager.</p>",
+                        "smithy.api#pattern": "^[ A-Za-z0-9._-]{0,120}$"
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the configuration manager.</p>",
+                        "smithy.api#pattern": "^.{0,512}$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UpdateServiceSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmquicksetup#UpdateServiceSettingsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmquicksetup#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates settings configured for Quick Setup.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/serviceSettings"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#UpdateServiceSettingsInput": {
+            "type": "structure",
+            "members": {
+                "ExplorerEnablingRoleArn": {
+                    "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role used to enable Explorer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmquicksetup#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is invalid. Verify the values provided for the request parameters are\n                  accurate.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

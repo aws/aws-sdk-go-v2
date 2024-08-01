@@ -163,12 +163,48 @@
                 "target": "com.amazonaws.controlcatalog#CommonControlSummary"
             }
         },
+        "com.amazonaws.controlcatalog#ControlArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 34,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws(?:[-a-z]*)?):(controlcatalog|controltower):[a-zA-Z0-9-]*::control/[0-9a-zA-Z_\\-]+$"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlBehavior": {
+            "type": "enum",
+            "members": {
+                "PREVENTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREVENTIVE"
+                    }
+                },
+                "PROACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROACTIVE"
+                    }
+                },
+                "DETECTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETECTIVE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.controlcatalog#ControlCatalog": {
             "type": "service",
             "version": "2018-05-10",
             "resources": [
                 {
                     "target": "com.amazonaws.controlcatalog#CommonControlResource"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ControlResource"
                 },
                 {
                     "target": "com.amazonaws.controlcatalog#DomainResource"
@@ -881,6 +917,88 @@
                 }
             }
         },
+        "com.amazonaws.controlcatalog#ControlResource": {
+            "type": "resource",
+            "identifiers": {
+                "ControlArn": {
+                    "target": "com.amazonaws.controlcatalog#ControlArn"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.controlcatalog#GetControl"
+            },
+            "list": {
+                "target": "com.amazonaws.controlcatalog#ListControls"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{ControlArn}",
+                    "absolute": true
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "control"
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlScope": {
+            "type": "enum",
+            "members": {
+                "GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLOBAL"
+                    }
+                },
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#ControlArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the control, as it may appear in the console. Describes the functionality of the control.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Overview of information about a control.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#Controls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ControlSummary"
+            }
+        },
+        "com.amazonaws.controlcatalog#DeployableRegions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#RegionCode"
+            }
+        },
         "com.amazonaws.controlcatalog#DomainArn": {
             "type": "string",
             "traits": {
@@ -982,6 +1100,98 @@
                 "target": "com.amazonaws.controlcatalog#DomainSummary"
             }
         },
+        "com.amazonaws.controlcatalog#GetControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controlcatalog#GetControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.controlcatalog#GetControlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controlcatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about a specific control, most notably a list of Amazon Web Services Regions where this control is supported. Input a value for the <i>ControlArn</i> parameter, in ARN form. <code>GetControl</code> accepts <i>controltower</i> or <i>controlcatalog</i> control ARNs as input. Returns a <i>controlcatalog</i> ARN format.</p>\n         <p>In the API response, controls that have the value <code>GLOBAL</code> in the <code>Scope</code> field do not show the <code>DeployableRegions</code> field, because it does not apply. Controls that have the value <code>REGIONAL</code> in the <code>Scope</code> field return a value for the <code>DeployableRegions</code> field, as shown in the example.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-control"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#GetControlRequest": {
+            "type": "structure",
+            "members": {
+                "ControlArn": {
+                    "target": "com.amazonaws.controlcatalog#ControlArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control. It has one of the following formats:</p>\n         <p>\n            <i>Global format</i>\n         </p>\n         <p>\n            <code>arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}</code>\n         </p>\n         <p>\n            <i>Or Regional format</i>\n         </p>\n         <p>\n            <code>arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}</code>\n         </p>\n         <p>Here is a more general pattern that covers Amazon Web Services Control Tower and Control Catalog ARNs:</p>\n         <p>\n            <code>^arn:(aws(?:[-a-z]*)?):(controlcatalog|controltower):[a-zA-Z0-9-]*::control/[0-9a-zA-Z_\\\\-]+$</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#GetControlResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#ControlArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of what the control does.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Behavior": {
+                    "target": "com.amazonaws.controlcatalog#ControlBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A term that identifies the control's functional behavior. One of <code>Preventive</code>, <code>Deteictive</code>, <code>Proactive</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionConfiguration": {
+                    "target": "com.amazonaws.controlcatalog#RegionConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.controlcatalog#InternalServerException": {
             "type": "structure",
             "members": {
@@ -1069,6 +1279,87 @@
                     "target": "com.amazonaws.controlcatalog#CommonControlSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of common controls that the <code>ListCommonControls</code> API returns.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListControls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controlcatalog#ListControlsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.controlcatalog#ListControlsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controlcatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of all available controls in the Amazon Web Services Control Catalog library. Allows you to discover available controls. The list of controls is given as structures of type <i>controlSummary</i>. The ARN is returned in the global <i>controlcatalog</i> format, as shown in the examples.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-controls"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Controls"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListControlsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.controlcatalog#MaxListControlsResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results on a page or for an API request call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListControlsResponse": {
+            "type": "structure",
+            "members": {
+                "Controls": {
+                    "target": "com.amazonaws.controlcatalog#Controls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of controls, given as structures of type <i>controlSummary</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1260,6 +1551,15 @@
                 }
             }
         },
+        "com.amazonaws.controlcatalog#MaxListControlsResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.controlcatalog#MaxListDomainsResults": {
             "type": "integer",
             "traits": {
@@ -1406,6 +1706,46 @@
                 "smithy.api#length": {
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.controlcatalog#RegionCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9-]{1,128}$"
+            }
+        },
+        "com.amazonaws.controlcatalog#RegionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.controlcatalog#ControlScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The coverage of the control, if deployed. Scope is an enumerated type, with value <code>Regional</code>, or <code>Global</code>. A control with Global scope is effective in all Amazon Web Services Regions, regardless of the Region from which it is enabled, or to which it is deployed. A control implemented by an SCP is usually Global in scope. A control with Regional scope has operations that are restricted specifically to the Region from which it is enabled and to which it is deployed. Controls implemented by Config rules and CloudFormation hooks usually are Regional in scope.  Security Hub controls usually are Regional in scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeployableRegions": {
+                    "target": "com.amazonaws.controlcatalog#DeployableRegions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Regions in which the control is available to be deployed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the control, including the scope of the control, if enabled, and the Regions in which the control currently is available for deployment.</p>\n         <p>If you are applying controls through an Amazon Web Services Control Tower landing zone environment, remember that the values returned in the <code>RegionConfiguration</code> API operation are not related to the governed Regions in your landing zone. For example, if you are governing Regions <code>A</code>,<code>B</code>,and <code>C</code> while the control is available in Regions <code>A</code>, <code>B</code>, C<code>,</code> and <code>D</code>, you'd see a response with <code>DeployableRegions</code> of <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> for a control with <code>REGIONAL</code> scope, even though you may not intend to deploy the control in Region <code>D</code>, because you do not govern it through your landing zone.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.controlcatalog#ThrottlingException": {
