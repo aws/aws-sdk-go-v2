@@ -1,8 +1,0 @@
-{
-    "id": "04f2682b-3466-4d03-b84a-14a9ebffde1b",
-    "type": "documentation",
-    "description": "Doc only update for changes to deletion API.",
-    "modules": [
-        "service/memorydb"
-    ]
-}

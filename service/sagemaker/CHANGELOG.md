@@ -1,3 +1,7 @@
+# v1.152.0 (2024-08-01)
+
+* **Feature**: This release adds support for Amazon EMR Serverless applications in SageMaker Studio for running data processing jobs.
+
 # v1.151.0 (2024-07-18)
 
 * **Feature**: SageMaker Training supports R5, T3 and R5D instances family. And SageMaker Processing supports G5 and R5D instances family.

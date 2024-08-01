@@ -59,7 +59,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.42.3
-	github.com/aws/aws-sdk-go-v2/service/rds v1.81.5
+	github.com/aws/aws-sdk-go-v2/service/rds v1.82.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.43.2
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.42.3
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.52.3
 	github.com/aws/aws-sdk-go-v2/service/sts v1.30.3
-	github.com/aws/aws-sdk-go-v2/service/support v1.24.3
+	github.com/aws/aws-sdk-go-v2/service/support v1.24.4
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/waf v1.23.3

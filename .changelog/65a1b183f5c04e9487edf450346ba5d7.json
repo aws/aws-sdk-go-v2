@@ -1,8 +1,0 @@
-{
-    "id": "65a1b183-f5c0-4e94-87ed-f450346ba5d7",
-    "type": "feature",
-    "description": "API and Documentation for Bedrock Model Copy feature. This feature lets you share and copy a custom model from one region to another or one account to another.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

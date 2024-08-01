@@ -1,3 +1,7 @@
+# v1.16.4 (2024-08-01)
+
+* **Documentation**: Updated Control Tower service documentation for controlcatalog control ARN support with existing Control Tower public APIs
+
 # v1.16.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

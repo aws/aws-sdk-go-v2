@@ -1,3 +1,24 @@
+# Release (2024-08-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.13.0](service/bedrock/CHANGELOG.md#v1130-2024-08-01)
+  * **Feature**: API and Documentation for Bedrock Model Copy feature. This feature lets you share and copy a custom model from one region to another or one account to another.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.3.0](service/controlcatalog/CHANGELOG.md#v130-2024-08-01)
+  * **Feature**: AWS Control Tower provides two new public APIs controlcatalog:ListControls and controlcatalog:GetControl under controlcatalog service namespace, which enable customers to programmatically retrieve control metadata of available controls.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.16.4](service/controltower/CHANGELOG.md#v1164-2024-08-01)
+  * **Documentation**: Updated Control Tower service documentation for controlcatalog control ARN support with existing Control Tower public APIs
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.21.5](service/memorydb/CHANGELOG.md#v1215-2024-08-01)
+  * **Documentation**: Doc only update for changes to deletion API.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.82.0](service/rds/CHANGELOG.md#v1820-2024-08-01)
+  * **Feature**: This release adds support for specifying optional MinACU parameter in CreateDBShardGroup and ModifyDBShardGroup API. DBShardGroup response will contain MinACU if specified.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.152.0](service/sagemaker/CHANGELOG.md#v11520-2024-08-01)
+  * **Feature**: This release adds support for Amazon EMR Serverless applications in SageMaker Studio for running data processing jobs.
+* `github.com/aws/aws-sdk-go-v2/service/ssmquicksetup`: [v1.0.0](service/ssmquicksetup/CHANGELOG.md#v100-2024-08-01)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds API support for the QuickSetup feature of AWS Systems Manager
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.24.4](service/support/CHANGELOG.md#v1244-2024-08-01)
+  * **Documentation**: Doc only updates to CaseDetails
+
 # Release (2024-07-30)
 
 ## Module Highlights

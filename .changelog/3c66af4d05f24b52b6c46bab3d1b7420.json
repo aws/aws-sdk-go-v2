@@ -1,8 +1,0 @@
-{
-    "id": "3c66af4d-05f2-4b52-b6c4-6bab3d1b7420",
-    "type": "documentation",
-    "description": "Updated Control Tower service documentation for controlcatalog control ARN support with existing Control Tower public APIs",
-    "modules": [
-        "service/controltower"
-    ]
-}

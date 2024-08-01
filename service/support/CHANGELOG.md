@@ -1,3 +1,7 @@
+# v1.24.4 (2024-08-01)
+
+* **Documentation**: Doc only updates to CaseDetails
+
 # v1.24.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

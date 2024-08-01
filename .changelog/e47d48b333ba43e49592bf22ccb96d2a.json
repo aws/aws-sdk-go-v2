@@ -1,8 +1,0 @@
-{
-    "id": "e47d48b3-33ba-43e4-9592-bf22ccb96d2a",
-    "type": "feature",
-    "description": "This release adds support for specifying optional MinACU parameter in CreateDBShardGroup and ModifyDBShardGroup API. DBShardGroup response will contain MinACU if specified.",
-    "modules": [
-        "service/rds"
-    ]
-}

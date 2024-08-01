@@ -1,3 +1,7 @@
+# v1.82.0 (2024-08-01)
+
+* **Feature**: This release adds support for specifying optional MinACU parameter in CreateDBShardGroup and ModifyDBShardGroup API. DBShardGroup response will contain MinACU if specified.
+
 # v1.81.5 (2024-07-18)
 
 * **Documentation**: Updates Amazon RDS documentation to specify an eventual consistency model for DescribePendingMaintenanceActions.

@@ -1,3 +1,7 @@
+# v1.13.0 (2024-08-01)
+
+* **Feature**: API and Documentation for Bedrock Model Copy feature. This feature lets you share and copy a custom model from one region to another or one account to another.
+
 # v1.12.0 (2024-07-10.2)
 
 * **Feature**: Add support for contextual grounding check for Guardrails for Amazon Bedrock.

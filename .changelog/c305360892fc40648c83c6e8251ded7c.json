@@ -1,8 +1,0 @@
-{
-    "id": "c3053608-92fc-4064-8c83-c6e8251ded7c",
-    "type": "documentation",
-    "description": "Doc only updates to CaseDetails",
-    "modules": [
-        "service/support"
-    ]
-}
