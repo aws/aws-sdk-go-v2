@@ -11,32 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a resource of the Resilience Hub application.
-//
-// This API accepts only one of the following parameters to describe the resource:
-//
-//   - resourceName
-//
-//   - logicalResourceId
-//
-//   - physicalResourceId (Along with physicalResourceId , you can also provide
-//     awsAccountId , and awsRegion )
-func (c *Client) DescribeAppVersionResource(ctx context.Context, params *DescribeAppVersionResourceInput, optFns ...func(*Options)) (*DescribeAppVersionResourceOutput, error) {
+// Describes the resource grouping recommendation tasks run by Resilience Hub for
+// your application.
+func (c *Client) DescribeResourceGroupingRecommendationTask(ctx context.Context, params *DescribeResourceGroupingRecommendationTaskInput, optFns ...func(*Options)) (*DescribeResourceGroupingRecommendationTaskOutput, error) {
 	if params == nil {
-		params = &DescribeAppVersionResourceInput{}
+		params = &DescribeResourceGroupingRecommendationTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAppVersionResource", params, optFns, c.addOperationDescribeAppVersionResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeResourceGroupingRecommendationTask", params, optFns, c.addOperationDescribeResourceGroupingRecommendationTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeAppVersionResourceOutput)
+	out := result.(*DescribeResourceGroupingRecommendationTaskOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeAppVersionResourceInput struct {
+type DescribeResourceGroupingRecommendationTaskInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
@@ -48,50 +40,26 @@ type DescribeAppVersionResourceInput struct {
 	// This member is required.
 	AppArn *string
 
-	// Resilience Hub application version.
-	//
-	// This member is required.
-	AppVersion *string
-
-	// Amazon Web Services account that owns the physical resource.
-	AwsAccountId *string
-
-	// Amazon Web Services region that owns the physical resource.
-	AwsRegion *string
-
-	// Logical identifier of the resource.
-	LogicalResourceId *types.LogicalResourceId
-
-	// Physical identifier of the resource.
-	PhysicalResourceId *string
-
-	// Name of the resource.
-	ResourceName *string
+	// Indicates the identifier of the grouping recommendation task.
+	GroupingId *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeAppVersionResourceOutput struct {
+type DescribeResourceGroupingRecommendationTaskOutput struct {
 
-	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
-	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
-	// guide.
-	//
-	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	// Indicates the identifier of the grouping recommendation task.
 	//
 	// This member is required.
-	AppArn *string
+	GroupingId *string
 
-	// Resilience Hub application version.
+	// Status of the action.
 	//
 	// This member is required.
-	AppVersion *string
+	Status types.ResourcesGroupingRecGenStatusType
 
-	// Defines a physical resource. A physical resource is a resource that exists in
-	// your account. It can be identified using an Amazon Resource Name (ARN) or a
-	// Resilience Hub-native identifier.
-	PhysicalResource *types.PhysicalResource
+	// Indicates the error that occurred while generating a grouping recommendation.
+	ErrorMessage *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -99,19 +67,19 @@ type DescribeAppVersionResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeAppVersionResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeResourceGroupingRecommendationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppVersionResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResourceGroupingRecommendationTask{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppVersionResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeResourceGroupingRecommendationTask{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAppVersionResource"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeResourceGroupingRecommendationTask"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -160,10 +128,10 @@ func (c *Client) addOperationDescribeAppVersionResourceMiddlewares(stack *middle
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDescribeAppVersionResourceValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeResourceGroupingRecommendationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAppVersionResource(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeResourceGroupingRecommendationTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -184,10 +152,10 @@ func (c *Client) addOperationDescribeAppVersionResourceMiddlewares(stack *middle
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeAppVersionResource(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeResourceGroupingRecommendationTask(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeAppVersionResource",
+		OperationName: "DescribeResourceGroupingRecommendationTask",
 	}
 }

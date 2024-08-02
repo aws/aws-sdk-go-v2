@@ -11,29 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the source of resource-maps to the draft version of an application. During
-// assessment, Resilience Hub will use these resource-maps to resolve the latest
-// physical ID for each resource in the application template. For more information
-// about different types of resources supported by Resilience Hub and how to add
-// them in your application, see [Step 2: How is your application managed?]in the Resilience Hub User Guide.
-//
-// [Step 2: How is your application managed?]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/how-app-manage.html
-func (c *Client) AddDraftAppVersionResourceMappings(ctx context.Context, params *AddDraftAppVersionResourceMappingsInput, optFns ...func(*Options)) (*AddDraftAppVersionResourceMappingsOutput, error) {
+// Accepts the resource grouping recommendations suggested by Resilience Hub for
+// your application.
+func (c *Client) AcceptResourceGroupingRecommendations(ctx context.Context, params *AcceptResourceGroupingRecommendationsInput, optFns ...func(*Options)) (*AcceptResourceGroupingRecommendationsOutput, error) {
 	if params == nil {
-		params = &AddDraftAppVersionResourceMappingsInput{}
+		params = &AcceptResourceGroupingRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddDraftAppVersionResourceMappings", params, optFns, c.addOperationAddDraftAppVersionResourceMappingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptResourceGroupingRecommendations", params, optFns, c.addOperationAcceptResourceGroupingRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*AddDraftAppVersionResourceMappingsOutput)
+	out := result.(*AcceptResourceGroupingRecommendationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type AddDraftAppVersionResourceMappingsInput struct {
+type AcceptResourceGroupingRecommendationsInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
@@ -45,19 +40,16 @@ type AddDraftAppVersionResourceMappingsInput struct {
 	// This member is required.
 	AppArn *string
 
-	// Mappings used to map logical resources from the template to physical resources.
-	// You can use the mapping type CFN_STACK if the application template uses a
-	// logical stack name. Or you can map individual resources by using the mapping
-	// type RESOURCE . We recommend using the mapping type CFN_STACK if the
-	// application is backed by a CloudFormation stack.
+	// Indicates the list of resource grouping recommendations you want to include in
+	// your application.
 	//
 	// This member is required.
-	ResourceMappings []types.ResourceMapping
+	Entries []types.AcceptGroupingRecommendationEntry
 
 	noSmithyDocumentSerde
 }
 
-type AddDraftAppVersionResourceMappingsOutput struct {
+type AcceptResourceGroupingRecommendationsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
@@ -69,17 +61,11 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 	// This member is required.
 	AppArn *string
 
-	// The version of the application.
+	// Indicates the list of resource grouping recommendations that could not be
+	// included in your application.
 	//
 	// This member is required.
-	AppVersion *string
-
-	// List of sources that are used to map a logical resource from the template to a
-	// physical resource. You can use sources such as CloudFormation, Terraform state
-	// files, AppRegistry applications, or Amazon EKS.
-	//
-	// This member is required.
-	ResourceMappings []types.ResourceMapping
+	FailedEntries []types.FailedGroupingRecommendationEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,19 +73,19 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationAddDraftAppVersionResourceMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptResourceGroupingRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddDraftAppVersionResourceMappings{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptResourceGroupingRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddDraftAppVersionResourceMappings{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptResourceGroupingRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddDraftAppVersionResourceMappings"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptResourceGroupingRecommendations"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -148,10 +134,10 @@ func (c *Client) addOperationAddDraftAppVersionResourceMappingsMiddlewares(stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpAddDraftAppVersionResourceMappingsValidationMiddleware(stack); err != nil {
+	if err = addOpAcceptResourceGroupingRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddDraftAppVersionResourceMappings(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptResourceGroupingRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -172,10 +158,10 @@ func (c *Client) addOperationAddDraftAppVersionResourceMappingsMiddlewares(stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opAddDraftAppVersionResourceMappings(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opAcceptResourceGroupingRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "AddDraftAppVersionResourceMappings",
+		OperationName: "AcceptResourceGroupingRecommendations",
 	}
 }

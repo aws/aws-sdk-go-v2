@@ -1,0 +1,8 @@
+{
+    "id": "14003caa-c553-43aa-97e4-4e6faa89d5e7",
+    "type": "feature",
+    "description": "updates cloudtrail event source for SDKs",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

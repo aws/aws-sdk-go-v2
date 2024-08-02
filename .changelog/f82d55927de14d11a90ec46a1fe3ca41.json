@@ -1,0 +1,8 @@
+{
+    "id": "f82d5592-7de1-4d11-a90e-c46a1fe3ca41",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/route53"
+    ]
+}

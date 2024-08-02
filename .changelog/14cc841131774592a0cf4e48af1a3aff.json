@@ -1,0 +1,8 @@
+{
+    "id": "14cc8411-3177-4592-a0cf-4e48af1a3aff",
+    "type": "feature",
+    "description": "updates cloudtrail event source for SDKs",
+    "modules": [
+        "service/ivs"
+    ]
+}

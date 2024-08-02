@@ -1,0 +1,8 @@
+{
+    "id": "c77a9a6d-439c-4c1a-ba07-af3be7ce5ad0",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/wafregional"
+    ]
+}

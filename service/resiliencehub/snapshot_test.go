@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AcceptResourceGroupingRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptResourceGroupingRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptResourceGroupingRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AddDraftAppVersionResourceMappings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddDraftAppVersionResourceMappings(context.Background(), nil, func(o *Options) {
@@ -338,6 +350,18 @@ func TestCheckSnapshot_DescribeResiliencyPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeResourceGroupingRecommendationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeResourceGroupingRecommendationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeResourceGroupingRecommendationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ImportResourcesToDraftAppVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportResourcesToDraftAppVersion(context.Background(), nil, func(o *Options) {
@@ -518,6 +542,18 @@ func TestCheckSnapshot_ListResiliencyPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListResourceGroupingRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceGroupingRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourceGroupingRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListSopRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListSopRecommendations(context.Background(), nil, func(o *Options) {
@@ -602,6 +638,18 @@ func TestCheckSnapshot_PutDraftAppVersionTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RejectResourceGroupingRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectResourceGroupingRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectResourceGroupingRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RemoveDraftAppVersionResourceMappings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RemoveDraftAppVersionResourceMappings(context.Background(), nil, func(o *Options) {
@@ -631,6 +679,18 @@ func TestCheckSnapshot_StartAppAssessment(t *testing.T) {
 	_, err := svc.StartAppAssessment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAppAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartResourceGroupingRecommendationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartResourceGroupingRecommendationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartResourceGroupingRecommendationTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -721,6 +781,18 @@ func TestCheckSnapshot_UpdateResiliencyPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AcceptResourceGroupingRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptResourceGroupingRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptResourceGroupingRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AddDraftAppVersionResourceMappings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddDraftAppVersionResourceMappings(context.Background(), nil, func(o *Options) {
@@ -997,6 +1069,18 @@ func TestUpdateSnapshot_DescribeResiliencyPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeResourceGroupingRecommendationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeResourceGroupingRecommendationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeResourceGroupingRecommendationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ImportResourcesToDraftAppVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportResourcesToDraftAppVersion(context.Background(), nil, func(o *Options) {
@@ -1177,6 +1261,18 @@ func TestUpdateSnapshot_ListResiliencyPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListResourceGroupingRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceGroupingRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourceGroupingRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListSopRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListSopRecommendations(context.Background(), nil, func(o *Options) {
@@ -1261,6 +1357,18 @@ func TestUpdateSnapshot_PutDraftAppVersionTemplate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RejectResourceGroupingRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectResourceGroupingRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectResourceGroupingRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RemoveDraftAppVersionResourceMappings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RemoveDraftAppVersionResourceMappings(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1398,18 @@ func TestUpdateSnapshot_StartAppAssessment(t *testing.T) {
 	_, err := svc.StartAppAssessment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAppAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartResourceGroupingRecommendationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartResourceGroupingRecommendationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartResourceGroupingRecommendationTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

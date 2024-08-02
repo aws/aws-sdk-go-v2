@@ -15,6 +15,88 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpAcceptResourceGroupingRecommendations struct {
+}
+
+func (*awsRestjson1_serializeOpAcceptResourceGroupingRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAcceptResourceGroupingRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AcceptResourceGroupingRecommendationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accept-resource-grouping-recommendations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAcceptResourceGroupingRecommendationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAcceptResourceGroupingRecommendationsInput(v *AcceptResourceGroupingRecommendationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAcceptResourceGroupingRecommendationsInput(v *AcceptResourceGroupingRecommendationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppArn != nil {
+		ok := object.Key("appArn")
+		ok.String(*v.AppArn)
+	}
+
+	if v.Entries != nil {
+		ok := object.Key("entries")
+		if err := awsRestjson1_serializeDocumentAcceptGroupingRecommendationEntries(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpAddDraftAppVersionResourceMappings struct {
 }
 
@@ -2101,6 +2183,86 @@ func awsRestjson1_serializeOpDocumentDescribeResiliencyPolicyInput(v *DescribeRe
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeResourceGroupingRecommendationTask struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeResourceGroupingRecommendationTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeResourceGroupingRecommendationTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeResourceGroupingRecommendationTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/describe-resource-grouping-recommendation-task")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDescribeResourceGroupingRecommendationTaskInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeResourceGroupingRecommendationTaskInput(v *DescribeResourceGroupingRecommendationTaskInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDescribeResourceGroupingRecommendationTaskInput(v *DescribeResourceGroupingRecommendationTaskInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppArn != nil {
+		ok := object.Key("appArn")
+		ok.String(*v.AppArn)
+	}
+
+	if v.GroupingId != nil {
+		ok := object.Key("groupingId")
+		ok.String(*v.GroupingId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpImportResourcesToDraftAppVersion struct {
 }
 
@@ -3415,6 +3577,74 @@ func awsRestjson1_serializeOpHttpBindingsListResiliencyPoliciesInput(v *ListResi
 	return nil
 }
 
+type awsRestjson1_serializeOpListResourceGroupingRecommendations struct {
+}
+
+func (*awsRestjson1_serializeOpListResourceGroupingRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListResourceGroupingRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListResourceGroupingRecommendationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/list-resource-grouping-recommendations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListResourceGroupingRecommendationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListResourceGroupingRecommendationsInput(v *ListResourceGroupingRecommendationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppArn != nil {
+		encoder.SetQuery("appArn").String(*v.AppArn)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListSopRecommendations struct {
 }
 
@@ -3969,6 +4199,88 @@ func awsRestjson1_serializeOpDocumentPutDraftAppVersionTemplateInput(v *PutDraft
 	return nil
 }
 
+type awsRestjson1_serializeOpRejectResourceGroupingRecommendations struct {
+}
+
+func (*awsRestjson1_serializeOpRejectResourceGroupingRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRejectResourceGroupingRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RejectResourceGroupingRecommendationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reject-resource-grouping-recommendations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRejectResourceGroupingRecommendationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRejectResourceGroupingRecommendationsInput(v *RejectResourceGroupingRecommendationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRejectResourceGroupingRecommendationsInput(v *RejectResourceGroupingRecommendationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppArn != nil {
+		ok := object.Key("appArn")
+		ok.String(*v.AppArn)
+	}
+
+	if v.Entries != nil {
+		ok := object.Key("entries")
+		if err := awsRestjson1_serializeDocumentRejectGroupingRecommendationEntries(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpRemoveDraftAppVersionResourceMappings struct {
 }
 
@@ -4258,6 +4570,81 @@ func awsRestjson1_serializeOpDocumentStartAppAssessmentInput(v *StartAppAssessme
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartResourceGroupingRecommendationTask struct {
+}
+
+func (*awsRestjson1_serializeOpStartResourceGroupingRecommendationTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartResourceGroupingRecommendationTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartResourceGroupingRecommendationTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/start-resource-grouping-recommendation-task")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartResourceGroupingRecommendationTaskInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartResourceGroupingRecommendationTaskInput(v *StartResourceGroupingRecommendationTaskInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartResourceGroupingRecommendationTaskInput(v *StartResourceGroupingRecommendationTaskInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppArn != nil {
+		ok := object.Key("appArn")
+		ok.String(*v.AppArn)
 	}
 
 	return nil
@@ -4940,6 +5327,31 @@ func awsRestjson1_serializeOpDocumentUpdateResiliencyPolicyInput(v *UpdateResili
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAcceptGroupingRecommendationEntries(v []types.AcceptGroupingRecommendationEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAcceptGroupingRecommendationEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAcceptGroupingRecommendationEntry(v *types.AcceptGroupingRecommendationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupingRecommendationId != nil {
+		ok := object.Key("groupingRecommendationId")
+		ok.String(*v.GroupingRecommendationId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAdditionalInfoMap(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5228,6 +5640,36 @@ func awsRestjson1_serializeDocumentRecommendationIdList(v []string, value smithy
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRejectGroupingRecommendationEntries(v []types.RejectGroupingRecommendationEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRejectGroupingRecommendationEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRejectGroupingRecommendationEntry(v *types.RejectGroupingRecommendationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupingRecommendationId != nil {
+		ok := object.Key("groupingRecommendationId")
+		ok.String(*v.GroupingRecommendationId)
+	}
+
+	if len(v.RejectionReason) > 0 {
+		ok := object.Key("rejectionReason")
+		ok.String(string(v.RejectionReason))
+	}
+
 	return nil
 }
 

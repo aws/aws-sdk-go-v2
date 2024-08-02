@@ -54,6 +54,8 @@ const (
 	AppComplianceStatusTypePolicyMet       AppComplianceStatusType = "PolicyMet"
 	AppComplianceStatusTypeNotAssessed     AppComplianceStatusType = "NotAssessed"
 	AppComplianceStatusTypeChangesDetected AppComplianceStatusType = "ChangesDetected"
+	AppComplianceStatusTypeNotApplicable   AppComplianceStatusType = "NotApplicable"
+	AppComplianceStatusTypeMissingPolicy   AppComplianceStatusType = "MissingPolicy"
 )
 
 // Values returns all known values for AppComplianceStatusType. Note that this can
@@ -66,6 +68,8 @@ func (AppComplianceStatusType) Values() []AppComplianceStatusType {
 		"PolicyMet",
 		"NotAssessed",
 		"ChangesDetected",
+		"NotApplicable",
+		"MissingPolicy",
 	}
 }
 
@@ -157,6 +161,8 @@ type ComplianceStatus string
 const (
 	ComplianceStatusPolicyBreached ComplianceStatus = "PolicyBreached"
 	ComplianceStatusPolicyMet      ComplianceStatus = "PolicyMet"
+	ComplianceStatusNotApplicable  ComplianceStatus = "NotApplicable"
+	ComplianceStatusMissingPolicy  ComplianceStatus = "MissingPolicy"
 )
 
 // Values returns all known values for ComplianceStatus. Note that this can be
@@ -167,6 +173,8 @@ func (ComplianceStatus) Values() []ComplianceStatus {
 	return []ComplianceStatus{
 		"PolicyBreached",
 		"PolicyMet",
+		"NotApplicable",
+		"MissingPolicy",
 	}
 }
 
@@ -389,6 +397,72 @@ func (ExcludeRecommendationReason) Values() []ExcludeRecommendationReason {
 	}
 }
 
+type GroupingRecommendationConfidenceLevel string
+
+// Enum values for GroupingRecommendationConfidenceLevel
+const (
+	GroupingRecommendationConfidenceLevelHigh   GroupingRecommendationConfidenceLevel = "High"
+	GroupingRecommendationConfidenceLevelMedium GroupingRecommendationConfidenceLevel = "Medium"
+)
+
+// Values returns all known values for GroupingRecommendationConfidenceLevel. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupingRecommendationConfidenceLevel) Values() []GroupingRecommendationConfidenceLevel {
+	return []GroupingRecommendationConfidenceLevel{
+		"High",
+		"Medium",
+	}
+}
+
+type GroupingRecommendationRejectionReason string
+
+// Enum values for GroupingRecommendationRejectionReason
+const (
+	GroupingRecommendationRejectionReasonDistinctBusinessPurpose   GroupingRecommendationRejectionReason = "DistinctBusinessPurpose"
+	GroupingRecommendationRejectionReasonSeparateDataConcern       GroupingRecommendationRejectionReason = "SeparateDataConcern"
+	GroupingRecommendationRejectionReasonDistinctUserGroupHandling GroupingRecommendationRejectionReason = "DistinctUserGroupHandling"
+	GroupingRecommendationRejectionReasonOther                     GroupingRecommendationRejectionReason = "Other"
+)
+
+// Values returns all known values for GroupingRecommendationRejectionReason. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupingRecommendationRejectionReason) Values() []GroupingRecommendationRejectionReason {
+	return []GroupingRecommendationRejectionReason{
+		"DistinctBusinessPurpose",
+		"SeparateDataConcern",
+		"DistinctUserGroupHandling",
+		"Other",
+	}
+}
+
+type GroupingRecommendationStatusType string
+
+// Enum values for GroupingRecommendationStatusType
+const (
+	GroupingRecommendationStatusTypeAccepted        GroupingRecommendationStatusType = "Accepted"
+	GroupingRecommendationStatusTypeRejected        GroupingRecommendationStatusType = "Rejected"
+	GroupingRecommendationStatusTypePendingDecision GroupingRecommendationStatusType = "PendingDecision"
+)
+
+// Values returns all known values for GroupingRecommendationStatusType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupingRecommendationStatusType) Values() []GroupingRecommendationStatusType {
+	return []GroupingRecommendationStatusType{
+		"Accepted",
+		"Rejected",
+		"PendingDecision",
+	}
+}
+
 type HaArchitecture string
 
 // Enum values for HaArchitecture
@@ -459,6 +533,7 @@ const (
 	RecommendationComplianceStatusBreachedUnattainable RecommendationComplianceStatus = "BreachedUnattainable"
 	RecommendationComplianceStatusBreachedCanMeet      RecommendationComplianceStatus = "BreachedCanMeet"
 	RecommendationComplianceStatusMetCanImprove        RecommendationComplianceStatus = "MetCanImprove"
+	RecommendationComplianceStatusMissingPolicy        RecommendationComplianceStatus = "MissingPolicy"
 )
 
 // Values returns all known values for RecommendationComplianceStatus. Note that
@@ -471,6 +546,7 @@ func (RecommendationComplianceStatus) Values() []RecommendationComplianceStatus 
 		"BreachedUnattainable",
 		"BreachedCanMeet",
 		"MetCanImprove",
+		"MissingPolicy",
 	}
 }
 
@@ -678,6 +754,30 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceResolutionStatusType) Values() []ResourceResolutionStatusType {
 	return []ResourceResolutionStatusType{
+		"Pending",
+		"InProgress",
+		"Failed",
+		"Success",
+	}
+}
+
+type ResourcesGroupingRecGenStatusType string
+
+// Enum values for ResourcesGroupingRecGenStatusType
+const (
+	ResourcesGroupingRecGenStatusTypePending    ResourcesGroupingRecGenStatusType = "Pending"
+	ResourcesGroupingRecGenStatusTypeInProgress ResourcesGroupingRecGenStatusType = "InProgress"
+	ResourcesGroupingRecGenStatusTypeFailed     ResourcesGroupingRecGenStatusType = "Failed"
+	ResourcesGroupingRecGenStatusTypeSuccess    ResourcesGroupingRecGenStatusType = "Success"
+)
+
+// Values returns all known values for ResourcesGroupingRecGenStatusType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourcesGroupingRecGenStatusType) Values() []ResourcesGroupingRecGenStatusType {
+	return []ResourcesGroupingRecGenStatusType{
 		"Pending",
 		"InProgress",
 		"Failed",

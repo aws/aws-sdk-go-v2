@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptResourceGroupingRecommendations struct {
+}
+
+func (*validateOpAcceptResourceGroupingRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptResourceGroupingRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptResourceGroupingRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptResourceGroupingRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddDraftAppVersionResourceMappings struct {
 }
 
@@ -470,6 +490,26 @@ func (m *validateOpDescribeResiliencyPolicy) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeResourceGroupingRecommendationTask struct {
+}
+
+func (*validateOpDescribeResourceGroupingRecommendationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeResourceGroupingRecommendationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeResourceGroupingRecommendationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeResourceGroupingRecommendationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportResourcesToDraftAppVersion struct {
 }
 
@@ -810,6 +850,26 @@ func (m *validateOpPutDraftAppVersionTemplate) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRejectResourceGroupingRecommendations struct {
+}
+
+func (*validateOpRejectResourceGroupingRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectResourceGroupingRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectResourceGroupingRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectResourceGroupingRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemoveDraftAppVersionResourceMappings struct {
 }
 
@@ -865,6 +925,26 @@ func (m *validateOpStartAppAssessment) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartAppAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartResourceGroupingRecommendationTask struct {
+}
+
+func (*validateOpStartResourceGroupingRecommendationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartResourceGroupingRecommendationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartResourceGroupingRecommendationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartResourceGroupingRecommendationTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1090,10 @@ func (m *validateOpUpdateResiliencyPolicy) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptResourceGroupingRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptResourceGroupingRecommendations{}, middleware.After)
+}
+
 func addOpAddDraftAppVersionResourceMappingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddDraftAppVersionResourceMappings{}, middleware.After)
 }
@@ -1102,6 +1186,10 @@ func addOpDescribeResiliencyPolicyValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDescribeResiliencyPolicy{}, middleware.After)
 }
 
+func addOpDescribeResourceGroupingRecommendationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeResourceGroupingRecommendationTask{}, middleware.After)
+}
+
 func addOpImportResourcesToDraftAppVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportResourcesToDraftAppVersion{}, middleware.After)
 }
@@ -1170,6 +1258,10 @@ func addOpPutDraftAppVersionTemplateValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpPutDraftAppVersionTemplate{}, middleware.After)
 }
 
+func addOpRejectResourceGroupingRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectResourceGroupingRecommendations{}, middleware.After)
+}
+
 func addOpRemoveDraftAppVersionResourceMappingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveDraftAppVersionResourceMappings{}, middleware.After)
 }
@@ -1180,6 +1272,10 @@ func addOpResolveAppVersionResourcesValidationMiddleware(stack *middleware.Stack
 
 func addOpStartAppAssessmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAppAssessment{}, middleware.After)
+}
+
+func addOpStartResourceGroupingRecommendationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartResourceGroupingRecommendationTask{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1208,6 +1304,38 @@ func addOpUpdateAppVersionResourceValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateResiliencyPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResiliencyPolicy{}, middleware.After)
+}
+
+func validateAcceptGroupingRecommendationEntries(v []types.AcceptGroupingRecommendationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptGroupingRecommendationEntries"}
+	for i := range v {
+		if err := validateAcceptGroupingRecommendationEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcceptGroupingRecommendationEntry(v *types.AcceptGroupingRecommendationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptGroupingRecommendationEntry"}
+	if v.GroupingRecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupingRecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDisruptionPolicy(v map[string]types.FailurePolicy) error {
@@ -1376,6 +1504,38 @@ func validatePhysicalResourceId(v *types.PhysicalResourceId) error {
 	}
 }
 
+func validateRejectGroupingRecommendationEntries(v []types.RejectGroupingRecommendationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectGroupingRecommendationEntries"}
+	for i := range v {
+		if err := validateRejectGroupingRecommendationEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRejectGroupingRecommendationEntry(v *types.RejectGroupingRecommendationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectGroupingRecommendationEntry"}
+	if v.GroupingRecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupingRecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceMapping(v *types.ResourceMapping) error {
 	if v == nil {
 		return nil
@@ -1480,6 +1640,28 @@ func validateUpdateRecommendationStatusRequestEntry(v *types.UpdateRecommendatio
 	}
 	if v.Excluded == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Excluded"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptResourceGroupingRecommendationsInput(v *AcceptResourceGroupingRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptResourceGroupingRecommendationsInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateAcceptGroupingRecommendationEntries(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1933,6 +2115,21 @@ func validateOpDescribeResiliencyPolicyInput(v *DescribeResiliencyPolicyInput) e
 	}
 }
 
+func validateOpDescribeResourceGroupingRecommendationTaskInput(v *DescribeResourceGroupingRecommendationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeResourceGroupingRecommendationTaskInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportResourcesToDraftAppVersionInput(v *ImportResourcesToDraftAppVersionInput) error {
 	if v == nil {
 		return nil
@@ -2216,6 +2413,28 @@ func validateOpPutDraftAppVersionTemplateInput(v *PutDraftAppVersionTemplateInpu
 	}
 }
 
+func validateOpRejectResourceGroupingRecommendationsInput(v *RejectResourceGroupingRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectResourceGroupingRecommendationsInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateRejectGroupingRecommendationEntries(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRemoveDraftAppVersionResourceMappingsInput(v *RemoveDraftAppVersionResourceMappingsInput) error {
 	if v == nil {
 		return nil
@@ -2262,6 +2481,21 @@ func validateOpStartAppAssessmentInput(v *StartAppAssessmentInput) error {
 	}
 	if v.AssessmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartResourceGroupingRecommendationTaskInput(v *StartResourceGroupingRecommendationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartResourceGroupingRecommendationTaskInput"}
+	if v.AppArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

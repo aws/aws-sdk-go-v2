@@ -1,0 +1,8 @@
+{
+    "id": "5ab39ebc-9359-47fb-967f-08be332124cd",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

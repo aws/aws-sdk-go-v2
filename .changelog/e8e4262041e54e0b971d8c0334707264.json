@@ -1,0 +1,8 @@
+{
+    "id": "e8e42620-41e5-4e0b-971d-8c0334707264",
+    "type": "feature",
+    "description": "updates cloudtrail event source for SDKs",
+    "modules": [
+        "service/ivschat"
+    ]
+}

@@ -62,8 +62,8 @@ type ListAppsInput struct {
 
 	// The application list is sorted based on the values of
 	// lastAppComplianceEvaluationTime field. By default, application list is sorted in
-	// ascending order. To sort the appliation list in descending order, set this field
-	// to True .
+	// ascending order. To sort the application list in descending order, set this
+	// field to True .
 	ReverseOrder *bool
 
 	// Indicates the upper limit of the range that is used to filter the applications
