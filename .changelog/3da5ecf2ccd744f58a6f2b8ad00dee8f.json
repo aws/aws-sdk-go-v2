@@ -1,8 +1,0 @@
-{
-    "id": "3da5ecf2-ccd7-44f5-8a6f-2b8ad00dee8f",
-    "type": "feature",
-    "description": "Customers are presented with the grouping recommendations and can determine if the recommendations are accurate and apply to their case. This feature simplifies onboarding by organizing resources into appropriate AppComponents.",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

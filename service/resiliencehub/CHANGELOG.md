@@ -1,3 +1,7 @@
+# v1.24.0 (2024-08-02)
+
+* **Feature**: Customers are presented with the grouping recommendations and can determine if the recommendations are accurate and apply to their case. This feature simplifies onboarding by organizing resources into appropriate AppComponents.
+
 # v1.23.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

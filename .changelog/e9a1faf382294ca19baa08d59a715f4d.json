@@ -1,8 +1,0 @@
-{
-    "id": "e9a1faf3-8229-4ca1-9baa-08d59a715f4d",
-    "type": "bugfix",
-    "description": "Add assurance tests for auth scheme selection logic.",
-    "modules": [
-        "service/s3"
-    ]
-}
