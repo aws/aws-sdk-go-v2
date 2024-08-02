@@ -18147,7 +18147,20 @@
                     "outputToken": "NextToken",
                     "items": "DocumentIdentifiers",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListDocumentsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ssm#ListDocumentsRequest": {

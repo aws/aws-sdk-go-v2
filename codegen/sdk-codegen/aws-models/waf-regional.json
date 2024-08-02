@@ -7937,6 +7937,21 @@
                             ]
                         }
                     }
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListRulesSuccess",
+                        "params": {
+                            "Limit": 20
+                        },
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
                 ]
             }
         },

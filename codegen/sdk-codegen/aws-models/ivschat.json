@@ -78,7 +78,7 @@
                     "sdkId": "ivschat",
                     "arnNamespace": "ivschat",
                     "cloudFormationName": "IVSChat",
-                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE"
+                    "cloudTrailEventSource": "ivschat.amazonaws.com"
                 },
                 "aws.auth#sigv4": {
                     "name": "ivschat"

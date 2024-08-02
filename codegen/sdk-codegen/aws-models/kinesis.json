@@ -670,6 +670,21 @@
                         "value": "control"
                     }
                 },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeStreamFailure",
+                        "params": {
+                            "StreamName": "bogus-stream-name"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ],
                 "smithy.waiters#waitable": {
                     "StreamExists": {
                         "acceptors": [
@@ -6069,7 +6084,20 @@
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "pageSize": "Limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListStreamsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.kinesis#ListStreamsInput": {

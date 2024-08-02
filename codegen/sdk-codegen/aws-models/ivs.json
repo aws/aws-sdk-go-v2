@@ -132,7 +132,7 @@
                     "sdkId": "ivs",
                     "arnNamespace": "ivs",
                     "cloudFormationName": "IVS",
-                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE"
+                    "cloudTrailEventSource": "ivs.amazonaws.com"
                 },
                 "aws.auth#sigv4": {
                     "name": "ivs"

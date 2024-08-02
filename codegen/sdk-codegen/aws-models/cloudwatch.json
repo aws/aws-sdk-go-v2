@@ -2594,7 +2594,7 @@
                     "sdkId": "CloudWatch",
                     "arnNamespace": "monitoring",
                     "cloudFormationName": "CloudWatch",
-                    "cloudTrailEventSource": "cloudwatch.amazonaws.com",
+                    "cloudTrailEventSource": "monitoring.amazonaws.com",
                     "docId": "monitoring-2010-08-01",
                     "endpointPrefix": "monitoring"
                 },
@@ -4360,7 +4360,22 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListMetricsSuccess",
+                        "params": {
+                            "Namespace": "AWS/EC2"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudwatch#ListMetricsInput": {

@@ -120,7 +120,7 @@
                     "sdkId": "IVS RealTime",
                     "arnNamespace": "ivs",
                     "cloudFormationName": "IVS",
-                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE",
+                    "cloudTrailEventSource": "ivs.amazonaws.com",
                     "endpointPrefix": "ivsrealtime"
                 },
                 "aws.auth#sigv4": {

@@ -3555,20 +3555,6 @@
                 "smithy.api#documentation": "<p>Disables an account setting for a specified user, role, or the root user for an\n\t\t\taccount.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To delete your account setting",
-                        "documentation": "This example deletes the account setting for your user for the specified resource type.",
-                        "input": {
-                            "name": "serviceLongArnFormat"
-                        },
-                        "output": {
-                            "setting": {
-                                "name": "serviceLongArnFormat",
-                                "value": "enabled",
-                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
-                            }
-                        }
-                    },
-                    {
                         "title": "To delete the account settings for a specific IAM user or IAM role",
                         "documentation": "This example deletes the account setting for a specific IAM user or IAM role for the specified resource type. Only the root user can view or modify the account settings for another user.",
                         "input": {
@@ -3578,6 +3564,20 @@
                         "output": {
                             "setting": {
                                 "name": "containerInstanceLongArnFormat",
+                                "value": "enabled",
+                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To delete your account setting",
+                        "documentation": "This example deletes the account setting for your user for the specified resource type.",
+                        "input": {
+                            "name": "serviceLongArnFormat"
+                        },
+                        "output": {
+                            "setting": {
+                                "name": "serviceLongArnFormat",
                                 "value": "enabled",
                                 "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
                             }
@@ -6679,10 +6679,11 @@
                 "smithy.api#documentation": "<p>Lists the account settings for a specified principal.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To view your effective account settings",
-                        "documentation": "This example displays the effective account settings for your account.",
+                        "title": "To view the effective account settings for a specific IAM user or IAM role",
+                        "documentation": "This example displays the effective account settings for the specified user or role.",
                         "input": {
-                            "effectiveSettings": true
+                            "effectiveSettings": true,
+                            "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
                         },
                         "output": {
                             "settings": [
@@ -6705,11 +6706,10 @@
                         }
                     },
                     {
-                        "title": "To view the effective account settings for a specific IAM user or IAM role",
-                        "documentation": "This example displays the effective account settings for the specified user or role.",
+                        "title": "To view your effective account settings",
+                        "documentation": "This example displays the effective account settings for your account.",
                         "input": {
-                            "effectiveSettings": true,
-                            "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                            "effectiveSettings": true
                         },
                         "output": {
                             "settings": [
@@ -6935,7 +6935,20 @@
                     "outputToken": "nextToken",
                     "items": "clusterArns",
                     "pageSize": "maxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListClustersSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#ListClustersRequest": {
@@ -7358,18 +7371,6 @@
                 "smithy.api#documentation": "<p>Returns a list of task definition families that are registered to your account. This\n\t\t\tlist includes task definition families that no longer have any <code>ACTIVE</code> task\n\t\t\tdefinition revisions.</p>\n         <p>You can filter out task definition families that don't contain any <code>ACTIVE</code>\n\t\t\ttask definition revisions by setting the <code>status</code> parameter to\n\t\t\t\t<code>ACTIVE</code>. You can also filter the results with the\n\t\t\t\t<code>familyPrefix</code> parameter.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To list your registered task definition families",
-                        "documentation": "This example lists all of your registered task definition families.",
-                        "output": {
-                            "families": [
-                                "node-js-app",
-                                "web-timer",
-                                "hpcc",
-                                "hpcc-c4-8xlarge"
-                            ]
-                        }
-                    },
-                    {
                         "title": "To filter your registered task definition families",
                         "documentation": "This example lists the task definition revisions that start with \"hpcc\".",
                         "input": {
@@ -7377,6 +7378,18 @@
                         },
                         "output": {
                             "families": [
+                                "hpcc",
+                                "hpcc-c4-8xlarge"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To list your registered task definition families",
+                        "documentation": "This example lists all of your registered task definition families.",
+                        "output": {
+                            "families": [
+                                "node-js-app",
+                                "web-timer",
                                 "hpcc",
                                 "hpcc-c4-8xlarge"
                             ]
@@ -7466,12 +7479,13 @@
                 "smithy.api#documentation": "<p>Returns a list of task definitions that are registered to your account. You can filter\n\t\t\tthe results by family name with the <code>familyPrefix</code> parameter or by status\n\t\t\twith the <code>status</code> parameter.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To list your registered task definitions",
-                        "documentation": "This example lists all of your registered task definitions.",
+                        "title": "To list the registered task definitions in a family",
+                        "documentation": "This example lists the task definition revisions of a specified family.",
+                        "input": {
+                            "familyPrefix": "wordpress"
+                        },
                         "output": {
                             "taskDefinitionArns": [
-                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep300:2",
-                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5",
@@ -7480,13 +7494,12 @@
                         }
                     },
                     {
-                        "title": "To list the registered task definitions in a family",
-                        "documentation": "This example lists the task definition revisions of a specified family.",
-                        "input": {
-                            "familyPrefix": "wordpress"
-                        },
+                        "title": "To list your registered task definitions",
+                        "documentation": "This example lists all of your registered task definitions.",
                         "output": {
                             "taskDefinitionArns": [
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep300:2",
+                                "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4",
                                 "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5",
@@ -7590,19 +7603,6 @@
                 "smithy.api#documentation": "<p>Returns a list of tasks. You can filter the results by cluster, task definition\n\t\t\tfamily, container instance, launch type, what IAM principal started the task, or by\n\t\t\tthe desired status of the task.</p>\n         <p>Recently stopped tasks might appear in the returned results. </p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To list the tasks in a cluster",
-                        "documentation": "This example lists all of the tasks in a cluster.",
-                        "input": {
-                            "cluster": "default"
-                        },
-                        "output": {
-                            "taskArns": [
-                                "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84",
-                                "arn:aws:ecs:us-east-1:012345678910:task/default/6b809ef6-c67e-4467-921f-ee261c15a0a1"
-                            ]
-                        }
-                    },
-                    {
                         "title": "To list the tasks on a particular container instance",
                         "documentation": "This example lists the tasks of a specified container instance. Specifying a ``containerInstance`` value limits  the  results  to  tasks  that belong to that container instance.",
                         "input": {
@@ -7612,6 +7612,19 @@
                         "output": {
                             "taskArns": [
                                 "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To list the tasks in a cluster",
+                        "documentation": "This example lists all of the tasks in a cluster.",
+                        "input": {
+                            "cluster": "default"
+                        },
+                        "output": {
+                            "taskArns": [
+                                "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84",
+                                "arn:aws:ecs:us-east-1:012345678910:task/default/6b809ef6-c67e-4467-921f-ee261c15a0a1"
                             ]
                         }
                     }
@@ -8680,21 +8693,6 @@
                 "smithy.api#documentation": "<p>Modifies an account setting. Account settings are set on a per-Region basis.</p>\n         <p>If you change the root user account setting, the default settings are reset for users and\n\t\t\troles that do not have specified individual account settings. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html\">Account\n\t\t\t\tSettings</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To modify your account settings",
-                        "documentation": "This example modifies your account settings to opt in to the new ARN and resource ID format for Amazon ECS services. If you’re using this command as the root user, then changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.",
-                        "input": {
-                            "name": "serviceLongArnFormat",
-                            "value": "enabled"
-                        },
-                        "output": {
-                            "setting": {
-                                "name": "serviceLongArnFormat",
-                                "value": "enabled",
-                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
-                            }
-                        }
-                    },
-                    {
                         "title": "To modify the account settings for a specific IAM user or IAM role",
                         "documentation": "This example modifies the account setting for a specific IAM user or IAM role to opt in to the new ARN and resource ID format for Amazon ECS container instances. If you’re using this command as the root user, then changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.",
                         "input": {
@@ -8705,6 +8703,21 @@
                         "output": {
                             "setting": {
                                 "name": "containerInstanceLongArnFormat",
+                                "value": "enabled",
+                                "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To modify your account settings",
+                        "documentation": "This example modifies your account settings to opt in to the new ARN and resource ID format for Amazon ECS services. If you’re using this command as the root user, then changes apply to the entire AWS account, unless an IAM user or role explicitly overrides these settings for themselves.",
+                        "input": {
+                            "name": "serviceLongArnFormat",
+                            "value": "enabled"
+                        },
+                        "output": {
+                            "setting": {
+                                "name": "serviceLongArnFormat",
                                 "value": "enabled",
                                 "principalArn": "arn:aws:iam::<aws_account_id>:user/principalName"
                             }
@@ -12906,20 +12919,20 @@
                 "smithy.api#documentation": "<p>Modifies the parameters of a service.</p>\n         <note>\n            <p>On March 21, 2024, a change was made to resolve the task definition revision before authorization. When a task definition revision is not specified, authorization will occur using the latest revision of a task definition.</p>\n         </note>\n         <p>For services using the rolling update (<code>ECS</code>) you can update the desired\n\t\t\tcount, deployment configuration, network configuration, load balancers, service\n\t\t\tregistries, enable ECS managed tags option, propagate tags option, task placement\n\t\t\tconstraints and strategies, and task definition. When you update any of these\n\t\t\tparameters, Amazon ECS starts new tasks with the new configuration. </p>\n         <p>You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume when starting or\n\t\t\trunning a task, or when creating or updating a service. For more infomation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types\">Amazon EBS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. You can update\n\t\t\tyour volume configurations and trigger a new deployment.\n\t\t\t\t<code>volumeConfigurations</code> is only supported for REPLICA service and not\n\t\t\tDAEMON service. If you leave <code>volumeConfigurations</code>\n            <code>null</code>, it doesn't trigger a new deployment. For more infomation on volumes,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types\">Amazon EBS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>For services using the blue/green (<code>CODE_DEPLOY</code>) deployment controller,\n\t\t\tonly the desired count, deployment configuration, health check grace period, task\n\t\t\tplacement constraints and strategies, enable ECS managed tags option, and propagate tags\n\t\t\tcan be updated using this API. If the network configuration, platform version, task\n\t\t\tdefinition, or load balancer need to be updated, create a new CodeDeploy deployment. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html\">CreateDeployment</a> in the <i>CodeDeploy API Reference</i>.</p>\n         <p>For services using an external deployment controller, you can update only the desired\n\t\t\tcount, task placement constraints and strategies, health check grace period, enable ECS\n\t\t\tmanaged tags option, and propagate tags option, using this API. If the launch type, load\n\t\t\tbalancer, network configuration, platform version, or task definition need to be\n\t\t\tupdated, create a new task set For more information, see <a>CreateTaskSet</a>.</p>\n         <p>You can add to or subtract from the number of instantiations of a task definition in a\n\t\t\tservice by specifying the cluster that the service is running in and a new\n\t\t\t\t<code>desiredCount</code> parameter.</p>\n         <p>You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume when starting or\n\t\t\trunning a task, or when creating or updating a service. For more infomation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types\">Amazon EBS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>If you have updated the container image of your application, you can create a new task\n\t\t\tdefinition with that image and deploy it to your service. The service scheduler uses the\n\t\t\tminimum healthy percent and maximum percent parameters (in the service's deployment\n\t\t\tconfiguration) to determine the deployment strategy.</p>\n         <note>\n            <p>If your updated Docker image uses the same tag as what is in the existing task\n\t\t\t\tdefinition for your service (for example, <code>my_image:latest</code>), you don't\n\t\t\t\tneed to create a new revision of your task definition. You can update the service\n\t\t\t\tusing the <code>forceNewDeployment</code> option. The new tasks launched by the\n\t\t\t\tdeployment pull the current image/tag combination from your repository when they\n\t\t\t\tstart.</p>\n         </note>\n         <p>You can also update the deployment configuration of a service. When a deployment is\n\t\t\ttriggered by updating the task definition of a service, the service scheduler uses the\n\t\t\tdeployment configuration parameters, <code>minimumHealthyPercent</code> and\n\t\t\t\t<code>maximumPercent</code>, to determine the deployment strategy.</p>\n         <ul>\n            <li>\n               <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore\n\t\t\t\t\t\t<code>desiredCount</code> temporarily during a deployment. For example, if\n\t\t\t\t\t\t<code>desiredCount</code> is four tasks, a minimum of 50% allows the\n\t\t\t\t\tscheduler to stop two existing tasks before starting two new tasks. Tasks for\n\t\t\t\t\tservices that don't use a load balancer are considered healthy if they're in the\n\t\t\t\t\t\t<code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported\n\t\t\t\t\tas healthy by the load balancer.</p>\n            </li>\n            <li>\n               <p>The <code>maximumPercent</code> parameter represents an upper limit on the\n\t\t\t\t\tnumber of running tasks during a deployment. You can use it to define the\n\t\t\t\t\tdeployment batch size. For example, if <code>desiredCount</code> is four tasks,\n\t\t\t\t\ta maximum of 200% starts four new tasks before stopping the four older tasks\n\t\t\t\t\t(provided that the cluster resources required to do this are available).</p>\n            </li>\n         </ul>\n         <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent\n\t\t\tof <code>docker stop</code> is issued to the containers running in the task. This\n\t\t\tresults in a <code>SIGTERM</code> and a 30-second timeout. After this,\n\t\t\t\t<code>SIGKILL</code> is sent and the containers are forcibly stopped. If the\n\t\t\tcontainer handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from\n\t\t\treceiving it, no <code>SIGKILL</code> is sent.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement in your\n\t\t\tcluster with the following logic.</p>\n         <ul>\n            <li>\n               <p>Determine which of the container instances in your cluster can support your\n\t\t\t\t\tservice's task definition. For example, they have the required CPU, memory,\n\t\t\t\t\tports, and container instance attributes.</p>\n            </li>\n            <li>\n               <p>By default, the service scheduler attempts to balance tasks across\n\t\t\t\t\tAvailability Zones in this manner even though you can choose a different\n\t\t\t\t\tplacement strategy.</p>\n               <ul>\n                  <li>\n                     <p>Sort the valid container instances by the fewest number of running\n\t\t\t\t\t\t\ttasks for this service in the same Availability Zone as the instance.\n\t\t\t\t\t\t\tFor example, if zone A has one running service task and zones B and C\n\t\t\t\t\t\t\teach have zero, valid container instances in either zone B or C are\n\t\t\t\t\t\t\tconsidered optimal for placement.</p>\n                  </li>\n                  <li>\n                     <p>Place the new service task on a valid container instance in an optimal\n\t\t\t\t\t\t\tAvailability Zone (based on the previous steps), favoring container\n\t\t\t\t\t\t\tinstances with the fewest number of running tasks for this\n\t\t\t\t\t\t\tservice.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>When the service scheduler stops running tasks, it attempts to maintain balance across\n\t\t\tthe Availability Zones in your cluster using the following logic: </p>\n         <ul>\n            <li>\n               <p>Sort the container instances by the largest number of running tasks for this\n\t\t\t\t\tservice in the same Availability Zone as the instance. For example, if zone A\n\t\t\t\t\thas one running service task and zones B and C each have two, container\n\t\t\t\t\tinstances in either zone B or C are considered optimal for termination.</p>\n            </li>\n            <li>\n               <p>Stop the task on a container instance in an optimal Availability Zone (based\n\t\t\t\t\ton the previous steps), favoring container instances with the largest number of\n\t\t\t\t\trunning tasks for this service.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You must have a service-linked role when you update any of the following service\n\t\t\t\tproperties:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>loadBalancers</code>,</p>\n               </li>\n               <li>\n                  <p>\n                     <code>serviceRegistries</code>\n                  </p>\n               </li>\n            </ul>\n            <p>For more information about the role see the <code>CreateService</code> request\n\t\t\t\tparameter <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role\">\n                  <code>role</code>\n               </a>. </p>\n         </note>",
                 "smithy.api#examples": [
                     {
-                        "title": "To change the task definition used in a service",
-                        "documentation": "This example updates the my-http-service service to use the amazon-ecs-sample task definition.",
-                        "input": {
-                            "service": "my-http-service",
-                            "taskDefinition": "amazon-ecs-sample"
-                        },
-                        "output": {}
-                    },
-                    {
                         "title": "To change the number of tasks in a service",
                         "documentation": "This example updates the desired count of the my-http-service service to 10.",
                         "input": {
                             "service": "my-http-service",
                             "desiredCount": 10
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "To change the task definition used in a service",
+                        "documentation": "This example updates the my-http-service service to use the amazon-ecs-sample task definition.",
+                        "input": {
+                            "service": "my-http-service",
+                            "taskDefinition": "amazon-ecs-sample"
                         },
                         "output": {}
                     }
@@ -13183,6 +13196,26 @@
                 "smithy.api#documentation": "<p>Updates the protection status of a task. You can set <code>protectionEnabled</code> to\n\t\t\t\t<code>true</code> to protect your task from termination during scale-in events from\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html\">Service\n\t\t\t\tAutoscaling</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">deployments</a>.</p>\n         <p>Task-protection, by default, expires after 2 hours at which point Amazon ECS clears the\n\t\t\t\t<code>protectionEnabled</code> property making the task eligible for termination by\n\t\t\ta subsequent scale-in event.</p>\n         <p>You can specify a custom expiration period for task protection from 1 minute to up to\n\t\t\t2,880 minutes (48 hours). To specify the custom expiration period, set the\n\t\t\t\t<code>expiresInMinutes</code> property. The <code>expiresInMinutes</code> property\n\t\t\tis always reset when you invoke this operation for a task that already has\n\t\t\t\t<code>protectionEnabled</code> set to <code>true</code>. You can keep extending the\n\t\t\tprotection expiration period of a task by invoking this operation repeatedly.</p>\n         <p>To learn more about Amazon ECS task protection, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html\">Task scale-in\n\t\t\t\tprotection</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>\n         <note>\n            <p>This operation is only supported for tasks belonging to an Amazon ECS service. Invoking\n\t\t\t\tthis operation for a standalone task will result in an <code>TASK_NOT_VALID</code>\n\t\t\t\tfailure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html\">API failure\n\t\t\t\t\treasons</a>.</p>\n         </note>\n         <important>\n            <p>If you prefer to set task protection from within the container, we recommend using\n\t\t\t\tthe <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html\">Task scale-in protection endpoint</a>.</p>\n         </important>",
                 "smithy.api#examples": [
                     {
+                        "title": "To remove task scale-in protection",
+                        "documentation": "This example removes scale-in protection for a task.",
+                        "input": {
+                            "cluster": "test-task-protection",
+                            "tasks": [
+                                "b8b1cf532d0e46ba8d44a40d1de16772"
+                            ],
+                            "protectionEnabled": false
+                        },
+                        "output": {
+                            "protectedTasks": [
+                                {
+                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
+                                    "protectionEnabled": false
+                                }
+                            ],
+                            "failures": []
+                        }
+                    },
+                    {
                         "title": "To set task scale-in protection for a task for 60 minutes",
                         "documentation": "This example enables scale-in protection for a task for 60 minutes.",
                         "input": {
@@ -13220,26 +13253,6 @@
                                     "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
                                     "protectionEnabled": true,
                                     "expirationDate": "2022-11-02T06:56:32.553Z"
-                                }
-                            ],
-                            "failures": []
-                        }
-                    },
-                    {
-                        "title": "To remove task scale-in protection",
-                        "documentation": "This example removes scale-in protection for a task.",
-                        "input": {
-                            "cluster": "test-task-protection",
-                            "tasks": [
-                                "b8b1cf532d0e46ba8d44a40d1de16772"
-                            ],
-                            "protectionEnabled": false
-                        },
-                        "output": {
-                            "protectedTasks": [
-                                {
-                                    "taskArn": "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772",
-                                    "protectionEnabled": false
                                 }
                             ],
                             "failures": []

@@ -15670,7 +15670,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the status of a migration operation.</p>"
+                "smithy.api#documentation": "<p>Retrieves the status of a migration operation.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetCatalogImportStatusSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.glue#GetCatalogImportStatusRequest": {
