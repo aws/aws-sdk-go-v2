@@ -420,6 +420,35 @@ func TestMarshalOmitEmpty(t *testing.T) {
 	}
 }
 
+type customNullMarshaler struct {}
+
+func (m customNullMarshaler) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
+	return &types.AttributeValueMemberNULL{Value: true}, nil
+}
+
+type testOmitEmptyCustom struct {
+	CustomNullOmit customNullMarshaler `dynamodbav:",omitempty"`
+	CustomNullPresent customNullMarshaler
+}
+
+func TestMarshalOmitEmptyCustom(t *testing.T) {
+	expect := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"CustomNullPresent": &types.AttributeValueMemberNULL{Value: true},
+		},
+	}
+
+	m := testOmitEmptyCustom{}
+
+	actual, err := Marshal(m)
+	if err != nil {
+		t.Errorf("expect nil, got %v", err)
+	}
+	if e, a := expect, actual; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
 func TestEncodeEmbeddedPointerStruct(t *testing.T) {
 	type B struct {
 		Bint int
