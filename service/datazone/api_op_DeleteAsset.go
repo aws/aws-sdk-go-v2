@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delets an asset in Amazon DataZone.
+// Deletes an asset in Amazon DataZone.
 func (c *Client) DeleteAsset(ctx context.Context, params *DeleteAssetInput, optFns ...func(*Options)) (*DeleteAssetOutput, error) {
 	if params == nil {
 		params = &DeleteAssetInput{}

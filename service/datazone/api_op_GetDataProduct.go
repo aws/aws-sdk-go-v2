@@ -12,90 +12,95 @@ import (
 	"time"
 )
 
-// Deletes and subscription grant in Amazon DataZone.
-func (c *Client) DeleteSubscriptionGrant(ctx context.Context, params *DeleteSubscriptionGrantInput, optFns ...func(*Options)) (*DeleteSubscriptionGrantOutput, error) {
+// Gets the data product.
+func (c *Client) GetDataProduct(ctx context.Context, params *GetDataProductInput, optFns ...func(*Options)) (*GetDataProductOutput, error) {
 	if params == nil {
-		params = &DeleteSubscriptionGrantInput{}
+		params = &GetDataProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSubscriptionGrant", params, optFns, c.addOperationDeleteSubscriptionGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataProduct", params, optFns, c.addOperationGetDataProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteSubscriptionGrantOutput)
+	out := result.(*GetDataProductOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteSubscriptionGrantInput struct {
+type GetDataProductInput struct {
 
-	// The ID of the Amazon DataZone domain where the subscription grant is deleted.
+	// The ID of the domain where the data product lives.
 	//
 	// This member is required.
 	DomainIdentifier *string
 
-	// The ID of the subscription grant that is deleted.
+	// The ID of the data product.
 	//
 	// This member is required.
 	Identifier *string
 
+	// The revision of the data product.
+	Revision *string
+
 	noSmithyDocumentSerde
 }
 
-type DeleteSubscriptionGrantOutput struct {
+type GetDataProductOutput struct {
 
-	// The timestamp of when the subscription grant that is deleted was created.
-	//
-	// This member is required.
-	CreatedAt *time.Time
-
-	// The Amazon DataZone user who created the subscription grant that is deleted.
-	//
-	// This member is required.
-	CreatedBy *string
-
-	// The ID of the Amazon DataZone domain in which the subscription grant is deleted.
+	// The ID of the domain where the data product lives.
 	//
 	// This member is required.
 	DomainId *string
 
-	// The entity to which the subscription is deleted.
-	//
-	// This member is required.
-	GrantedEntity types.GrantedEntity
-
-	// The ID of the subscription grant that is deleted.
+	// The ID of the data product.
 	//
 	// This member is required.
 	Id *string
 
-	// The status of the subscription grant that is deleted.
+	// The name of the data product.
 	//
 	// This member is required.
-	Status types.SubscriptionGrantOverallStatus
+	Name *string
 
-	// The ID of the subscription target associated with the subscription grant that
-	// is deleted.
+	// The ID of the owning project of the data product.
 	//
 	// This member is required.
-	SubscriptionTargetId *string
+	OwningProjectId *string
 
-	// The timestamp of when the subscription grant that is deleted was updated.
+	// The revision of the data product.
 	//
 	// This member is required.
-	UpdatedAt *time.Time
+	Revision *string
 
-	// The assets for which the subsctiption grant that is deleted gave access.
-	Assets []types.SubscribedAsset
-
-	// The identifier of the subsctiption whose subscription grant is to be deleted.
+	// The status of the data product.
 	//
-	// Deprecated: Multiple subscriptions can exist for a single grant
-	SubscriptionId *string
+	// This member is required.
+	Status types.DataProductStatus
 
-	// The Amazon DataZone user who updated the subscription grant that is deleted.
-	UpdatedBy *string
+	// The timestamp at which the data product is created.
+	CreatedAt *time.Time
+
+	// The user who created the data product.
+	CreatedBy *string
+
+	// The description of the data product.
+	Description *string
+
+	// The timestamp at which the first revision of the data product is created.
+	FirstRevisionCreatedAt *time.Time
+
+	// The user who created the first revision of the data product.
+	FirstRevisionCreatedBy *string
+
+	// The metadata forms of the data product.
+	FormsOutput []types.FormOutput
+
+	// The glossary terms of the data product.
+	GlossaryTerms []string
+
+	// The data assets of the data product.
+	Items []types.DataProductItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -103,19 +108,19 @@ type DeleteSubscriptionGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteSubscriptionGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSubscriptionGrant{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataProduct{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSubscriptionGrant{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataProduct{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSubscriptionGrant"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataProduct"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -164,10 +169,10 @@ func (c *Client) addOperationDeleteSubscriptionGrantMiddlewares(stack *middlewar
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeleteSubscriptionGrantValidationMiddleware(stack); err != nil {
+	if err = addOpGetDataProductValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSubscriptionGrant(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataProduct(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -188,10 +193,10 @@ func (c *Client) addOperationDeleteSubscriptionGrantMiddlewares(stack *middlewar
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteSubscriptionGrant(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetDataProduct(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteSubscriptionGrant",
+		OperationName: "GetDataProduct",
 	}
 }

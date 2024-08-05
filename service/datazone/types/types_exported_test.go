@@ -159,6 +159,9 @@ func ExampleListingItem_outputUsage() {
 	case *types.ListingItemMemberAssetListing:
 		_ = v.Value // Value is types.AssetListing
 
+	case *types.ListingItemMemberDataProductListing:
+		_ = v.Value // Value is types.DataProductListing
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -169,6 +172,7 @@ func ExampleListingItem_outputUsage() {
 }
 
 var _ *types.AssetListing
+var _ *types.DataProductListing
 
 func ExampleMember_outputUsage() {
 	var union types.Member
@@ -383,6 +387,9 @@ func ExampleSearchInventoryResultItem_outputUsage() {
 	case *types.SearchInventoryResultItemMemberAssetItem:
 		_ = v.Value // Value is types.AssetItem
 
+	case *types.SearchInventoryResultItemMemberDataProductItem:
+		_ = v.Value // Value is types.DataProductResultItem
+
 	case *types.SearchInventoryResultItemMemberGlossaryItem:
 		_ = v.Value // Value is types.GlossaryItem
 
@@ -399,6 +406,7 @@ func ExampleSearchInventoryResultItem_outputUsage() {
 }
 
 var _ *types.GlossaryItem
+var _ *types.DataProductResultItem
 var _ *types.AssetItem
 var _ *types.GlossaryTermItem
 
@@ -409,6 +417,9 @@ func ExampleSearchResultItem_outputUsage() {
 	case *types.SearchResultItemMemberAssetListing:
 		_ = v.Value // Value is types.AssetListingItem
 
+	case *types.SearchResultItemMemberDataProductListing:
+		_ = v.Value // Value is types.DataProductListingItem
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -418,6 +429,7 @@ func ExampleSearchResultItem_outputUsage() {
 	}
 }
 
+var _ *types.DataProductListingItem
 var _ *types.AssetListingItem
 
 func ExampleSearchTypesResultItem_outputUsage() {
@@ -475,6 +487,9 @@ func ExampleSubscribedListingItem_outputUsage() {
 	case *types.SubscribedListingItemMemberAssetListing:
 		_ = v.Value // Value is types.SubscribedAssetListing
 
+	case *types.SubscribedListingItemMemberProductListing:
+		_ = v.Value // Value is types.SubscribedProductListing
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -485,6 +500,7 @@ func ExampleSubscribedListingItem_outputUsage() {
 }
 
 var _ *types.SubscribedAssetListing
+var _ *types.SubscribedProductListing
 
 func ExampleSubscribedPrincipal_outputUsage() {
 	var union types.SubscribedPrincipal

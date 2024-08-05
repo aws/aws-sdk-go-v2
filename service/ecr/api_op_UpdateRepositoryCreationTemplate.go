@@ -47,7 +47,10 @@ type UpdateRepositoryCreationTemplateInput struct {
 	AppliedFor []types.RCTAppliedFor
 
 	// The ARN of the role to be assumed by Amazon ECR. This role must be in the same
-	// account as the registry that you are configuring.
+	// account as the registry that you are configuring. Amazon ECR will assume your
+	// supplied role when the customRoleArn is specified. When this field isn't
+	// specified, Amazon ECR will use the service-linked role for the repository
+	// creation template.
 	CustomRoleArn *string
 
 	// A description for the repository creation template.

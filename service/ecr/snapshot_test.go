@@ -314,6 +314,18 @@ func TestCheckSnapshot_DescribeRepositoryCreationTemplates(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccountSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAuthorizationToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAuthorizationToken(context.Background(), nil, func(o *Options) {
@@ -427,6 +439,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -877,6 +901,18 @@ func TestUpdateSnapshot_DescribeRepositoryCreationTemplates(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAccountSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAuthorizationToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAuthorizationToken(context.Background(), nil, func(o *Options) {
@@ -990,6 +1026,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

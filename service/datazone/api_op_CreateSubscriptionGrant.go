@@ -106,6 +106,8 @@ type CreateSubscriptionGrantOutput struct {
 	Assets []types.SubscribedAsset
 
 	// The identifier of the subscription grant.
+	//
+	// Deprecated: Multiple subscriptions can exist for a single grant
 	SubscriptionId *string
 
 	// The Amazon DataZone user who updated the subscription grant.

@@ -61,6 +61,9 @@ type ListSubscriptionsInput struct {
 	SortOrder types.SortOrder
 
 	// The status of the subscriptions that you want to list.
+	//
+	// This is not a required parameter, but if not provided, by default, Amazon
+	// DataZone returns only APPROVED subscriptions.
 	Status types.SubscriptionStatus
 
 	// The identifier of the subscribed listing for the subscriptions that you want to

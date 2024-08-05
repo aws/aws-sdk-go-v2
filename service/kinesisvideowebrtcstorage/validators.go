@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpJoinStorageSessionAsViewer struct {
+}
+
+func (*validateOpJoinStorageSessionAsViewer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpJoinStorageSessionAsViewer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*JoinStorageSessionAsViewerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpJoinStorageSessionAsViewerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpJoinStorageSession struct {
 }
 
@@ -29,8 +49,30 @@ func (m *validateOpJoinStorageSession) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpJoinStorageSessionAsViewerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpJoinStorageSessionAsViewer{}, middleware.After)
+}
+
 func addOpJoinStorageSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpJoinStorageSession{}, middleware.After)
+}
+
+func validateOpJoinStorageSessionAsViewerInput(v *JoinStorageSessionAsViewerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JoinStorageSessionAsViewerInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpJoinStorageSessionInput(v *JoinStorageSessionInput) error {

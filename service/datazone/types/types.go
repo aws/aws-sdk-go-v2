@@ -130,6 +130,21 @@ type AssetFilterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The listing of the asset in a data product.
+type AssetInDataProductListingItem struct {
+
+	// The entity ID of the listing of the asset in a data product.
+	EntityId *string
+
+	// The entity revision of the listing of the asset in a data product.
+	EntityRevision *string
+
+	// The entity type of the listing of the asset in a data product.
+	EntityType *string
+
+	noSmithyDocumentSerde
+}
+
 // A Amazon DataZone inventory asset.
 type AssetItem struct {
 
@@ -503,6 +518,174 @@ type CustomParameter struct {
 
 	// Specifies whether the custom parameter is optional.
 	IsOptional *bool
+
+	noSmithyDocumentSerde
+}
+
+// The data product.
+type DataProductItem struct {
+
+	// The ID of the data product.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The type of the data product.
+	//
+	// This member is required.
+	ItemType DataProductItemType
+
+	// The glossary terms of the data product.
+	GlossaryTerms []string
+
+	// The revision of the data product.
+	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// The data product listing.
+type DataProductListing struct {
+
+	// The timestamp at which the data product listing was created.
+	CreatedAt *time.Time
+
+	// The ID of the data product listing.
+	DataProductId *string
+
+	// The revision of the data product listing.
+	DataProductRevision *string
+
+	// The metadata forms of the data product listing.
+	Forms *string
+
+	// The glossary terms of the data product listing.
+	GlossaryTerms []DetailedGlossaryTerm
+
+	// The data assets of the data product listing.
+	Items []ListingSummary
+
+	// The ID of the owning project of the data product listing.
+	OwningProjectId *string
+
+	noSmithyDocumentSerde
+}
+
+// The asset of the data product listing.
+type DataProductListingItem struct {
+
+	// The additional attributes of the asset of the data product.
+	AdditionalAttributes *DataProductListingItemAdditionalAttributes
+
+	// The timestamp at which the asset of the data product listing was created.
+	CreatedAt *time.Time
+
+	// The description of the asset of the asset of the data product.
+	Description *string
+
+	// The entity ID of the asset of the asset of the data product.
+	EntityId *string
+
+	// The revision of the asset of the asset of the data product.
+	EntityRevision *string
+
+	// The glossary terms of the asset of the asset of the data product.
+	GlossaryTerms []DetailedGlossaryTerm
+
+	// The data of the asset of the data product.
+	Items []ListingSummaryItem
+
+	// The timestamp at which the listing was created.
+	ListingCreatedBy *string
+
+	// The ID of the listing.
+	ListingId *string
+
+	// The revision of the listing.
+	ListingRevision *string
+
+	// The user who updated the listing.
+	ListingUpdatedBy *string
+
+	// The name of the asset of the data product.
+	Name *string
+
+	// The ID of the owning project of the asset of the data product.
+	OwningProjectId *string
+
+	noSmithyDocumentSerde
+}
+
+// The additional attributes of the asset of the data product.
+type DataProductListingItemAdditionalAttributes struct {
+
+	// The metadata forms of the asset of the data product.
+	Forms *string
+
+	noSmithyDocumentSerde
+}
+
+// The data product.
+type DataProductResultItem struct {
+
+	// The ID of the domain where the data product lives.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The ID of the data product.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the data product.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID of the owning project of the data product.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The timestamp at which the data product was created.
+	CreatedAt *time.Time
+
+	// The user who created the data product.
+	CreatedBy *string
+
+	// The description of the data product.
+	Description *string
+
+	// The timestamp at which first revision of the data product was created.
+	FirstRevisionCreatedAt *time.Time
+
+	// The user who created the first revision of the data product.
+	FirstRevisionCreatedBy *string
+
+	// The glossary terms of the data product.
+	GlossaryTerms []string
+
+	noSmithyDocumentSerde
+}
+
+// The data product revision.
+type DataProductRevision struct {
+
+	// The timestamp at which the data product revision was created.
+	CreatedAt *time.Time
+
+	// The user who created the data product revision.
+	CreatedBy *string
+
+	// The ID of the domain where the data product revision lives.
+	DomainId *string
+
+	// The ID of the data product revision.
+	Id *string
+
+	// The data product revision.
+	Revision *string
 
 	noSmithyDocumentSerde
 }
@@ -1793,6 +1976,7 @@ type LineageNodeTypeItem struct {
 // The following types satisfy this interface:
 //
 //	ListingItemMemberAssetListing
+//	ListingItemMemberDataProductListing
 type ListingItem interface {
 	isListingItem()
 }
@@ -1805,6 +1989,15 @@ type ListingItemMemberAssetListing struct {
 }
 
 func (*ListingItemMemberAssetListing) isListingItem() {}
+
+// The data product listing.
+type ListingItemMemberDataProductListing struct {
+	Value DataProductListing
+
+	noSmithyDocumentSerde
+}
+
+func (*ListingItemMemberDataProductListing) isListingItem() {}
 
 // A revision of an asset published in a Amazon DataZone catalog.
 type ListingRevision struct {
@@ -1836,6 +2029,36 @@ type ListingRevisionInput struct {
 	//
 	// This member is required.
 	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the listing of the data product.
+type ListingSummary struct {
+
+	// The glossary terms of the data product.
+	GlossaryTerms []DetailedGlossaryTerm
+
+	// The ID of the data product listing.
+	ListingId *string
+
+	// The revision of the data product listing.
+	ListingRevision *string
+
+	noSmithyDocumentSerde
+}
+
+// The results of the data product summary.
+type ListingSummaryItem struct {
+
+	// The glossary terms of the data product listing.
+	GlossaryTerms []DetailedGlossaryTerm
+
+	// The ID of the data product listing.
+	ListingId *string
+
+	// The revision of the data product listing.
+	ListingRevision *string
 
 	noSmithyDocumentSerde
 }
@@ -2657,6 +2880,7 @@ type SearchInItem struct {
 // The following types satisfy this interface:
 //
 //	SearchInventoryResultItemMemberAssetItem
+//	SearchInventoryResultItemMemberDataProductItem
 //	SearchInventoryResultItemMemberGlossaryItem
 //	SearchInventoryResultItemMemberGlossaryTermItem
 type SearchInventoryResultItem interface {
@@ -2671,6 +2895,15 @@ type SearchInventoryResultItemMemberAssetItem struct {
 }
 
 func (*SearchInventoryResultItemMemberAssetItem) isSearchInventoryResultItem() {}
+
+// The data product.
+type SearchInventoryResultItemMemberDataProductItem struct {
+	Value DataProductResultItem
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchInventoryResultItemMemberDataProductItem) isSearchInventoryResultItem() {}
 
 // The glossary item included in the search results.
 type SearchInventoryResultItemMemberGlossaryItem struct {
@@ -2695,6 +2928,7 @@ func (*SearchInventoryResultItemMemberGlossaryTermItem) isSearchInventoryResultI
 // The following types satisfy this interface:
 //
 //	SearchResultItemMemberAssetListing
+//	SearchResultItemMemberDataProductListing
 type SearchResultItem interface {
 	isSearchResultItem()
 }
@@ -2707,6 +2941,15 @@ type SearchResultItemMemberAssetListing struct {
 }
 
 func (*SearchResultItemMemberAssetListing) isSearchResultItem() {}
+
+// The data product listing.
+type SearchResultItemMemberDataProductListing struct {
+	Value DataProductListingItem
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchResultItemMemberDataProductListing) isSearchResultItem() {}
 
 // The details of the way to sort search results.
 type SearchSort struct {
@@ -2954,6 +3197,7 @@ type SubscribedListingInput struct {
 // The following types satisfy this interface:
 //
 //	SubscribedListingItemMemberAssetListing
+//	SubscribedListingItemMemberProductListing
 type SubscribedListingItem interface {
 	isSubscribedListingItem()
 }
@@ -2966,6 +3210,15 @@ type SubscribedListingItemMemberAssetListing struct {
 }
 
 func (*SubscribedListingItemMemberAssetListing) isSubscribedListingItem() {}
+
+// The data product listing.
+type SubscribedListingItemMemberProductListing struct {
+	Value SubscribedProductListing
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribedListingItemMemberProductListing) isSubscribedListingItem() {}
 
 // The principal that has the subscription grant for the asset.
 //
@@ -3002,6 +3255,30 @@ type SubscribedPrincipalInputMemberProject struct {
 }
 
 func (*SubscribedPrincipalInputMemberProject) isSubscribedPrincipalInput() {}
+
+// The data product listing.
+type SubscribedProductListing struct {
+
+	// The data assets of the data product listing.
+	AssetListings []AssetInDataProductListingItem
+
+	// The description of the data product listing.
+	Description *string
+
+	// The ID of the data product listing.
+	EntityId *string
+
+	// The revision of the data product listing.
+	EntityRevision *string
+
+	// The glossary terms of the data product listing.
+	GlossaryTerms []DetailedGlossaryTerm
+
+	// The name of the data product listing.
+	Name *string
+
+	noSmithyDocumentSerde
+}
 
 // The project that has the subscription grant.
 type SubscribedProject struct {
@@ -3071,7 +3348,9 @@ type SubscriptionGrantSummary struct {
 	// The assets included in the subscription grant.
 	Assets []SubscribedAsset
 
-	// The ID of the subscription grant.
+	// The ID of the subscription.
+	//
+	// Deprecated: Multiple subscriptions can exist for a single grant
 	SubscriptionId *string
 
 	// The Amazon DataZone user who updated the subscription grant.

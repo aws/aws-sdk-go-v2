@@ -1,0 +1,8 @@
+{
+    "id": "36c57771-dbf8-4278-ab29-cbf42293f46e",
+    "type": "documentation",
+    "description": "Added a description for the Dimension db.sql.tokenized_id on the DimensionGroup data type page.",
+    "modules": [
+        "service/pi"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "e21b74c5-2ae8-452b-a405-7f4fca112eff",
+    "type": "feature",
+    "description": "Add JoinStorageSessionAsViewer API",
+    "modules": [
+        "service/kinesisvideowebrtcstorage"
+    ]
+}

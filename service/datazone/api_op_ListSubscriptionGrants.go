@@ -52,6 +52,9 @@ type ListSubscriptionGrantsInput struct {
 	// grants.
 	NextToken *string
 
+	// The ID of the owning project of the subscription grants.
+	OwningProjectId *string
+
 	// Specifies the way of sorting the results of this action.
 	SortBy types.SortKey
 

@@ -330,6 +330,26 @@ func (m *validateOpDescribeImages) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAccountSetting struct {
+}
+
+func (*validateOpGetAccountSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccountSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccountSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccountSettingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDownloadUrlForLayer struct {
 }
 
@@ -465,6 +485,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccountSetting struct {
+}
+
+func (*validateOpPutAccountSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountSettingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -854,6 +894,10 @@ func addOpDescribeImagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeImages{}, middleware.After)
 }
 
+func addOpGetAccountSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccountSetting{}, middleware.After)
+}
+
 func addOpGetDownloadUrlForLayerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDownloadUrlForLayer{}, middleware.After)
 }
@@ -880,6 +924,10 @@ func addOpListImagesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutAccountSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountSetting{}, middleware.After)
 }
 
 func addOpPutImageValidationMiddleware(stack *middleware.Stack) error {
@@ -1502,6 +1550,21 @@ func validateOpDescribeImagesInput(v *DescribeImagesInput) error {
 	}
 }
 
+func validateOpGetAccountSettingInput(v *GetAccountSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccountSettingInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDownloadUrlForLayerInput(v *GetDownloadUrlForLayerInput) error {
 	if v == nil {
 		return nil
@@ -1602,6 +1665,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountSettingInput(v *PutAccountSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountSettingInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

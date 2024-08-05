@@ -113,6 +113,8 @@ type UpdateSubscriptionGrantStatusOutput struct {
 	Assets []types.SubscribedAsset
 
 	// The identifier of the subscription.
+	//
+	// Deprecated: Multiple subscriptions can exist for a single grant
 	SubscriptionId *string
 
 	// The Amazon DataZone user who updated the subscription grant status.

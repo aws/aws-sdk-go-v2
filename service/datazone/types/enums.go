@@ -110,6 +110,44 @@ func (DataAssetActivityStatus) Values() []DataAssetActivityStatus {
 	}
 }
 
+type DataProductItemType string
+
+// Enum values for DataProductItemType
+const (
+	DataProductItemTypeAsset DataProductItemType = "ASSET"
+)
+
+// Values returns all known values for DataProductItemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataProductItemType) Values() []DataProductItemType {
+	return []DataProductItemType{
+		"ASSET",
+	}
+}
+
+type DataProductStatus string
+
+// Enum values for DataProductStatus
+const (
+	DataProductStatusCreated      DataProductStatus = "CREATED"
+	DataProductStatusCreating     DataProductStatus = "CREATING"
+	DataProductStatusCreateFailed DataProductStatus = "CREATE_FAILED"
+)
+
+// Values returns all known values for DataProductStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataProductStatus) Values() []DataProductStatus {
+	return []DataProductStatus{
+		"CREATED",
+		"CREATING",
+		"CREATE_FAILED",
+	}
+}
+
 type DataSourceErrorType string
 
 // Enum values for DataSourceErrorType
@@ -327,7 +365,8 @@ type EntityType string
 
 // Enum values for EntityType
 const (
-	EntityTypeAsset EntityType = "ASSET"
+	EntityTypeAsset       EntityType = "ASSET"
+	EntityTypeDataProduct EntityType = "DATA_PRODUCT"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -337,6 +376,7 @@ const (
 func (EntityType) Values() []EntityType {
 	return []EntityType{
 		"ASSET",
+		"DATA_PRODUCT",
 	}
 }
 
@@ -521,6 +561,7 @@ const (
 	InventorySearchScopeAsset        InventorySearchScope = "ASSET"
 	InventorySearchScopeGlossary     InventorySearchScope = "GLOSSARY"
 	InventorySearchScopeGlossaryTerm InventorySearchScope = "GLOSSARY_TERM"
+	InventorySearchScopeDataProduct  InventorySearchScope = "DATA_PRODUCT"
 )
 
 // Values returns all known values for InventorySearchScope. Note that this can be
@@ -532,6 +573,7 @@ func (InventorySearchScope) Values() []InventorySearchScope {
 		"ASSET",
 		"GLOSSARY",
 		"GLOSSARY_TERM",
+		"DATA_PRODUCT",
 	}
 }
 

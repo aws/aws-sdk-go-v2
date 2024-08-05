@@ -170,6 +170,30 @@ func TestCheckSnapshot_CreateAssetType(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDataProductRevision(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataProductRevision(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataProductRevision")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataSource(context.Background(), nil, func(o *Options) {
@@ -391,6 +415,18 @@ func TestCheckSnapshot_DeleteAssetType(t *testing.T) {
 	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDataProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataProduct")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -631,6 +667,18 @@ func TestCheckSnapshot_GetAssetType(t *testing.T) {
 	_, err := svc.GetAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataProduct")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -943,6 +991,18 @@ func TestCheckSnapshot_ListAssetRevisions(t *testing.T) {
 	_, err := svc.ListAssetRevisions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssetRevisions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataProductRevisions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataProductRevisions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataProductRevisions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1645,6 +1705,30 @@ func TestUpdateSnapshot_CreateAssetType(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDataProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataProduct")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataProductRevision(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataProductRevision(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataProductRevision")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataSource(context.Background(), nil, func(o *Options) {
@@ -1866,6 +1950,18 @@ func TestUpdateSnapshot_DeleteAssetType(t *testing.T) {
 	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataProduct")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2106,6 +2202,18 @@ func TestUpdateSnapshot_GetAssetType(t *testing.T) {
 	_, err := svc.GetAssetType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataProduct(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataProduct(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataProduct")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2418,6 +2526,18 @@ func TestUpdateSnapshot_ListAssetRevisions(t *testing.T) {
 	_, err := svc.ListAssetRevisions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssetRevisions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataProductRevisions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataProductRevisions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataProductRevisions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

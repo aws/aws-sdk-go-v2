@@ -190,6 +190,46 @@ func (m *validateOpCreateAssetType) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataProduct struct {
+}
+
+func (*validateOpCreateDataProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataProductInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDataProductRevision struct {
+}
+
+func (*validateOpCreateDataProductRevision) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataProductRevision) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataProductRevisionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataProductRevisionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataSource struct {
 }
 
@@ -565,6 +605,26 @@ func (m *validateOpDeleteAssetType) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAssetTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataProduct struct {
+}
+
+func (*validateOpDeleteDataProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataProductInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -965,6 +1025,26 @@ func (m *validateOpGetAssetType) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAssetTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataProduct struct {
+}
+
+func (*validateOpGetDataProduct) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataProduct) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataProductInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataProductInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1485,6 +1565,26 @@ func (m *validateOpListAssetRevisions) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssetRevisionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataProductRevisions struct {
+}
+
+func (*validateOpListDataProductRevisions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataProductRevisions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataProductRevisionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataProductRevisionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2486,6 +2586,14 @@ func addOpCreateAssetTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAssetType{}, middleware.After)
 }
 
+func addOpCreateDataProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataProduct{}, middleware.After)
+}
+
+func addOpCreateDataProductRevisionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataProductRevision{}, middleware.After)
+}
+
 func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
 }
@@ -2560,6 +2668,10 @@ func addOpDeleteAssetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAssetTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAssetType{}, middleware.After)
+}
+
+func addOpDeleteDataProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataProduct{}, middleware.After)
 }
 
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2640,6 +2752,10 @@ func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAssetTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAssetType{}, middleware.After)
+}
+
+func addOpGetDataProductValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataProduct{}, middleware.After)
 }
 
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2744,6 +2860,10 @@ func addOpListAssetFiltersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAssetRevisionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssetRevisions{}, middleware.After)
+}
+
+func addOpListDataProductRevisionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataProductRevisions{}, middleware.After)
 }
 
 func addOpListDataSourceRunActivitiesValidationMiddleware(stack *middleware.Stack) error {
@@ -3014,6 +3134,41 @@ func validateAssetTargetNames(v []types.AssetTargetNameMap) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AssetTargetNames"}
 	for i := range v {
 		if err := validateAssetTargetNameMap(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataProductItem(v *types.DataProductItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataProductItem"}
+	if len(v.ItemType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataProductItems(v []types.DataProductItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataProductItems"}
+	for i := range v {
+		if err := validateDataProductItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4170,6 +4325,68 @@ func validateOpCreateAssetTypeInput(v *CreateAssetTypeInput) error {
 	}
 }
 
+func validateOpCreateDataProductInput(v *CreateDataProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataProductInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if v.FormsInput != nil {
+		if err := validateFormInputList(v.FormsInput); err != nil {
+			invalidParams.AddNested("FormsInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Items != nil {
+		if err := validateDataProductItems(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataProductRevisionInput(v *CreateDataProductRevisionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataProductRevisionInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Items != nil {
+		if err := validateDataProductItems(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FormsInput != nil {
+		if err := validateFormInputList(v.FormsInput); err != nil {
+			invalidParams.AddNested("FormsInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -4623,6 +4840,24 @@ func validateOpDeleteAssetTypeInput(v *DeleteAssetTypeInput) error {
 	}
 }
 
+func validateOpDeleteDataProductInput(v *DeleteDataProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataProductInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -4988,6 +5223,24 @@ func validateOpGetAssetTypeInput(v *GetAssetTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAssetTypeInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataProductInput(v *GetDataProductInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataProductInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
@@ -5465,6 +5718,24 @@ func validateOpListAssetRevisionsInput(v *ListAssetRevisionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssetRevisionsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataProductRevisionsInput(v *ListDataProductRevisionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataProductRevisionsInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}

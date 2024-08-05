@@ -6,107 +6,61 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Gets a listing (a record of an asset at a given time). If you specify a listing
-// version, only details that are specific to that version are returned.
-func (c *Client) GetListing(ctx context.Context, params *GetListingInput, optFns ...func(*Options)) (*GetListingOutput, error) {
+// Deletes an data product in Amazon DataZone.
+func (c *Client) DeleteDataProduct(ctx context.Context, params *DeleteDataProductInput, optFns ...func(*Options)) (*DeleteDataProductOutput, error) {
 	if params == nil {
-		params = &GetListingInput{}
+		params = &DeleteDataProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetListing", params, optFns, c.addOperationGetListingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDataProduct", params, optFns, c.addOperationDeleteDataProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetListingOutput)
+	out := result.(*DeleteDataProductOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetListingInput struct {
+type DeleteDataProductInput struct {
 
-	// The ID of the Amazon DataZone domain.
+	// The ID of the Amazon DataZone domain in which the data product is deleted.
 	//
 	// This member is required.
 	DomainIdentifier *string
 
-	// The ID of the listing.
+	// The identifier of the data product that is deleted.
 	//
 	// This member is required.
 	Identifier *string
 
-	// The revision of the listing.
-	ListingRevision *string
-
 	noSmithyDocumentSerde
 }
 
-type GetListingOutput struct {
-
-	// The ID of the Amazon DataZone domain.
-	//
-	// This member is required.
-	DomainId *string
-
-	// The ID of the listing.
-	//
-	// This member is required.
-	Id *string
-
-	// The revision of a listing.
-	//
-	// This member is required.
-	ListingRevision *string
-
-	// The timestamp of when the listing was created.
-	CreatedAt *time.Time
-
-	// The Amazon DataZone user who created the listing.
-	CreatedBy *string
-
-	// The description of the listing.
-	Description *string
-
-	// The details of a listing.
-	Item types.ListingItem
-
-	// The name of the listing.
-	Name *string
-
-	// The status of the listing.
-	Status types.ListingStatus
-
-	// The timestamp of when the listing was updated.
-	UpdatedAt *time.Time
-
-	// The Amazon DataZone user who updated the listing.
-	UpdatedBy *string
-
+type DeleteDataProductOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDataProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetListing{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataProduct{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetListing{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataProduct{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetListing"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataProduct"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -155,10 +109,10 @@ func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, opti
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetListingValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteDataProductValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetListing(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataProduct(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -179,10 +133,10 @@ func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetListing(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteDataProduct(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetListing",
+		OperationName: "DeleteDataProduct",
 	}
 }

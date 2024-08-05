@@ -62,6 +62,9 @@ type ListSubscriptionRequestsInput struct {
 	SortOrder types.SortOrder
 
 	// Specifies the status of the subscription requests.
+	//
+	// This is not a required parameter, but if not specified, by default, Amazon
+	// DataZone returns only PENDING subscription requests.
 	Status types.SubscriptionRequestStatus
 
 	// The identifier of the subscribed listing.
