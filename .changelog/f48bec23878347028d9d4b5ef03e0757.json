@@ -1,0 +1,8 @@
+{
+    "id": "f48bec23-8783-4702-8d9d-4b5ef03e0757",
+    "type": "feature",
+    "description": "create v2 s3 transfermanager client and putobject feature",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
