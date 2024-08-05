@@ -29,6 +29,18 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.ecr#AccountSettingName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.ecr#AccountSettingValue": {
+            "type": "string"
+        },
         "com.amazonaws.ecr#AmazonEC2ContainerRegistry_V20150921": {
             "type": "service",
             "version": "2015-09-21",
@@ -97,6 +109,9 @@
                     "target": "com.amazonaws.ecr#DescribeRepositoryCreationTemplates"
                 },
                 {
+                    "target": "com.amazonaws.ecr#GetAccountSetting"
+                },
+                {
                     "target": "com.amazonaws.ecr#GetAuthorizationToken"
                 },
                 {
@@ -125,6 +140,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ecr#PutAccountSetting"
                 },
                 {
                     "target": "com.amazonaws.ecr#PutImage"
@@ -2124,7 +2142,7 @@
                 "customRoleArn": {
                     "target": "com.amazonaws.ecr#CustomRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring. Amazon ECR will assume your supplied role when\n            the customRoleArn is specified. When this field isn't specified, Amazon ECR will\n            use the service-linked role for the repository creation template.</p>"
                     }
                 }
             },
@@ -3704,6 +3722,64 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.ecr#GetAccountSetting": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#GetAccountSettingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#GetAccountSettingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the basic scan type version name.</p>"
+            }
+        },
+        "com.amazonaws.ecr#GetAccountSettingRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecr#AccountSettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Basic scan type version name. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#GetAccountSettingResponse": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecr#AccountSettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the basic scan type version name.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.ecr#AccountSettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the value that specifies what basic scan type is being used:\n                <code>AWS_NATIVE</code> or <code>CLAIR</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ecr#GetAuthorizationToken": {
@@ -5841,6 +5917,74 @@
         "com.amazonaws.ecr#PushTimestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.ecr#PutAccountSetting": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#PutAccountSettingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#PutAccountSettingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows you to change the basic scan type version by setting the <code>name</code>\n            parameter to either <code>CLAIR</code> to <code>AWS_NATIVE</code>.</p>"
+            }
+        },
+        "com.amazonaws.ecr#PutAccountSettingRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecr#AccountSettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Basic scan type version name. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.ecr#AccountSettingValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Setting value that determines what basic scan type is being used:\n                <code>AWS_NATIVE</code> or <code>CLAIR</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecr#PutAccountSettingResponse": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecr#AccountSettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the the basic scan type version name.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.ecr#AccountSettingValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the basic scan type value, either <code>AWS_NATIVE</code> or\n            <code>-</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecr#PutImage": {
             "type": "operation",
             "input": {
@@ -6766,7 +6910,7 @@
                 "customRoleArn": {
                     "target": "com.amazonaws.ecr#CustomRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when\n            the customRoleArn is specified. When this field isn't specified, Amazon ECR will\n            use the service-linked role for the repository creation template.</p>"
                     }
                 },
                 "createdAt": {
@@ -8079,7 +8223,7 @@
                 "customRoleArn": {
                     "target": "com.amazonaws.ecr#CustomRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring. Amazon ECR will assume your supplied role when\n            the customRoleArn is specified. When this field isn't specified, Amazon ECR will\n            use the service-linked role for the repository creation template.</p>"
                     }
                 }
             },

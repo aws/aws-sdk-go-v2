@@ -593,6 +593,38 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
             }
         },
+        "com.amazonaws.datazone#AssetInDataProductListingItem": {
+            "type": "structure",
+            "members": {
+                "entityId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity ID of the listing of the asset in a data product.</p>"
+                    }
+                },
+                "entityRevision": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity revision of the listing of the asset in a data product.</p>"
+                    }
+                },
+                "entityType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity type of the listing of the asset in a data product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The listing of the asset in a data product.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AssetInDataProductListingItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AssetInDataProductListingItem"
+            }
+        },
         "com.amazonaws.datazone#AssetItem": {
             "type": "structure",
             "members": {
@@ -2489,6 +2521,406 @@
                     "target": "com.amazonaws.datazone#UpdatedBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon DataZone user that created the custom asset type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDataProduct": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateDataProductInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateDataProductOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a data product.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/data-products"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDataProductInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the data product is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "owningProjectIdentifier": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DataProductDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data product.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product.</p>"
+                    }
+                },
+                "formsInput": {
+                    "target": "com.amazonaws.datazone#FormInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms of the data product.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#DataProductItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data assets of the data product.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDataProductOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the data product lives.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#DataProductStatus",
+                    "traits": {
+                        "smithy.api#default": "CREATED",
+                        "smithy.api#documentation": "<p>The status of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DataProductDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data product.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#DataProductItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data assets of the data product.</p>"
+                    }
+                },
+                "formsOutput": {
+                    "target": "com.amazonaws.datazone#FormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms of the data product.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data product was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the data product.</p>"
+                    }
+                },
+                "firstRevisionCreatedAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the first revision of the data product was created.</p>"
+                    }
+                },
+                "firstRevisionCreatedBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the first revision of the data product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDataProductRevision": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateDataProductRevisionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateDataProductRevisionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a data product revision.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/data-products/{identifier}/revisions"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDataProductRevisionInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the data product revision is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product revision.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data product revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DataProductDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data product revision.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product revision.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#DataProductItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data assets of the data product revision.</p>"
+                    }
+                },
+                "formsInput": {
+                    "target": "com.amazonaws.datazone#FormInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms of the data product revision.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDataProductRevisionOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where data product revision is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the data product revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data product revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#DataProductStatus",
+                    "traits": {
+                        "smithy.api#default": "CREATED",
+                        "smithy.api#documentation": "<p>The status of the data product revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DataProductDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data product revision.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product revision.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#DataProductItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data assets of the data product revision.</p>"
+                    }
+                },
+                "formsOutput": {
+                    "target": "com.amazonaws.datazone#FormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms of the data product revision.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data product revision is created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the data product revision.</p>"
+                    }
+                },
+                "firstRevisionCreatedAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the first revision of the data product is created.</p>"
+                    }
+                },
+                "firstRevisionCreatedBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the first revision of the data product.</p>"
                     }
                 }
             },
@@ -4541,6 +4973,9 @@
                 "subscriptionId": {
                     "target": "com.amazonaws.datazone#SubscriptionId",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Multiple subscriptions can exist for a single grant"
+                        },
                         "smithy.api#documentation": "<p>The identifier of the subscription grant.</p>"
                     }
                 }
@@ -5186,6 +5621,452 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]{0,36}$"
+            }
+        },
+        "com.amazonaws.datazone#DataProduct": {
+            "type": "resource",
+            "identifiers": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId"
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DataProductId"
+                }
+            },
+            "properties": {
+                "id": {
+                    "target": "com.amazonaws.datazone#DataProductId"
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision"
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName"
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DataProductDescription"
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId"
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms"
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#DataProductItems"
+                },
+                "owningProjectIdentifier": {
+                    "target": "com.amazonaws.datazone#ProjectId"
+                },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId"
+                },
+                "formsInput": {
+                    "target": "com.amazonaws.datazone#FormInputList"
+                },
+                "formsOutput": {
+                    "target": "com.amazonaws.datazone#FormOutputList"
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt"
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy"
+                },
+                "firstRevisionCreatedAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt"
+                },
+                "firstRevisionCreatedBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy"
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#DataProductStatus"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.datazone#CreateDataProduct"
+            },
+            "read": {
+                "target": "com.amazonaws.datazone#GetDataProduct"
+            },
+            "delete": {
+                "target": "com.amazonaws.datazone#DeleteDataProduct"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.datazone#CreateDataProductRevision"
+                }
+            ]
+        },
+        "com.amazonaws.datazone#DataProductDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#DataProductId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#DataProductItem": {
+            "type": "structure",
+            "members": {
+                "itemType": {
+                    "target": "com.amazonaws.datazone#DataProductItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#ItemGlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data product.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DataProductItemType": {
+            "type": "enum",
+            "members": {
+                "ASSET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#DataProductItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#DataProductItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.datazone#DataProductListing": {
+            "type": "structure",
+            "members": {
+                "dataProductId": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product listing.</p>"
+                    }
+                },
+                "dataProductRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product listing.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data product listing was created.</p>"
+                    }
+                },
+                "forms": {
+                    "target": "com.amazonaws.datazone#Forms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms of the data product listing.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#DetailedGlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product listing.</p>"
+                    }
+                },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the data product listing.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#ListingSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data assets of the data product listing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data product listing.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DataProductListingItem": {
+            "type": "structure",
+            "members": {
+                "listingId": {
+                    "target": "com.amazonaws.datazone#ListingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the listing.</p>"
+                    }
+                },
+                "listingRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the listing.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the asset of the data product. </p>"
+                    }
+                },
+                "entityId": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity ID of the asset of the asset of the data product. </p>"
+                    }
+                },
+                "entityRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the asset of the asset of the data product. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the asset of the asset of the data product. </p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the asset of the data product listing was created. </p>"
+                    }
+                },
+                "listingCreatedBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the listing was created.</p>"
+                    }
+                },
+                "listingUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who updated the listing.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#DetailedGlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the asset of the asset of the data product. </p>"
+                    }
+                },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the asset of the data product. </p>"
+                    }
+                },
+                "additionalAttributes": {
+                    "target": "com.amazonaws.datazone#DataProductListingItemAdditionalAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional attributes of the asset of the data product.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#ListingSummaryItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the asset of the data product. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The asset of the data product listing.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DataProductListingItemAdditionalAttributes": {
+            "type": "structure",
+            "members": {
+                "forms": {
+                    "target": "com.amazonaws.datazone#Forms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms of the asset of the data product. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The additional attributes of the asset of the data product. </p>"
+            }
+        },
+        "com.amazonaws.datazone#DataProductName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#DataProductResultItem": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the data product lives.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DataProductDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data product.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data product was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the data product.</p>"
+                    }
+                },
+                "firstRevisionCreatedAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which first revision of the data product was created.</p>"
+                    }
+                },
+                "firstRevisionCreatedBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the first revision of the data product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data product.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DataProductRevision": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the data product revision lives.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product revision.</p>"
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data product revision.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data product revision was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the data product revision.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data product revision.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DataProductRevisions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#DataProductRevision"
+            }
+        },
+        "com.amazonaws.datazone#DataProductStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.datazone#DataSource": {
@@ -5983,6 +6864,9 @@
                     "target": "com.amazonaws.datazone#ListAssetRevisions"
                 },
                 {
+                    "target": "com.amazonaws.datazone#ListDataProductRevisions"
+                },
+                {
                     "target": "com.amazonaws.datazone#ListDataSourceRunActivities"
                 },
                 {
@@ -6100,6 +6984,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#AssetType"
+                },
+                {
+                    "target": "com.amazonaws.datazone#DataProduct"
                 },
                 {
                     "target": "com.amazonaws.datazone#DataSource"
@@ -6582,6 +7469,9 @@
                     "target": "com.amazonaws.datazone#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.datazone#InternalServerException"
                 },
                 {
@@ -6595,7 +7485,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delets an asset in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes an asset in Amazon DataZone.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",
@@ -6767,6 +7657,75 @@
             }
         },
         "com.amazonaws.datazone#DeleteAssetTypeOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDataProduct": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteDataProductInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#DeleteDataProductOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an data product in Amazon DataZone.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/data-products/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDataProductInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the data product is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data product that is deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDataProductOutput": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -7893,6 +8852,9 @@
                 "subscriptionId": {
                     "target": "com.amazonaws.datazone#SubscriptionId",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Multiple subscriptions can exist for a single grant"
+                        },
                         "smithy.api#documentation": "<p>The identifier of the subsctiption whose subscription grant is to be deleted.</p>"
                     }
                 }
@@ -8633,6 +9595,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ASSET"
+                    }
+                },
+                "DATA_PRODUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_PRODUCT"
                     }
                 }
             }
@@ -10306,6 +11274,171 @@
                     "target": "com.amazonaws.datazone#UpdatedBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon DataZone user that updated the asset type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDataProduct": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetDataProductInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetDataProductOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the data product.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/data-products/{identifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDataProductInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the data product lives.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product.</p>",
+                        "smithy.api#httpQuery": "revision"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDataProductOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the data product lives.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DataProductName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#DataProductStatus",
+                    "traits": {
+                        "smithy.api#default": "CREATED",
+                        "smithy.api#documentation": "<p>The status of the data product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DataProductDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data product.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#GlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product.</p>"
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.datazone#DataProductItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data assets of the data product.</p>"
+                    }
+                },
+                "formsOutput": {
+                    "target": "com.amazonaws.datazone#FormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms of the data product.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data product is created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the data product.</p>"
+                    }
+                },
+                "firstRevisionCreatedAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the first revision of the data product is created.</p>"
+                    }
+                },
+                "firstRevisionCreatedBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the first revision of the data product.</p>"
                     }
                 }
             },
@@ -12424,7 +13557,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a listing (a record of an asset at a given time).</p>",
+                "smithy.api#documentation": "<p>Gets a listing (a record of an asset at a given time). If you specify a listing version,\n         only details that are specific to that version are returned.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -12961,6 +14094,9 @@
                 "subscriptionId": {
                     "target": "com.amazonaws.datazone#SubscriptionId",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Multiple subscriptions can exist for a single grant"
+                        },
                         "smithy.api#documentation": "<p>The identifier of the subscription.</p>"
                     }
                 }
@@ -14390,6 +15526,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GLOSSARY_TERM"
                     }
+                },
+                "DATA_PRODUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_PRODUCT"
+                    }
                 }
             }
         },
@@ -14421,6 +15563,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies that the expression is null.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ItemGlossaryTerms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#GlossaryTermId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.datazone#KmsKeyArn": {
@@ -14833,7 +15987,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.datazone#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the number of asset filters is greater than the default value for the\n         <code>MaxResults</code> parameter, or if you explicitly specify a value for\n         <code>MaxResults</code> that is less than the number of asset filters, the response\n         includes a pagination token named <code>NextToken</code>. You can specify this\n         <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to\n         list the next set of asset filters.</p>"
+                        "smithy.api#documentation": "<p>When the number of asset filters is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of asset filters, the response\n         includes a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to\n         list the next set of asset filters.</p>"
                     }
                 }
             },
@@ -14928,6 +16082,106 @@
                     "target": "com.amazonaws.datazone#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When the number of revisions is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of revisions, the response includes\n         a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to\n         list the next set of revisions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#ListDataProductRevisions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListDataProductRevisionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListDataProductRevisionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists data product revisions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/data-products/{identifier}/revisions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListDataProductRevisionsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain of the data product revisions that you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DataProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product revision.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of asset filters to return in a single call to\n            <code>ListDataProductRevisions</code>. When the number of data product revisions to be\n         listed is greater than the value of <code>MaxResults</code>, the response contains a\n            <code>NextToken</code> value that you can use in a subsequent call to\n            <code>ListDataProductRevisions</code> to list the next set of data product\n         revisions.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of data product revisions is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of data product revisions, the\n         response includes a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to\n            <code>ListDataProductRevisions</code> to list the next set of data product\n         revisions.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListDataProductRevisionsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#DataProductRevisions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the <code>ListDataProductRevisions</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of data product revisions is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of data product revisions, the\n         response includes a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to\n            <code>ListDataProductRevisions</code> to list the next set of data product\n         revisions.</p>"
                     }
                 }
             },
@@ -16620,6 +17874,13 @@
                         "smithy.api#httpQuery": "subscriptionId"
                     }
                 },
+                "owningProjectId": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owning project of the subscription grants.</p>",
+                        "smithy.api#httpQuery": "owningProjectId"
+                    }
+                },
                 "sortBy": {
                     "target": "com.amazonaws.datazone#SortKey",
                     "traits": {
@@ -16729,7 +17990,7 @@
                 "status": {
                     "target": "com.amazonaws.datazone#SubscriptionRequestStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the status of the subscription requests.</p>",
+                        "smithy.api#documentation": "<p>Specifies the status of the subscription requests.</p>\n         <note>\n            <p>This is not a required parameter, but if not specified, by default, Amazon DataZone\n            returns only <code>PENDING</code> subscription requests. </p>\n         </note>",
                         "smithy.api#httpQuery": "status"
                     }
                 },
@@ -16984,7 +18245,7 @@
                 "status": {
                     "target": "com.amazonaws.datazone#SubscriptionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the subscriptions that you want to list.</p>",
+                        "smithy.api#documentation": "<p>The status of the subscriptions that you want to list.</p>\n         <note>\n            <p>This is not a required parameter, but if not provided, by default, Amazon DataZone\n            returns only <code>APPROVED</code> subscriptions. </p>\n         </note>",
                         "smithy.api#httpQuery": "status"
                     }
                 },
@@ -17316,6 +18577,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An asset published in an Amazon DataZone catalog.</p>"
                     }
+                },
+                "dataProductListing": {
+                    "target": "com.amazonaws.datazone#DataProductListing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data product listing.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17396,6 +18663,70 @@
                         "smithy.api#enumValue": "INACTIVE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.datazone#ListingSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ListingSummary"
+            }
+        },
+        "com.amazonaws.datazone#ListingSummary": {
+            "type": "structure",
+            "members": {
+                "listingId": {
+                    "target": "com.amazonaws.datazone#ListingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product listing.</p>"
+                    }
+                },
+                "listingRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product listing.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#DetailedGlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the listing of the data product.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ListingSummaryItem": {
+            "type": "structure",
+            "members": {
+                "listingId": {
+                    "target": "com.amazonaws.datazone#ListingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product listing.</p>"
+                    }
+                },
+                "listingRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product listing.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#DetailedGlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product listing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results of the data product summary.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ListingSummaryItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ListingSummaryItem"
             }
         },
         "com.amazonaws.datazone#LongDescription": {
@@ -19869,6 +21200,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The asset item included in the search results.</p>"
                     }
+                },
+                "dataProductItem": {
+                    "target": "com.amazonaws.datazone#DataProductResultItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data product.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20061,6 +21398,12 @@
                     "target": "com.amazonaws.datazone#AssetListingItem",
                     "traits": {
                         "smithy.api#documentation": "<p>The asset listing included in the results of the <code>SearchListings</code>\n         action.</p>"
+                    }
+                },
+                "dataProductListing": {
+                    "target": "com.amazonaws.datazone#DataProductListingItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data product listing.</p>"
                     }
                 }
             },
@@ -21102,6 +22445,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The asset for which the subscription grant is created.</p>"
                     }
+                },
+                "productListing": {
+                    "target": "com.amazonaws.datazone#SubscribedProductListing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data product listing.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21158,6 +22507,50 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.datazone#SubscribedPrincipal"
+            }
+        },
+        "com.amazonaws.datazone#SubscribedProductListing": {
+            "type": "structure",
+            "members": {
+                "entityId": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data product listing.</p>"
+                    }
+                },
+                "entityRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the data product listing.</p>"
+                    }
+                },
+                "glossaryTerms": {
+                    "target": "com.amazonaws.datazone#DetailedGlossaryTerms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glossary terms of the data product listing.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data product listing.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data product listing.</p>"
+                    }
+                },
+                "assetListings": {
+                    "target": "com.amazonaws.datazone#AssetInDataProductListingItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data assets of the data product listing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data product listing.</p>"
             }
         },
         "com.amazonaws.datazone#SubscribedProject": {
@@ -21374,7 +22767,10 @@
                 "subscriptionId": {
                     "target": "com.amazonaws.datazone#SubscriptionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the subscription grant.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Multiple subscriptions can exist for a single grant"
+                        },
+                        "smithy.api#documentation": "<p>The ID of the subscription.</p>"
                     }
                 }
             },
@@ -24503,6 +25899,9 @@
                 "subscriptionId": {
                     "target": "com.amazonaws.datazone#SubscriptionId",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Multiple subscriptions can exist for a single grant"
+                        },
                         "smithy.api#documentation": "<p>The identifier of the subscription.</p>"
                     }
                 }
