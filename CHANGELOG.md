@@ -1,3 +1,15 @@
+# Release (2024-08-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.17.0](service/datazone/CHANGELOG.md#v1170-2024-08-05)
+  * **Feature**: This releases Data Product feature. Data Products allow grouping data assets into cohesive, self-contained units for ease of publishing for data producers, and ease of finding and accessing for data consumers.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.32.0](service/ecr/CHANGELOG.md#v1320-2024-08-05)
+  * **Feature**: Released two new APIs along with documentation updates. The GetAccountSetting API is used to view the current basic scan type version setting for your registry, while the PutAccountSetting API is used to update the basic scan type version for your registry.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.12.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v1120-2024-08-05)
+  * **Feature**: Add JoinStorageSessionAsViewer API
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.27.5](service/pi/CHANGELOG.md#v1275-2024-08-05)
+  * **Documentation**: Added a description for the Dimension db.sql.tokenized_id on the DimensionGroup data type page.
+
 # Release (2024-08-02)
 
 ## General Highlights

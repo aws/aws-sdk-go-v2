@@ -1,3 +1,7 @@
+# v1.32.0 (2024-08-05)
+
+* **Feature**: Released two new APIs along with documentation updates. The GetAccountSetting API is used to view the current basic scan type version setting for your registry, while the PutAccountSetting API is used to update the basic scan type version for your registry.
+
 # v1.31.0 (2024-07-25)
 
 * **Feature**: API and documentation updates for Amazon ECR, adding support for creating, updating, describing and deleting ECR Repository Creation Template.

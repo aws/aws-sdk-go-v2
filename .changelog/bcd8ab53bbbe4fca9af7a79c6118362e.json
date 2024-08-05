@@ -1,8 +1,0 @@
-{
-    "id": "bcd8ab53-bbbe-4fca-9af7-a79c6118362e",
-    "type": "feature",
-    "description": "Released two new APIs along with documentation updates. The GetAccountSetting API is used to view the current basic scan type version setting for your registry, while the PutAccountSetting API is used to update the basic scan type version for your registry.",
-    "modules": [
-        "service/ecr"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.27.5 (2024-08-05)
+
+* **Documentation**: Added a description for the Dimension db.sql.tokenized_id on the DimensionGroup data type page.
+
 # v1.27.4 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

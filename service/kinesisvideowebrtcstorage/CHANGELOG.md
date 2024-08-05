@@ -1,3 +1,7 @@
+# v1.12.0 (2024-08-05)
+
+* **Feature**: Add JoinStorageSessionAsViewer API
+
 # v1.11.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
