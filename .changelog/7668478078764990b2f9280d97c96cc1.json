@@ -1,0 +1,8 @@
+{
+    "id": "76684780-7876-4990-b2f9-280d97c96cc1",
+    "type": "bugfix",
+    "description": "Use blessed strings that don't trigger our internal scanners",
+    "modules": [
+        "credentials"
+    ]
+}
