@@ -42,8 +42,12 @@ type ListRecommendationSummariesInput struct {
 	// Filters recommendations by different dimensions.
 	Filter *types.Filter
 
-	// The maximum number of recommendations that are returned for the request.
+	// The maximum number of recommendations to be returned for the request.
 	MaxResults *int32
+
+	// Additional metrics to be returned for the request. The only valid value is
+	// savingsPercentage .
+	Metrics []types.SummaryMetrics
 
 	// The token to retrieve the next set of results.
 	NextToken *string
@@ -62,8 +66,12 @@ type ListRecommendationSummariesOutput struct {
 	// The dimension used to group the recommendations by.
 	GroupBy *string
 
-	// List of all savings recommendations.
+	// A list of all savings recommendations.
 	Items []types.RecommendationSummary
+
+	// The results or descriptions for the additional metrics, based on whether the
+	// metrics were or were not requested.
+	Metrics *types.SummaryMetricsResult
 
 	// The token to retrieve the next set of results.
 	NextToken *string
@@ -162,7 +170,7 @@ func (c *Client) addOperationListRecommendationSummariesMiddlewares(stack *middl
 // ListRecommendationSummariesPaginatorOptions is the paginator options for
 // ListRecommendationSummaries
 type ListRecommendationSummariesPaginatorOptions struct {
-	// The maximum number of recommendations that are returned for the request.
+	// The maximum number of recommendations to be returned for the request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

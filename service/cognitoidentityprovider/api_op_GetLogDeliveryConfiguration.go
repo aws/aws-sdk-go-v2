@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the detailed activity logging configuration for a user pool.
+// Gets the logging configuration of a user pool.
 func (c *Client) GetLogDeliveryConfiguration(ctx context.Context, params *GetLogDeliveryConfigurationInput, optFns ...func(*Options)) (*GetLogDeliveryConfigurationOutput, error) {
 	if params == nil {
 		params = &GetLogDeliveryConfigurationInput{}
@@ -29,8 +29,8 @@ func (c *Client) GetLogDeliveryConfiguration(ctx context.Context, params *GetLog
 
 type GetLogDeliveryConfigurationInput struct {
 
-	// The ID of the user pool where you want to view detailed activity logging
-	// configuration.
+	// The ID of the user pool that has the logging configuration that you want to
+	// view.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -40,7 +40,7 @@ type GetLogDeliveryConfigurationInput struct {
 
 type GetLogDeliveryConfigurationOutput struct {
 
-	// The detailed activity logging configuration of the requested user pool.
+	// The logging configuration of the requested user pool.
 	LogDeliveryConfiguration *types.LogDeliveryConfigurationType
 
 	// Metadata pertaining to the operation's result.

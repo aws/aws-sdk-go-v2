@@ -431,7 +431,7 @@ type FlowCompletionEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an input into the flow and what to do with it.
+// Contains information about an input into the prompt flow and where to send it.
 //
 // This data type is used in the following API operations:
 //
@@ -440,17 +440,17 @@ type FlowCompletionEvent struct {
 // [InvokeFlow request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
 type FlowInput struct {
 
-	// Contains information about an input into the flow.
+	// Contains information about an input into the prompt flow.
 	//
 	// This member is required.
 	Content FlowInputContent
 
-	// A name for the input of the flow input node.
+	// The name of the flow input node that begins the prompt flow.
 	//
 	// This member is required.
 	NodeName *string
 
-	// A name for the output of the flow input node.
+	// The name of the output from the flow input node that begins the prompt flow.
 	//
 	// This member is required.
 	NodeOutputName *string
@@ -473,7 +473,7 @@ type FlowInputContent interface {
 	isFlowInputContent()
 }
 
-// The input for the flow input node.
+// The input to send to the prompt flow input node.
 type FlowInputContentMemberDocument struct {
 	Value document.Interface
 
@@ -482,7 +482,7 @@ type FlowInputContentMemberDocument struct {
 
 func (*FlowInputContentMemberDocument) isFlowInputContent() {}
 
-// Contains information about the output node.
+// Contains information about the content in an output from prompt flow invocation.
 //
 // This data type is used in the following API operations:
 //
@@ -497,7 +497,7 @@ type FlowOutputContent interface {
 	isFlowOutputContent()
 }
 
-// A name for the output of the flow.
+// The content in the output.
 type FlowOutputContentMemberDocument struct {
 	Value document.Interface
 
@@ -506,7 +506,7 @@ type FlowOutputContentMemberDocument struct {
 
 func (*FlowOutputContentMemberDocument) isFlowOutputContent() {}
 
-// Contains information about an output from flow invoction.
+// Contains information about an output from prompt flow invoction.
 //
 // This data type is used in the following API operations:
 //
@@ -515,17 +515,17 @@ func (*FlowOutputContentMemberDocument) isFlowOutputContent() {}
 // [InvokeFlow response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
 type FlowOutputEvent struct {
 
-	// The output of the node.
+	// The content in the output.
 	//
 	// This member is required.
 	Content FlowOutputContent
 
-	// The name of the node to which input was provided.
+	// The name of the flow output node that the output is from.
 	//
 	// This member is required.
 	NodeName *string
 
-	// The type of node to which input was provided.
+	// The type of the node that the output is from.
 	//
 	// This member is required.
 	NodeType NodeType
@@ -926,7 +926,7 @@ type InferenceConfiguration struct {
 	// While generating a response, the model determines the probability of the
 	// following token at each point of generation. The value that you set for Top P
 	// determines the number of most-likely candidates from which the model chooses the
-	// next token in the sequence. For example, if you set topP to 80, the model only
+	// next token in the sequence. For example, if you set topP to 0.8, the model only
 	// selects the next token from the top 80% of the probability distribution of next
 	// tokens.
 	TopP *float32
@@ -1283,6 +1283,15 @@ type MemorySessionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details of the foundation model.
+type Metadata struct {
+
+	// Contains details of the foundation model usage.
+	Usage *Usage
+
+	noSmithyDocumentSerde
+}
+
 // The input for the pre-processing step.
 //
 //   - The type matches the agent step.
@@ -1385,6 +1394,21 @@ type OrchestrationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The foundation model output from the orchestration step.
+type OrchestrationModelInvocationOutput struct {
+
+	// Contains information about the foundation model output.
+	Metadata *Metadata
+
+	// Contains details of the raw response from the foundation model output.
+	RawResponse *RawResponse
+
+	// The unique identifier of the trace.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about the orchestration step, in which the agent determines the order
 // in which actions are executed and which knowledge bases are retrieved.
 //
@@ -1392,6 +1416,7 @@ type OrchestrationConfiguration struct {
 //
 //	OrchestrationTraceMemberInvocationInput
 //	OrchestrationTraceMemberModelInvocationInput
+//	OrchestrationTraceMemberModelInvocationOutput
 //	OrchestrationTraceMemberObservation
 //	OrchestrationTraceMemberRationale
 type OrchestrationTrace interface {
@@ -1425,6 +1450,16 @@ type OrchestrationTraceMemberModelInvocationInput struct {
 }
 
 func (*OrchestrationTraceMemberModelInvocationInput) isOrchestrationTrace() {}
+
+// Contains information pertaining to the output from the foundation model that is
+// being invoked.
+type OrchestrationTraceMemberModelInvocationOutput struct {
+	Value OrchestrationModelInvocationOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*OrchestrationTraceMemberModelInvocationOutput) isOrchestrationTrace() {}
 
 // Details about the observation (the output of the action group Lambda or
 // knowledge base) made by the agent.
@@ -1675,6 +1710,15 @@ type Rationale struct {
 
 	// The unique identifier of the trace step.
 	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the raw output from the foundation model.
+type RawResponse struct {
+
+	// The foundation model's raw output content.
+	Content *string
 
 	noSmithyDocumentSerde
 }
@@ -2504,6 +2548,18 @@ type TracePart struct {
 	//
 	// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 	Trace Trace
+
+	noSmithyDocumentSerde
+}
+
+// Contains information of the usage of the foundation model.
+type Usage struct {
+
+	// Contains information about the input tokens from the foundation model usage.
+	InputTokens *int32
+
+	// Contains information about the output tokens from the foundation model usage.
+	OutputTokens *int32
 
 	noSmithyDocumentSerde
 }

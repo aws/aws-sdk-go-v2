@@ -2497,6 +2497,9 @@ func awsAwsjson11_deserializeOpErrorAdminRespondToAuthChallenge(response *smithy
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
+		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -2761,6 +2764,9 @@ func awsAwsjson11_deserializeOpErrorAdminSetUserPassword(response *smithyhttp.Re
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
+		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -3652,6 +3658,9 @@ func awsAwsjson11_deserializeOpErrorChangePassword(response *smithyhttp.Response
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
+		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -3940,6 +3949,9 @@ func awsAwsjson11_deserializeOpErrorConfirmForgotPassword(response *smithyhttp.R
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
+		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -9954,6 +9966,9 @@ func awsAwsjson11_deserializeOpErrorRespondToAuthChallenge(response *smithyhttp.
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
+		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -13685,6 +13700,41 @@ func awsAwsjson11_deserializeErrorNotAuthorizedException(response *smithyhttp.Re
 	return output
 }
 
+func awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.PasswordHistoryPolicyViolationException{}
+	err := awsAwsjson11_deserializeDocumentPasswordHistoryPolicyViolationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorPasswordResetRequiredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -16575,6 +16625,46 @@ func awsAwsjson11_deserializeDocumentExplicitAuthFlowsListType(v *[]types.Explic
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFirehoseConfigurationType(v **types.FirehoseConfigurationType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FirehoseConfigurationType
+	if *v == nil {
+		sv = &types.FirehoseConfigurationType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StreamArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.StreamArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentForbiddenException(v **types.ForbiddenException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17593,6 +17683,11 @@ func awsAwsjson11_deserializeDocumentLogConfigurationType(v **types.LogConfigura
 				sv.EventSource = types.EventSourceName(jtv)
 			}
 
+		case "FirehoseConfiguration":
+			if err := awsAwsjson11_deserializeDocumentFirehoseConfigurationType(&sv.FirehoseConfiguration, value); err != nil {
+				return err
+			}
+
 		case "LogLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17600,6 +17695,11 @@ func awsAwsjson11_deserializeDocumentLogConfigurationType(v **types.LogConfigura
 					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
 				}
 				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		case "S3Configuration":
+			if err := awsAwsjson11_deserializeDocumentS3ConfigurationType(&sv.S3Configuration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -18178,6 +18278,46 @@ func awsAwsjson11_deserializeDocumentOAuthFlowsType(v *[]types.OAuthFlowType, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPasswordHistoryPolicyViolationException(v **types.PasswordHistoryPolicyViolationException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PasswordHistoryPolicyViolationException
+	if *v == nil {
+		sv = &types.PasswordHistoryPolicyViolationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPasswordPolicyType(v **types.PasswordPolicyType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18211,6 +18351,19 @@ func awsAwsjson11_deserializeDocumentPasswordPolicyType(v **types.PasswordPolicy
 					return err
 				}
 				sv.MinimumLength = ptr.Int32(int32(i64))
+			}
+
+		case "PasswordHistorySize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PasswordHistorySizeType to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PasswordHistorySize = ptr.Int32(int32(i64))
 			}
 
 		case "RequireLowercase":
@@ -18968,6 +19121,46 @@ func awsAwsjson11_deserializeDocumentRiskExceptionConfigurationType(v **types.Ri
 		case "SkippedIPRangeList":
 			if err := awsAwsjson11_deserializeDocumentSkippedIPRangeListType(&sv.SkippedIPRangeList, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3ConfigurationType(v **types.S3ConfigurationType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ConfigurationType
+	if *v == nil {
+		sv = &types.S3ConfigurationType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ArnType to be of type string, got %T instead", value)
+				}
+				sv.BucketArn = ptr.String(jtv)
 			}
 
 		default:

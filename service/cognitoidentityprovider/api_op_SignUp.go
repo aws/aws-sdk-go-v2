@@ -151,7 +151,7 @@ type SignUpOutput struct {
 	// This member is required.
 	UserConfirmed bool
 
-	// The UUID of the authenticated user. This isn't the same as username .
+	// The 128-bit ID of the authenticated user. This isn't the same as username .
 	//
 	// This member is required.
 	UserSub *string

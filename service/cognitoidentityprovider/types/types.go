@@ -234,8 +234,9 @@ type ChallengeResponseType struct {
 	noSmithyDocumentSerde
 }
 
-// The CloudWatch logging destination of a user pool detailed activity logging
-// configuration.
+// Configuration for the CloudWatch log group destination of user pool detailed
+// activity logging, or of user activity log export with advanced security
+// features.
 type CloudWatchLogsConfigurationType struct {
 
 	// The Amazon Resource Name (arn) of a CloudWatch Logs log group where your user
@@ -658,6 +659,17 @@ type EventRiskType struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for the Amazon Data Firehose stream destination of user activity
+// log export with advanced security features.
+type FirehoseConfigurationType struct {
+
+	// The ARN of an Amazon Data Firehose stream that's the destination for advanced
+	// security features log export.
+	StreamArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The group type.
 type GroupType struct {
 
@@ -903,32 +915,56 @@ type LambdaConfigType struct {
 // The logging parameters of a user pool.
 type LogConfigurationType struct {
 
-	// The source of events that your user pool sends for detailed activity logging.
+	// The source of events that your user pool sends for logging. To send error-level
+	// logs about user notification activity, set to userNotification . To send
+	// info-level logs about advanced security features user activity, set to
+	// userAuthEvents .
 	//
 	// This member is required.
 	EventSource EventSourceName
 
 	// The errorlevel selection of logs that a user pool sends for detailed activity
-	// logging.
+	// logging. To send userNotification activity with [information about message delivery], choose ERROR with
+	// CloudWatchLogsConfiguration . To send userAuthEvents activity with user logs
+	// from advanced security features, choose INFO with one of
+	// CloudWatchLogsConfiguration , FirehoseConfiguration , or S3Configuration .
+	//
+	// [information about message delivery]: https://docs.aws.amazon.com/cognito/latest/developerguide/tracking-quotas-and-usage-in-cloud-watch-logs.html
 	//
 	// This member is required.
 	LogLevel LogLevel
 
-	// The CloudWatch logging destination of a user pool.
+	// The CloudWatch log group destination of user pool detailed activity logs, or of
+	// user activity log export with advanced security features.
 	CloudWatchLogsConfiguration *CloudWatchLogsConfigurationType
+
+	// The Amazon Data Firehose stream destination of user activity log export with
+	// advanced security features. To activate this setting, [advanced security features]must be active in your
+	// user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	FirehoseConfiguration *FirehoseConfigurationType
+
+	// The Amazon S3 bucket destination of user activity log export with advanced
+	// security features. To activate this setting, [advanced security features]must be active in your user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	S3Configuration *S3ConfigurationType
 
 	noSmithyDocumentSerde
 }
 
-// The logging parameters of a user pool.
+// The logging parameters of a user pool returned in response to
+// GetLogDeliveryConfiguration .
 type LogDeliveryConfigurationType struct {
 
-	// The detailed activity logging destination of a user pool.
+	// A logging destination of a user pool. User pools can have multiple logging
+	// destinations for message-delivery and user-activity logs.
 	//
 	// This member is required.
 	LogConfigurations []LogConfigurationType
 
-	// The ID of the user pool where you configured detailed activity logging.
+	// The ID of the user pool where you configured logging.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -1053,6 +1089,18 @@ type PasswordPolicyType struct {
 	// The minimum length of the password in the policy that you have set. This value
 	// can't be less than 6.
 	MinimumLength *int32
+
+	// The number of previous passwords that you want Amazon Cognito to restrict each
+	// user from reusing. Users can't set a password that matches any of n previous
+	// passwords, where n is the value of PasswordHistorySize .
+	//
+	// Password history isn't enforced and isn't displayed in [DescribeUserPool] responses when you set
+	// this value to 0 or don't provide it. To activate this setting, [advanced security features] must be active
+	// in your user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	// [DescribeUserPool]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html
+	PasswordHistorySize *int32
 
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one lowercase letter in their password.
@@ -1235,6 +1283,17 @@ type RiskExceptionConfigurationType struct {
 	// Risk detection isn't performed on the IP addresses in this range list. The IP
 	// range is in CIDR notation.
 	SkippedIPRangeList []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the Amazon S3 bucket destination of user activity log export
+// with advanced security features.
+type S3ConfigurationType struct {
+
+	// The ARN of an Amazon S3 bucket that's the destination for advanced security
+	// features log export.
+	BucketArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1881,8 +1940,10 @@ type UserPoolClientType struct {
 	//
 	//   - ENABLED - This prevents user existence-related errors.
 	//
-	//   - LEGACY - This represents the old behavior of Amazon Cognito where user
+	//   - LEGACY - This represents the early behavior of Amazon Cognito where user
 	//   existence related errors aren't prevented.
+	//
+	// Defaults to LEGACY when you don't provide a value.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
 	// The list of user attributes that you want your app client to have read-only

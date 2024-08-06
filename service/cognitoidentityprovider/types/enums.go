@@ -416,6 +416,7 @@ type EventSourceName string
 // Enum values for EventSourceName
 const (
 	EventSourceNameUserNotification EventSourceName = "userNotification"
+	EventSourceNameUserAuthEvents   EventSourceName = "userAuthEvents"
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
@@ -425,6 +426,7 @@ const (
 func (EventSourceName) Values() []EventSourceName {
 	return []EventSourceName{
 		"userNotification",
+		"userAuthEvents",
 	}
 }
 
@@ -535,6 +537,7 @@ type LogLevel string
 // Enum values for LogLevel
 const (
 	LogLevelError LogLevel = "ERROR"
+	LogLevelInfo  LogLevel = "INFO"
 )
 
 // Values returns all known values for LogLevel. Note that this can be expanded in
@@ -544,6 +547,7 @@ const (
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"ERROR",
+		"INFO",
 	}
 }
 

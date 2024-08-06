@@ -3914,6 +3914,42 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseLookupOutput(v **types.Knowled
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMetadata(v **types.Metadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Metadata
+	if *v == nil {
+		sv = &types.Metadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "usage":
+			if err := awsRestjson1_deserializeDocumentUsage(&sv.Usage, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentModelInvocationInput(v **types.ModelInvocationInput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4078,6 +4114,56 @@ func awsRestjson1_deserializeDocumentObservation(v **types.Observation, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOrchestrationModelInvocationOutput(v **types.OrchestrationModelInvocationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OrchestrationModelInvocationOutput
+	if *v == nil {
+		sv = &types.OrchestrationModelInvocationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
+		case "rawResponse":
+			if err := awsRestjson1_deserializeDocumentRawResponse(&sv.RawResponse, value); err != nil {
+				return err
+			}
+
+		case "traceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TraceId to be of type string, got %T instead", value)
+				}
+				sv.TraceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOrchestrationTrace(v *types.OrchestrationTrace, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4116,6 +4202,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.OrchestrationTraceMemberModelInvocationInput{Value: mv}
+			break loop
+
+		case "modelInvocationOutput":
+			var mv types.OrchestrationModelInvocationOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentOrchestrationModelInvocationOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OrchestrationTraceMemberModelInvocationOutput{Value: mv}
 			break loop
 
 		case "observation":
@@ -4772,6 +4868,46 @@ func awsRestjson1_deserializeDocumentRationale(v **types.Rationale, value interf
 					return fmt.Errorf("expected TraceId to be of type string, got %T instead", value)
 				}
 				sv.TraceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRawResponse(v **types.RawResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RawResponse
+	if *v == nil {
+		sv = &types.RawResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "content":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Content = ptr.String(jtv)
 			}
 
 		default:
@@ -5733,6 +5869,63 @@ func awsRestjson1_deserializeDocumentTracePart(v **types.TracePart, value interf
 		case "trace":
 			if err := awsRestjson1_deserializeDocumentTrace(&sv.Trace, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUsage(v **types.Usage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Usage
+	if *v == nil {
+		sv = &types.Usage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputTokens":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InputTokens = ptr.Int32(int32(i64))
+			}
+
+		case "outputTokens":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutputTokens = ptr.Int32(int32(i64))
 			}
 
 		default:

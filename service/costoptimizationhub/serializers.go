@@ -584,6 +584,17 @@ func awsAwsjson10_serializeDocumentResourceTypeList(v []types.ResourceType, valu
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentSummaryMetricsList(v []types.SummaryMetrics, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -715,6 +726,13 @@ func awsAwsjson10_serializeOpDocumentListRecommendationSummariesInput(v *ListRec
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
+	}
+
+	if v.Metrics != nil {
+		ok := object.Key("metrics")
+		if err := awsAwsjson10_serializeDocumentSummaryMetricsList(v.Metrics, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.NextToken != nil {

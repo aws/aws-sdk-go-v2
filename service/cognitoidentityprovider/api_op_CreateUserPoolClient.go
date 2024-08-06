@@ -264,6 +264,8 @@ type CreateUserPoolClientInput struct {
 	//
 	//   - LEGACY - This represents the early behavior of Amazon Cognito where user
 	//   existence related errors aren't prevented.
+	//
+	// Defaults to LEGACY when you don't provide a value.
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
 	// The list of user attributes that you want your app client to have read-only

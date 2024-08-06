@@ -195,6 +195,23 @@ func (Source) Values() []Source {
 	}
 }
 
+type SummaryMetrics string
+
+// Enum values for SummaryMetrics
+const (
+	SummaryMetricsSavingsPercentage SummaryMetrics = "SavingsPercentage"
+)
+
+// Values returns all known values for SummaryMetrics. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryMetrics) Values() []SummaryMetrics {
+	return []SummaryMetrics{
+		"SavingsPercentage",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

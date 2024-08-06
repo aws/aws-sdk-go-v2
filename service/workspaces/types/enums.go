@@ -1174,6 +1174,7 @@ const (
 	WorkspaceImageIngestionProcessByolGraphicspro      WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
 	WorkspaceImageIngestionProcessByolGraphicsG4dn     WorkspaceImageIngestionProcess = "BYOL_GRAPHICS_G4DN"
 	WorkspaceImageIngestionProcessByolRegularWsp       WorkspaceImageIngestionProcess = "BYOL_REGULAR_WSP"
+	WorkspaceImageIngestionProcessByolGraphicsG4dnWsp  WorkspaceImageIngestionProcess = "BYOL_GRAPHICS_G4DN_WSP"
 	WorkspaceImageIngestionProcessByolRegularByop      WorkspaceImageIngestionProcess = "BYOL_REGULAR_BYOP"
 	WorkspaceImageIngestionProcessByolGraphicsG4dnByop WorkspaceImageIngestionProcess = "BYOL_GRAPHICS_G4DN_BYOP"
 )
@@ -1190,6 +1191,7 @@ func (WorkspaceImageIngestionProcess) Values() []WorkspaceImageIngestionProcess 
 		"BYOL_GRAPHICSPRO",
 		"BYOL_GRAPHICS_G4DN",
 		"BYOL_REGULAR_WSP",
+		"BYOL_GRAPHICS_G4DN_WSP",
 		"BYOL_REGULAR_BYOP",
 		"BYOL_GRAPHICS_G4DN_BYOP",
 	}

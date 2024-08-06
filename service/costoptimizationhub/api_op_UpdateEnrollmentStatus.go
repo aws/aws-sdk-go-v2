@@ -14,8 +14,9 @@ import (
 // Updates the enrollment (opt in and opt out) status of an account to the Cost
 // Optimization Hub service.
 //
-// If the account is a management account of an organization, this action can also
-// be used to enroll member accounts of the organization.
+// If the account is a management account or delegated administrator of an
+// organization, this action can also be used to enroll member accounts of the
+// organization.
 //
 // You must have the appropriate permissions to opt in to Cost Optimization Hub
 // and to view its recommendations. When you opt in, Cost Optimization Hub
@@ -43,7 +44,7 @@ type UpdateEnrollmentStatusInput struct {
 	Status types.EnrollmentStatus
 
 	// Indicates whether to enroll member accounts of the organization if the account
-	// is the management account.
+	// is the management account or delegated administrator.
 	IncludeMemberAccounts *bool
 
 	noSmithyDocumentSerde

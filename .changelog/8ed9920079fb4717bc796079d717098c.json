@@ -1,0 +1,8 @@
+{
+    "id": "8ed99200-79fb-4717-bc79-6079d717098c",
+    "type": "feature",
+    "description": "This release adds savings percentage support to the ListRecommendationSummaries API.",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

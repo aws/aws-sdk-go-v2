@@ -1,0 +1,8 @@
+{
+    "id": "04e3ba5d-22fe-41a5-a493-34137fefec6a",
+    "type": "feature",
+    "description": "Added support for BYOL_GRAPHICS_G4DN_WSP IngestionProcess",
+    "modules": [
+        "service/workspaces"
+    ]
+}

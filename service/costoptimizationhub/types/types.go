@@ -1068,6 +1068,20 @@ type StorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The results or descriptions for the additional metrics, based on whether the
+// metrics were or were not requested.
+type SummaryMetricsResult struct {
+
+	// The savings percentage based on your Amazon Web Services spend over the past 30
+	// days.
+	//
+	// Savings percentage is only supported when filtering by Region, account ID, or
+	// tags.
+	SavingsPercentage *string
+
+	noSmithyDocumentSerde
+}
+
 // The tag structure that contains a tag key and value.
 type Tag struct {
 

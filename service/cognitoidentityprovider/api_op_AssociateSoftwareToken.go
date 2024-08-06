@@ -21,7 +21,7 @@ import (
 // pool doesn't require MFA, the user can then authenticate with user name and
 // password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito
 // generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user
-// signs. Complete setup with AssociateSoftwareToken and VerifySoftwareToken .
+// signs in. Complete setup with AssociateSoftwareToken and VerifySoftwareToken .
 //
 // After you set up software token MFA for your user, Amazon Cognito generates a
 // SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge

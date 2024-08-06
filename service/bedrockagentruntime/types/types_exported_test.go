@@ -138,6 +138,9 @@ func ExampleOrchestrationTrace_outputUsage() {
 	case *types.OrchestrationTraceMemberModelInvocationInput:
 		_ = v.Value // Value is types.ModelInvocationInput
 
+	case *types.OrchestrationTraceMemberModelInvocationOutput:
+		_ = v.Value // Value is types.OrchestrationModelInvocationOutput
+
 	case *types.OrchestrationTraceMemberObservation:
 		_ = v.Value // Value is types.Observation
 
@@ -155,6 +158,7 @@ func ExampleOrchestrationTrace_outputUsage() {
 
 var _ *types.InvocationInput
 var _ *types.ModelInvocationInput
+var _ *types.OrchestrationModelInvocationOutput
 var _ *types.Rationale
 var _ *types.Observation
 

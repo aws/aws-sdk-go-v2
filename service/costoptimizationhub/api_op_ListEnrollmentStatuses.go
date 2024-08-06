@@ -48,7 +48,7 @@ type ListEnrollmentStatusesInput struct {
 type ListEnrollmentStatusesOutput struct {
 
 	// The enrollment status of all member accounts in the organization if the account
-	// is the management account.
+	// is the management account or delegated administrator.
 	IncludeMemberAccounts *bool
 
 	// The enrollment status of a specific account ID, including creation and last

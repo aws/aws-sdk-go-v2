@@ -6204,6 +6204,18 @@ func awsAwsjson11_serializeDocumentExplicitAuthFlowsListType(v []types.ExplicitA
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFirehoseConfigurationType(v *types.FirehoseConfigurationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StreamArn != nil {
+		ok := object.Key("StreamArn")
+		ok.String(*v.StreamArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHttpHeader(v *types.HttpHeader, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6357,9 +6369,23 @@ func awsAwsjson11_serializeDocumentLogConfigurationType(v *types.LogConfiguratio
 		ok.String(string(v.EventSource))
 	}
 
+	if v.FirehoseConfiguration != nil {
+		ok := object.Key("FirehoseConfiguration")
+		if err := awsAwsjson11_serializeDocumentFirehoseConfigurationType(v.FirehoseConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("LogLevel")
 		ok.String(string(v.LogLevel))
+	}
+
+	if v.S3Configuration != nil {
+		ok := object.Key("S3Configuration")
+		if err := awsAwsjson11_serializeDocumentS3ConfigurationType(v.S3Configuration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -6530,6 +6556,11 @@ func awsAwsjson11_serializeDocumentPasswordPolicyType(v *types.PasswordPolicyTyp
 		ok.Integer(*v.MinimumLength)
 	}
 
+	if v.PasswordHistorySize != nil {
+		ok := object.Key("PasswordHistorySize")
+		ok.Integer(*v.PasswordHistorySize)
+	}
+
 	if v.RequireLowercase {
 		ok := object.Key("RequireLowercase")
 		ok.Boolean(v.RequireLowercase)
@@ -6684,6 +6715,18 @@ func awsAwsjson11_serializeDocumentRiskExceptionConfigurationType(v *types.RiskE
 		if err := awsAwsjson11_serializeDocumentSkippedIPRangeListType(v.SkippedIPRangeList, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3ConfigurationType(v *types.S3ConfigurationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketArn != nil {
+		ok := object.Key("BucketArn")
+		ok.String(*v.BucketArn)
 	}
 
 	return nil

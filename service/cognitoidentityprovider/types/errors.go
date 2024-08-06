@@ -580,6 +580,35 @@ func (e *NotAuthorizedException) ErrorCode() string {
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The message returned when a user's new password matches a previous password and
+// doesn't comply with the password-history policy.
+type PasswordHistoryPolicyViolationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PasswordHistoryPolicyViolationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PasswordHistoryPolicyViolationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PasswordHistoryPolicyViolationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PasswordHistoryPolicyViolationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PasswordHistoryPolicyViolationException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // This exception is thrown when a password reset is required.
 type PasswordResetRequiredException struct {
 	Message *string
