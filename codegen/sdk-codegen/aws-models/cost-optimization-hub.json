@@ -1943,7 +1943,7 @@
                 "includeMemberAccounts": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enrollment status of all member accounts in the organization if the account is the\n      management account.</p>"
+                        "smithy.api#documentation": "<p>The enrollment status of all member accounts in the organization if the account is the\n      management account or delegated administrator.</p>"
                     }
                 },
                 "nextToken": {
@@ -2006,11 +2006,20 @@
                 "maxResults": {
                     "target": "com.amazonaws.costoptimizationhub#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of recommendations that are returned for the request.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of recommendations to be returned for the request.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 1000
                         }
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.costoptimizationhub#SummaryMetricsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional metrics to be returned for the request. The only valid value is\n        <code>savingsPercentage</code>.</p>",
+                        "smithy.api#tags": [
+                            "delegatedAdmin"
+                        ]
                     }
                 },
                 "nextToken": {
@@ -2036,7 +2045,7 @@
                 "items": {
                     "target": "com.amazonaws.costoptimizationhub#RecommendationSummariesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of all savings recommendations.</p>"
+                        "smithy.api#documentation": "<p>A list of all savings recommendations.</p>"
                     }
                 },
                 "groupBy": {
@@ -2049,6 +2058,15 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The currency code used for the recommendation.</p>"
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.costoptimizationhub#SummaryMetricsResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results or descriptions for the additional metrics, based on whether the metrics were\n      or were not requested.</p>",
+                        "smithy.api#tags": [
+                            "delegatedAdmin"
+                        ]
                     }
                 },
                 "nextToken": {
@@ -3353,6 +3371,43 @@
                 "smithy.api#documentation": "<p>The storage configuration used for recommendations.</p>"
             }
         },
+        "com.amazonaws.costoptimizationhub#SummaryMetrics": {
+            "type": "enum",
+            "members": {
+                "SAVINGS_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SavingsPercentage"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#SummaryMetricsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costoptimizationhub#SummaryMetrics"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#SummaryMetricsResult": {
+            "type": "structure",
+            "members": {
+                "savingsPercentage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The savings percentage based on your Amazon Web Services spend over the past 30\n      days.</p>\n         <note>\n            <p>Savings percentage is only supported when filtering by Region, account ID, or\n        tags.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results or descriptions for the additional metrics, based on whether the metrics were\n      or were not requested.</p>"
+            }
+        },
         "com.amazonaws.costoptimizationhub#Tag": {
             "type": "structure",
             "members": {
@@ -3421,7 +3476,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization\n      Hub service.</p>\n         <p>If the account is a management account of an organization, this action can also be used to\n      enroll member accounts of the organization.</p>\n         <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view\n      its recommendations. When you opt in, Cost Optimization Hub automatically creates a\n      service-linked role in your account to access its data.</p>"
+                "smithy.api#documentation": "<p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization\n      Hub service.</p>\n         <p>If the account is a management account or delegated administrator of an organization, this\n      action can also be used to enroll member accounts of the organization.</p>\n         <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view\n      its recommendations. When you opt in, Cost Optimization Hub automatically creates a\n      service-linked role in your account to access its data.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#UpdateEnrollmentStatusRequest": {
@@ -3437,7 +3492,7 @@
                 "includeMemberAccounts": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the account is the\n      management account.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the account is the\n      management account or delegated administrator.</p>"
                     }
                 }
             },

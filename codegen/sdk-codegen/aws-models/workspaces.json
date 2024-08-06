@@ -5915,7 +5915,7 @@
                 "Applications": {
                     "target": "com.amazonaws.workspaces#ApplicationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 and 11\n         BYOL images. For more information about subscribing to Office for BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring\n            Your Own Windows Desktop Licenses</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Although this parameter is an array, only one item is allowed at this time.</p>\n               </li>\n               <li>\n                  <p>Windows 11 only supports <code>Microsoft_Office_2019</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 and 11\n         BYOL images. For more information about subscribing to Office for BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring\n            Your Own Windows Desktop Licenses</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Although this parameter is an array, only one item is allowed at this\n                  time.</p>\n               </li>\n               <li>\n                  <p>During the image import process, non-GPU WSP WorkSpaces with Windows 11 support\n                  only <code>Microsoft_Office_2019</code>. GPU WSP WorkSpaces with Windows 11 do not\n                  support Office installation.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -10709,6 +10709,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BYOL_REGULAR_WSP"
+                    }
+                },
+                "BYOL_GRAPHICS_G4DN_WSP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOL_GRAPHICS_G4DN_WSP"
                     }
                 },
                 "BYOL_REGULAR_BYOP": {

@@ -1696,27 +1696,27 @@
                 "nodeName": {
                     "target": "com.amazonaws.bedrockagentruntime#NodeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the input of the flow input node.</p>",
+                        "smithy.api#documentation": "<p>The name of the flow input node that begins the prompt flow.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nodeOutputName": {
                     "target": "com.amazonaws.bedrockagentruntime#NodeOutputName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the output of the flow input node.</p>",
+                        "smithy.api#documentation": "<p>The name of the output from the flow input node that begins the prompt flow.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "content": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowInputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about an input into the flow.</p>",
+                        "smithy.api#documentation": "<p>Contains information about an input into the prompt flow.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an input into the flow and what to do with it.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax\">InvokeFlow request</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about an input into the prompt flow and where to send it.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax\">InvokeFlow request</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowInputContent": {
@@ -1725,7 +1725,7 @@
                 "document": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input for the flow input node.</p>"
+                        "smithy.api#documentation": "<p>The input to send to the prompt flow input node.</p>"
                     }
                 }
             },
@@ -1752,12 +1752,12 @@
                 "document": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the output of the flow.</p>"
+                        "smithy.api#documentation": "<p>The content in the output.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the output node.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax\">InvokeFlow request</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about the content in an output from prompt flow invocation.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax\">InvokeFlow request</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowOutputEvent": {
@@ -1766,27 +1766,27 @@
                 "nodeName": {
                     "target": "com.amazonaws.bedrockagentruntime#NodeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the node to which input was provided.</p>",
+                        "smithy.api#documentation": "<p>The name of the flow output node that the output is from.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nodeType": {
                     "target": "com.amazonaws.bedrockagentruntime#NodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of node to which input was provided.</p>",
+                        "smithy.api#documentation": "<p>The type of the node that the output is from.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "content": {
                     "target": "com.amazonaws.bedrockagentruntime#FlowOutputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output of the node.</p>",
+                        "smithy.api#documentation": "<p>The content in the output.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an output from flow invoction.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax\">InvokeFlow response</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Contains information about an output from prompt flow invoction.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax\">InvokeFlow response</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2938,7 +2938,7 @@
                 "topP": {
                     "target": "com.amazonaws.bedrockagentruntime#TopP",
                     "traits": {
-                        "smithy.api#documentation": "<p>While generating a response, the model determines the probability of the following token at each point of generation. The value that you set for <code>Top P</code> determines the number of most-likely candidates from which the model chooses the next token in the sequence. For example, if you set <code>topP</code> to 80, the model only selects the next token from the top 80% of the probability distribution of next tokens.</p>"
+                        "smithy.api#documentation": "<p>While generating a response, the model determines the probability of the following token at each point of generation. The value that you set for <code>Top P</code> determines the number of most-likely candidates from which the model chooses the next token in the sequence. For example, if you set <code>topP</code> to 0.8, the model only selects the next token from the top 80% of the probability distribution of next tokens.</p>"
                     }
                 },
                 "topK": {
@@ -3334,7 +3334,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html\">Test a flow in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Invokes an alias of a flow to run the inputs that you specify and return the output of each node as a stream. If there's an error, the error is returned. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html\">Test a flow in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n         <note>\n            <p>The CLI doesn't support streaming operations in Amazon Bedrock, including <code>InvokeFlow</code>.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3750,6 +3750,21 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#Metadata": {
+            "type": "structure",
+            "members": {
+                "usage": {
+                    "target": "com.amazonaws.bedrockagentruntime#Usage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details of the foundation model usage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details of the foundation model.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#MimeType": {
             "type": "string"
         },
@@ -3945,6 +3960,33 @@
                 "smithy.api#documentation": "<p>Settings for how the model processes the prompt prior to retrieval and generation.</p>"
             }
         },
+        "com.amazonaws.bedrockagentruntime#OrchestrationModelInvocationOutput": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the trace.</p>"
+                    }
+                },
+                "rawResponse": {
+                    "target": "com.amazonaws.bedrockagentruntime#RawResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details of the raw response from the foundation model output.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the foundation model output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The foundation model output from the orchestration step.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#OrchestrationTrace": {
             "type": "union",
             "members": {
@@ -3970,6 +4012,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#ModelInvocationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The input for the orchestration step.</p>\n         <ul>\n            <li>\n               <p>The <code>type</code> is <code>ORCHESTRATION</code>.</p>\n            </li>\n            <li>\n               <p>The <code>text</code> contains the prompt.</p>\n            </li>\n            <li>\n               <p>The <code>inferenceConfiguration</code>, <code>parserMode</code>, and <code>overrideLambda</code> values are set in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> object that was set when the agent was created or updated.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "modelInvocationOutput": {
+                    "target": "com.amazonaws.bedrockagentruntime#OrchestrationModelInvocationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information pertaining to the output from the foundation model that is being invoked.</p>"
                     }
                 }
             },
@@ -4351,6 +4399,21 @@
         "com.amazonaws.bedrockagentruntime#RationaleString": {
             "type": "string",
             "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#RawResponse": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The foundation model's raw output content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the raw output from the foundation model.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -5639,6 +5702,27 @@
                         "smithy.api#enumValue": "REPROMPT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Usage": {
+            "type": "structure",
+            "members": {
+                "inputTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the input tokens from the foundation model usage.</p>"
+                    }
+                },
+                "outputTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the output tokens from the foundation model usage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information of the usage of the foundation model.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#ValidationException": {

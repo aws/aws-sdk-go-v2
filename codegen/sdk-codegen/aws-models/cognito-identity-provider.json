@@ -366,7 +366,7 @@
                     "name": "cognito-idp"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>With the Amazon Cognito user pools API, you can configure user pools and authenticate users. To\n            authenticate users from third-party identity providers (IdPs) in this API, you can\n                <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html\">link IdP users to native user profiles</a>. Learn more\n            about the authentication and authorization of federated users at <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html\">Adding user pool sign-in through a third party</a> and in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-userpools-server-contract-reference.html\">User pool federation endpoints and hosted UI reference</a>.</p>\n         <p>This API reference provides detailed information about API operations and object types\n            in Amazon Cognito.</p>\n         <p>Along with resource management operations, the Amazon Cognito user pools API includes classes\n            of operations and authorization models for client-side and server-side authentication of\n            users. You can interact with operations in the Amazon Cognito user pools API as any of the\n            following subjects.</p>\n         <ol>\n            <li>\n               <p>An administrator who wants to configure user pools, app clients, users,\n                    groups, or other user pool functions.</p>\n            </li>\n            <li>\n               <p>A server-side app, like a web application, that wants to use its Amazon Web Services\n                    privileges to manage, authenticate, or authorize a user.</p>\n            </li>\n            <li>\n               <p>A client-side app, like a mobile app, that wants to make unauthenticated\n                    requests to manage, authenticate, or authorize a user.</p>\n            </li>\n         </ol>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n            in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <p>With your Amazon Web Services SDK, you can build the logic to support operational flows in every use\n            case for this API. You can also make direct REST API requests to <a href=\"https://docs.aws.amazon.com/general/latest/gr/cognito_identity.html#cognito_identity_your_user_pools_region\">Amazon Cognito user pools service endpoints</a>. The following links can get you started\n            with the <code>CognitoIdentityProvider</code> client in other supported Amazon Web Services\n            SDKs.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html#cli-aws-cognito-idp\">Amazon Web Services\n                        Command Line Interface</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/CognitoIdentityProvider/TCognitoIdentityProviderClient.html\">Amazon Web Services SDK for .NET</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-cognito-idp/html/class_aws_1_1_cognito_identity_provider_1_1_cognito_identity_provider_client.html\">Amazon Web Services SDK for C++</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-go/api/service/cognitoidentityprovider/#CognitoIdentityProvider\">Amazon Web Services SDK for Go</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/cognitoidentityprovider/CognitoIdentityProviderClient.html\">Amazon Web Services SDK for Java V2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html\">Amazon Web Services\n                        SDK for JavaScript</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-cognito-idp-2016-04-18.html\">Amazon Web Services SDK for PHP\n                        V3</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cognito-idp.html\">Amazon Web Services SDK for Python</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html\">Amazon Web Services SDK\n                        for Ruby V3</a>\n               </p>\n            </li>\n         </ul>\n         <p>To get started with an Amazon Web Services SDK, see <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on Amazon Web Services</a>. For example actions and scenarios, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/service_code_examples_cognito-identity-provider.html\">Code examples for Amazon Cognito Identity Provider using Amazon Web Services\n                SDKs</a>.</p>",
+                "smithy.api#documentation": "<p>With the Amazon Cognito user pools API, you can configure user pools and authenticate users. To\n            authenticate users from third-party identity providers (IdPs) in this API, you can\n            <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html\">link IdP users to native user profiles</a>. Learn more\n            about the authentication and authorization of federated users at <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html\">Adding user pool sign-in through a third party</a> and in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-userpools-server-contract-reference.html\">User pool federation endpoints and hosted UI reference</a>.</p>\n         <p>This API reference provides detailed information about API operations and object types\n            in Amazon Cognito.</p>\n         <p>Along with resource management operations, the Amazon Cognito user pools API includes classes\n            of operations and authorization models for client-side and server-side authentication of\n            users. You can interact with operations in the Amazon Cognito user pools API as any of the\n            following subjects.</p>\n         <ol>\n            <li>\n               <p>An administrator who wants to configure user pools, app clients, users,\n                    groups, or other user pool functions.</p>\n            </li>\n            <li>\n               <p>A server-side app, like a web application, that wants to use its Amazon Web Services\n                    privileges to manage, authenticate, or authorize a user.</p>\n            </li>\n            <li>\n               <p>A client-side app, like a mobile app, that wants to make unauthenticated\n                    requests to manage, authenticate, or authorize a user.</p>\n            </li>\n         </ol>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n            in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <p>With your Amazon Web Services SDK, you can build the logic to support operational flows in every use\n            case for this API. You can also make direct REST API requests to <a href=\"https://docs.aws.amazon.com/general/latest/gr/cognito_identity.html#cognito_identity_your_user_pools_region\">Amazon Cognito user pools service endpoints</a>. The following links can get you started\n            with the <code>CognitoIdentityProvider</code> client in other supported Amazon Web Services\n            SDKs.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html#cli-aws-cognito-idp\">Amazon Web Services\n                    Command Line Interface</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/CognitoIdentityProvider/TCognitoIdentityProviderClient.html\">Amazon Web Services SDK for .NET</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-cognito-idp/html/class_aws_1_1_cognito_identity_provider_1_1_cognito_identity_provider_client.html\">Amazon Web Services SDK for C++</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-go/api/service/cognitoidentityprovider/#CognitoIdentityProvider\">Amazon Web Services SDK for Go</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/cognitoidentityprovider/CognitoIdentityProviderClient.html\">Amazon Web Services SDK for Java V2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html\">Amazon Web Services\n                    SDK for JavaScript</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-cognito-idp-2016-04-18.html\">Amazon Web Services SDK for PHP\n                    V3</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cognito-idp.html\">Amazon Web Services SDK for Python</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html\">Amazon Web Services SDK\n                    for Ruby V3</a>\n               </p>\n            </li>\n         </ul>\n         <p>To get started with an Amazon Web Services SDK, see <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on Amazon Web Services</a>. For example actions and scenarios, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/service_code_examples_cognito-identity-provider.html\">Code examples for Amazon Cognito Identity Provider using Amazon Web Services\n                SDKs</a>.</p>",
                 "smithy.api#title": "Amazon Cognito Identity Provider",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cognito-idp.amazonaws.com/doc/2016-04-18/"
@@ -1570,7 +1570,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This IAM-authenticated API operation provides a code that Amazon Cognito sent to your user\n            when they signed up in your user pool. After your user enters their code, they confirm\n            ownership of the email address or phone number that they provided, and their user\n            account becomes active. Depending on your user pool configuration, your users will\n            receive their confirmation code in an email or SMS message.</p>\n         <p>Local users who signed up in your user pool are the only type of user who can confirm\n            sign-up with a code. Users who federate through an external identity provider (IdP) have\n            already been confirmed by their IdP. Administrator-created users confirm their accounts\n            when they respond to their invitation email message and choose a password.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>This IAM-authenticated API operation confirms user sign-up as an administrator.\n            Unlike <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmSignUp.html\">ConfirmSignUp</a>, your IAM credentials authorize user account confirmation.\n            No confirmation code is required.</p>\n         <p>This request sets a user account active in a user pool that <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#signing-up-users-in-your-app-and-confirming-them-as-admin\">requires confirmation of new user accounts</a> before they can sign in. You can\n            configure your user pool to not send confirmation codes to new users and instead confirm\n            them with this API operation on the back end.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AdminConfirmSignUpRequest": {
@@ -3117,6 +3117,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -3334,6 +3337,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -3940,7 +3946,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA)\n            for a user, with a unique private key that Amazon Cognito generates and returns in the API\n            response. You can authorize an <code>AssociateSoftwareToken</code> request with either\n            the user's access token, or a session string from a challenge response that you received\n            from Amazon Cognito.</p>\n         <note>\n            <p>Amazon Cognito disassociates an existing software token when you verify the new token in a\n                    <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html\"> VerifySoftwareToken</a> API request. If you don't verify the software\n                token and your user pool doesn't require MFA, the user can then authenticate with\n                user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito\n                generates an <code>MFA_SETUP</code> or <code>SOFTWARE_TOKEN_SETUP</code> challenge\n                each time your user signs. Complete setup with <code>AssociateSoftwareToken</code>\n                and <code>VerifySoftwareToken</code>.</p>\n            <p>After you set up software token MFA for your user, Amazon Cognito generates a\n                    <code>SOFTWARE_TOKEN_MFA</code> challenge when they authenticate. Respond to\n                this challenge with your user's TOTP.</p>\n         </note>\n         <note>\n            <p>Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you can't use IAM credentials to authorize requests, and you can't\n    grant IAM permissions in policies. For more information about authorization models in\n    Amazon Cognito, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA)\n            for a user, with a unique private key that Amazon Cognito generates and returns in the API\n            response. You can authorize an <code>AssociateSoftwareToken</code> request with either\n            the user's access token, or a session string from a challenge response that you received\n            from Amazon Cognito.</p>\n         <note>\n            <p>Amazon Cognito disassociates an existing software token when you verify the new token in a\n                    <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html\"> VerifySoftwareToken</a> API request. If you don't verify the software\n                token and your user pool doesn't require MFA, the user can then authenticate with\n                user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito\n                generates an <code>MFA_SETUP</code> or <code>SOFTWARE_TOKEN_SETUP</code> challenge\n                each time your user signs in. Complete setup with\n                    <code>AssociateSoftwareToken</code> and <code>VerifySoftwareToken</code>.</p>\n            <p>After you set up software token MFA for your user, Amazon Cognito generates a\n                    <code>SOFTWARE_TOKEN_MFA</code> challenge when they authenticate. Respond to\n                this challenge with your user's TOTP.</p>\n         </note>\n         <note>\n            <p>Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you can't use IAM credentials to authorize requests, and you can't\n    grant IAM permissions in policies. For more information about authorization models in\n    Amazon Cognito, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>.</p>\n         </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -4481,6 +4487,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -4607,7 +4616,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The CloudWatch logging destination of a user pool detailed activity logging\n            configuration.</p>"
+                "smithy.api#documentation": "<p>Configuration for the CloudWatch log group destination of user pool detailed activity\n            logging, or of user activity log export with advanced security features.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#CodeDeliveryDetailsListType": {
@@ -4894,6 +4903,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -6297,7 +6309,7 @@
                 "PreventUserExistenceErrors": {
                     "target": "com.amazonaws.cognitoidentityprovider#PreventUserExistenceErrorTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Errors and responses that you want Amazon Cognito APIs to return during authentication, account\n            confirmation, and password recovery when the user doesn't exist in the user pool. When\n            set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error\n            indicating either the username or password was incorrect. Account confirmation and\n            password recovery return a response indicating a code was sent to a simulated\n            destination. When set to <code>LEGACY</code>, those APIs return a\n                <code>UserNotFoundException</code> exception if the user doesn't exist in the user\n            pool.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGACY</code> - This represents the early behavior of Amazon Cognito where user\n                    existence related errors aren't prevented.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Errors and responses that you want Amazon Cognito APIs to return during authentication, account\n            confirmation, and password recovery when the user doesn't exist in the user pool. When\n            set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error\n            indicating either the username or password was incorrect. Account confirmation and\n            password recovery return a response indicating a code was sent to a simulated\n            destination. When set to <code>LEGACY</code>, those APIs return a\n                <code>UserNotFoundException</code> exception if the user doesn't exist in the user\n            pool.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGACY</code> - This represents the early behavior of Amazon Cognito where user\n                    existence related errors aren't prevented.</p>\n            </li>\n         </ul>\n         <p>Defaults to <code>LEGACY</code> when you don't provide a value.</p>"
                     }
                 },
                 "EnableTokenRevocation": {
@@ -8188,6 +8200,12 @@
                     "traits": {
                         "smithy.api#enumValue": "userNotification"
                     }
+                },
+                "USER_AUTH_EVENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "userAuthEvents"
+                    }
                 }
             }
         },
@@ -8316,6 +8334,20 @@
                         "smithy.api#enumValue": "Invalid"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#FirehoseConfigurationType": {
+            "type": "structure",
+            "members": {
+                "StreamArn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an Amazon Data Firehose stream that's the destination for advanced security\n            features log export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for the Amazon Data Firehose stream destination of user activity log export with\n            advanced security features.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ForbiddenException": {
@@ -8844,7 +8876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the detailed activity logging configuration for a user pool.</p>"
+                "smithy.api#documentation": "<p>Gets the logging configuration of a user pool.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#GetLogDeliveryConfigurationRequest": {
@@ -8853,7 +8885,7 @@
                 "UserPoolId": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user pool where you want to view detailed activity logging\n            configuration.</p>",
+                        "smithy.api#documentation": "<p>The ID of the user pool that has the logging configuration that you want to\n            view.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8868,7 +8900,7 @@
                 "LogDeliveryConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#LogDeliveryConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detailed activity logging configuration of the requested user pool.</p>"
+                        "smithy.api#documentation": "<p>The logging configuration of the requested user pool.</p>"
                     }
                 }
             },
@@ -9890,7 +9922,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the trust relationship is not valid for the role\n            provided for SMS configuration. This can happen if you don't trust\n                <code>cognito-idp.amazonaws.com</code> or the external ID provided in the role does\n            not match what is provided in the SMS configuration for the user pool.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when the trust relationship is not valid for the role\n            provided for SMS configuration. This can happen if you don't trust\n            <code>cognito-idp.amazonaws.com</code> or the external ID provided in the role does\n            not match what is provided in the SMS configuration for the user pool.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -10962,7 +10994,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1
+                    "max": 2
                 }
             }
         },
@@ -10972,21 +11004,33 @@
                 "LogLevel": {
                     "target": "com.amazonaws.cognitoidentityprovider#LogLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>errorlevel</code> selection of logs that a user pool sends for detailed\n            activity logging.</p>",
+                        "smithy.api#documentation": "<p>The <code>errorlevel</code> selection of logs that a user pool sends for detailed\n            activity logging. To send <code>userNotification</code> activity with <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/tracking-quotas-and-usage-in-cloud-watch-logs.html\">information about message delivery</a>, choose <code>ERROR</code> with\n                <code>CloudWatchLogsConfiguration</code>. To send <code>userAuthEvents</code>\n            activity with user logs from advanced security features, choose <code>INFO</code> with\n            one of <code>CloudWatchLogsConfiguration</code>, <code>FirehoseConfiguration</code>, or\n                <code>S3Configuration</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EventSource": {
                     "target": "com.amazonaws.cognitoidentityprovider#EventSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of events that your user pool sends for detailed activity logging.</p>",
+                        "smithy.api#documentation": "<p>The source of events that your user pool sends for logging. To send error-level logs\n            about user notification activity, set to <code>userNotification</code>. To send\n            info-level logs about advanced security features user activity, set to\n                <code>userAuthEvents</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CloudWatchLogsConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#CloudWatchLogsConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CloudWatch logging destination of a user pool.</p>"
+                        "smithy.api#documentation": "<p>The CloudWatch log group destination of user pool detailed activity logs, or of user\n            activity log export with advanced security features.</p>"
+                    }
+                },
+                "S3Configuration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#S3ConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket destination of user activity log export with advanced security\n            features. To activate this setting, <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html\">\n                     advanced security features</a> must be active in your user pool.</p>"
+                    }
+                },
+                "FirehoseConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#FirehoseConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Data Firehose stream destination of user activity log export with advanced security\n            features. To activate this setting, <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html\">\n                     advanced security features</a> must be active in your user pool.</p>"
                     }
                 }
             },
@@ -11000,20 +11044,20 @@
                 "UserPoolId": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user pool where you configured detailed activity logging.</p>",
+                        "smithy.api#documentation": "<p>The ID of the user pool where you configured logging.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LogConfigurations": {
                     "target": "com.amazonaws.cognitoidentityprovider#LogConfigurationListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detailed activity logging destination of a user pool.</p>",
+                        "smithy.api#documentation": "<p>A logging destination of a user pool. User pools can have multiple logging\n            destinations for message-delivery and user-activity logs.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The logging parameters of a user pool.</p>"
+                "smithy.api#documentation": "<p>The logging parameters of a user pool returned in response to\n                <code>GetLogDeliveryConfiguration</code>.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#LogLevel": {
@@ -11023,6 +11067,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
                     }
                 }
             }
@@ -11315,6 +11365,28 @@
                 "smithy.api#pattern": "^[\\S]+$"
             }
         },
+        "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MessageType"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message returned when a user's new password matches a previous password and \n            doesn't comply with the password-history policy.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#PasswordHistorySizeType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 24
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#PasswordPolicyMinLengthType": {
             "type": "integer",
             "traits": {
@@ -11359,6 +11431,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>In the password policy that you have set, refers to whether you have required users to\n            use at least one symbol in their password.</p>"
+                    }
+                },
+                "PasswordHistorySize": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHistorySizeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of previous passwords that you want Amazon Cognito to restrict each user from\n            reusing. Users can't set a password that matches any of <code>n</code> previous\n            passwords, where <code>n</code> is the value of <code>PasswordHistorySize</code>.</p>\n         <p>Password history isn't enforced and isn't displayed in <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html\">DescribeUserPool</a> responses when you set this value to\n                <code>0</code> or don't provide it. To activate this setting, <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html\">\n                     advanced security features</a> must be active in your user pool.</p>"
                     }
                 },
                 "TemporaryPasswordValidityDays": {
@@ -12009,6 +12087,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -12307,6 +12388,16 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#S3ArnType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:::[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?$"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#S3BucketType": {
             "type": "string",
             "traits": {
@@ -12315,6 +12406,20 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*(?<!\\.)$"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#S3ConfigurationType": {
+            "type": "structure",
+            "members": {
+                "BucketArn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#S3ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an Amazon S3 bucket that's the destination for advanced security features\n            log export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for the Amazon S3 bucket destination of user activity log export with\n            advanced security features.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SESConfigurationSet": {
@@ -12521,7 +12626,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets up or modifies the detailed activity logging configuration of a user pool.</p>"
+                "smithy.api#documentation": "<p>Sets up or modifies the logging configuration of a user pool. User pools can export\n            user notification logs and advanced security features user activity logs.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SetLogDeliveryConfigurationRequest": {
@@ -12530,14 +12635,14 @@
                 "UserPoolId": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the user pool where you want to configure detailed activity logging .</p>",
+                        "smithy.api#documentation": "<p>The ID of the user pool where you want to configure logging.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LogConfigurations": {
                     "target": "com.amazonaws.cognitoidentityprovider#LogConfigurationListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of all of the detailed activity logging configurations for a user\n            pool.</p>",
+                        "smithy.api#documentation": "<p>A collection of the logging configurations for a user pool.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13121,7 +13226,7 @@
                 "UserSub": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The UUID of the authenticated user. This isn't the same as\n            <code>username</code>.</p>",
+                        "smithy.api#documentation": "<p>The 128-bit ID of the authenticated user. This isn't the same as\n            <code>username</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14567,7 +14672,7 @@
                 "PreventUserExistenceErrors": {
                     "target": "com.amazonaws.cognitoidentityprovider#PreventUserExistenceErrorTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Errors and responses that you want Amazon Cognito APIs to return during authentication, account\n            confirmation, and password recovery when the user doesn't exist in the user pool. When\n            set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error\n            indicating either the username or password was incorrect. Account confirmation and\n            password recovery return a response indicating a code was sent to a simulated\n            destination. When set to <code>LEGACY</code>, those APIs return a\n                <code>UserNotFoundException</code> exception if the user doesn't exist in the user\n            pool.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGACY</code> - This represents the early behavior of Amazon Cognito where user\n                    existence related errors aren't prevented.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Errors and responses that you want Amazon Cognito APIs to return during authentication, account\n            confirmation, and password recovery when the user doesn't exist in the user pool. When\n            set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error\n            indicating either the username or password was incorrect. Account confirmation and\n            password recovery return a response indicating a code was sent to a simulated\n            destination. When set to <code>LEGACY</code>, those APIs return a\n                <code>UserNotFoundException</code> exception if the user doesn't exist in the user\n            pool.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGACY</code> - This represents the early behavior of Amazon Cognito where user\n                    existence related errors aren't prevented.</p>\n            </li>\n         </ul>\n         <p>Defaults to <code>LEGACY</code> when you don't provide a value.</p>"
                     }
                 },
                 "EnableTokenRevocation": {
@@ -15297,7 +15402,7 @@
                 "PreventUserExistenceErrors": {
                     "target": "com.amazonaws.cognitoidentityprovider#PreventUserExistenceErrorTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Errors and responses that you want Amazon Cognito APIs to return during authentication, account\n            confirmation, and password recovery when the user doesn't exist in the user pool. When\n            set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error\n            indicating either the username or password was incorrect. Account confirmation and\n            password recovery return a response indicating a code was sent to a simulated\n            destination. When set to <code>LEGACY</code>, those APIs return a\n                <code>UserNotFoundException</code> exception if the user doesn't exist in the user\n            pool.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGACY</code> - This represents the old behavior of Amazon Cognito where user\n                    existence related errors aren't prevented.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Errors and responses that you want Amazon Cognito APIs to return during authentication, account\n            confirmation, and password recovery when the user doesn't exist in the user pool. When\n            set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error\n            indicating either the username or password was incorrect. Account confirmation and\n            password recovery return a response indicating a code was sent to a simulated\n            destination. When set to <code>LEGACY</code>, those APIs return a\n                <code>UserNotFoundException</code> exception if the user doesn't exist in the user\n            pool.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGACY</code> - This represents the early behavior of Amazon Cognito where user\n                    existence related errors aren't prevented.</p>\n            </li>\n         </ul>\n         <p>Defaults to <code>LEGACY</code> when you don't provide a value.</p>"
                     }
                 },
                 "EnableTokenRevocation": {
