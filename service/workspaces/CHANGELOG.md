@@ -1,3 +1,7 @@
+# v1.45.0 (2024-08-06)
+
+* **Feature**: Added support for BYOL_GRAPHICS_G4DN_WSP IngestionProcess
+
 # v1.44.3 (2024-07-30)
 
 * **Documentation**: Removing multi-session as it isn't supported for pools

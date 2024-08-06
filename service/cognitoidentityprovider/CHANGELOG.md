@@ -1,3 +1,7 @@
+# v1.42.0 (2024-08-06)
+
+* **Feature**: Advanced security feature updates to include password history and log export for Cognito user pools.
+
 # v1.41.4 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

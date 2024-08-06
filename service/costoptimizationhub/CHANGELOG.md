@@ -1,3 +1,7 @@
+# v1.8.0 (2024-08-06)
+
+* **Feature**: This release adds savings percentage support to the ListRecommendationSummaries API.
+
 # v1.7.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

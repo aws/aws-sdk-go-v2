@@ -1,3 +1,15 @@
+# Release (2024-08-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.16.0](service/bedrockagentruntime/CHANGELOG.md#v1160-2024-08-06)
+  * **Feature**: Introduce model invocation output traces for orchestration traces, which contain the model's raw response and usage.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.42.0](service/cognitoidentityprovider/CHANGELOG.md#v1420-2024-08-06)
+  * **Feature**: Advanced security feature updates to include password history and log export for Cognito user pools.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.8.0](service/costoptimizationhub/CHANGELOG.md#v180-2024-08-06)
+  * **Feature**: This release adds savings percentage support to the ListRecommendationSummaries API.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.45.0](service/workspaces/CHANGELOG.md#v1450-2024-08-06)
+  * **Feature**: Added support for BYOL_GRAPHICS_G4DN_WSP IngestionProcess
+
 # Release (2024-08-05)
 
 ## Module Highlights

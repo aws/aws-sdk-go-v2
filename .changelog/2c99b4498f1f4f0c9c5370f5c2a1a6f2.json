@@ -1,8 +1,0 @@
-{
-    "id": "2c99b449-8f1f-4f0c-9c53-70f5c2a1a6f2",
-    "type": "feature",
-    "description": "Introduce model invocation output traces for orchestration traces, which contain the model's raw response and usage.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

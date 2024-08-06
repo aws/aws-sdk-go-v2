@@ -1,8 +1,0 @@
-{
-    "id": "9f052fd4-047c-44fe-90c2-a46844f0ebac",
-    "type": "feature",
-    "description": "Advanced security feature updates to include password history and log export for Cognito user pools.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}
