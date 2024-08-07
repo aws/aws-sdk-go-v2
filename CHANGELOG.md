@@ -1,3 +1,11 @@
+# Release (2024-08-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.28.0](service/appintegrations/CHANGELOG.md#v1280-2024-08-07)
+  * **Feature**: Updated CreateDataIntegration and CreateDataIntegrationAssociation API to support bulk data export from Amazon Connect Customer Profiles to the customer S3 bucket.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.92.0](service/glue/CHANGELOG.md#v1920-2024-08-07)
+  * **Feature**: Introducing AWS Glue Data Quality anomaly detection, a new functionality that uses ML-based solutions to detect data anomalies users have not explicitly defined rules for.
+
 # Release (2024-08-06)
 
 ## Module Highlights

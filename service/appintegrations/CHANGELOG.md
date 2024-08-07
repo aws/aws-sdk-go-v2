@@ -1,3 +1,7 @@
+# v1.28.0 (2024-08-07)
+
+* **Feature**: Updated CreateDataIntegration and CreateDataIntegrationAssociation API to support bulk data export from Amazon Connect Customer Profiles to the customer S3 bucket.
+
 # v1.27.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

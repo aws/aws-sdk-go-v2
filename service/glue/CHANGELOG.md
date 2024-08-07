@@ -1,3 +1,7 @@
+# v1.92.0 (2024-08-07)
+
+* **Feature**: Introducing AWS Glue Data Quality anomaly detection, a new functionality that uses ML-based solutions to detect data anomalies users have not explicitly defined rules for.
+
 # v1.91.0 (2024-07-10.2)
 
 * **Feature**: Add recipe step support for recipe node
