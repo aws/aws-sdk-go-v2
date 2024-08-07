@@ -51,6 +51,10 @@ type StartDataQualityRuleRecommendationRunInput struct {
 	// A name for the ruleset.
 	CreatedRulesetName *string
 
+	// The name of the security configuration created with the data quality encryption
+	// option.
+	DataQualitySecurityConfiguration *string
+
 	// The number of G.1X workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
 

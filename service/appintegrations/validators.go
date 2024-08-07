@@ -30,6 +30,26 @@ func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataIntegrationAssociation struct {
+}
+
+func (*validateOpCreateDataIntegrationAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataIntegrationAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataIntegrationAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataIntegrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataIntegration struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataIntegrationAssociation struct {
+}
+
+func (*validateOpUpdateDataIntegrationAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataIntegrationAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataIntegrationAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataIntegrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataIntegration struct {
 }
 
@@ -372,6 +412,10 @@ func (m *validateOpUpdateEventIntegration) HandleInitialize(ctx context.Context,
 
 func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
+}
+
+func addOpCreateDataIntegrationAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataIntegrationAssociation{}, middleware.After)
 }
 
 func addOpCreateDataIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -434,6 +478,10 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
+func addOpUpdateDataIntegrationAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataIntegrationAssociation{}, middleware.After)
+}
+
 func addOpUpdateDataIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataIntegration{}, middleware.After)
 }
@@ -474,6 +522,31 @@ func validateEventFilter(v *types.EventFilter) error {
 	}
 }
 
+func validateExecutionConfiguration(v *types.ExecutionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecutionConfiguration"}
+	if len(v.ExecutionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionMode"))
+	}
+	if v.OnDemandConfiguration != nil {
+		if err := validateOnDemandConfiguration(v.OnDemandConfiguration); err != nil {
+			invalidParams.AddNested("OnDemandConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScheduleConfiguration != nil {
+		if err := validateScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExternalUrlConfig(v *types.ExternalUrlConfig) error {
 	if v == nil {
 		return nil
@@ -496,6 +569,21 @@ func validateFileConfiguration(v *types.FileConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FileConfiguration"}
 	if v.Folders == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Folders"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOnDemandConfiguration(v *types.OnDemandConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnDemandConfiguration"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -621,6 +709,26 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 	}
 }
 
+func validateOpCreateDataIntegrationAssociationInput(v *CreateDataIntegrationAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataIntegrationAssociationInput"}
+	if v.DataIntegrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataIntegrationIdentifier"))
+	}
+	if v.ExecutionConfiguration != nil {
+		if err := validateExecutionConfiguration(v.ExecutionConfiguration); err != nil {
+			invalidParams.AddNested("ExecutionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataIntegrationInput(v *CreateDataIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -631,9 +739,6 @@ func validateOpCreateDataIntegrationInput(v *CreateDataIntegrationInput) error {
 	}
 	if v.KmsKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KmsKey"))
-	}
-	if v.SourceURI == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceURI"))
 	}
 	if v.ScheduleConfig != nil {
 		if err := validateScheduleConfiguration(v.ScheduleConfig); err != nil {
@@ -884,6 +989,31 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	if v.Publications != nil {
 		if err := validatePublicationList(v.Publications); err != nil {
 			invalidParams.AddNested("Publications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDataIntegrationAssociationInput(v *UpdateDataIntegrationAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataIntegrationAssociationInput"}
+	if v.DataIntegrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataIntegrationIdentifier"))
+	}
+	if v.DataIntegrationAssociationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataIntegrationAssociationIdentifier"))
+	}
+	if v.ExecutionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionConfiguration"))
+	} else if v.ExecutionConfiguration != nil {
+		if err := validateExecutionConfiguration(v.ExecutionConfiguration); err != nil {
+			invalidParams.AddNested("ExecutionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

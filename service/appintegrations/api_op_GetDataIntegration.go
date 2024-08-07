@@ -48,7 +48,7 @@ type GetDataIntegrationOutput struct {
 	// The Amazon Resource Name (ARN) for the DataIntegration.
 	Arn *string
 
-	// The KMS key for the DataIntegration.
+	// The KMS key ARN for the DataIntegration.
 	Description *string
 
 	// The configuration for what files should be pulled from the source.
@@ -57,7 +57,7 @@ type GetDataIntegrationOutput struct {
 	// A unique identifier.
 	Id *string
 
-	// The KMS key for the DataIntegration.
+	// The KMS key ARN for the DataIntegration.
 	KmsKey *string
 
 	// The name of the DataIntegration.

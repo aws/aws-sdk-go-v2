@@ -46,6 +46,10 @@ type GetDataQualityRuleRecommendationRunOutput struct {
 	// The name of the ruleset that was created by the run.
 	CreatedRulesetName *string
 
+	// The name of the security configuration created with the data quality encryption
+	// option.
+	DataQualitySecurityConfiguration *string
+
 	// The data source (an Glue table) associated with this run.
 	DataSource *types.DataSource
 

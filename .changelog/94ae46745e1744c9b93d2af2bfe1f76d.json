@@ -1,0 +1,8 @@
+{
+    "id": "94ae4674-5e17-44c9-b93d-2af2bfe1f76d",
+    "type": "feature",
+    "description": "Updated CreateDataIntegration and CreateDataIntegrationAssociation API to support bulk data export from Amazon Connect Customer Profiles to the customer S3 bucket.",
+    "modules": [
+        "service/appintegrations"
+    ]
+}

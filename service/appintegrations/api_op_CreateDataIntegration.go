@@ -33,7 +33,7 @@ func (c *Client) CreateDataIntegration(ctx context.Context, params *CreateDataIn
 
 type CreateDataIntegrationInput struct {
 
-	// The KMS key for the DataIntegration.
+	// The KMS key ARN for the DataIntegration.
 	//
 	// This member is required.
 	KmsKey *string
@@ -42,11 +42,6 @@ type CreateDataIntegrationInput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// The URI of the data source.
-	//
-	// This member is required.
-	SourceURI *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
@@ -66,6 +61,9 @@ type CreateDataIntegrationInput struct {
 
 	// The name of the data and how often it should be pulled from the source.
 	ScheduleConfig *types.ScheduleConfiguration
+
+	// The URI of the data source.
+	SourceURI *string
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
@@ -95,7 +93,7 @@ type CreateDataIntegrationOutput struct {
 	// A unique identifier.
 	Id *string
 
-	// The KMS key for the DataIntegration.
+	// The KMS key ARN for the DataIntegration.
 	KmsKey *string
 
 	// The name of the DataIntegration.

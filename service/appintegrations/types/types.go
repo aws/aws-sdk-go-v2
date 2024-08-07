@@ -69,6 +69,15 @@ type DataIntegrationAssociationSummary struct {
 	// The Amazon Resource Name (ARN) of the DataIntegration association.
 	DataIntegrationAssociationArn *string
 
+	// The URI of the data destination.
+	DestinationURI *string
+
+	// The configuration for how the files should be pulled from the source.
+	ExecutionConfiguration *ExecutionConfiguration
+
+	// The execution status of the last job.
+	LastExecutionStatus *LastExecutionStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -147,6 +156,23 @@ type EventIntegrationAssociation struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for how the files should be pulled from the source.
+type ExecutionConfiguration struct {
+
+	// The mode for data import/export execution.
+	//
+	// This member is required.
+	ExecutionMode ExecutionMode
+
+	// The start and end time for data pull from the source.
+	OnDemandConfiguration *OnDemandConfiguration
+
+	// The name of the data and how often it should be pulled from the source.
+	ScheduleConfiguration *ScheduleConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The external URL source for the application.
 type ExternalUrlConfig struct {
 
@@ -171,6 +197,34 @@ type FileConfiguration struct {
 
 	// Restrictions for what files should be pulled from the source.
 	Filters map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+// The execution status of the last job.
+type LastExecutionStatus struct {
+
+	// The job status enum string.
+	ExecutionStatus ExecutionStatus
+
+	// The status message of a job.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The start and end time for data pull from the source.
+type OnDemandConfiguration struct {
+
+	// The start time for data pull from the source as an Unix/epoch string in
+	// milliseconds
+	//
+	// This member is required.
+	StartTime *string
+
+	// The end time for data pull from the source as an Unix/epoch string in
+	// milliseconds
+	EndTime *string
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,8 @@
+{
+    "id": "1e04c426-9eb1-413c-bd32-038d217c29cf",
+    "type": "feature",
+    "description": "Introducing AWS Glue Data Quality anomaly detection, a new functionality that uses ML-based solutions to detect data anomalies users have not explicitly defined rules for.",
+    "modules": [
+        "service/glue"
+    ]
+}

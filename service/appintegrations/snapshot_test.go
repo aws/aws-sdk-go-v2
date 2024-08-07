@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateDataIntegration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataIntegrationAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataIntegrationAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataIntegrationAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEventIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEventIntegration(context.Background(), nil, func(o *Options) {
@@ -302,6 +314,18 @@ func TestCheckSnapshot_UpdateDataIntegration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDataIntegrationAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataIntegrationAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataIntegrationAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEventIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEventIntegration(context.Background(), nil, func(o *Options) {
@@ -330,6 +354,18 @@ func TestUpdateSnapshot_CreateDataIntegration(t *testing.T) {
 	_, err := svc.CreateDataIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateDataIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataIntegrationAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataIntegrationAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataIntegrationAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -546,6 +582,18 @@ func TestUpdateSnapshot_UpdateDataIntegration(t *testing.T) {
 	_, err := svc.UpdateDataIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDataIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDataIntegrationAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataIntegrationAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataIntegrationAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

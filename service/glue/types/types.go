@@ -229,6 +229,21 @@ type AmazonRedshiftTarget struct {
 	noSmithyDocumentSerde
 }
 
+// A failed annotation.
+type AnnotationError struct {
+
+	// The reason why the annotation failed.
+	FailureReason *string
+
+	// The Profile ID for the failed annotation.
+	ProfileId *string
+
+	// The Statistic ID for the failed annotation.
+	StatisticId *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a transform that maps data property keys in the data source to data
 // property keys in the data target. You can rename keys, modify the data types for
 // keys, and choose which keys to drop from the dataset.
@@ -2545,6 +2560,21 @@ type DataLakePrincipal struct {
 	noSmithyDocumentSerde
 }
 
+// An Inclusion Annotation.
+type DatapointInclusionAnnotation struct {
+
+	// The inclusion annotation value to apply to the statistic.
+	InclusionAnnotation InclusionAnnotationValue
+
+	// The ID of the data quality profile the statistic belongs to.
+	ProfileId *string
+
+	// The Statistic ID.
+	StatisticId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the result of the evaluation of a data quality analyzer.
 type DataQualityAnalyzerResult struct {
 
@@ -2640,6 +2670,9 @@ type DataQualityResult struct {
 	// A list of DataQualityObservation objects representing the observations
 	// generated after evaluating the rules and analyzers.
 	Observations []DataQualityObservation
+
+	// The Profile ID for the data quality result.
+	ProfileId *string
 
 	// A unique result ID for the data quality result.
 	ResultId *string
@@ -2749,6 +2782,9 @@ type DataQualityRuleResult struct {
 
 	// A map of metrics associated with the evaluation of the rule.
 	EvaluatedMetrics map[string]float64
+
+	// The evaluated rule.
+	EvaluatedRule *string
 
 	// An evaluation message.
 	EvaluationMessage *string
@@ -5608,6 +5644,9 @@ type MetricBasedObservation struct {
 	// the data quality metric value.
 	NewRules []string
 
+	// The Statistic ID.
+	StatisticId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -6692,6 +6731,18 @@ type ResourceUri struct {
 
 	// The URI for accessing the resource.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// A run identifier.
+type RunIdentifier struct {
+
+	// The Job Run ID.
+	JobRunId *string
+
+	// The Run ID.
+	RunId *string
 
 	noSmithyDocumentSerde
 }
@@ -8164,6 +8215,88 @@ type StatementOutputData struct {
 	noSmithyDocumentSerde
 }
 
+// A Statistic Annotation.
+type StatisticAnnotation struct {
+
+	// The inclusion annotation applied to the statistic.
+	InclusionAnnotation *TimestampedInclusionAnnotation
+
+	// The Profile ID.
+	ProfileId *string
+
+	// The Statistic ID.
+	StatisticId *string
+
+	// The timestamp when the annotated statistic was recorded.
+	StatisticRecordedOn *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The statistic model result.
+type StatisticModelResult struct {
+
+	// The actual value.
+	ActualValue *float64
+
+	// The date.
+	Date *time.Time
+
+	// The inclusion annotation.
+	InclusionAnnotation InclusionAnnotationValue
+
+	// The lower bound.
+	LowerBound *float64
+
+	// The predicted value.
+	PredictedValue *float64
+
+	// The upper bound.
+	UpperBound *float64
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a statistic.
+type StatisticSummary struct {
+
+	// The list of columns referenced by the statistic.
+	ColumnsReferenced []string
+
+	// The value of the statistic.
+	DoubleValue float64
+
+	// The evaluation level of the statistic. Possible values: Dataset , Column ,
+	// Multicolumn .
+	EvaluationLevel StatisticEvaluationLevel
+
+	// The inclusion annotation for the statistic.
+	InclusionAnnotation *TimestampedInclusionAnnotation
+
+	// The Profile ID.
+	ProfileId *string
+
+	// The timestamp when the statistic was recorded.
+	RecordedOn *time.Time
+
+	// The list of datasets referenced by the statistic.
+	ReferencedDatasets []string
+
+	// The Run Identifier
+	RunIdentifier *RunIdentifier
+
+	// The Statistic ID.
+	StatisticId *string
+
+	// The name of the statistic.
+	StatisticName *string
+
+	// A StatisticPropertiesMap , which contains a NameString and DescriptionString
+	StatisticProperties map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the physical storage of table data.
 type StorageDescriptor struct {
 
@@ -8643,6 +8776,30 @@ type TaskRunSortCriteria struct {
 	//
 	// This member is required.
 	SortDirection SortDirectionType
+
+	noSmithyDocumentSerde
+}
+
+// A timestamped inclusion annotation.
+type TimestampedInclusionAnnotation struct {
+
+	// The timestamp when the inclusion annotation was last modified.
+	LastModifiedOn *time.Time
+
+	// The inclusion annotation value.
+	Value InclusionAnnotationValue
+
+	noSmithyDocumentSerde
+}
+
+// A timestamp filter.
+type TimestampFilter struct {
+
+	// The timestamp after which statistics should be included in the results.
+	RecordedAfter *time.Time
+
+	// The timestamp before which statistics should be included in the results.
+	RecordedBefore *time.Time
 
 	noSmithyDocumentSerde
 }

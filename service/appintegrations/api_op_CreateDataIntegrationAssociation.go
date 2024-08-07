@@ -11,38 +11,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates and persists an Application resource.
-func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
+// Creates and persists a DataIntegrationAssociation resource.
+func (c *Client) CreateDataIntegrationAssociation(ctx context.Context, params *CreateDataIntegrationAssociationInput, optFns ...func(*Options)) (*CreateDataIntegrationAssociationOutput, error) {
 	if params == nil {
-		params = &CreateApplicationInput{}
+		params = &CreateDataIntegrationAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApplication", params, optFns, c.addOperationCreateApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataIntegrationAssociation", params, optFns, c.addOperationCreateDataIntegrationAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateApplicationOutput)
+	out := result.(*CreateDataIntegrationAssociationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateApplicationInput struct {
+type CreateDataIntegrationAssociationInput struct {
 
-	// The configuration for where the application should be loaded from.
+	// A unique identifier for the DataIntegration.
 	//
 	// This member is required.
-	ApplicationSourceConfig *types.ApplicationSourceConfig
+	DataIntegrationIdentifier *string
 
-	// The name of the application.
-	//
-	// This member is required.
-	Name *string
+	// The mapping of metadata to be extracted from the data.
+	ClientAssociationMetadata map[string]string
 
-	// The namespace of the application.
-	//
-	// This member is required.
-	Namespace *string
+	// The identifier for the client that is associated with the DataIntegration
+	// association.
+	ClientId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
@@ -51,36 +48,25 @@ type CreateApplicationInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// The description of the application.
-	Description *string
+	// The URI of the data destination.
+	DestinationURI *string
 
-	// The configuration of events or requests that the application has access to.
-	Permissions []string
+	// The configuration for how the files should be pulled from the source.
+	ExecutionConfiguration *types.ExecutionConfiguration
 
-	// The events that the application publishes.
-	//
-	// Deprecated: Publications has been replaced with Permissions
-	Publications []types.Publication
-
-	// The events that the application subscribes.
-	//
-	// Deprecated: Subscriptions has been replaced with Permissions
-	Subscriptions []types.Subscription
-
-	// The tags used to organize, track, or control access for this resource. For
-	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
-	Tags map[string]string
+	// The configuration for what data should be pulled from the source.
+	ObjectConfiguration map[string]map[string][]string
 
 	noSmithyDocumentSerde
 }
 
-type CreateApplicationOutput struct {
+type CreateDataIntegrationAssociationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Application.
-	Arn *string
+	// The Amazon Resource Name (ARN) for the DataIntegration.
+	DataIntegrationArn *string
 
-	// A unique identifier for the Application.
-	Id *string
+	// A unique identifier. for the DataIntegrationAssociation.
+	DataIntegrationAssociationId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -88,19 +74,19 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDataIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataIntegrationAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataIntegrationAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApplication"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataIntegrationAssociation"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -149,13 +135,13 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateApplicationMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opCreateDataIntegrationAssociationMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateApplicationValidationMiddleware(stack); err != nil {
+	if err = addOpCreateDataIntegrationAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataIntegrationAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -176,24 +162,24 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-type idempotencyToken_initializeOpCreateApplication struct {
+type idempotencyToken_initializeOpCreateDataIntegrationAssociation struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpCreateApplication) ID() string {
+func (*idempotencyToken_initializeOpCreateDataIntegrationAssociation) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpCreateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpCreateDataIntegrationAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*CreateApplicationInput)
+	input, ok := in.Parameters.(*CreateDataIntegrationAssociationInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateApplicationInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateDataIntegrationAssociationInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -205,14 +191,14 @@ func (m *idempotencyToken_initializeOpCreateApplication) HandleInitialize(ctx co
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opCreateApplicationMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateApplication{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opCreateDataIntegrationAssociationMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataIntegrationAssociation{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opCreateApplication(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateDataIntegrationAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateApplication",
+		OperationName: "CreateDataIntegrationAssociation",
 	}
 }

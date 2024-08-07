@@ -48,6 +48,10 @@ type CreateDataQualityRulesetInput struct {
 	// UUID) to avoid creating or starting multiple instances of the same resource.
 	ClientToken *string
 
+	// The name of the security configuration created with the data quality encryption
+	// option.
+	DataQualitySecurityConfiguration *string
+
 	// A description of the data quality ruleset.
 	Description *string
 

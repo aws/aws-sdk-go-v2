@@ -65,6 +65,9 @@ type GetDataQualityResultOutput struct {
 	// generated after evaluating the rules and analyzers.
 	Observations []types.DataQualityObservation
 
+	// The Profile ID for the data quality result.
+	ProfileId *string
+
 	// A unique result ID for the data quality result.
 	ResultId *string
 

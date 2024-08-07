@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_CreateApplication.go",
         "api_op_CreateDataIntegration.go",
+        "api_op_CreateDataIntegrationAssociation.go",
         "api_op_CreateEventIntegration.go",
         "api_op_DeleteApplication.go",
         "api_op_DeleteDataIntegration.go",
@@ -28,6 +29,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateApplication.go",
         "api_op_UpdateDataIntegration.go",
+        "api_op_UpdateDataIntegrationAssociation.go",
         "api_op_UpdateEventIntegration.go",
         "auth.go",
         "deserializers.go",
@@ -42,6 +44,7 @@
         "protocol_test.go",
         "serializers.go",
         "snapshot_test.go",
+        "types/enums.go",
         "types/errors.go",
         "types/types.go",
         "validators.go"

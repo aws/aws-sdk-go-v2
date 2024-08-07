@@ -650,6 +650,27 @@ func (DataFormat) Values() []DataFormat {
 	}
 }
 
+type DataQualityModelStatus string
+
+// Enum values for DataQualityModelStatus
+const (
+	DataQualityModelStatusRunning   DataQualityModelStatus = "RUNNING"
+	DataQualityModelStatusSucceeded DataQualityModelStatus = "SUCCEEDED"
+	DataQualityModelStatusFailed    DataQualityModelStatus = "FAILED"
+)
+
+// Values returns all known values for DataQualityModelStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityModelStatus) Values() []DataQualityModelStatus {
+	return []DataQualityModelStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type DataQualityRuleResultStatus string
 
 // Enum values for DataQualityRuleResultStatus
@@ -1037,6 +1058,25 @@ func (HudiTargetCompressionType) Values() []HudiTargetCompressionType {
 		"lzo",
 		"uncompressed",
 		"snappy",
+	}
+}
+
+type InclusionAnnotationValue string
+
+// Enum values for InclusionAnnotationValue
+const (
+	InclusionAnnotationValueInclude InclusionAnnotationValue = "INCLUDE"
+	InclusionAnnotationValueExclude InclusionAnnotationValue = "EXCLUDE"
+)
+
+// Values returns all known values for InclusionAnnotationValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InclusionAnnotationValue) Values() []InclusionAnnotationValue {
+	return []InclusionAnnotationValue{
+		"INCLUDE",
+		"EXCLUDE",
 	}
 }
 
@@ -1998,6 +2038,27 @@ func (StatementState) Values() []StatementState {
 		"CANCELLING",
 		"CANCELLED",
 		"ERROR",
+	}
+}
+
+type StatisticEvaluationLevel string
+
+// Enum values for StatisticEvaluationLevel
+const (
+	StatisticEvaluationLevelDataset     StatisticEvaluationLevel = "Dataset"
+	StatisticEvaluationLevelColumn      StatisticEvaluationLevel = "Column"
+	StatisticEvaluationLevelMulticolumn StatisticEvaluationLevel = "Multicolumn"
+)
+
+// Values returns all known values for StatisticEvaluationLevel. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StatisticEvaluationLevel) Values() []StatisticEvaluationLevel {
+	return []StatisticEvaluationLevel{
+		"Dataset",
+		"Column",
+		"Multicolumn",
 	}
 }
 

@@ -12,8 +12,6 @@ import (
 	"time"
 )
 
-// This API is in preview release and subject to change.
-//
 // Get an Application resource.
 func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput, optFns ...func(*Options)) (*GetApplicationOutput, error) {
 	if params == nil {

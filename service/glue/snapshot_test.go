@@ -242,6 +242,18 @@ func TestCheckSnapshot_BatchGetWorkflows(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchPutDataQualityStatisticAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutDataQualityStatisticAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchPutDataQualityStatisticAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchStopJobRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchStopJobRun(context.Background(), nil, func(o *Options) {
@@ -1166,6 +1178,30 @@ func TestCheckSnapshot_GetDataflowGraph(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataQualityModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataQualityModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataQualityModelResult(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityModelResult(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataQualityModelResult")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataQualityResult(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataQualityResult(context.Background(), nil, func(o *Options) {
@@ -1874,6 +1910,30 @@ func TestCheckSnapshot_ListDataQualityRulesets(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListDataQualityStatisticAnnotations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityStatisticAnnotations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataQualityStatisticAnnotations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataQualityStatistics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityStatistics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataQualityStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDevEndpoints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDevEndpoints(context.Background(), nil, func(o *Options) {
@@ -2023,6 +2083,18 @@ func TestCheckSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutDataCatalogEncryptionSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutDataQualityProfileAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataQualityProfileAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutDataQualityProfileAnnotation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2850,6 +2922,18 @@ func TestUpdateSnapshot_BatchGetWorkflows(t *testing.T) {
 	_, err := svc.BatchGetWorkflows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetWorkflows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchPutDataQualityStatisticAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutDataQualityStatisticAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchPutDataQualityStatisticAnnotation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3781,6 +3865,30 @@ func TestUpdateSnapshot_GetDataflowGraph(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataQualityModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataQualityModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataQualityModelResult(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityModelResult(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataQualityModelResult")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataQualityResult(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataQualityResult(context.Background(), nil, func(o *Options) {
@@ -4489,6 +4597,30 @@ func TestUpdateSnapshot_ListDataQualityRulesets(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListDataQualityStatisticAnnotations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityStatisticAnnotations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataQualityStatisticAnnotations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataQualityStatistics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityStatistics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataQualityStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDevEndpoints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDevEndpoints(context.Background(), nil, func(o *Options) {
@@ -4638,6 +4770,18 @@ func TestUpdateSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutDataCatalogEncryptionSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutDataQualityProfileAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataQualityProfileAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutDataQualityProfileAnnotation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

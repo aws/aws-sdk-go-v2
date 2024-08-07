@@ -43,6 +43,10 @@ type GetDataQualityRulesetOutput struct {
 	// A timestamp. The time and date that this data quality ruleset was created.
 	CreatedOn *time.Time
 
+	// The name of the security configuration created with the data quality encryption
+	// option.
+	DataQualitySecurityConfiguration *string
+
 	// A description of the ruleset.
 	Description *string
 

@@ -310,6 +310,26 @@ func (m *validateOpBatchGetWorkflows) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchPutDataQualityStatisticAnnotation struct {
+}
+
+func (*validateOpBatchPutDataQualityStatisticAnnotation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchPutDataQualityStatisticAnnotation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchPutDataQualityStatisticAnnotationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchPutDataQualityStatisticAnnotationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchStopJobRun struct {
 }
 
@@ -1670,6 +1690,46 @@ func (m *validateOpGetDatabase) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataQualityModel struct {
+}
+
+func (*validateOpGetDataQualityModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataQualityModelResult struct {
+}
+
+func (*validateOpGetDataQualityModelResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityModelResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityModelResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityModelResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataQualityResult struct {
 }
 
@@ -2705,6 +2765,26 @@ func (m *validateOpPutDataCatalogEncryptionSettings) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutDataCatalogEncryptionSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutDataQualityProfileAnnotation struct {
+}
+
+func (*validateOpPutDataQualityProfileAnnotation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDataQualityProfileAnnotation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDataQualityProfileAnnotationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDataQualityProfileAnnotationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3770,6 +3850,10 @@ func addOpBatchGetWorkflowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetWorkflows{}, middleware.After)
 }
 
+func addOpBatchPutDataQualityStatisticAnnotationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchPutDataQualityStatisticAnnotation{}, middleware.After)
+}
+
 func addOpBatchStopJobRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchStopJobRun{}, middleware.After)
 }
@@ -4042,6 +4126,14 @@ func addOpGetDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDatabase{}, middleware.After)
 }
 
+func addOpGetDataQualityModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityModel{}, middleware.After)
+}
+
+func addOpGetDataQualityModelResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityModelResult{}, middleware.After)
+}
+
 func addOpGetDataQualityResultValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataQualityResult{}, middleware.After)
 }
@@ -4248,6 +4340,10 @@ func addOpListTableOptimizerRunsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpPutDataCatalogEncryptionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataCatalogEncryptionSettings{}, middleware.After)
+}
+
+func addOpPutDataQualityProfileAnnotationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDataQualityProfileAnnotation{}, middleware.After)
 }
 
 func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -8446,6 +8542,21 @@ func validateOpBatchGetWorkflowsInput(v *BatchGetWorkflowsInput) error {
 	}
 }
 
+func validateOpBatchPutDataQualityStatisticAnnotationInput(v *BatchPutDataQualityStatisticAnnotationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchPutDataQualityStatisticAnnotationInput"}
+	if v.InclusionAnnotations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InclusionAnnotations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchStopJobRunInput(v *BatchStopJobRunInput) error {
 	if v == nil {
 		return nil
@@ -9727,6 +9838,39 @@ func validateOpGetDatabaseInput(v *GetDatabaseInput) error {
 	}
 }
 
+func validateOpGetDataQualityModelInput(v *GetDataQualityModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityModelInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataQualityModelResultInput(v *GetDataQualityModelResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityModelResultInput"}
+	if v.StatisticId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatisticId"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataQualityResultInput(v *GetDataQualityResultInput) error {
 	if v == nil {
 		return nil
@@ -10657,6 +10801,24 @@ func validateOpPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryption
 		if err := validateDataCatalogEncryptionSettings(v.DataCatalogEncryptionSettings); err != nil {
 			invalidParams.AddNested("DataCatalogEncryptionSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDataQualityProfileAnnotationInput(v *PutDataQualityProfileAnnotationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDataQualityProfileAnnotationInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if len(v.InclusionAnnotation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InclusionAnnotation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

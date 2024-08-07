@@ -11,74 +11,65 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates and persists an Application resource.
-func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
+// Updates and persists a DataIntegrationAssociation resource.
+//
+// Updating a DataIntegrationAssociation with ExecutionConfiguration will rerun
+// the on-demand job.
+func (c *Client) UpdateDataIntegrationAssociation(ctx context.Context, params *UpdateDataIntegrationAssociationInput, optFns ...func(*Options)) (*UpdateDataIntegrationAssociationOutput, error) {
 	if params == nil {
-		params = &UpdateApplicationInput{}
+		params = &UpdateDataIntegrationAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApplication", params, optFns, c.addOperationUpdateApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDataIntegrationAssociation", params, optFns, c.addOperationUpdateDataIntegrationAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateApplicationOutput)
+	out := result.(*UpdateDataIntegrationAssociationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateApplicationInput struct {
+type UpdateDataIntegrationAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of the Application.
+	// A unique identifier. of the DataIntegrationAssociation resource
 	//
 	// This member is required.
-	Arn *string
+	DataIntegrationAssociationIdentifier *string
 
-	// The configuration for where the application should be loaded from.
-	ApplicationSourceConfig *types.ApplicationSourceConfig
-
-	// The description of the application.
-	Description *string
-
-	// The name of the application.
-	Name *string
-
-	// The configuration of events or requests that the application has access to.
-	Permissions []string
-
-	// The events that the application publishes.
+	// A unique identifier for the DataIntegration.
 	//
-	// Deprecated: Publications has been replaced with Permissions
-	Publications []types.Publication
+	// This member is required.
+	DataIntegrationIdentifier *string
 
-	// The events that the application subscribes.
+	// The configuration for how the files should be pulled from the source.
 	//
-	// Deprecated: Subscriptions has been replaced with Permissions
-	Subscriptions []types.Subscription
+	// This member is required.
+	ExecutionConfiguration *types.ExecutionConfiguration
 
 	noSmithyDocumentSerde
 }
 
-type UpdateApplicationOutput struct {
+type UpdateDataIntegrationAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDataIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplication{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataIntegrationAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplication{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataIntegrationAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplication"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataIntegrationAssociation"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -127,10 +118,10 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpUpdateApplicationValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateDataIntegrationAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplication(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataIntegrationAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -151,10 +142,10 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateApplication(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateDataIntegrationAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "UpdateApplication",
+		OperationName: "UpdateDataIntegrationAssociation",
 	}
 }

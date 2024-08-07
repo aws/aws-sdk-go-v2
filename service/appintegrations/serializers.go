@@ -262,6 +262,125 @@ func awsRestjson1_serializeOpDocumentCreateDataIntegrationInput(v *CreateDataInt
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateDataIntegrationAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpCreateDataIntegrationAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateDataIntegrationAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateDataIntegrationAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/dataIntegrations/{DataIntegrationIdentifier}/associations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateDataIntegrationAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateDataIntegrationAssociationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateDataIntegrationAssociationInput(v *CreateDataIntegrationAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DataIntegrationIdentifier == nil || len(*v.DataIntegrationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataIntegrationIdentifier must not be empty")}
+	}
+	if v.DataIntegrationIdentifier != nil {
+		if err := encoder.SetURI("DataIntegrationIdentifier").String(*v.DataIntegrationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateDataIntegrationAssociationInput(v *CreateDataIntegrationAssociationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientAssociationMetadata != nil {
+		ok := object.Key("ClientAssociationMetadata")
+		if err := awsRestjson1_serializeDocumentClientAssociationMetadata(v.ClientAssociationMetadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DestinationURI != nil {
+		ok := object.Key("DestinationURI")
+		ok.String(*v.DestinationURI)
+	}
+
+	if v.ExecutionConfiguration != nil {
+		ok := object.Key("ExecutionConfiguration")
+		if err := awsRestjson1_serializeDocumentExecutionConfiguration(v.ExecutionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ObjectConfiguration != nil {
+		ok := object.Key("ObjectConfiguration")
+		if err := awsRestjson1_serializeDocumentObjectConfiguration(v.ObjectConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateEventIntegration struct {
 }
 
@@ -1607,6 +1726,105 @@ func awsRestjson1_serializeOpDocumentUpdateDataIntegrationInput(v *UpdateDataInt
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateDataIntegrationAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateDataIntegrationAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateDataIntegrationAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateDataIntegrationAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/dataIntegrations/{DataIntegrationIdentifier}/associations/{DataIntegrationAssociationIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateDataIntegrationAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateDataIntegrationAssociationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateDataIntegrationAssociationInput(v *UpdateDataIntegrationAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DataIntegrationAssociationIdentifier == nil || len(*v.DataIntegrationAssociationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataIntegrationAssociationIdentifier must not be empty")}
+	}
+	if v.DataIntegrationAssociationIdentifier != nil {
+		if err := encoder.SetURI("DataIntegrationAssociationIdentifier").String(*v.DataIntegrationAssociationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.DataIntegrationIdentifier == nil || len(*v.DataIntegrationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DataIntegrationIdentifier must not be empty")}
+	}
+	if v.DataIntegrationIdentifier != nil {
+		if err := encoder.SetURI("DataIntegrationIdentifier").String(*v.DataIntegrationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateDataIntegrationAssociationInput(v *UpdateDataIntegrationAssociationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutionConfiguration != nil {
+		ok := object.Key("ExecutionConfiguration")
+		if err := awsRestjson1_serializeDocumentExecutionConfiguration(v.ExecutionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateEventIntegration struct {
 }
 
@@ -1720,6 +1938,17 @@ func awsRestjson1_serializeDocumentApplicationSourceConfig(v *types.ApplicationS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentClientAssociationMetadata(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEventFilter(v *types.EventFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1727,6 +1956,32 @@ func awsRestjson1_serializeDocumentEventFilter(v *types.EventFilter, value smith
 	if v.Source != nil {
 		ok := object.Key("Source")
 		ok.String(*v.Source)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExecutionConfiguration(v *types.ExecutionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ExecutionMode) > 0 {
+		ok := object.Key("ExecutionMode")
+		ok.String(string(v.ExecutionMode))
+	}
+
+	if v.OnDemandConfiguration != nil {
+		ok := object.Key("OnDemandConfiguration")
+		if err := awsRestjson1_serializeDocumentOnDemandConfiguration(v.OnDemandConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScheduleConfiguration != nil {
+		ok := object.Key("ScheduleConfiguration")
+		if err := awsRestjson1_serializeDocumentScheduleConfiguration(v.ScheduleConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1823,6 +2078,23 @@ func awsRestjson1_serializeDocumentObjectConfiguration(v map[string]map[string][
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOnDemandConfiguration(v *types.OnDemandConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.String(*v.EndTime)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.String(*v.StartTime)
+	}
+
 	return nil
 }
 

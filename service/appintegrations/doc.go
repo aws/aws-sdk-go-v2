@@ -3,12 +3,22 @@
 // Package appintegrations provides the API client, operations, and parameter
 // types for Amazon AppIntegrations Service.
 //
+// [Amazon AppIntegrations actions]
+//
+// [Amazon AppIntegrations data types]
+//
 // The Amazon AppIntegrations service enables you to configure and reuse
 // connections to external applications.
 //
 // For information about how you can use external applications with Amazon
-// Connect, see [Set up pre-built integrations]and [Deliver information to agents using Amazon Connect Wisdom] in the Amazon Connect Administrator Guide.
+// Connect, see the following topics in the Amazon Connect Administrator Guide:
 //
-// [Set up pre-built integrations]: https://docs.aws.amazon.com/connect/latest/adminguide/crm.html
-// [Deliver information to agents using Amazon Connect Wisdom]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-wisdom.html
+// [Third-party applications (3p apps) in the agent workspace]
+//
+// [Use Amazon Q in Connect for generative AI–powered agent assistance in real-time]
+//
+// [Amazon AppIntegrations actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_AppIntegrations_Service.html
+// [Use Amazon Q in Connect for generative AI–powered agent assistance in real-time]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html
+// [Amazon AppIntegrations data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_AppIntegrations_Service.html
+// [Third-party applications (3p apps) in the agent workspace]: https://docs.aws.amazon.com/connect/latest/adminguide/3p-apps.html
 package appintegrations
