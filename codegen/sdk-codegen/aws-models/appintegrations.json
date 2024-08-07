@@ -53,6 +53,9 @@
                     "target": "com.amazonaws.appintegrations#CreateDataIntegration"
                 },
                 {
+                    "target": "com.amazonaws.appintegrations#CreateDataIntegrationAssociation"
+                },
+                {
                     "target": "com.amazonaws.appintegrations#CreateEventIntegration"
                 },
                 {
@@ -107,6 +110,9 @@
                     "target": "com.amazonaws.appintegrations#UpdateDataIntegration"
                 },
                 {
+                    "target": "com.amazonaws.appintegrations#UpdateDataIntegrationAssociation"
+                },
+                {
                     "target": "com.amazonaws.appintegrations#UpdateEventIntegration"
                 }
             ],
@@ -115,14 +121,14 @@
                     "sdkId": "AppIntegrations",
                     "arnNamespace": "app-integrations",
                     "cloudFormationName": "AppIntegrations",
-                    "cloudTrailEventSource": "appintegrations.amazonaws.com",
+                    "cloudTrailEventSource": "app-integrations.amazonaws.com",
                     "endpointPrefix": "app-integrations"
                 },
                 "aws.auth#sigv4": {
                     "name": "app-integrations"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations service enables you to configure and reuse connections to external\n      applications.</p>\n         <p>For information about how you can use external applications with Amazon Connect, see\n        <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built\n        integrations</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-wisdom.html\">Deliver information to agents\n        using Amazon Connect Wisdom</a> in the <i>Amazon Connect Administrator\n        Guide</i>.</p>",
+                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_AppIntegrations_Service.html\">Amazon AppIntegrations\n            actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_AppIntegrations_Service.html\">Amazon AppIntegrations\n            data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external\n      applications.</p>\n         <p>For information about how you can use external applications with Amazon Connect, see\n      the following topics in the <i>Amazon Connect Administrator\n      Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/3p-apps.html\">Third-party\n            applications (3p apps) in the agent workspace</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use\n            Amazon Q in Connect for generative AI–powered agent assistance in\n          real-time</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon AppIntegrations Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1092,7 +1098,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Creates and persists an Application resource.</p>",
+                "smithy.api#documentation": "<p>Creates and persists an Application resource.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create an application",
@@ -1249,6 +1255,113 @@
                 }
             }
         },
+        "com.amazonaws.appintegrations#CreateDataIntegrationAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#CreateDataIntegrationAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#CreateDataIntegrationAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates and persists a DataIntegrationAssociation resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/dataIntegrations/{DataIntegrationIdentifier}/associations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#CreateDataIntegrationAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "DataIntegrationIdentifier": {
+                    "target": "com.amazonaws.appintegrations#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the DataIntegration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.appintegrations#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the client that is associated with the DataIntegration\n      association.</p>"
+                    }
+                },
+                "ObjectConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ObjectConfiguration"
+                },
+                "DestinationURI": {
+                    "target": "com.amazonaws.appintegrations#DestinationURI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the data destination.</p>"
+                    }
+                },
+                "ClientAssociationMetadata": {
+                    "target": "com.amazonaws.appintegrations#ClientAssociationMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mapping of metadata to be extracted from the data.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.appintegrations#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ExecutionConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ExecutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for how the files should be pulled from the source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#CreateDataIntegrationAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "DataIntegrationAssociationId": {
+                    "target": "com.amazonaws.appintegrations#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier. for the DataIntegrationAssociation.</p>"
+                    }
+                },
+                "DataIntegrationArn": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the DataIntegration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appintegrations#CreateDataIntegrationRequest": {
             "type": "structure",
             "members": {
@@ -1268,15 +1381,14 @@
                 "KmsKey": {
                     "target": "com.amazonaws.appintegrations#NonBlankString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key for the DataIntegration.</p>",
+                        "smithy.api#documentation": "<p>The KMS key ARN for the DataIntegration.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceURI": {
                     "target": "com.amazonaws.appintegrations#SourceURI",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the data source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The URI of the data source.</p>"
                     }
                 },
                 "ScheduleConfig": {
@@ -1345,7 +1457,7 @@
                 "KmsKey": {
                     "target": "com.amazonaws.appintegrations#NonBlankString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key for the DataIntegration.</p>"
+                        "smithy.api#documentation": "<p>The KMS key ARN for the DataIntegration.</p>"
                     }
                 },
                 "SourceURI": {
@@ -1508,6 +1620,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the client that is associated with the DataIntegration\n      association.</p>"
                     }
+                },
+                "DestinationURI": {
+                    "target": "com.amazonaws.appintegrations#DestinationURI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the data destination.</p>"
+                    }
+                },
+                "LastExecutionStatus": {
+                    "target": "com.amazonaws.appintegrations#LastExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution status of the last job.</p>"
+                    }
+                },
+                "ExecutionConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ExecutionConfiguration"
                 }
             },
             "traits": {
@@ -1590,7 +1717,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the Application. Only Applications that don't have any Application Associations can be deleted.</p>",
+                "smithy.api#documentation": "<p>Deletes the Application. Only Applications that don't have any Application Associations\n      can be deleted.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an application",
@@ -1753,6 +1880,16 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.appintegrations#DestinationURI": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+$)|(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+[\\w/!@#+=.-]+[\\w/!@#+=.,-]+$)$"
             }
         },
         "com.amazonaws.appintegrations#DuplicateResourceException": {
@@ -1935,6 +2072,67 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9\\/\\._\\-]+::[a-zA-Z0-9\\/\\._\\-]+(?:\\*)?$"
             }
         },
+        "com.amazonaws.appintegrations#ExecutionConfiguration": {
+            "type": "structure",
+            "members": {
+                "ExecutionMode": {
+                    "target": "com.amazonaws.appintegrations#ExecutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode for data import/export execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OnDemandConfiguration": {
+                    "target": "com.amazonaws.appintegrations#OnDemandConfiguration"
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ScheduleConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for how the files should be pulled from the source.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#ExecutionMode": {
+            "type": "enum",
+            "members": {
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
+                    }
+                },
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#ExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.appintegrations#ExternalUrlConfig": {
             "type": "structure",
             "members": {
@@ -2046,7 +2244,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Get an Application resource.</p>",
+                "smithy.api#documentation": "<p>Get an Application resource.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To get an application",
@@ -2249,13 +2447,13 @@
                 "Description": {
                     "target": "com.amazonaws.appintegrations#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key for the DataIntegration.</p>"
+                        "smithy.api#documentation": "<p>The KMS key ARN for the DataIntegration.</p>"
                     }
                 },
                 "KmsKey": {
                     "target": "com.amazonaws.appintegrations#NonBlankString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key for the DataIntegration.</p>"
+                        "smithy.api#documentation": "<p>The KMS key ARN for the DataIntegration.</p>"
                     }
                 },
                 "SourceURI": {
@@ -2433,6 +2631,26 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.appintegrations#LastExecutionStatus": {
+            "type": "structure",
+            "members": {
+                "ExecutionStatus": {
+                    "target": "com.amazonaws.appintegrations#ExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job status enum string.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.appintegrations#NonBlankString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of a job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The execution status of the last job.</p>"
+            }
+        },
         "com.amazonaws.appintegrations#ListApplicationAssociations": {
             "type": "operation",
             "input": {
@@ -2565,7 +2783,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Lists applications in the account.</p>",
+                "smithy.api#documentation": "<p>Lists applications in the account.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list applications in the account",
@@ -3114,6 +3332,27 @@
                 "smithy.api#documentation": "<p>The configuration for what data should be pulled from the source.</p>"
             }
         },
+        "com.amazonaws.appintegrations#OnDemandConfiguration": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.appintegrations#NonBlankString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for data pull from the source as an Unix/epoch string in\n      milliseconds</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.appintegrations#NonBlankString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time for data pull from the source as an Unix/epoch string in\n      milliseconds</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The start and end time for data pull from the source.</p>"
+            }
+        },
         "com.amazonaws.appintegrations#Permission": {
             "type": "string",
             "traits": {
@@ -3526,7 +3765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release and subject to change.</p>\n         <p>Updates and persists an Application resource.</p>",
+                "smithy.api#documentation": "<p>Updates and persists an Application resource.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To update an application",
@@ -3642,6 +3881,78 @@
                     "uri": "/dataIntegrations/{Identifier}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateDataIntegrationAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appintegrations#UpdateDataIntegrationAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appintegrations#UpdateDataIntegrationAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates and persists a DataIntegrationAssociation resource.</p>\n         <note>\n            <p>\n      Updating a DataIntegrationAssociation with ExecutionConfiguration will rerun the on-demand job.\n      </p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/dataIntegrations/{DataIntegrationIdentifier}/associations/{DataIntegrationAssociationIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateDataIntegrationAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "DataIntegrationIdentifier": {
+                    "target": "com.amazonaws.appintegrations#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the DataIntegration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataIntegrationAssociationIdentifier": {
+                    "target": "com.amazonaws.appintegrations#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier. of the DataIntegrationAssociation resource</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionConfiguration": {
+                    "target": "com.amazonaws.appintegrations#ExecutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for how the files should be pulled from the source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appintegrations#UpdateDataIntegrationAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appintegrations#UpdateDataIntegrationRequest": {

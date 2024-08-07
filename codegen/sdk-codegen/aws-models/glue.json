@@ -79,6 +79,9 @@
                     "target": "com.amazonaws.glue#BatchGetWorkflows"
                 },
                 {
+                    "target": "com.amazonaws.glue#BatchPutDataQualityStatisticAnnotation"
+                },
+                {
                     "target": "com.amazonaws.glue#BatchStopJobRun"
                 },
                 {
@@ -310,6 +313,12 @@
                     "target": "com.amazonaws.glue#GetDataflowGraph"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetDataQualityModel"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetDataQualityModelResult"
+                },
+                {
                     "target": "com.amazonaws.glue#GetDataQualityResult"
                 },
                 {
@@ -487,6 +496,12 @@
                     "target": "com.amazonaws.glue#ListDataQualityRulesets"
                 },
                 {
+                    "target": "com.amazonaws.glue#ListDataQualityStatisticAnnotations"
+                },
+                {
+                    "target": "com.amazonaws.glue#ListDataQualityStatistics"
+                },
+                {
                     "target": "com.amazonaws.glue#ListDevEndpoints"
                 },
                 {
@@ -524,6 +539,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#PutDataCatalogEncryptionSettings"
+                },
+                {
+                    "target": "com.amazonaws.glue#PutDataQualityProfileAnnotation"
                 },
                 {
                     "target": "com.amazonaws.glue#PutResourcePolicy"
@@ -2221,6 +2239,44 @@
                 "smithy.api#documentation": "<p>Specifies an Amazon Redshift target.</p>"
             }
         },
+        "com.amazonaws.glue#AnnotationError": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID for the failed annotation.</p>"
+                    }
+                },
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID for the failed annotation.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the annotation failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A failed annotation.</p>"
+            }
+        },
+        "com.amazonaws.glue#AnnotationErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#AnnotationError"
+            }
+        },
+        "com.amazonaws.glue#AnnotationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#StatisticAnnotation"
+            }
+        },
         "com.amazonaws.glue#ApplyMapping": {
             "type": "structure",
             "members": {
@@ -3717,6 +3773,67 @@
                     "target": "com.amazonaws.glue#WorkflowNames",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of names of workflows not found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#BatchPutDataQualityStatisticAnnotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#BatchPutDataQualityStatisticAnnotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#BatchPutDataQualityStatisticAnnotationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Annotate datapoints over time for a specific data quality statistic.</p>"
+            }
+        },
+        "com.amazonaws.glue#BatchPutDataQualityStatisticAnnotationRequest": {
+            "type": "structure",
+            "members": {
+                "InclusionAnnotations": {
+                    "target": "com.amazonaws.glue#InclusionAnnotationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DatapointInclusionAnnotation</code>'s.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Client Token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#BatchPutDataQualityStatisticAnnotationResponse": {
+            "type": "structure",
+            "members": {
+                "FailedInclusionAnnotations": {
+                    "target": "com.amazonaws.glue#AnnotationErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>AnnotationError</code>'s.</p>"
                     }
                 }
             },
@@ -8503,6 +8620,12 @@
                         "smithy.api#documentation": "<p>A target table associated with the data quality ruleset.</p>"
                     }
                 },
+                "DataQualitySecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security configuration created with the data quality encryption option.</p>"
+                    }
+                },
                 "ClientToken": {
                     "target": "com.amazonaws.glue#HashString",
                     "traits": {
@@ -11121,6 +11244,29 @@
                 "smithy.api#documentation": "<p>Describes the data quality metric value according to the analysis of historical data.</p>"
             }
         },
+        "com.amazonaws.glue#DataQualityModelStatus": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#DataQualityObservation": {
             "type": "structure",
             "members": {
@@ -11148,7 +11294,8 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.glue#DataQualityObservations": {
@@ -11170,6 +11317,12 @@
                     "target": "com.amazonaws.glue#HashString",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique result ID for the data quality result.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID for the data quality result.</p>"
                     }
                 },
                 "Score": {
@@ -11458,6 +11611,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of metrics associated with the evaluation of the rule.</p>"
                     }
+                },
+                "EvaluatedRule": {
+                    "target": "com.amazonaws.glue#DataQualityRuleResultDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluated rule.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11471,7 +11630,8 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.glue#DataQualityRuleResultStatus": {
@@ -11924,6 +12084,32 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.glue#DatapointInclusionAnnotation": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data quality profile the statistic belongs to.</p>"
+                    }
+                },
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>"
+                    }
+                },
+                "InclusionAnnotation": {
+                    "target": "com.amazonaws.glue#InclusionAnnotationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusion annotation value to apply to the statistic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Inclusion Annotation.</p>"
             }
         },
         "com.amazonaws.glue#Datatype": {
@@ -14686,6 +14872,9 @@
             },
             "value": {
                 "target": "com.amazonaws.glue#NullableDouble"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.glue#EvaluationMetrics": {
@@ -16618,6 +16807,153 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#GetDataQualityModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetDataQualityModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetDataQualityModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the training status of the model along with more information (CompletedOn, StartedOn, FailureReason).</p>"
+            }
+        },
+        "com.amazonaws.glue#GetDataQualityModelRequest": {
+            "type": "structure",
+            "members": {
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetDataQualityModelResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.glue#DataQualityModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The training status of the data quality model.</p>"
+                    }
+                },
+                "StartedOn": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the data quality model training started.</p>"
+                    }
+                },
+                "CompletedOn": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the data quality model training completed.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The training failure reason.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetDataQualityModelResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetDataQualityModelResultRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetDataQualityModelResultResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve a statistic's predictions for a given Profile ID.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetDataQualityModelResultRequest": {
+            "type": "structure",
+            "members": {
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetDataQualityModelResultResponse": {
+            "type": "structure",
+            "members": {
+                "CompletedOn": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the data quality model training completed.</p>"
+                    }
+                },
+                "Model": {
+                    "target": "com.amazonaws.glue#StatisticModelResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>StatisticModelResult</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#GetDataQualityResult": {
             "type": "operation",
             "input": {
@@ -16666,6 +17002,12 @@
                     "target": "com.amazonaws.glue#HashString",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique result ID for the data quality result.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID for the data quality result.</p>"
                     }
                 },
                 "Score": {
@@ -16866,6 +17208,12 @@
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the ruleset that was created by the run.</p>"
+                    }
+                },
+                "DataQualitySecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security configuration created with the data quality encryption option.</p>"
                     }
                 }
             },
@@ -17097,6 +17445,12 @@
                     "target": "com.amazonaws.glue#HashString",
                     "traits": {
                         "smithy.api#documentation": "<p>When a ruleset was created from a recommendation run, this run ID is generated to link the two together.</p>"
+                    }
+                },
+                "DataQualitySecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security configuration created with the data quality encryption option.</p>"
                     }
                 }
             },
@@ -21925,6 +22279,29 @@
                 "smithy.api#documentation": "<p>Specifies configuration properties for an importing labels task run.</p>"
             }
         },
+        "com.amazonaws.glue#InclusionAnnotationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#DatapointInclusionAnnotation"
+            }
+        },
+        "com.amazonaws.glue#InclusionAnnotationValue": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#Integer": {
             "type": "integer",
             "traits": {
@@ -24590,6 +24967,165 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#ListDataQualityStatisticAnnotations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListDataQualityStatisticAnnotationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListDataQualityStatisticAnnotationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve annotations for a data quality statistic.</p>"
+            }
+        },
+        "com.amazonaws.glue#ListDataQualityStatisticAnnotationsRequest": {
+            "type": "structure",
+            "members": {
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID.</p>"
+                    }
+                },
+                "TimestampFilter": {
+                    "target": "com.amazonaws.glue#TimestampFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp filter.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListDataQualityStatisticAnnotationsResponse": {
+            "type": "structure",
+            "members": {
+                "Annotations": {
+                    "target": "com.amazonaws.glue#AnnotationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>StatisticAnnotation</code> applied to the Statistic</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#ListDataQualityStatistics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListDataQualityStatisticsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListDataQualityStatisticsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of data quality statistics.</p>"
+            }
+        },
+        "com.amazonaws.glue#ListDataQualityStatisticsRequest": {
+            "type": "structure",
+            "members": {
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID.</p>"
+                    }
+                },
+                "TimestampFilter": {
+                    "target": "com.amazonaws.glue#TimestampFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp filter.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#ListDataQualityStatisticsResponse": {
+            "type": "structure",
+            "members": {
+                "Statistics": {
+                    "target": "com.amazonaws.glue#StatisticSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>StatisticSummaryList</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#ListDevEndpoints": {
             "type": "operation",
             "input": {
@@ -26238,6 +26774,12 @@
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the data quality metric used for generating the observation.</p>"
+                    }
+                },
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>"
                     }
                 },
                 "MetricValues": {
@@ -28090,6 +28632,59 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#PutDataQualityProfileAnnotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#PutDataQualityProfileAnnotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#PutDataQualityProfileAnnotationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Annotate all datapoints for a Profile.</p>"
+            }
+        },
+        "com.amazonaws.glue#PutDataQualityProfileAnnotationRequest": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data quality monitoring profile to annotate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InclusionAnnotation": {
+                    "target": "com.amazonaws.glue#InclusionAnnotationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusion annotation value to apply to the profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#PutDataQualityProfileAnnotationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Left blank.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#PutResourcePolicy": {
             "type": "operation",
             "input": {
@@ -28798,6 +29393,12 @@
                 "smithy.api#documentation": "<p>Specifies a target that uses Amazon Redshift.</p>"
             }
         },
+        "com.amazonaws.glue#ReferenceDatasetsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#NameString"
+            }
+        },
         "com.amazonaws.glue#RegisterSchemaVersion": {
             "type": "operation",
             "input": {
@@ -29428,6 +30029,26 @@
         },
         "com.amazonaws.glue#RunId": {
             "type": "string"
+        },
+        "com.amazonaws.glue#RunIdentifier": {
+            "type": "structure",
+            "members": {
+                "RunId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Run ID.</p>"
+                    }
+                },
+                "JobRunId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Job Run ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A run identifier.</p>"
+            }
         },
         "com.amazonaws.glue#RunMetrics": {
             "type": "structure",
@@ -32520,6 +33141,12 @@
                         "smithy.api#documentation": "<p>A name for the ruleset.</p>"
                     }
                 },
+                "DataQualitySecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security configuration created with the data quality encryption option.</p>"
+                    }
+                },
                 "ClientToken": {
                     "target": "com.amazonaws.glue#HashString",
                     "traits": {
@@ -33368,6 +33995,217 @@
                         "smithy.api#enumValue": "ERROR"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#StatisticAnnotation": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID.</p>"
+                    }
+                },
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>"
+                    }
+                },
+                "StatisticRecordedOn": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the annotated statistic was recorded.</p>"
+                    }
+                },
+                "InclusionAnnotation": {
+                    "target": "com.amazonaws.glue#TimestampedInclusionAnnotation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusion annotation applied to the statistic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A Statistic Annotation.</p>"
+            }
+        },
+        "com.amazonaws.glue#StatisticEvaluationLevel": {
+            "type": "enum",
+            "members": {
+                "DATASET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Dataset"
+                    }
+                },
+                "COLUMN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Column"
+                    }
+                },
+                "MULTICOLUMN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Multicolumn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#StatisticModelResult": {
+            "type": "structure",
+            "members": {
+                "LowerBound": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lower bound.</p>"
+                    }
+                },
+                "UpperBound": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upper bound.</p>"
+                    }
+                },
+                "PredictedValue": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The predicted value.</p>"
+                    }
+                },
+                "ActualValue": {
+                    "target": "com.amazonaws.glue#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual value.</p>"
+                    }
+                },
+                "Date": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date.</p>"
+                    }
+                },
+                "InclusionAnnotation": {
+                    "target": "com.amazonaws.glue#InclusionAnnotationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusion annotation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The statistic model result.</p>"
+            }
+        },
+        "com.amazonaws.glue#StatisticModelResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#StatisticModelResult"
+            }
+        },
+        "com.amazonaws.glue#StatisticNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Z][A-Za-z\\.]+$"
+            }
+        },
+        "com.amazonaws.glue#StatisticPropertiesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#DescriptionString"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.glue#StatisticSummary": {
+            "type": "structure",
+            "members": {
+                "StatisticId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Statistic ID.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.glue#HashString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Profile ID.</p>"
+                    }
+                },
+                "RunIdentifier": {
+                    "target": "com.amazonaws.glue#RunIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Run Identifier</p>"
+                    }
+                },
+                "StatisticName": {
+                    "target": "com.amazonaws.glue#StatisticNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the statistic.</p>"
+                    }
+                },
+                "DoubleValue": {
+                    "target": "com.amazonaws.glue#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The value of the statistic.</p>"
+                    }
+                },
+                "EvaluationLevel": {
+                    "target": "com.amazonaws.glue#StatisticEvaluationLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluation level of the statistic. Possible values: <code>Dataset</code>, <code>Column</code>, <code>Multicolumn</code>.</p>"
+                    }
+                },
+                "ColumnsReferenced": {
+                    "target": "com.amazonaws.glue#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of columns referenced by the statistic.</p>"
+                    }
+                },
+                "ReferencedDatasets": {
+                    "target": "com.amazonaws.glue#ReferenceDatasetsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of datasets referenced by the statistic.</p>"
+                    }
+                },
+                "StatisticProperties": {
+                    "target": "com.amazonaws.glue#StatisticPropertiesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>StatisticPropertiesMap</code>, which contains a <code>NameString</code> and <code>DescriptionString</code>\n         </p>"
+                    }
+                },
+                "RecordedOn": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the statistic was recorded.</p>"
+                    }
+                },
+                "InclusionAnnotation": {
+                    "target": "com.amazonaws.glue#TimestampedInclusionAnnotation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusion annotation for the statistic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a statistic.</p>"
+            }
+        },
+        "com.amazonaws.glue#StatisticSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#StatisticSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <code>StatisticSummary</code>.</p>"
             }
         },
         "com.amazonaws.glue#StopColumnStatisticsTaskRun": {
@@ -34837,8 +35675,48 @@
         "com.amazonaws.glue#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.glue#TimestampFilter": {
+            "type": "structure",
+            "members": {
+                "RecordedBefore": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp before which statistics should be included in the results.</p>"
+                    }
+                },
+                "RecordedAfter": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp after which statistics should be included in the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A timestamp filter.</p>"
+            }
+        },
         "com.amazonaws.glue#TimestampValue": {
             "type": "timestamp"
+        },
+        "com.amazonaws.glue#TimestampedInclusionAnnotation": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.glue#InclusionAnnotationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusion annotation value.</p>"
+                    }
+                },
+                "LastModifiedOn": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the inclusion annotation was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A timestamped inclusion annotation.</p>"
+            }
         },
         "com.amazonaws.glue#Token": {
             "type": "string"
