@@ -1,3 +1,7 @@
+# v1.93.0 (2024-08-08)
+
+* **Feature**: This release adds support to retrieve the validation status when creating or updating Glue Data Catalog Views. Also added is support for BasicCatalogTarget partition keys.
+
 # v1.92.0 (2024-08-07)
 
 * **Feature**: Introducing AWS Glue Data Quality anomaly detection, a new functionality that uses ML-based solutions to detect data anomalies users have not explicitly defined rules for.

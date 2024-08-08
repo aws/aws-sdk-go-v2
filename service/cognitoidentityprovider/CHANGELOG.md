@@ -1,3 +1,7 @@
+# v1.43.0 (2024-08-08)
+
+* **Feature**: Added support for threat protection for custom authentication in Amazon Cognito user pools.
+
 # v1.42.0 (2024-08-06)
 
 * **Feature**: Advanced security feature updates to include password history and log export for Cognito user pools.

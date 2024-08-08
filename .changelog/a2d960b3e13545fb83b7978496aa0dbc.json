@@ -1,8 +1,0 @@
-{
-    "id": "a2d960b3-e135-45fb-83b7-978496aa0dbc",
-    "type": "feature",
-    "description": "This release adds support to retrieve the validation status when creating or updating Glue Data Catalog Views. Also added is support for BasicCatalogTarget partition keys.",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.23.3
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.42.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.48.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.40.3
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.36.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.173.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.174.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.3
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.24.3
-	github.com/aws/aws-sdk-go-v2/service/glue v1.92.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.93.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.23.3

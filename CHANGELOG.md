@@ -1,3 +1,13 @@
+# Release (2024-08-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.43.0](service/cognitoidentityprovider/CHANGELOG.md#v1430-2024-08-08)
+  * **Feature**: Added support for threat protection for custom authentication in Amazon Cognito user pools.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.174.0](service/ec2/CHANGELOG.md#v11740-2024-08-08)
+  * **Feature**: Launch of private IPv6 addressing for VPCs and Subnets. VPC IPAM supports the planning and monitoring of private IPv6 usage.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.93.0](service/glue/CHANGELOG.md#v1930-2024-08-08)
+  * **Feature**: This release adds support to retrieve the validation status when creating or updating Glue Data Catalog Views. Also added is support for BasicCatalogTarget partition keys.
+
 # Release (2024-08-07)
 
 ## Module Highlights
