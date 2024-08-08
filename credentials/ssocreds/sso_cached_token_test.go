@@ -102,6 +102,24 @@ func TestLoadCachedToken(t *testing.T) {
 				},
 			},
 		},
+		"non-utc token": {
+			filename: filepath.Join("testdata", "non_utc_token.json"),
+			expectToken: token{
+				tokenKnownFields: tokenKnownFields{
+					AccessToken:  "dGhpcyBpcyBub3QgYSByZWFsIHZhbHVl",
+					ExpiresAt:    (*rfc3339)(aws.Time(time.Date(2044, 4, 4, 7, 0, 1, 0, time.UTC))),
+					ClientID:     "client id",
+					ClientSecret: "client secret",
+					RefreshToken: "refresh token",
+				},
+				UnknownFields: map[string]interface{}{
+					"unknownField":          "some value",
+					"registrationExpiresAt": "2044-04-04T07:00:01Z",
+					"region":                "region",
+					"startURL":              "start URL",
+				},
+			},
+		},
 	}
 
 	for name, c := range cases {
@@ -120,7 +138,7 @@ func TestLoadCachedToken(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmpDiff(c.expectToken, actualToken); diff != "" {
+			if diff := cmpDiffToken(c.expectToken, actualToken); diff != "" {
 				t.Errorf("expect tokens match\n%s", diff)
 			}
 		})
@@ -162,6 +180,25 @@ func TestStoreCachedToken(t *testing.T) {
 				},
 			},
 		},
+		"non-utc token": {
+			filename: filepath.Join(tempDir, "token_file.json"),
+			fileMode: 0600,
+			token: token{
+				tokenKnownFields: tokenKnownFields{
+					AccessToken:  "dGhpcyBpcyBub3QgYSByZWFsIHZhbHVl",
+					ExpiresAt:    (*rfc3339)(aws.Time(time.Date(2044, 4, 4, 7, 0, 1, 0, time.FixedZone("UTC-8", -8*60*60)))),
+					ClientID:     "client id",
+					ClientSecret: "client secret",
+					RefreshToken: "refresh token",
+				},
+				UnknownFields: map[string]interface{}{
+					"unknownField":          "some value",
+					"registrationExpiresAt": "2044-04-04T07:00:01Z",
+					"region":                "region",
+					"startURL":              "start URL",
+				},
+			},
+		},
 	}
 
 	for name, c := range cases {
@@ -176,7 +213,7 @@ func TestStoreCachedToken(t *testing.T) {
 				t.Fatalf("failed to load stored token, %v", err)
 			}
 
-			if diff := cmpDiff(c.token, actual); diff != "" {
+			if diff := cmpDiffToken(c.token, actual); diff != "" {
 				t.Errorf("expect tokens match\n%s", diff)
 			}
 		})
