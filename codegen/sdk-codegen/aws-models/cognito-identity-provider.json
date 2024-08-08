@@ -3782,6 +3782,37 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#AdvancedSecurityAdditionalFlowsType": {
+            "type": "structure",
+            "members": {
+                "CustomAuthMode": {
+                    "target": "com.amazonaws.cognitoidentityprovider#AdvancedSecurityEnabledModeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating mode of advanced security features in custom authentication with \n            <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html\">\n                Custom authentication challenge Lambda triggers</a>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Advanced security configuration options for additional authentication types\n            in your user pool, including custom authentication and refresh-token \n            authentication.\n        </p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdvancedSecurityEnabledModeType": {
+            "type": "enum",
+            "members": {
+                "AUDIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIT"
+                    }
+                },
+                "ENFORCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENFORCED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#AdvancedSecurityModeType": {
             "type": "enum",
             "members": {
@@ -15227,8 +15258,14 @@
                 "AdvancedSecurityMode": {
                     "target": "com.amazonaws.cognitoidentityprovider#AdvancedSecurityModeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating mode of advanced security features in your user pool.</p>",
+                        "smithy.api#documentation": "<p>The operating mode of advanced security features for standard authentication types\n            in your user pool, including username-password and secure remote password (SRP)\n            authentication.\n        </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AdvancedSecurityAdditionalFlows": {
+                    "target": "com.amazonaws.cognitoidentityprovider#AdvancedSecurityAdditionalFlowsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Advanced security configuration options for additional authentication types\n            in your user pool, including custom authentication and refresh-token \n            authentication.\n        </p>"
                     }
                 }
             },
