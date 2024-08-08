@@ -26,6 +26,26 @@ func (AccountTakeoverEventActionType) Values() []AccountTakeoverEventActionType 
 	}
 }
 
+type AdvancedSecurityEnabledModeType string
+
+// Enum values for AdvancedSecurityEnabledModeType
+const (
+	AdvancedSecurityEnabledModeTypeAudit    AdvancedSecurityEnabledModeType = "AUDIT"
+	AdvancedSecurityEnabledModeTypeEnforced AdvancedSecurityEnabledModeType = "ENFORCED"
+)
+
+// Values returns all known values for AdvancedSecurityEnabledModeType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdvancedSecurityEnabledModeType) Values() []AdvancedSecurityEnabledModeType {
+	return []AdvancedSecurityEnabledModeType{
+		"AUDIT",
+		"ENFORCED",
+	}
+}
+
 type AdvancedSecurityModeType string
 
 // Enum values for AdvancedSecurityModeType

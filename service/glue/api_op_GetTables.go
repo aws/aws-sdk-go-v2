@@ -44,6 +44,10 @@ type GetTablesInput struct {
 	// the pattern are returned.
 	Expression *string
 
+	// Specifies whether to include status details related to a request to create or
+	// update an Glue Data Catalog view.
+	IncludeStatusDetails *bool
+
 	// The maximum number of tables to return in a single response.
 	MaxResults *int32
 

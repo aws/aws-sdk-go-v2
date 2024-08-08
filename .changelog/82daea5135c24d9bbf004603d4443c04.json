@@ -1,0 +1,8 @@
+{
+    "id": "82daea51-35c2-4d9b-bf00-4603d4443c04",
+    "type": "feature",
+    "description": "This release fixes a regression in number of access control tags that are allowed to be added to a security profile in Amazon Connect. You can now add up to four access control tags on a single security profile.",
+    "modules": [
+        "service/connect"
+    ]
+}

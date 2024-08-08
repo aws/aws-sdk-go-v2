@@ -14665,6 +14665,46 @@ func awsAwsjson11_deserializeDocumentAdminCreateUserConfigType(v **types.AdminCr
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAdvancedSecurityAdditionalFlowsType(v **types.AdvancedSecurityAdditionalFlowsType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdvancedSecurityAdditionalFlowsType
+	if *v == nil {
+		sv = &types.AdvancedSecurityAdditionalFlowsType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomAuthMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdvancedSecurityEnabledModeType to be of type string, got %T instead", value)
+				}
+				sv.CustomAuthMode = types.AdvancedSecurityEnabledModeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAliasAttributesListType(v *[]types.AliasAttributeType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20783,6 +20823,11 @@ func awsAwsjson11_deserializeDocumentUserPoolAddOnsType(v **types.UserPoolAddOns
 
 	for key, value := range shape {
 		switch key {
+		case "AdvancedSecurityAdditionalFlows":
+			if err := awsAwsjson11_deserializeDocumentAdvancedSecurityAdditionalFlowsType(&sv.AdvancedSecurityAdditionalFlows, value); err != nil {
+				return err
+			}
+
 		case "AdvancedSecurityMode":
 			if value != nil {
 				jtv, ok := value.(string)

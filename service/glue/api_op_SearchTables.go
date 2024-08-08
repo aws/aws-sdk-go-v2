@@ -54,6 +54,10 @@ type SearchTablesInput struct {
 	// returned, but xxlinkyy is not returned.
 	Filters []types.PropertyPredicate
 
+	// Specifies whether to include status details related to a request to create or
+	// update an Glue Data Catalog view.
+	IncludeStatusDetails *bool
+
 	// The maximum number of tables to return in a single response.
 	MaxResults *int32
 

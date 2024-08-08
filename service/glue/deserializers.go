@@ -28902,6 +28902,11 @@ func awsAwsjson11_deserializeDocumentBasicCatalogTarget(v **types.BasicCatalogTa
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "PartitionKeys":
+			if err := awsAwsjson11_deserializeDocumentGlueStudioPathList(&sv.PartitionKeys, value); err != nil {
+				return err
+			}
+
 		case "Table":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -53806,6 +53811,47 @@ func awsAwsjson11_deserializeDocumentStatisticSummaryList(v *[]types.StatisticSu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStatusDetails(v **types.StatusDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StatusDetails
+	if *v == nil {
+		sv = &types.StatusDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RequestedChange":
+			if err := awsAwsjson11_deserializeDocumentTable(&sv.RequestedChange, value); err != nil {
+				return err
+			}
+
+		case "ViewValidations":
+			if err := awsAwsjson11_deserializeDocumentViewValidationList(&sv.ViewValidations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStorageDescriptor(v **types.StorageDescriptor, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -54302,6 +54348,11 @@ func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) e
 				sv.Retention = int32(i64)
 			}
 
+		case "Status":
+			if err := awsAwsjson11_deserializeDocumentTableStatus(&sv.Status, value); err != nil {
+				return err
+			}
+
 		case "StorageDescriptor":
 			if err := awsAwsjson11_deserializeDocumentStorageDescriptor(&sv.StorageDescriptor, value); err != nil {
 				return err
@@ -54774,6 +54825,115 @@ func awsAwsjson11_deserializeDocumentTableOptimizerRuns(v *[]types.TableOptimize
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTableStatus(v **types.TableStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableStatus
+	if *v == nil {
+		sv = &types.TableStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.ResourceAction(jtv)
+			}
+
+		case "Details":
+			if err := awsAwsjson11_deserializeDocumentStatusDetails(&sv.Details, value); err != nil {
+				return err
+			}
+
+		case "Error":
+			if err := awsAwsjson11_deserializeDocumentErrorDetail(&sv.Error, value); err != nil {
+				return err
+			}
+
+		case "RequestedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.RequestedBy = ptr.String(jtv)
+			}
+
+		case "RequestTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RequestTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ResourceState(jtv)
+			}
+
+		case "UpdatedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.UpdatedBy = ptr.String(jtv)
+			}
+
+		case "UpdateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -56613,6 +56773,128 @@ func awsAwsjson11_deserializeDocumentViewSubObjectsList(v *[]string, value inter
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentViewValidation(v **types.ViewValidation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ViewValidation
+	if *v == nil {
+		sv = &types.ViewValidation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Dialect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewDialect to be of type string, got %T instead", value)
+				}
+				sv.Dialect = types.ViewDialect(jtv)
+			}
+
+		case "DialectVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewDialectVersionString to be of type string, got %T instead", value)
+				}
+				sv.DialectVersion = ptr.String(jtv)
+			}
+
+		case "Error":
+			if err := awsAwsjson11_deserializeDocumentErrorDetail(&sv.Error, value); err != nil {
+				return err
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ResourceState(jtv)
+			}
+
+		case "UpdateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ViewValidationText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewTextString to be of type string, got %T instead", value)
+				}
+				sv.ViewValidationText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentViewValidationList(v *[]types.ViewValidation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ViewValidation
+	if *v == nil {
+		cv = []types.ViewValidation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ViewValidation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentViewValidation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

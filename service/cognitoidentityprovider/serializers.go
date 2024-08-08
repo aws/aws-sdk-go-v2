@@ -5783,6 +5783,18 @@ func awsAwsjson11_serializeDocumentAdminCreateUserConfigType(v *types.AdminCreat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAdvancedSecurityAdditionalFlowsType(v *types.AdvancedSecurityAdditionalFlowsType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CustomAuthMode) > 0 {
+		ok := object.Key("CustomAuthMode")
+		ok.String(string(v.CustomAuthMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAliasAttributesListType(v []types.AliasAttributeType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7018,6 +7030,13 @@ func awsAwsjson11_serializeDocumentUsernameConfigurationType(v *types.UsernameCo
 func awsAwsjson11_serializeDocumentUserPoolAddOnsType(v *types.UserPoolAddOnsType, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdvancedSecurityAdditionalFlows != nil {
+		ok := object.Key("AdvancedSecurityAdditionalFlows")
+		if err := awsAwsjson11_serializeDocumentAdvancedSecurityAdditionalFlowsType(v.AdvancedSecurityAdditionalFlows, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.AdvancedSecurityMode) > 0 {
 		ok := object.Key("AdvancedSecurityMode")

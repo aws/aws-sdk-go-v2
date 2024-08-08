@@ -12896,6 +12896,13 @@ func awsAwsjson11_serializeDocumentBasicCatalogTarget(v *types.BasicCatalogTarge
 		ok.String(*v.Name)
 	}
 
+	if v.PartitionKeys != nil {
+		ok := object.Key("PartitionKeys")
+		if err := awsAwsjson11_serializeDocumentGlueStudioPathList(v.PartitionKeys, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Table != nil {
 		ok := object.Key("Table")
 		ok.String(*v.Table)
@@ -24639,6 +24646,11 @@ func awsAwsjson11_serializeOpDocumentGetTableInput(v *GetTableInput, value smith
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.IncludeStatusDetails != nil {
+		ok := object.Key("IncludeStatusDetails")
+		ok.Boolean(*v.IncludeStatusDetails)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -24701,6 +24713,11 @@ func awsAwsjson11_serializeOpDocumentGetTablesInput(v *GetTablesInput, value smi
 	if v.Expression != nil {
 		ok := object.Key("Expression")
 		ok.String(*v.Expression)
+	}
+
+	if v.IncludeStatusDetails != nil {
+		ok := object.Key("IncludeStatusDetails")
+		ok.Boolean(*v.IncludeStatusDetails)
 	}
 
 	if v.MaxResults != nil {
@@ -26077,6 +26094,11 @@ func awsAwsjson11_serializeOpDocumentSearchTablesInput(v *SearchTablesInput, val
 		if err := awsAwsjson11_serializeDocumentSearchPropertyPredicates(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.IncludeStatusDetails != nil {
+		ok := object.Key("IncludeStatusDetails")
+		ok.Boolean(*v.IncludeStatusDetails)
 	}
 
 	if v.MaxResults != nil {

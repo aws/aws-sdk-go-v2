@@ -1,0 +1,8 @@
+{
+    "id": "88b72bc4-57a4-4b5f-8aff-048727b27910",
+    "type": "feature",
+    "description": "Added support for threat protection for custom authentication in Amazon Cognito user pools.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

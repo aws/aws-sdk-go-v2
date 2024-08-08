@@ -1,0 +1,8 @@
+{
+    "id": "abb82f33-ab4f-4d25-9baa-1ff38b3ce8ab",
+    "type": "feature",
+    "description": "Launch of private IPv6 addressing for VPCs and Subnets. VPC IPAM supports the planning and monitoring of private IPv6 usage.",
+    "modules": [
+        "service/ec2"
+    ]
+}

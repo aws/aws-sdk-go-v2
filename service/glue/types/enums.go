@@ -374,6 +374,10 @@ const (
 	ConnectionPropertyKeyKafkaSaslGssapiService               ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_SERVICE"
 	ConnectionPropertyKeyKafkaSaslGssapiPrincipal             ConnectionPropertyKey = "KAFKA_SASL_GSSAPI_PRINCIPAL"
 	ConnectionPropertyKeyRoleArn                              ConnectionPropertyKey = "ROLE_ARN"
+	ConnectionPropertyKeyRegion                               ConnectionPropertyKey = "REGION"
+	ConnectionPropertyKeyWorkgroupName                        ConnectionPropertyKey = "WORKGROUP_NAME"
+	ConnectionPropertyKeyClusterIdentifier                    ConnectionPropertyKey = "CLUSTER_IDENTIFIER"
+	ConnectionPropertyKeyDatabase                             ConnectionPropertyKey = "DATABASE"
 )
 
 // Values returns all known values for ConnectionPropertyKey. Note that this can
@@ -425,6 +429,10 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"KAFKA_SASL_GSSAPI_SERVICE",
 		"KAFKA_SASL_GSSAPI_PRINCIPAL",
 		"ROLE_ARN",
+		"REGION",
+		"WORKGROUP_NAME",
+		"CLUSTER_IDENTIFIER",
+		"DATABASE",
 	}
 }
 
@@ -453,14 +461,16 @@ type ConnectionType string
 
 // Enum values for ConnectionType
 const (
-	ConnectionTypeJdbc        ConnectionType = "JDBC"
-	ConnectionTypeSftp        ConnectionType = "SFTP"
-	ConnectionTypeMongodb     ConnectionType = "MONGODB"
-	ConnectionTypeKafka       ConnectionType = "KAFKA"
-	ConnectionTypeNetwork     ConnectionType = "NETWORK"
-	ConnectionTypeMarketplace ConnectionType = "MARKETPLACE"
-	ConnectionTypeCustom      ConnectionType = "CUSTOM"
-	ConnectionTypeSalesforce  ConnectionType = "SALESFORCE"
+	ConnectionTypeJdbc                   ConnectionType = "JDBC"
+	ConnectionTypeSftp                   ConnectionType = "SFTP"
+	ConnectionTypeMongodb                ConnectionType = "MONGODB"
+	ConnectionTypeKafka                  ConnectionType = "KAFKA"
+	ConnectionTypeNetwork                ConnectionType = "NETWORK"
+	ConnectionTypeMarketplace            ConnectionType = "MARKETPLACE"
+	ConnectionTypeCustom                 ConnectionType = "CUSTOM"
+	ConnectionTypeSalesforce             ConnectionType = "SALESFORCE"
+	ConnectionTypeViewValidationRedshift ConnectionType = "VIEW_VALIDATION_REDSHIFT"
+	ConnectionTypeViewValidationAthena   ConnectionType = "VIEW_VALIDATION_ATHENA"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -477,6 +487,8 @@ func (ConnectionType) Values() []ConnectionType {
 		"MARKETPLACE",
 		"CUSTOM",
 		"SALESFORCE",
+		"VIEW_VALIDATION_REDSHIFT",
+		"VIEW_VALIDATION_ATHENA",
 	}
 }
 
@@ -1714,6 +1726,25 @@ func (RegistryStatus) Values() []RegistryStatus {
 	}
 }
 
+type ResourceAction string
+
+// Enum values for ResourceAction
+const (
+	ResourceActionUpdate ResourceAction = "UPDATE"
+	ResourceActionCreate ResourceAction = "CREATE"
+)
+
+// Values returns all known values for ResourceAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceAction) Values() []ResourceAction {
+	return []ResourceAction{
+		"UPDATE",
+		"CREATE",
+	}
+}
+
 type ResourceShareType string
 
 // Enum values for ResourceShareType
@@ -1732,6 +1763,31 @@ func (ResourceShareType) Values() []ResourceShareType {
 		"FOREIGN",
 		"ALL",
 		"FEDERATED",
+	}
+}
+
+type ResourceState string
+
+// Enum values for ResourceState
+const (
+	ResourceStateQueued     ResourceState = "QUEUED"
+	ResourceStateInProgress ResourceState = "IN_PROGRESS"
+	ResourceStateSuccess    ResourceState = "SUCCESS"
+	ResourceStateStopped    ResourceState = "STOPPED"
+	ResourceStateFailed     ResourceState = "FAILED"
+)
+
+// Values returns all known values for ResourceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceState) Values() []ResourceState {
+	return []ResourceState{
+		"QUEUED",
+		"IN_PROGRESS",
+		"SUCCESS",
+		"STOPPED",
+		"FAILED",
 	}
 }
 

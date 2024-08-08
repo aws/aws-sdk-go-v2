@@ -100,6 +100,20 @@ type AdminCreateUserConfigType struct {
 	noSmithyDocumentSerde
 }
 
+// Advanced security configuration options for additional authentication types in
+// your user pool, including custom authentication and refresh-token
+// authentication.
+type AdvancedSecurityAdditionalFlowsType struct {
+
+	// The operating mode of advanced security features in custom authentication with [Custom authentication challenge Lambda triggers]
+	// .
+	//
+	// [Custom authentication challenge Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html
+	CustomAuthMode AdvancedSecurityEnabledModeType
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Pinpoint analytics configuration necessary to collect metrics for a
 // user pool.
 //
@@ -1695,10 +1709,17 @@ type UsernameConfigurationType struct {
 // [Adding advanced security to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
 type UserPoolAddOnsType struct {
 
-	// The operating mode of advanced security features in your user pool.
+	// The operating mode of advanced security features for standard authentication
+	// types in your user pool, including username-password and secure remote password
+	// (SRP) authentication.
 	//
 	// This member is required.
 	AdvancedSecurityMode AdvancedSecurityModeType
+
+	// Advanced security configuration options for additional authentication types in
+	// your user pool, including custom authentication and refresh-token
+	// authentication.
+	AdvancedSecurityAdditionalFlows *AdvancedSecurityAdditionalFlowsType
 
 	noSmithyDocumentSerde
 }

@@ -429,6 +429,10 @@ type BasicCatalogTarget struct {
 	// This member is required.
 	Table *string
 
+	// The partition keys used to distribute data across multiple partitions or shards
+	// based on a specific key or set of key.
+	PartitionKeys [][]string
+
 	noSmithyDocumentSerde
 }
 
@@ -1689,6 +1693,18 @@ type Connection struct {
 	//   - KAFKA_SASL_GSSAPI_PRINCIPAL - The name of the Kerberos princial used by
 	//   Glue. For more information, see [Kafka Documentation: Configuring Kafka Brokers].
 	//
+	//   - ROLE_ARN - The role to be used for running queries.
+	//
+	//   - REGION - The Amazon Web Services Region where queries will be run.
+	//
+	//   - WORKGROUP_NAME - The name of an Amazon Redshift serverless workgroup or
+	//   Amazon Athena workgroup in which queries will run.
+	//
+	//   - CLUSTER_IDENTIFIER - The cluster identifier of an Amazon Redshift cluster in
+	//   which queries will run.
+	//
+	//   - DATABASE - The Amazon Redshift database that you are connecting to.
+	//
 	// [MIT Kerberos Documentation: Keytab]: https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html
 	// [SASL Mechanisms]: https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
 	// [Kafka Documentation: Configuring Kafka Brokers]: https://kafka.apache.org/documentation/#security_sasl_kerberos_clientconfig
@@ -1793,6 +1809,12 @@ type ConnectionInput struct {
 	//   - SALESFORCE - Designates a connection to Salesforce using OAuth authencation.
 	//
 	//   - Requires the AuthenticationConfiguration member to be configured.
+	//
+	//   - VIEW_VALIDATION_REDSHIFT - Designates a connection used for view validation
+	//   by Amazon Redshift.
+	//
+	//   - VIEW_VALIDATION_ATHENA - Designates a connection used for view validation by
+	//   Amazon Athena.
 	//
 	//   - NETWORK - Designates a network connection to a data source within an Amazon
 	//   Virtual Private Cloud environment (Amazon VPC).
@@ -8297,6 +8319,19 @@ type StatisticSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A structure containing information about an asynchronous change to a table.
+type StatusDetails struct {
+
+	// A Table object representing the requested changes.
+	RequestedChange *Table
+
+	// A list of ViewValidation objects that contain information for an analytical
+	// engine to validate a view.
+	ViewValidations []ViewValidation
+
+	noSmithyDocumentSerde
+}
+
 // Describes the physical storage of table data.
 type StorageDescriptor struct {
 
@@ -8463,6 +8498,10 @@ type Table struct {
 
 	// The retention time for this table.
 	Retention int32
+
+	// A structure containing information about the state of an asynchronous change to
+	// a table.
+	Status *TableStatus
 
 	// A storage descriptor containing information about the physical storage of this
 	// table.
@@ -8652,6 +8691,42 @@ type TableOptimizerRun struct {
 	// Represents the epoch timestamp at which the compaction job was started within
 	// Lake Formation.
 	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing information about the state of an asynchronous change to
+// a table.
+type TableStatus struct {
+
+	// Indicates which action was called on the table, currently only CREATE or UPDATE .
+	Action ResourceAction
+
+	// A StatusDetails object with information about the requested change.
+	Details *StatusDetails
+
+	// An error that will only appear when the state is "FAILED". This is a parent
+	// level exception message, there may be different Error s for each dialect.
+	Error *ErrorDetail
+
+	// An ISO 8601 formatted date string indicating the time that the change was
+	// initiated.
+	RequestTime *time.Time
+
+	// The ARN of the user who requested the asynchronous change.
+	RequestedBy *string
+
+	// A generic status for the change in progress, such as QUEUED, IN_PROGRESS,
+	// SUCCESS, or FAILED.
+	State ResourceState
+
+	// An ISO 8601 formatted date string indicating the time that the state was last
+	// updated.
+	UpdateTime *time.Time
+
+	// The ARN of the user to last manually alter the asynchronous change (requesting
+	// cancellation, etc).
+	UpdatedBy *string
 
 	noSmithyDocumentSerde
 }
@@ -9341,6 +9416,32 @@ type ViewRepresentationInput struct {
 
 	// A string that represents the original SQL query that describes the view.
 	ViewOriginalText *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information for an analytical engine to validate a
+// view, prior to persisting the view metadata. Used in the case of direct
+// UpdateTable or CreateTable API calls.
+type ViewValidation struct {
+
+	// The dialect of the query engine.
+	Dialect ViewDialect
+
+	// The version of the dialect of the query engine. For example, 3.0.0.
+	DialectVersion *string
+
+	// An error associated with the validation.
+	Error *ErrorDetail
+
+	// The state of the validation.
+	State ResourceState
+
+	// The time of the last update.
+	UpdateTime *time.Time
+
+	// The SELECT query that defines the view, as provided by the customer.
+	ViewValidationText *string
 
 	noSmithyDocumentSerde
 }

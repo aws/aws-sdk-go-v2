@@ -46,6 +46,10 @@ type GetTableInput struct {
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string
 
+	// Specifies whether to include status details related to a request to create or
+	// update an Glue Data Catalog view.
+	IncludeStatusDetails *bool
+
 	// The time as of when to read the table contents. If not set, the most recent
 	// transaction commit time will be used. Cannot be specified along with
 	// TransactionId .
