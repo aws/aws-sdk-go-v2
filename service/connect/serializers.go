@@ -19477,6 +19477,13 @@ func awsRestjson1_serializeOpDocumentUpdateContactRoutingDataInput(v *UpdateCont
 		ok.Integer(*v.QueueTimeAdjustmentSeconds)
 	}
 
+	if v.RoutingCriteria != nil {
+		ok := object.Key("RoutingCriteria")
+		if err := awsRestjson1_serializeDocumentRoutingCriteriaInput(v.RoutingCriteria, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23220,6 +23227,17 @@ func awsRestjson1_serializeDocumentAgentHierarchyGroups(v *types.AgentHierarchyG
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgentIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAgentResourceIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -23228,6 +23246,20 @@ func awsRestjson1_serializeDocumentAgentResourceIdList(v []string, value smithyj
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgentsCriteria(v *types.AgentsCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentIds != nil {
+		ok := object.Key("AgentIds")
+		if err := awsRestjson1_serializeDocumentAgentIds(v.AgentIds, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23423,6 +23455,53 @@ func awsRestjson1_serializeDocumentAttributeAndCondition(v *types.AttributeAndCo
 		if err := awsRestjson1_serializeDocumentTagAndConditionList(v.TagConditions, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAttributeCondition(v *types.AttributeCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ComparisonOperator != nil {
+		ok := object.Key("ComparisonOperator")
+		ok.String(*v.ComparisonOperator)
+	}
+
+	if v.MatchCriteria != nil {
+		ok := object.Key("MatchCriteria")
+		if err := awsRestjson1_serializeDocumentMatchCriteria(v.MatchCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.ProficiencyLevel != nil {
+		ok := object.Key("ProficiencyLevel")
+		switch {
+		case math.IsNaN(float64(*v.ProficiencyLevel)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.ProficiencyLevel), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.ProficiencyLevel), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.ProficiencyLevel)
+
+		}
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
 	}
 
 	return nil
@@ -24658,6 +24737,47 @@ func awsRestjson1_serializeDocumentEventBridgeActionDefinition(v *types.EventBri
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExpression(v *types.Expression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AndExpression != nil {
+		ok := object.Key("AndExpression")
+		if err := awsRestjson1_serializeDocumentExpressions(v.AndExpression, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AttributeCondition != nil {
+		ok := object.Key("AttributeCondition")
+		if err := awsRestjson1_serializeDocumentAttributeCondition(v.AttributeCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrExpression != nil {
+		ok := object.Key("OrExpression")
+		if err := awsRestjson1_serializeDocumentExpressions(v.OrExpression, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExpressions(v []types.Expression, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentExpression(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFieldValue(v *types.FieldValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25291,6 +25411,20 @@ func awsRestjson1_serializeDocumentListCondition(v *types.ListCondition, value s
 	if len(v.TargetListType) > 0 {
 		ok := object.Key("TargetListType")
 		ok.String(string(v.TargetListType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMatchCriteria(v *types.MatchCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentsCriteria != nil {
+		ok := object.Key("AgentsCriteria")
+		if err := awsRestjson1_serializeDocumentAgentsCriteria(v.AgentsCriteria, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -26134,6 +26268,66 @@ func awsRestjson1_serializeDocumentResourceTypeList(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRoutingCriteriaInput(v *types.RoutingCriteriaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Steps != nil {
+		ok := object.Key("Steps")
+		if err := awsRestjson1_serializeDocumentRoutingCriteriaInputSteps(v.Steps, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRoutingCriteriaInputStep(v *types.RoutingCriteriaInputStep, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expiry != nil {
+		ok := object.Key("Expiry")
+		if err := awsRestjson1_serializeDocumentRoutingCriteriaInputStepExpiry(v.Expiry, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		if err := awsRestjson1_serializeDocumentExpression(v.Expression, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRoutingCriteriaInputStepExpiry(v *types.RoutingCriteriaInputStepExpiry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("DurationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRoutingCriteriaInputSteps(v []types.RoutingCriteriaInputStep, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRoutingCriteriaInputStep(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

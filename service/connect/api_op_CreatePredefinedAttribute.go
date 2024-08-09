@@ -12,6 +12,11 @@ import (
 )
 
 // Creates a new predefined attribute for the specified Amazon Connect instance.
+// Predefined attributes are attributes in an Amazon Connect instance that can be
+// used to route contacts to an agent or pools of agents within a queue. For more
+// information, see [Create predefined attributes for routing contacts to agents].
+//
+// [Create predefined attributes for routing contacts to agents]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
 func (c *Client) CreatePredefinedAttribute(ctx context.Context, params *CreatePredefinedAttributeInput, optFns ...func(*Options)) (*CreatePredefinedAttributeOutput, error) {
 	if params == nil {
 		params = &CreatePredefinedAttributeInput{}

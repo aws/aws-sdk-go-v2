@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a queue.
+// Deletes a queue. It isn't possible to delete a queue by using the Amazon
+// Connect admin website.
 func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optFns ...func(*Options)) (*DeleteQueueOutput, error) {
 	if params == nil {
 		params = &DeleteQueueInput{}

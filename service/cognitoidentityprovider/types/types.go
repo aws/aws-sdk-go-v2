@@ -101,8 +101,7 @@ type AdminCreateUserConfigType struct {
 }
 
 // Advanced security configuration options for additional authentication types in
-// your user pool, including custom authentication and refresh-token
-// authentication.
+// your user pool, including custom authentication.
 type AdvancedSecurityAdditionalFlowsType struct {
 
 	// The operating mode of advanced security features in custom authentication with [Custom authentication challenge Lambda triggers]
@@ -1717,8 +1716,7 @@ type UserPoolAddOnsType struct {
 	AdvancedSecurityMode AdvancedSecurityModeType
 
 	// Advanced security configuration options for additional authentication types in
-	// your user pool, including custom authentication and refresh-token
-	// authentication.
+	// your user pool, including custom authentication.
 	AdvancedSecurityAdditionalFlows *AdvancedSecurityAdditionalFlowsType
 
 	noSmithyDocumentSerde

@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Predefined attributes that meet certain criteria.
+// Searches predefined attributes that meet certain criteria. Predefined
+// attributes are attributes in an Amazon Connect instance that can be used to
+// route contacts to an agent or pools of agents within a queue. For more
+// information, see [Create predefined attributes for routing contacts to agents].
+//
+// [Create predefined attributes for routing contacts to agents]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
 func (c *Client) SearchPredefinedAttributes(ctx context.Context, params *SearchPredefinedAttributesInput, optFns ...func(*Options)) (*SearchPredefinedAttributesOutput, error) {
 	if params == nil {
 		params = &SearchPredefinedAttributesInput{}

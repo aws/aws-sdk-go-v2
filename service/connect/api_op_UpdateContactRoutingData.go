@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +66,10 @@ type UpdateContactRoutingDataInput struct {
 	// that changing their amount of time in queue compared to others also changes
 	// their position in queue.
 	QueueTimeAdjustmentSeconds *int32
+
+	// Updates the routing criteria on the contact. These properties can be used to
+	// change how a  contact is routed within the queue.
+	RoutingCriteria *types.RoutingCriteriaInput
 
 	noSmithyDocumentSerde
 }

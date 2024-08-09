@@ -1,0 +1,8 @@
+{
+    "id": "90bc24c6-e240-4675-b311-f1fdc9c3a5cf",
+    "type": "documentation",
+    "description": "Systems Manager doc-only updates for August 2024.",
+    "modules": [
+        "service/ssm"
+    ]
+}

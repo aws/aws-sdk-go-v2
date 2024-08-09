@@ -132,12 +132,12 @@ type AgentQualityMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// Can be used to define a list of preferred agents to target the contact within
-// the queue. Note that agents must have the queue in their routing profile in
-// order to be offered the contact.
+// Can be used to define a list of preferred agents to target the contact to
+// within the queue.  Note that agents must have the queue in their routing profile
+// in order to be offered the  contact.
 type AgentsCriteria struct {
 
-	// An object to specify a list of agents, by Agent ID.
+	// An object to specify a list of agents, by user ID.
 	AgentIds []string
 
 	noSmithyDocumentSerde
@@ -3293,10 +3293,10 @@ type ListPhoneNumbersSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An object to define AgentsCriteria .
+// An object to define AgentsCriteria.
 type MatchCriteria struct {
 
-	// An object to define AgentIds .
+	// An object to define agentIds.
 	AgentsCriteria *AgentsCriteria
 
 	noSmithyDocumentSerde
@@ -4758,6 +4758,42 @@ type RoutingCriteria struct {
 	// with an agent. When all steps are exhausted, the contact will be offered to any
 	// agent in the queue.
 	Steps []Step
+
+	noSmithyDocumentSerde
+}
+
+// An object to define the RoutingCriteria.
+type RoutingCriteriaInput struct {
+
+	// When Amazon Connect does not find an available agent meeting the requirements
+	// in a step for  a given step duration, the routing criteria will move on to the
+	// next step sequentially until a  join is completed with an agent. When all steps
+	// are exhausted, the contact will be offered to any agent in the queue.
+	Steps []RoutingCriteriaInputStep
+
+	noSmithyDocumentSerde
+}
+
+// Step defines the list of agents to be routed or route based on the agent
+// requirements such as ProficiencyLevel, Name, or Value.
+type RoutingCriteriaInputStep struct {
+
+	// An object to specify the expiration of a routing step.
+	Expiry *RoutingCriteriaInputStepExpiry
+
+	// A tagged union to specify expression for a routing step.
+	Expression *Expression
+
+	noSmithyDocumentSerde
+}
+
+// Specify whether this routing criteria step should apply for only a limited
+// amount of time,  or if it should never expire.
+type RoutingCriteriaInputStepExpiry struct {
+
+	// The number of seconds that the contact will be routed only to agents matching
+	// this routing  step, if expiry was configured for this routing step.
+	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
 }

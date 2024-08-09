@@ -1,0 +1,8 @@
+{
+    "id": "aaf624b0-d891-4aa9-9a31-0815bc9646cd",
+    "type": "documentation",
+    "description": "Fixed a description of AdvancedSecurityAdditionalFlows in Amazon Cognito user pool configuration.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}
