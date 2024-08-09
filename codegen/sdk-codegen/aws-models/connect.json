@@ -789,12 +789,12 @@
                 "AgentIds": {
                     "target": "com.amazonaws.connect#AgentIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object to specify a list of agents, by Agent ID.</p>"
+                        "smithy.api#documentation": "<p>An object to specify a list of agents, by user ID.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Can be used to define a list of preferred agents to target the contact within the queue.\n   Note that agents must have the queue in their routing profile in order to be offered the\n   contact.</p>"
+                "smithy.api#documentation": "<p>Can be used to define a list of preferred agents to target the contact to within the queue.\u2028\n   Note that agents must have the queue in their routing profile in order to be offered the\u2028\n   contact.</p>"
             }
         },
         "com.amazonaws.connect#AgentsMinOneMaxHundred": {
@@ -7150,7 +7150,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Initiates an Amazon Connect instance with all the supported channels enabled. It does\n   not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It\n   also does not allow for any configurations on features, such as Contact Lens for Amazon Connect. </p>\n         <p>Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. \nIf you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. \nYou must wait 30 days before you can restart creating and deleting instances in your account.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Initiates an Amazon Connect instance with all the supported channels enabled. It does\n   not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It\n   also does not allow for any configurations on features, such as Contact Lens for Amazon Connect. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html\">Create an Amazon Connect\n    instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <p>Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. \nIf you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. \nYou must wait 30 days before you can restart creating and deleting instances in your account.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance",
@@ -7556,7 +7556,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new predefined attribute for the specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>Creates a new predefined attribute for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/predefined-attributes/{InstanceId}",
@@ -8190,7 +8190,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a security profile.</p>",
+                "smithy.api#documentation": "<p>Creates a security profile.</p>\n         <p>For information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the\n     <i>Amazon Connect Administrator Guide</i>. For a mapping of the API name and\n   user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile\n    permissions</a>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/security-profiles/{InstanceId}",
@@ -10088,7 +10088,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Deletes the Amazon Connect instance.</p>\n         <p>Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. \nIf you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. \nYou must wait 30 days before you can restart creating and deleting instances in your account.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Deletes the Amazon Connect instance. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/delete-connect-instance.html\">Delete your\n     Amazon Connect instance</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. \nIf you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. \nYou must wait 30 days before you can restart creating and deleting instances in your account.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}",
@@ -10316,7 +10316,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a queue.</p>",
+                "smithy.api#documentation": "<p>Deletes a queue. It isn't possible to delete a queue by using the Amazon Connect admin website.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/queues/{InstanceId}/{QueueId}",
@@ -12027,7 +12027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a predefined attribute for the specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>Describes a predefined attribute for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/predefined-attributes/{InstanceId}/{Name}",
@@ -12460,7 +12460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets basic information about the security profle.</p>",
+                "smithy.api#documentation": "<p>Gets basic information about the security profile.</p>\n         <p>For information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the\n     <i>Amazon Connect Administrator Guide</i>. For a mapping of the API name and\n   user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile\n    permissions</a>. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles/{InstanceId}/{SecurityProfileId}",
@@ -21613,7 +21613,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists predefined attributes for the specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>Lists predefined attributes for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/predefined-attributes/{InstanceId}",
@@ -22729,7 +22729,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the permissions granted to a security profile.</p>",
+                "smithy.api#documentation": "<p>Lists the permissions granted to a security profile.</p>\n         <p>For information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the\n     <i>Amazon Connect Administrator Guide</i>. For a mapping of the API name and\n   user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile\n    permissions</a>. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles-permissions/{InstanceId}/{SecurityProfileId}",
@@ -22839,7 +22839,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about the security profiles for the specified Amazon Connect instance.</p>\n         <p>For more information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Provides summary information about the security profiles for the specified Amazon Connect instance.</p>\n         <p>For more information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the\n     <i>Amazon Connect Administrator Guide</i>. For a mapping of the API name and\n   user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile\n    permissions</a>. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/security-profiles-summary/{InstanceId}",
@@ -23845,12 +23845,12 @@
                 "AgentsCriteria": {
                     "target": "com.amazonaws.connect#AgentsCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object to define <code>AgentIds</code>.</p>"
+                        "smithy.api#documentation": "<p>An object to define agentIds.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object to define <code>AgentsCriteria</code>.</p>"
+                "smithy.api#documentation": "<p>An object to define AgentsCriteria.</p>"
             }
         },
         "com.amazonaws.connect#MaxResult10": {
@@ -28485,7 +28485,7 @@
                 "FailureCode": {
                     "target": "com.amazonaws.connect#RealTimeContactAnalysisPostContactSummaryFailureCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the summary failed to be generated, one of the following failure codes\n   occurs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached\n     your service quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: The conversation needs to have\n     at least one turn from both the participants in order to generate the\n     summary.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_SAFETY_GUIDELINES</code>: The generated summary cannot be\n     provided because it failed to meet system safety guidelines.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_ANALYSIS_CONFIGURATION</code>: This code occurs when, for\n     example, you're using a \n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens\">language</a> \n     that isn't supported by generative AI-powered post-contact summaries.\n    </p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: Internal system error.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>If the summary failed to be generated, one of the following failure codes occurs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached your service\n     quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: The conversation needs to have at least\n     one turn from both the participants in order to generate the summary.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_SAFETY_GUIDELINES</code>: The generated summary cannot be provided because it\n     failed to meet system safety guidelines.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_ANALYSIS_CONFIGURATION</code>: This code occurs when, for example, you're\n     using a <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens\">language</a> that isn't supported by generative AI-powered post-contact summaries.\n    </p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: Internal system error.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -29535,6 +29535,60 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Latest routing criteria on the contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#RoutingCriteriaInput": {
+            "type": "structure",
+            "members": {
+                "Steps": {
+                    "target": "com.amazonaws.connect#RoutingCriteriaInputSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When Amazon Connect does not find an available agent meeting the requirements in a step for\u2028 \n   a given step duration, the routing criteria will move on to the next step sequentially until a\u2028 \n   join is completed with an agent. When all steps are exhausted, the contact will be offered to any agent \n   in the queue.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to define the RoutingCriteria.</p>"
+            }
+        },
+        "com.amazonaws.connect#RoutingCriteriaInputStep": {
+            "type": "structure",
+            "members": {
+                "Expiry": {
+                    "target": "com.amazonaws.connect#RoutingCriteriaInputStepExpiry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the expiration of a routing step.</p>"
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.connect#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tagged union to specify expression for a routing step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Step defines the list of agents to be routed or route based on the agent requirements such as ProficiencyLevel, \n   Name, or Value.</p>"
+            }
+        },
+        "com.amazonaws.connect#RoutingCriteriaInputStepExpiry": {
+            "type": "structure",
+            "members": {
+                "DurationInSeconds": {
+                    "target": "com.amazonaws.connect#DurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds that the contact will be routed only to agents matching this routing\u2028 step, if expiry \n   was configured for this routing step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specify whether this routing criteria step should apply for only a limited amount of time,\u2028 or if it should \n   never expire.</p>"
+            }
+        },
+        "com.amazonaws.connect#RoutingCriteriaInputSteps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RoutingCriteriaInputStep"
             }
         },
         "com.amazonaws.connect#RoutingCriteriaStepStatus": {
@@ -31073,7 +31127,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Predefined attributes that meet certain criteria.</p>",
+                "smithy.api#documentation": "<p>Searches predefined attributes that meet certain criteria. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-predefined-attributes",
@@ -31694,7 +31748,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches security profiles in an Amazon Connect instance, with optional\n   filtering.</p>",
+                "smithy.api#documentation": "<p>Searches security profiles in an Amazon Connect instance, with optional\n   filtering.</p>\n         <p>For information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the\n     <i>Amazon Connect Administrator Guide</i>. For a mapping of the API name and\n   user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile\n    permissions</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-security-profiles",
@@ -36832,6 +36886,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Priority of the contact in the queue. The default priority for new contacts is 5. You can\n   raise the priority of a contact compared to other contacts in the queue by assigning them a\n   higher priority, such as 1 or 2.</p>"
                     }
+                },
+                "RoutingCriteria": {
+                    "target": "com.amazonaws.connect#RoutingCriteriaInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the routing criteria on the contact. These properties can be used to change how a\u2028\n   contact is routed within the queue.</p>"
+                    }
                 }
             },
             "traits": {
@@ -37571,7 +37631,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a predefined attribute for the specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>Updates a predefined attribute for the specified Amazon Connect instance. <i>Predefined\n    attributes</i> are attributes in an Amazon Connect instance that can be used to route\n   contacts to an agent or pools of agents within a queue. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html\">Create\n    predefined attributes for routing contacts to agents</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/predefined-attributes/{InstanceId}/{Name}",
@@ -38630,7 +38690,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a security profile.</p>",
+                "smithy.api#documentation": "<p>Updates a security profile.</p>\n         <p>For information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the\n     <i>Amazon Connect Administrator Guide</i>. For a mapping of the API name and\n   user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile\n    permissions</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/security-profiles/{InstanceId}/{SecurityProfileId}",

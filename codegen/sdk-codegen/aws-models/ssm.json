@@ -6687,7 +6687,7 @@
                 "RejectedPatchesAction": {
                     "target": "com.amazonaws.ssm#PatchAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action for Patch Manager to take on patches included in the\n    <code>RejectedPackages</code> list.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>ALLOW_AS_DEPENDENCY</code>\n                  </b>: A package in the\n      <code>Rejected</code> patches list is installed only if it is a dependency of another package.\n     It is considered compliant with the patch baseline, and its status is reported as\n      <code>InstalledOther</code>. This is the default action if no option is specified.</p>\n            </li>\n            <li>\n               <p>\n                  <b>BLOCK</b>: Packages in the <b>Rejected\n      patches</b> list, and packages that include them as dependencies, aren't installed by\n     Patch Manager under any circumstances. If a package was installed before it was added to the\n      <b>Rejected patches</b> list, or is installed outside of Patch\n     Manager afterward, it's considered noncompliant with the patch baseline and its status is\n     reported as <i>InstalledRejected</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The action for Patch Manager to take on patches included in the\n    <code>RejectedPackages</code> list.</p>\n         <dl>\n            <dt>ALLOW_AS_DEPENDENCY</dt>\n            <dd>\n               <p>\n                  <b>Linux and macOS</b>: A package in the rejected patches list\n      is installed only if it is a dependency of another package. It is considered compliant with\n      the patch baseline, and its status is reported as <code>INSTALLED_OTHER</code>. This is the\n      default action if no option is specified.</p>\n               <p>\n                  <b>Windows Server</b>: Windows Server doesn't support the\n      concept of package dependencies. If a package in the rejected patches list and already\n      installed on the node, its status is reported as <code>INSTALLED_OTHER</code>. Any package not\n      already installed on the node is skipped. This is the default action if no option is\n      specified.</p>\n            </dd>\n            <dt>BLOCK</dt>\n            <dd>\n               <p>\n                  <b>All OSs</b>: Packages in the rejected patches list, and\n      packages that include them as dependencies, aren't installed by Patch Manager under any\n      circumstances. If a package was installed before it was added to the rejected patches list, or\n      is installed outside of Patch Manager afterward, it's considered noncompliant with the patch\n      baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "Description": {
@@ -8769,7 +8769,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about one or more of your managed nodes, including the operating system\n   platform, SSM Agent version, association status, and IP address. This operation does not return\n   information for nodes that are either Stopped or Terminated.</p>\n         <p>If you specify one or more node IDs, the operation returns information for those managed\n   nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you\n   specify a node ID that isn't valid or a node that you don't own, you receive an error.</p>\n         <note>\n            <p>The <code>IamRole</code> field returned for this API operation is the Identity and Access Management (IAM) role assigned to on-premises managed nodes. This operation does not\n    return the IAM role for EC2 instances.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Provides information about one or more of your managed nodes, including the operating system\n   platform, SSM Agent version, association status, and IP address. This operation does not return\n   information for nodes that are either Stopped or Terminated.</p>\n         <p>If you specify one or more node IDs, the operation returns information for those managed\n   nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you\n   specify a node ID that isn't valid or a node that you don't own, you receive an error.</p>\n         <note>\n            <p>The <code>IamRole</code> field returned for this API operation is the role assigned to an\n    Amazon EC2 instance configured with a Systems Manager Quick Setup host management configuration or\n    the role assigned to an on-premises managed node.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -9102,7 +9102,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>An API operation used by the Systems Manager console to display information about Systems Manager managed nodes.</p>",
+                "smithy.api#documentation": "<p>An API operation used by the Systems Manager console to display information about Systems Manager managed\n   nodes.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -9138,7 +9138,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#DescribeInstancePropertiesMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to return for the call. The call also returns a token that you\n        can specify in a subsequent call to get the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return for the call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
                     }
                 },
                 "NextToken": {
@@ -9164,7 +9164,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssm#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of properties to return. Use this token to get the next set of\n        results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of properties to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
             },
@@ -10323,7 +10323,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the properties of available patches organized by product, product family,\n   classification, severity, and other properties of available patches. You can use the reported\n   properties in the filters you specify in requests for operations such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p>\n         <p>The following section lists the properties that can be used in filters for each major\n   operating system type:</p>\n         <dl>\n            <dt>AMAZON_LINUX</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>AMAZON_LINUX_2</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>CENTOS</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>DEBIAN</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>PRIORITY</code>\n               </p>\n            </dd>\n            <dt>MACOS</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code>\n               </p>\n            </dd>\n            <dt>ORACLE_LINUX</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>REDHAT_ENTERPRISE_LINUX</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>SUSE</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>UBUNTU</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>PRIORITY</code>\n               </p>\n            </dd>\n            <dt>WINDOWS</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>PRODUCT_FAMILY</code> |\n       <code>CLASSIFICATION</code> | <code>MSRC_SEVERITY</code>\n               </p>\n            </dd>\n         </dl>",
+                "smithy.api#documentation": "<p>Lists the properties of available patches organized by product, product family,\n   classification, severity, and other properties of available patches. You can use the reported\n   properties in the filters you specify in requests for operations such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p>\n         <p>The following section lists the properties that can be used in filters for each major\n   operating system type:</p>\n         <dl>\n            <dt>AMAZON_LINUX</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>AMAZON_LINUX_2</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>AMAZON_LINUX_2023</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>CENTOS</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>DEBIAN</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>PRIORITY</code>\n               </p>\n            </dd>\n            <dt>MACOS</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code>\n               </p>\n            </dd>\n            <dt>ORACLE_LINUX</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>REDHAT_ENTERPRISE_LINUX</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>SUSE</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> |\n       <code>SEVERITY</code>\n               </p>\n            </dd>\n            <dt>UBUNTU</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>PRIORITY</code>\n               </p>\n            </dd>\n            <dt>WINDOWS</dt>\n            <dd>\n               <p>Valid properties: <code>PRODUCT</code> | <code>PRODUCT_FAMILY</code> |\n       <code>CLASSIFICATION</code> | <code>MSRC_SEVERITY</code>\n               </p>\n            </dd>\n         </dl>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -12091,7 +12091,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information about command execution for an invocation or plugin.</p>\n         <p>\n            <code>GetCommandInvocation</code> only gives the execution status of a plugin in a document.\n   To get the command execution status on a specific managed node, use <a>ListCommandInvocations</a>. To get the command execution status across managed nodes,\n   use <a>ListCommands</a>.</p>",
+                "smithy.api#documentation": "<p>Returns detailed information about command execution for an invocation or plugin. The Run\n   Command API follows an eventual consistency model, due to the distributed nature of the system\n   supporting the API. This means that the result of an API command you run that affects your\n   resources might not be immediately visible to all subsequent commands you run. You should keep\n   this in mind when you carry out an API command that immediately follows a previous API\n   command.</p>\n         <p>\n            <code>GetCommandInvocation</code> only gives the execution status of a plugin in a document.\n   To get the command execution status on a specific managed node, use <a>ListCommandInvocations</a>. To get the command execution status across managed nodes,\n   use <a>ListCommands</a>.</p>",
                 "smithy.waiters#waitable": {
                     "CommandExecuted": {
                         "acceptors": [
@@ -13408,7 +13408,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service \n(Amazon SNS) notifications for maintenance window Run Command tasks.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskType": {
@@ -14797,7 +14797,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) role assigned to the on-premises Systems Manager\n   managed node. This call doesn't return the IAM role for Amazon Elastic Compute Cloud\n    (Amazon EC2) instances. To retrieve the IAM role for an EC2 instance, use\n   the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>Amazon Web Services CLI Command Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The role assigned to an Amazon EC2 instance configured with a Systems Manager\n   Quick Setup host management configuration or the role assigned to an on-premises managed\n   node.</p>\n         <p> This call doesn't return the IAM role for <i>unmanaged</i>\n   Amazon EC2 instances (instances not configured for Systems Manager). To retrieve the\n   role for an unmanaged instance, use the Amazon EC2 <code>DescribeInstances</code> operation. For\n   information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the\n    <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the\n    <i>Amazon Web Services CLI Command Reference</i>.</p>"
                     }
                 },
                 "RegistrationDate": {
@@ -15329,7 +15329,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#InstanceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the EC2 <code>Name</code> tag associated with the node. If a <code>Name</code> tag hasn't been applied to the node, this value is blank.</p>"
+                        "smithy.api#documentation": "<p>The value of the EC2 <code>Name</code> tag associated with the node. If a <code>Name</code>\n   tag hasn't been applied to the node, this value is blank.</p>"
                     }
                 },
                 "InstanceId": {
@@ -15347,13 +15347,13 @@
                 "InstanceRole": {
                     "target": "com.amazonaws.ssm#InstanceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance profile attached to the node. If an instance profile isn't attached to the node, this value is blank.</p>"
+                        "smithy.api#documentation": "<p>The instance profile attached to the node. If an instance profile isn't attached to the\n   node, this value is blank.</p>"
                     }
                 },
                 "KeyName": {
                     "target": "com.amazonaws.ssm#KeyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the key pair associated with the node. If a key pair isnt't associated with the node, this value is blank.</p>"
+                        "smithy.api#documentation": "<p>The name of the key pair associated with the node. If a key pair isnt't associated with the\n   node, this value is blank.</p>"
                     }
                 },
                 "InstanceState": {
@@ -15365,13 +15365,13 @@
                 "Architecture": {
                     "target": "com.amazonaws.ssm#Architecture",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CPU architecture of the node. For example, x86_64.</p>"
+                        "smithy.api#documentation": "<p>The CPU architecture of the node. For example, <code>x86_64</code>.</p>"
                     }
                 },
                 "IPAddress": {
                     "target": "com.amazonaws.ssm#IPAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public IPv4 address assigned to the node. If a public IPv4 address isn't assigned to the node, this value is blank.</p>"
+                        "smithy.api#documentation": "<p>The public IPv4 address assigned to the node. If a public IPv4 address isn't assigned to the\n   node, this value is blank.</p>"
                     }
                 },
                 "LaunchTime": {
@@ -15419,13 +15419,13 @@
                 "ActivationId": {
                     "target": "com.amazonaws.ssm#ActivationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The activation ID created by Systems Manager when the server or virtual machine (VM) was registered</p>"
+                        "smithy.api#documentation": "<p>The activation ID created by Systems Manager when the server or virtual machine (VM) was\n   registered</p>"
                     }
                 },
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role used in the hybrid activation to register the node with Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>The IAM role used in the hybrid activation to register the node with\n   Systems Manager.</p>"
                     }
                 },
                 "RegistrationDate": {
@@ -15503,7 +15503,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter for a specific list of managed nodes. You can filter node information by using tags. You specify tags by using a key-value mapping.</p>"
+                "smithy.api#documentation": "<p>Describes a filter for a specific list of managed nodes. You can filter node information by\n   using tags. You specify tags by using a key-value mapping.</p>"
             }
         },
         "com.amazonaws.ssm#InstancePropertyFilterKey": {
@@ -19516,7 +19516,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service \n(Amazon SNS) notifications for maintenance window Run Command tasks.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TimeoutSeconds": {
@@ -19710,7 +19710,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service \n(Amazon SNS) notifications for maintenance window Run Command tasks.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "MaxConcurrency": {
@@ -23262,7 +23262,7 @@
                     "target": "com.amazonaws.ssm#DefaultBaseline",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether this is the default baseline. Amazon Web Services Systems Manager supports creating multiple default patch\n   baselines. For example, you can create a default patch baseline for each operating system.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether this is the default baseline. Amazon Web Services Systems Manager supports creating multiple default\n   patch baselines. For example, you can create a default patch baseline for each operating\n   system.</p>"
                     }
                 }
             },
@@ -23997,13 +23997,13 @@
                     "target": "com.amazonaws.ssm#ApproveAfterDays",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of days after the release date of each patch matched by the rule that the patch\n   is marked as approved in the patch baseline. For example, a value of <code>7</code> means that\n   patches are approved seven days after they are released. Not supported on Debian Server or Ubuntu\n   Server.</p>"
+                        "smithy.api#documentation": "<p>The number of days after the release date of each patch matched by the rule that the patch\n   is marked as approved in the patch baseline. For example, a value of <code>7</code> means that\n   patches are approved seven days after they are released.</p>\n         <note>\n            <p>This parameter is marked as not required, but your request must include a value\n    for either <code>ApproveAfterDays</code> or <code>ApproveUntilDate</code>.</p>\n         </note>\n         <p> Not supported for Debian Server or Ubuntu Server.</p>"
                     }
                 },
                 "ApproveUntilDate": {
                     "target": "com.amazonaws.ssm#PatchStringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cutoff date for auto approval of released patches. Any patches released on or before\n   this date are installed automatically. Not supported on Debian Server or Ubuntu Server.</p>\n         <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,\n   <code>2021-12-31</code>.</p>"
+                        "smithy.api#documentation": "<p>The cutoff date for auto approval of released patches. Any patches released on or before\n   this date are installed automatically.</p>\n         <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,\n   <code>2021-12-31</code>.</p>\n         <note>\n            <p>This parameter is marked as not required, but your request must include a value\n    for either <code>ApproveUntilDate</code> or <code>ApproveAfterDays</code>.</p>\n         </note>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>"
                     }
                 },
                 "EnableNonSecurity": {
@@ -29792,7 +29792,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service \n(Amazon SNS) notifications for maintenance window Run Command tasks.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskParameters": {
@@ -30203,7 +30203,7 @@
                 "RejectedPatchesAction": {
                     "target": "com.amazonaws.ssm#PatchAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action for Patch Manager to take on patches included in the\n    <code>RejectedPackages</code> list.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>ALLOW_AS_DEPENDENCY</code>\n                  </b>: A package in the\n      <code>Rejected</code> patches list is installed only if it is a dependency of another package.\n     It is considered compliant with the patch baseline, and its status is reported as\n      <code>InstalledOther</code>. This is the default action if no option is specified.</p>\n            </li>\n            <li>\n               <p>\n                  <b>BLOCK</b>: Packages in the <b>Rejected\n      patches</b> list, and packages that include them as dependencies, aren't installed by\n     Patch Manager under any circumstances. If a package was installed before it was added to the\n      <b>Rejected patches</b> list, or is installed outside of Patch\n     Manager afterward, it's considered noncompliant with the patch baseline and its status is\n     reported as <i>InstalledRejected</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The action for Patch Manager to take on patches included in the\n    <code>RejectedPackages</code> list.</p>\n         <dl>\n            <dt>ALLOW_AS_DEPENDENCY</dt>\n            <dd>\n               <p>\n                  <b>Linux and macOS</b>: A package in the rejected patches list\n      is installed only if it is a dependency of another package. It is considered compliant with\n      the patch baseline, and its status is reported as <code>INSTALLED_OTHER</code>. This is the\n      default action if no option is specified.</p>\n               <p>\n                  <b>Windows Server</b>: Windows Server doesn't support the\n      concept of package dependencies. If a package in the rejected patches list and already\n      installed on the node, its status is reported as <code>INSTALLED_OTHER</code>. Any package not\n      already installed on the node is skipped. This is the default action if no option is\n      specified.</p>\n            </dd>\n            <dt>BLOCK</dt>\n            <dd>\n               <p>\n                  <b>All OSs</b>: Packages in the rejected patches list, and\n      packages that include them as dependencies, aren't installed by Patch Manager under any\n      circumstances. If a package was installed before it was added to the rejected patches list, or\n      is installed outside of Patch Manager afterward, it's considered noncompliant with the patch\n      baseline and its status is reported as <code>INSTALLED_REJECTED</code>.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "Description": {
