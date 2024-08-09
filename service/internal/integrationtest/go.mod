@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.37.0
-	github.com/aws/aws-sdk-go-v2/service/athena v1.44.3
+	github.com/aws/aws-sdk-go-v2/service/athena v1.44.4
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/batch v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.53.3
@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.23.3
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.48.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.40.3
@@ -75,7 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/sns v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.34.3
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.52.3
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.52.4
 	github.com/aws/aws-sdk-go-v2/service/sts v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/support v1.24.4
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.27.3

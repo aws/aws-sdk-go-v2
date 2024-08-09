@@ -1,3 +1,7 @@
+# v1.107.0 (2024-08-09)
+
+* **Feature**: This release supports adding RoutingCriteria via UpdateContactRoutingData public API.
+
 # v1.106.0 (2024-07-23)
 
 * **Feature**: Added PostContactSummary segment type on ListRealTimeContactAnalysisSegmentsV2 API

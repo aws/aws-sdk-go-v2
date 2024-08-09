@@ -1,3 +1,7 @@
+# v1.43.1 (2024-08-09)
+
+* **Documentation**: Fixed a description of AdvancedSecurityAdditionalFlows in Amazon Cognito user pool configuration.
+
 # v1.43.0 (2024-08-08)
 
 * **Feature**: Added support for threat protection for custom authentication in Amazon Cognito user pools.

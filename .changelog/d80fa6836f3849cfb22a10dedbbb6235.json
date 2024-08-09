@@ -1,8 +1,0 @@
-{
-    "id": "d80fa683-6f38-49cf-b22a-10dedbbb6235",
-    "type": "feature",
-    "description": "This release supports adding RoutingCriteria via UpdateContactRoutingData public API.",
-    "modules": [
-        "service/connect"
-    ]
-}

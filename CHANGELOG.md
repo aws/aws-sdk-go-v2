@@ -1,3 +1,13 @@
+# Release (2024-08-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.43.1](service/cognitoidentityprovider/CHANGELOG.md#v1431-2024-08-09)
+  * **Documentation**: Fixed a description of AdvancedSecurityAdditionalFlows in Amazon Cognito user pool configuration.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.107.0](service/connect/CHANGELOG.md#v11070-2024-08-09)
+  * **Feature**: This release supports adding RoutingCriteria via UpdateContactRoutingData public API.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.52.4](service/ssm/CHANGELOG.md#v1524-2024-08-09)
+  * **Documentation**: Systems Manager doc-only updates for August 2024.
+
 # Release (2024-08-08)
 
 ## Module Highlights
