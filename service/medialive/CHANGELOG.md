@@ -1,3 +1,7 @@
+# v1.56.0 (2024-08-12)
+
+* **Feature**: AWS Elemental MediaLive now supports now supports editing the PID values for a Multiplex.
+
 # v1.55.0 (2024-07-18)
 
 * **Feature**: AWS Elemental MediaLive now supports the SRT protocol via the new SRT Caller input type.

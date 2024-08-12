@@ -1,3 +1,7 @@
+# v1.29.4 (2024-08-12)
+
+* **Documentation**: Updating documentation for OEMEphemeris to link to AWS Ground Station User Guide
+
 # v1.29.3 (2024-07-10.2)
 
 * **Documentation**: Documentation update specifying OEM ephemeris units of measurement

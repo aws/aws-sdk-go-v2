@@ -1,8 +1,0 @@
-{
-    "id": "6711027e-4948-433f-bf4c-9422ef175bd0",
-    "type": "feature",
-    "description": "Releasing large data support as part of CreateAutoMLJobV2 in SageMaker Autopilot and CreateDomain API for SageMaker Canvas.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

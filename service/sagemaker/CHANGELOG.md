@@ -1,3 +1,7 @@
+# v1.153.0 (2024-08-12)
+
+* **Feature**: Releasing large data support as part of CreateAutoMLJobV2 in SageMaker Autopilot and CreateDomain API for SageMaker Canvas.
+
 # v1.152.0 (2024-08-01)
 
 * **Feature**: This release adds support for Amazon EMR Serverless applications in SageMaker Studio for running data processing jobs.

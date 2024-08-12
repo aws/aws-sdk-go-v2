@@ -1,8 +1,0 @@
-{
-    "id": "63014507-6427-447a-aca0-e9fab2816809",
-    "type": "feature",
-    "description": "This release adds new capabilities to manage On-Demand Capacity Reservations including the ability to split your reservation, move capacity between reservations, and modify the instance eligibility of your reservation.",
-    "modules": [
-        "service/ec2"
-    ]
-}

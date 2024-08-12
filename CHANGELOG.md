@@ -1,3 +1,19 @@
+# Release (2024-08-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.37.4](service/computeoptimizer/CHANGELOG.md#v1374-2024-08-12)
+  * **Documentation**: Doc only update for Compute Optimizer that fixes several customer-reported issues relating to ECS finding classifications
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.175.0](service/ec2/CHANGELOG.md#v11750-2024-08-12)
+  * **Feature**: This release adds new capabilities to manage On-Demand Capacity Reservations including the ability to split your reservation, move capacity between reservations, and modify the instance eligibility of your reservation.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.48.0](service/eks/CHANGELOG.md#v1480-2024-08-12)
+  * **Feature**: Added support for new AL2023 GPU AMIs to the supported AMITypes.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.29.4](service/groundstation/CHANGELOG.md#v1294-2024-08-12)
+  * **Documentation**: Updating documentation for OEMEphemeris to link to AWS Ground Station User Guide
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.56.0](service/medialive/CHANGELOG.md#v1560-2024-08-12)
+  * **Feature**: AWS Elemental MediaLive now supports now supports editing the PID values for a Multiplex.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.153.0](service/sagemaker/CHANGELOG.md#v11530-2024-08-12)
+  * **Feature**: Releasing large data support as part of CreateAutoMLJobV2 in SageMaker Autopilot and CreateDomain API for SageMaker Canvas.
+
 # Release (2024-08-09)
 
 ## Module Highlights

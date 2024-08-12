@@ -1,3 +1,7 @@
+# v1.37.4 (2024-08-12)
+
+* **Documentation**: Doc only update for Compute Optimizer that fixes several customer-reported issues relating to ECS finding classifications
+
 # v1.37.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

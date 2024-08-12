@@ -1,8 +1,0 @@
-{
-    "id": "d222a14e-cbc1-4a17-832c-a41e7aca5cab",
-    "type": "feature",
-    "description": "Documentation update for the OrganizationConfigRuleName regex pattern.",
-    "modules": [
-        "service/configservice"
-    ]
-}

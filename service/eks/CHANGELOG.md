@@ -1,3 +1,7 @@
+# v1.48.0 (2024-08-12)
+
+* **Feature**: Added support for new AL2023 GPU AMIs to the supported AMITypes.
+
 # v1.47.0 (2024-07-25)
 
 * **Feature**: This release adds support for EKS cluster to manage extended support.
