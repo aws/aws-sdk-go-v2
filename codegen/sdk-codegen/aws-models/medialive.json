@@ -22357,6 +22357,18 @@
                 "smithy.api#documentation": "Multiplex Output Settings"
             }
         },
+        "com.amazonaws.medialive#MultiplexPacketIdentifiersMapping": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.medialive#__string"
+            },
+            "value": {
+                "target": "com.amazonaws.medialive#MultiplexProgramPacketIdentifiersMap"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for MultiplexPacketIdentifiersMapping"
+            }
+        },
         "com.amazonaws.medialive#MultiplexProgram": {
             "type": "structure",
             "members": {
@@ -22501,6 +22513,30 @@
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
                         "smithy.api#jsonName": "videoPid"
+                    }
+                },
+                "AribCaptionsPid": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#jsonName": "aribCaptionsPid"
+                    }
+                },
+                "DvbTeletextPids": {
+                    "target": "com.amazonaws.medialive#__listOf__integer",
+                    "traits": {
+                        "smithy.api#jsonName": "dvbTeletextPids"
+                    }
+                },
+                "EcmPid": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#jsonName": "ecmPid"
+                    }
+                },
+                "Smpte2038Pid": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#jsonName": "smpte2038Pid"
                     }
                 }
             },
@@ -30511,6 +30547,12 @@
                     "traits": {
                         "smithy.api#documentation": "Name of the multiplex.",
                         "smithy.api#jsonName": "name"
+                    }
+                },
+                "PacketIdentifiersMapping": {
+                    "target": "com.amazonaws.medialive#MultiplexPacketIdentifiersMapping",
+                    "traits": {
+                        "smithy.api#jsonName": "packetIdentifiersMapping"
                     }
                 }
             },

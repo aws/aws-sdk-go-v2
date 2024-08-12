@@ -2328,7 +2328,7 @@
                 "values": {
                     "target": "com.amazonaws.computeoptimizer#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The value of the filter.\n        </p>\n         <p>The valid values for this parameter are as follows:</p>\n         <ul>\n            <li>\n               <p>If you specify the <code>name</code> parameter as <code>Finding</code>, specify\n                    <code>Optimized</code>, <code>NotOptimized</code>, or <code>Unavailable</code>.</p>\n            </li>\n            <li>\n               <p>If you specify the <code>name</code> parameter as <code>FindingReasonCode</code>, specify\n                    <code>CPUUnderprovisioned</code>, <code>CPUOverprovisioned</code>, \n                    <code>MemoryUnderprovisioned</code>, or <code>MemoryOverprovisioned</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            The value of the filter.\n        </p>\n         <p>The valid values for this parameter are as follows:</p>\n         <ul>\n            <li>\n               <p>If you specify the <code>name</code> parameter as <code>Finding</code>, specify\n                    <code>Optimized</code>, <code>Underprovisioned</code>, or <code>Overprovisioned</code>.</p>\n            </li>\n            <li>\n               <p>If you specify the <code>name</code> parameter as <code>FindingReasonCode</code>, specify\n                    <code>CPUUnderprovisioned</code>, <code>CPUOverprovisioned</code>, \n                    <code>MemoryUnderprovisioned</code>, or <code>MemoryOverprovisioned</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9361,7 +9361,7 @@
                 "lookBackPeriod": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.\n            </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "utilizationPreferences": {

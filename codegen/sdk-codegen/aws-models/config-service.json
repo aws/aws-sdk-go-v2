@@ -8689,7 +8689,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": "^[A-Za-z0-9-_]+$"
             }
         },
         "com.amazonaws.configservice#OrganizationConfigRuleNames": {
