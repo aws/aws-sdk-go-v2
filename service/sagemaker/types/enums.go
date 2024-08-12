@@ -3856,19 +3856,20 @@ type MlTools string
 
 // Enum values for MlTools
 const (
-	MlToolsDataWrangler         MlTools = "DataWrangler"
-	MlToolsFeatureStore         MlTools = "FeatureStore"
-	MlToolsEmrClusters          MlTools = "EmrClusters"
-	MlToolsAutoMl               MlTools = "AutoMl"
-	MlToolsExperiments          MlTools = "Experiments"
-	MlToolsTraining             MlTools = "Training"
-	MlToolsModelEvaluation      MlTools = "ModelEvaluation"
-	MlToolsPipelines            MlTools = "Pipelines"
-	MlToolsModels               MlTools = "Models"
-	MlToolsJumpStart            MlTools = "JumpStart"
-	MlToolsInferenceRecommender MlTools = "InferenceRecommender"
-	MlToolsEndpoints            MlTools = "Endpoints"
-	MlToolsProjects             MlTools = "Projects"
+	MlToolsDataWrangler          MlTools = "DataWrangler"
+	MlToolsFeatureStore          MlTools = "FeatureStore"
+	MlToolsEmrClusters           MlTools = "EmrClusters"
+	MlToolsAutoMl                MlTools = "AutoMl"
+	MlToolsExperiments           MlTools = "Experiments"
+	MlToolsTraining              MlTools = "Training"
+	MlToolsModelEvaluation       MlTools = "ModelEvaluation"
+	MlToolsPipelines             MlTools = "Pipelines"
+	MlToolsModels                MlTools = "Models"
+	MlToolsJumpStart             MlTools = "JumpStart"
+	MlToolsInferenceRecommender  MlTools = "InferenceRecommender"
+	MlToolsEndpoints             MlTools = "Endpoints"
+	MlToolsProjects              MlTools = "Projects"
+	MlToolsInferenceOptimization MlTools = "InferenceOptimization"
 )
 
 // Values returns all known values for MlTools. Note that this can be expanded in
@@ -3890,6 +3891,7 @@ func (MlTools) Values() []MlTools {
 		"InferenceRecommender",
 		"Endpoints",
 		"Projects",
+		"InferenceOptimization",
 	}
 }
 

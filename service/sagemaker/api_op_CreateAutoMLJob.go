@@ -13,6 +13,21 @@ import (
 
 // Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.
 //
+// An AutoML job in SageMaker is a fully automated process that allows you to
+// build machine learning models with minimal effort and machine learning
+// expertise. When initiating an AutoML job, you provide your data and optionally
+// specify parameters tailored to your use case. SageMaker then automates the
+// entire model development lifecycle, including data preprocessing, model
+// training, tuning, and evaluation. AutoML jobs are designed to simplify and
+// accelerate the model building process by automating various tasks and exploring
+// different combinations of machine learning algorithms, data preprocessing
+// techniques, and hyperparameter values. The output of an AutoML job comprises one
+// or more trained models ready for deployment and inference. Additionally,
+// SageMaker AutoML jobs generate a candidate model leaderboard, allowing you to
+// select the best-performing model for deployment.
+//
+// For more information about AutoML jobs, see [https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html] in the SageMaker developer guide.
+//
 // We recommend using the new versions [CreateAutoMLJobV2] and [DescribeAutoMLJobV2], which offer backward compatibility.
 //
 // CreateAutoMLJobV2 can manage tabular problem types identical to those of its
@@ -27,6 +42,7 @@ import (
 //
 // [DescribeAutoMLJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
 // [DescribeAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+// [https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
 // [CreateAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
 // [Migrate a CreateAutoMLJob to CreateAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2
 func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInput, optFns ...func(*Options)) (*CreateAutoMLJobOutput, error) {

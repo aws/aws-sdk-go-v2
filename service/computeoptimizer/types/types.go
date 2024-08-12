@@ -745,7 +745,7 @@ type ECSServiceRecommendationFilter struct {
 	// The valid values for this parameter are as follows:
 	//
 	//   - If you specify the name parameter as Finding , specify Optimized ,
-	//   NotOptimized , or Unavailable .
+	//   Underprovisioned , or Overprovisioned .
 	//
 	//   - If you specify the name parameter as FindingReasonCode , specify
 	//   CPUUnderprovisioned , CPUOverprovisioned , MemoryUnderprovisioned , or

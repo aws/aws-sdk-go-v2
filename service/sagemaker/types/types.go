@@ -1732,6 +1732,34 @@ type AutoMLChannel struct {
 	noSmithyDocumentSerde
 }
 
+// This data type is intended for use exclusively by SageMaker Canvas and cannot
+// be used in other contexts at the moment.
+//
+// Specifies the compute configuration for an AutoML job V2.
+type AutoMLComputeConfig struct {
+
+	// The configuration for using [EMR Serverless] to run the AutoML job V2.
+	//
+	// To allow your AutoML job V2 to automatically initiate a remote job on EMR
+	// Serverless when additional compute resources are needed to process large
+	// datasets, you need to provide an EmrServerlessComputeConfig object, which
+	// includes an ExecutionRoleARN attribute, to the AutoMLComputeConfig of the
+	// AutoML job V2 input request.
+	//
+	// By seamlessly transitioning to EMR Serverless when required, the AutoML job can
+	// handle datasets that would otherwise exceed the initially provisioned resources,
+	// without any manual intervention from you.
+	//
+	// EMR Serverless is available for the tabular and time series problem types. We
+	// recommend setting up this option for tabular datasets larger than 5 GB and time
+	// series datasets larger than 30 GB.
+	//
+	// [EMR Serverless]: https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html
+	EmrServerlessComputeConfig *EmrServerlessComputeConfig
+
+	noSmithyDocumentSerde
+}
+
 // A list of container definitions that describe the different containers that
 // make up an AutoML candidate. For more information, see [ContainerDefinition].
 //
@@ -2057,7 +2085,7 @@ type AutoMLJobSummary struct {
 // The output data configuration.
 type AutoMLOutputDataConfig struct {
 
-	// The Amazon S3 output path. Must be 128 characters or less.
+	// The Amazon S3 output path. Must be 512 characters or less.
 	//
 	// This member is required.
 	S3OutputPath *string
@@ -2654,6 +2682,10 @@ type CanvasAppSettings struct {
 
 	// The model deployment settings for the SageMaker Canvas application.
 	DirectDeploySettings *DirectDeploySettings
+
+	// The settings for running Amazon EMR Serverless data processing jobs in
+	// SageMaker Canvas.
+	EmrServerlessSettings *EmrServerlessSettings
 
 	// The generative AI settings for the SageMaker Canvas application.
 	GenerativeAiSettings *GenerativeAiSettings
@@ -5251,6 +5283,42 @@ type EFSFileSystemConfig struct {
 	// The path to the file system directory that is accessible in Amazon SageMaker
 	// Studio. Permitted users can access only this directory and below.
 	FileSystemPath *string
+
+	noSmithyDocumentSerde
+}
+
+// This data type is intended for use exclusively by SageMaker Canvas and cannot
+// be used in other contexts at the moment.
+//
+// Specifies the compute configuration for the EMR Serverless job.
+type EmrServerlessComputeConfig struct {
+
+	// The ARN of the IAM role granting the AutoML job V2 the necessary permissions
+	// access policies to list, connect to, or manage EMR Serverless jobs. For detailed
+	// information about the required permissions of this role, see "How to configure
+	// AutoML to initiate a remote job on EMR Serverless for large datasets" in [Create a regression or classification job for tabular data using the AutoML API]or [Create an AutoML job for time-series forecasting using the API].
+	//
+	// [Create a regression or classification job for tabular data using the AutoML API]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html
+	// [Create an AutoML job for time-series forecasting using the API]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-timeseries-forecasting.html#timeseries-forecasting-api-optional-params
+	//
+	// This member is required.
+	ExecutionRoleARN *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings for running Amazon EMR Serverless jobs in SageMaker Canvas.
+type EmrServerlessSettings struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services IAM role that is
+	// assumed for running Amazon EMR Serverless jobs in SageMaker Canvas. This role
+	// should have the necessary permissions to read and write data attached and a
+	// trust relationship with EMR Serverless.
+	ExecutionRoleArn *string
+
+	// Describes whether Amazon EMR Serverless job capabilities are enabled or
+	// disabled in the SageMaker Canvas application.
+	Status FeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -13917,14 +13985,6 @@ type ProcessingS3Input struct {
 // container.
 type ProcessingS3Output struct {
 
-	// The local path of a directory where you want Amazon SageMaker to upload its
-	// contents to Amazon S3. LocalPath is an absolute path to a directory containing
-	// output files. This directory will be created by the platform and exist when your
-	// container's entrypoint is invoked.
-	//
-	// This member is required.
-	LocalPath *string
-
 	// Whether to upload the results of the processing job continuously or after the
 	// job completes.
 	//
@@ -13936,6 +13996,12 @@ type ProcessingS3Output struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// The local path of a directory where you want Amazon SageMaker to upload its
+	// contents to Amazon S3. LocalPath is an absolute path to a directory containing
+	// output files. This directory will be created by the platform and exist when your
+	// container's entrypoint is invoked.
+	LocalPath *string
 
 	noSmithyDocumentSerde
 }
@@ -13999,6 +14065,18 @@ type ProductionVariant struct {
 	// By selecting an AMI version, you can ensure that your inference environment is
 	// compatible with specific software requirements, such as CUDA driver versions,
 	// Linux kernel versions, or Amazon Web Services Neuron driver versions.
+	//
+	// The AMI version names, and their configurations, are the following:
+	//
+	// al2-ami-sagemaker-inference-gpu-2
+	//   - Accelerator: GPU
+	//
+	//   - NVIDIA driver version: 535.54.03
+	//
+	//   - CUDA driver version: 12.2
+	//
+	//   - Supported instance types: ml.g4dn.*, ml.g5.*, ml.g6.*, ml.p3.*, ml.p4d.*,
+	//   ml.p4de.*, ml.p5.*
 	InferenceAmiVersion ProductionVariantInferenceAmiVersion
 
 	// Number of instances to launch initially.

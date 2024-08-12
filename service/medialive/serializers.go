@@ -7325,6 +7325,13 @@ func awsRestjson1_serializeOpDocumentUpdateMultiplexInput(v *UpdateMultiplexInpu
 		ok.String(*v.Name)
 	}
 
+	if v.PacketIdentifiersMapping != nil {
+		ok := object.Key("packetIdentifiersMapping")
+		if err := awsRestjson1_serializeDocumentMultiplexPacketIdentifiersMapping(v.PacketIdentifiersMapping, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7519,6 +7526,17 @@ func awsRestjson1_serializeOpDocumentUpdateReservationInput(v *UpdateReservation
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOf__integer(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
 	return nil
 }
 
@@ -12736,6 +12754,20 @@ func awsRestjson1_serializeDocumentMultiplexOutputSettings(v *types.MultiplexOut
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMultiplexPacketIdentifiersMapping(v map[string]types.MultiplexProgramPacketIdentifiersMap, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentMultiplexProgramPacketIdentifiersMap(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMultiplexProgramChannelDestinationSettings(v *types.MultiplexProgramChannelDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12748,6 +12780,108 @@ func awsRestjson1_serializeDocumentMultiplexProgramChannelDestinationSettings(v 
 	if v.ProgramName != nil {
 		ok := object.Key("programName")
 		ok.String(*v.ProgramName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiplexProgramPacketIdentifiersMap(v *types.MultiplexProgramPacketIdentifiersMap, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AribCaptionsPid != nil {
+		ok := object.Key("aribCaptionsPid")
+		ok.Integer(*v.AribCaptionsPid)
+	}
+
+	if v.AudioPids != nil {
+		ok := object.Key("audioPids")
+		if err := awsRestjson1_serializeDocument__listOf__integer(v.AudioPids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DvbSubPids != nil {
+		ok := object.Key("dvbSubPids")
+		if err := awsRestjson1_serializeDocument__listOf__integer(v.DvbSubPids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DvbTeletextPid != nil {
+		ok := object.Key("dvbTeletextPid")
+		ok.Integer(*v.DvbTeletextPid)
+	}
+
+	if v.DvbTeletextPids != nil {
+		ok := object.Key("dvbTeletextPids")
+		if err := awsRestjson1_serializeDocument__listOf__integer(v.DvbTeletextPids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EcmPid != nil {
+		ok := object.Key("ecmPid")
+		ok.Integer(*v.EcmPid)
+	}
+
+	if v.EtvPlatformPid != nil {
+		ok := object.Key("etvPlatformPid")
+		ok.Integer(*v.EtvPlatformPid)
+	}
+
+	if v.EtvSignalPid != nil {
+		ok := object.Key("etvSignalPid")
+		ok.Integer(*v.EtvSignalPid)
+	}
+
+	if v.KlvDataPids != nil {
+		ok := object.Key("klvDataPids")
+		if err := awsRestjson1_serializeDocument__listOf__integer(v.KlvDataPids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PcrPid != nil {
+		ok := object.Key("pcrPid")
+		ok.Integer(*v.PcrPid)
+	}
+
+	if v.PmtPid != nil {
+		ok := object.Key("pmtPid")
+		ok.Integer(*v.PmtPid)
+	}
+
+	if v.PrivateMetadataPid != nil {
+		ok := object.Key("privateMetadataPid")
+		ok.Integer(*v.PrivateMetadataPid)
+	}
+
+	if v.Scte27Pids != nil {
+		ok := object.Key("scte27Pids")
+		if err := awsRestjson1_serializeDocument__listOf__integer(v.Scte27Pids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Scte35Pid != nil {
+		ok := object.Key("scte35Pid")
+		ok.Integer(*v.Scte35Pid)
+	}
+
+	if v.Smpte2038Pid != nil {
+		ok := object.Key("smpte2038Pid")
+		ok.Integer(*v.Smpte2038Pid)
+	}
+
+	if v.TimedMetadataPid != nil {
+		ok := object.Key("timedMetadataPid")
+		ok.Integer(*v.TimedMetadataPid)
+	}
+
+	if v.VideoPid != nil {
+		ok := object.Key("videoPid")
+		ok.Integer(*v.VideoPid)
 	}
 
 	return nil

@@ -6912,6 +6912,23 @@ func validateAutoMLChannel(v *types.AutoMLChannel) error {
 	}
 }
 
+func validateAutoMLComputeConfig(v *types.AutoMLComputeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLComputeConfig"}
+	if v.EmrServerlessComputeConfig != nil {
+		if err := validateEmrServerlessComputeConfig(v.EmrServerlessComputeConfig); err != nil {
+			invalidParams.AddNested("EmrServerlessComputeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutoMLDataSource(v *types.AutoMLDataSource) error {
 	if v == nil {
 		return nil
@@ -8653,6 +8670,21 @@ func validateEFSFileSystemConfig(v *types.EFSFileSystemConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EFSFileSystemConfig"}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmrServerlessComputeConfig(v *types.EmrServerlessComputeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmrServerlessComputeConfig"}
+	if v.ExecutionRoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11312,9 +11344,6 @@ func validateProcessingS3Output(v *types.ProcessingS3Output) error {
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
-	if v.LocalPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LocalPath"))
-	}
 	if len(v.S3UploadMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("S3UploadMode"))
 	}
@@ -13113,6 +13142,11 @@ func validateOpCreateAutoMLJobV2Input(v *CreateAutoMLJobV2Input) error {
 	if v.AutoMLJobObjective != nil {
 		if err := validateAutoMLJobObjective(v.AutoMLJobObjective); err != nil {
 			invalidParams.AddNested("AutoMLJobObjective", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoMLComputeConfig != nil {
+		if err := validateAutoMLComputeConfig(v.AutoMLComputeConfig); err != nil {
+			invalidParams.AddNested("AutoMLComputeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

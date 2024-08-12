@@ -1,0 +1,8 @@
+{
+    "id": "5e5f2bcc-e44e-4d27-821a-de51ec327ff0",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive now supports now supports editing the PID values for a Multiplex.",
+    "modules": [
+        "service/medialive"
+    ]
+}

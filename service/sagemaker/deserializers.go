@@ -37616,6 +37616,42 @@ func awsAwsjson11_deserializeDocumentAutoMLChannel(v **types.AutoMLChannel, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAutoMLComputeConfig(v **types.AutoMLComputeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoMLComputeConfig
+	if *v == nil {
+		sv = &types.AutoMLComputeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EmrServerlessComputeConfig":
+			if err := awsAwsjson11_deserializeDocumentEmrServerlessComputeConfig(&sv.EmrServerlessComputeConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAutoMLContainerDefinition(v **types.AutoMLContainerDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39804,6 +39840,11 @@ func awsAwsjson11_deserializeDocumentCanvasAppSettings(v **types.CanvasAppSettin
 		switch key {
 		case "DirectDeploySettings":
 			if err := awsAwsjson11_deserializeDocumentDirectDeploySettings(&sv.DirectDeploySettings, value); err != nil {
+				return err
+			}
+
+		case "EmrServerlessSettings":
+			if err := awsAwsjson11_deserializeDocumentEmrServerlessSettings(&sv.EmrServerlessSettings, value); err != nil {
 				return err
 			}
 
@@ -47743,6 +47784,95 @@ func awsAwsjson11_deserializeDocumentEFSFileSystemConfig(v **types.EFSFileSystem
 					return fmt.Errorf("expected FileSystemPath to be of type string, got %T instead", value)
 				}
 				sv.FileSystemPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEmrServerlessComputeConfig(v **types.EmrServerlessComputeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmrServerlessComputeConfig
+	if *v == nil {
+		sv = &types.EmrServerlessComputeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExecutionRoleARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEmrServerlessSettings(v **types.EmrServerlessSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmrServerlessSettings
+	if *v == nil {
+		sv = &types.EmrServerlessSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExecutionRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleArn = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.FeatureStatus(jtv)
 			}
 
 		default:
@@ -85417,6 +85547,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoMLJobV2Output(v **DescribeAut
 
 	for key, value := range shape {
 		switch key {
+		case "AutoMLComputeConfig":
+			if err := awsAwsjson11_deserializeDocumentAutoMLComputeConfig(&sv.AutoMLComputeConfig, value); err != nil {
+				return err
+			}
+
 		case "AutoMLJobArn":
 			if value != nil {
 				jtv, ok := value.(string)

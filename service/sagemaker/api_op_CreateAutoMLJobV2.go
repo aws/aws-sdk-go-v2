@@ -14,6 +14,26 @@ import (
 // Creates an Autopilot job also referred to as Autopilot experiment or AutoML job
 // V2.
 //
+// An AutoML job in SageMaker is a fully automated process that allows you to
+// build machine learning models with minimal effort and machine learning
+// expertise. When initiating an AutoML job, you provide your data and optionally
+// specify parameters tailored to your use case. SageMaker then automates the
+// entire model development lifecycle, including data preprocessing, model
+// training, tuning, and evaluation. AutoML jobs are designed to simplify and
+// accelerate the model building process by automating various tasks and exploring
+// different combinations of machine learning algorithms, data preprocessing
+// techniques, and hyperparameter values. The output of an AutoML job comprises one
+// or more trained models ready for deployment and inference. Additionally,
+// SageMaker AutoML jobs generate a candidate model leaderboard, allowing you to
+// select the best-performing model for deployment.
+//
+// For more information about AutoML jobs, see [https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html] in the SageMaker developer guide.
+//
+// AutoML jobs V2 support various problem types such as regression, binary, and
+// multiclass classification with tabular data, text and image classification,
+// time-series forecasting, and fine-tuning of large language models (LLMs) for
+// text generation.
+//
 // [CreateAutoMLJobV2]and [DescribeAutoMLJobV2] are new versions of [CreateAutoMLJob] and [DescribeAutoMLJob] which offer backward compatibility.
 //
 // CreateAutoMLJobV2 can manage tabular problem types identical to those of its
@@ -31,6 +51,7 @@ import (
 // [CreateAutoMLJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
 // [DescribeAutoMLJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
 // [DescribeAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+// [https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
 // [CreateAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
 // [Migrate a CreateAutoMLJob to CreateAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2
 // [AutoMLProblemTypeConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html
@@ -91,6 +112,9 @@ type CreateAutoMLJobV2Input struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// Specifies the compute configuration for the AutoML job V2.
+	AutoMLComputeConfig *types.AutoMLComputeConfig
 
 	// Specifies a metric to minimize or maximize as the objective of a job. If not
 	// specified, the default objective metric depends on the problem type. For the

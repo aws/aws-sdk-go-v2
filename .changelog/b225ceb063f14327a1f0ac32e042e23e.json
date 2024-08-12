@@ -1,0 +1,8 @@
+{
+    "id": "b225ceb0-63f1-4327-a1f0-ac32e042e23e",
+    "type": "documentation",
+    "description": "Doc only update for Compute Optimizer that fixes several customer-reported issues relating to ECS finding classifications",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

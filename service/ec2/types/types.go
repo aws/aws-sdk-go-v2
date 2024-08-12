@@ -474,7 +474,7 @@ type AnalysisRouteTableRoute struct {
 	// The destination IPv4 address, in CIDR notation.
 	DestinationCidr *string
 
-	// The prefix of the Amazon Web Service.
+	// The prefix of the Amazon Web Services service.
 	DestinationPrefixListId *string
 
 	// The ID of an egress-only internet gateway.
@@ -12304,7 +12304,7 @@ type NetworkInterfacePermission struct {
 	// The Amazon Web Services account ID.
 	AwsAccountId *string
 
-	// The Amazon Web Service.
+	// The Amazon Web Services service.
 	AwsService *string
 
 	// The ID of the network interface.
@@ -13089,7 +13089,7 @@ type PortRange struct {
 // Describes prefixes for Amazon Web Services services.
 type PrefixList struct {
 
-	// The IP address range of the Amazon Web Service.
+	// The IP address range of the Amazon Web Services service.
 	Cidrs []string
 
 	// The ID of the prefix.
@@ -14551,7 +14551,7 @@ type Route struct {
 	// The IPv6 CIDR block used for the destination match.
 	DestinationIpv6CidrBlock *string
 
-	// The prefix of the Amazon Web Service.
+	// The prefix of the Amazon Web Services service.
 	DestinationPrefixListId *string
 
 	// The ID of the egress-only internet gateway.

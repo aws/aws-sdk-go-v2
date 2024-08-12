@@ -90,6 +90,9 @@ type DescribeAutoMLJobV2Output struct {
 	// This member is required.
 	RoleArn *string
 
+	// The compute configuration used for the AutoML job V2.
+	AutoMLComputeConfig *types.AutoMLComputeConfig
+
 	// The artifacts that are generated during an AutoML job.
 	AutoMLJobArtifacts *types.AutoMLJobArtifacts
 

@@ -1,0 +1,8 @@
+{
+    "id": "d5859cc7-65f8-4b93-9b67-1b4398b9443e",
+    "type": "documentation",
+    "description": "Updating documentation for OEMEphemeris to link to AWS Ground Station User Guide",
+    "modules": [
+        "service/groundstation"
+    ]
+}

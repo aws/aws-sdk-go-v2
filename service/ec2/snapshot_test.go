@@ -734,6 +734,18 @@ func TestCheckSnapshot_CreateCapacityReservation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCapacityReservationBySplitting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationBySplitting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityReservationBySplitting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -6758,6 +6770,18 @@ func TestCheckSnapshot_MoveByoipCidrToIpam(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_MoveCapacityReservationInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.MoveCapacityReservationInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "MoveCapacityReservationInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ProvisionByoipCidr(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ProvisionByoipCidr(context.Background(), nil, func(o *Options) {
@@ -8226,6 +8250,18 @@ func TestUpdateSnapshot_CreateCapacityReservation(t *testing.T) {
 	_, err := svc.CreateCapacityReservation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCapacityReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCapacityReservationBySplitting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationBySplitting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityReservationBySplitting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14250,6 +14286,18 @@ func TestUpdateSnapshot_MoveByoipCidrToIpam(t *testing.T) {
 	_, err := svc.MoveByoipCidrToIpam(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "MoveByoipCidrToIpam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_MoveCapacityReservationInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.MoveCapacityReservationInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "MoveCapacityReservationInstances")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

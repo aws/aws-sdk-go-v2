@@ -41,6 +41,9 @@ type UpdateMultiplexInput struct {
 	// Name of the multiplex.
 	Name *string
 
+	// Placeholder documentation for MultiplexPacketIdentifiersMapping
+	PacketIdentifiersMapping map[string]types.MultiplexProgramPacketIdentifiersMap
+
 	noSmithyDocumentSerde
 }
 

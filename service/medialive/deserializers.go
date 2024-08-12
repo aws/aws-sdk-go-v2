@@ -33302,6 +33302,19 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 
 	for key, value := range shape {
 		switch key {
+		case "aribCaptionsPid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AribCaptionsPid = ptr.Int32(int32(i64))
+			}
+
 		case "audioPids":
 			if err := awsRestjson1_deserializeDocument__listOf__integer(&sv.AudioPids, value); err != nil {
 				return err
@@ -33323,6 +33336,24 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 					return err
 				}
 				sv.DvbTeletextPid = ptr.Int32(int32(i64))
+			}
+
+		case "dvbTeletextPids":
+			if err := awsRestjson1_deserializeDocument__listOf__integer(&sv.DvbTeletextPids, value); err != nil {
+				return err
+			}
+
+		case "ecmPid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EcmPid = ptr.Int32(int32(i64))
 			}
 
 		case "etvPlatformPid":
@@ -33411,6 +33442,19 @@ func awsRestjson1_deserializeDocumentMultiplexProgramPacketIdentifiersMap(v **ty
 					return err
 				}
 				sv.Scte35Pid = ptr.Int32(int32(i64))
+			}
+
+		case "smpte2038Pid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Smpte2038Pid = ptr.Int32(int32(i64))
 			}
 
 		case "timedMetadataPid":

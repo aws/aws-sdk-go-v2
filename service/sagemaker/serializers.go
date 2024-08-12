@@ -19130,6 +19130,20 @@ func awsAwsjson11_serializeDocumentAutoMLChannel(v *types.AutoMLChannel, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAutoMLComputeConfig(v *types.AutoMLComputeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmrServerlessComputeConfig != nil {
+		ok := object.Key("EmrServerlessComputeConfig")
+		if err := awsAwsjson11_serializeDocumentEmrServerlessComputeConfig(v.EmrServerlessComputeConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoMLDataSource(v *types.AutoMLDataSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19643,6 +19657,13 @@ func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings,
 	if v.DirectDeploySettings != nil {
 		ok := object.Key("DirectDeploySettings")
 		if err := awsAwsjson11_serializeDocumentDirectDeploySettings(v.DirectDeploySettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EmrServerlessSettings != nil {
+		ok := object.Key("EmrServerlessSettings")
+		if err := awsAwsjson11_serializeDocumentEmrServerlessSettings(v.EmrServerlessSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -21879,6 +21900,35 @@ func awsAwsjson11_serializeDocumentEFSFileSystemConfig(v *types.EFSFileSystemCon
 	if v.FileSystemPath != nil {
 		ok := object.Key("FileSystemPath")
 		ok.String(*v.FileSystemPath)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEmrServerlessComputeConfig(v *types.EmrServerlessComputeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutionRoleARN != nil {
+		ok := object.Key("ExecutionRoleARN")
+		ok.String(*v.ExecutionRoleARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEmrServerlessSettings(v *types.EmrServerlessSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("ExecutionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil
@@ -30046,6 +30096,13 @@ func awsAwsjson11_serializeOpDocumentCreateAutoMLJobInput(v *CreateAutoMLJobInpu
 func awsAwsjson11_serializeOpDocumentCreateAutoMLJobV2Input(v *CreateAutoMLJobV2Input, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AutoMLComputeConfig != nil {
+		ok := object.Key("AutoMLComputeConfig")
+		if err := awsAwsjson11_serializeDocumentAutoMLComputeConfig(v.AutoMLComputeConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AutoMLJobInputDataConfig != nil {
 		ok := object.Key("AutoMLJobInputDataConfig")

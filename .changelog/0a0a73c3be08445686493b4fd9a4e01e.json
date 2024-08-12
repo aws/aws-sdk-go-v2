@@ -1,0 +1,8 @@
+{
+    "id": "0a0a73c3-be08-4456-8649-3b4fd9a4e01e",
+    "type": "feature",
+    "description": "Added support for new AL2023 GPU AMIs to the supported AMITypes.",
+    "modules": [
+        "service/eks"
+    ]
+}

@@ -4809,6 +4809,9 @@ type MultiplexProgramChannelDestinationSettings struct {
 // Packet identifiers map for a given Multiplex program.
 type MultiplexProgramPacketIdentifiersMap struct {
 
+	// Placeholder documentation for __integer
+	AribCaptionsPid *int32
+
 	// Placeholder documentation for __listOf__integer
 	AudioPids []int32
 
@@ -4817,6 +4820,12 @@ type MultiplexProgramPacketIdentifiersMap struct {
 
 	// Placeholder documentation for __integer
 	DvbTeletextPid *int32
+
+	// Placeholder documentation for __listOf__integer
+	DvbTeletextPids []int32
+
+	// Placeholder documentation for __integer
+	EcmPid *int32
 
 	// Placeholder documentation for __integer
 	EtvPlatformPid *int32
@@ -4841,6 +4850,9 @@ type MultiplexProgramPacketIdentifiersMap struct {
 
 	// Placeholder documentation for __integer
 	Scte35Pid *int32
+
+	// Placeholder documentation for __integer
+	Smpte2038Pid *int32
 
 	// Placeholder documentation for __integer
 	TimedMetadataPid *int32
