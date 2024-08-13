@@ -2,6 +2,23 @@
 
 package types
 
+type BlankNodeHandling string
+
+// Enum values for BlankNodeHandling
+const (
+	BlankNodeHandlingConvertToIri BlankNodeHandling = "convertToIri"
+)
+
+// Values returns all known values for BlankNodeHandling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BlankNodeHandling) Values() []BlankNodeHandling {
+	return []BlankNodeHandling{
+		"convertToIri",
+	}
+}
+
 type ConflictExceptionReason string
 
 // Enum values for ConflictExceptionReason
@@ -44,6 +61,7 @@ type Format string
 const (
 	FormatCsv        Format = "CSV"
 	FormatOpenCypher Format = "OPEN_CYPHER"
+	FormatNtriples   Format = "NTRIPLES"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -54,6 +72,7 @@ func (Format) Values() []Format {
 	return []Format{
 		"CSV",
 		"OPEN_CYPHER",
+		"NTRIPLES",
 	}
 }
 

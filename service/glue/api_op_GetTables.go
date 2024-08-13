@@ -36,6 +36,16 @@ type GetTablesInput struct {
 	// This member is required.
 	DatabaseName *string
 
+	//  Specifies the table fields returned by the GetTables call. This parameter
+	// doesn’t accept an empty list. The request must include NAME .
+	//
+	// The following are the valid combinations of values:
+	//
+	//   - NAME - Names of all tables in the database.
+	//
+	//   - NAME , TABLE_TYPE - Names of all tables and the table types.
+	AttributesToGet []types.TableAttributes
+
 	// The ID of the Data Catalog where the tables reside. If none is provided, the
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string

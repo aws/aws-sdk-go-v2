@@ -4568,6 +4568,64 @@ func awsRestjson1_deserializeDocumentExperimentCloudWatchLogsLogConfiguration(v 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExperimentError(v **types.ExperimentError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExperimentError
+	if *v == nil {
+		sv = &types.ExperimentError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExperimentErrorAccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExperimentErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "location":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExperimentErrorLocation to be of type string, got %T instead", value)
+				}
+				sv.Location = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentExperimentLogConfiguration(v **types.ExperimentLogConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4751,6 +4809,11 @@ func awsRestjson1_deserializeDocumentExperimentState(v **types.ExperimentState, 
 
 	for key, value := range shape {
 		switch key {
+		case "error":
+			if err := awsRestjson1_deserializeDocumentExperimentError(&sv.Error, value); err != nil {
+				return err
+			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)

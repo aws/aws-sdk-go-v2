@@ -20659,6 +20659,17 @@ func awsAwsjson11_serializeDocumentSupportedDialect(v *types.SupportedDialect, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTableAttributesList(v []types.TableAttributes, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTableIdentifier(v *types.TableIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24699,6 +24710,13 @@ func awsAwsjson11_serializeOpDocumentGetTableOptimizerInput(v *GetTableOptimizer
 func awsAwsjson11_serializeOpDocumentGetTablesInput(v *GetTablesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AttributesToGet != nil {
+		ok := object.Key("AttributesToGet")
+		if err := awsAwsjson11_serializeDocumentTableAttributesList(v.AttributesToGet, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")

@@ -278,6 +278,18 @@ func TestCheckSnapshot_CreateStreamingURL(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateThemeForStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateUpdatedImage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateUpdatedImage(context.Background(), nil, func(o *Options) {
@@ -427,6 +439,18 @@ func TestCheckSnapshot_DeleteStack(t *testing.T) {
 	_, err := svc.DeleteStack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteThemeForStack")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -607,6 +631,18 @@ func TestCheckSnapshot_DescribeStacks(t *testing.T) {
 	_, err := svc.DescribeStacks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeStacks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeThemeForStack")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -961,6 +997,18 @@ func TestCheckSnapshot_UpdateStack(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateThemeForStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateAppBlockBuilderAppBlock(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateAppBlockBuilderAppBlock(context.Background(), nil, func(o *Options) {
@@ -1177,6 +1225,18 @@ func TestUpdateSnapshot_CreateStreamingURL(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateThemeForStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateUpdatedImage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateUpdatedImage(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1386,18 @@ func TestUpdateSnapshot_DeleteStack(t *testing.T) {
 	_, err := svc.DeleteStack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteThemeForStack")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1506,6 +1578,18 @@ func TestUpdateSnapshot_DescribeStacks(t *testing.T) {
 	_, err := svc.DescribeStacks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeStacks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeThemeForStack")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1854,6 +1938,18 @@ func TestUpdateSnapshot_UpdateStack(t *testing.T) {
 	_, err := svc.UpdateStack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateThemeForStack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThemeForStack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateThemeForStack")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

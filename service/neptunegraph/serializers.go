@@ -419,6 +419,11 @@ func awsRestjson1_serializeOpDocumentCreateGraphUsingImportTaskInput(v *CreateGr
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.BlankNodeHandling) > 0 {
+		ok := object.Key("blankNodeHandling")
+		ok.String(string(v.BlankNodeHandling))
+	}
+
 	if v.DeletionProtection != nil {
 		ok := object.Key("deletionProtection")
 		ok.Boolean(*v.DeletionProtection)
@@ -2008,6 +2013,11 @@ func awsRestjson1_serializeOpHttpBindingsStartImportTaskInput(v *StartImportTask
 func awsRestjson1_serializeOpDocumentStartImportTaskInput(v *StartImportTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.BlankNodeHandling) > 0 {
+		ok := object.Key("blankNodeHandling")
+		ok.String(string(v.BlankNodeHandling))
+	}
 
 	if v.FailOnError != nil {
 		ok := object.Key("failOnError")

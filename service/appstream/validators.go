@@ -370,6 +370,26 @@ func (m *validateOpCreateStreamingURL) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateThemeForStack struct {
+}
+
+func (*validateOpCreateThemeForStack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateThemeForStack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateThemeForStackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateThemeForStackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUpdatedImage struct {
 }
 
@@ -610,6 +630,26 @@ func (m *validateOpDeleteStack) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteThemeForStack struct {
+}
+
+func (*validateOpDeleteThemeForStack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteThemeForStack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteThemeForStackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteThemeForStackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteUser struct {
 }
 
@@ -685,6 +725,26 @@ func (m *validateOpDescribeSessions) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeThemeForStack struct {
+}
+
+func (*validateOpDescribeThemeForStack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeThemeForStack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeThemeForStackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeThemeForStackInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1230,6 +1290,26 @@ func (m *validateOpUpdateStack) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateThemeForStack struct {
+}
+
+func (*validateOpUpdateThemeForStack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateThemeForStack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateThemeForStackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateThemeForStackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateAppBlockBuilderAppBlockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateAppBlockBuilderAppBlock{}, middleware.After)
 }
@@ -1302,6 +1382,10 @@ func addOpCreateStreamingURLValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateStreamingURL{}, middleware.After)
 }
 
+func addOpCreateThemeForStackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateThemeForStack{}, middleware.After)
+}
+
 func addOpCreateUpdatedImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUpdatedImage{}, middleware.After)
 }
@@ -1350,6 +1434,10 @@ func addOpDeleteStackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStack{}, middleware.After)
 }
 
+func addOpDeleteThemeForStackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteThemeForStack{}, middleware.After)
+}
+
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
 }
@@ -1364,6 +1452,10 @@ func addOpDescribeImagePermissionsValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDescribeSessionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSessions{}, middleware.After)
+}
+
+func addOpDescribeThemeForStackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeThemeForStack{}, middleware.After)
 }
 
 func addOpDescribeUsersValidationMiddleware(stack *middleware.Stack) error {
@@ -1472,6 +1564,10 @@ func addOpUpdateImagePermissionsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateStackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStack{}, middleware.After)
+}
+
+func addOpUpdateThemeForStackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateThemeForStack{}, middleware.After)
 }
 
 func validateAccessEndpoint(v *types.AccessEndpoint) error {
@@ -2131,6 +2227,41 @@ func validateOpCreateStreamingURLInput(v *CreateStreamingURLInput) error {
 	}
 }
 
+func validateOpCreateThemeForStackInput(v *CreateThemeForStackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateThemeForStackInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.TitleText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TitleText"))
+	}
+	if len(v.ThemeStyling) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ThemeStyling"))
+	}
+	if v.OrganizationLogoS3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationLogoS3Location"))
+	} else if v.OrganizationLogoS3Location != nil {
+		if err := validateS3Location(v.OrganizationLogoS3Location); err != nil {
+			invalidParams.AddNested("OrganizationLogoS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FaviconS3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FaviconS3Location"))
+	} else if v.FaviconS3Location != nil {
+		if err := validateS3Location(v.FaviconS3Location); err != nil {
+			invalidParams.AddNested("FaviconS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateUpdatedImageInput(v *CreateUpdatedImageInput) error {
 	if v == nil {
 		return nil
@@ -2323,6 +2454,21 @@ func validateOpDeleteStackInput(v *DeleteStackInput) error {
 	}
 }
 
+func validateOpDeleteThemeForStackInput(v *DeleteThemeForStackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteThemeForStackInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	if v == nil {
 		return nil
@@ -2381,6 +2527,21 @@ func validateOpDescribeSessionsInput(v *DescribeSessionsInput) error {
 	}
 	if v.FleetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeThemeForStackInput(v *DescribeThemeForStackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeThemeForStackInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2866,6 +3027,31 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 	if v.AccessEndpoints != nil {
 		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
 			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateThemeForStackInput(v *UpdateThemeForStackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateThemeForStackInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.OrganizationLogoS3Location != nil {
+		if err := validateS3Location(v.OrganizationLogoS3Location); err != nil {
+			invalidParams.AddNested("OrganizationLogoS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FaviconS3Location != nil {
+		if err := validateS3Location(v.FaviconS3Location); err != nil {
+			invalidParams.AddNested("FaviconS3Location", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

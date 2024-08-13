@@ -1005,6 +1005,61 @@ func (m *awsAwsjson11_serializeOpCreateStreamingURL) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateThemeForStack struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateThemeForStack) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateThemeForStack) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateThemeForStackInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PhotonAdminProxyService.CreateThemeForStack")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateThemeForStackInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateUpdatedImage struct {
 }
 
@@ -1705,6 +1760,61 @@ func (m *awsAwsjson11_serializeOpDeleteStack) HandleSerialize(ctx context.Contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteStackInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteThemeForStack struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteThemeForStack) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteThemeForStack) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteThemeForStackInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PhotonAdminProxyService.DeleteThemeForStack")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteThemeForStackInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2530,6 +2640,61 @@ func (m *awsAwsjson11_serializeOpDescribeStacks) HandleSerialize(ctx context.Con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeStacksInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeThemeForStack struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeThemeForStack) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeThemeForStack) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeThemeForStackInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PhotonAdminProxyService.DescribeThemeForStack")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeThemeForStackInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4139,6 +4304,61 @@ func (m *awsAwsjson11_serializeOpUpdateStack) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson11_serializeOpUpdateThemeForStack struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateThemeForStack) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateThemeForStack) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateThemeForStackInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PhotonAdminProxyService.UpdateThemeForStack")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateThemeForStackInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson11_serializeDocumentAccessEndpoint(v *types.AccessEndpoint, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4568,6 +4788,47 @@ func awsAwsjson11_serializeDocumentTags(v map[string]string, value smithyjson.Va
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentThemeAttributes(v []types.ThemeAttribute, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentThemeFooterLink(v *types.ThemeFooterLink, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayName != nil {
+		ok := object.Key("DisplayName")
+		ok.String(*v.DisplayName)
+	}
+
+	if v.FooterLinkURL != nil {
+		ok := object.Key("FooterLinkURL")
+		ok.String(*v.FooterLinkURL)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentThemeFooterLinks(v []types.ThemeFooterLink, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentThemeFooterLink(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -5423,6 +5684,49 @@ func awsAwsjson11_serializeOpDocumentCreateStreamingURLInput(v *CreateStreamingU
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateThemeForStackInput(v *CreateThemeForStackInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FaviconS3Location != nil {
+		ok := object.Key("FaviconS3Location")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.FaviconS3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FooterLinks != nil {
+		ok := object.Key("FooterLinks")
+		if err := awsAwsjson11_serializeDocumentThemeFooterLinks(v.FooterLinks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationLogoS3Location != nil {
+		ok := object.Key("OrganizationLogoS3Location")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.OrganizationLogoS3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StackName != nil {
+		ok := object.Key("StackName")
+		ok.String(*v.StackName)
+	}
+
+	if len(v.ThemeStyling) > 0 {
+		ok := object.Key("ThemeStyling")
+		ok.String(string(v.ThemeStyling))
+	}
+
+	if v.TitleText != nil {
+		ok := object.Key("TitleText")
+		ok.String(*v.TitleText)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateUpdatedImageInput(v *CreateUpdatedImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5626,6 +5930,18 @@ func awsAwsjson11_serializeOpDocumentDeleteStackInput(v *DeleteStackInput, value
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteThemeForStackInput(v *DeleteThemeForStackInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StackName != nil {
+		ok := object.Key("StackName")
+		ok.String(*v.StackName)
 	}
 
 	return nil
@@ -5996,6 +6312,18 @@ func awsAwsjson11_serializeOpDocumentDescribeStacksInput(v *DescribeStacksInput,
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeThemeForStackInput(v *DescribeThemeForStackInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StackName != nil {
+		ok := object.Key("StackName")
+		ok.String(*v.StackName)
 	}
 
 	return nil
@@ -6799,6 +7127,61 @@ func awsAwsjson11_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value
 		if err := awsAwsjson11_serializeDocumentUserSettingList(v.UserSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateThemeForStackInput(v *UpdateThemeForStackInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributesToDelete != nil {
+		ok := object.Key("AttributesToDelete")
+		if err := awsAwsjson11_serializeDocumentThemeAttributes(v.AttributesToDelete, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FaviconS3Location != nil {
+		ok := object.Key("FaviconS3Location")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.FaviconS3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FooterLinks != nil {
+		ok := object.Key("FooterLinks")
+		if err := awsAwsjson11_serializeDocumentThemeFooterLinks(v.FooterLinks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationLogoS3Location != nil {
+		ok := object.Key("OrganizationLogoS3Location")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.OrganizationLogoS3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StackName != nil {
+		ok := object.Key("StackName")
+		ok.String(*v.StackName)
+	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	if len(v.ThemeStyling) > 0 {
+		ok := object.Key("ThemeStyling")
+		ok.String(string(v.ThemeStyling))
+	}
+
+	if v.TitleText != nil {
+		ok := object.Key("TitleText")
+		ok.String(*v.TitleText)
 	}
 
 	return nil

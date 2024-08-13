@@ -772,6 +772,10 @@ type Image struct {
 	// The image name to display.
 	DisplayName *string
 
+	// Indicates whether dynamic app providers are enabled within an AppStream 2.0
+	// image or not.
+	DynamicAppProvidersEnabled DynamicAppProvidersEnabled
+
 	// The name of the image builder that was used to create the private image. If the
 	// image is shared, this value is null.
 	ImageBuilderName *string
@@ -786,6 +790,13 @@ type Image struct {
 	// image.
 	ImagePermissions *ImagePermissions
 
+	// Indicates whether the image is shared with another account ID.
+	ImageSharedWithOthers ImageSharedWithOthers
+
+	// Indicates whether the image is using the latest AppStream 2.0 agent version or
+	// not.
+	LatestAppstreamAgentVersion LatestAppstreamAgentVersion
+
 	// The operating system platform of the image.
 	Platform PlatformType
 
@@ -799,6 +810,27 @@ type Image struct {
 
 	// The reason why the last state change occurred.
 	StateChangeReason *ImageStateChangeReason
+
+	// The supported instances families that determine which image a customer can use
+	// when the customer launches a fleet or image builder. The following instances
+	// families are supported:
+	//
+	//   - General Purpose
+	//
+	//   - Compute Optimized
+	//
+	//   - Memory Optimized
+	//
+	//   - Graphics
+	//
+	//   - Graphics Design
+	//
+	//   - Graphics Pro
+	//
+	//   - Graphics G4
+	//
+	//   - Graphics G5
+	SupportedInstanceFamilies []string
 
 	// Indicates whether the image is public or private.
 	Visibility VisibilityType
@@ -929,6 +961,10 @@ type ImageBuilder struct {
 	//
 	//   - stream.graphics-pro.16xlarge
 	InstanceType *string
+
+	// Indicates whether the image builder is using the latest AppStream 2.0 agent
+	// version or not.
+	LatestAppstreamAgentVersion LatestAppstreamAgentVersion
 
 	// Describes the network details of the fleet or image builder instance.
 	NetworkAccessConfiguration *NetworkAccessConfiguration
@@ -1265,6 +1301,51 @@ type StreamingExperienceSettings struct {
 
 	// The preferred protocol that you want to use while streaming your application.
 	PreferredProtocol PreferredProtocol
+
+	noSmithyDocumentSerde
+}
+
+// The custom branding theme, which might include a custom logo, website links,
+// and other branding to display to users.
+type Theme struct {
+
+	// The time the theme was created.
+	CreatedTime *time.Time
+
+	// The stack that has the custom branding theme.
+	StackName *string
+
+	// The state of the theme.
+	State ThemeState
+
+	// The URL of the icon that displays at the top of a user's browser tab during
+	// streaming sessions.
+	ThemeFaviconURL *string
+
+	// The website links that display in the catalog page footer.
+	ThemeFooterLinks []ThemeFooterLink
+
+	// The URL of the logo that displays in the catalog page header.
+	ThemeOrganizationLogoURL *string
+
+	// The color that is used for the website links, text, buttons, and catalog page
+	// background.
+	ThemeStyling ThemeStyling
+
+	// The browser tab page title.
+	ThemeTitleText *string
+
+	noSmithyDocumentSerde
+}
+
+// The website links that display in the catalog page footer.
+type ThemeFooterLink struct {
+
+	// The name of the websites that display in the catalog page footer.
+	DisplayName *string
+
+	// The URL of the websites that display in the catalog page footer.
+	FooterLinkURL *string
 
 	noSmithyDocumentSerde
 }

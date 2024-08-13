@@ -228,6 +228,25 @@ func (CertificateBasedAuthStatus) Values() []CertificateBasedAuthStatus {
 	}
 }
 
+type DynamicAppProvidersEnabled string
+
+// Enum values for DynamicAppProvidersEnabled
+const (
+	DynamicAppProvidersEnabledEnabled  DynamicAppProvidersEnabled = "ENABLED"
+	DynamicAppProvidersEnabledDisabled DynamicAppProvidersEnabled = "DISABLED"
+)
+
+// Values returns all known values for DynamicAppProvidersEnabled. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DynamicAppProvidersEnabled) Values() []DynamicAppProvidersEnabled {
+	return []DynamicAppProvidersEnabled{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type FleetAttribute string
 
 // Enum values for FleetAttribute
@@ -433,6 +452,25 @@ func (ImageBuilderStateChangeReasonCode) Values() []ImageBuilderStateChangeReaso
 	}
 }
 
+type ImageSharedWithOthers string
+
+// Enum values for ImageSharedWithOthers
+const (
+	ImageSharedWithOthersTrue  ImageSharedWithOthers = "TRUE"
+	ImageSharedWithOthersFalse ImageSharedWithOthers = "FALSE"
+)
+
+// Values returns all known values for ImageSharedWithOthers. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageSharedWithOthers) Values() []ImageSharedWithOthers {
+	return []ImageSharedWithOthers{
+		"TRUE",
+		"FALSE",
+	}
+}
+
 type ImageState string
 
 // Enum values for ImageState
@@ -480,6 +518,25 @@ func (ImageStateChangeReasonCode) Values() []ImageStateChangeReasonCode {
 		"INTERNAL_ERROR",
 		"IMAGE_BUILDER_NOT_AVAILABLE",
 		"IMAGE_COPY_FAILURE",
+	}
+}
+
+type LatestAppstreamAgentVersion string
+
+// Enum values for LatestAppstreamAgentVersion
+const (
+	LatestAppstreamAgentVersionTrue  LatestAppstreamAgentVersion = "TRUE"
+	LatestAppstreamAgentVersionFalse LatestAppstreamAgentVersion = "FALSE"
+)
+
+// Values returns all known values for LatestAppstreamAgentVersion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LatestAppstreamAgentVersion) Values() []LatestAppstreamAgentVersion {
+	return []LatestAppstreamAgentVersion{
+		"TRUE",
+		"FALSE",
 	}
 }
 
@@ -721,6 +778,65 @@ func (StreamView) Values() []StreamView {
 	return []StreamView{
 		"APP",
 		"DESKTOP",
+	}
+}
+
+type ThemeAttribute string
+
+// Enum values for ThemeAttribute
+const (
+	ThemeAttributeFooterLinks ThemeAttribute = "FOOTER_LINKS"
+)
+
+// Values returns all known values for ThemeAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThemeAttribute) Values() []ThemeAttribute {
+	return []ThemeAttribute{
+		"FOOTER_LINKS",
+	}
+}
+
+type ThemeState string
+
+// Enum values for ThemeState
+const (
+	ThemeStateEnabled  ThemeState = "ENABLED"
+	ThemeStateDisabled ThemeState = "DISABLED"
+)
+
+// Values returns all known values for ThemeState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThemeState) Values() []ThemeState {
+	return []ThemeState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ThemeStyling string
+
+// Enum values for ThemeStyling
+const (
+	ThemeStylingLightBlue ThemeStyling = "LIGHT_BLUE"
+	ThemeStylingBlue      ThemeStyling = "BLUE"
+	ThemeStylingPink      ThemeStyling = "PINK"
+	ThemeStylingRed       ThemeStyling = "RED"
+)
+
+// Values returns all known values for ThemeStyling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThemeStyling) Values() []ThemeStyling {
+	return []ThemeStyling{
+		"LIGHT_BLUE",
+		"BLUE",
+		"PINK",
+		"RED",
 	}
 }
 

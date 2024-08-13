@@ -48,6 +48,13 @@ type StartImportTaskInput struct {
 	// This member is required.
 	Source *string
 
+	// The method to handle blank nodes in the dataset. Currently, only convertToIri
+	// is supported, meaning blank nodes are converted to unique IRIs at load time.
+	// Must be provided when format is ntriples . For more information, see [Handling RDF values].
+	//
+	// [Handling RDF values]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling
+	BlankNodeHandling types.BlankNodeHandling
+
 	// If set to true, the task halts when an import error is encountered. If set to
 	// false, the task skips the data that caused the error and continues if possible.
 	FailOnError *bool

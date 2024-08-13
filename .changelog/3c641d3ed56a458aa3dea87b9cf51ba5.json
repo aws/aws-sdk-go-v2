@@ -1,0 +1,8 @@
+{
+    "id": "3c641d3e-d56a-458a-a3de-a87b9cf51ba5",
+    "type": "feature",
+    "description": "Add a new field \"cacheConfig\" that enables users to configure the CDN cache settings for an App",
+    "modules": [
+        "service/amplify"
+    ]
+}

@@ -6138,6 +6138,11 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 				sv.BuildSpec = ptr.String(jtv)
 			}
 
+		case "cacheConfig":
+			if err := awsRestjson1_deserializeDocumentCacheConfig(&sv.CacheConfig, value); err != nil {
+				return err
+			}
+
 		case "createTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7170,6 +7175,46 @@ func awsRestjson1_deserializeDocumentBranches(v *[]types.Branch, value interface
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCacheConfig(v **types.CacheConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CacheConfig
+	if *v == nil {
+		sv = &types.CacheConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CacheConfigType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CacheConfigType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

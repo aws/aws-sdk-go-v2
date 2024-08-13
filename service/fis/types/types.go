@@ -301,6 +301,21 @@ type ExperimentCloudWatchLogsLogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the error when an experiment has failed .
+type ExperimentError struct {
+
+	// The Amazon Web Services Account ID where the experiment failure occurred.
+	AccountId *string
+
+	// The error code for the failed experiment.
+	Code *string
+
+	// Context for the section of the experiment template that failed.
+	Location *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration for experiment logging.
 type ExperimentLogConfiguration struct {
 
@@ -346,6 +361,9 @@ type ExperimentS3LogConfiguration struct {
 
 // Describes the state of an experiment.
 type ExperimentState struct {
+
+	// The error information of the experiment when the action has failed .
+	Error *ExperimentError
 
 	// The reason for the state.
 	Reason *string

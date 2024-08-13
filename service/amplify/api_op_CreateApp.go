@@ -65,6 +65,9 @@ type CreateAppInput struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string
 
+	// The cache configuration for the Amplify app.
+	CacheConfig *types.CacheConfig
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string
 

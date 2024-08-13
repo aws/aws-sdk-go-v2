@@ -874,6 +874,21 @@ func addOpUpdateWebhookValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWebhook{}, middleware.After)
 }
 
+func validateCacheConfig(v *types.CacheConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CacheConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCertificateSettings(v *types.CertificateSettings) error {
 	if v == nil {
 		return nil
@@ -970,6 +985,11 @@ func validateOpCreateAppInput(v *CreateAppInput) error {
 	if v.CustomRules != nil {
 		if err := validateCustomRules(v.CustomRules); err != nil {
 			invalidParams.AddNested("CustomRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CacheConfig != nil {
+		if err := validateCacheConfig(v.CacheConfig); err != nil {
+			invalidParams.AddNested("CacheConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1545,6 +1565,11 @@ func validateOpUpdateAppInput(v *UpdateAppInput) error {
 	if v.CustomRules != nil {
 		if err := validateCustomRules(v.CustomRules); err != nil {
 			invalidParams.AddNested("CustomRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CacheConfig != nil {
+		if err := validateCacheConfig(v.CacheConfig); err != nil {
+			invalidParams.AddNested("CacheConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

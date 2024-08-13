@@ -111,6 +111,13 @@ func awsRestjson1_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 		ok.String(*v.BuildSpec)
 	}
 
+	if v.CacheConfig != nil {
+		ok := object.Key("cacheConfig")
+		if err := awsRestjson1_serializeDocumentCacheConfig(v.CacheConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomHeaders != nil {
 		ok := object.Key("customHeaders")
 		ok.String(*v.CustomHeaders)
@@ -2986,6 +2993,13 @@ func awsRestjson1_serializeOpDocumentUpdateAppInput(v *UpdateAppInput, value smi
 		ok.String(*v.BuildSpec)
 	}
 
+	if v.CacheConfig != nil {
+		ok := object.Key("cacheConfig")
+		if err := awsRestjson1_serializeDocumentCacheConfig(v.CacheConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomHeaders != nil {
 		ok := object.Key("customHeaders")
 		ok.String(*v.CustomHeaders)
@@ -3538,6 +3552,18 @@ func awsRestjson1_serializeDocumentBackend(v *types.Backend, value smithyjson.Va
 	if v.StackArn != nil {
 		ok := object.Key("stackArn")
 		ok.String(*v.StackArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCacheConfig(v *types.CacheConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

@@ -58,6 +58,13 @@ type CreateGraphUsingImportTaskInput struct {
 	// This member is required.
 	Source *string
 
+	// The method to handle blank nodes in the dataset. Currently, only convertToIri
+	// is supported, meaning blank nodes are converted to unique IRIs at load time.
+	// Must be provided when format is ntriples . For more information, see [Handling RDF values].
+	//
+	// [Handling RDF values]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling
+	BlankNodeHandling types.BlankNodeHandling
+
 	// Indicates whether or not to enable deletion protection on the graph. The graph
 	// can’t be deleted when deletion protection is enabled. ( true or false ).
 	DeletionProtection *bool
@@ -146,10 +153,12 @@ type CreateGraphUsingImportTaskOutput struct {
 	TaskId *string
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	// identifies the [Gremlin CSV format], OPENCYPHER , which identifies the [openCypher load format], or ntriples , which
+	// identifies the [RDF n-triples]format.
 	//
 	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
 	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
+	// [RDF n-triples]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html
 	Format types.Format
 
 	// The unique identifier of the Neptune Analytics graph.

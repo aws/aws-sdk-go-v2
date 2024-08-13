@@ -97,6 +97,20 @@ type CreateFleetInput struct {
 	//
 	//   - stream.graphics.g4dn.16xlarge
 	//
+	//   - stream.graphics.g5.xlarge
+	//
+	//   - stream.graphics.g5.2xlarge
+	//
+	//   - stream.graphics.g5.4xlarge
+	//
+	//   - stream.graphics.g5.8xlarge
+	//
+	//   - stream.graphics.g5.12xlarge
+	//
+	//   - stream.graphics.g5.16xlarge
+	//
+	//   - stream.graphics.g5.24xlarge
+	//
 	//   - stream.graphics-pro.4xlarge
 	//
 	//   - stream.graphics-pro.8xlarge

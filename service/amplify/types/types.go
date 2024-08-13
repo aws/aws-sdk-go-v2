@@ -94,6 +94,10 @@ type App struct {
 	// app.
 	BuildSpec *string
 
+	// The cache configuration for the Amplify app. If you don't specify the cache
+	// configuration type , Amplify uses the default AMPLIFY_MANAGED setting.
+	CacheConfig *CacheConfig
+
 	// Describes the custom HTTP headers for the Amplify app.
 	CustomHeaders *string
 
@@ -375,6 +379,30 @@ type Branch struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the cache configuration for an Amplify app.
+//
+// For more information about how Amplify applies an optimal cache configuration
+// for your app based on the type of content that is being served, see [Managing cache configuration]in the
+// Amplify User guide.
+//
+// [Managing cache configuration]: https://docs.aws.amazon.com/amplify/latest/userguide/managing-cache-configuration
+type CacheConfig struct {
+
+	// The type of cache configuration to use for an Amplify app.
+	//
+	// The AMPLIFY_MANAGED cache configuration automatically applies an optimized
+	// cache configuration for your app based on its platform, routing rules, and
+	// rewrite rules. This is the default setting.
+	//
+	// The AMPLIFY_MANAGED_NO_COOKIES cache configuration type is the same as
+	// AMPLIFY_MANAGED , except that it excludes all cookies from the cache key.
+	//
+	// This member is required.
+	Type CacheConfigType
+
+	noSmithyDocumentSerde
+}
+
 // Describes the current SSL/TLS certificate that is in use for the domain. If you
 // are using CreateDomainAssociation to create a new domain association,
 // Certificate describes the new certificate that you are creating.
@@ -388,7 +416,7 @@ type Certificate struct {
 	// Specify CUSTOM to use your own certificate that you have already added to
 	// Certificate Manager in your Amazon Web Services account. Make sure you request
 	// (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For
-	// more information about using ACM, see [Importing certificates into Certificate Manager]in the ACM User guide .
+	// more information about using ACM, see [Importing certificates into Certificate Manager]in the ACM User guide.
 	//
 	// [Importing certificates into Certificate Manager]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
 	//

@@ -2,6 +2,25 @@
 
 package types
 
+type CacheConfigType string
+
+// Enum values for CacheConfigType
+const (
+	CacheConfigTypeAmplifyManaged          CacheConfigType = "AMPLIFY_MANAGED"
+	CacheConfigTypeAmplifyManagedNoCookies CacheConfigType = "AMPLIFY_MANAGED_NO_COOKIES"
+)
+
+// Values returns all known values for CacheConfigType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CacheConfigType) Values() []CacheConfigType {
+	return []CacheConfigType{
+		"AMPLIFY_MANAGED",
+		"AMPLIFY_MANAGED_NO_COOKIES",
+	}
+}
+
 type CertificateType string
 
 // Enum values for CertificateType

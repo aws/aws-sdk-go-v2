@@ -2118,6 +2118,25 @@ func (StatisticEvaluationLevel) Values() []StatisticEvaluationLevel {
 	}
 }
 
+type TableAttributes string
+
+// Enum values for TableAttributes
+const (
+	TableAttributesName      TableAttributes = "NAME"
+	TableAttributesTableType TableAttributes = "TABLE_TYPE"
+)
+
+// Values returns all known values for TableAttributes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableAttributes) Values() []TableAttributes {
+	return []TableAttributes{
+		"NAME",
+		"TABLE_TYPE",
+	}
+}
+
 type TableOptimizerEventType string
 
 // Enum values for TableOptimizerEventType
