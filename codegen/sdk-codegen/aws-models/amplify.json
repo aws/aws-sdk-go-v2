@@ -1204,6 +1204,12 @@
                     "traits": {
                         "smithy.api#documentation": "<note>\n            <p>This is for internal use.</p>\n         </note>\n         <p>The Amplify service uses this parameter to specify the authentication protocol to use\n            to access the Git repository for an Amplify app. Amplify specifies <code>TOKEN</code>\n            for a GitHub repository, <code>SIGV4</code> for an Amazon Web Services CodeCommit\n            repository, and <code>SSH</code> for GitLab and Bitbucket repositories.</p>"
                     }
+                },
+                "cacheConfig": {
+                    "target": "com.amazonaws.amplify#CacheConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cache configuration for the Amplify app. If you don't specify the\n            cache configuration <code>type</code>, Amplify uses the default\n                <code>AMPLIFY_MANAGED</code> setting.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1761,13 +1767,45 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.amplify#CacheConfig": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.amplify#CacheConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of cache configuration to use for an Amplify app.</p>\n         <p>The <code>AMPLIFY_MANAGED</code> cache configuration automatically applies an\n            optimized cache configuration for your app based on its platform, routing rules, and\n            rewrite rules. This is the default setting.</p>\n         <p>The <code>AMPLIFY_MANAGED_NO_COOKIES</code> cache configuration type is the same as <code>AMPLIFY_MANAGED</code>, except that it excludes all cookies from the cache key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the cache configuration for an Amplify app.</p>\n         <p>For more\n            information about how Amplify applies an optimal cache configuration for\n            your app based on the type of content that is being served, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/managing-cache-configuration\">Managing cache configuration</a> in the <i>Amplify User\n                guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.amplify#CacheConfigType": {
+            "type": "enum",
+            "members": {
+                "AMPLIFY_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMPLIFY_MANAGED"
+                    }
+                },
+                "AMPLIFY_MANAGED_NO_COOKIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMPLIFY_MANAGED_NO_COOKIES"
+                    }
+                }
+            }
+        },
         "com.amazonaws.amplify#Certificate": {
             "type": "structure",
             "members": {
                 "type": {
                     "target": "com.amazonaws.amplify#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of SSL/TLS certificate that you want to use.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager</a> in the <i>ACM User\n                guide</i> .</p>",
+                        "smithy.api#documentation": "<p>The type of SSL/TLS certificate that you want to use.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager</a> in the <i>ACM User\n                guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2034,6 +2072,12 @@
                     "target": "com.amazonaws.amplify#AutoBranchCreationConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The automated branch creation configuration for an Amplify app. </p>"
+                    }
+                },
+                "cacheConfig": {
+                    "target": "com.amazonaws.amplify#CacheConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cache configuration for the Amplify app.</p>"
                     }
                 }
             },
@@ -6160,6 +6204,12 @@
                     "target": "com.amazonaws.amplify#AccessToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The personal access token for a GitHub repository for an Amplify app. The personal\n            access token is used to authorize access to a GitHub repository using the Amplify GitHub\n            App. The token is not stored.</p>\n         <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a\n            repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p>\n         <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you\n            update an app.</p>\n         <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work\n            with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub\n            App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the\n                <i>Amplify User Guide</i> .</p>"
+                    }
+                },
+                "cacheConfig": {
+                    "target": "com.amazonaws.amplify#CacheConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cache configuration for the Amplify app.</p>"
                     }
                 }
             },

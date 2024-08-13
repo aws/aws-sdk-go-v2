@@ -1183,6 +1183,48 @@
         "com.amazonaws.fis#ExperimentEndTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.fis#ExperimentError": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.fis#ExperimentErrorAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Account ID where the experiment failure occurred.</p>"
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.fis#ExperimentErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the failed experiment.</p>"
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.fis#ExperimentErrorLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Context for the section of the experiment template that failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the error when an experiment has <code>failed</code>.</p>"
+            }
+        },
+        "com.amazonaws.fis#ExperimentErrorAccountId": {
+            "type": "string"
+        },
+        "com.amazonaws.fis#ExperimentErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#ExperimentErrorLocation": {
+            "type": "string"
+        },
         "com.amazonaws.fis#ExperimentId": {
             "type": "string",
             "traits": {
@@ -1281,6 +1323,12 @@
                     "target": "com.amazonaws.fis#ExperimentStatusReason",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason for the state.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.fis#ExperimentError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error information of the experiment when the action has <code>failed</code>.</p>"
                     }
                 }
             },
@@ -2338,7 +2386,7 @@
                     "name": "fis"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Fault Injection Service is a managed service that enables you to perform fault injection \n           experiments on your Amazon Web Services workloads. For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">Fault Injection Service User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Fault Injection Service is a managed service that enables you to perform fault injection \n           experiments on your Amazon Web Services workloads. For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">Fault Injection Service User Guide</a>.</p>",
                 "smithy.api#title": "AWS Fault Injection Simulator",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

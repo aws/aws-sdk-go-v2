@@ -20451,6 +20451,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.</p>"
                     }
+                },
+                "AttributesToGet": {
+                    "target": "com.amazonaws.glue#TableAttributesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the table fields returned by the <code>GetTables</code> call. This parameter doesn’t accept an empty list. The request must include <code>NAME</code>.</p>\n         <p>The following are the valid combinations of values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NAME</code> - Names of all tables in the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NAME</code>, <code>TABLE_TYPE</code> - Names of all tables and the table types.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -35005,6 +35011,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents a collection of related data organized in columns and rows.</p>"
+            }
+        },
+        "com.amazonaws.glue#TableAttributes": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "TABLE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLE_TYPE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#TableAttributesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#TableAttributes"
             }
         },
         "com.amazonaws.glue#TableError": {

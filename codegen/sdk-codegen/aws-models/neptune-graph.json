@@ -1534,6 +1534,17 @@
                 "smithy.api#pattern": "^arn:.+$"
             }
         },
+        "com.amazonaws.neptunegraph#BlankNodeHandling": {
+            "type": "enum",
+            "members": {
+                "CONVERT_TO_IRI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "convertToIri"
+                    }
+                }
+            }
+        },
         "com.amazonaws.neptunegraph#CancelImportTask": {
             "type": "operation",
             "input": {
@@ -2187,6 +2198,12 @@
                         "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
                     }
                 },
+                "blankNodeHandling": {
+                    "target": "com.amazonaws.neptunegraph#BlankNodeHandling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, \n      meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. \n      For more information, see <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling\">Handling RDF values</a>.</p>"
+                    }
+                },
                 "roleArn": {
                     "target": "com.amazonaws.neptunegraph#RoleArn",
                     "traits": {
@@ -2225,7 +2242,7 @@
                 "format": {
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a>, <code>OPENCYPHER</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>, or <code>ntriples</code>, which identifies the\n     <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html\">RDF n-triples</a> format.</p>"
                     }
                 },
                 "roleArn": {
@@ -2931,6 +2948,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OPEN_CYPHER"
+                    }
+                },
+                "NTRIPLES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NTRIPLES"
                     }
                 }
             }
@@ -5910,6 +5933,12 @@
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or \n      OPENCYPHER, which identies the openCypher load format.</p>"
+                    }
+                },
+                "blankNodeHandling": {
+                    "target": "com.amazonaws.neptunegraph#BlankNodeHandling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, \n      meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. \n      For more information, see <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling\">Handling RDF values</a>.</p>"
                     }
                 },
                 "graphIdentifier": {

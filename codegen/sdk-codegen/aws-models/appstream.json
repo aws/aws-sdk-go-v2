@@ -2036,7 +2036,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2603,6 +2603,106 @@
                     "target": "com.amazonaws.appstream#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateThemeForStack": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateThemeForStackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateThemeForStackResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates custom branding that customizes the appearance of the streaming application catalog page.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateThemeForStackRequest": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the stack for the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FooterLinks": {
+                    "target": "com.amazonaws.appstream#ThemeFooterLinks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The links that are displayed in the footer of the streaming application catalog page. These links are helpful resources for users, such as the organization's IT support and product marketing sites.</p>"
+                    }
+                },
+                "TitleText": {
+                    "target": "com.amazonaws.appstream#ThemeTitleText",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The title that is displayed at the top of the browser tab during users' application streaming sessions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThemeStyling": {
+                    "target": "com.amazonaws.appstream#ThemeStyling",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The color theme that is applied to website links, text, and buttons. These colors are also applied as accents in the background for the streaming application catalog page.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrganizationLogoS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The organization logo that appears on the streaming application catalog page.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FaviconS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The S3 location of the favicon. The favicon enables users to recognize their application streaming site in a browser full of tabs or bookmarks. It is displayed at the top of the browser tab for the application streaming site during users' streaming sessions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateThemeForStackResult": {
+            "type": "structure",
+            "members": {
+                "Theme": {
+                    "target": "com.amazonaws.appstream#Theme",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The theme object that contains the metadata of the custom branding.</p>"
                     }
                 }
             },
@@ -3331,6 +3431,52 @@
             }
         },
         "com.amazonaws.appstream#DeleteStackResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#DeleteThemeForStack": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DeleteThemeForStackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DeleteThemeForStackResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes custom branding that customizes the appearance of the streaming application catalog page.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DeleteThemeForStackRequest": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the stack for the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#DeleteThemeForStackResult": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -4438,6 +4584,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.appstream#DescribeThemeForStack": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DescribeThemeForStackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DescribeThemeForStackResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list that describes the theme for a specified stack. A theme is custom branding that customizes the appearance of the streaming application catalog page.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DescribeThemeForStackRequest": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the stack for the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#DescribeThemeForStackResult": {
+            "type": "structure",
+            "members": {
+                "Theme": {
+                    "target": "com.amazonaws.appstream#Theme",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The theme object that contains the metadata of the custom branding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#DescribeUsageReportSubscriptions": {
             "type": "operation",
             "input": {
@@ -5037,6 +5233,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.appstream#DynamicAppProvidersEnabled": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
                 }
             }
         },
@@ -5942,6 +6155,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the errors that are returned when a new image can't be created.</p>"
                     }
+                },
+                "LatestAppstreamAgentVersion": {
+                    "target": "com.amazonaws.appstream#LatestAppstreamAgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the image is using the latest AppStream 2.0 agent version or not.</p>"
+                    }
+                },
+                "SupportedInstanceFamilies": {
+                    "target": "com.amazonaws.appstream#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported instances families that determine which image a customer can use when the customer launches a fleet or image builder. The following instances families are supported:</p>\n         <ul>\n            <li>\n               <p>General Purpose</p>\n            </li>\n            <li>\n               <p>Compute Optimized</p>\n            </li>\n            <li>\n               <p>Memory Optimized</p>\n            </li>\n            <li>\n               <p>Graphics</p>\n            </li>\n            <li>\n               <p>Graphics Design</p>\n            </li>\n            <li>\n               <p>Graphics Pro</p>\n            </li>\n            <li>\n               <p>Graphics G4</p>\n            </li>\n            <li>\n               <p>Graphics G5</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DynamicAppProvidersEnabled": {
+                    "target": "com.amazonaws.appstream#DynamicAppProvidersEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether dynamic app providers are enabled within an AppStream 2.0 image or not.</p>"
+                    }
+                },
+                "ImageSharedWithOthers": {
+                    "target": "com.amazonaws.appstream#ImageSharedWithOthers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the image is shared with another account ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6056,6 +6293,12 @@
                     "target": "com.amazonaws.appstream#AccessEndpointList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>"
+                    }
+                },
+                "LatestAppstreamAgentVersion": {
+                    "target": "com.amazonaws.appstream#LatestAppstreamAgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the image builder is using the latest AppStream 2.0 agent version or not.</p>"
                     }
                 }
             },
@@ -6201,6 +6444,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the permissions for an image. </p>"
+            }
+        },
+        "com.amazonaws.appstream#ImageSharedWithOthers": {
+            "type": "enum",
+            "members": {
+                "TRUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUE"
+                    }
+                },
+                "FALSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FALSE"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#ImageState": {
@@ -6372,6 +6632,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appstream#LastReportGenerationExecutionError"
+            }
+        },
+        "com.amazonaws.appstream#LatestAppstreamAgentVersion": {
+            "type": "enum",
+            "members": {
+                "TRUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUE"
+                    }
+                },
+                "FALSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FALSE"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#LimitExceededException": {
@@ -6806,6 +7083,9 @@
                     "target": "com.amazonaws.appstream#CreateStreamingURL"
                 },
                 {
+                    "target": "com.amazonaws.appstream#CreateThemeForStack"
+                },
+                {
                     "target": "com.amazonaws.appstream#CreateUpdatedImage"
                 },
                 {
@@ -6843,6 +7123,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#DeleteStack"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DeleteThemeForStack"
                 },
                 {
                     "target": "com.amazonaws.appstream#DeleteUsageReportSubscription"
@@ -6888,6 +7171,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#DescribeStacks"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DescribeThemeForStack"
                 },
                 {
                     "target": "com.amazonaws.appstream#DescribeUsageReportSubscriptions"
@@ -6975,6 +7261,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#UpdateStack"
+                },
+                {
+                    "target": "com.amazonaws.appstream#UpdateThemeForStack"
                 }
             ],
             "traits": {
@@ -9133,6 +9422,180 @@
                 }
             }
         },
+        "com.amazonaws.appstream#Theme": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stack that has the custom branding theme.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.appstream#ThemeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the theme.</p>"
+                    }
+                },
+                "ThemeTitleText": {
+                    "target": "com.amazonaws.appstream#ThemeTitleText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The browser tab page title.</p>"
+                    }
+                },
+                "ThemeStyling": {
+                    "target": "com.amazonaws.appstream#ThemeStyling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for the website links, text, buttons, and catalog page background.</p>"
+                    }
+                },
+                "ThemeFooterLinks": {
+                    "target": "com.amazonaws.appstream#ThemeFooterLinks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The website links that display in the catalog page footer.</p>"
+                    }
+                },
+                "ThemeOrganizationLogoURL": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the logo that displays in the catalog page header.</p>"
+                    }
+                },
+                "ThemeFaviconURL": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the icon that displays at the top of a user's browser tab during streaming sessions.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the theme was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom branding theme, which might include a custom logo, website links, and other branding to display to users.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ThemeAttribute": {
+            "type": "enum",
+            "members": {
+                "FOOTER_LINKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOOTER_LINKS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#ThemeAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ThemeAttribute"
+            }
+        },
+        "com.amazonaws.appstream#ThemeFooterLink": {
+            "type": "structure",
+            "members": {
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#ThemeFooterLinkDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the websites that display in the catalog page footer.</p>"
+                    }
+                },
+                "FooterLinkURL": {
+                    "target": "com.amazonaws.appstream#ThemeFooterLinkURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the websites that display in the catalog page footer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The website links that display in the catalog page footer.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ThemeFooterLinkDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^[-@./#&+\\w\\s]*$"
+            }
+        },
+        "com.amazonaws.appstream#ThemeFooterLinkURL": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.appstream#ThemeFooterLinks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ThemeFooterLink"
+            }
+        },
+        "com.amazonaws.appstream#ThemeState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#ThemeStyling": {
+            "type": "enum",
+            "members": {
+                "LIGHT_BLUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIGHT_BLUE"
+                    }
+                },
+                "BLUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLUE"
+                    }
+                },
+                "PINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PINK"
+                    }
+                },
+                "RED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#ThemeTitleText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^[-@./#&+\\w\\s]*$"
+            }
+        },
         "com.amazonaws.appstream#Timestamp": {
             "type": "timestamp"
         },
@@ -9967,6 +10430,110 @@
                     "target": "com.amazonaws.appstream#Stack",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the stack.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#UpdateThemeForStack": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#UpdateThemeForStackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#UpdateThemeForStackResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates custom branding that customizes the appearance of the streaming application catalog page.</p>"
+            }
+        },
+        "com.amazonaws.appstream#UpdateThemeForStackRequest": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the stack for the theme.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FooterLinks": {
+                    "target": "com.amazonaws.appstream#ThemeFooterLinks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The links that are displayed in the footer of the streaming application catalog page. These links are helpful resources for users, such as the organization's IT support and product marketing sites.</p>"
+                    }
+                },
+                "TitleText": {
+                    "target": "com.amazonaws.appstream#ThemeTitleText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title that is displayed at the top of the browser tab during users' application streaming sessions.</p>"
+                    }
+                },
+                "ThemeStyling": {
+                    "target": "com.amazonaws.appstream#ThemeStyling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color theme that is applied to website links, text, and buttons. These colors are also applied as accents in the background for the streaming application catalog page.</p>"
+                    }
+                },
+                "OrganizationLogoS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organization logo that appears on the streaming application catalog page.</p>"
+                    }
+                },
+                "FaviconS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the favicon. The favicon enables users to recognize their application streaming site in a browser full of tabs or bookmarks. It is displayed at the top of the browser tab for the application streaming site during users' streaming sessions.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.appstream#ThemeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether custom branding should be applied to catalog page or not.</p>"
+                    }
+                },
+                "AttributesToDelete": {
+                    "target": "com.amazonaws.appstream#ThemeAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#UpdateThemeForStackResult": {
+            "type": "structure",
+            "members": {
+                "Theme": {
+                    "target": "com.amazonaws.appstream#Theme",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The theme object that contains the metadata of the custom branding.</p>"
                     }
                 }
             },
