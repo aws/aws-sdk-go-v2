@@ -1,3 +1,7 @@
+# v1.38.0 (2024-08-13)
+
+* **Feature**: This release includes following new APIs: CreateThemeForStack, DescribeThemeForStack, UpdateThemeForStack, DeleteThemeForStack to support custom branding programmatically.
+
 # v1.37.0 (2024-07-30)
 
 * **Feature**: Added support for Red Hat Enterprise Linux 8 on Amazon AppStream 2.0

@@ -1,8 +1,0 @@
-{
-    "id": "6630798b-26b7-4248-9f23-39f1d776a2a5",
-    "type": "feature",
-    "description": "This release includes following new APIs: CreateThemeForStack, DescribeThemeForStack, UpdateThemeForStack, DeleteThemeForStack to support custom branding programmatically.",
-    "modules": [
-        "service/appstream"
-    ]
-}

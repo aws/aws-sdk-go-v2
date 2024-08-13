@@ -1,3 +1,17 @@
+# Release (2024-08-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.24.0](service/amplify/CHANGELOG.md#v1240-2024-08-13)
+  * **Feature**: Add a new field "cacheConfig" that enables users to configure the CDN cache settings for an App
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.38.0](service/appstream/CHANGELOG.md#v1380-2024-08-13)
+  * **Feature**: This release includes following new APIs: CreateThemeForStack, DescribeThemeForStack, UpdateThemeForStack, DeleteThemeForStack to support custom branding programmatically.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.27.0](service/fis/CHANGELOG.md#v1270-2024-08-13)
+  * **Feature**: This release adds support for additional error information on experiment failure. It adds the error code, location, and account id on relevant failures to the GetExperiment and ListExperiment API responses.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.94.0](service/glue/CHANGELOG.md#v1940-2024-08-13)
+  * **Feature**: Add AttributesToGet parameter support for Glue GetTables
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.11.0](service/neptunegraph/CHANGELOG.md#v1110-2024-08-13)
+  * **Feature**: Amazon Neptune Analytics provides a new option for customers to load data into a graph using the RDF (Resource Description Framework) NTRIPLES format. When loading NTRIPLES files, use the value `convertToIri` for the `blankNodeHandling` parameter.
+
 # Release (2024-08-12)
 
 ## Module Highlights

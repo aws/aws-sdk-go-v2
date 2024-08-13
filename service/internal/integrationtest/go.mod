@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.26.3
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.37.0
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.44.4
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/batch v1.43.0
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.24.3
-	github.com/aws/aws-sdk-go-v2/service/glue v1.93.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.94.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.23.3

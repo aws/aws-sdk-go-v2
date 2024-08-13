@@ -1,8 +1,0 @@
-{
-    "id": "4f8a58e2-21c1-4f60-8c0d-607a8dcfdd2d",
-    "type": "feature",
-    "description": "Add AttributesToGet parameter support for Glue GetTables",
-    "modules": [
-        "service/glue"
-    ]
-}

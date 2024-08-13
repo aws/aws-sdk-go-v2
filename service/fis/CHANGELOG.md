@@ -1,3 +1,7 @@
+# v1.27.0 (2024-08-13)
+
+* **Feature**: This release adds support for additional error information on experiment failure. It adds the error code, location, and account id on relevant failures to the GetExperiment and ListExperiment API responses.
+
 # v1.26.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions
