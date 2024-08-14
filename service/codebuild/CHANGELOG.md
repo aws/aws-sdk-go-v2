@@ -1,3 +1,7 @@
+# v1.41.0 (2024-08-14)
+
+* **Feature**: AWS CodeBuild now supports using Secrets Manager to store git credentials and using multiple source credentials in a single project.
+
 # v1.40.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

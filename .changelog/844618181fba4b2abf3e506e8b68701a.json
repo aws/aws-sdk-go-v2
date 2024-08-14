@@ -1,8 +1,0 @@
-{
-    "id": "84461818-1fba-4b2a-bf3e-506e8b68701a",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports using Secrets Manager to store git credentials and using multiple source credentials in a single project.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

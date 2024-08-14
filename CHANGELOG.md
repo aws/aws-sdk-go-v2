@@ -1,3 +1,9 @@
+# Release (2024-08-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.41.0](service/codebuild/CHANGELOG.md#v1410-2024-08-14)
+  * **Feature**: AWS CodeBuild now supports using Secrets Manager to store git credentials and using multiple source credentials in a single project.
+
 # Release (2024-08-13)
 
 ## Module Highlights
