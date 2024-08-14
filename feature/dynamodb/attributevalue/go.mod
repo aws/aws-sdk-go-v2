@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue
 
-go 1.20
+go 1.21
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.3
@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.22.3
 )
 
-require github.com/aws/smithy-go v1.20.3 // indirect
+require github.com/aws/smithy-go v1.20.4 // indirect
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 

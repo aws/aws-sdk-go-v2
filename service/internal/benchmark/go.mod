@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/service/internal/benchmark
 
-go 1.20
+go 1.21
 
 require (
 	github.com/aws/aws-sdk-go v1.44.28
@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.22.3
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.58.3
 	github.com/aws/aws-sdk-go-v2/service/schemas v1.26.3
-	github.com/aws/smithy-go v1.20.3
+	github.com/aws/smithy-go v1.20.4
 )
 
 require (
