@@ -9141,6 +9141,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RELEASE_NAME"
                     }
+                },
+                "REPOSITORY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPOSITORY_NAME"
+                    }
                 }
             }
         },
