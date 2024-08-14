@@ -1822,9 +1822,6 @@ type ProjectSource struct {
 
 	// Information about the authorization settings for CodeBuild to access the source
 	// code to be built.
-	//
-	// This information is for the CodeBuild console's use only. Your code should not
-	// get or set this information directly.
 	Auth *SourceAuth
 
 	// Contains information that defines how the build project reports the build
@@ -2328,12 +2325,10 @@ type ScopeConfiguration struct {
 
 // Information about the authorization settings for CodeBuild to access the source
 // code to be built.
-//
-// This information is for the CodeBuild console's use only. Your code should not
-// get or set this information directly.
 type SourceAuth struct {
 
-	// The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.
+	// The authorization type to use. Valid options are OAUTH, CODECONNECTIONS, or
+	// SECRETS_MANAGER.
 	//
 	// This member is required.
 	Type SourceAuthType
@@ -2353,11 +2348,10 @@ type SourceCredentialsInfo struct {
 	Arn *string
 
 	//  The type of authentication used by the credentials. Valid options are OAUTH,
-	// BASIC_AUTH, PERSONAL_ACCESS_TOKEN, or CODECONNECTIONS.
+	// BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER.
 	AuthType AuthType
 
-	// The connection ARN if your serverType type is GITLAB or GITLAB_SELF_MANAGED and
-	// your authType is CODECONNECTIONS.
+	// The connection ARN if your authType is CODECONNECTIONS or SECRETS_MANAGER.
 	Resource *string
 
 	//  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE,

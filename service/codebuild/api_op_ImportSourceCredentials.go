@@ -13,7 +13,8 @@ import (
 
 //	Imports the source repository credentials for an CodeBuild project that has
 //
-// its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.
+// its source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self
+// Managed, or Bitbucket repository.
 func (c *Client) ImportSourceCredentials(ctx context.Context, params *ImportSourceCredentialsInput, optFns ...func(*Options)) (*ImportSourceCredentialsOutput, error) {
 	if params == nil {
 		params = &ImportSourceCredentialsInput{}
@@ -33,8 +34,7 @@ type ImportSourceCredentialsInput struct {
 
 	//  The type of authentication used to connect to a GitHub, GitHub Enterprise,
 	// GitLab, GitLab Self Managed, or Bitbucket repository. An OAUTH connection is not
-	// supported by the API and must be created using the CodeBuild console. Note that
-	// CODECONNECTIONS is only valid for GitLab and GitLab Self Managed.
+	// supported by the API and must be created using the CodeBuild console.
 	//
 	// This member is required.
 	AuthType types.AuthType
@@ -46,7 +46,8 @@ type ImportSourceCredentialsInput struct {
 
 	//  For GitHub or GitHub Enterprise, this is the personal access token. For
 	// Bitbucket, this is either the access token or the app password. For the authType
-	// CODECONNECTIONS, this is the connectionArn .
+	// CODECONNECTIONS, this is the connectionArn . For the authType SECRETS_MANAGER,
+	// this is the secretArn .
 	//
 	// This member is required.
 	Token *string

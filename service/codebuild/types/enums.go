@@ -69,6 +69,7 @@ const (
 	AuthTypeBasicAuth           AuthType = "BASIC_AUTH"
 	AuthTypePersonalAccessToken AuthType = "PERSONAL_ACCESS_TOKEN"
 	AuthTypeCodeconnections     AuthType = "CODECONNECTIONS"
+	AuthTypeSecretsManager      AuthType = "SECRETS_MANAGER"
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
@@ -81,6 +82,7 @@ func (AuthType) Values() []AuthType {
 		"BASIC_AUTH",
 		"PERSONAL_ACCESS_TOKEN",
 		"CODECONNECTIONS",
+		"SECRETS_MANAGER",
 	}
 }
 
@@ -876,6 +878,7 @@ type SourceAuthType string
 const (
 	SourceAuthTypeOauth           SourceAuthType = "OAUTH"
 	SourceAuthTypeCodeconnections SourceAuthType = "CODECONNECTIONS"
+	SourceAuthTypeSecretsManager  SourceAuthType = "SECRETS_MANAGER"
 )
 
 // Values returns all known values for SourceAuthType. Note that this can be
@@ -886,6 +889,7 @@ func (SourceAuthType) Values() []SourceAuthType {
 	return []SourceAuthType{
 		"OAUTH",
 		"CODECONNECTIONS",
+		"SECRETS_MANAGER",
 	}
 }
 
