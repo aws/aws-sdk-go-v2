@@ -124,6 +124,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CODECONNECTIONS"
                     }
+                },
+                "SECRETS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECRETS_MANAGER"
+                    }
                 }
             }
         },
@@ -4551,7 +4557,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Imports the source repository credentials for an CodeBuild project that has its\n            source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. </p>"
+                "smithy.api#documentation": "<p> Imports the source repository credentials for an CodeBuild project that has its\n            source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. </p>"
             }
         },
         "com.amazonaws.codebuild#ImportSourceCredentialsInput": {
@@ -4566,7 +4572,7 @@
                 "token": {
                     "target": "com.amazonaws.codebuild#SensitiveNonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,\n            this is either the access token or the app password. For the <code>authType</code> CODECONNECTIONS, \n            this is the <code>connectionArn</code>.</p>",
+                        "smithy.api#documentation": "<p> For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,\n            this is either the access token or the app password. For the <code>authType</code> CODECONNECTIONS, \n            this is the <code>connectionArn</code>. For the <code>authType</code> SECRETS_MANAGER, this is the <code>secretArn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4580,7 +4586,7 @@
                 "authType": {
                     "target": "com.amazonaws.codebuild#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or\n            Bitbucket repository. An OAUTH connection is not supported by the API and must be\n            created using the CodeBuild console. Note that CODECONNECTIONS is only valid for \n            GitLab and GitLab Self Managed.</p>",
+                        "smithy.api#documentation": "<p> The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or\n            Bitbucket repository. An OAUTH connection is not supported by the API and must be\n            created using the CodeBuild console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6437,7 +6443,7 @@
                 "auth": {
                     "target": "com.amazonaws.codebuild#SourceAuth",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the authorization settings for CodeBuild to access the source code to be\n            built.</p>\n         <p>This information is for the CodeBuild console's use only. Your code should not get or set\n            this information directly.</p>"
+                        "smithy.api#documentation": "<p>Information about the authorization settings for CodeBuild to access the source code to be\n            built.</p>"
                     }
                 },
                 "reportBuildStatus": {
@@ -7543,7 +7549,7 @@
                 "type": {
                     "target": "com.amazonaws.codebuild#SourceAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.</p>",
+                        "smithy.api#documentation": "<p>The authorization type to use. Valid options are OAUTH, CODECONNECTIONS, or SECRETS_MANAGER.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7555,7 +7561,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the authorization settings for CodeBuild to access the source code to be\n            built.</p>\n         <p>This information is for the CodeBuild console's use only. Your code should not get or set\n            this information directly.</p>"
+                "smithy.api#documentation": "<p>Information about the authorization settings for CodeBuild to access the source code to be\n            built.</p>"
             }
         },
         "com.amazonaws.codebuild#SourceAuthType": {
@@ -7571,6 +7577,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CODECONNECTIONS"
+                    }
+                },
+                "SECRETS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECRETS_MANAGER"
                     }
                 }
             }
@@ -7593,13 +7605,13 @@
                 "authType": {
                     "target": "com.amazonaws.codebuild#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of authentication used by the credentials. Valid options are OAUTH,\n            BASIC_AUTH, PERSONAL_ACCESS_TOKEN, or CODECONNECTIONS. </p>"
+                        "smithy.api#documentation": "<p> The type of authentication used by the credentials. Valid options are OAUTH,\n            BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. </p>"
                     }
                 },
                 "resource": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connection ARN if your serverType type is GITLAB or GITLAB_SELF_MANAGED and your authType is CODECONNECTIONS.</p>"
+                        "smithy.api#documentation": "<p>The connection ARN if your authType is CODECONNECTIONS or SECRETS_MANAGER.</p>"
                     }
                 }
             },
