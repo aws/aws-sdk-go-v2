@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.51.4
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.45.0
-	github.com/aws/smithy-go v1.20.3
+	github.com/aws/smithy-go v1.20.4
 )
 
 require (
@@ -105,7 +105,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 
-go 1.20
+go 1.21
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 

@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression
 
-go 1.20
+go 1.21
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.3
@@ -14,7 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.22.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.16 // indirect
-	github.com/aws/smithy-go v1.20.3 // indirect
+	github.com/aws/smithy-go v1.20.4 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

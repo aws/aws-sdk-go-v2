@@ -1,6 +1,6 @@
 module github.com/aws/aws-sdk-go-v2/service/s3
 
-go 1.20
+go 1.21
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.3
@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.3.17
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.17
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.17.15
-	github.com/aws/smithy-go v1.20.3
+	github.com/aws/smithy-go v1.20.4
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
