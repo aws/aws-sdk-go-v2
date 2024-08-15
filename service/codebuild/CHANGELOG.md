@@ -1,3 +1,8 @@
+# v1.41.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2024-08-14)
 
 * **Feature**: AWS CodeBuild now supports using Secrets Manager to store git credentials and using multiple source credentials in a single project.

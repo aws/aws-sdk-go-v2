@@ -1,3 +1,8 @@
+# v1.40.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2024-07-24)
 
 * **Feature**: Adds support for creating SiteWise Edge gateways that run on a Siemens Industrial Edge Device.

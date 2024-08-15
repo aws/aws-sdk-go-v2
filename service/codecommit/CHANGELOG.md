@@ -1,3 +1,8 @@
+# v1.25.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2024-07-25)
 
 * **Feature**: CreateRepository API now throws OperationNotAllowedException when the account has been restricted from creating a repository.

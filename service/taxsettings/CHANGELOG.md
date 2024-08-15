@@ -1,3 +1,8 @@
+# v1.3.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2024-07-18)
 
 * **Feature**: Set default endpoint for aws partition. Requests from all regions in aws partition will be forward to us-east-1 endpoint.

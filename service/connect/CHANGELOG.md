@@ -1,3 +1,8 @@
+# v1.107.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.107.0 (2024-08-09)
 
 * **Feature**: This release supports adding RoutingCriteria via UpdateContactRoutingData public API.

@@ -1,3 +1,8 @@
+# v1.27.6 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.5 (2024-08-05)
 
 * **Documentation**: Added a description for the Dimension db.sql.tokenized_id on the DimensionGroup data type page.

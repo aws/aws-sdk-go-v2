@@ -1,3 +1,19 @@
+# Release (2024-08-15)
+
+## General Highlights
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.37.0](service/docdb/CHANGELOG.md#v1370-2024-08-15)
+  * **Feature**: This release adds Global Cluster Failover capability which enables you to change your global cluster's primary AWS region, the region that serves writes, during a regional outage. Performing a failover action preserves your Global Cluster setup.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.45.0](service/ecs/CHANGELOG.md#v1450-2024-08-15)
+  * **Feature**: This release introduces a new ContainerDefinition configuration to support the customer-managed keys for ECS container restart feature.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.35.0](service/iam/CHANGELOG.md#v1350-2024-08-15)
+  * **Feature**: Make the LastUsedDate field in the GetAccessKeyLastUsed response optional. This may break customers who only call the API for access keys with a valid LastUsedDate. This fixes a deserialization issue for access keys without a LastUsedDate, because the field was marked as required but could be null.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.59.0](service/s3/CHANGELOG.md#v1590-2024-08-15)
+  * **Feature**: Amazon Simple Storage Service / Features  : Adds support for pagination in the S3 ListBuckets API.
+
 # Release (2024-08-14)
 
 ## Module Highlights

@@ -1,3 +1,8 @@
+# v1.45.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2024-08-06)
 
 * **Feature**: Added support for BYOL_GRAPHICS_G4DN_WSP IngestionProcess

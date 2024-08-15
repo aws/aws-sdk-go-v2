@@ -1,3 +1,8 @@
+# v1.34.5 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.4 (2024-07-24)
 
 * **Documentation**: DynamoDB doc only update for July

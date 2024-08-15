@@ -1,8 +1,0 @@
-{
-    "id": "e4c7660f-372d-4a0e-9ce1-7c2e6b9b81ca",
-    "type": "feature",
-    "description": "This release introduces a new ContainerDefinition configuration to support the customer-managed keys for ECS container restart feature.",
-    "modules": [
-        "service/ecs"
-    ]
-}

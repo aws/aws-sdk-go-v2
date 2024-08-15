@@ -1,3 +1,8 @@
+# v1.56.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2024-08-12)
 
 * **Feature**: AWS Elemental MediaLive now supports now supports editing the PID values for a Multiplex.

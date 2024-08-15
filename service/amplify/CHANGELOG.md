@@ -1,3 +1,8 @@
+# v1.24.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2024-08-13)
 
 * **Feature**: Add a new field "cacheConfig" that enables users to configure the CDN cache settings for an App

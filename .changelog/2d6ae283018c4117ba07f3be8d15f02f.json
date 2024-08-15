@@ -1,8 +1,0 @@
-{
-    "id": "2d6ae283-018c-4117-ba07-f3be8d15f02f",
-    "type": "feature",
-    "description": "This release adds Global Cluster Failover capability which enables you to change your global cluster's primary AWS region, the region that serves writes, during a regional outage. Performing a failover action preserves your Global Cluster setup.",
-    "modules": [
-        "service/docdb"
-    ]
-}

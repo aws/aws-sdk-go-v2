@@ -1,3 +1,8 @@
+# v1.43.2 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.1 (2024-08-09)
 
 * **Documentation**: Fixed a description of AdvancedSecurityAdditionalFlows in Amazon Cognito user pool configuration.

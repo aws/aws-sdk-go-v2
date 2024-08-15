@@ -1,3 +1,8 @@
+# v1.37.5 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.4 (2024-08-12)
 
 * **Documentation**: Doc only update for Compute Optimizer that fixes several customer-reported issues relating to ECS finding classifications

@@ -1,3 +1,8 @@
+# v1.21.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2024-07-22)
 
 * **Feature**: Adds dualstack support for Redshift Serverless workgroup.

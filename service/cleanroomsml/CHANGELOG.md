@@ -1,3 +1,8 @@
+# v1.7.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2024-07-23)
 
 * **Feature**: Adds SQL query as the source of seed audience for audience generation job.

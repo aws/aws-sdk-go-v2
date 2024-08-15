@@ -1,3 +1,8 @@
+# v1.94.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.94.0 (2024-08-13)
 
 * **Feature**: Add AttributesToGet parameter support for Glue GetTables

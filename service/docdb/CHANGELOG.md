@@ -1,3 +1,9 @@
+# v1.37.0 (2024-08-15)
+
+* **Feature**: This release adds Global Cluster Failover capability which enables you to change your global cluster's primary AWS region, the region that serves writes, during a regional outage. Performing a failover action preserves your Global Cluster setup.
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

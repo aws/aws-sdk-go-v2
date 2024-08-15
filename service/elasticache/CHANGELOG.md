@@ -1,3 +1,8 @@
+# v1.40.6 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.5 (2024-07-30)
 
 * **Documentation**: Doc only update for changes to deletion API.

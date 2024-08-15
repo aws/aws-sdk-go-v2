@@ -1,3 +1,8 @@
+# v1.29.5 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.4 (2024-08-12)
 
 * **Documentation**: Updating documentation for OEMEphemeris to link to AWS Ground Station User Guide

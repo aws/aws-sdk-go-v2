@@ -1,3 +1,9 @@
+# v1.45.0 (2024-08-15)
+
+* **Feature**: This release introduces a new ContainerDefinition configuration to support the customer-managed keys for ECS container restart feature.
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.3 (2024-07-10.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

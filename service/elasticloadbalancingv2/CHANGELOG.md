@@ -1,3 +1,8 @@
+# v1.34.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2024-07-25)
 
 * **Feature**: This release adds support for sharing trust stores across accounts and organizations through integration with AWS Resource Access Manager.

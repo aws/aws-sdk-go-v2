@@ -1,3 +1,8 @@
+# v1.25.5 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.4 (2024-07-18)
 
 * **Documentation**: Doc-only update for TimestreamQuery. Added guidance about the accepted valid value for the QueryPricingModel parameter.

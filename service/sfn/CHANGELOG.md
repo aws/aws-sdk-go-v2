@@ -1,3 +1,8 @@
+# v1.30.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2024-07-25)
 
 * **Feature**: This release adds support to customer managed KMS key encryption in AWS Step Functions.

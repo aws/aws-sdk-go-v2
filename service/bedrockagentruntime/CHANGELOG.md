@@ -1,3 +1,8 @@
+# v1.16.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2024-08-06)
 
 * **Feature**: Introduce model invocation output traces for orchestration traces, which contain the model's raw response and usage.

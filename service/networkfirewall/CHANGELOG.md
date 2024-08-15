@@ -1,3 +1,8 @@
+# v1.41.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2024-07-25)
 
 * **Feature**: You can now log events that are related to TLS inspection, in addition to the existing alert and flow logging.

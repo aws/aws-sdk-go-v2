@@ -1,3 +1,8 @@
+# v1.16.5 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.4 (2024-08-01)
 
 * **Documentation**: Updated Control Tower service documentation for controlcatalog control ARN support with existing Control Tower public APIs

@@ -1,3 +1,8 @@
+# v1.12.1 (2024-08-15)
+
+* **Dependency Update**: Bump minimum Go version to 1.21.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-07-12)
 
 * **Feature**: Adds the option to subscribe to get notifications when a zonal autoshift occurs in a region.
