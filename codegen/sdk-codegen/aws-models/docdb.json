@@ -246,6 +246,9 @@
                     "target": "com.amazonaws.docdb#FailoverDBCluster"
                 },
                 {
+                    "target": "com.amazonaws.docdb#FailoverGlobalCluster"
+                },
+                {
                     "target": "com.amazonaws.docdb#ListTagsForResource"
                 },
                 {
@@ -2810,6 +2813,16 @@
                 "smithy.api#documentation": "<p>You already have a cluster with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.docdb#DBClusterIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z][0-9A-Za-z-:._]*$"
             }
         },
         "com.amazonaws.docdb#DBClusterList": {
@@ -5765,6 +5778,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.docdb#FailoverGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdb#FailoverGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.docdb#FailoverGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdb#DBClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#InvalidDBClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Promotes the specified secondary DB cluster to be the primary DB cluster in the global cluster when failing over a global cluster occurs.</p>\n         <p>Use this operation to respond to an unplanned event, such as a regional disaster in the primary region. \n            Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred. \n            However, the recovery process that promotes a DB instance on the chosen seconday DB cluster to be the primary writer DB instance guarantees that the data is in a transactionally consistent state.</p>"
+            }
+        },
+        "com.amazonaws.docdb#FailoverGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.docdb#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DocumentDB global cluster to apply this operation. \n            The identifier is the unique key assigned by the user when the cluster is created. \n            In other words, it's the name of the global cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing global cluster.</p>\n            </li>\n            <li>\n               <p>Minimum length of 1. Maximum length of 255.</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetDbClusterIdentifier": {
+                    "target": "com.amazonaws.docdb#DBClusterIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster. \n            Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing secondary cluster.</p>\n            </li>\n            <li>\n               <p>Minimum length of 1. Maximum length of 255.</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowDataLoss": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to allow data loss for this global cluster operation. Allowing data loss triggers a global failover operation.</p>\n         <p>If you don't specify <code>AllowDataLoss</code>, the global cluster operation defaults to a switchover.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be specified together with the <code>Switchover</code> parameter.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Switchover": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to switch over this global database cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdb#FailoverGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.docdb#GlobalCluster"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.docdb#Filter": {
             "type": "structure",
             "members": {
@@ -8443,7 +8529,7 @@
                     }
                 },
                 "TargetDbClusterIdentifier": {
-                    "target": "com.amazonaws.docdb#String",
+                    "target": "com.amazonaws.docdb#DBClusterIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster. \n            Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing secondary cluster.</p>\n            </li>\n            <li>\n               <p>Minimum length of 1. Maximum length of 255.</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>\n         </p>",
