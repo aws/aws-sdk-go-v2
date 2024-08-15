@@ -3580,6 +3580,13 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		}
 	}
 
+	if v.RestartPolicy != nil {
+		ok := object.Key("restartPolicy")
+		if err := awsAwsjson11_serializeDocumentContainerRestartPolicy(v.RestartPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Secrets != nil {
 		ok := object.Key("secrets")
 		if err := awsAwsjson11_serializeDocumentSecretList(v.Secrets, ok); err != nil {
@@ -3750,6 +3757,30 @@ func awsAwsjson11_serializeDocumentContainerOverrides(v []types.ContainerOverrid
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentContainerRestartPolicy(v *types.ContainerRestartPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.IgnoredExitCodes != nil {
+		ok := object.Key("ignoredExitCodes")
+		if err := awsAwsjson11_serializeDocumentIntegerList(v.IgnoredExitCodes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RestartAttemptPeriod != nil {
+		ok := object.Key("restartAttemptPeriod")
+		ok.Integer(*v.RestartAttemptPeriod)
+	}
+
 	return nil
 }
 
@@ -4391,6 +4422,17 @@ func awsAwsjson11_serializeDocumentInferenceAccelerators(v []types.InferenceAcce
 		if err := awsAwsjson11_serializeDocumentInferenceAccelerator(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIntegerList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
 	}
 	return nil
 }

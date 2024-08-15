@@ -19,8 +19,8 @@ import (
 // before authorization. When a task definition revision is not specified,
 // authorization will occur using the latest revision of a task definition.
 //
-// For information about the maximum number of task sets and otther quotas, see [Amazon ECS service quotas]
-// in the Amazon Elastic Container Service Developer Guide.
+// For information about the maximum number of task sets and other quotas, see [Amazon ECS service quotas] in
+// the Amazon Elastic Container Service Developer Guide.
 //
 // [Amazon ECS deployment types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
 // [Amazon ECS service quotas]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html

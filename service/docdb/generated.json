@@ -49,6 +49,7 @@
         "api_op_DescribeOrderableDBInstanceOptions.go",
         "api_op_DescribePendingMaintenanceActions.go",
         "api_op_FailoverDBCluster.go",
+        "api_op_FailoverGlobalCluster.go",
         "api_op_ListTagsForResource.go",
         "api_op_ModifyDBCluster.go",
         "api_op_ModifyDBClusterParameterGroup.go",

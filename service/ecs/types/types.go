@@ -159,7 +159,8 @@ type AutoScalingGroupProviderUpdate struct {
 
 // An object representing the networking details for a task or service. For
 // example
-// awsvpcConfiguration={subnets=["subnet-12344321"],securityGroups=["sg-12344321"]}
+// awsVpcConfiguration={subnets=["subnet-12344321"],securityGroups=["sg-12344321"]}
+// .
 type AwsVpcConfiguration struct {
 
 	// The IDs of the subnets associated with the task or service. There's a limit of
@@ -630,18 +631,14 @@ type Container struct {
 // containers that are launched as part of a task.
 type ContainerDefinition struct {
 
-	// The command that's passed to the container. This parameter maps to Cmd in the [Create a container]
-	// section of the [Docker Remote API]and the COMMAND parameter to [docker run]. For more information, see [https://docs.docker.com/engine/reference/builder/#cmd]. If
+	// The command that's passed to the container. This parameter maps to Cmd in the
+	// docker create-container command and the COMMAND parameter to docker run. If
 	// there are multiple arguments, each argument is a separated string in the array.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
-	// [https://docs.docker.com/engine/reference/builder/#cmd]: https://docs.docker.com/engine/reference/builder/#cmd
 	Command []string
 
 	// The number of cpu units reserved for the container. This parameter maps to
-	// CpuShares in the [Create a container] section of the [Docker Remote API] and the --cpu-shares option to [docker run].
+	// CpuShares in the docker create-container commandand the --cpu-shares option to
+	// docker run.
 	//
 	// This field is optional for tasks using the Fargate launch type, and the only
 	// requirement is that the total amount of CPU reserved for all containers within a
@@ -664,11 +661,12 @@ type ContainerDefinition struct {
 	//
 	// On Linux container instances, the Docker daemon on the container instance uses
 	// the CPU value to calculate the relative CPU share ratios for running containers.
-	// For more information, see [CPU share constraint]in the Docker documentation. The minimum valid CPU
-	// share value that the Linux kernel allows is 2. However, the CPU parameter isn't
-	// required, and you can use CPU values below 2 in your container definitions. For
-	// CPU values below 2 (including null), the behavior varies based on your Amazon
-	// ECS container agent version:
+	// The minimum valid CPU share value that the Linux kernel allows is 2, and the
+	// maximum valid CPU share value that the Linux kernel allows is 262144. However,
+	// the CPU parameter isn't required, and you can use CPU values below 2 or above
+	// 262144 in your container definitions. For CPU values below 2 (including null) or
+	// above 262144, the behavior varies based on your Amazon ECS container agent
+	// version:
 	//
 	//   - Agent versions less than or equal to 1.1.0: Null and zero CPU values are
 	//   passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU
@@ -678,16 +676,15 @@ type ContainerDefinition struct {
 	//   - Agent versions greater than or equal to 1.2.0: Null, zero, and CPU values
 	//   of 1 are passed to Docker as 2.
 	//
+	//   - Agent versions greater than or equal to 1.84.0: CPU values greater than 256
+	//   vCPU are passed to Docker as 256, which is equivalent to 262144 CPU shares.
+	//
 	// On Windows container instances, the CPU limit is enforced as an absolute limit,
 	// or a quota. Windows containers only have access to the specified amount of CPU
 	// that's described in the task definition. A null or zero CPU value is passed to
 	// Docker as 0 , which Windows interprets as 1% of one CPU.
 	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [CPU share constraint]: https://docs.docker.com/engine/reference/run/#cpu-share-constraint
 	// [Amazon EC2 Instances]: http://aws.amazon.com/ec2/instance-types/
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Cpu int32
 
 	// A list of ARNs in SSM or Amazon S3 to a credential spec ( CredSpec ) file that
@@ -753,50 +750,36 @@ type ContainerDefinition struct {
 	DependsOn []ContainerDependency
 
 	// When this parameter is true, networking is off within the container. This
-	// parameter maps to NetworkDisabled in the [Create a container] section of the [Docker Remote API].
+	// parameter maps to NetworkDisabled in the docker create-container command.
 	//
 	// This parameter is not supported for Windows containers.
-	//
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	DisableNetworking *bool
 
 	// A list of DNS search domains that are presented to the container. This
-	// parameter maps to DnsSearch in the [Create a container] section of the [Docker Remote API] and the --dns-search option
-	// to [docker run].
+	// parameter maps to DnsSearch in the docker create-container command and the
+	// --dns-search option to docker run.
 	//
 	// This parameter is not supported for Windows containers.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	DnsSearchDomains []string
 
 	// A list of DNS servers that are presented to the container. This parameter maps
-	// to Dns in the [Create a container] section of the [Docker Remote API] and the --dns option to [docker run].
+	// to Dns in the the docker create-container command and the --dns option to
+	// docker run.
 	//
 	// This parameter is not supported for Windows containers.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	DnsServers []string
 
 	// A key/value map of labels to add to the container. This parameter maps to Labels
-	// in the [Create a container]section of the [Docker Remote API] and the --label option to [docker run]. This parameter requires
-	// version 1.18 of the Docker Remote API or greater on your container instance. To
-	// check the Docker Remote API version on your container instance, log in to your
-	// container instance and run the following command: sudo docker version --format
-	// '{{.Server.APIVersion}}'
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// in the docker create-container command and the --label option to docker run.
+	// This parameter requires version 1.18 of the Docker Remote API or greater on your
+	// container instance. To check the Docker Remote API version on your container
+	// instance, log in to your container instance and run the following command: sudo
+	// docker version --format '{{.Server.APIVersion}}'
 	DockerLabels map[string]string
 
 	// A list of strings to provide custom configuration for multiple security
-	// systems. For more information about valid values, see [Docker Run Security Configuration]. This field isn't valid
-	// for containers in tasks using the Fargate launch type.
+	// systems. This field isn't valid for containers in tasks using the Fargate launch
+	// type.
 	//
 	// For Linux tasks on EC2, this parameter can be used to reference custom labels
 	// for SELinux and AppArmor multi-level security systems.
@@ -805,8 +788,8 @@ type ContainerDefinition struct {
 	// file that configures a container for Active Directory authentication. For more
 	// information, see [Using gMSAs for Windows Containers]and [Using gMSAs for Linux Containers] in the Amazon Elastic Container Service Developer Guide.
 	//
-	// This parameter maps to SecurityOpt in the [Create a container] section of the [Docker Remote API] and the
-	// --security-opt option to [docker run].
+	// This parameter maps to SecurityOpt in the docker create-container command and
+	// the --security-opt option to docker run.
 	//
 	// The Amazon ECS container agent running on a container instance must register
 	// with the ECS_SELINUX_CAPABLE=true or ECS_APPARMOR_CAPABLE=true environment
@@ -814,17 +797,11 @@ type ContainerDefinition struct {
 	// options. For more information, see [Amazon ECS Container Agent Configuration]in the Amazon Elastic Container Service
 	// Developer Guide.
 	//
-	// For more information about valid values, see [Docker Run Security Configuration].
-	//
 	// Valid values: "no-new-privileges" | "apparmor:PROFILE" | "label:value" |
 	// "credentialspec:CredentialSpecFilePath"
 	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Docker Run Security Configuration]: https://docs.docker.com/engine/reference/run/#security-configuration
 	// [Using gMSAs for Windows Containers]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
 	// [Using gMSAs for Linux Containers]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	// [Amazon ECS Container Agent Configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
 	DockerSecurityOptions []string
 
@@ -834,33 +811,24 @@ type ContainerDefinition struct {
 	// instead.
 	//
 	// The entry point that's passed to the container. This parameter maps to
-	// Entrypoint in the [Create a container] section of the [Docker Remote API] and the --entrypoint option to [docker run]. For more
-	// information, see [https://docs.docker.com/engine/reference/builder/#entrypoint].
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [https://docs.docker.com/engine/reference/builder/#entrypoint]: https://docs.docker.com/engine/reference/builder/#entrypoint
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// Entrypoint in tthe docker create-container command and the --entrypoint option
+	// to docker run.
 	EntryPoint []string
 
 	// The environment variables to pass to a container. This parameter maps to Env in
-	// the [Create a container]section of the [Docker Remote API] and the --env option to [docker run].
+	// the docker create-container command and the --env option to docker run.
 	//
 	// We don't recommend that you use plaintext environment variables for sensitive
 	// information, such as credential data.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Environment []KeyValuePair
 
 	// A list of files containing the environment variables to pass to a container.
-	// This parameter maps to the --env-file option to [docker run].
+	// This parameter maps to the --env-file option to docker run.
 	//
 	// You can specify up to ten environment files. The file must have a .env file
 	// extension. Each line in an environment file contains an environment variable in
 	// VARIABLE=VALUE format. Lines beginning with # are treated as comments and are
-	// ignored. For more information about the environment variable file syntax, see [Declare default environment variables in file].
+	// ignored.
 	//
 	// If there are environment variables specified using the environment parameter in
 	// a container definition, they take precedence over the variables contained within
@@ -869,8 +837,6 @@ type ContainerDefinition struct {
 	// use unique variable names. For more information, see [Specifying Environment Variables]in the Amazon Elastic
 	// Container Service Developer Guide.
 	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Declare default environment variables in file]: https://docs.docker.com/compose/env-file/
 	// [Specifying Environment Variables]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html
 	EnvironmentFiles []EnvironmentFile
 
@@ -890,15 +856,11 @@ type ContainerDefinition struct {
 	Essential *bool
 
 	// A list of hostnames and IP address mappings to append to the /etc/hosts file on
-	// the container. This parameter maps to ExtraHosts in the [Create a container] section of the [Docker Remote API] and
-	// the --add-host option to [docker run].
+	// the container. This parameter maps to ExtraHosts in the docker create-container
+	// command and the --add-host option to docker run.
 	//
 	// This parameter isn't supported for Windows containers or tasks that use the
 	// awsvpc network mode.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	ExtraHosts []HostEntry
 
 	// The FireLens configuration for the container. This is used to specify and
@@ -909,22 +871,14 @@ type ContainerDefinition struct {
 	FirelensConfiguration *FirelensConfiguration
 
 	// The container health check command and associated configuration parameters for
-	// the container. This parameter maps to HealthCheck in the [Create a container] section of the [Docker Remote API] and
-	// the HEALTHCHECK parameter of [docker run].
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// the container. This parameter maps to HealthCheck in the docker
+	// create-container command and the HEALTHCHECK parameter of docker run.
 	HealthCheck *HealthCheck
 
-	// The hostname to use for your container. This parameter maps to Hostname in the [Create a container]
-	// section of the [Docker Remote API]and the --hostname option to [docker run].
+	// The hostname to use for your container. This parameter maps to Hostname in
+	// thethe docker create-container command and the --hostname option to docker run.
 	//
 	// The hostname parameter is not supported if you're using the awsvpc network mode.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Hostname *string
 
 	// The image used to start a container. This string is passed directly to the
@@ -932,8 +886,8 @@ type ContainerDefinition struct {
 	// Other repositories are specified with either repository-url/image:tag  or
 	// repository-url/image@digest . Up to 255 letters (uppercase and lowercase),
 	// numbers, hyphens, underscores, colons, periods, forward slashes, and number
-	// signs are allowed. This parameter maps to Image in the [Create a container] section of the [Docker Remote API] and the
-	// IMAGE parameter of [docker run].
+	// signs are allowed. This parameter maps to Image in the docker create-container
+	// command and the IMAGE parameter of docker run.
 	//
 	//   - When a new task starts, the Amazon ECS container agent pulls the latest
 	//   version of the specified image and tag for the container to use. However,
@@ -954,28 +908,19 @@ type ContainerDefinition struct {
 	//
 	//   - Images in other online repositories are qualified further by a domain name
 	//   (for example, quay.io/assemblyline/ubuntu ).
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Image *string
 
 	// When this parameter is true , you can deploy containerized applications that
-	// require stdin or a tty to be allocated. This parameter maps to OpenStdin in the [Create a container]
-	// section of the [Docker Remote API]and the --interactive option to [docker run].
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// require stdin or a tty to be allocated. This parameter maps to OpenStdin in the
+	// docker create-container command and the --interactive option to docker run.
 	Interactive *bool
 
 	// The links parameter allows containers to communicate with each other without
 	// the need for port mappings. This parameter is only supported if the network mode
 	// of a task definition is bridge . The name:internalName construct is analogous
 	// to name:alias in Docker links. Up to 255 letters (uppercase and lowercase),
-	// numbers, underscores, and hyphens are allowed. For more information about
-	// linking Docker containers, go to [Legacy container links]in the Docker documentation. This parameter
-	// maps to Links in the [Create a container] section of the [Docker Remote API] and the --link option to [docker run].
+	// numbers, underscores, and hyphens are allowed.. This parameter maps to Links in
+	// the docker create-container command and the --link option to docker run.
 	//
 	// This parameter is not supported for Windows containers.
 	//
@@ -983,11 +928,6 @@ type ContainerDefinition struct {
 	// communicate with each other without requiring links or host port mappings.
 	// Network isolation is achieved on the container instance using security groups
 	// and VPC settings.
-	//
-	// [Legacy container links]: https://docs.docker.com/network/links/
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Links []string
 
 	// Linux-specific modifications that are applied to the container, such as Linux
@@ -998,14 +938,13 @@ type ContainerDefinition struct {
 
 	// The log configuration specification for the container.
 	//
-	// This parameter maps to LogConfig in the [Create a container] section of the [Docker Remote API] and the --log-driver
-	// option to [docker run]. By default, containers use the same logging driver that the Docker
-	// daemon uses. However the container can use a different logging driver than the
-	// Docker daemon by specifying a log driver with this parameter in the container
-	// definition. To use a different logging driver for a container, the log system
-	// must be configured properly on the container instance (or on a different log
-	// server for remote logging options). For more information about the options for
-	// different supported log drivers, see [Configure logging drivers]in the Docker documentation.
+	// This parameter maps to LogConfig in the docker create-container command and the
+	// --log-driver option to docker run. By default, containers use the same logging
+	// driver that the Docker daemon uses. However the container can use a different
+	// logging driver than the Docker daemon by specifying a log driver with this
+	// parameter in the container definition. To use a different logging driver for a
+	// container, the log system must be configured properly on the container instance
+	// (or on a different log server for remote logging options).
 	//
 	// Amazon ECS currently supports a subset of the logging drivers available to the
 	// Docker daemon (shown in the LogConfigurationdata type). Additional log drivers may be available
@@ -1022,10 +961,6 @@ type ContainerDefinition struct {
 	// that instance can use these log configuration options. For more information, see
 	// [Amazon ECS Container Agent Configuration]in the Amazon Elastic Container Service Developer Guide.
 	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Configure logging drivers]: https://docs.docker.com/engine/admin/logging/overview/
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	// [Amazon ECS Container Agent Configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
 	LogConfiguration *LogConfiguration
 
@@ -1033,7 +968,7 @@ type ContainerDefinition struct {
 	// attempts to exceed the memory specified here, the container is killed. The total
 	// amount of memory reserved for all containers within a task must be lower than
 	// the task memory value, if one is specified. This parameter maps to Memory in
-	// the [Create a container]section of the [Docker Remote API] and the --memory option to [docker run].
+	// thethe docker create-container command and the --memory option to docker run.
 	//
 	// If using the Fargate launch type, this parameter is optional.
 	//
@@ -1050,10 +985,6 @@ type ContainerDefinition struct {
 	// The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory
 	// for a container. So, don't specify less than 4 MiB of memory for your
 	// containers.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Memory *int32
 
 	// The soft limit (in MiB) of memory to reserve for the container. When system
@@ -1061,8 +992,8 @@ type ContainerDefinition struct {
 	// to this soft limit. However, your container can consume more memory when it
 	// needs to, up to either the hard limit specified with the memory parameter (if
 	// applicable), or all of the available memory on the container instance, whichever
-	// comes first. This parameter maps to MemoryReservation in the [Create a container] section of the [Docker Remote API]
-	// and the --memory-reservation option to [docker run].
+	// comes first. This parameter maps to MemoryReservation in the the docker
+	// create-container command and the --memory-reservation option to docker run.
 	//
 	// If a task-level memory value is not specified, you must specify a non-zero
 	// integer for one or both of memory or memoryReservation in a container
@@ -1084,35 +1015,24 @@ type ContainerDefinition struct {
 	// The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory
 	// for a container. So, don't specify less than 4 MiB of memory for your
 	// containers.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	MemoryReservation *int32
 
 	// The mount points for data volumes in your container.
 	//
-	// This parameter maps to Volumes in the [Create a container] section of the [Docker Remote API] and the --volume option
-	// to [docker run].
+	// This parameter maps to Volumes in the the docker create-container command and
+	// the --volume option to docker run.
 	//
 	// Windows containers can mount whole directories on the same drive as
 	// $env:ProgramData . Windows containers can't mount directories on a different
 	// drive, and mount point can't be across drives.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	MountPoints []MountPoint
 
 	// The name of a container. If you're linking multiple containers together in a
 	// task definition, the name of one container can be entered in the links of
 	// another container to connect the containers. Up to 255 letters (uppercase and
 	// lowercase), numbers, underscores, and hyphens are allowed. This parameter maps
-	// to name in the [Create a container] section of the [Docker Remote API] and the --name option to [docker run].
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// to name in tthe docker create-container command and the --name option to docker
+	// run.
 	Name *string
 
 	// The list of port mappings for the container. Port mappings allow containers to
@@ -1126,50 +1046,35 @@ type ContainerDefinition struct {
 	// There's no loopback for port mappings on Windows, so you can't access a
 	// container's mapped port from the host itself.
 	//
-	// This parameter maps to PortBindings in the [Create a container] section of the [Docker Remote API] and the --publish
-	// option to [docker run]. If the network mode of a task definition is set to none , then you
-	// can't specify port mappings. If the network mode of a task definition is set to
-	// host , then host ports must either be undefined or they must match the container
-	// port in the port mapping.
+	// This parameter maps to PortBindings in the the docker create-container command
+	// and the --publish option to docker run. If the network mode of a task
+	// definition is set to none , then you can't specify port mappings. If the network
+	// mode of a task definition is set to host , then host ports must either be
+	// undefined or they must match the container port in the port mapping.
 	//
 	// After a task reaches the RUNNING status, manual and automatic host and
 	// container port assignments are visible in the Network Bindings section of a
 	// container description for a selected task in the Amazon ECS console. The
 	// assignments are also visible in the networkBindings section DescribeTasks responses.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	PortMappings []PortMapping
 
 	// When this parameter is true, the container is given elevated privileges on the
 	// host container instance (similar to the root user). This parameter maps to
-	// Privileged in the [Create a container] section of the [Docker Remote API] and the --privileged option to [docker run].
+	// Privileged in the the docker create-container command and the --privileged
+	// option to docker run
 	//
 	// This parameter is not supported for Windows containers or tasks run on Fargate.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Privileged *bool
 
 	// When this parameter is true , a TTY is allocated. This parameter maps to Tty in
-	// the [Create a container]section of the [Docker Remote API] and the --tty option to [docker run].
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// tthe docker create-container command and the --tty option to docker run.
 	PseudoTerminal *bool
 
 	// When this parameter is true, the container is given read-only access to its
-	// root file system. This parameter maps to ReadonlyRootfs in the [Create a container] section of the [Docker Remote API]
-	// and the --read-only option to [docker run].
+	// root file system. This parameter maps to ReadonlyRootfs in the docker
+	// create-container command and the --read-only option to docker run.
 	//
 	// This parameter is not supported for Windows containers.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	ReadonlyRootFilesystem *bool
 
 	// The private repository authentication credentials to use.
@@ -1178,6 +1083,13 @@ type ContainerDefinition struct {
 	// The type and amount of a resource to assign to a container. The only supported
 	// resource is a GPU.
 	ResourceRequirements []ResourceRequirement
+
+	// The restart policy for a container. When you set up a restart policy, Amazon
+	// ECS can restart the container without needing to replace the task. For more
+	// information, see [Restart individual containers in Amazon ECS tasks with container restart policies]in the Amazon Elastic Container Service Developer Guide.
+	//
+	// [Restart individual containers in Amazon ECS tasks with container restart policies]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html
+	RestartPolicy *ContainerRestartPolicy
 
 	// The secrets to pass to the container. For more information, see [Specifying Sensitive Data] in the Amazon
 	// Elastic Container Service Developer Guide.
@@ -1213,7 +1125,7 @@ type ContainerDefinition struct {
 	// ecs-init . For more information, see [Amazon ECS-optimized Linux AMI] in the Amazon Elastic Container Service
 	// Developer Guide.
 	//
-	// The valid values are 2-120 seconds.
+	// The valid values for Fargate are 2-120 seconds.
 	//
 	// [Updating the Amazon ECS Container Agent]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
 	// [Amazon ECS-optimized Linux AMI]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
@@ -1255,25 +1167,21 @@ type ContainerDefinition struct {
 	StopTimeout *int32
 
 	// A list of namespaced kernel parameters to set in the container. This parameter
-	// maps to Sysctls in the [Create a container] section of the [Docker Remote API] and the --sysctl option to [docker run]. For
-	// example, you can configure net.ipv4.tcp_keepalive_time setting to maintain
-	// longer lived connections.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// maps to Sysctls in tthe docker create-container command and the --sysctl option
+	// to docker run. For example, you can configure net.ipv4.tcp_keepalive_time
+	// setting to maintain longer lived connections.
 	SystemControls []SystemControl
 
 	// A list of ulimits to set in the container. If a ulimit value is specified in a
 	// task definition, it overrides the default values set by Docker. This parameter
-	// maps to Ulimits in the [Create a container] section of the [Docker Remote API] and the --ulimit option to [docker run]. Valid
-	// naming values are displayed in the Ulimitdata type.
+	// maps to Ulimits in tthe docker create-container command and the --ulimit option
+	// to docker run. Valid naming values are displayed in the Ulimitdata type.
 	//
 	// Amazon ECS tasks hosted on Fargate use the default resource limit values set by
 	// the operating system with the exception of the nofile resource limit parameter
 	// which Fargate overrides. The nofile resource limit sets a restriction on the
 	// number of open files that a container can use. The default nofile soft limit is
-	// 1024 and the default hard limit is 65535 .
+	// 65535 and the default hard limit is 65535 .
 	//
 	// This parameter requires version 1.18 of the Docker Remote API or greater on
 	// your container instance. To check the Docker Remote API version on your
@@ -1281,14 +1189,10 @@ type ContainerDefinition struct {
 	// command: sudo docker version --format '{{.Server.APIVersion}}'
 	//
 	// This parameter is not supported for Windows containers.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Ulimits []Ulimit
 
-	// The user to use inside the container. This parameter maps to User in the [Create a container]
-	// section of the [Docker Remote API]and the --user option to [docker run].
+	// The user to use inside the container. This parameter maps to User in the docker
+	// create-container command and the --user option to docker run.
 	//
 	// When running tasks using the host network mode, don't run containers using the
 	// root user (UID 0). We recommend using a non-root user for better security.
@@ -1309,26 +1213,16 @@ type ContainerDefinition struct {
 	//   - uid:group
 	//
 	// This parameter is not supported for Windows containers.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	User *string
 
 	// Data volumes to mount from another container. This parameter maps to VolumesFrom
-	// in the [Create a container]section of the [Docker Remote API] and the --volumes-from option to [docker run].
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// in tthe docker create-container command and the --volumes-from option to docker
+	// run.
 	VolumesFrom []VolumeFrom
 
 	// The working directory to run commands inside the container in. This parameter
-	// maps to WorkingDir in the [Create a container] section of the [Docker Remote API] and the --workdir option to [docker run].
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// maps to WorkingDir in the docker create-container command and the --workdir
+	// option to docker run.
 	WorkingDirectory *string
 
 	noSmithyDocumentSerde
@@ -1589,6 +1483,37 @@ type ContainerOverride struct {
 	// The type and amount of a resource to assign to a container, instead of the
 	// default value from the task definition. The only supported resource is a GPU.
 	ResourceRequirements []ResourceRequirement
+
+	noSmithyDocumentSerde
+}
+
+// You can enable a restart policy for each container defined in your task
+// definition, to overcome transient failures faster and maintain task
+// availability. When you enable a restart policy for a container, Amazon ECS can
+// restart the container if it exits, without needing to replace the task. For more
+// information, see [Restart individual containers in Amazon ECS tasks with container restart policies]in the Amazon Elastic Container Service Developer Guide.
+//
+// [Restart individual containers in Amazon ECS tasks with container restart policies]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html
+type ContainerRestartPolicy struct {
+
+	// Specifies whether a restart policy is enabled for the container.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// A list of exit codes that Amazon ECS will ignore and not attempt a restart on.
+	// You can specify a maximum of 50 container exit codes. By default, Amazon ECS
+	// does not ignore any exit codes.
+	IgnoredExitCodes []int32
+
+	// A period of time (in seconds) that the container must run for before a restart
+	// can be attempted. A container can be restarted only once every
+	// restartAttemptPeriod seconds. If a container isn't able to run for this time
+	// period and exits early, it will not be restarted. You can set a minimum
+	// restartAttemptPeriod of 60 seconds and a maximum restartAttemptPeriod of 1800
+	// seconds. By default, a container must run for 300 seconds before it can be
+	// restarted.
+	RestartAttemptPeriod *int32
 
 	noSmithyDocumentSerde
 }
@@ -1988,30 +1913,19 @@ type DockerVolumeConfiguration struct {
 	// provided by Docker because it is used for task placement. If the driver was
 	// installed using the Docker plugin CLI, use docker plugin ls to retrieve the
 	// driver name from your container instance. If the driver was installed using
-	// another method, use Docker plugin discovery to retrieve the driver name. For
-	// more information, see [Docker plugin discovery]. This parameter maps to Driver in the [Create a volume] section of the [Docker Remote API]
-	// and the xxdriver option to [docker volume create].
-	//
-	// [Create a volume]: https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
-	// [docker volume create]: https://docs.docker.com/engine/reference/commandline/volume_create/
-	// [Docker plugin discovery]: https://docs.docker.com/engine/extend/plugin_api/#plugin-discovery
+	// another method, use Docker plugin discovery to retrieve the driver name. This
+	// parameter maps to Driver in the docker create-container command and the xxdriver
+	// option to docker volume create.
 	Driver *string
 
 	// A map of Docker driver-specific options passed through. This parameter maps to
-	// DriverOpts in the [Create a volume] section of the [Docker Remote API] and the xxopt option to [docker volume create].
-	//
-	// [Create a volume]: https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
-	// [docker volume create]: https://docs.docker.com/engine/reference/commandline/volume_create/
+	// DriverOpts in the docker create-volume command and the xxopt option to docker
+	// volume create.
 	DriverOpts map[string]string
 
 	// Custom metadata to add to your Docker volume. This parameter maps to Labels in
-	// the [Create a volume]section of the [Docker Remote API] and the xxlabel option to [docker volume create].
-	//
-	// [Create a volume]: https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
-	// [docker volume create]: https://docs.docker.com/engine/reference/commandline/volume_create/
+	// the docker create-container command and the xxlabel option to docker volume
+	// create.
 	Labels map[string]string
 
 	// The scope for the Docker volume that determines its lifecycle. Docker volumes
@@ -2349,7 +2263,7 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // are specified in a container definition override any Docker health checks that
 // exist in the container image (such as those specified in a parent image or from
 // the image's Dockerfile). This configuration maps to the HEALTHCHECK parameter
-// of [docker run].
+// of docker run.
 //
 // The Amazon ECS container agent only monitors and reports on the health checks
 // specified in the task definition. Amazon ECS does not monitor Docker health
@@ -2447,7 +2361,6 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 //   - Container health checks aren't supported for tasks that are part of a
 //     service that's configured to use a Classic Load Balancer.
 //
-// [docker run]: https://docs.docker.com/engine/reference/run/
 // [Updating the Amazon ECS container agent]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
 // [Fargate platform versions]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
 type HealthCheck struct {
@@ -2469,10 +2382,7 @@ type HealthCheck struct {
 	//     CMD-SHELL, curl -f http://localhost/ || exit 1
 	//
 	// An exit code of 0 indicates success, and non-zero exit code indicates failure.
-	// For more information, see HealthCheck in the [Create a container] section of the [Docker Remote API].
-	//
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// For more information, see HealthCheck in tthe docker create-container command
 	//
 	// This member is required.
 	Command []string
@@ -2599,18 +2509,15 @@ type InstanceHealthCheckResult struct {
 }
 
 // The Linux capabilities to add or remove from the default Docker configuration
-// for a container defined in the task definition. For more information about the
-// default capabilities and the non-default available capabilities, see [Runtime privilege and Linux capabilities]in the
-// Docker run reference. For more detailed information about these Linux
-// capabilities, see the [capabilities(7)]Linux manual page.
+// for a container defined in the task definition. For more detailed information
+// about these Linux capabilities, see the [capabilities(7)]Linux manual page.
 //
-// [Runtime privilege and Linux capabilities]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 // [capabilities(7)]: http://man7.org/linux/man-pages/man7/capabilities.7.html
 type KernelCapabilities struct {
 
 	// The Linux capabilities for the container that have been added to the default
-	// configuration provided by Docker. This parameter maps to CapAdd in the [Create a container] section
-	// of the [Docker Remote API]and the --cap-add option to [docker run].
+	// configuration provided by Docker. This parameter maps to CapAdd in the docker
+	// create-container command and the --cap-add option to docker run.
 	//
 	// Tasks launched on Fargate only support adding the SYS_PTRACE kernel capability.
 	//
@@ -2622,15 +2529,11 @@ type KernelCapabilities struct {
 	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
 	// "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" |
 	// "SYSLOG" | "WAKE_ALARM"
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Add []string
 
 	// The Linux capabilities for the container that have been removed from the
-	// default configuration provided by Docker. This parameter maps to CapDrop in the [Create a container]
-	// section of the [Docker Remote API]and the --cap-drop option to [docker run].
+	// default configuration provided by Docker. This parameter maps to CapDrop in the
+	// docker create-container command and the --cap-drop option to docker run.
 	//
 	// Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
 	// "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK"
@@ -2640,10 +2543,6 @@ type KernelCapabilities struct {
 	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
 	// "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" |
 	// "SYSLOG" | "WAKE_ALARM"
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Drop []string
 
 	noSmithyDocumentSerde
@@ -2677,14 +2576,10 @@ type LinuxParameters struct {
 	Capabilities *KernelCapabilities
 
 	// Any host devices to expose to the container. This parameter maps to Devices in
-	// the [Create a container]section of the [Docker Remote API] and the --device option to [docker run].
+	// tthe docker create-container command and the --device option to docker run.
 	//
 	// If you're using tasks that use the Fargate launch type, the devices parameter
 	// isn't supported.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	Devices []Device
 
 	// Run an init process inside the container that forwards signals and reaps
@@ -2716,12 +2611,10 @@ type LinuxParameters struct {
 	MaxSwap *int32
 
 	// The value for the size (in MiB) of the /dev/shm volume. This parameter maps to
-	// the --shm-size option to [docker run].
+	// the --shm-size option to docker run.
 	//
 	// If you are using tasks that use the Fargate launch type, the sharedMemorySize
 	// parameter is not supported.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
 	SharedMemorySize *int32
 
 	// This allows you to tune a container's memory swappiness behavior. A swappiness
@@ -2730,24 +2623,20 @@ type LinuxParameters struct {
 	// Accepted values are whole numbers between 0 and 100 . If the swappiness
 	// parameter is not specified, a default value of 60 is used. If a value is not
 	// specified for maxSwap then this parameter is ignored. This parameter maps to
-	// the --memory-swappiness option to [docker run].
+	// the --memory-swappiness option to docker run.
 	//
 	// If you're using tasks that use the Fargate launch type, the swappiness
 	// parameter isn't supported.
 	//
 	// If you're using tasks on Amazon Linux 2023 the swappiness parameter isn't
 	// supported.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
 	Swappiness *int32
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
-	// parameter maps to the --tmpfs option to [docker run].
+	// parameter maps to the --tmpfs option to docker run.
 	//
 	// If you're using tasks that use the Fargate launch type, the tmpfs parameter
 	// isn't supported.
-	//
-	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
 	Tmpfs []Tmpfs
 
 	noSmithyDocumentSerde
@@ -2818,13 +2707,11 @@ type LoadBalancer struct {
 }
 
 // The log configuration for the container. This parameter maps to LogConfig in
-// the [Create a container]section of the [Docker Remote API] and the --log-driver option to [docker run]docker run .
+// the docker create-container command and the --log-driver option to docker run.
 //
 // By default, containers use the same logging driver that the Docker daemon uses.
 // However, the container might use a different logging driver than the Docker
-// daemon by specifying a log driver configuration in the container definition. For
-// more information about the options for different supported log drivers, see [Configure logging drivers]in
-// the Docker documentation.
+// daemon by specifying a log driver configuration in the container definition.
 //
 // Understand the following when specifying a log configuration for your
 // containers.
@@ -2839,8 +2726,7 @@ type LoadBalancer struct {
 //
 // For tasks hosted on Amazon EC2 instances, the supported log drivers are awslogs
 //
-//	, fluentd , gelf , json-file , journald , logentries , syslog , splunk , and
-//	awsfirelens .
+//	, fluentd , gelf , json-file , journald , syslog , splunk , and awsfirelens .
 //
 //	- This parameter requires version 1.18 of the Docker Remote API or greater on
 //	your container instance.
@@ -2856,11 +2742,6 @@ type LoadBalancer struct {
 //	needed must be installed outside of the task. For example, the Fluentd output
 //	aggregators or a remote host running Logstash to send Gelf logs to.
 //
-// [docker run]: https://docs.docker.com/engine/reference/commandline/run/
-// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-// [Configure logging drivers]: https://docs.docker.com/engine/admin/logging/overview/
-// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
-//
 // [Amazon ECS container agent configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
 type LogConfiguration struct {
 
@@ -2870,14 +2751,12 @@ type LogConfiguration struct {
 	// awsfirelens .
 	//
 	// For tasks hosted on Amazon EC2 instances, the supported log drivers are awslogs
-	// , fluentd , gelf , json-file , journald , logentries , syslog , splunk , and
-	// awsfirelens .
+	// , fluentd , gelf , json-file , journald , syslog , splunk , and awsfirelens .
 	//
-	// For more information about using the awslogs log driver, see [Using the awslogs log driver] in the Amazon
+	// For more information about using the awslogs log driver, see [Send Amazon ECS logs to CloudWatch] in the Amazon
 	// Elastic Container Service Developer Guide.
 	//
-	// For more information about using the awsfirelens log driver, see [Custom log routing] in the Amazon
-	// Elastic Container Service Developer Guide.
+	// For more information about using the awsfirelens log driver, see [Send Amazon ECS logs to an Amazon Web Services service or Amazon Web Services Partner].
 	//
 	// If you have a custom driver that isn't listed, you can fork the Amazon ECS
 	// container agent project that's [available on GitHub]and customize it to work with that driver. We
@@ -2885,9 +2764,9 @@ type LogConfiguration struct {
 	// included. However, we don't currently provide support for running modified
 	// copies of this software.
 	//
+	// [Send Amazon ECS logs to an Amazon Web Services service or Amazon Web Services Partner]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+	// [Send Amazon ECS logs to CloudWatch]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
 	// [available on GitHub]: https://github.com/aws/amazon-ecs-agent
-	// [Using the awslogs log driver]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-	// [Custom log routing]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
 	//
 	// This member is required.
 	LogDriver LogDriver
@@ -3217,9 +3096,9 @@ type PlatformDevice struct {
 // must be the same value as the containerPort .
 //
 // Most fields of this parameter ( containerPort , hostPort , protocol ) maps to
-// PortBindings in the [Create a container] section of the [Docker Remote API] and the --publish option to [docker run]docker run . If
-// the network mode of a task definition is set to host , host ports must either be
-// undefined or match the container port in the port mapping.
+// PortBindings in the docker create-container command and the --publish option to
+// docker run . If the network mode of a task definition is set to host , host
+// ports must either be undefined or match the container port in the port mapping.
 //
 // You can't expose the same container port for multiple protocols. If you attempt
 // this, an error is returned.
@@ -3227,10 +3106,6 @@ type PlatformDevice struct {
 // After a task reaches the RUNNING status, manual and automatic host and
 // container port assignments are visible in the networkBindings section of DescribeTasks API
 // responses.
-//
-// [docker run]: https://docs.docker.com/engine/reference/commandline/run/
-// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 type PortMapping struct {
 
 	// The application protocol that's used for the port mapping. This parameter only
@@ -3859,13 +3734,11 @@ type ServiceConnectConfiguration struct {
 	Enabled bool
 
 	// The log configuration for the container. This parameter maps to LogConfig in
-	// the [Create a container]section of the [Docker Remote API] and the --log-driver option to [docker run]docker run .
+	// the docker create-container command and the --log-driver option to docker run.
 	//
 	// By default, containers use the same logging driver that the Docker daemon uses.
 	// However, the container might use a different logging driver than the Docker
-	// daemon by specifying a log driver configuration in the container definition. For
-	// more information about the options for different supported log drivers, see [Configure logging drivers]in
-	// the Docker documentation.
+	// daemon by specifying a log driver configuration in the container definition.
 	//
 	// Understand the following when specifying a log configuration for your
 	// containers.
@@ -3878,8 +3751,7 @@ type ServiceConnectConfiguration struct {
 	//   awsfirelens .
 	//
 	// For tasks hosted on Amazon EC2 instances, the supported log drivers are awslogs
-	//   , fluentd , gelf , json-file , journald , logentries , syslog , splunk , and
-	//   awsfirelens .
+	//   , fluentd , gelf , json-file , journald , syslog , splunk , and awsfirelens .
 	//
 	//   - This parameter requires version 1.18 of the Docker Remote API or greater on
 	//   your container instance.
@@ -3895,11 +3767,7 @@ type ServiceConnectConfiguration struct {
 	//   needed must be installed outside of the task. For example, the Fluentd output
 	//   aggregators or a remote host running Logstash to send Gelf logs to.
 	//
-	// [docker run]: https://docs.docker.com/engine/reference/commandline/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Configure logging drivers]: https://docs.docker.com/engine/admin/logging/overview/
 	// [Amazon ECS container agent configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 	LogConfiguration *LogConfiguration
 
 	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
@@ -4302,9 +4170,9 @@ type Setting struct {
 }
 
 // A list of namespaced kernel parameters to set in the container. This parameter
-// maps to Sysctls in the [Create a container] section of the [Docker Remote API] and the --sysctl option to [docker run]. For
-// example, you can configure net.ipv4.tcp_keepalive_time setting to maintain
-// longer lived connections.
+// maps to Sysctls in tthe docker create-container command and the --sysctl option
+// to docker run. For example, you can configure net.ipv4.tcp_keepalive_time
+// setting to maintain longer lived connections.
 //
 // We don't recommend that you specify network-related systemControls parameters
 // for multiple containers in a single task that also uses either the awsvpc or
@@ -4334,10 +4202,7 @@ type Setting struct {
 // tasks are using platform version 1.4.0 or later (Linux). This isn't supported
 // for Windows containers on Fargate.
 //
-// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
 // [IPC mode]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_ipcmode
-// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
 type SystemControl struct {
 
 	// The namespaced kernel parameter to set a value for.
@@ -4679,6 +4544,9 @@ type TaskDefinition struct {
 	// this field is required. You must use one of the following values. The value that
 	// you choose determines your range of valid values for the memory parameter.
 	//
+	// If you use the EC2 launch type, this field is optional. Supported values are
+	// between 128 CPU units ( 0.125 vCPUs) and 10240 CPU units ( 10 vCPUs).
+	//
 	// The CPU units cannot be less than 1 vCPU when you use Windows containers on
 	// Fargate.
 	//
@@ -4714,11 +4582,10 @@ type TaskDefinition struct {
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the
 	// Amazon ECS container agent permission to make Amazon Web Services API calls on
-	// your behalf. The task execution IAM role is required depending on the
-	// requirements of your task. For more information, see [Amazon ECS task execution IAM role]in the Amazon Elastic
-	// Container Service Developer Guide.
+	// your behalf. For informationabout the required IAM roles for Amazon ECS, see [IAM roles for Amazon ECS]in
+	// the Amazon Elastic Container Service Developer Guide.
 	//
-	// [Amazon ECS task execution IAM role]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
+	// [IAM roles for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html
 	ExecutionRoleArn *string
 
 	// The name of a family that this task definition is registered to. Up to 255
@@ -4742,11 +4609,10 @@ type TaskDefinition struct {
 	// resources. If none is specified, then IPC resources within the containers of a
 	// task are private and not shared with other containers in a task or on the
 	// container instance. If no value is specified, then the IPC resource namespace
-	// sharing depends on the Docker daemon setting on the container instance. For more
-	// information, see [IPC settings]in the Docker run reference.
+	// sharing depends on the Docker daemon setting on the container instance.
 	//
 	// If the host IPC mode is used, be aware that there is a heightened risk of
-	// undesired IPC namespace expose. For more information, see [Docker security].
+	// undesired IPC namespace expose.
 	//
 	// If you are setting namespaced kernel parameters using systemControls for the
 	// containers in the task, the following will apply to your IPC resource namespace.
@@ -4762,8 +4628,6 @@ type TaskDefinition struct {
 	// This parameter is not supported for Windows containers or tasks run on Fargate.
 	//
 	// [System Controls]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
-	// [Docker security]: https://docs.docker.com/engine/security/security/
-	// [IPC settings]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
 	IpcMode IpcMode
 
 	// The amount (in MiB) of memory used by the task.
@@ -4827,17 +4691,15 @@ type TaskDefinition struct {
 	// user (UID 0). It is considered best practice to use a non-root user.
 	//
 	// If the network mode is awsvpc , the task is allocated an elastic network
-	// interface, and you must specify a NetworkConfigurationvalue when you create a service or run a task
+	// interface, and you must specify a [NetworkConfiguration]value when you create a service or run a task
 	// with the task definition. For more information, see [Task Networking]in the Amazon Elastic
 	// Container Service Developer Guide.
 	//
 	// If the network mode is host , you cannot run multiple instantiations of the same
 	// task on a single container instance when port mappings are used.
 	//
-	// For more information, see [Network settings] in the Docker run reference.
-	//
 	// [Task Networking]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-	// [Network settings]: https://docs.docker.com/engine/reference/run/#network-settings
+	// [NetworkConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
 	NetworkMode NetworkMode
 
 	// The process namespace to use for the containers in the task. The valid values
@@ -4852,20 +4714,16 @@ type TaskDefinition struct {
 	// If task is specified, all containers within the specified task share the same
 	// process namespace.
 	//
-	// If no value is specified, the default is a private namespace for each
-	// container. For more information, see [PID settings]in the Docker run reference.
+	// If no value is specified, the default is a private namespace for each container.
 	//
 	// If the host PID mode is used, there's a heightened risk of undesired process
-	// namespace exposure. For more information, see [Docker security].
+	// namespace exposure.
 	//
 	// This parameter is not supported for Windows containers.
 	//
 	// This parameter is only supported for tasks that are hosted on Fargate if the
 	// tasks are using platform version 1.4.0 or later (Linux). This isn't supported
 	// for Windows containers on Fargate.
-	//
-	// [PID settings]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
-	// [Docker security]: https://docs.docker.com/engine/security/security/
 	PidMode PidMode
 
 	// An array of placement constraint objects to use for tasks.
@@ -4933,16 +4791,10 @@ type TaskDefinition struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the Identity and Access
 	// Management role that grants containers in the task permission to call Amazon Web
-	// Services APIs on your behalf. For more information, see [Amazon ECS Task Role]in the Amazon Elastic
-	// Container Service Developer Guide.
+	// Services APIs on your behalf. For informationabout the required IAM roles for
+	// Amazon ECS, see [IAM roles for Amazon ECS]in the Amazon Elastic Container Service Developer Guide.
 	//
-	// IAM roles for tasks on Windows require that the -EnableTaskIAMRole option is
-	// set when you launch the Amazon ECS-optimized Windows AMI. Your containers must
-	// also run some configuration code to use the feature. For more information, see [Windows IAM roles for tasks]
-	// in the Amazon Elastic Container Service Developer Guide.
-	//
-	// [Windows IAM roles for tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html
-	// [Amazon ECS Task Role]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+	// [IAM roles for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html
 	TaskRoleArn *string
 
 	// The list of data volume definitions for the task. For more information, see [Using data volumes in tasks] in
@@ -5428,7 +5280,7 @@ type Tmpfs struct {
 // the operating system with the exception of the nofile resource limit parameter
 // which Fargate overrides. The nofile resource limit sets a restriction on the
 // number of open files that a container can use. The default nofile soft limit is
-// 1024 and the default hard limit is 65535 .
+// 65535 and the default hard limit is 65535 .
 //
 // You can specify the ulimit settings for a container in a task definition.
 type Ulimit struct {

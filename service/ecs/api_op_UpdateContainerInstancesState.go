@@ -54,11 +54,13 @@ import (
 // You must wait for them to finish or stop them manually.
 //
 // A container instance has completed draining when it has no more RUNNING tasks.
-// You can verify this using ListTasks.
+// You can verify this using [ListTasks].
 //
 // When a container instance has been drained, you can set a container instance to
 // ACTIVE status and once it has reached that status the Amazon ECS scheduler can
 // begin scheduling tasks on the instance again.
+//
+// [ListTasks]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
 func (c *Client) UpdateContainerInstancesState(ctx context.Context, params *UpdateContainerInstancesStateInput, optFns ...func(*Options)) (*UpdateContainerInstancesStateOutput, error) {
 	if params == nil {
 		params = &UpdateContainerInstancesStateInput{}

@@ -710,6 +710,26 @@ func (m *validateOpDescribePendingMaintenanceActions) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpFailoverGlobalCluster struct {
+}
+
+func (*validateOpFailoverGlobalCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpFailoverGlobalCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*FailoverGlobalClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpFailoverGlobalClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1208,6 +1228,10 @@ func addOpDescribeOrderableDBInstanceOptionsValidationMiddleware(stack *middlewa
 
 func addOpDescribePendingMaintenanceActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePendingMaintenanceActions{}, middleware.After)
+}
+
+func addOpFailoverGlobalClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpFailoverGlobalCluster{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1924,6 +1948,24 @@ func validateOpDescribePendingMaintenanceActionsInput(v *DescribePendingMaintena
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpFailoverGlobalClusterInput(v *FailoverGlobalClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverGlobalClusterInput"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.TargetDbClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDbClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

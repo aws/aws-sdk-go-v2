@@ -1244,6 +1244,11 @@ func validateContainerDefinition(v *types.ContainerDefinition) error {
 			invalidParams.AddNested("RepositoryCredentials", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RestartPolicy != nil {
+		if err := validateContainerRestartPolicy(v.RestartPolicy); err != nil {
+			invalidParams.AddNested("RestartPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.EnvironmentFiles != nil {
 		if err := validateEnvironmentFiles(v.EnvironmentFiles); err != nil {
 			invalidParams.AddNested("EnvironmentFiles", err.(smithy.InvalidParamsError))
@@ -1384,6 +1389,21 @@ func validateContainerOverrides(v []types.ContainerOverride) error {
 		if err := validateContainerOverride(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerRestartPolicy(v *types.ContainerRestartPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerRestartPolicy"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

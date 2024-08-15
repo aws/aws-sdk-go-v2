@@ -9313,6 +9313,11 @@ func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefi
 				return err
 			}
 
+		case "restartPolicy":
+			if err := awsAwsjson11_deserializeDocumentContainerRestartPolicy(&sv.RestartPolicy, value); err != nil {
+				return err
+			}
+
 		case "secrets":
 			if err := awsAwsjson11_deserializeDocumentSecretList(&sv.Secrets, value); err != nil {
 				return err
@@ -9896,6 +9901,64 @@ func awsAwsjson11_deserializeDocumentContainerOverrides(v *[]types.ContainerOver
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentContainerRestartPolicy(v **types.ContainerRestartPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContainerRestartPolicy
+	if *v == nil {
+		sv = &types.ContainerRestartPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "ignoredExitCodes":
+			if err := awsAwsjson11_deserializeDocumentIntegerList(&sv.IgnoredExitCodes, value); err != nil {
+				return err
+			}
+
+		case "restartAttemptPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RestartAttemptPeriod = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -11963,6 +12026,46 @@ func awsAwsjson11_deserializeDocumentInstanceHealthCheckResultList(v *[]types.In
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIntegerList(v *[]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int32
+	if *v == nil {
+		cv = []int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = int32(i64)
+		}
 		cv = append(cv, col)
 
 	}

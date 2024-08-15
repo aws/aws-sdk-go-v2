@@ -140,16 +140,6 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
-				Region: "af-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "datazone.af-south-1.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "ap-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "datazone.ap-east-1.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.ap-northeast-1.api.aws",
@@ -163,11 +153,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-northeast-3",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.ap-northeast-3.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "ap-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "datazone.ap-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-south-2",
@@ -216,11 +201,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "datazone.eu-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
-				Region: "eu-central-2",
-			}: endpoints.Endpoint{
-				Hostname: "datazone.eu-central-2.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.eu-north-1.api.aws",
@@ -229,11 +209,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-south-1",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.eu-south-1.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "eu-south-2",
-			}: endpoints.Endpoint{
-				Hostname: "datazone.eu-south-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",

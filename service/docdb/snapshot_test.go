@@ -494,6 +494,18 @@ func TestCheckSnapshot_FailoverDBCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_FailoverGlobalCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.FailoverGlobalCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "FailoverGlobalCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1134,6 +1146,18 @@ func TestUpdateSnapshot_FailoverDBCluster(t *testing.T) {
 	_, err := svc.FailoverDBCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "FailoverDBCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_FailoverGlobalCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.FailoverGlobalCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "FailoverGlobalCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
