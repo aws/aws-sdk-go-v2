@@ -8231,8 +8231,7 @@
                 "UseCaseDescription": {
                     "target": "com.amazonaws.sesv2#UseCaseDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the types of email that you plan to send.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A description of the types of email that you plan to send.</p>"
                     }
                 },
                 "AdditionalContactEmailAddresses": {
@@ -12462,8 +12461,11 @@
         "com.amazonaws.sesv2#UseCaseDescription": {
             "type": "string",
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Use case description is optional and deprecated"
+                },
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 5000
                 },
                 "smithy.api#sensitive": {}

@@ -8238,6 +8238,9 @@
                     "target": "com.amazonaws.quicksight#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CustomerManagedKeyUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.quicksight#InternalFailureException"
                 },
                 {
@@ -10993,6 +10996,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of custom values for the destination parameter in <code>DestinationParameterValueConfiguration</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomerManagedKeyUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.quicksight#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The customer managed key that is registered to your Amazon QuickSight account is unavailable.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.quicksight#Dashboard": {
@@ -52021,6 +52043,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#CustomerManagedKeyUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.quicksight#InternalFailureException"

@@ -27449,6 +27449,20 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#EndpointConfigStepMetadata": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#EndpointConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the endpoint configuration used in the step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata for an endpoint configuration step.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#EndpointConfigSummary": {
             "type": "structure",
             "members": {
@@ -27828,6 +27842,20 @@
                         "smithy.api#enumValue": "UpdateRollbackFailed"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#EndpointStepMetadata": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#EndpointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the endpoint in the step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata for an endpoint step.</p>"
             }
         },
         "com.amazonaws.sagemaker#EndpointSummary": {
@@ -50965,6 +50993,18 @@
                     "target": "com.amazonaws.sagemaker#AutoMLJobStepMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AutoML job that was run by this step.</p>"
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.sagemaker#EndpointStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint that was invoked during this step execution.</p>"
+                    }
+                },
+                "EndpointConfig": {
+                    "target": "com.amazonaws.sagemaker#EndpointConfigStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration used to create an endpoint during this step execution.</p>"
                     }
                 }
             },

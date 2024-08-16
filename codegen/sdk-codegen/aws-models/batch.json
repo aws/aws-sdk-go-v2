@@ -1588,7 +1588,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a job in an Batch job queue. Jobs that are in the\n      <code>SUBMITTED</code>\n      or\n        <code>PENDING</code>\n      are\n      canceled. A job\n        in<code>RUNNABLE</code> remains in <code>RUNNABLE</code> until it reaches the head of the\n      job queue. Then the job status is updated to\n      <code>FAILED</code>.</p>\n         <note>\n            <p>A <code>PENDING</code> job is canceled after all dependency jobs are completed.\n        Therefore, it may take longer than expected to cancel a job in <code>PENDING</code>\n        status.</p>\n            <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch attempts to\n        cancel all child jobs. The array parent job is canceled when all child jobs are\n        completed.</p>\n         </note>\n         <p>Jobs that progressed to the <code>STARTING</code> or\n        <code>RUNNING</code> state aren't canceled. However, the API operation still succeeds, even\n      if no job is canceled. These jobs must be terminated with the <a>TerminateJob</a>\n      operation.</p>",
+                "smithy.api#documentation": "<p>Cancels a job in an Batch job queue. Jobs that are in a <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled and the job status is updated to <code>FAILED</code>.</p>\n         <note>\n            <p>A <code>PENDING</code> job is canceled after all dependency jobs are completed.\n        Therefore, it may take longer than expected to cancel a job in <code>PENDING</code>\n        status.</p>\n            <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch attempts to\n        cancel all child jobs. The array parent job is canceled when all child jobs are\n        completed.</p>\n         </note>\n         <p>Jobs that progressed to the <code>STARTING</code> or\n        <code>RUNNING</code> state aren't canceled. However, the API operation still succeeds, even\n      if no job is canceled. These jobs must be terminated with the <a>TerminateJob</a>\n      operation.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To cancel a job",
@@ -1747,6 +1747,12 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Unique identifier for the compute environment.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             },
@@ -2581,6 +2587,12 @@
                     "target": "com.amazonaws.batch#EksConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The details for the Amazon EKS cluster that supports the compute environment.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             },
@@ -8013,6 +8025,12 @@
                     "target": "com.amazonaws.batch#UpdatePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the updated infrastructure update policy for the compute environment. For more\n      information about infrastructure updates, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute environments</a> in\n      the <i>Batch User Guide</i>.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             },

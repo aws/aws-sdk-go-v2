@@ -14004,7 +14004,7 @@
         "com.amazonaws.inspector2#TagValueList": {
             "type": "list",
             "member": {
-                "target": "smithy.api#String"
+                "target": "com.amazonaws.inspector2#TargetResourceTagsValue"
             },
             "traits": {
                 "smithy.api#length": {
@@ -14044,7 +14044,7 @@
         "com.amazonaws.inspector2#TargetResourceTags": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.inspector2#NonEmptyString"
+                "target": "com.amazonaws.inspector2#TargetResourceTagsKey"
             },
             "value": {
                 "target": "com.amazonaws.inspector2#TagValueList"
@@ -14053,6 +14053,25 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.inspector2#TargetResourceTagsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"
+            }
+        },
+        "com.amazonaws.inspector2#TargetResourceTagsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
                 }
             }
         },
