@@ -4011,6 +4011,15 @@ func awsRestjson1_deserializeDocumentComputeEnvironmentDetail(v **types.ComputeE
 				sv.ContainerOrchestrationType = types.OrchestrationType(jtv)
 			}
 
+		case "context":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Context = ptr.String(jtv)
+			}
+
 		case "ecsClusterArn":
 			if value != nil {
 				jtv, ok := value.(string)

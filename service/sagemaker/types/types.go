@@ -5434,6 +5434,15 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata for an endpoint configuration step.
+type EndpointConfigStepMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the endpoint configuration used in the step.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information for an endpoint configuration.
 type EndpointConfigSummary struct {
 
@@ -5601,6 +5610,15 @@ type EndpointPerformance struct {
 	//
 	// This member is required.
 	Metrics *InferenceMetrics
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an endpoint step.
+type EndpointStepMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the endpoint in the step.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -13508,6 +13526,13 @@ type PipelineExecutionStepMetadata struct {
 
 	// The configurations and outcomes of an Amazon EMR step execution.
 	EMR *EMRStepMetadata
+
+	// The endpoint that was invoked during this step execution.
+	Endpoint *EndpointStepMetadata
+
+	// The endpoint configuration used to create an endpoint during this step
+	// execution.
+	EndpointConfig *EndpointConfigStepMetadata
 
 	// The configurations and outcomes of a Fail step execution.
 	Fail *FailStepMetadata

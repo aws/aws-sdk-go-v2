@@ -168,6 +168,9 @@ type ComputeEnvironmentDetail struct {
 	// (default) or EKS .
 	ContainerOrchestrationType OrchestrationType
 
+	// Reserved.
+	Context *string
+
 	// The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster that the
 	// compute environment uses.
 	EcsClusterArn *string

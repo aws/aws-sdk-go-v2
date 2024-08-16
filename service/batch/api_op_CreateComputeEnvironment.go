@@ -136,6 +136,9 @@ type CreateComputeEnvironmentInput struct {
 	// [Compute Environments]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
 	ComputeResources *types.ComputeResource
 
+	// Reserved.
+	Context *string
+
 	// The details for the Amazon EKS cluster that supports the compute environment.
 	EksConfiguration *types.EksConfiguration
 

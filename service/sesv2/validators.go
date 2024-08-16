@@ -3375,9 +3375,6 @@ func validateOpPutAccountDetailsInput(v *PutAccountDetailsInput) error {
 	if v.WebsiteURL == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebsiteURL"))
 	}
-	if v.UseCaseDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UseCaseDescription"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

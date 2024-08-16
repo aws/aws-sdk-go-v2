@@ -1821,6 +1821,9 @@ func awsRestjson1_deserializeOpErrorCreateDataSource(response *smithyhttp.Respon
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
+	case strings.EqualFold("CustomerManagedKeyUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorCustomerManagedKeyUnavailableException(response, errorBody)
+
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
@@ -30734,6 +30737,9 @@ func awsRestjson1_deserializeOpErrorUpdateDataSource(response *smithyhttp.Respon
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
+	case strings.EqualFold("CustomerManagedKeyUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorCustomerManagedKeyUnavailableException(response, errorBody)
+
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
@@ -35490,6 +35496,42 @@ func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Respons
 	}
 
 	err := awsRestjson1_deserializeDocumentConflictException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorCustomerManagedKeyUnavailableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.CustomerManagedKeyUnavailableException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentCustomerManagedKeyUnavailableException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -48130,6 +48172,55 @@ func awsRestjson1_deserializeDocumentCustomContentVisual(v **types.CustomContent
 					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.VisualId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomerManagedKeyUnavailableException(v **types.CustomerManagedKeyUnavailableException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomerManagedKeyUnavailableException
+	if *v == nil {
+		sv = &types.CustomerManagedKeyUnavailableException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		default:

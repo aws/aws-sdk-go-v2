@@ -43,6 +43,9 @@ type UpdateComputeEnvironmentInput struct {
 	// [Compute Environments]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
 	ComputeResources *types.ComputeResourceUpdate
 
+	// Reserved.
+	Context *string
+
 	// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make
 	// calls to other Amazon Web Services services on your behalf. For more
 	// information, see [Batch service IAM role]in the Batch User Guide.

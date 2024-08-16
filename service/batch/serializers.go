@@ -174,6 +174,11 @@ func awsRestjson1_serializeOpDocumentCreateComputeEnvironmentInput(v *CreateComp
 		}
 	}
 
+	if v.Context != nil {
+		ok := object.Key("context")
+		ok.String(*v.Context)
+	}
+
 	if v.EksConfiguration != nil {
 		ok := object.Key("eksConfiguration")
 		if err := awsRestjson1_serializeDocumentEksConfiguration(v.EksConfiguration, ok); err != nil {
@@ -2104,6 +2109,11 @@ func awsRestjson1_serializeOpDocumentUpdateComputeEnvironmentInput(v *UpdateComp
 		if err := awsRestjson1_serializeDocumentComputeResourceUpdate(v.ComputeResources, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Context != nil {
+		ok := object.Key("context")
+		ok.String(*v.Context)
 	}
 
 	if v.ServiceRole != nil {

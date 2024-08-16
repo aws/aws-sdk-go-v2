@@ -96,6 +96,37 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The customer managed key that is registered to your Amazon QuickSight account
+// is unavailable.
+type CustomerManagedKeyUnavailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CustomerManagedKeyUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CustomerManagedKeyUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CustomerManagedKeyUnavailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CustomerManagedKeyUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CustomerManagedKeyUnavailableException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The domain specified isn't on the allow list. All domains for embedded
 // dashboards must be added to the approved list by an Amazon QuickSight admin.
 type DomainNotWhitelistedException struct {

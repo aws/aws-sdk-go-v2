@@ -48125,6 +48125,46 @@ func awsAwsjson11_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEndpointConfigStepMetadata(v **types.EndpointConfigStepMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EndpointConfigStepMetadata
+	if *v == nil {
+		sv = &types.EndpointConfigStepMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointConfigArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEndpointConfigSummary(v **types.EndpointConfigSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48761,6 +48801,46 @@ func awsAwsjson11_deserializeDocumentEndpoints(v *[]types.EndpointInfo, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEndpointStepMetadata(v **types.EndpointStepMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EndpointStepMetadata
+	if *v == nil {
+		sv = &types.EndpointStepMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -67747,6 +67827,16 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStepMetadata(v **types.Pip
 
 		case "EMR":
 			if err := awsAwsjson11_deserializeDocumentEMRStepMetadata(&sv.EMR, value); err != nil {
+				return err
+			}
+
+		case "Endpoint":
+			if err := awsAwsjson11_deserializeDocumentEndpointStepMetadata(&sv.Endpoint, value); err != nil {
+				return err
+			}
+
+		case "EndpointConfig":
+			if err := awsAwsjson11_deserializeDocumentEndpointConfigStepMetadata(&sv.EndpointConfig, value); err != nil {
 				return err
 			}
 

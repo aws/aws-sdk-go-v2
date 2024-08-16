@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a job in an Batch job queue. Jobs that are in the SUBMITTED or PENDING
-// are canceled. A job in RUNNABLE remains in RUNNABLE until it reaches the head
-// of the job queue. Then the job status is updated to FAILED .
+// Cancels a job in an Batch job queue. Jobs that are in a SUBMITTED , PENDING , or
+// RUNNABLE state are cancelled and the job status is updated to FAILED .
 //
 // A PENDING job is canceled after all dependency jobs are completed. Therefore,
 // it may take longer than expected to cancel a job in PENDING status.

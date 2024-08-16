@@ -1,0 +1,8 @@
+{
+    "id": "9b169dfc-395f-4acf-8a59-e6d54b1cef28",
+    "type": "feature",
+    "description": "Marking use case description field of account details as deprecated.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

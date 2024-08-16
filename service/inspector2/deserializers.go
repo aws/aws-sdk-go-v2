@@ -18824,7 +18824,7 @@ func awsRestjson1_deserializeDocumentTagValueList(v *[]string, value interface{}
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				return fmt.Errorf("expected TargetResourceTagsValue to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

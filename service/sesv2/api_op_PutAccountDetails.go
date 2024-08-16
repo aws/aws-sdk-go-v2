@@ -35,11 +35,6 @@ type PutAccountDetailsInput struct {
 	// This member is required.
 	MailType types.MailType
 
-	// A description of the types of email that you plan to send.
-	//
-	// This member is required.
-	UseCaseDescription *string
-
 	// The URL of your website. This information helps us better understand the type
 	// of content that you plan to send.
 	//
@@ -64,6 +59,11 @@ type PutAccountDetailsInput struct {
 	// quota and maximum sending rate for your account vary based on your specific use
 	// case.
 	ProductionAccessEnabled *bool
+
+	// A description of the types of email that you plan to send.
+	//
+	// Deprecated: Use case description is optional and deprecated
+	UseCaseDescription *string
 
 	noSmithyDocumentSerde
 }

@@ -32,6 +32,8 @@ type AccountDetails struct {
 	ReviewDetails *ReviewDetails
 
 	// A description of the types of email that you plan to send.
+	//
+	// Deprecated: Use case description is optional and deprecated
 	UseCaseDescription *string
 
 	// The URL of your website. This information helps us better understand the type
