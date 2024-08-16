@@ -1,8 +1,0 @@
-{
-    "id": "c9f74927-76c1-43eb-a202-31472b79112c",
-    "type": "feature",
-    "description": "Amazon QuickSight launches Customer Managed Key (CMK) encryption for Data Source metadata",
-    "modules": [
-        "service/quicksight"
-    ]
-}

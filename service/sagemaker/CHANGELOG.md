@@ -1,3 +1,7 @@
+# v1.154.0 (2024-08-16)
+
+* **Feature**: Introduce Endpoint and EndpointConfig Arns in sagemaker:ListPipelineExecutionSteps API response
+
 # v1.153.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

@@ -1,3 +1,7 @@
+# v1.69.0 (2024-08-16)
+
+* **Feature**: Amazon QuickSight launches Customer Managed Key (CMK) encryption for Data Source metadata
+
 # v1.68.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

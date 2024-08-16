@@ -1,8 +1,0 @@
-{
-    "id": "557331c8-6d90-44a4-81e4-3f6acb9ec191",
-    "type": "feature",
-    "description": "Update the correct format of key and values for resource tags",
-    "modules": [
-        "service/inspector2"
-    ]
-}

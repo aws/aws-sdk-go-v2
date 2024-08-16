@@ -1,3 +1,7 @@
+# v1.33.0 (2024-08-16)
+
+* **Feature**: Marking use case description field of account details as deprecated.
+
 # v1.32.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

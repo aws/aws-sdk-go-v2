@@ -1,3 +1,7 @@
+# v1.29.0 (2024-08-16)
+
+* **Feature**: Update the correct format of key and values for resource tags
+
 # v1.28.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

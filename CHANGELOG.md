@@ -1,3 +1,17 @@
+# Release (2024-08-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.44.0](service/batch/CHANGELOG.md#v1440-2024-08-16)
+  * **Feature**: Improvements of integration between AWS Batch and EC2.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.29.0](service/inspector2/CHANGELOG.md#v1290-2024-08-16)
+  * **Feature**: Update the correct format of key and values for resource tags
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.69.0](service/quicksight/CHANGELOG.md#v1690-2024-08-16)
+  * **Feature**: Amazon QuickSight launches Customer Managed Key (CMK) encryption for Data Source metadata
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.154.0](service/sagemaker/CHANGELOG.md#v11540-2024-08-16)
+  * **Feature**: Introduce Endpoint and EndpointConfig Arns in sagemaker:ListPipelineExecutionSteps API response
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.33.0](service/sesv2/CHANGELOG.md#v1330-2024-08-16)
+  * **Feature**: Marking use case description field of account details as deprecated.
+
 # Release (2024-08-15)
 
 ## General Highlights

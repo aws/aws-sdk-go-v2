@@ -1,8 +1,0 @@
-{
-    "id": "28300370-2c9c-4e62-9da4-69961de234bc",
-    "type": "feature",
-    "description": "Introduce Endpoint and EndpointConfig Arns in sagemaker:ListPipelineExecutionSteps API response",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

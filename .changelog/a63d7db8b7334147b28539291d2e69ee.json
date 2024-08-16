@@ -1,8 +1,0 @@
-{
-    "id": "a63d7db8-b733-4147-b285-39291d2e69ee",
-    "type": "feature",
-    "description": "Improvements of integration between AWS Batch and EC2.",
-    "modules": [
-        "service/batch"
-    ]
-}

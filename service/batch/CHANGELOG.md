@@ -1,3 +1,7 @@
+# v1.44.0 (2024-08-16)
+
+* **Feature**: Improvements of integration between AWS Batch and EC2.
+
 # v1.43.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.
