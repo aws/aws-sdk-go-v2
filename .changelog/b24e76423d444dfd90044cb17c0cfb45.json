@@ -1,8 +1,0 @@
-{
-    "id": "b24e7642-3d44-4dfd-9004-4cb17c0cfb45",
-    "type": "feature",
-    "description": "This release adds additional search fields and provides sorting by multiple fields.",
-    "modules": [
-        "service/deadline"
-    ]
-}

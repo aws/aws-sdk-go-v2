@@ -1,3 +1,7 @@
+# v1.57.0 (2024-08-19)
+
+* **Feature**: Release Lambda FunctionRecursiveConfig, enabling customers to turn recursive loop detection on or off on individual functions. This release adds two new APIs, GetFunctionRecursionConfig and PutFunctionRecursionConfig.
+
 # v1.56.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

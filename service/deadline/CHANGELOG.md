@@ -1,3 +1,7 @@
+# v1.3.0 (2024-08-19)
+
+* **Feature**: This release adds additional search fields and provides sorting by multiple fields.
+
 # v1.2.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

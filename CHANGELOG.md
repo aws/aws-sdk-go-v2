@@ -1,3 +1,17 @@
+# Release (2024-08-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.14.0](service/bedrock/CHANGELOG.md#v1140-2024-08-19)
+  * **Feature**: Amazon Bedrock Batch Inference/ Model Invocation is a feature which allows customers to asynchronously run inference on a large set of records/files stored in S3.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.42.0](service/codebuild/CHANGELOG.md#v1420-2024-08-19)
+  * **Feature**: AWS CodeBuild now supports creating fleets with macOS platform for running builds.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.3.0](service/deadline/CHANGELOG.md#v130-2024-08-19)
+  * **Feature**: This release adds additional search fields and provides sorting by multiple fields.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.57.0](service/lambda/CHANGELOG.md#v1570-2024-08-19)
+  * **Feature**: Release Lambda FunctionRecursiveConfig, enabling customers to turn recursive loop detection on or off on individual functions. This release adds two new APIs, GetFunctionRecursionConfig and PutFunctionRecursionConfig.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.16.0](service/ssmsap/CHANGELOG.md#v1160-2024-08-19)
+  * **Feature**: Add new attributes to the outputs of GetApplication and GetDatabase APIs.
+
 # Release (2024-08-16)
 
 ## Module Highlights

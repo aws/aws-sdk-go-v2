@@ -1,3 +1,7 @@
+# v1.14.0 (2024-08-19)
+
+* **Feature**: Amazon Bedrock Batch Inference/ Model Invocation is a feature which allows customers to asynchronously run inference on a large set of records/files stored in S3.
+
 # v1.13.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

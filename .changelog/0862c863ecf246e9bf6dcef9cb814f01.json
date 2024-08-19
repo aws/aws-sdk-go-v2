@@ -1,8 +1,0 @@
-{
-    "id": "0862c863-ecf2-46e9-bf6d-cef9cb814f01",
-    "type": "feature",
-    "description": "Amazon Bedrock Batch Inference/ Model Invocation is a feature which allows customers to asynchronously run inference on a large set of records/files stored in S3.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

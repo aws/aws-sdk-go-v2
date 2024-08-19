@@ -1,8 +1,0 @@
-{
-    "id": "36f13e5c-cda6-4ae5-aa7d-502fcd62f49c",
-    "type": "feature",
-    "description": "Release Lambda FunctionRecursiveConfig, enabling customers to turn recursive loop detection on or off on individual functions. This release adds two new APIs, GetFunctionRecursionConfig and PutFunctionRecursionConfig.",
-    "modules": [
-        "service/lambda"
-    ]
-}

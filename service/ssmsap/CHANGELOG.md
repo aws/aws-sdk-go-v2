@@ -1,3 +1,7 @@
+# v1.16.0 (2024-08-19)
+
+* **Feature**: Add new attributes to the outputs of GetApplication and GetDatabase APIs.
+
 # v1.15.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

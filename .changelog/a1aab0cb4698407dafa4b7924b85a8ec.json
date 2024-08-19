@@ -1,8 +1,0 @@
-{
-    "id": "a1aab0cb-4698-407d-afa4-b7924b85a8ec",
-    "type": "feature",
-    "description": "Add new attributes to the outputs of GetApplication and GetDatabase APIs.",
-    "modules": [
-        "service/ssmsap"
-    ]
-}

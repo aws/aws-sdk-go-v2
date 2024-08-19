@@ -1,3 +1,7 @@
+# v1.42.0 (2024-08-19)
+
+* **Feature**: AWS CodeBuild now supports creating fleets with macOS platform for running builds.
+
 # v1.41.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.
