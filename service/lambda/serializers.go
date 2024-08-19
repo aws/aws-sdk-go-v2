@@ -2262,6 +2262,71 @@ func awsRestjson1_serializeOpHttpBindingsGetFunctionEventInvokeConfigInput(v *Ge
 	return nil
 }
 
+type awsRestjson1_serializeOpGetFunctionRecursionConfig struct {
+}
+
+func (*awsRestjson1_serializeOpGetFunctionRecursionConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetFunctionRecursionConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetFunctionRecursionConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2024-08-31/functions/{FunctionName}/recursion-config")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetFunctionRecursionConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetFunctionRecursionConfigInput(v *GetFunctionRecursionConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
+	}
+	if v.FunctionName != nil {
+		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetFunctionUrlConfig struct {
 }
 
@@ -4370,6 +4435,94 @@ func awsRestjson1_serializeOpDocumentPutFunctionEventInvokeConfigInput(v *PutFun
 	if v.MaximumRetryAttempts != nil {
 		ok := object.Key("MaximumRetryAttempts")
 		ok.Integer(*v.MaximumRetryAttempts)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutFunctionRecursionConfig struct {
+}
+
+func (*awsRestjson1_serializeOpPutFunctionRecursionConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutFunctionRecursionConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutFunctionRecursionConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2024-08-31/functions/{FunctionName}/recursion-config")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutFunctionRecursionConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutFunctionRecursionConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutFunctionRecursionConfigInput(v *PutFunctionRecursionConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
+	}
+	if v.FunctionName != nil {
+		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutFunctionRecursionConfigInput(v *PutFunctionRecursionConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RecursiveLoop) > 0 {
+		ok := object.Key("RecursiveLoop")
+		ok.String(string(v.RecursiveLoop))
 	}
 
 	return nil

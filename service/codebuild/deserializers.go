@@ -8325,6 +8325,15 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "imageId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ImageId = ptr.String(jtv)
+			}
+
 		case "lastModified":
 			if value != nil {
 				switch jtv := value.(type) {

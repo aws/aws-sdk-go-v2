@@ -52,9 +52,17 @@ type UpdateQueueInput struct {
 	DefaultBudgetAction types.DefaultQueueBudgetAction
 
 	// The description of the queue to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	// The display name of the queue to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	DisplayName *string
 
 	// The job attachment settings to update for the queue.

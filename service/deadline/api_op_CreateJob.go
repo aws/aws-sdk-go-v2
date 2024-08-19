@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job. A job is a render submission submitted by a user. It contains
-// specific job properties outlined as steps and tasks.
+// Creates a job. A job is a set of instructions that AWS Deadline Cloud uses to
+// schedule and run work on available workers. For more information, see [Deadline Cloud jobs].
+//
+// [Deadline Cloud jobs]: https://docs.aws.amazon.com/deadline-cloud/latest/userguide/deadline-cloud-jobs.html
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -35,7 +37,9 @@ type CreateJobInput struct {
 	// This member is required.
 	FarmId *string
 
-	// The priority of the job on a scale of 1 to 100. The highest priority is 1.
+	// The priority of the job on a scale of 0 to 100. The highest priority (first
+	// scheduled) is 100. When two jobs have the same priority, the oldest job is
+	// scheduled first.
 	//
 	// This member is required.
 	Priority *int32
@@ -66,7 +70,7 @@ type CreateJobInput struct {
 	// .
 	MaxFailedTasksCount *int32
 
-	// The maximum number of retries for a job.
+	// The maximum number of retries for each task.
 	MaxRetriesPerTask *int32
 
 	// The parameters for the job.
@@ -75,8 +79,8 @@ type CreateJobInput struct {
 	// The storage profile ID for the storage profile to connect to the job.
 	StorageProfileId *string
 
-	// The initial status of the job's tasks when they are created. Tasks that are
-	// created with a SUSPENDED status will not run until you update their status.
+	// The initial job status when it is created. Jobs that are created with a
+	// SUSPENDED status will not run until manually requeued.
 	TargetTaskRunStatus types.CreateJobTargetTaskRunStatus
 
 	noSmithyDocumentSerde

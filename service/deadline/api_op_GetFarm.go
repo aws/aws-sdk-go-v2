@@ -51,6 +51,10 @@ type GetFarmOutput struct {
 
 	// The display name of the farm.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 
@@ -65,6 +69,10 @@ type GetFarmOutput struct {
 	KmsKeyArn *string
 
 	// The description of the farm.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	// The date and time the resource was updated.

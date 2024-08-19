@@ -41,11 +41,14 @@ type ListLayersInput struct {
 	// [instruction set architecture]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
 	CompatibleArchitecture types.Architecture
 
-	// A runtime identifier. For example, java21 .
+	// A runtime identifier.
 	//
-	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	// The following list includes deprecated runtimes. For more information, see [Runtime use after deprecation].
 	//
-	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+	// For a list of all currently supported runtimes, see [Supported runtimes].
+	//
+	// [Runtime use after deprecation]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+	// [Supported runtimes]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
 	CompatibleRuntime types.Runtime
 
 	// A pagination token returned by a previous call.

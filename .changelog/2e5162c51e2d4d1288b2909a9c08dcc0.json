@@ -1,0 +1,8 @@
+{
+    "id": "2e5162c5-1e2d-4d12-88b2-909a9c08dcc0",
+    "type": "feature",
+    "description": "AWS CodeBuild now supports creating fleets with macOS platform for running builds.",
+    "modules": [
+        "service/codebuild"
+    ]
+}

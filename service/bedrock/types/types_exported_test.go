@@ -82,3 +82,39 @@ func ExampleEvaluationModelConfig_outputUsage() {
 }
 
 var _ *types.EvaluationBedrockModel
+
+func ExampleModelInvocationJobInputDataConfig_outputUsage() {
+	var union types.ModelInvocationJobInputDataConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ModelInvocationJobInputDataConfigMemberS3InputDataConfig:
+		_ = v.Value // Value is types.ModelInvocationJobS3InputDataConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ModelInvocationJobS3InputDataConfig
+
+func ExampleModelInvocationJobOutputDataConfig_outputUsage() {
+	var union types.ModelInvocationJobOutputDataConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig:
+		_ = v.Value // Value is types.ModelInvocationJobS3OutputDataConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ModelInvocationJobS3OutputDataConfig

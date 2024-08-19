@@ -33,6 +33,10 @@ type CreateQueueInput struct {
 
 	// The display name of the queue.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 
@@ -51,6 +55,10 @@ type CreateQueueInput struct {
 	DefaultBudgetAction types.DefaultQueueBudgetAction
 
 	// The description of the queue.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	// The job attachment settings for the queue. These are the Amazon S3 bucket name

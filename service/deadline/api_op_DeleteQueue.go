@@ -11,6 +11,9 @@ import (
 )
 
 // Deletes a queue.
+//
+// You can't recover the jobs in a queue if you delete the queue. Deleting the
+// queue also deletes the jobs in that queue.
 func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optFns ...func(*Options)) (*DeleteQueueOutput, error) {
 	if params == nil {
 		params = &DeleteQueueInput{}

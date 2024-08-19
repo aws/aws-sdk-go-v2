@@ -34,9 +34,17 @@ type UpdateFarmInput struct {
 	FarmId *string
 
 	// The description of the farm to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	// The display name of the farm to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	DisplayName *string
 
 	noSmithyDocumentSerde

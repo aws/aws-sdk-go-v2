@@ -1295,6 +1295,144 @@ type ModelCustomizationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the location of the input to the batch inference job.
+//
+// The following types satisfy this interface:
+//
+//	ModelInvocationJobInputDataConfigMemberS3InputDataConfig
+type ModelInvocationJobInputDataConfig interface {
+	isModelInvocationJobInputDataConfig()
+}
+
+// Contains the configuration of the S3 location of the input data.
+type ModelInvocationJobInputDataConfigMemberS3InputDataConfig struct {
+	Value ModelInvocationJobS3InputDataConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ModelInvocationJobInputDataConfigMemberS3InputDataConfig) isModelInvocationJobInputDataConfig() {
+}
+
+// Contains the configuration of the S3 location of the output data.
+//
+// The following types satisfy this interface:
+//
+//	ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig
+type ModelInvocationJobOutputDataConfig interface {
+	isModelInvocationJobOutputDataConfig()
+}
+
+// Contains the configuration of the S3 location of the output data.
+type ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig struct {
+	Value ModelInvocationJobS3OutputDataConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig) isModelInvocationJobOutputDataConfig() {
+}
+
+// Contains the configuration of the S3 location of the output data.
+type ModelInvocationJobS3InputDataConfig struct {
+
+	// The S3 location of the input data.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The format of the input data.
+	S3InputFormat S3InputFormat
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration of the S3 location of the output data.
+type ModelInvocationJobS3OutputDataConfig struct {
+
+	// The S3 location of the output data.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The unique identifier of the key that encrypts the S3 location of the output
+	// data.
+	S3EncryptionKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a batch inference job.
+type ModelInvocationJobSummary struct {
+
+	// Details about the location of the input to the batch inference job.
+	//
+	// This member is required.
+	InputDataConfig ModelInvocationJobInputDataConfig
+
+	// The Amazon Resource Name (ARN) of the batch inference job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The name of the batch inference job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The unique identifier of the foundation model used for model inference.
+	//
+	// This member is required.
+	ModelId *string
+
+	// Details about the location of the output of the batch inference job.
+	//
+	// This member is required.
+	OutputDataConfig ModelInvocationJobOutputDataConfig
+
+	// The Amazon Resource Name (ARN) of the service role with permissions to carry
+	// out and manage batch inference. You can use the console to create a default
+	// service role or follow the steps at [Create a service role for batch inference].
+	//
+	// [Create a service role for batch inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The time at which the batch inference job was submitted.
+	//
+	// This member is required.
+	SubmitTime *time.Time
+
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+	ClientRequestToken *string
+
+	// The time at which the batch inference job ended.
+	EndTime *time.Time
+
+	// The time at which the batch inference job times or timed out.
+	JobExpirationTime *time.Time
+
+	// The time at which the batch inference job was last modified.
+	LastModifiedTime *time.Time
+
+	// If the batch inference job failed, this field contains a message describing why
+	// the job failed.
+	Message *string
+
+	// The status of the batch inference job.
+	Status ModelInvocationJobStatus
+
+	// The number of hours after which the batch inference job was set to time out.
+	TimeoutDurationInHours *int32
+
+	noSmithyDocumentSerde
+}
+
 // S3 Location of the output data.
 type OutputDataConfig struct {
 
@@ -1489,7 +1627,9 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isEvaluationConfig()          {}
-func (*UnknownUnionMember) isEvaluationDatasetLocation() {}
-func (*UnknownUnionMember) isEvaluationInferenceConfig() {}
-func (*UnknownUnionMember) isEvaluationModelConfig()     {}
+func (*UnknownUnionMember) isEvaluationConfig()                   {}
+func (*UnknownUnionMember) isEvaluationDatasetLocation()          {}
+func (*UnknownUnionMember) isEvaluationInferenceConfig()          {}
+func (*UnknownUnionMember) isEvaluationModelConfig()              {}
+func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()  {}
+func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig() {}

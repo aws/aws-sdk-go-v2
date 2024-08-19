@@ -53,9 +53,17 @@ type UpdateBudgetInput struct {
 	ClientToken *string
 
 	// The description of the budget to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	// The display name of the budget to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	DisplayName *string
 
 	// The schedule to update.

@@ -297,6 +297,7 @@ const (
 	EnvironmentTypeWindowsServer2019Container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
 	EnvironmentTypeLinuxLambdaContainer       EnvironmentType = "LINUX_LAMBDA_CONTAINER"
 	EnvironmentTypeArmLambdaContainer         EnvironmentType = "ARM_LAMBDA_CONTAINER"
+	EnvironmentTypeMacArm                     EnvironmentType = "MAC_ARM"
 )
 
 // Values returns all known values for EnvironmentType. Note that this can be
@@ -312,6 +313,7 @@ func (EnvironmentType) Values() []EnvironmentType {
 		"WINDOWS_SERVER_2019_CONTAINER",
 		"LINUX_LAMBDA_CONTAINER",
 		"ARM_LAMBDA_CONTAINER",
+		"MAC_ARM",
 	}
 }
 
@@ -357,9 +359,11 @@ type FleetContextCode string
 
 // Enum values for FleetContextCode
 const (
-	FleetContextCodeCreateFailed   FleetContextCode = "CREATE_FAILED"
-	FleetContextCodeUpdateFailed   FleetContextCode = "UPDATE_FAILED"
-	FleetContextCodeActionRequired FleetContextCode = "ACTION_REQUIRED"
+	FleetContextCodeCreateFailed         FleetContextCode = "CREATE_FAILED"
+	FleetContextCodeUpdateFailed         FleetContextCode = "UPDATE_FAILED"
+	FleetContextCodeActionRequired       FleetContextCode = "ACTION_REQUIRED"
+	FleetContextCodePendingDeletion      FleetContextCode = "PENDING_DELETION"
+	FleetContextCodeInsufficientCapacity FleetContextCode = "INSUFFICIENT_CAPACITY"
 )
 
 // Values returns all known values for FleetContextCode. Note that this can be
@@ -371,6 +375,8 @@ func (FleetContextCode) Values() []FleetContextCode {
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
 		"ACTION_REQUIRED",
+		"PENDING_DELETION",
+		"INSUFFICIENT_CAPACITY",
 	}
 }
 

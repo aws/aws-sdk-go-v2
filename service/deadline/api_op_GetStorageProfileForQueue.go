@@ -51,6 +51,10 @@ type GetStorageProfileForQueueOutput struct {
 
 	// The display name of the storage profile connected to a queue.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 

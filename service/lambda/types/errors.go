@@ -678,8 +678,13 @@ func (e *PolicyLengthExceededException) ErrorCode() string {
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The RevisionId provided does not match the latest RevisionId for the Lambda
-// function or alias. Call the GetFunction or the GetAlias API operation to
-// retrieve the latest RevisionId for your resource.
+// function or alias.
+//
+//   - For AddPermission and RemovePermission API operations: Call GetPolicy to
+//     retrieve the latest RevisionId for your resource.
+//
+//   - For all other API operations: Call GetFunction or GetAlias to retrieve the
+//     latest RevisionId for your resource.
 type PreconditionFailedException struct {
 	Message *string
 

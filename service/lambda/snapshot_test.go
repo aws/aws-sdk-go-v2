@@ -374,6 +374,18 @@ func TestCheckSnapshot_GetFunctionEventInvokeConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFunctionRecursionConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFunctionRecursionConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFunctionRecursionConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFunctionUrlConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFunctionUrlConfig(context.Background(), nil, func(o *Options) {
@@ -691,6 +703,18 @@ func TestCheckSnapshot_PutFunctionEventInvokeConfig(t *testing.T) {
 	_, err := svc.PutFunctionEventInvokeConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutFunctionEventInvokeConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutFunctionRecursionConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFunctionRecursionConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutFunctionRecursionConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1165,6 +1189,18 @@ func TestUpdateSnapshot_GetFunctionEventInvokeConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFunctionRecursionConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFunctionRecursionConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFunctionRecursionConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFunctionUrlConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFunctionUrlConfig(context.Background(), nil, func(o *Options) {
@@ -1482,6 +1518,18 @@ func TestUpdateSnapshot_PutFunctionEventInvokeConfig(t *testing.T) {
 	_, err := svc.PutFunctionEventInvokeConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutFunctionEventInvokeConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutFunctionRecursionConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFunctionRecursionConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutFunctionRecursionConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -911,6 +911,175 @@ func awsRestjson1_deserializeOpDocumentCreateModelCustomizationJobOutput(v **Cre
 	return nil
 }
 
+type awsRestjson1_deserializeOpCreateModelInvocationJob struct {
+}
+
+func (*awsRestjson1_deserializeOpCreateModelInvocationJob) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreateModelInvocationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateModelInvocationJob(response, &metadata)
+	}
+	output := &CreateModelInvocationJobOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateModelInvocationJobOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreateModelInvocationJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreateModelInvocationJobOutput(v **CreateModelInvocationJobOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateModelInvocationJobOutput
+	if *v == nil {
+		sv = &CreateModelInvocationJobOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpCreateProvisionedModelThroughput struct {
 }
 
@@ -3021,6 +3190,298 @@ func awsRestjson1_deserializeOpDocumentGetModelCustomizationJobOutput(v **GetMod
 	return nil
 }
 
+type awsRestjson1_deserializeOpGetModelInvocationJob struct {
+}
+
+func (*awsRestjson1_deserializeOpGetModelInvocationJob) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetModelInvocationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetModelInvocationJob(response, &metadata)
+	}
+	output := &GetModelInvocationJobOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetModelInvocationJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(v **GetModelInvocationJobOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetModelInvocationJobOutput
+	if *v == nil {
+		sv = &GetModelInvocationJobOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientRequestToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationIdempotencyToken to be of type string, got %T instead", value)
+				}
+				sv.ClientRequestToken = ptr.String(jtv)
+			}
+
+		case "endTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EndTime = ptr.Time(t)
+			}
+
+		case "inputDataConfig":
+			if err := awsRestjson1_deserializeDocumentModelInvocationJobInputDataConfig(&sv.InputDataConfig, value); err != nil {
+				return err
+			}
+
+		case "jobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
+		case "jobExpirationTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.JobExpirationTime = ptr.Time(t)
+			}
+
+		case "jobName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobName to be of type string, got %T instead", value)
+				}
+				sv.JobName = ptr.String(jtv)
+			}
+
+		case "lastModifiedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastModifiedTime = ptr.Time(t)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "modelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelId to be of type string, got %T instead", value)
+				}
+				sv.ModelId = ptr.String(jtv)
+			}
+
+		case "outputDataConfig":
+			if err := awsRestjson1_deserializeDocumentModelInvocationJobOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
+				return err
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ModelInvocationJobStatus(jtv)
+			}
+
+		case "submitTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.SubmitTime = ptr.Time(t)
+			}
+
+		case "timeoutDurationInHours":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobTimeoutDurationInHours to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutDurationInHours = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpGetModelInvocationLoggingConfiguration struct {
 }
 
@@ -4452,6 +4913,171 @@ func awsRestjson1_deserializeOpDocumentListModelCustomizationJobsOutput(v **List
 	return nil
 }
 
+type awsRestjson1_deserializeOpListModelInvocationJobs struct {
+}
+
+func (*awsRestjson1_deserializeOpListModelInvocationJobs) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListModelInvocationJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListModelInvocationJobs(response, &metadata)
+	}
+	output := &ListModelInvocationJobsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListModelInvocationJobsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListModelInvocationJobs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListModelInvocationJobsOutput(v **ListModelInvocationJobsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListModelInvocationJobsOutput
+	if *v == nil {
+		sv = &ListModelInvocationJobsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "invocationJobSummaries":
+			if err := awsRestjson1_deserializeDocumentModelInvocationJobSummaries(&sv.InvocationJobSummaries, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpListProvisionedModelThroughputs struct {
 }
 
@@ -4996,6 +5622,104 @@ func (m *awsRestjson1_deserializeOpStopModelCustomizationJob) HandleDeserialize(
 }
 
 func awsRestjson1_deserializeOpErrorStopModelCustomizationJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpStopModelInvocationJob struct {
+}
+
+func (*awsRestjson1_deserializeOpStopModelInvocationJob) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStopModelInvocationJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStopModelInvocationJob(response, &metadata)
+	}
+	output := &StopModelInvocationJobOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStopModelInvocationJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8909,6 +9633,387 @@ func awsRestjson1_deserializeDocumentModelCustomizationList(v *[]types.ModelCust
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelInvocationJobInputDataConfig(v *types.ModelInvocationJobInputDataConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ModelInvocationJobInputDataConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3InputDataConfig":
+			var mv types.ModelInvocationJobS3InputDataConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentModelInvocationJobS3InputDataConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ModelInvocationJobInputDataConfigMemberS3InputDataConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelInvocationJobOutputDataConfig(v *types.ModelInvocationJobOutputDataConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ModelInvocationJobOutputDataConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3OutputDataConfig":
+			var mv types.ModelInvocationJobS3OutputDataConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentModelInvocationJobS3OutputDataConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelInvocationJobS3InputDataConfig(v **types.ModelInvocationJobS3InputDataConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelInvocationJobS3InputDataConfig
+	if *v == nil {
+		sv = &types.ModelInvocationJobS3InputDataConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3InputFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3InputFormat to be of type string, got %T instead", value)
+				}
+				sv.S3InputFormat = types.S3InputFormat(jtv)
+			}
+
+		case "s3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelInvocationJobS3OutputDataConfig(v **types.ModelInvocationJobS3OutputDataConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelInvocationJobS3OutputDataConfig
+	if *v == nil {
+		sv = &types.ModelInvocationJobS3OutputDataConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3EncryptionKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.S3EncryptionKeyId = ptr.String(jtv)
+			}
+
+		case "s3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelInvocationJobSummaries(v *[]types.ModelInvocationJobSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ModelInvocationJobSummary
+	if *v == nil {
+		cv = []types.ModelInvocationJobSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ModelInvocationJobSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentModelInvocationJobSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelInvocationJobSummary(v **types.ModelInvocationJobSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelInvocationJobSummary
+	if *v == nil {
+		sv = &types.ModelInvocationJobSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientRequestToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationIdempotencyToken to be of type string, got %T instead", value)
+				}
+				sv.ClientRequestToken = ptr.String(jtv)
+			}
+
+		case "endTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.EndTime = ptr.Time(t)
+			}
+
+		case "inputDataConfig":
+			if err := awsRestjson1_deserializeDocumentModelInvocationJobInputDataConfig(&sv.InputDataConfig, value); err != nil {
+				return err
+			}
+
+		case "jobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
+		case "jobExpirationTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.JobExpirationTime = ptr.Time(t)
+			}
+
+		case "jobName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobName to be of type string, got %T instead", value)
+				}
+				sv.JobName = ptr.String(jtv)
+			}
+
+		case "lastModifiedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastModifiedTime = ptr.Time(t)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "modelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelId to be of type string, got %T instead", value)
+				}
+				sv.ModelId = ptr.String(jtv)
+			}
+
+		case "outputDataConfig":
+			if err := awsRestjson1_deserializeDocumentModelInvocationJobOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
+				return err
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ModelInvocationJobStatus(jtv)
+			}
+
+		case "submitTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.SubmitTime = ptr.Time(t)
+			}
+
+		case "timeoutDurationInHours":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ModelInvocationJobTimeoutDurationInHours to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutDurationInHours = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

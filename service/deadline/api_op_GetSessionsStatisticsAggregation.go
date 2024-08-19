@@ -57,7 +57,14 @@ type GetSessionsStatisticsAggregationInput struct {
 
 type GetSessionsStatisticsAggregationOutput struct {
 
-	// The status of the aggregated results.
+	// The status of the aggregated results. An aggregation may fail or time out if
+	// the results are too large. If this happens, you can call the
+	// StartSessionsStatisticsAggregation operation after you reduce the aggregation
+	// time frame, reduce the number of queues or fleets in the aggregation, or
+	// increase the period length.
+	//
+	// If you call the StartSessionsStatisticsAggregation  operation when the status
+	// is IN_PROGRESS , you will receive a ThrottlingException .
 	//
 	// This member is required.
 	Status types.SessionsStatisticsAggregationStatus

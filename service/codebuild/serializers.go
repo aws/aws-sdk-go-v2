@@ -3826,6 +3826,11 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(*v.FleetServiceRole)
 	}
 
+	if v.ImageId != nil {
+		ok := object.Key("imageId")
+		ok.String(*v.ImageId)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -5135,6 +5140,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if v.FleetServiceRole != nil {
 		ok := object.Key("fleetServiceRole")
 		ok.String(*v.FleetServiceRole)
+	}
+
+	if v.ImageId != nil {
+		ok := object.Key("imageId")
+		ok.String(*v.ImageId)
 	}
 
 	if len(v.OverflowBehavior) > 0 {

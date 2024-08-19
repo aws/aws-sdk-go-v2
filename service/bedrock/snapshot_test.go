@@ -122,6 +122,18 @@ func TestCheckSnapshot_CreateModelCustomizationJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateModelInvocationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateModelInvocationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateModelInvocationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateProvisionedModelThroughput(context.Background(), nil, func(o *Options) {
@@ -254,6 +266,18 @@ func TestCheckSnapshot_GetModelCustomizationJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetModelInvocationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetModelInvocationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetModelInvocationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetModelInvocationLoggingConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetModelInvocationLoggingConfiguration(context.Background(), nil, func(o *Options) {
@@ -350,6 +374,18 @@ func TestCheckSnapshot_ListModelCustomizationJobs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListModelInvocationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListModelInvocationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListModelInvocationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListProvisionedModelThroughputs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProvisionedModelThroughputs(context.Background(), nil, func(o *Options) {
@@ -403,6 +439,18 @@ func TestCheckSnapshot_StopModelCustomizationJob(t *testing.T) {
 	_, err := svc.StopModelCustomizationJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopModelCustomizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopModelInvocationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopModelInvocationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopModelInvocationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -510,6 +558,18 @@ func TestUpdateSnapshot_CreateModelCustomizationJob(t *testing.T) {
 	_, err := svc.CreateModelCustomizationJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateModelCustomizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateModelInvocationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateModelInvocationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateModelInvocationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -649,6 +709,18 @@ func TestUpdateSnapshot_GetModelCustomizationJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetModelInvocationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetModelInvocationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetModelInvocationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetModelInvocationLoggingConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetModelInvocationLoggingConfiguration(context.Background(), nil, func(o *Options) {
@@ -745,6 +817,18 @@ func TestUpdateSnapshot_ListModelCustomizationJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListModelInvocationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListModelInvocationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListModelInvocationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListProvisionedModelThroughputs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProvisionedModelThroughputs(context.Background(), nil, func(o *Options) {
@@ -798,6 +882,18 @@ func TestUpdateSnapshot_StopModelCustomizationJob(t *testing.T) {
 	_, err := svc.StopModelCustomizationJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopModelCustomizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopModelInvocationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopModelInvocationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopModelInvocationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -52,6 +52,10 @@ type GetMonitorOutput struct {
 
 	// The name used to identify the monitor on the Deadline Cloud console.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 

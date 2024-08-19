@@ -233,6 +233,10 @@ type BudgetActionToAdd struct {
 	Type BudgetActionType
 
 	// A description for the budget action to add.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -297,6 +301,10 @@ type BudgetSummary struct {
 
 	// The display name of the budget summary to update.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 
@@ -321,6 +329,13 @@ type BudgetSummary struct {
 	Usages *ConsumedUsages
 
 	// The description of the budget summary.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
+	// Deprecated: ListBudgets no longer supports description. Use GetBudget if
+	// description is needed.
 	Description *string
 
 	// The date and time the resource was updated.
@@ -623,6 +638,10 @@ type FarmSummary struct {
 
 	// The display name of the farm.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 
@@ -826,6 +845,10 @@ type FleetSummary struct {
 	CreatedBy *string
 
 	// The display name of the fleet summary to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	//
 	// This member is required.
 	DisplayName *string
@@ -1347,7 +1370,7 @@ type JobSearchSummary struct {
 	// The task status to start with on the job.
 	TargetTaskRunStatus JobTargetTaskRunStatus
 
-	// task run status for the job.
+	// The task run status for the job.
 	//
 	//   - PENDING –pending and waiting for resources.
 	//
@@ -1585,6 +1608,10 @@ type MonitorSummary struct {
 	CreatedBy *string
 
 	// The name of the monitor that displays on the Deadline Cloud console.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	//
 	// This member is required.
 	DisplayName *string
@@ -1845,6 +1872,10 @@ type QueueSummary struct {
 
 	// The display name of the queue summary to update.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 
@@ -1889,6 +1920,10 @@ type ResponseBudgetAction struct {
 	Type BudgetActionType
 
 	// The budget action description.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -2705,6 +2740,10 @@ type StepSummary struct {
 type StorageProfileSummary struct {
 
 	// The display name of the storage profile summary to update.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	//
 	// This member is required.
 	DisplayName *string

@@ -510,6 +510,26 @@ func (m *validateOpGetFunction) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFunctionRecursionConfig struct {
+}
+
+func (*validateOpGetFunctionRecursionConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFunctionRecursionConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFunctionRecursionConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFunctionRecursionConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFunctionUrlConfig struct {
 }
 
@@ -970,6 +990,26 @@ func (m *validateOpPutFunctionEventInvokeConfig) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutFunctionRecursionConfig struct {
+}
+
+func (*validateOpPutFunctionRecursionConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFunctionRecursionConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFunctionRecursionConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFunctionRecursionConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutProvisionedConcurrencyConfig struct {
 }
 
@@ -1330,6 +1370,10 @@ func addOpGetFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFunction{}, middleware.After)
 }
 
+func addOpGetFunctionRecursionConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFunctionRecursionConfig{}, middleware.After)
+}
+
 func addOpGetFunctionUrlConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFunctionUrlConfig{}, middleware.After)
 }
@@ -1420,6 +1464,10 @@ func addOpPutFunctionConcurrencyValidationMiddleware(stack *middleware.Stack) er
 
 func addOpPutFunctionEventInvokeConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutFunctionEventInvokeConfig{}, middleware.After)
+}
+
+func addOpPutFunctionRecursionConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFunctionRecursionConfig{}, middleware.After)
 }
 
 func addOpPutProvisionedConcurrencyConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1976,6 +2024,21 @@ func validateOpGetFunctionInput(v *GetFunctionInput) error {
 	}
 }
 
+func validateOpGetFunctionRecursionConfigInput(v *GetFunctionRecursionConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFunctionRecursionConfigInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFunctionUrlConfigInput(v *GetFunctionUrlConfigInput) error {
 	if v == nil {
 		return nil
@@ -2334,6 +2397,24 @@ func validateOpPutFunctionEventInvokeConfigInput(v *PutFunctionEventInvokeConfig
 	invalidParams := smithy.InvalidParamsError{Context: "PutFunctionEventInvokeConfigInput"}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFunctionRecursionConfigInput(v *PutFunctionRecursionConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFunctionRecursionConfigInput"}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if len(v.RecursiveLoop) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecursiveLoop"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

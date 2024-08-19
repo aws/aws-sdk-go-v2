@@ -16,6 +16,10 @@ type Application struct {
 	// The Amazon Resource Name (ARN) of the application.
 	Arn *string
 
+	// The Amazon Resource Names of the associated AWS Systems Manager for SAP
+	// applications.
+	AssociatedApplicationArns []string
+
 	// The components of the application.
 	Components []string
 
@@ -243,6 +247,10 @@ type Database struct {
 
 	// The ID of the component.
 	ComponentId *string
+
+	// The Amazon Resource Names of the connected AWS Systems Manager for SAP
+	// components.
+	ConnectedComponentArns []string
 
 	// The credentials of the database.
 	Credentials []ApplicationCredential

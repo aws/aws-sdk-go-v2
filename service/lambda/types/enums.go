@@ -374,6 +374,25 @@ func (ProvisionedConcurrencyStatusEnum) Values() []ProvisionedConcurrencyStatusE
 	}
 }
 
+type RecursiveLoop string
+
+// Enum values for RecursiveLoop
+const (
+	RecursiveLoopAllow     RecursiveLoop = "Allow"
+	RecursiveLoopTerminate RecursiveLoop = "Terminate"
+)
+
+// Values returns all known values for RecursiveLoop. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecursiveLoop) Values() []RecursiveLoop {
+	return []RecursiveLoop{
+		"Allow",
+		"Terminate",
+	}
+}
+
 type ResponseStreamingInvocationType string
 
 // Enum values for ResponseStreamingInvocationType

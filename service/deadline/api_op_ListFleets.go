@@ -35,6 +35,10 @@ type ListFleetsInput struct {
 	FarmId *string
 
 	// The display names of a list of fleets.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	DisplayName *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to

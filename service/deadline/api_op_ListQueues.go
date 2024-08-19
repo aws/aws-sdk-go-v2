@@ -41,8 +41,7 @@ type ListQueuesInput struct {
 	// The token for the next set of results, or null to start from the beginning.
 	NextToken *string
 
-	// The principal ID. This filter is only valid when using Nimble Studio
-	// credentials and should match the user ID in the credentials of the caller.
+	// The principal IDs to include in the list of queues.
 	PrincipalId *string
 
 	// The status of the queues listed.

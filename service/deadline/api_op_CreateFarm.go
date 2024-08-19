@@ -33,6 +33,10 @@ type CreateFarmInput struct {
 
 	// The display name of the farm.
 	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
+	//
 	// This member is required.
 	DisplayName *string
 
@@ -40,6 +44,10 @@ type CreateFarmInput struct {
 	ClientToken *string
 
 	// The description of the farm.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	// The ARN of the KMS key to use on the farm.

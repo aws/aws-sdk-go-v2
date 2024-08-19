@@ -966,6 +966,9 @@ type Fleet struct {
 	// The ID of the compute fleet.
 	Id *string
 
+	// The Amazon Machine Image (AMI) of the compute fleet.
+	ImageId *string
+
 	// The time at which the compute fleet was last modified.
 	LastModified *time.Time
 

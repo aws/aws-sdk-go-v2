@@ -94,6 +94,10 @@ type GetStepOutput struct {
 	DependencyCounts *types.DependencyCounts
 
 	// The description of the step.
+	//
+	// This field can store any content. Escape or encode this content before
+	// displaying it on a webpage or any other system that might interpret the content
+	// of this field.
 	Description *string
 
 	// The date and time the resource ended running.

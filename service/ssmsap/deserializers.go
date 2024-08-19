@@ -3380,6 +3380,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AssociatedApplicationArns":
+			if err := awsRestjson1_deserializeDocumentApplicationArnList(&sv.AssociatedApplicationArns, value); err != nil {
+				return err
+			}
+
 		case "Components":
 			if err := awsRestjson1_deserializeDocumentComponentIdList(&sv.Components, value); err != nil {
 				return err
@@ -3452,6 +3457,42 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentApplicationArnList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SsmSapArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -3910,6 +3951,42 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentComponentArnList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SsmSapArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentComponentIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4139,6 +4216,11 @@ func awsRestjson1_deserializeDocumentDatabase(v **types.Database, value interfac
 					return fmt.Errorf("expected ComponentId to be of type string, got %T instead", value)
 				}
 				sv.ComponentId = ptr.String(jtv)
+			}
+
+		case "ConnectedComponentArns":
+			if err := awsRestjson1_deserializeDocumentComponentArnList(&sv.ConnectedComponentArns, value); err != nil {
+				return err
 			}
 
 		case "Credentials":

@@ -237,6 +237,16 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "budgets.us-isob-east-1.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso-e",

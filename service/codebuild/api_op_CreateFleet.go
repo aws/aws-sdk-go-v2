@@ -124,6 +124,9 @@ type CreateFleetInput struct {
 	// [Allow a user to add a permission policy for a fleet service role]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
 	FleetServiceRole *string
 
+	// The Amazon Machine Image (AMI) of the compute fleet.
+	ImageId *string
+
 	// The compute fleet overflow behavior.
 	//
 	//   - For overflow behavior QUEUE , your overflow builds need to wait on the

@@ -110,6 +110,26 @@ func (m *validateOpCreateModelCustomizationJob) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateModelInvocationJob struct {
+}
+
+func (*validateOpCreateModelInvocationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateModelInvocationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateModelInvocationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateModelInvocationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProvisionedModelThroughput struct {
 }
 
@@ -310,6 +330,26 @@ func (m *validateOpGetModelCustomizationJob) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetModelInvocationJob struct {
+}
+
+func (*validateOpGetModelInvocationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetModelInvocationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetModelInvocationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetModelInvocationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProvisionedModelThroughput struct {
 }
 
@@ -405,6 +445,26 @@ func (m *validateOpStopModelCustomizationJob) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopModelCustomizationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopModelInvocationJob struct {
+}
+
+func (*validateOpStopModelInvocationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopModelInvocationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopModelInvocationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopModelInvocationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +570,10 @@ func addOpCreateModelCustomizationJobValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateModelCustomizationJob{}, middleware.After)
 }
 
+func addOpCreateModelInvocationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateModelInvocationJob{}, middleware.After)
+}
+
 func addOpCreateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProvisionedModelThroughput{}, middleware.After)
 }
@@ -550,6 +614,10 @@ func addOpGetModelCustomizationJobValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetModelCustomizationJob{}, middleware.After)
 }
 
+func addOpGetModelInvocationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetModelInvocationJob{}, middleware.After)
+}
+
 func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProvisionedModelThroughput{}, middleware.After)
 }
@@ -568,6 +636,10 @@ func addOpStopEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopModelCustomizationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopModelCustomizationJob{}, middleware.After)
+}
+
+func addOpStopModelInvocationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopModelInvocationJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1247,6 +1319,74 @@ func validateLoggingConfig(v *types.LoggingConfig) error {
 	}
 }
 
+func validateModelInvocationJobInputDataConfig(v types.ModelInvocationJobInputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelInvocationJobInputDataConfig"}
+	switch uv := v.(type) {
+	case *types.ModelInvocationJobInputDataConfigMemberS3InputDataConfig:
+		if err := validateModelInvocationJobS3InputDataConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3InputDataConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelInvocationJobOutputDataConfig(v types.ModelInvocationJobOutputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelInvocationJobOutputDataConfig"}
+	switch uv := v.(type) {
+	case *types.ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig:
+		if err := validateModelInvocationJobS3OutputDataConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3OutputDataConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelInvocationJobS3InputDataConfig(v *types.ModelInvocationJobS3InputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelInvocationJobS3InputDataConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelInvocationJobS3OutputDataConfig(v *types.ModelInvocationJobS3OutputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelInvocationJobS3OutputDataConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	if v == nil {
 		return nil
@@ -1590,6 +1730,46 @@ func validateOpCreateModelCustomizationJobInput(v *CreateModelCustomizationJobIn
 	}
 }
 
+func validateOpCreateModelInvocationJobInput(v *CreateModelInvocationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateModelInvocationJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateModelInvocationJobInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateModelInvocationJobOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateProvisionedModelThroughputInput(v *CreateProvisionedModelThroughputInput) error {
 	if v == nil {
 		return nil
@@ -1751,6 +1931,21 @@ func validateOpGetModelCustomizationJobInput(v *GetModelCustomizationJobInput) e
 	}
 }
 
+func validateOpGetModelInvocationJobInput(v *GetModelInvocationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetModelInvocationJobInput"}
+	if v.JobIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProvisionedModelThroughputInput(v *GetProvisionedModelThroughputInput) error {
 	if v == nil {
 		return nil
@@ -1820,6 +2015,21 @@ func validateOpStopModelCustomizationJobInput(v *StopModelCustomizationJobInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopModelCustomizationJobInput"}
+	if v.JobIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopModelInvocationJobInput(v *StopModelInvocationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopModelInvocationJobInput"}
 	if v.JobIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
 	}

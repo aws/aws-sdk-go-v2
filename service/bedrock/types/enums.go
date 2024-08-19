@@ -466,6 +466,41 @@ func (ModelCustomizationJobStatus) Values() []ModelCustomizationJobStatus {
 	}
 }
 
+type ModelInvocationJobStatus string
+
+// Enum values for ModelInvocationJobStatus
+const (
+	ModelInvocationJobStatusSubmitted          ModelInvocationJobStatus = "Submitted"
+	ModelInvocationJobStatusInProgress         ModelInvocationJobStatus = "InProgress"
+	ModelInvocationJobStatusCompleted          ModelInvocationJobStatus = "Completed"
+	ModelInvocationJobStatusFailed             ModelInvocationJobStatus = "Failed"
+	ModelInvocationJobStatusStopping           ModelInvocationJobStatus = "Stopping"
+	ModelInvocationJobStatusStopped            ModelInvocationJobStatus = "Stopped"
+	ModelInvocationJobStatusPartiallyCompleted ModelInvocationJobStatus = "PartiallyCompleted"
+	ModelInvocationJobStatusExpired            ModelInvocationJobStatus = "Expired"
+	ModelInvocationJobStatusValidating         ModelInvocationJobStatus = "Validating"
+	ModelInvocationJobStatusScheduled          ModelInvocationJobStatus = "Scheduled"
+)
+
+// Values returns all known values for ModelInvocationJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelInvocationJobStatus) Values() []ModelInvocationJobStatus {
+	return []ModelInvocationJobStatus{
+		"Submitted",
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Stopping",
+		"Stopped",
+		"PartiallyCompleted",
+		"Expired",
+		"Validating",
+		"Scheduled",
+	}
+}
+
 type ModelModality string
 
 // Enum values for ModelModality
@@ -507,6 +542,23 @@ func (ProvisionedModelStatus) Values() []ProvisionedModelStatus {
 		"InService",
 		"Updating",
 		"Failed",
+	}
+}
+
+type S3InputFormat string
+
+// Enum values for S3InputFormat
+const (
+	S3InputFormatJsonl S3InputFormat = "JSONL"
+)
+
+// Values returns all known values for S3InputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3InputFormat) Values() []S3InputFormat {
+	return []S3InputFormat{
+		"JSONL",
 	}
 }
 
