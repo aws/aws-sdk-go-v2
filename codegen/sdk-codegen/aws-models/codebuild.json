@@ -2902,6 +2902,12 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
                 },
+                "imageId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Machine Image (AMI) of the compute fleet.</p>"
+                    }
+                },
                 "fleetServiceRole": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
@@ -3952,6 +3958,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ARM_LAMBDA_CONTAINER"
                     }
+                },
+                "MAC_ARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAC_ARM"
+                    }
                 }
             }
         },
@@ -4133,6 +4145,12 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
                 },
+                "imageId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Machine Image (AMI) of the compute fleet.</p>"
+                    }
+                },
                 "fleetServiceRole": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
@@ -4189,6 +4207,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ACTION_REQUIRED"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                },
+                "INSUFFICIENT_CAPACITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_CAPACITY"
                     }
                 }
             }
@@ -8548,6 +8578,12 @@
                 },
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "imageId": {
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Machine Image (AMI) of the compute fleet.</p>"
+                    }
                 },
                 "fleetServiceRole": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",

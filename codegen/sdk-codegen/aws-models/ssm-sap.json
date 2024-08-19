@@ -92,10 +92,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status message.</p>"
                     }
+                },
+                "AssociatedApplicationArns": {
+                    "target": "com.amazonaws.ssmsap#ApplicationArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names of the associated AWS Systems Manager for SAP\n         applications.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An SAP application registered with AWS Systems Manager for SAP.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#SsmSapArn"
             }
         },
         "com.amazonaws.ssmsap#ApplicationCredential": {
@@ -177,7 +189,11 @@
         "com.amazonaws.ssmsap#ApplicationId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[\\w\\d]{1,50}$"
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60
+                },
+                "smithy.api#pattern": "^[\\w\\d\\.-]+$"
             }
         },
         "com.amazonaws.ssmsap#ApplicationStatus": {
@@ -534,9 +550,19 @@
                 "smithy.api#documentation": "<p>The SAP component of your application.</p>"
             }
         },
+        "com.amazonaws.ssmsap#ComponentArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#SsmSapArn"
+            }
+        },
         "com.amazonaws.ssmsap#ComponentId": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
                 "smithy.api#pattern": "^[\\w\\d-]+$"
             }
         },
@@ -793,6 +819,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the database was last updated.</p>"
                     }
+                },
+                "ConnectedComponentArns": {
+                    "target": "com.amazonaws.ssmsap#ComponentArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names of the connected AWS Systems Manager for SAP\n         components.</p>"
+                    }
                 }
             },
             "traits": {
@@ -845,6 +877,10 @@
         "com.amazonaws.ssmsap#DatabaseId": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                },
                 "smithy.api#pattern": "[\\w\\d]+$"
             }
         },
@@ -1865,7 +1901,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of operations events.</p>\n         <p>Available parameters include <code>OperationID</code>, as well as optional parameters\n            <code>MaxResults</code>, <code>NextToken</code>, and\n         <code>Filters</code>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of operations events.</p>\n         <p>Available parameters include <code>OperationID</code>, as well as optional parameters\n            <code>MaxResults</code>, <code>NextToken</code>, and <code>Filters</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1900,13 +1936,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. \n         This value is null when there are no more results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.ssmsap#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optionally specify filters to narrow the returned operation \n      event items.</p>\n         <p>Valid filter names include <code>status</code>, <code>resourceID</code>, \n      and <code>resourceType</code>. The valid operator for all three filters \n      is <code>Equals</code>.</p>"
+                        "smithy.api#documentation": "<p>Optionally specify filters to narrow the returned operation event items.</p>\n         <p>Valid filter names include <code>status</code>, <code>resourceID</code>, and\n            <code>resourceType</code>. The valid operator for all three filters is\n            <code>Equals</code>.</p>"
                     }
                 }
             },
@@ -1920,7 +1956,7 @@
                 "OperationEvents": {
                     "target": "com.amazonaws.ssmsap#OperationEventList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A returned list of operation events that \n         meet the filter criteria.</p>"
+                        "smithy.api#documentation": "<p>A returned list of operation events that meet the filter criteria.</p>"
                     }
                 },
                 "NextToken": {
@@ -2162,7 +2198,7 @@
                 "Description": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the operation event. For example, \n         \"Stop the EC2 instance i-abcdefgh987654321\".</p>"
+                        "smithy.api#documentation": "<p>A description of the operation event. For example, \"Stop the EC2 instance\n         i-abcdefgh987654321\".</p>"
                     }
                 },
                 "Resource": {
@@ -2174,13 +2210,13 @@
                 "Status": {
                     "target": "com.amazonaws.ssmsap#OperationEventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the operation event. The possible statuses \n         are: <code>IN_PROGRESS</code>, \n         <code>COMPLETED</code>, and <code>FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>The status of the operation event. The possible statuses are: <code>IN_PROGRESS</code>,\n            <code>COMPLETED</code>, and <code>FAILED</code>.</p>"
                     }
                 },
                 "StatusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status message relating to a specific \n         operation event.</p>"
+                        "smithy.api#documentation": "<p>The status message relating to a specific operation event.</p>"
                     }
                 },
                 "Timestamp": {
@@ -2191,7 +2227,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An operation event returns details for an operation, including \n      key milestones which can be used to monitor and track operations \n      in progress.</p>\n         <p>Operation events contain:</p>\n         <ul>\n            <li>\n               <p>Description string</p>\n            </li>\n            <li>\n               <p>Resource, including its ARN and type</p>\n            </li>\n            <li>\n               <p>Status</p>\n            </li>\n            <li>\n               <p>StatusMessage string</p>\n            </li>\n            <li>\n               <p>TimeStamp</p>\n            </li>\n         </ul>\n         <p>Operation event examples include StartApplication or \n         StopApplication.</p>"
+                "smithy.api#documentation": "<p>An operation event returns details for an operation, including key milestones which can\n         be used to monitor and track operations in progress.</p>\n         <p>Operation events contain:</p>\n         <ul>\n            <li>\n               <p>Description string</p>\n            </li>\n            <li>\n               <p>Resource, including its ARN and type</p>\n            </li>\n            <li>\n               <p>Status</p>\n            </li>\n            <li>\n               <p>StatusMessage string</p>\n            </li>\n            <li>\n               <p>TimeStamp</p>\n            </li>\n         </ul>\n         <p>Operation event examples include StartApplication or StopApplication.</p>"
             }
         },
         "com.amazonaws.ssmsap#OperationEventList": {
@@ -2581,18 +2617,18 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.ssmsap#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source resource.</p>\n         <p>Example of <code>ResourceArn</code>: \n         \"<code>arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321</code>\"</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source resource.</p>\n         <p>Example of <code>ResourceArn</code>:\n            \"<code>arn:aws:ec2:us-east-1:111111111111:instance/i-abcdefgh987654321</code>\"</p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.ssmsap#OperationEventResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Example of <code>ResourceType</code>: \"<code>AWS::SystemsManagerSAP::Component</code>\" \n         or \"<code>AWS::EC2::Instance</code>\".</p>"
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Example of <code>ResourceType</code>: \"<code>AWS::SystemsManagerSAP::Component</code>\"\n         or \"<code>AWS::EC2::Instance</code>\".</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The resource contains a <code>ResourceArn</code> \n         and the <code>ResourceType</code>.</p>"
+                "smithy.api#documentation": "<p>The resource contains a <code>ResourceArn</code> and the\n         <code>ResourceType</code>.</p>"
             }
         },
         "com.amazonaws.ssmsap#ResourceId": {
@@ -3559,7 +3595,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Request is an operation to stop an application.</p>\n         <p>Parameter <code>ApplicationId</code> is required. \n         Parameters <code>StopConnectedEntity</code> and \n         <code>IncludeEc2InstanceShutdown</code> are optional.</p>",
+                "smithy.api#documentation": "<p>Request is an operation to stop an application.</p>\n         <p>Parameter <code>ApplicationId</code> is required. Parameters\n            <code>StopConnectedEntity</code> and <code>IncludeEc2InstanceShutdown</code> are\n         optional.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -3580,13 +3616,13 @@
                 "StopConnectedEntity": {
                     "target": "com.amazonaws.ssmsap#ConnectedEntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the <code>ConnectedEntityType</code>. Accepted type \n      is <code>DBMS</code>.</p>\n         <p>If this parameter is included, the connected DBMS (Database \n      Management System) will be stopped.</p>"
+                        "smithy.api#documentation": "<p>Specify the <code>ConnectedEntityType</code>. Accepted type is <code>DBMS</code>.</p>\n         <p>If this parameter is included, the connected DBMS (Database Management System) will be\n         stopped.</p>"
                     }
                 },
                 "IncludeEc2InstanceShutdown": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean. If included and if set to <code>True</code>, the \n         StopApplication operation will shut down the associated Amazon EC2 instance in addition to \n         the application.</p>"
+                        "smithy.api#documentation": "<p>Boolean. If included and if set to <code>True</code>, the StopApplication operation will\n         shut down the associated Amazon EC2 instance in addition to the application.</p>"
                     }
                 }
             },

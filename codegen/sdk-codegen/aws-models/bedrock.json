@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.bedrock#ModelCopyResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobResource"
+                },
+                {
                     "target": "com.amazonaws.bedrock#ModelResource"
                 },
                 {
@@ -1457,6 +1460,124 @@
                     "target": "com.amazonaws.bedrock#ModelCustomizationJobArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the fine tuning job</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateModelInvocationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#CreateModelInvocationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#CreateModelInvocationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a job to invoke a model on multiple prompts (batch inference). Format your data according to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-prerq.html#batch-inference-data\">Format your inference data</a> and upload it to an Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-create.html\">Create a batch inference job</a>.</p>\n         <p>The response returns a <code>jobArn</code> that you can use to stop or get details about the job. You can check the status of the job by sending a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetModelCustomizationJob.html\">GetModelCustomizationJob</a> request.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/model-invocation-job"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateModelInvocationJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name to give the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.bedrock#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html\">Create a service role for batch inference</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n\t       Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.bedrock#ModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the foundation model to use for the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobInputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the location of the input to the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the location of the output of the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeoutDurationInHours": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobTimeoutDurationInHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours after which to force the batch inference job to time out.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrock#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags to associate with the batch inference job. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html\">Tagging Amazon Bedrock resources</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateModelInvocationJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch inference job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3493,6 +3614,155 @@
                     "target": "com.amazonaws.bedrock#VpcConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>VPC configuration for the custom model job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetModelInvocationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetModelInvocationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetModelInvocationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details about a batch inference job. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-view\">View details about a batch inference job</a>\n         </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/model-invocation-job/{jobIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetModelInvocationJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobIdentifier": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch inference job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetModelInvocationJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the batch inference job.</p>"
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.bedrock#ModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the foundation model used for model inference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n\t       Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.bedrock#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html\">Create a service role for batch inference</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the batch inference job.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.bedrock#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the batch inference job failed, this field contains a message describing why the job failed.</p>"
+                    }
+                },
+                "submitTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job was submitted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job was last modified.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job ended.</p>"
+                    }
+                },
+                "inputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobInputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the location of the input to the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the location of the output of the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeoutDurationInHours": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobTimeoutDurationInHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours after which batch inference job was set to time out.</p>"
+                    }
+                },
+                "jobExpirationTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job times or timed out.</p>"
                     }
                 }
             },
@@ -5902,6 +6172,128 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#ListModelInvocationJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ListModelInvocationJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ListModelInvocationJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all batch inference jobs in the account. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-view\">View details about a batch inference job</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/model-invocation-jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "invocationJobSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListModelInvocationJobsRequest": {
+            "type": "structure",
+            "members": {
+                "submitTimeAfter": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a time to filter for batch inference jobs that were submitted after the time you specify.</p>",
+                        "smithy.api#httpQuery": "submitTimeAfter"
+                    }
+                },
+                "submitTimeBefore": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a time to filter for batch inference jobs that were submitted before the time you specify.</p>",
+                        "smithy.api#httpQuery": "submitTimeBefore"
+                    }
+                },
+                "statusEquals": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a status to filter for batch inference jobs whose statuses match the string you specify.</p>",
+                        "smithy.api#httpQuery": "statusEquals"
+                    }
+                },
+                "nameContains": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a string to filter for batch inference jobs whose names contain the string.</p>",
+                        "smithy.api#httpQuery": "nameContains"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrock#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. If there are more results than the number that you specify, a <code>nextToken</code> value is returned. Use the <code>nextToken</code> in a request to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there were more results than the value you specified\n            in the <code>maxResults</code> field in a previous <code>ListModelInvocationJobs</code> request, the response would have returned a <code>nextToken</code>\n            value. To see the next batch of results, send the\n            <code>nextToken</code> value in another\n            request.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.bedrock#SortJobsBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute by which to sort the results.</p>",
+                        "smithy.api#httpQuery": "sortBy"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.bedrock#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the results by ascending or descending order.</p>",
+                        "smithy.api#httpQuery": "sortOrder"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListModelInvocationJobsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more results than can fit in the response, a <code>nextToken</code> is returned. Use the <code>nextToken</code> in a request to return the next batch of results.</p>"
+                    }
+                },
+                "invocationJobSummaries": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items, each of which contains a summary about a batch inference job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#ListProvisionedModelThroughputs": {
             "type": "operation",
             "input": {
@@ -6162,6 +6554,15 @@
                     "min": 1,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.bedrock#Message": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrock#MetricFloat": {
@@ -6473,6 +6874,16 @@
                 "target": "com.amazonaws.bedrock#ModelCustomization"
             }
         },
+        "com.amazonaws.bedrock#ModelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-:]{1,63}/[a-z0-9]{12}$)|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}$)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"
+            }
+        },
         "com.amazonaws.bedrock#ModelIdentifier": {
             "type": "string",
             "traits": {
@@ -6481,6 +6892,310 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationIdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,256}(-*[a-zA-Z0-9]){0,256}$"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:model-invocation-job/[a-z0-9]{12})$"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^((arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:model-invocation-job/)?[a-z0-9]{12})$"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobInputDataConfig": {
+            "type": "union",
+            "members": {
+                "s3InputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobS3InputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration of the S3 location of the input data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the location of the input to the batch inference job.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,63}(-*[a-zA-Z0-9\\+\\-\\.]){0,63}$"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobOutputDataConfig": {
+            "type": "union",
+            "members": {
+                "s3OutputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobS3OutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration of the S3 location of the output data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration of the S3 location of the output data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#CreateModelInvocationJob"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetModelInvocationJob"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ListModelInvocationJobs"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#StopModelInvocationJob"
+                }
+            ]
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobS3InputDataConfig": {
+            "type": "structure",
+            "members": {
+                "s3InputFormat": {
+                    "target": "com.amazonaws.bedrock#S3InputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the input data.</p>"
+                    }
+                },
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrock#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the input data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration of the S3 location of the output data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobS3OutputDataConfig": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrock#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the output data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3EncryptionKeyId": {
+                    "target": "com.amazonaws.bedrock#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the key that encrypts the S3 location of the output data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration of the S3 location of the output data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobStatus": {
+            "type": "enum",
+            "members": {
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Submitted"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                },
+                "PARTIALLY_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PartiallyCompleted"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Expired"
+                    }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Validating"
+                    }
+                },
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#ModelInvocationJobSummary"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobSummary": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.bedrock#ModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the foundation model used for model inference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n\t       Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.bedrock#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html\">Create a service role for batch inference</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the batch inference job.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.bedrock#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the batch inference job failed, this field contains a message describing why the job failed.</p>"
+                    }
+                },
+                "submitTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job was submitted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job was last modified.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job ended.</p>"
+                    }
+                },
+                "inputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobInputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the location of the input to the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the location of the output of the batch inference job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeoutDurationInHours": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobTimeoutDurationInHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of hours after which the batch inference job was set to time out.</p>"
+                    }
+                },
+                "jobExpirationTime": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch inference job times or timed out.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a batch inference job.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ModelInvocationJobTimeoutDurationInHours": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 24,
+                    "max": 168
+                }
             }
         },
         "com.amazonaws.bedrock#ModelModality": {
@@ -6824,6 +7539,7 @@
         "com.amazonaws.bedrock#RoleArn": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "ARN of a IAM role",
                 "smithy.api#length": {
                     "max": 2048
                 },
@@ -6849,6 +7565,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>S3 configuration for storing log data.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#S3InputFormat": {
+            "type": "enum",
+            "members": {
+                "JSONL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONL"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrock#S3Uri": {
@@ -7075,6 +7802,66 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#StopModelInvocationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#StopModelInvocationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#StopModelInvocationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a batch inference job. You're only charged for tokens that were already processed. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-stop\">Stop a batch inference job</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/model-invocation-job/{jobIdentifier}/stop"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#StopModelInvocationJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobIdentifier": {
+                    "target": "com.amazonaws.bedrock#ModelInvocationJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch inference job to stop.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#StopModelInvocationJobResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#SubnetId": {
             "type": "string",
             "traits": {
@@ -7238,7 +8025,7 @@
                     "min": 20,
                     "max": 1011
                 },
-                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job|custom-model)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:provisioned-model/[a-z0-9]{12}$)|(:guardrail/[a-z0-9]+$)|(:evaluation-job/[a-z0-9]{12}$)))"
+                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job|custom-model)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:guardrail/[a-z0-9]+$)|(:(provisioned-model|model-invocation-job|model-evaluation-job|evaluation-job|model-import-job|imported-model)/[a-z0-9]{12}$)))"
             }
         },
         "com.amazonaws.bedrock#TaggingResource": {

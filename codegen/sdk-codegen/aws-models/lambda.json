@@ -112,6 +112,9 @@
                     "target": "com.amazonaws.lambda#GetFunctionEventInvokeConfig"
                 },
                 {
+                    "target": "com.amazonaws.lambda#GetFunctionRecursionConfig"
+                },
+                {
                     "target": "com.amazonaws.lambda#GetFunctionUrlConfig"
                 },
                 {
@@ -191,6 +194,9 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#PutFunctionEventInvokeConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PutFunctionRecursionConfig"
                 },
                 {
                     "target": "com.amazonaws.lambda#PutProvisionedConcurrencyConfig"
@@ -2560,7 +2566,7 @@
                 "MaximumBatchingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumBatchingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For Kinesis, DynamoDB, and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
                     }
                 },
                 "ParallelizationFactor": {
@@ -2729,7 +2735,7 @@
                 "Runtime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">\n          runtime</a>. Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in\n          an error if you're deploying a function using a container image.</p>\n         <p>The following list includes deprecated runtimes. Lambda blocks creating new functions and updating existing\n          functions shortly after each runtime is deprecated. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>"
                     }
                 },
                 "Role": {
@@ -4318,7 +4324,7 @@
                 "Runtime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">\n          runtime</a>. Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in\n          an error if you're deploying a function using a container image.</p>\n         <p>The following list includes deprecated runtimes. Lambda blocks creating new functions and updating existing\n          functions shortly after each runtime is deprecated. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>"
                     }
                 },
                 "Role": {
@@ -5396,6 +5402,67 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.lambda#GetFunctionRecursionConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#GetFunctionRecursionConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#GetFunctionRecursionConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html\">recursive loop detection</a> configuration. \n    </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2024-08-31/functions/{FunctionName}/recursion-config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#GetFunctionRecursionConfigRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#UnqualifiedFunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lambda#GetFunctionRecursionConfigResponse": {
+            "type": "structure",
+            "members": {
+                "RecursiveLoop": {
+                    "target": "com.amazonaws.lambda#RecursiveLoop",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your function's recursive loop detection configuration is <code>Allow</code>, Lambda doesn't take any action when it \n    detects your function being invoked as part of a recursive loop.</p>\n         <p>If your function's recursive loop detection configuration is <code>Terminate</code>, Lambda stops your function being \n      invoked and notifies you when it detects your function being invoked as part of a recursive loop.</p>\n         <p>By default, Lambda sets your function's configuration to <code>Terminate</code>. You can update this \n      configuration using the <a>PutFunctionRecursionConfig</a> action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lambda#GetFunctionRequest": {
             "type": "structure",
             "members": {
@@ -5782,7 +5849,7 @@
                 "CompatibleRuntimes": {
                     "target": "com.amazonaws.lambda#CompatibleRuntimes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
+                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>"
                     }
                 },
                 "LicenseInfo": {
@@ -7296,7 +7363,7 @@
                 "CompatibleRuntimes": {
                     "target": "com.amazonaws.lambda#CompatibleRuntimes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
+                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>"
                     }
                 },
                 "LicenseInfo": {
@@ -8016,7 +8083,7 @@
                 "CompatibleRuntime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>java21</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
+                        "smithy.api#documentation": "<p>A runtime identifier.</p>\n         <p>The following list includes deprecated runtimes. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>",
                         "smithy.api#httpQuery": "CompatibleRuntime"
                     }
                 },
@@ -8114,7 +8181,7 @@
                 "CompatibleRuntime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>java21</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
+                        "smithy.api#documentation": "<p>A runtime identifier.</p>\n         <p>The following list includes deprecated runtimes. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>",
                         "smithy.api#httpQuery": "CompatibleRuntime"
                     }
                 },
@@ -8786,7 +8853,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The RevisionId provided does not match the latest RevisionId for the Lambda function or alias. Call the <code>GetFunction</code> or the <code>GetAlias</code>\n      API operation to retrieve the latest RevisionId for your resource.</p>",
+                "smithy.api#documentation": "<p>The RevisionId provided does not match the latest RevisionId for the Lambda function or alias.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>For AddPermission and RemovePermission API operations:</b> Call <code>GetPolicy</code> to retrieve the latest RevisionId for your resource.</p>\n            </li>\n            <li>\n               <p>\n                  <b>For all other API operations:</b> Call <code>GetFunction</code> or <code>GetAlias</code> to retrieve the latest RevisionId for your resource.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 412
             }
@@ -9026,7 +9093,7 @@
                 "CompatibleRuntimes": {
                     "target": "com.amazonaws.lambda#CompatibleRuntimes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
+                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>"
                     }
                 },
                 "LicenseInfo": {
@@ -9334,6 +9401,77 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.lambda#PutFunctionRecursionConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#PutFunctionRecursionConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#PutFunctionRecursionConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html\">recursive loop detection</a> configuration.</p>\n         <p>When you configure a Lambda function to output to the same service or resource that invokes the function, it's possible to create \n      an infinite recursive loop. For example, a Lambda function might write a message to an Amazon Simple Queue Service (Amazon SQS) queue, which then invokes the same \n      function. This invocation causes the function to write another message to the queue, which in turn invokes the function again.</p>\n         <p>Lambda can detect certain types of recursive loops shortly after they occur. When Lambda detects a recursive loop and your \n      function's recursive loop detection configuration is set to <code>Terminate</code>, it stops your function being invoked and notifies\n      you.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2024-08-31/functions/{FunctionName}/recursion-config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#PutFunctionRecursionConfigRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#UnqualifiedFunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ARN of the Lambda function.</p>\n         <p class=\"title\">\n            <b>Name formats</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function name</b> – <code>my-function</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Function ARN</b> – <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Partial ARN</b> – <code>123456789012:function:my-function</code>.</p>\n            </li>\n         </ul>\n         <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64\n      characters in length.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecursiveLoop": {
+                    "target": "com.amazonaws.lambda#RecursiveLoop",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you set your function's recursive loop detection configuration to <code>Allow</code>, Lambda doesn't take any action when it \n      detects your function being invoked as part of a recursive loop. We recommend that you only use this setting if your design intentionally uses a \n    Lambda function to write data back to the same Amazon Web Services resource that invokes it.</p>\n         <p>If you set your function's recursive loop detection configuration to <code>Terminate</code>, Lambda stops your function being \n      invoked and notifies you when it detects your function being invoked as part of a recursive loop.</p>\n         <p>By default, Lambda sets your function's configuration to <code>Terminate</code>.</p>\n         <important>\n            <p>If your design intentionally uses a Lambda function to write data back to the same Amazon Web Services resource that invokes\n        the function, then use caution and implement suitable guard rails to prevent unexpected charges being billed to\n        your Amazon Web Services account. To learn more about best practices for using recursive invocation patterns, see <a href=\"https://serverlessland.com/content/service/lambda/guides/aws-lambda-operator-guide/recursive-runaway\">Recursive patterns that cause\n          run-away Lambda functions</a> in Serverless Land.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lambda#PutFunctionRecursionConfigResponse": {
+            "type": "structure",
+            "members": {
+                "RecursiveLoop": {
+                    "target": "com.amazonaws.lambda#RecursiveLoop",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of your function's recursive loop detection configuration.</p>\n         <p>When this value is set to <code>Allow</code>and Lambda detects your function being invoked as part of a recursive \n      loop, it doesn't take any action.</p>\n         <p>When this value is set to <code>Terminate</code> and Lambda detects your function being invoked as part of a recursive \n      loop, it stops your function being invoked and notifies you.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lambda#PutProvisionedConcurrencyConfig": {
             "type": "operation",
             "input": {
@@ -9593,6 +9731,23 @@
                 "smithy.api#documentation": "<p>Lambda has detected your function being invoked in a recursive loop with other Amazon Web Services resources and stopped your function's invocation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.lambda#RecursiveLoop": {
+            "type": "enum",
+            "members": {
+                "Allow": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Allow"
+                    }
+                },
+                "Terminate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terminate"
+                    }
+                }
             }
         },
         "com.amazonaws.lambda#RemoveLayerVersionPermission": {
@@ -10985,6 +11140,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$"
             }
         },
+        "com.amazonaws.lambda#UnqualifiedFunctionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                },
+                "smithy.api#pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)$"
+            }
+        },
         "com.amazonaws.lambda#UnreservedConcurrentExecutions": {
             "type": "integer",
             "traits": {
@@ -11304,7 +11469,7 @@
                 "MaximumBatchingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumBatchingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For streams and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  You can configure <code>MaximumBatchingWindowInSeconds</code> to any value from 0 seconds to 300 seconds in increments of seconds.</p>\n         <p>For Kinesis, DynamoDB, and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default\n  batching window is 500 ms. Note that because you can only change <code>MaximumBatchingWindowInSeconds</code> in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it.\n  To restore the default batching window, you must create a new event source mapping.</p>\n         <p>Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources, when you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>"
                     }
                 },
                 "DestinationConfig": {
@@ -11595,7 +11760,7 @@
                 "Runtime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">\n          runtime</a>. Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in\n          an error if you're deploying a function using a container image.</p>\n         <p>The following list includes deprecated runtimes. Lambda blocks creating new functions and updating existing\n          functions shortly after each runtime is deprecated. For more information, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels\">Runtime use after deprecation</a>.</p>\n         <p>For a list of all currently supported runtimes, see\n          <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported\">Supported runtimes</a>.</p>"
                     }
                 },
                 "DeadLetterConfig": {
