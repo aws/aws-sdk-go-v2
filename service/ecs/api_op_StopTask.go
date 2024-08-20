@@ -13,11 +13,12 @@ import (
 
 // Stops a running task. Any tags associated with the task will be deleted.
 //
-// When StopTask is called on a task, the equivalent of docker stop is issued to the
-// containers running in the task. This results in a SIGTERM value and a default
-// 30-second timeout, after which the SIGKILL value is sent and the containers are
-// forcibly stopped. If the container handles the SIGTERM value gracefully and
-// exits within 30 seconds from receiving it, no SIGKILL value is sent.
+// When you call StopTask on a task, the equivalent of docker stop is issued to
+// the containers running in the task. This results in a SIGTERM value and a
+// default 30-second timeout, after which the SIGKILL value is sent and the
+// containers are forcibly stopped. If the container handles the SIGTERM value
+// gracefully and exits within 30 seconds from receiving it, no SIGKILL value is
+// sent.
 //
 // For Windows containers, POSIX signals do not work and runtime stops the
 // container by sending a CTRL_SHUTDOWN_EVENT . For more information, see [Unable to react to graceful shutdown of (Windows) container #25982] on
@@ -57,8 +58,10 @@ type StopTaskInput struct {
 
 	// An optional message specified when a task is stopped. For example, if you're
 	// using a custom scheduler, you can use this parameter to specify the reason for
-	// stopping the task here, and the message appears in subsequent DescribeTasksAPI operations on
-	// this task.
+	// stopping the task here, and the message appears in subsequent [DescribeTasks]> API operations
+	// on this task.
+	//
+	// [DescribeTasks]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
 	Reason *string
 
 	noSmithyDocumentSerde

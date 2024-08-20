@@ -13,9 +13,9 @@ import (
 
 // Creates a new Amazon ECS cluster. By default, your account receives a default
 // cluster when you launch your first container instance. However, you can create
-// your own cluster with a unique name with the CreateCluster action.
+// your own cluster with a unique name.
 //
-// When you call the CreateCluster API operation, Amazon ECS attempts to create the Amazon ECS
+// When you call the [CreateCluster] API operation, Amazon ECS attempts to create the Amazon ECS
 // service-linked role for your account. This is so that it can manage required
 // resources in other Amazon Web Services services on your behalf. However, if the
 // user that makes the call doesn't have permissions to create the service-linked
@@ -23,6 +23,7 @@ import (
 // Container Service Developer Guide.
 //
 // [Using service-linked roles for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+// [CreateCluster]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -76,9 +77,10 @@ type CreateClusterInput struct {
 	// capacity provider strategy for the cluster is used.
 	//
 	// If a default capacity provider strategy isn't defined for a cluster when it was
-	// created, it can be defined later with the PutClusterCapacityProvidersAPI operation.
+	// created, it can be defined later with the [PutClusterCapacityProviders]API operation.
 	//
 	// [CreateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+	// [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
 	// [RunTask]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
 
@@ -102,7 +104,10 @@ type CreateClusterInput struct {
 
 	// The setting to use when creating a cluster. This parameter is used to turn on
 	// CloudWatch Container Insights for a cluster. If this value is specified, it
-	// overrides the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.
+	// overrides the containerInsights value set with [PutAccountSetting] or [PutAccountSettingDefault].
+	//
+	// [PutAccountSettingDefault]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html
+	// [PutAccountSetting]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html
 	Settings []types.ClusterSetting
 
 	// The metadata that you apply to the cluster to help you categorize and organize

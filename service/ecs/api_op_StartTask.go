@@ -26,8 +26,8 @@ import (
 // who have used Amazon EI at least once during the past 30-day period are
 // considered current customers and will be able to continue using the service.
 //
-// Alternatively, you can use RunTask to place tasks for you. For more information, see [Scheduling Tasks]
-// in the Amazon Elastic Container Service Developer Guide.
+// Alternatively, you can use RunTask to place tasks for you. For more
+// information, see [Scheduling Tasks]in the Amazon Elastic Container Service Developer Guide.
 //
 // You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume
 // when creating or updating a service. For more infomation, see [Amazon EBS volumes]in the Amazon

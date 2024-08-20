@@ -199,6 +199,11 @@ func awsRestxml_serializeOpHttpBindingsCompleteMultipartUploadInput(v *CompleteM
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+		locationName := "If-None-Match"
+		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
+	}
+
 	if v.Key == nil || len(*v.Key) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
 	}
@@ -6998,6 +7003,11 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	if v.GrantWriteACP != nil && len(*v.GrantWriteACP) > 0 {
 		locationName := "X-Amz-Grant-Write-Acp"
 		encoder.SetHeader(locationName).String(*v.GrantWriteACP)
+	}
+
+	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+		locationName := "If-None-Match"
+		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
 	}
 
 	if v.Key == nil || len(*v.Key) == 0 {
