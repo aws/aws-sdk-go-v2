@@ -1,8 +1,0 @@
-{
-    "id": "2f08f362-82c3-499c-a82a-b34a3492176c",
-    "type": "feature",
-    "description": "Amazon Simple Storage Service / Features : Add support for conditional writes for PutObject and CompleteMultipartUpload APIs.",
-    "modules": [
-        "service/s3"
-    ]
-}

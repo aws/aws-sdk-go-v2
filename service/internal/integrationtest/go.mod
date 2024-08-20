@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.4
 	github.com/aws/aws-sdk-go-v2/config v1.27.28
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.11
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/acm v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.1
@@ -32,7 +32,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.5
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.175.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.32.1
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.45.0
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.4
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.40.6
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.26.3
@@ -64,7 +64,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.42.4
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.30.4
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.59.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.30.4

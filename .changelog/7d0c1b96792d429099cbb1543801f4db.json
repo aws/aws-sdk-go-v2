@@ -1,8 +1,0 @@
-{
-    "id": "7d0c1b96-792d-4290-99cb-b1543801f4db",
-    "type": "feature",
-    "description": "Added FailureCode and FailureMessage to BatchGetCollectionResponse for BatchGetVPCEResponse for non-Active Collection and VPCE.",
-    "modules": [
-        "service/opensearchserverless"
-    ]
-}

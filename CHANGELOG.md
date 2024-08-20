@@ -1,3 +1,16 @@
+# Release (2024-08-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.45.1](service/ecs/CHANGELOG.md#v1451-2024-08-20)
+  * **Documentation**: Documentation only release to address various tickets
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.14.0](service/opensearchserverless/CHANGELOG.md#v1140-2024-08-20)
+  * **Feature**: Added FailureCode and FailureMessage to BatchGetCollectionResponse for BatchGetVPCEResponse for non-Active Collection and VPCE.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.60.0](service/s3/CHANGELOG.md#v1600-2024-08-20)
+  * **Feature**: Amazon Simple Storage Service / Features : Add support for conditional writes for PutObject and CompleteMultipartUpload APIs.
+
 # Release (2024-08-19)
 
 ## Module Highlights
