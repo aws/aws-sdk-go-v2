@@ -526,6 +526,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Collection-specific endpoint used to access OpenSearch Dashboards.</p>"
                     }
+                },
+                "failureCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A failure code associated with the request.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the failure code.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3622,17 +3634,6 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
                         }
                     ],
                     "version": "1.0"
@@ -3690,7 +3691,7 @@
         "com.amazonaws.opensearchserverless#ResourceName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^index/[a-z][a-z0-9-]{3,32}/([a-z;0-9&$%][+.~=\\-_a-z;0-9&$%]*|\\*)$"
+                "smithy.api#pattern": "^index/[a-z][a-z0-9-]{3,32}/([a-z;0-9&$%][+.~=\\-_a-z;0-9&$%]*)$"
             }
         },
         "com.amazonaws.opensearchserverless#ResourceNotFoundException": {
@@ -5060,6 +5061,18 @@
                     "target": "smithy.api#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>The date the endpoint was created.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A failure code associated with the request.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the failure code.</p>"
                     }
                 }
             },
