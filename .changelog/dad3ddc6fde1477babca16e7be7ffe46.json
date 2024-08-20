@@ -1,0 +1,8 @@
+{
+    "id": "dad3ddc6-fde1-477b-abca-16e7be7ffe46",
+    "type": "feature",
+    "description": "Remove deprecated `codestar` service.",
+    "modules": [
+        "."
+    ]
+}
