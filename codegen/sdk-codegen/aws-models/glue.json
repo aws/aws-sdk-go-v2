@@ -9114,6 +9114,12 @@
                         "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
                     }
                 },
+                "JobRunQueuingEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether job run queuing is enabled for the job runs for this job.</p>\n         <p>A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.</p>\n         <p>If this field does not match the value set in the job run, then the value from the job run field will be used.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.glue#DescriptionString",
                     "traits": {
@@ -22978,6 +22984,12 @@
                         "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
                     }
                 },
+                "JobRunQueuingEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether job run queuing is enabled for the job runs for this job.</p>\n         <p>A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.</p>\n         <p>If this field does not match the value set in the job run, then the value from the job run field will be used.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.glue#DescriptionString",
                     "traits": {
@@ -23346,6 +23358,12 @@
                         "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
                     }
                 },
+                "JobRunQueuingEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether job run queuing is enabled for the job run.</p>\n         <p>A value of true means job run queuing is enabled for the job run. If false or not populated, the job run will not be considered for queueing.</p>"
+                    }
+                },
                 "StartedOn": {
                     "target": "com.amazonaws.glue#TimestampValue",
                     "traits": {
@@ -23476,6 +23494,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of an Glue usage profile associated with the job run.</p>"
                     }
+                },
+                "StateDetail": {
+                    "target": "com.amazonaws.glue#OrchestrationMessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field holds details that pertain to the state of a job run. The field is nullable.</p>\n         <p>For example, when a job run is in a WAITING state as a result of job run queuing, the field has the reason why the job run is in that state.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23560,6 +23584,12 @@
                     "target": "com.amazonaws.glue#JobMode",
                     "traits": {
                         "smithy.api#documentation": "<p>A mode that describes how a job was created. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCRIPT</code> - The job was created using the Glue Studio script editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VISUAL</code> - The job was created using the Glue Studio visual editor.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK</code> - The job was created using an interactive sessions notebook.</p>\n            </li>\n         </ul>\n         <p>When the <code>JobMode</code> field is missing or null, <code>SCRIPT</code> is assigned as the default value.</p>"
+                    }
+                },
+                "JobRunQueuingEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether job run queuing is enabled for the job runs for this job.</p>\n         <p>A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.</p>\n         <p>If this field does not match the value set in the job run, then the value from the job run field will be used.</p>"
                     }
                 },
                 "Description": {
@@ -27594,6 +27624,15 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^arn:aws[^:]*:iam::[0-9]*:role/.+$"
+            }
+        },
+        "com.amazonaws.glue#OrchestrationMessageString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400000
+                }
             }
         },
         "com.amazonaws.glue#OrchestrationNameString": {
@@ -33567,6 +33606,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the job definition to use.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "JobRunQueuingEnabled": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether job run queuing is enabled for the job run.</p>\n         <p>A value of true means job run queuing is enabled for the job run. If false or not populated, the job run will not be considered for queueing.</p>"
                     }
                 },
                 "JobRunId": {
