@@ -1,3 +1,7 @@
+# v1.58.0 (2024-08-21)
+
+* **Feature**: Release FilterCriteria encryption for Lambda EventSourceMapping,  enabling customers to encrypt their filter criteria using a customer-owned KMS key.
+
 # v1.57.0 (2024-08-19)
 
 * **Feature**: Release Lambda FunctionRecursiveConfig, enabling customers to turn recursive loop detection on or off on individual functions. This release adds two new APIs, GetFunctionRecursionConfig and PutFunctionRecursionConfig.

@@ -1,3 +1,7 @@
+# v1.26.0 (2024-08-21)
+
+* **Feature**: Enable email receiving customers to provide SES with access to their S3 buckets via an IAM role for "Deliver to S3 Action"
+
 # v1.25.3 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

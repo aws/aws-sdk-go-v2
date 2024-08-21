@@ -1,3 +1,7 @@
+# v1.95.0 (2024-08-21)
+
+* **Feature**: Add optional field JobRunQueuingEnabled to CreateJob and UpdateJob APIs.
+
 # v1.94.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

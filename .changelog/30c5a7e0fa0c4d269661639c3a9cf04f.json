@@ -1,8 +1,0 @@
-{
-    "id": "30c5a7e0-fa0c-4d26-9661-639c3a9cf04f",
-    "type": "feature",
-    "description": "Increase the mapping attributes in Schema to 35.",
-    "modules": [
-        "service/entityresolution"
-    ]
-}

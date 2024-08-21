@@ -1,8 +1,0 @@
-{
-    "id": "54bfae7c-f8e5-41d7-9842-df8dafd2ba19",
-    "type": "feature",
-    "description": "Add optional field JobRunQueuingEnabled to CreateJob and UpdateJob APIs.",
-    "modules": [
-        "service/glue"
-    ]
-}

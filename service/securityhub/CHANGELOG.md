@@ -1,3 +1,7 @@
+# v1.52.0 (2024-08-21)
+
+* **Feature**: Security Hub documentation and definition updates
+
 # v1.51.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

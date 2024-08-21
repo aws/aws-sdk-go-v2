@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.175.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.176.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.4
@@ -45,14 +45,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.33.4
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.24.4
-	github.com/aws/aws-sdk-go-v2/service/glue v1.94.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.95.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/iot v1.55.4
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.29.4
 	github.com/aws/aws-sdk-go-v2/service/kms v1.35.4
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.57.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.58.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.40.4
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.33.4
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.30.4
-	github.com/aws/aws-sdk-go-v2/service/ses v1.25.3
+	github.com/aws/aws-sdk-go-v2/service/ses v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/shield v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.28.4

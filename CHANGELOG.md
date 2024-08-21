@@ -1,3 +1,17 @@
+# Release (2024-08-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.176.0](service/ec2/CHANGELOG.md#v11760-2024-08-21)
+  * **Feature**: DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.95.0](service/glue/CHANGELOG.md#v1950-2024-08-21)
+  * **Feature**: Add optional field JobRunQueuingEnabled to CreateJob and UpdateJob APIs.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.58.0](service/lambda/CHANGELOG.md#v1580-2024-08-21)
+  * **Feature**: Release FilterCriteria encryption for Lambda EventSourceMapping,  enabling customers to encrypt their filter criteria using a customer-owned KMS key.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.52.0](service/securityhub/CHANGELOG.md#v1520-2024-08-21)
+  * **Feature**: Security Hub documentation and definition updates
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.26.0](service/ses/CHANGELOG.md#v1260-2024-08-21)
+  * **Feature**: Enable email receiving customers to provide SES with access to their S3 buckets via an IAM role for "Deliver to S3 Action"
+
 # Release (2024-08-20)
 
 ## General Highlights
