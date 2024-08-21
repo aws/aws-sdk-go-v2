@@ -81,8 +81,17 @@ type DeleteEventSourceMappingOutput struct {
 	// An object that defines the filter criteria that determine whether Lambda should
 	// process an event. For more information, see [Lambda event filtering].
 	//
+	// If filter criteria is encrypted, this field shows up as null in the response of
+	// ListEventSourceMapping API calls. You can view this field in plaintext in the
+	// response of GetEventSourceMapping and DeleteEventSourceMapping calls if you have
+	// kms:Decrypt permissions for the correct KMS key.
+	//
 	// [Lambda event filtering]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
 	FilterCriteria *types.FilterCriteria
+
+	// An object that contains details about an error related to filter criteria
+	// encryption.
+	FilterCriteriaError *types.FilterCriteriaError
 
 	// The ARN of the Lambda function.
 	FunctionArn *string
@@ -90,6 +99,12 @@ type DeleteEventSourceMappingOutput struct {
 	// (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type
 	// enums applied to the event source mapping.
 	FunctionResponseTypes []types.FunctionResponseType
+
+	//  The ARN of the Key Management Service (KMS) customer managed key that Lambda
+	// uses to encrypt your function's [filter criteria].
+	//
+	// [filter criteria]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics
+	KMSKeyArn *string
 
 	// The date that the event source mapping was last updated or that its state
 	// changed.

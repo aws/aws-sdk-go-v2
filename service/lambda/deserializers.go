@@ -929,6 +929,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				return err
 			}
 
+		case "FilterCriteriaError":
+			if err := awsRestjson1_deserializeDocumentFilterCriteriaError(&sv.FilterCriteriaError, value); err != nil {
+				return err
+			}
+
 		case "FunctionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -941,6 +946,15 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 		case "FunctionResponseTypes":
 			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
 				return err
+			}
+
+		case "KMSKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KMSKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyArn = ptr.String(jtv)
 			}
 
 		case "LastModified":
@@ -2171,6 +2185,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 				return err
 			}
 
+		case "FilterCriteriaError":
+			if err := awsRestjson1_deserializeDocumentFilterCriteriaError(&sv.FilterCriteriaError, value); err != nil {
+				return err
+			}
+
 		case "FunctionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2183,6 +2202,15 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 		case "FunctionResponseTypes":
 			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
 				return err
+			}
+
+		case "KMSKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KMSKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyArn = ptr.String(jtv)
 			}
 
 		case "LastModified":
@@ -3766,6 +3794,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 				return err
 			}
 
+		case "FilterCriteriaError":
+			if err := awsRestjson1_deserializeDocumentFilterCriteriaError(&sv.FilterCriteriaError, value); err != nil {
+				return err
+			}
+
 		case "FunctionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3778,6 +3811,15 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 		case "FunctionResponseTypes":
 			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
 				return err
+			}
+
+		case "KMSKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KMSKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyArn = ptr.String(jtv)
 			}
 
 		case "LastModified":
@@ -11906,6 +11948,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				return err
 			}
 
+		case "FilterCriteriaError":
+			if err := awsRestjson1_deserializeDocumentFilterCriteriaError(&sv.FilterCriteriaError, value); err != nil {
+				return err
+			}
+
 		case "FunctionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11918,6 +11965,15 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 		case "FunctionResponseTypes":
 			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
 				return err
+			}
+
+		case "KMSKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KMSKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyArn = ptr.String(jtv)
 			}
 
 		case "LastModified":
@@ -16894,6 +16950,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				return err
 			}
 
+		case "FilterCriteriaError":
+			if err := awsRestjson1_deserializeDocumentFilterCriteriaError(&sv.FilterCriteriaError, value); err != nil {
+				return err
+			}
+
 		case "FunctionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16906,6 +16967,15 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 		case "FunctionResponseTypes":
 			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
 				return err
+			}
+
+		case "KMSKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KMSKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyArn = ptr.String(jtv)
 			}
 
 		case "LastModified":
@@ -17271,6 +17341,55 @@ func awsRestjson1_deserializeDocumentFilterCriteria(v **types.FilterCriteria, va
 		case "Filters":
 			if err := awsRestjson1_deserializeDocumentFilterList(&sv.Filters, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFilterCriteriaError(v **types.FilterCriteriaError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilterCriteriaError
+	if *v == nil {
+		sv = &types.FilterCriteriaError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FilterCriteriaErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FilterCriteriaErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

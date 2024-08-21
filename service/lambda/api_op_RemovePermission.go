@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes function-use permission from an Amazon Web Service or another Amazon
-// Web Services account. You can get the ID of the statement from the output of GetPolicy.
+// Revokes function-use permission from an Amazon Web Servicesservice or another
+// Amazon Web Services account. You can get the ID of the statement from the output
+// of GetPolicy.
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}

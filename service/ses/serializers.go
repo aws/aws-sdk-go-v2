@@ -5268,6 +5268,11 @@ func awsAwsquery_serializeDocumentS3Action(v *types.S3Action, value query.Value)
 		objectKey.String(*v.BucketName)
 	}
 
+	if v.IamRoleArn != nil {
+		objectKey := object.Key("IamRoleArn")
+		objectKey.String(*v.IamRoleArn)
+	}
+
 	if v.KmsKeyArn != nil {
 		objectKey := object.Key("KmsKeyArn")
 		objectKey.String(*v.KmsKeyArn)

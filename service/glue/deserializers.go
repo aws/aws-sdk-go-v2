@@ -42254,6 +42254,15 @@ func awsAwsjson11_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.JobMode = types.JobMode(jtv)
 			}
 
+		case "JobRunQueuingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.JobRunQueuingEnabled = ptr.Bool(jtv)
+			}
+
 		case "LastModifiedOn":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -42928,6 +42937,15 @@ func awsAwsjson11_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.JobName = ptr.String(jtv)
 			}
 
+		case "JobRunQueuingEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.JobRunQueuingEnabled = ptr.Bool(jtv)
+			}
+
 		case "JobRunState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -43069,6 +43087,15 @@ func awsAwsjson11_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 					return fmt.Errorf("expected TimestampValue to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "StateDetail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrchestrationMessageString to be of type string, got %T instead", value)
+				}
+				sv.StateDetail = ptr.String(jtv)
 			}
 
 		case "Timeout":

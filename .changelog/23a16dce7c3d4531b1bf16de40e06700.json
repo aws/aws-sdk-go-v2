@@ -1,0 +1,8 @@
+{
+    "id": "23a16dce-7c3d-4531-b1bf-16de40e06700",
+    "type": "feature",
+    "description": "DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "a185e9c8-6363-4aa5-9900-5836f6aa56fa",
+    "type": "feature",
+    "description": "Security Hub documentation and definition updates",
+    "modules": [
+        "service/securityhub"
+    ]
+}

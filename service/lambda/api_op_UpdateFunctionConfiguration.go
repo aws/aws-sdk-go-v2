@@ -26,7 +26,7 @@ import (
 // only the unpublished version.
 //
 // To configure function concurrency, use PutFunctionConcurrency. To grant invoke permissions to an
-// Amazon Web Services account or Amazon Web Service, use AddPermission.
+// Amazon Web Services account or Amazon Web Servicesservice, use AddPermission.
 //
 // [Lambda function states]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
 func (c *Client) UpdateFunctionConfiguration(ctx context.Context, params *UpdateFunctionConfigurationInput, optFns ...func(*Options)) (*UpdateFunctionConfigurationOutput, error) {

@@ -2685,6 +2685,9 @@ func validateOpSendBulkTemplatedEmailInput(v *SendBulkTemplatedEmailInput) error
 	if v.Template == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Template"))
 	}
+	if v.DefaultTemplateData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultTemplateData"))
+	}
 	if v.Destinations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
 	} else if v.Destinations != nil {

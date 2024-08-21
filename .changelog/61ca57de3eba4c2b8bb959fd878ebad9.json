@@ -1,0 +1,8 @@
+{
+    "id": "61ca57de-3eba-4c2b-8bb9-59fd878ebad9",
+    "type": "feature",
+    "description": "Enable email receiving customers to provide SES with access to their S3 buckets via an IAM role for \"Deliver to S3 Action\"",
+    "modules": [
+        "service/ses"
+    ]
+}

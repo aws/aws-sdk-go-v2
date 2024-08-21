@@ -47,20 +47,23 @@ type UpdateFindingAggregatorInput struct {
 	//
 	// The options are as follows:
 	//
-	//   - ALL_REGIONS - Indicates to aggregate findings from all of the Regions where
-	//   Security Hub is enabled. When you choose this option, Security Hub also
-	//   automatically aggregates findings from new Regions as Security Hub supports them
-	//   and you opt into them.
+	//   - ALL_REGIONS - Aggregates findings from all of the Regions where Security Hub
+	//   is enabled. When you choose this option, Security Hub also automatically
+	//   aggregates findings from new Regions as Security Hub supports them and you opt
+	//   into them.
 	//
-	//   - ALL_REGIONS_EXCEPT_SPECIFIED - Indicates to aggregate findings from all of
-	//   the Regions where Security Hub is enabled, except for the Regions listed in the
-	//   Regions parameter. When you choose this option, Security Hub also
-	//   automatically aggregates findings from new Regions as Security Hub supports them
-	//   and you opt into them.
+	//   - ALL_REGIONS_EXCEPT_SPECIFIED - Aggregates findings from all of the Regions
+	//   where Security Hub is enabled, except for the Regions listed in the Regions
+	//   parameter. When you choose this option, Security Hub also automatically
+	//   aggregates findings from new Regions as Security Hub supports them and you opt
+	//   into them.
 	//
-	//   - SPECIFIED_REGIONS - Indicates to aggregate findings only from the Regions
-	//   listed in the Regions parameter. Security Hub does not automatically aggregate
-	//   findings from new Regions.
+	//   - SPECIFIED_REGIONS - Aggregates findings only from the Regions listed in the
+	//   Regions parameter. Security Hub does not automatically aggregate findings from
+	//   new Regions.
+	//
+	//   - NO_REGIONS - Aggregates no data because no Regions are selected as linked
+	//   Regions.
 	//
 	// This member is required.
 	RegionLinkingMode *string
@@ -71,6 +74,9 @@ type UpdateFindingAggregatorInput struct {
 	//
 	// If RegionLinkingMode is SPECIFIED_REGIONS , then this is a space-separated list
 	// of Regions that do aggregate findings to the aggregation Region.
+	//
+	// An InvalidInputException error results if you populate this field while
+	// RegionLinkingMode is NO_REGIONS .
 	Regions []string
 
 	noSmithyDocumentSerde

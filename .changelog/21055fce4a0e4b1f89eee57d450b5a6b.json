@@ -1,0 +1,8 @@
+{
+    "id": "21055fce-4a0e-4b1f-89ee-e57d450b5a6b",
+    "type": "feature",
+    "description": "Release FilterCriteria encryption for Lambda EventSourceMapping,  enabling customers to encrypt their filter criteria using a customer-owned KMS key.",
+    "modules": [
+        "service/lambda"
+    ]
+}

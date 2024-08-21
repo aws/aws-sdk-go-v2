@@ -85,6 +85,12 @@ type StartJobRunInput struct {
 	// The ID of a previous JobRun to retry.
 	JobRunId *string
 
+	// Specifies whether job run queuing is enabled for the job run.
+	//
+	// A value of true means job run queuing is enabled for the job run. If false or
+	// not populated, the job run will not be considered for queueing.
+	JobRunQueuingEnabled *bool
+
 	// For Glue version 1.0 or earlier jobs, using the standard worker type, the
 	// number of Glue data processing units (DPUs) that can be allocated when this job
 	// runs. A DPU is a relative measure of processing power that consists of 4 vCPUs

@@ -609,8 +609,9 @@ type AutomationRulesFindingFilters struct {
 	//  The identifier for the given resource type. For Amazon Web Services resources
 	// that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon
 	// Web Services resources that lack ARNs, this is the identifier as defined by the
-	// Amazon Web Service that created the resource. For non-Amazon Web Services
-	// resources, this is a unique identifier that is associated with the resource.
+	// Amazon Web Servicesservice that created the resource. For non-Amazon Web
+	// Services resources, this is a unique identifier that is associated with the
+	// resource.
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
 	ResourceId []StringFilter
@@ -13242,7 +13243,8 @@ type AwsSecurityFindingFilters struct {
 	ComplianceAssociatedStandardsId []StringFilter
 
 	//  The unique identifier of a control across standards. Values for this field
-	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
+	// typically consist of an Amazon Web Servicesservice and a number, such as
+	// APIGateway.5.
 	ComplianceSecurityControlId []StringFilter
 
 	//  The name of a security control parameter.
@@ -15044,7 +15046,8 @@ type Compliance struct {
 	RelatedRequirements []string
 
 	//  The unique identifier of a control across standards. Values for this field
-	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
+	// typically consist of an Amazon Web Servicesservice and a number, such as
+	// APIGateway.5.
 	SecurityControlId *string
 
 	//  An object that includes security control parameter names and values.
@@ -15555,8 +15558,9 @@ type FindingHistoryRecord struct {
 	NextToken *string
 
 	//  Identifies the source of the event that changed the finding. For example, an
-	// integrated Amazon Web Service or third-party partner integration may call [BatchImportFindings]
-	// BatchImportFindings , or an Security Hub customer may call [BatchUpdateFindings]BatchUpdateFindings .
+	// integrated Amazon Web Servicesservice or third-party partner integration may
+	// call [BatchImportFindings]BatchImportFindings , or an Security Hub customer may call [BatchUpdateFindings]
+	// BatchUpdateFindings .
 	//
 	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
 	// [BatchImportFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
@@ -15623,8 +15627,8 @@ type FindingHistoryUpdateSource struct {
 	Identity *string
 
 	//  Describes the type of finding change event, such as a call to [BatchImportFindings]
-	// BatchImportFindings (by an integrated Amazon Web Service or third party partner
-	// integration) or [BatchUpdateFindings]BatchUpdateFindings (by a Security Hub customer).
+	// BatchImportFindings (by an integrated Amazon Web Servicesservice or third party
+	// partner integration) or [BatchUpdateFindings]BatchUpdateFindings (by a Security Hub customer).
 	//
 	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
 	// [BatchImportFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
@@ -16766,7 +16770,7 @@ type Policy interface {
 	isPolicy()
 }
 
-// The Amazon Web Service that the configuration policy applies to.
+// The Amazon Web Servicesservice that the configuration policy applies to.
 type PolicyMemberSecurityHub struct {
 	Value SecurityHubPolicy
 
@@ -17468,7 +17472,7 @@ type RouteSetDetails struct {
 	//  The IPv6 CIDR block used for the destination match.
 	DestinationIpv6CidrBlock *string
 
-	//  The prefix of the destination Amazon Web Service.
+	//  The prefix of the destination Amazon Web Servicesservice.
 	DestinationPrefixListId *string
 
 	//  The ID of the egress-only internet gateway.
@@ -17815,8 +17819,8 @@ type SecurityControl struct {
 	SecurityControlArn *string
 
 	//  The unique identifier of a security control across standards. Values for this
-	// field typically consist of an Amazon Web Service name and a number, such as
-	// APIGateway.3.
+	// field typically consist of an Amazon Web Servicesservice name and a number, such
+	// as APIGateway.3.
 	//
 	// This member is required.
 	SecurityControlId *string
@@ -17853,9 +17857,10 @@ type SecurityControl struct {
 	Parameters map[string]ParameterConfiguration
 
 	//  Identifies whether customizable properties of a security control are reflected
-	// in Security Hub findings. A status of READY indicates findings include the
-	// current parameter values. A status of UPDATING indicates that all findings may
-	// not include the current parameter values.
+	// in Security Hub findings. A status of READY indicates that Security Hub uses
+	// the current control parameter values when running security checks of the
+	// control. A status of UPDATING indicates that all security checks might not use
+	// the current parameter values.
 	UpdateStatus UpdateStatus
 
 	noSmithyDocumentSerde
@@ -17903,10 +17908,10 @@ type SecurityControlDefinition struct {
 	RemediationUrl *string
 
 	//  The unique identifier of a security control across standards. Values for this
-	// field typically consist of an Amazon Web Service name and a number (for example,
-	// APIGateway.3). This parameter differs from SecurityControlArn , which is a
-	// unique Amazon Resource Name (ARN) assigned to a control. The ARN references the
-	// security control ID (for example,
+	// field typically consist of an Amazon Web Servicesservice name and a number (for
+	// example, APIGateway.3). This parameter differs from SecurityControlArn , which
+	// is a unique Amazon Resource Name (ARN) assigned to a control. The ARN references
+	// the security control ID (for example,
 	// arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3).
 	//
 	// This member is required.
@@ -18283,8 +18288,8 @@ type StandardsControlAssociationDetail struct {
 	SecurityControlArn *string
 
 	//  The unique identifier of a security control across standards. Values for this
-	// field typically consist of an Amazon Web Service name and a number, such as
-	// APIGateway.3.
+	// field typically consist of an Amazon Web Servicesservice name and a number, such
+	// as APIGateway.3.
 	//
 	// This member is required.
 	SecurityControlId *string
@@ -18362,8 +18367,8 @@ type StandardsControlAssociationSummary struct {
 	SecurityControlArn *string
 
 	//  A unique standard-agnostic identifier for a control. Values for this field
-	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
-	// This field doesn't reference a specific standard.
+	// typically consist of an Amazon Web Servicesservice and a number, such as
+	// APIGateway.5. This field doesn't reference a specific standard.
 	//
 	// This member is required.
 	SecurityControlId *string

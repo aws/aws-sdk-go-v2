@@ -585,6 +585,11 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		}
 	}
 
+	if v.KMSKeyArn != nil {
+		ok := object.Key("KMSKeyArn")
+		ok.String(*v.KMSKeyArn)
+	}
+
 	if v.MaximumBatchingWindowInSeconds != nil {
 		ok := object.Key("MaximumBatchingWindowInSeconds")
 		ok.Integer(*v.MaximumBatchingWindowInSeconds)
@@ -5389,6 +5394,11 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		if err := awsRestjson1_serializeDocumentFunctionResponseTypeList(v.FunctionResponseTypes, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.KMSKeyArn != nil {
+		ok := object.Key("KMSKeyArn")
+		ok.String(*v.KMSKeyArn)
 	}
 
 	if v.MaximumBatchingWindowInSeconds != nil {

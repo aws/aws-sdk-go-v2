@@ -14,13 +14,14 @@ import (
 // UpdateFindings is a deprecated operation. Instead of UpdateFindings , use the
 // BatchUpdateFindings operation.
 //
-// Updates the Note and RecordState of the Security Hub-aggregated findings that
-// the filter attributes specify. Any member account that can view the finding also
-// sees the update to the finding.
+// The UpdateFindings operation updates the Note and RecordState of the Security
+// Hub aggregated findings that the filter attributes specify. Any member account
+// that can view the finding can also see the update to the finding.
 //
-// Finding updates made with UpdateFindings might not be persisted if the same
-// finding is later updated by the finding provider through the BatchImportFindings
-// operation.
+// Finding updates made with UpdateFindings aren't persisted if the same finding
+// is later updated by the finding provider through the BatchImportFindings
+// operation. In addition, Security Hub doesn't record updates made with
+// UpdateFindings in the finding history.
 func (c *Client) UpdateFindings(ctx context.Context, params *UpdateFindingsInput, optFns ...func(*Options)) (*UpdateFindingsOutput, error) {
 	if params == nil {
 		params = &UpdateFindingsInput{}
