@@ -1,3 +1,7 @@
+# v1.58.1 (2024-08-22)
+
+* No change notes available for this release.
+
 # v1.58.0 (2024-08-21)
 
 * **Feature**: Release FilterCriteria encryption for Lambda EventSourceMapping,  enabling customers to encrypt their filter criteria using a customer-owned KMS key.

@@ -1,3 +1,7 @@
+# v1.37.1 (2024-08-22)
+
+* No change notes available for this release.
+
 # v1.37.0 (2024-08-15)
 
 * **Feature**: This release adds Global Cluster Failover capability which enables you to change your global cluster's primary AWS region, the region that serves writes, during a regional outage. Performing a failover action preserves your Global Cluster setup.

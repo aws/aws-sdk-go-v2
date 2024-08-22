@@ -1,3 +1,7 @@
+# v1.60.1 (2024-08-22)
+
+* No change notes available for this release.
+
 # v1.60.0 (2024-08-20)
 
 * **Feature**: Amazon Simple Storage Service / Features : Add support for conditional writes for PutObject and CompleteMultipartUpload APIs.

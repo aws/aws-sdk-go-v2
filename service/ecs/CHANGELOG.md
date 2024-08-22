@@ -1,3 +1,7 @@
+# v1.45.2 (2024-08-22)
+
+* No change notes available for this release.
+
 # v1.45.1 (2024-08-20)
 
 * **Documentation**: Documentation only release to address various tickets

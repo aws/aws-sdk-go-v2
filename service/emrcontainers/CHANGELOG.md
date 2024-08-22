@@ -1,3 +1,7 @@
+# v1.31.0 (2024-08-22)
+
+* **Feature**: Correct endpoint for FIPS is configured for US Gov Regions.
+
 # v1.30.5 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

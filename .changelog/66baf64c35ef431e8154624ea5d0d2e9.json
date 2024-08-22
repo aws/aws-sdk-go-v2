@@ -1,8 +1,0 @@
-{
-    "id": "66baf64c-35ef-431e-8154-624ea5d0d2e9",
-    "type": "documentation",
-    "description": "Amazon EC2 Auto Scaling now provides EBS health check to manage EC2 instance replacement",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

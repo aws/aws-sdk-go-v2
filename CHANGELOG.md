@@ -1,3 +1,22 @@
+# Release (2024-08-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.43.5](service/autoscaling/CHANGELOG.md#v1435-2024-08-22)
+  * **Documentation**: Amazon EC2 Auto Scaling now provides EBS health check to manage EC2 instance replacement
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.15.0](service/bedrock/CHANGELOG.md#v1150-2024-08-22)
+  * **Feature**: Amazon Bedrock Evaluation BatchDeleteEvaluationJob API allows customers to delete evaluation jobs under terminated evaluation job statuses - Stopped, Failed, or Completed. Customers can submit a batch of 25 evaluation jobs to be deleted at once.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.31.0](service/emrcontainers/CHANGELOG.md#v1310-2024-08-22)
+  * **Feature**: Correct endpoint for FIPS is configured for US Gov Regions.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.30.0](service/inspector2/CHANGELOG.md#v1300-2024-08-22)
+  * **Feature**: Add enums for Agentless scan statuses and EC2 enablement error states
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.70.0](service/quicksight/CHANGELOG.md#v1700-2024-08-22)
+  * **Feature**: Explicit query for authors and dashboard viewing sharing for embedded users
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.43.0](service/route53/CHANGELOG.md#v1430-2024-08-22)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Malaysia) Region (ap-southeast-5) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # Release (2024-08-21)
 
 ## Module Highlights
