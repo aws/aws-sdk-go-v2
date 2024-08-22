@@ -195,6 +195,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "qbusiness.ap-southeast-4.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{
+				Hostname: "qbusiness.ap-southeast-5.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "qbusiness.ca-central-1.api.aws",

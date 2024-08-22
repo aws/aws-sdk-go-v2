@@ -54,6 +54,12 @@ type AccountAggregationResponse struct {
 	// The Amazon Web Services account ID.
 	AccountId *string
 
+	//  The number of findings that have an exploit available.
+	ExploitAvailableCount *int64
+
+	//  Details about the number of fixes.
+	FixAvailableCount *int64
+
 	// The number of findings by severity.
 	SeverityCounts *SeverityCounts
 
@@ -2214,6 +2220,12 @@ type FindingTypeAggregationResponse struct {
 
 	// The ID of the Amazon Web Services account associated with the findings.
 	AccountId *string
+
+	// The number of findings that have an exploit available.
+	ExploitAvailableCount *int64
+
+	//  Details about the number of fixes.
+	FixAvailableCount *int64
 
 	// The value to sort results by.
 	SeverityCounts *SeverityCounts

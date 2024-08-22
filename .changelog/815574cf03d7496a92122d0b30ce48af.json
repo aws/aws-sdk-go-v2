@@ -1,0 +1,8 @@
+{
+    "id": "815574cf-03d7-496a-9212-2d0b30ce48af",
+    "type": "feature",
+    "description": "Correct endpoint for FIPS is configured for US Gov Regions.",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

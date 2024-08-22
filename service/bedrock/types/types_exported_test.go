@@ -83,6 +83,24 @@ func ExampleEvaluationModelConfig_outputUsage() {
 
 var _ *types.EvaluationBedrockModel
 
+func ExampleModelDataSource_outputUsage() {
+	var union types.ModelDataSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ModelDataSourceMemberS3DataSource:
+		_ = v.Value // Value is types.S3DataSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3DataSource
+
 func ExampleModelInvocationJobInputDataConfig_outputUsage() {
 	var union types.ModelInvocationJobInputDataConfig
 	// type switches can be used to check the union value

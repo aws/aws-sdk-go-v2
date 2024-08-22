@@ -929,20 +929,22 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeAlreadyEnabled          ErrorCode = "ALREADY_ENABLED"
-	ErrorCodeEnableInProgress        ErrorCode = "ENABLE_IN_PROGRESS"
-	ErrorCodeDisableInProgress       ErrorCode = "DISABLE_IN_PROGRESS"
-	ErrorCodeSuspendInProgress       ErrorCode = "SUSPEND_IN_PROGRESS"
-	ErrorCodeResourceNotFound        ErrorCode = "RESOURCE_NOT_FOUND"
-	ErrorCodeAccessDenied            ErrorCode = "ACCESS_DENIED"
-	ErrorCodeInternalError           ErrorCode = "INTERNAL_ERROR"
-	ErrorCodeSsmUnavailable          ErrorCode = "SSM_UNAVAILABLE"
-	ErrorCodeSsmThrottled            ErrorCode = "SSM_THROTTLED"
-	ErrorCodeEventbridgeUnavailable  ErrorCode = "EVENTBRIDGE_UNAVAILABLE"
-	ErrorCodeEventbridgeThrottled    ErrorCode = "EVENTBRIDGE_THROTTLED"
-	ErrorCodeResourceScanNotDisabled ErrorCode = "RESOURCE_SCAN_NOT_DISABLED"
-	ErrorCodeDisassociateAllMembers  ErrorCode = "DISASSOCIATE_ALL_MEMBERS"
-	ErrorCodeAccountIsIsolated       ErrorCode = "ACCOUNT_IS_ISOLATED"
+	ErrorCodeAlreadyEnabled                        ErrorCode = "ALREADY_ENABLED"
+	ErrorCodeEnableInProgress                      ErrorCode = "ENABLE_IN_PROGRESS"
+	ErrorCodeDisableInProgress                     ErrorCode = "DISABLE_IN_PROGRESS"
+	ErrorCodeSuspendInProgress                     ErrorCode = "SUSPEND_IN_PROGRESS"
+	ErrorCodeResourceNotFound                      ErrorCode = "RESOURCE_NOT_FOUND"
+	ErrorCodeAccessDenied                          ErrorCode = "ACCESS_DENIED"
+	ErrorCodeInternalError                         ErrorCode = "INTERNAL_ERROR"
+	ErrorCodeSsmUnavailable                        ErrorCode = "SSM_UNAVAILABLE"
+	ErrorCodeSsmThrottled                          ErrorCode = "SSM_THROTTLED"
+	ErrorCodeEventbridgeUnavailable                ErrorCode = "EVENTBRIDGE_UNAVAILABLE"
+	ErrorCodeEventbridgeThrottled                  ErrorCode = "EVENTBRIDGE_THROTTLED"
+	ErrorCodeResourceScanNotDisabled               ErrorCode = "RESOURCE_SCAN_NOT_DISABLED"
+	ErrorCodeDisassociateAllMembers                ErrorCode = "DISASSOCIATE_ALL_MEMBERS"
+	ErrorCodeAccountIsIsolated                     ErrorCode = "ACCOUNT_IS_ISOLATED"
+	ErrorCodeEc2SsmResourceDataSyncLimitExceeded   ErrorCode = "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED"
+	ErrorCodeEc2SsmAssociationVersionLimitExceeded ErrorCode = "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
@@ -965,6 +967,8 @@ func (ErrorCode) Values() []ErrorCode {
 		"RESOURCE_SCAN_NOT_DISABLED",
 		"DISASSOCIATE_ALL_MEMBERS",
 		"ACCOUNT_IS_ISOLATED",
+		"EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED",
+		"EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED",
 	}
 }
 
@@ -1795,6 +1799,8 @@ const (
 	ScanStatusReasonDeepInspectionDailySsmInventoryLimitExceeded ScanStatusReason = "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"
 	ScanStatusReasonDeepInspectionCollectionTimeLimitExceeded    ScanStatusReason = "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"
 	ScanStatusReasonDeepInspectionNoInventory                    ScanStatusReason = "DEEP_INSPECTION_NO_INVENTORY"
+	ScanStatusReasonAgentlessInstanceStorageLimitExceeded        ScanStatusReason = "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED"
+	ScanStatusReasonAgentlessInstanceCollectionTimeLimitExceeded ScanStatusReason = "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -1827,6 +1833,8 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED",
 		"DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED",
 		"DEEP_INSPECTION_NO_INVENTORY",
+		"AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED",
+		"AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED",
 	}
 }
 

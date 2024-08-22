@@ -1,0 +1,8 @@
+{
+    "id": "d5c6ca88-e6d3-4699-8543-1bc2af44f8d1",
+    "type": "feature",
+    "description": "Amazon Bedrock Evaluation BatchDeleteEvaluationJob API allows customers to delete evaluation jobs under terminated evaluation job statuses - Stopped, Failed, or Completed. Customers can submit a batch of 25 evaluation jobs to be deleted at once.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

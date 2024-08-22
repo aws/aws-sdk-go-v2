@@ -9543,6 +9543,32 @@ func awsRestjson1_deserializeDocumentAccountAggregationResponse(v **types.Accoun
 				sv.AccountId = ptr.String(jtv)
 			}
 
+		case "exploitAvailableCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExploitAvailableCount = ptr.Int64(i64)
+			}
+
+		case "fixAvailableCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FixAvailableCount = ptr.Int64(i64)
+			}
+
 		case "severityCounts":
 			if err := awsRestjson1_deserializeDocumentSeverityCounts(&sv.SeverityCounts, value); err != nil {
 				return err
@@ -15075,6 +15101,32 @@ func awsRestjson1_deserializeDocumentFindingTypeAggregationResponse(v **types.Fi
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
 				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "exploitAvailableCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ExploitAvailableCount = ptr.Int64(i64)
+			}
+
+		case "fixAvailableCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FixAvailableCount = ptr.Int64(i64)
 			}
 
 		case "severityCounts":

@@ -320,6 +320,9 @@ type AnalysisDefinition struct {
 	// [Parameters in Amazon QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html
 	ParameterDeclarations []ParameterDeclaration
 
+	// A structure that describes the query execution options.
+	QueryExecutionOptions *QueryExecutionOptions
+
 	// An array of sheet definitions for an analysis. Each SheetDefinition provides
 	// detailed information about a sheet within this analysis.
 	Sheets []SheetDefinition
@@ -490,6 +493,24 @@ type AnonymousUserDashboardEmbeddingConfiguration struct {
 	//
 	// This member is required.
 	InitialDashboardId *string
+
+	// A list of all disabled features of a specified anonymous dashboard.
+	DisabledFeatures []AnonymousUserDashboardEmbeddingConfigurationDisabledFeature
+
+	// A list of all enabled features of a specified anonymous dashboard.
+	EnabledFeatures []AnonymousUserDashboardEmbeddingConfigurationEnabledFeature
+
+	// The feature configuration for an embedded dashboard.
+	FeatureConfigurations *AnonymousUserDashboardFeatureConfigurations
+
+	noSmithyDocumentSerde
+}
+
+// The feature configuration for an embedded dashboard.
+type AnonymousUserDashboardFeatureConfigurations struct {
+
+	// The shared view settings of an embedded dashboard.
+	SharedView *SharedViewConfigurations
 
 	noSmithyDocumentSerde
 }
@@ -10795,6 +10816,15 @@ type ProjectOperation struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that describes the query execution options.
+type QueryExecutionOptions struct {
+
+	// A structure that describes the query execution mode.
+	QueryExecutionMode QueryExecutionMode
+
+	noSmithyDocumentSerde
+}
+
 // Information about a queued dataset SPICE ingestion.
 type QueueInfo struct {
 
@@ -11339,6 +11369,9 @@ type RegisteredCustomerManagedKey struct {
 // The feature configurations of an embedded Amazon QuickSight console.
 type RegisteredUserConsoleFeatureConfigurations struct {
 
+	// The shared view settings of an embedded dashboard.
+	SharedView *SharedViewConfigurations
+
 	// The state persistence configurations of an embedded Amazon QuickSight console.
 	StatePersistence *StatePersistenceConfigurations
 
@@ -11369,6 +11402,9 @@ type RegisteredUserDashboardFeatureConfigurations struct {
 
 	// The bookmarks configuration for an embedded dashboard in Amazon QuickSight.
 	Bookmarks *BookmarksConfigurations
+
+	// The shared view settings of an embedded dashboard.
+	SharedView *SharedViewConfigurations
 
 	// The state persistence settings of an embedded dashboard.
 	StatePersistence *StatePersistenceConfigurations
@@ -12393,6 +12429,17 @@ type ShapeConditionalFormat struct {
 	//
 	// This member is required.
 	BackgroundColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// The shared view settings of an embedded dashboard.
+type SharedViewConfigurations struct {
+
+	// The shared view settings of an embedded dashboard.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -13929,6 +13976,9 @@ type TemplateVersionDefinition struct {
 	//
 	// [Parameters in Amazon QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html
 	ParameterDeclarations []ParameterDeclaration
+
+	// A structure that describes the query execution options.
+	QueryExecutionOptions *QueryExecutionOptions
 
 	// An array of sheet definitions for a template.
 	Sheets []SheetDefinition

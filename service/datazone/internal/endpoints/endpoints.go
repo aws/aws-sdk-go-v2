@@ -180,6 +180,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "datazone.ap-southeast-4.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{
+				Hostname: "datazone.ap-southeast-5.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "datazone.ca-central-1.api.aws",

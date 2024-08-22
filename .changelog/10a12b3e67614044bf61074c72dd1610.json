@@ -1,0 +1,8 @@
+{
+    "id": "10a12b3e-6761-4044-bf61-074c72dd1610",
+    "type": "feature",
+    "description": "Explicit query for authors and dashboard viewing sharing for embedded users",
+    "modules": [
+        "service/quicksight"
+    ]
+}

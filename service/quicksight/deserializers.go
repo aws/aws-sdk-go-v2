@@ -37239,6 +37239,11 @@ func awsRestjson1_deserializeDocumentAnalysisDefinition(v **types.AnalysisDefini
 				return err
 			}
 
+		case "QueryExecutionOptions":
+			if err := awsRestjson1_deserializeDocumentQueryExecutionOptions(&sv.QueryExecutionOptions, value); err != nil {
+				return err
+			}
+
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetDefinitionList(&sv.Sheets, value); err != nil {
 				return err
@@ -72166,6 +72171,46 @@ func awsRestjson1_deserializeDocumentProjectOperation(v **types.ProjectOperation
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentQueryExecutionOptions(v **types.QueryExecutionOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryExecutionOptions
+	if *v == nil {
+		sv = &types.QueryExecutionOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "QueryExecutionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryExecutionMode to be of type string, got %T instead", value)
+				}
+				sv.QueryExecutionMode = types.QueryExecutionMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentQueueInfo(v **types.QueueInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -82322,6 +82367,11 @@ func awsRestjson1_deserializeDocumentTemplateVersionDefinition(v **types.Templat
 
 		case "ParameterDeclarations":
 			if err := awsRestjson1_deserializeDocumentParameterDeclarationList(&sv.ParameterDeclarations, value); err != nil {
+				return err
+			}
+
+		case "QueryExecutionOptions":
+			if err := awsRestjson1_deserializeDocumentQueryExecutionOptions(&sv.QueryExecutionOptions, value); err != nil {
 				return err
 			}
 
