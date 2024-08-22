@@ -707,6 +707,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of option definitions for an analysis.</p>"
                     }
+                },
+                "QueryExecutionOptions": {
+                    "target": "com.amazonaws.quicksight#QueryExecutionOptions"
                 }
             },
             "traits": {
@@ -1079,10 +1082,76 @@
                         "smithy.api#documentation": "<p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard.</p>\n         <p>The Amazon Resource Name (ARN) of this dashboard must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EnabledFeatures": {
+                    "target": "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all enabled features of a specified anonymous dashboard.</p>"
+                    }
+                },
+                "DisabledFeatures": {
+                    "target": "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all disabled features of a specified anonymous dashboard.</p>"
+                    }
+                },
+                "FeatureConfigurations": {
+                    "target": "com.amazonaws.quicksight#AnonymousUserDashboardFeatureConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature configuration for an embedded dashboard.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the dashboard that you want to embed.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationDisabledFeature": {
+            "type": "enum",
+            "members": {
+                "SHARED_VIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED_VIEW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationDisabledFeature"
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationEnabledFeature": {
+            "type": "enum",
+            "members": {
+                "SHARED_VIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED_VIEW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfigurationEnabledFeature"
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserDashboardFeatureConfigurations": {
+            "type": "structure",
+            "members": {
+                "SharedView": {
+                    "target": "com.amazonaws.quicksight#SharedViewConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared view settings of an embedded dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The feature configuration for an embedded dashboard.</p>"
             }
         },
         "com.amazonaws.quicksight#AnonymousUserDashboardVisualEmbeddingConfiguration": {
@@ -37737,6 +37806,37 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#QueryExecutionMode": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#QueryExecutionOptions": {
+            "type": "structure",
+            "members": {
+                "QueryExecutionMode": {
+                    "target": "com.amazonaws.quicksight#QueryExecutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the query execution mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes the query execution options.</p>"
+            }
+        },
         "com.amazonaws.quicksight#QueueInfo": {
             "type": "structure",
             "members": {
@@ -40290,6 +40390,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The state persistence configurations of an embedded Amazon QuickSight console.</p>"
                     }
+                },
+                "SharedView": {
+                    "target": "com.amazonaws.quicksight#SharedViewConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared view settings of an embedded dashboard.</p>"
+                    }
                 }
             },
             "traits": {
@@ -40324,6 +40430,12 @@
                     "target": "com.amazonaws.quicksight#StatePersistenceConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The state persistence settings of an embedded dashboard.</p>"
+                    }
+                },
+                "SharedView": {
+                    "target": "com.amazonaws.quicksight#SharedViewConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared view settings of an embedded dashboard.</p>"
                     }
                 },
                 "Bookmarks": {
@@ -43235,6 +43347,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The shape conditional formatting of a filled map visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SharedViewConfigurations": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The shared view settings of an embedded dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The shared view settings of an embedded dashboard.</p>"
             }
         },
         "com.amazonaws.quicksight#SharingModel": {
@@ -47058,6 +47186,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of option definitions for a template.</p>"
                     }
+                },
+                "QueryExecutionOptions": {
+                    "target": "com.amazonaws.quicksight#QueryExecutionOptions"
                 }
             },
             "traits": {

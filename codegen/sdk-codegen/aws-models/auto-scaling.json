@@ -3003,7 +3003,7 @@
                 "HealthCheckType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated value string of one or more health check types.</p>\n         <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>.\n                <code>EC2</code> is the default health check and cannot be disabled. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html\">Health checks\n                for instances in an Auto Scaling group</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>Only specify <code>EC2</code> if you must clear a value that was previously\n            set.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated value string of one or more health check types.</p>\n         <p>The valid values are <code>EC2</code>, <code>EBS</code>, <code>ELB</code>, and\n                <code>VPC_LATTICE</code>. <code>EC2</code> is the default health check and cannot be\n            disabled. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html\">Health checks\n                for instances in an Auto Scaling group</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>Only specify <code>EC2</code> if you must clear a value that was previously\n            set.</p>"
                     }
                 },
                 "HealthCheckGracePeriod": {
@@ -10028,7 +10028,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the health status of the specified instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html\">Health checks\n                for instances in an Auto Scaling group</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Sets the health status of the specified instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/set-up-a-custom-health-check.html\">Set up a custom\n                health check for your Auto Scaling group</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To set the health status of an instance",
@@ -10868,7 +10868,7 @@
                 "HealthCheckType": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated value string of one or more health check types.</p>\n         <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>.\n                <code>EC2</code> is the default health check and cannot be disabled. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html\">Health checks\n                for instances in an Auto Scaling group</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>Only specify <code>EC2</code> if you must clear a value that was previously\n            set.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated value string of one or more health check types.</p>\n         <p>The valid values are <code>EC2</code>, <code>EBS</code>, <code>ELB</code>, and\n                <code>VPC_LATTICE</code>. <code>EC2</code> is the default health check and cannot be\n            disabled. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html\">Health checks\n                for instances in an Auto Scaling group</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>Only specify <code>EC2</code> if you must clear a value that was previously\n            set.</p>"
                     }
                 },
                 "HealthCheckGracePeriod": {

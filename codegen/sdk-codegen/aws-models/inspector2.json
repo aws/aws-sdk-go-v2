@@ -12,7 +12,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>\n         <p>\n         For <code>Enable</code>, you receive this error if you attempt to use a feature in an unsupported Amazon Web Services Region.\n      </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -91,6 +91,18 @@
                     "target": "com.amazonaws.inspector2#SeverityCounts",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of findings by severity.</p>"
+                    }
+                },
+                "exploitAvailableCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The number of findings that have an exploit available.\n      </p>"
+                    }
+                },
+                "fixAvailableCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Details about the number of fixes.\n      </p>"
                     }
                 }
             },
@@ -5715,6 +5727,14 @@
                     {
                         "value": "ACCOUNT_IS_ISOLATED",
                         "name": "ACCOUNT_IS_ISOLATED"
+                    },
+                    {
+                        "value": "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED",
+                        "name": "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED",
+                        "name": "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
                     }
                 ]
             }
@@ -6770,6 +6790,18 @@
                     "target": "com.amazonaws.inspector2#SeverityCounts",
                     "traits": {
                         "smithy.api#documentation": "<p>The value to sort results by.</p>"
+                    }
+                },
+                "exploitAvailableCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of findings that have an exploit available.</p>"
+                    }
+                },
+                "fixAvailableCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Details about the number of fixes.\n      </p>"
                     }
                 }
             },
@@ -12730,6 +12762,14 @@
                     {
                         "value": "DEEP_INSPECTION_NO_INVENTORY",
                         "name": "DEEP_INSPECTION_NO_INVENTORY"
+                    },
+                    {
+                        "value": "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED",
+                        "name": "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED",
+                        "name": "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"
                     }
                 ]
             }
