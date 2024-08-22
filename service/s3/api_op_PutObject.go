@@ -769,6 +769,43 @@ func (v *PutObjectInput) bucket() (string, bool) {
 	return *v.Bucket, true
 }
 
+// PresignPostObject is a special kind of [presigned request] used to send a request using
+// form data, likely from an HTML form on a browser.
+// Unlike other presigned operations, the return values of this function are not meant to be used directly
+// to make an HTTP request but rather to be used as inputs to a form. See [the docs] for more information
+// on how to use these values
+//
+// [presigned request] https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html
+// [the docs] https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html
+func (c *PresignClient) PresignPostObject(ctx context.Context, params *PutObjectInput, optFns ...func(*PresignPostOptions)) (*PresignedPostRequest, error) {
+	if params == nil {
+		params = &PutObjectInput{}
+	}
+	clientOptions := c.options.copy()
+	options := PresignPostOptions{
+		Expires:       clientOptions.Expires,
+		PostPresigner: &postSignAdapter{},
+	}
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	clientOptFns := append(clientOptions.ClientOptions, withNopHTTPClientAPIOption)
+	cvt := presignPostConverter(options)
+	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
+		c.client.addOperationPutObjectMiddlewares,
+		cvt.ConvertToPresignMiddleware,
+		func(stack *middleware.Stack, options Options) error {
+			return awshttp.RemoveContentTypeHeader(stack)
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	out := result.(*PresignedPostRequest)
+	return out, nil
+}
+
 func newServiceMetadataMiddleware_opPutObject(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
