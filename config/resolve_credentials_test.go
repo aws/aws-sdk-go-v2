@@ -578,6 +578,7 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 				WithRetryer(func() aws.Retryer { return aws.NopRetryer{} }),
 				WithHTTPClient(httpClient),
 				WithSharedConfigFiles([]string{}),
+				WithSharedCredentialsFiles([]string{}),
 			}
 
 			if tc.enabledState != imds.ClientDefaultEnableState {

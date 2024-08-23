@@ -1,0 +1,8 @@
+{
+    "id": "3ddb265e-4270-47be-a4b1-5251acbcd270",
+    "type": "bugfix",
+    "description": "Don't fail credentials unit tests if credentials are found on a file",
+    "modules": [
+        "config"
+    ]
+}
