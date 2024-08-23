@@ -115,14 +115,14 @@ func TestPresignPutObject(t *testing.T) {
 			if err != nil {
 				t.Error("expected base64 encoded policy, got error", err, "policy", policy)
 			}
-			var policyJson map[string]interface{}
-			err = json.Unmarshal(decoded, &policyJson)
+			var policyJSON map[string]interface{}
+			err = json.Unmarshal(decoded, &policyJSON)
 			if err != nil {
 				t.Error("expected valid JSON for policy, got error", err, "with policy", policy)
 			}
-			actualExpires, ok := policyJson["expiration"]
+			actualExpires, ok := policyJSON["expiration"]
 			if !ok {
-				t.Error("expected non-empty expiration on policy JSON policy", policyJson)
+				t.Error("expected non-empty expiration on policy JSON policy", policyJSON)
 			}
 
 			if !time.Time.IsZero(tc.expectedExpires) {

@@ -234,10 +234,10 @@ func (s *presignPostRequestMiddleware) HandleFinalize(
 	}
 
 	// Other middlewares may set default values on the URL on the path or as query params. Remove them
-	baseUrl := toBaseURL(u)
+	baseURL := toBaseURL(u)
 
 	out.Result = &PresignedPostRequest{
-		URL:    baseUrl,
+		URL:    baseURL,
 		Values: fields,
 	}
 
