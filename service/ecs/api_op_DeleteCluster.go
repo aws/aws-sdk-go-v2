@@ -17,8 +17,11 @@ import (
 // don't recommend that you rely on INACTIVE clusters persisting.
 //
 // You must deregister all container instances from this cluster before you may
-// delete it. You can list the container instances in a cluster with ListContainerInstancesand
-// deregister them with DeregisterContainerInstance.
+// delete it. You can list the container instances in a cluster with [ListContainerInstances]and
+// deregister them with [DeregisterContainerInstance].
+//
+// [ListContainerInstances]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html
+// [DeregisterContainerInstance]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html
 func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, optFns ...func(*Options)) (*DeleteClusterOutput, error) {
 	if params == nil {
 		params = &DeleteClusterInput{}

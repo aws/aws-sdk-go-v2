@@ -13,10 +13,11 @@ import (
 
 // Create or update an attribute on an Amazon ECS resource. If the attribute
 // doesn't exist, it's created. If the attribute exists, its value is replaced with
-// the specified value. To delete an attribute, use DeleteAttributes. For more information, see [Attributes]
+// the specified value. To delete an attribute, use [DeleteAttributes]. For more information, see [Attributes]
 // in the Amazon Elastic Container Service Developer Guide.
 //
 // [Attributes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
+// [DeleteAttributes]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html
 func (c *Client) PutAttributes(ctx context.Context, params *PutAttributesInput, optFns ...func(*Options)) (*PutAttributesOutput, error) {
 	if params == nil {
 		params = &PutAttributesInput{}

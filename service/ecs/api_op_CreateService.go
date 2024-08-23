@@ -14,7 +14,7 @@ import (
 // Runs and maintains your desired number of tasks from a specified task
 // definition. If the number of tasks running in a service drops below the
 // desiredCount , Amazon ECS runs another copy of the task in the specified
-// cluster. To update an existing service, see the UpdateServiceaction.
+// cluster. To update an existing service, use [UpdateService].
 //
 // On March 21, 2024, a change was made to resolve the task definition revision
 // before authorization. When a task definition revision is not specified,
@@ -56,9 +56,8 @@ import (
 // You can optionally specify a deployment configuration for your service. The
 // deployment is initiated by changing properties. For example, the deployment
 // might be initiated by the task definition or by your desired count of a service.
-// This is done with an UpdateServiceoperation. The default value for a replica service for
-// minimumHealthyPercent is 100%. The default value for a daemon service for
-// minimumHealthyPercent is 0%.
+// You can use [UpdateService]. The default value for a replica service for minimumHealthyPercent
+// is 100%. The default value for a daemon service for minimumHealthyPercent is 0%.
 //
 // If a service uses the ECS deployment controller, the minimum healthy percent
 // represents a lower limit on the number of tasks in a service that must remain in
@@ -98,9 +97,9 @@ import (
 //
 // When creating a service that uses the EXTERNAL deployment controller, you can
 // specify only parameters that aren't controlled at the task set level. The only
-// required parameter is the service name. You control your services using the CreateTaskSet
-// operation. For more information, see [Amazon ECS deployment types]in the Amazon Elastic Container Service
-// Developer Guide.
+// required parameter is the service name. You control your services using the [CreateTaskSet].
+// For more information, see [Amazon ECS deployment types]in the Amazon Elastic Container Service Developer
+// Guide.
 //
 // When the service scheduler launches new tasks, it determines task placement.
 // For information about task placement and task placement strategies, see [Amazon ECS task placement]in the
@@ -117,6 +116,8 @@ import (
 // [Amazon ECS task placement]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
 // [Service scheduler concepts]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
 // [Amazon ECS deployment types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+// [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+// [CreateTaskSet]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
 // [Service load balancing]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
 // [Amazon EBS volumes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {

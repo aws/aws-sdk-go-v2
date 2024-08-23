@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchDeleteEvaluationJob struct {
+}
+
+func (*validateOpBatchDeleteEvaluationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteEvaluationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteEvaluationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteEvaluationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvaluationJob struct {
 }
 
@@ -110,6 +130,26 @@ func (m *validateOpCreateModelCustomizationJob) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateModelImportJob struct {
+}
+
+func (*validateOpCreateModelImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateModelImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateModelImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateModelImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModelInvocationJob struct {
 }
 
@@ -185,6 +225,26 @@ func (m *validateOpDeleteGuardrail) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGuardrailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteImportedModel struct {
+}
+
+func (*validateOpDeleteImportedModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteImportedModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteImportedModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteImportedModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +350,26 @@ func (m *validateOpGetGuardrail) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetImportedModel struct {
+}
+
+func (*validateOpGetImportedModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImportedModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImportedModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImportedModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetModelCopyJob struct {
 }
 
@@ -325,6 +405,26 @@ func (m *validateOpGetModelCustomizationJob) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetModelCustomizationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetModelImportJob struct {
+}
+
+func (*validateOpGetModelImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetModelImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetModelImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetModelImportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +650,10 @@ func (m *validateOpUpdateProvisionedModelThroughput) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchDeleteEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteEvaluationJob{}, middleware.After)
+}
+
 func addOpCreateEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEvaluationJob{}, middleware.After)
 }
@@ -570,6 +674,10 @@ func addOpCreateModelCustomizationJobValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateModelCustomizationJob{}, middleware.After)
 }
 
+func addOpCreateModelImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateModelImportJob{}, middleware.After)
+}
+
 func addOpCreateModelInvocationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModelInvocationJob{}, middleware.After)
 }
@@ -584,6 +692,10 @@ func addOpDeleteCustomModelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteGuardrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGuardrail{}, middleware.After)
+}
+
+func addOpDeleteImportedModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteImportedModel{}, middleware.After)
 }
 
 func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
@@ -606,12 +718,20 @@ func addOpGetGuardrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGuardrail{}, middleware.After)
 }
 
+func addOpGetImportedModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImportedModel{}, middleware.After)
+}
+
 func addOpGetModelCopyJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetModelCopyJob{}, middleware.After)
 }
 
 func addOpGetModelCustomizationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetModelCustomizationJob{}, middleware.After)
+}
+
+func addOpGetModelImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetModelImportJob{}, middleware.After)
 }
 
 func addOpGetModelInvocationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1319,6 +1439,25 @@ func validateLoggingConfig(v *types.LoggingConfig) error {
 	}
 }
 
+func validateModelDataSource(v types.ModelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelDataSource"}
+	switch uv := v.(type) {
+	case *types.ModelDataSourceMemberS3DataSource:
+		if err := validateS3DataSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3DataSource]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelInvocationJobInputDataConfig(v types.ModelInvocationJobInputDataConfig) error {
 	if v == nil {
 		return nil
@@ -1409,6 +1548,21 @@ func validateS3Config(v *types.S3Config) error {
 	invalidParams := smithy.InvalidParamsError{Context: "S3Config"}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DataSource(v *types.S3DataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DataSource"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1528,6 +1682,21 @@ func validateVpcConfig(v *types.VpcConfig) error {
 	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteEvaluationJobInput(v *BatchDeleteEvaluationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteEvaluationJobInput"}
+	if v.JobIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifiers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1730,6 +1899,49 @@ func validateOpCreateModelCustomizationJobInput(v *CreateModelCustomizationJobIn
 	}
 }
 
+func validateOpCreateModelImportJobInput(v *CreateModelImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateModelImportJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.ImportedModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportedModelName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.ModelDataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelDataSource"))
+	} else if v.ModelDataSource != nil {
+		if err := validateModelDataSource(v.ModelDataSource); err != nil {
+			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobTags != nil {
+		if err := validateTagList(v.JobTags); err != nil {
+			invalidParams.AddNested("JobTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImportedModelTags != nil {
+		if err := validateTagList(v.ImportedModelTags); err != nil {
+			invalidParams.AddNested("ImportedModelTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelInvocationJobInput(v *CreateModelInvocationJobInput) error {
 	if v == nil {
 		return nil
@@ -1826,6 +2038,21 @@ func validateOpDeleteGuardrailInput(v *DeleteGuardrailInput) error {
 	}
 }
 
+func validateOpDeleteImportedModelInput(v *DeleteImportedModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteImportedModelInput"}
+	if v.ModelIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteProvisionedModelThroughputInput(v *DeleteProvisionedModelThroughputInput) error {
 	if v == nil {
 		return nil
@@ -1901,6 +2128,21 @@ func validateOpGetGuardrailInput(v *GetGuardrailInput) error {
 	}
 }
 
+func validateOpGetImportedModelInput(v *GetImportedModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImportedModelInput"}
+	if v.ModelIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetModelCopyJobInput(v *GetModelCopyJobInput) error {
 	if v == nil {
 		return nil
@@ -1921,6 +2163,21 @@ func validateOpGetModelCustomizationJobInput(v *GetModelCustomizationJobInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetModelCustomizationJobInput"}
+	if v.JobIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetModelImportJobInput(v *GetModelImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetModelImportJobInput"}
 	if v.JobIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
 	}

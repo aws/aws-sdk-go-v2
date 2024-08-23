@@ -5612,7 +5612,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 25
+                    "max": 35
                 }
             }
         },

@@ -195,6 +195,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "kendra-ranking.ap-southeast-4.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{
+				Hostname: "kendra-ranking.ap-southeast-5.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "kendra-ranking.ca-central-1.api.aws",

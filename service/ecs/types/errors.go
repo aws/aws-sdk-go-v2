@@ -34,8 +34,11 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can apply up to 10 custom attributes for each resource. You can view the
-// attributes of a resource with ListAttributes. You can remove existing attributes on a
-// resource with DeleteAttributes.
+// attributes of a resource with [ListAttributes]. You can remove existing attributes on a
+// resource with [DeleteAttributes].
+//
+// [ListAttributes]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListAttributes.html
+// [DeleteAttributes]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html
 type AttributeLimitExceededException struct {
 	Message *string
 
@@ -128,7 +131,9 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 
 // You can't delete a cluster that has registered container instances. First,
 // deregister the container instances before you can delete the cluster. For more
-// information, see DeregisterContainerInstance.
+// information, see [DeregisterContainerInstance].
+//
+// [DeregisterContainerInstance]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html
 type ClusterContainsContainerInstancesException struct {
 	Message *string
 
@@ -158,7 +163,10 @@ func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFa
 
 // You can't delete a cluster that contains services. First, update the service to
 // reduce its desired task count to 0, and then delete the service. For more
-// information, see UpdateServiceand DeleteService.
+// information, see [UpdateService]and [DeleteService].
+//
+// [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+// [DeleteService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html
 type ClusterContainsServicesException struct {
 	Message *string
 
@@ -210,8 +218,10 @@ func (e *ClusterContainsTasksException) ErrorCode() string {
 }
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified cluster wasn't found. You can view your available clusters with ListClusters.
+// The specified cluster wasn't found. You can view your available clusters with [ListClusters].
 // Amazon ECS clusters are Region specific.
+//
+// [ListClusters]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html
 type ClusterNotFoundException struct {
 	Message *string
 
@@ -544,7 +554,9 @@ func (e *ServerException) ErrorCode() string {
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified service isn't active. You can't update a service that's inactive.
-// If you have previously deleted a service, you can re-create it with CreateService.
+// If you have previously deleted a service, you can re-create it with [CreateService].
+//
+// [CreateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
 type ServiceNotActiveException struct {
 	Message *string
 
@@ -570,8 +582,10 @@ func (e *ServiceNotActiveException) ErrorCode() string {
 }
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified service wasn't found. You can view your available services with ListServices.
+// The specified service wasn't found. You can view your available services with [ListServices].
 // Amazon ECS services are cluster specific and Region specific.
+//
+// [ListServices]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
 type ServiceNotFoundException struct {
 	Message *string
 
@@ -666,8 +680,10 @@ func (e *TargetNotFoundException) ErrorCode() string {
 }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified task set wasn't found. You can view your available task sets with DescribeTaskSets
+// The specified task set wasn't found. You can view your available task sets with [DescribeTaskSets]
 // . Task sets are specific to each cluster, service and Region.
+//
+// [DescribeTaskSets]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskSets.html
 type TaskSetNotFoundException struct {
 	Message *string
 

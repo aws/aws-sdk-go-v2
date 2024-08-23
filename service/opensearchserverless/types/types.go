@@ -116,6 +116,12 @@ type CollectionDetail struct {
 	// A description of the collection.
 	Description *string
 
+	// A failure code associated with the request.
+	FailureCode *string
+
+	// A message associated with the failure code.
+	FailureMessage *string
+
 	// A unique identifier for the collection.
 	Id *string
 
@@ -654,6 +660,12 @@ type VpcEndpointDetail struct {
 
 	// The date the endpoint was created.
 	CreatedDate *int64
+
+	// A failure code associated with the request.
+	FailureCode *string
+
+	// A message associated with the failure code.
+	FailureMessage *string
 
 	// The unique identifier of the endpoint.
 	Id *string

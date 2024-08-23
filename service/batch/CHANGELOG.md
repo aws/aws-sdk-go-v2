@@ -1,3 +1,7 @@
+# v1.44.1 (2024-08-22)
+
+* No change notes available for this release.
+
 # v1.44.0 (2024-08-16)
 
 * **Feature**: Improvements of integration between AWS Batch and EC2.

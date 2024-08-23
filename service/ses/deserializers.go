@@ -13884,6 +13884,19 @@ func awsAwsquery_deserializeDocumentS3Action(v **types.S3Action, decoder smithyx
 				sv.BucketName = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("IamRoleArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IamRoleArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("KmsKeyArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

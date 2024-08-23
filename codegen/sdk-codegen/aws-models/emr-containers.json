@@ -368,6 +368,44 @@
                                                     ],
                                                     "rules": [
                                                         {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-east-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://emr-containers.us-gov-east-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-gov-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://emr-containers.us-gov-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://emr-containers-fips.{Region}.{PartitionResult#dnsSuffix}",
@@ -828,6 +866,58 @@
                             }
                         },
                         {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
                             "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -841,19 +931,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://emr-containers-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
                             "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -864,19 +941,6 @@
                                 "Region": "us-gov-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://emr-containers.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
                             }
                         },
                         {

@@ -20,6 +20,42 @@ type AutomatedEvaluationConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A JSON array that provides the status of the model evaluation jobs being
+// deleted.
+type BatchDeleteEvaluationJobError struct {
+
+	// A HTTP status code of the model evaluation job being deleted.
+	//
+	// This member is required.
+	Code *string
+
+	// The ARN of the model evaluation job being deleted.
+	//
+	// This member is required.
+	JobIdentifier *string
+
+	// A status message about the model evaluation job deletion.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// An array of model evaluation jobs to be deleted, and their associated statuses.
+type BatchDeleteEvaluationJobItem struct {
+
+	// The ARN of model evaluation job to be deleted.
+	//
+	// This member is required.
+	JobIdentifier *string
+
+	// The status of the job's deletion.
+	//
+	// This member is required.
+	JobStatus EvaluationJobStatus
+
+	noSmithyDocumentSerde
+}
+
 // CloudWatch logging configuration.
 type CloudWatchConfig struct {
 
@@ -89,7 +125,7 @@ type CustomModelSummary struct {
 // "temperature":"0.25" key value pair would need to be formatted as
 // \"temperature\":\"0.25\" to successfully accepted in the request.
 //
-// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets-custom.html
+// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 type EvaluationBedrockModel struct {
 
 	// Each Amazon Bedrock support different inference parameters that change how the
@@ -143,7 +179,7 @@ type EvaluationDataset struct {
 
 	// Used to specify supported built-in prompt datasets. Valid values are
 	// Builtin.Bold , Builtin.BoolQ , Builtin.NaturalQuestions , Builtin.Gigaword ,
-	// Builtin.RealToxicityPrompts , Builtin.TriviaQa , Builtin.T-Rex ,
+	// Builtin.RealToxicityPrompts , Builtin.TriviaQA , Builtin.T-Rex ,
 	// Builtin.WomensEcommerceClothingReviews and Builtin.Wikitext2 .
 	//
 	// This member is required.
@@ -1166,6 +1202,27 @@ type HumanWorkflowConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about tne imported model.
+type ImportedModelSummary struct {
+
+	// Creation time of the imported model.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the imported model.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// Name of the imported model.
+	//
+	// This member is required.
+	ModelName *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration fields for invocation logging.
 type LoggingConfig struct {
 
@@ -1290,6 +1347,62 @@ type ModelCustomizationJobSummary struct {
 	EndTime *time.Time
 
 	// Time that the customization job was last modified.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Data source for the imported model.
+//
+// The following types satisfy this interface:
+//
+//	ModelDataSourceMemberS3DataSource
+type ModelDataSource interface {
+	isModelDataSource()
+}
+
+// The Amazon S3 data source of the imported model.
+type ModelDataSourceMemberS3DataSource struct {
+	Value S3DataSource
+
+	noSmithyDocumentSerde
+}
+
+func (*ModelDataSourceMemberS3DataSource) isModelDataSource() {}
+
+// Information about the import job.
+type ModelImportJobSummary struct {
+
+	// The time import job was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the import job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The name of the import job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The status of the imported job.
+	//
+	// This member is required.
+	Status ModelImportJobStatus
+
+	// The time when import job ended.
+	EndTime *time.Time
+
+	// The Amazon resource Name (ARN) of the imported model.
+	ImportedModelArn *string
+
+	// The name of the imported model.
+	ImportedModelName *string
+
+	// The time when the import job was last modified.
 	LastModifiedTime *time.Time
 
 	noSmithyDocumentSerde
@@ -1533,6 +1646,17 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon S3 data source of the imported job.
+type S3DataSource struct {
+
+	// The URI of the Amazon S3 data source.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Definition of the key/value pair for a tag.
 type Tag struct {
 
@@ -1631,5 +1755,6 @@ func (*UnknownUnionMember) isEvaluationConfig()                   {}
 func (*UnknownUnionMember) isEvaluationDatasetLocation()          {}
 func (*UnknownUnionMember) isEvaluationInferenceConfig()          {}
 func (*UnknownUnionMember) isEvaluationModelConfig()              {}
+func (*UnknownUnionMember) isModelDataSource()                    {}
 func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()  {}
 func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig() {}

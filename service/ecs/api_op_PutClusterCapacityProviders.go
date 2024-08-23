@@ -18,7 +18,7 @@ import (
 // provider strategy for the cluster. If the specified cluster has existing
 // capacity providers associated with it, you must specify all existing capacity
 // providers in addition to any new ones you want to add. Any existing capacity
-// providers that are associated with a cluster that are omitted from a PutClusterCapacityProvidersAPI call
+// providers that are associated with a cluster that are omitted from a [PutClusterCapacityProviders]API call
 // will be disassociated with the cluster. You can only disassociate an existing
 // capacity provider from a cluster if it's not being used by any existing tasks.
 //
@@ -27,6 +27,8 @@ import (
 // strategy is used. We recommend that you define a default capacity provider
 // strategy for your cluster. However, you must specify an empty array ( [] ) to
 // bypass defining a default strategy.
+//
+// [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
 func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClusterCapacityProvidersInput, optFns ...func(*Options)) (*PutClusterCapacityProvidersOutput, error) {
 	if params == nil {
 		params = &PutClusterCapacityProvidersInput{}
@@ -48,11 +50,13 @@ type PutClusterCapacityProvidersInput struct {
 	//
 	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created. New capacity providers can be created with the
-	// CreateCapacityProviderAPI operation.
+	// [CreateCapacityProvider]API operation.
 	//
 	// To use a Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
 	// capacity providers. The Fargate capacity providers are available to all accounts
 	// and only need to be associated with a cluster to be used.
+	//
+	// [CreateCapacityProvider]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
 	//
 	// This member is required.
 	CapacityProviders []string
@@ -72,17 +76,20 @@ type PutClusterCapacityProvidersInput struct {
 	//
 	// A capacity provider strategy consists of one or more capacity providers along
 	// with the base and weight to assign to them. A capacity provider must be
-	// associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProvidersAPI
+	// associated with the cluster to be used in a capacity provider strategy. The [PutClusterCapacityProviders]API
 	// is used to associate a capacity provider with a cluster. Only capacity providers
 	// with an ACTIVE or UPDATING status can be used.
 	//
 	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created. New capacity providers can be created with the
-	// CreateCapacityProviderAPI operation.
+	// [CreateCapacityProvider]API operation.
 	//
 	// To use a Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
 	// capacity providers. The Fargate capacity providers are available to all accounts
 	// and only need to be associated with a cluster to be used.
+	//
+	// [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+	// [CreateCapacityProvider]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
 	//
 	// This member is required.
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem

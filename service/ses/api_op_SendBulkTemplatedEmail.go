@@ -66,6 +66,16 @@ func (c *Client) SendBulkTemplatedEmail(ctx context.Context, params *SendBulkTem
 // [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
 type SendBulkTemplatedEmailInput struct {
 
+	// A list of replacement values to apply to the template when replacement data is
+	// not specified in a Destination object. These values act as a default or fallback
+	// option when no other data is available.
+	//
+	// The template data is a JSON object, typically consisting of key-value pairs in
+	// which the keys correspond to replacement tags in the email template.
+	//
+	// This member is required.
+	DefaultTemplateData *string
+
 	// One or more Destination objects. All of the recipients in a Destination receive
 	// the same version of the email. You can specify up to 50 Destination objects
 	// within a Destinations array.
@@ -110,14 +120,6 @@ type SendBulkTemplatedEmailInput struct {
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send to a destination using SendBulkTemplatedEmail .
 	DefaultTags []types.MessageTag
-
-	// A list of replacement values to apply to the template when replacement data is
-	// not specified in a Destination object. These values act as a default or fallback
-	// option when no other data is available.
-	//
-	// The template data is a JSON object, typically consisting of key-value pairs in
-	// which the keys correspond to replacement tags in the email template.
-	DefaultTemplateData *string
 
 	// The reply-to email address(es) for the message. If the recipient replies to the
 	// message, each reply-to address receives the reply.

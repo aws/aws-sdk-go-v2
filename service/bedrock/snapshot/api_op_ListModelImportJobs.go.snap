@@ -1,4 +1,4 @@
-ListUserProfiles
+ListModelImportJobs
 	Initialize stack step
 		RegisterServiceMetadata
 		legacyEndpointContextSetter

@@ -16915,6 +16915,11 @@ func awsAwsjson11_serializeDocumentJobUpdate(v *types.JobUpdate, value smithyjso
 		ok.String(string(v.JobMode))
 	}
 
+	if v.JobRunQueuingEnabled != nil {
+		ok := object.Key("JobRunQueuingEnabled")
+		ok.Boolean(*v.JobRunQueuingEnabled)
+	}
+
 	if v.LogUri != nil {
 		ok := object.Key("LogUri")
 		ok.String(*v.LogUri)
@@ -22376,6 +22381,11 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.String(string(v.JobMode))
 	}
 
+	if v.JobRunQueuingEnabled != nil {
+		ok := object.Key("JobRunQueuingEnabled")
+		ok.Boolean(*v.JobRunQueuingEnabled)
+	}
+
 	if v.LogUri != nil {
 		ok := object.Key("LogUri")
 		ok.String(*v.LogUri)
@@ -26419,6 +26429,11 @@ func awsAwsjson11_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 	if v.JobRunId != nil {
 		ok := object.Key("JobRunId")
 		ok.String(*v.JobRunId)
+	}
+
+	if v.JobRunQueuingEnabled != nil {
+		ok := object.Key("JobRunQueuingEnabled")
+		ok.Boolean(*v.JobRunQueuingEnabled)
 	}
 
 	if v.MaxCapacity != nil {

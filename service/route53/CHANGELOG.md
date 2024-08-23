@@ -1,3 +1,7 @@
+# v1.43.0 (2024-08-22)
+
+* **Feature**: Amazon Route 53 now supports the Asia Pacific (Malaysia) Region (ap-southeast-5) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # v1.42.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

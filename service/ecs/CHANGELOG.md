@@ -1,3 +1,11 @@
+# v1.45.2 (2024-08-22)
+
+* No change notes available for this release.
+
+# v1.45.1 (2024-08-20)
+
+* **Documentation**: Documentation only release to address various tickets
+
 # v1.45.0 (2024-08-15)
 
 * **Feature**: This release introduces a new ContainerDefinition configuration to support the customer-managed keys for ECS container restart feature.

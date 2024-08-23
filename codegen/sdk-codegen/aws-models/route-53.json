@@ -3443,6 +3443,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ca-west-1"
                     }
+                },
+                "ap_southeast_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-5"
+                    }
                 }
             },
             "traits": {
@@ -10848,6 +10854,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ca-west-1"
                     }
+                },
+                "ap_southeast_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-5"
+                    }
                 }
             },
             "traits": {
@@ -12469,6 +12481,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ca-west-1"
+                    }
+                },
+                "ap_southeast_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-5"
                     }
                 }
             },

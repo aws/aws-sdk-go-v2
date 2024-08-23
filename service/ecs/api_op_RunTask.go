@@ -22,8 +22,8 @@ import (
 // For more information, see [Scheduling Tasks]in the Amazon Elastic Container Service Developer
 // Guide.
 //
-// Alternatively, you can use StartTask to use your own scheduler or place tasks manually
-// on specific container instances.
+// Alternatively, you can use StartTask to use your own scheduler or place tasks
+// manually on specific container instances.
 //
 // Starting April 15, 2023, Amazon Web Services will not onboard new customers to
 // Amazon Elastic Inference (EI), and will help current customers migrate their
@@ -213,9 +213,11 @@ type RunTaskInput struct {
 	// Specifies whether to propagate the tags from the task definition to the task.
 	// If no value is specified, the tags aren't propagated. Tags can only be
 	// propagated to the task during task creation. To add tags to a task after task
-	// creation, use the TagResourceAPI action.
+	// creation, use the[TagResource] API action.
 	//
 	// An error will be received if you specify the SERVICE option when running a task.
+	//
+	// [TagResource]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
 	PropagateTags types.PropagateTags
 
 	// The reference ID to use for the task. The reference ID can have a maximum

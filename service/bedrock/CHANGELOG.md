@@ -1,3 +1,7 @@
+# v1.15.0 (2024-08-22)
+
+* **Feature**: Amazon Bedrock Evaluation BatchDeleteEvaluationJob API allows customers to delete evaluation jobs under terminated evaluation job statuses - Stopped, Failed, or Completed. Customers can submit a batch of 25 evaluation jobs to be deleted at once.
+
 # v1.14.0 (2024-08-19)
 
 * **Feature**: Amazon Bedrock Batch Inference/ Model Invocation is a feature which allows customers to asynchronously run inference on a large set of records/files stored in S3.

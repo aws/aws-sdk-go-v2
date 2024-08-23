@@ -155,6 +155,42 @@ func (AnchorType) Values() []AnchorType {
 	}
 }
 
+type AnonymousUserDashboardEmbeddingConfigurationDisabledFeature string
+
+// Enum values for AnonymousUserDashboardEmbeddingConfigurationDisabledFeature
+const (
+	AnonymousUserDashboardEmbeddingConfigurationDisabledFeatureSharedView AnonymousUserDashboardEmbeddingConfigurationDisabledFeature = "SHARED_VIEW"
+)
+
+// Values returns all known values for
+// AnonymousUserDashboardEmbeddingConfigurationDisabledFeature. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnonymousUserDashboardEmbeddingConfigurationDisabledFeature) Values() []AnonymousUserDashboardEmbeddingConfigurationDisabledFeature {
+	return []AnonymousUserDashboardEmbeddingConfigurationDisabledFeature{
+		"SHARED_VIEW",
+	}
+}
+
+type AnonymousUserDashboardEmbeddingConfigurationEnabledFeature string
+
+// Enum values for AnonymousUserDashboardEmbeddingConfigurationEnabledFeature
+const (
+	AnonymousUserDashboardEmbeddingConfigurationEnabledFeatureSharedView AnonymousUserDashboardEmbeddingConfigurationEnabledFeature = "SHARED_VIEW"
+)
+
+// Values returns all known values for
+// AnonymousUserDashboardEmbeddingConfigurationEnabledFeature. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnonymousUserDashboardEmbeddingConfigurationEnabledFeature) Values() []AnonymousUserDashboardEmbeddingConfigurationEnabledFeature {
+	return []AnonymousUserDashboardEmbeddingConfigurationEnabledFeature{
+		"SHARED_VIEW",
+	}
+}
+
 type ArcThickness string
 
 // Enum values for ArcThickness
@@ -3360,6 +3396,25 @@ func (PurchaseMode) Values() []PurchaseMode {
 	return []PurchaseMode{
 		"MANUAL",
 		"AUTO_PURCHASE",
+	}
+}
+
+type QueryExecutionMode string
+
+// Enum values for QueryExecutionMode
+const (
+	QueryExecutionModeAuto   QueryExecutionMode = "AUTO"
+	QueryExecutionModeManual QueryExecutionMode = "MANUAL"
+)
+
+// Values returns all known values for QueryExecutionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryExecutionMode) Values() []QueryExecutionMode {
+	return []QueryExecutionMode{
+		"AUTO",
+		"MANUAL",
 	}
 }
 

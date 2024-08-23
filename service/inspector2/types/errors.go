@@ -8,6 +8,9 @@ import (
 )
 
 // You do not have sufficient access to perform this action.
+//
+// For Enable , you receive this error if you attempt to use a feature in an
+// unsupported Amazon Web Services Region.
 type AccessDeniedException struct {
 	Message *string
 

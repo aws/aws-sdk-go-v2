@@ -1,4 +1,4 @@
-AssociateTeamMember
+GetModelImportJob
 	Initialize stack step
 		RegisterServiceMetadata
 		legacyEndpointContextSetter

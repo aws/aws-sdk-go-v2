@@ -1,3 +1,49 @@
+# Release (2024-08-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.43.5](service/autoscaling/CHANGELOG.md#v1435-2024-08-22)
+  * **Documentation**: Amazon EC2 Auto Scaling now provides EBS health check to manage EC2 instance replacement
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.15.0](service/bedrock/CHANGELOG.md#v1150-2024-08-22)
+  * **Feature**: Amazon Bedrock Evaluation BatchDeleteEvaluationJob API allows customers to delete evaluation jobs under terminated evaluation job statuses - Stopped, Failed, or Completed. Customers can submit a batch of 25 evaluation jobs to be deleted at once.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.31.0](service/emrcontainers/CHANGELOG.md#v1310-2024-08-22)
+  * **Feature**: Correct endpoint for FIPS is configured for US Gov Regions.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.30.0](service/inspector2/CHANGELOG.md#v1300-2024-08-22)
+  * **Feature**: Add enums for Agentless scan statuses and EC2 enablement error states
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.70.0](service/quicksight/CHANGELOG.md#v1700-2024-08-22)
+  * **Feature**: Explicit query for authors and dashboard viewing sharing for embedded users
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.43.0](service/route53/CHANGELOG.md#v1430-2024-08-22)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Malaysia) Region (ap-southeast-5) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
+# Release (2024-08-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.176.0](service/ec2/CHANGELOG.md#v11760-2024-08-21)
+  * **Feature**: DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.95.0](service/glue/CHANGELOG.md#v1950-2024-08-21)
+  * **Feature**: Add optional field JobRunQueuingEnabled to CreateJob and UpdateJob APIs.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.58.0](service/lambda/CHANGELOG.md#v1580-2024-08-21)
+  * **Feature**: Release FilterCriteria encryption for Lambda EventSourceMapping,  enabling customers to encrypt their filter criteria using a customer-owned KMS key.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.52.0](service/securityhub/CHANGELOG.md#v1520-2024-08-21)
+  * **Feature**: Security Hub documentation and definition updates
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.26.0](service/ses/CHANGELOG.md#v1260-2024-08-21)
+  * **Feature**: Enable email receiving customers to provide SES with access to their S3 buckets via an IAM role for "Deliver to S3 Action"
+
+# Release (2024-08-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.45.1](service/ecs/CHANGELOG.md#v1451-2024-08-20)
+  * **Documentation**: Documentation only release to address various tickets
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.14.0](service/opensearchserverless/CHANGELOG.md#v1140-2024-08-20)
+  * **Feature**: Added FailureCode and FailureMessage to BatchGetCollectionResponse for BatchGetVPCEResponse for non-Active Collection and VPCE.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.60.0](service/s3/CHANGELOG.md#v1600-2024-08-20)
+  * **Feature**: Amazon Simple Storage Service / Features : Add support for conditional writes for PutObject and CompleteMultipartUpload APIs.
+
 # Release (2024-08-19)
 
 ## Module Highlights

@@ -49,6 +49,7 @@ const (
 	EvaluationJobStatusFailed     EvaluationJobStatus = "Failed"
 	EvaluationJobStatusStopping   EvaluationJobStatus = "Stopping"
 	EvaluationJobStatusStopped    EvaluationJobStatus = "Stopped"
+	EvaluationJobStatusDeleting   EvaluationJobStatus = "Deleting"
 )
 
 // Values returns all known values for EvaluationJobStatus. Note that this can be
@@ -62,6 +63,7 @@ func (EvaluationJobStatus) Values() []EvaluationJobStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+		"Deleting",
 	}
 }
 
@@ -463,6 +465,27 @@ func (ModelCustomizationJobStatus) Values() []ModelCustomizationJobStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type ModelImportJobStatus string
+
+// Enum values for ModelImportJobStatus
+const (
+	ModelImportJobStatusInProgress ModelImportJobStatus = "InProgress"
+	ModelImportJobStatusCompleted  ModelImportJobStatus = "Completed"
+	ModelImportJobStatusFailed     ModelImportJobStatus = "Failed"
+)
+
+// Values returns all known values for ModelImportJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelImportJobStatus) Values() []ModelImportJobStatus {
+	return []ModelImportJobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
 	}
 }
 

@@ -4878,6 +4878,24 @@ func awsAwsjson10_deserializeDocumentCollectionDetail(v **types.CollectionDetail
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "failureCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureCode = ptr.String(jtv)
+			}
+
+		case "failureMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureMessage = ptr.String(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7395,6 +7413,24 @@ func awsAwsjson10_deserializeDocumentVpcEndpointDetail(v **types.VpcEndpointDeta
 					return err
 				}
 				sv.CreatedDate = ptr.Int64(i64)
+			}
+
+		case "failureCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureCode = ptr.String(jtv)
+			}
+
+		case "failureMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureMessage = ptr.String(jtv)
 			}
 
 		case "id":

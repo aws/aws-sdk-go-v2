@@ -1,3 +1,7 @@
+# v1.176.0 (2024-08-21)
+
+* **Feature**: DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances
+
 # v1.175.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

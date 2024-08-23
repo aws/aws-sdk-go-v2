@@ -4464,6 +4464,15 @@ type Job struct {
 	// value.
 	JobMode JobMode
 
+	// Specifies whether job run queuing is enabled for the job runs for this job.
+	//
+	// A value of true means job run queuing is enabled for the job runs. If false or
+	// not populated, the job runs will not be considered for queueing.
+	//
+	// If this field does not match the value set in the job run, then the value from
+	// the job run field will be used.
+	JobRunQueuingEnabled *bool
+
 	// The last point in time when this job definition was modified.
 	LastModifiedOn *time.Time
 
@@ -4771,6 +4780,12 @@ type JobRun struct {
 	// The name of the job definition being used in this run.
 	JobName *string
 
+	// Specifies whether job run queuing is enabled for the job run.
+	//
+	// A value of true means job run queuing is enabled for the job run. If false or
+	// not populated, the job run will not be considered for queueing.
+	JobRunQueuingEnabled *bool
+
 	// The current state of the job run. For more information about the statuses of
 	// jobs that have terminated abnormally, see [Glue Job Run Statuses].
 	//
@@ -4844,6 +4859,13 @@ type JobRun struct {
 
 	// The date and time at which this job run was started.
 	StartedOn *time.Time
+
+	// This field holds details that pertain to the state of a job run. The field is
+	// nullable.
+	//
+	// For example, when a job run is in a WAITING state as a result of job run
+	// queuing, the field has the reason why the job run is in that state.
+	StateDetail *string
 
 	// The JobRun timeout in minutes. This is the maximum time that a job run can
 	// consume resources before it is terminated and enters TIMEOUT status. This value
@@ -4998,6 +5020,15 @@ type JobUpdate struct {
 	// When the JobMode field is missing or null, SCRIPT is assigned as the default
 	// value.
 	JobMode JobMode
+
+	// Specifies whether job run queuing is enabled for the job runs for this job.
+	//
+	// A value of true means job run queuing is enabled for the job runs. If false or
+	// not populated, the job runs will not be considered for queueing.
+	//
+	// If this field does not match the value set in the job run, then the value from
+	// the job run field will be used.
+	JobRunQueuingEnabled *bool
 
 	// This field is reserved for future use.
 	LogUri *string

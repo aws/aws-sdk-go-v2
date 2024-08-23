@@ -4442,6 +4442,28 @@ func validateAnonymousUserDashboardEmbeddingConfiguration(v *types.AnonymousUser
 	if v.InitialDashboardId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialDashboardId"))
 	}
+	if v.FeatureConfigurations != nil {
+		if err := validateAnonymousUserDashboardFeatureConfigurations(v.FeatureConfigurations); err != nil {
+			invalidParams.AddNested("FeatureConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnonymousUserDashboardFeatureConfigurations(v *types.AnonymousUserDashboardFeatureConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserDashboardFeatureConfigurations"}
+	if v.SharedView != nil {
+		if err := validateSharedViewConfigurations(v.SharedView); err != nil {
+			invalidParams.AddNested("SharedView", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -14434,6 +14456,11 @@ func validateRegisteredUserConsoleFeatureConfigurations(v *types.RegisteredUserC
 			invalidParams.AddNested("StatePersistence", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SharedView != nil {
+		if err := validateSharedViewConfigurations(v.SharedView); err != nil {
+			invalidParams.AddNested("SharedView", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -14469,6 +14496,11 @@ func validateRegisteredUserDashboardFeatureConfigurations(v *types.RegisteredUse
 	if v.StatePersistence != nil {
 		if err := validateStatePersistenceConfigurations(v.StatePersistence); err != nil {
 			invalidParams.AddNested("StatePersistence", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SharedView != nil {
+		if err := validateSharedViewConfigurations(v.SharedView); err != nil {
+			invalidParams.AddNested("SharedView", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Bookmarks != nil {
@@ -15317,6 +15349,18 @@ func validateShapeConditionalFormat(v *types.ShapeConditionalFormat) error {
 			invalidParams.AddNested("BackgroundColor", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharedViewConfigurations(v *types.SharedViewConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharedViewConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

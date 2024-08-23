@@ -45,7 +45,7 @@ import (
 // period, enable ECS managed tags option, and propagate tags option, using this
 // API. If the launch type, load balancer, network configuration, platform version,
 // or task definition need to be updated, create a new task set For more
-// information, see CreateTaskSet.
+// information, see [CreateTaskSet].
 //
 // You can add to or subtract from the number of instantiations of a task
 // definition in a service by specifying the cluster that the service is running in
@@ -85,7 +85,7 @@ import (
 //     four new tasks before stopping the four older tasks (provided that the cluster
 //     resources required to do this are available).
 //
-// When UpdateService stops a task during a deployment, the equivalent of docker stop is issued
+// When [UpdateService] stops a task during a deployment, the equivalent of docker stop is issued
 // to the containers running in the task. This results in a SIGTERM and a
 // 30-second timeout. After this, SIGKILL is sent and the containers are forcibly
 // stopped. If the container handles the SIGTERM gracefully and exits within 30
@@ -134,6 +134,8 @@ import (
 // .
 //
 // [role]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
+// [CreateTaskSet]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
+// [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
 // [Amazon EBS volumes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
 // [CreateDeployment]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
@@ -168,20 +170,23 @@ type UpdateServiceInput struct {
 	//
 	// A capacity provider strategy consists of one or more capacity providers along
 	// with the base and weight to assign to them. A capacity provider must be
-	// associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProvidersAPI
+	// associated with the cluster to be used in a capacity provider strategy. The [PutClusterCapacityProviders]API
 	// is used to associate a capacity provider with a cluster. Only capacity providers
 	// with an ACTIVE or UPDATING status can be used.
 	//
 	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created. New capacity providers can be created with the
-	// CreateCapacityProviderAPI operation.
+	// [CreateClusterCapacityProvider]API operation.
 	//
 	// To use a Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
 	// capacity providers. The Fargate capacity providers are available to all accounts
 	// and only need to be associated with a cluster to be used.
 	//
-	// The PutClusterCapacityProviders API operation is used to update the list of available capacity providers
+	// The [PutClusterCapacityProviders]API operation is used to update the list of available capacity providers
 	// for a cluster after the cluster is created.
+	//
+	// [PutClusterCapacityProviders]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+	// [CreateClusterCapacityProvider]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that your

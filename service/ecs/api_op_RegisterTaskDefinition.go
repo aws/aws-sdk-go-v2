@@ -26,12 +26,13 @@ import (
 // You can specify a Docker networking mode for the containers in your task
 // definition with the networkMode parameter. If you specify the awsvpc network
 // mode, the task is allocated an elastic network interface, and you must specify a
-// NetworkConfigurationwhen you create a service or run a task with the task definition. For more
+// [NetworkConfiguration]when you create a service or run a task with the task definition. For more
 // information, see [Task Networking]in the Amazon Elastic Container Service Developer Guide.
 //
 // [Amazon ECS Task Definitions]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
 // [Task Networking]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
 // [IAM Roles for Tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+// [NetworkConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
 func (c *Client) RegisterTaskDefinition(ctx context.Context, params *RegisterTaskDefinitionInput, optFns ...func(*Options)) (*RegisterTaskDefinitionOutput, error) {
 	if params == nil {
 		params = &RegisterTaskDefinitionInput{}

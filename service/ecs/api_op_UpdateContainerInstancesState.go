@@ -30,7 +30,7 @@ import (
 // Service tasks on the container instance that are in the RUNNING state are
 // stopped and replaced according to the service's deployment configuration
 // parameters, minimumHealthyPercent and maximumPercent . You can change the
-// deployment configuration of your service using UpdateService.
+// deployment configuration of your service using [UpdateService].
 //
 //   - If minimumHealthyPercent is below 100%, the scheduler can ignore
 //     desiredCount temporarily during task replacement. For example, desiredCount is
@@ -60,6 +60,7 @@ import (
 // ACTIVE status and once it has reached that status the Amazon ECS scheduler can
 // begin scheduling tasks on the instance again.
 //
+// [UpdateService]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
 // [ListTasks]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
 func (c *Client) UpdateContainerInstancesState(ctx context.Context, params *UpdateContainerInstancesStateInput, optFns ...func(*Options)) (*UpdateContainerInstancesStateOutput, error) {
 	if params == nil {

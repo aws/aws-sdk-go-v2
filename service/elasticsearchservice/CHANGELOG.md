@@ -1,3 +1,7 @@
+# v1.30.5 (2024-08-22)
+
+* No change notes available for this release.
+
 # v1.30.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

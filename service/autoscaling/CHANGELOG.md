@@ -1,3 +1,7 @@
+# v1.43.5 (2024-08-22)
+
+* **Documentation**: Amazon EC2 Auto Scaling now provides EBS health check to manage EC2 instance replacement
+
 # v1.43.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.
