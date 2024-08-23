@@ -1,8 +1,0 @@
-{
-    "id": "ae1b8eaa-92bd-4938-92ca-cda2dd1db2a0",
-    "type": "documentation",
-    "description": "Added support for the MAC_ARM environment type for CodeBuild fleets.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

@@ -1,3 +1,24 @@
+# Release (2024-08-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.27.30](config/CHANGELOG.md#v12730-2024-08-23)
+  * **Bug Fix**: Don't fail credentials unit tests if credentials are found on a file
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.17.0](service/bedrockagent/CHANGELOG.md#v1170-2024-08-23)
+  * **Feature**: Releasing the support for Action User Confirmation.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.17.0](service/bedrockagentruntime/CHANGELOG.md#v1170-2024-08-23)
+  * **Feature**: Releasing the support for Action User Confirmation.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.42.1](service/codebuild/CHANGELOG.md#v1421-2024-08-23)
+  * **Documentation**: Added support for the MAC_ARM environment type for CodeBuild fleets.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.31.0](service/organizations/CHANGELOG.md#v1310-2024-08-23)
+  * **Feature**: Releasing minor partitional endpoint updates.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.11.0](service/qbusiness/CHANGELOG.md#v1110-2024-08-23)
+  * **Feature**: Amazon QBusiness: Enable support for SAML and OIDC federation through AWS IAM Identity Provider integration.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.5.5](service/supplychain/CHANGELOG.md#v155-2024-08-23)
+  * **Documentation**: Update API documentation to clarify the event SLA as well as the data model expectations
+
 # Release (2024-08-22)
 
 ## General Highlights

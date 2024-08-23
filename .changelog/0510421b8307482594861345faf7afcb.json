@@ -1,8 +1,0 @@
-{
-    "id": "0510421b-8307-4825-9486-1345faf7afcb",
-    "type": "documentation",
-    "description": "Update API documentation to clarify the event SLA as well as the data model expectations",
-    "modules": [
-        "service/supplychain"
-    ]
-}

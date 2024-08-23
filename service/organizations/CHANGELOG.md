@@ -1,3 +1,7 @@
+# v1.31.0 (2024-08-23)
+
+* **Feature**: Releasing minor partitional endpoint updates.
+
 # v1.30.3 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

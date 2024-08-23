@@ -1,3 +1,7 @@
+# v1.42.1 (2024-08-23)
+
+* **Documentation**: Added support for the MAC_ARM environment type for CodeBuild fleets.
+
 # v1.42.0 (2024-08-19)
 
 * **Feature**: AWS CodeBuild now supports creating fleets with macOS platform for running builds.

@@ -1,3 +1,7 @@
+# v1.17.0 (2024-08-23)
+
+* **Feature**: Releasing the support for Action User Confirmation.
+
 # v1.16.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.
