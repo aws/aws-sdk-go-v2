@@ -3,6 +3,7 @@
     "type": "feature",
     "description": "Add Encoder option to obey omitempty tag for NULL attribute values.",
     "modules": [
-        "feature/dynamodb/attributevalue"
+        "feature/dynamodb/attributevalue",
+        "feature/dynamodbstreams/attributevalue"
     ]
 }
