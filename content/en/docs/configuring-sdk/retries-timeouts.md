@@ -144,8 +144,8 @@ than what's available results in operation failure with a
 
 The default implementation is parameterized as follows (how to modify each setting):
 - a capacity of 500 (set the value of RateLimiter on StandardOptions using [NewTokenRateLimit]({{< apiref "aws/ratelimit#NewTokenRateLimit" >}}))
-- a retry caused by a timeout costs 10 tokens (set RetryCost on StandardOptions)
-- a retry caused by other errors costs 5 tokens (set RetryTimeoutCost on StandardOptions)
+- a retry caused by a timeout costs 10 tokens (set RetryTimeoutCost on StandardOptions)
+- a retry caused by other errors costs 5 tokens (set RetryCost on StandardOptions)
 - an operation that succeeds on the 1st attempt adds 1 token (set NoRetryIncrement on StandardOptions)
   - operations that succeed on the 2nd or later attempt do not add back any tokens
 
