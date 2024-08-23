@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a prompt or a prompt version from the Prompt management tool. For more
-// information, see [Delete prompts from the Prompt management tool]and [Delete a version of a prompt from the Prompt management tool] in the Amazon Bedrock User Guide.
+// Deletes a prompt or a version of it, depending on whether you include the
+// promptVersion field or not. For more information, see [Delete prompts from the Prompt management tool] and [Delete a version of a prompt from the Prompt management tool] in the Amazon
+// Bedrock User Guide.
 //
 // [Delete a version of a prompt from the Prompt management tool]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-delete.html
 // [Delete prompts from the Prompt management tool]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-delete.html
@@ -37,7 +38,7 @@ type DeletePromptInput struct {
 	// This member is required.
 	PromptIdentifier *string
 
-	// The version of the prompt to delete.
+	// The version of the prompt to delete. To delete the prompt, omit this field.
 	PromptVersion *string
 
 	noSmithyDocumentSerde

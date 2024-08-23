@@ -6304,6 +6304,11 @@ func awsRestjson1_serializeDocumentFunction(v *types.Function, value smithyjson.
 		}
 	}
 
+	if len(v.RequireConfirmation) > 0 {
+		ok := object.Key("requireConfirmation")
+		ok.String(string(v.RequireConfirmation))
+	}
+
 	return nil
 }
 

@@ -1663,6 +1663,21 @@ func validateAuthChallengeResponseEvent(v *types.AuthChallengeResponseEvent) err
 	}
 }
 
+func validateAutoSubscriptionConfiguration(v *types.AutoSubscriptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoSubscriptionConfiguration"}
+	if len(v.AutoSubscribe) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoSubscribe"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBasicAuthConfiguration(v *types.BasicAuthConfiguration) error {
 	if v == nil {
 		return nil
@@ -2122,6 +2137,30 @@ func validateHookConfiguration(v *types.HookConfiguration) error {
 	}
 }
 
+func validateIdentityProviderConfiguration(v types.IdentityProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdentityProviderConfiguration"}
+	switch uv := v.(type) {
+	case *types.IdentityProviderConfigurationMemberOpenIDConnectConfiguration:
+		if err := validateOpenIDConnectProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[openIDConnectConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.IdentityProviderConfigurationMemberSamlConfiguration:
+		if err := validateSamlProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[samlConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInlineDocumentEnrichmentConfiguration(v *types.InlineDocumentEnrichmentConfiguration) error {
 	if v == nil {
 		return nil
@@ -2303,6 +2342,24 @@ func validateOAuth2ClientCredentialConfiguration(v *types.OAuth2ClientCredential
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenIDConnectProviderConfiguration(v *types.OpenIDConnectProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenIDConnectProviderConfiguration"}
+	if v.SecretsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretsArn"))
+	}
+	if v.SecretsRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretsRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2538,6 +2595,21 @@ func validateSamlConfiguration(v *types.SamlConfiguration) error {
 	}
 	if v.UserIdAttribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserIdAttribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSamlProviderConfiguration(v *types.SamlProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SamlProviderConfiguration"}
+	if v.AuthenticationUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3023,6 +3095,11 @@ func validateOpCreateWebExperienceInput(v *CreateWebExperienceInput) error {
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdentityProviderConfiguration != nil {
+		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
+			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3722,6 +3799,11 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 			invalidParams.AddNested("PersonalizationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AutoSubscriptionConfiguration != nil {
+		if err := validateAutoSubscriptionConfiguration(v.AutoSubscriptionConfiguration); err != nil {
+			invalidParams.AddNested("AutoSubscriptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3901,6 +3983,11 @@ func validateOpUpdateWebExperienceInput(v *UpdateWebExperienceInput) error {
 	if v.AuthenticationConfiguration != nil {
 		if err := validateWebExperienceAuthConfiguration(v.AuthenticationConfiguration); err != nil {
 			invalidParams.AddNested("AuthenticationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdentityProviderConfiguration != nil {
+		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
+			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

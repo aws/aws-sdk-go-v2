@@ -1764,6 +1764,15 @@ func awsRestjson1_deserializeDocumentApiInvocationInput(v **types.ApiInvocationI
 				sv.ActionGroup = ptr.String(jtv)
 			}
 
+		case "actionInvocationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionInvocationType to be of type string, got %T instead", value)
+				}
+				sv.ActionInvocationType = types.ActionInvocationType(jtv)
+			}
+
 		case "apiPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2510,6 +2519,15 @@ func awsRestjson1_deserializeDocumentFunctionInvocationInput(v **types.FunctionI
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ActionGroup = ptr.String(jtv)
+			}
+
+		case "actionInvocationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionInvocationType to be of type string, got %T instead", value)
+				}
+				sv.ActionInvocationType = types.ActionInvocationType(jtv)
 			}
 
 		case "function":

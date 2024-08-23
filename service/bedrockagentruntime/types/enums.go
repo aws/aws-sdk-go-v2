@@ -2,6 +2,46 @@
 
 package types
 
+type ActionInvocationType string
+
+// Enum values for ActionInvocationType
+const (
+	ActionInvocationTypeResult                    ActionInvocationType = "RESULT"
+	ActionInvocationTypeUserConfirmation          ActionInvocationType = "USER_CONFIRMATION"
+	ActionInvocationTypeUserConfirmationAndResult ActionInvocationType = "USER_CONFIRMATION_AND_RESULT"
+)
+
+// Values returns all known values for ActionInvocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionInvocationType) Values() []ActionInvocationType {
+	return []ActionInvocationType{
+		"RESULT",
+		"USER_CONFIRMATION",
+		"USER_CONFIRMATION_AND_RESULT",
+	}
+}
+
+type ConfirmationState string
+
+// Enum values for ConfirmationState
+const (
+	ConfirmationStateConfirm ConfirmationState = "CONFIRM"
+	ConfirmationStateDeny    ConfirmationState = "DENY"
+)
+
+// Values returns all known values for ConfirmationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfirmationState) Values() []ConfirmationState {
+	return []ConfirmationState{
+		"CONFIRM",
+		"DENY",
+	}
+}
+
 type CreationMode string
 
 // Enum values for CreationMode

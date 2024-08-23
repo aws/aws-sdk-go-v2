@@ -548,6 +548,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		}
 	}
 
+	if v.ClientIdsForOIDC != nil {
+		ok := object.Key("clientIdsForOIDC")
+		if err := awsRestjson1_serializeDocumentClientIdsForOIDC(v.ClientIdsForOIDC, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -570,9 +577,19 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		}
 	}
 
+	if v.IamIdentityProviderArn != nil {
+		ok := object.Key("iamIdentityProviderArn")
+		ok.String(*v.IamIdentityProviderArn)
+	}
+
 	if v.IdentityCenterInstanceArn != nil {
 		ok := object.Key("identityCenterInstanceArn")
 		ok.String(*v.IdentityCenterInstanceArn)
+	}
+
+	if len(v.IdentityType) > 0 {
+		ok := object.Key("identityType")
+		ok.String(string(v.IdentityType))
 	}
 
 	if v.PersonalizationConfiguration != nil {
@@ -1290,6 +1307,13 @@ func awsRestjson1_serializeOpDocumentCreateWebExperienceInput(v *CreateWebExperi
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.IdentityProviderConfiguration != nil {
+		ok := object.Key("identityProviderConfiguration")
+		if err := awsRestjson1_serializeDocumentIdentityProviderConfiguration(v.IdentityProviderConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RoleArn != nil {
@@ -4345,6 +4369,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.AutoSubscriptionConfiguration != nil {
+		ok := object.Key("autoSubscriptionConfiguration")
+		if err := awsRestjson1_serializeDocumentAutoSubscriptionConfiguration(v.AutoSubscriptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -5193,6 +5224,13 @@ func awsRestjson1_serializeOpDocumentUpdateWebExperienceInput(v *UpdateWebExperi
 		}
 	}
 
+	if v.IdentityProviderConfiguration != nil {
+		ok := object.Key("identityProviderConfiguration")
+		if err := awsRestjson1_serializeDocumentIdentityProviderConfiguration(v.IdentityProviderConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -5830,6 +5868,23 @@ func awsRestjson1_serializeDocumentAuthChallengeResponse(v *types.AuthChallengeR
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutoSubscriptionConfiguration(v *types.AutoSubscriptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AutoSubscribe) > 0 {
+		ok := object.Key("autoSubscribe")
+		ok.String(string(v.AutoSubscribe))
+	}
+
+	if len(v.DefaultSubscriptionType) > 0 {
+		ok := object.Key("defaultSubscriptionType")
+		ok.String(string(v.DefaultSubscriptionType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBasicAuthConfiguration(v *types.BasicAuthConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5881,6 +5936,17 @@ func awsRestjson1_serializeDocumentBlockedPhrasesConfigurationUpdate(v *types.Bl
 		ok.String(*v.SystemMessageOverride)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentClientIdsForOIDC(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -6388,6 +6454,30 @@ func awsRestjson1_serializeDocumentHookConfiguration(v *types.HookConfiguration,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIdentityProviderConfiguration(v types.IdentityProviderConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IdentityProviderConfigurationMemberOpenIDConnectConfiguration:
+		av := object.Key("openIDConnectConfiguration")
+		if err := awsRestjson1_serializeDocumentOpenIDConnectProviderConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.IdentityProviderConfigurationMemberSamlConfiguration:
+		av := object.Key("samlConfiguration")
+		if err := awsRestjson1_serializeDocumentSamlProviderConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIndexCapacityConfiguration(v *types.IndexCapacityConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6593,6 +6683,23 @@ func awsRestjson1_serializeDocumentOAuth2ClientCredentialConfiguration(v *types.
 	if v.SecretArn != nil {
 		ok := object.Key("secretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOpenIDConnectProviderConfiguration(v *types.OpenIDConnectProviderConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretsArn != nil {
+		ok := object.Key("secretsArn")
+		ok.String(*v.SecretsArn)
+	}
+
+	if v.SecretsRole != nil {
+		ok := object.Key("secretsRole")
+		ok.String(*v.SecretsRole)
 	}
 
 	return nil
@@ -6869,6 +6976,18 @@ func awsRestjson1_serializeDocumentSamlConfiguration(v *types.SamlConfiguration,
 	if v.UserIdAttribute != nil {
 		ok := object.Key("userIdAttribute")
 		ok.String(*v.UserIdAttribute)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSamlProviderConfiguration(v *types.SamlProviderConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthenticationUrl != nil {
+		ok := object.Key("authenticationUrl")
+		ok.String(*v.AuthenticationUrl)
 	}
 
 	return nil

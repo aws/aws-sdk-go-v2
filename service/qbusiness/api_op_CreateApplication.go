@@ -45,6 +45,9 @@ type CreateApplicationInput struct {
 	// An option to allow end users to upload files directly during chat.
 	AttachmentsConfiguration *types.AttachmentsConfiguration
 
+	// The OIDC client ID for a Amazon Q Business application.
+	ClientIdsForOIDC []string
+
 	// A token that you provide to identify the request to create your Amazon Q
 	// Business application.
 	ClientToken *string
@@ -56,9 +59,16 @@ type CreateApplicationInput struct {
 	// Business doesn't support asymmetric keys.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
+	// The Amazon Resource Name (ARN) of an identity provider being used by an Amazon
+	// Q Business application.
+	IamIdentityProviderArn *string
+
 	//  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
 	// either creating for—or connecting to—your Amazon Q Business application.
 	IdentityCenterInstanceArn *string
+
+	// The authentication type being used by a Amazon Q Business application.
+	IdentityType types.IdentityType
 
 	// Configuration information about chat response personalization. For more
 	// information, see [Personalizing chat responses]

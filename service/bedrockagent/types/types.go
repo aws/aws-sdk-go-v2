@@ -826,9 +826,9 @@ type ConfluenceSourceConfiguration struct {
 	AuthType ConfluenceAuthType
 
 	// The Amazon Resource Name of an Secrets Manager secret that stores your
-	// authentication credentials for your SharePoint site/sites. For more information
-	// on the key-value pairs that must be included in your secret, depending on your
-	// authentication type, see [Confluence connection configuration].
+	// authentication credentials for your Confluence instance URL. For more
+	// information on the key-value pairs that must be included in your secret,
+	// depending on your authentication type, see [Confluence connection configuration].
 	//
 	// [Confluence connection configuration]: https://docs.aws.amazon.com/bedrock/latest/userguide/confluence-data-source-connector.html#configuration-confluence-connector
 	//
@@ -1067,7 +1067,7 @@ type FlowAliasRoutingConfigurationListItem struct {
 // [ListFlowAliases response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowAliases.html#API_agent_ListFlowAliases_ResponseSyntax
 type FlowAliasSummary struct {
 
-	// The Amazon Resource Name (ARN) of the flow alias.
+	// The Amazon Resource Name (ARN) of the alias.
 	//
 	// This member is required.
 	Arn *string
@@ -1534,7 +1534,7 @@ type FlowValidation struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the flow version.
+// Contains information about a version of a flow.
 //
 // This data type is used in the following API operations:
 //
@@ -1548,7 +1548,7 @@ type FlowVersionSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The time at the flow version was created.
+	// The time at the version was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -1603,6 +1603,9 @@ type Function struct {
 
 	// The parameters that the agent elicits from the user to fulfill the function.
 	Parameters map[string]ParameterDetail
+
+	// Contains information if user confirmation is required to invoke the function.
+	RequireConfirmation RequireConfirmation
 
 	noSmithyDocumentSerde
 }
@@ -2625,7 +2628,8 @@ type PromptOverrideConfiguration struct {
 // [ListPrompts response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListPrompts.html#API_agent_ListPrompts_ResponseSyntax
 type PromptSummary struct {
 
-	// The Amazon Resource Name (ARN) of the prompt.
+	// The Amazon Resource Name (ARN) of the prompt or the prompt version (if you
+	// specified a version in the request).
 	//
 	// This member is required.
 	Arn *string
@@ -2952,9 +2956,9 @@ type SalesforceSourceConfiguration struct {
 	AuthType SalesforceAuthType
 
 	// The Amazon Resource Name of an Secrets Manager secret that stores your
-	// authentication credentials for your SharePoint site/sites. For more information
-	// on the key-value pairs that must be included in your secret, depending on your
-	// authentication type, see [Salesforce connection configuration].
+	// authentication credentials for your Salesforce instance URL. For more
+	// information on the key-value pairs that must be included in your secret,
+	// depending on your authentication type, see [Salesforce connection configuration].
 	//
 	// [Salesforce connection configuration]: https://docs.aws.amazon.com/bedrock/latest/userguide/salesforce-data-source-connector.html#configuration-salesforce-connector
 	//

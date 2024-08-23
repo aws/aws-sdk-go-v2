@@ -76,7 +76,7 @@ type CreateFlowVersionOutput struct {
 	// This member is required.
 	Id *string
 
-	// The name of the flow version.
+	// The name of the version.
 	//
 	// This member is required.
 	Name *string
@@ -98,7 +98,7 @@ type CreateFlowVersionOutput struct {
 	// A definition of the nodes and connections in the flow.
 	Definition *types.FlowDefinition
 
-	// The description of the flow version.
+	// The description of the version.
 	Description *string
 
 	// Metadata pertaining to the operation's result.

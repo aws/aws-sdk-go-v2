@@ -202,6 +202,28 @@ func ExampleDocumentContent_outputUsage() {
 var _ *types.S3
 var _ []byte
 
+func ExampleIdentityProviderConfiguration_outputUsage() {
+	var union types.IdentityProviderConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IdentityProviderConfigurationMemberOpenIDConnectConfiguration:
+		_ = v.Value // Value is types.OpenIDConnectProviderConfiguration
+
+	case *types.IdentityProviderConfigurationMemberSamlConfiguration:
+		_ = v.Value // Value is types.SamlProviderConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenIDConnectProviderConfiguration
+var _ *types.SamlProviderConfiguration
+
 func ExamplePluginAuthConfiguration_outputUsage() {
 	var union types.PluginAuthConfiguration
 	// type switches can be used to check the union value

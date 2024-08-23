@@ -58,13 +58,15 @@ type CreateDataSourceInput struct {
 	//
 	// You can set the data deletion policy to:
 	//
-	//   - DELETE: Deletes all underlying data belonging to the data source from the
-	//   vector store upon deletion of a knowledge base or data source resource. Note
-	//   that the vector store itself is not deleted, only the underlying data. This flag
-	//   is ignored if an Amazon Web Services account is deleted.
+	//   - DELETE: Deletes all data from your data source that’s converted into vector
+	//   embeddings upon deletion of a knowledge base or data source resource. Note that
+	//   the vector store itself is not deleted, only the data. This flag is ignored if
+	//   an Amazon Web Services account is deleted.
 	//
-	//   - RETAIN: Retains all underlying data in your vector store upon deletion of a
-	//   knowledge base or data source resource.
+	//   - RETAIN: Retains all data from your data source that’s converted into vector
+	//   embeddings upon deletion of a knowledge base or data source resource. Note that
+	//   the vector store itself is not deleted if you delete a knowledge base or data
+	//   source resource.
 	DataDeletionPolicy types.DataDeletionPolicy
 
 	// A description of the data source.

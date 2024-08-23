@@ -655,6 +655,11 @@ func awsRestjson1_serializeDocumentApiResult(v *types.ApiResult, value smithyjso
 		ok.String(*v.ApiPath)
 	}
 
+	if len(v.ConfirmationState) > 0 {
+		ok := object.Key("confirmationState")
+		ok.String(string(v.ConfirmationState))
+	}
+
 	if v.HttpMethod != nil {
 		ok := object.Key("httpMethod")
 		ok.String(*v.HttpMethod)
@@ -953,6 +958,11 @@ func awsRestjson1_serializeDocumentFunctionResult(v *types.FunctionResult, value
 	if v.ActionGroup != nil {
 		ok := object.Key("actionGroup")
 		ok.String(*v.ActionGroup)
+	}
+
+	if len(v.ConfirmationState) > 0 {
+		ok := object.Key("confirmationState")
+		ok.String(string(v.ConfirmationState))
 	}
 
 	if v.Function != nil {

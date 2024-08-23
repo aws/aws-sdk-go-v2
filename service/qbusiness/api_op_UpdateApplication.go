@@ -37,6 +37,10 @@ type UpdateApplicationInput struct {
 	// An option to allow end users to upload files directly during chat.
 	AttachmentsConfiguration *types.AttachmentsConfiguration
 
+	// An option to enable updating the default subscription type assigned to an
+	// Amazon Q Business application using IAM identity federation for user management.
+	AutoSubscriptionConfiguration *types.AutoSubscriptionConfiguration
+
 	// A description for the Amazon Q Business application.
 	Description *string
 

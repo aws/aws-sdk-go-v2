@@ -74,7 +74,7 @@ type CreatePromptVersionOutput struct {
 	// This member is required.
 	Id *string
 
-	// The name of the prompt version.
+	// The name of the prompt.
 	//
 	// This member is required.
 	Name *string
@@ -100,7 +100,7 @@ type CreatePromptVersionOutput struct {
 	// [PromptVariant]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptVariant.html
 	DefaultVariant *string
 
-	// A description for the prompt version.
+	// A description for the version.
 	Description *string
 
 	// A list of objects, each containing details about a variant of the prompt.

@@ -145,6 +145,25 @@ func (AttributeValueOperator) Values() []AttributeValueOperator {
 	}
 }
 
+type AutoSubscriptionStatus string
+
+// Enum values for AutoSubscriptionStatus
+const (
+	AutoSubscriptionStatusEnabled  AutoSubscriptionStatus = "ENABLED"
+	AutoSubscriptionStatusDisabled AutoSubscriptionStatus = "DISABLED"
+)
+
+// Values returns all known values for AutoSubscriptionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoSubscriptionStatus) Values() []AutoSubscriptionStatus {
+	return []AutoSubscriptionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ChatMode string
 
 // Enum values for ChatMode
@@ -437,6 +456,27 @@ func (GroupStatus) Values() []GroupStatus {
 		"PROCESSING",
 		"DELETING",
 		"DELETED",
+	}
+}
+
+type IdentityType string
+
+// Enum values for IdentityType
+const (
+	IdentityTypeAwsIamIdpSaml IdentityType = "AWS_IAM_IDP_SAML"
+	IdentityTypeAwsIamIdpOidc IdentityType = "AWS_IAM_IDP_OIDC"
+	IdentityTypeAwsIamIdc     IdentityType = "AWS_IAM_IDC"
+)
+
+// Values returns all known values for IdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityType) Values() []IdentityType {
+	return []IdentityType{
+		"AWS_IAM_IDP_SAML",
+		"AWS_IAM_IDP_OIDC",
+		"AWS_IAM_IDC",
 	}
 }
 
@@ -866,6 +906,25 @@ func (StringAttributeValueBoostingLevel) Values() []StringAttributeValueBoosting
 		"MEDIUM",
 		"HIGH",
 		"VERY_HIGH",
+	}
+}
+
+type SubscriptionType string
+
+// Enum values for SubscriptionType
+const (
+	SubscriptionTypeQLite     SubscriptionType = "Q_LITE"
+	SubscriptionTypeQBusiness SubscriptionType = "Q_BUSINESS"
+)
+
+// Values returns all known values for SubscriptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionType) Values() []SubscriptionType {
+	return []SubscriptionType{
+		"Q_LITE",
+		"Q_BUSINESS",
 	}
 }
 

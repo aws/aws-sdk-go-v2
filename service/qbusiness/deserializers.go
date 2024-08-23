@@ -3000,6 +3000,16 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				return err
 			}
 
+		case "autoSubscriptionConfiguration":
+			if err := awsRestjson1_deserializeDocumentAutoSubscriptionConfiguration(&sv.AutoSubscriptionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "clientIdsForOIDC":
+			if err := awsRestjson1_deserializeDocumentClientIdsForOIDC(&sv.ClientIdsForOIDC, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3044,6 +3054,15 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				return err
 			}
 
+		case "iamIdentityProviderArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamIdentityProviderArn to be of type string, got %T instead", value)
+				}
+				sv.IamIdentityProviderArn = ptr.String(jtv)
+			}
+
 		case "identityCenterApplicationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3051,6 +3070,15 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 					return fmt.Errorf("expected IdcApplicationArn to be of type string, got %T instead", value)
 				}
 				sv.IdentityCenterApplicationArn = ptr.String(jtv)
+			}
+
+		case "identityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityType to be of type string, got %T instead", value)
+				}
+				sv.IdentityType = types.IdentityType(jtv)
 			}
 
 		case "personalizationConfiguration":
@@ -4895,6 +4923,11 @@ func awsRestjson1_deserializeOpDocumentGetWebExperienceOutput(v **GetWebExperien
 
 		case "error":
 			if err := awsRestjson1_deserializeDocumentErrorDetail(&sv.Error, value); err != nil {
+				return err
+			}
+
+		case "identityProviderConfiguration":
+			if err := awsRestjson1_deserializeDocumentIdentityProviderConfiguration(&sv.IdentityProviderConfiguration, value); err != nil {
 				return err
 			}
 
@@ -10363,6 +10396,15 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				sv.DisplayName = ptr.String(jtv)
 			}
 
+		case "identityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityType to be of type string, got %T instead", value)
+				}
+				sv.IdentityType = types.IdentityType(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10585,6 +10627,55 @@ func awsRestjson1_deserializeDocumentAuthChallengeRequest(v **types.AuthChalleng
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutoSubscriptionConfiguration(v **types.AutoSubscriptionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoSubscriptionConfiguration
+	if *v == nil {
+		sv = &types.AutoSubscriptionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoSubscribe":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoSubscriptionStatus to be of type string, got %T instead", value)
+				}
+				sv.AutoSubscribe = types.AutoSubscriptionStatus(jtv)
+			}
+
+		case "defaultSubscriptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubscriptionType to be of type string, got %T instead", value)
+				}
+				sv.DefaultSubscriptionType = types.SubscriptionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBasicAuthConfiguration(v **types.BasicAuthConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10712,6 +10803,42 @@ func awsRestjson1_deserializeDocumentBlockedPhrasesConfiguration(v **types.Block
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentClientIdsForOIDC(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClientIdForOIDC to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -12517,6 +12644,56 @@ func awsRestjson1_deserializeDocumentHookConfiguration(v **types.HookConfigurati
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIdentityProviderConfiguration(v *types.IdentityProviderConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.IdentityProviderConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "openIDConnectConfiguration":
+			var mv types.OpenIDConnectProviderConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentOpenIDConnectProviderConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.IdentityProviderConfigurationMemberOpenIDConnectConfiguration{Value: mv}
+			break loop
+
+		case "samlConfiguration":
+			var mv types.SamlProviderConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSamlProviderConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.IdentityProviderConfigurationMemberSamlConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIndex(v **types.Index, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13216,6 +13393,55 @@ func awsRestjson1_deserializeDocumentOAuth2ClientCredentialConfiguration(v **typ
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOpenIDConnectProviderConfiguration(v **types.OpenIDConnectProviderConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIDConnectProviderConfiguration
+	if *v == nil {
+		sv = &types.OpenIDConnectProviderConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretsArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretsArn = ptr.String(jtv)
+			}
+
+		case "secretsRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.SecretsRole = ptr.String(jtv)
 			}
 
 		default:
@@ -13980,6 +14206,46 @@ func awsRestjson1_deserializeDocumentSamlConfiguration(v **types.SamlConfigurati
 					return fmt.Errorf("expected SamlAttribute to be of type string, got %T instead", value)
 				}
 				sv.UserIdAttribute = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSamlProviderConfiguration(v **types.SamlProviderConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SamlProviderConfiguration
+	if *v == nil {
+		sv = &types.SamlProviderConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authenticationUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SamlAuthenticationUrl to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationUrl = ptr.String(jtv)
 			}
 
 		default:

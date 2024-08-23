@@ -70,6 +70,9 @@ type ApiInvocationInput struct {
 	// This member is required.
 	ActionGroup *string
 
+	// Contains information about the API operation to invoke.
+	ActionInvocationType ActionInvocationType
+
 	// The path to the API operation.
 	ApiPath *string
 
@@ -142,6 +145,10 @@ type ApiResult struct {
 
 	// The path to the API operation.
 	ApiPath *string
+
+	// Controls the API operations or functions to invoke based on the user
+	// confirmation.
+	ConfirmationState ConfirmationState
 
 	// The HTTP method for the API operation.
 	HttpMethod *string
@@ -582,6 +589,9 @@ type FunctionInvocationInput struct {
 	// This member is required.
 	ActionGroup *string
 
+	// Contains information about the function to invoke,
+	ActionInvocationType ActionInvocationType
+
 	// The name of the function.
 	Function *string
 
@@ -626,6 +636,9 @@ type FunctionResult struct {
 	//
 	// This member is required.
 	ActionGroup *string
+
+	// Contains the user confirmation information about the function that was called.
+	ConfirmationState ConfirmationState
 
 	// The name of the function that was called.
 	Function *string

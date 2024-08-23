@@ -49,6 +49,13 @@ type GetApplicationOutput struct {
 	// Settings for whether end users can upload files directly during chat.
 	AttachmentsConfiguration *types.AppliedAttachmentsConfiguration
 
+	// Settings for auto-subscription behavior for this application. This is only
+	// applicable to SAML and OIDC applications.
+	AutoSubscriptionConfiguration *types.AutoSubscriptionConfiguration
+
+	// The OIDC client ID for a Amazon Q Business application.
+	ClientIdsForOIDC []string
+
 	// The Unix timestamp when the Amazon Q Business application was last updated.
 	CreatedAt *time.Time
 
@@ -66,9 +73,16 @@ type GetApplicationOutput struct {
 	// description of the error that caused the synchronization to fail.
 	Error *types.ErrorDetail
 
+	// The Amazon Resource Name (ARN) of an identity provider being used by an Amazon
+	// Q Business application.
+	IamIdentityProviderArn *string
+
 	// The Amazon Resource Name (ARN) of the AWS IAM Identity Center instance attached
 	// to your Amazon Q Business application.
 	IdentityCenterApplicationArn *string
+
+	// The authentication type being used by a Amazon Q Business application.
+	IdentityType types.IdentityType
 
 	// Configuration information about chat response personalization. For more
 	// information, see [Personalizing chat responses].

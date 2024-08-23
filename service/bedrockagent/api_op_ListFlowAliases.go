@@ -50,7 +50,7 @@ type ListFlowAliasesInput struct {
 
 type ListFlowAliasesOutput struct {
 
-	// A list, each member of which contains information about a flow alias.
+	// A list, each member of which contains information about an alias.
 	//
 	// This member is required.
 	FlowAliasSummaries []types.FlowAliasSummary

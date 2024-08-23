@@ -67,6 +67,10 @@ type GetWebExperienceOutput struct {
 	// description of the error that caused the data source connector to fail.
 	Error *types.ErrorDetail
 
+	// Information about the identity provider (IdP) used to authenticate end users of
+	// an Amazon Q Business web experience.
+	IdentityProviderConfiguration types.IdentityProviderConfiguration
+
 	//  The Amazon Resource Name (ARN) of the service role attached to your web
 	// experience.
 	RoleArn *string

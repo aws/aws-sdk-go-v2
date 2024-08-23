@@ -1,0 +1,8 @@
+{
+    "id": "fce5c73b-a58d-4ee1-bab7-51ff0999f077",
+    "type": "feature",
+    "description": "Amazon QBusiness: Enable support for SAML and OIDC federation through AWS IAM Identity Provider integration.",
+    "modules": [
+        "service/qbusiness"
+    ]
+}

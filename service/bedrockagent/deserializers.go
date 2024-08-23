@@ -15338,6 +15338,15 @@ func awsRestjson1_deserializeDocumentFunction(v **types.Function, value interfac
 				return err
 			}
 
+		case "requireConfirmation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RequireConfirmation to be of type string, got %T instead", value)
+				}
+				sv.RequireConfirmation = types.RequireConfirmation(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

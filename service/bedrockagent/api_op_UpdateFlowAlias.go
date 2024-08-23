@@ -44,7 +44,7 @@ type UpdateFlowAliasInput struct {
 	// This member is required.
 	FlowIdentifier *string
 
-	// The name of the flow alias.
+	// The name of the alias.
 	//
 	// This member is required.
 	Name *string
@@ -54,7 +54,7 @@ type UpdateFlowAliasInput struct {
 	// This member is required.
 	RoutingConfiguration []types.FlowAliasRoutingConfigurationListItem
 
-	// A description for the flow alias.
+	// A description for the alias.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -82,7 +82,7 @@ type UpdateFlowAliasOutput struct {
 	// This member is required.
 	Id *string
 
-	// The name of the flow alias.
+	// The name of the alias.
 	//
 	// This member is required.
 	Name *string
@@ -92,7 +92,7 @@ type UpdateFlowAliasOutput struct {
 	// This member is required.
 	RoutingConfiguration []types.FlowAliasRoutingConfigurationListItem
 
-	// The time at which the flow alias was last updated.
+	// The time at which the alias was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time

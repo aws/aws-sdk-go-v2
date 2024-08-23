@@ -250,6 +250,9 @@ type Application struct {
 	// The name of the Amazon Q Business application.
 	DisplayName *string
 
+	// The authentication type being used by a Amazon Q Business application.
+	IdentityType IdentityType
+
 	// The status of the Amazon Q Business application. The application is ready to
 	// use when the status is ACTIVE .
 	Status ApplicationStatus
@@ -448,6 +451,24 @@ type AuthChallengeResponseEvent struct {
 	//
 	// This member is required.
 	ResponseMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Subscription configuration information for an Amazon Q Business application
+// using IAM identity federation for user management.
+type AutoSubscriptionConfiguration struct {
+
+	// Describes whether automatic subscriptions are enabled for an Amazon Q Business
+	// application using IAM identity federation for user management.
+	//
+	// This member is required.
+	AutoSubscribe AutoSubscriptionStatus
+
+	// Describes the default subscription type assigned to an Amazon Q Business
+	// application using IAM identity federation for user management. If the value for
+	// autoSubscribe is set to ENABLED you must select a value for this field.
+	DefaultSubscriptionType SubscriptionType
 
 	noSmithyDocumentSerde
 }
@@ -1461,6 +1482,38 @@ type HookConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the identity provider (IdP) used to authenticate end
+// users of an Amazon Q Business web experience.
+//
+// The following types satisfy this interface:
+//
+//	IdentityProviderConfigurationMemberOpenIDConnectConfiguration
+//	IdentityProviderConfigurationMemberSamlConfiguration
+type IdentityProviderConfiguration interface {
+	isIdentityProviderConfiguration()
+}
+
+// Information about the OIDC-compliant identity provider (IdP) used to
+// authenticate end users of an Amazon Q Business web experience.
+type IdentityProviderConfigurationMemberOpenIDConnectConfiguration struct {
+	Value OpenIDConnectProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*IdentityProviderConfigurationMemberOpenIDConnectConfiguration) isIdentityProviderConfiguration() {
+}
+
+// Information about the SAML 2.0-compliant identity provider (IdP) used to
+// authenticate end users of an Amazon Q Business web experience.
+type IdentityProviderConfigurationMemberSamlConfiguration struct {
+	Value SamlProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*IdentityProviderConfigurationMemberSamlConfiguration) isIdentityProviderConfiguration() {}
+
 // Summary information for your Amazon Q Business index.
 type Index struct {
 
@@ -1733,6 +1786,25 @@ type OAuth2ClientCredentialConfiguration struct {
 	//
 	// This member is required.
 	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the OIDC-compliant identity provider (IdP) used to
+// authenticate end users of an Amazon Q Business web experience.
+type OpenIDConnectProviderConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of a Secrets Manager secret containing the OIDC
+	// client secret.
+	//
+	// This member is required.
+	SecretsArn *string
+
+	// An IAM role with permissions to access KMS to decrypt the Secrets Manager
+	// secret containing your OIDC client secret.
+	//
+	// This member is required.
+	SecretsRole *string
 
 	noSmithyDocumentSerde
 }
@@ -2065,6 +2137,19 @@ type SamlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the SAML 2.0-compliant identity provider (IdP) used to
+// authenticate end users of an Amazon Q Business web experience.
+type SamlProviderConfiguration struct {
+
+	// The URL where Amazon Q Business end users will be redirected for
+	// authentication.
+	//
+	// This member is required.
+	AuthenticationUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the relevant text excerpt from a source that was used to generate a
 // citation text segment in an Amazon Q Business chat response.
 type SnippetExcerpt struct {
@@ -2365,6 +2450,7 @@ func (*UnknownUnionMember) isChatOutputStream()                       {}
 func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration() {}
 func (*UnknownUnionMember) isDocumentAttributeValue()                 {}
 func (*UnknownUnionMember) isDocumentContent()                        {}
+func (*UnknownUnionMember) isIdentityProviderConfiguration()          {}
 func (*UnknownUnionMember) isPluginAuthConfiguration()                {}
 func (*UnknownUnionMember) isPrincipal()                              {}
 func (*UnknownUnionMember) isRetrieverConfiguration()                 {}

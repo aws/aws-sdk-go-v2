@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Retrieves information about a prompt or a version of it. For more information,
-// see [View information about prompts using Prompt management]and [View information about a version of your prompt] in the Amazon Bedrock User Guide.
+// Retrieves information about the working draft ( DRAFT version) of a prompt or a
+// version of it, depending on whether you include the promptVersion field or not.
+// For more information, see [View information about prompts using Prompt management]and [View information about a version of your prompt] in the Amazon Bedrock User Guide.
 //
 // [View information about a version of your prompt]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-view.html
 // [View information about prompts using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html
@@ -39,7 +40,8 @@ type GetPromptInput struct {
 	// This member is required.
 	PromptIdentifier *string
 
-	// The version of the prompt about which you want to retrieve information.
+	// The version of the prompt about which you want to retrieve information. Omit
+	// this field to return information about the working draft of the prompt.
 	PromptVersion *string
 
 	noSmithyDocumentSerde
@@ -47,7 +49,8 @@ type GetPromptInput struct {
 
 type GetPromptOutput struct {
 
-	// The Amazon Resource Name (ARN) of the prompt.
+	// The Amazon Resource Name (ARN) of the prompt or the prompt version (if you
+	// specified a version in the request).
 	//
 	// This member is required.
 	Arn *string

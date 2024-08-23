@@ -46,6 +46,10 @@ type UpdateWebExperienceInput struct {
 	// of using AWS IAM Identity Center for user management.
 	AuthenticationConfiguration types.WebExperienceAuthConfiguration
 
+	// Information about the identity provider (IdP) used to authenticate end users of
+	// an Amazon Q Business web experience.
+	IdentityProviderConfiguration types.IdentityProviderConfiguration
+
 	// The Amazon Resource Name (ARN) of the role with permission to access the Amazon
 	// Q Business web experience and required resources.
 	RoleArn *string

@@ -656,6 +656,25 @@ func (PromptType) Values() []PromptType {
 	}
 }
 
+type RequireConfirmation string
+
+// Enum values for RequireConfirmation
+const (
+	RequireConfirmationEnabled  RequireConfirmation = "ENABLED"
+	RequireConfirmationDisabled RequireConfirmation = "DISABLED"
+)
+
+// Values returns all known values for RequireConfirmation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RequireConfirmation) Values() []RequireConfirmation {
+	return []RequireConfirmation{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type SalesforceAuthType string
 
 // Enum values for SalesforceAuthType

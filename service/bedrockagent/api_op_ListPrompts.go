@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of prompts from the Prompt management tool and information about
-// each prompt. For more information, see [View information about prompts using Prompt management]in the Amazon Bedrock User Guide.
+// Returns either information about the working draft ( DRAFT version) of each
+// prompt in an account, or information about of all versions of a prompt,
+// depending on whether you include the promptIdentifier field or not. For more
+// information, see [View information about prompts using Prompt management]in the Amazon Bedrock User Guide.
 //
 // [View information about prompts using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html
 func (c *Client) ListPrompts(ctx context.Context, params *ListPromptsInput, optFns ...func(*Options)) (*ListPromptsOutput, error) {
@@ -43,7 +45,9 @@ type ListPromptsInput struct {
 	// this field to return the next batch of results.
 	NextToken *string
 
-	// The unique identifier of the prompt.
+	// The unique identifier of the prompt for whose versions you want to return
+	// information. Omit this field to list information about all prompts in an
+	// account.
 	PromptIdentifier *string
 
 	noSmithyDocumentSerde

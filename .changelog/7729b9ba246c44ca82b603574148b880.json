@@ -1,0 +1,8 @@
+{
+    "id": "7729b9ba-246c-44ca-82b6-03574148b880",
+    "type": "feature",
+    "description": "Releasing the support for Action User Confirmation.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

@@ -71,7 +71,7 @@ type GetFlowVersionOutput struct {
 	// This member is required.
 	Id *string
 
-	// The name of the flow version.
+	// The name of the version.
 	//
 	// This member is required.
 	Name *string
