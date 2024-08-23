@@ -1,0 +1,8 @@
+{
+    "id": "ebcf2e12-f2ba-4d0f-9aa4-4b48b850c41f",
+    "type": "bugfix",
+    "description": "Save SSO cached token expiry in UTC to ensure cross-SDK compatibility.",
+    "modules": [
+        "credentials"
+    ]
+}
