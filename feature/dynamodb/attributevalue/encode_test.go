@@ -420,17 +420,17 @@ func TestMarshalOmitEmpty(t *testing.T) {
 	}
 }
 
-type customNullMarshaler struct {}
+type customNullMarshaler struct{}
 
 func (m customNullMarshaler) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
 	return &types.AttributeValueMemberNULL{Value: true}, nil
 }
 
 type testOmitEmptyCustom struct {
-	CustomNullOmit customNullMarshaler `dynamodbav:",omitempty"`
+	CustomNullOmit       customNullMarshaler `dynamodbav:",omitempty"`
 	CustomNullOmitTagKey customNullMarshaler `tagkey:",omitempty"`
-	CustomNullPresent customNullMarshaler
-	EmptySetOmit []string `dynamodbav:",omitempty"`
+	CustomNullPresent    customNullMarshaler
+	EmptySetOmit         []string `dynamodbav:",omitempty"`
 }
 
 func TestMarshalOmitEmptyCustom(t *testing.T) {
@@ -442,7 +442,7 @@ func TestMarshalOmitEmptyCustom(t *testing.T) {
 
 	m := testOmitEmptyCustom{}
 
-	actual, err := MarshalWithOptions(m, func(eo *EncoderOptions){
+	actual, err := MarshalWithOptions(m, func(eo *EncoderOptions) {
 		eo.TagKey = "tagkey"
 		eo.OmitNullAttributeValues = true
 		eo.NullEmptySets = true

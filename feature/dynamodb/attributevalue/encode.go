@@ -393,11 +393,11 @@ type EncoderOptions struct {
 	// from a MarshalBinary call will convert to binary (B).
 	UseEncodingMarshalers bool
 
-	// When enabled, the encoder will omit null (NULL) attribute values when 
-	// marshaling a field tagged with omitempty.
+	// When enabled, the encoder will omit null (NULL) attribute values
+	// returned from custom marshalers tagged with `omitempty`.
 	//
-	// The value field of the marshaled null (NULL) attribute value must be set 
-	// to true in order for the attribute value to be omitted.
+	// NULL attribute values returned from the standard marshaling routine will
+	// always respect omitempty regardless of this setting.
 	OmitNullAttributeValues bool
 }
 
