@@ -441,6 +441,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the Amazon Q Business application. The application is ready to use when the\n            status is <code>ACTIVE</code>.</p>"
                     }
+                },
+                "identityType": {
+                    "target": "com.amazonaws.qbusiness#IdentityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type being used by a Amazon Q Business application.</p>"
+                    }
                 }
             },
             "traits": {
@@ -923,6 +929,44 @@
             },
             "value": {
                 "target": "com.amazonaws.qbusiness#AuthResponseValue"
+            }
+        },
+        "com.amazonaws.qbusiness#AutoSubscriptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "autoSubscribe": {
+                    "target": "com.amazonaws.qbusiness#AutoSubscriptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether automatic subscriptions are enabled for an Amazon Q Business\n            application using IAM identity federation for user management.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultSubscriptionType": {
+                    "target": "com.amazonaws.qbusiness#SubscriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the default subscription type assigned to an Amazon Q Business\n            application using IAM identity federation for user management. If the\n            value for <code>autoSubscribe</code> is set to <code>ENABLED</code> you must select a\n            value for this field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Subscription configuration information for an Amazon Q Business application\n            using IAM identity federation for user management. </p>"
+            }
+        },
+        "com.amazonaws.qbusiness#AutoSubscriptionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.qbusiness#BasicAuthConfiguration": {
@@ -1628,6 +1672,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qbusiness#ClientIdForOIDC": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.qbusiness#ClientIdsForOIDC": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#ClientIdForOIDC"
+            }
+        },
         "com.amazonaws.qbusiness#ClientToken": {
             "type": "string",
             "traits": {
@@ -1902,10 +1961,28 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of an IAM role with permissions to access your Amazon\n                CloudWatch logs and metrics.</p>"
                     }
                 },
+                "identityType": {
+                    "target": "com.amazonaws.qbusiness#IdentityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type being used by a Amazon Q Business application.</p>"
+                    }
+                },
+                "iamIdentityProviderArn": {
+                    "target": "com.amazonaws.qbusiness#IamIdentityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an identity provider being used by an Amazon Q Business application.</p>"
+                    }
+                },
                 "identityCenterInstanceArn": {
                     "target": "com.amazonaws.qbusiness#InstanceArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the IAM Identity Center instance you are either\n            creating for—or connecting to—your Amazon Q Business application.</p>"
+                    }
+                },
+                "clientIdsForOIDC": {
+                    "target": "com.amazonaws.qbusiness#ClientIdsForOIDC",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client ID for a Amazon Q Business application.</p>"
                     }
                 },
                 "description": {
@@ -2054,7 +2131,7 @@
                 "configuration": {
                     "target": "com.amazonaws.qbusiness#DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information to connect to your data source repository. For configuration\n            templates for your specific data source, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html\">Supported\n                connectors</a>.</p>",
+                        "smithy.api#documentation": "<p>Configuration information to connect your data source repository to Amazon Q Business. Use this parameter to provide a JSON schema with configuration\n            information specific to your data source connector.</p>\n         <p>Each data source has a JSON schema provided by Amazon Q Business that you must\n            use. For example, the Amazon S3 and Web Crawler connectors require the following\n            JSON schemas:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/s3-api.html\">Amazon S3 JSON schema</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/web-crawler-api.html\">Web Crawler JSON schema</a>\n               </p>\n            </li>\n         </ul>\n         <p>You can find configuration templates for your specific data source using the following\n            steps:</p>\n         <ol>\n            <li>\n               <p>Navigate to the <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html\">Supported\n                        connectors</a> page in the Amazon Q Business User Guide, and\n                    select the data source of your choice.</p>\n            </li>\n            <li>\n               <p>Then, from your specific data source connector page, select <b>Using the API</b>. You will find the JSON schema for your\n                    data source, including parameter descriptions, in this section.</p>\n            </li>\n         </ol>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2674,7 +2751,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.qbusiness#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role attached to your web\n            experience.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role attached to your web\n            experience.</p>\n         <note>\n            <p>You must provide this value if you're using IAM Identity Center to manage end user\n                access to your application. If you're using legacy identity management to manage\n                user access, you don't need to provide this value.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -2689,6 +2766,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token you provide to identify a request to create an Amazon Q Business web experience.\n        </p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "identityProviderConfiguration": {
+                    "target": "com.amazonaws.qbusiness#IdentityProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the identity provider (IdP) used to authenticate end users of an\n                Amazon Q Business web experience.</p>"
                     }
                 }
             },
@@ -5202,6 +5285,18 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q Business application.</p>"
                     }
                 },
+                "identityType": {
+                    "target": "com.amazonaws.qbusiness#IdentityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type being used by a Amazon Q Business application.</p>"
+                    }
+                },
+                "iamIdentityProviderArn": {
+                    "target": "com.amazonaws.qbusiness#IamIdentityProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an identity provider being used by an Amazon Q Business application.</p>"
+                    }
+                },
                 "identityCenterApplicationArn": {
                     "target": "com.amazonaws.qbusiness#IdcApplicationArn",
                     "traits": {
@@ -5269,6 +5364,18 @@
                     "target": "com.amazonaws.qbusiness#PersonalizationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration information about chat response personalization. For more information,\n            see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
+                    }
+                },
+                "autoSubscriptionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#AutoSubscriptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for auto-subscription behavior for this application. This is only applicable\n            to SAML and OIDC applications.</p>"
+                    }
+                },
+                "clientIdsForOIDC": {
+                    "target": "com.amazonaws.qbusiness#ClientIdsForOIDC",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OIDC client ID for a Amazon Q Business application.</p>"
                     }
                 }
             },
@@ -6275,6 +6382,12 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the service role attached to your web\n            experience.</p>"
                     }
                 },
+                "identityProviderConfiguration": {
+                    "target": "com.amazonaws.qbusiness#IdentityProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the identity provider (IdP) used to authenticate end users of an\n                Amazon Q Business web experience.</p>"
+                    }
+                },
                 "authenticationConfiguration": {
                     "target": "com.amazonaws.qbusiness#WebExperienceAuthConfiguration",
                     "traits": {
@@ -6445,6 +6558,16 @@
                 "smithy.api#documentation": "<p>Provides the configuration information for invoking a Lambda function in\n                Lambda to alter document metadata and content when ingesting\n            documents into Amazon Q Business.</p>\n         <p>You can configure your Lambda function using the\n                <code>PreExtractionHookConfiguration</code> parameter if you want to apply advanced\n            alterations on the original or raw documents.</p>\n         <p>If you want to apply advanced alterations on the Amazon Q Business structured documents,\n            you must configure your Lambda function using\n                <code>PostExtractionHookConfiguration</code>.</p>\n         <p>You can only invoke one Lambda function. However, this function can invoke\n            other functions it requires.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html\">Custom document enrichment</a>. </p>"
             }
         },
+        "com.amazonaws.qbusiness#IamIdentityProviderArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$"
+            }
+        },
         "com.amazonaws.qbusiness#IdcApplicationArn": {
             "type": "string",
             "traits": {
@@ -6453,6 +6576,43 @@
                     "max": 1224
                 },
                 "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+            }
+        },
+        "com.amazonaws.qbusiness#IdentityProviderConfiguration": {
+            "type": "union",
+            "members": {
+                "samlConfiguration": {
+                    "target": "com.amazonaws.qbusiness#SamlProviderConfiguration"
+                },
+                "openIDConnectConfiguration": {
+                    "target": "com.amazonaws.qbusiness#OpenIDConnectProviderConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the identity provider (IdP) used to authenticate end users\n            of an Amazon Q Business web experience.</p>"
+            }
+        },
+        "com.amazonaws.qbusiness#IdentityType": {
+            "type": "enum",
+            "members": {
+                "AWS_IAM_IDP_SAML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM_IDP_SAML"
+                    }
+                },
+                "AWS_IAM_IDP_OIDC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM_IDP_OIDC"
+                    }
+                },
+                "AWS_IAM_IDC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM_IDC"
+                    }
+                }
             }
         },
         "com.amazonaws.qbusiness#Index": {
@@ -8531,6 +8691,28 @@
                 "smithy.api#documentation": "<p>Information about the OAuth 2.0 authentication credential/token used to configure a\n            plugin.</p>"
             }
         },
+        "com.amazonaws.qbusiness#OpenIDConnectProviderConfiguration": {
+            "type": "structure",
+            "members": {
+                "secretsArn": {
+                    "target": "com.amazonaws.qbusiness#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Secrets Manager secret containing the OIDC\n            client secret.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretsRole": {
+                    "target": "com.amazonaws.qbusiness#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IAM role with permissions to access KMS to decrypt\n            the Secrets Manager secret containing your OIDC client secret.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the OIDC-compliant identity provider (IdP) used to authenticate end\n            users of an Amazon Q Business web experience.</p>"
+            }
+        },
         "com.amazonaws.qbusiness#Payload": {
             "type": "string",
             "traits": {
@@ -9067,7 +9249,7 @@
                 "groupName": {
                     "target": "com.amazonaws.qbusiness#GroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list that contains your users or sub groups that belong the same group. For\n            example, the group \"Company\" includes the user \"CEO\" and the sub groups \"Research\",\n            \"Engineering\", and \"Sales and Marketing\".</p>\n         <p>If you have more than 1000 users and/or sub groups for a single group, you need to\n            provide the path to the S3 file that lists your users and sub groups for a group. Your\n            sub groups can contain more than 1000 users, but the list of sub groups that belong to a\n            group (and/or users) must be no more than 1000.</p>",
+                        "smithy.api#documentation": "<p>The list that contains your users or sub groups that belong the same group. For\n            example, the group \"Company\" includes the user \"CEO\" and the sub groups \"Research\",\n            \"Engineering\", and \"Sales and Marketing\".</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9502,6 +9684,16 @@
                 }
             }
         },
+        "com.amazonaws.qbusiness#SamlAuthenticationUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1284
+                },
+                "smithy.api#pattern": "^https://.*$"
+            }
+        },
         "com.amazonaws.qbusiness#SamlConfiguration": {
             "type": "structure",
             "members": {
@@ -9545,6 +9737,21 @@
                     "max": 10000000
                 },
                 "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.qbusiness#SamlProviderConfiguration": {
+            "type": "structure",
+            "members": {
+                "authenticationUrl": {
+                    "target": "com.amazonaws.qbusiness#SamlAuthenticationUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL where Amazon Q Business end users will be redirected for authentication.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the SAML 2.0-compliant identity provider (IdP) used to authenticate\n            end users of an Amazon Q Business web experience.</p>"
             }
         },
         "com.amazonaws.qbusiness#SecretArn": {
@@ -9957,6 +10164,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qbusiness#SubnetId"
+            }
+        },
+        "com.amazonaws.qbusiness#SubscriptionType": {
+            "type": "enum",
+            "members": {
+                "Q_LITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Q_LITE"
+                    }
+                },
+                "Q_BUSINESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Q_BUSINESS"
+                    }
+                }
             }
         },
         "com.amazonaws.qbusiness#SyncSchedule": {
@@ -10470,6 +10694,12 @@
                     "target": "com.amazonaws.qbusiness#PersonalizationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration information about chat response personalization. For more information,\n            see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html\">Personalizing chat responses</a>.</p>"
+                    }
+                },
+                "autoSubscriptionConfiguration": {
+                    "target": "com.amazonaws.qbusiness#AutoSubscriptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to enable updating the default subscription type assigned to an Amazon Q Business application using IAM identity federation for user\n            management.</p>"
                     }
                 }
             },
@@ -11202,6 +11432,12 @@
                     "target": "com.amazonaws.qbusiness#WebExperienceSamplePromptsControlMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines whether sample prompts are enabled in the web experience for an end\n            user.</p>"
+                    }
+                },
+                "identityProviderConfiguration": {
+                    "target": "com.amazonaws.qbusiness#IdentityProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the identity provider (IdP) used to authenticate end users of an\n                Amazon Q Business web experience.</p>"
                     }
                 }
             },

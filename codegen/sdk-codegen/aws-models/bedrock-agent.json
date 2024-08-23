@@ -2269,7 +2269,7 @@
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that \n            stores your authentication credentials for your SharePoint site/sites. \n            For more information on the key-value pairs that must be included in \n            your secret, depending on your authentication type, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/confluence-data-source-connector.html#configuration-confluence-connector\">Confluence connection configuration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that \n            stores your authentication credentials for your Confluence instance URL. \n            For more information on the key-value pairs that must be included in \n            your secret, depending on your authentication type, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/confluence-data-source-connector.html#configuration-confluence-connector\">Confluence connection configuration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2773,7 +2773,7 @@
                 "dataDeletionPolicy": {
                     "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data deletion policy for the data source.</p>\n         <p>You can set the data deletion policy to:</p>\n         <ul>\n            <li>\n               <p>DELETE: Deletes all underlying data belonging to \n          the data source from the vector store upon deletion of a knowledge base or data \n          source resource. Note that the vector store itself is not deleted, only the \n          underlying data. This flag is ignored if an Amazon Web Services account is deleted.</p>\n            </li>\n            <li>\n               <p>RETAIN: Retains all underlying data in your \n          vector store upon deletion of a knowledge base or data source resource.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The data deletion policy for the data source.</p>\n         <p>You can set the data deletion policy to:</p>\n         <ul>\n            <li>\n               <p>DELETE: Deletes all data from your data source that’s converted \n          into vector embeddings upon deletion of a knowledge base or data source resource. \n          Note that the <b>vector store itself is not deleted</b>, \n          only the data. This flag is ignored if an Amazon Web Services account is deleted.</p>\n            </li>\n            <li>\n               <p>RETAIN: Retains all data from your data source that’s converted \n          into vector embeddings upon deletion of a knowledge base or data source resource. \n          Note that the <b>vector store itself is not deleted</b> \n          if you delete a knowledge base or data source resource.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {
@@ -3221,14 +3221,14 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagent#FlowName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the flow version.</p>",
+                        "smithy.api#documentation": "<p>The name of the version.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.bedrockagent#FlowDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the flow version.</p>"
+                        "smithy.api#documentation": "<p>The description of the version.</p>"
                     }
                 },
                 "executionRoleArn": {
@@ -3655,14 +3655,14 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagent#PromptName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the prompt version.</p>",
+                        "smithy.api#documentation": "<p>The name of the prompt.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.bedrockagent#PromptDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the prompt version.</p>"
+                        "smithy.api#documentation": "<p>A description for the version.</p>"
                     }
                 },
                 "customerEncryptionKeyArn": {
@@ -4893,7 +4893,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a prompt or a prompt version from the Prompt management tool. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-delete.html\">Delete prompts from the Prompt management tool</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-delete.html\">Delete a version of a prompt from the Prompt management tool</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Deletes a prompt or a version of it, depending on whether you include the <code>promptVersion</code> field or not. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-delete.html\">Delete prompts from the Prompt management tool</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-delete.html\">Delete a version of a prompt from the Prompt management tool</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -4919,7 +4919,7 @@
                 "promptVersion": {
                     "target": "com.amazonaws.bedrockagent#NumericalVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the prompt to delete.</p>",
+                        "smithy.api#documentation": "<p>The version of the prompt to delete. To delete the prompt, omit this field.</p>",
                         "smithy.api#httpQuery": "promptVersion"
                     }
                 }
@@ -5302,7 +5302,7 @@
                 "arn": {
                     "target": "com.amazonaws.bedrockagent#FlowAliasArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow alias.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alias.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6176,7 +6176,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at the flow version was created.</p>",
+                        "smithy.api#documentation": "<p>The time at the version was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6189,7 +6189,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the flow version.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowVersions.html#API_agent_ListFlowVersions_ResponseSyntax\">ListFlowVersions response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about a version of a flow.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowVersions.html#API_agent_ListFlowVersions_ResponseSyntax\">ListFlowVersions response</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagent#Function": {
@@ -6212,6 +6212,12 @@
                     "target": "com.amazonaws.bedrockagent#ParameterMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters that the agent elicits from the user to fulfill the function.</p>"
+                    }
+                },
+                "requireConfirmation": {
+                    "target": "com.amazonaws.bedrockagent#RequireConfirmation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information if user confirmation is required to invoke the function.</p>"
                     }
                 }
             },
@@ -6824,7 +6830,7 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagent#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the flow alias.</p>",
+                        "smithy.api#documentation": "<p>The name of the alias.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6872,7 +6878,7 @@
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the flow alias was last updated.</p>",
+                        "smithy.api#documentation": "<p>The time at which the alias was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7053,7 +7059,7 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagent#FlowName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the flow version.</p>",
+                        "smithy.api#documentation": "<p>The name of the version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7302,7 +7308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a prompt or a version of it. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html\">View information about prompts using Prompt management</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-view.html\">View information about a version of your prompt</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the working draft (<code>DRAFT</code> version) of a prompt or a version of it, depending on whether you include the <code>promptVersion</code> field or not. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html\">View information about prompts using Prompt management</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-view.html\">View information about a version of your prompt</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -7328,7 +7334,7 @@
                 "promptVersion": {
                     "target": "com.amazonaws.bedrockagent#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the prompt about which you want to retrieve information.</p>",
+                        "smithy.api#documentation": "<p>The version of the prompt about which you want to retrieve information. Omit this field to return information about the working draft of the prompt.</p>",
                         "smithy.api#httpQuery": "promptVersion"
                     }
                 }
@@ -7381,7 +7387,7 @@
                 "arn": {
                     "target": "com.amazonaws.bedrockagent#PromptArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt or the prompt version (if you specified a version in the request).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9020,7 +9026,7 @@
                 "flowAliasSummaries": {
                     "target": "com.amazonaws.bedrockagent#FlowAliasSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list, each member of which contains information about a flow alias.</p>",
+                        "smithy.api#documentation": "<p>A list, each member of which contains information about an alias.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9435,7 +9441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of prompts from the Prompt management tool and information about each prompt. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html\">View information about prompts using Prompt management</a> in the Amazon Bedrock User Guide.</p>",
+                "smithy.api#documentation": "<p>Returns either information about the working draft (<code>DRAFT</code> version) of each prompt in an account, or information about of all versions of a prompt, depending on whether you include the <code>promptIdentifier</code> field or not. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html\">View information about prompts using Prompt management</a> in the Amazon Bedrock User Guide.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -9459,7 +9465,7 @@
                 "promptIdentifier": {
                     "target": "com.amazonaws.bedrockagent#PromptIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the prompt.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the prompt for whose versions you want to return information. Omit this field to list information about all prompts in an account.</p>",
                         "smithy.api#httpQuery": "promptIdentifier"
                     }
                 },
@@ -10670,7 +10676,7 @@
                 "arn": {
                     "target": "com.amazonaws.bedrockagent#PromptArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt or the prompt version (if you specified a version in the request).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11028,6 +11034,26 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.bedrockagent#RequireConfirmation": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "ENUM to check if action requires user confirmation"
+            }
+        },
         "com.amazonaws.bedrockagent#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -11275,7 +11301,7 @@
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that \n            stores your authentication credentials for your SharePoint site/sites. \n            For more information on the key-value pairs that must be included in \n            your secret, depending on your authentication type, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/salesforce-data-source-connector.html#configuration-salesforce-connector\">Salesforce connection configuration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of an Secrets Manager secret that \n            stores your authentication credentials for your Salesforce instance URL. \n            For more information on the key-value pairs that must be included in \n            your secret, depending on your authentication type, see \n            <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/salesforce-data-source-connector.html#configuration-salesforce-connector\">Salesforce connection configuration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12810,14 +12836,14 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagent#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the flow alias.</p>",
+                        "smithy.api#documentation": "<p>The name of the alias.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.bedrockagent#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the flow alias.</p>"
+                        "smithy.api#documentation": "<p>A description for the alias.</p>"
                     }
                 },
                 "routingConfiguration": {
@@ -12854,7 +12880,7 @@
                 "name": {
                     "target": "com.amazonaws.bedrockagent#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the flow alias.</p>",
+                        "smithy.api#documentation": "<p>The name of the alias.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12902,7 +12928,7 @@
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the flow alias was last updated.</p>",
+                        "smithy.api#documentation": "<p>The time at which the alias was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
