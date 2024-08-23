@@ -1,0 +1,8 @@
+{
+    "id": "281f2e28-209e-4406-8c04-c9d74bab8970",
+    "type": "feature",
+    "description": "Add Encoder option to obey omitempty tag for NULL attribute values.",
+    "modules": [
+        "feature/dynamodb/attributevalue"
+    ]
+}
