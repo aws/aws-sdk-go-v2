@@ -1,0 +1,1484 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.identitystoreinternal#AWSIdentityStoreService": {
+            "type": "service",
+            "version": "2024-08-22",
+            "operations": [
+                {
+                    "target": "com.amazonaws.identitystoreinternal#SearchUsers"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.identitystoreinternal#UserResource"
+                }
+            ],
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystoreinternal#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.identitystoreinternal#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.identitystoreinternal#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "identitystoreinternal",
+                    "arnNamespace": "identitystore",
+                    "cloudFormationName": "IdentityStore",
+                    "cloudTrailEventSource": "sso-directory.amazonaws.com",
+                    "endpointPrefix": "up.sso"
+                },
+                "aws.auth#sigv4": {
+                    "name": "identitystore"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>The Identity Store service used by IAM Identity Center provides a single place to retrieve all of\n         your identities (users and groups). For more information, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User\n            Guide</a>.</p>\n         <p>This reference guide describes the identity store operations that you can call\n         programmatically and includes detailed information about data types and errors.</p>\n         <note>\n            <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API namespaces.</p>\n         </note>",
+                "smithy.api#title": "AWS SSO Identity Store Internal",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-west-1"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-north-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://up-sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}/identitystore/",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://up.sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}/identitystore/",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "stringEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "Region"
+                                                                                },
+                                                                                "us-west-1"
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "endpoint": {
+                                                                        "url": "https://up-sso.us-west-1.amazonaws.com/identitystore",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                },
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "stringEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "Region"
+                                                                                },
+                                                                                "eu-north-1"
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "endpoint": {
+                                                                        "url": "https://up-sso.eu-north-1.amazonaws.com/identitystore/",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://up.sso.{Region}.amazonaws.com/identitystore/",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://up.sso-fips.{Region}.{PartitionResult#dnsSuffix}/identitystore/",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "us-west-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://up-sso.us-west-1.{PartitionResult#dualStackDnsSuffix}/identitystore/",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "eu-north-1"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://up-sso.eu-north-1.{PartitionResult#dualStackDnsSuffix}/identitystore/",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://up.sso.{Region}.{PartitionResult#dualStackDnsSuffix}/identitystore/",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "us-west-1"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://up-sso.us-west-1.{PartitionResult#dnsSuffix}/identitystore/",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "eu-north-1"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://up-sso.eu-north-1.{PartitionResult#dnsSuffix}/identitystore/",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://up.sso.{Region}.{PartitionResult#dnsSuffix}/identitystore/",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.ap-northeast-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.ap-northeast-2.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.ap-south-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.ap-southeast-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.ap-southeast-2.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.ca-central-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.eu-central-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up-sso.eu-north-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.eu-west-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.eu-west-2.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-east-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-east-2.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-west-2.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso-fips.us-east-1.api.aws/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso-fips.us-east-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-east-1.api.aws/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso-fips.cn-north-1.api.amazonwebservices.com.cn/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso-fips.cn-north-1.amazonaws.com.cn/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.cn-north-1.api.amazonwebservices.com.cn/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.cn-north-1.amazonaws.com.cn/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-gov-east-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-gov-east-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-gov-west-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-gov-west-1.amazonaws.com/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso-fips.us-gov-east-1.api.aws/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-gov-east-1.api.aws/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso-fips.us-iso-east-1.c2s.ic.gov/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-iso-east-1.c2s.ic.gov/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso-fips.us-isob-east-1.sc2s.sgov.gov/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://up.sso.us-isob-east-1.sc2s.sgov.gov/identitystore/"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.identitystoreinternal#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.identitystoreinternal#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.identitystoreinternal#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by\n         the identity store service for each sent request, and is then returned inside the exception\n         if the request fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.identitystoreinternal#AttributePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^\\p{L}+(?:\\.\\p{L}+){0,2}$"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#AttributeValue": {
+            "type": "document",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of the attribute. This is a <code>Document</code> type.\n         This type is not supported by Java V1, Go V1, and older versions of the CLI.</p>"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.identitystoreinternal#Filter": {
+            "type": "structure",
+            "members": {
+                "AttributePath": {
+                    "target": "com.amazonaws.identitystoreinternal#AttributePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute path that is used to specify which attribute name to search. Length limit\n         is 255 characters. For example, <code>UserName</code> is a valid attribute path for the\n            <code>SearchUsers</code> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeValue": {
+                    "target": "com.amazonaws.identitystoreinternal#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the data for an attribute. Each attribute value is described as a name-value\n         pair. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query filter used by <code>SearchUsers</code>. This filter\n         object provides the attribute name and attribute value to search users or groups.</p>"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#Filters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystoreinternal#Filter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.identitystoreinternal#IdentityStoreId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.identitystoreinternal#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.identitystoreinternal#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by\n         the identity store service for each sent request, and is then returned inside the exception\n         if the request fails.</p>"
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.identitystoreinternal#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the next request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure with an internal server.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.identitystoreinternal#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.identitystoreinternal#UserInfo": {
+            "type": "structure",
+            "members": {
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the user was created.</p>",
+                        "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the user was updated.</p>",
+                        "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.identitystoreinternal#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Entity that created the user.</p>"
+                    }
+                },
+                "UpdatedBy": {
+                    "target": "com.amazonaws.identitystoreinternal#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Entity that updated the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata information about a user.</p>"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9+=/:_]*$"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#RequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#ResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.identitystoreinternal#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum object indicating the type of resource in the identity store service. Valid values include USER, GROUP, and IDENTITY_STORE.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.identitystoreinternal#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a resource in the identity store that can be used as <code>UserId</code> or <code>GroupId</code>. The format for <code>ResourceId</code> is either <code>UUID</code> or <code>1234567890-UUID</code>, where <code>UUID</code> is a randomly generated value for each resource when it is created and <code>1234567890</code> represents the <code>IdentityStoreId</code> string value. In the case that the identity store is migrated from a legacy SSO identity store, the <code>ResourceId</code> for that identity store will be in the format of <code>UUID</code>. Otherwise, it will be in the <code>1234567890-UUID</code> format.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.identitystoreinternal#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.identitystoreinternal#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by\n         the identity store service for each sent request, and is then returned inside the exception\n         if the request fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that a requested resource is not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.identitystoreinternal#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GROUP",
+                        "name": "GROUP"
+                    },
+                    {
+                        "value": "USER",
+                        "name": "USER"
+                    },
+                    {
+                        "value": "IDENTITY_STORE",
+                        "name": "IDENTITY_STORE"
+                    },
+                    {
+                        "value": "GROUP_MEMBERSHIP",
+                        "name": "GROUP_MEMBERSHIP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.identitystoreinternal#RetryAfterSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.identitystoreinternal#SearchUsers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystoreinternal#SearchUsersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystoreinternal#SearchUsersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystoreinternal#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystoreinternal#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Search all users in the identity store. Returns a paginated list of complete <code>User</code> objects. \n         Filtering for a <code>User</code> by the <code>UserName</code> attribute is deprecated. Instead, use the <code>GetUserId</code> API action.</p>\n         <note>\n            <p>If you have administrator access to a member account, you can use this API from the member account. \n         Read about <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html\">member accounts</a> in the \n         <i>Organizations User Guide</i>.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Users",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystoreinternal#SearchUsersRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystoreinternal#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains numbers and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.identitystoreinternal#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>SearchUsers</code> request to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.identitystoreinternal#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>SearchUsers</code> API\n         operation. This value is generated by the identity store service. It is returned in the\n         API response if the total results are more than the size of one page. This token is also\n         returned when it is used in the API request to search for the next page.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.identitystoreinternal#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects, which is used in the <code>SearchUsers</code> request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystoreinternal#SearchUsersResponse": {
+            "type": "structure",
+            "members": {
+                "Users": {
+                    "target": "com.amazonaws.identitystoreinternal#Users",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>User</code> objects in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.identitystoreinternal#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>SearchUsers</code> API\n         operation. This value is generated by the identity store service. It is returned in the\n         API response if the total results are more than the size of one page. This token is also\n         returned when it is used in the API request to search for the next page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystoreinternal#SensitiveBooleanType": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false,
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.identitystoreinternal#SensitiveStringType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  　]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.identitystoreinternal#String": {
+            "type": "string"
+        },
+        "com.amazonaws.identitystoreinternal#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.identitystoreinternal#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.identitystoreinternal#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by\n         the identity store service for each sent request, and is then returned inside the exception\n         if the request fails.</p>"
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.identitystoreinternal#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the next request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the principal has crossed the throttling limits of the API operations.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.identitystoreinternal#User": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.identitystoreinternal#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify the user. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.identitystoreinternal#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a user in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Active": {
+                    "target": "com.amazonaws.identitystoreinternal#SensitiveBooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value representing whether the user is active.</p>"
+                    }
+                },
+                "Meta": {
+                    "target": "com.amazonaws.identitystoreinternal#UserInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata information for a user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A user object that contains the metadata and attributes for a specified user.</p>"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#UserName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.identitystoreinternal#UserResource": {
+            "type": "resource",
+            "identifiers": {
+                "UserId": {
+                    "target": "com.amazonaws.identitystoreinternal#ResourceId"
+                }
+            },
+            "search": {
+                "target": "com.amazonaws.identitystoreinternal#SearchUsers"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "User"
+                },
+                "smithy.api#documentation": "Resource Type definition for AWS:IdentityStore::User"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#Users": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystoreinternal#User"
+            }
+        },
+        "com.amazonaws.identitystoreinternal#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.identitystoreinternal#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.identitystoreinternal#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by\n         the identity store service for each sent request, and is then returned inside the exception\n         if the request fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed because it contains a syntax error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}
