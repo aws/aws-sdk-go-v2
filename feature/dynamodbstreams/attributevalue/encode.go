@@ -392,6 +392,13 @@ type EncoderOptions struct {
 	// The results of a MarshalText call will convert to string (S), results
 	// from a MarshalBinary call will convert to binary (B).
 	UseEncodingMarshalers bool
+
+	// When enabled, the encoder will omit null (NULL) attribute values
+	// returned from custom marshalers tagged with `omitempty`.
+	//
+	// NULL attribute values returned from the standard marshaling routine will
+	// always respect omitempty regardless of this setting.
+	OmitNullAttributeValues bool
 }
 
 // An Encoder provides marshaling Go value types to AttributeValues.
@@ -452,6 +459,8 @@ func (e *Encoder) encode(v reflect.Value, fieldTag tag) (types.AttributeValue, e
 	if v.Kind() != reflect.Invalid {
 		if av, err := e.tryMarshaler(v); err != nil {
 			return nil, err
+		} else if e.options.OmitNullAttributeValues && fieldTag.OmitEmpty && isNullAttributeValue(av) {
+			return nil, nil
 		} else if av != nil {
 			return av, nil
 		}
@@ -892,4 +901,9 @@ func defaultEncodeTime(t time.Time) (types.AttributeValue, error) {
 	return &types.AttributeValueMemberS{
 		Value: t.Format(time.RFC3339Nano),
 	}, nil
+}
+
+func isNullAttributeValue(av types.AttributeValue) bool {
+	n, ok := av.(*types.AttributeValueMemberNULL)
+	return ok && n.Value
 }
