@@ -16,12 +16,8 @@ import (
 
 func TestPresignPutObject(t *testing.T) {
 	fixedTime := time.Date(2022, time.February, 1, 0, 0, 0, 0, time.UTC)
-	sdk.NowTime = func() time.Time {
-		return fixedTime
-	}
-	defer func() {
-		sdk.NowTime = time.Now
-	}()
+	defer mockTime(fixedTime)()
+
 	cases := map[string]struct {
 		input           PutObjectInput
 		options         []func(*PresignPostOptions)
@@ -155,12 +151,7 @@ func TestSampleFromPublicDocs(t *testing.T) {
 	bucket := "sigv4examplebucket"
 	key := "user/user1"
 	testTime := time.Date(2015, time.December, 29, 0, 0, 0, 0, time.UTC)
-	sdk.NowTime = func() time.Time {
-		return testTime
-	}
-	defer func() {
-		sdk.NowTime = time.Now
-	}()
+	defer mockTime(testTime)()
 	expiresIn := 36 * time.Hour
 	staticCredentials := staticCredentialsProvider{Key: accessKeyID, Secret: secretAccessKey}
 	ctx := context.Background()
@@ -387,6 +378,11 @@ func TestBuildPresignPostRequest(t *testing.T) {
 			}
 		})
 	}
+}
+
+func mockTime(t time.Time) func() {
+	sdk.NowTime = func() time.Time { return t }
+	return func() { sdk.NowTime = time.Now }
 }
 
 type staticCredentialsProvider struct {
