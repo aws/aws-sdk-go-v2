@@ -16,6 +16,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
@@ -35,7 +36,45 @@ const (
 	aws4Request      = "aws4_request"
 	bucketHeader     = "bucket"
 	defaultExpiresIn = 15 * time.Minute
+	shortDateLayout  = "20060102"
 )
+
+// PresignPostObject is a special kind of [presigned request] used to send a request using
+// form data, likely from an HTML form on a browser.
+// Unlike other presigned operations, the return values of this function are not meant to be used directly
+// to make an HTTP request but rather to be used as inputs to a form. See [the docs] for more information
+// on how to use these values
+//
+// [presigned request] https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html
+// [the docs] https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html
+func (c *PresignClient) PresignPostObject(ctx context.Context, params *PutObjectInput, optFns ...func(*PresignPostOptions)) (*PresignedPostRequest, error) {
+	if params == nil {
+		params = &PutObjectInput{}
+	}
+	clientOptions := c.options.copy()
+	options := PresignPostOptions{
+		Expires:       clientOptions.Expires,
+		PostPresigner: &postSignAdapter{},
+	}
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	clientOptFns := append(clientOptions.ClientOptions, withNopHTTPClientAPIOption)
+	cvt := presignPostConverter(options)
+	result, _, err := c.client.invokeOperation(ctx, "$type:L", params, clientOptFns,
+		c.client.addOperationPutObjectMiddlewares,
+		cvt.ConvertToPresignMiddleware,
+		func(stack *middleware.Stack, options Options) error {
+			return awshttp.RemoveContentTypeHeader(stack)
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	out := result.(*PresignedPostRequest)
+	return out, nil
+}
 
 // PresignedPostRequest represents a presigned request to be sent using HTTP verb POST and FormData
 type PresignedPostRequest struct {
@@ -64,10 +103,6 @@ func (s *postSignAdapter) PresignPost(
 	bucket string, key string,
 	region string, service string, signingTime time.Time, conditions []interface{}, expirationTime time.Time, optFns ...func(*v4.SignerOptions),
 ) (fields map[string]interface{}, err error) {
-	if conditions == nil {
-		conditions = make([]interface{}, 0)
-	}
-
 	credentialScope := buildCredentialScope(signingTime, region, service)
 	credentialStr := credentials.AccessKeyID + "/" + credentialScope
 
@@ -251,16 +286,15 @@ func toBaseURL(fullURL string) string {
 
 // Adapted from existing PresignConverter middleware
 func (c presignPostConverter) ConvertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
-	removeStepIfPresent(stack, (*acceptencodingcust.DisableGzip)(nil).ID())
-	removeStepIfPresent(stack, (*retry.Attempt)(nil).ID())
-	removeStepIfPresent(stack, (*retry.MetricsHeader)(nil).ID())
+	stack.Build.Remove("UserAgent")
+	stack.Finalize.Remove((*acceptencodingcust.DisableGzip)(nil).ID())
+	stack.Finalize.Remove((*retry.Attempt)(nil).ID())
+	stack.Finalize.Remove((*retry.MetricsHeader)(nil).ID())
 	stack.Deserialize.Clear()
-	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
 
 	if err := stack.Finalize.Insert(&presignContextPolyfillMiddleware{}, "Signing", middleware.Before); err != nil {
 		return err
 	}
-	stack.Build.Remove("UserAgent")
 
 	// if no expiration is set, set one
 	expiresIn := c.Expires
@@ -286,12 +320,6 @@ func (c presignPostConverter) ConvertToPresignMiddleware(stack *middleware.Stack
 		return err
 	}
 	return nil
-}
-
-func removeStepIfPresent(stack *middleware.Stack, id string) {
-	if _, ok := stack.Finalize.Get(id); ok {
-		stack.Finalize.Remove(id)
-	}
 }
 
 func createPolicyDocument(expirationTime time.Time, signingTime time.Time, bucket string, key string, credentialString string, securityToken *string, extraConditions []interface{}) (string, error) {
@@ -392,7 +420,7 @@ func buildSignature(strToSign, secret, service, region string, t time.Time) stri
 }
 
 func deriveKey(secret, service, region string, t time.Time) []byte {
-	hmacDate := hmacsha256([]byte("AWS4"+secret), []byte(t.UTC().Format("20060102")))
+	hmacDate := hmacsha256([]byte("AWS4"+secret), []byte(t.UTC().Format(shortDateLayout)))
 	hmacRegion := hmacsha256(hmacDate, []byte(region))
 	hmacService := hmacsha256(hmacRegion, []byte(service))
 	return hmacsha256(hmacService, []byte(aws4Request))
@@ -400,7 +428,7 @@ func deriveKey(secret, service, region string, t time.Time) []byte {
 
 func buildCredentialScope(signingTime time.Time, region, service string) string {
 	return strings.Join([]string{
-		signingTime.UTC().Format("20060102"),
+		signingTime.UTC().Format(shortDateLayout),
 		region,
 		service,
 		aws4Request,
