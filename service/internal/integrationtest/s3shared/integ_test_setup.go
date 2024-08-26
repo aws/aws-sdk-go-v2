@@ -71,7 +71,7 @@ pt:
 			goto pt
 		}
 		// fail if not succeed after 10 attempts
-		return fmt.Errorf("failed to determine if a bucket %s exists and you have permission to access it", bucketName)
+		return fmt.Errorf("failed to determine if a bucket %s exists and you have permission to access it %v", bucketName, err)
 	}
 
 	return nil
