@@ -1,3 +1,20 @@
+# Release (2024-08-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.17.30](credentials/CHANGELOG.md#v11730-2024-08-26)
+  * **Bug Fix**: Save SSO cached token expiry in UTC to ensure cross-SDK compatibility.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.15.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1150-2024-08-26)
+  * **Feature**: Add Encoder option to obey omitempty tag for NULL attribute values.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.14.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1140-2024-08-26)
+  * **Feature**: Add Encoder option to obey omitempty tag for NULL attribute values.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.41.0](service/iotsitewise/CHANGELOG.md#v1410-2024-08-26)
+  * **Feature**: AWS IoT SiteWise now supports versioning for asset models. It enables users to retrieve active version of their asset model and perform asset model writes with optimistic lock.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.46.0](service/workspaces/CHANGELOG.md#v1460-2024-08-26)
+  * **Feature**: This release adds support for creating and managing directories that use AWS IAM Identity Center as user identity source. Such directories can be used to create non-Active Directory domain joined WorkSpaces Personal.Updated RegisterWorkspaceDirectory and DescribeWorkspaceDirectories APIs.
+
 # Release (2024-08-23)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.41.0 (2024-08-26)
+
+* **Feature**: AWS IoT SiteWise now supports versioning for asset models. It enables users to retrieve active version of their asset model and perform asset model writes with optimistic lock.
+
 # v1.40.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

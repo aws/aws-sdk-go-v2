@@ -1,8 +1,0 @@
-{
-    "id": "ab4c5e77-a758-46aa-bae3-cbee871b278e",
-    "type": "feature",
-    "description": "AWS IoT SiteWise now supports versioning for asset models. It enables users to retrieve active version of their asset model and perform asset model writes with optimistic lock.",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}
