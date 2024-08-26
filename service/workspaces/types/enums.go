@@ -500,6 +500,26 @@ func (DeletableSamlProperty) Values() []DeletableSamlProperty {
 	}
 }
 
+type DescribeWorkspaceDirectoriesFilterName string
+
+// Enum values for DescribeWorkspaceDirectoriesFilterName
+const (
+	DescribeWorkspaceDirectoriesFilterNameUserIdentityType DescribeWorkspaceDirectoriesFilterName = "USER_IDENTITY_TYPE"
+	DescribeWorkspaceDirectoriesFilterNameWorkspaceType    DescribeWorkspaceDirectoriesFilterName = "WORKSPACE_TYPE"
+)
+
+// Values returns all known values for DescribeWorkspaceDirectoriesFilterName.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DescribeWorkspaceDirectoriesFilterName) Values() []DescribeWorkspaceDirectoriesFilterName {
+	return []DescribeWorkspaceDirectoriesFilterName{
+		"USER_IDENTITY_TYPE",
+		"WORKSPACE_TYPE",
+	}
+}
+
 type DescribeWorkspacesPoolsFilterName string
 
 // Enum values for DescribeWorkspacesPoolsFilterName
@@ -912,8 +932,9 @@ type UserIdentityType string
 
 // Enum values for UserIdentityType
 const (
-	UserIdentityTypeCustomerManaged     UserIdentityType = "CUSTOMER_MANAGED"
-	UserIdentityTypeAwsDirectoryService UserIdentityType = "AWS_DIRECTORY_SERVICE"
+	UserIdentityTypeCustomerManaged      UserIdentityType = "CUSTOMER_MANAGED"
+	UserIdentityTypeAwsDirectoryService  UserIdentityType = "AWS_DIRECTORY_SERVICE"
+	UserIdentityTypeAwsIamIdentityCenter UserIdentityType = "AWS_IAM_IDENTITY_CENTER"
 )
 
 // Values returns all known values for UserIdentityType. Note that this can be
@@ -924,6 +945,7 @@ func (UserIdentityType) Values() []UserIdentityType {
 	return []UserIdentityType{
 		"CUSTOMER_MANAGED",
 		"AWS_DIRECTORY_SERVICE",
+		"AWS_IAM_IDENTITY_CENTER",
 	}
 }
 
@@ -1080,9 +1102,10 @@ type WorkspaceDirectoryType string
 
 // Enum values for WorkspaceDirectoryType
 const (
-	WorkspaceDirectoryTypeSimpleAd        WorkspaceDirectoryType = "SIMPLE_AD"
-	WorkspaceDirectoryTypeAdConnector     WorkspaceDirectoryType = "AD_CONNECTOR"
-	WorkspaceDirectoryTypeCustomerManaged WorkspaceDirectoryType = "CUSTOMER_MANAGED"
+	WorkspaceDirectoryTypeSimpleAd             WorkspaceDirectoryType = "SIMPLE_AD"
+	WorkspaceDirectoryTypeAdConnector          WorkspaceDirectoryType = "AD_CONNECTOR"
+	WorkspaceDirectoryTypeCustomerManaged      WorkspaceDirectoryType = "CUSTOMER_MANAGED"
+	WorkspaceDirectoryTypeAwsIamIdentityCenter WorkspaceDirectoryType = "AWS_IAM_IDENTITY_CENTER"
 )
 
 // Values returns all known values for WorkspaceDirectoryType. Note that this can
@@ -1094,6 +1117,7 @@ func (WorkspaceDirectoryType) Values() []WorkspaceDirectoryType {
 		"SIMPLE_AD",
 		"AD_CONNECTOR",
 		"CUSTOMER_MANAGED",
+		"AWS_IAM_IDENTITY_CENTER",
 	}
 }
 

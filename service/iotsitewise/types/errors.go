@@ -148,6 +148,35 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The precondition in one or more of the request-header fields evaluated to FALSE .
+type PreconditionFailedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId  *string
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PreconditionFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PreconditionFailedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PreconditionFailedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PreconditionFailedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The query timed out.
 type QueryTimeoutException struct {
 	Message *string

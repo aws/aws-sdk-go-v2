@@ -33,6 +33,9 @@ type DescribeWorkspaceDirectoriesInput struct {
 	// retrieved.
 	DirectoryIds []string
 
+	// The filter condition for the WorkSpaces.
+	Filters []types.DescribeWorkspaceDirectoriesFilter
+
 	// The maximum number of directories to return.
 	Limit *int32
 
@@ -120,6 +123,9 @@ func (c *Client) addOperationDescribeWorkspaceDirectoriesMiddlewares(stack *midd
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addOpDescribeWorkspaceDirectoriesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkspaceDirectories(options.Region), middleware.Before); err != nil {

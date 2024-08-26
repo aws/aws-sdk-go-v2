@@ -5096,6 +5096,49 @@ func awsAwsjson11_serializeDocumentDeletableSamlPropertiesList(v []types.Deletab
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesFilter(v *types.DescribeWorkspaceDirectoriesFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesFilterList(v []types.DescribeWorkspaceDirectoriesFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDescribeWorkspacesPoolsFilter(v *types.DescribeWorkspacesPoolsFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5281,6 +5324,23 @@ func awsAwsjson11_serializeDocumentLoginMessage(v map[string]string, value smith
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMicrosoftEntraConfig(v *types.MicrosoftEntraConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationConfigSecretArn != nil {
+		ok := object.Key("ApplicationConfigSecretArn")
+		ok.String(*v.ApplicationConfigSecretArn)
+	}
+
+	if v.TenantId != nil {
+		ok := object.Key("TenantId")
+		ok.String(*v.TenantId)
+	}
+
 	return nil
 }
 
@@ -6899,6 +6959,13 @@ func awsAwsjson11_serializeOpDocumentDescribeWorkspaceDirectoriesInput(v *Descri
 		}
 	}
 
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Limit != nil {
 		ok := object.Key("Limit")
 		ok.Integer(*v.Limit)
@@ -7583,6 +7650,18 @@ func awsAwsjson11_serializeOpDocumentRegisterWorkspaceDirectoryInput(v *Register
 	if v.EnableWorkDocs != nil {
 		ok := object.Key("EnableWorkDocs")
 		ok.Boolean(*v.EnableWorkDocs)
+	}
+
+	if v.IdcInstanceArn != nil {
+		ok := object.Key("IdcInstanceArn")
+		ok.String(*v.IdcInstanceArn)
+	}
+
+	if v.MicrosoftEntraConfig != nil {
+		ok := object.Key("MicrosoftEntraConfig")
+		if err := awsAwsjson11_serializeDocumentMicrosoftEntraConfig(v.MicrosoftEntraConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SubnetIds != nil {

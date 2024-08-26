@@ -54,6 +54,12 @@ type RegisterWorkspaceDirectoryInput struct {
 	// again.
 	EnableWorkDocs *bool
 
+	// The Amazon Resource Name (ARN) of the identity center instance.
+	IdcInstanceArn *string
+
+	// The details about Microsoft Entra config.
+	MicrosoftEntraConfig *types.MicrosoftEntraConfig
+
 	// The identifiers of the subnets for your virtual private cloud (VPC). Make sure
 	// that the subnets are in supported Availability Zones. The subnets must also be
 	// in separate Availability Zones. If these conditions are not met, you will

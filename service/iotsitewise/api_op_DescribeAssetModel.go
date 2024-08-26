@@ -43,6 +43,13 @@ type DescribeAssetModelInput struct {
 	// This member is required.
 	AssetModelId *string
 
+	// The version alias that specifies the latest or active version of the asset
+	// model. The details are returned in the response. The default value is LATEST .
+	// See [Asset model versions]in the IoT SiteWise User Guide.
+	//
+	// [Asset model versions]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+	AssetModelVersion *string
+
 	//  Whether or not to exclude asset model properties from the response.
 	ExcludeProperties bool
 
@@ -126,6 +133,20 @@ type DescribeAssetModelOutput struct {
 	//   composite models of other asset models. You can't create assets directly from
 	//   this type of asset model.
 	AssetModelType types.AssetModelType
+
+	// The version of the asset model. See [Asset model versions] in the IoT SiteWise User Guide.
+	//
+	// [Asset model versions]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+	AssetModelVersion *string
+
+	// The entity tag (ETag) is a hash of the retrieved version of the asset model.
+	// It's used to make concurrent updates safely to the resource. See [Optimistic locking for asset model writes]in the IoT
+	// SiteWise User Guide.
+	//
+	// See [Optimistic locking for asset model writes] in the IoT SiteWise User Guide.
+	//
+	// [Optimistic locking for asset model writes]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
+	ETag *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

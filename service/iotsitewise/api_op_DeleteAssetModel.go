@@ -49,6 +49,23 @@ type DeleteAssetModelInput struct {
 	// request is required.
 	ClientToken *string
 
+	// The expected current entity tag (ETag) for the asset model’s latest or active
+	// version (specified using matchForVersionType ). The delete request is rejected
+	// if the tag does not match the latest or active version's current entity tag. See
+	// [Optimistic locking for asset model writes]in the IoT SiteWise User Guide.
+	//
+	// [Optimistic locking for asset model writes]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
+	IfMatch *string
+
+	// Accepts * to reject the delete request if an active version (specified using
+	// matchForVersionType as ACTIVE ) already exists for the asset model.
+	IfNoneMatch *string
+
+	// Specifies the asset model version type ( LATEST or ACTIVE ) used in conjunction
+	// with If-Match or If-None-Match headers to determine the target ETag for the
+	// delete operation.
+	MatchForVersionType types.AssetModelVersionType
+
 	noSmithyDocumentSerde
 }
 

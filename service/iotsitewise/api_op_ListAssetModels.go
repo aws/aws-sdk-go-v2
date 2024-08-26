@@ -29,15 +29,23 @@ func (c *Client) ListAssetModels(ctx context.Context, params *ListAssetModelsInp
 
 type ListAssetModelsInput struct {
 
-	// The type of asset model.
+	// The type of asset model. If you don't provide an assetModelTypes , all types of
+	// asset models are returned.
 	//
-	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
-	//   Can't be included as a component in another asset model.
+	//   - ASSET_MODEL – An asset model that you can use to create assets. Can't be
+	//   included as a component in another asset model.
 	//
 	//   - COMPONENT_MODEL – A reusable component that you can include in the
 	//   composite models of other asset models. You can't create assets directly from
 	//   this type of asset model.
 	AssetModelTypes []types.AssetModelType
+
+	// The version alias that specifies the latest or active version of the asset
+	// model. The details are returned in the response. The default value is LATEST .
+	// See [Asset model versions]in the IoT SiteWise User Guide.
+	//
+	// [Asset model versions]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+	AssetModelVersion *string
 
 	// The maximum number of results to return for each paginated request.
 	//

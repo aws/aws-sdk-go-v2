@@ -760,6 +760,9 @@ type AssetModelSummary struct {
 	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	ExternalId *string
 
+	// The version number of the asset model.
+	Version *string
+
 	noSmithyDocumentSerde
 }
 

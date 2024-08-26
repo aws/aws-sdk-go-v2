@@ -509,6 +509,22 @@ type DefaultWorkspaceCreationProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the filter conditions for the WorkSpaces to return.
+type DescribeWorkspaceDirectoriesFilter struct {
+
+	// The name of the WorkSpaces to filter.
+	//
+	// This member is required.
+	Name DescribeWorkspaceDirectoriesFilterName
+
+	// The values for filtering WorkSpaces
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the filter conditions for WorkSpaces Pools to return.
 type DescribeWorkspacesPoolsFilter struct {
 
@@ -588,6 +604,18 @@ type FailedWorkspaceChangeRequest struct {
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configurations of the identity center.
+type IDCConfig struct {
+
+	// The Amazon Resource Name (ARN) of the application.
+	ApplicationArn *string
+
+	// The Amazon Resource Name (ARN) of the identity center instance.
+	InstanceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -770,6 +798,18 @@ type IpRuleItem struct {
 
 	// The description.
 	RuleDesc *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configurations of the Microsoft Entra.
+type MicrosoftEntraConfig struct {
+
+	// The Amazon Resource Name (ARN) of the application config.
+	ApplicationConfigSecretArn *string
+
+	// The identifier of the tenant.
+	TenantId *string
 
 	noSmithyDocumentSerde
 }
@@ -1494,12 +1534,18 @@ type WorkspaceDirectory struct {
 	// The error message returned.
 	ErrorMessage *string
 
+	// Specifies details about identity center configurations.
+	IDCConfig *IDCConfig
+
 	// The identifier of the IAM role. This is the role that allows Amazon WorkSpaces
 	// to make calls to other services, such as Amazon EC2, on your behalf.
 	IamRoleId *string
 
 	// The identifiers of the IP access control groups associated with the directory.
 	IpGroupIds []string
+
+	// Specifies details about Microsoft Entra configurations.
+	MicrosoftEntraConfig *MicrosoftEntraConfig
 
 	// The registration code for the directory. This is the code that users enter in
 	// their Amazon WorkSpaces client application to connect to the directory.

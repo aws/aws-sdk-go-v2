@@ -710,6 +710,26 @@ func (m *validateOpDescribeWorkspaceAssociations) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeWorkspaceDirectories struct {
+}
+
+func (*validateOpDescribeWorkspaceDirectories) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorkspaceDirectories) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorkspaceDirectoriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorkspaceDirectoriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeWorkspaceImagePermissions struct {
 }
 
@@ -1610,6 +1630,10 @@ func addOpDescribeWorkspaceAssociationsValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeWorkspaceAssociations{}, middleware.After)
 }
 
+func addOpDescribeWorkspaceDirectoriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorkspaceDirectories{}, middleware.After)
+}
+
 func addOpDescribeWorkspaceImagePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkspaceImagePermissions{}, middleware.After)
 }
@@ -1820,6 +1844,41 @@ func validateConnectionAliasPermission(v *types.ConnectionAliasPermission) error
 	}
 	if v.AllowAssociation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowAssociation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDescribeWorkspaceDirectoriesFilter(v *types.DescribeWorkspaceDirectoriesFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkspaceDirectoriesFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDescribeWorkspaceDirectoriesFilterList(v []types.DescribeWorkspaceDirectoriesFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkspaceDirectoriesFilterList"}
+	for i := range v {
+		if err := validateDescribeWorkspaceDirectoriesFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2868,6 +2927,23 @@ func validateOpDescribeWorkspaceAssociationsInput(v *DescribeWorkspaceAssociatio
 	}
 	if v.AssociatedResourceTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResourceTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWorkspaceDirectoriesInput(v *DescribeWorkspaceDirectoriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkspaceDirectoriesInput"}
+	if v.Filters != nil {
+		if err := validateDescribeWorkspaceDirectoriesFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

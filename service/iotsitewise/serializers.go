@@ -1137,6 +1137,21 @@ func awsRestjson1_serializeOpHttpBindingsCreateAssetModelCompositeModelInput(v *
 		}
 	}
 
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+		locationName := "If-None-Match"
+		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
+	}
+
+	if len(v.MatchForVersionType) > 0 {
+		locationName := "Match-For-Version-Type"
+		encoder.SetHeader(locationName).String(string(v.MatchForVersionType))
+	}
+
 	return nil
 }
 
@@ -1923,6 +1938,21 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAssetModelInput(v *DeleteAssetMod
 		encoder.SetQuery("clientToken").String(*v.ClientToken)
 	}
 
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+		locationName := "If-None-Match"
+		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
+	}
+
+	if len(v.MatchForVersionType) > 0 {
+		locationName := "Match-For-Version-Type"
+		encoder.SetHeader(locationName).String(string(v.MatchForVersionType))
+	}
+
 	return nil
 }
 
@@ -1999,6 +2029,21 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAssetModelCompositeModelInput(v *
 
 	if v.ClientToken != nil {
 		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+		locationName := "If-None-Match"
+		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
+	}
+
+	if len(v.MatchForVersionType) > 0 {
+		locationName := "Match-For-Version-Type"
+		encoder.SetHeader(locationName).String(string(v.MatchForVersionType))
 	}
 
 	return nil
@@ -2702,6 +2747,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetModelInput(v *DescribeAsse
 		}
 	}
 
+	if v.AssetModelVersion != nil {
+		encoder.SetQuery("assetModelVersion").String(*v.AssetModelVersion)
+	}
+
 	if v.ExcludeProperties {
 		encoder.SetQuery("excludeProperties").Boolean(v.ExcludeProperties)
 	}
@@ -2778,6 +2827,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetModelCompositeModelInput(v
 		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
 			return err
 		}
+	}
+
+	if v.AssetModelVersion != nil {
+		encoder.SetQuery("assetModelVersion").String(*v.AssetModelVersion)
 	}
 
 	return nil
@@ -4440,6 +4493,10 @@ func awsRestjson1_serializeOpHttpBindingsListAssetModelCompositeModelsInput(v *L
 		}
 	}
 
+	if v.AssetModelVersion != nil {
+		encoder.SetQuery("assetModelVersion").String(*v.AssetModelVersion)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -4511,6 +4568,10 @@ func awsRestjson1_serializeOpHttpBindingsListAssetModelPropertiesInput(v *ListAs
 		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
 			return err
 		}
+	}
+
+	if v.AssetModelVersion != nil {
+		encoder.SetQuery("assetModelVersion").String(*v.AssetModelVersion)
 	}
 
 	if len(v.Filter) > 0 {
@@ -4585,6 +4646,10 @@ func awsRestjson1_serializeOpHttpBindingsListAssetModelsInput(v *ListAssetModels
 		for i := range v.AssetModelTypes {
 			encoder.AddQuery("assetModelTypes").String(string(v.AssetModelTypes[i]))
 		}
+	}
+
+	if v.AssetModelVersion != nil {
+		encoder.SetQuery("assetModelVersion").String(*v.AssetModelVersion)
 	}
 
 	if v.MaxResults != nil {
@@ -6216,6 +6281,21 @@ func awsRestjson1_serializeOpHttpBindingsUpdateAssetModelInput(v *UpdateAssetMod
 		}
 	}
 
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+		locationName := "If-None-Match"
+		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
+	}
+
+	if len(v.MatchForVersionType) > 0 {
+		locationName := "Match-For-Version-Type"
+		encoder.SetHeader(locationName).String(string(v.MatchForVersionType))
+	}
+
 	return nil
 }
 
@@ -6347,6 +6427,21 @@ func awsRestjson1_serializeOpHttpBindingsUpdateAssetModelCompositeModelInput(v *
 		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
 			return err
 		}
+	}
+
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+		locationName := "If-None-Match"
+		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
+	}
+
+	if len(v.MatchForVersionType) > 0 {
+		locationName := "Match-For-Version-Type"
+		encoder.SetHeader(locationName).String(string(v.MatchForVersionType))
 	}
 
 	return nil

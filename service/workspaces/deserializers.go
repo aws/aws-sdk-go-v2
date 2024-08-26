@@ -13392,6 +13392,55 @@ func awsAwsjson11_deserializeDocumentFailedWorkspaceChangeRequest(v **types.Fail
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIDCConfig(v **types.IDCConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IDCConfig
+	if *v == nil {
+		sv = &types.IDCConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.ApplicationArn = ptr.String(jtv)
+			}
+
+		case "InstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.InstanceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentImagePermission(v **types.ImagePermission, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13997,6 +14046,55 @@ func awsAwsjson11_deserializeDocumentLoginMessage(v *map[string]string, value in
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMicrosoftEntraConfig(v **types.MicrosoftEntraConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MicrosoftEntraConfig
+	if *v == nil {
+		sv = &types.MicrosoftEntraConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApplicationConfigSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretsManagerArn to be of type string, got %T instead", value)
+				}
+				sv.ApplicationConfigSecretArn = ptr.String(jtv)
+			}
+
+		case "TenantId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MicrosoftEntraConfigTenantId to be of type string, got %T instead", value)
+				}
+				sv.TenantId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -16748,8 +16846,18 @@ func awsAwsjson11_deserializeDocumentWorkspaceDirectory(v **types.WorkspaceDirec
 				sv.IamRoleId = ptr.String(jtv)
 			}
 
+		case "IDCConfig":
+			if err := awsAwsjson11_deserializeDocumentIDCConfig(&sv.IDCConfig, value); err != nil {
+				return err
+			}
+
 		case "ipGroupIds":
 			if err := awsAwsjson11_deserializeDocumentIpGroupIdList(&sv.IpGroupIds, value); err != nil {
+				return err
+			}
+
+		case "MicrosoftEntraConfig":
+			if err := awsAwsjson11_deserializeDocumentMicrosoftEntraConfig(&sv.MicrosoftEntraConfig, value); err != nil {
 				return err
 			}
 

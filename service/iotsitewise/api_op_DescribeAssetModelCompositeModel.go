@@ -51,6 +51,13 @@ type DescribeAssetModelCompositeModelInput struct {
 	// This member is required.
 	AssetModelId *string
 
+	// The version alias that specifies the latest or active version of the asset
+	// model. The details are returned in the response. The default value is LATEST .
+	// See [Asset model versions]in the IoT SiteWise User Guide.
+	//
+	// [Asset model versions]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+	AssetModelVersion *string
+
 	noSmithyDocumentSerde
 }
 
