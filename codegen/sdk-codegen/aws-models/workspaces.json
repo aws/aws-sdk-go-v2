@@ -4480,6 +4480,75 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the WorkSpaces to filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values for filtering WorkSpaces</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the filter conditions for the WorkSpaces to return.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterName": {
+            "type": "enum",
+            "members": {
+                "USER_IDENTITY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_IDENTITY_TYPE"
+                    }
+                },
+                "WORKSPACE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKSPACE_TYPE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?-_]{0,64}$"
+            }
+        },
+        "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesRequest": {
             "type": "structure",
             "members": {
@@ -4505,6 +4574,12 @@
                     "target": "com.amazonaws.workspaces#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated,\n         provide this token to receive the next set of results.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.workspaces#DescribeWorkspaceDirectoriesFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter condition for the WorkSpaces.</p>"
                     }
                 }
             },
@@ -5603,6 +5678,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspaces#IDCConfig": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.workspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity center instance.</p>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.workspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configurations of the identity center.</p>"
+            }
+        },
         "com.amazonaws.workspaces#IdleDisconnectTimeoutInSeconds": {
             "type": "integer",
             "traits": {
@@ -6398,6 +6493,32 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.workspaces#MicrosoftEntraConfig": {
+            "type": "structure",
+            "members": {
+                "TenantId": {
+                    "target": "com.amazonaws.workspaces#MicrosoftEntraConfigTenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the tenant.</p>"
+                    }
+                },
+                "ApplicationConfigSecretArn": {
+                    "target": "com.amazonaws.workspaces#SecretsManagerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the application config.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configurations of the Microsoft Entra.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#MicrosoftEntraConfigTenantId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9-]{1,100}$"
             }
         },
         "com.amazonaws.workspaces#MigrateWorkspace": {
@@ -7630,6 +7751,18 @@
                     "target": "com.amazonaws.workspaces#UserIdentityType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of identity management the user is using.</p>"
+                    }
+                },
+                "IdcInstanceArn": {
+                    "target": "com.amazonaws.workspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity center instance.</p>"
+                    }
+                },
+                "MicrosoftEntraConfig": {
+                    "target": "com.amazonaws.workspaces#MicrosoftEntraConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details about Microsoft Entra config.</p>"
                     }
                 },
                 "WorkspaceType": {
@@ -9457,6 +9590,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS_DIRECTORY_SERVICE"
                     }
+                },
+                "AWS_IAM_IDENTITY_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM_IDENTITY_CENTER"
+                    }
                 }
             }
         },
@@ -10256,6 +10395,12 @@
                         "smithy.api#documentation": "<p>The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP)\n         user identities to Active Directory for WorkSpaces login.</p>"
                     }
                 },
+                "MicrosoftEntraConfig": {
+                    "target": "com.amazonaws.workspaces#MicrosoftEntraConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies details about Microsoft Entra configurations.</p>"
+                    }
+                },
                 "WorkspaceDirectoryName": {
                     "target": "com.amazonaws.workspaces#WorkspaceDirectoryName",
                     "traits": {
@@ -10278,6 +10423,12 @@
                     "target": "com.amazonaws.workspaces#WorkspaceType",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the directory's WorkSpace type is personal or pools.</p>"
+                    }
+                },
+                "IDCConfig": {
+                    "target": "com.amazonaws.workspaces#IDCConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies details about identity center configurations.</p>"
                     }
                 },
                 "ActiveDirectoryConfig": {
@@ -10381,6 +10532,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CUSTOMER_MANAGED"
+                    }
+                },
+                "AWS_IAM_IDENTITY_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IAM_IDENTITY_CENTER"
                     }
                 }
             }
