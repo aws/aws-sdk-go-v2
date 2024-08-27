@@ -1906,7 +1906,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a run group.</p>",
+                "smithy.api#documentation": "<p>You can optionally create a run group to limit the compute resources for the runs that you add to the group.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -1929,7 +1929,7 @@
                 "maxCpus": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of CPUs to use in the group.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of CPUs that can run\n      concurrently across all active runs in the run group.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100000
@@ -1939,7 +1939,7 @@
                 "maxRuns": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of concurrent runs for the group.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of runs that can be running at the same time.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100000
@@ -1949,7 +1949,7 @@
                 "maxDuration": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A maximum run time for the group in minutes.</p>",
+                        "smithy.api#documentation": "<p>The maximum time for each run (in minutes). If a run exceeds\n      the maximum run time, the run fails automatically.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100000
@@ -1973,7 +1973,7 @@
                 "maxGpus": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum GPUs that can be used by a run group.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of GPUs that can run concurrently across all active\n      runs in the run group.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100000
@@ -2198,7 +2198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a cross-account shared resource. The resource owner makes an offer to share the resource \n      with the principal subscriber (an AWS user with a different account than the resource owner).</p>\n         <p>The following resources support cross-account sharing:</p>\n         <ul>\n            <li>\n               <p>Healthomics variant stores</p>\n            </li>\n            <li>\n               <p>Healthomics annotation stores</p>\n            </li>\n            <li>\n               <p>Private workflows</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a cross-account shared resource. The resource owner makes an offer to share the resource \n      with the principal subscriber (an AWS user with a different account than the resource owner).</p>\n         <p>The following resources support cross-account sharing:</p>\n         <ul>\n            <li>\n               <p>HealthOmics variant stores</p>\n            </li>\n            <li>\n               <p>HealthOmics annotation stores</p>\n            </li>\n            <li>\n               <p>Private workflows</p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -2485,7 +2485,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage capacity for the workflow in gibibytes.</p>",
+                        "smithy.api#documentation": "<p>The default storage capacity for the workflow runs, in gibibytes.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -2547,6 +2547,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#CreationJobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.omics#CreationTime": {
@@ -5291,6 +5301,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The entity tag (ETag) is a hash of the object meant to represent its semantic content.</p>"
                     }
+                },
+                "creationJobId": {
+                    "target": "com.amazonaws.omics#CreationJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The read set's creation job ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5744,6 +5760,18 @@
                     "target": "com.amazonaws.omics#ReferenceFiles",
                     "traits": {
                         "smithy.api#documentation": "<p>The reference's files.</p>"
+                    }
+                },
+                "creationType": {
+                    "target": "com.amazonaws.omics#ReferenceCreationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference's creation type.</p>"
+                    }
+                },
+                "creationJobId": {
+                    "target": "com.amazonaws.omics#CreationJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference's creation job ID.</p>"
                     }
                 }
             },
@@ -7588,7 +7616,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow's storage capacity in gibibytes.</p>",
+                        "smithy.api#documentation": "<p>The workflow's default run storage capacity in gibibytes.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -7811,6 +7839,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The source's tags.</p>"
                     }
+                },
+                "readSetId": {
+                    "target": "com.amazonaws.omics#ReadSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source's read set ID.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7946,6 +7980,12 @@
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The source's tags.</p>"
+                    }
+                },
+                "referenceId": {
+                    "target": "com.amazonaws.omics#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source's reference ID.</p>"
                     }
                 }
             },
@@ -12067,6 +12107,17 @@
                     "max": 127
                 },
                 "smithy.api#pattern": "^$|^arn:.+$"
+            }
+        },
+        "com.amazonaws.omics#ReferenceCreationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IMPORT",
+                        "name": "IMPORT"
+                    }
+                ]
             }
         },
         "com.amazonaws.omics#ReferenceDescription": {

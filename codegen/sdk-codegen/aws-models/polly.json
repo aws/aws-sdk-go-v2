@@ -764,6 +764,18 @@
                     "traits": {
                         "smithy.api#enumValue": "fr-BE"
                     }
+                },
+                "cs_CZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cs-CZ"
+                    }
+                },
+                "de_CH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-CH"
+                    }
                 }
             }
         },
@@ -3522,6 +3534,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Burcu"
+                    }
+                },
+                "Jitka": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Jitka"
+                    }
+                },
+                "Sabrina": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sabrina"
                     }
                 }
             }

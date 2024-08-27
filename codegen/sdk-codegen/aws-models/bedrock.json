@@ -31,6 +31,9 @@
                     "target": "com.amazonaws.bedrock#GuardrailsResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#InferenceProfileResource"
+                },
+                {
                     "target": "com.amazonaws.bedrock#LoggingResource"
                 },
                 {
@@ -1430,7 +1433,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.bedrock#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n\t       Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -1770,7 +1773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job to invoke a model on multiple prompts (batch inference). Format your data according to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-prerq.html#batch-inference-data\">Format your inference data</a> and upload it to an Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-create.html\">Create a batch inference job</a>.</p>\n         <p>The response returns a <code>jobArn</code> that you can use to stop or get details about the job. You can check the status of the job by sending a <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetModelCustomizationJob.html\">GetModelCustomizationJob</a> request.</p>",
+                "smithy.api#documentation": "<p>Creates a batch inference job to invoke a model on multiple prompts. Format your data according to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data\">Format your inference data</a> and upload it to an Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference.html\">Process multiple prompts with batch inference</a>.</p>\n         <p>The response returns a <code>jobArn</code> that you can use to stop or get details about the job.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1799,7 +1802,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.bedrock#ModelInvocationIdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n\t       Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3754,6 +3757,125 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#GetInferenceProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetInferenceProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetInferenceProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about an inference profile. For more information, see the Amazon Bedrock User Guide.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/inference-profiles/{inferenceProfileIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetInferenceProfileRequest": {
+            "type": "structure",
+            "members": {
+                "inferenceProfileIdentifier": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the inference profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetInferenceProfileResponse": {
+            "type": "structure",
+            "members": {
+                "inferenceProfileName": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "models": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of information about each model in the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the inference profile.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the inference profile was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the inference profile was last updated.</p>"
+                    }
+                },
+                "inferenceProfileArn": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inferenceProfileId": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the inference profile. <code>ACTIVE</code> means that the inference profile is available to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the inference profile. <code>SYSTEM_DEFINED</code> means that the inference profile is defined by Amazon Bedrock.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#GetModelCopyJob": {
             "type": "operation",
             "input": {
@@ -4294,7 +4416,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.bedrock#ModelInvocationIdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n\t       Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
                     }
                 },
                 "roleArn": {
@@ -6067,6 +6189,192 @@
                 "target": "com.amazonaws.bedrock#ImportedModelSummary"
             }
         },
+        "com.amazonaws.bedrock#InferenceProfileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{0,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+$"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-:.]+$"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{0,20}):(|[0-9]{12}):inference-profile/)?[a-zA-Z0-9-:.]+$"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileModel": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrock#FoundationModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a model.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileModels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#InferenceProfileModel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^([0-9a-zA-Z][ _-]?)+$"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileResource": {
+            "type": "resource",
+            "identifiers": {
+                "inferenceProfileIdentifier": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileIdentifier"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.bedrock#GetInferenceProfile"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrock#ListInferenceProfiles"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#InferenceProfileSummary"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileSummary": {
+            "type": "structure",
+            "members": {
+                "inferenceProfileName": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "models": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of information about each model in the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the inference profile.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the inference profile was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the inference profile was last updated.</p>"
+                    }
+                },
+                "inferenceProfileArn": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inferenceProfileId": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the inference profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the inference profile. <code>ACTIVE</code> means that the inference profile is available to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the inference profile. <code>SYSTEM_DEFINED</code> means that the inference profile is defined by Amazon Bedrock.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an inference profile.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#InferenceProfileType": {
+            "type": "enum",
+            "members": {
+                "SYSTEM_DEFINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_DEFINED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrock#InferenceType": {
             "type": "enum",
             "members": {
@@ -6680,6 +6988,86 @@
                     "target": "com.amazonaws.bedrock#ImportedModelSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>Model summaries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListInferenceProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ListInferenceProfilesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ListInferenceProfilesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of inference profiles that you can use.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/inference-profiles"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "inferenceProfileSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListInferenceProfilesRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.bedrock#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListInferenceProfilesResponse": {
+            "type": "structure",
+            "members": {
+                "inferenceProfileSummaries": {
+                    "target": "com.amazonaws.bedrock#InferenceProfileSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of information about each inference profile that you can use.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
                     }
                 }
             },
@@ -8159,7 +8547,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.bedrock#ModelInvocationIdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n\t       Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request,\n      Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
                     }
                 },
                 "roleArn": {
