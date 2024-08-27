@@ -135,14 +135,14 @@ func TestInteg_PresigPost(t *testing.T) {
 	}
 }
 
-func sendMultipartRequest(url string, fields map[string]interface{}, filePath string) (*http.Response, error) {
+func sendMultipartRequest(url string, fields map[string]string, filePath string) (*http.Response, error) {
 	// Create a buffer to hold the multipart data
 	var requestBody bytes.Buffer
 	writer := multipart.NewWriter(&requestBody)
 
 	// Add form fields
 	for key, val := range fields {
-		err := writer.WriteField(key, val.(string))
+		err := writer.WriteField(key, val)
 		if err != nil {
 			return nil, err
 		}

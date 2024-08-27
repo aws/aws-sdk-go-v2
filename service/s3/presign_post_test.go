@@ -107,7 +107,7 @@ func TestPresignPutObject(t *testing.T) {
 			if !ok {
 				t.Error("expected non-empty policy on postObject")
 			}
-			decoded, err := base64.StdEncoding.DecodeString(policy.(string))
+			decoded, err := base64.StdEncoding.DecodeString(policy)
 			if err != nil {
 				t.Error("expected base64 encoded policy, got error", err, "policy", policy)
 			}
@@ -297,11 +297,7 @@ func TestBuildPresignPostRequest(t *testing.T) {
 				t.Errorf("PresignPostHTTP did not contain expected \"key\" %s. Has %s", aBucketKey, actualKey)
 			}
 			policy := fields["policy"]
-			strPolicy, ok := policy.(string)
-			if !ok {
-				t.Errorf("Policy field is not a string as expected, is %v", policy)
-			}
-			decoded, err := base64.StdEncoding.DecodeString(strPolicy)
+			decoded, err := base64.StdEncoding.DecodeString(policy)
 			if err != nil {
 				t.Errorf("Decoding policy document %s failed with error %v", policy, err)
 			}
@@ -310,7 +306,7 @@ func TestBuildPresignPostRequest(t *testing.T) {
 			if err != nil {
 				t.Errorf("Policy document %s failed to parse to JSON with error %v", policy, err)
 			}
-			_, ok = doc["conditions"]
+			_, ok := doc["conditions"]
 			if !ok {
 				t.Errorf("Conditions field not present in policy document %s", policy)
 			}

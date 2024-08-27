@@ -82,7 +82,7 @@ type PresignedPostRequest struct {
 	URL string
 	// Values is a key-value map of values to be sent as FormData
 	// these values are not encoded
-	Values map[string]interface{}
+	Values map[string]string
 }
 
 // postSignAdapter adapter to implement the presignPost interface
@@ -102,7 +102,7 @@ func (s *postSignAdapter) PresignPost(
 	credentials aws.Credentials,
 	bucket string, key string,
 	region string, service string, signingTime time.Time, conditions []interface{}, expirationTime time.Time, optFns ...func(*v4.SignerOptions),
-) (fields map[string]interface{}, err error) {
+) (fields map[string]string, err error) {
 	credentialScope := buildCredentialScope(signingTime, region, service)
 	credentialStr := credentials.AccessKeyID + "/" + credentialScope
 
@@ -121,8 +121,8 @@ func (s *postSignAdapter) PresignPost(
 	return fields, nil
 }
 
-func getPostSignRequiredFields(t time.Time, credentialStr string, awsCredentials aws.Credentials) map[string]interface{} {
-	fields := map[string]interface{}{
+func getPostSignRequiredFields(t time.Time, credentialStr string, awsCredentials aws.Credentials) map[string]string {
+	fields := map[string]string{
 		algorithmHeader:  algorithm,
 		dateHeader:       t.UTC().Format("20060102T150405Z"),
 		credentialHeader: credentialStr,
@@ -143,7 +143,7 @@ type PresignPost interface {
 		bucket string, key string,
 		region string, service string, signingTime time.Time, conditions []interface{}, expirationTime time.Time,
 		optFns ...func(*v4.SignerOptions),
-	) (fields map[string]interface{}, err error)
+	) (fields map[string]string, err error)
 }
 
 // PresignPostOptions represent the options to be passed to a PresignPost sign request
