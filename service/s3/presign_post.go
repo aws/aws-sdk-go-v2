@@ -211,9 +211,6 @@ func (s *presignPostRequestMiddleware) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	if s.presigner == nil {
-		return out, metadata, fmt.Errorf("no presigner provided. Double-check your configuration")
-	}
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected request middleware type %T", in.Request)
