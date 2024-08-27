@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Slack Channel Configuration
+// Creates an AWS Chatbot confugration for Slack.
 func (c *Client) CreateSlackChannelConfiguration(ctx context.Context, params *CreateSlackChannelConfigurationInput, optFns ...func(*Options)) (*CreateSlackChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateSlackChannelConfigurationInput{}
@@ -34,16 +34,21 @@ type CreateSlackChannelConfigurationInput struct {
 	// This member is required.
 	ConfigurationName *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ID of the Slack channel. To get the ID, open Slack, right click on the
-	// channel name in the left pane, then choose Copy Link. The channel ID is the
-	// 9-character string at the end of the URL. For example, ABCBBLZZZ.
+	// The ID of the Slack channel.
+	//
+	// To get this ID, open Slack, right click on the channel name in the left pane,
+	// then choose Copy Link. The channel ID is the 9-character string at the end of
+	// the URL. For example, ABCBBLZZZ.
 	//
 	// This member is required.
 	SlackChannelId *string
@@ -54,19 +59,21 @@ type CreateSlackChannelConfigurationInput struct {
 	SlackTeamId *string
 
 	// The list of IAM policy ARNs that are applied as channel guardrails. The AWS
-	// managed 'AdministratorAccess' policy is applied by default if this is not set.
+	// managed AdministratorAccess policy is applied by default if this is not set.
 	GuardrailPolicyArns []string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// The name of the Slack Channel.
+	// The name of the Slack channel.
 	SlackChannelName *string
 
-	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+	// The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications
+	// to AWS Chatbot.
 	SnsTopicArns []string
 
-	// A list of tags to apply to the configuration.
+	// A map of tags assigned to a resource. A tag is a string-to-string map of
+	// key-value pairs.
 	Tags []types.Tag
 
 	// Enables use of a user role requirement in your chat configuration.

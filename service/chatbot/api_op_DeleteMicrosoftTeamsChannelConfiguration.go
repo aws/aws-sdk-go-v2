@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes MS Teams Channel Configuration
+// Deletes a Microsoft Teams channel configuration for AWS Chatbot
 func (c *Client) DeleteMicrosoftTeamsChannelConfiguration(ctx context.Context, params *DeleteMicrosoftTeamsChannelConfigurationInput, optFns ...func(*Options)) (*DeleteMicrosoftTeamsChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteMicrosoftTeamsChannelConfigurationInput{}
@@ -28,7 +28,8 @@ func (c *Client) DeleteMicrosoftTeamsChannelConfiguration(ctx context.Context, p
 
 type DeleteMicrosoftTeamsChannelConfigurationInput struct {
 
-	// The ARN of the MicrosoftTeamsChannelConfiguration to delete.
+	// The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration
+	// associated with the user identity to delete.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

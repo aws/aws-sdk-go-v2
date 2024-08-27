@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes Slack Channel Configuration
+// Deletes a Slack channel configuration for AWS Chatbot
 func (c *Client) DeleteSlackChannelConfiguration(ctx context.Context, params *DeleteSlackChannelConfigurationInput, optFns ...func(*Options)) (*DeleteSlackChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteSlackChannelConfigurationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteSlackChannelConfiguration(ctx context.Context, params *De
 
 type DeleteSlackChannelConfigurationInput struct {
 
-	// The ARN of the SlackChannelConfiguration to delete.
+	// The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

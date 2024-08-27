@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Chime Webhook Configuration
+// Deletes a Amazon Chime webhook configuration for AWS Chatbot.
 func (c *Client) DeleteChimeWebhookConfiguration(ctx context.Context, params *DeleteChimeWebhookConfigurationInput, optFns ...func(*Options)) (*DeleteChimeWebhookConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteChimeWebhookConfigurationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteChimeWebhookConfiguration(ctx context.Context, params *De
 
 type DeleteChimeWebhookConfigurationInput struct {
 
-	// The ARN of the ChimeWebhookConfiguration to delete.
+	// The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

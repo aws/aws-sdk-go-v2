@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all authorized MS teams for AWS Account
+// Lists all authorized Microsoft Teams for an AWS Account
 func (c *Client) ListMicrosoftTeamsConfiguredTeams(ctx context.Context, params *ListMicrosoftTeamsConfiguredTeamsInput, optFns ...func(*Options)) (*ListMicrosoftTeamsConfiguredTeamsOutput, error) {
 	if params == nil {
 		params = &ListMicrosoftTeamsConfiguredTeamsInput{}
@@ -44,7 +44,7 @@ type ListMicrosoftTeamsConfiguredTeamsInput struct {
 
 type ListMicrosoftTeamsConfiguredTeamsOutput struct {
 
-	// A list of teams in Microsoft Teams that have been configured with AWS Chatbot.
+	// A list of teams in Microsoft Teams that are configured with AWS Chatbot.
 	ConfiguredTeams []types.ConfiguredTeam
 
 	// An optional token returned from a prior request. Use this token for pagination

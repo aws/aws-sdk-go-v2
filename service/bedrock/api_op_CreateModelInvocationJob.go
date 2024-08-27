@@ -11,16 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job to invoke a model on multiple prompts (batch inference). Format
+// Creates a batch inference job to invoke a model on multiple prompts. Format
 // your data according to [Format your inference data]and upload it to an Amazon S3 bucket. For more
-// information, see [Create a batch inference job].
+// information, see [Process multiple prompts with batch inference].
 //
 // The response returns a jobArn that you can use to stop or get details about the
-// job. You can check the status of the job by sending a [GetModelCustomizationJob]request.
+// job.
 //
-// [Create a batch inference job]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-create.html
-// [Format your inference data]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-prerq.html#batch-inference-data
-// [GetModelCustomizationJob]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetModelCustomizationJob.html
+// [Process multiple prompts with batch inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference.html
+// [Format your inference data]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data
 func (c *Client) CreateModelInvocationJob(ctx context.Context, params *CreateModelInvocationJobInput, optFns ...func(*Options)) (*CreateModelInvocationJobOutput, error) {
 	if params == nil {
 		params = &CreateModelInvocationJobInput{}

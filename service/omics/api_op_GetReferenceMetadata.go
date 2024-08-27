@@ -75,6 +75,12 @@ type GetReferenceMetadataOutput struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// The reference's creation job ID.
+	CreationJobId *string
+
+	// The reference's creation type.
+	CreationType types.ReferenceCreationType
+
 	// The reference's description.
 	Description *string
 

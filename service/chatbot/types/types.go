@@ -6,18 +6,19 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Preferences which apply for AWS Chatbot usage in the calling AWS account.
+// Preferences related to AWS Chatbot usage in the calling AWS account.
 type AccountPreferences struct {
 
-	// Turns on training data collection. This helps improve the AWS Chatbot
-	// experience by allowing AWS Chatbot to store and use your customer information,
-	// such as AWS Chatbot configurations, notifications, user inputs, AWS Chatbot
-	// generated responses, and interaction data. This data helps us to continuously
-	// improve and develop Artificial Intelligence (AI) technologies. Your data is not
-	// shared with any third parties and is protected using sophisticated controls to
-	// prevent unauthorized access and misuse. AWS Chatbot does not store or use
-	// interactions in chat channels with Amazon Q for training AWS Chatbot’s AI
-	// technologies.
+	// Turns on training data collection.
+	//
+	// This helps improve the AWS Chatbot experience by allowing AWS Chatbot to store
+	// and use your customer information, such as AWS Chatbot configurations,
+	// notifications, user inputs, AWS Chatbot generated responses, and interaction
+	// data. This data helps us to continuously improve and develop Artificial
+	// Intelligence (AI) technologies. Your data is not shared with any third parties
+	// and is protected using sophisticated controls to prevent unauthorized access and
+	// misuse. AWS Chatbot does not store or use interactions in chat channels with
+	// Amazon Q for training AI technologies for AWS Chatbot.
 	TrainingDataCollectionEnabled *bool
 
 	// Enables use of a user role requirement in your chat configuration.
@@ -29,26 +30,33 @@ type AccountPreferences struct {
 // An AWS Chatbot configuration for Amazon Chime.
 type ChimeWebhookConfiguration struct {
 
-	// The ARN of the ChimeWebhookConfiguration.
+	// The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+	// The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications
+	// to AWS Chatbot.
 	//
 	// This member is required.
 	SnsTopicArns []string
 
-	// Description of the webhook. Recommend using the convention RoomName/WebhookName
-	// . See Chime setup tutorial for more details:
-	// https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+	// A description of the webhook. We recommend using the convention
+	// RoomName/WebhookName .
+	//
+	// For more information, see [Tutorial: Get started with Amazon Chime] in the AWS Chatbot Administrator Guide.
+	//
+	// [Tutorial: Get started with Amazon Chime]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
 	//
 	// This member is required.
 	WebhookDescription *string
@@ -56,25 +64,27 @@ type ChimeWebhookConfiguration struct {
 	// The name of the configuration.
 	ConfigurationName *string
 
-	// Specifies the logging level for this configuration. This property affects the
-	// log entries pushed to Amazon CloudWatch Logs.Logging levels include ERROR, INFO,
-	// or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// A list of tags applied to the configuration.
+	// A map of tags assigned to a resource. A tag is a string-to-string map of
+	// key-value pairs.
 	Tags []Tag
 
 	noSmithyDocumentSerde
 }
 
-// A Microsoft Teams team that has been authorized with AWS Chatbot.
+// A Microsoft Teams team that is authorized with AWS Chatbot.
 type ConfiguredTeam struct {
 
-	// The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID,
-	// you must perform the initial authorization flow with Microsoft Teams in the AWS
-	// Chatbot console. Then you can copy and paste the team ID from the console. For
-	// more details, see steps 1-4 in Get started with Microsoft Teams in the AWS
-	// Chatbot Administrator Guide.
+	//  The ID of the Microsoft Teams authorized with AWS Chatbot.
+	//
+	// To get the team ID, you must perform the initial authorization flow with
+	// Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team
+	// ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client]in the AWS Chatbot Administrator
+	// Guide.
+	//
+	// [Step 1: Configure a Microsoft Teams client]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
 	//
 	// This member is required.
 	TeamId *string
@@ -93,36 +103,41 @@ type ConfiguredTeam struct {
 // An AWS Chatbot configuration for Slack.
 type SlackChannelConfiguration struct {
 
-	// The ARN of the SlackChannelConfiguration.
+	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ID of the Slack channel. To get the ID, open Slack, right click on the
-	// channel name in the left pane, then choose Copy Link. The channel ID is the
-	// 9-character string at the end of the URL. For example, ABCBBLZZZ.
+	// The ID of the Slack channel.
+	//
+	// To get this ID, open Slack, right click on the channel name in the left pane,
+	// then choose Copy Link. The channel ID is the 9-character string at the end of
+	// the URL. For example, ABCBBLZZZ.
 	//
 	// This member is required.
 	SlackChannelId *string
 
-	// The name of the Slack Channel.
+	// The name of the Slack channel.
 	//
 	// This member is required.
 	SlackChannelName *string
 
-	// The ID of the Slack workspace authorized with AWS Chatbot.
+	// The ID of the Slack workspace authorized with Amazon Chime.
 	//
 	// This member is required.
 	SlackTeamId *string
 
-	// Name of the Slack Workspace.
+	// Name of the Slack workspace.
 	//
 	// This member is required.
 	SlackTeamName *string
@@ -136,13 +151,14 @@ type SlackChannelConfiguration struct {
 	ConfigurationName *string
 
 	// The list of IAM policy ARNs that are applied as channel guardrails. The AWS
-	// managed 'AdministratorAccess' policy is applied by default if this is not set.
+	// managed AdministratorAccess policy is applied by default if this is not set.
 	GuardrailPolicyArns []string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// A list of tags applied to the configuration.
+	// A map of tags assigned to a resource. A tag is a string-to-string map of
+	// key-value pairs.
 	Tags []Tag
 
 	// Enables use of a user role requirement in your chat configuration.
@@ -151,17 +167,21 @@ type SlackChannelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Identifes a User level permission for a channel configuration.
+// Identifes a user level permission for a channel configuration.
 type SlackUserIdentity struct {
 
-	// The ARN of the SlackChannelConfiguration associated with the user identity.
+	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration associated
+	// with the user identity to delete.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -171,19 +191,18 @@ type SlackUserIdentity struct {
 	// This member is required.
 	SlackTeamId *string
 
-	// The ID of the user in Slack.
+	// The ID of the user in Slack
 	//
 	// This member is required.
 	SlackUserId *string
 
-	// The AWS user identity ARN used to associate a Slack User Identity with an IAM
-	// Role.
+	// The AWS user identity ARN used to associate a Slack user ID with an IAM Role.
 	AwsUserIdentity *string
 
 	noSmithyDocumentSerde
 }
 
-// A Slack Workspace.
+// A Slack workspace.
 type SlackWorkspace struct {
 
 	// The ID of the Slack workspace authorized with AWS Chatbot.
@@ -191,7 +210,7 @@ type SlackWorkspace struct {
 	// This member is required.
 	SlackTeamId *string
 
-	// Name of the Slack Workspace.
+	// The name of the Slack workspace.
 	//
 	// This member is required.
 	SlackTeamName *string
@@ -199,15 +218,22 @@ type SlackWorkspace struct {
 	noSmithyDocumentSerde
 }
 
-// A tag applied to the configuration.
+// A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag
+// values are both required, but tag values can be empty (null) strings.
+//
+// Do not include confidential or sensitive information in this field.
+//
+// For more information, see [User-Defined Tag Restrictions] in the AWS Billing and Cost Management User Guide.
+//
+// [User-Defined Tag Restrictions]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
 type Tag struct {
 
-	// The tag key.
+	// The key of the tag.
 	//
 	// This member is required.
 	TagKey *string
 
-	// The tag value.
+	// The value of the tag.
 	//
 	// This member is required.
 	TagValue *string
@@ -223,28 +249,36 @@ type TeamsChannelConfiguration struct {
 	// This member is required.
 	ChannelId *string
 
-	// The ARN of the MicrosoftTeamsChannelConfiguration.
+	// The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration
+	// associated with the user identity to delete.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+	// The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications
+	// to AWS Chatbot.
 	//
 	// This member is required.
 	SnsTopicArns []string
 
-	// The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID,
-	// you must perform the initial authorization flow with Microsoft Teams in the AWS
-	// Chatbot console. Then you can copy and paste the team ID from the console. For
-	// more details, see steps 1-4 in Get started with Microsoft Teams in the AWS
-	// Chatbot Administrator Guide.
+	//  The ID of the Microsoft Teams authorized with AWS Chatbot.
+	//
+	// To get the team ID, you must perform the initial authorization flow with
+	// Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team
+	// ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client]in the AWS Chatbot Administrator
+	// Guide.
+	//
+	// [Step 1: Configure a Microsoft Teams client]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
 	//
 	// This member is required.
 	TeamId *string
@@ -261,13 +295,14 @@ type TeamsChannelConfiguration struct {
 	ConfigurationName *string
 
 	// The list of IAM policy ARNs that are applied as channel guardrails. The AWS
-	// managed 'AdministratorAccess' policy is applied by default if this is not set.
+	// managed AdministratorAccess policy is applied by default if this is not set.
 	GuardrailPolicyArns []string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// A list of tags applied to the configuration.
+	// A map of tags assigned to a resource. A tag is a string-to-string map of
+	// key-value pairs.
 	Tags []Tag
 
 	// The name of the Microsoft Teams Team.
@@ -282,29 +317,35 @@ type TeamsChannelConfiguration struct {
 // Identifes a user level permission for a channel configuration.
 type TeamsUserIdentity struct {
 
-	// The ARN of the MicrosoftTeamsChannelConfiguration associated with the user
-	// identity.
+	// The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration
+	// associated with the user identity to delete.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID,
-	// you must perform the initial authorization flow with Microsoft Teams in the AWS
-	// Chatbot console. Then you can copy and paste the team ID from the console. For
-	// more details, see steps 1-4 in Get started with Microsoft Teams in the AWS
-	// Chatbot Administrator Guide.
+	//  The ID of the Microsoft Teams authorized with AWS Chatbot.
+	//
+	// To get the team ID, you must perform the initial authorization flow with
+	// Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team
+	// ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client]in the AWS Chatbot Administrator
+	// Guide.
+	//
+	// [Step 1: Configure a Microsoft Teams client]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
 	//
 	// This member is required.
 	TeamId *string
 
-	// The AWS user identity ARN used to associate a Microsoft Teams User Identity
+	// The AWS user identity ARN used to associate a Microsoft Teams user Identity
 	// with an IAM Role.
 	AwsUserIdentity *string
 
@@ -314,7 +355,7 @@ type TeamsUserIdentity struct {
 	// The ID of the Microsoft Teams tenant.
 	TeamsTenantId *string
 
-	// Id from Microsoft Teams for user.
+	// The Microsoft Teams user ID.
 	UserId *string
 
 	noSmithyDocumentSerde

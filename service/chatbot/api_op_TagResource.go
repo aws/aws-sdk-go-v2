@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies the supplied tags to a configuration.
+// Attaches a key-value pair to a resource, as identified by its Amazon Resource
+// Name (ARN). Resources are users, servers, roles, and other entities.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

@@ -6621,7 +6621,7 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected TeamName to be of type string, got %T instead", value)
 				}
 				sv.TeamName = ptr.String(jtv)
 			}

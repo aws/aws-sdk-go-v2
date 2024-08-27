@@ -1,0 +1,8 @@
+{
+    "id": "720b3cea-df5c-4da7-beb7-d3632c3b50ed",
+    "type": "feature",
+    "description": "Amazon Bedrock SDK updates for Inference Profile.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

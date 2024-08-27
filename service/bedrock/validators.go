@@ -370,6 +370,26 @@ func (m *validateOpGetImportedModel) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInferenceProfile struct {
+}
+
+func (*validateOpGetInferenceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInferenceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInferenceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInferenceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetModelCopyJob struct {
 }
 
@@ -720,6 +740,10 @@ func addOpGetGuardrailValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetImportedModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetImportedModel{}, middleware.After)
+}
+
+func addOpGetInferenceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInferenceProfile{}, middleware.After)
 }
 
 func addOpGetModelCopyJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2135,6 +2159,21 @@ func validateOpGetImportedModelInput(v *GetImportedModelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetImportedModelInput"}
 	if v.ModelIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInferenceProfileInput(v *GetInferenceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInferenceProfileInput"}
+	if v.InferenceProfileIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceProfileIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

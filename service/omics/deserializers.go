@@ -5960,6 +5960,15 @@ func awsRestjson1_deserializeOpDocumentGetReadSetMetadataOutput(v **GetReadSetMe
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "creationJobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreationJobId to be of type string, got %T instead", value)
+				}
+				sv.CreationJobId = ptr.String(jtv)
+			}
+
 		case "creationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6601,6 +6610,15 @@ func awsRestjson1_deserializeOpDocumentGetReferenceMetadataOutput(v **GetReferen
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "creationJobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreationJobId to be of type string, got %T instead", value)
+				}
+				sv.CreationJobId = ptr.String(jtv)
+			}
+
 		case "creationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6612,6 +6630,15 @@ func awsRestjson1_deserializeOpDocumentGetReferenceMetadataOutput(v **GetReferen
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "creationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReferenceCreationType to be of type string, got %T instead", value)
+				}
+				sv.CreationType = types.ReferenceCreationType(jtv)
 			}
 
 		case "description":
@@ -17313,6 +17340,15 @@ func awsRestjson1_deserializeDocumentImportReadSetSourceItem(v **types.ImportRea
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "readSetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReadSetId to be of type string, got %T instead", value)
+				}
+				sv.ReadSetId = ptr.String(jtv)
+			}
+
 		case "referenceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17585,6 +17621,15 @@ func awsRestjson1_deserializeDocumentImportReferenceSourceItem(v **types.ImportR
 					return fmt.Errorf("expected ReferenceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "referenceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReferenceId to be of type string, got %T instead", value)
+				}
+				sv.ReferenceId = ptr.String(jtv)
 			}
 
 		case "sourceFile":

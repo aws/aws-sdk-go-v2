@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Chime Webhook Configuration
+// Creates an AWS Chatbot configuration for Amazon Chime.
 func (c *Client) CreateChimeWebhookConfiguration(ctx context.Context, params *CreateChimeWebhookConfigurationInput, optFns ...func(*Options)) (*CreateChimeWebhookConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateChimeWebhookConfigurationInput{}
@@ -34,33 +34,42 @@ type CreateChimeWebhookConfigurationInput struct {
 	// This member is required.
 	ConfigurationName *string
 
-	// This is a user-defined role that AWS Chatbot will assume. This is not the
-	// service-linked role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+	// The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications
+	// to AWS Chatbot.
 	//
 	// This member is required.
 	SnsTopicArns []string
 
-	// Description of the webhook. Recommend using the convention RoomName/WebhookName
-	// . See Chime setup tutorial for more details:
-	// https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+	// A description of the webhook. We recommend using the convention
+	// RoomName/WebhookName .
+	//
+	// For more information, see [Tutorial: Get started with Amazon Chime] in the AWS Chatbot Administrator Guide.
+	//
+	// [Tutorial: Get started with Amazon Chime]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
 	//
 	// This member is required.
 	WebhookDescription *string
 
-	// URL for the Chime webhook.
+	// The URL for the Amazon Chime webhook.
 	//
 	// This member is required.
 	WebhookUrl *string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// A list of tags to apply to the configuration.
+	// A map of tags assigned to a resource. A tag is a string-to-string map of
+	// key-value pairs.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -68,7 +77,7 @@ type CreateChimeWebhookConfigurationInput struct {
 
 type CreateChimeWebhookConfigurationOutput struct {
 
-	// Chime webhook configuration.
+	// An Amazon Chime webhook configuration.
 	WebhookConfiguration *types.ChimeWebhookConfiguration
 
 	// Metadata pertaining to the operation's result.

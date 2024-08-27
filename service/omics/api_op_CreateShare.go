@@ -17,9 +17,9 @@ import (
 //
 // The following resources support cross-account sharing:
 //
-//   - Healthomics variant stores
+//   - HealthOmics variant stores
 //
-//   - Healthomics annotation stores
+//   - HealthOmics annotation stores
 //
 //   - Private workflows
 func (c *Client) CreateShare(ctx context.Context, params *CreateShareInput, optFns ...func(*Options)) (*CreateShareOutput, error) {

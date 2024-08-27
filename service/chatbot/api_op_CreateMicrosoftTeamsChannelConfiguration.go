@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates MS Teams Channel Configuration
+// Creates an AWS Chatbot configuration for Microsoft Teams.
 func (c *Client) CreateMicrosoftTeamsChannelConfiguration(ctx context.Context, params *CreateMicrosoftTeamsChannelConfigurationInput, optFns ...func(*Options)) (*CreateMicrosoftTeamsChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateMicrosoftTeamsChannelConfigurationInput{}
@@ -39,18 +39,24 @@ type CreateMicrosoftTeamsChannelConfigurationInput struct {
 	// This member is required.
 	ConfigurationName *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID,
-	// you must perform the initial authorization flow with Microsoft Teams in the AWS
-	// Chatbot console. Then you can copy and paste the team ID from the console. For
-	// more details, see steps 1-4 in Get started with Microsoft Teams in the AWS
-	// Chatbot Administrator Guide.
+	//  The ID of the Microsoft Teams authorized with AWS Chatbot.
+	//
+	// To get the team ID, you must perform the initial authorization flow with
+	// Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team
+	// ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client]in the AWS Chatbot Administrator
+	// Guide.
+	//
+	// [Step 1: Configure a Microsoft Teams client]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
 	//
 	// This member is required.
 	TeamId *string
@@ -64,16 +70,18 @@ type CreateMicrosoftTeamsChannelConfigurationInput struct {
 	ChannelName *string
 
 	// The list of IAM policy ARNs that are applied as channel guardrails. The AWS
-	// managed 'AdministratorAccess' policy is applied by default if this is not set.
+	// managed AdministratorAccess policy is applied by default if this is not set.
 	GuardrailPolicyArns []string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+	// The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications
+	// to AWS Chatbot.
 	SnsTopicArns []string
 
-	// A list of tags to apply to the configuration.
+	// A map of tags assigned to a resource. A tag is a string-to-string map of
+	// key-value pairs.
 	Tags []types.Tag
 
 	// The name of the Microsoft Teams Team.

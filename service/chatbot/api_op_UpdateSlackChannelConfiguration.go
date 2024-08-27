@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates Slack Channel Configuration
+// Updates a Slack channel configuration.
 func (c *Client) UpdateSlackChannelConfiguration(ctx context.Context, params *UpdateSlackChannelConfigurationInput, optFns ...func(*Options)) (*UpdateSlackChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateSlackChannelConfigurationInput{}
@@ -29,34 +29,40 @@ func (c *Client) UpdateSlackChannelConfiguration(ctx context.Context, params *Up
 
 type UpdateSlackChannelConfigurationInput struct {
 
-	// The ARN of the SlackChannelConfiguration to update.
+	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration to update.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// The ID of the Slack channel. To get the ID, open Slack, right click on the
-	// channel name in the left pane, then choose Copy Link. The channel ID is the
-	// 9-character string at the end of the URL. For example, ABCBBLZZZ.
+	// The ID of the Slack channel.
+	//
+	// To get this ID, open Slack, right click on the channel name in the left pane,
+	// then choose Copy Link. The channel ID is the 9-character string at the end of
+	// the URL. For example, ABCBBLZZZ.
 	//
 	// This member is required.
 	SlackChannelId *string
 
 	// The list of IAM policy ARNs that are applied as channel guardrails. The AWS
-	// managed 'AdministratorAccess' policy is applied by default if this is not set.
+	// managed AdministratorAccess policy is applied by default if this is not set.
 	GuardrailPolicyArns []string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	IamRoleArn *string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// The name of the Slack Channel.
+	// The name of the Slack channel.
 	SlackChannelName *string
 
-	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+	// The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications
+	// to AWS Chatbot.
 	SnsTopicArns []string
 
 	// Enables use of a user role requirement in your chat configuration.

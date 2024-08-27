@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists MS Teams Channel Configurations optionally filtered by TeamId
+// Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS account.
 func (c *Client) ListMicrosoftTeamsChannelConfigurations(ctx context.Context, params *ListMicrosoftTeamsChannelConfigurationsInput, optFns ...func(*Options)) (*ListMicrosoftTeamsChannelConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListMicrosoftTeamsChannelConfigurationsInput{}
@@ -39,11 +39,14 @@ type ListMicrosoftTeamsChannelConfigurationsInput struct {
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
 
-	// The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID,
-	// you must perform the initial authorization flow with Microsoft Teams in the AWS
-	// Chatbot console. Then you can copy and paste the team ID from the console. For
-	// more details, see steps 1-4 in Get started with Microsoft Teams in the AWS
-	// Chatbot Administrator Guide.
+	//  The ID of the Microsoft Teams authorized with AWS Chatbot.
+	//
+	// To get the team ID, you must perform the initial authorization flow with
+	// Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team
+	// ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client]in the AWS Chatbot Administrator
+	// Guide.
+	//
+	// [Step 1: Configure a Microsoft Teams client]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
 	TeamId *string
 
 	noSmithyDocumentSerde

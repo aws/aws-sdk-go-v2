@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Chime Webhook Configuration
+// Updates a Amazon Chime webhook configuration.
 func (c *Client) UpdateChimeWebhookConfiguration(ctx context.Context, params *UpdateChimeWebhookConfigurationInput, optFns ...func(*Options)) (*UpdateChimeWebhookConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateChimeWebhookConfigurationInput{}
@@ -29,28 +29,34 @@ func (c *Client) UpdateChimeWebhookConfiguration(ctx context.Context, params *Up
 
 type UpdateChimeWebhookConfigurationInput struct {
 
-	// The ARN of the ChimeWebhookConfiguration to update.
+	// The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration to update.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	IamRoleArn *string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
 	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
 	SnsTopicArns []string
 
-	// Description of the webhook. Recommend using the convention RoomName/WebhookName
-	// . See Chime setup tutorial for more details:
-	// https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+	// A description of the webhook. We recommend using the convention
+	// RoomName/WebhookName .
+	//
+	// For more information, see [Tutorial: Get started with Amazon Chime] in the AWS Chatbot Administrator Guide.
+	//
+	// [Tutorial: Get started with Amazon Chime]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
 	WebhookDescription *string
 
-	// URL for the Chime webhook.
+	// The URL for the Amazon Chime webhook.
 	WebhookUrl *string
 
 	noSmithyDocumentSerde
@@ -58,7 +64,7 @@ type UpdateChimeWebhookConfigurationInput struct {
 
 type UpdateChimeWebhookConfigurationOutput struct {
 
-	// Chime webhook configuration.
+	// A Amazon Chime webhook configuration.
 	WebhookConfiguration *types.ChimeWebhookConfiguration
 
 	// Metadata pertaining to the operation's result.

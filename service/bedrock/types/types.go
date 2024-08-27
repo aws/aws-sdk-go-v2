@@ -1223,6 +1223,62 @@ type ImportedModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a model.
+type InferenceProfileModel struct {
+
+	// The Amazon Resource Name (ARN) of the model.
+	ModelArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an inference profile.
+type InferenceProfileSummary struct {
+
+	// The Amazon Resource Name (ARN) of the inference profile.
+	//
+	// This member is required.
+	InferenceProfileArn *string
+
+	// The unique identifier of the inference profile.
+	//
+	// This member is required.
+	InferenceProfileId *string
+
+	// The name of the inference profile.
+	//
+	// This member is required.
+	InferenceProfileName *string
+
+	// A list of information about each model in the inference profile.
+	//
+	// This member is required.
+	Models []InferenceProfileModel
+
+	// The status of the inference profile. ACTIVE means that the inference profile is
+	// available to use.
+	//
+	// This member is required.
+	Status InferenceProfileStatus
+
+	// The type of the inference profile. SYSTEM_DEFINED means that the inference
+	// profile is defined by Amazon Bedrock.
+	//
+	// This member is required.
+	Type InferenceProfileType
+
+	// The time at which the inference profile was created.
+	CreatedAt *time.Time
+
+	// The description of the inference profile.
+	Description *string
+
+	// The time at which the inference profile was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Configuration fields for invocation logging.
 type LoggingConfig struct {
 

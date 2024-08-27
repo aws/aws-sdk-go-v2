@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Slack user identity
+// Deletes a user level permission for a Slack channel configuration.
 func (c *Client) DeleteSlackUserIdentity(ctx context.Context, params *DeleteSlackUserIdentityInput, optFns ...func(*Options)) (*DeleteSlackUserIdentityOutput, error) {
 	if params == nil {
 		params = &DeleteSlackUserIdentityInput{}
@@ -39,7 +39,7 @@ type DeleteSlackUserIdentityInput struct {
 	// This member is required.
 	SlackTeamId *string
 
-	// The ID of the user in Slack.
+	// The ID of the user in Slack
 	//
 	// This member is required.
 	SlackUserId *string

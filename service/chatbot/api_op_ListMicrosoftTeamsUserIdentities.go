@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Microsoft Teams user identities with a mapped role.
+// A list all Microsoft Teams user identities with a mapped role.
 func (c *Client) ListMicrosoftTeamsUserIdentities(ctx context.Context, params *ListMicrosoftTeamsUserIdentitiesInput, optFns ...func(*Options)) (*ListMicrosoftTeamsUserIdentitiesOutput, error) {
 	if params == nil {
 		params = &ListMicrosoftTeamsUserIdentitiesInput{}
@@ -29,8 +29,8 @@ func (c *Client) ListMicrosoftTeamsUserIdentities(ctx context.Context, params *L
 
 type ListMicrosoftTeamsUserIdentitiesInput struct {
 
-	// The ARN of the MicrosoftTeamsChannelConfiguration associated with the user
-	// identities to list.
+	// The Amazon Resource Number (ARN) of the MicrosoftTeamsChannelConfiguration
+	// associated with the user identities to list.
 	ChatConfigurationArn *string
 
 	// The maximum number of results to include in the response. If more results exist

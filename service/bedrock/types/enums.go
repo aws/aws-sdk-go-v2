@@ -384,6 +384,40 @@ func (GuardrailTopicType) Values() []GuardrailTopicType {
 	}
 }
 
+type InferenceProfileStatus string
+
+// Enum values for InferenceProfileStatus
+const (
+	InferenceProfileStatusActive InferenceProfileStatus = "ACTIVE"
+)
+
+// Values returns all known values for InferenceProfileStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceProfileStatus) Values() []InferenceProfileStatus {
+	return []InferenceProfileStatus{
+		"ACTIVE",
+	}
+}
+
+type InferenceProfileType string
+
+// Enum values for InferenceProfileType
+const (
+	InferenceProfileTypeSystemDefined InferenceProfileType = "SYSTEM_DEFINED"
+)
+
+// Values returns all known values for InferenceProfileType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceProfileType) Values() []InferenceProfileType {
+	return []InferenceProfileType{
+		"SYSTEM_DEFINED",
+	}
+}
+
 type InferenceType string
 
 // Enum values for InferenceType

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Teams user identity
+// Identifes a user level permission for a channel configuration.
 func (c *Client) DeleteMicrosoftTeamsUserIdentity(ctx context.Context, params *DeleteMicrosoftTeamsUserIdentityInput, optFns ...func(*Options)) (*DeleteMicrosoftTeamsUserIdentityOutput, error) {
 	if params == nil {
 		params = &DeleteMicrosoftTeamsUserIdentityInput{}
@@ -34,7 +34,7 @@ type DeleteMicrosoftTeamsUserIdentityInput struct {
 	// This member is required.
 	ChatConfigurationArn *string
 
-	// Id from Microsoft Teams for user.
+	// The Microsoft Teams user ID.
 	//
 	// This member is required.
 	UserId *string

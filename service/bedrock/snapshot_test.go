@@ -290,6 +290,18 @@ func TestCheckSnapshot_GetImportedModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInferenceProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInferenceProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInferenceProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetModelCopyJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetModelCopyJob(context.Background(), nil, func(o *Options) {
@@ -415,6 +427,18 @@ func TestCheckSnapshot_ListImportedModels(t *testing.T) {
 	_, err := svc.ListImportedModels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListImportedModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInferenceProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInferenceProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInferenceProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -817,6 +841,18 @@ func TestUpdateSnapshot_GetImportedModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetInferenceProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInferenceProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInferenceProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetModelCopyJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetModelCopyJob(context.Background(), nil, func(o *Options) {
@@ -942,6 +978,18 @@ func TestUpdateSnapshot_ListImportedModels(t *testing.T) {
 	_, err := svc.ListImportedModels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListImportedModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInferenceProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInferenceProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInferenceProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

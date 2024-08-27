@@ -540,6 +540,9 @@ type ImportReadSetSourceItem struct {
 	// The source's name.
 	Name *string
 
+	// The source's read set ID.
+	ReadSetId *string
+
 	// The source's genome reference ARN.
 	ReferenceArn *string
 
@@ -614,6 +617,9 @@ type ImportReferenceSourceItem struct {
 
 	// The source's name.
 	Name *string
+
+	// The source's reference ID.
+	ReferenceId *string
 
 	// The source file's location in Amazon S3.
 	SourceFile *string

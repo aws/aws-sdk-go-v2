@@ -29,8 +29,8 @@ func (c *Client) DescribeSlackUserIdentities(ctx context.Context, params *Descri
 
 type DescribeSlackUserIdentitiesInput struct {
 
-	// The ARN of the SlackChannelConfiguration associated with the user identities to
-	// describe.
+	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration associated
+	// with the user identities to describe.
 	ChatConfigurationArn *string
 
 	// The maximum number of results to include in the response. If more results exist
@@ -38,7 +38,7 @@ type DescribeSlackUserIdentitiesInput struct {
 	// the remaining results can be retrieved.
 	MaxResults *int32
 
-	// An optional token returned from a prior request. Use this token for pagination
+	//  An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
@@ -48,7 +48,7 @@ type DescribeSlackUserIdentitiesInput struct {
 
 type DescribeSlackUserIdentitiesOutput struct {
 
-	// An optional token returned from a prior request. Use this token for pagination
+	//  An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Slack Channel Configurations optionally filtered by ChatConfigurationArn
+// Lists Slack channel configurations optionally filtered by ChatConfigurationArn
 func (c *Client) DescribeSlackChannelConfigurations(ctx context.Context, params *DescribeSlackChannelConfigurationsInput, optFns ...func(*Options)) (*DescribeSlackChannelConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeSlackChannelConfigurationsInput{}
@@ -29,7 +29,8 @@ func (c *Client) DescribeSlackChannelConfigurations(ctx context.Context, params 
 
 type DescribeSlackChannelConfigurationsInput struct {
 
-	// An optional ARN of a SlackChannelConfiguration to describe.
+	// An optional Amazon Resource Number (ARN) of a SlackChannelConfiguration to
+	// describe.
 	ChatConfigurationArn *string
 
 	// The maximum number of results to include in the response. If more results exist
@@ -37,7 +38,7 @@ type DescribeSlackChannelConfigurationsInput struct {
 	// the remaining results can be retrieved.
 	MaxResults *int32
 
-	// An optional token returned from a prior request. Use this token for pagination
+	//  An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string

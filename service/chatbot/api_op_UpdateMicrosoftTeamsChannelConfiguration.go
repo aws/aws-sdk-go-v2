@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates MS Teams Channel Configuration
+// Updates an Microsoft Teams channel configuration.
 func (c *Client) UpdateMicrosoftTeamsChannelConfiguration(ctx context.Context, params *UpdateMicrosoftTeamsChannelConfigurationInput, optFns ...func(*Options)) (*UpdateMicrosoftTeamsChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateMicrosoftTeamsChannelConfigurationInput{}
@@ -34,7 +34,7 @@ type UpdateMicrosoftTeamsChannelConfigurationInput struct {
 	// This member is required.
 	ChannelId *string
 
-	// The ARN of the MicrosoftTeamsChannelConfiguration to update.
+	// The Amazon Resource Number (ARN) of the TeamsChannelConfiguration to update.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
@@ -43,18 +43,22 @@ type UpdateMicrosoftTeamsChannelConfigurationInput struct {
 	ChannelName *string
 
 	// The list of IAM policy ARNs that are applied as channel guardrails. The AWS
-	// managed 'AdministratorAccess' policy is applied by default if this is not set.
+	// managed AdministratorAccess policy is applied by default if this is not set.
 	GuardrailPolicyArns []string
 
-	// The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a
-	// user-defined role that AWS Chatbot will assume. This is not the service-linked
-	// role. For more information, see IAM Policies for AWS Chatbot.
+	// A user-defined role that AWS Chatbot assumes. This is not the service-linked
+	// role.
+	//
+	// For more information, see [IAM policies for AWS Chatbot] in the AWS Chatbot Administrator Guide.
+	//
+	// [IAM policies for AWS Chatbot]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
 	IamRoleArn *string
 
-	// Logging levels include ERROR, INFO, or NONE.
+	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
-	// The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+	// The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications
+	// to AWS Chatbot.
 	SnsTopicArns []string
 
 	// Enables use of a user role requirement in your chat configuration.

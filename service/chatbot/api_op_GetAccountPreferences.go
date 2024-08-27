@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get Chatbot account level preferences
+// Returns AWS Chatbot account preferences.
 func (c *Client) GetAccountPreferences(ctx context.Context, params *GetAccountPreferencesInput, optFns ...func(*Options)) (*GetAccountPreferencesOutput, error) {
 	if params == nil {
 		params = &GetAccountPreferencesInput{}
@@ -33,7 +33,7 @@ type GetAccountPreferencesInput struct {
 
 type GetAccountPreferencesOutput struct {
 
-	// Preferences which apply for AWS Chatbot usage in the calling AWS account.
+	// The preferences related to AWS Chatbot usage in the calling AWS account.
 	AccountPreferences *types.AccountPreferences
 
 	// Metadata pertaining to the operation's result.

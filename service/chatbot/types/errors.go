@@ -490,8 +490,7 @@ func (e *GetTeamsChannelConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
 
-// Customer/consumer-facing internal service exception.
-// https://w.amazon.com/index.php/AWS/API_Standards/Exceptions#InternalServiceError
+// Unexpected error during processing of request.
 type InternalServiceError struct {
 	Message *string
 
@@ -517,7 +516,7 @@ func (e *InternalServiceError) ErrorCode() string {
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Your request input doesn't meet the constraints that AWS Chatbot requires.
+// Your request input doesn't meet the constraints required by AWS Chatbot.
 type InvalidParameterException struct {
 	Message *string
 
@@ -543,7 +542,7 @@ func (e *InvalidParameterException) ErrorCode() string {
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your request input doesn't meet the constraints that AWS Chatbot requires.
+// Your request input doesn't meet the constraints required by AWS Chatbot.
 type InvalidRequestException struct {
 	Message *string
 
@@ -682,7 +681,7 @@ func (e *ListTeamsChannelConfigurationsException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultServer
 }
 
-// We were not able to find the resource for your request.
+// We were unable to find the resource for your request
 type ResourceNotFoundException struct {
 	Message *string
 

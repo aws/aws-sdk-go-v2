@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update Chatbot account level preferences
+// Updates AWS Chatbot account preferences.
 func (c *Client) UpdateAccountPreferences(ctx context.Context, params *UpdateAccountPreferencesInput, optFns ...func(*Options)) (*UpdateAccountPreferencesOutput, error) {
 	if params == nil {
 		params = &UpdateAccountPreferencesInput{}
@@ -29,15 +29,16 @@ func (c *Client) UpdateAccountPreferences(ctx context.Context, params *UpdateAcc
 
 type UpdateAccountPreferencesInput struct {
 
-	// Turns on training data collection. This helps improve the AWS Chatbot
-	// experience by allowing AWS Chatbot to store and use your customer information,
-	// such as AWS Chatbot configurations, notifications, user inputs, AWS Chatbot
-	// generated responses, and interaction data. This data helps us to continuously
-	// improve and develop Artificial Intelligence (AI) technologies. Your data is not
-	// shared with any third parties and is protected using sophisticated controls to
-	// prevent unauthorized access and misuse. AWS Chatbot does not store or use
-	// interactions in chat channels with Amazon Q for training AWS Chatbot’s AI
-	// technologies.
+	// Turns on training data collection.
+	//
+	// This helps improve the AWS Chatbot experience by allowing AWS Chatbot to store
+	// and use your customer information, such as AWS Chatbot configurations,
+	// notifications, user inputs, AWS Chatbot generated responses, and interaction
+	// data. This data helps us to continuously improve and develop Artificial
+	// Intelligence (AI) technologies. Your data is not shared with any third parties
+	// and is protected using sophisticated controls to prevent unauthorized access and
+	// misuse. AWS Chatbot does not store or use interactions in chat channels with
+	// Amazon Q for training AI technologies for AWS Chatbot.
 	TrainingDataCollectionEnabled *bool
 
 	// Enables use of a user role requirement in your chat configuration.
@@ -48,7 +49,7 @@ type UpdateAccountPreferencesInput struct {
 
 type UpdateAccountPreferencesOutput struct {
 
-	// Preferences which apply for AWS Chatbot usage in the calling AWS account.
+	// Preferences related to AWS Chatbot usage in the calling AWS account.
 	AccountPreferences *types.AccountPreferences
 
 	// Metadata pertaining to the operation's result.

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the supplied tags from a configuration
+// Detaches a key-value pair from a resource, as identified by its Amazon Resource
+// Name (ARN). Resources are users, servers, roles, and other entities.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,12 +29,16 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the configuration.
+	// The value of the resource that will have the tag removed. An Amazon Resource
+	// Name (ARN) is an identifier for a specific AWS resource, such as a server, user,
+	// or role.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// A list of tag keys to remove from the configuration.
+	// TagKeys are key-value pairs assigned to ARNs that can be used to group and
+	// search for resources by type. This metadata can be attached to resources for any
+	// purpose.
 	//
 	// This member is required.
 	TagKeys []string

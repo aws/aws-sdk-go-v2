@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a single MS Teams Channel Configurations
+// Returns a Microsoft Teams channel configuration in an AWS account.
 func (c *Client) GetMicrosoftTeamsChannelConfiguration(ctx context.Context, params *GetMicrosoftTeamsChannelConfigurationInput, optFns ...func(*Options)) (*GetMicrosoftTeamsChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &GetMicrosoftTeamsChannelConfigurationInput{}
@@ -29,7 +29,8 @@ func (c *Client) GetMicrosoftTeamsChannelConfiguration(ctx context.Context, para
 
 type GetMicrosoftTeamsChannelConfigurationInput struct {
 
-	// The ARN of the MicrosoftTeamsChannelConfiguration to retrieve.
+	// The Amazon Resource Number (ARN) of the MicrosoftTeamsChannelConfiguration to
+	// retrieve.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

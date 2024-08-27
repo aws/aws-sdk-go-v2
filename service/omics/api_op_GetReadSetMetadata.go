@@ -75,6 +75,9 @@ type GetReadSetMetadataOutput struct {
 	// This member is required.
 	Status types.ReadSetStatus
 
+	// The read set's creation job ID.
+	CreationJobId *string
+
 	//  The creation type of the read set.
 	CreationType types.CreationType
 
