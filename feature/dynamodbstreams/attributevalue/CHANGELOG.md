@@ -1,3 +1,7 @@
+# v1.14.1 (2024-08-27)
+
+* No change notes available for this release.
+
 # v1.14.0 (2024-08-26)
 
 * **Feature**: Add Encoder option to obey omitempty tag for NULL attribute values.

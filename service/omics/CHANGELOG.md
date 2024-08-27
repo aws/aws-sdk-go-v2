@@ -1,3 +1,7 @@
+# v1.24.0 (2024-08-27)
+
+* **Feature**: Adds data provenance to import jobs from read sets and references
+
 # v1.23.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

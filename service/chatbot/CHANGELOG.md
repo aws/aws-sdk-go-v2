@@ -1,3 +1,7 @@
+# v1.5.0 (2024-08-27)
+
+* **Feature**: Update documentation to be consistent with the API docs
+
 # v1.4.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

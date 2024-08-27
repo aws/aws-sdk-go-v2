@@ -1,3 +1,7 @@
+# v1.43.0 (2024-08-27)
+
+* **Feature**: Amazon Polly adds 2 new voices: Jitka (cs-CZ) and Sabrina (de-CH).
+
 # v1.42.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

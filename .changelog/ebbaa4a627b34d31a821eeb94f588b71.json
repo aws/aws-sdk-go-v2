@@ -1,8 +1,0 @@
-{
-    "id": "ebbaa4a6-27b3-4d31-a821-eeb94f588b71",
-    "type": "feature",
-    "description": "Update documentation to be consistent with the API docs",
-    "modules": [
-        "service/chatbot"
-    ]
-}

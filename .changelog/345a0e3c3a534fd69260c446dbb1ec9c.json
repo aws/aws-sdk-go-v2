@@ -1,8 +1,0 @@
-{
-    "id": "345a0e3c-3a53-4fd6-9260-c446dbb1ec9c",
-    "type": "feature",
-    "description": "Amazon Polly adds 2 new voices: Jitka (cs-CZ) and Sabrina (de-CH).",
-    "modules": [
-        "service/polly"
-    ]
-}

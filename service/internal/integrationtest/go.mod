@@ -57,7 +57,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.33.5
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.21.4
-	github.com/aws/aws-sdk-go-v2/service/polly v1.42.4
+	github.com/aws/aws-sdk-go-v2/service/polly v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.82.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.46.6
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.43.3

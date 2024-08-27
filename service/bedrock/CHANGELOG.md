@@ -1,3 +1,7 @@
+# v1.16.0 (2024-08-27)
+
+* **Feature**: Amazon Bedrock SDK updates for Inference Profile.
+
 # v1.15.0 (2024-08-22)
 
 * **Feature**: Amazon Bedrock Evaluation BatchDeleteEvaluationJob API allows customers to delete evaluation jobs under terminated evaluation job statuses - Stopped, Failed, or Completed. Customers can submit a batch of 25 evaluation jobs to be deleted at once.

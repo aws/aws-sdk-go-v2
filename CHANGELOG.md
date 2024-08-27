@@ -1,3 +1,15 @@
+# Release (2024-08-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.16.0](service/bedrock/CHANGELOG.md#v1160-2024-08-27)
+  * **Feature**: Amazon Bedrock SDK updates for Inference Profile.
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.5.0](service/chatbot/CHANGELOG.md#v150-2024-08-27)
+  * **Feature**: Update documentation to be consistent with the API docs
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.24.0](service/omics/CHANGELOG.md#v1240-2024-08-27)
+  * **Feature**: Adds data provenance to import jobs from read sets and references
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.43.0](service/polly/CHANGELOG.md#v1430-2024-08-27)
+  * **Feature**: Amazon Polly adds 2 new voices: Jitka (cs-CZ) and Sabrina (de-CH).
+
 # Release (2024-08-26)
 
 ## General Highlights

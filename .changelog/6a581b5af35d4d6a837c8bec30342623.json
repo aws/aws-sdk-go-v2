@@ -1,8 +1,0 @@
-{
-    "id": "6a581b5a-f35d-4d6a-837c-8bec30342623",
-    "type": "feature",
-    "description": "Adds data provenance to import jobs from read sets and references",
-    "modules": [
-        "service/omics"
-    ]
-}
