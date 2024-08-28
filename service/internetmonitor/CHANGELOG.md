@@ -1,3 +1,7 @@
+# v1.17.0 (2024-08-28)
+
+* **Feature**: Adds new querying types to show overall traffic suggestion information for monitors
+
 # v1.16.5 (2024-08-22)
 
 * No change notes available for this release.

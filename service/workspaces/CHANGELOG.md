@@ -1,3 +1,7 @@
+# v1.46.1 (2024-08-28)
+
+* **Documentation**: Documentation-only update that clarifies the StartWorkspaces and StopWorkspaces actions, and a few other minor edits.
+
 # v1.46.0 (2024-08-26)
 
 * **Feature**: This release adds support for creating and managing directories that use AWS IAM Identity Center as user identity source. Such directories can be used to create non-Active Directory domain joined WorkSpaces Personal.Updated RegisterWorkspaceDirectory and DescribeWorkspaceDirectories APIs.

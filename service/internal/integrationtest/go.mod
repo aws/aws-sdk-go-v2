@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.4
 	github.com/aws/aws-sdk-go-v2/config v1.27.31
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.15
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.16
 	github.com/aws/aws-sdk-go-v2/service/acm v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.6
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.2
@@ -25,12 +25,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.48.5
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.40.5
-	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.25.3
+	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.37.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.6
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.176.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.177.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.4
@@ -64,7 +64,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.30.5
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.60.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.61.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.46.5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.6
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.30.4
@@ -82,7 +82,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.51.5
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.46.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.46.1
 	github.com/aws/smithy-go v1.20.4
 )
 

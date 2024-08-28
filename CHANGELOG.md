@@ -1,3 +1,27 @@
+# Release (2024-08-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.32.0](service/appconfig/CHANGELOG.md#v1320-2024-08-28)
+  * **Feature**: This release adds support for deletion protection, which is a safety guardrail to prevent the unintentional deletion of a recently used AWS AppConfig Configuration Profile or Environment. This also includes a change to increase the maximum length of the Name parameter in UpdateConfigurationProfile.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.18.0](service/datazone/CHANGELOG.md#v1180-2024-08-28)
+  * **Feature**: Update regex to include dot character to be consistent with IAM role creation in the authorized principal field for create and update subscription target.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.26.0](service/devicefarm/CHANGELOG.md#v1260-2024-08-28)
+  * **Feature**: This release removed support for Calabash, UI Automation, Built-in Explorer, remote access record, remote access replay, and web performance profile framework in ScheduleRun API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.177.0](service/ec2/CHANGELOG.md#v11770-2024-08-28)
+  * **Feature**: Amazon VPC IP Address Manager (IPAM) now allows customers to provision IPv4 CIDR blocks and allocate Elastic IP Addresses directly from IPAM pools with public IPv4 space
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.17.0](service/internetmonitor/CHANGELOG.md#v1170-2024-08-28)
+  * **Feature**: Adds new querying types to show overall traffic suggestion information for monitors
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.0.0](service/pcs/CHANGELOG.md#v100-2024-08-28)
+  * **Release**: New AWS service client module
+  * **Feature**: Introducing AWS Parallel Computing Service (AWS PCS), a new service makes it easy to setup and manage high performance computing (HPC) clusters, and build scientific and engineering models at virtually any scale on AWS.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.61.0](service/s3/CHANGELOG.md#v1610-2024-08-28)
+  * **Feature**: Add presignPost for s3 PutObject
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.46.1](service/workspaces/CHANGELOG.md#v1461-2024-08-28)
+  * **Documentation**: Documentation-only update that clarifies the StartWorkspaces and StopWorkspaces actions, and a few other minor edits.
+
 # Release (2024-08-27)
 
 ## Module Highlights

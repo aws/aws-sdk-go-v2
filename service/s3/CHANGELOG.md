@@ -1,3 +1,7 @@
+# v1.61.0 (2024-08-28)
+
+* **Feature**: Add presignPost for s3 PutObject
+
 # v1.60.1 (2024-08-22)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.177.0 (2024-08-28)
+
+* **Feature**: Amazon VPC IP Address Manager (IPAM) now allows customers to provision IPv4 CIDR blocks and allocate Elastic IP Addresses directly from IPAM pools with public IPv4 space
+
 # v1.176.0 (2024-08-21)
 
 * **Feature**: DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances

@@ -1,8 +1,0 @@
-{
-    "id": "5752dab3-d036-4c6f-bc3c-7631ef2f52e7",
-    "type": "feature",
-    "description": "Amazon VPC IP Address Manager (IPAM) now allows customers to provision IPv4 CIDR blocks and allocate Elastic IP Addresses directly from IPAM pools with public IPv4 space",
-    "modules": [
-        "service/ec2"
-    ]
-}

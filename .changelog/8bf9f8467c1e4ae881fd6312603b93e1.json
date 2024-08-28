@@ -1,8 +1,0 @@
-{
-    "id": "8bf9f846-7c1e-4ae8-81fd-6312603b93e1",
-    "type": "documentation",
-    "description": "Documentation-only update that clarifies the StartWorkspaces and StopWorkspaces actions, and a few other minor edits.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

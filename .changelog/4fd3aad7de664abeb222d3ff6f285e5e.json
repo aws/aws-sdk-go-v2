@@ -1,8 +1,0 @@
-{
-    "id": "4fd3aad7-de66-4abe-b222-d3ff6f285e5e",
-    "type": "feature",
-    "description": "This release adds support for deletion protection, which is a safety guardrail to prevent the unintentional deletion of a recently used AWS AppConfig Configuration Profile or Environment. This also includes a change to increase the maximum length of the Name parameter in UpdateConfigurationProfile.",
-    "modules": [
-        "service/appconfig"
-    ]
-}

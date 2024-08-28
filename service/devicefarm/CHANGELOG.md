@@ -1,3 +1,7 @@
+# v1.26.0 (2024-08-28)
+
+* **Feature**: This release removed support for Calabash, UI Automation, Built-in Explorer, remote access record, remote access replay, and web performance profile framework in ScheduleRun API.
+
 # v1.25.3 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.
