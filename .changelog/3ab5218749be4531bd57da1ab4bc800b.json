@@ -1,0 +1,8 @@
+{
+    "id": "3ab52187-49be-4531-bd57-da1ab4bc800b",
+    "type": "feature",
+    "description": "Introducing AWS Parallel Computing Service (AWS PCS), a new service makes it easy to setup and manage high performance computing (HPC) clusters, and build scientific and engineering models at virtually any scale on AWS.",
+    "modules": [
+        "service/pcs"
+    ]
+}

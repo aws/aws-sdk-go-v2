@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Stops the specified WorkSpaces.
+// Stops the specified WorkSpaces.
 //
-// You cannot stop a WorkSpace unless it has a running mode of AutoStop and a
-// state of AVAILABLE , IMPAIRED , UNHEALTHY , or ERROR .
+// You cannot stop a WorkSpace unless it has a running mode of AutoStop or Manual
+// and a state of AVAILABLE , IMPAIRED , UNHEALTHY , or ERROR .
 func (c *Client) StopWorkspaces(ctx context.Context, params *StopWorkspacesInput, optFns ...func(*Options)) (*StopWorkspacesOutput, error) {
 	if params == nil {
 		params = &StopWorkspacesInput{}

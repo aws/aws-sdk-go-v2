@@ -65,6 +65,27 @@ func (BytesMeasure) Values() []BytesMeasure {
 	}
 }
 
+type DeletionProtectionCheck string
+
+// Enum values for DeletionProtectionCheck
+const (
+	DeletionProtectionCheckAccountDefault DeletionProtectionCheck = "ACCOUNT_DEFAULT"
+	DeletionProtectionCheckApply          DeletionProtectionCheck = "APPLY"
+	DeletionProtectionCheckBypass         DeletionProtectionCheck = "BYPASS"
+)
+
+// Values returns all known values for DeletionProtectionCheck. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionProtectionCheck) Values() []DeletionProtectionCheck {
+	return []DeletionProtectionCheck{
+		"ACCOUNT_DEFAULT",
+		"APPLY",
+		"BYPASS",
+	}
+}
+
 type DeploymentEventType string
 
 // Enum values for DeploymentEventType

@@ -10,7 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new configuration in the AppConfig hosted configuration store.
+// Creates a new configuration in the AppConfig hosted configuration store. If
+// you're creating a feature flag, we recommend you familiarize yourself with the
+// JSON schema for feature flag data. For more information, see [Type reference for AWS.AppConfig.FeatureFlags]in the AppConfig
+// User Guide.
+//
+// [Type reference for AWS.AppConfig.FeatureFlags]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags
 func (c *Client) CreateHostedConfigurationVersion(ctx context.Context, params *CreateHostedConfigurationVersionInput, optFns ...func(*Options)) (*CreateHostedConfigurationVersionOutput, error) {
 	if params == nil {
 		params = &CreateHostedConfigurationVersionInput{}
@@ -38,7 +43,10 @@ type CreateHostedConfigurationVersionInput struct {
 	// This member is required.
 	ConfigurationProfileId *string
 
-	// The content of the configuration or the configuration data.
+	// The configuration data, as bytes.
+	//
+	// AppConfig accepts any type of data, including text formats like JSON or TOML,
+	// or binary formats like protocol buffers or compressed data.
 	//
 	// This member is required.
 	Content []byte

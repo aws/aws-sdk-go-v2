@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an data product in Amazon DataZone.
+// Deletes a data product in Amazon DataZone.
 func (c *Client) DeleteDataProduct(ctx context.Context, params *DeleteDataProductInput, optFns ...func(*Options)) (*DeleteDataProductOutput, error) {
 	if params == nil {
 		params = &DeleteDataProductInput{}

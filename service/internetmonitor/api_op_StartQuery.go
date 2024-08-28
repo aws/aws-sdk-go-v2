@@ -63,6 +63,13 @@ type StartQueryInput struct {
 	//   - TOP_LOCATION_DETAILS : Provides TTFB for Amazon CloudFront, your current
 	//   configuration, and the best performing EC2 configuration, at 1 hour intervals.
 	//
+	//   - OVERALL_TRAFFIC_SUGGESTIONS : Provides TTFB, using a 30-day weighted
+	//   average, for all traffic in each Amazon Web Services location that is monitored.
+	//
+	//   - OVERALL_TRAFFIC_SUGGESTIONS_DETAILS : Provides TTFB, using a 30-day weighted
+	//   average, for each top location, for a proposed Amazon Web Services location.
+	//   Must provide a Amazon Web Services location to search.
+	//
 	// For lists of the fields returned with each query type and more information
 	// about how each type of query is performed, see [Using the Amazon CloudWatch Internet Monitor query interface]in the Amazon CloudWatch
 	// Internet Monitor User Guide.

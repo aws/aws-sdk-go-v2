@@ -635,27 +635,20 @@ type TestType string
 
 // Enum values for TestType
 const (
-	TestTypeBuiltinFuzz           TestType = "BUILTIN_FUZZ"
-	TestTypeBuiltinExplorer       TestType = "BUILTIN_EXPLORER"
-	TestTypeWebPerformanceProfile TestType = "WEB_PERFORMANCE_PROFILE"
-	TestTypeAppiumJavaJunit       TestType = "APPIUM_JAVA_JUNIT"
-	TestTypeAppiumJavaTestng      TestType = "APPIUM_JAVA_TESTNG"
-	TestTypeAppiumPython          TestType = "APPIUM_PYTHON"
-	TestTypeAppiumNode            TestType = "APPIUM_NODE"
-	TestTypeAppiumRuby            TestType = "APPIUM_RUBY"
-	TestTypeAppiumWebJavaJunit    TestType = "APPIUM_WEB_JAVA_JUNIT"
-	TestTypeAppiumWebJavaTestng   TestType = "APPIUM_WEB_JAVA_TESTNG"
-	TestTypeAppiumWebPython       TestType = "APPIUM_WEB_PYTHON"
-	TestTypeAppiumWebNode         TestType = "APPIUM_WEB_NODE"
-	TestTypeAppiumWebRuby         TestType = "APPIUM_WEB_RUBY"
-	TestTypeCalabash              TestType = "CALABASH"
-	TestTypeInstrumentation       TestType = "INSTRUMENTATION"
-	TestTypeUiautomation          TestType = "UIAUTOMATION"
-	TestTypeUiautomator           TestType = "UIAUTOMATOR"
-	TestTypeXctest                TestType = "XCTEST"
-	TestTypeXctestUi              TestType = "XCTEST_UI"
-	TestTypeRemoteAccessRecord    TestType = "REMOTE_ACCESS_RECORD"
-	TestTypeRemoteAccessReplay    TestType = "REMOTE_ACCESS_REPLAY"
+	TestTypeBuiltinFuzz         TestType = "BUILTIN_FUZZ"
+	TestTypeAppiumJavaJunit     TestType = "APPIUM_JAVA_JUNIT"
+	TestTypeAppiumJavaTestng    TestType = "APPIUM_JAVA_TESTNG"
+	TestTypeAppiumPython        TestType = "APPIUM_PYTHON"
+	TestTypeAppiumNode          TestType = "APPIUM_NODE"
+	TestTypeAppiumRuby          TestType = "APPIUM_RUBY"
+	TestTypeAppiumWebJavaJunit  TestType = "APPIUM_WEB_JAVA_JUNIT"
+	TestTypeAppiumWebJavaTestng TestType = "APPIUM_WEB_JAVA_TESTNG"
+	TestTypeAppiumWebPython     TestType = "APPIUM_WEB_PYTHON"
+	TestTypeAppiumWebNode       TestType = "APPIUM_WEB_NODE"
+	TestTypeAppiumWebRuby       TestType = "APPIUM_WEB_RUBY"
+	TestTypeInstrumentation     TestType = "INSTRUMENTATION"
+	TestTypeXctest              TestType = "XCTEST"
+	TestTypeXctestUi            TestType = "XCTEST_UI"
 )
 
 // Values returns all known values for TestType. Note that this can be expanded in
@@ -665,8 +658,6 @@ const (
 func (TestType) Values() []TestType {
 	return []TestType{
 		"BUILTIN_FUZZ",
-		"BUILTIN_EXPLORER",
-		"WEB_PERFORMANCE_PROFILE",
 		"APPIUM_JAVA_JUNIT",
 		"APPIUM_JAVA_TESTNG",
 		"APPIUM_PYTHON",
@@ -677,14 +668,9 @@ func (TestType) Values() []TestType {
 		"APPIUM_WEB_PYTHON",
 		"APPIUM_WEB_NODE",
 		"APPIUM_WEB_RUBY",
-		"CALABASH",
 		"INSTRUMENTATION",
-		"UIAUTOMATION",
-		"UIAUTOMATOR",
 		"XCTEST",
 		"XCTEST_UI",
-		"REMOTE_ACCESS_RECORD",
-		"REMOTE_ACCESS_REPLAY",
 	}
 }
 

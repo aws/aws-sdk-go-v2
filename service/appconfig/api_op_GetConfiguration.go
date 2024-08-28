@@ -17,7 +17,8 @@ import (
 //   - This API action is deprecated. Calls to receive configuration data should
 //     use the [StartConfigurationSession]and [GetLatestConfiguration]APIs instead.
 //
-//   - GetConfiguration is a priced call. For more information, see [Pricing].
+// GetConfiguration
+//   - is a priced call. For more information, see [Pricing].
 //
 // Deprecated: This API has been deprecated in favor of the GetLatestConfiguration
 // API used in conjunction with StartConfigurationSession.
@@ -71,17 +72,15 @@ type GetConfigurationInput struct {
 	//
 	// AppConfig uses the value of the ClientConfigurationVersion parameter to
 	// identify the configuration version on your clients. If you don’t send
-	// ClientConfigurationVersion with each call to GetConfiguration , your clients
-	// receive the current configuration. You are charged each time your clients
-	// receive a configuration.
+	// ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current
+	// configuration. You are charged each time your clients receive a configuration.
 	//
 	// To avoid excess charges, we recommend you use the [StartConfigurationSession] and [GetLatestConfiguration] APIs, which track the
-	// client configuration version on your behalf. If you choose to continue using
-	// GetConfiguration , we recommend that you include the ClientConfigurationVersion
-	// value with every call to GetConfiguration . The value to use for
-	// ClientConfigurationVersion comes from the ConfigurationVersion attribute
-	// returned by GetConfiguration when there is new or updated data, and should be
-	// saved for subsequent calls to GetConfiguration .
+	// client configuration version on your behalf. If you choose to continue using GetConfiguration,
+	// we recommend that you include the ClientConfigurationVersion value with every
+	// call to GetConfiguration. The value to use for ClientConfigurationVersion comes from the
+	// ConfigurationVersion attribute returned by GetConfiguration when there is new or updated data,
+	// and should be saved for subsequent calls to GetConfiguration.
 	//
 	// For more information about working with configurations, see [Retrieving the Configuration] in the AppConfig
 	// User Guide.

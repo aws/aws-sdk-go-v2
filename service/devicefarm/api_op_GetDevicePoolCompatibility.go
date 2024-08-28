@@ -50,9 +50,6 @@ type GetDevicePoolCompatibilityInput struct {
 	//
 	//   - BUILTIN_FUZZ.
 	//
-	//   - BUILTIN_EXPLORER. For Android, an app explorer that traverses an Android
-	//   app, interacting with it and capturing screenshots at the same time.
-	//
 	//   - APPIUM_JAVA_JUNIT.
 	//
 	//   - APPIUM_JAVA_TESTNG.
@@ -73,13 +70,7 @@ type GetDevicePoolCompatibilityInput struct {
 	//
 	//   - APPIUM_WEB_RUBY.
 	//
-	//   - CALABASH.
-	//
 	//   - INSTRUMENTATION.
-	//
-	//   - UIAUTOMATION.
-	//
-	//   - UIAUTOMATOR.
 	//
 	//   - XCTEST.
 	//

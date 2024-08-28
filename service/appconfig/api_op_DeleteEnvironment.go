@@ -6,12 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an environment. Deleting an environment does not delete a configuration
-// from a host.
+// Deletes an environment.
+//
+// To prevent users from unintentionally deleting actively-used environments,
+// enable [deletion protection].
+//
+// [deletion protection]: https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentInput{}
@@ -38,6 +43,28 @@ type DeleteEnvironmentInput struct {
 	//
 	// This member is required.
 	EnvironmentId *string
+
+	// A parameter to configure deletion protection. If enabled, deletion protection
+	// prevents a user from deleting an environment if your application called either [GetLatestConfiguration]
+	// or in the environment during the specified interval.
+	//
+	// This parameter supports the following values:
+	//
+	//   - BYPASS : Instructs AppConfig to bypass the deletion protection check and
+	//   delete a configuration profile even if deletion protection would have otherwise
+	//   prevented it.
+	//
+	//   - APPLY : Instructs the deletion protection check to run, even if deletion
+	//   protection is disabled at the account level. APPLY also forces the deletion
+	//   protection check to run against resources created in the past hour, which are
+	//   normally excluded from deletion protection checks.
+	//
+	//   - ACCOUNT_DEFAULT : The default setting, which instructs AppConfig to
+	//   implement the deletion protection value specified in the UpdateAccountSettings
+	//   API.
+	//
+	// [GetLatestConfiguration]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+	DeletionProtectionCheck types.DeletionProtectionCheck
 
 	noSmithyDocumentSerde
 }

@@ -1748,6 +1748,10 @@ type WorkspaceRequest struct {
 	VolumeEncryptionKey *string
 
 	// The name of the user-decoupled WorkSpace.
+	//
+	// WorkspaceName is required if UserName is [UNDEFINED] for user-decoupled
+	// WorkSpaces. WorkspaceName is not applicable if UserName is specified for
+	// user-assigned WorkSpaces.
 	WorkspaceName *string
 
 	// The WorkSpace properties.

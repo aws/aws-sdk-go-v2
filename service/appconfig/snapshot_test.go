@@ -230,6 +230,18 @@ func TestCheckSnapshot_DeleteHostedConfigurationVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
@@ -494,6 +506,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateApplication(context.Background(), nil, func(o *Options) {
@@ -738,6 +762,18 @@ func TestUpdateSnapshot_DeleteHostedConfigurationVersion(t *testing.T) {
 	_, err := svc.DeleteHostedConfigurationVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteHostedConfigurationVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1002,6 +1038,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAccountSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

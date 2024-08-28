@@ -13,8 +13,8 @@ import (
 
 // Starts the specified WorkSpaces.
 //
-// You cannot start a WorkSpace unless it has a running mode of AutoStop and a
-// state of STOPPED .
+// You cannot start a WorkSpace unless it has a running mode of AutoStop or Manual
+// and a state of STOPPED .
 func (c *Client) StartWorkspaces(ctx context.Context, params *StartWorkspacesInput, optFns ...func(*Options)) (*StartWorkspacesOutput, error) {
 	if params == nil {
 		params = &StartWorkspacesInput{}

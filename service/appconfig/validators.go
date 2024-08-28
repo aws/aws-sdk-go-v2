@@ -1211,11 +1211,11 @@ func validateOpDeleteEnvironmentInput(v *DeleteEnvironmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentInput"}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
-	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "fa4b8774-cfbe-4f88-9533-9f0e3b06886c",
+    "type": "feature",
+    "description": "Update regex to include dot character to be consistent with IAM role creation in the authorized principal field for create and update subscription target.",
+    "modules": [
+        "service/datazone"
+    ]
+}

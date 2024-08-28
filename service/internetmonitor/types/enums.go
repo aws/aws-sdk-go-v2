@@ -219,9 +219,11 @@ type QueryType string
 
 // Enum values for QueryType
 const (
-	QueryTypeMeasurements       QueryType = "MEASUREMENTS"
-	QueryTypeTopLocations       QueryType = "TOP_LOCATIONS"
-	QueryTypeTopLocationDetails QueryType = "TOP_LOCATION_DETAILS"
+	QueryTypeMeasurements                     QueryType = "MEASUREMENTS"
+	QueryTypeTopLocations                     QueryType = "TOP_LOCATIONS"
+	QueryTypeTopLocationDetails               QueryType = "TOP_LOCATION_DETAILS"
+	QueryTypeOverallTrafficSuggestions        QueryType = "OVERALL_TRAFFIC_SUGGESTIONS"
+	QueryTypeOverallTrafficSuggestionsDetails QueryType = "OVERALL_TRAFFIC_SUGGESTIONS_DETAILS"
 )
 
 // Values returns all known values for QueryType. Note that this can be expanded
@@ -233,6 +235,8 @@ func (QueryType) Values() []QueryType {
 		"MEASUREMENTS",
 		"TOP_LOCATIONS",
 		"TOP_LOCATION_DETAILS",
+		"OVERALL_TRAFFIC_SUGGESTIONS",
+		"OVERALL_TRAFFIC_SUGGESTIONS_DETAILS",
 	}
 }
 

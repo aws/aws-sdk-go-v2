@@ -162,6 +162,38 @@ type ConfigurationProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A parameter to configure deletion protection. If enabled, deletion protection
+// prevents a user from deleting a configuration profile or an environment if
+// AppConfig has called either [GetLatestConfiguration]or for the configuration profile or from the
+// environment during the specified interval.
+//
+// This setting uses the following default values:
+//
+//   - Deletion protection is disabled by default.
+//
+//   - The default interval specified by ProtectionPeriodInMinutes is 60.
+//
+//   - DeletionProtectionCheck skips configuration profiles and environments that
+//     were created in the past hour.
+//
+// [GetLatestConfiguration]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+type DeletionProtectionSettings struct {
+
+	// A parameter that indicates if deletion protection is enabled or not.
+	Enabled *bool
+
+	// The time interval during which AppConfig monitors for calls to [GetLatestConfiguration] or for a
+	// configuration profile or from an environment. AppConfig returns an error if a
+	// user calls or for the designated configuration profile or environment. To bypass
+	// the error and delete a configuration profile or an environment, specify BYPASS
+	// for the DeletionProtectionCheck parameter for either or .
+	//
+	// [GetLatestConfiguration]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+	ProtectionPeriodInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // An object that describes a deployment event.
 type DeploymentEvent struct {
 
@@ -433,7 +465,10 @@ type Parameter struct {
 // that you want to deploy functions as intended. To validate your application
 // configuration data, you provide a schema or an Amazon Web Services Lambda
 // function that runs against the configuration. The configuration deployment or
-// update can only proceed when the configuration data is valid.
+// update can only proceed when the configuration data is valid. For more
+// information, see [About validators]in the AppConfig User Guide.
+//
+// [About validators]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-profile.html#appconfig-creating-configuration-and-profile-validators
 type Validator struct {
 
 	// Either the JSON Schema content or the Amazon Resource Name (ARN) of an Lambda

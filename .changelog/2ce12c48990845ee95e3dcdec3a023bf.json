@@ -1,0 +1,8 @@
+{
+    "id": "2ce12c48-9908-45ee-95e3-dcdec3a023bf",
+    "type": "feature",
+    "description": "Adds new querying types to show overall traffic suggestion information for monitors",
+    "modules": [
+        "service/internetmonitor"
+    ]
+}

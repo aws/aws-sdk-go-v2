@@ -76,13 +76,7 @@ type CreateUploadInput struct {
 	//
 	//   - APPIUM_WEB_RUBY_TEST_PACKAGE
 	//
-	//   - CALABASH_TEST_PACKAGE
-	//
 	//   - INSTRUMENTATION_TEST_PACKAGE
-	//
-	//   - UIAUTOMATION_TEST_PACKAGE
-	//
-	//   - UIAUTOMATOR_TEST_PACKAGE
 	//
 	//   - XCTEST_TEST_PACKAGE
 	//
