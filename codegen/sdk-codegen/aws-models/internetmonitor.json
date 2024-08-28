@@ -2984,6 +2984,14 @@
                     {
                         "name": "TOP_LOCATION_DETAILS",
                         "value": "TOP_LOCATION_DETAILS"
+                    },
+                    {
+                        "name": "OVERALL_TRAFFIC_SUGGESTIONS",
+                        "value": "OVERALL_TRAFFIC_SUGGESTIONS"
+                    },
+                    {
+                        "name": "OVERALL_TRAFFIC_SUGGESTIONS_DETAILS",
+                        "value": "OVERALL_TRAFFIC_SUGGESTIONS_DETAILS"
                     }
                 ]
             }
@@ -3136,7 +3144,7 @@
                 "QueryType": {
                     "target": "com.amazonaws.internetmonitor#QueryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MEASUREMENTS</code>: Provides availability score, performance score, total traffic, \n\t\t\t\tand round-trip times, at 5 minute intervals.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATIONS</code>: Provides availability score, performance score, total traffic, \n\t\t\t\tand time to first byte (TTFB) information, for the top location and ASN combinations that you're monitoring, by traffic volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATION_DETAILS</code>: Provides TTFB for Amazon CloudFront, your \n\t\t\t\tcurrent configuration, and the best performing EC2 configuration, at 1 hour intervals.</p>\n            </li>\n         </ul>\n         <p>For lists of the fields returned with each query type and more information about how each type of query is\n\t\t\tperformed, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">\n\t\t\t\tUsing the Amazon CloudWatch Internet Monitor query interface</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
+                        "smithy.api#documentation": "<p>The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MEASUREMENTS</code>: Provides availability score, performance score, total traffic, \n\t\t\t\tand round-trip times, at 5 minute intervals.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATIONS</code>: Provides availability score, performance score, total traffic, \n\t\t\t\tand time to first byte (TTFB) information, for the top location and ASN combinations that you're monitoring, by traffic volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TOP_LOCATION_DETAILS</code>: Provides TTFB for Amazon CloudFront, your \n\t\t\t\tcurrent configuration, and the best performing EC2 configuration, at 1 hour intervals.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OVERALL_TRAFFIC_SUGGESTIONS</code>: Provides TTFB, using a 30-day weighted average, for all traffic in \n\t\t\t\teach Amazon Web Services location that is monitored.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OVERALL_TRAFFIC_SUGGESTIONS_DETAILS</code>: Provides TTFB, using a 30-day weighted average, for each top \n\t\t\t\tlocation, for a proposed Amazon Web Services location. Must provide a Amazon Web Services location to search.</p>\n            </li>\n         </ul>\n         <p>For lists of the fields returned with each query type and more information about how each type of query is\n\t\t\tperformed, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">\n\t\t\t\tUsing the Amazon CloudWatch Internet Monitor query interface</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 },

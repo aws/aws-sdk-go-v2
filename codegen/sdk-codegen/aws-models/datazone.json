@@ -1283,7 +1283,7 @@
         "com.amazonaws.datazone#AuthorizedPrincipalIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9:/_-]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9:/._-]*$"
             }
         },
         "com.amazonaws.datazone#AuthorizedPrincipalIdentifiers": {
@@ -7692,7 +7692,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an data product in Amazon DataZone.</p>",
+                "smithy.api#documentation": "<p>Deletes a data product in Amazon DataZone.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "DELETE",

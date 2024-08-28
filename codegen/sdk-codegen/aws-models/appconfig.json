@@ -29,6 +29,17 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.appconfig#AccountSettings": {
+            "type": "structure",
+            "members": {
+                "DeletionProtection": {
+                    "target": "com.amazonaws.appconfig#DeletionProtectionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A parameter to configure deletion protection. If enabled, deletion protection prevents a\n         user from deleting a configuration profile or an environment if AppConfig has\n         called either <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> or  for the\n         configuration profile or from the environment during the specified interval. Deletion\n         protection is disabled by default. The default interval for\n            <code>ProtectionPeriodInMinutes</code> is 60.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.appconfig#Action": {
             "type": "structure",
             "members": {
@@ -238,6 +249,9 @@
                     "target": "com.amazonaws.appconfig#DeleteHostedConfigurationVersion"
                 },
                 {
+                    "target": "com.amazonaws.appconfig#GetAccountSettings"
+                },
+                {
                     "target": "com.amazonaws.appconfig#GetApplication"
                 },
                 {
@@ -302,6 +316,9 @@
                 },
                 {
                     "target": "com.amazonaws.appconfig#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.appconfig#UpdateAccountSettings"
                 },
                 {
                     "target": "com.amazonaws.appconfig#UpdateApplication"
@@ -1424,7 +1441,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:[a-zA-Z0-9-_/:.]+$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:[a-zA-Z0-9-_/:.]+$"
             }
         },
         "com.amazonaws.appconfig#BadRequestDetails": {
@@ -2235,7 +2252,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new configuration in the AppConfig hosted configuration\n         store.</p>",
+                "smithy.api#documentation": "<p>Creates a new configuration in the AppConfig hosted configuration store. If\n         you're creating a feature flag, we recommend you familiarize yourself with the JSON schema\n         for feature flag data. For more information, see <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags\">Type reference for AWS.AppConfig.FeatureFlags</a> in the\n            <i>AppConfig User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a hosted configuration version",
@@ -2291,7 +2308,7 @@
                 "Content": {
                     "target": "com.amazonaws.appconfig#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the configuration or the configuration data.</p>",
+                        "smithy.api#documentation": "<p>The configuration data, as bytes.</p>\n         <note>\n            <p>AppConfig accepts any type of data, including text formats like JSON or\n            TOML, or binary formats like protocol buffers or compressed data.</p>\n         </note>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -2344,7 +2361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an application. Deleting an application does not delete a configuration from a\n         host.</p>",
+                "smithy.api#documentation": "<p>Deletes an application.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an application",
@@ -2400,7 +2417,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a configuration profile. Deleting a configuration profile does not delete a\n         configuration from a host.</p>",
+                "smithy.api#documentation": "<p>Deletes a configuration profile.</p>\n         <p>To prevent users from unintentionally deleting actively-used configuration profiles,\n         enable <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html\">deletion\n         protection</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a configuration profile",
@@ -2436,6 +2453,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "DeletionProtectionCheck": {
+                    "target": "com.amazonaws.appconfig#DeletionProtectionCheck",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A parameter to configure deletion protection. If enabled, deletion protection prevents a\n         user from deleting a configuration profile if your application has called either <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> or  for the\n         configuration profile during the specified interval. </p>\n         <p>This parameter supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BYPASS</code>: Instructs AppConfig to bypass the deletion\n               protection check and delete a configuration profile even if deletion protection would\n               have otherwise prevented it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>APPLY</code>: Instructs the deletion protection check to run, even if\n               deletion protection is disabled at the account level. <code>APPLY</code> also forces\n               the deletion protection check to run against resources created in the past hour,\n               which are normally excluded from deletion protection checks. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT_DEFAULT</code>: The default setting, which instructs AppConfig to implement the deletion protection value specified in the\n                  <code>UpdateAccountSettings</code> API.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "x-amzn-deletion-protection-check"
+                    }
                 }
             },
             "traits": {
@@ -2462,7 +2486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a deployment strategy. Deleting a deployment strategy does not delete a\n         configuration from a host.</p>",
+                "smithy.api#documentation": "<p>Deletes a deployment strategy.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a deployment strategy",
@@ -2518,7 +2542,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an environment. Deleting an environment does not delete a configuration from a\n         host.</p>",
+                "smithy.api#documentation": "<p>Deletes an environment.</p>\n         <p>To prevent users from unintentionally deleting actively-used environments, enable <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html\">deletion\n            protection</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an environment",
@@ -2539,6 +2563,14 @@
         "com.amazonaws.appconfig#DeleteEnvironmentRequest": {
             "type": "structure",
             "members": {
+                "EnvironmentId": {
+                    "target": "com.amazonaws.appconfig#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
                 "ApplicationId": {
                     "target": "com.amazonaws.appconfig#Id",
                     "traits": {
@@ -2547,12 +2579,11 @@
                         "smithy.api#required": {}
                     }
                 },
-                "EnvironmentId": {
-                    "target": "com.amazonaws.appconfig#Id",
+                "DeletionProtectionCheck": {
+                    "target": "com.amazonaws.appconfig#DeletionProtectionCheck",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment that you want to delete.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A parameter to configure deletion protection. If enabled, deletion protection prevents a\n         user from deleting an environment if your application called either <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> or  in the\n         environment during the specified interval. </p>\n         <p>This parameter supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BYPASS</code>: Instructs AppConfig to bypass the deletion\n               protection check and delete a configuration profile even if deletion protection would\n               have otherwise prevented it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>APPLY</code>: Instructs the deletion protection check to run, even if\n               deletion protection is disabled at the account level. <code>APPLY</code> also forces\n               the deletion protection check to run against resources created in the past hour,\n               which are normally excluded from deletion protection checks. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT_DEFAULT</code>: The default setting, which instructs AppConfig to implement the deletion protection value specified in the\n                  <code>UpdateAccountSettings</code> API.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "x-amzn-deletion-protection-check"
                     }
                 }
             },
@@ -2726,6 +2757,59 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appconfig#DeletionProtectionCheck": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_DEFAULT"
+                    }
+                },
+                "APPLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLY"
+                    }
+                },
+                "BYPASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYPASS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appconfig#DeletionProtectionDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 15,
+                    "max": 1440
+                }
+            }
+        },
+        "com.amazonaws.appconfig#DeletionProtectionSettings": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.appconfig#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A parameter that indicates if deletion protection is enabled or not.</p>"
+                    }
+                },
+                "ProtectionPeriodInMinutes": {
+                    "target": "com.amazonaws.appconfig#DeletionProtectionDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval during which AppConfig monitors for calls to <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> or  for a\n         configuration profile or from an environment. AppConfig returns an error if a\n         user calls  or  for the designated configuration profile or\n         environment. To bypass the error and delete a configuration profile or an environment,\n         specify <code>BYPASS</code> for the <code>DeletionProtectionCheck</code> parameter for\n         either  or .</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A parameter to configure deletion protection. If enabled, deletion protection prevents a\n         user from deleting a configuration profile or an environment if AppConfig has\n         called either <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> or  for the\n         configuration profile or from the environment during the specified interval.</p>\n         <p>This setting uses the following default values:</p>\n         <ul>\n            <li>\n               <p>Deletion protection is disabled by default. </p>\n            </li>\n            <li>\n               <p>The default interval specified by <code>ProtectionPeriodInMinutes</code> is\n               60.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletionProtectionCheck</code> skips configuration profiles and environments\n               that were created in the past hour.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.appconfig#Deployment": {
@@ -3520,6 +3604,31 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.appconfig#GetAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.appconfig#AccountSettings"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appconfig#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appconfig#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the status of the <code>DeletionProtection</code>\n         parameter.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/settings",
+                    "code": 200
+                }
+            }
+        },
         "com.amazonaws.appconfig#GetApplication": {
             "type": "operation",
             "input": {
@@ -3600,7 +3709,7 @@
                 "smithy.api#deprecated": {
                     "message": "This API has been deprecated in favor of the GetLatestConfiguration API used in conjunction with StartConfigurationSession."
                 },
-                "smithy.api#documentation": "<p>(Deprecated) Retrieves the latest deployed configuration.</p>\n         <important>\n            <p>Note the following important information.</p>\n            <ul>\n               <li>\n                  <p>This API action is deprecated. Calls to receive configuration data should use\n                  the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs instead. </p>\n               </li>\n               <li>\n                  <p>\n                     <code>GetConfiguration</code> is a priced call. For more information, see\n                     <a href=\"https://aws.amazon.com/systems-manager/pricing/\">Pricing</a>.</p>\n               </li>\n            </ul>\n         </important>",
+                "smithy.api#documentation": "<p>(Deprecated) Retrieves the latest deployed configuration.</p>\n         <important>\n            <p>Note the following important information.</p>\n            <ul>\n               <li>\n                  <p>This API action is deprecated. Calls to receive configuration data should use\n                  the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs instead. </p>\n               </li>\n               <li>\n                  <p>\n                     <a>GetConfiguration</a> is a priced call. For more information, see\n                     <a href=\"https://aws.amazon.com/systems-manager/pricing/\">Pricing</a>.</p>\n               </li>\n            </ul>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "To retrieve configuration details",
@@ -3731,7 +3840,7 @@
                 "ClientConfigurationVersion": {
                     "target": "com.amazonaws.appconfig#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration version returned in the most recent <code>GetConfiguration</code>\n         response.</p>\n         <important>\n            <p>AppConfig uses the value of the <code>ClientConfigurationVersion</code>\n            parameter to identify the configuration version on your clients. If you don’t send\n               <code>ClientConfigurationVersion</code> with each call to\n               <code>GetConfiguration</code>, your clients receive the current configuration. You\n            are charged each time your clients receive a configuration.</p>\n            <p>To avoid excess charges, we recommend you use the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs, which track the client configuration version on\n            your behalf. If you choose to continue using <code>GetConfiguration</code>, we recommend\n            that you include the <code>ClientConfigurationVersion</code> value with every call to\n               <code>GetConfiguration</code>. The value to use for\n               <code>ClientConfigurationVersion</code> comes from the\n               <code>ConfigurationVersion</code> attribute returned by <code>GetConfiguration</code>\n            when there is new or updated data, and should be saved for subsequent calls to\n               <code>GetConfiguration</code>.</p>\n         </important>\n         <p>For more information about working with configurations, see <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html\">Retrieving the\n            Configuration</a> in the <i>AppConfig User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The configuration version returned in the most recent <a>GetConfiguration</a>\n         response.</p>\n         <important>\n            <p>AppConfig uses the value of the <code>ClientConfigurationVersion</code>\n            parameter to identify the configuration version on your clients. If you don’t send\n               <code>ClientConfigurationVersion</code> with each call to <a>GetConfiguration</a>, your clients receive the current configuration. You are\n            charged each time your clients receive a configuration.</p>\n            <p>To avoid excess charges, we recommend you use the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs, which track the client configuration version on\n            your behalf. If you choose to continue using <a>GetConfiguration</a>, we\n            recommend that you include the <code>ClientConfigurationVersion</code> value with every\n            call to <a>GetConfiguration</a>. The value to use for\n               <code>ClientConfigurationVersion</code> comes from the\n               <code>ConfigurationVersion</code> attribute returned by <a>GetConfiguration</a> when there is new or updated data, and should be saved\n            for subsequent calls to <a>GetConfiguration</a>.</p>\n         </important>\n         <p>For more information about working with configurations, see <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html\">Retrieving the\n            Configuration</a> in the <i>AppConfig User Guide</i>.</p>",
                         "smithy.api#httpQuery": "client_configuration_version"
                     }
                 }
@@ -5720,6 +5829,45 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.appconfig#UpdateAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appconfig#UpdateAccountSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appconfig#AccountSettings"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appconfig#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appconfig#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the value of the <code>DeletionProtection</code> parameter.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appconfig#UpdateAccountSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DeletionProtection": {
+                    "target": "com.amazonaws.appconfig#DeletionProtectionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A parameter to configure deletion protection. If enabled, deletion protection prevents a\n         user from deleting a configuration profile or an environment if AppConfig has\n         called either <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html\">GetLatestConfiguration</a> or  for the\n         configuration profile or from the environment during the specified interval. Deletion\n         protection is disabled by default. The default interval for\n            <code>ProtectionPeriodInMinutes</code> is 60.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.appconfig#UpdateApplication": {
             "type": "operation",
             "input": {
@@ -5859,7 +6007,7 @@
                     }
                 },
                 "Name": {
-                    "target": "com.amazonaws.appconfig#Name",
+                    "target": "com.amazonaws.appconfig#LongName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the configuration profile.</p>"
                     }
@@ -6297,7 +6445,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A validator provides a syntactic or semantic check to ensure the configuration that you\n         want to deploy functions as intended. To validate your application configuration data, you\n         provide a schema or an Amazon Web Services Lambda function that runs against the configuration. The\n         configuration deployment or update can only proceed when the configuration data is\n         valid.</p>"
+                "smithy.api#documentation": "<p>A validator provides a syntactic or semantic check to ensure the configuration that you\n         want to deploy functions as intended. To validate your application configuration data, you\n         provide a schema or an Amazon Web Services Lambda function that runs against the configuration. The\n         configuration deployment or update can only proceed when the configuration data is valid.\n         For more information, see <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-profile.html#appconfig-creating-configuration-and-profile-validators\">About validators</a> in the <i>AppConfig User Guide</i>.</p>"
             }
         },
         "com.amazonaws.appconfig#ValidatorList": {
