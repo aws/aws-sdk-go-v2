@@ -1,0 +1,8 @@
+{
+    "id": "f80f1344-92ef-4724-93f6-e5090b404bc2",
+    "type": "feature",
+    "description": "Add presignPost for s3 PutObject",
+    "modules": [
+        "service/s3"
+    ]
+}
