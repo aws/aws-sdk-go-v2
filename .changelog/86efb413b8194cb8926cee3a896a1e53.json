@@ -1,8 +1,0 @@
-{
-    "id": "86efb413-b819-4cb8-926c-ee3a896a1e53",
-    "type": "feature",
-    "description": "Add support for imported-model in invokeModel and InvokeModelWithResponseStream.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

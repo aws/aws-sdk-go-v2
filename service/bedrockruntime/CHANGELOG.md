@@ -1,3 +1,7 @@
+# v1.16.0 (2024-08-29)
+
+* **Feature**: Add support for imported-model in invokeModel and InvokeModelWithResponseStream.
+
 # v1.15.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

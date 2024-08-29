@@ -1,3 +1,7 @@
+# v1.71.0 (2024-08-29)
+
+* **Feature**: Increased Character Limit for Dataset Calculation Field expressions
+
 # v1.70.0 (2024-08-22)
 
 * **Feature**: Explicit query for authors and dashboard viewing sharing for embedded users

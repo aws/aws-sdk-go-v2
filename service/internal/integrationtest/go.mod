@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.6
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/ses v1.26.0
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.30.2
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/shield v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/sns v1.31.5
@@ -81,7 +81,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/waf v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.23.4
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.51.5
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.46.1
 	github.com/aws/smithy-go v1.20.4
 )

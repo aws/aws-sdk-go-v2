@@ -1,3 +1,7 @@
+# v1.52.0 (2024-08-29)
+
+* **Feature**: The minimum request rate for a rate-based rule is now 10. Before this, it was 100.
+
 # v1.51.5 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

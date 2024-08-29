@@ -1,3 +1,19 @@
+# Release (2024-08-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.18.0](service/bedrockagentruntime/CHANGELOG.md#v1180-2024-08-29)
+  * **Feature**: Lifting the maximum length on Bedrock KnowledgeBase RetrievalFilter array
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.16.0](service/bedrockruntime/CHANGELOG.md#v1160-2024-08-29)
+  * **Feature**: Add support for imported-model in invokeModel and InvokeModelWithResponseStream.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.37.0](service/personalize/CHANGELOG.md#v1370-2024-08-29)
+  * **Feature**: This releases ability to update automatic training scheduler for customer solutions
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.71.0](service/quicksight/CHANGELOG.md#v1710-2024-08-29)
+  * **Feature**: Increased Character Limit for Dataset Calculation Field expressions
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.31.0](service/sfn/CHANGELOG.md#v1310-2024-08-29)
+  * **Feature**: This release adds support for static analysis to ValidateStateMachineDefinition API, which can now return optional WARNING diagnostics for semantic errors on the definition of an Amazon States Language (ASL) state machine.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.52.0](service/wafv2/CHANGELOG.md#v1520-2024-08-29)
+  * **Feature**: The minimum request rate for a rate-based rule is now 10. Before this, it was 100.
+
 # Release (2024-08-28)
 
 ## General Highlights

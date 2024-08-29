@@ -1,3 +1,7 @@
+# v1.37.0 (2024-08-29)
+
+* **Feature**: This releases ability to update automatic training scheduler for customer solutions
+
 # v1.36.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.
