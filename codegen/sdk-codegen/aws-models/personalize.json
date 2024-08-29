@@ -340,6 +340,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#UpdateRecommender"
+                },
+                {
+                    "target": "com.amazonaws.personalize#UpdateSolution"
                 }
             ],
             "traits": {
@@ -3118,7 +3121,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>After you create a solution, you can’t change its configuration. By default, all new solutions use automatic training. With automatic training, you incur training costs while\n           your solution is active. You can't stop automatic training for a solution. To avoid unnecessary costs, make sure to delete the solution when you are finished. For information about training\n  costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         </important>\n         <p>Creates the configuration for training a model (creating a solution version). This configuration\n      includes the recipe to use for model training and optional training configuration, such as columns to use\n      in training and feature transformation parameters. For more information about configuring a solution, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html\">Creating and configuring a solution</a>.\n    </p>\n         <p>\n      By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency.\n      Automatic solution version creation starts one hour after the solution is ACTIVE. If you manually create a solution version within\n      the hour, the solution skips the first automatic training. For more information,\n        see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html\">Configuring automatic training</a>.</p>\n         <p>\n      To turn off automatic training, set <code>performAutoTraining</code> to false. If you turn off automatic training, you must manually create a solution version\n      by calling the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a> operation.</p>\n         <p>After training starts, you can\n        get the solution version's Amazon Resource Name (ARN) with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a> API operation. \n        To get its status, use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>.\n      </p>\n         <p>After training completes you can evaluate model accuracy by calling\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html\">GetSolutionMetrics</a>. When you are satisfied with the solution version, you\n      deploy it using <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>. The campaign provides recommendations\n      to a client through the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        for solution hyperparameter optimization at this time.</p>\n         </note>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the solution, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>. If you use\n      manual training, the status must be ACTIVE before you call <code>CreateSolutionVersion</code>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html\">ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html\">DeleteSolution</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<important>\n            <p>By default, all new solutions use automatic training. With automatic training, you incur training costs while\n           your solution is active. To avoid unnecessary costs, when you are finished you can \n           <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html\">update the solution</a> to turn off automatic training. \n           For information about training\n  costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         </important>\n         <p>Creates the configuration for training a model (creating a solution version). This configuration\n      includes the recipe to use for model training and optional training configuration, such as columns to use\n      in training and feature transformation parameters. For more information about configuring a solution, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html\">Creating and configuring a solution</a>.\n    </p>\n         <p>\n      By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency.\n      Automatic solution version creation starts within one hour after the solution is ACTIVE. If you manually create a solution version within\n      the hour, the solution skips the first automatic training. For more information,\n        see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html\">Configuring automatic training</a>.</p>\n         <p>\n      To turn off automatic training, set <code>performAutoTraining</code> to false. If you turn off automatic training, you must manually create a solution version\n      by calling the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a> operation.</p>\n         <p>After training starts, you can\n        get the solution version's Amazon Resource Name (ARN) with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a> API operation. \n        To get its status, use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>.\n      </p>\n         <p>After training completes you can evaluate model accuracy by calling\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html\">GetSolutionMetrics</a>. When you are satisfied with the solution version, you\n      deploy it using <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>. The campaign provides recommendations\n      to a client through the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        for solution hyperparameter optimization at this time.</p>\n         </note>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the solution, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>. If you use\n      manual training, the status must be ACTIVE before you call <code>CreateSolutionVersion</code>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html\">UpdateSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html\">ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html\">DeleteSolution</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateSolutionRequest": {
@@ -3147,7 +3150,7 @@
                 "performAutoTraining": {
                     "target": "com.amazonaws.personalize#PerformAutoTraining",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the solution uses automatic training to create new solution versions (trained models). The default is\n        <code>True</code> and the solution automatically creates new solution versions every 7 days. You can change the training\n      frequency by specifying a <code>schedulingExpression</code> in the <code>AutoTrainingConfig</code> as part of solution\n      configuration. For more information about automatic training,\n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html\">Configuring automatic training</a>.</p>\n         <p>\n      Automatic solution version creation starts one hour after the solution is ACTIVE. If you manually create a solution version within\n      the hour, the solution skips the first automatic training.\n    </p>\n         <p>\n      After training starts, you can\n      get the solution version's Amazon Resource Name (ARN) with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a> API operation. \n      To get its status, use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>.\n    </p>"
+                        "smithy.api#documentation": "<p>Whether the solution uses automatic training to create new solution versions (trained models). The default is\n        <code>True</code> and the solution automatically creates new solution versions every 7 days. You can change the training\n      frequency by specifying a <code>schedulingExpression</code> in the <code>AutoTrainingConfig</code> as part of solution\n      configuration. For more information about automatic training,\n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html\">Configuring automatic training</a>.</p>\n         <p>\n      Automatic solution version creation starts within one hour after the solution is ACTIVE. If you manually create a solution version within\n      the hour, the solution skips the first automatic training.\n    </p>\n         <p>\n      After training starts, you can\n      get the solution version's Amazon Resource Name (ARN) with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a> API operation. \n      To get its status, use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>.\n    </p>"
                     }
                 },
                 "recipeArn": {
@@ -3172,7 +3175,7 @@
                 "solutionConfig": {
                     "target": "com.amazonaws.personalize#SolutionConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration to use with the solution. When <code>performAutoML</code> is set to\n      true, Amazon Personalize only evaluates the <code>autoMLConfig</code> section\n      of the solution configuration.</p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        at this time.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The configuration properties for the solution. When <code>performAutoML</code> is set to\n      true, Amazon Personalize only evaluates the <code>autoMLConfig</code> section\n      of the solution configuration.</p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        at this time.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -8168,7 +8171,7 @@
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the recommender update.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the recommender update. A recommender update can be in one of the following states:</p>\n         <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>"
                     }
                 },
                 "failureReason": {
@@ -8399,10 +8402,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the latest version of the solution, including the status and the ARN.</p>"
                     }
+                },
+                "latestSolutionUpdate": {
+                    "target": "com.amazonaws.personalize#SolutionUpdateSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a summary of the latest updates to the solution.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>After you create a solution, you can’t change its configuration. By default, all new solutions use automatic training. With automatic training, you incur training costs while\n           your solution is active. You can't stop automatic training for a solution. To avoid unnecessary costs, make sure to delete the solution when you are finished. For information about training\n  costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         </important>\n         <p>An object that provides information about a solution. A solution includes the custom recipe, customized parameters, and\n      trained models (Solution Versions) that Amazon Personalize uses to generate recommendations. </p>\n         <p>After you create a solution, you can’t change its configuration. If you need to make changes, you can <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html\">clone the solution</a> with the Amazon Personalize console\n      or create a new one.</p>"
+                "smithy.api#documentation": "<important>\n            <p>By default, all new solutions use automatic training. With automatic training, you incur training costs while\n           your solution is active. To avoid unnecessary costs, when you are finished you can \n           <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html\">update the solution</a> to turn off automatic training. \n           For information about training\n  costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         </important>\n         <p>An object that provides information about a solution. A solution includes the custom recipe, customized parameters, and\n      trained models (Solution Versions) that Amazon Personalize uses to generate recommendations. </p>\n         <p>After you create a solution, you can’t change its configuration. If you need to make changes, you can <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html\">clone the solution</a> with the Amazon Personalize console\n      or create a new one.</p>"
             }
         },
         "com.amazonaws.personalize#SolutionConfig": {
@@ -8503,6 +8512,61 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides a summary of the properties of a solution. For a complete listing, call the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a> API.</p>"
+            }
+        },
+        "com.amazonaws.personalize#SolutionUpdateConfig": {
+            "type": "structure",
+            "members": {
+                "autoTrainingConfig": {
+                    "target": "com.amazonaws.personalize#AutoTrainingConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details of the solution update.</p>"
+            }
+        },
+        "com.amazonaws.personalize#SolutionUpdateSummary": {
+            "type": "structure",
+            "members": {
+                "solutionUpdateConfig": {
+                    "target": "com.amazonaws.personalize#SolutionUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the solution.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the solution update. A solution update can be in one of the following states:</p>\n         <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>"
+                    }
+                },
+                "performAutoTraining": {
+                    "target": "com.amazonaws.personalize#PerformAutoTraining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the solution automatically creates solution versions.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix format) that the solution update was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix time) that the solution update was last updated.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a solution update fails, the reason behind the failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the properties of a solution update. For a complete listing, call the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a> API.</p>"
             }
         },
         "com.amazonaws.personalize#SolutionVersion": {
@@ -9429,6 +9493,73 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The same recommender Amazon Resource Name (ARN) as given in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.personalize#UpdateSolution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#UpdateSolutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#UpdateSolutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an Amazon Personalize solution to use a different automatic training configuration. When you update a solution, \n      you can change whether the solution uses\n      automatic training, and you can change the training frequency. For more information about updating a solution, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/updating-solution.html\">Updating a solution</a>.</p>\n         <p>A solution update can be in one of the\n      following states:</p>\n         <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n         <p>To get the status of a solution update, call the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a> API operation and find the status\n      in the <code>latestSolutionUpdate</code>. </p>"
+            }
+        },
+        "com.amazonaws.personalize#UpdateSolutionRequest": {
+            "type": "structure",
+            "members": {
+                "solutionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "performAutoTraining": {
+                    "target": "com.amazonaws.personalize#PerformAutoTraining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the solution uses automatic training to create new solution versions (trained models). You can change the training\n      frequency by specifying a <code>schedulingExpression</code> in the <code>AutoTrainingConfig</code> as part of solution\n      configuration. </p>\n         <p>\n      If you turn on automatic training, the first automatic training starts within one hour after the solution update\n      completes. If you manually create a solution version within the hour, the solution skips the first automatic training. \n      For more information about automatic training,\n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html\">Configuring automatic training</a>.\n    </p>\n         <p>\n      After training starts, you can\n      get the solution version's Amazon Resource Name (ARN) with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a> API operation. \n      To get its status, use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>.\n    </p>"
+                    }
+                },
+                "solutionUpdateConfig": {
+                    "target": "com.amazonaws.personalize#SolutionUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new configuration details of the solution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#UpdateSolutionResponse": {
+            "type": "structure",
+            "members": {
+                "solutionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The same solution Amazon Resource Name (ARN) as given in the request.</p>"
                     }
                 }
             },

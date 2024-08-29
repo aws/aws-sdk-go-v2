@@ -9758,7 +9758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches an IAM policy to the specified resource. Use this to share a rule group across\n         accounts.</p>\n         <p>You must be the owner of the rule group to perform this operation.</p>\n         <p>This action is subject to the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can attach only one policy with each <code>PutPermissionPolicy</code>\n               request.</p>\n            </li>\n            <li>\n               <p>The ARN in the request must be a valid WAF <a>RuleGroup</a> ARN and the\n               rule group must exist in the same Region.</p>\n            </li>\n            <li>\n               <p>The user making the request must be the owner of the rule group.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this to share a rule group with other accounts.</p>\n         <p>This action attaches an IAM policy to the specified resource. You must be the owner of the rule group to perform this operation.</p>\n         <p>This action is subject to the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can attach only one policy with each <code>PutPermissionPolicy</code>\n               request.</p>\n            </li>\n            <li>\n               <p>The ARN in the request must be a valid WAF <a>RuleGroup</a> ARN and the\n               rule group must exist in the same Region.</p>\n            </li>\n            <li>\n               <p>The user making the request must be the owner of the rule group.</p>\n            </li>\n         </ul>\n         <p>If a rule group has been shared with your account, you can access it through the call <code>GetRuleGroup</code>, \n          and you can reference it in <code>CreateWebACL</code> and <code>UpdateWebACL</code>. \n          Rule groups that are shared with you don't appear in your WAF console rule groups listing.  </p>"
             }
         },
         "com.amazonaws.wafv2#PutPermissionPolicyRequest": {
@@ -9971,7 +9971,7 @@
             "type": "long",
             "traits": {
                 "smithy.api#range": {
-                    "min": 100,
+                    "min": 10,
                     "max": 2000000000
                 }
             }

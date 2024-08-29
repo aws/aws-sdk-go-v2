@@ -5065,7 +5065,7 @@
                     }
                 },
                 "Expression": {
-                    "target": "com.amazonaws.quicksight#Expression",
+                    "target": "com.amazonaws.quicksight#DataSetCalculatedFieldExpression",
                     "traits": {
                         "smithy.api#documentation": "<p>An expression that defines the calculated column.</p>",
                         "smithy.api#required": {}
@@ -6015,7 +6015,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#ColumnGroup": {
@@ -12399,6 +12400,16 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DataSetCalculatedFieldExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250000
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#DataSetConfiguration": {
