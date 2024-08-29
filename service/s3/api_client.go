@@ -72,6 +72,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPSignerV4a(&options)
 
+	resolveTracerProvider(&options)
+
 	resolveAuthSchemeResolver(&options)
 
 	for _, fn := range optFns {
@@ -718,6 +720,12 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeAdaptive)
 	}
 	return nil
+}
+
+func resolveTracerProvider(options *Options) {
+	if options.TracerProvider == nil {
+		options.TracerProvider = &tracing.NopTracerProvider{}
+	}
 }
 
 func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
