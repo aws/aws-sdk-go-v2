@@ -86,9 +86,15 @@ generate: smithy-generate update-requires gen-repo-mod-replace update-module-met
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-dropreplace-smithy-. min-go-version-. \
 tidy-modules-. add-module-license-files gen-aws-ptrs format
 
-generate-tmpreplace-smithy: smithy-generate update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
-gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-replace-smithy-. min-go-version-. \
+generate-tmpreplace-smithy: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-. update-module-metadata smithy-annotate-stable \
+gen-config-asserts gen-internal-codegen copy-attributevalue-feature min-go-version-. \
 tidy-modules-. add-module-license-files gen-aws-ptrs format gen-mod-dropreplace-smithy-. reset-sum
+
+# stripped-down regenerate script that eliminates a lot of the cruft you don't
+# need in development (that takes time)
+# modify this with whatever service you're working on
+generate-dev: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-config gen-mod-replace-smithy-aws gen-mod-replace-smithy-service_s3 update-module-metadata smithy-annotate-stable \
+gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tidy-modules-service_s3 format-dev
 
 reset-sum:
 	find . -name go.sum -exec git checkout -- {} \;
@@ -122,6 +128,9 @@ smithy-go-publish-local:
 
 format:
 	gofmt -w -s .
+
+format-dev:
+	gofmt -w -s service/s3
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"

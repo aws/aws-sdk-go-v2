@@ -16,6 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/logging"
 	smithymiddle "github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/tracing"
 	"github.com/aws/smithy-go/transport/http"
 )
 
@@ -97,7 +98,13 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 		ctx = internalcontext.SetAttemptSkewContext(ctx, attemptClockSkew)
 
 		var attemptResult AttemptResult
+
+		attemptCtx, span := tracing.StartSpan(ctx, "Attempt", func(o *tracing.SpanOptions) {
+			o.Properties.Set("operation.attempt", attemptNum)
+		})
 		out, attemptResult, releaseRetryToken, err = r.handleAttempt(attemptCtx, attemptInput, releaseRetryToken, next)
+		span.End()
+
 		attemptClockSkew, _ = awsmiddle.GetAttemptSkew(attemptResult.ResponseMetadata)
 
 		// AttemptResult Retried states that the attempt was not successful, and
