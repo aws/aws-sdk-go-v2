@@ -61,8 +61,14 @@ type InvokeModelInput struct {
 	//   Then specify the ARN of the resulting provisioned model. For more information,
 	//   see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
 	//
+	//   - If you use an [imported model], specify the ARN of the imported model. You can get the
+	//   model ARN from a successful call to [CreateModelImportJob]or from the Imported models page in the
+	//   Amazon Bedrock console.
+	//
 	// [Run inference using a Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
 	// [Use a custom model in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+	// [imported model]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+	// [CreateModelImportJob]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
 	// [Amazon Bedrock base model IDs (on-demand throughput)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
 	//
 	// This member is required.

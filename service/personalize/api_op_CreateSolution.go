@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// After you create a solution, you can’t change its configuration. By default,
-// all new solutions use automatic training. With automatic training, you incur
-// training costs while your solution is active. You can't stop automatic training
-// for a solution. To avoid unnecessary costs, make sure to delete the solution
-// when you are finished. For information about training costs, see [Amazon Personalize pricing].
+// By default, all new solutions use automatic training. With automatic training,
+// you incur training costs while your solution is active. To avoid unnecessary
+// costs, when you are finished you can [update the solution]to turn off automatic training. For
+// information about training costs, see [Amazon Personalize pricing].
 //
 // Creates the configuration for training a model (creating a solution version).
 // This configuration includes the recipe to use for model training and optional
@@ -25,9 +24,9 @@ import (
 //
 // By default, new solutions use automatic training to create solution versions
 // every 7 days. You can change the training frequency. Automatic solution version
-// creation starts one hour after the solution is ACTIVE. If you manually create a
-// solution version within the hour, the solution skips the first automatic
-// training. For more information, see [Configuring automatic training].
+// creation starts within one hour after the solution is ACTIVE. If you manually
+// create a solution version within the hour, the solution skips the first
+// automatic training. For more information, see [Configuring automatic training].
 //
 // To turn off automatic training, set performAutoTraining to false. If you turn
 // off automatic training, you must manually create a solution version by calling
@@ -56,6 +55,8 @@ import (
 //
 // # Related APIs
 //
+// [UpdateSolution]
+//
 // [ListSolutions]
 //
 // [CreateSolutionVersion]
@@ -68,18 +69,20 @@ import (
 //
 // [DescribeSolutionVersion]
 //
-// [DescribeSolutionVersion]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
 // [CreateCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
-// [DeleteSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
 // [GetSolutionMetrics]: https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html
+// [update the solution]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html
+// [ListSolutions]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html
+// [Amazon Personalize pricing]: https://aws.amazon.com/personalize/pricing/
+// [DescribeSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
+// [DescribeSolutionVersion]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+// [DeleteSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
+// [UpdateSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html
 // [ListSolutionVersions]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
 // [Creating and configuring a solution]: https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html
-// [ListSolutions]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html
 // [GetRecommendations]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
 // [Configuring automatic training]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
-// [Amazon Personalize pricing]: https://aws.amazon.com/personalize/pricing/
 // [CreateSolutionVersion]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html
-// [DescribeSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
 func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput, optFns ...func(*Options)) (*CreateSolutionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionInput{}
@@ -137,9 +140,9 @@ type CreateSolutionInput struct {
 	// specifying a schedulingExpression in the AutoTrainingConfig as part of solution
 	// configuration. For more information about automatic training, see [Configuring automatic training].
 	//
-	// Automatic solution version creation starts one hour after the solution is
-	// ACTIVE. If you manually create a solution version within the hour, the solution
-	// skips the first automatic training.
+	// Automatic solution version creation starts within one hour after the solution
+	// is ACTIVE. If you manually create a solution version within the hour, the
+	// solution skips the first automatic training.
 	//
 	// After training starts, you can get the solution version's Amazon Resource Name
 	// (ARN) with the [ListSolutionVersions]API operation. To get its status, use the [DescribeSolutionVersion].
@@ -163,9 +166,9 @@ type CreateSolutionInput struct {
 	// [Choosing a recipe]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
 	RecipeArn *string
 
-	// The configuration to use with the solution. When performAutoML is set to true,
-	// Amazon Personalize only evaluates the autoMLConfig section of the solution
-	// configuration.
+	// The configuration properties for the solution. When performAutoML is set to
+	// true, Amazon Personalize only evaluates the autoMLConfig section of the
+	// solution configuration.
 	//
 	// Amazon Personalize doesn't support configuring the hpoObjective at this time.
 	SolutionConfig *types.SolutionConfig

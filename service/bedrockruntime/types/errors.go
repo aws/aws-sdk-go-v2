@@ -89,6 +89,11 @@ func (e *ModelErrorException) ErrorCode() string {
 func (e *ModelErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The model specified in the request is not ready to serve inference requests.
+// The AWS SDK will automatically retry the operation up to 5 times. For
+// information about configuring automatic retries, see [Retry behavior]in the AWS SDKs and Tools
+// reference guide.
+//
+// [Retry behavior]: https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
 type ModelNotReadyException struct {
 	Message *string
 

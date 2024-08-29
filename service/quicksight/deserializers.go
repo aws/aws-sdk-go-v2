@@ -44143,7 +44143,7 @@ func awsRestjson1_deserializeDocumentCalculatedColumn(v **types.CalculatedColumn
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Expression to be of type string, got %T instead", value)
+					return fmt.Errorf("expected DataSetCalculatedFieldExpression to be of type string, got %T instead", value)
 				}
 				sv.Expression = ptr.String(jtv)
 			}

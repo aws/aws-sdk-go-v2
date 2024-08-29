@@ -1,0 +1,8 @@
+{
+    "id": "f428414d-0a1b-4886-87f0-337192f454eb",
+    "type": "feature",
+    "description": "Lifting the maximum length on Bedrock KnowledgeBase RetrievalFilter array",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

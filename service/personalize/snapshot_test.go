@@ -901,6 +901,18 @@ func TestCheckSnapshot_UpdateRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateSolution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSolution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSolution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateBatchInferenceJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBatchInferenceJob(context.Background(), nil, func(o *Options) {
@@ -1734,6 +1746,18 @@ func TestUpdateSnapshot_UpdateRecommender(t *testing.T) {
 	_, err := svc.UpdateRecommender(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRecommender")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSolution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSolution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSolution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

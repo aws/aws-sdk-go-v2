@@ -78,6 +78,7 @@
         "api_op_UpdateDataset.go",
         "api_op_UpdateMetricAttribution.go",
         "api_op_UpdateRecommender.go",
+        "api_op_UpdateSolution.go",
         "auth.go",
         "deserializers.go",
         "doc.go",

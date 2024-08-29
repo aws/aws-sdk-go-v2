@@ -1,0 +1,8 @@
+{
+    "id": "f7c31468-a04c-465c-b5bd-42b9906e2daa",
+    "type": "feature",
+    "description": "Increased Character Limit for Dataset Calculation Field expressions",
+    "modules": [
+        "service/quicksight"
+    ]
+}

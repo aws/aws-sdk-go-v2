@@ -64,10 +64,14 @@ type ConverseStreamInput struct {
 
 	// The ID for the model.
 	//
-	// The modelId to provide depends on the type of model that you use:
+	// The modelId to provide depends on the type of model or throughput that you use:
 	//
 	//   - If you use a base model, specify the model ID or its ARN. For a list of
 	//   model IDs for base models, see [Amazon Bedrock base model IDs (on-demand throughput)]in the Amazon Bedrock User Guide.
+	//
+	//   - If you use an inference profile, specify the inference profile ID or its
+	//   ARN. For a list of inference profile IDs, see [Supported Regions and models for cross-region inference]in the Amazon Bedrock User
+	//   Guide.
 	//
 	//   - If you use a provisioned model, specify the ARN of the Provisioned
 	//   Throughput. For more information, see [Run inference using a Provisioned Throughput]in the Amazon Bedrock User Guide.
@@ -76,8 +80,12 @@ type ConverseStreamInput struct {
 	//   Then specify the ARN of the resulting provisioned model. For more information,
 	//   see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
 	//
+	// The Converse API doesn't support [imported models].
+	//
 	// [Run inference using a Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
 	// [Use a custom model in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+	// [Supported Regions and models for cross-region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+	// [imported models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
 	// [Amazon Bedrock base model IDs (on-demand throughput)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
 	//
 	// This member is required.

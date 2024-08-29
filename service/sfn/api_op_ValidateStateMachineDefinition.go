@@ -56,6 +56,18 @@ type ValidateStateMachineDefinitionInput struct {
 	// This member is required.
 	Definition *string
 
+	// The maximum number of diagnostics that are returned per call. The default and
+	// maximum value is 100. Setting the value to 0 will also use the default of 100.
+	//
+	// If the number of diagnostics returned in the response exceeds maxResults , the
+	// value of the truncated field in the response will be set to true .
+	MaxResults int32
+
+	// Minimum level of diagnostics to return. ERROR returns only ERROR diagnostics,
+	// whereas WARNING returns both WARNING and ERROR diagnostics. The default is ERROR
+	// .
+	Severity types.ValidateStateMachineDefinitionSeverity
+
 	// The target type of state machine for this definition. The default is STANDARD .
 	Type types.StateMachineType
 
@@ -75,6 +87,11 @@ type ValidateStateMachineDefinitionOutput struct {
 	//
 	// This member is required.
 	Result types.ValidateStateMachineDefinitionResultCode
+
+	// The result value will be true if the number of diagnostics found in the
+	// workflow definition exceeds maxResults . When all diagnostics results are
+	// returned, the value will be false .
+	Truncated *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

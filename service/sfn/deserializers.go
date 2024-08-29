@@ -13366,6 +13366,15 @@ func awsAwsjson10_deserializeOpDocumentValidateStateMachineDefinitionOutput(v **
 				sv.Result = types.ValidateStateMachineDefinitionResultCode(jtv)
 			}
 
+		case "truncated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ValidateStateMachineDefinitionTruncated to be of type *bool, got %T instead", value)
+				}
+				sv.Truncated = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

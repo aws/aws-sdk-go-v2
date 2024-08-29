@@ -1,0 +1,8 @@
+{
+    "id": "09e10203-3480-4850-a3cb-c9b43e9f1be5",
+    "type": "feature",
+    "description": "This releases ability to update automatic training scheduler for customer solutions",
+    "modules": [
+        "service/personalize"
+    ]
+}

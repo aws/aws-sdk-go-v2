@@ -1776,16 +1776,10 @@ type RecommenderUpdateSummary struct {
 	// The configuration details of the recommender update.
 	RecommenderConfig *RecommenderConfig
 
-	// The status of the recommender update.
+	// The status of the recommender update. A recommender update can be in one of the
+	// following states:
 	//
-	// A recommender can be in one of the following states:
-	//
-	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	//   - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
-	//   IN_PROGRESS > ACTIVE
-	//
-	//   - DELETE PENDING > DELETE IN_PROGRESS
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1806,11 +1800,10 @@ type S3DataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// After you create a solution, you can’t change its configuration. By default,
-// all new solutions use automatic training. With automatic training, you incur
-// training costs while your solution is active. You can't stop automatic training
-// for a solution. To avoid unnecessary costs, make sure to delete the solution
-// when you are finished. For information about training costs, see [Amazon Personalize pricing].
+// By default, all new solutions use automatic training. With automatic training,
+// you incur training costs while your solution is active. To avoid unnecessary
+// costs, when you are finished you can [update the solution]to turn off automatic training. For
+// information about training costs, see [Amazon Personalize pricing].
 //
 // An object that provides information about a solution. A solution includes the
 // custom recipe, customized parameters, and trained models (Solution Versions)
@@ -1820,6 +1813,7 @@ type S3DataConfig struct {
 // make changes, you can [clone the solution]with the Amazon Personalize console or create a new one.
 //
 // [clone the solution]: https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html
+// [update the solution]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html
 // [Amazon Personalize pricing]: https://aws.amazon.com/personalize/pricing/
 type Solution struct {
 
@@ -1840,6 +1834,9 @@ type Solution struct {
 
 	// The date and time (in Unix time) that the solution was last updated.
 	LastUpdatedDateTime *time.Time
+
+	// Provides a summary of the latest updates to the solution.
+	LatestSolutionUpdate *SolutionUpdateSummary
 
 	// Describes the latest version of the solution, including the status and the ARN.
 	LatestSolutionVersion *SolutionVersionSummary
@@ -1958,6 +1955,45 @@ type SolutionSummary struct {
 	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
 	//   - DELETE PENDING > DELETE IN_PROGRESS
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details of the solution update.
+type SolutionUpdateConfig struct {
+
+	// The automatic training configuration to use when performAutoTraining is true.
+	AutoTrainingConfig *AutoTrainingConfig
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the properties of a solution update. For a complete
+// listing, call the [DescribeSolution]API.
+//
+// [DescribeSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
+type SolutionUpdateSummary struct {
+
+	// The date and time (in Unix format) that the solution update was created.
+	CreationDateTime *time.Time
+
+	// If a solution update fails, the reason behind the failure.
+	FailureReason *string
+
+	// The date and time (in Unix time) that the solution update was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// Whether the solution automatically creates solution versions.
+	PerformAutoTraining *bool
+
+	// The configuration details of the solution.
+	SolutionUpdateConfig *SolutionUpdateConfig
+
+	// The status of the solution update. A solution update can be in one of the
+	// following states:
+	//
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde

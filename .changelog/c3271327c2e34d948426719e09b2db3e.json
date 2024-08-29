@@ -1,0 +1,8 @@
+{
+    "id": "c3271327-c2e3-4d94-8426-719e09b2db3e",
+    "type": "feature",
+    "description": "This release adds support for static analysis to ValidateStateMachineDefinition API, which can now return optional WARNING diagnostics for semantic errors on the definition of an Amazon States Language (ASL) state machine.",
+    "modules": [
+        "service/sfn"
+    ]
+}

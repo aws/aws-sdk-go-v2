@@ -3033,6 +3033,16 @@ func awsAwsjson10_serializeOpDocumentValidateStateMachineDefinitionInput(v *Vali
 		ok.String(*v.Definition)
 	}
 
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if len(v.Severity) > 0 {
+		ok := object.Key("severity")
+		ok.String(string(v.Severity))
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))

@@ -203,8 +203,8 @@ type ByteContentDoc struct {
 // The property contains the file to chat with, along with its attributes.
 type ByteContentFile struct {
 
-	// The byte value of the file to attach, encoded as Base-64 string. The maximum
-	// size of all files that is attached is 10MB. You can attach a maximum of 5 files.
+	// The raw bytes of the file to attach. The maximum size of all files that is
+	// attached is 10MB. You can attach a maximum of 5 files.
 	//
 	// This member is required.
 	Data []byte

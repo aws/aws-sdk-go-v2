@@ -1070,6 +1070,26 @@ func (m *validateOpUpdateRecommender) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSolution struct {
+}
+
+func (*validateOpUpdateSolution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSolution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSolutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSolutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateBatchInferenceJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBatchInferenceJob{}, middleware.After)
 }
@@ -1280,6 +1300,10 @@ func addOpUpdateMetricAttributionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateRecommenderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRecommender{}, middleware.After)
+}
+
+func addOpUpdateSolutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSolution{}, middleware.After)
 }
 
 func validateBatchInferenceJobInput(v *types.BatchInferenceJobInput) error {
@@ -2520,6 +2544,21 @@ func validateOpUpdateRecommenderInput(v *UpdateRecommenderInput) error {
 	}
 	if v.RecommenderConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommenderConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSolutionInput(v *UpdateSolutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSolutionInput"}
+	if v.SolutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SolutionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
