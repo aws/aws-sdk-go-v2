@@ -1,10 +1,13 @@
 ListBuckets
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		putBucketContext
 		setOperationInput
 		ResolveEndpoint
@@ -21,6 +24,7 @@ ListBuckets
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		ResolveAuthScheme
@@ -29,6 +33,7 @@ ListBuckets
 		disableHTTPS
 		ComputePayloadHash
 		SigV4ContentSHA256Header
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions
