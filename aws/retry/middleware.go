@@ -99,7 +99,7 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 
 		var attemptResult AttemptResult
 
-		attemptCtx, span := tracing.StartSpan(ctx, "Attempt", func(o *tracing.SpanOptions) {
+		attemptCtx, span := tracing.StartSpan(attemptCtx, "Attempt", func(o *tracing.SpanOptions) {
 			o.Properties.Set("operation.attempt", attemptNum)
 		})
 		out, attemptResult, releaseRetryToken, err = r.handleAttempt(attemptCtx, attemptInput, releaseRetryToken, next)
