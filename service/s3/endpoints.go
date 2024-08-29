@@ -20,6 +20,7 @@ import (
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
@@ -5800,6 +5801,9 @@ func (*resolveEndpointV2Middleware) ID() string {
 func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "ResolveEndpoint")
+	defer span.End()
+
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
 		return next.HandleFinalize(ctx, in)
 	}
@@ -5822,6 +5826,8 @@ func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in mid
 	if err != nil {
 		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
 	}
+
+	span.SetProperty("operation.resolved_endpoint", endpt.URI.String())
 
 	if endpt.URI.RawPath == "" && req.URL.RawPath != "" {
 		endpt.URI.RawPath = endpt.URI.Path
@@ -5847,5 +5853,6 @@ func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in mid
 	backend := s3cust.GetPropertiesBackend(&endpt.Properties)
 	ctx = internalcontext.SetS3Backend(ctx, backend)
 
+	span.End()
 	return next.HandleFinalize(ctx, in)
 }

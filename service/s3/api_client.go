@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
@@ -27,6 +28,7 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
@@ -36,6 +38,10 @@ import (
 
 const ServiceID = "S3"
 const ServiceAPIVersion = "2006-03-01"
+
+func operationTracer(p tracing.TracerProvider) tracing.Tracer {
+	return p.Tracer("github.com/aws/aws-sdk-go-v2/service/s3")
+}
 
 // Client provides the API client to make operations call for Amazon Simple
 // Storage Service.
@@ -133,15 +139,47 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		}
 	}
 
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err = handler.Handle(ctx, params)
+	tracer := operationTracer(options.TracerProvider)
+	spanName := fmt.Sprintf("S3.%s", opID)
+
+	ctx = tracing.WithOperationTracer(ctx, tracer)
+
+	ctx, span := tracer.StartSpan(ctx, spanName, func(o *tracing.SpanOptions) {
+		o.Kind = tracing.SpanKindClient
+		o.Properties.Set("rpc.system", "aws-api")
+		o.Properties.Set("rpc.method", opID)
+		o.Properties.Set("rpc.service", "S3")
+	})
+	defer span.End()
+
+	handler := smithyhttp.NewClientHandler(options.HTTPClient)
+	decorated := middleware.DecorateHandler(handler, stack)
+	result, metadata, err = decorated.Handle(ctx, params)
 	if err != nil {
+		span.SetProperty("error.go.type", fmt.Sprintf("%T", err))
+		span.SetProperty("error.go.error", err.Error())
+
+		var aerr smithy.APIError
+		if errors.As(err, &aerr) {
+			span.SetProperty("error.api.code", aerr.ErrorCode())
+			span.SetProperty("error.api.message", aerr.ErrorMessage())
+			span.SetProperty("error.api.fault", aerr.ErrorFault().String())
+		}
+
 		err = &smithy.OperationError{
 			ServiceID:     ServiceID,
 			OperationName: opID,
 			Err:           err,
 		}
 	}
+
+	span.SetProperty("error", err != nil)
+	if err == nil {
+		span.SetStatus(tracing.SpanStatusOK)
+	} else {
+		span.SetStatus(tracing.SpanStatusError)
+	}
+
 	return result, metadata, err
 }
 
@@ -179,7 +217,7 @@ func addProtocolFinalizerMiddlewares(stack *middleware.Stack, options Options, o
 	if err := stack.Finalize.Insert(&resolveEndpointV2Middleware{options: options}, "GetIdentity", middleware.After); err != nil {
 		return fmt.Errorf("add ResolveEndpointV2: %v", err)
 	}
-	if err := stack.Finalize.Insert(&signRequestMiddleware{}, "ResolveEndpointV2", middleware.After); err != nil {
+	if err := stack.Finalize.Insert(&signRequestMiddleware{options: options}, "ResolveEndpointV2", middleware.After); err != nil {
 		return fmt.Errorf("add Signing: %w", err)
 	}
 	return nil
@@ -467,6 +505,30 @@ func addRawResponseToMetadata(stack *middleware.Stack) error {
 
 func addRecordResponseTiming(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+}
+
+func addSpanRetryLoop(stack *middleware.Stack, options Options) error {
+	return stack.Finalize.Insert(&spanRetryLoop{options: options}, "Retry", middleware.Before)
+}
+
+type spanRetryLoop struct {
+	options Options
+}
+
+func (*spanRetryLoop) ID() string {
+	return "spanRetryLoop"
+}
+
+func (m *spanRetryLoop) HandleFinalize(
+	ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
+) (
+	middleware.FinalizeOutput, middleware.Metadata, error,
+) {
+	tracer := operationTracer(m.options.TracerProvider)
+	ctx, span := tracer.StartSpan(ctx, "RetryLoop")
+	defer span.End()
+
+	return next.HandleFinalize(ctx, in)
 }
 func addStreamingEventsPayload(stack *middleware.Stack) error {
 	return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
@@ -985,4 +1047,90 @@ func addDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Finalize.Insert(&disableHTTPSMiddleware{
 		DisableHTTPS: o.EndpointOptions.DisableHTTPS,
 	}, "ResolveEndpointV2", middleware.After)
+}
+
+type spanInitializeStart struct {
+}
+
+func (*spanInitializeStart) ID() string {
+	return "spanInitializeStart"
+}
+
+func (m *spanInitializeStart) HandleInitialize(
+	ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+) (
+	middleware.InitializeOutput, middleware.Metadata, error,
+) {
+	ctx, _ = tracing.StartSpan(ctx, "Initialize")
+
+	return next.HandleInitialize(ctx, in)
+}
+
+type spanInitializeEnd struct {
+}
+
+func (*spanInitializeEnd) ID() string {
+	return "spanInitializeEnd"
+}
+
+func (m *spanInitializeEnd) HandleInitialize(
+	ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+) (
+	middleware.InitializeOutput, middleware.Metadata, error,
+) {
+	ctx, span := tracing.PopSpan(ctx)
+	span.End()
+
+	return next.HandleInitialize(ctx, in)
+}
+
+type spanBuildRequestStart struct {
+}
+
+func (*spanBuildRequestStart) ID() string {
+	return "spanBuildRequestStart"
+}
+
+func (m *spanBuildRequestStart) HandleSerialize(
+	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
+) (
+	middleware.SerializeOutput, middleware.Metadata, error,
+) {
+	ctx, _ = tracing.StartSpan(ctx, "BuildRequest")
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type spanBuildRequestEnd struct {
+}
+
+func (*spanBuildRequestEnd) ID() string {
+	return "spanBuildRequestEnd"
+}
+
+func (m *spanBuildRequestEnd) HandleBuild(
+	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
+) (
+	middleware.BuildOutput, middleware.Metadata, error,
+) {
+	ctx, span := tracing.PopSpan(ctx)
+	span.End()
+
+	return next.HandleBuild(ctx, in)
+}
+
+func addSpanInitializeStart(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&spanInitializeStart{}, middleware.Before)
+}
+
+func addSpanInitializeEnd(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&spanInitializeEnd{}, middleware.After)
+}
+
+func addSpanBuildRequestStart(stack *middleware.Stack) error {
+	return stack.Serialize.Add(&spanBuildRequestStart{}, middleware.Before)
+}
+
+func addSpanBuildRequestEnd(stack *middleware.Stack) error {
+	return stack.Build.Add(&spanBuildRequestEnd{}, middleware.After)
 }

@@ -13,6 +13,7 @@ import (
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 )
@@ -120,6 +121,9 @@ type Options struct {
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
+
+	// The client tracer provider.
+	TracerProvider tracing.TracerProvider
 
 	// Allows you to enable arn region support for the service.
 	UseARNRegion bool
