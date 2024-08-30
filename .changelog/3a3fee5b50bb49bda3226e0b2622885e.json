@@ -1,0 +1,8 @@
+{
+    "id": "3a3fee5b-50bb-49bd-a322-6e0b2622885e",
+    "type": "bugfix",
+    "description": "Fix issue where SDK could not send a VisibilityTimeout of 0 in a ChangeMessageVisibilityBatchRequestEntry.",
+    "modules": [
+        "service/sqs"
+    ]
+}
