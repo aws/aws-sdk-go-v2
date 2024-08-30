@@ -390,6 +390,239 @@
                 "smithy.api#documentation": "<p>The parameters of the environment action.</p>"
             }
         },
+        "com.amazonaws.datazone#AddEntityOwner": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#AddEntityOwnerInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#AddEntityOwnerOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds the owner of an entity (a domain unit).</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/addOwner"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#AddEntityOwnerInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which you want to add the entity owner.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#DataZoneEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of an entity.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity to which you want to add an owner.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.datazone#OwnerProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner that you want to add to the entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#AddEntityOwnerOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#AddPolicyGrant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#AddPolicyGrantInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#AddPolicyGrantOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a policy grant (an authorization policy) to a specified entity, including domain\n         units, environment blueprint configurations, or environment profiles.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/policies/managed/{entityType}/{entityIdentifier}/addGrant"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#AddPolicyGrantInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to add a policy grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TargetEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entity (resource) to which the grant is added.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity (resource) to which you want to add a policy grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyType": {
+                    "target": "com.amazonaws.datazone#ManagedPolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy that you want to grant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.datazone#PolicyGrantPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal to whom the permissions are granted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#PolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the policy grant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#AddPolicyGrantOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#AddToProjectMemberPoolPolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy grant is applied to child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AllDomainUnitsGrantFilter": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The grant filter for all domain units.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AllUsersGrantFilter": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The all users grant filter.</p>"
+            }
+        },
         "com.amazonaws.datazone#ApplicableAssetTypes": {
             "type": "list",
             "member": {
@@ -2528,6 +2761,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#CreateAssetTypePolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy grant is applied to child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
+            }
+        },
         "com.amazonaws.datazone#CreateDataProduct": {
             "type": "operation",
             "input": {
@@ -3304,6 +3551,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "rootDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the root domain unit.</p>"
+                    }
+                },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -3361,6 +3614,171 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDomainUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateDomainUnitInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateDomainUnitOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a domain unit in Amazon DataZone.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/domain-units"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#CreateDomainUnitInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to crate a domain unit.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DomainUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parentDomainUnitIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the parent domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DomainUnitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the domain unit.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDomainUnitOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the domain unit was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DomainUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parentDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the parent domain unit.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DomainUnitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the domain unit.</p>"
+                    }
+                },
+                "owners": {
+                    "target": "com.amazonaws.datazone#DomainUnitOwners",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owners of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ancestorDomainUnitIds": {
+                    "target": "com.amazonaws.datazone#DomainUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the ancestor domain units.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the domain unit was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the domain unit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDomainUnitPolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy grant is applied to child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
             }
         },
         "com.amazonaws.datazone#CreateEnvironment": {
@@ -3934,6 +4352,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#CreateEnvironmentProfilePolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
+            }
+        },
         "com.amazonaws.datazone#CreateFormType": {
             "type": "operation",
             "input": {
@@ -4073,6 +4505,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#CreateFormTypePolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy grant is applied to child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
+            }
+        },
         "com.amazonaws.datazone#CreateGlossary": {
             "type": "operation",
             "input": {
@@ -4206,6 +4652,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateGlossaryPolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy grant is applied to child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
             }
         },
         "com.amazonaws.datazone#CreateGlossaryTerm": {
@@ -4656,6 +5116,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms that can be used in this Amazon DataZone project.</p>"
                     }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit. This parameter is not required and if it is not specified, then\n         the project is created at the root domain unit level.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4806,10 +5272,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms that can be used in the project.</p>"
                     }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateProjectPolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy grant is applied to child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
             }
         },
         "com.amazonaws.datazone#CreateSubscriptionGrant": {
@@ -6735,6 +7221,12 @@
                     "target": "com.amazonaws.datazone#AcceptSubscriptionRequest"
                 },
                 {
+                    "target": "com.amazonaws.datazone#AddEntityOwner"
+                },
+                {
+                    "target": "com.amazonaws.datazone#AddPolicyGrant"
+                },
+                {
                     "target": "com.amazonaws.datazone#AssociateEnvironmentRole"
                 },
                 {
@@ -6870,6 +7362,9 @@
                     "target": "com.amazonaws.datazone#ListDataSourceRunActivities"
                 },
                 {
+                    "target": "com.amazonaws.datazone#ListEntityOwners"
+                },
+                {
                     "target": "com.amazonaws.datazone#ListEnvironmentActions"
                 },
                 {
@@ -6886,6 +7381,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#ListNotifications"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ListPolicyGrants"
                 },
                 {
                     "target": "com.amazonaws.datazone#ListProjectMemberships"
@@ -6922,6 +7420,12 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#RejectSubscriptionRequest"
+                },
+                {
+                    "target": "com.amazonaws.datazone#RemoveEntityOwner"
+                },
+                {
+                    "target": "com.amazonaws.datazone#RemovePolicyGrant"
                 },
                 {
                     "target": "com.amazonaws.datazone#RevokeSubscription"
@@ -6996,6 +7500,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#Domain"
+                },
+                {
+                    "target": "com.amazonaws.datazone#DomainUnit"
                 },
                 {
                     "target": "com.amazonaws.datazone#EnvironmentBlueprintConfiguration"
@@ -7437,6 +7944,17 @@
                         }
                     ],
                     "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.datazone#DataZoneEntityType": {
+            "type": "enum",
+            "members": {
+                "DOMAIN_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_UNIT"
+                    }
                 }
             }
         },
@@ -8037,6 +8555,78 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDomainUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteDomainUnitInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#DeleteDomainUnitOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a domain unit.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/domain-units/{identifier}"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#DeleteDomainUnitInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to delete a domain unit.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDomainUnitOutput": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -9356,6 +9946,9 @@
                 "id": {
                     "target": "com.amazonaws.datazone#DomainId"
                 },
+                "rootDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId"
+                },
                 "status": {
                     "target": "com.amazonaws.datazone#DomainStatus"
                 },
@@ -9521,6 +10114,271 @@
                 "smithy.api#documentation": "<p>A summary of a Amazon DataZone domain.</p>"
             }
         },
+        "com.amazonaws.datazone#DomainUnit": {
+            "type": "resource",
+            "identifiers": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId"
+                }
+            },
+            "properties": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId"
+                },
+                "parentDomainUnitIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId"
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DomainUnitName"
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DomainUnitDescription"
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken"
+                },
+                "owners": {
+                    "target": "com.amazonaws.datazone#DomainUnitOwners"
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId"
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DomainUnitId"
+                },
+                "parentDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId"
+                },
+                "ancestorDomainUnitIds": {
+                    "target": "com.amazonaws.datazone#DomainUnitIds"
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt"
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt"
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy"
+                },
+                "lastUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.datazone#CreateDomainUnit"
+            },
+            "read": {
+                "target": "com.amazonaws.datazone#GetDomainUnit"
+            },
+            "update": {
+                "target": "com.amazonaws.datazone#UpdateDomainUnit"
+            },
+            "delete": {
+                "target": "com.amazonaws.datazone#DeleteDomainUnit"
+            },
+            "list": {
+                "target": "com.amazonaws.datazone#ListDomainUnitsForParent"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitDesignation": {
+            "type": "enum",
+            "members": {
+                "OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OWNER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitFilterForProject": {
+            "type": "structure",
+            "members": {
+                "domainUnit": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain unit ID to use in the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to include child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The domain unit filter of the project grant filter.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitGrantFilter": {
+            "type": "union",
+            "members": {
+                "allDomainUnitsGrantFilter": {
+                    "target": "com.amazonaws.datazone#AllDomainUnitsGrantFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a grant filter containing all domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The grant filter for the domain unit. In the current release of Amazon DataZone, the only\nsupported filter is the <code>allDomainUnitsGrantFilter</code>.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitGroupProperties": {
+            "type": "structure",
+            "members": {
+                "groupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of a domain unit group.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-z0-9_\\-]+$"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#DomainUnitId"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w -]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitOwnerProperties": {
+            "type": "union",
+            "members": {
+                "user": {
+                    "target": "com.amazonaws.datazone#DomainUnitUserProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the domain unit owner is a user.</p>"
+                    }
+                },
+                "group": {
+                    "target": "com.amazonaws.datazone#DomainUnitGroupProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the domain unit owner is a group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of the domain unit owner.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitOwners": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#DomainUnitOwnerProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitPolicyGrantPrincipal": {
+            "type": "structure",
+            "members": {
+                "domainUnitDesignation": {
+                    "target": "com.amazonaws.datazone#DomainUnitDesignation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifes the designation of the domain unit users.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainUnitIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
+                },
+                "domainUnitGrantFilter": {
+                    "target": "com.amazonaws.datazone#DomainUnitGrantFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The grant filter for the domain unit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The domain unit principal to whom the policy is granted.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#DomainUnitSummary"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain unit summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the domain unit.</p>"
+            }
+        },
+        "com.amazonaws.datazone#DomainUnitUserProperties": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of teh domain unit user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of the domain unit user.</p>"
+            }
+        },
         "com.amazonaws.datazone#EdgeDirection": {
             "type": "enum",
             "members": {
@@ -9586,6 +10444,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#EntityOwners": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#OwnerPropertiesOutput"
             }
         },
         "com.amazonaws.datazone#EntityType": {
@@ -11884,6 +12748,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "rootDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the root domain in Amazon Datazone.</p>"
+                    }
+                },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -11950,6 +12820,140 @@
                     "target": "com.amazonaws.datazone#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags specified for the Amazon DataZone domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDomainUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetDomainUnitInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetDomainUnitOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of the specified domain unit.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/domain-units/{identifier}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#GetDomainUnitInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to get a domain unit.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the domain unit that you want to get.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDomainUnitOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which the domain unit lives.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DomainUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parentDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the parent domain unit.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DomainUnitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the domain unit.</p>"
+                    }
+                },
+                "owners": {
+                    "target": "com.amazonaws.datazone#DomainUnitOwners",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owners of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp at which the domain unit was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the domain unit was last updated.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the domain unit.</p>"
+                    }
+                },
+                "lastUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who last updated the domain unit.</p>"
                     }
                 }
             },
@@ -13920,6 +14924,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The business glossary terms that can be used in the project.</p>"
                     }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15317,13 +16327,27 @@
         "com.amazonaws.datazone#GroupIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+)"
+                "smithy.api#pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+)"
+            }
+        },
+        "com.amazonaws.datazone#GroupPolicyGrantPrincipal": {
+            "type": "union",
+            "members": {
+                "groupIdentifier": {
+                    "target": "com.amazonaws.datazone#GroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID Of the group of the group principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The group principal to whom the policy is granted.</p>"
             }
         },
         "com.amazonaws.datazone#GroupProfileId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
             }
         },
         "com.amazonaws.datazone#GroupProfileName": {
@@ -16549,6 +17573,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#ListDomainUnitsForParent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListDomainUnitsForParentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListDomainUnitsForParentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists child domain units for the specified parent domain unit.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/domain-units"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#ListDomainUnitsForParentInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which you want to list domain units for a parent domain\n         unit.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "parentDomainUnitIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the parent domain unit.</p>",
+                        "smithy.api#httpQuery": "parentDomainUnitIdentifier",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResultsForListDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of domain units to return in a single call to\n         ListDomainUnitsForParent. When the number of domain units to be listed is greater than the\n         value of MaxResults, the response contains a NextToken value that you can use in a\n         subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of domain units is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of domain units, the response includes a pagination token named NextToken. You can specify\n         this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set\n         of domain units.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListDomainUnitsForParentOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#DomainUnitSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results returned by this action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of domain units is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of domain units, the response includes a pagination token named NextToken. You can specify\n         this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set\n         of domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#ListDomains": {
             "type": "operation",
             "input": {
@@ -16639,6 +17763,114 @@
                     "target": "com.amazonaws.datazone#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When the number of domains is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of domains, the response includes a\n         pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>\n         value in a subsequent call to <code>ListDomains</code> to list the next set of\n         domains.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#ListEntityOwners": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListEntityOwnersInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListEntityOwnersOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the entity (domain units) owners.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/owners"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "owners"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#ListEntityOwnersInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to list entity owners.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#DataZoneEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the entity that you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity that you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResultsForListDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of entities to return in a single call to\n            <code>ListEntityOwners</code>. When the number of entities to be listed is greater than\n         the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value\n         that you can use in a subsequent call to <code>ListEntityOwners</code> to list the next set\n         of entities.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of entities is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of entities, the response includes\n         a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to\n         list the next set of entities.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListEntityOwnersOutput": {
+            "type": "structure",
+            "members": {
+                "owners": {
+                    "target": "com.amazonaws.datazone#EntityOwners",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owners of the entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of entities is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of entities, the response includes\n         a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to\n         list the next set of entities.</p>"
                     }
                 }
             },
@@ -17564,6 +18796,122 @@
                     "target": "com.amazonaws.datazone#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>When the number of notifications is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of notifications, the response\n         includes a pagination token named <code>NextToken</code>. You can specify this\n            <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to\n         list the next set of notifications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#ListPolicyGrants": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListPolicyGrantsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListPolicyGrantsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists policy grants.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/policies/managed/{entityType}/{entityIdentifier}/grants"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "grantList"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#ListPolicyGrantsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to list policy grants.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TargetEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entity for which you want to list policy grants.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity for which you want to list policy grants.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyType": {
+                    "target": "com.amazonaws.datazone#ManagedPolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy that you want to list.</p>",
+                        "smithy.api#httpQuery": "policyType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResultsForListDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of grants to return in a single call to\n         <code>ListPolicyGrants</code>. When the number of grants to be listed is greater than the\n         value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that\n         you can use in a subsequent call to <code>ListPolicyGrants</code> to list the next set of\n         grants.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of grants is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of grants, the response includes a\n         pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>\n         value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of\n         grants.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListPolicyGrantsOutput": {
+            "type": "structure",
+            "members": {
+                "grantList": {
+                    "target": "com.amazonaws.datazone#PolicyGrantList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of this action - the listed grants.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of grants is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of grants, the response includes a\n         pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>\n         value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of\n         grants.</p>"
                     }
                 }
             },
@@ -18738,6 +20086,77 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.datazone#ManagedPolicyType": {
+            "type": "enum",
+            "members": {
+                "CREATE_DOMAIN_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_DOMAIN_UNIT"
+                    }
+                },
+                "OVERRIDE_DOMAIN_UNIT_OWNERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERRIDE_DOMAIN_UNIT_OWNERS"
+                    }
+                },
+                "ADD_TO_PROJECT_MEMBER_POOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD_TO_PROJECT_MEMBER_POOL"
+                    }
+                },
+                "OVERRIDE_PROJECT_OWNERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERRIDE_PROJECT_OWNERS"
+                    }
+                },
+                "CREATE_GLOSSARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_GLOSSARY"
+                    }
+                },
+                "CREATE_FORM_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FORM_TYPE"
+                    }
+                },
+                "CREATE_ASSET_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_ASSET_TYPE"
+                    }
+                },
+                "CREATE_PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_PROJECT"
+                    }
+                },
+                "CREATE_ENVIRONMENT_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_ENVIRONMENT_PROFILE"
+                    }
+                },
+                "DELEGATE_CREATE_ENVIRONMENT_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELEGATE_CREATE_ENVIRONMENT_PROFILE"
+                    }
+                },
+                "CREATE_ENVIRONMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_ENVIRONMENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#MaxResults": {
             "type": "integer",
             "traits": {
@@ -19299,6 +20718,132 @@
                 "target": "com.amazonaws.datazone#NotificationOutput"
             }
         },
+        "com.amazonaws.datazone#OverrideDomainUnitOwnersPolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy is inherited by child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The grant details of the override domain unit owners policy.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OverrideProjectOwnersPolicyGrantDetail": {
+            "type": "structure",
+            "members": {
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the policy is inherited by child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the override project owners policy grant.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OwnerGroupProperties": {
+            "type": "structure",
+            "members": {
+                "groupIdentifier": {
+                    "target": "com.amazonaws.datazone#GroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit owners group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of the domain unit owners group.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OwnerGroupPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "groupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit owners group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of the domain unit owners group.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OwnerProperties": {
+            "type": "union",
+            "members": {
+                "user": {
+                    "target": "com.amazonaws.datazone#OwnerUserProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the domain unit owner is a user.</p>"
+                    }
+                },
+                "group": {
+                    "target": "com.amazonaws.datazone#OwnerGroupProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the domain unit owner is a group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of a domain unit's owner.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OwnerPropertiesOutput": {
+            "type": "union",
+            "members": {
+                "user": {
+                    "target": "com.amazonaws.datazone#OwnerUserPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the domain unit owner is a user.</p>"
+                    }
+                },
+                "group": {
+                    "target": "com.amazonaws.datazone#OwnerGroupPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the domain unit owner is a group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of the domain unit owners group.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OwnerUserProperties": {
+            "type": "structure",
+            "members": {
+                "userIdentifier": {
+                    "target": "com.amazonaws.datazone#UserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owner user.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of the owner user.</p>"
+            }
+        },
+        "com.amazonaws.datazone#OwnerUserPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the owner user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of the owner user.</p>"
+            }
+        },
         "com.amazonaws.datazone#PaginationToken": {
             "type": "string",
             "traits": {
@@ -19306,6 +20851,150 @@
                     "min": 1,
                     "max": 8192
                 }
+            }
+        },
+        "com.amazonaws.datazone#PolicyGrantDetail": {
+            "type": "union",
+            "members": {
+                "createDomainUnit": {
+                    "target": "com.amazonaws.datazone#CreateDomainUnitPolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is a create domain unit policy.</p>"
+                    }
+                },
+                "overrideDomainUnitOwners": {
+                    "target": "com.amazonaws.datazone#OverrideDomainUnitOwnersPolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to override domain unit owners.</p>"
+                    }
+                },
+                "addToProjectMemberPool": {
+                    "target": "com.amazonaws.datazone#AddToProjectMemberPoolPolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the policy grant is to be added to the members of the project.</p>"
+                    }
+                },
+                "overrideProjectOwners": {
+                    "target": "com.amazonaws.datazone#OverrideProjectOwnersPolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to override project owners.</p>"
+                    }
+                },
+                "createGlossary": {
+                    "target": "com.amazonaws.datazone#CreateGlossaryPolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is a create glossary policy.</p>"
+                    }
+                },
+                "createFormType": {
+                    "target": "com.amazonaws.datazone#CreateFormTypePolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is a create form type policy.</p>"
+                    }
+                },
+                "createAssetType": {
+                    "target": "com.amazonaws.datazone#CreateAssetTypePolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is a create asset type policy.</p>"
+                    }
+                },
+                "createProject": {
+                    "target": "com.amazonaws.datazone#CreateProjectPolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is a create project policy.</p>"
+                    }
+                },
+                "createEnvironmentProfile": {
+                    "target": "com.amazonaws.datazone#CreateEnvironmentProfilePolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is a create environment profile policy.</p>"
+                    }
+                },
+                "delegateCreateEnvironmentProfile": {
+                    "target": "com.amazonaws.datazone#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is the delegation of the create environment profile policy.</p>"
+                    }
+                },
+                "createEnvironment": {
+                    "target": "com.amazonaws.datazone#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that this is a create environment policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy grant.</p>"
+            }
+        },
+        "com.amazonaws.datazone#PolicyGrantList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#PolicyGrantMember"
+            }
+        },
+        "com.amazonaws.datazone#PolicyGrantMember": {
+            "type": "structure",
+            "members": {
+                "principal": {
+                    "target": "com.amazonaws.datazone#PolicyGrantPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal of the policy grant member.</p>"
+                    }
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#PolicyGrantDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the policy grant member.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the timestamp at which policy grant member was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the user who created the policy grant member.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A member of the policy grant list.</p>"
+            }
+        },
+        "com.amazonaws.datazone#PolicyGrantPrincipal": {
+            "type": "union",
+            "members": {
+                "user": {
+                    "target": "com.amazonaws.datazone#UserPolicyGrantPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user of the policy grant principal.</p>"
+                    }
+                },
+                "group": {
+                    "target": "com.amazonaws.datazone#GroupPolicyGrantPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group of the policy grant principal.</p>"
+                    }
+                },
+                "project": {
+                    "target": "com.amazonaws.datazone#ProjectPolicyGrantPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project of the policy grant principal.</p>"
+                    }
+                },
+                "domainUnit": {
+                    "target": "com.amazonaws.datazone#DomainUnitPolicyGrantPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain unit of the policy grant principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy grant principal.</p>"
             }
         },
         "com.amazonaws.datazone#PostLineageEvent": {
@@ -19547,6 +21236,37 @@
                 "smithy.api#documentation": "<p>Specifies the error message that is returned if the operation cannot be successfully\n         completed.</p>"
             }
         },
+        "com.amazonaws.datazone#ProjectDesignation": {
+            "type": "enum",
+            "members": {
+                "OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OWNER"
+                    }
+                },
+                "CONTRIBUTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTRIBUTOR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#ProjectGrantFilter": {
+            "type": "union",
+            "members": {
+                "domainUnitFilter": {
+                    "target": "com.amazonaws.datazone#DomainUnitFilterForProject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain unit filter of the project grant filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project grant filter.</p>"
+            }
+        },
         "com.amazonaws.datazone#ProjectId": {
             "type": "string",
             "traits": {
@@ -19590,6 +21310,33 @@
                 },
                 "smithy.api#pattern": "^[\\w -]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#ProjectPolicyGrantPrincipal": {
+            "type": "structure",
+            "members": {
+                "projectDesignation": {
+                    "target": "com.amazonaws.datazone#ProjectDesignation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project designation of the project policy grant principal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.datazone#ProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project ID of the project policy grant principal.</p>"
+                    }
+                },
+                "projectGrantFilter": {
+                    "target": "com.amazonaws.datazone#ProjectGrantFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project grant filter of the project policy grant principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project policy grant principal.</p>"
             }
         },
         "com.amazonaws.datazone#ProjectStatus": {
@@ -19682,6 +21429,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the project was updated.</p>",
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
                     }
                 }
             },
@@ -20496,6 +22249,192 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.datazone#RelationalFilterConfiguration"
+            }
+        },
+        "com.amazonaws.datazone#RemoveEntityOwner": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#RemoveEntityOwnerInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#RemoveEntityOwnerOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an owner from an entity.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/removeOwner"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#RemoveEntityOwnerInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to remove an owner from an entity.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#DataZoneEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the entity from which you want to remove an owner.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity from which you want to remove an owner.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.datazone#OwnerProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner that you want to remove from an entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#RemoveEntityOwnerOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#RemovePolicyGrant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#RemovePolicyGrantInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#RemovePolicyGrantOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a policy grant.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/policies/managed/{entityType}/{entityIdentifier}/removeGrant"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#RemovePolicyGrantInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to remove a policy grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TargetEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the entity from which you want to remove a policy grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the entity from which you want to remove a policy grant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyType": {
+                    "target": "com.amazonaws.datazone#ManagedPolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the policy that you want to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.datazone#PolicyGrantPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal from which you want to remove a policy grant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#RemovePolicyGrantOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#RequestReason": {
@@ -23285,6 +25224,29 @@
                 "target": "com.amazonaws.datazone#TagValue"
             }
         },
+        "com.amazonaws.datazone#TargetEntityType": {
+            "type": "enum",
+            "members": {
+                "DOMAIN_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_UNIT"
+                    }
+                },
+                "ENVIRONMENT_BLUEPRINT_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENVIRONMENT_BLUEPRINT_CONFIGURATION"
+                    }
+                },
+                "ENVIRONMENT_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENVIRONMENT_PROFILE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#TaskId": {
             "type": "string",
             "traits": {
@@ -24022,6 +25984,13 @@
                 "smithy.api#httpError": 401
             }
         },
+        "com.amazonaws.datazone#Unit": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the policy of creating an environment.</p>"
+            }
+        },
         "com.amazonaws.datazone#UntagResource": {
             "type": "operation",
             "input": {
@@ -24614,6 +26583,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "rootDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the root domain unit.</p>"
+                    }
+                },
                 "description": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -24642,6 +26617,155 @@
                     "target": "com.amazonaws.datazone#UpdatedAt",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the timestamp of when the domain was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateDomainUnit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#UpdateDomainUnitInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#UpdateDomainUnitOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the domain unit.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/v2/domains/{domainIdentifier}/domain-units/{identifier}"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "Administration"
+                ]
+            }
+        },
+        "com.amazonaws.datazone#UpdateDomainUnitInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to update a domain unit.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DomainUnitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the domain unit that you want to update.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DomainUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain unit that you want to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateDomainUnitOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where you want to update the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DomainUnitName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain unit that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "owners": {
+                    "target": "com.amazonaws.datazone#DomainUnitOwners",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owners of the domain unit that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#DomainUnitDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the domain unit that you want to update.</p>"
+                    }
+                },
+                "parentDomainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the parent domain unit.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp at which the domain unit that you want to update was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the domain unit was last updated.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the domain unit that you want to update.</p>"
+                    }
+                },
+                "lastUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who last updated the domain unit.</p>"
                     }
                 }
             },
@@ -25626,7 +27750,7 @@
                 "domainIdentifier": {
                     "target": "com.amazonaws.datazone#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain in which a project is to be updated.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain where a project is being updated.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -25729,6 +27853,12 @@
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms of the project that are to be updated.</p>"
+                    }
+                },
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
                     }
                 }
             },
@@ -26457,7 +28587,27 @@
         "com.amazonaws.datazone#UserIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)"
+                "smithy.api#pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)"
+            }
+        },
+        "com.amazonaws.datazone#UserPolicyGrantPrincipal": {
+            "type": "union",
+            "members": {
+                "userIdentifier": {
+                    "target": "com.amazonaws.datazone#UserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the user policy grant principal.</p>"
+                    }
+                },
+                "allUsersGrantFilter": {
+                    "target": "com.amazonaws.datazone#AllUsersGrantFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The all users grant filter of the user policy grant principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user policy grant principal.</p>"
             }
         },
         "com.amazonaws.datazone#UserProfileDetails": {
@@ -26483,7 +28633,7 @@
         "com.amazonaws.datazone#UserProfileId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
             }
         },
         "com.amazonaws.datazone#UserProfileName": {
