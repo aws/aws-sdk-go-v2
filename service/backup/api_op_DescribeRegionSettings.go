@@ -47,11 +47,11 @@ type DescribeRegionSettingsOutput struct {
 	// by enabling [Backup's advanced DynamoDB backup features].
 	//
 	// [Full Backup management]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management
-	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
 	// [Backup's advanced DynamoDB backup features]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
 	ResourceTypeManagementPreference map[string]bool
 
-	// Returns a list of all services along with the opt-in preferences in the Region.
+	// The services along with the opt-in preferences in the Region.
 	ResourceTypeOptInPreference map[string]bool
 
 	// Metadata pertaining to the operation's result.

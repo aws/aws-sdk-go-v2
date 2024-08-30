@@ -169,6 +169,9 @@ type StatementData struct {
 	// database.
 	SecretArn *string
 
+	// The session identifier of the query.
+	SessionId *string
+
 	// The name of the SQL statement.
 	StatementName *string
 

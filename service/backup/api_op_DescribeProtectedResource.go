@@ -48,28 +48,27 @@ type DescribeProtectedResourceOutput struct {
 	// 26, 2018 12:11:30.087 AM.
 	LastBackupTime *time.Time
 
-	// This is the ARN (Amazon Resource Name) of the backup vault that contains the
-	// most recent backup recovery point.
+	// The ARN (Amazon Resource Name) of the backup vault that contains the most
+	// recent backup recovery point.
 	LastBackupVaultArn *string
 
-	// This is the ARN (Amazon Resource Name) of the most recent recovery point.
+	// The ARN (Amazon Resource Name) of the most recent recovery point.
 	LastRecoveryPointArn *string
 
-	// This is the time in minutes the most recent restore job took to complete.
+	// The time, in minutes, that the most recent restore job took to complete.
 	LatestRestoreExecutionTimeMinutes *int64
 
-	// This is the creation date of the most recent restore job.
+	// The creation date of the most recent restore job.
 	LatestRestoreJobCreationDate *time.Time
 
-	// This is the date the most recent recovery point was created.
+	// The date the most recent recovery point was created.
 	LatestRestoreRecoveryPointCreationDate *time.Time
 
 	// An ARN that uniquely identifies a resource. The format of the ARN depends on
 	// the resource type.
 	ResourceArn *string
 
-	// This is the non-unique name of the resource that belongs to the specified
-	// backup.
+	// The name of the resource that belongs to the specified backup.
 	ResourceName *string
 
 	// The type of Amazon Web Services resource saved as a recovery point; for

@@ -30,8 +30,7 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 
 type UpdateProjectInput struct {
 
-	// The identifier of the Amazon DataZone domain in which a project is to be
-	// updated.
+	// The ID of the Amazon DataZone domain where a project is being updated.
 	//
 	// This member is required.
 	DomainIdentifier *string
@@ -80,6 +79,9 @@ type UpdateProjectOutput struct {
 
 	// The description of the project that is to be updated.
 	Description *string
+
+	// The ID of the domain unit.
+	DomainUnitId *string
 
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.

@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Updates an existing backup plan identified by its backupPlanId with the input
-// document in JSON format. The new version is uniquely identified by a VersionId .
+// Updates the specified backup plan. The new version is uniquely identified by
+// its ID.
 func (c *Client) UpdateBackupPlan(ctx context.Context, params *UpdateBackupPlanInput, optFns ...func(*Options)) (*UpdateBackupPlanOutput, error) {
 	if params == nil {
 		params = &UpdateBackupPlanInput{}
@@ -31,13 +31,13 @@ func (c *Client) UpdateBackupPlan(ctx context.Context, params *UpdateBackupPlanI
 
 type UpdateBackupPlanInput struct {
 
-	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
-	// sets of Rules .
+	// The body of a backup plan. Includes a BackupPlanName and one or more sets of
+	// Rules .
 	//
 	// This member is required.
 	BackupPlan *types.BackupPlanInput
 
-	// Uniquely identifies a backup plan.
+	// The ID of the backup plan.
 	//
 	// This member is required.
 	BackupPlanId *string

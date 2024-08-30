@@ -33,8 +33,8 @@ func (c *Client) CreateFramework(ctx context.Context, params *CreateFrameworkInp
 
 type CreateFrameworkInput struct {
 
-	// A list of the controls that make up the framework. Each control in the list has
-	// a name, input parameters, and scope.
+	// The controls that make up the framework. Each control in the list has a name,
+	// input parameters, and scope.
 	//
 	// This member is required.
 	FrameworkControls []types.FrameworkControl
@@ -49,8 +49,7 @@ type CreateFrameworkInput struct {
 	// An optional description of the framework with a maximum of 1,024 characters.
 	FrameworkDescription *string
 
-	// Metadata that you can assign to help organize the frameworks that you create.
-	// Each tag is a key-value pair.
+	// The tags to assign to the framework.
 	FrameworkTags map[string]string
 
 	// A customer-chosen string that you can use to distinguish between otherwise

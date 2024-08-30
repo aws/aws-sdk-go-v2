@@ -77,6 +77,9 @@ type GetDomainOutput struct {
 	// The URL of the data portal for this Amazon DataZone domain.
 	PortalUrl *string
 
+	// The ID of the root domain in Amazon Datazone.
+	RootDomainUnitId *string
+
 	// The single sing-on option of the specified Amazon DataZone domain.
 	SingleSignOn *types.SingleSignOn
 

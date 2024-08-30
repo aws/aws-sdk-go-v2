@@ -48,7 +48,7 @@ type UpdateRestoreTestingPlanInput struct {
 	// This member is required.
 	RestoreTestingPlan *types.RestoreTestingPlanForUpdate
 
-	// This is the restore testing plan name you wish to update.
+	// The name of the restore testing plan name.
 	//
 	// This member is required.
 	RestoreTestingPlanName *string
@@ -58,7 +58,7 @@ type UpdateRestoreTestingPlanInput struct {
 
 type UpdateRestoreTestingPlanOutput struct {
 
-	// This is the time the resource testing plan was created.
+	// The time the resource testing plan was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -74,7 +74,7 @@ type UpdateRestoreTestingPlanOutput struct {
 	// This member is required.
 	RestoreTestingPlanName *string
 
-	// This is the time the update completed for the restore testing plan.
+	// The time the update completed for the restore testing plan.
 	//
 	// This member is required.
 	UpdateTime *time.Time

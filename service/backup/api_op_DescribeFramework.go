@@ -56,8 +56,8 @@ type DescribeFrameworkOutput struct {
 	// of the ARN depends on the resource type.
 	FrameworkArn *string
 
-	// A list of the controls that make up the framework. Each control in the list has
-	// a name, input parameters, and scope.
+	// The controls that make up the framework. Each control in the list has a name,
+	// input parameters, and scope.
 	FrameworkControls []types.FrameworkControl
 
 	// An optional description of the framework.

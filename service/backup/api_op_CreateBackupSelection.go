@@ -33,13 +33,12 @@ func (c *Client) CreateBackupSelection(ctx context.Context, params *CreateBackup
 
 type CreateBackupSelectionInput struct {
 
-	// Uniquely identifies the backup plan to be associated with the selection of
-	// resources.
+	// The ID of the backup plan.
 	//
 	// This member is required.
 	BackupPlanId *string
 
-	// Specifies the body of a request to assign a set of resources to a backup plan.
+	// The body of a request to assign a set of resources to a backup plan.
 	//
 	// This member is required.
 	BackupSelection *types.BackupSelection
@@ -56,7 +55,7 @@ type CreateBackupSelectionInput struct {
 
 type CreateBackupSelectionOutput struct {
 
-	// Uniquely identifies a backup plan.
+	// The ID of the backup plan.
 	BackupPlanId *string
 
 	// The date and time a backup selection is created, in Unix format and Coordinated

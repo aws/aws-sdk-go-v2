@@ -74,10 +74,11 @@ import (
 //     cross-account delivery. Kinesis Data Streams and Firehose are supported as
 //     logical destinations.
 //
-// Each account can have one account-level subscription filter policy. If you are
-// updating an existing filter, you must specify the correct name in PolicyName .
-// To perform a PutAccountPolicy subscription filter operation for any destination
-// except a Lambda function, you must also have the iam:PassRole permission.
+// Each account can have one account-level subscription filter policy per Region.
+// If you are updating an existing filter, you must specify the correct name in
+// PolicyName . To perform a PutAccountPolicy subscription filter operation for
+// any destination except a Lambda function, you must also have the iam:PassRole
+// permission.
 //
 // [PutDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
 // [PutDataProtectionPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
@@ -166,7 +167,7 @@ type PutAccountPolicyInput struct {
 	//   - FilterPattern A filter pattern for subscribing to a filtered stream of log
 	//   events.
 	//
-	//   - DistributionThe method used to distribute log data to the destination. By
+	//   - Distribution The method used to distribute log data to the destination. By
 	//   default, log data is grouped by log stream, but the grouping can be set to
 	//   Random for a more even distribution. This property is only applicable when the
 	//   destination is an Kinesis Data Streams data stream.

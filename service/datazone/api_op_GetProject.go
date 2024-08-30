@@ -71,6 +71,9 @@ type GetProjectOutput struct {
 	// The description of the project.
 	Description *string
 
+	// The ID of the domain unit.
+	DomainUnitId *string
+
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.
 	FailureReasons []types.ProjectDeletionError

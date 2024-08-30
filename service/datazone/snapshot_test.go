@@ -86,6 +86,30 @@ func TestCheckSnapshot_AcceptSubscriptionRequest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AddEntityOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddEntityOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddEntityOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AddPolicyGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddPolicyGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddPolicyGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateEnvironmentRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateEnvironmentRole(context.Background(), nil, func(o *Options) {
@@ -211,6 +235,18 @@ func TestCheckSnapshot_CreateDomain(t *testing.T) {
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -451,6 +487,18 @@ func TestCheckSnapshot_DeleteDomain(t *testing.T) {
 	_, err := svc.DeleteDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -715,6 +763,18 @@ func TestCheckSnapshot_GetDomain(t *testing.T) {
 	_, err := svc.GetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1058,6 +1118,30 @@ func TestCheckSnapshot_ListDomains(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListDomainUnitsForParent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainUnitsForParent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDomainUnitsForParent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEntityOwners(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEntityOwners(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEntityOwners")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEnvironmentActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnvironmentActions(context.Background(), nil, func(o *Options) {
@@ -1147,6 +1231,18 @@ func TestCheckSnapshot_ListNotifications(t *testing.T) {
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListNotifications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyGrants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1310,6 +1406,30 @@ func TestCheckSnapshot_RejectSubscriptionRequest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RemoveEntityOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveEntityOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RemoveEntityOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RemovePolicyGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemovePolicyGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RemovePolicyGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RevokeSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RevokeSubscription(context.Background(), nil, func(o *Options) {
@@ -1459,6 +1579,18 @@ func TestCheckSnapshot_UpdateDomain(t *testing.T) {
 	_, err := svc.UpdateDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1621,6 +1753,30 @@ func TestUpdateSnapshot_AcceptSubscriptionRequest(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AddEntityOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddEntityOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddEntityOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AddPolicyGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddPolicyGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddPolicyGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateEnvironmentRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateEnvironmentRole(context.Background(), nil, func(o *Options) {
@@ -1746,6 +1902,18 @@ func TestUpdateSnapshot_CreateDomain(t *testing.T) {
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1986,6 +2154,18 @@ func TestUpdateSnapshot_DeleteDomain(t *testing.T) {
 	_, err := svc.DeleteDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2250,6 +2430,18 @@ func TestUpdateSnapshot_GetDomain(t *testing.T) {
 	_, err := svc.GetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2593,6 +2785,30 @@ func TestUpdateSnapshot_ListDomains(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListDomainUnitsForParent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDomainUnitsForParent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDomainUnitsForParent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEntityOwners(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEntityOwners(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEntityOwners")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEnvironmentActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnvironmentActions(context.Background(), nil, func(o *Options) {
@@ -2682,6 +2898,18 @@ func TestUpdateSnapshot_ListNotifications(t *testing.T) {
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListNotifications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyGrants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2845,6 +3073,30 @@ func TestUpdateSnapshot_RejectSubscriptionRequest(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RemoveEntityOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveEntityOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RemoveEntityOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RemovePolicyGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemovePolicyGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RemovePolicyGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RevokeSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RevokeSubscription(context.Background(), nil, func(o *Options) {
@@ -2994,6 +3246,18 @@ func TestUpdateSnapshot_UpdateDomain(t *testing.T) {
 	_, err := svc.UpdateDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDomainUnit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDomainUnit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDomainUnit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

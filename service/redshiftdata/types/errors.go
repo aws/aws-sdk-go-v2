@@ -7,6 +7,33 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The Amazon Redshift Data API operation failed because the maximum number of
+// active sessions exceeded.
+type ActiveSessionsExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ActiveSessionsExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ActiveSessionsExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ActiveSessionsExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ActiveSessionsExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ActiveSessionsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The number of active statements exceeds the limit.
 type ActiveStatementsExceededException struct {
 	Message *string
@@ -140,6 +167,32 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The Amazon Redshift Data API operation failed due to timeout.
+type QueryTimeoutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *QueryTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *QueryTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *QueryTimeoutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "QueryTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *QueryTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Amazon Redshift Data API operation failed due to a missing resource.
 type ResourceNotFoundException struct {

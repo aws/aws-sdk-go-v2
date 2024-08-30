@@ -124,11 +124,17 @@ func awsAwsjson11_deserializeOpErrorBatchExecuteStatement(response *smithyhttp.R
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("ActiveSessionsExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorActiveSessionsExceededException(response, errorBody)
+
 	case strings.EqualFold("ActiveStatementsExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorActiveStatementsExceededException(response, errorBody)
 
 	case strings.EqualFold("BatchExecuteStatementException", errorCode):
 		return awsAwsjson11_deserializeErrorBatchExecuteStatementException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -472,6 +478,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTable(response *smithyhttp.Response,
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("QueryTimeoutException", errorCode):
+		return awsAwsjson11_deserializeErrorQueryTimeoutException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
 
@@ -579,11 +588,17 @@ func awsAwsjson11_deserializeOpErrorExecuteStatement(response *smithyhttp.Respon
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("ActiveSessionsExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorActiveSessionsExceededException(response, errorBody)
+
 	case strings.EqualFold("ActiveStatementsExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorActiveStatementsExceededException(response, errorBody)
 
 	case strings.EqualFold("ExecuteStatementException", errorCode):
 		return awsAwsjson11_deserializeErrorExecuteStatementException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -811,6 +826,9 @@ func awsAwsjson11_deserializeOpErrorListDatabases(response *smithyhttp.Response,
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("QueryTimeoutException", errorCode):
+		return awsAwsjson11_deserializeErrorQueryTimeoutException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
 
@@ -923,6 +941,9 @@ func awsAwsjson11_deserializeOpErrorListSchemas(response *smithyhttp.Response, m
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("QueryTimeoutException", errorCode):
+		return awsAwsjson11_deserializeErrorQueryTimeoutException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -1147,6 +1168,9 @@ func awsAwsjson11_deserializeOpErrorListTables(response *smithyhttp.Response, me
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("QueryTimeoutException", errorCode):
+		return awsAwsjson11_deserializeErrorQueryTimeoutException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
 
@@ -1158,6 +1182,41 @@ func awsAwsjson11_deserializeOpErrorListTables(response *smithyhttp.Response, me
 		return genericError
 
 	}
+}
+
+func awsAwsjson11_deserializeErrorActiveSessionsExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ActiveSessionsExceededException{}
+	err := awsAwsjson11_deserializeDocumentActiveSessionsExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
 }
 
 func awsAwsjson11_deserializeErrorActiveStatementsExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
@@ -1335,6 +1394,41 @@ func awsAwsjson11_deserializeErrorInternalServerException(response *smithyhttp.R
 	return output
 }
 
+func awsAwsjson11_deserializeErrorQueryTimeoutException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.QueryTimeoutException{}
+	err := awsAwsjson11_deserializeDocumentQueryTimeoutException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorResourceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1403,6 +1497,46 @@ func awsAwsjson11_deserializeErrorValidationException(response *smithyhttp.Respo
 
 	errorBody.Seek(0, io.SeekStart)
 	return output
+}
+
+func awsAwsjson11_deserializeDocumentActiveSessionsExceededException(v **types.ActiveSessionsExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActiveSessionsExceededException
+	if *v == nil {
+		sv = &types.ActiveSessionsExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsAwsjson11_deserializeDocumentActiveStatementsExceededException(v **types.ActiveStatementsExceededException, value interface{}) error {
@@ -1802,6 +1936,42 @@ func awsAwsjson11_deserializeDocumentDatabaseList(v *[]string, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDbGroupList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentExecuteStatementException(v **types.ExecuteStatementException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2034,6 +2204,46 @@ func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalS
 	var sv *types.InternalServerException
 	if *v == nil {
 		sv = &types.InternalServerException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentQueryTimeoutException(v **types.QueryTimeoutException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryTimeoutException
+	if *v == nil {
+		sv = &types.QueryTimeoutException{}
 	} else {
 		sv = *v
 	}
@@ -2300,7 +2510,7 @@ func awsAwsjson11_deserializeDocumentStatementData(v **types.StatementData, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StatementId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -2340,6 +2550,15 @@ func awsAwsjson11_deserializeDocumentStatementData(v **types.StatementData, valu
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "SessionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+				}
+				sv.SessionId = ptr.String(jtv)
 			}
 
 		case "StatementName":
@@ -2528,7 +2747,7 @@ func awsAwsjson11_deserializeDocumentSubStatementData(v **types.SubStatementData
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StatementId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -2807,7 +3026,7 @@ func awsAwsjson11_deserializeOpDocumentBatchExecuteStatementOutput(v **BatchExec
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Location to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ClusterIdentifierString to be of type string, got %T instead", value)
 				}
 				sv.ClusterIdentifier = ptr.String(jtv)
 			}
@@ -2837,6 +3056,11 @@ func awsAwsjson11_deserializeOpDocumentBatchExecuteStatementOutput(v **BatchExec
 				sv.Database = ptr.String(jtv)
 			}
 
+		case "DbGroups":
+			if err := awsAwsjson11_deserializeDocumentDbGroupList(&sv.DbGroups, value); err != nil {
+				return err
+			}
+
 		case "DbUser":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2850,7 +3074,7 @@ func awsAwsjson11_deserializeOpDocumentBatchExecuteStatementOutput(v **BatchExec
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StatementId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -2862,6 +3086,15 @@ func awsAwsjson11_deserializeOpDocumentBatchExecuteStatementOutput(v **BatchExec
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "SessionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+				}
+				sv.SessionId = ptr.String(jtv)
 			}
 
 		case "WorkgroupName":
@@ -3022,7 +3255,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeStatementOutput(v **DescribeState
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StatementId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -3100,6 +3333,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeStatementOutput(v **DescribeState
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "SessionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SessionId = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -3230,7 +3472,7 @@ func awsAwsjson11_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Location to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ClusterIdentifierString to be of type string, got %T instead", value)
 				}
 				sv.ClusterIdentifier = ptr.String(jtv)
 			}
@@ -3260,6 +3502,11 @@ func awsAwsjson11_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 				sv.Database = ptr.String(jtv)
 			}
 
+		case "DbGroups":
+			if err := awsAwsjson11_deserializeDocumentDbGroupList(&sv.DbGroups, value); err != nil {
+				return err
+			}
+
 		case "DbUser":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3273,7 +3520,7 @@ func awsAwsjson11_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StatementId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -3285,6 +3532,15 @@ func awsAwsjson11_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "SessionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+				}
+				sv.SessionId = ptr.String(jtv)
 			}
 
 		case "WorkgroupName":

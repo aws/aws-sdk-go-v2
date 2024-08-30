@@ -32,8 +32,7 @@ type StartBackupJobInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// Amazon Web Services Region where they are created.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -50,8 +49,8 @@ type StartBackupJobInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Specifies the backup option for a selected resource. This option is only
-	// available for Windows Volume Shadow Copy Service (VSS) backup jobs.
+	// The backup option for a selected resource. This option is only available for
+	// Windows Volume Shadow Copy Service (VSS) backup jobs.
 	//
 	// Valid values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup
 	// option and create a Windows VSS backup. Set to "WindowsVSS""disabled" to create
@@ -81,17 +80,15 @@ type StartBackupJobInput struct {
 	// than the “transition to cold after days” setting. The “transition to cold after
 	// days” setting cannot be changed after a backup has been transitioned to cold.
 	//
-	// Resource types that are able to be transitioned to cold storage are listed in
-	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
-	// expression for other resource types.
+	// Resource types that can transition to cold storage are listed in the [Feature availability by resource] table.
+	// Backup ignores this expression for other resource types.
 	//
 	// This parameter has a maximum value of 100 years (36,500 days).
 	//
-	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
-	// To help organize your resources, you can assign your own metadata to the
-	// resources that you create. Each tag is a key-value pair.
+	// The tags to assign to the resources.
 	RecoveryPointTags map[string]string
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if

@@ -1340,7 +1340,7 @@ func awsAwsjson10_serializeDocumentChangeMessageVisibilityBatchRequestEntry(v *t
 		ok.String(*v.ReceiptHandle)
 	}
 
-	if v.VisibilityTimeout != 0 {
+	{
 		ok := object.Key("VisibilityTimeout")
 		ok.Integer(v.VisibilityTimeout)
 	}

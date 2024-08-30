@@ -20,7 +20,12 @@ import (
 // Backup Vault Lock has been assessed by Cohasset Associates for use in
 // environments that are subject to SEC 17a-4, CFTC, and FINRA regulations. For
 // more information about how Backup Vault Lock relates to these regulations, see
-// the Cohasset Associates Compliance Assessment.
+// the [Cohasset Associates Compliance Assessment.]
+//
+// For more information, see [Backup Vault Lock].
+//
+// [Cohasset Associates Compliance Assessment.]: https://docs.aws.amazon.com/aws-backup/latest/devguide/samples/cohassetreport.zip
+// [Backup Vault Lock]: https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html
 func (c *Client) PutBackupVaultLockConfiguration(ctx context.Context, params *PutBackupVaultLockConfigurationInput, optFns ...func(*Options)) (*PutBackupVaultLockConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBackupVaultLockConfigurationInput{}
@@ -86,8 +91,9 @@ type PutBackupVaultLockConfigurationInput struct {
 	// example, your organization's policies require you to retain certain data for at
 	// least seven years (2555 days).
 	//
-	// If this parameter is not specified, Vault Lock will not enforce a minimum
-	// retention period.
+	// This parameter is required when a vault lock is created through CloudFormation;
+	// otherwise, this parameter is optional. If this parameter is not specified, Vault
+	// Lock will not enforce a minimum retention period.
 	//
 	// If this parameter is specified, any backup or copy job to the vault must have a
 	// lifecycle policy with a retention period equal to or longer than the minimum

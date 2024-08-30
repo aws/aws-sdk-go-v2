@@ -35,15 +35,13 @@ func (c *Client) CreateBackupPlan(ctx context.Context, params *CreateBackupPlanI
 
 type CreateBackupPlanInput struct {
 
-	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
-	// sets of Rules .
+	// The body of a backup plan. Includes a BackupPlanName and one or more sets of
+	// Rules .
 	//
 	// This member is required.
 	BackupPlan *types.BackupPlanInput
 
-	// To help organize your resources, you can assign your own metadata to the
-	// resources that you create. Each tag is a key-value pair. The specified tags are
-	// assigned to all backups created with this plan.
+	// The tags to assign to the backup plan.
 	BackupPlanTags map[string]string
 
 	// Identifies the request and allows failed requests to be retried without the
@@ -59,8 +57,8 @@ type CreateBackupPlanInput struct {
 
 type CreateBackupPlanOutput struct {
 
-	// A list of BackupOptions settings for a resource type. This option is only
-	// available for Windows Volume Shadow Copy Service (VSS) backup jobs.
+	// The settings for a resource type. This option is only available for Windows
+	// Volume Shadow Copy Service (VSS) backup jobs.
 	AdvancedBackupSettings []types.AdvancedBackupSetting
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
@@ -68,7 +66,7 @@ type CreateBackupPlanOutput struct {
 	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50 .
 	BackupPlanArn *string
 
-	// Uniquely identifies a backup plan.
+	// The ID of the backup plan.
 	BackupPlanId *string
 
 	// The date and time that a backup plan is created, in Unix format and Coordinated

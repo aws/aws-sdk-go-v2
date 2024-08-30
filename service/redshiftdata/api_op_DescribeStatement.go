@@ -109,6 +109,9 @@ type DescribeStatementOutput struct {
 	// database.
 	SecretArn *string
 
+	// The session identifier of the query.
+	SessionId *string
+
 	// The status of the SQL statement being described. Status values are defined as
 	// follows:
 	//

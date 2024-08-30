@@ -43,9 +43,9 @@ type ListFrameworksInput struct {
 
 type ListFrameworksOutput struct {
 
-	// A list of frameworks with details for each framework, including the framework
-	// name, Amazon Resource Name (ARN), description, number of controls, creation
-	// time, and deployment status.
+	// The frameworks with details for each framework, including the framework name,
+	// Amazon Resource Name (ARN), description, number of controls, creation time, and
+	// deployment status.
 	Frameworks []types.Framework
 
 	// An identifier that was returned from the previous call to this operation, which

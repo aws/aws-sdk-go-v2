@@ -36,6 +36,10 @@ type GetSupportedResourceTypesOutput struct {
 	//
 	//   - Aurora for Amazon Aurora
 	//
+	//   - CloudFormation for CloudFormation
+	//
+	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//
 	//   - DynamoDB for Amazon DynamoDB
 	//
 	//   - EBS for Amazon Elastic Block Store
@@ -44,15 +48,24 @@ type GetSupportedResourceTypesOutput struct {
 	//
 	//   - EFS for Amazon Elastic File System
 	//
-	//   - FSX for Amazon FSx
+	//   - FSx for Amazon FSx
+	//
+	//   - Neptune for Amazon Neptune
 	//
 	//   - RDS for Amazon Relational Database Service
 	//
+	//   - Redshift for Amazon Redshift
+	//
+	//   - S3 for Amazon Simple Storage Service (Amazon S3)
+	//
+	//   - SAP HANA on Amazon EC2 for SAP HANA databases on Amazon Elastic Compute
+	//   Cloud instances
+	//
 	//   - Storage Gateway for Storage Gateway
 	//
-	//   - DocDB for Amazon DocumentDB (with MongoDB compatibility)
+	//   - Timestream for Amazon Timestream
 	//
-	//   - Neptune for Amazon Neptune
+	//   - VirtualMachine for VMware virtual machines
 	ResourceTypes []string
 
 	// Metadata pertaining to the operation's result.

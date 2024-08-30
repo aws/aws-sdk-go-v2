@@ -269,9 +269,6 @@ func validateOpBatchExecuteStatementInput(v *BatchExecuteStatementInput) error {
 	if v.Sqls == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sqls"))
 	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -331,9 +328,6 @@ func validateOpExecuteStatementInput(v *ExecuteStatementInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ExecuteStatementInput"}
 	if v.Sql == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sql"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
 	if v.Parameters != nil {
 		if err := validateSqlParametersList(v.Parameters); err != nil {

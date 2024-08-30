@@ -91,6 +91,46 @@ func ExampleDataSourceConfigurationOutput_outputUsage() {
 var _ *types.GlueRunConfigurationOutput
 var _ *types.RedshiftRunConfigurationOutput
 
+func ExampleDomainUnitGrantFilter_outputUsage() {
+	var union types.DomainUnitGrantFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DomainUnitGrantFilterMemberAllDomainUnitsGrantFilter:
+		_ = v.Value // Value is types.AllDomainUnitsGrantFilter
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AllDomainUnitsGrantFilter
+
+func ExampleDomainUnitOwnerProperties_outputUsage() {
+	var union types.DomainUnitOwnerProperties
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DomainUnitOwnerPropertiesMemberGroup:
+		_ = v.Value // Value is types.DomainUnitGroupProperties
+
+	case *types.DomainUnitOwnerPropertiesMemberUser:
+		_ = v.Value // Value is types.DomainUnitUserProperties
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DomainUnitGroupProperties
+var _ *types.DomainUnitUserProperties
+
 func ExampleFilterClause_outputUsage() {
 	var union types.FilterClause
 	// type switches can be used to check the union value
@@ -151,6 +191,24 @@ func ExampleGrantedEntityInput_outputUsage() {
 }
 
 var _ *types.ListingRevisionInput
+
+func ExampleGroupPolicyGrantPrincipal_outputUsage() {
+	var union types.GroupPolicyGrantPrincipal
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GroupPolicyGrantPrincipalMemberGroupIdentifier:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleListingItem_outputUsage() {
 	var union types.ListingItem
@@ -234,6 +292,155 @@ func ExampleModel_outputUsage() {
 }
 
 var _ *string
+
+func ExampleOwnerProperties_outputUsage() {
+	var union types.OwnerProperties
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OwnerPropertiesMemberGroup:
+		_ = v.Value // Value is types.OwnerGroupProperties
+
+	case *types.OwnerPropertiesMemberUser:
+		_ = v.Value // Value is types.OwnerUserProperties
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OwnerGroupProperties
+var _ *types.OwnerUserProperties
+
+func ExampleOwnerPropertiesOutput_outputUsage() {
+	var union types.OwnerPropertiesOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OwnerPropertiesOutputMemberGroup:
+		_ = v.Value // Value is types.OwnerGroupPropertiesOutput
+
+	case *types.OwnerPropertiesOutputMemberUser:
+		_ = v.Value // Value is types.OwnerUserPropertiesOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OwnerGroupPropertiesOutput
+var _ *types.OwnerUserPropertiesOutput
+
+func ExamplePolicyGrantDetail_outputUsage() {
+	var union types.PolicyGrantDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PolicyGrantDetailMemberAddToProjectMemberPool:
+		_ = v.Value // Value is types.AddToProjectMemberPoolPolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberCreateAssetType:
+		_ = v.Value // Value is types.CreateAssetTypePolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberCreateDomainUnit:
+		_ = v.Value // Value is types.CreateDomainUnitPolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberCreateEnvironment:
+		_ = v.Value // Value is types.Unit
+
+	case *types.PolicyGrantDetailMemberCreateEnvironmentProfile:
+		_ = v.Value // Value is types.CreateEnvironmentProfilePolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberCreateFormType:
+		_ = v.Value // Value is types.CreateFormTypePolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberCreateGlossary:
+		_ = v.Value // Value is types.CreateGlossaryPolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberCreateProject:
+		_ = v.Value // Value is types.CreateProjectPolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberDelegateCreateEnvironmentProfile:
+		_ = v.Value // Value is types.Unit
+
+	case *types.PolicyGrantDetailMemberOverrideDomainUnitOwners:
+		_ = v.Value // Value is types.OverrideDomainUnitOwnersPolicyGrantDetail
+
+	case *types.PolicyGrantDetailMemberOverrideProjectOwners:
+		_ = v.Value // Value is types.OverrideProjectOwnersPolicyGrantDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CreateDomainUnitPolicyGrantDetail
+var _ *types.OverrideProjectOwnersPolicyGrantDetail
+var _ *types.CreateEnvironmentProfilePolicyGrantDetail
+var _ *types.CreateGlossaryPolicyGrantDetail
+var _ *types.AddToProjectMemberPoolPolicyGrantDetail
+var _ *types.CreateProjectPolicyGrantDetail
+var _ *types.OverrideDomainUnitOwnersPolicyGrantDetail
+var _ *types.CreateAssetTypePolicyGrantDetail
+var _ *types.Unit
+var _ *types.CreateFormTypePolicyGrantDetail
+
+func ExamplePolicyGrantPrincipal_outputUsage() {
+	var union types.PolicyGrantPrincipal
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PolicyGrantPrincipalMemberDomainUnit:
+		_ = v.Value // Value is types.DomainUnitPolicyGrantPrincipal
+
+	case *types.PolicyGrantPrincipalMemberGroup:
+		_ = v.Value // Value is types.GroupPolicyGrantPrincipal
+
+	case *types.PolicyGrantPrincipalMemberProject:
+		_ = v.Value // Value is types.ProjectPolicyGrantPrincipal
+
+	case *types.PolicyGrantPrincipalMemberUser:
+		_ = v.Value // Value is types.UserPolicyGrantPrincipal
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DomainUnitPolicyGrantPrincipal
+var _ types.GroupPolicyGrantPrincipal
+var _ types.UserPolicyGrantPrincipal
+var _ *types.ProjectPolicyGrantPrincipal
+
+func ExampleProjectGrantFilter_outputUsage() {
+	var union types.ProjectGrantFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProjectGrantFilterMemberDomainUnitFilter:
+		_ = v.Value // Value is types.DomainUnitFilterForProject
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DomainUnitFilterForProject
 
 func ExampleProvisioningConfiguration_outputUsage() {
 	var union types.ProvisioningConfiguration
@@ -537,6 +744,28 @@ func ExampleSubscribedPrincipalInput_outputUsage() {
 }
 
 var _ *types.SubscribedProjectInput
+
+func ExampleUserPolicyGrantPrincipal_outputUsage() {
+	var union types.UserPolicyGrantPrincipal
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UserPolicyGrantPrincipalMemberAllUsersGrantFilter:
+		_ = v.Value // Value is types.AllUsersGrantFilter
+
+	case *types.UserPolicyGrantPrincipalMemberUserIdentifier:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *types.AllUsersGrantFilter
 
 func ExampleUserProfileDetails_outputUsage() {
 	var union types.UserProfileDetails

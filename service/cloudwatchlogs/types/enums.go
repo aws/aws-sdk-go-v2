@@ -92,6 +92,35 @@ func (Distribution) Values() []Distribution {
 	}
 }
 
+type EntityRejectionErrorType string
+
+// Enum values for EntityRejectionErrorType
+const (
+	EntityRejectionErrorTypeInvalidEntity           EntityRejectionErrorType = "InvalidEntity"
+	EntityRejectionErrorTypeInvalidTypeValue        EntityRejectionErrorType = "InvalidTypeValue"
+	EntityRejectionErrorTypeInvalidKeyAttribute     EntityRejectionErrorType = "InvalidKeyAttributes"
+	EntityRejectionErrorTypeInvalidAttributes       EntityRejectionErrorType = "InvalidAttributes"
+	EntityRejectionErrorTypeEntitySizeTooLarge      EntityRejectionErrorType = "EntitySizeTooLarge"
+	EntityRejectionErrorTypeUnsupportedLogGroupType EntityRejectionErrorType = "UnsupportedLogGroupType"
+	EntityRejectionErrorTypeMissingRequiredFields   EntityRejectionErrorType = "MissingRequiredFields"
+)
+
+// Values returns all known values for EntityRejectionErrorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntityRejectionErrorType) Values() []EntityRejectionErrorType {
+	return []EntityRejectionErrorType{
+		"InvalidEntity",
+		"InvalidTypeValue",
+		"InvalidKeyAttributes",
+		"InvalidAttributes",
+		"EntitySizeTooLarge",
+		"UnsupportedLogGroupType",
+		"MissingRequiredFields",
+	}
+}
+
 type EvaluationFrequency string
 
 // Enum values for EvaluationFrequency

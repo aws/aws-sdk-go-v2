@@ -28,8 +28,7 @@ func (c *Client) StartRestoreJob(ctx context.Context, params *StartRestoreJobInp
 
 type StartRestoreJobInput struct {
 
-	// A set of metadata key-value pairs. Contains information, such as a resource
-	// name, required to restore a recovery point.
+	// A set of metadata key-value pairs.
 	//
 	// You can get configuration metadata about a resource at the time it was backed
 	// up by calling GetRecoveryPointRestoreMetadata . However, values in addition to
@@ -37,32 +36,53 @@ type StartRestoreJobInput struct {
 	// a resource. For example, you might need to provide a new resource name if the
 	// original already exists.
 	//
-	// You need to specify specific metadata to restore an Amazon Elastic File System
-	// (Amazon EFS) instance:
+	// For more information about the metadata for each resource, see the following:
 	//
-	//   - file-system-id : The ID of the Amazon EFS file system that is backed up by
-	//   Backup. Returned in GetRecoveryPointRestoreMetadata .
+	// [Metadata for Amazon Aurora]
 	//
-	//   - Encrypted : A Boolean value that, if true, specifies that the file system is
-	//   encrypted. If KmsKeyId is specified, Encrypted must be set to true .
+	// [Metadata for Amazon DocumentDB]
 	//
-	//   - KmsKeyId : Specifies the Amazon Web Services KMS key that is used to encrypt
-	//   the restored file system. You can specify a key from another Amazon Web Services
-	//   account provided that key it is properly shared with your account via Amazon Web
-	//   Services KMS.
+	// [Metadata for CloudFormation]
 	//
-	//   - PerformanceMode : Specifies the throughput mode of the file system.
+	// [Metadata for Amazon DynamoDB]
 	//
-	//   - CreationToken : A user-supplied value that ensures the uniqueness
-	//   (idempotency) of the request.
+	// [Metadata for Amazon EBS]
 	//
-	//   - newFileSystem : A Boolean value that, if true, specifies that the recovery
-	//   point is restored to a new Amazon EFS file system.
+	// [Metadata for Amazon EC2]
 	//
-	//   - ItemsToRestore : An array of one to five strings where each string is a file
-	//   path. Use ItemsToRestore to restore specific files or directories rather than
-	//   the entire file system. This parameter is optional. For example,
-	//   "itemsToRestore":"[\"/my.test\"]" .
+	// [Metadata for Amazon EFS]
+	//
+	// [Metadata for Amazon FSx]
+	//
+	// [Metadata for Amazon Neptune]
+	//
+	// [Metadata for Amazon RDS]
+	//
+	// [Metadata for Amazon Redshift]
+	//
+	// [Metadata for Storage Gateway]
+	//
+	// [Metadata for Amazon S3]
+	//
+	// [Metadata for Amazon Timestream]
+	//
+	// [Metadata for virtual machines]
+	//
+	// [Metadata for Amazon Aurora]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-aur.html#aur-restore-cli
+	// [Metadata for Amazon RDS]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-rds.html#rds-restore-cli
+	// [Metadata for Storage Gateway]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-storage-gateway.html#restoring-sgw-cli
+	// [Metadata for Amazon EC2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-ec2.html#restoring-ec2-cli
+	// [Metadata for Amazon Timestream]: https://docs.aws.amazon.com/aws-backup/latest/devguide/timestream-restore.html#timestream-restore-api
+	// [Metadata for Amazon EBS]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-ebs.html#ebs-restore-cli
+	// [Metadata for Amazon Redshift]: https://docs.aws.amazon.com/aws-backup/latest/devguide/redshift-restores.html#redshift-restore-api
+	// [Metadata for Amazon DynamoDB]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-dynamodb.html#ddb-restore-cli
+	// [Metadata for Amazon Neptune]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-nep.html#nep-restore-cli
+	// [Metadata for Amazon S3]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-s3.html#s3-restore-cli
+	// [Metadata for Amazon EFS]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-efs.html#efs-restore-cli
+	// [Metadata for virtual machines]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-vm.html#vm-restore-cli
+	// [Metadata for CloudFormation]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-application-stacks.html#restoring-cfn-cli
+	// [Metadata for Amazon FSx]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-fsx.html#fsx-restore-cli
+	// [Metadata for Amazon DocumentDB]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-docdb.html#docdb-restore-cli
 	//
 	// This member is required.
 	Metadata map[string]string
@@ -91,35 +111,35 @@ type StartRestoreJobInput struct {
 
 	// Starts a job to restore a recovery point for one of the following resources:
 	//
-	//   - Aurora for Amazon Aurora
+	//   - Aurora - Amazon Aurora
 	//
-	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//   - DocumentDB - Amazon DocumentDB
 	//
-	//   - CloudFormation for CloudFormation
+	//   - CloudFormation - CloudFormation
 	//
-	//   - DynamoDB for Amazon DynamoDB
+	//   - DynamoDB - Amazon DynamoDB
 	//
-	//   - EBS for Amazon Elastic Block Store
+	//   - EBS - Amazon Elastic Block Store
 	//
-	//   - EC2 for Amazon Elastic Compute Cloud
+	//   - EC2 - Amazon Elastic Compute Cloud
 	//
-	//   - EFS for Amazon Elastic File System
+	//   - EFS - Amazon Elastic File System
 	//
-	//   - FSx for Amazon FSx
+	//   - FSx - Amazon FSx
 	//
-	//   - Neptune for Amazon Neptune
+	//   - Neptune - Amazon Neptune
 	//
-	//   - RDS for Amazon Relational Database Service
+	//   - RDS - Amazon Relational Database Service
 	//
-	//   - Redshift for Amazon Redshift
+	//   - Redshift - Amazon Redshift
 	//
-	//   - Storage Gateway for Storage Gateway
+	//   - Storage Gateway - Storage Gateway
 	//
-	//   - S3 for Amazon S3
+	//   - S3 - Amazon Simple Storage Service
 	//
-	//   - Timestream for Amazon Timestream
+	//   - Timestream - Amazon Timestream
 	//
-	//   - VirtualMachine for virtual machines
+	//   - VirtualMachine - Virtual machines
 	ResourceType *string
 
 	noSmithyDocumentSerde

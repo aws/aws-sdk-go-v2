@@ -1,3 +1,7 @@
+# v1.28.0 (2024-08-30)
+
+* **Feature**: The release include the new Redshift DataAPI feature for session use, customer execute query with --session-keep-alive-seconds parameter and can submit follow-up queries to same sessions with returned`session-id`
+
 # v1.27.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

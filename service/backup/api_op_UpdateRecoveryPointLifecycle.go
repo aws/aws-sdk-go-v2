@@ -17,18 +17,22 @@ import (
 // and when it expires. Backup transitions and expires backups automatically
 // according to the lifecycle that you define.
 //
+// Resource types that can transition to cold storage are listed in the [Feature availability by resource] table.
+// Backup ignores this expression for other resource types.
+//
 // Backups transitioned to cold storage must be stored in cold storage for a
 // minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
 // than the “transition to cold after days” setting. The “transition to cold after
 // days” setting cannot be changed after a backup has been transitioned to cold.
 //
-// Resource types that are able to be transitioned to cold storage are listed in
-// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
-// expression for other resource types.
+// If your lifecycle currently uses the parameters DeleteAfterDays and
+// MoveToColdStorageAfterDays , include these parameters and their values when you
+// call this operation. Not including them may result in your plan updating with
+// null values.
 //
 // This operation does not support continuous backups.
 //
-// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
 func (c *Client) UpdateRecoveryPointLifecycle(ctx context.Context, params *UpdateRecoveryPointLifecycleInput, optFns ...func(*Options)) (*UpdateRecoveryPointLifecycleOutput, error) {
 	if params == nil {
 		params = &UpdateRecoveryPointLifecycleInput{}
@@ -48,8 +52,7 @@ type UpdateRecoveryPointLifecycleInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// Amazon Web Services Region where they are created.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -78,7 +81,7 @@ type UpdateRecoveryPointLifecycleInput struct {
 type UpdateRecoveryPointLifecycleOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
+	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	BackupVaultArn *string
 
 	// A CalculatedLifecycle object containing DeleteAt and MoveToColdStorageAt
@@ -94,11 +97,10 @@ type UpdateRecoveryPointLifecycleOutput struct {
 	// than the “transition to cold after days” setting. The “transition to cold after
 	// days” setting cannot be changed after a backup has been transitioned to cold.
 	//
-	// Resource types that are able to be transitioned to cold storage are listed in
-	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
-	// expression for other resource types.
+	// Resource types that can transition to cold storage are listed in the [Feature availability by resource] table.
+	// Backup ignores this expression for other resource types.
 	//
-	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for

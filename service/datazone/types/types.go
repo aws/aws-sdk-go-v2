@@ -58,6 +58,25 @@ type ActionParametersMemberAwsConsoleLink struct {
 
 func (*ActionParametersMemberAwsConsoleLink) isActionParameters() {}
 
+// The details of the policy grant.
+type AddToProjectMemberPoolPolicyGrantDetail struct {
+
+	// Specifies whether the policy grant is applied to child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The grant filter for all domain units.
+type AllDomainUnitsGrantFilter struct {
+	noSmithyDocumentSerde
+}
+
+// The all users grant filter.
+type AllUsersGrantFilter struct {
+	noSmithyDocumentSerde
+}
+
 // The configuration details of the asset filter.
 //
 // The following types satisfy this interface:
@@ -490,6 +509,60 @@ type ConfigurableEnvironmentAction struct {
 	// The authentication type of a configurable action of a Amazon DataZone
 	// environment.
 	Auth ConfigurableActionTypeAuthorization
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy grant.
+type CreateAssetTypePolicyGrantDetail struct {
+
+	// Specifies whether the policy grant is applied to child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy grant.
+type CreateDomainUnitPolicyGrantDetail struct {
+
+	// Specifies whether the policy grant is applied to child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy grant.
+type CreateEnvironmentProfilePolicyGrantDetail struct {
+
+	// The ID of the domain unit.
+	DomainUnitId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy grant.
+type CreateFormTypePolicyGrantDetail struct {
+
+	// Specifies whether the policy grant is applied to child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy grant.
+type CreateGlossaryPolicyGrantDetail struct {
+
+	// Specifies whether the policy grant is applied to child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy grant.
+type CreateProjectPolicyGrantDetail struct {
+
+	// Specifies whether the policy grant is applied to child domain units.
+	IncludeChildDomainUnits *bool
 
 	noSmithyDocumentSerde
 }
@@ -1019,6 +1092,118 @@ type DomainSummary struct {
 
 	// The data portal URL for the Amazon DataZone domain.
 	PortalUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The domain unit filter of the project grant filter.
+type DomainUnitFilterForProject struct {
+
+	// The domain unit ID to use in the filter.
+	//
+	// This member is required.
+	DomainUnit *string
+
+	// Specifies whether to include child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The grant filter for the domain unit. In the current release of Amazon
+// DataZone, the only supported filter is the allDomainUnitsGrantFilter .
+//
+// The following types satisfy this interface:
+//
+//	DomainUnitGrantFilterMemberAllDomainUnitsGrantFilter
+type DomainUnitGrantFilter interface {
+	isDomainUnitGrantFilter()
+}
+
+// Specifies a grant filter containing all domain units.
+type DomainUnitGrantFilterMemberAllDomainUnitsGrantFilter struct {
+	Value AllDomainUnitsGrantFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*DomainUnitGrantFilterMemberAllDomainUnitsGrantFilter) isDomainUnitGrantFilter() {}
+
+// The properties of a domain unit group.
+type DomainUnitGroupProperties struct {
+
+	// The ID of the domain unit group.
+	GroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of the domain unit owner.
+//
+// The following types satisfy this interface:
+//
+//	DomainUnitOwnerPropertiesMemberGroup
+//	DomainUnitOwnerPropertiesMemberUser
+type DomainUnitOwnerProperties interface {
+	isDomainUnitOwnerProperties()
+}
+
+// Indicates that the domain unit owner is a group.
+type DomainUnitOwnerPropertiesMemberGroup struct {
+	Value DomainUnitGroupProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*DomainUnitOwnerPropertiesMemberGroup) isDomainUnitOwnerProperties() {}
+
+// Indicates that the domain unit owner is a user.
+type DomainUnitOwnerPropertiesMemberUser struct {
+	Value DomainUnitUserProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*DomainUnitOwnerPropertiesMemberUser) isDomainUnitOwnerProperties() {}
+
+// The domain unit principal to whom the policy is granted.
+type DomainUnitPolicyGrantPrincipal struct {
+
+	// Specifes the designation of the domain unit users.
+	//
+	// This member is required.
+	DomainUnitDesignation DomainUnitDesignation
+
+	// The grant filter for the domain unit.
+	DomainUnitGrantFilter DomainUnitGrantFilter
+
+	// The ID of the domain unit.
+	DomainUnitIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the domain unit.
+type DomainUnitSummary struct {
+
+	// The ID of the domain unit summary.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the domain unit summary.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of the domain unit user.
+type DomainUnitUserProperties struct {
+
+	// The ID of teh domain unit user.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -1729,6 +1914,24 @@ type GroupDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The group principal to whom the policy is granted.
+//
+// The following types satisfy this interface:
+//
+//	GroupPolicyGrantPrincipalMemberGroupIdentifier
+type GroupPolicyGrantPrincipal interface {
+	isGroupPolicyGrantPrincipal()
+}
+
+// The ID Of the group of the group principal.
+type GroupPolicyGrantPrincipalMemberGroupIdentifier struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GroupPolicyGrantPrincipalMemberGroupIdentifier) isGroupPolicyGrantPrincipal() {}
+
 // The details of a group profile.
 type GroupProfileSummary struct {
 
@@ -2318,6 +2521,304 @@ type NotLikeExpression struct {
 	noSmithyDocumentSerde
 }
 
+// The grant details of the override domain unit owners policy.
+type OverrideDomainUnitOwnersPolicyGrantDetail struct {
+
+	// Specifies whether the policy is inherited by child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The details of the override project owners policy grant.
+type OverrideProjectOwnersPolicyGrantDetail struct {
+
+	// Specifies whether the policy is inherited by child domain units.
+	IncludeChildDomainUnits *bool
+
+	noSmithyDocumentSerde
+}
+
+// The properties of the domain unit owners group.
+type OwnerGroupProperties struct {
+
+	// The ID of the domain unit owners group.
+	//
+	// This member is required.
+	GroupIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of the domain unit owners group.
+type OwnerGroupPropertiesOutput struct {
+
+	// The ID of the domain unit owners group.
+	GroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of a domain unit's owner.
+//
+// The following types satisfy this interface:
+//
+//	OwnerPropertiesMemberGroup
+//	OwnerPropertiesMemberUser
+type OwnerProperties interface {
+	isOwnerProperties()
+}
+
+// Specifies that the domain unit owner is a group.
+type OwnerPropertiesMemberGroup struct {
+	Value OwnerGroupProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*OwnerPropertiesMemberGroup) isOwnerProperties() {}
+
+// Specifies that the domain unit owner is a user.
+type OwnerPropertiesMemberUser struct {
+	Value OwnerUserProperties
+
+	noSmithyDocumentSerde
+}
+
+func (*OwnerPropertiesMemberUser) isOwnerProperties() {}
+
+// The ID of the domain unit owners group.
+//
+// The following types satisfy this interface:
+//
+//	OwnerPropertiesOutputMemberGroup
+//	OwnerPropertiesOutputMemberUser
+type OwnerPropertiesOutput interface {
+	isOwnerPropertiesOutput()
+}
+
+// Specifies that the domain unit owner is a group.
+type OwnerPropertiesOutputMemberGroup struct {
+	Value OwnerGroupPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*OwnerPropertiesOutputMemberGroup) isOwnerPropertiesOutput() {}
+
+// Specifies that the domain unit owner is a user.
+type OwnerPropertiesOutputMemberUser struct {
+	Value OwnerUserPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*OwnerPropertiesOutputMemberUser) isOwnerPropertiesOutput() {}
+
+// The properties of the owner user.
+type OwnerUserProperties struct {
+
+	// The ID of the owner user.
+	//
+	// This member is required.
+	UserIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of the owner user.
+type OwnerUserPropertiesOutput struct {
+
+	// The ID of the owner user.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy grant.
+//
+// The following types satisfy this interface:
+//
+//	PolicyGrantDetailMemberAddToProjectMemberPool
+//	PolicyGrantDetailMemberCreateAssetType
+//	PolicyGrantDetailMemberCreateDomainUnit
+//	PolicyGrantDetailMemberCreateEnvironment
+//	PolicyGrantDetailMemberCreateEnvironmentProfile
+//	PolicyGrantDetailMemberCreateFormType
+//	PolicyGrantDetailMemberCreateGlossary
+//	PolicyGrantDetailMemberCreateProject
+//	PolicyGrantDetailMemberDelegateCreateEnvironmentProfile
+//	PolicyGrantDetailMemberOverrideDomainUnitOwners
+//	PolicyGrantDetailMemberOverrideProjectOwners
+type PolicyGrantDetail interface {
+	isPolicyGrantDetail()
+}
+
+// Specifies that the policy grant is to be added to the members of the project.
+type PolicyGrantDetailMemberAddToProjectMemberPool struct {
+	Value AddToProjectMemberPoolPolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberAddToProjectMemberPool) isPolicyGrantDetail() {}
+
+// Specifies that this is a create asset type policy.
+type PolicyGrantDetailMemberCreateAssetType struct {
+	Value CreateAssetTypePolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberCreateAssetType) isPolicyGrantDetail() {}
+
+// Specifies that this is a create domain unit policy.
+type PolicyGrantDetailMemberCreateDomainUnit struct {
+	Value CreateDomainUnitPolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberCreateDomainUnit) isPolicyGrantDetail() {}
+
+// Specifies that this is a create environment policy.
+type PolicyGrantDetailMemberCreateEnvironment struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberCreateEnvironment) isPolicyGrantDetail() {}
+
+// Specifies that this is a create environment profile policy.
+type PolicyGrantDetailMemberCreateEnvironmentProfile struct {
+	Value CreateEnvironmentProfilePolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberCreateEnvironmentProfile) isPolicyGrantDetail() {}
+
+// Specifies that this is a create form type policy.
+type PolicyGrantDetailMemberCreateFormType struct {
+	Value CreateFormTypePolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberCreateFormType) isPolicyGrantDetail() {}
+
+// Specifies that this is a create glossary policy.
+type PolicyGrantDetailMemberCreateGlossary struct {
+	Value CreateGlossaryPolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberCreateGlossary) isPolicyGrantDetail() {}
+
+// Specifies that this is a create project policy.
+type PolicyGrantDetailMemberCreateProject struct {
+	Value CreateProjectPolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberCreateProject) isPolicyGrantDetail() {}
+
+// Specifies that this is the delegation of the create environment profile policy.
+type PolicyGrantDetailMemberDelegateCreateEnvironmentProfile struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberDelegateCreateEnvironmentProfile) isPolicyGrantDetail() {}
+
+// Specifies whether to override domain unit owners.
+type PolicyGrantDetailMemberOverrideDomainUnitOwners struct {
+	Value OverrideDomainUnitOwnersPolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberOverrideDomainUnitOwners) isPolicyGrantDetail() {}
+
+// Specifies whether to override project owners.
+type PolicyGrantDetailMemberOverrideProjectOwners struct {
+	Value OverrideProjectOwnersPolicyGrantDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantDetailMemberOverrideProjectOwners) isPolicyGrantDetail() {}
+
+// A member of the policy grant list.
+type PolicyGrantMember struct {
+
+	// Specifies the timestamp at which policy grant member was created.
+	CreatedAt *time.Time
+
+	// Specifies the user who created the policy grant member.
+	CreatedBy *string
+
+	// The details of the policy grant member.
+	Detail PolicyGrantDetail
+
+	// The principal of the policy grant member.
+	Principal PolicyGrantPrincipal
+
+	noSmithyDocumentSerde
+}
+
+// The policy grant principal.
+//
+// The following types satisfy this interface:
+//
+//	PolicyGrantPrincipalMemberDomainUnit
+//	PolicyGrantPrincipalMemberGroup
+//	PolicyGrantPrincipalMemberProject
+//	PolicyGrantPrincipalMemberUser
+type PolicyGrantPrincipal interface {
+	isPolicyGrantPrincipal()
+}
+
+// The domain unit of the policy grant principal.
+type PolicyGrantPrincipalMemberDomainUnit struct {
+	Value DomainUnitPolicyGrantPrincipal
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantPrincipalMemberDomainUnit) isPolicyGrantPrincipal() {}
+
+// The group of the policy grant principal.
+type PolicyGrantPrincipalMemberGroup struct {
+	Value GroupPolicyGrantPrincipal
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantPrincipalMemberGroup) isPolicyGrantPrincipal() {}
+
+// The project of the policy grant principal.
+type PolicyGrantPrincipalMemberProject struct {
+	Value ProjectPolicyGrantPrincipal
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantPrincipalMemberProject) isPolicyGrantPrincipal() {}
+
+// The user of the policy grant principal.
+type PolicyGrantPrincipalMemberUser struct {
+	Value UserPolicyGrantPrincipal
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyGrantPrincipalMemberUser) isPolicyGrantPrincipal() {}
+
 // The configuration of the prediction.
 type PredictionConfiguration struct {
 
@@ -2340,6 +2841,24 @@ type ProjectDeletionError struct {
 	noSmithyDocumentSerde
 }
 
+// The project grant filter.
+//
+// The following types satisfy this interface:
+//
+//	ProjectGrantFilterMemberDomainUnitFilter
+type ProjectGrantFilter interface {
+	isProjectGrantFilter()
+}
+
+// The domain unit filter of the project grant filter.
+type ProjectGrantFilterMemberDomainUnitFilter struct {
+	Value DomainUnitFilterForProject
+
+	noSmithyDocumentSerde
+}
+
+func (*ProjectGrantFilterMemberDomainUnitFilter) isProjectGrantFilter() {}
+
 // The details of a project member.
 type ProjectMember struct {
 
@@ -2352,6 +2871,23 @@ type ProjectMember struct {
 	//
 	// This member is required.
 	MemberDetails MemberDetails
+
+	noSmithyDocumentSerde
+}
+
+// The project policy grant principal.
+type ProjectPolicyGrantPrincipal struct {
+
+	// The project designation of the project policy grant principal.
+	//
+	// This member is required.
+	ProjectDesignation ProjectDesignation
+
+	// The project grant filter of the project policy grant principal.
+	ProjectGrantFilter ProjectGrantFilter
+
+	// The project ID of the project policy grant principal.
+	ProjectIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -2384,6 +2920,9 @@ type ProjectSummary struct {
 
 	// The description of a project.
 	Description *string
+
+	// The ID of the domain unit.
+	DomainUnitId *string
 
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.
@@ -3689,6 +4228,11 @@ type Topic struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the policy of creating an environment.
+type Unit struct {
+	noSmithyDocumentSerde
+}
+
 // The user details of a project member.
 type UserDetails struct {
 
@@ -3699,6 +4243,34 @@ type UserDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// The user policy grant principal.
+//
+// The following types satisfy this interface:
+//
+//	UserPolicyGrantPrincipalMemberAllUsersGrantFilter
+//	UserPolicyGrantPrincipalMemberUserIdentifier
+type UserPolicyGrantPrincipal interface {
+	isUserPolicyGrantPrincipal()
+}
+
+// The all users grant filter of the user policy grant principal.
+type UserPolicyGrantPrincipalMemberAllUsersGrantFilter struct {
+	Value AllUsersGrantFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*UserPolicyGrantPrincipalMemberAllUsersGrantFilter) isUserPolicyGrantPrincipal() {}
+
+// The user ID of the user policy grant principal.
+type UserPolicyGrantPrincipalMemberUserIdentifier struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UserPolicyGrantPrincipalMemberUserIdentifier) isUserPolicyGrantPrincipal() {}
 
 // The details of the user profile in Amazon DataZone.
 //
@@ -3764,13 +4336,21 @@ func (*UnknownUnionMember) isActionParameters()              {}
 func (*UnknownUnionMember) isAssetFilterConfiguration()      {}
 func (*UnknownUnionMember) isDataSourceConfigurationInput()  {}
 func (*UnknownUnionMember) isDataSourceConfigurationOutput() {}
+func (*UnknownUnionMember) isDomainUnitGrantFilter()         {}
+func (*UnknownUnionMember) isDomainUnitOwnerProperties()     {}
 func (*UnknownUnionMember) isFilterClause()                  {}
 func (*UnknownUnionMember) isGrantedEntity()                 {}
 func (*UnknownUnionMember) isGrantedEntityInput()            {}
+func (*UnknownUnionMember) isGroupPolicyGrantPrincipal()     {}
 func (*UnknownUnionMember) isListingItem()                   {}
 func (*UnknownUnionMember) isMember()                        {}
 func (*UnknownUnionMember) isMemberDetails()                 {}
 func (*UnknownUnionMember) isModel()                         {}
+func (*UnknownUnionMember) isOwnerProperties()               {}
+func (*UnknownUnionMember) isOwnerPropertiesOutput()         {}
+func (*UnknownUnionMember) isPolicyGrantDetail()             {}
+func (*UnknownUnionMember) isPolicyGrantPrincipal()          {}
+func (*UnknownUnionMember) isProjectGrantFilter()            {}
 func (*UnknownUnionMember) isProvisioningConfiguration()     {}
 func (*UnknownUnionMember) isProvisioningProperties()        {}
 func (*UnknownUnionMember) isRedshiftStorage()               {}
@@ -3783,4 +4363,5 @@ func (*UnknownUnionMember) isSelfGrantStatusOutput()         {}
 func (*UnknownUnionMember) isSubscribedListingItem()         {}
 func (*UnknownUnionMember) isSubscribedPrincipal()           {}
 func (*UnknownUnionMember) isSubscribedPrincipalInput()      {}
+func (*UnknownUnionMember) isUserPolicyGrantPrincipal()      {}
 func (*UnknownUnionMember) isUserProfileDetails()            {}

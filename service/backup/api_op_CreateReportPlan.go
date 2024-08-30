@@ -69,8 +69,7 @@ type CreateReportPlanInput struct {
 	// An optional description of the report plan with a maximum of 1,024 characters.
 	ReportPlanDescription *string
 
-	// Metadata that you can assign to help organize the report plans that you create.
-	// Each tag is a key-value pair.
+	// The tags to assign to the report plan.
 	ReportPlanTags map[string]string
 
 	noSmithyDocumentSerde

@@ -47,10 +47,10 @@ type ListReportPlansOutput struct {
 	// can be used to return the next set of items in the list.
 	NextToken *string
 
-	// A list of your report plans with detailed information for each plan. This
-	// information includes the Amazon Resource Name (ARN), report plan name,
-	// description, settings, delivery channel, deployment status, creation time, and
-	// last times the report plan attempted to and successfully ran.
+	// The report plans with detailed information for each plan. This information
+	// includes the Amazon Resource Name (ARN), report plan name, description,
+	// settings, delivery channel, deployment status, creation time, and last times the
+	// report plan attempted to and successfully ran.
 	ReportPlans []types.ReportPlan
 
 	// Metadata pertaining to the operation's result.
