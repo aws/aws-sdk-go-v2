@@ -84,3 +84,4 @@ software.amazon.smithy.aws.go.codegen.customization.AccountIDEndpointRouting
 software.amazon.smithy.aws.go.codegen.customization.RetryModeUserAgent
 software.amazon.smithy.aws.go.codegen.customization.RequestCompressionUserAgent
 software.amazon.smithy.aws.go.codegen.customization.s3.ExpressUserAgent
+software.amazon.smithy.aws.go.codegen.customization.BackfillRequiredTrait
