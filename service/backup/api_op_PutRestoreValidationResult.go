@@ -36,7 +36,7 @@ type PutRestoreValidationResultInput struct {
 	// This member is required.
 	RestoreJobId *string
 
-	// This is the status of your restore validation.
+	// The status of your restore validation.
 	//
 	// This member is required.
 	ValidationStatus types.RestoreValidationStatus

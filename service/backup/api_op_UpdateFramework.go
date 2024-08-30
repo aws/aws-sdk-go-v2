@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Updates an existing framework identified by its FrameworkName with the input
-// document in JSON format.
+// Updates the specified framework.
 func (c *Client) UpdateFramework(ctx context.Context, params *UpdateFrameworkInput, optFns ...func(*Options)) (*UpdateFrameworkOutput, error) {
 	if params == nil {
 		params = &UpdateFrameworkInput{}
@@ -38,8 +37,8 @@ type UpdateFrameworkInput struct {
 	// This member is required.
 	FrameworkName *string
 
-	// A list of the controls that make up the framework. Each control in the list has
-	// a name, input parameters, and scope.
+	// The controls that make up the framework. Each control in the list has a name,
+	// input parameters, and scope.
 	FrameworkControls []types.FrameworkControl
 
 	// An optional description of the framework with a maximum 1,024 characters.

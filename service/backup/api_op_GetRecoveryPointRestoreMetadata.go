@@ -30,8 +30,7 @@ type GetRecoveryPointRestoreMetadataInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// Amazon Web Services Region where they are created.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -44,7 +43,7 @@ type GetRecoveryPointRestoreMetadataInput struct {
 	// This member is required.
 	RecoveryPointArn *string
 
-	// This is the account ID of the specified backup vault.
+	// The account ID of the specified backup vault.
 	BackupVaultAccountId *string
 
 	noSmithyDocumentSerde
@@ -53,7 +52,7 @@ type GetRecoveryPointRestoreMetadataInput struct {
 type GetRecoveryPointRestoreMetadataOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
+	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	BackupVaultArn *string
 
 	// An ARN that uniquely identifies a recovery point; for example,
@@ -61,7 +60,7 @@ type GetRecoveryPointRestoreMetadataOutput struct {
 	// .
 	RecoveryPointArn *string
 
-	// This is the resource type associated with the recovery point.
+	// The resource type of the recovery point.
 	ResourceType *string
 
 	// The set of metadata key-value pairs that describe the original configuration of

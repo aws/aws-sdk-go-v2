@@ -46,18 +46,16 @@ type ListBackupJobSummariesInput struct {
 	// organization, then returns the sum.
 	AccountId *string
 
-	// This is the period that sets the boundaries for returned results.
+	// The period for the returned results.
 	//
-	// Acceptable values include
+	//   - ONE_DAY - The daily job count for the prior 14 days.
 	//
-	//   - ONE_DAY for daily job count for the prior 14 days.
+	//   - SEVEN_DAYS - The aggregated job count for the prior 7 days.
 	//
-	//   - SEVEN_DAYS for the aggregated job count for the prior 7 days.
-	//
-	//   - FOURTEEN_DAYS for aggregated job count for prior 14 days.
+	//   - FOURTEEN_DAYS - The aggregated job count for prior 14 days.
 	AggregationPeriod types.AggregationPeriod
 
-	// This parameter sets the maximum number of items to be returned.
+	// The maximum number of items to be returned.
 	//
 	// The value is an integer. Range of accepted values is from 1 to 500.
 	MaxResults *int32
@@ -116,17 +114,16 @@ type ListBackupJobSummariesInput struct {
 
 type ListBackupJobSummariesOutput struct {
 
-	// This is the period that sets the boundaries for returned results.
+	// The period for the returned results.
 	//
-	//   - ONE_DAY for daily job count for the prior 14 days.
+	//   - ONE_DAY - The daily job count for the prior 14 days.
 	//
-	//   - SEVEN_DAYS for the aggregated job count for the prior 7 days.
+	//   - SEVEN_DAYS - The aggregated job count for the prior 7 days.
 	//
-	//   - FOURTEEN_DAYS for aggregated job count for prior 14 days.
+	//   - FOURTEEN_DAYS - The aggregated job count for prior 14 days.
 	AggregationPeriod *string
 
-	// This request returns a summary that contains Region, Account, State,
-	// ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+	// The summary information.
 	BackupJobSummaries []types.BackupJobSummary
 
 	// The next item following a partial list of returned resources. For example, if a
@@ -226,7 +223,7 @@ func (c *Client) addOperationListBackupJobSummariesMiddlewares(stack *middleware
 // ListBackupJobSummariesPaginatorOptions is the paginator options for
 // ListBackupJobSummaries
 type ListBackupJobSummariesPaginatorOptions struct {
-	// This parameter sets the maximum number of items to be returned.
+	// The maximum number of items to be returned.
 	//
 	// The value is an integer. Range of accepted values is from 1 to 500.
 	Limit int32

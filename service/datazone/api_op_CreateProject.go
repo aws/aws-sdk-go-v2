@@ -43,6 +43,10 @@ type CreateProjectInput struct {
 	// The description of the Amazon DataZone project.
 	Description *string
 
+	// The ID of the domain unit. This parameter is not required and if it is not
+	// specified, then the project is created at the root domain unit level.
+	DomainUnitId *string
+
 	// The glossary terms that can be used in this Amazon DataZone project.
 	GlossaryTerms []string
 
@@ -76,6 +80,9 @@ type CreateProjectOutput struct {
 
 	// The description of the project.
 	Description *string
+
+	// The ID of the domain unit.
+	DomainUnitId *string
 
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.

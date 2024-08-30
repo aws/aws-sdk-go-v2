@@ -49,8 +49,8 @@ type ListCopyJobsInput struct {
 	ByCreatedBefore *time.Time
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to
-	// copy from; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault
-	// .
+	// copy from; for example,
+	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	ByDestinationVaultArn *string
 
 	// This is an optional parameter that can be used to filter out jobs with a
@@ -96,19 +96,20 @@ type ListCopyJobsInput struct {
 	//
 	//   - Neptune for Amazon Neptune
 	//
-	//   - Redshift for Amazon Redshift
-	//
 	//   - RDS for Amazon Relational Database Service
 	//
-	//   - SAP HANA on Amazon EC2 for SAP HANA databases
+	//   - Redshift for Amazon Redshift
+	//
+	//   - S3 for Amazon Simple Storage Service (Amazon S3)
+	//
+	//   - SAP HANA on Amazon EC2 for SAP HANA databases on Amazon Elastic Compute
+	//   Cloud instances
 	//
 	//   - Storage Gateway for Storage Gateway
 	//
-	//   - S3 for Amazon S3
-	//
 	//   - Timestream for Amazon Timestream
 	//
-	//   - VirtualMachine for virtual machines
+	//   - VirtualMachine for VMware virtual machines
 	ByResourceType *string
 
 	// Returns only copy jobs that are in the specified state.

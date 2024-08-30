@@ -252,6 +252,23 @@ func (DataSourceStatus) Values() []DataSourceStatus {
 	}
 }
 
+type DataZoneEntityType string
+
+// Enum values for DataZoneEntityType
+const (
+	DataZoneEntityTypeDomainUnit DataZoneEntityType = "DOMAIN_UNIT"
+)
+
+// Values returns all known values for DataZoneEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataZoneEntityType) Values() []DataZoneEntityType {
+	return []DataZoneEntityType{
+		"DOMAIN_UNIT",
+	}
+}
+
 type DeploymentStatus string
 
 // Enum values for DeploymentStatus
@@ -320,6 +337,23 @@ func (DomainStatus) Values() []DomainStatus {
 		"DELETING",
 		"DELETED",
 		"DELETION_FAILED",
+	}
+}
+
+type DomainUnitDesignation string
+
+// Enum values for DomainUnitDesignation
+const (
+	DomainUnitDesignationOwner DomainUnitDesignation = "OWNER"
+)
+
+// Values returns all known values for DomainUnitDesignation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainUnitDesignation) Values() []DomainUnitDesignation {
+	return []DomainUnitDesignation{
+		"OWNER",
 	}
 }
 
@@ -598,6 +632,43 @@ func (ListingStatus) Values() []ListingStatus {
 	}
 }
 
+type ManagedPolicyType string
+
+// Enum values for ManagedPolicyType
+const (
+	ManagedPolicyTypeCreateDomainUnit                 ManagedPolicyType = "CREATE_DOMAIN_UNIT"
+	ManagedPolicyTypeOverrideDomainUnitOwners         ManagedPolicyType = "OVERRIDE_DOMAIN_UNIT_OWNERS"
+	ManagedPolicyTypeAddToProjectMemberPool           ManagedPolicyType = "ADD_TO_PROJECT_MEMBER_POOL"
+	ManagedPolicyTypeOverrideProjectOwners            ManagedPolicyType = "OVERRIDE_PROJECT_OWNERS"
+	ManagedPolicyTypeCreateGlossary                   ManagedPolicyType = "CREATE_GLOSSARY"
+	ManagedPolicyTypeCreateFormType                   ManagedPolicyType = "CREATE_FORM_TYPE"
+	ManagedPolicyTypeCreateAssetType                  ManagedPolicyType = "CREATE_ASSET_TYPE"
+	ManagedPolicyTypeCreateProject                    ManagedPolicyType = "CREATE_PROJECT"
+	ManagedPolicyTypeCreateEnvironmentProfile         ManagedPolicyType = "CREATE_ENVIRONMENT_PROFILE"
+	ManagedPolicyTypeDelegateCreateEnvironmentProfile ManagedPolicyType = "DELEGATE_CREATE_ENVIRONMENT_PROFILE"
+	ManagedPolicyTypeCreateEnvironment                ManagedPolicyType = "CREATE_ENVIRONMENT"
+)
+
+// Values returns all known values for ManagedPolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedPolicyType) Values() []ManagedPolicyType {
+	return []ManagedPolicyType{
+		"CREATE_DOMAIN_UNIT",
+		"OVERRIDE_DOMAIN_UNIT_OWNERS",
+		"ADD_TO_PROJECT_MEMBER_POOL",
+		"OVERRIDE_PROJECT_OWNERS",
+		"CREATE_GLOSSARY",
+		"CREATE_FORM_TYPE",
+		"CREATE_ASSET_TYPE",
+		"CREATE_PROJECT",
+		"CREATE_ENVIRONMENT_PROFILE",
+		"DELEGATE_CREATE_ENVIRONMENT_PROFILE",
+		"CREATE_ENVIRONMENT",
+	}
+}
+
 type MetadataGenerationRunStatus string
 
 // Enum values for MetadataGenerationRunStatus
@@ -716,6 +787,25 @@ func (NotificationType) Values() []NotificationType {
 	return []NotificationType{
 		"TASK",
 		"EVENT",
+	}
+}
+
+type ProjectDesignation string
+
+// Enum values for ProjectDesignation
+const (
+	ProjectDesignationOwner       ProjectDesignation = "OWNER"
+	ProjectDesignationContributor ProjectDesignation = "CONTRIBUTOR"
+)
+
+// Values returns all known values for ProjectDesignation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectDesignation) Values() []ProjectDesignation {
+	return []ProjectDesignation{
+		"OWNER",
+		"CONTRIBUTOR",
 	}
 }
 
@@ -963,6 +1053,27 @@ func (SubscriptionStatus) Values() []SubscriptionStatus {
 		"APPROVED",
 		"REVOKED",
 		"CANCELLED",
+	}
+}
+
+type TargetEntityType string
+
+// Enum values for TargetEntityType
+const (
+	TargetEntityTypeDomainUnit                        TargetEntityType = "DOMAIN_UNIT"
+	TargetEntityTypeEnvironmentBlueprintConfiguration TargetEntityType = "ENVIRONMENT_BLUEPRINT_CONFIGURATION"
+	TargetEntityTypeEnvironmentProfile                TargetEntityType = "ENVIRONMENT_PROFILE"
+)
+
+// Values returns all known values for TargetEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetEntityType) Values() []TargetEntityType {
+	return []TargetEntityType{
+		"DOMAIN_UNIT",
+		"ENVIRONMENT_BLUEPRINT_CONFIGURATION",
+		"ENVIRONMENT_PROFILE",
 	}
 }
 

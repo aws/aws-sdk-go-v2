@@ -42,7 +42,7 @@ type DescribeReportJobInput struct {
 
 type DescribeReportJobOutput struct {
 
-	// A list of information about a report job, including its completion and creation
+	// The information about a report job, including its completion and creation
 	// times, report destination, unique report job ID, Amazon Resource Name (ARN),
 	// report template, status, and status message.
 	ReportJob *types.ReportJob

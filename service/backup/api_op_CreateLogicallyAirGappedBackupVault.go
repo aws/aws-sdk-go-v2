@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// This request creates a logical container to where backups may be copied.
+// Creates a logical container to where backups may be copied.
 //
 // This request includes a name, the Region, the maximum number of retention days,
 // the minimum number of retention days, and optionally can include tags and a
@@ -37,42 +37,30 @@ func (c *Client) CreateLogicallyAirGappedBackupVault(ctx context.Context, params
 
 type CreateLogicallyAirGappedBackupVaultInput struct {
 
-	// This is the name of the vault that is being created.
+	// The name of a logical container where backups are stored. Logically air-gapped
+	// backup vaults are identified by names that are unique to the account used to
+	// create them and the Region where they are created.
 	//
 	// This member is required.
 	BackupVaultName *string
 
-	// This is the setting that specifies the maximum retention period that the vault
-	// retains its recovery points. If this parameter is not specified, Backup does not
-	// enforce a maximum retention period on the recovery points in the vault (allowing
-	// indefinite storage).
-	//
-	// If specified, any backup or copy job to the vault must have a lifecycle policy
-	// with a retention period equal to or shorter than the maximum retention period.
-	// If the job retention period is longer than that maximum retention period, then
-	// the vault fails the backup or copy job, and you should either modify your
-	// lifecycle settings or use a different vault.
+	// The maximum retention period that the vault retains its recovery points.
 	//
 	// This member is required.
 	MaxRetentionDays *int64
 
 	// This setting specifies the minimum retention period that the vault retains its
-	// recovery points. If this parameter is not specified, no minimum retention period
-	// is enforced.
+	// recovery points.
 	//
-	// If specified, any backup or copy job to the vault must have a lifecycle policy
-	// with a retention period equal to or longer than the minimum retention period. If
-	// a job retention period is shorter than that minimum retention period, then the
-	// vault fails the backup or copy job, and you should either modify your lifecycle
-	// settings or use a different vault.
+	// The minimum value accepted is 7 days.
 	//
 	// This member is required.
 	MinRetentionDays *int64
 
-	// These are the tags that will be included in the newly-created vault.
+	// The tags to assign to the vault.
 	BackupVaultTags map[string]string
 
-	// This is the ID of the creation request.
+	// The ID of the creation request.
 	//
 	// This parameter is optional. If used, this parameter must contain 1 to 50
 	// alphanumeric or '-_.' characters.
@@ -83,13 +71,12 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 
 type CreateLogicallyAirGappedBackupVaultOutput struct {
 
-	// This is the ARN (Amazon Resource Name) of the vault being created.
+	// The ARN (Amazon Resource Name) of the vault.
 	BackupVaultArn *string
 
 	// The name of a logical container where backups are stored. Logically air-gapped
 	// backup vaults are identified by names that are unique to the account used to
-	// create them and the Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// create them and the Region where they are created.
 	BackupVaultName *string
 
 	// The date and time when the vault was created.
@@ -99,7 +86,7 @@ type CreateLogicallyAirGappedBackupVaultOutput struct {
 	// 26, 2018 12:11:30.087 AM.
 	CreationDate *time.Time
 
-	// This is the current state of the vault.
+	// The current state of the vault.
 	VaultState types.VaultState
 
 	// Metadata pertaining to the operation's result.

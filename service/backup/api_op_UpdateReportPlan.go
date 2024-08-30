@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Updates an existing report plan identified by its ReportPlanName with the input
-// document in JSON format.
+// Updates the specified report plan.
 func (c *Client) UpdateReportPlan(ctx context.Context, params *UpdateReportPlanInput, optFns ...func(*Options)) (*UpdateReportPlanOutput, error) {
 	if params == nil {
 		params = &UpdateReportPlanInput{}
@@ -43,16 +42,15 @@ type UpdateReportPlanInput struct {
 	// the same idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
-	// A structure that contains information about where to deliver your reports,
-	// specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your
-	// reports.
+	// The information about where to deliver your reports, specifically your Amazon
+	// S3 bucket name, S3 key prefix, and the formats of your reports.
 	ReportDeliveryChannel *types.ReportDeliveryChannel
 
 	// An optional description of the report plan with a maximum 1,024 characters.
 	ReportPlanDescription *string
 
-	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are:
+	// The report template for the report. Reports are built using a report template.
+	// The report templates are:
 	//
 	//     RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
 	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT

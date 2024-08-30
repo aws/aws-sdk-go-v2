@@ -31,8 +31,7 @@ func (c *Client) GetLegalHold(ctx context.Context, params *GetLegalHoldInput, op
 
 type GetLegalHoldInput struct {
 
-	// This is the ID required to use GetLegalHold . This unique ID is associated with
-	// a specific legal hold.
+	// The ID of the legal hold.
 	//
 	// This member is required.
 	LegalHoldId *string
@@ -42,38 +41,36 @@ type GetLegalHoldInput struct {
 
 type GetLegalHoldOutput struct {
 
-	// String describing the reason for removing the legal hold.
+	// The reason for removing the legal hold.
 	CancelDescription *string
 
-	// Time in number when legal hold was cancelled.
+	// The time when the legal hold was cancelled.
 	CancellationDate *time.Time
 
-	// Time in number format when legal hold was created.
+	// The time when the legal hold was created.
 	CreationDate *time.Time
 
-	// This is the returned string description of the legal hold.
+	// The description of the legal hold.
 	Description *string
 
-	// This is the returned framework ARN for the specified legal hold. An Amazon
-	// Resource Name (ARN) uniquely identifies a resource. The format of the ARN
-	// depends on the resource type.
+	// The framework ARN for the specified legal hold. The format of the ARN depends
+	// on the resource type.
 	LegalHoldArn *string
 
-	// This is the returned ID associated with a specified legal hold.
+	// The ID of the legal hold.
 	LegalHoldId *string
 
-	// This specifies criteria to assign a set of resources, such as resource types or
-	// backup vaults.
+	// The criteria to assign a set of resources, such as resource types or backup
+	// vaults.
 	RecoveryPointSelection *types.RecoveryPointSelection
 
-	// This is the date and time until which the legal hold record will be retained.
+	// The date and time until which the legal hold record is retained.
 	RetainRecordUntil *time.Time
 
-	// This is the status of the legal hold. Statuses can be ACTIVE , CREATING ,
-	// CANCELED , and CANCELING .
+	// The status of the legal hold.
 	Status types.LegalHoldStatus
 
-	// This is the string title of the legal hold.
+	// The title of the legal hold.
 	Title *string
 
 	// Metadata pertaining to the operation's result.

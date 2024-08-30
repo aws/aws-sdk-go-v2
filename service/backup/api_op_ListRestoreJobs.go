@@ -69,19 +69,20 @@ type ListRestoreJobsInput struct {
 	//
 	//   - Neptune for Amazon Neptune
 	//
-	//   - Redshift for Amazon Redshift
-	//
 	//   - RDS for Amazon Relational Database Service
 	//
-	//   - SAP HANA on Amazon EC2 for SAP HANA databases
+	//   - Redshift for Amazon Redshift
+	//
+	//   - S3 for Amazon Simple Storage Service (Amazon S3)
+	//
+	//   - SAP HANA on Amazon EC2 for SAP HANA databases on Amazon Elastic Compute
+	//   Cloud instances
 	//
 	//   - Storage Gateway for Storage Gateway
 	//
-	//   - S3 for Amazon S3
-	//
 	//   - Timestream for Amazon Timestream
 	//
-	//   - VirtualMachine for virtual machines
+	//   - VirtualMachine for VMware virtual machines
 	ByResourceType *string
 
 	// This returns only restore testing jobs that match the specified resource Amazon

@@ -89,6 +89,9 @@ type CreateDomainOutput struct {
 	// The URL of the data portal for this Amazon DataZone domain.
 	PortalUrl *string
 
+	// The ID of the root domain unit.
+	RootDomainUnitId *string
+
 	// The single-sign on configuration of the Amazon DataZone domain.
 	SingleSignOn *types.SingleSignOn
 

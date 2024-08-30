@@ -12,12 +12,10 @@ import (
 	"time"
 )
 
-// This is the first of two steps to create a restore testing plan; once this
-// request is successful, finish the procedure with request
-// CreateRestoreTestingSelection.
+// Creates a restore testing plan.
 //
-// You must include the parameter RestoreTestingPlan. You may optionally include
-// CreatorRequestId and Tags.
+// The first of two steps to create a restore testing plan. After this request is
+// successful, finish the procedure using CreateRestoreTestingSelection.
 func (c *Client) CreateRestoreTestingPlan(ctx context.Context, params *CreateRestoreTestingPlanInput, optFns ...func(*Options)) (*CreateRestoreTestingPlanOutput, error) {
 	if params == nil {
 		params = &CreateRestoreTestingPlanInput{}
@@ -52,9 +50,7 @@ type CreateRestoreTestingPlanInput struct {
 	// characters.
 	CreatorRequestId *string
 
-	// Optional tags to include. A tag is a key-value pair you can use to manage,
-	// filter, and search for your resources. Allowed characters include UTF-8
-	// letters,numbers, spaces, and the following characters: + - = . _ : /.
+	// The tags to assign to the restore testing plan.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

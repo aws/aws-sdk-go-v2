@@ -10,14 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of key-value pairs assigned to a target recovery point, backup
-// plan, or backup vault.
-//
-// ListTags only works for resource types that support full Backup management of
-// their backups. Those resource types are listed in the "Full Backup management"
-// section of the [Feature availability by resource]table.
-//
-// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+// Returns the tags assigned to the resource, such as a target recovery point,
+// backup plan, or backup vault.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -62,8 +56,7 @@ type ListTagsOutput struct {
 	// token.
 	NextToken *string
 
-	// To help organize your resources, you can assign your own metadata to the
-	// resources you create. Each tag is a key-value pair.
+	// Information about the tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

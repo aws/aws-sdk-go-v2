@@ -33,8 +33,7 @@ type DescribeRecoveryPointInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// Amazon Web Services Region where they are created.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -47,7 +46,7 @@ type DescribeRecoveryPointInput struct {
 	// This member is required.
 	RecoveryPointArn *string
 
-	// This is the account ID of the specified backup vault.
+	// The account ID of the specified backup vault.
 	BackupVaultAccountId *string
 
 	noSmithyDocumentSerde
@@ -59,13 +58,12 @@ type DescribeRecoveryPointOutput struct {
 	BackupSizeInBytes *int64
 
 	// An ARN that uniquely identifies a backup vault; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
+	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	BackupVaultArn *string
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Region where they are created. They consist of lowercase letters, numbers, and
-	// hyphens.
+	// Region where they are created.
 	BackupVaultName *string
 
 	// A CalculatedLifecycle object containing DeleteAt and MoveToColdStorageAt
@@ -78,9 +76,9 @@ type DescribeRecoveryPointOutput struct {
 	// Friday, January 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time
 
-	// This is the identifier of a resource within a composite group, such as nested
-	// (child) recovery point belonging to a composite (parent) stack. The ID is
-	// transferred from the [logical ID]within a stack.
+	// The identifier of a resource within a composite group, such as nested (child)
+	// recovery point belonging to a composite (parent) stack. The ID is transferred
+	// from the [logical ID]within a stack.
 	//
 	// [logical ID]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax
 	CompositeMemberIdentifier *string
@@ -128,11 +126,10 @@ type DescribeRecoveryPointOutput struct {
 	// cold after days” setting cannot be changed after a backup has been transitioned
 	// to cold.
 	//
-	// Resource types that are able to be transitioned to cold storage are listed in
-	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
-	// expression for other resource types.
+	// Resource types that can transition to cold storage are listed in the [Feature availability by resource] table.
+	// Backup ignores this expression for other resource types.
 	//
-	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
 	// This is an ARN that uniquely identifies a parent (composite) recovery point;
@@ -150,8 +147,7 @@ type DescribeRecoveryPointOutput struct {
 	// on the resource type.
 	ResourceArn *string
 
-	// This is the non-unique name of the resource that belongs to the specified
-	// backup.
+	// The name of the resource that belongs to the specified backup.
 	ResourceName *string
 
 	// The type of Amazon Web Services resource to save as a recovery point; for
@@ -161,9 +157,9 @@ type DescribeRecoveryPointOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies the source vault where
 	// the resource was originally backed up in; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:BackupVault . If the recovery is
-	// restored to the same Amazon Web Services account or Region, this value will be
-	// null .
+	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault . If the
+	// recovery is restored to the same Amazon Web Services account or Region, this
+	// value will be null .
 	SourceBackupVaultArn *string
 
 	// A status code specifying the state of the recovery point.
@@ -182,6 +178,8 @@ type DescribeRecoveryPointOutput struct {
 	// that causes the continuous backup to be disabled. This can be caused by the
 	// removal of permissions, turning off versioning, turning off events being sent to
 	// EventBridge, or disabling the EventBridge rules that are put in place by Backup.
+	// For recovery points of Amazon S3, Amazon RDS, and Amazon Aurora resources, this
+	// status occurs when the retention period of a continuous backup rule is changed.
 	//
 	// To resolve STOPPED status, ensure that all requested permissions are in place
 	// and that versioning is enabled on the S3 bucket. Once these conditions are met,
@@ -205,7 +203,7 @@ type DescribeRecoveryPointOutput struct {
 	// .
 	StorageClass types.StorageClass
 
-	// This is the type of vault in which the described recovery point is stored.
+	// The type of vault in which the described recovery point is stored.
 	VaultType types.VaultType
 
 	// Metadata pertaining to the operation's result.

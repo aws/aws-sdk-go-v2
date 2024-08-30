@@ -31,8 +31,7 @@ type GetBackupVaultNotificationsInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// Amazon Web Services Region where they are created.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -43,7 +42,7 @@ type GetBackupVaultNotificationsInput struct {
 type GetBackupVaultNotificationsOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
-	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
+	// example, arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	BackupVaultArn *string
 
 	// An array of events that indicate the status of jobs to back up resources to the
@@ -52,8 +51,7 @@ type GetBackupVaultNotificationsOutput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Region where they are created. They consist of lowercase letters, numbers, and
-	// hyphens.
+	// Region where they are created.
 	BackupVaultName *string
 
 	// An ARN that uniquely identifies an Amazon Simple Notification Service (Amazon

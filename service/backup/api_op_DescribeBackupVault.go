@@ -32,13 +32,12 @@ type DescribeBackupVaultInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// Amazon Web Services Region where they are created.
 	//
 	// This member is required.
 	BackupVaultName *string
 
-	// This is the account ID of the specified backup vault.
+	// The account ID of the specified backup vault.
 	BackupVaultAccountId *string
 
 	noSmithyDocumentSerde
@@ -47,13 +46,12 @@ type DescribeBackupVaultInput struct {
 type DescribeBackupVaultOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
-	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
+	// example, arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	BackupVaultArn *string
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// Region where they are created. They consist of lowercase letters, numbers, and
-	// hyphens.
+	// Region where they are created.
 	BackupVaultName *string
 
 	// The date and time that a backup vault is created, in Unix format and
@@ -105,7 +103,7 @@ type DescribeBackupVaultOutput struct {
 
 	// The Backup Vault Lock setting that specifies the minimum retention period that
 	// the vault retains its recovery points. If this parameter is not specified, Vault
-	// Lock does not enforce a minimum retention period.
+	// Lock will not enforce a minimum retention period.
 	//
 	// If specified, any backup or copy job to the vault must have a lifecycle policy
 	// with a retention period equal to or longer than the minimum retention period. If
@@ -118,7 +116,10 @@ type DescribeBackupVaultOutput struct {
 	// The number of recovery points that are stored in a backup vault.
 	NumberOfRecoveryPoints int64
 
-	// This is the type of vault described.
+	// The current state of the vault.->
+	VaultState types.VaultState
+
+	// The type of vault described.
 	VaultType types.VaultType
 
 	// Metadata pertaining to the operation's result.

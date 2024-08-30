@@ -4119,6 +4119,49 @@ func awsAwsjson11_serializeDocumentDimensions(v map[string]string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEntity(v *types.Entity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsAwsjson11_serializeDocumentEntityAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyAttributes != nil {
+		ok := object.Key("keyAttributes")
+		if err := awsAwsjson11_serializeDocumentEntityKeyAttributes(v.KeyAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEntityAttributes(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEntityKeyAttributes(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInputLogEvent(v *types.InputLogEvent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5571,6 +5614,13 @@ func awsAwsjson11_serializeOpDocumentPutDestinationPolicyInput(v *PutDestination
 func awsAwsjson11_serializeOpDocumentPutLogEventsInput(v *PutLogEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Entity != nil {
+		ok := object.Key("entity")
+		if err := awsAwsjson11_serializeDocumentEntity(v.Entity, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.LogEvents != nil {
 		ok := object.Key("logEvents")

@@ -634,6 +634,16 @@ func awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteS
 		ok.String(*v.SecretArn)
 	}
 
+	if v.SessionId != nil {
+		ok := object.Key("SessionId")
+		ok.String(*v.SessionId)
+	}
+
+	if v.SessionKeepAliveSeconds != nil {
+		ok := object.Key("SessionKeepAliveSeconds")
+		ok.Integer(*v.SessionKeepAliveSeconds)
+	}
+
 	if v.Sqls != nil {
 		ok := object.Key("Sqls")
 		if err := awsAwsjson11_serializeDocumentSqlList(v.Sqls, ok); err != nil {
@@ -774,6 +784,16 @@ func awsAwsjson11_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 	if v.SecretArn != nil {
 		ok := object.Key("SecretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	if v.SessionId != nil {
+		ok := object.Key("SessionId")
+		ok.String(*v.SessionId)
+	}
+
+	if v.SessionKeepAliveSeconds != nil {
+		ok := object.Key("SessionKeepAliveSeconds")
+		ok.Integer(*v.SessionKeepAliveSeconds)
 	}
 
 	if v.Sql != nil {

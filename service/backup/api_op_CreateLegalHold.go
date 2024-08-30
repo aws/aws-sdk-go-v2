@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// This action creates a legal hold on a recovery point (backup). A legal hold is
-// a restraint on altering or deleting a backup until an authorized user cancels
-// the legal hold. Any actions to delete or disassociate a recovery point will fail
-// with an error if one or more active legal holds are on the recovery point.
+// Creates a legal hold on a recovery point (backup). A legal hold is a restraint
+// on altering or deleting a backup until an authorized user cancels the legal
+// hold. Any actions to delete or disassociate a recovery point will fail with an
+// error if one or more active legal holds are on the recovery point.
 func (c *Client) CreateLegalHold(ctx context.Context, params *CreateLegalHoldInput, optFns ...func(*Options)) (*CreateLegalHoldOutput, error) {
 	if params == nil {
 		params = &CreateLegalHoldInput{}
@@ -33,12 +33,12 @@ func (c *Client) CreateLegalHold(ctx context.Context, params *CreateLegalHoldInp
 
 type CreateLegalHoldInput struct {
 
-	// This is the string description of the legal hold.
+	// The description of the legal hold.
 	//
 	// This member is required.
 	Description *string
 
-	// This is the string title of the legal hold.
+	// The title of the legal hold.
 	//
 	// This member is required.
 	Title *string
@@ -48,8 +48,8 @@ type CreateLegalHoldInput struct {
 	// a success message with no action taken.
 	IdempotencyToken *string
 
-	// This specifies criteria to assign a set of resources, such as resource types or
-	// backup vaults.
+	// The criteria to assign a set of resources, such as resource types or backup
+	// vaults.
 	RecoveryPointSelection *types.RecoveryPointSelection
 
 	// Optional tags to include. A tag is a key-value pair you can use to manage,
@@ -62,28 +62,26 @@ type CreateLegalHoldInput struct {
 
 type CreateLegalHoldOutput struct {
 
-	// Time in number format when legal hold was created.
+	// The time when the legal hold was created.
 	CreationDate *time.Time
 
-	// This is the returned string description of the legal hold.
+	// The description of the legal hold.
 	Description *string
 
-	// This is the ARN (Amazon Resource Number) of the created legal hold.
+	// The Amazon Resource Name (ARN) of the legal hold.
 	LegalHoldArn *string
 
-	// Legal hold ID returned for the specified legal hold on a recovery point.
+	// The ID of the legal hold.
 	LegalHoldId *string
 
-	// This specifies criteria to assign a set of resources, such as resource types or
-	// backup vaults.
+	// The criteria to assign to a set of resources, such as resource types or backup
+	// vaults.
 	RecoveryPointSelection *types.RecoveryPointSelection
 
-	// This displays the status of the legal hold returned after creating the legal
-	// hold. Statuses can be ACTIVE , PENDING , CANCELED , CANCELING , or FAILED .
+	// The status of the legal hold.
 	Status types.LegalHoldStatus
 
-	// This is the string title of the legal hold returned after creating the legal
-	// hold.
+	// The title of the legal hold.
 	Title *string
 
 	// Metadata pertaining to the operation's result.

@@ -388,6 +388,18 @@ type Destination struct {
 	noSmithyDocumentSerde
 }
 
+// Reserved for future use.
+type Entity struct {
+
+	// Reserved for future use.
+	Attributes map[string]string
+
+	// Reserved for future use.
+	KeyAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an export task.
 type ExportTask struct {
 
@@ -855,7 +867,7 @@ type OutputLogEvent struct {
 	noSmithyDocumentSerde
 }
 
-// A tructures that contains information about one pattern token related to an
+// A structure that contains information about one pattern token related to an
 // anomaly.
 //
 // For more information about patterns and tokens, see [CreateLogAnomalyDetector].
@@ -976,6 +988,17 @@ type QueryStatistics struct {
 
 	// The total number of log events scanned during the query.
 	RecordsScanned float64
+
+	noSmithyDocumentSerde
+}
+
+// Reserved for future use.
+type RejectedEntityInfo struct {
+
+	// Reserved for future use.
+	//
+	// This member is required.
+	ErrorType EntityRejectionErrorType
 
 	noSmithyDocumentSerde
 }

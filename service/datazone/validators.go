@@ -50,6 +50,46 @@ func (m *validateOpAcceptSubscriptionRequest) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddEntityOwner struct {
+}
+
+func (*validateOpAddEntityOwner) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddEntityOwner) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddEntityOwnerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddEntityOwnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAddPolicyGrant struct {
+}
+
+func (*validateOpAddPolicyGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddPolicyGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddPolicyGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddPolicyGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateEnvironmentRole struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDomainUnit struct {
+}
+
+func (*validateOpCreateDomainUnit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDomainUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDomainUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDomainUnitInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -665,6 +725,26 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDomainUnit struct {
+}
+
+func (*validateOpDeleteDomainUnit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDomainUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDomainUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDomainUnitInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1105,6 +1185,26 @@ func (m *validateOpGetDomain) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDomainUnit struct {
+}
+
+func (*validateOpGetDomainUnit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDomainUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDomainUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDomainUnitInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1650,6 +1750,46 @@ func (m *validateOpListDataSources) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDomainUnitsForParent struct {
+}
+
+func (*validateOpListDomainUnitsForParent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDomainUnitsForParent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDomainUnitsForParentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDomainUnitsForParentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEntityOwners struct {
+}
+
+func (*validateOpListEntityOwners) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEntityOwners) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEntityOwnersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEntityOwnersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEnvironmentActions struct {
 }
 
@@ -1805,6 +1945,26 @@ func (m *validateOpListNotifications) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListNotificationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPolicyGrants struct {
+}
+
+func (*validateOpListPolicyGrants) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPolicyGrants) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPolicyGrantsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPolicyGrantsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2070,6 +2230,46 @@ func (m *validateOpRejectSubscriptionRequest) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveEntityOwner struct {
+}
+
+func (*validateOpRemoveEntityOwner) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveEntityOwner) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveEntityOwnerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveEntityOwnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemovePolicyGrant struct {
+}
+
+func (*validateOpRemovePolicyGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemovePolicyGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemovePolicyGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemovePolicyGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRevokeSubscription struct {
 }
 
@@ -2330,6 +2530,26 @@ func (m *validateOpUpdateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDomainUnit struct {
+}
+
+func (*validateOpUpdateDomainUnit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDomainUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDomainUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDomainUnitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEnvironmentAction struct {
 }
 
@@ -2558,6 +2778,14 @@ func addOpAcceptSubscriptionRequestValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpAcceptSubscriptionRequest{}, middleware.After)
 }
 
+func addOpAddEntityOwnerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddEntityOwner{}, middleware.After)
+}
+
+func addOpAddPolicyGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddPolicyGrant{}, middleware.After)
+}
+
 func addOpAssociateEnvironmentRoleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateEnvironmentRole{}, middleware.After)
 }
@@ -2600,6 +2828,10 @@ func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
+}
+
+func addOpCreateDomainUnitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDomainUnit{}, middleware.After)
 }
 
 func addOpCreateEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
@@ -2680,6 +2912,10 @@ func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
+}
+
+func addOpDeleteDomainUnitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDomainUnit{}, middleware.After)
 }
 
 func addOpDeleteEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
@@ -2768,6 +3004,10 @@ func addOpGetDataSourceRunValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomain{}, middleware.After)
+}
+
+func addOpGetDomainUnitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDomainUnit{}, middleware.After)
 }
 
 func addOpGetEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
@@ -2878,6 +3118,14 @@ func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSources{}, middleware.After)
 }
 
+func addOpListDomainUnitsForParentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDomainUnitsForParent{}, middleware.After)
+}
+
+func addOpListEntityOwnersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEntityOwners{}, middleware.After)
+}
+
 func addOpListEnvironmentActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironmentActions{}, middleware.After)
 }
@@ -2908,6 +3156,10 @@ func addOpListMetadataGenerationRunsValidationMiddleware(stack *middleware.Stack
 
 func addOpListNotificationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNotifications{}, middleware.After)
+}
+
+func addOpListPolicyGrantsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPolicyGrants{}, middleware.After)
 }
 
 func addOpListProjectMembershipsValidationMiddleware(stack *middleware.Stack) error {
@@ -2962,6 +3214,14 @@ func addOpRejectSubscriptionRequestValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpRejectSubscriptionRequest{}, middleware.After)
 }
 
+func addOpRemoveEntityOwnerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveEntityOwner{}, middleware.After)
+}
+
+func addOpRemovePolicyGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemovePolicyGrant{}, middleware.After)
+}
+
 func addOpRevokeSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeSubscription{}, middleware.After)
 }
@@ -3012,6 +3272,10 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomain{}, middleware.After)
+}
+
+func addOpUpdateDomainUnitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDomainUnit{}, middleware.After)
 }
 
 func addOpUpdateEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
@@ -3195,6 +3459,36 @@ func validateDataSourceConfigurationInput(v types.DataSourceConfigurationInput) 
 			invalidParams.AddNested("[redshiftRunConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDomainUnitFilterForProject(v *types.DomainUnitFilterForProject) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DomainUnitFilterForProject"}
+	if v.DomainUnit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainUnit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDomainUnitPolicyGrantPrincipal(v *types.DomainUnitPolicyGrantPrincipal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DomainUnitPolicyGrantPrincipal"}
+	if len(v.DomainUnitDesignation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainUnitDesignation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3646,6 +3940,123 @@ func validateNotLikeExpression(v *types.NotLikeExpression) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOwnerGroupProperties(v *types.OwnerGroupProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OwnerGroupProperties"}
+	if v.GroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOwnerProperties(v types.OwnerProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OwnerProperties"}
+	switch uv := v.(type) {
+	case *types.OwnerPropertiesMemberGroup:
+		if err := validateOwnerGroupProperties(&uv.Value); err != nil {
+			invalidParams.AddNested("[group]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.OwnerPropertiesMemberUser:
+		if err := validateOwnerUserProperties(&uv.Value); err != nil {
+			invalidParams.AddNested("[user]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOwnerUserProperties(v *types.OwnerUserProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OwnerUserProperties"}
+	if v.UserIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyGrantPrincipal(v types.PolicyGrantPrincipal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyGrantPrincipal"}
+	switch uv := v.(type) {
+	case *types.PolicyGrantPrincipalMemberDomainUnit:
+		if err := validateDomainUnitPolicyGrantPrincipal(&uv.Value); err != nil {
+			invalidParams.AddNested("[domainUnit]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PolicyGrantPrincipalMemberProject:
+		if err := validateProjectPolicyGrantPrincipal(&uv.Value); err != nil {
+			invalidParams.AddNested("[project]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProjectGrantFilter(v types.ProjectGrantFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectGrantFilter"}
+	switch uv := v.(type) {
+	case *types.ProjectGrantFilterMemberDomainUnitFilter:
+		if err := validateDomainUnitFilterForProject(&uv.Value); err != nil {
+			invalidParams.AddNested("[domainUnitFilter]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProjectPolicyGrantPrincipal(v *types.ProjectPolicyGrantPrincipal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectPolicyGrantPrincipal"}
+	if len(v.ProjectDesignation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectDesignation"))
+	}
+	if v.ProjectGrantFilter != nil {
+		if err := validateProjectGrantFilter(v.ProjectGrantFilter); err != nil {
+			invalidParams.AddNested("ProjectGrantFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4157,6 +4568,68 @@ func validateOpAcceptSubscriptionRequestInput(v *AcceptSubscriptionRequestInput)
 	}
 }
 
+func validateOpAddEntityOwnerInput(v *AddEntityOwnerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddEntityOwnerInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if v.Owner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
+	} else if v.Owner != nil {
+		if err := validateOwnerProperties(v.Owner); err != nil {
+			invalidParams.AddNested("Owner", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddPolicyGrantInput(v *AddPolicyGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddPolicyGrantInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
+	}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	} else if v.Principal != nil {
+		if err := validatePolicyGrantPrincipal(v.Principal); err != nil {
+			invalidParams.AddNested("Principal", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Detail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Detail"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateEnvironmentRoleInput(v *AssociateEnvironmentRoleInput) error {
 	if v == nil {
 		return nil
@@ -4434,6 +4907,27 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 	if v.DomainExecutionRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainExecutionRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDomainUnitInput(v *CreateDomainUnitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainUnitInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ParentDomainUnitIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentDomainUnitIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4891,6 +5385,24 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	}
 }
 
+func validateOpDeleteDomainUnitInput(v *DeleteDomainUnitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainUnitInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEnvironmentActionInput(v *DeleteEnvironmentActionInput) error {
 	if v == nil {
 		return nil
@@ -5295,6 +5807,24 @@ func validateOpGetDomainInput(v *GetDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDomainInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDomainUnitInput(v *GetDomainUnitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDomainUnitInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
@@ -5803,6 +6333,45 @@ func validateOpListDataSourcesInput(v *ListDataSourcesInput) error {
 	}
 }
 
+func validateOpListDomainUnitsForParentInput(v *ListDomainUnitsForParentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDomainUnitsForParentInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.ParentDomainUnitIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentDomainUnitIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEntityOwnersInput(v *ListEntityOwnersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEntityOwnersInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEnvironmentActionsInput(v *ListEnvironmentActionsInput) error {
 	if v == nil {
 		return nil
@@ -5927,6 +6496,30 @@ func validateOpListNotificationsInput(v *ListNotificationsInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPolicyGrantsInput(v *ListPolicyGrantsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPolicyGrantsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6170,6 +6763,65 @@ func validateOpRejectSubscriptionRequestInput(v *RejectSubscriptionRequestInput)
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveEntityOwnerInput(v *RemoveEntityOwnerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveEntityOwnerInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if v.Owner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
+	} else if v.Owner != nil {
+		if err := validateOwnerProperties(v.Owner); err != nil {
+			invalidParams.AddNested("Owner", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemovePolicyGrantInput(v *RemovePolicyGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemovePolicyGrantInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
+	}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	} else if v.Principal != nil {
+		if err := validatePolicyGrantPrincipal(v.Principal); err != nil {
+			invalidParams.AddNested("Principal", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6472,6 +7124,24 @@ func validateOpUpdateDomainInput(v *UpdateDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDomainUnitInput(v *UpdateDomainUnitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainUnitInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}

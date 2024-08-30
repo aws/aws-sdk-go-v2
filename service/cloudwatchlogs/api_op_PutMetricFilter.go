@@ -18,6 +18,12 @@ import (
 // The maximum number of metric filters that can be associated with a log group is
 // 100.
 //
+// Using regular expressions to create metric filters is supported. For these
+// filters, there is a quotas of quota of two regular expression patterns within a
+// single filter pattern. There is also a quota of five regular expression patterns
+// per log group. For more information about using regular expressions in metric
+// filters, see [Filter pattern syntax for metric filters, subscription filters, filter log events, and Live Tail].
+//
 // When you create a metric filter, you can also optionally assign a unit and
 // dimensions to the metric that is created.
 //
@@ -35,6 +41,7 @@ import (
 //
 // [Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services Charges]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html
 // [PutLogEvents]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
+// [Filter pattern syntax for metric filters, subscription filters, filter log events, and Live Tail]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
 func (c *Client) PutMetricFilter(ctx context.Context, params *PutMetricFilterInput, optFns ...func(*Options)) (*PutMetricFilterOutput, error) {
 	if params == nil {
 		params = &PutMetricFilterInput{}

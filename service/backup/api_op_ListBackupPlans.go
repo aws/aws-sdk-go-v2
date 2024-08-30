@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all active backup plans for an authenticated account. The
-// list contains information such as Amazon Resource Names (ARNs), plan IDs,
-// creation and deletion dates, version IDs, plan names, and creator request IDs.
+// Lists the active backup plans for the account.
 func (c *Client) ListBackupPlans(ctx context.Context, params *ListBackupPlansInput, optFns ...func(*Options)) (*ListBackupPlansOutput, error) {
 	if params == nil {
 		params = &ListBackupPlansInput{}
@@ -49,8 +47,7 @@ type ListBackupPlansInput struct {
 
 type ListBackupPlansOutput struct {
 
-	// An array of backup plan list items containing metadata about your saved backup
-	// plans.
+	// Information about the backup plans.
 	BackupPlansList []types.BackupPlansListMember
 
 	// The next item following a partial list of returned items. For example, if a

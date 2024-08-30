@@ -12901,6 +12901,46 @@ func awsAwsjson11_deserializeDocumentQueryStatistics(v **types.QueryStatistics, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRejectedEntityInfo(v **types.RejectedEntityInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RejectedEntityInfo
+	if *v == nil {
+		sv = &types.RejectedEntityInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityRejectionErrorType to be of type string, got %T instead", value)
+				}
+				sv.ErrorType = types.EntityRejectionErrorType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRejectedLogEventsInfo(v **types.RejectedLogEventsInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15492,6 +15532,11 @@ func awsAwsjson11_deserializeOpDocumentPutLogEventsOutput(v **PutLogEventsOutput
 					return fmt.Errorf("expected SequenceToken to be of type string, got %T instead", value)
 				}
 				sv.NextSequenceToken = ptr.String(jtv)
+			}
+
+		case "rejectedEntityInfo":
+			if err := awsAwsjson11_deserializeDocumentRejectedEntityInfo(&sv.RejectedEntityInfo, value); err != nil {
+				return err
 			}
 
 		case "rejectedLogEventsInfo":

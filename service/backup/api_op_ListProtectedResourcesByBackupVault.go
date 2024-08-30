@@ -29,14 +29,14 @@ func (c *Client) ListProtectedResourcesByBackupVault(ctx context.Context, params
 
 type ListProtectedResourcesByBackupVaultInput struct {
 
-	// This is the list of protected resources by backup vault within the vault(s) you
-	// specify by name.
+	// The list of protected resources by backup vault within the vault(s) you specify
+	// by name.
 	//
 	// This member is required.
 	BackupVaultName *string
 
-	// This is the list of protected resources by backup vault within the vault(s) you
-	// specify by account ID.
+	// The list of protected resources by backup vault within the vault(s) you specify
+	// by account ID.
 	BackupVaultAccountId *string
 
 	// The maximum number of items to be returned.

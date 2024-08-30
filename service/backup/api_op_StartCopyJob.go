@@ -34,7 +34,7 @@ type StartCopyJobInput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a destination backup
 	// vault to copy to; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault .
+	// arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault .
 	//
 	// This member is required.
 	DestinationBackupVaultArn *string
@@ -54,8 +54,7 @@ type StartCopyJobInput struct {
 
 	// The name of a logical source container where backups are stored. Backup vaults
 	// are identified by names that are unique to the account used to create them and
-	// the Amazon Web Services Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// the Amazon Web Services Region where they are created.
 	//
 	// This member is required.
 	SourceBackupVaultName *string
@@ -65,20 +64,23 @@ type StartCopyJobInput struct {
 	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
-	// Contains an array of Transition objects specifying how long in days before a
-	// recovery point transitions to cold storage or is deleted.
+	// Specifies the time period, in days, before a recovery point transitions to cold
+	// storage or is deleted.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
-	// minimum of 90 days. Therefore, on the console, the “retention” setting must be
-	// 90 days greater than the “transition to cold after days” setting. The
-	// “transition to cold after days” setting cannot be changed after a backup has
-	// been transitioned to cold.
+	// minimum of 90 days. Therefore, on the console, the retention setting must be 90
+	// days greater than the transition to cold after days setting. The transition to
+	// cold after days setting can't be changed after a backup has been transitioned to
+	// cold.
 	//
-	// Resource types that are able to be transitioned to cold storage are listed in
-	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
-	// expression for other resource types.
+	// Resource types that can transition to cold storage are listed in the [Feature availability by resource] table.
+	// Backup ignores this expression for other resource types.
 	//
-	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+	// To remove the existing lifecycle and retention periods and keep your recovery
+	// points indefinitely, specify -1 for MoveToColdStorageAfterDays and
+	// DeleteAfterDays .
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
 	noSmithyDocumentSerde

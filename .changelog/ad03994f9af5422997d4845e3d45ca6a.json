@@ -1,0 +1,8 @@
+{
+    "id": "ad03994f-9af5-4229-97d4-845e3d45ca6a",
+    "type": "feature",
+    "description": "This release introduces a new optional parameter: Entity, in PutLogEvents request",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

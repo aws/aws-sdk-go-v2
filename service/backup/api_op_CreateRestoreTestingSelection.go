@@ -82,18 +82,18 @@ type CreateRestoreTestingSelectionInput struct {
 
 type CreateRestoreTestingSelectionOutput struct {
 
-	// This is the time the resource testing selection was created successfully.
+	// The time that the resource testing selection was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// This is the ARN of the restore testing plan with which the restore testing
-	// selection is associated.
+	// The ARN of the restore testing plan with which the restore testing selection is
+	// associated.
 	//
 	// This member is required.
 	RestoreTestingPlanArn *string
 
-	// Unique string that is the name of the restore testing plan.
+	// The name of the restore testing plan.
 	//
 	// The name cannot be changed after creation. The name consists of only
 	// alphanumeric characters and underscores. Maximum length is 50.
@@ -101,8 +101,7 @@ type CreateRestoreTestingSelectionOutput struct {
 	// This member is required.
 	RestoreTestingPlanName *string
 
-	// This is the unique name of the restore testing selection that belongs to the
-	// related restore testing plan.
+	// The name of the restore testing selection for the related restore testing plan.
 	//
 	// This member is required.
 	RestoreTestingSelectionName *string
