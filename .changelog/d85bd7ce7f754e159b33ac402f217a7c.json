@@ -1,0 +1,8 @@
+{
+    "id": "d85bd7ce-7f75-4e15-9b33-ac402f217a7c",
+    "type": "bugfix",
+    "description": "Change requestPayer behaviour from signedHeader to hoisted query parameter ",
+    "modules": [
+        "."
+    ]
+}
