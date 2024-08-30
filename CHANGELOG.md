@@ -1,3 +1,17 @@
+# Release (2024-08-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.37.0](service/backup/CHANGELOG.md#v1370-2024-08-30)
+  * **Feature**: The latest update introduces two new attributes, VaultType and VaultState, to the DescribeBackupVault and ListBackupVaults APIs. The VaultState attribute reflects the current status of the vault, while the VaultType attribute indicates the specific category of the vault.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.38.0](service/cloudwatchlogs/CHANGELOG.md#v1380-2024-08-30)
+  * **Feature**: This release introduces a new optional parameter: Entity, in PutLogEvents request
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.19.0](service/datazone/CHANGELOG.md#v1190-2024-08-30)
+  * **Feature**: Amazon DataZone now adds new governance capabilities of Domain Units for organization within your Data Domains, and Authorization Policies for tighter controls.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.28.0](service/redshiftdata/CHANGELOG.md#v1280-2024-08-30)
+  * **Feature**: The release include the new Redshift DataAPI feature for session use, customer execute query with --session-keep-alive-seconds parameter and can submit follow-up queries to same sessions with returned`session-id`
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.34.6](service/sqs/CHANGELOG.md#v1346-2024-08-30)
+  * **Bug Fix**: Fix issue where SDK could not send a VisibilityTimeout of 0 in a ChangeMessageVisibilityBatchRequestEntry.
+
 # Release (2024-08-29)
 
 ## Module Highlights

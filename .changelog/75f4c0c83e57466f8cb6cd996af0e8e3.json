@@ -1,8 +1,0 @@
-{
-    "id": "75f4c0c8-3e57-466f-8cb6-cd996af0e8e3",
-    "type": "feature",
-    "description": "The release include the new Redshift DataAPI feature for session use, customer execute query with --session-keep-alive-seconds parameter and can submit follow-up queries to same sessions with returned`session-id`",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}

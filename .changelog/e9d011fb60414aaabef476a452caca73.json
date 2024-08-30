@@ -1,8 +1,0 @@
-{
-    "id": "e9d011fb-6041-4aaa-bef4-76a452caca73",
-    "type": "feature",
-    "description": "Amazon DataZone now adds new governance capabilities of Domain Units for organization within your Data Domains, and Authorization Policies for tighter controls.",
-    "modules": [
-        "service/datazone"
-    ]
-}

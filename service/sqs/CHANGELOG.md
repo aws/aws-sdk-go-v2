@@ -1,3 +1,7 @@
+# v1.34.6 (2024-08-30)
+
+* **Bug Fix**: Fix issue where SDK could not send a VisibilityTimeout of 0 in a ChangeMessageVisibilityBatchRequestEntry.
+
 # v1.34.5 (2024-08-22)
 
 * No change notes available for this release.
