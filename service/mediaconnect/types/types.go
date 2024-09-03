@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Add a flow source to an existing bridge.
@@ -720,6 +721,9 @@ type Flow struct {
 	// The settings for source failover.
 	SourceFailoverConfig *FailoverConfig
 
+	// The settings for source monitoring.
+	SourceMonitoringConfig *MonitoringConfig
+
 	Sources []Source
 
 	// The VPC Interfaces for this flow.
@@ -1384,6 +1388,15 @@ type Messages struct {
 	noSmithyDocumentSerde
 }
 
+// The settings for source monitoring.
+type MonitoringConfig struct {
+
+	// The state of thumbnail monitoring.
+	ThumbnailState ThumbnailState
+
+	noSmithyDocumentSerde
+}
+
 // A savings plan that reserves a certain amount of outbound bandwidth usage at a
 // discounted rate each month over a period of time.
 type Offering struct {
@@ -1762,6 +1775,32 @@ type SourcePriority struct {
 
 	// The name of the source you choose as the primary source for this flow.
 	PrimarySource *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the thumbnail, including thumbnail base64 string, timecode and
+// the time when thumbnail was generated.
+type ThumbnailDetails struct {
+
+	// The ARN of the flow that DescribeFlowSourceThumbnail was performed on.
+	//
+	// This member is required.
+	FlowArn *string
+
+	// Status code and messages about the flow source thumbnail.
+	//
+	// This member is required.
+	ThumbnailMessages []MessageDetail
+
+	// Thumbnail Base64 string.
+	Thumbnail *string
+
+	// Timecode of thumbnail.
+	Timecode *string
+
+	// The timestamp of when thumbnail was generated.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }

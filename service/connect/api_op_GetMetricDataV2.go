@@ -823,7 +823,7 @@ type GetMetricDataV2Input struct {
 	//
 	// The Negate key in Metric Level Filters is not applicable for this metric.
 	//
-	// SUM_CONTACTS_ABANDONED Unit: Count
+	// CONTACTS_ABANDONED Unit: Count
 	//
 	// Metric filter:
 	//

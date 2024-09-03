@@ -1128,6 +1128,27 @@ func (AutoMLSortOrder) Values() []AutoMLSortOrder {
 	}
 }
 
+type AutoMountHomeEFS string
+
+// Enum values for AutoMountHomeEFS
+const (
+	AutoMountHomeEFSEnabled         AutoMountHomeEFS = "Enabled"
+	AutoMountHomeEFSDisabled        AutoMountHomeEFS = "Disabled"
+	AutoMountHomeEFSDefaultAsDomain AutoMountHomeEFS = "DefaultAsDomain"
+)
+
+// Values returns all known values for AutoMountHomeEFS. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMountHomeEFS) Values() []AutoMountHomeEFS {
+	return []AutoMountHomeEFS{
+		"Enabled",
+		"Disabled",
+		"DefaultAsDomain",
+	}
+}
+
 type AutotuneMode string
 
 // Enum values for AutotuneMode

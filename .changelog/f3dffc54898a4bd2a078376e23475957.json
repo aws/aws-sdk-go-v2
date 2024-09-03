@@ -1,0 +1,8 @@
+{
+    "id": "f3dffc54-898a-4bd2-a078-376e23475957",
+    "type": "feature",
+    "description": "This release adds support for configuring TCP idle timeout on NLB and GWLB listeners.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

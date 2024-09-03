@@ -254,6 +254,18 @@ func TestCheckSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeFlowSourceThumbnail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFlowSourceThumbnail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeFlowSourceThumbnail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeGateway(context.Background(), nil, func(o *Options) {
@@ -858,6 +870,18 @@ func TestUpdateSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 	_, err := svc.DescribeFlowSourceMetadata(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeFlowSourceMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeFlowSourceThumbnail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFlowSourceThumbnail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeFlowSourceThumbnail")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

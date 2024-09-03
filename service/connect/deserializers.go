@@ -11110,6 +11110,11 @@ func awsRestjson1_deserializeOpDocumentDescribeInstanceOutput(v **DescribeInstan
 				return err
 			}
 
+		case "ReplicationConfiguration":
+			if err := awsRestjson1_deserializeDocumentReplicationConfiguration(&sv.ReplicationConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -52659,6 +52664,152 @@ func awsRestjson1_deserializeDocumentReferenceSummaryList(v *[]types.ReferenceSu
 		if err := awsRestjson1_deserializeDocumentReferenceSummary(&col, value); err != nil {
 			return err
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicationConfiguration(v **types.ReplicationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicationConfiguration
+	if *v == nil {
+		sv = &types.ReplicationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GlobalSignInEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlobalSignInEndpoint to be of type string, got %T instead", value)
+				}
+				sv.GlobalSignInEndpoint = ptr.String(jtv)
+			}
+
+		case "ReplicationStatusSummaryList":
+			if err := awsRestjson1_deserializeDocumentReplicationStatusSummaryList(&sv.ReplicationStatusSummaryList, value); err != nil {
+				return err
+			}
+
+		case "SourceRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsRegion to be of type string, got %T instead", value)
+				}
+				sv.SourceRegion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicationStatusSummary(v **types.ReplicationStatusSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicationStatusSummary
+	if *v == nil {
+		sv = &types.ReplicationStatusSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsRegion to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "ReplicationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceReplicationStatus to be of type string, got %T instead", value)
+				}
+				sv.ReplicationStatus = types.InstanceReplicationStatus(jtv)
+			}
+
+		case "ReplicationStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplicationStatusReason to be of type string, got %T instead", value)
+				}
+				sv.ReplicationStatusReason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicationStatusSummaryList(v *[]types.ReplicationStatusSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ReplicationStatusSummary
+	if *v == nil {
+		cv = []types.ReplicationStatusSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ReplicationStatusSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentReplicationStatusSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

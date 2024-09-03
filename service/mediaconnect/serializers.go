@@ -789,6 +789,13 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 		}
 	}
 
+	if v.SourceMonitoringConfig != nil {
+		ok := object.Key("sourceMonitoringConfig")
+		if err := awsRestjson1_serializeDocumentMonitoringConfig(v.SourceMonitoringConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Sources != nil {
 		ok := object.Key("sources")
 		if err := awsRestjson1_serializeDocument__listOfSetSourceRequest(v.Sources, ok); err != nil {
@@ -1338,6 +1345,71 @@ func (m *awsRestjson1_serializeOpDescribeFlowSourceMetadata) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeFlowSourceMetadataInput(v *DescribeFlowSourceMetadataInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
+	}
+	if v.FlowArn != nil {
+		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeFlowSourceThumbnail struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeFlowSourceThumbnail) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeFlowSourceThumbnail) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFlowSourceThumbnailInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/flows/{FlowArn}/source-thumbnail")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeFlowSourceThumbnailInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeFlowSourceThumbnailInput(v *DescribeFlowSourceThumbnailInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3618,6 +3690,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowInput(v *UpdateFlowInput, value s
 		}
 	}
 
+	if v.SourceMonitoringConfig != nil {
+		ok := object.Key("sourceMonitoringConfig")
+		if err := awsRestjson1_serializeDocumentMonitoringConfig(v.SourceMonitoringConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5138,6 +5217,18 @@ func awsRestjson1_serializeDocumentMediaStreamSourceConfigurationRequest(v *type
 	if v.MediaStreamName != nil {
 		ok := object.Key("mediaStreamName")
 		ok.String(*v.MediaStreamName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMonitoringConfig(v *types.MonitoringConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ThumbnailState) > 0 {
+		ok := object.Key("thumbnailState")
+		ok.String(string(v.ThumbnailState))
 	}
 
 	return nil

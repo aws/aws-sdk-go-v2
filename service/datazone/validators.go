@@ -3354,6 +3354,41 @@ func validateAcceptChoices(v []types.AcceptChoice) error {
 	}
 }
 
+func validateAcceptedAssetScope(v *types.AcceptedAssetScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptedAssetScope"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.FilterIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcceptedAssetScopes(v []types.AcceptedAssetScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptedAssetScopes"}
+	for i := range v {
+		if err := validateAcceptedAssetScope(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetFilterConfiguration(v types.AssetFilterConfiguration) error {
 	if v == nil {
 		return nil
@@ -4560,6 +4595,11 @@ func validateOpAcceptSubscriptionRequestInput(v *AcceptSubscriptionRequestInput)
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.AssetScopes != nil {
+		if err := validateAcceptedAssetScopes(v.AssetScopes); err != nil {
+			invalidParams.AddNested("AssetScopes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

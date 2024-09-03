@@ -1,0 +1,8 @@
+{
+    "id": "3ced4aa7-a348-4c19-b67b-b518f9ec39d8",
+    "type": "feature",
+    "description": "Added MinQP as a Rate Control option for H264 and H265 encodes.",
+    "modules": [
+        "service/medialive"
+    ]
+}

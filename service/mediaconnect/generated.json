@@ -25,6 +25,7 @@
         "api_op_DescribeBridge.go",
         "api_op_DescribeFlow.go",
         "api_op_DescribeFlowSourceMetadata.go",
+        "api_op_DescribeFlowSourceThumbnail.go",
         "api_op_DescribeGateway.go",
         "api_op_DescribeGatewayInstance.go",
         "api_op_DescribeOffering.go",

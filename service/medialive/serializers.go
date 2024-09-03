@@ -10475,6 +10475,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.Integer(*v.MinIInterval)
 	}
 
+	if v.MinQp != nil {
+		ok := object.Key("minQp")
+		ok.Integer(*v.MinQp)
+	}
+
 	if v.NumRefFrames != nil {
 		ok := object.Key("numRefFrames")
 		ok.Integer(*v.NumRefFrames)
@@ -10740,6 +10745,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if v.MinIInterval != nil {
 		ok := object.Key("minIInterval")
 		ok.Integer(*v.MinIInterval)
+	}
+
+	if v.MinQp != nil {
+		ok := object.Key("minQp")
+		ok.Integer(*v.MinQp)
 	}
 
 	if len(v.MvOverPictureBoundaries) > 0 {

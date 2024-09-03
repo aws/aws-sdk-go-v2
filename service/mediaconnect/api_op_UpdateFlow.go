@@ -41,6 +41,9 @@ type UpdateFlowInput struct {
 	// The settings for source failover.
 	SourceFailoverConfig *types.UpdateFailoverConfig
 
+	// The settings for source monitoring.
+	SourceMonitoringConfig *types.MonitoringConfig
+
 	noSmithyDocumentSerde
 }
 

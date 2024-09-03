@@ -645,3 +645,22 @@ func (Tcs) Values() []Tcs {
 		"DENSITY",
 	}
 }
+
+type ThumbnailState string
+
+// Enum values for ThumbnailState
+const (
+	ThumbnailStateEnabled  ThumbnailState = "ENABLED"
+	ThumbnailStateDisabled ThumbnailState = "DISABLED"
+)
+
+// Values returns all known values for ThumbnailState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThumbnailState) Values() []ThumbnailState {
+	return []ThumbnailState{
+		"ENABLED",
+		"DISABLED",
+	}
+}

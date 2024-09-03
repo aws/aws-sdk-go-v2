@@ -999,9 +999,19 @@ func awsAwsjson10_serializeOpDocumentUpdateDbInstanceInput(v *UpdateDbInstanceIn
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DbInstanceType) > 0 {
+		ok := object.Key("dbInstanceType")
+		ok.String(string(v.DbInstanceType))
+	}
+
 	if v.DbParameterGroupIdentifier != nil {
 		ok := object.Key("dbParameterGroupIdentifier")
 		ok.String(*v.DbParameterGroupIdentifier)
+	}
+
+	if len(v.DeploymentType) > 0 {
+		ok := object.Key("deploymentType")
+		ok.String(string(v.DeploymentType))
 	}
 
 	if v.Identifier != nil {

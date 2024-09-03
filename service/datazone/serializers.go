@@ -220,6 +220,13 @@ func awsRestjson1_serializeOpDocumentAcceptSubscriptionRequestInput(v *AcceptSub
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetScopes != nil {
+		ok := object.Key("assetScopes")
+		if err := awsRestjson1_serializeDocumentAcceptedAssetScopes(v.AssetScopes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DecisionComment != nil {
 		ok := object.Key("decisionComment")
 		ok.String(*v.DecisionComment)
@@ -13143,6 +13150,38 @@ func awsRestjson1_serializeDocumentAcceptChoices(v []types.AcceptChoice, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAcceptedAssetScope(v *types.AcceptedAssetScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetId != nil {
+		ok := object.Key("assetId")
+		ok.String(*v.AssetId)
+	}
+
+	if v.FilterIds != nil {
+		ok := object.Key("filterIds")
+		if err := awsRestjson1_serializeDocumentFilterIds(v.FilterIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAcceptedAssetScopes(v []types.AcceptedAssetScope, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAcceptedAssetScope(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAcceptRule(v *types.AcceptRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13682,6 +13721,17 @@ func awsRestjson1_serializeDocumentFilterExpressions(v []types.FilterExpression,
 		if err := awsRestjson1_serializeDocumentFilterExpression(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

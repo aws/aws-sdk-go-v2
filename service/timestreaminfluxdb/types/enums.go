@@ -98,13 +98,15 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusCreating  Status = "CREATING"
-	StatusAvailable Status = "AVAILABLE"
-	StatusDeleting  Status = "DELETING"
-	StatusModifying Status = "MODIFYING"
-	StatusUpdating  Status = "UPDATING"
-	StatusDeleted   Status = "DELETED"
-	StatusFailed    Status = "FAILED"
+	StatusCreating               Status = "CREATING"
+	StatusAvailable              Status = "AVAILABLE"
+	StatusDeleting               Status = "DELETING"
+	StatusModifying              Status = "MODIFYING"
+	StatusUpdating               Status = "UPDATING"
+	StatusDeleted                Status = "DELETED"
+	StatusFailed                 Status = "FAILED"
+	StatusUpdatingDeploymentType Status = "UPDATING_DEPLOYMENT_TYPE"
+	StatusUpdatingInstanceType   Status = "UPDATING_INSTANCE_TYPE"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -120,6 +122,8 @@ func (Status) Values() []Status {
 		"UPDATING",
 		"DELETED",
 		"FAILED",
+		"UPDATING_DEPLOYMENT_TYPE",
+		"UPDATING_INSTANCE_TYPE",
 	}
 }
 

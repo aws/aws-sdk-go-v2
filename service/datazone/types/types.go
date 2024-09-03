@@ -27,6 +27,22 @@ type AcceptChoice struct {
 	noSmithyDocumentSerde
 }
 
+// The accepted asset scope.
+type AcceptedAssetScope struct {
+
+	// The asset ID of the accepted asset scope.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The filter IDs of the accepted asset scope.
+	//
+	// This member is required.
+	FilterIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the rule and the threshold under which a prediction can be accepted.
 type AcceptRule struct {
 
@@ -369,6 +385,30 @@ type AssetRevision struct {
 
 	// The revision details of the inventory asset.
 	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// The asset scope.
+type AssetScope struct {
+
+	// The asset ID of the asset scope.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The filter IDs of the asset scope.
+	//
+	// This member is required.
+	FilterIds []string
+
+	// The status of the asset scope.
+	//
+	// This member is required.
+	Status *string
+
+	// The error message of the asset scope.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -3637,6 +3677,9 @@ type SubscribedAsset struct {
 	// This member is required.
 	Status SubscriptionGrantStatus
 
+	// The asset scope of the subscribed asset.
+	AssetScope *AssetScope
+
 	// The failure cause included in the details of the asset for which the
 	// subscription grant is created.
 	FailureCause *FailureCause
@@ -3656,6 +3699,9 @@ type SubscribedAsset struct {
 
 // The details of the published asset for which the subscription grant is created.
 type SubscribedAssetListing struct {
+
+	// The asset scope of the subscribed asset listing.
+	AssetScope *AssetScope
 
 	// The identifier of the published asset for which the subscription grant is
 	// created.

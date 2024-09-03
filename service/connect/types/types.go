@@ -4722,6 +4722,61 @@ type ReferenceSummaryMemberUrl struct {
 
 func (*ReferenceSummaryMemberUrl) isReferenceSummary() {}
 
+// Details about the status of the replication of a source Amazon Connect instance
+// across Amazon Web Services Regions. Use these details to understand the general
+// status of a given replication. For information about why a replication process
+// may fail, see [Why a ReplicateInstance call fails]in the Create a replica of your existing Amazon Connect instance
+// topic in the Amazon Connect Administrator Guide.
+//
+// [Why a ReplicateInstance call fails]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html#why-replicateinstance-fails
+type ReplicationConfiguration struct {
+
+	// The URL that is used to sign-in to your Amazon Connect instance according to
+	// your traffic distribution group configuration. For more information about
+	// sign-in and traffic distribution groups, see [Important things to know]in the Create traffic distribution
+	// groups topic in the Amazon Connect Administrator Guide.
+	//
+	// [Important things to know]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
+	GlobalSignInEndpoint *string
+
+	// A list of replication status summaries. The summaries contain details about the
+	// replication of configuration information for Amazon Connect resources, for each
+	// Amazon Web Services Region.
+	ReplicationStatusSummaryList []ReplicationStatusSummary
+
+	// The Amazon Web Services Region where the source Amazon Connect instance was
+	// created. This is the Region where the [ReplicateInstance]API was called to start the replication
+	// process.
+	//
+	// [ReplicateInstance]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html
+	SourceRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// Status information about the replication process, where you use the [ReplicateInstance] API to
+// create a replica of your Amazon Connect instance in another Amazon Web Services
+// Region. For more information, see [Set up Amazon Connect Global Resiliency]in the Amazon Connect Administrator Guide.
+//
+// [ReplicateInstance]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html
+// [Set up Amazon Connect Global Resiliency]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
+type ReplicationStatusSummary struct {
+
+	// The Amazon Web Services Region. This can be either the source or the replica
+	// Region, depending where it appears in the summary list.
+	Region *string
+
+	// The state of the replication.
+	ReplicationStatus InstanceReplicationStatus
+
+	// A description of the replication status. Use this information to resolve any
+	// issues that are preventing the successful replication of your Amazon Connect
+	// instance to another Region.
+	ReplicationStatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a required field.
 type RequiredFieldInfo struct {
 

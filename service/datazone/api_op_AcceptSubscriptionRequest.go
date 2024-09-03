@@ -41,6 +41,9 @@ type AcceptSubscriptionRequestInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The asset scopes of the accept subscription request.
+	AssetScopes []types.AcceptedAssetScope
+
 	// A description that specifies the reason for accepting the specified
 	// subscription request.
 	DecisionComment *string

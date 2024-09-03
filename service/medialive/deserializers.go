@@ -27014,6 +27014,19 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
 
+		case "minQp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max51 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinQp = ptr.Int32(int32(i64))
+			}
+
 		case "numRefFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -27533,6 +27546,19 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return err
 				}
 				sv.MinIInterval = ptr.Int32(int32(i64))
+			}
+
+		case "minQp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max51 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinQp = ptr.Int32(int32(i64))
 			}
 
 		case "mvOverPictureBoundaries":

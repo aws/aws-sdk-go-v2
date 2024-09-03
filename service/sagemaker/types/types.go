@@ -3732,7 +3732,8 @@ type ContainerDefinition struct {
 	// [Use Logs and Metrics to Monitor an Inference Pipeline]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html
 	ContainerHostname *string
 
-	// The environment variables to set in the Docker container.
+	// The environment variables to set in the Docker container. Don't include any
+	// sensitive data in your environment variables.
 	//
 	// The maximum length of each key and value in the Environment map is 1024 bytes.
 	// The maximum length of all keys and values in the map, combined, is 32 KB. If you
@@ -19004,6 +19005,11 @@ type UserProfileDetails struct {
 // settings in UserSettings , the values specified in CreateUserProfile take
 // precedence over those specified in CreateDomain .
 type UserSettings struct {
+
+	// Indicates whether auto-mounting of an EFS volume is supported for the user
+	// profile. The DefaultAsDomain value is only supported for user profiles. Do not
+	// use the DefaultAsDomain value when setting this parameter for a domain.
+	AutoMountHomeEFS AutoMountHomeEFS
 
 	// The Canvas app settings.
 	CanvasAppSettings *CanvasAppSettings

@@ -11,41 +11,41 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified attributes of the specified target group.
-func (c *Client) ModifyTargetGroupAttributes(ctx context.Context, params *ModifyTargetGroupAttributesInput, optFns ...func(*Options)) (*ModifyTargetGroupAttributesOutput, error) {
+// Modifies the specified attributes of the specified listener.
+func (c *Client) ModifyListenerAttributes(ctx context.Context, params *ModifyListenerAttributesInput, optFns ...func(*Options)) (*ModifyListenerAttributesOutput, error) {
 	if params == nil {
-		params = &ModifyTargetGroupAttributesInput{}
+		params = &ModifyListenerAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyTargetGroupAttributes", params, optFns, c.addOperationModifyTargetGroupAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyListenerAttributes", params, optFns, c.addOperationModifyListenerAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ModifyTargetGroupAttributesOutput)
+	out := result.(*ModifyListenerAttributesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ModifyTargetGroupAttributesInput struct {
+type ModifyListenerAttributesInput struct {
 
-	// The target group attributes.
+	// The listener attributes.
 	//
 	// This member is required.
-	Attributes []types.TargetGroupAttribute
+	Attributes []types.ListenerAttribute
 
-	// The Amazon Resource Name (ARN) of the target group.
+	// The Amazon Resource Name (ARN) of the listener.
 	//
 	// This member is required.
-	TargetGroupArn *string
+	ListenerArn *string
 
 	noSmithyDocumentSerde
 }
 
-type ModifyTargetGroupAttributesOutput struct {
+type ModifyListenerAttributesOutput struct {
 
-	// Information about the target group attributes.
-	Attributes []types.TargetGroupAttribute
+	// Information about the listener attributes.
+	Attributes []types.ListenerAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,19 +53,19 @@ type ModifyTargetGroupAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationModifyTargetGroupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyListenerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyTargetGroupAttributes{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyListenerAttributes{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyTargetGroupAttributes{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyListenerAttributes{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyTargetGroupAttributes"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyListenerAttributes"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -114,10 +114,10 @@ func (c *Client) addOperationModifyTargetGroupAttributesMiddlewares(stack *middl
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpModifyTargetGroupAttributesValidationMiddleware(stack); err != nil {
+	if err = addOpModifyListenerAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyTargetGroupAttributes(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyListenerAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -138,10 +138,10 @@ func (c *Client) addOperationModifyTargetGroupAttributesMiddlewares(stack *middl
 	return nil
 }
 
-func newServiceMetadataMiddleware_opModifyTargetGroupAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opModifyListenerAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ModifyTargetGroupAttributes",
+		OperationName: "ModifyListenerAttributes",
 	}
 }

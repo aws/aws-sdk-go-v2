@@ -34,10 +34,17 @@ type UpdateDbInstanceInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The Timestream for InfluxDB DB instance type to run InfluxDB on.
+	DbInstanceType types.DbInstanceType
+
 	// The id of the DB parameter group to assign to your DB instance. DB parameter
 	// groups specify how the database is configured. For example, DB parameter groups
 	// can specify the limit for query concurrency.
 	DbParameterGroupIdentifier *string
+
+	// Specifies whether the DB instance will be deployed as a standalone instance or
+	// with a Multi-AZ standby for high availability.
+	DeploymentType types.DeploymentType
 
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration

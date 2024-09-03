@@ -1,0 +1,8 @@
+{
+    "id": "6cf17f34-83b5-4473-b16c-8f9ca40beda0",
+    "type": "feature",
+    "description": "Release ReplicaConfiguration as part of DescribeInstance",
+    "modules": [
+        "service/connect"
+    ]
+}

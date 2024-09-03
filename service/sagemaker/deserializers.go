@@ -80661,6 +80661,15 @@ func awsAwsjson11_deserializeDocumentUserSettings(v **types.UserSettings, value 
 
 	for key, value := range shape {
 		switch key {
+		case "AutoMountHomeEFS":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMountHomeEFS to be of type string, got %T instead", value)
+				}
+				sv.AutoMountHomeEFS = types.AutoMountHomeEFS(jtv)
+			}
+
 		case "CanvasAppSettings":
 			if err := awsAwsjson11_deserializeDocumentCanvasAppSettings(&sv.CanvasAppSettings, value); err != nil {
 				return err

@@ -2343,6 +2343,10 @@ type H264Settings struct {
 	// GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
 	MinIInterval *int32
 
+	// Sets the minimum QP. If you aren't familiar with quantization adjustment, leave
+	// the field empty. MediaLive will apply an appropriate value.
+	MinQp *int32
+
 	// Number of reference frames to use. The encoder may use more than requested if
 	// using B-frames and/or interlaced encoding.
 	NumRefFrames *int32
@@ -2595,6 +2599,10 @@ type H265Settings struct {
 	// lookahead as well as setting I-interval. The normal cadence resumes for the next
 	// GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
 	MinIInterval *int32
+
+	// Sets the minimum QP. If you aren't familiar with quantization adjustment, leave
+	// the field empty. MediaLive will apply an appropriate value.
+	MinQp *int32
 
 	// If you are setting up the picture as a tile, you must set this to "disabled".
 	// In all other configurations, you typically enter "enabled".

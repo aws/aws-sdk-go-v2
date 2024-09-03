@@ -112,8 +112,9 @@ type CreateTransformJobInput struct {
 	// [Associate Prediction Results with their Corresponding Input Records]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html
 	DataProcessing *types.DataProcessing
 
-	// The environment variables to set in the Docker container. We support up to 16
-	// key and values entries in the map.
+	// The environment variables to set in the Docker container. Don't include any
+	// sensitive data in your environment variables. We support up to 16 key and values
+	// entries in the map.
 	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.

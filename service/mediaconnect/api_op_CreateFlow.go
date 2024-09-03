@@ -60,6 +60,9 @@ type CreateFlowInput struct {
 	// The settings for source failover.
 	SourceFailoverConfig *types.FailoverConfig
 
+	// The settings for source monitoring.
+	SourceMonitoringConfig *types.MonitoringConfig
+
 	Sources []types.SetSourceRequest
 
 	// The VPC interfaces you want on the flow.

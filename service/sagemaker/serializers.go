@@ -29411,6 +29411,11 @@ func awsAwsjson11_serializeDocumentUserSettings(v *types.UserSettings, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AutoMountHomeEFS) > 0 {
+		ok := object.Key("AutoMountHomeEFS")
+		ok.String(string(v.AutoMountHomeEFS))
+	}
+
 	if v.CanvasAppSettings != nil {
 		ok := object.Key("CanvasAppSettings")
 		if err := awsAwsjson11_serializeDocumentCanvasAppSettings(v.CanvasAppSettings, ok); err != nil {

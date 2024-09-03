@@ -38,7 +38,7 @@ type AssociateSecurityKeyInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// A valid security key in PEM format.
+	// A valid security key in PEM format as a String.
 	//
 	// This member is required.
 	Key *string

@@ -951,6 +951,33 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 	}
 }
 
+type InstanceReplicationStatus string
+
+// Enum values for InstanceReplicationStatus
+const (
+	InstanceReplicationStatusInstanceReplicationComplete       InstanceReplicationStatus = "INSTANCE_REPLICATION_COMPLETE"
+	InstanceReplicationStatusInstanceReplicationInProgress     InstanceReplicationStatus = "INSTANCE_REPLICATION_IN_PROGRESS"
+	InstanceReplicationStatusInstanceReplicationFailed         InstanceReplicationStatus = "INSTANCE_REPLICATION_FAILED"
+	InstanceReplicationStatusInstanceReplicaDeleting           InstanceReplicationStatus = "INSTANCE_REPLICA_DELETING"
+	InstanceReplicationStatusInstanceReplicationDeletionFailed InstanceReplicationStatus = "INSTANCE_REPLICATION_DELETION_FAILED"
+	InstanceReplicationStatusResourceReplicationNotStarted     InstanceReplicationStatus = "RESOURCE_REPLICATION_NOT_STARTED"
+)
+
+// Values returns all known values for InstanceReplicationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceReplicationStatus) Values() []InstanceReplicationStatus {
+	return []InstanceReplicationStatus{
+		"INSTANCE_REPLICATION_COMPLETE",
+		"INSTANCE_REPLICATION_IN_PROGRESS",
+		"INSTANCE_REPLICATION_FAILED",
+		"INSTANCE_REPLICA_DELETING",
+		"INSTANCE_REPLICATION_DELETION_FAILED",
+		"RESOURCE_REPLICATION_NOT_STARTED",
+	}
+}
+
 type InstanceStatus string
 
 // Enum values for InstanceStatus

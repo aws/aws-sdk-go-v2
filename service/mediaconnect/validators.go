@@ -330,6 +330,26 @@ func (m *validateOpDescribeFlowSourceMetadata) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFlowSourceThumbnail struct {
+}
+
+func (*validateOpDescribeFlowSourceThumbnail) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFlowSourceThumbnail) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFlowSourceThumbnailInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFlowSourceThumbnailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeGateway struct {
 }
 
@@ -952,6 +972,10 @@ func addOpDescribeFlowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeFlowSourceMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFlowSourceMetadata{}, middleware.After)
+}
+
+func addOpDescribeFlowSourceThumbnailValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFlowSourceThumbnail{}, middleware.After)
 }
 
 func addOpDescribeGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -2073,6 +2097,21 @@ func validateOpDescribeFlowSourceMetadataInput(v *DescribeFlowSourceMetadataInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeFlowSourceMetadataInput"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFlowSourceThumbnailInput(v *DescribeFlowSourceThumbnailInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFlowSourceThumbnailInput"}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
 	}
