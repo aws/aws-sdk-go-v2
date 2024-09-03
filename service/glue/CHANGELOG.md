@@ -1,3 +1,7 @@
+# v1.95.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.95.0 (2024-08-21)
 
 * **Feature**: Add optional field JobRunQueuingEnabled to CreateJob and UpdateJob APIs.

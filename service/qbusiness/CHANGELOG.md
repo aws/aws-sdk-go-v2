@@ -1,3 +1,7 @@
+# v1.11.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2024-08-23)
 
 * **Feature**: Amazon QBusiness: Enable support for SAML and OIDC federation through AWS IAM Identity Provider integration.

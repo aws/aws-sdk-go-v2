@@ -1,3 +1,7 @@
+# v1.38.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2024-08-30)
 
 * **Feature**: This release introduces a new optional parameter: Entity, in PutLogEvents request

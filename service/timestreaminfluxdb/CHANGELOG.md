@@ -1,3 +1,8 @@
+# v1.3.0 (2024-09-03)
+
+* **Feature**: Timestream for InfluxDB now supports compute scaling and deployment type conversion. This release adds the DbInstanceType and DeploymentType parameters to the UpdateDbInstance API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.4 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

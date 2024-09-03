@@ -1,3 +1,7 @@
+# v1.71.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.71.0 (2024-08-29)
 
 * **Feature**: Increased Character Limit for Dataset Calculation Field expressions

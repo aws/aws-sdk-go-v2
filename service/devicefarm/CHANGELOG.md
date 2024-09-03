@@ -1,3 +1,7 @@
+# v1.26.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2024-08-28)
 
 * **Feature**: This release removed support for Calabash, UI Automation, Built-in Explorer, remote access record, remote access replay, and web performance profile framework in ScheduleRun API.

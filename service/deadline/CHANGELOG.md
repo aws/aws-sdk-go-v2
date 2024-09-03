@@ -1,3 +1,7 @@
+# v1.3.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2024-08-19)
 
 * **Feature**: This release adds additional search fields and provides sorting by multiple fields.

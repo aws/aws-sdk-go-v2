@@ -1,3 +1,7 @@
+# v1.41.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2024-08-26)
 
 * **Feature**: AWS IoT SiteWise now supports versioning for asset models. It enables users to retrieve active version of their asset model and perform asset model writes with optimistic lock.

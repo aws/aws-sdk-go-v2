@@ -1,3 +1,7 @@
+# v1.15.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2024-08-26)
 
 * **Feature**: Add Encoder option to obey omitempty tag for NULL attribute values.

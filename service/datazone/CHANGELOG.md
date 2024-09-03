@@ -1,3 +1,8 @@
+# v1.20.0 (2024-09-03)
+
+* **Feature**: Add support to let data publisher specify a subset of the data asset that a subscriber will have access to based on the asset filters provided, when accepting a subscription request.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2024-08-30)
 
 * **Feature**: Amazon DataZone now adds new governance capabilities of Domain Units for organization within your Data Domains, and Authorization Policies for tighter controls.

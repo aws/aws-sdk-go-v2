@@ -1,3 +1,7 @@
+# v1.16.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2024-08-27)
 
 * **Feature**: Amazon Bedrock SDK updates for Inference Profile.

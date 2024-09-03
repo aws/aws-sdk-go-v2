@@ -1,8 +1,0 @@
-{
-    "id": "d7426ee7-ace5-4a8f-9822-6f487647cbce",
-    "type": "feature",
-    "description": "Amazon SageMaker now supports automatic mounting of a user's home folder in the Amazon Elastic File System (EFS) associated with the SageMaker Studio domain to their Studio Spaces to enable users to share data between their own private spaces.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

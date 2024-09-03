@@ -1,3 +1,7 @@
+# v1.24.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2024-08-27)
 
 * **Feature**: Adds data provenance to import jobs from read sets and references

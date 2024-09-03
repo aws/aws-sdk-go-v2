@@ -1,3 +1,7 @@
+# v1.17.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2024-08-28)
 
 * **Feature**: Adds new querying types to show overall traffic suggestion information for monitors

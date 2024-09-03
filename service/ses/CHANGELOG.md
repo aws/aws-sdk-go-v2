@@ -1,3 +1,7 @@
+# v1.26.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2024-08-21)
 
 * **Feature**: Enable email receiving customers to provide SES with access to their S3 buckets via an IAM role for "Deliver to S3 Action"

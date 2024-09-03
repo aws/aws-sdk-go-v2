@@ -1,3 +1,8 @@
+# v1.57.0 (2024-09-03)
+
+* **Feature**: Added MinQP as a Rate Control option for H264 and H265 encodes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

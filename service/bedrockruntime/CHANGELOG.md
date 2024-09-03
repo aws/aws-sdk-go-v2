@@ -1,3 +1,7 @@
+# v1.16.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2024-08-29)
 
 * **Feature**: Add support for imported-model in invokeModel and InvokeModelWithResponseStream.

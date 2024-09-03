@@ -1,3 +1,7 @@
+# v1.5.6 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.5 (2024-08-23)
 
 * **Documentation**: Update API documentation to clarify the event SLA as well as the data model expectations

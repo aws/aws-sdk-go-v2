@@ -1,3 +1,27 @@
+# Release (2024-09-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.30.5
+  * **Bug Fix**: Change requestPayer behaviour from signedHeader to hoisted query parameter 
+  * **Bug Fix**: refactoring of buildQuery to accept a map of hand maintained headers to lowercase because of an S3 limitation
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.108.0](service/connect/CHANGELOG.md#v11080-2024-09-03)
+  * **Feature**: Release ReplicaConfiguration as part of DescribeInstance
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.20.0](service/datazone/CHANGELOG.md#v1200-2024-09-03)
+  * **Feature**: Add support to let data publisher specify a subset of the data asset that a subscriber will have access to based on the asset filters provided, when accepting a subscription request.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.35.0](service/elasticloadbalancingv2/CHANGELOG.md#v1350-2024-09-03)
+  * **Feature**: This release adds support for configuring TCP idle timeout on NLB and GWLB listeners.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.33.0](service/mediaconnect/CHANGELOG.md#v1330-2024-09-03)
+  * **Feature**: AWS Elemental MediaConnect introduces thumbnails for Flow source monitoring. Thumbnails provide still image previews of the live content feeding your MediaConnect Flow allowing you to easily verify that your source is operating as expected.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.57.0](service/medialive/CHANGELOG.md#v1570-2024-09-03)
+  * **Feature**: Added MinQP as a Rate Control option for H264 and H265 encodes.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.155.0](service/sagemaker/CHANGELOG.md#v11550-2024-09-03)
+  * **Feature**: Amazon SageMaker now supports automatic mounting of a user's home folder in the Amazon Elastic File System (EFS) associated with the SageMaker Studio domain to their Studio Spaces to enable users to share data between their own private spaces.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.3.0](service/timestreaminfluxdb/CHANGELOG.md#v130-2024-09-03)
+  * **Feature**: Timestream for InfluxDB now supports compute scaling and deployment type conversion. This release adds the DbInstanceType and DeploymentType parameters to the UpdateDbInstance API.
+
 # Release (2024-08-30)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.52.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2024-08-29)
 
 * **Feature**: The minimum request rate for a rate-based rule is now 10. Before this, it was 100.

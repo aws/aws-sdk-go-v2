@@ -1,3 +1,7 @@
+# v1.30.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2024-08-22)
 
 * **Feature**: Add enums for Agentless scan statuses and EC2 enablement error states

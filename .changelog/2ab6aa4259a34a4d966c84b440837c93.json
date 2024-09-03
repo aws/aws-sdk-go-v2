@@ -1,8 +1,0 @@
-{
-    "id": "2ab6aa42-59a3-4a4d-966c-84b440837c93",
-    "type": "bugfix",
-    "description": "refactoring of buildQuery to accept a map of hand maintained headers to lowercase because of an S3 limitation",
-    "modules": [
-        "."
-    ]
-}

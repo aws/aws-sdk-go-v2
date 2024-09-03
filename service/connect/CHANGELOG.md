@@ -1,3 +1,8 @@
+# v1.108.0 (2024-09-03)
+
+* **Feature**: Release ReplicaConfiguration as part of DescribeInstance
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.107.1 (2024-08-15)
 
 * **Dependency Update**: Bump minimum Go version to 1.21.

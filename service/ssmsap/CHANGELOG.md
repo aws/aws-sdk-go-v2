@@ -1,3 +1,7 @@
+# v1.16.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2024-08-19)
 
 * **Feature**: Add new attributes to the outputs of GetApplication and GetDatabase APIs.

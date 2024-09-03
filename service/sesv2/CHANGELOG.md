@@ -1,3 +1,7 @@
+# v1.33.1 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2024-08-16)
 
 * **Feature**: Marking use case description field of account details as deprecated.

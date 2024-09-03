@@ -1,3 +1,7 @@
+# v1.46.2 (2024-09-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.1 (2024-08-28)
 
 * **Documentation**: Documentation-only update that clarifies the StartWorkspaces and StopWorkspaces actions, and a few other minor edits.
